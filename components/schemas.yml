@@ -1,0 +1,46 @@
+Account:
+  type: object
+  properties:
+    droplet_limit:
+      description: The total number of Droplets current user or team may have active at one time.
+      type: integer
+    floating_ip_limit:
+      description: The total number of Floating IPs the current user or team may have.
+      type: integer
+    email:
+      description: The email address used by the current user to register for DigitalOcean.
+      type: string
+    uuid:
+      description: The unique universal identifier for the current user.
+      type: string
+    email_verified:
+      description: If true, the user has verified their account via email. False otherwise.
+      type: boolean
+      default: false
+    status:
+      description: This value is one of "active", "warning" or "locked".
+      type: string
+      enum:
+        - active
+        - warning
+        - locked
+      default: active
+    status_message:
+      description: A human-readable message giving more details about the status of the account.
+      type: string
+  required:
+    - droplet_limit
+    - floating_ip_limit
+    - email
+    - uuid
+    - email_verified
+    - status
+    - status_message
+  example:
+    droplet_limit: 25
+    floating_ip_limit: 5
+    email: sammy@digitalocean.com
+    uuid: b6fr89dbf6d9156cace5f3c78dc9851d957381ef
+    email_verified: true
+    status: active
+    status_message: ""

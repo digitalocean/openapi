@@ -8,12 +8,14 @@ info:
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
   contact:
     name: DigitalOcean API Team
-    email: devex-api-engineering@digitalocean.com
+    email: api-engineering@digitalocean.com
   termsOfService: 'https://www.digitalocean.com/legal/terms-of-service-agreement/'
 servers:
   - url: 'https://api.digitalocean.com/v2'
     description: production
-paths: {}
+paths:
+  /account:
+    $ref: 'endpoints/account.yml'
 components:
   schemas: {}
   securitySchemes:
@@ -22,6 +24,3 @@ components:
       scheme: bearer
 security:
   - bearerAuth: []
-tags:
-  - name: vpn
-    description: all resources and methods valid in a vpn

@@ -1,0 +1,23 @@
+ratelimit-limit:
+  schema:
+    type: integer
+  description: >-
+    The default limit on number of requests that can be made per hour and per minute.
+    Current rate limits are 5000 requests per hour and 250 requests per minute.
+
+ratelimit-remaining:
+  schema:
+    type: integer
+  description: >-
+    The number of requests in your hourly quota that remain before you hit your request limit.
+    See https://developers.digitalocean.com/documentation/v2/#rate-limit for information about
+    how requests expire.
+
+ratelimit-reset:
+  schema:
+    type: integer
+  description: >-
+    The time when the oldest request will expire. The value is given in Unix epoch time. 
+    See https://developers.digitalocean.com/documentation/v2/#rate-limit for information about
+    how requests expire.
+    
