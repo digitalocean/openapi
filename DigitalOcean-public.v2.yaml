@@ -16,8 +16,9 @@ servers:
 paths:
   /account:
     $ref: 'endpoints/account.yml'
+  /account/keys:
+    $ref: 'endpoints/ssh_keys.yml'
 components:
-  schemas: {}
   securitySchemes:
     bearerAuth:
       type: http
