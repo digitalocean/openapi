@@ -1,0 +1,21 @@
+get:
+  description: >-
+    To list all of the keys in your account, send a GET request to /v2/account/keys.
+    The response will be a JSON object with a key set to ssh_keys.  
+    The value of this will be an array of key objects, each of which contain the standard key attributes.
+  operationId: list_all_keys
+  responses:
+    '200':
+      description: >-
+        A JSON object with a key set to ssh_keys. The value is an array of key objects, each of which contain the standard key attributes.
+      headers:
+        ratelimit-limit:
+          $ref: '../components/headers.yml#/ratelimit-limit'
+        ratelimit-remaining:
+          $ref: '../components/headers.yml#/ratelimit-remaining'
+        ratelimit-reset:
+          $ref: '../components/headers.yml#/ratelimit-reset'
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/SSHKeys'
