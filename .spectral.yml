@@ -4,4 +4,49 @@ rules:
   operation-tags: off
   contact-properties: off
   operation-default-response: off
-  
+
+  ratelimit-headers:
+    description: Response must include ratelimit-x headers
+    message: "{{description}}; missing {{property}}"
+    severity: error
+    given: $..responses.*
+    then:
+    - field: headers.ratelimit-limit
+      function: truthy
+    - field: headers.ratelimit-remaining
+      function: truthy
+    - field: headers.ratelimit-reset
+      function: truthy
+
+  schema-must-include-examples:
+    description: A schema must include examples
+    message: "{{description}}; missing {{property}}"
+    severity: error
+    given: $..schema
+    then:
+      field: example
+      function: schema
+      functionOptions:
+        schema:
+          minItems: 1
+
+  endpoint-must-be-ref:
+    description: Endpoint must a $ref
+    message: "{{description}}; {{property}} incorrect"
+    severity: error
+    resolved: false
+    given: $.paths.*
+    then:
+    - field: $ref
+      function: truthy
+
+  endpoint-ref-must-be-file:
+    description: Endpoint must a $ref to a file in endpoints/
+    message: "{{description}}; {{value}} incorrect"
+    severity: error
+    resolved: false
+    given: $.paths.*.$ref
+    then:
+      function: pattern
+      functionOptions:
+        match: "^endpoints\/.*yml$"
