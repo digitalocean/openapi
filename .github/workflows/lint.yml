@@ -1,0 +1,14 @@
+name: Run Spectral
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    name: Run Spectral
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: stoplightio/spectral-action@master
+        with:
+          file_glob: "./DigitalOcean-public.v2.yaml"
