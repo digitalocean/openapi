@@ -14,4 +14,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../components/schemas.yml#/Account'
+            $ref: '../components/schemas.yml#/WrappedAccount'
