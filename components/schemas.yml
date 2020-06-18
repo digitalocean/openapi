@@ -1,3 +1,20 @@
+WrappedAccount:
+  type: object
+  properties:
+    account:
+      $ref: '#/Account'
+  required:
+    - account
+  example:
+    account:
+      droplet_limit: 25
+      floating_ip_limit: 5
+      email: sammy@digitalocean.com
+      uuid: b6fr89dbf6d9156cace5f3c78dc9851d957381ef
+      email_verified: true
+      status: active
+      status_message: ""   
+
 Account:
   type: object
   properties:
@@ -45,6 +62,25 @@ Account:
     status: active
     status_message: ""
 
+WrappedSSHKeys:
+  type: object
+  properties:
+    ssh_keys:
+      $ref: '#/SSHKeys'
+    meta:
+      $ref: '#/Meta'
+  required:
+    - ssh_keys
+    - meta
+  example:
+    ssh_keys:
+      id: 512189
+      fingerprint: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
+      public_key: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
+      name: My SSH Public Key
+    meta:
+      total: 1
+
 SSHKeys:
   type: object
   properties:
@@ -66,4 +102,15 @@ SSHKeys:
     id: 512189
     fingerprint: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
     public_key: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
-    name": My SSH Public Key
+    name: My SSH Public Key
+
+Meta:
+  type: object
+  properties:
+    total:
+      description: Number of objects returned by the request.
+      type: integer
+  required:
+    - total
+  example:
+    total: 43
