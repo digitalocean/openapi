@@ -63,15 +63,9 @@ Account:
     status_message: ""
 
 DecoratedSSHKeys:
-  type: object
-  properties:
-    ssh_keys:
-      $ref: '#/WrappedSSHKeys'
-    meta:
-      $ref: '#/Meta'
-  required:
-    - ssh_keys
-    - meta
+  allOf:
+    - $ref: '#/WrappedSSHKeys'
+    - $ref: '#/Meta'
   example:
     ssh_keys:
       - id: 512189
@@ -82,14 +76,20 @@ DecoratedSSHKeys:
       total: 1
 
 WrappedSSHKeys:
-  type: array
-  items:
-    $ref: '#/SSHKeys'
+  type: object
+  properties:
+    ssh_keys:
+      type: array
+      items:
+        $ref: '#/SSHKeys'
+  required:
+    - ssh_keys
   example:
-    - id: 512189
-      fingerprint: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
-      public_key: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
-      name: My SSH Public Key
+    ssh_keys:
+      - id: 512189
+        fingerprint: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
+        public_key: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
+        name: My SSH Public Key
 
 SSHKeys:
   type: object
@@ -117,11 +117,18 @@ SSHKeys:
 Meta:
   type: object
   properties:
-    total:
-      description: Number of objects returned by the request.
-      type: integer
+    meta:
+      description: Information about the response itself.
+      type: object
+      properties:
+        total:
+          description: Number of objects returned by the request.
+          type: integer
+      required:
+        - total
   required:
-    - total
+    - meta
   example:
-    total: 43
+    meta:
+      total: 43
 
