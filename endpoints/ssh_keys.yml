@@ -18,4 +18,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../components/schemas.yml#/WrappedSSHKeys'
+            $ref: '../components/schemas.yml#/DecoratedSSHKeys'
