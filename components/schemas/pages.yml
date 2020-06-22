@@ -1,0 +1,77 @@
+Pagination:
+  type: object
+  properties:
+    links:
+      $ref: '#/PageLinks'
+  example:
+    links:
+      pages:
+        first: "https://api.digitalocean.com/v2/images?page=1"
+        prev: "https://api.digitalocean.com/v2/images?page=3"
+        last: "https://api.digitalocean.com/v2/images?page=5"
+        next: "https://api.digitalocean.com/v2/images?page=5"
+
+PageLinks:
+  type: object
+  properties:
+    pages:
+      anyOf:
+        - $ref: '#/ForwardLinks'
+        - $ref: '#/BackwardLinks'
+        - {}
+  example:
+    pages:
+      first: "https://api.digitalocean.com/v2/images?page=1"
+      prev: "https://api.digitalocean.com/v2/images?page=1"
+ 
+BackwardLinks:
+  allOf:
+    - $ref: '#/LinkToFirstPage'
+    - $ref: '#/LinkToPrevPage'
+  example:
+    first: "https://api.digitalocean.com/v2/images?page=1"
+    prev: "https://api.digitalocean.com/v2/images?page=1"
+
+ForwardLinks:
+  allOf:
+    - $ref: '#/LinkToLastPage'
+    - $ref: '#/LinkToNextPage'
+  example:
+    last: "https://api.digitalocean.com/v2/images?page=2"
+    next: "https://api.digitalocean.com/v2/images?page=2"
+
+LinkToFirstPage:
+  type: object
+  properties:
+    first:
+      description: URI of the first page of the results.
+      type: string
+  example:
+    first: "https://api.digitalocean.com/v2/images?page=1"
+
+LinkToNextPage:
+  type: object
+  properties:
+    next:
+      description: URI of the next page of the results.
+      type: string
+  example:
+    next: "https://api.digitalocean.com/v2/images?page=2"
+
+LinkToPrevPage:
+  type: object
+  properties:
+    prev:
+      description: URI of the previous page of the results.
+      type: string
+  example:
+    prev: "https://api.digitalocean.com/v2/images?page=1"
+
+LinkToLastPage:
+  type: object
+  properties:
+    last:
+      description: URI of the last page of the results.
+      type: string
+  example:
+    last: "https://api.digitalocean.com/v2/images?page=2"
