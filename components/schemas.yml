@@ -62,11 +62,11 @@ Account:
     status: active
     status_message: ""
 
-WrappedSSHKeys:
+DecoratedSSHKeys:
   type: object
   properties:
     ssh_keys:
-      $ref: '#/SSHKeys'
+      $ref: '#/WrappedSSHKeys'
     meta:
       $ref: '#/Meta'
   required:
@@ -74,12 +74,22 @@ WrappedSSHKeys:
     - meta
   example:
     ssh_keys:
-      id: 512189
+      - id: 512189
+        fingerprint: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
+        public_key: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
+        name: My SSH Public Key
+    meta:
+      total: 1
+
+WrappedSSHKeys:
+  type: array
+  items:
+    $ref: '#/SSHKeys'
+  example:
+    - id: 512189
       fingerprint: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
       public_key: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
       name: My SSH Public Key
-    meta:
-      total: 1
 
 SSHKeys:
   type: object
@@ -114,3 +124,4 @@ Meta:
     - total
   example:
     total: 43
+
