@@ -60,6 +60,7 @@ DecoratedSSHKeys:
 <<<<<<< HEAD
 =======
   example:
+<<<<<<< HEAD
     ssh_keys:
       - id: 512189
         fingerprint: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
@@ -69,6 +70,10 @@ DecoratedSSHKeys:
     meta:
       total: 1
 >>>>>>> 355ab03... add links and pages schemas
+=======
+    - $ref: 'schemas/pages.yml#/Pagination'
+      example: {}
+>>>>>>> a64a73f... use links with list_all_keys
 
 WrappedSSHKeys:
   type: object

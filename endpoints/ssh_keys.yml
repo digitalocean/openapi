@@ -1,4 +1,6 @@
 get:
+  parameters:
+    - $ref: '../components/parameters.yml#/PerPage'
   description: >-
     To list all of the keys in your account, send a GET request to /v2/account/keys.
     The response will be a JSON object with a key set to ssh_keys.  
