@@ -4,6 +4,8 @@ get:
     The response will be a JSON object with a key set to ssh_keys.  
     The value of this will be an array of key objects, each of which contain the standard key attributes.
   operationId: list_all_keys
+  tags:
+    - ssh_keys
   responses:
     '200':
       description: >-
