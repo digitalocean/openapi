@@ -18,11 +18,11 @@ rules:
     - field: headers.ratelimit-reset
       function: truthy
 
-  schema-must-include-examples:
-    description: A schema must include examples
+  properties-must-include-examples:
+    description: Object properties must include examples
     message: "{{description}}; missing {{property}}"
     severity: error
-    given: $..schema
+    given: $..properties..properties.*
     then:
       field: example
       function: schema
