@@ -5,15 +5,6 @@ WrappedAccount:
       $ref: '#/Account'
   required:
     - account
-  example:
-    account:
-      droplet_limit: 25
-      floating_ip_limit: 5
-      email: sammy@digitalocean.com
-      uuid: b6fr89dbf6d9156cace5f3c78dc9851d957381ef
-      email_verified: true
-      status: active
-      status_message: ""   
 
 Account:
   type: object
@@ -21,19 +12,24 @@ Account:
     droplet_limit:
       description: The total number of Droplets current user or team may have active at one time.
       type: integer
+      example: 25
     floating_ip_limit:
       description: The total number of Floating IPs the current user or team may have.
       type: integer
+      example: 5
     email:
       description: The email address used by the current user to register for DigitalOcean.
       type: string
+      example: sammy@digitalocean.com
     uuid:
       description: The unique universal identifier for the current user.
       type: string
+      example: b6fr89dbf6d9156cace5f3c78dc9851d957381ef
     email_verified:
       description: If true, the user has verified their account via email. False otherwise.
       type: boolean
       default: false
+      example: true
     status:
       description: This value is one of "active", "warning" or "locked".
       type: string
@@ -42,9 +38,11 @@ Account:
         - warning
         - locked
       default: active
+      example: active
     status_message:
       description: A human-readable message giving more details about the status of the account.
       type: string
+      example: ""
   required:
     - droplet_limit
     - floating_ip_limit
@@ -53,27 +51,11 @@ Account:
     - email_verified
     - status
     - status_message
-  example:
-    droplet_limit: 25
-    floating_ip_limit: 5
-    email: sammy@digitalocean.com
-    uuid: b6fr89dbf6d9156cace5f3c78dc9851d957381ef
-    email_verified: true
-    status: active
-    status_message: ""
 
 DecoratedSSHKeys:
   allOf:
     - $ref: '#/WrappedSSHKeys'
     - $ref: '#/Meta'
-  example:
-    ssh_keys:
-      - id: 512189
-        fingerprint: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
-        public_key: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
-        name: My SSH Public Key
-    meta:
-      total: 1
 
 WrappedSSHKeys:
   type: object
@@ -84,12 +66,6 @@ WrappedSSHKeys:
         $ref: '#/SSHKeys'
   required:
     - ssh_keys
-  example:
-    ssh_keys:
-      - id: 512189
-        fingerprint: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
-        public_key: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
-        name: My SSH Public Key
 
 SSHKeys:
   type: object
@@ -97,27 +73,26 @@ SSHKeys:
     id:
       description: A unique identification number for this key. Can be used to embed a specific SSH key into a Droplet.
       type: integer
+      example: 512189
     fingerprint:
       description: A unique identifier that differentiates this key from other keys using a format that SSH recognizes.
       type: string
+      example: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
     public_key:
       description: >-
         The entire public key string that was uploaded. Embedded into the root user's authorized_keys file 
         if you include this key during Droplet creation.
       type: string
+      example: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
     name:
       description: A human-readable display name for this key, used to easily identify the SSH keys when they are displayed.
       type: string
+      example: My SSH Public Key
   required:
     - id
     - fingerprint
     - public_key
     - name
-  example:
-    id: 512189
-    fingerprint: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
-    public_key: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
-    name: My SSH Public Key
 
 Meta:
   type: object
@@ -129,11 +104,8 @@ Meta:
         total:
           description: Number of objects returned by the request.
           type: integer
+          example: 1
       required:
         - total
   required:
     - meta
-  example:
-    meta:
-      total: 43
-
