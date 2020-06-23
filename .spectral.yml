@@ -1,7 +1,5 @@
 extends: [[spectral:oas, all]]
 rules:
-  openapi-tags: off
-  operation-tags: off
   contact-properties: off
   operation-default-response: off
 

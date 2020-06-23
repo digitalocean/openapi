@@ -13,6 +13,11 @@ info:
 servers:
   - url: 'https://api.digitalocean.com/v2'
     description: production
+tags:
+  - name: account
+    description: Account
+  - name: ssh_keys
+    description: SSH Keys
 paths:
   /account:
     $ref: 'endpoints/account.yml'

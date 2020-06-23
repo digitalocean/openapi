@@ -1,6 +1,8 @@
 get:
   description: To show information about the current user account, send a GET request to /account.
   operationId: get_user_information
+  tags:
+    - account
   responses:
     '200':
       description: A JSON object keyed on account with an exerpt of the current user account data.
