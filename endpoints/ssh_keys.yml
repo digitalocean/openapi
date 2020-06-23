@@ -5,7 +5,7 @@ get:
     The value of this will be an array of key objects, each of which contain the standard key attributes.
   operationId: list_all_keys
   tags:
-    - ssh_keys
+    - SSH Keys
   responses:
     '200':
       description: >-

@@ -14,10 +14,10 @@ servers:
   - url: 'https://api.digitalocean.com/v2'
     description: production
 tags:
-  - name: account
-    description: Account
-  - name: ssh_keys
-    description: SSH Keys
+  - name: Account
+    description: Provides information about your current account.
+  - name: SSH Keys
+    description: Manage SSH keys available on your account.
 paths:
   /account:
     $ref: 'endpoints/account.yml'
