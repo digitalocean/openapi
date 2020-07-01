@@ -8,7 +8,7 @@ allOf:
       ssh_keys:
         type: array
         items:
-          $ref: 'ssh_keys.yml'
+          $ref: 'ssh_key.yml'
 
     required:
       - ssh_keys
