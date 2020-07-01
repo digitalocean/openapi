@@ -1,0 +1,20 @@
+operationId: list_all_keys
+
+summary: List all ssh keys in your account.
+
+description: >-
+  To list all of the keys in your account, send a GET request to /v2/account/keys.
+  The response will be a JSON object with a key set to ssh_keys.  
+  The value of this will be an array of key objects, each of which contain the standard key attributes.
+
+tags:
+  - Account
+  - SSH Keys
+
+parameters:
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/all_keys.yml'

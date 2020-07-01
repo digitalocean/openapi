@@ -1,0 +1,76 @@
+description: >-
+  A JSON object with a key set to ssh_keys. The value is an array of key objects,
+  each of which contain the standard key attributes.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/decorated_wrapped_ssh_keys.yml'
+
+    examples:
+      FirstPage:
+        value:
+          ssh_keys:
+            - id: 289794
+              fingerprint: 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
+              public_key: "ssh-rsa ANOTHEREXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V anotherexample"
+              name: Other Public Key
+          links:
+            pages:
+              last: "https://api.digitalocean.com/v2/account/keys?page=2"
+              next: "https://api.digitalocean.com/v2/account/keys?page=2"
+          meta:
+            total:
+              3
+
+      LastPage:
+        value:
+          ssh_keys:
+            - id: 289794
+              fingerprint: 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
+              public_key: "ssh-rsa ANOTHEREXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V anotherexample"
+              name: Other Public Key
+          links:
+            pages:
+              first: "https://api.digitalocean.com/v2/account/keys?page=1"
+              prev: "https://api.digitalocean.com/v2/account/keys?page=1"
+          meta:
+            total:
+              3
+
+      MiddlePage:
+        value:
+          ssh_keys:
+            - id: 289794
+              fingerprint: 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
+              public_key: "ssh-rsa ANOTHEREXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V anotherexample"
+              name: Other Public Key
+          links:
+            pages:
+              first: "https://api.digitalocean.com/v2/account/keys?page=1"
+              prev: "https://api.digitalocean.com/v2/account/keys?page=2"
+              last: "https://api.digitalocean.com/v2/account/keys?page=4"
+              next: "https://api.digitalocean.com/v2/account/keys?page=5"
+          meta:
+            total:
+              9
+
+      NoPagination:
+        value:
+          ssh_keys:
+            - id: 289794
+              fingerprint: 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
+              public_key: "ssh-rsa ANOTHEREXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V anotherexample"
+              name: Other Public Key
+          links: {}
+          meta:
+            total:
+              1

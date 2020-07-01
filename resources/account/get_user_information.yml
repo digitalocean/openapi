@@ -1,0 +1,25 @@
+operationId: get_user_information
+
+summary: Show information about my account.
+
+description: To show information about the current user account, send a GET request to /account.
+
+tags:
+  - Account
+
+responses:
+  '200':
+    description: A JSON object keyed on account with an exerpt of the current user account data.
+
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+
+    content:
+      application/json:
+        schema:
+          $ref: 'wrapped_account.yml'

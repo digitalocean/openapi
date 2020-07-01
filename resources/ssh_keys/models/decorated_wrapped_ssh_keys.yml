@@ -1,0 +1,17 @@
+description: >-
+  A paginated list of your ssh keys.
+
+allOf:
+  - type: object
+
+    properties:
+      ssh_keys:
+        type: array
+        items:
+          $ref: 'ssh_keys.yml'
+
+    required:
+      - ssh_keys
+
+  - $ref: '../../../shared/pages.yml#/Pagination'
+  - $ref: '../../../shared/meta.yml'
