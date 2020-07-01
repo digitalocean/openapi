@@ -2,6 +2,7 @@ extends: [[spectral:oas, all]]
 rules:
   contact-properties: off
   operation-default-response: off
+  operation-singular-tag: off
 
   ratelimit-headers:
     description: Response must include ratelimit-x headers
@@ -29,17 +30,17 @@ rules:
           minItems: 1
 
   endpoint-must-be-ref:
-    description: Endpoint must a $ref
+    description: Endpoint must be a $ref
     message: "{{description}}; {{property}} incorrect"
     severity: error
     resolved: false
-    given: $.paths.*
+    given: $.paths.*.*
     then:
     - field: $ref
       function: truthy
 
   endpoint-ref-must-be-file:
-    description: Endpoint must a $ref to a file in endpoints/
+    description: Endpoint must a $ref to a file in resources/
     message: "{{description}}; {{value}} incorrect"
     severity: error
     resolved: false
@@ -47,4 +48,4 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^endpoints\/.*yml$"
+        match: "^resources\/.*yml$"
