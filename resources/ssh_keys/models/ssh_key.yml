@@ -2,14 +2,10 @@ type: object
 
 properties:
   id:
-    description: A unique identification number for this key. Can be used to embed a specific SSH key into a Droplet.
-    type: integer
-    example: 512189
+    $ref: '../attributes/ssh_key_id.yml'
 
   fingerprint:
-    description: A unique identifier that differentiates this key from other keys using a format that SSH recognizes.
-    type: string
-    example: 3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa
+    $ref: '../attributes/ssh_key_fingerprint.yml'
 
   public_key:
     description: >-

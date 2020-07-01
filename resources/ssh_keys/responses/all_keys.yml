@@ -1,6 +1,6 @@
 description: >-
-  A JSON object with a key set to ssh_keys. The value is an array of key objects,
-  each of which contain the standard key attributes.
+  A JSON object with the key set to `ssh_keys`. The value is an array of `ssh_key`
+  objects, each of which contains the standard `ssh_key` attributes.
 
 headers:
   ratelimit-limit:
