@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  mock:
+    image: stoplight/prism:latest
+    command: mock -h 0.0.0.0 /prism/DigitalOcean-public.v2.yaml
+    volumes:
+      - .:/prism
+    ports:
+      - "4010:4010"
+
+  proxy:
+    image: stoplight/prism:latest
+    command: proxy -h 0.0.0.0 /prism/DigitalOcean-public.v2.yaml ${PROXY_TARGET}
+    volumes:
+      - .:/prism
+    ports:
+      - "8080:4010"
