@@ -39,7 +39,3 @@ test: start-mockedproxy _sleep ## Run Postman collection against local proxy wit
 		--env-var accessToken=${DO_TOKEN} \
 		--reporters json,cli \
 		--reporter-json-export newman-results.json
-
-.PHONY: bundle-spec
-bundle-spec:
-	npx @redocly/openapi-cli bundle $(SPEC_FILE) -o DigitalOcean-public.v2.json
