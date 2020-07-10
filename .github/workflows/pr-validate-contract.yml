@@ -18,8 +18,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          node-version: '14.x'
       - name: Deploy Mock and Proxy
         run: make start-mockedproxy
       - name: Run contract validation
