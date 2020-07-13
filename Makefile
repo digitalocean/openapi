@@ -4,7 +4,7 @@ PROXY_TARGET ?= http://mock:4010
 
 SPEC_FILE ?= DigitalOcean-public.v2.yaml
 
-## TODO: This is an inital (temporary) collection 
+## TODO: This is an inital (temporary) collection
 ## This file is generated through Postman from the spec (through the app)
 ## This will be replaced with an automated way to generate the collection in APICLI-401
 COLLECTION_PATH ?= tests/DigitalOcean.postman_collection.json
@@ -25,7 +25,7 @@ stop-services: ## Stop the proxy with mock docker services
 	docker-compose down
 
 .PHONY: start-prodproxy
-start-prodproxy: ## Start a proxy to the production 
+start-prodproxy: ## Start a proxy to the production
 	 PROXY_TARGET=https://api.digitalocean.com/v2 docker-compose up proxy
 
 .PHONY: _sleep
@@ -39,3 +39,7 @@ test: start-mockedproxy _sleep ## Run Postman collection against local proxy wit
 		--env-var accessToken=${DO_TOKEN} \
 		--reporters json,cli \
 		--reporter-json-export newman-results.json
+
+.PHONY: lint
+lint: ## Lint the OpenAPI spec using Spectral
+	spectral lint ${SPEC_FILE}
