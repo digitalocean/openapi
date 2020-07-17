@@ -16,6 +16,10 @@ DO_TOKEN ?= XXXXXX
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+.PHONY: dev-dependencies
+dev-dependencies: ## Install development tooling using npm
+	npm install --only=dev
+
 .PHONY: start-mockedproxy
 start-mockedproxy: ## Start a prism proxy (port 8080) targeting a local mock api (port 4010)
 	PROXY_TARGET=$(PROXY_TARGET) docker-compose up -d
@@ -41,5 +45,5 @@ test: start-mockedproxy _sleep ## Run Postman collection against local proxy wit
 		--reporter-json-export newman-results.json
 
 .PHONY: lint
-lint: ## Lint the OpenAPI spec using Spectral
-	spectral lint ${SPEC_FILE}
+lint: dev-dependencies ## Lint the OpenAPI spec using Spectral
+	npm run lint
