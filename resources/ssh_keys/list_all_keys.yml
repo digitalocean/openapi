@@ -9,7 +9,6 @@ description: >-
   the standard ssh_key attributes.
 
 tags:
-  - Account
   - SSH Keys
 
 parameters:
