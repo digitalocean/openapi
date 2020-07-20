@@ -1,0 +1,29 @@
+{
+  "name": "@digitalocean/apiv2-openapi",
+  "version": "2.0.0",
+  "description": "OpenAPI v3 specification for DigitalOcean's public API v2.",
+  "dependencies": {},
+  "devDependencies": {
+    "@stoplight/spectral": "^5.4.0"
+  },
+  "scripts": {
+    "test": "make test",
+    "lint": "spectral lint DigitalOcean-public.v2.yaml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitalocean/apiv2-openapi.git"
+  },
+  "keywords": [
+    "openapi",
+    "cloud",
+    "digitalocean",
+    "api"
+  ],
+  "author": "DigitalOcean API Engineering",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/digitalocean/apiv2-openapi/issues"
+  },
+  "homepage": "https://github.com/digitalocean/apiv2-openapi#readme"
+}

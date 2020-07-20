@@ -1,4 +1,5 @@
 openapi: 3.0.0
+
 info:
   title: DigitalOcean API
   version: '2.0'
@@ -10,30 +11,50 @@ info:
     name: DigitalOcean API Team
     email: api-engineering@digitalocean.com
   termsOfService: 'https://www.digitalocean.com/legal/terms-of-service-agreement/'
+
 servers:
   - url: 'https://api.digitalocean.com/v2'
     description: production
+
 tags:
   - name: Account
     description: Provides information about your current account.
   - name: Images
     description: >-
       A DigitalOcean image can be used to create a Droplet and may come in a number of flavors.
+  - name: Regions
+    description: Provides information about DigitalOcean data center regions.
   - name: SSH Keys
     description: Manage SSH keys available on your account.
+
 paths:
   /account:
     get:
       $ref: 'resources/account/get_user_information.yml'
+
   /account/keys:
     get:
       $ref: 'resources/ssh_keys/list_all_keys.yml'
+
+  /account/keys/{ssh_key_identifier}:
+    get:
+      $ref: 'resources/ssh_keys/retrieve_an_existing_key.yml'
+
+    delete:
+      $ref: 'resources/ssh_keys/destroy_a_key.yml'
+
   /images:
     get: 
       $ref: 'resources/images/list_images.yml'
+
   /images/{image_identifier}:
     get:
       $ref: 'resources/images/get_image.yml'
+
+  /regions:
+    get:
+      $ref: 'resources/regions/list_regions.yml'
+
 components:
   securitySchemes:
     bearerAuth:

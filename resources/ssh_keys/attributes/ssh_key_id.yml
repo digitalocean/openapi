@@ -1,0 +1,7 @@
+type: integer
+
+description: >-
+  A unique identification number for this key. Can be used to embed a 
+  specific SSH key into a Droplet.
+
+example: 512189

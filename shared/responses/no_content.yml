@@ -1,4 +1,4 @@
-description: Server error.
+description: The action was successful and the response body is empty.
 
 headers:
   ratelimit-limit:
@@ -7,11 +7,3 @@ headers:
     $ref: '../headers.yml#/ratelimit-remaining'
   ratelimit-reset:
     $ref: '../headers.yml#/ratelimit-reset'
-
-content:
-  application/json:
-    schema:
-      $ref: '../models/error.yml'
-    example:
-      id: server_error
-      message: Unexpected server-side error
