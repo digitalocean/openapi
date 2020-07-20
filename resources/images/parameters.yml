@@ -1,0 +1,48 @@
+ImageIdentifier:
+  in: path
+  description: The image ID (integer) or Slug (string) used to reference the specific image.
+  name: image_identifier
+  required: true
+  schema:
+    oneOf:
+      - type: integer
+        example: 123456
+      - type: string
+        example: ubuntu-16-04-x64
+
+ImageSlug:
+  in: path
+  description: A unique number used to reference a specific image.
+  name: image_slug
+  required: true
+  schema:
+    type: string
+  example: ubuntu-16-04-x64
+
+Type:
+  in: query
+  name: type
+  description: Filters results based on image type which can be either `application` or `distribution`.
+  required: false
+  schema:
+    type: string
+    enum:
+      - application
+      - distribution
+
+Private:
+  in: query
+  name: private
+  description: Used to filter only user images.
+  required: false
+  schema:
+    type: boolean
+
+Tag:
+  in: query
+  name: tag_name
+  description: Used to filter images by a specific tag.
+  required: false
+  schema:
+    type: string
+  example: base-image

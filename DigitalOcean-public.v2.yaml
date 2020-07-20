@@ -16,6 +16,9 @@ servers:
 tags:
   - name: Account
     description: Provides information about your current account.
+  - name: Images
+    description: >-
+      A DigitalOcean image can be used to create a Droplet and may come in a number of flavors.
   - name: SSH Keys
     description: Manage SSH keys available on your account.
 paths:
@@ -25,6 +28,12 @@ paths:
   /account/keys:
     get:
       $ref: 'resources/ssh_keys/list_all_keys.yml'
+  /images:
+    get: 
+      $ref: 'resources/images/list_images.yml'
+  /images/{image_identifier}:
+    get:
+      $ref: 'resources/images/get_image.yml'
 components:
   securitySchemes:
     bearerAuth:

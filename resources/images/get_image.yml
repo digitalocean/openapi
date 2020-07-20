@@ -1,0 +1,15 @@
+operationId: get_image
+
+summary: Retrieve an Existing Image by ID
+
+description: Retrieve information about an image (public or private).
+
+tags:
+  - Images
+
+parameters:
+  - $ref: 'parameters.yml#/ImageIdentifier'
+
+responses:
+  '200':
+    $ref: 'responses/get_image.yml'

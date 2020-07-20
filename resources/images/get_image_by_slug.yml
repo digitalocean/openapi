@@ -1,0 +1,15 @@
+operationId: get_image
+
+summary: Retrieve an Existing Image by Slug
+
+description: etrieve information about a public image.
+
+tags:
+  - Images
+
+parameters:
+  - $ref: 'parameters.yml#/ImageSlug'
+
+responses:
+  '200':
+    $ref: 'responses/get_image.yml'
