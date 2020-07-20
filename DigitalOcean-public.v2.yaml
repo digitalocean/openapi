@@ -39,17 +39,22 @@ paths:
   /account/keys/{ssh_key_identifier}:
     get:
       $ref: 'resources/ssh_keys/retrieve_an_existing_key.yml'
-
     delete:
       $ref: 'resources/ssh_keys/destroy_a_key.yml'
 
   /images:
     get: 
       $ref: 'resources/images/list_images.yml'
+    post:
+      $ref: 'resources/images/create_image.yml'
 
   /images/{image_identifier}:
     get:
       $ref: 'resources/images/get_image.yml'
+    put:
+      $ref: 'resources/images/update_image.yml'
+    delete:
+      $ref: 'resources/images/delete_image.yml'
 
   /regions:
     get:

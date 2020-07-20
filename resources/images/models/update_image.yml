@@ -1,0 +1,15 @@
+type: object
+
+properties:
+  name:
+    type: string
+    description: The display name to be given to an image.
+    example: new-image-name
+  distribution:
+    type: string
+    description: The name of a custom image's distribution.
+    example: Ubuntu
+  description:
+    type: string
+    description: An optional free-form text field to describe an image.
+    example: My base image

@@ -1,0 +1,33 @@
+operationId: update_image
+
+summary: Update an Image
+
+description: >-
+  To update an image, send a PUT request to /v2/images/$IMAGE_ID. 
+
+tags:
+  - Images
+
+parameters:
+  - in: path
+    name: image_identifier
+    description: The unique identifier used to reference a specific image.
+    required: true
+    schema:
+      type: integer
+      minimum: 1
+
+requestBody:
+  description: >-
+    Set the `name` attribute to the new value you would like to use. 
+    For custom images, the `description` and `distribution` attributes may also be updated.
+  required: true
+  
+  content:
+    application/json:
+      schema:
+        $ref: 'models/update_image.yml'
+
+responses:
+  '200':
+    $ref: 'responses/updated_image.yml'

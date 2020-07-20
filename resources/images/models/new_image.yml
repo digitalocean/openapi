@@ -1,0 +1,54 @@
+type: object
+
+properties:
+  name:
+    type: string
+    description: The display name to be given to an image.
+    example: ubuntu-18.04-minimal
+  url:
+    type: string
+    description: >-
+      A URL from which the custom Linux virtual machine image may be retrieved. 
+      The image it points to must be in the raw, qcow2, vhdx, vdi, or vmdk format. 
+      It may be compressed using gzip or bzip2 and must be smaller than 100 GB after being decompressed.
+    example: http://cloud-images.ubuntu.com/minimal/releases/bionic/release/ubuntu-18.04-minimal-cloudimg-amd64.img
+  region:
+    type: string
+    description: The slug identifier for the region where the image will initially be available.
+    example: nyc3
+  distribution:
+    type: string
+    description: >-
+      The name of a custom image's distribution. Currently, the valid values are 
+      "Arch Linux", "CentOS", "CoreOS", "Debian", "Fedora", "Fedora Atomic", "FreeBSD", "Gentoo", "openSUSE", "RancherOS", "Ubuntu", and "Unknown". 
+      Any other value will be accepted but ignored, and "Unknown" will be used in its place.
+    enum:
+      - Arch Linux
+      - CentOS
+      - CoreOS
+      - Debian
+      - Fedora
+      - Fedora Atomic
+      - FreeBSD
+      - Gentoo
+      - openSUSE
+      - RancherOS
+      - Ubuntu
+      - Unknown
+    default: Unknown
+    example: Ubuntu
+  description:
+    type: string
+    description: An optional free-form text field to describe an image.
+    example: Cloud-optimized image w/ small footprint
+  tags:
+    type: array
+    description: A flat array of tag names as strings to be applied to the image. Tag names may be for either existing or new tags.
+    example: 
+      - base-image
+      - prod
+
+required:
+  - name
+  - url
+  - region

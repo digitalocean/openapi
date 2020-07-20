@@ -8,7 +8,7 @@ tags:
   - Images
 
 parameters:
-  - $ref: 'parameters.yml#/ImageIdentifier'
+  - $ref: 'parameters.yml#/ImageIdOrSlug'
 
 responses:
   '200':

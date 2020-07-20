@@ -1,0 +1,15 @@
+operationId: delete_image
+
+summary: Delete an delete_image
+
+description: To delete a snapshot or custom image, send a DELETE request to /v2/images/$IMAGE_ID.
+
+tags:
+  - Images
+
+parameters:
+  - $ref: 'parameters.yml#/ImageId' 
+
+responses:
+  '204':
+    $ref: 'responses/deleted_image.yml'

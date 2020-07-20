@@ -1,23 +1,32 @@
-ImageIdentifier:
+ImageId:
   in: path
   description: The image ID (integer) or Slug (string) used to reference the specific image.
   name: image_identifier
   required: true
   schema:
-    oneOf:
-      - type: integer
-        example: 123456
-      - type: string
-        example: ubuntu-16-04-x64
+    type: integer
+  example: 123456
 
 ImageSlug:
   in: path
   description: A unique number used to reference a specific image.
-  name: image_slug
+  name: image_identifier
   required: true
   schema:
     type: string
   example: ubuntu-16-04-x64
+
+ImageIdOrSlug:
+  in: path
+  description: A unique number used to reference a specific image.
+  name: image_identifier
+  required: true
+  schema:
+    oneOf:
+      - type: integer
+        minimum: 1
+      - type: string
+    example: ubuntu-16-04-x64
 
 Type:
   in: query
