@@ -20,7 +20,7 @@ rules:
   properties-must-include-examples:
     description: Object properties must include examples
     message: "{{description}}; missing {{property}}"
-    severity: error
+    severity: warn
     given: $..properties..properties.*
     then:
       field: example
