@@ -15,9 +15,7 @@ properties:
     example: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
 
   name:
-    description: A human-readable display name for this key, used to easily identify the SSH keys when they are displayed.
-    type: string
-    example: My SSH Public Key
+    $ref: '../attributes/ssh_key_name.yml'
 
 required:
   - id

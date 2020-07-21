@@ -40,6 +40,9 @@ paths:
     get:
       $ref: 'resources/ssh_keys/retrieve_an_existing_key.yml'
 
+    patch:
+      $ref: 'resources/ssh_keys/update_a_key.yml'
+
     delete:
       $ref: 'resources/ssh_keys/destroy_a_key.yml'
 
