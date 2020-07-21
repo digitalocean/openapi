@@ -9,6 +9,10 @@ description: >-
 tags:
   - Actions
 
+parameters:
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
 responses:
   '200':
     $ref: 'responses/all_actions.yml'
