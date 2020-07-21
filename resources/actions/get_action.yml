@@ -1,0 +1,21 @@
+operationId: get_action
+
+summary: Retrieve an Existing Action
+
+description: To retrieve a specific action object, send a GET request to `/v2/actions/$ACTION_ID`.
+
+tags:
+  - Actions
+
+parameters:
+  - in: path
+    name: action_id
+    description: A unique numeric ID that can be used to identify and reference an action.
+    required: true
+    schema:
+      type: integer
+      minimum: 1
+
+responses:
+  '200':
+    $ref: 'responses/specific_action.yml'
