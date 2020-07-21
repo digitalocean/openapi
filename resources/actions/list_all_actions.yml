@@ -1,0 +1,14 @@
+operationId: list_all_actions
+
+summary: Retrieve and Existing Action
+
+description: >-
+  This will be the entire list of actions taken on your account, so it will be quite large. 
+  As with any large collection returned by the API, the results will be paginated with only 20 on each page by default.
+
+tags:
+  - Actions
+
+responses:
+  '200':
+    $ref: 'responses/all_actions.yml'
