@@ -1,6 +1,6 @@
 operationId: list_all_actions
 
-summary: Retrieve and Existing Action
+summary: List All Actions
 
 description: >-
   This will be the entire list of actions taken on your account, so it will be quite large. 
