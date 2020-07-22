@@ -13,4 +13,18 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/ssh_key.yml'
+      $ref: '../models/wrapped_ssh_key.yml'
+
+links:
+  GetSSHKeyById:
+    $ref: '../links/get_ssh_key_by_id.yml'
+
+  GetSSHKeyByFingerprint:
+    $ref: '../links/get_ssh_key_by_fingerprint.yml'
+
+  DeleteSSHKeyById:
+    $ref: '../links/delete_ssh_key_by_id.yml'
+
+  DeleteSSHKeyByFingerprint:
+    $ref: '../links/delete_ssh_key_by_fingerprint.yml'
+
