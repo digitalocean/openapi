@@ -40,9 +40,15 @@ paths:
     get:
       $ref: 'resources/ssh_keys/list_all_keys.yml'
 
+    post:
+      $ref: 'resources/ssh_keys/create_a_new_key.yml'
+
   /account/keys/{ssh_key_identifier}:
     get:
       $ref: 'resources/ssh_keys/retrieve_an_existing_key.yml'
+
+    patch:
+      $ref: 'resources/ssh_keys/update_a_key.yml'
 
     delete:
       $ref: 'resources/ssh_keys/destroy_a_key.yml'

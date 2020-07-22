@@ -10,7 +10,6 @@ description: >-
   object which contains the standard ssh_key attributes.
 
 tags:
-  - Account
   - SSH Keys
 
 parameters:

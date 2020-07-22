@@ -10,7 +10,6 @@ description: >-
   the response body is empty.
 
 tags:
-  - Account
   - SSH Keys
 
 parameters:
