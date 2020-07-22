@@ -8,6 +8,10 @@ properties:
   status:
     type: string
     description: The current status of the action. This can be "in-progress", "completed", or "errored".
+    enum:
+      - in-progress
+      - completed
+      - errored
     example: completed
   type:
     type: string
