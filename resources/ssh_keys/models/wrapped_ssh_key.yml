@@ -1,0 +1,8 @@
+type: object
+
+properties:
+  ssh_key:
+    $ref: 'ssh_key.yml'
+
+required:
+  - ssh_key
