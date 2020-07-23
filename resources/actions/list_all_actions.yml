@@ -1,0 +1,18 @@
+operationId: list_all_actions
+
+summary: List All Actions
+
+description: >-
+  This will be the entire list of actions taken on your account, so it will be quite large. 
+  As with any large collection returned by the API, the results will be paginated with only 20 on each page by default.
+
+tags:
+  - Actions
+
+parameters:
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/all_actions.yml'
