@@ -13,6 +13,7 @@ properties:
       - completed
       - errored
     example: completed
+    default: in-progress
   type:
     type: string
     description: This is the type of action that the object represents. For example, this could be "transfer" to represent the state of an image transfer action.
@@ -36,7 +37,8 @@ properties:
   region:
       $ref: '../../regions/models/region.yml'
   region_slug:
-    type: string
-    nullable: true
-    description: A slug representing the region where the action occurred.
-    example: nyc3
+    allOf:
+      - $ref: '../../regions/models/region.yml#/properties/slug'
+      - type: object
+        properties:
+          nullable: true
