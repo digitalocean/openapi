@@ -21,10 +21,12 @@ properties:
   started_at:
     type: string
     description: A time value given in ISO8601 combined date and time format that represents when the action was initiated.
+    format: date-time
     example: 2020-11-14T16:29:21Z
   completed_at:
     type: string
     description: A time value given in ISO8601 combined date and time format that represents when the action was completed.
+    format: date-time
     example: 2020-11-14T16:30:06Z
   resource_id:
     type: integer
@@ -39,6 +41,5 @@ properties:
   region_slug:
     allOf:
       - $ref: '../../regions/models/region.yml#/properties/slug'
-      - type: object
-        properties:
-          nullable: true
+      - type: string
+        nullable: true
