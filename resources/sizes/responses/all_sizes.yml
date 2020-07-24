@@ -32,8 +32,8 @@ content:
         memory: 1024
         vcpus: 1
         disk: 25
-        transfer: 1
-        price_monthly: 5
+        transfer: 1.0
+        price_monthly: 5.0
         price_hourly: 0.00743999984115362
         regions:
         - ams2

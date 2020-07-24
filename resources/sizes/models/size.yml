@@ -32,7 +32,7 @@ properties:
     title: transfer
     type: number
     format: float
-    example: 1
+    example: 1.0
     description: The amount of transfer bandwidth that is available for Droplets
       created in this size. This only counts traffic on the public interface.
       The value is given in terabytes.
@@ -41,7 +41,7 @@ properties:
     title: price_monthly
     type: number
     format: float
-    example: 5
+    example: 5.0
     description: This attribute describes the monthly cost of this Droplet size
       if the Droplet is kept for an entire month. The value is measured in
       US dollars.
