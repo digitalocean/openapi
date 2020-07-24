@@ -1,0 +1,24 @@
+operationId: retrieve_an_existing_action
+
+summary: Retrieve an Existing Action
+
+description: To retrieve a specific action object, send a GET request to `/v2/actions/$ACTION_ID`.
+
+tags:
+  - Actions
+
+parameters:
+  - $ref: 'parameters.yml#/actionId'
+
+responses:
+  '200':
+    $ref: 'responses/existing_action.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

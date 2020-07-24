@@ -67,6 +67,10 @@ paths:
     get:
       $ref: 'resources/actions/list_all_actions.yml'
 
+  /actions/{action_id}:
+    get:
+      $ref: 'resources/actions/retrieve_an_existing_action.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'

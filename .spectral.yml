@@ -49,3 +49,21 @@ rules:
       function: pattern
       functionOptions:
         match: "^resources\/.*yml$"
+
+  common-responses-unauthorized:
+    description: Responses should contain common response - 401 (unauthorized)
+    message: "{{description}}. Missing {{property}}"
+    severity: warn
+    given: $..responses
+    then:
+      - field: '401'
+        function: truthy
+
+  common-responses-server-error:
+    description: Responses should contain common response - 500 (server error)
+    message: "{{description}}. Missing {{property}}"
+    severity: warn
+    given: $..responses
+    then:
+      - field: '500'
+        function: truthy
