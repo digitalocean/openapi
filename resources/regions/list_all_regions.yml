@@ -1,4 +1,4 @@
-operationId: list_regions
+operationId: list_all_regions
 
 summary: List all data center regions
 
@@ -19,7 +19,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/regions_list.yml'
+    $ref: 'responses/all_regions.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

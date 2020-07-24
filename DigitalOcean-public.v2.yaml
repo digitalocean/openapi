@@ -59,7 +59,7 @@ paths:
 
   /regions:
     get:
-      $ref: 'resources/regions/list_regions.yml'
+      $ref: 'resources/regions/list_all_regions.yml'
 
 components:
   securitySchemes:
