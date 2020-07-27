@@ -1,0 +1,37 @@
+description: A JSON object keyed on account with an exerpt of the current user account data.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      allOf:
+        - type: object
+          properties:
+            images: 
+              type: array
+              items:
+                $ref: '../models/image.yml'
+          required:
+            - images
+        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/meta.yml'
+    examples:
+      All:
+        $ref: 'examples.yml#/all'
+      Snapshots:
+        $ref: 'examples.yml#/snapshots'
+      Distribution:
+        $ref: 'examples.yml#/distribution'
+      Custom: 
+        $ref: 'examples.yml#/custom'
+      Application: 
+        $ref: 'examples.yml#/application'
+      Tagged: 
+        $ref: 'examples.yml#/tagged'
