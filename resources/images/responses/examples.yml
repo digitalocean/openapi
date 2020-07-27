@@ -4,7 +4,7 @@ images_all:
       - id: 7555620
         name: Nifty New Snapshot
         distribution: Ubuntu
-        slug: 
+        slug:
         public: false
         regions:
           - nyc2
@@ -17,11 +17,10 @@ images_all:
         tags: []
         status: available
         error_message: ''
-
       - id: 7555621
         name: Another Snapshot
         distribution: Ubuntu
-        slug: 
+        slug:
         public: false
         regions:
           - nyc2
@@ -50,11 +49,10 @@ images_all:
         tags: []
         status: available
         error_message: ''
-
       - id: 7555621
         name: A custom image
         distribution: Arch Linux
-        slug: 
+        slug:
         public: false
         regions:
           - nyc3
@@ -66,11 +64,10 @@ images_all:
         tags: []
         status: available
         error_message: ''
-
       - id: 7555621
         name: An APP image
         distribution: Fedora
-        slug: 
+        slug:
         public: false
         regions:
           - nyc2
@@ -83,11 +80,10 @@ images_all:
         tags: []
         status: available
         error_message: ''
-
       - id: 7555621
         name: A simple tagged image
         distribution: CentOS
-        slug: 
+        slug:
         public: false
         regions:
           - nyc2
@@ -101,7 +97,6 @@ images_all:
           - simple-image
         status: available
         error_message: ''
-
     links:
       pages: {}
     meta:
@@ -114,7 +109,7 @@ images_snapshots:
       - id: 7555620
         name: Nifty New Snapshot
         distribution: Ubuntu
-        slug: 
+        slug:
         public: false
         regions:
           - nyc2
@@ -127,11 +122,10 @@ images_snapshots:
         tags: []
         status: available
         error_message: ''
-
       - id: 7555621
         name: Another Snapshot
         distribution: Ubuntu
-        slug: 
+        slug:
         public: false
         regions:
           - nyc2
@@ -143,7 +137,6 @@ images_snapshots:
         tags: []
         status: available
         error_message: ''
-
     links:
       pages: {}
     meta:
@@ -153,10 +146,10 @@ images_snapshots:
 images_distribution:
 
   description: |
-    **Important:**  
+    **Important:**
     The `type` query parameter is not directly related to the `type` attribute.
-    The main thing to remember here is that DigitalOcean-produced distribution images will have `snapshot` as the type attribute. 
-  
+    The main thing to remember here is that DigitalOcean-produced distribution images will have `snapshot` as the type attribute.
+
   value:
     images:
       - id: 63663980
@@ -175,7 +168,6 @@ images_distribution:
         tags: []
         status: available
         error_message: ''
-
     links:
       pages: {}
     meta:
@@ -188,7 +180,7 @@ images_custom:
       - id: 7555621
         name: A custom image
         distribution: Arch Linux
-        slug: 
+        slug:
         public: false
         regions:
           - nyc3
@@ -208,14 +200,14 @@ images_custom:
 
 images_application:
   description: |
-    **Important:**  
+    **Important:**
     The `type` query parameter is not directly related to the `type` attribute.
   value:
     images:
       - id: 7555621
         name: An APP image
         distribution: Fedora
-        slug: 
+        slug:
         public: false
         regions:
           - nyc2
@@ -228,7 +220,7 @@ images_application:
         tags: []
         status: available
         error_message: ''
-        
+
     links:
       pages: {}
     meta:
@@ -241,7 +233,7 @@ images_tagged:
       - id: 7555621
         name: A simple tagged image
         distribution: CentOS
-        slug: 
+        slug:
         public: false
         regions:
           - nyc2
@@ -255,7 +247,6 @@ images_tagged:
           - simple-image
         status: available
         error_message: ''
-
     links:
       pages: {}
     meta:
