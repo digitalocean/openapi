@@ -11,6 +11,7 @@ properties:
   memory:
     title: memory
     type: integer
+    multipleOf: 8
     example: 1024
     description: The amount of RAM allocated to Droplets created of this size.
       The value is represented in megabytes.
