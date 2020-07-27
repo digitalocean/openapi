@@ -17,7 +17,6 @@ images_all:
         tags: []
         status: available
         error_message: ''
-
       - id: 7555621
         name: Another Snapshot
         distribution: Ubuntu
@@ -50,7 +49,6 @@ images_all:
         tags: []
         status: available
         error_message: ''
-
       - id: 7555621
         name: A custom image
         distribution: Arch Linux
@@ -66,7 +64,6 @@ images_all:
         tags: []
         status: available
         error_message: ''
-
       - id: 7555621
         name: An APP image
         distribution: Fedora
@@ -83,7 +80,6 @@ images_all:
         tags: []
         status: available
         error_message: ''
-
       - id: 7555621
         name: A simple tagged image
         distribution: CentOS
@@ -101,7 +97,6 @@ images_all:
           - simple-image
         status: available
         error_message: ''
-
     links:
       pages: {}
     meta:
@@ -127,7 +122,6 @@ images_snapshots:
         tags: []
         status: available
         error_message: ''
-
       - id: 7555621
         name: Another Snapshot
         distribution: Ubuntu
@@ -143,7 +137,6 @@ images_snapshots:
         tags: []
         status: available
         error_message: ''
-
     links:
       pages: {}
     meta:
@@ -175,7 +168,6 @@ images_distribution:
         tags: []
         status: available
         error_message: ''
-
     links:
       pages: {}
     meta:
@@ -254,7 +246,6 @@ images_tagged:
           - simple-image
         status: available
         error_message: ''
-
     links:
       pages: {}
     meta:
