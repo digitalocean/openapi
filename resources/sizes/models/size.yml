@@ -12,6 +12,7 @@ properties:
     title: memory
     type: integer
     multipleOf: 8
+    minimum: 8
     example: 1024
     description: The amount of RAM allocated to Droplets created of this size.
       The value is represented in megabytes.
@@ -80,6 +81,7 @@ properties:
   available:
     title: available
     type: boolean
+    default: true
     example: true
     description: This is a boolean value that represents whether new Droplets
       can be created with this size.
