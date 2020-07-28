@@ -36,6 +36,17 @@ tags:
       Every action that creates an action object is available through this endpoint. Completed
       actions are not removed from this list and are always available for querying.
 
+  - name: Droplets
+    description: |
+      A [Droplet](https://www.digitalocean.com/docs/droplets/) is a DigitalOcean
+      virtual machine. By sending requests to the Droplet endpoint, you can
+      list, create, or delete Droplets.
+
+      Some of the attributes will have an object value. The `region` and `image`
+      objects will all contain the standard attributes of their associated
+      types. Find more information about each of these objects in their
+      respective sections.
+
   - name: Images
     description: |
       A DigitalOcean [image](https://www.digitalocean.com/docs/images/) can be used to create a Droplet and may come in a number of flavors. Currently, there are five types of images: snapshots, backups, applications, distributions, and custom images.
@@ -95,6 +106,10 @@ paths:
   /actions/{action_id}:
     get:
       $ref: 'resources/actions/retrieve_an_existing_action.yml'
+
+  /droplets:
+    get:
+      $ref: 'resources/droplets/list_all_droplets.yml'
 
   /images:
     get:
