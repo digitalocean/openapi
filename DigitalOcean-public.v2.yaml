@@ -129,6 +129,10 @@ paths:
     get:
       $ref: 'resources/droplets/list_all_droplets.yml'
 
+  /droplets/{droplet_id}:
+    get:
+      $ref: 'resources/droplets/retrieve_existing_droplet.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'

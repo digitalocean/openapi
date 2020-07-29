@@ -1,3 +1,12 @@
+DropletId:
+  in: path
+  name: droplet_id
+  description: A unique identifier for a Droplet instance.
+  required: true
+  schema:
+    type: integer
+    minimum: 1
+
 DropletTagName:
   in: query
   name: tag_name
