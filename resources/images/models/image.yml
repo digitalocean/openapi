@@ -29,7 +29,7 @@ properties:
     type: string
     nullable: true
     description: >-
-      string	A uniquely identifying string that is associated with each of the DigitalOcean-provided public images. These can be used to reference a public image as an alternative to the numeric id.
+      A uniquely identifying string that is associated with each of the DigitalOcean-provided public images. These can be used to reference a public image as an alternative to the numeric id.
     example: nifty1
   public:
     type: boolean

@@ -141,20 +141,24 @@ snapshots:
       total:
         2
 distribution:
+  description: |
+    **Important:**  
+    The `type` query parameter is not directly related to the `type` attribute.
+    The main thing to remember here is that DigitalOcean-produced distribution images will have `snapshot` as the type attribute. 
   value:
     images:
-      - id: 7555621
-        name: A common distribution
+      - id: 63663980
+        name: 20.04 (LTS) x64
         distribution: Ubuntu
-        slug: 
-        public: false
+        slug: ubuntu-20-04-x64
+        public: true
         regions:
           - nyc2
           - nyc3
-        created_at: '2014-11-04T22:23:02Z'
-        type: distribution
+        created_at: '2020-05-15T05:47:50Z'
+        type: snapshot
         min_disk_size: 20
-        size_gigabytes: 2.34
+        size_gigabytes: 2.36
         description: ''
         tags: []
         status: available
@@ -188,6 +192,9 @@ custom:
       total:
         1
 application:
+  description: |
+    **Important:**  
+    The `type` query parameter is not directly related to the `type` attribute.
   value:
     images:
       - id: 7555621

@@ -1,4 +1,6 @@
-description: A JSON object keyed on account with an exerpt of the current user account data.
+description: >-
+  The response will be a JSON object with a key called `images`. 
+  This will be set to an array of image objects, each of which will contain the standard image attributes.
 
 headers:
   ratelimit-limit:
