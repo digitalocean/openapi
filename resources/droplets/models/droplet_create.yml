@@ -1,0 +1,107 @@
+type: object
+
+properties:
+  name:
+    type: string
+    example: example.com
+    description: The human-readable string you wish to use when displaying the
+      Droplet name. The name, if set to a domain name managed in the
+      DigitalOcean DNS management system, will configure a PTR record for the
+      Droplet. The name set during creation will also determine the hostname
+      for the Droplet in its internal configuration.
+
+  region:
+    type: string
+    example: nyc3
+    description: The slug identifier for the region that you wish to
+      deploy the Droplet in.
+
+  size:
+    type: string
+    example: s-1vcpu-1gb
+    description: The slug identifier for the size that you wish to select
+      for this Droplet.
+
+  image:
+    oneOf:
+    - type: string
+    - type: integer
+    example: ubuntu-20-04-x64
+    description: The image ID of a public or private image or the slug
+      identifier for a public image. This image will be the base image for
+      your Droplet.
+
+  ssh_keys:
+    type: array
+    items:
+      anyOf:
+      - type: string
+      - type: integer
+    example:
+    - 289794
+    - 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
+    default: []
+    description: An array containing the IDs or fingerprints of the SSH keys
+      that you wish to embed in the Droplet's root account upon creation.
+
+  backups:
+    type: boolean
+    example: true
+    default: false
+    description: A boolean indicating whether automated backups should be enabled
+      for the Droplet.
+
+  ipv6:
+    type: boolean
+    example: true
+    default: false
+    description: A boolean indicating whether to enable IPv6 on the Droplet.
+
+  monitoring:
+    type: boolean
+    example: true
+    default: false
+    description: A boolean indicating whether to install the DigitalOcean agent
+      for monitoring.
+
+  tags:
+    type: array
+    items:
+      type: string
+    example:
+    - env:prod
+    - web
+    default: []
+    description: A flat array of tag names as strings to apply to the Droplet
+      after it is created. Tag names can either be existing or new tags.
+
+  user_data:
+    type: string
+    example: |
+      #cloud-config
+      runcmd:
+        - touch /test.txt
+    description: A string containing 'user data' which may be used to configure
+      the Droplet on first boot, often a 'cloud-config' file or Bash script.
+      It must be plain text and may not exceed 64 KiB in size.
+
+  private_networking:
+    type: boolean
+    example: true
+    default: false
+    description: A boolean indicating whether to enable private networking.
+      This will provision the Droplet inside of your account's default VPC for
+      the region. Use the `vpc_uuid` attribute to specify a different VPC.
+
+  vpc_uuid:
+    type: string
+    example: 760e09ef-dc84-11e8-981e-3cfdfeaae000
+    description: A string specifying the UUID of the VPC to which the Droplet
+      will be assigned. If excluded, the Droplet will be assigned to your
+      account's default VPC for the region.
+
+required:
+- name
+- region
+- size
+- image

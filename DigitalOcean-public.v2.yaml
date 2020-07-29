@@ -129,6 +129,9 @@ paths:
     get:
       $ref: 'resources/droplets/list_all_droplets.yml'
 
+    post:
+      $ref: 'resources/droplets/create_droplet.yml'
+
   /droplets/{droplet_id}:
     get:
       $ref: 'resources/droplets/retrieve_existing_droplet.yml'

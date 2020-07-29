@@ -1,0 +1,37 @@
+operationId: create_droplet
+
+summary: Create a New Droplet
+
+description: |
+  To create a new Droplet, send a POST request to `/v2/droplets` setting the
+  required attributes.
+
+  A Droplet will be created using the provided information. The response body
+  will contain a JSON object with a key called `droplet`. The value will be an
+  object containing the standard attributes for your new Droplet. The response
+  code, 202 Accepted, does not indicate the success or failure of the operation,
+  just that the request has been accepted for processing. The `actions` returned
+  as part of the response's `links` object can be used to check the status
+  of the Droplet create event.
+
+tags:
+  - Droplets
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: 'models/droplet_create.yml'
+
+responses:
+  '202':
+    $ref: 'responses/droplet_create.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
