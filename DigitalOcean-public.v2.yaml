@@ -133,6 +133,9 @@ paths:
     get:
       $ref: 'resources/droplets/retrieve_existing_droplet.yml'
 
+    delete:
+      $ref: 'resources/droplets/destroy_droplet.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
