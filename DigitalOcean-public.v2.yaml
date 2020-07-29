@@ -38,6 +38,16 @@ tags:
       To interact with images, you will generally send requests to the images endpoint at /v2/images.
   - name: Regions
     description: Provides information about DigitalOcean data center regions.
+  - name: Sizes
+    description: |
+      The sizes objects represent different packages of hardware resources that
+      can be used for Droplets. When a Droplet is created, a size must be
+      selected so that the correct resources can be allocated.
+
+      Each size represents a plan that bundles together specific sets of
+      resources. This includes the amount of RAM, the number of virtual CPUs,
+      disk space, and transfer. The size object also includes the pricing
+      details and the regions that the size is available in.
   - name: SSH Keys
     description: Manage SSH keys available on your account.
 
@@ -70,10 +80,17 @@ paths:
   /images:
     get: 
       $ref: 'resources/images/list_images.yml'
+  /actions/{action_id}:
+    get:
+      $ref: 'resources/actions/retrieve_an_existing_action.yml'
 
   /regions:
     get:
-      $ref: 'resources/regions/list_regions.yml'
+      $ref: 'resources/regions/list_all_regions.yml'
+
+  /sizes:
+    get:
+      $ref: 'resources/sizes/list_all_sizes.yml'
 
 components:
   securitySchemes:

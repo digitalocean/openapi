@@ -1,0 +1,30 @@
+operationId: list_all_sizes
+
+summary: List all Droplet sizes
+
+description: >-
+  To list all of available Droplet sizes, send a GET request to `/v2/sizes`.
+
+  The response will be a JSON object with a key called `sizes`. The value of
+  this will be an array of `size` objects each of which contain the standard
+  size attributes.
+
+tags:
+  - Sizes
+
+parameters:
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/all_sizes.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
