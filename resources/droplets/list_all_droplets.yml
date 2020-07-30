@@ -2,12 +2,19 @@ operationId: list_all_droplets
 
 summary: List All Droplets
 
-description: >-
+description: |
   To list all Droplets in your account, send a GET request to `/v2/droplets`.
 
   The response body will be a JSON object with a key of `droplets`. This will be
   set to an array containing objects representing each Droplet. These will
   contain the standard Droplet attributes.
+
+  ### Filtering Results by Tag
+
+  It's possible to request filtered results by including certain query parameters.
+  To only list Droplets assigned to a specific tag, include the `tag_name` query
+  parameter set to the name of the tag in your GET request. For example,
+  `/v2/droplets?tag_name=$TAG_NAME`.
 
 tags:
   - Droplets
