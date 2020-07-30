@@ -11,18 +11,32 @@ headers:
 content:
   application/json:
     schema:
-      properties:
-        droplet:
-          $ref: '../models/droplet.yml'
-        links:
-          type: object
-          properties:
-            actions:
-              type: array
-              items:
-                $ref: '../models/action_link.yml'
-
+      oneOf:
+      - properties:
+          droplet:
+            $ref: '../models/droplet.yml'
+          links:
+            type: object
+            properties:
+              actions:
+                type: array
+                items:
+                  $ref: '../models/action_link.yml'
+      - properties:
+          droplets:
+            type: array
+            items:
+              $ref: '../models/droplet.yml'
+          links:
+            type: object
+            properties:
+              actions:
+                type: array
+                items:
+                  $ref: '../models/action_link.yml'
 
     examples:
-      Create Response:
+      Single Droplet Create Response:
         $ref: 'examples.yml#/createResponse'
+      Multiple Droplet Create Response:
+        $ref: 'examples.yml#/multiCreateResponse'
