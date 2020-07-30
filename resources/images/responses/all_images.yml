@@ -26,14 +26,14 @@ content:
         - $ref: '../../../shared/meta.yml'
     examples:
       All:
-        $ref: 'examples.yml#/all'
+        $ref: 'examples.yml#/images_all'
       Snapshots:
-        $ref: 'examples.yml#/snapshots'
+        $ref: 'examples.yml#/images_snapshots'
       Distribution:
-        $ref: 'examples.yml#/distribution'
+        $ref: 'examples.yml#/images_distribution'
       Custom: 
-        $ref: 'examples.yml#/custom'
+        $ref: 'examples.yml#/images_custom'
       Application: 
-        $ref: 'examples.yml#/application'
+        $ref: 'examples.yml#/images_application'
       Tagged: 
-        $ref: 'examples.yml#/tagged'
+        $ref: 'examples.yml#/images_tagged'
