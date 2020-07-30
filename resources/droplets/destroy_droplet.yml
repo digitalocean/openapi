@@ -8,11 +8,19 @@ description: |
   A successful request will receive a 204 status code with no body in response.
   This indicates that the request was processed successfully.
 
+  ### Deleting Droplets by Tag
+
+  It's possible to delete multiple Droplets with a single request by including
+  certain query parameters. To delete **all** Droplets assigned to a specific
+  tag, include the `tag_name` query parameter set to the name of the tag in
+  your DELETE request. For example, `/v2/droplets?tag_name=$TAG_NAME`.
+
 tags:
   - Droplets
 
 parameters:
   - $ref: 'parameters.yml#/DropletId'
+  - $ref: 'parameters.yml#/DropletTagName'
 
 responses:
   '204':
