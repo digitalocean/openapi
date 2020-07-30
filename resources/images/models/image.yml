@@ -1,16 +1,19 @@
 type: object
 
 properties:
+
   id:
     type: integer
     description: >-
       A unique number that can be used to identify and reference a specific image.
     example: 7555620
+
   name:
     type: string
     description: >-
       The display name that has been given to an image. This is what is shown in the control panel and is generally a descriptive title for the image in question.
     example: Nifty New Snapshot
+
   type:
     type: string
     description: >-
@@ -20,11 +23,13 @@ properties:
       - backup
       - custom
     example: snapshot
+
   distribution:
     type: string
     description: >-
       This attribute describes the base distribution used for this image. For custom images, this is user defined.
     example: Ubuntu
+
   slug:
     type: string
     nullable: true
@@ -37,6 +42,7 @@ properties:
     description: >-
       This is a boolean value that indicates whether the image in question is public or not. An image that is public is available to all accounts. A non-public image is only accessible from your account.
     example: true
+
   regions:
     type: array
     items:
@@ -46,11 +52,13 @@ properties:
     example:
       - nyc1
       - nyc2
+
   created_at:
     type: string
     description: >-
       A time value given in ISO8601 combined date and time format that represents when the image was created.
     example: 2020-11-04T22:23:02Z
+
   min_disk_size:
     type: integer
     description: >-
@@ -64,11 +72,13 @@ properties:
     description: >-
       The size of the image in gigabytes.
     example: 2.34
+
   description:
     type: string
     description: >-
       An optional free-form text field to describe an image.
     example: A new and nifty snapshot
+
   tags:
     type: array
     items:
@@ -76,6 +86,7 @@ properties:
     description: >-
       An array containing the names of the tags the image has been tagged with.
     example: []
+
   status:
     type: string
     description: >-
@@ -86,6 +97,7 @@ properties:
       - pending
       - deleted
     example: NEW
+
   error_message:
     type: string
     description: >-
