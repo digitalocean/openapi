@@ -146,6 +146,10 @@ paths:
     get:
       $ref: 'resources/droplets/list_associated_resources.yml'
 
+  /v2/droplets/{droplet_id}/destroy_with_associated_resources/selective:
+    delete:
+      $ref: 'resources/droplets/destroy_with_associated_resources_selective.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
