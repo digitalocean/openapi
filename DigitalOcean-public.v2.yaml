@@ -150,6 +150,10 @@ paths:
     get:
       $ref: 'resources/droplets/list_droplet_kernels.yml'
 
+  /v2/droplets/{droplet_id}/neighbors:
+    get:
+      $ref: 'resources/droplets/droplet_neighbors.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
