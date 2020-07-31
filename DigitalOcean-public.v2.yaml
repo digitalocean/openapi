@@ -146,13 +146,17 @@ paths:
     get:
       $ref: 'resources/droplets/list_associated_resources.yml'
 
-  /v2/droplets/{droplet_id}/destroy_with_associated_resources/selective:
+  /droplets/{droplet_id}/destroy_with_associated_resources/selective:
     delete:
       $ref: 'resources/droplets/destroy_with_associated_resources_selective.yml'
 
-  /v2/droplets/{droplet_id}/destroy_with_associated_resources/dangerous:
+  /droplets/{droplet_id}/destroy_with_associated_resources/dangerous:
     delete:
       $ref: 'resources/droplets/destroy_with_associated_resources_dangerous.yml'
+
+  /droplets/$DROPLET_ID/destroy_with_associated_resources/status:
+    get:
+      $ref: 'resources/droplets/destroy_with_associated_resources_status.yml'
 
   /images:
     get:
