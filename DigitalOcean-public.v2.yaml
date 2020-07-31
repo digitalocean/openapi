@@ -166,6 +166,10 @@ paths:
     get:
       $ref: 'resources/droplets/destroy_with_associated_resources_status.yml'
 
+  /droplets/$DROPLET_ID/destroy_with_associated_resources/retry:
+    post:
+      $ref: 'resources/droplets/destroy_with_associated_resources_retry.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
