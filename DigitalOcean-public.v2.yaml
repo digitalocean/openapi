@@ -162,11 +162,11 @@ paths:
     delete:
       $ref: 'resources/droplets/destroy_with_associated_resources_dangerous.yml'
 
-  /droplets/$DROPLET_ID/destroy_with_associated_resources/status:
+  /droplets/{droplet_id}/destroy_with_associated_resources/status:
     get:
       $ref: 'resources/droplets/destroy_with_associated_resources_status.yml'
 
-  /droplets/$DROPLET_ID/destroy_with_associated_resources/retry:
+  /droplets/{droplet_id}/destroy_with_associated_resources/retry:
     post:
       $ref: 'resources/droplets/destroy_with_associated_resources_retry.yml'
 
