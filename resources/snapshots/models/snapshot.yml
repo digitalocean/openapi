@@ -2,8 +2,8 @@ type: object
 
 properties:
   id:
-    type: integer
-    example: 6372321
+    type: string
+    example: '6372321'
     description: The unique identifier for the snapshot.
 
   name:
