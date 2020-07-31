@@ -150,6 +150,10 @@ paths:
     delete:
       $ref: 'resources/droplets/destroy_with_associated_resources_selective.yml'
 
+  /v2/droplets/{droplet_id}/destroy_with_associated_resources/dangerous:
+    delete:
+      $ref: 'resources/droplets/destroy_with_associated_resources_dangerous.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
