@@ -6,7 +6,7 @@ description: |
   To list all Droplets in your account, send a GET request to `/v2/droplets`.
 
   The response body will be a JSON object with a key of `droplets`. This will be
-  set to an array containing objects representing each Droplet. These will
+  set to an array containing objects each representing a Droplet. These will
   contain the standard Droplet attributes.
 
   ### Filtering Results by Tag

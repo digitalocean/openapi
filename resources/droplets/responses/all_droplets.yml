@@ -1,4 +1,4 @@
-description: >-
+description: A JSON object with a key of `droplets`.
 
 headers:
   ratelimit-limit:
