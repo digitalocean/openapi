@@ -9,3 +9,16 @@ VolumeResourceType:
         - droplet
         - volume
   example: droplet
+
+SnapshotId:
+  in: path
+  name: snapshot_id
+  required: true
+  description: Either the ID of an existing snapshot. This will be an integer for
+    a Droplet snapshot or a string for a volume snapshot.
+  schema:
+    oneOf:
+      - type: string
+        example: 6372321
+      - type: integer
+        example: fbe805e8-866b-11e6-96bf-000f53315a41

@@ -108,6 +108,10 @@ paths:
     get:
       $ref: 'resources/snapshots/list_all_snapshots.yml'
 
+  /snapshots/{snapshot_id}:
+    get:
+      $ref: 'resources/snapshots/retrieve_existing_snapshots.yml'
+
 components:
   securitySchemes:
     bearerAuth:
