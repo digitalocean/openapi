@@ -152,7 +152,7 @@ paths:
 
   /v2/droplets/{droplet_id}/neighbors:
     get:
-      $ref: 'resources/droplets/droplet_neighbors.yml'
+      $ref: 'resources/droplets/list_droplet_neighbors.yml'
 
   /images:
     get:
@@ -164,7 +164,7 @@ paths:
 
   /v2/reports/droplet_neighbors_ids:
     get:
-      $ref: 'resources/droplets/list_droplet_neighbors_ids.yml'
+      $ref: 'resources/droplets/list_all_droplet_neighbors_ids.yml'
 
   /sizes:
     get:
