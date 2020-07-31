@@ -150,6 +150,10 @@ paths:
     get:
       $ref: 'resources/droplets/list_droplet_neighbors.yml'
 
+  /droplets/{droplet_id}/destroy_with_associated_resources:
+    get:
+      $ref: 'resources/droplets/list_associated_resources.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
