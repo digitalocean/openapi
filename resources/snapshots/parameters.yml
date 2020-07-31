@@ -1,0 +1,11 @@
+VolumeResourceType:
+  in: query
+  name: resource_type
+  description: Used to filter snapshots by a resource type.
+  required: false
+  schema:
+      type: string
+      enum:
+        - droplet
+        - volume
+  example: droplet
