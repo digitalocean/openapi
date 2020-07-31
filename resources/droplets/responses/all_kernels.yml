@@ -1,5 +1,4 @@
-description: |
-  something about the response....
+description: A JSON object that has a key called `kernels`.
 
 headers:
   ratelimit-limit:
