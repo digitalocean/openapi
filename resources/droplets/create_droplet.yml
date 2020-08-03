@@ -37,8 +37,8 @@ requestBody:
     application/json:
       schema:
         oneOf:
-          - $ref: 'models/droplet_single_create.yml#/SingleDropletCreate'
-          - $ref: 'models/droplet_multi_create.yml#/MultipleDropletCreate'
+          - $ref: 'models/droplet_single_create.yml'
+          - $ref: 'models/droplet_multi_create.yml'
 
       examples:
         Single Droplet Create Request:

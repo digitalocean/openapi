@@ -12,7 +12,8 @@ content:
   application/json:
     schema:
       oneOf:
-      - properties:
+      - title: Single Droplet Response
+        properties:
           droplet:
             $ref: '../models/droplet.yml'
           links:
@@ -22,7 +23,8 @@ content:
                 type: array
                 items:
                   $ref: '../models/action_link.yml'
-      - properties:
+      - title: Multiple Droplet Response
+        properties:
           droplets:
             type: array
             items:
