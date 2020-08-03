@@ -1,5 +1,5 @@
 description: >-
-  The response will be a JSON object with a key called `images`.
+  The response will be a JSON object with a key called `images`. 
   This will be set to an array of image objects, each of which will contain the standard image attributes.
 
 headers:
@@ -16,7 +16,7 @@ content:
       allOf:
         - type: object
           properties:
-            images:
+            images: 
               type: array
               items:
                 $ref: '../models/image.yml'
@@ -31,9 +31,9 @@ content:
         $ref: 'examples.yml#/images_snapshots'
       Distribution:
         $ref: 'examples.yml#/images_distribution'
-      Custom:
+      Custom: 
         $ref: 'examples.yml#/images_custom'
-      Application:
+      Application: 
         $ref: 'examples.yml#/images_application'
-      Tagged:
+      Tagged: 
         $ref: 'examples.yml#/images_tagged'
