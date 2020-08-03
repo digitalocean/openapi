@@ -1,4 +1,4 @@
-VolumeResourceType:
+SnapshotResourceType:
   in: query
   name: resource_type
   description: Used to filter snapshots by a resource type.

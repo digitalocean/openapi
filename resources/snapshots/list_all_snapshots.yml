@@ -30,7 +30,7 @@ tags:
 parameters:
   - $ref: '../../shared/parameters.yml#/PerPage'
   - $ref: '../../shared/parameters.yml#/Page'
-  - $ref: 'parameters.yml#/VolumeResourceType'
+  - $ref: 'parameters.yml#/SnapshotResourceType'
 
 responses:
   '200':
