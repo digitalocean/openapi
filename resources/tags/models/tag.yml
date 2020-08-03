@@ -25,7 +25,7 @@ properties:
     type: object
     description: >- 
       An embedded object containing key value pairs of resource type and resource statistics. 
-      It also includes a count of the total number of resources tagged with the current tag as well as a last_tagged_uri attribute set to the last resource tagged with the current tag.
+      It also includes a count of the total number of resources tagged with the current tag as well as a `last_tagged_uri` attribute set to the last resource tagged with the current tag.
     allOf:
       - $ref: 'tag_metadata.yml'
       - properties:

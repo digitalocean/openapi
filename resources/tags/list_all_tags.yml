@@ -2,7 +2,7 @@ operationId: list_all_tags
 
 summary: List All Tags
 
-description: To list all of your tags, you can send a GET request to /v2/tags.
+description: To list all of your tags, you can send a GET request to `/v2/tags`.
 
 tags:
   - Tags
