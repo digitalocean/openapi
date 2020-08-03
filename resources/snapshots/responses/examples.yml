@@ -1,4 +1,4 @@
-AllSnapshots:
+SnapshotsAll:
   value:
     snapshots:
     - id: '6372321'
@@ -29,7 +29,7 @@ AllSnapshots:
     meta:
       total: 2
 
-DropletSnapshots:
+SnapshotsDropletsOnly:
   value:
     snapshots:
     - id: '6372321'
@@ -49,7 +49,7 @@ DropletSnapshots:
     meta:
       total: 1
 
-VolumeSnapshots:
+SnapshotsVolumesOnly:
   value:
     snapshots:
     - id: 'fbe805e8-866b-11e6-96bf-000f53315a41'

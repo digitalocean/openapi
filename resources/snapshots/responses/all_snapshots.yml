@@ -23,8 +23,8 @@ content:
 
     examples:
       All Snapshots:
-        $ref: 'examples.yml#/AllSnapshots'
+        $ref: 'examples.yml#/SnapshotsAll'
       Droplets Snapshots:
-        $ref: 'examples.yml#/DropletSnapshots'
+        $ref: 'examples.yml#/SnapshotsDropletsOnly'
       Volume Snapshots:
-        $ref: 'examples.yml#/VolumeSnapshots'
+        $ref: 'examples.yml#/SnapshotsVolumesOnly'
