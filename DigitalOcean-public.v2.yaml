@@ -40,6 +40,12 @@ tags:
       details and the regions that the size is available in.
   - name: SSH Keys
     description: Manage SSH keys available on your account.
+  - name: Tags
+    description: |
+      A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters)
+      in order to better organize or facilitate the lookups and actions on it.  
+
+      Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
 
 paths:
   /account:
@@ -78,6 +84,10 @@ paths:
   /sizes:
     get:
       $ref: 'resources/sizes/list_all_sizes.yml'
+
+  /tags:
+    get:
+      $ref: 'resources/tags/list_all_tags.yml'
 
 components:
   securitySchemes:

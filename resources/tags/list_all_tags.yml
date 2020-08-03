@@ -1,0 +1,21 @@
+operationId: list_all_tags
+
+summary: List All Tags
+
+description: To list all of your tags, you can send a GET request to /v2/tags.
+
+tags:
+  - Tags
+
+responses:
+  '200':
+    $ref: 'responses/all_tags.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
