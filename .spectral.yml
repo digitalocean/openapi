@@ -53,7 +53,7 @@ rules:
   common-responses-unauthorized:
     description: Responses should contain common response - 401 (unauthorized)
     message: "{{description}}. Missing {{property}}"
-    severity: warn
+    severity: error
     given: $..responses
     then:
       - field: '401'
@@ -62,7 +62,7 @@ rules:
   common-responses-server-error:
     description: Responses should contain common response - 500 (server error)
     message: "{{description}}. Missing {{property}}"
-    severity: warn
+    severity: error
     given: $..responses
     then:
       - field: '500'
