@@ -1,4 +1,4 @@
-allDroplets:
+DropletsAll:
   value:
     droplets:
     - id: 3164444
@@ -349,7 +349,7 @@ allDroplets:
       total:
         3
 
-taggedDroplets:
+DropletsTagged:
   value:
     droplets:
     - id: 3164444

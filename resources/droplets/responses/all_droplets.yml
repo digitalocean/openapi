@@ -22,6 +22,6 @@ content:
         - $ref: '../../../shared/meta.yml'
     examples:
       All Droplets:
-        $ref: 'examples.yml#/allDroplets'
+        $ref: 'examples.yml#/DropletsAll'
       Droplets Filtered By Tag:
-        $ref: 'examples.yml#/taggedDroplets'
+        $ref: 'examples.yml#/DropletsTagged'
