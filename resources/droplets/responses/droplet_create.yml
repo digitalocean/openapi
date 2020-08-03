@@ -39,6 +39,6 @@ content:
 
     examples:
       Single Droplet Create Response:
-        $ref: 'examples.yml#/createResponse'
+        $ref: 'examples.yml#/DropletCreateResponse'
       Multiple Droplet Create Response:
-        $ref: 'examples.yml#/multiCreateResponse'
+        $ref: 'examples.yml#/DropletMultiCreateResponse'

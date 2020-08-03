@@ -589,7 +589,7 @@ DropletsTagged:
       total:
         2
 
-singleDroplet:
+DropletSingle:
   value:
     id: 3164444
     name: example.com
@@ -712,7 +712,7 @@ singleDroplet:
     - env:prod
     vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
 
-createResponse:
+DropletCreateResponse:
   value:
     droplet:
       id: 3164444
@@ -825,7 +825,7 @@ createResponse:
         rel: create
         href: https://api.digitalocean.com/v2/actions/7515
 
-multiCreateResponse:
+DropletMultiCreateResponse:
   value:
     droplets:
     - id: 3164444

@@ -18,4 +18,4 @@ content:
           $ref: '../models/droplet.yml'
     examples:
       Single Droplet:
-        $ref: 'examples.yml#/singleDroplet'
+        $ref: 'examples.yml#/DropletSingle'

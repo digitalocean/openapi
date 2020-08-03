@@ -1,4 +1,4 @@
-createRequest:
+DropletCreateRequest:
   value:
     name: example.com
     region: nyc3
@@ -17,7 +17,7 @@ createRequest:
     private_networking: true
     vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
 
-multiCreateRequest:
+DropletMultiCreateRequest:
   value:
     names:
     - sub-01.example.com
