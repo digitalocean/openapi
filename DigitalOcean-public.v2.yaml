@@ -146,6 +146,14 @@ paths:
     get:
       $ref: 'resources/droplets/list_droplet_actions.yml'
 
+  /droplets/{droplet_id}/backups:
+    get:
+      $ref: 'resources/droplets/list_droplet_backups.yml'
+
+  /droplets/{droplet_id}/snapshots:
+    get:
+      $ref: 'resources/droplets/list_droplet_snapshots.yml'
+
   /droplets/{droplet_id}/kernels:
     get:
       $ref: 'resources/droplets/list_droplet_kernels.yml'
