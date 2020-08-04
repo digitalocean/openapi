@@ -3,7 +3,9 @@ openapi: 3.0.0
 info:
   title: DigitalOcean API
   version: '2.0'
-  description: 'The DigitalOcean API allows you to manage Droplets and resources within the DigitalOcean cloud in a simple, programmatic way using conventional HTTP requests.'
+  description: >
+    The DigitalOcean API allows you to manage Droplets and resources within the
+    DigitalOcean cloud in a simple, programmatic way using conventional HTTP requests.
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
@@ -19,25 +21,48 @@ servers:
 tags:
   - name: Account
     description: Provides information about your current account.
-  - name: Actions
-    description: |
-      Actions are records of events that have occurred on the resources in your account. These can be things like rebooting a Droplet, or transferring an image to a new region.
 
-      An action object is created every time one of these actions is initiated. The action object contains information about the current status of the action, start and complete timestamps, and the associated resource type and ID.
+  - name: Actions
+    description: >
+      Actions are records of events that have occurred on the resources in your account.
+      These can be things like rebooting a Droplet, or transferring an image to a new region.
+
+
+      An action object is created every time one of these actions is initiated. The action
+      object contains information about the current status of the action, start and complete
+      timestamps, and the associated resource type and ID.
+
+
+      Every action that creates an action object is available through this endpoint. Completed
+      actions are not removed from this list and are always available for querying.
 
       Every action that creates an action object is available through this endpoint. Completed actions are not removed from this list and are always available for querying.
+  - name: Images
+    description: |
+      A DigitalOcean [image](https://www.digitalocean.com/docs/images/) can be used to create a Droplet and may come in a number of flavors. Currently, there are five types of images: snapshots, backups, applications, distributions, and custom images.
+
+      * [Snapshots](https://www.digitalocean.com/docs/images/snapshots/) provide a full copy of an existing Droplet instance taken on demand.
+      * [Backups](https://www.digitalocean.com/docs/images/backups/) are similar to snapshots but are created automatically at regular intervals when enabled for a Droplet.
+      * [Custom images](https://www.digitalocean.com/docs/images/custom-images/) are Linux-based virtual machine images (raw, qcow2, vhdx, vdi, and vmdk formats are supported) that you may upload for use on DigitalOcean.
+      * Distributions are the public Linux distributions that are available to be used as a base to create Droplets.
+      * Applications, or [1-Click Apps](https://www.digitalocean.com/docs/one-clicks/), are distributions pre-configured with additional software.
+      
+      To interact with images, you will generally send requests to the images endpoint at /v2/images.
   - name: Regions
     description: Provides information about DigitalOcean data center regions.
+
   - name: Sizes
-    description: |
+    description: >
       The sizes objects represent different packages of hardware resources that
       can be used for Droplets. When a Droplet is created, a size must be
       selected so that the correct resources can be allocated.
+
 
       Each size represents a plan that bundles together specific sets of
       resources. This includes the amount of RAM, the number of virtual CPUs,
       disk space, and transfer. The size object also includes the pricing
       details and the regions that the size is available in.
+
   - name: SSH Keys
     description: Manage SSH keys available on your account.
   - name: Tags
@@ -73,6 +98,9 @@ paths:
     get:
       $ref: 'resources/actions/list_all_actions.yml'
 
+  /images:
+    get: 
+      $ref: 'resources/images/list_images.yml'
   /actions/{action_id}:
     get:
       $ref: 'resources/actions/retrieve_an_existing_action.yml'
