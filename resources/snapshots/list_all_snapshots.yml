@@ -1,0 +1,46 @@
+operationId: list_all_snapshots
+
+summary: List All Snapshots
+
+description: |
+  To list all of the snapshots available on your account, send a GET request to
+  `/v2/snapshots`.
+
+  The response will be a JSON object with a key called `snapshots`. This will be
+  set to an array of `snapshot` objects, each of which will contain the standard
+  snapshot attributes.
+
+  ### Filtering Results by Resource Type
+
+  It's possible to request filtered results by including certain query parameters.
+
+  #### List Droplet Snapshots
+
+  To retrieve only snapshots based on Droplets, include the `resource_type`
+  query parameter set to `droplet`. For example, `/v2/snapshots?resource_type=droplet`.
+
+  #### List Volume Snapshots
+
+  To retrieve only snapshots based on volumes, include the `resource_type`
+  query parameter set to `volume`. For example, `/v2/snapshots?resource_type=volume`.
+
+tags:
+  - Snapshots
+
+parameters:
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+  - $ref: 'parameters.yml#/SnapshotResourceType'
+
+responses:
+  '200':
+    $ref: 'responses/all_snapshots.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
