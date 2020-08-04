@@ -1,0 +1,33 @@
+operationId: retrieve_existing_droplet_action
+
+summary: Retrieve a Droplet Action
+
+description: |
+  To retrieve a Droplet action, send a GET request to
+  `/v2/droplets/$DROPLET_ID/actions/$ACTION_ID`.
+
+  The response will be a JSON object with a key called `action`. The value will
+  be a Droplet action object.
+
+tags:
+  - Droplets
+
+parameters:
+  - $ref: 'parameters.yml#/DropletId'
+  - $ref: '../actions/parameters.yml#/actionId'
+
+responses:
+  '200':
+    $ref: '../actions/responses/existing_action.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

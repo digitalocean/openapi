@@ -150,6 +150,10 @@ paths:
     post:
       $ref: 'resources/droplets/initiate_droplet_action_by_tag.yml'
 
+  /droplets/{droplet_id}/actions/{action_id}:
+    get:
+      $ref: 'resources/droplets/retrieve_existing_droplet_action.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
