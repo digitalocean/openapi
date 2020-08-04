@@ -148,6 +148,10 @@ paths:
     post:
       $ref: 'resources/droplets/initiate_droplet_action.yml'
 
+  /droplets/actions:
+    post:
+      $ref: 'resources/droplets/initiate_droplet_action_by_tag.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
