@@ -1,0 +1,92 @@
+operationId: initiate_droplet_action
+
+summary: Initiate a Droplet Action
+
+description: |
+  Droplet actions are tasks that can be executed on a Droplet. These can be
+  things like rebooting, resizing, snapshotting, etc.
+
+  Droplet action requests are generally targeted at the "actions" endpoint for
+  a specific Droplet. The specific actions are usually initiated by sending a
+  POST request with the action and arguments as attributes in the request body.
+
+  Droplet action requests create a Droplet actions object, which can be used to
+  get information about the status of an action. Creating a Droplet action is
+  asynchronous: the HTTP call will return the action object before the action
+  has finished processing on the Droplet. The current status of an action can
+  be retrieved from either the Droplet actions endpoint or the global actions
+  endpoint. If a Droplet action is uncompleted it may block the creation of a
+  subsequent action for that Droplet, the locked attribute of the Droplet will
+  be true and attempts to create a Droplet action will fail with a status of
+  422.
+
+tags:
+  - Droplets
+
+parameters:
+  - $ref: 'parameters.yml#/DropletId'
+
+requestBody:
+  description: |
+    The `type` attribute set in the request body will specify the  action that
+    will be taken on the Droplet. The supported action types are:
+
+      - `enable_backups`
+      - `disable_backups`
+      - `reboot`
+      - `power_cycle`
+      - `shutdown`
+      - `power_off`
+      - `power_on`
+      - `restore`
+      - `password_reset`
+      - `resize`
+      - `rebuild`
+      - `rename`
+      - `change_kernel`
+      - `enable_ipv6`
+      - `enable_private_networking`
+      - `snapshot`
+
+    Some actions will require additional attributes to be set as well.
+
+  content:
+    application/json:
+      schema:
+        oneOf:
+          - $ref: 'models/droplet_actions.yml#/DropletActionType'
+        discriminator:
+          propertyName: type
+          mapping:
+            enable_backups: 'models/droplet_actions.yml#/DropletActionType'
+            disable_backups: 'models/droplet_actions.yml#/DropletActionType'
+            reboot: 'models/droplet_actions.yml#/DropletActionType'
+            power_cycle: 'models/droplet_actions.yml#/DropletActionType'
+            shutdown: 'models/droplet_actions.yml#/DropletActionType'
+            power_off: 'models/droplet_actions.yml#/DropletActionType'
+            power_on: 'models/droplet_actions.yml#/DropletActionType'
+            password_reset: 'models/droplet_actions.yml#/DropletActionType'
+            restore: 'models/droplet_actions.yml#/DropletActionRestore'
+            resize: 'models/droplet_actions.yml#/DropletActionResize'
+            rebuild: 'models/droplet_actions.yml#/DropletActionRebuild'
+            rename: 'models/droplet_actions.yml#/DropletActionRename'
+            change_kernel: 'models/droplet_actions.yml#/DropletActionChangeKernel'
+            enable_ipv6: 'models/droplet_actions.yml#/DropletActionType'
+            enable_private_networking: 'models/droplet_actions.yml#/DropletActionType'
+            snapshot: 'models/droplet_actions.yml#/DropletActionSnapshot'
+
+responses:
+  '201':
+    $ref: 'responses/droplet_action.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
