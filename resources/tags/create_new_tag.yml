@@ -14,9 +14,7 @@ requestBody:
   content:
     application/json:
       schema:
-        properties:
-          name:
-            $ref: 'models/tag.yml#/properties/name'
+        $ref: 'models/tag.yml'
 
 responses:
   '200':
