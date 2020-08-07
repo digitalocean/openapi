@@ -1,9 +1,11 @@
-operationId: destroy_droplet
+operationId: destroy_droplets_by_tag
 
-summary: Delete an Existing Droplet
+summary: Deleting Droplets by Tag
 
 description: |
-  To delete a Droplet, send a DELETE request to `/v2/droplets/$DROPLET_ID`.
+  To delete **all** Droplets assigned to a specific tag, include the `tag_name`
+  query parameter set to the name of the tag in your DELETE request. For
+  example,  `/v2/droplets?tag_name=$TAG_NAME`.
 
   A successful request will receive a 204 status code with no body in response.
   This indicates that the request was processed successfully.
@@ -12,7 +14,7 @@ tags:
   - Droplets
 
 parameters:
-  - $ref: 'parameters.yml#/DropletId'
+  - $ref: 'parameters.yml#/DropletDeleteTagName'
 
 responses:
   '204':
