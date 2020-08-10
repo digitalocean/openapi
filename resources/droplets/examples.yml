@@ -13,7 +13,7 @@ DropletCreateRequest:
     tags:
     - env:prod
     - web
-    user_data: #cloud-config\nruncmd:\n  - touch /test.txt\n
+    user_data: "#cloud-config\nruncmd:\n  - touch /test.txt\n"
     private_networking: true
     vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
 
@@ -34,6 +34,6 @@ DropletMultiCreateRequest:
     tags:
     - env:prod
     - web
-    user_data: #cloud-config\nruncmd:\n  - touch /test.txt\n
+    user_data: "#cloud-config\nruncmd:\n  - touch /test.txt\n"
     private_networking: true
     vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
