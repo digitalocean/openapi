@@ -3,13 +3,10 @@ POSTMAN_BASE_URL ?= http://localhost:8080
 PROXY_TARGET ?= http://mock:4010
 
 SPEC_FILE ?= DigitalOcean-public.v2.yaml
+BUNDLE_PATH ?= tests/openapi-bundled.yaml
+COLLECTION_PATH ?= tests/postman.json
+TMP_COLLECTION_PATH ?= tests/postman-temp.json
 
-## TODO: This is an inital (temporary) collection
-## This file is generated through Postman from the spec (through the app)
-## This will be replaced with an automated way to generate the collection in APICLI-401
-COLLECTION_PATH ?= tests/DigitalOcean.postman_collection.json
-
-NEWMAN_CMD = npx newman run ${COLLECTION_PATH}
 DO_TOKEN ?= XXXXXX
 
 .PHONY: help
@@ -37,8 +34,8 @@ _sleep:
 	sleep 3
 
 .PHONY: test
-test: start-mockedproxy _sleep ## Run Postman collection against local proxy with validation
-	@$(NEWMAN_CMD) \
+test: dev-dependencies bundle collection start-mockedproxy _sleep ## Run Postman collection against local proxy with validation
+	npm run newman -- ${COLLECTION_PATH} \
 		--env-var baseUrl=${POSTMAN_BASE_URL} \
 		--env-var accessToken=${DO_TOKEN} \
 		--reporters json,cli \
@@ -47,3 +44,14 @@ test: start-mockedproxy _sleep ## Run Postman collection against local proxy wit
 .PHONY: lint
 lint: dev-dependencies ## Lint the OpenAPI spec using Spectral
 	npm run lint
+
+.PHONY: collection
+collection: dev-dependencies bundle ## Use openapi-to-postmanv2 to generate a collection
+	npm run collection -- -s ${BUNDLE_PATH} -o ${TMP_COLLECTION_PATH}
+	jq --argjson authToken '{"bearer":[{"key":"token","value":"{{accessToken}}","type":"string"}]}' \
+		'.auth += $$authToken' ${TMP_COLLECTION_PATH} > ${COLLECTION_PATH}
+	rm -f ${TMP_COLLECTION_PATH}
+
+.PHONY: bundle
+bundle: dev-dependencies ## Use openapi-cli to bundle the spec
+	npm run bundle -- ${SPEC_FILE} -o ${BUNDLE_PATH}
