@@ -131,7 +131,7 @@ DropletsAll:
       created_at: '2020-07-21T18:42:27Z'
       features:
       - private_networking
-      backup_ids:
+      backup_ids: []
       next_backup_window:
         start: '2020-07-30T00:00:00Z'
         end: '2020-07-30T23:00:00Z'
@@ -243,7 +243,7 @@ DropletsAll:
       created_at: '2020-07-21T18:32:55Z'
       features:
       - private_networking
-      backup_ids:
+      backup_ids: []
       next_backup_window:
         start: '2020-07-30T00:00:00Z'
         end: '2020-07-30T23:00:00Z'
@@ -482,7 +482,7 @@ DropletsTagged:
       created_at: '2020-07-21T18:42:27Z'
       features:
       - private_networking
-      backup_ids:
+      backup_ids: []
       next_backup_window:
         start: '2020-07-30T00:00:00Z'
         end: '2020-07-30T23:00:00Z'
