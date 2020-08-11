@@ -1,0 +1,38 @@
+operationId: retrieve_an_existing_image
+
+summary: Retrieve an Existing Image
+
+description: |
+  To retrieve information about a public image, send a `GET` request to 
+  `/v2/images/$IDENTIFIER` where `$IDENTIFIER` is either the Image ID (integer) 
+  or the Image slug (string).
+
+tags:
+  - Images
+
+parameters:
+  - in: path
+    name: identifier
+    description: A unique number that can be used to identify and reference a specific image.
+    required: true
+    schema:
+      oneOf:
+        - type: integer
+        - type: string
+    example: 62137902
+
+responses:
+  '200':
+    $ref: 'responses/existing_image.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+  
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

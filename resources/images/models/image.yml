@@ -5,19 +5,22 @@ properties:
   id:
     type: integer
     description: >-
-      A unique number that can be used to identify and reference a specific image.
+      A unique number that can be used to identify and reference a specific 
+      image.
     example: 7555620
+    readOnly: true
 
   name:
-    type: string
-    description: >-
-      The display name that has been given to an image. This is what is shown in the control panel and is generally a descriptive title for the image in question.
-    example: Nifty New Snapshot
+    $ref: '../attributes.yml#/ImageName'
 
   type:
     type: string
     description: >-
-      Describes the kind of image. It may be one of "snapshot", "backup", or "custom". This specifies whether an image is a user-generated Droplet snapshot, automatically created Droplet backup, or a user-provided virtual machine image.
+      Describes the kind of image. It may be one of "snapshot", "backup", or 
+      "custom". 
+      This specifies whether an image is a user-generated Droplet snapshot, 
+      automatically created Droplet backup, or a user-provided virtual machine 
+      image.
     enum:
       - snapshot
       - backup
@@ -25,39 +28,37 @@ properties:
     example: snapshot
 
   distribution:
-    type: string
-    description: >-
-      This attribute describes the base distribution used for this image. For custom images, this is user defined.
-    example: Ubuntu
+     $ref: '../../../shared/attributes/distribution.yml'
 
   slug:
     type: string
     nullable: true
     description: >-
-      A uniquely identifying string that is associated with each of the DigitalOcean-provided public images. These can be used to reference a public image as an alternative to the numeric id.
+      A uniquely identifying string that is associated with each of the 
+      DigitalOcean-provided public images. 
+      These can be used to reference a public image as an alternative to the 
+      numeric id.
     example: nifty1
 
   public:
     type: boolean
     description: >-
-      This is a boolean value that indicates whether the image in question is public or not. An image that is public is available to all accounts. A non-public image is only accessible from your account.
+      This is a boolean value that indicates whether the image in question is 
+      public or not. 
+      An image that is public is available to all accounts. A non-public image 
+      is only accessible from your account.
     example: true
 
   regions:
-    type: array
-    items:
-      type: string
-    description: >-
-      This attribute is an array of the regions that the image is available in. The regions are represented by their identifying slug values.
-    example: 
-      - nyc1
-      - nyc2
+    $ref: '../../../shared/attributes/regions_array.yml'
 
   created_at:
     type: string
+    format: date-time
     description: >-
-      A time value given in ISO8601 combined date and time format that represents when the image was created.
-    example: 2020-11-04T22:23:02Z
+      A time value given in ISO8601 combined date and time format that 
+      represents when the image was created.
+    example: 2020-05-04T22:23:02Z
 
   min_disk_size:
     type: integer
@@ -74,23 +75,16 @@ properties:
     example: 2.34
 
   description:
-    type: string
-    description: >-
-      An optional free-form text field to describe an image.
-    example: A new and nifty snapshot
+    $ref: '../attributes.yml#/ImageDescription'
 
   tags:
-    type: array
-    items:
-      type: string
-    description: >-
-      An array containing the names of the tags the image has been tagged with.
-    example: []
+    $ref: '../../../shared/attributes/tags_array.yml'
 
   status:
     type: string
     description: >-
-      A status string indicating the state of a custom image. This may be "NEW", "available", "pending", or "deleted".
+      A status string indicating the state of a custom image. This may be "NEW",
+       "available", "pending", or "deleted".
     enum:
       - NEW
       - available
@@ -101,11 +95,6 @@ properties:
   error_message:
     type: string
     description: >-
-      A string containing information about errors that may occur when importing a custom image.
+      A string containing information about errors that may occur when importing
+       a custom image.
     example: ''
-
-required:
-  - id
-  - name
-  - type
-  - slug
