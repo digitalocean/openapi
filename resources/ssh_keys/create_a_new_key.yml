@@ -4,7 +4,7 @@ summary: Create a New SSH Key
 
 description: >-
   To add a new SSH public key to your DigitalOcean account, send a POST request to `/v2/account/keys`.
-  Set the "name" attribute to the name you wish to use and the "public_key" attribute
+  Set the `name` attribute to the name you wish to use and the `public_key` attribute
   to the full public key you are adding.
 
 tags:
@@ -12,7 +12,7 @@ tags:
 
 requestBody:
   description: >-
-    Set the "name" attribute to the name you wish to use and the "public_key" attribute
+    Set the `name` attribute to the name you wish to use and the `public_key` attribute
     to the full public key you are adding.
 
   required: true

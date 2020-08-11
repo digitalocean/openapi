@@ -2,14 +2,16 @@ operationId: get_user_information
 
 summary: Get User Information
 
-description: To show information about the current user account, send a GET request to /account.
+description: To show information about the current user account, send a GET
+  request to `/v2/account`.
 
 tags:
   - Account
 
 responses:
   '200':
-    description: A JSON object keyed on account with an exerpt of the current user account data.
+    description: A JSON object keyed on account with an excerpt of the current
+      user account data.
 
     headers:
       ratelimit-limit:
