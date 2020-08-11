@@ -165,6 +165,8 @@ paths:
   /tags:
     get:
       $ref: 'resources/tags/list_all_tags.yml'
+    post:
+      $ref: 'resources/tags/create_new_tag.yml'
 
 components:
   securitySchemes:
