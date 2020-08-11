@@ -1,12 +1,12 @@
 operationId: destroy_a_key
 
-summary: Delete an existing SSH key from your account.
+summary: Delete an SSH Key
 
 description: >-
-  To destroy a public SSH key that you have in your account, send a DELETE request 
+  To destroy a public SSH key that you have in your account, send a DELETE request
   to `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`.
 
-  A 204 status will be returned, indicating that the action was successful and that 
+  A 204 status will be returned, indicating that the action was successful and that
   the response body is empty.
 
 tags:

@@ -1,10 +1,10 @@
 operationId: create_a_new_key
 
-summary: Add a SSH public key to your account.
+summary: Create a New SSH Key
 
 description: >-
-  To add a new SSH public key to your DigitalOcean account, send a POST request to `/v2/account/keys`. 
-  Set the "name" attribute to the name you wish to use and the "public_key" attribute 
+  To add a new SSH public key to your DigitalOcean account, send a POST request to `/v2/account/keys`.
+  Set the "name" attribute to the name you wish to use and the "public_key" attribute
   to the full public key you are adding.
 
 tags:
@@ -38,7 +38,7 @@ responses:
       application/json:
         schema:
           $ref: 'models/wrapped_ssh_key.yml'
-    
+
     links:
       GetSSHKeyById:
         $ref: 'links/get_ssh_key_by_id.yml'
@@ -60,5 +60,5 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
-    
+
 

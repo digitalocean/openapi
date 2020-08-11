@@ -1,6 +1,6 @@
 operationId: get_user_information
 
-summary: Show information about my account.
+summary: Get User Information
 
 description: To show information about the current user account, send a GET request to /account.
 

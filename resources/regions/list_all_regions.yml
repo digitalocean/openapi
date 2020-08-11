@@ -1,6 +1,6 @@
 operationId: list_all_regions
 
-summary: List all data center regions
+summary: List All Data Center Regions
 
 description: >-
   To list all of the regions that are available, send a GET request to
