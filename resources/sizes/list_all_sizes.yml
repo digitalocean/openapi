@@ -1,6 +1,6 @@
 operationId: list_all_sizes
 
-summary: List all Droplet sizes
+summary: List All Droplet Sizes
 
 description: >-
   To list all of available Droplet sizes, send a GET request to `/v2/sizes`.

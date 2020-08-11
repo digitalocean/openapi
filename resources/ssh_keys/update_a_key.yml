@@ -1,10 +1,10 @@
 operationId: update_a_key
 
-summary: Update the name of an existing SSH key.
+summary: Update an SSH Key's Name
 
 description: >-
   To update the name of an SSH key, send a PUT request to either `/v2/account/keys/$SSH_KEY_ID`
-  or `/v2/account/keys/$SSH_KEY_FINGERPRINT`. Set the "name" attribute to the new name you want to use.
+  or `/v2/account/keys/$SSH_KEY_FINGERPRINT`. Set the `name` attribute to the new name you want to use.
 
 tags:
   - SSH Keys
@@ -13,7 +13,7 @@ parameters:
   - $ref: 'parameters/ssh_key_identifier.yml'
 
 requestBody:
-  description: Set the "name" attribute to the new name you want to use.
+  description: Set the `name` attribute to the new name you want to use.
 
   required: true
 
@@ -29,7 +29,7 @@ requestBody:
 responses:
   '200':
     $ref: 'responses/existing_key.yml'
-    
+
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
 
@@ -41,6 +41,3 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
-
-
-    
