@@ -106,9 +106,6 @@ properties:
 
   image:
     $ref: '../../images/models/image.yml'
-    description: The base image used to create the Droplet instance.  When setting
-      an image, the value is set to the image id or slug.  When querying the
-      Droplet, the entire image object will be returned.
 
   volume_ids:
     type: array
@@ -121,11 +118,6 @@ properties:
 
   size:
     $ref: '../../sizes/models/size.yml'
-    description: The current size object describing the Droplet. When setting
-      a size, the value is set to the size slug.  When querying the Droplet,
-      the entire size object will be returned. Note that the disk volume of
-      a Droplet may not match the size's disk due to Droplet resize actions.
-      The disk attribute on the Droplet should always be referenced.
 
   size_slug:
     type: string
@@ -152,9 +144,6 @@ properties:
 
   region:
     $ref: '../../regions/models/region.yml'
-    description: The region that the Droplet instance is deployed in.  When
-      setting a region, the value should be the slug identifier for the region.
-      When you query a Droplet, the entire region object will be returned.
 
   tags:
     type: array
