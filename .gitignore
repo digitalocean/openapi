@@ -4,3 +4,6 @@
 node_modules/
 newman/
 newman-results.json
+tests/openapi-bundled.yaml
+tests/postman.json
+tests/postman-temp.json

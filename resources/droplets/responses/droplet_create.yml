@@ -1,0 +1,44 @@
+description: Created
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      oneOf:
+      - title: Single Droplet Response
+        properties:
+          droplet:
+            $ref: '../models/droplet.yml'
+          links:
+            type: object
+            properties:
+              actions:
+                type: array
+                items:
+                  $ref: '../models/action_link.yml'
+      - title: Multiple Droplet Response
+        properties:
+          droplets:
+            type: array
+            items:
+              $ref: '../models/droplet.yml'
+          links:
+            type: object
+            properties:
+              actions:
+                type: array
+                items:
+                  $ref: '../models/action_link.yml'
+
+    examples:
+      Single Droplet Create Response:
+        $ref: 'examples.yml#/DropletCreateResponse'
+      Multiple Droplet Create Response:
+        $ref: 'examples.yml#/DropletMultiCreateResponse'

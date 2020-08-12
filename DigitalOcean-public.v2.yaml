@@ -91,7 +91,7 @@ tags:
   - name: Tags
     description: |
       A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters)
-      in order to better organize or facilitate the lookups and actions on it.  
+      in order to better organize or facilitate the lookups and actions on it.
 
       Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
 
@@ -129,6 +129,19 @@ paths:
     get:
       $ref: 'resources/droplets/list_all_droplets.yml'
 
+    post:
+      $ref: 'resources/droplets/create_droplet.yml'
+
+    delete:
+      $ref: 'resources/droplets/destroy_droplets_by_tag.yml'
+
+  /droplets/{droplet_id}:
+    get:
+      $ref: 'resources/droplets/retrieve_existing_droplet.yml'
+
+    delete:
+      $ref: 'resources/droplets/destroy_droplet.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
@@ -150,7 +163,7 @@ paths:
   /sizes:
     get:
       $ref: 'resources/sizes/list_all_sizes.yml'
-      
+
   /snapshots:
     get:
       $ref: 'resources/snapshots/list_all_snapshots.yml'

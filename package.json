@@ -4,11 +4,17 @@
   "description": "OpenAPI v3 specification for DigitalOcean's public API v2.",
   "dependencies": {},
   "devDependencies": {
-    "@stoplight/spectral": "^5.4.0"
+    "@redocly/openapi-cli": "^1.0.0-beta.8",
+    "@stoplight/spectral": "^5.4.0",
+    "newman": "^5.1.2",
+    "openapi-to-postmanv2": "^1.2.6"
   },
   "scripts": {
     "test": "make test",
-    "lint": "spectral lint DigitalOcean-public.v2.yaml"
+    "lint": "spectral lint DigitalOcean-public.v2.yaml",
+    "bundle": "openapi bundle",
+    "collection": "openapi2postmanv2",
+    "newman": "newman run"
   },
   "repository": {
     "type": "git",
