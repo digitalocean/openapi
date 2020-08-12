@@ -31,22 +31,24 @@ requestBody:
     The `type` attribute set in the request body will specify the  action that
     will be taken on the Droplet. The supported action types are:
 
-      - `enable_backups`
-      - `disable_backups`
-      - `reboot`
-      - `power_cycle`
-      - `shutdown`
-      - `power_off`
-      - `power_on`
-      - `restore`
-      - `password_reset`
-      - `resize`
-      - `rebuild`
-      - `rename`
-      - `change_kernel`
-      - `enable_ipv6`
-      - `enable_private_networking`
-      - `snapshot`
+    | Action                      | Details |
+    | --------------------------- | ----------- |
+    | `enable_backups`            | Enables backups for a Droplet |
+    | `disable_backups`           | Disables backups for a Droplet |
+    | `reboot`                    | Reboots a Droplet. A `reboot` action is an attempt to reboot the Droplet in a graceful way, similar to using the `reboot` command from the console. |
+    | `power_cycle`               | Power cycles a Droplet. A `powercycle` action is similar to pushing the reset button on a physical machine, it's similar to booting from scratch. |
+    | `shutdown`                  | Shutsdown a Droplet. A shutdown action is an attempt to shutdown the Droplet in a graceful way, similar to using the `shutdown` command from the console. Since a `shutdown` command can fail, this action guarantees that the command is issued, not that it succeeds. The preferred way to turn off a Droplet is to attempt a shutdown, with a reasonable timeout, followed by a `power_off` action to ensure the Droplet is off. |
+    | `power_off`                 | Powers off a Droplet. A `power_off` event is a hard shutdown and should only be used if the `shutdown` action is not successful. It is similar to cutting the power on a server and could lead to complications. |
+    | `power_on`                  | Powers on a Droplet. |
+    | `restore`                   | Restore a Droplet using a backup image. The image ID that is passed in must be a backup of the current Droplet instance. The operation will leave any embedded SSH keys intact. |
+    | `password_reset`            | Resets the root password for a Droplet. A new password will be provided via email. It must be changed after first use. |
+    | `resize`                    | Resizes a Droplet. Set the `size` attribute to a size slug. If a permanent resize with disk changes included is desired, set the `disk` attribute to `true`. |
+    | `rebuild`                   | Rebuilds a Droplet from a new base image. Set the `image` attribute to an image ID or slug. |
+    | `rename`                    | Renames a Droplet. |
+    | `change_kernel`             | Changes a Droplet's kernel. Only applies to Droplets with externally managed kernels. All Droplets created after March 2017 use internal kernels by default. |
+    | `enable_ipv6`               | Enables IPv6 for a Droplet. |
+    | `enable_private_networking` | Enables private networking for a Droplet. *Note*: When VPC is enabled on your account, this will add the Droplet to your account's default VPC for the region. |
+    | `snapshot`                  | Takes a snapshot of a Droplet. |
 
     Some actions will require additional attributes to be set as well.
 
