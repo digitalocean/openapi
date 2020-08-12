@@ -20,7 +20,7 @@ description: |
   - `snapshot`
 
 tags:
-  - Droplets
+  -  Droplet Actions
 
 parameters:
   - $ref: 'parameters.yml#/DropletTagName'
