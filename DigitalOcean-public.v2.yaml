@@ -176,6 +176,10 @@ paths:
     get:
       $ref: 'resources/droplets/retrieve_existing_droplet_action.yml'
 
+  /droplets/{droplet_id}/kernels:
+    get:
+      $ref: 'resources/droplets/list_droplet_kernels.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
