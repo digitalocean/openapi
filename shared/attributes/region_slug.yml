@@ -1,6 +1,7 @@
 type: string
 description: >-
-  The slug identifier for the region where the image will initially be available.
+  The slug identifier for the region where the resource will initially be 
+  available.
 enum:
   - ams1
   - ams2
