@@ -142,6 +142,10 @@ paths:
     delete:
       $ref: 'resources/droplets/destroy_droplet.yml'
 
+  /droplets/{droplet_id}/kernels:
+    get:
+      $ref: 'resources/droplets/list_droplet_kernels.yml'
+
   /v2/droplets/{droplet_id}/neighbors:
     get:
       $ref: 'resources/droplets/list_droplet_neighbors.yml'
