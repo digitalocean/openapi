@@ -1,0 +1,35 @@
+operationId: list_droplet_kernels
+
+summary: List All Available Kernels for a Droplet
+
+description: |
+  To retrieve a list of all kernels available to a Droplet, send a GET request
+  to `/v2/droplets/$DROPLET_ID/kernels`
+
+  The response will be a JSON object that has a key called `kernels`. This will
+  be set to an array of `kernel` objects, each of which contain the standard
+  `kernel` attributes.
+
+tags:
+  - Droplets
+
+parameters:
+  - $ref: 'parameters.yml#/DropletId'
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/all_kernels.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
