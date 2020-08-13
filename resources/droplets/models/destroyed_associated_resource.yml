@@ -23,6 +23,6 @@ properties:
 
   error_message:
     type: string
-    example: ''
+    example: ' '
     description: A string indicating that the resource was not successfully
       destroyed and providing additional information.
