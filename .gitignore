@@ -1,5 +1,7 @@
 .DS_Store
 .idea/
+.vscode/
+!.vscode/extensions.json
 node_modules/
 newman/
 newman-results.json
