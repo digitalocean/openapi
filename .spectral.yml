@@ -1,4 +1,10 @@
 extends: [[spectral:oas, all]]
+
+functionsDir: ./spectral/
+
+functions:
+  - ensurePropertiesExample
+
 rules:
   contact-properties: off
   operation-default-response: off
@@ -19,15 +25,29 @@ rules:
 
   properties-must-include-examples:
     description: Object properties must include examples
-    message: "{{description}}; missing {{property}}"
-    severity: warn
     given: $..properties..properties.*
+    severity: error
+    message: "{{error}}"
+    then:
+      function: ensurePropertiesExample
+
+  params-must-include-examples:
+    description: Parameters must include examples
+    given: $..parameters.*
+    severity: error
+    message: "{{description}}; missing {{property}}"
     then:
       field: example
-      function: schema
-      functionOptions:
-        schema:
-          minItems: 1
+      function: truthy
+
+  headers-must-include-examples:
+    description: Headers must include examples
+    given: $..headers.*
+    severity: error
+    message: "{{description}}; missing {{property}}"
+    then:
+      field: example
+      function: truthy
 
   endpoint-must-be-ref:
     description: Endpoint must be a $ref

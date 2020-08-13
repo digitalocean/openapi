@@ -14,7 +14,8 @@
     "lint": "spectral lint DigitalOcean-public.v2.yaml",
     "bundle": "openapi bundle",
     "collection": "openapi2postmanv2",
-    "newman": "newman run"
+    "newman": "newman run",
+    "preview": "openapi preview-docs ${SPEC_FILE}"
   },
   "repository": {
     "type": "git",
