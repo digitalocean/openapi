@@ -40,6 +40,15 @@ rules:
       field: example
       function: truthy
 
+  headers-must-include-examples:
+    description: Headers must include examples
+    given: $..headers.*
+    severity: error
+    message: "{{description}}; missing {{property}}"
+    then:
+      field: example
+      function: truthy
+
   endpoint-must-be-ref:
     description: Endpoint must be a $ref
     message: "{{description}}; {{property}} incorrect"
