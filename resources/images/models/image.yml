@@ -97,4 +97,4 @@ properties:
     description: >-
       A string containing information about errors that may occur when importing
        a custom image.
-    example: ''
+    example: " "

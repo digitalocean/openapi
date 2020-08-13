@@ -9,3 +9,4 @@ ImageName:
 ImageDescription:
   type: string
   description: An optional free-form text field to describe an image.
+  example: " "
