@@ -40,7 +40,7 @@ properties:
   status_message:
     description: A human-readable message giving more details about the status of the account.
     type: string
-    example: ""
+    example: " "
 
 required:
   - droplet_limit

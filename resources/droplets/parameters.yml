@@ -6,6 +6,7 @@ DropletId:
   schema:
     type: integer
     minimum: 1
+  example: 3164444
 
 DropletTagName:
   in: query

@@ -6,3 +6,4 @@ schema:
   oneOf:
     - $ref: '../attributes/ssh_key_id.yml'
     - $ref: '../attributes/ssh_key_fingerprint.yml'
+example: 512189

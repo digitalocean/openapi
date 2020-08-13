@@ -8,7 +8,7 @@ PerPage:
     minimum: 1
     default: 20
     maximum: 200
-    example: 2
+  example: 2
 
 Page:
   in: query
@@ -19,4 +19,4 @@ Page:
     type: integer
     minimum: 1
     default: 1
-    example: 1
+  example: 1

@@ -6,3 +6,4 @@ actionId:
   schema:
     type: integer
     minimum: 1
+  example: 36804636
