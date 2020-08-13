@@ -8,6 +8,7 @@ Type:
     enum:
       - application
       - distribution
+  example: distribution
 
 Private:
   in: query
@@ -16,6 +17,7 @@ Private:
   required: false
   schema:
     type: boolean
+  example: true
 
 Tag:
   in: query
