@@ -31,6 +31,14 @@ rules:
     then:
       function: ensurePropertiesExample
 
+  params-must-include-examples:
+    description: Parameters must include examples
+    given: $..parameters.*
+    severity: error
+    message: "{{description}}; missing {{property}}"
+    then:
+      field: example
+      function: truthy
 
   endpoint-must-be-ref:
     description: Endpoint must be a $ref
