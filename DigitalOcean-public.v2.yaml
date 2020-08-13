@@ -183,6 +183,12 @@ paths:
     post:
       $ref: 'resources/tags/create_new_tag.yml'
 
+  /tags/{tag_id}:
+    get:
+      $ref: 'resources/tags/get_tag.yml'
+    delete:
+      $ref: 'resources/tags/delete_tag.yml'
+
 components:
   securitySchemes:
     bearerAuth:
