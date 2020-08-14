@@ -12,8 +12,8 @@ parameters:
   - $ref: 'parameters.yml#/ImageId'
 
 responses:
-  '200':
-    $ref: 'responses/all_images.yml'
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

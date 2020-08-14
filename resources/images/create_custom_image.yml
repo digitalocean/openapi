@@ -22,7 +22,7 @@ requestBody:
         $ref: 'models/image_new_custom.yml'
 
 responses:
-  '200':
+  '202':
     $ref: 'responses/new_custom_image.yml'
 
   '401':
