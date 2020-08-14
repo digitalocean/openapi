@@ -37,8 +37,11 @@ rules:
     severity: error
     message: "{{description}}; missing {{property}}"
     then:
-      field: example
-      function: truthy
+      function: xor
+      functionOptions: 
+        properties: 
+          - example
+          - examples
 
   headers-must-include-examples:
     description: Headers must include examples
