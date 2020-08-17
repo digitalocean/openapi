@@ -11,13 +11,16 @@ headers:
 content:
   application/json:
     schema:
-      allOf:
-        - type: object
-          properties:
-            1-clicks:
-              type: array
-              items:
-                $ref: '../models/1_click.yml'
+      properties:
+        1-clicks:
+          type: array
+          items:
+            $ref: '../models/1_click.yml'
     examples:
       All 1-Click Applications:
-        $ref: 'examples.yml#/1ClicksAll'
+        value:
+          1_clicks:
+          - slug: monitoring
+            type: kubernetes
+          - slug: wordpress-18-04
+            type: droplet

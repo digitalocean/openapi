@@ -15,13 +15,13 @@ headers:
 content:
   application/json:
     schema:
-      allOf:
-        - type: object
-          properties:
-            message:
-              type: string
-              description: A message about the result of the request.
-              example: Successfully kicked off addon job.
+      - type: object
+        properties:
+          message:
+            type: string
+            description: A message about the result of the request.
+            example: Successfully kicked off addon job.
     examples:
       Install a 1-Click Application:
-        $ref: 'examples.yml#/1ClickInstall'
+        value:
+          message: Successfully kicked off addon job.
