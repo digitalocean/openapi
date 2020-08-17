@@ -153,6 +153,16 @@ paths:
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
+    post:
+      $ref: 'resources/images/create_custom_image.yml'
+  
+  /images/{identifier}:
+    get:
+      $ref: 'resources/images/retrieve_existing_image.yml'
+    put: 
+      $ref: 'resources/images/update_an_image.yml'
+    delete:
+      $ref: 'resources/images/delete_an_image.yml'
 
   /regions:
     get:
