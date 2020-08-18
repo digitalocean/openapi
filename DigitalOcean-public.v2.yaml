@@ -19,6 +19,12 @@ servers:
     description: production
 
 tags:
+  - name: 1-Click Applications
+    description: >
+      1-Click applications are pre-built Droplet images or Kubernetes apps with software,
+      features, and configuration details already set up for you. They can be found in the
+      [DigitalOcean Marketplace](https://www.digitalocean.com/docs/marketplace).
+
   - name: Account
     description: Provides information about your current account.
 
@@ -96,6 +102,14 @@ tags:
       Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
 
 paths:
+  /1-clicks:
+    get:
+      $ref: 'resources/1-clicks/list.yml'
+
+  /1-clicks/kubernetes:
+    post:
+      $ref: 'resources/1-clicks/install_kubernetes.yml'
+
   /account:
     get:
       $ref: 'resources/account/get_user_information.yml'
