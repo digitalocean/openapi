@@ -23,3 +23,12 @@ ratelimit-reset:
     The time when the oldest request will expire. The value is given in Unix epoch time.
     See https://developers.digitalocean.com/documentation/v2/#rate-limit for information about
     how requests expire.
+
+x-request-id:
+  description: >-
+    Optionally, some endpoints may include a request ID that should be provided 
+    when reporting bugs or opening support tickets to help identify the issue. 
+  schema:
+    type: string
+    format: uuid
+  example: 515850a0-a812-50bf-aa3c-d0d21d287e40
