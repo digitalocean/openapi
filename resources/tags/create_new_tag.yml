@@ -20,6 +20,9 @@ responses:
   '200':
     $ref: 'responses/new_tag.yml'
 
+  '400':
+    $ref: 'responses/bad_request.yml'
+
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
 
