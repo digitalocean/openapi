@@ -14,7 +14,7 @@ jobs:
           node-version: '14.x'
       - run: make bundle
         with:
-          name: openapi-bundled
+          name: bundled-spec
           path: tests/openapi-bundled.yaml
   publish-preview:
     name: Publish preview
@@ -22,6 +22,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Upload PR spec
+        with:
+          name: bundled-spec
         run: >-
           aws s3 cp test/openapi-bundled.yaml 
           s3://api-engineering/spec-ci/previews/${{ github.event.number }}.json

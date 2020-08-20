@@ -78,9 +78,8 @@
     <div class="header">
         <a href="#default" class="logo">DigitalOcean APIv2 OpenAPI Preview</a>
         <div class="header-right">
-            <a class="active" href="#home">Home</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
+            <a id="pr-link" class="active" href="#" target="_blank">PR: none</a>
+            <a id="spec-link" href="DigitalOcean-public.v2.json" target="_blank">Spec File</a>
         </div>
     </div>
 
@@ -95,11 +94,13 @@
         
         if (pr) {
             specUrl = `previews/${pr}-spec.json`
-
+            document.getElementById('pr-link').setAttribute('href', `https://github.com/digitalocean/apiv2-openapi/pull/${pr}`);
+            document.getElementById('pr-link').textContent = `PR: ${pr}`;
+            document.getElementById('spec-link').setAttribute('href', specUrl);
         }
 
-
-        document.getElementsByTagName('redoc')[0].setAttribute('spec-url', specUrl);
+        
+        document.querySelector('redoc').setAttribute('spec-url', specUrl);
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
