@@ -13,9 +13,6 @@ jobs:
         with:
           node-version: '14.x'
       - run: make bundle
-        with:
-          name: bundled-spec
-          path: tests/openapi-bundled.yaml
       - name: Upload PR spec
         run: >-
           aws s3 cp test/openapi-bundled.yaml 
