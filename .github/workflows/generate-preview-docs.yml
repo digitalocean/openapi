@@ -16,7 +16,7 @@ jobs:
       - name: Upload PR spec
         run: >-
           aws s3 cp tests/openapi-bundled.yaml 
-          s3://api-engineering/spec-ci/previews/${{ github.event.number }}.json
+          s3://api-engineering/spec-ci/previews/${{ github.event.number }}-spec.yaml
           --endpoint=${{ env.SPACES_ENDPOINT }} 
           --acl public-read
         env:
@@ -27,6 +27,7 @@ jobs:
       - name: Update commit
         uses: ouzi-dev/commit-status-updater@v1.0.7
         with: 
+          description: "ReDoc "
           status: "${{ job.status }}"
           pendingComment: "Publishing preview"
           successComment: "Preview ready"

@@ -6,7 +6,7 @@
     <!-- needed for adaptive design -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <!--
     ReDoc doesn't change outer page styles
@@ -14,39 +14,40 @@
     <style>
         .header {
             overflow: hidden;
-            background-color: #f1f1f1;
-            padding: 10px 10px;
-            font-family: 'Sailec-Medium','Helvetica','san-serif';
+            background-color: dodgerblue;
+            padding: 20px;
+            font-family: 'Roboto', sans-serif;
         }
 
         /* Style the header links */
         .header a {
             float: left;
-            color: black;
+            color: #f1f1f1;
             text-align: center;
             padding: 12px;
             text-decoration: none;
             font-size: 18px;
-            line-height: 25px;
+            line-height: 20px;
             border-radius: 4px;
         }
 
         /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-        .header a.logo {
+        .header .logo {
             font-size: 25px;
             font-weight: bold;
+            color: #f1f1f1;
         }
 
         /* Change the background color on mouse-over */
         .header a:hover {
             background-color: #ddd;
-            color: black;
+            color: dodgerblue;
         }
 
         /* Style the active/current link*/
         .header a.active {
-            background-color: dodgerblue;
-            color: white;
+            background-color: #f1f1f1;
+            color: gray;
         }
 
         /* Float the link section to the right */
@@ -76,10 +77,10 @@
 
 <body>
     <div class="header">
-        <a href="#default" class="logo">DigitalOcean APIv2 OpenAPI Preview</a>
+        <label class="logo">DigitalOcean APIv2 OpenAPI Preview</label>
         <div class="header-right">
-            <a id="pr-link" class="active" href="#" target="_blank">PR: none</a>
-            <a id="spec-link" href="DigitalOcean-public.v2.json" target="_blank">Spec File</a>
+            <a id="pr-link" href="#" target="_blank">PR: none</a>
+            <a id="spec-link" href="#" target="_blank">Spec File</a>
         </div>
     </div>
 
@@ -90,10 +91,10 @@
         const urlParams = new URLSearchParams(queryString);
         const pr = urlParams.get('pr');
         
-        let specUrl = "DigitalOcean-public.v2.json";
+        let specUrl = "DigitalOcean-public.v2.yaml";
         
         if (pr) {
-            specUrl = `previews/${pr}-spec.json`
+            specUrl = `previews/${pr}-spec.yaml`
             document.getElementById('pr-link').setAttribute('href', `https://github.com/digitalocean/apiv2-openapi/pull/${pr}`);
             document.getElementById('pr-link').textContent = `PR: ${pr}`;
             document.getElementById('spec-link').setAttribute('href', specUrl);
