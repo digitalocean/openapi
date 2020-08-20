@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Upload PR spec
         run: >-
           aws s3 cp test/openapi-bundled.yaml 
           s3://api-engineering/spec-ci/previews/${{ github.event.number }}.json
@@ -32,7 +33,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
           AWS_DEFAULT_OUTPUT: json
           SPACES_ENDPOINT: https://nyc3.digitaloceanspaces.com
-      - name: commit-status-updater
+      - name: Update commit
         uses: ouzi-dev/commit-status-updater@v1.0.7
         with: 
           status: "${{ job.status }}"
