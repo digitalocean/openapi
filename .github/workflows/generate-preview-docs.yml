@@ -15,7 +15,7 @@ jobs:
       - run: make bundle
       - name: Upload PR spec
         run: >-
-          aws s3 cp test/openapi-bundled.yaml 
+          aws s3 cp tests/openapi-bundled.yaml 
           s3://api-engineering/spec-ci/previews/${{ github.event.number }}.json
           --endpoint=${{ env.SPACES_ENDPOINT }} 
           --acl public-read
