@@ -16,18 +16,10 @@ jobs:
         with:
           name: bundled-spec
           path: tests/openapi-bundled.yaml
-  publish-preview:
-    name: Publish preview
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
       - name: Upload PR spec
-        with:
-          name: bundled-spec
         run: >-
           aws s3 cp test/openapi-bundled.yaml 
           s3://api-engineering/spec-ci/previews/${{ github.event.number }}.json
-          s3://api-engineering/spec-ci/${{ github.event.number }} 
           --endpoint=${{ env.SPACES_ENDPOINT }} 
           --acl public-read
         env:
