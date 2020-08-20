@@ -1,0 +1,41 @@
+name: Generate Preview
+
+on:
+  pull_request:
+
+jobs:
+  generate-preview:
+    name: Bundle Spec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - run: make bundle
+        with:
+          name: openapi-bundled
+          path: tests/openapi-bundled.yaml
+  publish-preview:
+    name: Publish preview
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        run: >-
+          aws s3 cp test/openapi-bundled.yaml 
+          s3://api-engineering/spec-ci/previews/${{ github.event.number }}.json
+          s3://api-engineering/spec-ci/${{ github.event.number }} 
+          --endpoint=${{ env.SPACES_ENDPOINT }} 
+          --acl public-read
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
+          AWS_DEFAULT_OUTPUT: json
+          SPACES_ENDPOINT: https://nyc3.digitaloceanspaces.com
+      - name: commit-status-updater
+        uses: ouzi-dev/commit-status-updater@v1.0.7
+        with: 
+          status: "${{ job.status }}"
+          pendingComment: "Publishing preview"
+          successComment: "Preview ready"
+          url: "https://api-engineering.nyc3.cdn.digitaloceanspaces.com/spec-ci/redoc-index.html?pr=${{ github.event.number }}"
