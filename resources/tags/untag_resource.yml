@@ -1,0 +1,44 @@
+operationId: untag_resource
+
+summary: Untag a Resource
+
+description: >-
+  Resources can be tagged by sending a DELETE request to 
+  `/v2/tags/$TAG_NAME/resources` with an array of json objects containing 
+  `resource_id` and `resource_type` attributes.
+
+  Currently only untagging of Droplets, Images, Volumes, and Volume Snapshots 
+  is supported. `resource_id` is expected to be the Droplet's id, Image's id, 
+  or Volume/Volume Snapshot's UUID attribute as a string, and `resource_type` is 
+  expected to be the string `droplet`, `image`, `volume` or `volume_snapshot`.
+
+tags:
+  - Tags
+
+parameters:
+  - $ref: 'parameters.yml#/TagId'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/tag_resource.yml'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+  

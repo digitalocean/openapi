@@ -213,6 +213,12 @@ paths:
     delete:
       $ref: 'resources/tags/delete_tag.yml'
 
+  /tags/{tag_id}/resources:
+    post:
+      $ref: 'resources/tags/tag_resource.yml'
+    delete:
+      $ref: 'resources/tags/untag_resource.yml'
+
 components:
   securitySchemes:
     bearerAuth:
