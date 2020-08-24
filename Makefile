@@ -55,3 +55,7 @@ collection: dev-dependencies bundle ## Use openapi-to-postmanv2 to generate a co
 .PHONY: bundle
 bundle: dev-dependencies ## Use openapi-cli to bundle the spec
 	npm run bundle -- ${SPEC_FILE} -o ${BUNDLE_PATH}
+
+.PHONY: preview
+preview: dev-dependencies ## Launch the docs preview server (openapi) and watch for file changes
+	SPEC_FILE=${SPEC_FILE} npm run preview
