@@ -11,7 +11,7 @@ description: |
   `action` attributes.
 
 tags:
-  - Droplets
+  - Droplet Actions
 
 parameters:
   - $ref: 'parameters.yml#/DropletId'

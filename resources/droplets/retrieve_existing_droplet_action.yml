@@ -10,7 +10,7 @@ description: |
   be a Droplet action object.
 
 tags:
-  - Droplets
+  - Droplet Actions
 
 parameters:
   - $ref: 'parameters.yml#/DropletId'
