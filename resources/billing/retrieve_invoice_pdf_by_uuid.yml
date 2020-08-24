@@ -1,10 +1,10 @@
-operationId: retrieve_invoice_csv_by_uuid
+operationId: retrieve_invoice_pdf_by_uuid
 
-summary: Retrieve an Invoice CSV by UUID
+summary: Retrieve an Invoice PDF by UUID
 
 description: >-
-  To retrieve a CSV for an invoice, send a GET request to 
-  `/v2/customers/my/invoices/$INVOICE_UUID/csv`.
+  To retrieve a PDF for an invoice, send a GET request to 
+  `/v2/customers/my/invoices/$INVOICE_UUID/pdf`.
 
 tags:
   - Invoices
@@ -14,7 +14,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/invoice_csv.yml'
+    $ref: 'responses/invoice_pdf.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

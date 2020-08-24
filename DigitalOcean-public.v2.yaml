@@ -160,6 +160,10 @@ paths:
     get:
       $ref: 'resources/billing/retrieve_invoice_csv_by_uuid.yml'
 
+  /customers/my/invoices/{invoice_uuid}/pdf:
+    get:
+      $ref: 'resources/billing/retrieve_invoice_pdf_by_uuid.yml'
+
   /customers/my/invoices/{invoice_uuid}/summary:
     get:
       $ref: 'resources/billing/retrieve_invoice_summary_by_uuid.yml'
