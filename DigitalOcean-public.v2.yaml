@@ -19,6 +19,12 @@ servers:
     description: production
 
 tags:
+  - name: 1-Click Applications
+    description: >
+      1-Click applications are pre-built Droplet images or Kubernetes apps with software,
+      features, and configuration details already set up for you. They can be found in the
+      [DigitalOcean Marketplace](https://www.digitalocean.com/docs/marketplace).
+
   - name: Account
     description: Provides information about your current account.
 
@@ -96,6 +102,14 @@ tags:
       Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
 
 paths:
+  /1-clicks:
+    get:
+      $ref: 'resources/1-clicks/list.yml'
+
+  /1-clicks/kubernetes:
+    post:
+      $ref: 'resources/1-clicks/install_kubernetes.yml'
+
   /account:
     get:
       $ref: 'resources/account/get_user_information.yml'
@@ -173,6 +187,16 @@ paths:
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
+    post:
+      $ref: 'resources/images/create_custom_image.yml'
+  
+  /images/{identifier}:
+    get:
+      $ref: 'resources/images/retrieve_existing_image.yml'
+    put: 
+      $ref: 'resources/images/update_an_image.yml'
+    delete:
+      $ref: 'resources/images/delete_an_image.yml'
 
   /regions:
     get:
@@ -202,6 +226,18 @@ paths:
       $ref: 'resources/tags/list_all_tags.yml'
     post:
       $ref: 'resources/tags/create_new_tag.yml'
+
+  /tags/{tag_id}:
+    get:
+      $ref: 'resources/tags/get_tag.yml'
+    delete:
+      $ref: 'resources/tags/delete_tag.yml'
+
+  /tags/{tag_id}/resources:
+    post:
+      $ref: 'resources/tags/tag_resource.yml'
+    delete:
+      $ref: 'resources/tags/untag_resource.yml'
 
 components:
   securitySchemes:

@@ -1,0 +1,7 @@
+type: array
+description: >-
+  A flat array of tag names as strings to be applied to the image. 
+  Tag names may be for either existing or new tags.
+example: 
+  - base-image
+  - prod
