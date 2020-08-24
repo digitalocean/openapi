@@ -13,4 +13,6 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/action.yml'
+      properties:
+        action:
+          $ref: '../models/action.yml'
