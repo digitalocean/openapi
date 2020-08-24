@@ -42,6 +42,21 @@ tags:
       Every action that creates an action object is available through this endpoint. Completed
       actions are not removed from this list and are always available for querying.
 
+  - name: Balance
+    description: >-
+      By sending requests to the `/v2/customers/my/balance` endpoint, you can 
+      retrieve the balance information for the requested customer account.
+
+  - name: Billing History
+    description: |
+      Billing history is a record of billing events for your account. 
+      For example, entries may include events like payments made, invoices 
+      issued, or credits granted.
+
+      To interact with the billing history for an account, you will generally 
+      send requests to the billing history endpoint at 
+      `/v2/customers/my/billing_history`.
+
   - name: Droplets
     description: |
       A [Droplet](https://www.digitalocean.com/docs/droplets/) is a DigitalOcean
@@ -138,6 +153,14 @@ paths:
   /actions/{action_id}:
     get:
       $ref: 'resources/actions/retrieve_an_existing_action.yml'
+
+  /customers/my/balance:
+    get:
+      $ref: 'resources/billing/get_customer_balance.yml'
+
+  /customers/my/billing_history:
+    get:
+      $ref: 'resources/billing/list_billing_history.yml'
 
   /droplets:
     get:

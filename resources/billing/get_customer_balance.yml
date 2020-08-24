@@ -1,0 +1,26 @@
+operationId: get_customer_balance
+
+summary: Get Customer Balance
+
+description: >-
+  To retrieve the balances on a customer's account, send a GET request to 
+  `/v2/customers/my/balance`.
+
+tags:
+  - Balance
+
+responses:
+  '200':
+    $ref: 'responses/balance.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
