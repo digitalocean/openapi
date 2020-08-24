@@ -36,17 +36,6 @@ tags:
       Every action that creates an action object is available through this endpoint. Completed
       actions are not removed from this list and are always available for querying.
 
-  - name: Droplets
-    description: |
-      A [Droplet](https://www.digitalocean.com/docs/droplets/) is a DigitalOcean
-      virtual machine. By sending requests to the Droplet endpoint, you can
-      list, create, or delete Droplets.
-
-      Some of the attributes will have an object value. The `region` and `image`
-      objects will all contain the standard attributes of their associated
-      types. Find more information about each of these objects in their
-      respective sections.
-
   - name: Droplet Actions
     description: |
       Droplet actions are tasks that can be executed on a Droplet. These can be
@@ -66,6 +55,17 @@ tags:
       the creation of a subsequent action for that Droplet, the locked attribute
       of the Droplet will be true and attempts to create a Droplet action will
       fail with a status of 422.
+
+  - name: Droplets
+    description: |
+      A [Droplet](https://www.digitalocean.com/docs/droplets/) is a DigitalOcean
+      virtual machine. By sending requests to the Droplet endpoint, you can
+      list, create, or delete Droplets.
+
+      Some of the attributes will have an object value. The `region` and `image`
+      objects will all contain the standard attributes of their associated
+      types. Find more information about each of these objects in their
+      respective sections.
 
   - name: Images
     description: |
