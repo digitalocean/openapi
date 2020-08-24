@@ -65,6 +65,15 @@ tags:
 
       To interact with images, you will generally send requests to the images endpoint at /v2/images.
 
+  - name: Invoices
+    description: |
+      Invoices are generated on the first of each month for every DigitalOcean 
+      customer. An invoice preview is generated daily, which can be accessed 
+      with the `preview` keyword in place of `$INVOICE_UUID`.
+
+      To interact with invoices, you will generally send requests to the 
+      invoices endpoint at `/v2/customers/my/invoices`.
+
   - name: Regions
     description: Provides information about DigitalOcean data center regions.
 
@@ -138,6 +147,22 @@ paths:
   /actions/{action_id}:
     get:
       $ref: 'resources/actions/retrieve_an_existing_action.yml'
+
+  /customers/my/invoices:
+    get:
+      $ref: 'resources/billing/list_invoices.yml'
+
+  /customers/my/invoices/{invoice_uuid}:
+    get:
+      $ref: 'resources/billing/retrieve_invoice_by_uuid.yml'
+
+  /customers/my/invoices/{invoice_uuid}/csv:
+    get:
+      $ref: 'resources/billing/retrieve_invoice_csv_by_uuid.yml'
+
+  /customers/my/invoices/{invoice_uuid}/summary:
+    get:
+      $ref: 'resources/billing/retrieve_invoice_summary_by_uuid.yml'
 
   /droplets:
     get:

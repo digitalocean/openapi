@@ -1,0 +1,11 @@
+type: object
+
+properties:
+  name:
+    type: string
+    description: Description of overages
+    example: Overages
+  amount:
+    type: string
+    description: Total amount of overages in USD
+    example: '3.45'
