@@ -1,6 +1,6 @@
 type: object
 
-description: An objects containing information about a resource scheduled
+description: An object containing information about a resource scheduled
   for deletion.
 
 properties:

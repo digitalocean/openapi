@@ -30,7 +30,7 @@ X-Dangerous:
   in: header
   name: X-Dangerous
   description: Acknowledge this action will destroy the Droplet and all
-    associated resources and _can not_ be reverse.
+    associated resources and _can not_ be reversed.
   schema:
     type: boolean
   example: true
