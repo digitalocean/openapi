@@ -176,6 +176,14 @@ paths:
     delete:
       $ref: 'resources/droplets/destroy_droplet.yml'
 
+  /droplets/{droplet_id}/backups:
+    get:
+      $ref: 'resources/droplets/list_droplet_backups.yml'
+
+  /droplets/{droplet_id}/snapshots:
+    get:
+      $ref: 'resources/droplets/list_droplet_snapshots.yml'
+
   /droplets/{droplet_id}/actions:
     get:
       $ref: 'resources/droplets/list_droplet_actions.yml'
@@ -203,11 +211,11 @@ paths:
       $ref: 'resources/images/list_images.yml'
     post:
       $ref: 'resources/images/create_custom_image.yml'
-  
+
   /images/{identifier}:
     get:
       $ref: 'resources/images/retrieve_existing_image.yml'
-    put: 
+    put:
       $ref: 'resources/images/update_an_image.yml'
     delete:
       $ref: 'resources/images/delete_an_image.yml'
