@@ -24,3 +24,4 @@ SnapshotId:
     - type: string
       description: The ID of a volume snapshot.
       example: fbe805e8-866b-11e6-96bf-000f53315a41
+  example: 6372321

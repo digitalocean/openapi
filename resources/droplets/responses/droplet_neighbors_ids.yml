@@ -1,6 +1,4 @@
-description: >-
-  The result will be a JSON object with an action key. 
-  This will be set to an action object containing the standard action attributes.
+description: A JSON object with an `neighbor_ids` key.
 
 headers:
   ratelimit-limit:
@@ -13,6 +11,4 @@ headers:
 content:
   application/json:
     schema:
-      properties:
-        action:
-          $ref: '../models/action.yml'
+      $ref: '../models/neighbor_ids.yml'

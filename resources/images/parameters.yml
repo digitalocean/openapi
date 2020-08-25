@@ -1,3 +1,12 @@
+ImageId:
+  in: path
+  name: identifier
+  description: A unique number that can be used to identify and reference a specific image.
+  required: true
+  schema:
+    type: integer
+  example: 62137902
+
 Type:
   in: query
   name: type
@@ -8,6 +17,7 @@ Type:
     enum:
       - application
       - distribution
+  example: distribution
 
 Private:
   in: query
@@ -16,6 +26,7 @@ Private:
   required: false
   schema:
     type: boolean
+  example: true
 
 Tag:
   in: query

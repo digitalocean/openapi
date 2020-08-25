@@ -19,6 +19,12 @@ servers:
     description: production
 
 tags:
+  - name: 1-Click Applications
+    description: >
+      1-Click applications are pre-built Droplet images or Kubernetes apps with software,
+      features, and configuration details already set up for you. They can be found in the
+      [DigitalOcean Marketplace](https://www.digitalocean.com/docs/marketplace).
+
   - name: Account
     description: Provides information about your current account.
 
@@ -35,6 +41,26 @@ tags:
 
       Every action that creates an action object is available through this endpoint. Completed
       actions are not removed from this list and are always available for querying.
+
+  - name: Droplet Actions
+    description: |
+      Droplet actions are tasks that can be executed on a Droplet. These can be
+      things like rebooting, resizing, snapshotting, etc.
+
+      Droplet action requests are generally targeted at one of the "actions"
+      endpoints for a specific Droplet. The specific actions are usually
+      initiated by sending a POST request with the action and arguments as
+      parameters.
+
+      Droplet action requests create a Droplet actions object, which can be used
+      to get information about the status of an action. Creating a Droplet
+      action is asynchronous: the HTTP call will return the action object before
+      the action has finished processing on the Droplet. The current status of
+      an action can be retrieved from either the Droplet actions endpoint or the
+      global actions endpoint. If a Droplet action is uncompleted it may block
+      the creation of a subsequent action for that Droplet, the locked attribute
+      of the Droplet will be true and attempts to create a Droplet action will
+      fail with a status of 422.
 
   - name: Droplets
     description: |
@@ -96,6 +122,14 @@ tags:
       Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
 
 paths:
+  /1-clicks:
+    get:
+      $ref: 'resources/1-clicks/list.yml'
+
+  /1-clicks/kubernetes:
+    post:
+      $ref: 'resources/1-clicks/install_kubernetes.yml'
+
   /account:
     get:
       $ref: 'resources/account/get_user_information.yml'
@@ -150,17 +184,49 @@ paths:
     get:
       $ref: 'resources/droplets/list_droplet_snapshots.yml'
 
+  /droplets/{droplet_id}/actions:
+    get:
+      $ref: 'resources/droplets/list_droplet_actions.yml'
+    post:
+      $ref: 'resources/droplets/initiate_droplet_action.yml'
+
+  /droplets/actions:
+    post:
+      $ref: 'resources/droplets/initiate_droplet_action_by_tag.yml'
+
+  /droplets/{droplet_id}/actions/{action_id}:
+    get:
+      $ref: 'resources/droplets/retrieve_existing_droplet_action.yml'
+
   /droplets/{droplet_id}/kernels:
     get:
       $ref: 'resources/droplets/list_droplet_kernels.yml'
 
+  /v2/droplets/{droplet_id}/neighbors:
+    get:
+      $ref: 'resources/droplets/list_droplet_neighbors.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
+    post:
+      $ref: 'resources/images/create_custom_image.yml'
+
+  /images/{identifier}:
+    get:
+      $ref: 'resources/images/retrieve_existing_image.yml'
+    put:
+      $ref: 'resources/images/update_an_image.yml'
+    delete:
+      $ref: 'resources/images/delete_an_image.yml'
 
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
+
+  /v2/reports/droplet_neighbors_ids:
+    get:
+      $ref: 'resources/droplets/list_all_droplet_neighbors_ids.yml'
 
   /sizes:
     get:
@@ -182,6 +248,18 @@ paths:
       $ref: 'resources/tags/list_all_tags.yml'
     post:
       $ref: 'resources/tags/create_new_tag.yml'
+
+  /tags/{tag_id}:
+    get:
+      $ref: 'resources/tags/get_tag.yml'
+    delete:
+      $ref: 'resources/tags/delete_tag.yml'
+
+  /tags/{tag_id}/resources:
+    post:
+      $ref: 'resources/tags/tag_resource.yml'
+    delete:
+      $ref: 'resources/tags/untag_resource.yml'
 
 components:
   securitySchemes:
