@@ -1,6 +1,4 @@
-description: >-
-  The result will be a JSON object with an action key. 
-  This will be set to an action object containing the standard action attributes.
+description: The response will be a JSON object with a key called `actions`.
 
 headers:
   ratelimit-limit:
@@ -14,5 +12,7 @@ content:
   application/json:
     schema:
       properties:
-        action:
-          $ref: '../models/action.yml'
+        actions:
+          type: array
+          items:
+            $ref: '../../actions/models/action.yml'

@@ -31,4 +31,4 @@ jobs:
           status: "${{ job.status }}"
           pendingComment: "Publishing preview"
           successComment: "Preview ready"
-          url: "https://api-engineering.nyc3.cdn.digitaloceanspaces.com/spec-ci/redoc-index.html?pr=${{ github.event.number }}"
+          url: "https://api-engineering.nyc3.digitaloceanspaces.com/spec-ci/redoc-index.html?pr=${{ github.event.number }}"
