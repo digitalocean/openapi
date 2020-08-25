@@ -30,3 +30,14 @@ properties:
     type: string
     description: Type of billing history entry.
     example: Invoice
+    enum:
+      - ACHFailure
+      - Adjustment
+      - AttemptFailed
+      - Chargeback
+      - Credit
+      - CreditExpiration
+      - Invoice
+      - Payment
+      - Refund
+      - Reversal
