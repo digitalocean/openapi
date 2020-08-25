@@ -66,20 +66,21 @@ Studio Code.
 These files and directories contain the API specification broken down to 
 
 ```
-├── DigitalOcean-public.v2.yaml:  Root YAML spec file
-├── resources/:  Contains directories for each top-level resource (referenced from the `paths` section in the root file)
-│   ├── <resource_name>/:  Resource specific content
-│   │   ├── models/:  Request and response models 
-│   │   ├── responses/:  Response definition to reference from respective request definition file
-│   │   ├── <request_definition>.yml:  Request definition to be referenced from respective path section in root file
-├── shared/:  Generalized definitions referenced across the API spec
-│   ├── headers.yml:  Header definition (separated by named keys)
-│   ├── attributes/:  Collection of common attributes
-│   │   ├── <attribute_name>.yml:  Individual attribute definition
-│   ├── models/:  Collection of common models
-│   │   ├── <model_name>.yml:  Individual model definition
-│   ├── parameters.yml:  Parameter definition (separated by named keys)
-│   └── responses/:  Response definitions
-│   │   ├── <response_name>.yml:  Individual response definition
-└── tests/:  Placeholder directory for test generation and output
+├── specification
+│   ├── DigitalOcean-public.v2.yaml:  Root YAML spec file
+│   ├── resources/:  Contains directories for each top-level resource (referenced from the `paths` section in the root file)
+│   │   ├── <resource_name>/:  Resource specific content
+│   │   │   ├── models/:  Request and response models 
+│   │   │   ├── responses/:  Response definition to reference from respective request definition file
+│   │   │   ├── <request_definition>.yml:  Request definition to be referenced from respective path section in root file
+│   ├── shared/:  Generalized definitions referenced across the API spec
+│   │   ├── headers.yml:  Header definition (separated by named keys)
+│   │   ├── attributes/:  Collection of common attributes
+│   │   │   ├── <attribute_name>.yml:  Individual attribute definition
+│   │   ├── models/:  Collection of common models
+│   │   │   ├── <model_name>.yml:  Individual model definition
+│   │   ├── parameters.yml:  Parameter definition (separated by named keys)
+│   │   └── responses/:  Response definitions
+│   │   │   ├── <response_name>.yml:  Individual response definition
+│   └── tests/:  Placeholder directory for test generation and output
 ```

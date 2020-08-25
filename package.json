@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "make test",
-    "lint": "spectral lint DigitalOcean-public.v2.yaml",
+    "lint": "spectral lint specification/DigitalOcean-public.v2.yaml",
     "bundle": "openapi bundle",
     "collection": "openapi2postmanv2",
     "newman": "newman run",
