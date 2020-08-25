@@ -1,6 +1,7 @@
 description: >- 
   The response will be a JSON object contains that contains a list of invoices 
-  under the invoices key, and the invoice preview under the invoice_preview key. 
+  under the `invoices` key, and the invoice preview under the `invoice_preview` 
+  key. 
   
   Each element contains the invoice summary attributes.
 

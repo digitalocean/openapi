@@ -87,7 +87,8 @@ tags:
 
   - name: Invoices
     description: |
-      Invoices are generated on the first of each month for every DigitalOcean 
+      [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/) 
+      are generated on the first of each month for every DigitalOcean 
       customer. An invoice preview is generated daily, which can be accessed 
       with the `preview` keyword in place of `$INVOICE_UUID`.
 
