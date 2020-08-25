@@ -44,17 +44,17 @@ tags:
 
   - name: Balance
     description: >-
-      By sending requests to the `/v2/customers/my/balance` endpoint, you can 
+      By sending requests to the `/v2/customers/my/balance` endpoint, you can
       retrieve the balance information for the requested customer account.
 
   - name: Billing History
     description: |
-      Billing history is a record of billing events for your account. 
-      For example, entries may include events like payments made, invoices 
+      Billing history is a record of billing events for your account.
+      For example, entries may include events like payments made, invoices
       issued, or credits granted.
 
-      To interact with the billing history for an account, you will generally 
-      send requests to the billing history endpoint at 
+      To interact with the billing history for an account, you will generally
+      send requests to the billing history endpoint at
       `/v2/customers/my/billing_history`.
   - name: Droplet Actions
     description: |
@@ -254,7 +254,7 @@ paths:
     get:
       $ref: 'resources/droplets/list_droplet_kernels.yml'
 
-  /v2/droplets/{droplet_id}/neighbors:
+  /droplets/{droplet_id}/neighbors:
     get:
       $ref: 'resources/droplets/list_droplet_neighbors.yml'
 
@@ -296,7 +296,7 @@ paths:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
 
-  /v2/reports/droplet_neighbors_ids:
+  /reports/droplet_neighbors_ids:
     get:
       $ref: 'resources/droplets/list_all_droplet_neighbors_ids.yml'
 
