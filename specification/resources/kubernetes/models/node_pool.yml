@@ -1,0 +1,70 @@
+type: object
+
+properties:
+  id:
+    type: string
+    example: cdda885e-7663-40c8-bc74-3a036c66545d
+    description: A unique ID that can be used to identify and reference a
+      specific node pool.
+
+  name:
+    type: string
+    example: frontend-pool
+    description: A human-readable name for the node pool.
+
+  size:
+    type: string
+    example: s-1vcpu-2gb
+    description: The slug identifier for the type of Droplet used as workers in
+      the node pool.
+
+  count:
+    type: integer
+    example: 3
+    description: The number of Droplet instances in the node pool.
+
+  tags:
+    type: array
+    items:
+      type: string
+    example:
+    - k8s
+    - k8s:bd5f5959-5e1e-4205-a714-a914373942af
+    - k8s-worker
+    - production
+    - web-team
+    description: An array containing the tags applied to the node pool. All
+      node pools are automatically tagged `k8s`, `k8s-worker`,` and
+      `k8s:$K8S_CLUSTER_ID`.
+
+  labels:
+    type: object
+    nullable: true
+    example: null
+    description: An object containing a set of Kubernetes labels. The keys and
+      are values are both user-defined.
+
+  nodes:
+    type: array
+    description: An object specifying the details of a specific worker node in
+      a node pool.
+    items:
+      $ref: 'node.yml'
+
+  auto_scale:
+    type: boolean
+    example: true
+    description: A boolean value indicating whether auto-scaling is enabled for
+      this node pool.
+
+  min_nodes:
+    type: integer
+    example: 3
+    description: The minimum number of nodes that this node pool can be
+      auto-scaled to. The value will be `0` if `auto_scale` is set to `false`.
+
+  max_nodes:
+    type: integer
+    example: 6
+    description: The maximum number of nodes that this node pool can be
+      auto-scaled to. The value will be `0` if `auto_scale` is set to `false`.
