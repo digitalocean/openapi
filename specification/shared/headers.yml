@@ -1,3 +1,13 @@
+content-disposition:
+  description: >- 
+    Indicates if the content is expected to be displayed *inline* in the 
+    browser, that is, as a Web page or as part of a Web page, or as an 
+    *attachment*, that is downloaded and saved locally.
+  schema:
+    type: string
+  example: >-
+    attachment; filename="DigitalOcean Invoice 2020 Jul (6173678-418071234).csv"
+
 ratelimit-limit:
   schema:
     type: integer

@@ -42,6 +42,20 @@ tags:
       Every action that creates an action object is available through this endpoint. Completed
       actions are not removed from this list and are always available for querying.
 
+  - name: Balance
+    description: >-
+      By sending requests to the `/v2/customers/my/balance` endpoint, you can 
+      retrieve the balance information for the requested customer account.
+
+  - name: Billing History
+    description: |
+      Billing history is a record of billing events for your account. 
+      For example, entries may include events like payments made, invoices 
+      issued, or credits granted.
+
+      To interact with the billing history for an account, you will generally 
+      send requests to the billing history endpoint at 
+      `/v2/customers/my/billing_history`.
   - name: Droplet Actions
     description: |
       Droplet actions are tasks that can be executed on a Droplet. These can be
@@ -84,6 +98,16 @@ tags:
       * Applications, or [1-Click Apps](https://www.digitalocean.com/docs/one-clicks/), are distributions pre-configured with additional software.
 
       To interact with images, you will generally send requests to the images endpoint at /v2/images.
+
+  - name: Invoices
+    description: |
+      [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/) 
+      are generated on the first of each month for every DigitalOcean 
+      customer. An invoice preview is generated daily, which can be accessed 
+      with the `preview` keyword in place of `$INVOICE_UUID`.
+
+      To interact with invoices, you will generally send requests to the 
+      invoices endpoint at `/v2/customers/my/invoices`.
 
   - name: Regions
     description: Provides information about DigitalOcean data center regions.
@@ -159,6 +183,34 @@ paths:
     get:
       $ref: 'resources/actions/retrieve_an_existing_action.yml'
 
+  /customers/my/balance:
+    get:
+      $ref: 'resources/billing/get_customer_balance.yml'
+
+  /customers/my/billing_history:
+    get:
+      $ref: 'resources/billing/list_billing_history.yml'
+  
+  /customers/my/invoices:
+    get:
+      $ref: 'resources/billing/list_invoices.yml'
+
+  /customers/my/invoices/{invoice_uuid}:
+    get:
+      $ref: 'resources/billing/retrieve_invoice_by_uuid.yml'
+
+  /customers/my/invoices/{invoice_uuid}/csv:
+    get:
+      $ref: 'resources/billing/retrieve_invoice_csv_by_uuid.yml'
+
+  /customers/my/invoices/{invoice_uuid}/pdf:
+    get:
+      $ref: 'resources/billing/retrieve_invoice_pdf_by_uuid.yml'
+
+  /customers/my/invoices/{invoice_uuid}/summary:
+    get:
+      $ref: 'resources/billing/retrieve_invoice_summary_by_uuid.yml'
+
   /droplets:
     get:
       $ref: 'resources/droplets/list_all_droplets.yml'
@@ -205,6 +257,26 @@ paths:
   /v2/droplets/{droplet_id}/neighbors:
     get:
       $ref: 'resources/droplets/list_droplet_neighbors.yml'
+
+  /droplets/{droplet_id}/destroy_with_associated_resources:
+    get:
+      $ref: 'resources/droplets/list_associated_resources.yml'
+
+  /droplets/{droplet_id}/destroy_with_associated_resources/selective:
+    delete:
+      $ref: 'resources/droplets/destroy_with_associated_resources_selective.yml'
+
+  /droplets/{droplet_id}/destroy_with_associated_resources/dangerous:
+    delete:
+      $ref: 'resources/droplets/destroy_with_associated_resources_dangerous.yml'
+
+  /droplets/{droplet_id}/destroy_with_associated_resources/status:
+    get:
+      $ref: 'resources/droplets/destroy_with_associated_resources_status.yml'
+
+  /droplets/{droplet_id}/destroy_with_associated_resources/retry:
+    post:
+      $ref: 'resources/droplets/destroy_with_associated_resources_retry.yml'
 
   /images:
     get:
