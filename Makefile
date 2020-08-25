@@ -2,7 +2,7 @@
 POSTMAN_BASE_URL ?= http://localhost:8080
 PROXY_TARGET ?= http://mock:4010
 
-SPEC_FILE ?= DigitalOcean-public.v2.yaml
+SPEC_FILE ?= specification/DigitalOcean-public.v2.yaml
 BUNDLE_PATH ?= tests/openapi-bundled.yaml
 COLLECTION_PATH ?= tests/postman.json
 TMP_COLLECTION_PATH ?= tests/postman-temp.json
