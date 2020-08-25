@@ -42,6 +42,26 @@ tags:
       Every action that creates an action object is available through this endpoint. Completed
       actions are not removed from this list and are always available for querying.
 
+  - name: Droplet Actions
+    description: |
+      Droplet actions are tasks that can be executed on a Droplet. These can be
+      things like rebooting, resizing, snapshotting, etc.
+
+      Droplet action requests are generally targeted at one of the "actions"
+      endpoints for a specific Droplet. The specific actions are usually
+      initiated by sending a POST request with the action and arguments as
+      parameters.
+
+      Droplet action requests create a Droplet actions object, which can be used
+      to get information about the status of an action. Creating a Droplet
+      action is asynchronous: the HTTP call will return the action object before
+      the action has finished processing on the Droplet. The current status of
+      an action can be retrieved from either the Droplet actions endpoint or the
+      global actions endpoint. If a Droplet action is uncompleted it may block
+      the creation of a subsequent action for that Droplet, the locked attribute
+      of the Droplet will be true and attempts to create a Droplet action will
+      fail with a status of 422.
+
   - name: Droplets
     description: |
       A [Droplet](https://www.digitalocean.com/docs/droplets/) is a DigitalOcean
@@ -185,6 +205,28 @@ paths:
     delete:
       $ref: 'resources/droplets/destroy_droplet.yml'
 
+  /droplets/{droplet_id}/backups:
+    get:
+      $ref: 'resources/droplets/list_droplet_backups.yml'
+
+  /droplets/{droplet_id}/snapshots:
+    get:
+      $ref: 'resources/droplets/list_droplet_snapshots.yml'
+
+  /droplets/{droplet_id}/actions:
+    get:
+      $ref: 'resources/droplets/list_droplet_actions.yml'
+    post:
+      $ref: 'resources/droplets/initiate_droplet_action.yml'
+
+  /droplets/actions:
+    post:
+      $ref: 'resources/droplets/initiate_droplet_action_by_tag.yml'
+
+  /droplets/{droplet_id}/actions/{action_id}:
+    get:
+      $ref: 'resources/droplets/retrieve_existing_droplet_action.yml'
+
   /droplets/{droplet_id}/kernels:
     get:
       $ref: 'resources/droplets/list_droplet_kernels.yml'
@@ -198,11 +240,11 @@ paths:
       $ref: 'resources/images/list_images.yml'
     post:
       $ref: 'resources/images/create_custom_image.yml'
-  
+
   /images/{identifier}:
     get:
       $ref: 'resources/images/retrieve_existing_image.yml'
-    put: 
+    put:
       $ref: 'resources/images/update_an_image.yml'
     delete:
       $ref: 'resources/images/delete_an_image.yml'
