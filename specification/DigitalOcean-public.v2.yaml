@@ -101,13 +101,22 @@ tags:
 
   - name: Invoices
     description: |
-      [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/) 
-      are generated on the first of each month for every DigitalOcean 
-      customer. An invoice preview is generated daily, which can be accessed 
+      [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/)
+      are generated on the first of each month for every DigitalOcean
+      customer. An invoice preview is generated daily, which can be accessed
       with the `preview` keyword in place of `$INVOICE_UUID`.
 
-      To interact with invoices, you will generally send requests to the 
+      To interact with invoices, you will generally send requests to the
       invoices endpoint at `/v2/customers/my/invoices`.
+
+  - name: Kubernetes
+    description: |
+      [DigitalOcean Kubernetes](https://www.digitalocean.com/docs/kubernetes/)
+      allows you to quickly deploy scalable and secure Kubernetes clusters. By
+      sending requests to the `/v2/kubernetes/clusters` endpoint, you can list,
+      create, or delete clusters as well as scale node pools up and down,
+      recycle individual nodes, and retrieve the kubeconfig file for use with
+      a cluster.
 
   - name: Regions
     description: Provides information about DigitalOcean data center regions.
@@ -190,7 +199,7 @@ paths:
   /customers/my/billing_history:
     get:
       $ref: 'resources/billing/list_billing_history.yml'
-  
+
   /customers/my/invoices:
     get:
       $ref: 'resources/billing/list_invoices.yml'
@@ -291,6 +300,10 @@ paths:
       $ref: 'resources/images/update_an_image.yml'
     delete:
       $ref: 'resources/images/delete_an_image.yml'
+
+  /kubernetes/clusters:
+    get:
+      $ref: 'resources/kubernetes/list_all_clusters.yml'
 
   /regions:
     get:
