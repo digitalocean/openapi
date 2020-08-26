@@ -35,18 +35,21 @@ KubernetesClustersAll:
           name: adoring-newton-3niq
           status:
             state: provisioning
+          droplet_id: '205545370'
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: ad12e744-c2a9-473d-8aa9-be5680500eb1
           name: adoring-newton-3nim
           status:
             state: provisioning
+          droplet_id: '205545371'
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: e46e8d07-f58f-4ff1-9737-97246364400e
           name: adoring-newton-3ni7
           status:
             state: provisioning
+          droplet_id: '205545372'
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
       - id: f49f4379-7e7f-4af5-aeb6-0354bd840778
@@ -70,12 +73,14 @@ KubernetesClustersAll:
           name: affectionate-nightingale-3nif
           status:
             state: provisioning
+          droplet_id: '205545373'
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: 4b8f60ff-ba06-4523-a6a4-b8148244c7e6
           name: affectionate-nightingale-3niy
           status:
             state: provisioning
+          droplet_id: '205545374'
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
       maintenance_policy:
@@ -125,18 +130,21 @@ KubernetesClustersCreateBasicResponse:
           name: ' '
           status:
             state: provisioning
+          droplet_id: ' '
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: ad12e744-c2a9-473d-8aa9-be5680500eb1
           name: ' '
           status:
             state: provisioning
+          droplet_id: ' '
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: e46e8d07-f58f-4ff1-9737-97246364400e
           name: ' '
           status:
             state: provisioning
+          droplet_id: ' '
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
       maintenance_policy:
@@ -189,18 +197,21 @@ KubernetesClustersMultiPoolResponse:
           name: ' '
           status:
             state: provisioning
+          droplet_id: ' '
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: ad12e744-c2a9-473d-8aa9-be5680500eb1
           name: ' '
           status:
             state: provisioning
+          droplet_id: ' '
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: e46e8d07-f58f-4ff1-9737-97246364400e
           name: ' '
           status:
             state: provisioning
+          droplet_id: ' '
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
       - id: f49f4379-7e7f-4af5-aeb6-0354bd840778
@@ -224,12 +235,14 @@ KubernetesClustersMultiPoolResponse:
           name: ' '
           status:
             state: provisioning
+          droplet_id: ' '
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: 4b8f60ff-ba06-4523-a6a4-b8148244c7e6
           name: ' '
           status:
             state: provisioning
+          droplet_id: ' '
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
       maintenance_policy:
