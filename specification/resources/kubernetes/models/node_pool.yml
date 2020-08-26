@@ -34,7 +34,7 @@ properties:
     - production
     - web-team
     description: An array containing the tags applied to the node pool. All
-      node pools are automatically tagged `k8s`, `k8s-worker`,` and
+      node pools are automatically tagged `k8s`, `k8s-worker`, and
       `k8s:$K8S_CLUSTER_ID`.
 
   labels:
