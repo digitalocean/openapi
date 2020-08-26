@@ -305,6 +305,9 @@ paths:
     get:
       $ref: 'resources/kubernetes/list_all_clusters.yml'
 
+    post:
+      $ref: 'resources/kubernetes/create_cluster.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
