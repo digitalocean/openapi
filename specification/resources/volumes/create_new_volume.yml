@@ -1,0 +1,47 @@
+operationId: create_new_volume
+
+summary: Create a New Block Storage Volume
+
+description: >-
+  To create a new volume, send a POST request to `/v2/volumes`.
+  Optionally, a `filesystem_type` attribute may be provided in order to
+  automatically format the volume's filesystem.
+  Pre-formatted volumes are automatically mounted when attached to Ubuntu,
+  Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April
+  26, 2018. Attaching pre-formatted volumes to Droplets without support for
+  auto-mounting is not recommended.
+
+tags:
+  - Block Storage
+
+requestBody:
+
+  required: true
+
+  content:
+    application/json:
+      schema:
+        $ref: 'models/new_volume.yml'
+      example: 
+        size_gigabytes: 10
+        name: example
+        description: Block store for examples
+        region: nyc1
+        filesystem_type: ext4
+        filesystem_label: example
+
+responses:
+  '201':
+    $ref: 'responses/volume.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

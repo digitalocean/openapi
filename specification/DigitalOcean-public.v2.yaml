@@ -365,6 +365,8 @@ paths:
   /volumes:
     get:
       $ref: 'resources/volumes/list_all_volumes.yml'
+    post:
+      $ref: 'resources/volumes/create_new_volume.yml'
 
 components:
   securitySchemes:
