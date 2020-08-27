@@ -312,6 +312,9 @@ paths:
     get:
       $ref: 'resources/kubernetes/retrieve_existing_cluster.yml'
 
+    delete:
+      $ref: 'resources/kubernetes/delete_cluster.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
