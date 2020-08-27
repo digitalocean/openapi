@@ -1,0 +1,43 @@
+operationId: list_all_volumes
+
+summary: List All Block Storage Volumes
+
+description: >+
+  To list all of the block storage volumes available on your account, send a GET
+  request to `/v2/volumes`.
+
+  ## Filtering Results
+
+  ### By Region
+  
+  The `region` may be provided as query paramater in order to restrict results
+  to volumes available in a specific region. 
+  For example: `/v2/volumes?region=nyc1`
+
+  ### By Name
+
+  It is also possible to list volumes on your account that match a specified
+  name. To do so, send a GET request with the volume's name as a query parameter
+  to `/v2/volumes?name=$VOLUME_NAME`.
+
+  **Note:** You can only create one volume per region with the same name.
+
+tags:
+  - Block Storage
+
+parameters:
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/all_volumes.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

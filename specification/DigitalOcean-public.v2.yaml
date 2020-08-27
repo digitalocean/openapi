@@ -56,6 +56,19 @@ tags:
       To interact with the billing history for an account, you will generally
       send requests to the billing history endpoint at
       `/v2/customers/my/billing_history`.
+
+  - name: Block Storage
+    description: |
+      [DigitalOcean Block Storage Volumes](https://www.digitalocean.com/docs/volumes/)
+      provide expanded storage capacity for your Droplets and can be moved
+      between Droplets within a specific region.
+      Volumes function as raw block devices, meaning they appear to the
+      operating system as locally attached storage which can be formatted using
+      any file system supported by the OS. They may be created in sizes from
+      1GiB to 16TiB.
+
+      By sending requests to the /v2/volumes endpoint, you can list, create, or delete volumes as well as attach and detach them from Droplets
+
   - name: Droplet Actions
     description: |
       Droplet actions are tasks that can be executed on a Droplet. These can be
@@ -348,6 +361,10 @@ paths:
       $ref: 'resources/tags/tag_resource.yml'
     delete:
       $ref: 'resources/tags/untag_resource.yml'
+
+  /volumes:
+    get:
+      $ref: 'resources/volumes/list_all_volumes.yml'
 
 components:
   securitySchemes:
