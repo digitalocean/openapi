@@ -1,0 +1,29 @@
+operationId: retrieve_existing_kubernetes_cluster
+
+summary: Retrieve an Existing Kubernetes Cluster
+
+description: |
+  To show information about an existing Kubernetes cluster, send a GET request
+  to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.
+
+tags:
+  - Kubernetes
+
+parameters:
+  - $ref: 'parameters.yml#/KubernetesClusterId'
+
+responses:
+  '200':
+    $ref: 'responses/existing_cluster.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
