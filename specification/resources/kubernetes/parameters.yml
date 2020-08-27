@@ -1,0 +1,9 @@
+KubernetesClusterId:
+  in: path
+  name: cluster_id
+  description: A unique ID that can be used to reference a Kubernetes cluster.
+  required: true
+  schema:
+    type: string
+    minimum: 1
+  example: bd5f5959-5e1e-4205-a714-a914373942af
