@@ -1,0 +1,7 @@
+VolumeName:
+  name: name
+  in: query
+  description: The volume's name.
+  schema:
+    type: string
+  example: example
