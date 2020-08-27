@@ -331,6 +331,10 @@ paths:
     delete:
       $ref: 'resources/kubernetes/delete_cluster.yml'
 
+  /kubernetes/clusters/{cluster_id}/upgrades:
+    get:
+      $ref: 'resources/kubernetes/retrieve_available_upgrades.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
