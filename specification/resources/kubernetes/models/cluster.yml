@@ -3,6 +3,7 @@ type: object
 properties:
   id:
     type: string
+    readOnly: true
     example: bd5f5959-5e1e-4205-a714-a914373942af
     description: A unique ID that can be used to identify and reference a
       Kubernetes cluster.
@@ -28,12 +29,14 @@ properties:
 
   cluster_subnet:
     type: string
+    readOnly: true
     example: 10.244.0.0/16
     description: The range of IP addresses in the overlay network of the
       Kubernetes cluster in CIDR notation.
 
   service_subnet:
     type: string
+    readOnly: true
     example: 10.245.0.0/16
     description: The range of assignable IP addresses for services running in
       the Kubernetes cluster in CIDR notation.
@@ -46,11 +49,13 @@ properties:
 
   ipv4:
     type: string
+    readOnly: true
     example: "68.183.121.157"
     description: The public IPv4 address of the Kubernetes master node.
 
   endpoint:
     type: string
+    readOnly: true
     example: https://bd5f5959-5e1e-4205-a714-a914373942af.k8s.ondigitalocean.com
     description: The base URL of the API server on the Kubernetes master node.
 
@@ -85,6 +90,7 @@ properties:
           24-hour clock format / HH:MM notation (e.g., `15:00`).
       duration:
         type: string
+        readOnly: true
         example: 4h0m0s
         description: The duration of the maintenance window policy in
           human-readable format.
@@ -105,12 +111,14 @@ properties:
 
   auto_upgrade:
     type: boolean
+    default: false
     example: true
     description: A boolean value indicating whether the cluster will be
       automatically upgraded to new patch releases during its maintenance window.
 
   status:
     type: object
+    readOnly: true
     description: An object containing a `state` attribute whose value is set to
       a string indicating the current status of the cluster.
     properties:
@@ -135,6 +143,7 @@ properties:
   created_at:
     type: string
     format: date-time
+    readOnly: true
     example: "2018-11-15T16:00:11Z"
     description: A time value given in ISO8601 combined date and time format
       that represents when the Kubernetes cluster was created.
@@ -143,13 +152,21 @@ properties:
     type: string
     format: date-time
     example: "2018-11-15T16:00:11Z"
+    readOnly: true
     description: A time value given in ISO8601 combined date and time format
       that represents when the Kubernetes cluster was last updated.
 
   surge_upgrade:
     type: boolean
+    default: false
     example: true
     description: A boolean value indicating whether surge upgrade is
       enabled/disabled for the cluster. Surge upgrade makes cluster upgrades
       fast and reliable by bringing up new nodes before destroying the outdated
       nodes.
+
+required:
+  - name
+  - region
+  - version
+  - node_pools
