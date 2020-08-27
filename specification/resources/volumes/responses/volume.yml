@@ -1,6 +1,6 @@
 description: >-
-  The response will be a array called `volume` containing an object with the
-  standard attributes associated with a volume
+  The response will be a JSON object with a key called `volume`. The value will
+  be an object containing the standard attributes associated with a volume.
 
 headers:
   ratelimit-limit:

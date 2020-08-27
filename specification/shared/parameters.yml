@@ -24,7 +24,8 @@ Page:
 Region:
   name: region
   in: query
-  description: The region where the resource is available
+  description: >- 
+    The slug identifier for the region where the resource is available.
   schema:
     $ref: 'attributes/region_slug.yml'
   example: nyc3

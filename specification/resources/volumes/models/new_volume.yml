@@ -1,7 +1,0 @@
-type: object
-
-allOf:
-  - $ref: 'volume_base.yml'
-  - properties:
-      region:
-        $ref: '../../../shared/attributes/region_slug.yml'

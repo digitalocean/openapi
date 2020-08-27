@@ -21,18 +21,38 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/new_volume.yml'
-      example: 
-        size_gigabytes: 10
-        name: example
-        description: Block store for examples
-        region: nyc1
-        filesystem_type: ext4
-        filesystem_label: example
+        oneOf:
+          - $ref: 'models/new_volume_ext4.yml'
+          - $ref: 'models/new_volume_xfs.yml'
+        discriminator:
+          propertyName: filesystem_type
+          mapping:
+            ext4: 'models/new_volume_ext4.yml'
+            xfs: 'models/new_volume_xfs.yml'
+      examples:
+        ext4 volume: 
+          value:
+            size_gigabytes: 10
+            name: ext4_example
+            description: Block store for examples
+            region: nyc1
+            filesystem_type: ext4
+            filesystem_label: ext4_volume_01
+        xfs volume: 
+          value:
+            size_gigabytes: 10
+            name: xfs_example
+            description: Block store for examples
+            region: nyc1
+            filesystem_type: xfs
+            filesystem_label: xfs_volume01
 
 responses:
   '201':
     $ref: 'responses/volume.yml'
+  
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
