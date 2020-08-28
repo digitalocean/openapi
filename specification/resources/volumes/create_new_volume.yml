@@ -1,0 +1,67 @@
+operationId: create_new_volume
+
+summary: Create a New Block Storage Volume
+
+description: >-
+  To create a new volume, send a POST request to `/v2/volumes`.
+  Optionally, a `filesystem_type` attribute may be provided in order to
+  automatically format the volume's filesystem.
+  Pre-formatted volumes are automatically mounted when attached to Ubuntu,
+  Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April
+  26, 2018. Attaching pre-formatted volumes to Droplets without support for
+  auto-mounting is not recommended.
+
+tags:
+  - Block Storage
+
+requestBody:
+
+  required: true
+
+  content:
+    application/json:
+      schema:
+        oneOf:
+          - $ref: 'models/new_volume_ext4.yml'
+          - $ref: 'models/new_volume_xfs.yml'
+        discriminator:
+          propertyName: filesystem_type
+          mapping:
+            ext4: 'models/new_volume_ext4.yml'
+            xfs: 'models/new_volume_xfs.yml'
+      examples:
+        ext4 volume: 
+          value:
+            size_gigabytes: 10
+            name: ext4_example
+            description: Block store for examples
+            region: nyc1
+            filesystem_type: ext4
+            filesystem_label: ext4_volume_01
+        xfs volume: 
+          value:
+            size_gigabytes: 10
+            name: xfs_example
+            description: Block store for examples
+            region: nyc1
+            filesystem_type: xfs
+            filesystem_label: xfs_volume01
+
+responses:
+  '201':
+    $ref: 'responses/volume.yml'
+  
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

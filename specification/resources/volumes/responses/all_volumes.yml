@@ -20,7 +20,7 @@ content:
             volumes:
               type: array
               items:
-                $ref: '../models/volume.yml'
+                $ref: '../models/volume_full.yml'
               description: Array of volumes.
           required:
             - volumes

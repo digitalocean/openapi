@@ -20,3 +20,12 @@ Page:
     minimum: 1
     default: 1
   example: 1
+
+Region:
+  name: region
+  in: query
+  description: >- 
+    The slug identifier for the region where the resource is available.
+  schema:
+    $ref: 'attributes/region_slug.yml'
+  example: nyc3
