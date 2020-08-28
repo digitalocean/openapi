@@ -385,6 +385,12 @@ paths:
       $ref: 'resources/volumes/list_all_volumes.yml'
     post:
       $ref: 'resources/volumes/create_new_volume.yml'
+    delete:
+      $ref: 'resources/volumes/delete_volume_by_name.yml'
+
+  /volumes/{volume_id}:
+    delete:
+      $ref: 'resources/volumes/delete_volume.yml'
 
 components:
   securitySchemes:

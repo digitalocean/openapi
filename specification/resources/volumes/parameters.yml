@@ -1,3 +1,12 @@
+VolumeId:
+  name: volume_id
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+    example: 7724db7c-e098-11e5-b522-000f53304e51
+
 VolumeName:
   name: name
   in: query
