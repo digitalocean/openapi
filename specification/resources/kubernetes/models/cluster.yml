@@ -25,7 +25,8 @@ properties:
     description: The slug identifier for the version of Kubernetes used for the
       cluster. If set to a minor version (e.g. "1.14"), the latest version within
       it will be used (e.g. "1.14.6-do.1"); if set to "latest", the latest
-      published version will be used.
+      published version will be used. See the `/v2/kubernetes/options` endpoint
+      to find all currently available versions.
 
   cluster_subnet:
     type: string
