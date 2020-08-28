@@ -1,0 +1,33 @@
+description: >-
+  You will get back a JSON object that has a `snapshot` key. This will contain
+  the standard snapshot attributes
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      properties:
+        snapshot:
+          $ref: '../../snapshots/models/snapshot.yml'
+    example:
+      snapshot:
+        id: 'bdf54322-e96b-11ea-9868-0a58ac144920'
+        name: web-01-1595954862243
+        created_at: '2020-07-28T16:47:44Z'
+        regions:
+          - nyc3
+          - sfo3
+        min_disk_size: 25
+        size_gigabytes: 2.34
+        resource_id: '200776916'
+        resource_type: droplet
+        tags:
+          - web
+          - env:prod
