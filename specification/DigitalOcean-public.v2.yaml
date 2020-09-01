@@ -347,6 +347,9 @@ paths:
     get:
       $ref: 'resources/kubernetes/list_node_pools.yml'
 
+    post:
+      $ref: 'resources/kubernetes/add_node_pool.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
