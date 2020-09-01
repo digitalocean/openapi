@@ -350,6 +350,9 @@ paths:
     get:
       $ref: 'resources/kubernetes/retrieve_node_pool.yml'
 
+    put:
+      $ref: 'resources/kubernetes/update_node_pool.yml'
+
     delete:
       $ref: 'resources/kubernetes/delete_node_pool.yml'
 

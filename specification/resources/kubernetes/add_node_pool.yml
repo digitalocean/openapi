@@ -19,7 +19,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/node_pool.yml'
+        $ref: 'models/node_pool.yml#/KubernetesNodePool'
 
       example:
         size: s-1vcpu-2gb
