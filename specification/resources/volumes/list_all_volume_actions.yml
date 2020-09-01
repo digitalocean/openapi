@@ -1,0 +1,28 @@
+operationId: list_all_volume_actions
+
+summary: List All Actions for a Volume
+
+description: >+
+  To retrieve all actions that have been executed on a volume, send a GET
+  request to `/v2/volumes/$VOLUME_ID/actions`.
+  
+tags:
+  - Block Storage Actions
+
+parameters:
+  - $ref: 'parameters.yml#/VolumeId'
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/all_volume_actions.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
