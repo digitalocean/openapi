@@ -339,6 +339,14 @@ paths:
     post:
       $ref: 'resources/kubernetes/upgrade_cluster.yml'
 
+  /kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}:
+    get:
+      $ref: 'resources/kubernetes/retrieve_node_pool.yml'
+
+  /kubernetes/clusters/{cluster_id}/node_pools:
+    get:
+      $ref: 'resources/kubernetes/list_node_pools.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
