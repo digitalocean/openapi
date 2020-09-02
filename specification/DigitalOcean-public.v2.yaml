@@ -359,6 +359,9 @@ paths:
     post:
       $ref: 'resources/kubernetes/run_clusterlint.yml'
 
+    get:
+      $ref: 'resources/kubernetes/fetch_clusterlint_results.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
