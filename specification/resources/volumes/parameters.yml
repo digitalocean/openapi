@@ -1,7 +1,6 @@
 VolumeId:
   name: volume_id
   in: path
-  description: The unique identifier for the snapshot.
   required: true
   description: The ID of the block storage volume.
   schema:

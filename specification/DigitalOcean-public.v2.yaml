@@ -406,10 +406,6 @@ paths:
     post:
       $ref: 'resources/volumes/create_volume_snapshot.yml'
 
-  /volumes/{volume_id}/snapshots/{snapshot_id}:
-    delete: 
-      $ref: 'resources/volumes/delete_volume_snapshot.yml'
-
 components:
   securitySchemes:
     bearerAuth:
