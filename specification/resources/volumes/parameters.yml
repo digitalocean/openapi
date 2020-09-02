@@ -3,6 +3,7 @@ VolumeId:
   in: path
   description: The unique identifier for the snapshot.
   required: true
+  description: The ID of the block storage volume.
   schema:
     type: string
     format: uuid
@@ -11,7 +12,7 @@ VolumeId:
 VolumeName:
   name: name
   in: query
-  description: The volume's name.
+  description: The block storage volume's name.
   schema:
     type: string
   example: example

@@ -1,0 +1,26 @@
+operationId: list_node_pools
+
+summary: List All Node Pools in a Kubernetes Clusters
+
+description: |
+  To list all of the node pools in a Kubernetes clusters, send a GET request to
+  `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.
+
+tags:
+  - Kubernetes
+
+parameters:
+  - $ref: 'parameters.yml#/KubernetesClusterId'
+
+responses:
+  '200':
+    $ref: 'responses/all_node_pools.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

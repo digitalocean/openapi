@@ -7,3 +7,13 @@ KubernetesClusterId:
     type: string
     minimum: 1
   example: bd5f5959-5e1e-4205-a714-a914373942af
+
+KubernetesNodePoolId:
+  in: path
+  name: node_pool_id
+  description: A unique ID that can be used to reference a Kubernetes node pool.
+  required: true
+  schema:
+    type: string
+    minimum: 1
+  example: cdda885e-7663-40c8-bc74-3a036c66545d
