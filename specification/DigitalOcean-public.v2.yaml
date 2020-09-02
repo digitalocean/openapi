@@ -355,6 +355,10 @@ paths:
     get:
       $ref: 'resources/kubernetes/list_node_pools.yml'
 
+  /kubernetes/clusters/{cluster_id}/clusterlint:
+    post:
+      $ref: 'resources/kubernetes/run_clusterlint.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
