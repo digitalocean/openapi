@@ -36,6 +36,7 @@ requestBody:
       schema:
         oneOf:
           - $ref: 'models/droplet_actions.yml#/DropletActionType'
+          - $ref: 'models/droplet_actions.yml#/DropletActionSnapshot'
         discriminator:
           propertyName: type
           mapping:

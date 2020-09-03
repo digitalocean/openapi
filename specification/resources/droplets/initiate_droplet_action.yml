@@ -43,6 +43,12 @@ requestBody:
       schema:
         oneOf:
           - $ref: 'models/droplet_actions.yml#/DropletActionType'
+          - $ref: 'models/droplet_actions.yml#/DropletActionRestore'
+          - $ref: 'models/droplet_actions.yml#/DropletActionResize'
+          - $ref: 'models/droplet_actions.yml#/DropletActionRebuild'
+          - $ref: 'models/droplet_actions.yml#/DropletActionRename'
+          - $ref: 'models/droplet_actions.yml#/DropletActionChangeKernel'
+          - $ref: 'models/droplet_actions.yml#/DropletActionSnapshot'
         discriminator:
           propertyName: type
           mapping:
