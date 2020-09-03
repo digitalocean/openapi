@@ -17,3 +17,15 @@ KubernetesNodePoolId:
     type: string
     minimum: 1
   example: cdda885e-7663-40c8-bc74-3a036c66545d
+
+KubernetesExpirySeconds:
+  in: query
+  name: expiry_seconds
+  required: false
+  description: The duration in seconds that the returned Kubernetes credentials
+   will be valid. If not set or 0, the credentials will have a 7 day expiry.
+  schema:
+    type: integer
+    minimum: 0
+    default: 0
+  example: 300

@@ -1,0 +1,32 @@
+operationId: retrieve_existing_volume_action
+
+summary: Retrieve an Existing Volume Action
+
+description: >+
+  To retrieve the status of a volume action, send a GET request to
+  `/v2/volumes/$VOLUME_ID/actions/$ACTION_ID`.
+  
+tags:
+  - Block Storage Actions
+
+parameters:
+  - $ref: 'parameters.yml#/VolumeId'
+  - $ref: '../actions/parameters.yml#/actionId'
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/volume_action.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
