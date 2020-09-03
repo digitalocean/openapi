@@ -358,13 +358,22 @@ paths:
     post:
       $ref: 'resources/kubernetes/upgrade_cluster.yml'
 
+  /kubernetes/clusters/{cluster_id}/node_pools:
+    get:
+      $ref: 'resources/kubernetes/list_node_pools.yml'
+
+    post:
+      $ref: 'resources/kubernetes/add_node_pool.yml'
+
   /kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}:
     get:
       $ref: 'resources/kubernetes/retrieve_node_pool.yml'
 
-  /kubernetes/clusters/{cluster_id}/node_pools:
-    get:
-      $ref: 'resources/kubernetes/list_node_pools.yml'
+    put:
+      $ref: 'resources/kubernetes/update_node_pool.yml'
+
+    delete:
+      $ref: 'resources/kubernetes/delete_node_pool.yml'
 
   /regions:
     get:
