@@ -1,0 +1,31 @@
+operationId: list_volume_snapshots
+
+summary: List Snapshots for a Volume
+
+description: >+
+  To retrieve the snapshots that have been created from a volume, send a GET
+  request to `/v2/volumes/$VOLUME_ID/snapshots`.
+  
+tags:
+  - Block Storage
+
+parameters:
+  - $ref: 'parameters.yml#/VolumeId'
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/volume_snapshots.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

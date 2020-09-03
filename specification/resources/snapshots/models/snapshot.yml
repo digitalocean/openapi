@@ -28,13 +28,14 @@ allOf:
         description: The type of resource that the snapshot originated from.
 
       tags:
+        description: An array of Tags the snapshot has been tagged with.
         type: array
         items:
           type: string
+        nullable: true
         example:
         - web
         - env:prod
-        description: An array of Tags the snapshot has been tagged with.
 
     required:
     - resource_id

@@ -427,6 +427,12 @@ paths:
     get:
       $ref: 'resources/volumes/retrieve_existing_volume_action.yml'
 
+  /volumes/{volume_id}/snapshots:
+    get:
+      $ref: 'resources/volumes/list_volume_snapshots.yml'
+    post:
+      $ref: 'resources/volumes/create_volume_snapshot.yml'
+
 components:
   securitySchemes:
     bearerAuth:
