@@ -375,6 +375,10 @@ paths:
     delete:
       $ref: 'resources/kubernetes/delete_node_pool.yml'
 
+  /kubernetes/options:
+    get:
+      $ref: 'resources/kubernetes/list_options.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
