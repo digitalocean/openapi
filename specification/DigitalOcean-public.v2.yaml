@@ -379,6 +379,10 @@ paths:
     delete:
       $ref: 'resources/kubernetes/delete_node.yml'
 
+  /kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle:
+    post:
+      $ref: 'resources/kubernetes/recycle_node_pool.yml'
+
   /kubernetes/clusters/{cluster_id}/user:
     get:
       $ref: 'resources/kubernetes/retrieve_cluster_user.yml'
@@ -387,9 +391,12 @@ paths:
     get:
       $ref: 'resources/kubernetes/list_options.yml'
 
-  /kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle:
+  /kubernetes/clusters/{cluster_id}/clusterlint:
     post:
-      $ref: 'resources/kubernetes/recycle_node_pool.yml'
+      $ref: 'resources/kubernetes/run_clusterlint.yml'
+
+    get:
+      $ref: 'resources/kubernetes/fetch_clusterlint_results.yml'
 
   /regions:
     get:

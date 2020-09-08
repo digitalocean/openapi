@@ -41,6 +41,15 @@ KubernetesExpirySeconds:
     default: 0
   example: 300
 
+ClusterlintRunId:
+  in: query
+  name: run_id
+  description: Specifies the clusterlint run whose results will be retrieved.
+  required: false
+  schema:
+    type: string
+  example: 50c2f44c-011d-493e-aee5-361a4a0d1844
+
 KubernetesNodeSkipDrain:
   in: query
   name: skip_drain

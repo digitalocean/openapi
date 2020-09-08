@@ -1,0 +1,44 @@
+operationId: run_clusterlint
+
+summary: Run Clusterlint Checks on a Kubernetes Cluster
+
+description: |
+  Clusterlint helps operators conform to Kubernetes best practices around
+  resources, security and reliability to avoid common problems while operating
+  or upgrading the clusters.
+
+  To request a clusterlint run on your cluster, send a POST request to
+  `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. This will run all
+  checks present in the `doks` group by default, if a request body is not
+  specified. Optionally specify the below attributes.
+
+  For information about the available checks, please refer to
+  [the clusterlint check documentation](https://github.com/digitalocean/clusterlint/blob/master/checks.md).
+
+tags:
+  - Kubernetes
+
+parameters:
+  - $ref: 'parameters.yml#/KubernetesClusterId'
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: 'models/clusterlint_request.yml'
+
+responses:
+  '202':
+    $ref: 'responses/clusterlint_run.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
