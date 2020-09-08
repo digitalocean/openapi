@@ -375,6 +375,10 @@ paths:
     delete:
       $ref: 'resources/kubernetes/delete_node_pool.yml'
 
+  /kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id}:
+    delete:
+      $ref: 'resources/kubernetes/delete_node.yml'
+
   /kubernetes/clusters/{cluster_id}/user:
     get:
       $ref: 'resources/kubernetes/retrieve_cluster_user.yml'
@@ -382,6 +386,10 @@ paths:
   /kubernetes/options:
     get:
       $ref: 'resources/kubernetes/list_options.yml'
+
+  /kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle:
+    post:
+      $ref: 'resources/kubernetes/recycle_node_pool.yml'
 
   /regions:
     get:
