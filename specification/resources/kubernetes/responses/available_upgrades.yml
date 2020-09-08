@@ -24,5 +24,5 @@ content:
           type: array
           nullable: true
           items:
-            $ref: '../models/options.yml#/KubernetesOptions'
+            $ref: '../models/options.yml#/KubernetesVersion'
 

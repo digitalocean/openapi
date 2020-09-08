@@ -18,6 +18,17 @@ KubernetesNodePoolId:
     minimum: 1
   example: cdda885e-7663-40c8-bc74-3a036c66545d
 
+KubernetesNodeId:
+  in: path
+  name: node_id
+  description: A unique ID that can be used to reference a node in a Kubernetes
+    node pool.
+  required: true
+  schema:
+    type: string
+    minimum: 1
+  example: 478247f8-b1bb-4f7a-8db9-2a5f8d4b8f8f
+
 KubernetesExpirySeconds:
   in: query
   name: expiry_seconds
@@ -38,3 +49,33 @@ ClusterlintRunId:
   schema:
     type: string
   example: 50c2f44c-011d-493e-aee5-361a4a0d1844
+
+KubernetesNodeSkipDrain:
+  in: query
+  name: skip_drain
+  required: false
+  description: Specifies whether or not to drain workloads from a node before
+    it is deleted. Setting it to `1` causes node draining to be skipped.
+    Omitting the query parameter or setting its value to `0` carries out
+    draining prior to deletion.
+  schema:
+    type: integer
+    minimum: 0
+    maximum: 1
+    default: 0
+  example: 1
+
+KubernetesNodeReplace:
+  in: query
+  name: replace
+  required: false
+  description: Specifies whether or not to replace a node after it has been
+    deleted. Setting it to `1` causes the node to be replaced by a new one after
+    deletion. Omitting the query parameter or setting its value to `0` deletes
+    without replacement.
+  schema:
+    type: integer
+    minimum: 0
+    maximum: 1
+    default: 0
+  example: 1
