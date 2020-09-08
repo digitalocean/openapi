@@ -18,4 +18,11 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/available_upgrade_versions.yml'
+      type: object
+      properties:
+        available_upgrade_versions:
+          type: array
+          nullable: true
+          items:
+            $ref: '../models/options.yml#/KubernetesVersion'
+

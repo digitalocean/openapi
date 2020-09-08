@@ -15,3 +15,12 @@ VolumeName:
   schema:
     type: string
   example: example
+
+VolumeSnapshotId:
+  name: snapshot_id
+  in: path
+  description: The unique identifier for the snapshot.
+  schema:
+    type: string
+  required: true
+  example: fbe805e8-866b-11e6-96bf-000f53315a41
