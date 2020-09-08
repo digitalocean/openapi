@@ -31,6 +31,7 @@ properties:
 
   cluster_subnet:
     type: string
+    format: cidr
     readOnly: true
     example: 10.244.0.0/16
     description: The range of IP addresses in the overlay network of the
