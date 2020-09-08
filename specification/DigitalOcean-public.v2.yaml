@@ -379,6 +379,10 @@ paths:
     delete:
       $ref: 'resources/kubernetes/delete_node.yml'
 
+  /kubernetes/clusters/{cluster_id}/user:
+    get:
+      $ref: 'resources/kubernetes/retrieve_cluster_user.yml'
+
   /kubernetes/options:
     get:
       $ref: 'resources/kubernetes/list_options.yml'
