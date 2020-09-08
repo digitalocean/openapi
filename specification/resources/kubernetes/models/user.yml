@@ -7,6 +7,7 @@ properties:
 
       username:
         type: string
+        format: email
         example: sammy@digitalocean.com
         description: The username for the cluster admin user.
 

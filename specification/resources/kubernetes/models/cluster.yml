@@ -3,6 +3,7 @@ type: object
 properties:
   id:
     type: string
+    format: uuid
     readOnly: true
     example: bd5f5959-5e1e-4205-a714-a914373942af
     description: A unique ID that can be used to identify and reference a
@@ -44,18 +45,21 @@ properties:
 
   vpc_uuid:
     type: string
+    format: uuid
     example: c33931f2-a26a-4e61-b85c-4e95a2ec431b
     description: A string specifying the UUID of the VPC to which the
       Kubernetes cluster is assigned.
 
   ipv4:
     type: string
+    format: ipv4
     readOnly: true
     example: "68.183.121.157"
     description: The public IPv4 address of the Kubernetes master node.
 
   endpoint:
     type: string
+    format: uri
     readOnly: true
     example: https://bd5f5959-5e1e-4205-a714-a914373942af.k8s.ondigitalocean.com
     description: The base URL of the API server on the Kubernetes master node.
