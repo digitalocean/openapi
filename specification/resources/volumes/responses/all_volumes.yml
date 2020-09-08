@@ -30,8 +30,8 @@ content:
 
     examples:
       All Volumes:
-        $ref: 'examples.yml#/VolumesAll'
+        $ref: '../examples.yml#/VolumesAll'
       Filtered by Name:
-        $ref: 'examples.yml#/VolumesFilteredByName'
+        $ref: '../examples.yml#/VolumesFilteredByName'
       Filtered by Region:
-        $ref: 'examples.yml#/VolumesFilteredByRegion'
+        $ref: '../examples.yml#/VolumesFilteredByRegion'

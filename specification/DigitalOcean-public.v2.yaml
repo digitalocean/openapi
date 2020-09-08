@@ -67,7 +67,18 @@ tags:
       any file system supported by the OS. They may be created in sizes from
       1GiB to 16TiB.
 
-      By sending requests to the /v2/volumes endpoint, you can list, create, or delete volumes as well as attach and detach them from Droplets
+      By sending requests to the /v2/volumes endpoint, you can list, create, or
+      delete volumes as well as attach and detach them from Droplets
+
+  - name: Block Storage Actions
+    description: |
+      Block storage actions are commands that can be given to a DigitalOcean
+      Block Storage Volume. An example would be detaching or attaching a volume
+      from a Droplet. These requests are made on the 
+      `/v2/volumes/$VOLUME_ID/actions` endpoint.
+
+      An action object is returned. These objects hold the current status of the
+      requested action.
 
   - name: Droplet Actions
     description: |
@@ -347,13 +358,26 @@ paths:
     post:
       $ref: 'resources/kubernetes/upgrade_cluster.yml'
 
+  /kubernetes/clusters/{cluster_id}/node_pools:
+    get:
+      $ref: 'resources/kubernetes/list_node_pools.yml'
+
+    post:
+      $ref: 'resources/kubernetes/add_node_pool.yml'
+
   /kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}:
     get:
       $ref: 'resources/kubernetes/retrieve_node_pool.yml'
 
-  /kubernetes/clusters/{cluster_id}/node_pools:
+    put:
+      $ref: 'resources/kubernetes/update_node_pool.yml'
+
+    delete:
+      $ref: 'resources/kubernetes/delete_node_pool.yml'
+
+  /kubernetes/options:
     get:
-      $ref: 'resources/kubernetes/list_node_pools.yml'
+      $ref: 'resources/kubernetes/list_options.yml'
 
   /kubernetes/clusters/{cluster_id}/clusterlint:
     post:
@@ -414,6 +438,20 @@ paths:
   /volumes/{volume_id}:
     delete:
       $ref: 'resources/volumes/delete_volume.yml'
+
+  /volumes/{volume_id}/actions:
+    get:
+      $ref: 'resources/volumes/list_all_volume_actions.yml'
+
+  /volumes/{volume_id}/actions/{action_id}:
+    get:
+      $ref: 'resources/volumes/retrieve_existing_volume_action.yml'
+
+  /volumes/{volume_id}/snapshots:
+    get:
+      $ref: 'resources/volumes/list_volume_snapshots.yml'
+    post:
+      $ref: 'resources/volumes/create_volume_snapshot.yml'
 
 components:
   securitySchemes:

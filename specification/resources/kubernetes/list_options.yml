@@ -1,0 +1,26 @@
+operationId: list_kubernetes_options
+
+summary: List Available Regions, Node Sizes, and Versions of Kubernetes
+
+description: To list the versions of Kubernetes available for use, the regions
+  that support Kubernetes, and the available node sizes, send a GET request to
+  `/v2/kubernetes/options`.
+
+tags:
+  - Kubernetes
+
+responses:
+  '200':
+    $ref: 'responses/all_options.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

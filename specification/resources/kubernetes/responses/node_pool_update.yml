@@ -1,6 +1,6 @@
 description: |
-  The response will be a JSON object with a key called `node_pool`. The value
-  of this will be an object containing the standard attributes of a node pool.
+  The response will be a JSON object with a key called `node_pool`. The value of
+  this will be an object containing the standard attributes of a node pool.
 
 headers:
   ratelimit-limit:
@@ -20,19 +20,21 @@ content:
       example:
         node_pool:
           id: cdda885e-7663-40c8-bc74-3a036c66545d
-          name: frontend-pool
+          name: renamed-pool
           size: s-1vcpu-2gb
           count: 3
           tags:
           - production
           - web-team
+          - front-end
+          - new-tag
           - k8s
           - k8s:bd5f5959-5e1e-4205-a714-a914373942af
           - k8s:worker
-          labels:
-          auto_scale: false
-          min_nodes: 0
-          max_nodes: 0
+          labels: null
+          auto_scale: true
+          min_nodes: 3
+          max_nodes: 6
           nodes:
           - id: 478247f8-b1bb-4f7a-8db9-2a5f8d4b8f8f
             name: adoring-newton-3niq
