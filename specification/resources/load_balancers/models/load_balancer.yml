@@ -1,0 +1,114 @@
+type: object
+
+properties:
+  id:
+    type: string
+    format: uuid
+    example: 4de7ac8b-495b-4884-9a69-1050c6793cd6
+    description: A unique ID that can be used to identify and reference a load
+      balancer.
+
+  name:
+    type: string
+    example: example-lb-01
+    description: A human-readable name for a load balancer instance.
+
+  ip:
+    type: string
+    format: ipv4
+    example: '104.131.186.241'
+    description: An attribute containing the public-facing IP address of the
+      load balancer.
+
+  algorithm:
+    type: string
+    example: round_robin
+    enum:
+      - round_robin
+      - least_connections
+    description: The load balancing algorithm used to determine which backend
+      Droplet will be selected by a client. It must be either `round_robin` or
+      `least_connections`.
+
+  status:
+    type: string
+    example: new
+    enum:
+      - new
+      - active
+      - errored
+    description: A status string indicating the current state of the load
+      balancer. This can be `new`, `active`, or `errored`.
+
+  created_at:
+    type: string
+    format: date-time
+    example: '2017-02-01T22:22:58Z'
+    description: A time value given in ISO8601 combined date and time format
+      that represents when the load balancer was created.
+
+  forwarding_rules:
+    type: array
+    items:
+      $ref: 'forwarding_rule.yml'
+    description: An array of objects specifying the forwarding rules for a
+      load balancer.
+
+  health_check:
+    $ref: 'health_check.yml'
+
+  sticky_sessions:
+    $ref: 'sticky_sessions.yml'
+
+  region:
+    type: object
+    allOf:
+      - description: >-
+          The region where the load balancer instance is located. When
+          setting a region, the value should be the slug identifier for the
+          region. When you query a load balancer, an entire region object will
+          be returned.
+      - $ref: '../../regions/models/region.yml'
+
+  tag:
+    type: string
+    example: " "
+    description: The name of a Droplet tag corresponding to Droplets assigned
+      to the load balancer.
+
+  droplet_ids:
+    type: array
+    items:
+      type: integer
+    example:
+    - 3164444
+    - 3164445
+    description: An array containing the IDs of the Droplets assigned to the
+      load balancer.
+
+  redirect_http_to_https:
+    type: boolean
+    example: true
+    default: false
+    description: A boolean value indicating whether HTTP requests to the load
+      balancer on port 80 will be redirected to HTTPS on port 443.
+
+  enable_proxy_protocol:
+    type: boolean
+    example: true
+    default: false
+    description: A boolean value indicating whether PROXY Protocol is in use.
+
+  enable_backend_keepalive:
+    type: boolean
+    example: true
+    default: false
+    description: A boolean value indicating whether HTTP keepalive connections
+      are maintained to target Droplets.
+
+  vpc_uuid:
+    type: string
+    format: uuid
+    example: c33931f2-a26a-4e61-b85c-4e95a2ec431b
+    description: A string specifying the UUID of the VPC to which the load
+      balancer is assigned.
