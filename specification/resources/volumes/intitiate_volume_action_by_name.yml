@@ -1,0 +1,106 @@
+operationId: intitiate_volume_action_by_name
+
+summary: Initiate A Block Storage Action By Volume Name
+
+description: |
+  To initiate an action on a block storage volume by Id, send a POST request to
+  `~/v2/volumes/actions`. The body should contain the appropriate
+  attributes for the respective action.
+
+  ## Attach a Block Storage Volume to a Droplet
+
+  | Attribute   | Details                                                             |
+  | ----------- | ------------------------------------------------------------------- |
+  | type        | This must be `attach`                                               |
+  | volume_name | The name of the block storage volume                                |
+  | droplet_id  | Set to the Droplet's ID                                             |
+  | region      | Set to the slug representing the region where the volume is located |
+
+  Each volume may only be attached to a single Droplet. However, up to five
+  volumes may be attached to a Droplet at a time. Pre-formatted volumes will be
+  automatically mounted to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS
+  Droplets created on or after April 26, 2018 when attched. On older Droplets,
+  [additional configuration](https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-digitalocean-block-storage-volumes-in-linux#mounting-the-filesystems)
+  is required.
+
+  ## Remove a Block Storage Volume from a Droplet
+
+  | Attribute   | Details                                                             |
+  | ----------- | ------------------------------------------------------------------- |
+  | type        | This must be `detach`                                               |
+  | volume_name | The name of the block storage volume                                |
+  | droplet_id  | Set to the Droplet's ID                                             |
+  | region      | Set to the slug representing the region where the volume is located |
+
+  ## Resize a Volume
+
+  | Attribute      | Details                                                             |
+  | -------------- | ------------------------------------------------------------------- |
+  | type           | This must be `resize`                                               |
+  | volume_name    | The name of the block storage volume                                |
+  | size_gigabytes | The new size of the block storage volume in GiB (1024^3)            |
+  | region         | Set to the slug representing the region where the volume is located |
+
+  Volumes may only be resized upwards. The maximum size for a volume is 16TiB.
+  
+tags:
+  - Block Storage Actions
+
+parameters:
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+requestBody:
+  required: true
+
+  content:
+    application/json:
+      schema:
+        oneOf:
+          - $ref: 'models/volume_action_initiate_attach.yml'
+          - $ref: 'models/volume_action_initiate_detach.yml'
+          - $ref: 'models/volume_action_initiate_resize.yml'
+        discriminator:
+          propertyName: type
+          mapping:
+            attach: 'models/volume_action_initiate_attach.yml'
+            detach: 'models/volume_action_initiate_detach.yml'
+            resize: 'models/volume_action_initiate_resize.yml'
+
+      
+      examples:
+        VolumeActionAttach:
+          value:
+            type: attach
+            droplet_id: 11612190
+            region: nyc1
+            tags:
+              - aninterestingtag
+
+        VolumeActionDetatch:
+          value:
+            type: detach
+            droplet_id: 11612190
+            region: nyc1
+
+        VolumeActionResize:
+          value:
+            type: resize
+            size_gigabytes: 100
+            region: nyc1
+
+responses:
+  '200':
+    $ref: 'responses/volume_action.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

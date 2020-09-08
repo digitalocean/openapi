@@ -1,0 +1,12 @@
+type: object
+
+allOf:
+  - $ref: 'volume_action_initiate_base.yml'
+  - properties:
+      droplet_id:
+        $ref: 'attributes.yml#/VolumeActionDropletId'
+      tags:
+        $ref: '../../../shared/attributes/tags_array.yml'
+
+    required:
+      - droplet_id

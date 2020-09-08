@@ -447,6 +447,10 @@ paths:
     delete:
       $ref: 'resources/volumes/delete_volume_by_name.yml'
 
+  /volumes/actions:
+    post:
+      $ref: 'resources/volumes/intitiate_volume_action_by_name.yml'
+
   /volumes/{volume_id}:
     delete:
       $ref: 'resources/volumes/delete_volume.yml'
@@ -454,6 +458,8 @@ paths:
   /volumes/{volume_id}/actions:
     get:
       $ref: 'resources/volumes/list_all_volume_actions.yml'
+    post:
+      $ref: 'resources/volumes/intitiate_volume_action_by_id.yml'
 
   /volumes/{volume_id}/actions/{action_id}:
     get:

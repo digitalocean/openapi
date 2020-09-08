@@ -22,3 +22,11 @@ VolumeWriteFileSystemLabel:
     for xfs type filesystems are limited to 12 characters.
     May only be used in conjunction with filesystem_type.
   example: example
+
+
+VolumeActionDropletId:
+  type: integer
+  description: >-
+    The unique identifier for the Droplet the volume will be attached or
+    detached from.
+  example: 11612190
