@@ -8,7 +8,6 @@ properties:
       diagnostics.
 
   requested_at:
-    name: requested_a
     type: string
     format: date-time
     example: '2019-10-30T05:34:07Z'
