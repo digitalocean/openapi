@@ -437,6 +437,8 @@ paths:
       $ref: 'resources/volumes/delete_volume_by_name.yml'
 
   /volumes/{volume_id}:
+    get:
+      $ref: 'resources/volumes/retrieve_existing_volume.yml'
     delete:
       $ref: 'resources/volumes/delete_volume.yml'
 
