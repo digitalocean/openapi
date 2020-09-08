@@ -74,7 +74,7 @@ tags:
     description: |
       Block storage actions are commands that can be given to a DigitalOcean
       Block Storage Volume. An example would be detaching or attaching a volume
-      from a Droplet. These requests are made on the 
+      from a Droplet. These requests are made on the
       `/v2/volumes/$VOLUME_ID/actions` endpoint.
 
       An action object is returned. These objects hold the current status of the
@@ -374,6 +374,10 @@ paths:
 
     delete:
       $ref: 'resources/kubernetes/delete_node_pool.yml'
+
+  /kubernetes/clusters/{cluster_id}/user:
+    get:
+      $ref: 'resources/kubernetes/retrieve_cluster_user.yml'
 
   /kubernetes/options:
     get:
