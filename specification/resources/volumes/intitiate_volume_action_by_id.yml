@@ -60,6 +60,10 @@ requestBody:
           - $ref: 'models/volume_action_initiate_resize.yml'
         discriminator:
           propertyName: type
+          mapping:
+            attach: 'models/volume_action_initiate_attach.yml'
+            detach: 'models/volume_action_initiate_detach.yml'
+            resize: 'models/volume_action_initiate_resize.yml'
       
       examples:
         VolumeActionAttach:
