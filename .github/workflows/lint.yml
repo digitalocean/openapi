@@ -12,7 +12,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - uses: stoplightio/spectral-action@v0.6.1
-        with:
-          file_glob: "./DigitalOcean-public.v2.yaml"
+      - name: Run contract validation
+        run: make lint
