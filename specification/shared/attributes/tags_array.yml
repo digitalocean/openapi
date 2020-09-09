@@ -1,7 +1,9 @@
 type: array
+items:
+  type: string
 description: >-
-  A flat array of tag names as strings to be applied to the resource. 
+  A flat array of tag names as strings to be applied to the resource.
   Tag names may be for either existing or new tags.
-example: 
+example:
   - base-image
   - prod
