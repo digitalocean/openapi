@@ -49,3 +49,9 @@ properties:
     example: false
     description: A boolean value indicating whether SSL encrypted traffic will
       be passed through to the backend Droplets.
+
+required:
+- entry_protocol
+- entry_port
+- target_protocol
+- target_port

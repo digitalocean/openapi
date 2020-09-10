@@ -407,6 +407,9 @@ paths:
       $ref: 'resources/kubernetes/fetch_clusterlint_results.yml'
 
   /load_balancers:
+    post:
+      $ref: 'resources/load_balancers/create_load_balancer.yml'
+
     get:
       $ref: 'resources/load_balancers/list_all_load_balancers.yml'
 

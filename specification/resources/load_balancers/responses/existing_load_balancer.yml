@@ -17,3 +17,7 @@ content:
       properties:
         load_balancer:
           $ref: '../models/load_balancer.yml'
+
+    examples:
+      LoadBalancerBasicResponse:
+        $ref: 'examples.yml#/LoadBalancerBasicResponse'
