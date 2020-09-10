@@ -417,6 +417,9 @@ paths:
     get:
       $ref: 'resources/load_balancers/retrieve_existing_load_balancer.yml'
 
+    put:
+      $ref: 'resources/load_balancers/update_existing_load_balancer.yml'
+
     delete:
       $ref: 'resources/load_balancers/delete_load_balancer.yml'
 
