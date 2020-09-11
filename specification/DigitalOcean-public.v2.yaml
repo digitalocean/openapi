@@ -152,6 +152,14 @@ tags:
       recycle individual nodes, and retrieve the kubeconfig file for use with
       a cluster.
 
+  - name: Load Balancers
+    description: |
+      [DigitalOcean Load Balancers](https://www.digitalocean.com/docs/networking/load-balancers/)
+      provide a way to distribute traffic across multiple Droplets. By sending
+      requests to the `/v2/load_balancers` endpoint, you can list, create, or
+      delete load balancers as well as add or remove Droplets, forwarding rules,
+      and other configuration details.
+
   - name: Regions
     description: Provides information about DigitalOcean data center regions.
 
@@ -419,6 +427,10 @@ paths:
 
     get:
       $ref: 'resources/kubernetes/fetch_clusterlint_results.yml'
+
+  /load_balancers/{lb_id}:
+    get:
+      $ref: 'resources/load_balancers/retrieve_existing_load_balancer.yml'
 
   /regions:
     get:
