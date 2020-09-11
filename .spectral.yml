@@ -4,6 +4,7 @@ functionsDir: ./spectral/
 
 functions:
   - ensurePropertiesExample
+  - ensureAllArraysHaveItemTypes
 
 rules:
   contact-properties: off
@@ -38,8 +39,8 @@ rules:
     message: "{{description}}; missing {{property}}"
     then:
       function: xor
-      functionOptions: 
-        properties: 
+      functionOptions:
+        properties:
           - example
           - examples
 
@@ -90,3 +91,19 @@ rules:
     then:
       - field: '500'
         function: truthy
+
+  array-properties-must-have-items-with-type:
+    description: Array properties must have an items attribute with a type
+    given: '$..*.properties[*]'
+    severity: error
+    message: "{{error}}"
+    then:
+      function: ensureAllArraysHaveItemTypes
+
+  array-params-must-have-items-with-type:
+    description: Array parameters must have an items attribute with a type
+    given: '$..*.parameters[*]'
+    severity: error
+    message: "{{error}}"
+    then:
+      function: ensureAllArraysHaveItemTypes
