@@ -1,0 +1,28 @@
+operationId: delete_domain
+
+summary: Delete a Domain
+
+description: |
+  To delete a domain, send a DELETE request to `/v2/domains/$DOMAIN_NAME`.
+
+tags:
+  - Domains
+
+parameters:
+  - $ref: 'parameters.yml#/DomainName'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
