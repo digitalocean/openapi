@@ -1,6 +1,8 @@
-extends: [[spectral:oas, all]]
+extends:
+  - [spectral:oas, all]
+  - ./spectral/ruleset.yml
 
-functionsDir: ./spectral/
+functionsDir: ./spectral/functions
 
 functions:
   - ensurePropertiesExample
@@ -10,100 +12,3 @@ rules:
   contact-properties: off
   operation-default-response: off
   operation-singular-tag: off
-
-  ratelimit-headers:
-    description: Response must include ratelimit-x headers
-    message: "{{description}}; missing {{property}}"
-    severity: error
-    given: $..responses.*
-    then:
-    - field: headers.ratelimit-limit
-      function: truthy
-    - field: headers.ratelimit-remaining
-      function: truthy
-    - field: headers.ratelimit-reset
-      function: truthy
-
-  properties-must-include-examples:
-    description: Object properties must include examples
-    given: $..properties..properties.*
-    severity: error
-    message: "{{error}}"
-    then:
-      function: ensurePropertiesExample
-
-  params-must-include-examples:
-    description: Parameters must include examples
-    given: $..parameters.*
-    severity: error
-    message: "{{description}}; missing {{property}}"
-    then:
-      function: xor
-      functionOptions:
-        properties:
-          - example
-          - examples
-
-  headers-must-include-examples:
-    description: Headers must include examples
-    given: $..headers.*
-    severity: error
-    message: "{{description}}; missing {{property}}"
-    then:
-      field: example
-      function: truthy
-
-  endpoint-must-be-ref:
-    description: Endpoint must be a $ref
-    message: "{{description}}; {{property}} incorrect"
-    severity: error
-    resolved: false
-    given: $.paths.*.*
-    then:
-    - field: $ref
-      function: truthy
-
-  endpoint-ref-must-be-file:
-    description: Endpoint must a $ref to a file in resources/
-    message: "{{description}}; {{value}} incorrect"
-    severity: error
-    resolved: false
-    given: $.paths.*.$ref
-    then:
-      function: pattern
-      functionOptions:
-        match: "^resources\/.*yml$"
-
-  common-responses-unauthorized:
-    description: Responses should contain common response - 401 (unauthorized)
-    message: "{{description}}. Missing {{property}}"
-    severity: error
-    given: $..responses
-    then:
-      - field: '401'
-        function: truthy
-
-  common-responses-server-error:
-    description: Responses should contain common response - 500 (server error)
-    message: "{{description}}. Missing {{property}}"
-    severity: error
-    given: $..responses
-    then:
-      - field: '500'
-        function: truthy
-
-  array-properties-must-have-items-with-type:
-    description: Array properties must have an items attribute with a type
-    given: '$..*.properties[*]'
-    severity: error
-    message: "{{error}}"
-    then:
-      function: ensureAllArraysHaveItemTypes
-
-  array-params-must-have-items-with-type:
-    description: Array parameters must have an items attribute with a type
-    given: '$..*.parameters[*]'
-    severity: error
-    message: "{{error}}"
-    then:
-      function: ensureAllArraysHaveItemTypes
