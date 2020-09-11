@@ -2,7 +2,7 @@
  * Ensures all arrays have item types
  *
  * Based on:
- * https://github.com/box/box-openapi/blob/main/src/spectral/ensureAllArraysHaveItemTypes.js
+ * https://github.com/box/box-openapi/blob/184889a4b5b6156e0e2719bd513d93f994c6c50e/src/spectral/ensureAllArraysHaveItemTypes.js
  */
 module.exports = (param, _, paths) => {
   // if this is actually a property called properties, ignore
