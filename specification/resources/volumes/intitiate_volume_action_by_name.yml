@@ -31,17 +31,6 @@ description: |
   | volume_name | The name of the block storage volume                                |
   | droplet_id  | Set to the Droplet's ID                                             |
   | region      | Set to the slug representing the region where the volume is located |
-
-  ## Resize a Volume
-
-  | Attribute      | Details                                                             |
-  | -------------- | ------------------------------------------------------------------- |
-  | type           | This must be `resize`                                               |
-  | volume_name    | The name of the block storage volume                                |
-  | size_gigabytes | The new size of the block storage volume in GiB (1024^3)            |
-  | region         | Set to the slug representing the region where the volume is located |
-
-  Volumes may only be resized upwards. The maximum size for a volume is 16TiB.
   
 tags:
   - Block Storage Actions
@@ -59,13 +48,11 @@ requestBody:
         oneOf:
           - $ref: 'models/volume_action_initiate_attach.yml'
           - $ref: 'models/volume_action_initiate_detach.yml'
-          - $ref: 'models/volume_action_initiate_resize.yml'
         discriminator:
           propertyName: type
           mapping:
             attach: 'models/volume_action_initiate_attach.yml'
             detach: 'models/volume_action_initiate_detach.yml'
-            resize: 'models/volume_action_initiate_resize.yml'
 
       
       examples:
