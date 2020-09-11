@@ -1,20 +1,19 @@
-operationId: delete_snapshot
+operationId: delete_volume_snapshot_by_id
 
-summary: Delete a Snapshot
+summary: Delete a Volume Snapshot
 
 description: |
-  Both Droplet and volume snapshots are managed through the `/v2/snapshots/`
-  endpoint. To delete a snapshot, send a DELETE request to 
+  To delete a volume snapshot, send a DELETE request to 
   `/v2/snapshots/$SNAPSHOT_ID`.
 
   A status of 204 will be given. This indicates that the request was processed
   successfully, but that no response body is needed.
 
 tags:
-  - Snapshots
+  - Block Storage
 
 parameters:
-  - $ref: 'parameters.yml#/SnapshotId'
+  - $ref: '../snapshots/parameters.yml#/SnapshotId'
 
 responses:
   '204':

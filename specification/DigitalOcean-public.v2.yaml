@@ -450,6 +450,12 @@ paths:
   /volumes/actions:
     post:
       $ref: 'resources/volumes/intitiate_volume_action_by_name.yml'
+      
+  /volumes/snapshot/{snapshot_id}:
+    get:
+      $ref: 'resources/volumes/retrieve_volume_snapshot_by_id.yml'
+    delete:
+      $ref: 'resources/volumes/delete_volume_snapshot_by_id.yml'
 
   /volumes/{volume_id}:
     get:

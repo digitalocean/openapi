@@ -1,0 +1,29 @@
+operationId: retrieve_volume_snapshot_by_id
+
+summary: Retreive an Existing Volume Snapshot
+
+description: >+
+  To retrieve the details of a snapshot that has been created from a volume,
+  send a GET request to `/v2/volumes/snapshots/$SNAPSHOT_ID`.
+  
+tags:
+  - Block Storage
+
+parameters:
+  - $ref: '../snapshots/parameters.yml#/SnapshotId'
+
+responses:
+  '200':
+    $ref: 'responses/volume_snapshot.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
