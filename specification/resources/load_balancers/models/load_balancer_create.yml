@@ -1,0 +1,46 @@
+oneOf:
+  - title: Assign Droplets by ID
+    allOf:
+    - type: object
+      properties:
+        droplet_ids:
+          type: array
+          items:
+            type: integer
+          example:
+          - 3164444
+          - 3164445
+          description: An array containing the IDs of the Droplets assigned to the
+            load balancer.
+      required:
+      - droplet_ids
+
+    - type: object
+      properties:
+        region:
+          $ref: '../../../shared/attributes/region_slug.yml'
+      required:
+      - region
+
+    - $ref: 'load_balancer_base.yml'
+
+  - title: Assign Droplets by Tag
+    allOf:
+    - type: object
+      properties:
+        tag:
+          type: string
+          example: prod:web
+          description: The name of a Droplet tag corresponding to Droplets assigned
+            to the load balancer.
+      required:
+      - tag
+
+    - type: object
+      properties:
+        region:
+          $ref: '../../../shared/attributes/region_slug.yml'
+      required:
+      - region
+
+    - $ref: 'load_balancer_base.yml'

@@ -32,6 +32,7 @@ KubernetesNodePoolBase:
   properties:
     id:
       type: string
+      format: uuid
       readOnly: true
       example: cdda885e-7663-40c8-bc74-3a036c66545d
       description: A unique ID that can be used to identify and reference a

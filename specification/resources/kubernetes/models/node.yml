@@ -3,7 +3,8 @@ type: object
 properties:
   id:
     type: string
-    example: 78247f8-b1bb-4f7a-8db9-2a5f8d4b8f8f
+    format: uuid
+    example: e78247f8-b1bb-4f7a-8db9-2a5f8d4b8f8f
     description: A unique ID that can be used to identify and reference the node.
 
   name:
