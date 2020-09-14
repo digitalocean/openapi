@@ -427,6 +427,9 @@ paths:
     post:
       $ref: 'resources/load_balancers/add_droplets.yml'
 
+    delete:
+      $ref: 'resources/load_balancers/remove_droplets.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
