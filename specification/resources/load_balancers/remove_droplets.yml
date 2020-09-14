@@ -1,4 +1,4 @@
-operationId: load_balancer_remove_droplets
+operationId: remove_load_balancer_droplets
 
 summary: Remove Droplets from a Load Balancer
 

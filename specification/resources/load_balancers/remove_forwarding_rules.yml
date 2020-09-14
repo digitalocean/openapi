@@ -1,14 +1,12 @@
-operationId: add_load_balancer_droplets
+operationId: remove_load_balancer_forwarding_rules
 
-summary: Add Droplets to a Load Balancer
+summary: Remove Forwarding Rules from a Load Balancer
 
 description: |
-  To assign a Droplet to a load balancer instance, send a POST request to
-  `/v2/load_balancers/$LOAD_BALANCER_ID/droplets`. In the body of the request,
-  there should be a `droplet_ids` attribute containing a list of Droplet IDs.
-  Individual Droplets can not be added to a load balancer configured with a
-  Droplet tag. Attempting to do so will result in a "422 Unprocessable Entity"
-  response from the API.
+  To remove forwarding rules from a load balancer instance, send a DELETE
+  request to `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the
+  body of the request, there should be a `forwarding_rules` attribute containing
+  an array of rules to be removed.
 
   No response body will be sent back, but the response code will indicate
   success. Specifically, the response code will be a 204, which means that the
@@ -27,9 +25,13 @@ requestBody:
     application/json:
       schema:
         properties:
-          $ref: 'models/attributes.yml#/LoadBalancerDropletIDs'
+          forwarding_rules:
+            type: array
+            minimum: 1
+            items:
+              $ref: 'models/forwarding_rule.yml'
         required:
-         - droplet_ids
+         - forwarding_rules
 
 responses:
   '204':

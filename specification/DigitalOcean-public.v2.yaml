@@ -430,6 +430,13 @@ paths:
     delete:
       $ref: 'resources/load_balancers/remove_droplets.yml'
 
+  /load_balancers/{lb_id}/forwarding_rules:
+    post:
+      $ref: 'resources/load_balancers/add_forwarding_rules.yml'
+
+    delete:
+      $ref: 'resources/load_balancers/remove_forwarding_rules.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
