@@ -1,0 +1,8 @@
+DomainName:
+  name: domain_name
+  description: The name of the domain itself.
+  in: path
+  schema:
+    type: string
+  example: example.com
+  required: true

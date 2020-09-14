@@ -80,6 +80,16 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
+  - name: Domains
+    description: |
+      Domain resources are domain names that you have purchased from a domain
+      name registrar that you are managing through the
+      [DigitalOcean DNS interface](https://www.digitalocean.com/docs/networking/dns/).
+
+      This resource establishes top-level control over each domain. Actions that
+      affect individual domain records should be taken on the
+      [Domain Records](#domain-records) resource.
+
   - name: Droplet Actions
     description: |
       Droplet actions are tasks that can be executed on a Droplet. These can be
@@ -252,6 +262,18 @@ paths:
     get:
       $ref: 'resources/billing/retrieve_invoice_summary_by_uuid.yml'
 
+  /domains:
+    get:
+      $ref: 'resources/domains/list_all_domains.yml'
+    post:
+      $ref: 'resources/domains/create_domain.yml'
+
+  /domains/{domain_name}:
+    get:
+      $ref: 'resources/domains/retrieve_existing_domain.yml'
+    delete:
+      $ref: 'resources/domains/delete_domain.yml'
+  
   /droplets:
     get:
       $ref: 'resources/droplets/list_all_droplets.yml'
