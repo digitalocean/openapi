@@ -1,0 +1,80 @@
+DomainRecord-A:
+  allOf:
+    - $ref: domain_record.yml
+    - required:
+        - type
+        - name
+        - data
+
+DomainRecord-AAAA:
+  allOf:
+    - $ref: domain_record.yml
+    - required:
+        - type
+        - name
+        - data
+
+DomainRecord-CAA:
+  allOf:
+    - $ref: domain_record.yml
+    - required:
+        - type
+        - name
+        - data
+        - flags
+        - tag
+
+DomainRecord-CNAME:
+  allOf:
+    - $ref: domain_record.yml
+    - required:
+        - type
+        - name
+        - data
+
+DomainRecord-MX:
+  allOf:
+    - $ref: domain_record.yml
+    - required:
+        - type
+        - data
+        - priority
+
+DomainRecord-NS:
+  allOf:
+    - $ref: domain_record.yml
+    - required:
+        - type
+        - name
+        - data
+        - flags
+        - tag
+
+DomainRecord-SOA:
+  allOf:
+    - $ref: domain_record.yml
+    - required:
+        - type
+        - ttl
+
+DomainRecord-SRV:
+  allOf:
+    - $ref: domain_record.yml
+    - required:
+        - type
+        - name
+        - data
+        - priority
+        - port
+        - flags
+        - tag
+
+DomainRecord-TXT:
+  allOf:
+    - $ref: domain_record.yml
+    - required:
+        - type
+        - name
+        - data
+        - flags
+        - tag
