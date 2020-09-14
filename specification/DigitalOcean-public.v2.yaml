@@ -423,6 +423,10 @@ paths:
     delete:
       $ref: 'resources/load_balancers/delete_load_balancer.yml'
 
+  /load_balancers/{lb_id}/droplets:
+    post:
+      $ref: 'resources/load_balancers/add_droplets.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
@@ -475,7 +479,7 @@ paths:
   /volumes/actions:
     post:
       $ref: 'resources/volumes/intitiate_volume_action_by_name.yml'
-      
+
   /volumes/snapshot/{snapshot_id}:
     get:
       $ref: 'resources/volumes/retrieve_volume_snapshot_by_id.yml'
