@@ -35,7 +35,7 @@ requestBody:
         Create Request Using Droplet Tag:
           $ref: 'examples.yml#/LoadBalancerUsingTagCreateRequest'
         Sticky Sessions and Custom Health Check:
-          $ref: 'examples.yml#/LoadBalancerSitckySessionsAndHealthCheckCreateRequest'
+          $ref: 'examples.yml#/LoadBalancerStickySessionsAndHealthCheckCreateRequest'
 
 responses:
   '202':

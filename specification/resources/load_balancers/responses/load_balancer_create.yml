@@ -23,4 +23,4 @@ content:
       Create Response Using Droplet Tag:
         $ref: 'examples.yml#/LoadBalancerUsingTagResponse'
       Sticky Sessions and Custom Health Check:
-        $ref: 'examples.yml#/LoadBalancerSitckySessionsAndHealthCheckResponse'
+        $ref: 'examples.yml#/LoadBalancerStickySessionsAndHealthCheckResponse'
