@@ -9,6 +9,7 @@ properties:
     - cookies
     - none
     example: cookies
+    default: none
     description: An attribute indicating how and if requests from a client will
       be persistently served by the same backend Droplet. The possible values
       are `cookies` or `none`.

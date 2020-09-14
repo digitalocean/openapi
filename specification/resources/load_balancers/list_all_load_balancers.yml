@@ -1,0 +1,27 @@
+operationId: list_all_load_balancers
+
+summary: List All Load Balancers
+
+description: |
+  To list all of the load balancer instances on your account, send a GET request
+  to `/v2/load_balancers`.
+
+tags:
+  - Load Balancers
+
+parameters:
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/all_load_balancers.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
