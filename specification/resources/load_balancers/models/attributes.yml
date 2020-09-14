@@ -1,0 +1,17 @@
+LoadBalancerDropletIDs:
+  droplet_ids:
+    type: array
+    items:
+      type: integer
+    example:
+    - 3164444
+    - 3164445
+    description: An array containing the IDs of the Droplets assigned to the
+      load balancer.
+
+LoadBalancerDropletTag:
+  tag:
+    type: string
+    example: prod:web
+    description: The name of a Droplet tag corresponding to Droplets assigned
+      to the load balancer.
