@@ -15,7 +15,7 @@ allOf:
 
     tag:
       type: string
-      example: " "
+      example: prod:web
       description: The name of a Droplet tag corresponding to Droplets assigned
         to the load balancer.
 
