@@ -270,6 +270,8 @@ paths:
   /cdn/endpoints:
     get:
       $ref: 'resources/cdn/list_all_endpoints.yml'
+    post:
+      $ref: 'resources/cdn/create_endpoint.yml'
 
   /cdn/endpoints/{cdn_id}:
     get:
