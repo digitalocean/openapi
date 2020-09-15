@@ -4,8 +4,8 @@ summary: Update a Domain Record
 
 description: |
   To update an existing record, send a PUT request to `
-  /v2/domains/$DOMAIN_NAME/records/$RECORD_ID`. Any attribute valid for the
-  record type can be set to a new value for the record. 
+  /v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for
+  the record type can be set to a new value for the record. 
 
   See the [attribute table](#tag/Domain-Records) for details regarding record
   types and their respective attributes.
