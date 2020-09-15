@@ -279,6 +279,10 @@ paths:
     delete:
       $ref: 'resources/cdn/delete_endpoint.yml'
 
+  /cdn/endpoints/{cdn_id}/cache:
+    delete:
+      $ref: 'resources/cdn/purge_cdn_cache.yml'
+
   /customers/my/balance:
     get:
       $ref: 'resources/billing/get_customer_balance.yml'
