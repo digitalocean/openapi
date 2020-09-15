@@ -276,6 +276,8 @@ paths:
   /cdn/endpoints/{cdn_id}:
     get:
       $ref: 'resources/cdn/retrieve_existing_endpoint.yml'
+    delete:
+      $ref: 'resources/cdn/delete_endpoint.yml'
 
   /customers/my/balance:
     get:
