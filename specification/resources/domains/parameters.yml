@@ -7,6 +7,15 @@ DomainName:
   example: example.com
   required: true
 
+DomainRecordId:
+  name: domain_record_id
+  description: The unique identifier of the domain record.
+  in: path
+  schema:
+    type: integer
+  example: 3352896
+  required: true
+
 DomainNameQuery:
   name: name
   description: >-

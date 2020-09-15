@@ -301,6 +301,8 @@ paths:
       $ref: 'resources/domains/list_all_domain_records.yml'
     post:
       $ref: 'resources/domains/create_domain_record.yml'
+
+  /domains/{domain_name}/records/{domain_record_id}:
     put:
       $ref: 'resources/domains/update_domain_record.yml'
     delete:
