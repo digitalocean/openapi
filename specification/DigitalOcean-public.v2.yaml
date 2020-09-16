@@ -304,9 +304,9 @@ paths:
 
   /domains/{domain_name}/records/{domain_record_id}:
     patch:
-      $ref: 'resources/domains/update_domain_record.yml'
+      $ref: 'resources/domains/patch_update_domain_record.yml'
     put:
-      $ref: 'resources/domains/update_domain_record.yml'
+      $ref: 'resources/domains/put_update_domain_record.yml'
     delete:
       $ref: 'resources/domains/delete_domain_record.yml'
 
