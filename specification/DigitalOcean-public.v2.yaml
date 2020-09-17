@@ -546,7 +546,7 @@ paths:
 
   /volumes/actions:
     post:
-      $ref: 'resources/volumes/intitiate_volume_action_by_name.yml'
+      $ref: 'resources/volumes/initiate_volume_action_by_name.yml'
 
   /volumes/snapshot/{snapshot_id}:
     get:
@@ -564,7 +564,7 @@ paths:
     get:
       $ref: 'resources/volumes/list_all_volume_actions.yml'
     post:
-      $ref: 'resources/volumes/intitiate_volume_action_by_id.yml'
+      $ref: 'resources/volumes/initiate_volume_action_by_id.yml'
 
   /volumes/{volume_id}/actions/{action_id}:
     get:

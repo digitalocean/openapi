@@ -1,4 +1,4 @@
-operationId: intitiate_volume_action_by_id
+operationId: initiate_volume_action_by_id
 
 summary: Initiate A Block Storage Action By Volume Id
 
@@ -18,7 +18,7 @@ description: |
   Each volume may only be attached to a single Droplet. However, up to five
   volumes may be attached to a Droplet at a time. Pre-formatted volumes will be
   automatically mounted to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS
-  Droplets created on or after April 26, 2018 when attched. On older Droplets,
+  Droplets created on or after April 26, 2018 when attached. On older Droplets,
   [additional configuration](https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-digitalocean-block-storage-volumes-in-linux#mounting-the-filesystems)
   is required.
 
@@ -39,7 +39,7 @@ description: |
   | region         | Set to the slug representing the region where the volume is located |
 
   Volumes may only be resized upwards. The maximum size for a volume is 16TiB.
-  
+
 tags:
   - Block Storage Actions
 
@@ -64,7 +64,7 @@ requestBody:
             attach: 'models/volume_action_initiate_attach.yml'
             detach: 'models/volume_action_initiate_detach.yml'
             resize: 'models/volume_action_initiate_resize.yml'
-      
+
       examples:
         VolumeActionAttach:
           value:

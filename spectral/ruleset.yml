@@ -38,8 +38,7 @@ rules:
     severity: error
     message: "{{description}}; missing {{property}}"
     then:
-      field: example
-      function: truthy
+      function: ensurePropertiesExample
 
   endpoint-must-be-ref:
     description: Endpoint must be a $ref
