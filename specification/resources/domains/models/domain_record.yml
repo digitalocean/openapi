@@ -31,7 +31,7 @@ properties:
     description: The priority for SRV and MX records.
     nullable: true
     # Note: This field is nullable in the current API, but `null` is an invalid
-    # integer value for exaples.
+    # integer value for examples.
     example: null
   
   port:
@@ -39,7 +39,7 @@ properties:
     description: The port for SRV records.
     nullable: true
     # Note: This field is nullable in the current API, but `null` is an invalid
-    # integer value for exaples.
+    # integer value for examples.
     example: null
   
   ttl:
@@ -55,7 +55,7 @@ properties:
     description: The weight for SRV records.
     nullable: true
     # Note: This field is nullable in the current API, but `null` is an invalid
-    # integer value for exaples.
+    # integer value for examples.
     example: null
   
   flags:
@@ -63,7 +63,7 @@ properties:
     description: An unsigned integer between 0-255 used for CAA records.
     nullable: true
     # Note: This field is nullable in the current API, but `null` is an invalid
-    # integer value for exaples.
+    # integer value for examples.
     example: null
   
   tag:
