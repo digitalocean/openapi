@@ -1,5 +1,5 @@
 description: >-
-  The result will be a JSON object with a `endpoints` key. This will be set to
+  The result will be a JSON object with an `endpoints` key. This will be set to
   an array of endpoint objects, each of which will contain the standard CDN
   endpoint attributes.
 

@@ -14,7 +14,7 @@ properties:
     format: hostname
     example: static-images.nyc3.digitaloceanspaces.com
     description: The fully qualified domain name (FQDN) for the origin server
-      which the provides the content for the CDN. This is currently restricted
+      which provides the content for the CDN. This is currently restricted
       to a Space.
 
   endpoint:

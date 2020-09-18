@@ -1,5 +1,5 @@
 description: >-
-  The response will be a JSON object with a `endpoint` key. This will be set to
+  The response will be a JSON object with an `endpoint` key. This will be set to
   an object containing the standard CDN endpoint attributes.
 
 headers:
