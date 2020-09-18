@@ -1,0 +1,40 @@
+operationId: patch_update_domain_record
+
+summary: Update a Domain Record
+
+description: |
+  To update an existing record, send a PATCH request to 
+  `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for
+  the record type can be set to a new value for the record. 
+
+  See the [attribute table](#tag/Domain-Records) for details regarding record
+  types and their respective attributes.
+
+tags:
+  - Domain Records
+
+parameters:
+  - $ref: 'parameters.yml#/DomainName'
+  - $ref: 'parameters.yml#/DomainRecordId'
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: 'models/domain_record.yml'
+
+      example:
+        name: blog
+
+responses:
+  '200':
+    $ref: 'responses/updated_domain_record.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
