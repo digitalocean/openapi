@@ -309,6 +309,9 @@ paths:
     get:
       $ref: 'resources/certificates/get_certificate.yml'
 
+    delete:
+      $ref: 'resources/certificates/delete_certificate.yml'
+
   /customers/my/balance:
     get:
       $ref: 'resources/billing/get_customer_balance.yml'
