@@ -302,6 +302,10 @@ paths:
     get:
       $ref: 'resources/certificates/list_certificates.yml'
 
+  /certificates/{certificate_id}:
+    get:
+      $ref: 'resources/certificates/get_certificate.yml'
+
   /customers/my/balance:
     get:
       $ref: 'resources/billing/get_customer_balance.yml'
