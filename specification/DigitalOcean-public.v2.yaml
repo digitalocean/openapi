@@ -573,6 +573,9 @@ paths:
     post:
       $ref: 'resources/registry/configure_registry.yml'
 
+    delete:
+      $ref: 'resources/registry/delete_registry.yml'
+
   /registry/docker-credentials:
     get:
       $ref: 'resources/registry/get_docker_credentials.yml'
