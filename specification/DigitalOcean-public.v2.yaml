@@ -80,6 +80,17 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
+  - name: CDN Endpoints
+    description: |
+      Content hosted in DigitalOcean's object storage solution,
+      [Spaces](https://www.digitalocean.com/docs/spaces/overview/),
+      can optionally be served by our globally distributed Content Delivery
+      Network (CDN). By sending requests to `/v2/cdn/endpoints`, you can list,
+      create, or delete CDN Endpoints as well as purge cached content. To use a
+      custom subdomain to access the CDN Endpoint, provide the ID of a
+      DigitalOcean managed TLS certificate and the fully qualified domain name
+      for the custom subdomain.
+
   - name: Domain Records
     description: |
       Domain record resources are used to set or retrieve information about the
@@ -90,17 +101,17 @@ tags:
       The [DigitalOcean DNS management interface](https://www.digitalocean.com/docs/networking/dns/)
       allows you to configure the following DNS records:
 
-      Name  | Description                                                                                                                                        | Description                                                                                                                                                                                                                                                                                                                                                                 | Required                              
+      Name  | Description                                                                                                                                        | Description                                                                                                                                                                                                                                                                                                                                                                 | Required
       ------|----------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------
-      A     | This record type is used to map an IPv4 address to a hostname.                                                                                     | The record type (A, MX, CNAME, etc).                                                                                                                                                                                                                                                                                                                                        | All Records                           
-      AAAA  | This record type is used to map an IPv6 address to a hostname.                                                                                     | The host name, alias, or service being defined by the record.                                                                                                                                                                                                                                                                                                               | A, AAAA, CAA, CNAME, TXT, SRV         
-      CAA   | As specified in RFC-6844, this record type can be used to restrict which certificate authorities are permitted to issue certificates for a domain. | Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.                                                                                                            | A, AAAA, CAA, CNAME, MX, TXT, SRV, NS 
-      CNAME | This record type defines an alias for your canonical hostname (the one defined by an A or AAAA record).                                            | The priority of the host (for SRV and MX records. null otherwise).                                                                                                                                                                                                                                                                                                          | MX, SRV                               
-      MX    | This record type is used to define the mail exchanges used for the domain.                                                                         | The port that the service is accessible on (for SRV records only. null otherwise).                                                                                                                                                                                                                                                                                          | SRV                                   
-      NS    | This record type defines the name servers that are used for this zone.                                                                             | This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested. There is a minimum ttl value of 30, unless it is not set. If not set, the default value is the value of the SOA record. For SOA records, defines the time to live for purposes of negative caching. | SOA                                   
-      TXT   | This record type is used to associate a string of text with a hostname, primarily used for verification.                                           | The weight of records with the same priority (for SRV records only. null otherwise).                                                                                                                                                                                                                                                                                        | SRV                                   
-      SRV   | This record type specifies the location (hostname and port number) of servers for specific services.                                               | An unsigned integer between 0-255 used for CAA records.                                                                                                                                                                                                                                                                                                                     | CAA                                   
-      SOA   | This record type defines administrative information about the zone. Can only have ttl changed, cannot be deleted                                   | The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"                                                                                                                                                                                                                                                                                        | CAA                                   
+      A     | This record type is used to map an IPv4 address to a hostname.                                                                                     | The record type (A, MX, CNAME, etc).                                                                                                                                                                                                                                                                                                                                        | All Records
+      AAAA  | This record type is used to map an IPv6 address to a hostname.                                                                                     | The host name, alias, or service being defined by the record.                                                                                                                                                                                                                                                                                                               | A, AAAA, CAA, CNAME, TXT, SRV
+      CAA   | As specified in RFC-6844, this record type can be used to restrict which certificate authorities are permitted to issue certificates for a domain. | Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.                                                                                                            | A, AAAA, CAA, CNAME, MX, TXT, SRV, NS
+      CNAME | This record type defines an alias for your canonical hostname (the one defined by an A or AAAA record).                                            | The priority of the host (for SRV and MX records. null otherwise).                                                                                                                                                                                                                                                                                                          | MX, SRV
+      MX    | This record type is used to define the mail exchanges used for the domain.                                                                         | The port that the service is accessible on (for SRV records only. null otherwise).                                                                                                                                                                                                                                                                                          | SRV
+      NS    | This record type defines the name servers that are used for this zone.                                                                             | This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested. There is a minimum ttl value of 30, unless it is not set. If not set, the default value is the value of the SOA record. For SOA records, defines the time to live for purposes of negative caching. | SOA
+      TXT   | This record type is used to associate a string of text with a hostname, primarily used for verification.                                           | The weight of records with the same priority (for SRV records only. null otherwise).                                                                                                                                                                                                                                                                                        | SRV
+      SRV   | This record type specifies the location (hostname and port number) of servers for specific services.                                               | An unsigned integer between 0-255 used for CAA records.                                                                                                                                                                                                                                                                                                                     | CAA
+      SOA   | This record type defines administrative information about the zone. Can only have ttl changed, cannot be deleted                                   | The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"                                                                                                                                                                                                                                                                                        | CAA
 
   - name: Domains
     description: |
@@ -255,6 +266,24 @@ paths:
   /actions/{action_id}:
     get:
       $ref: 'resources/actions/retrieve_an_existing_action.yml'
+
+  /cdn/endpoints:
+    get:
+      $ref: 'resources/cdn/list_all_endpoints.yml'
+
+    post:
+      $ref: 'resources/cdn/create_endpoint.yml'
+
+  /cdn/endpoints/{cdn_id}:
+    get:
+      $ref: 'resources/cdn/retrieve_existing_endpoint.yml'
+
+    delete:
+      $ref: 'resources/cdn/delete_endpoint.yml'
+
+  /cdn/endpoints/{cdn_id}/cache:
+    delete:
+      $ref: 'resources/cdn/purge_cdn_cache.yml'
 
   /customers/my/balance:
     get:

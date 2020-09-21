@@ -1,0 +1,29 @@
+operationId: get_cdn_endpoint
+
+summary: Retrieve an Existing CDN Endpoint
+
+description: >-
+  To show information about an existing CDN endpoint, send a GET request to
+  `/v2/cdn/endpoints/$ENDPOINT_ID`.
+
+tags:
+  - CDN Endpoints
+
+parameters:
+  - $ref: 'parameters.yml#/CdnEndpointId'
+
+responses:
+  '200':
+    $ref: 'responses/existing_endpoint.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
