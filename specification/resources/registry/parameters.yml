@@ -1,0 +1,22 @@
+RegistryExpirySeconds:
+  in: query
+  name: expiry_seconds
+  required: false
+  description: The duration in seconds that the returned registry credentials
+   will be valid. If not set or 0, the credentials will not expire.
+  schema:
+    type: integer
+    minimum: 0
+    default: 0
+  example: 3600
+
+RegistryReadWrite:
+  in: query
+  name: read_write
+  required: false
+  description: By default, the registry credentials allow for read-only access.
+    Set this query parameter to `true` to obtain read-write credentials.
+  schema:
+    type: boolean
+    default: false
+  example: true

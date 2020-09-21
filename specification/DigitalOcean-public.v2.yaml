@@ -573,6 +573,10 @@ paths:
     post:
       $ref: 'resources/registry/configure_registry.yml'
 
+  /registry/docker-credentials:
+    get:
+      $ref: 'resources/registry/get_docker_credentials.yml'
+
   /reports/droplet_neighbors_ids:
     get:
       $ref: 'resources/droplets/list_all_droplet_neighbors_ids.yml'
