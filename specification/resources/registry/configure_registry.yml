@@ -13,6 +13,8 @@ tags:
   - Container Registry
 
 requestBody:
+  required: true
+
   content:
     application/json:
       schema:
