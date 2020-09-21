@@ -39,3 +39,12 @@ RegistryRepositoryName:
   schema:
     type: string
   example: repo-1
+
+RegistryRepositoryTag:
+  in: path
+  name: repository_tag
+  description: The name of a container registry repository tag.
+  required: true
+  schema:
+    type: string
+  example: 06a447a
