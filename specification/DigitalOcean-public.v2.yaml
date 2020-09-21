@@ -576,6 +576,14 @@ paths:
     delete:
       $ref: 'resources/registry/delete_registry.yml'
 
+  /registry/docker-credentials:
+    get:
+      $ref: 'resources/registry/get_docker_credentials.yml'
+
+  /registry/validate-name:
+    post:
+      $ref: 'resources/registry/validate_registry_name.yml'
+
   /registry/{registry_name}:
     get:
       $ref: 'resources/registry/list_registry_repositories.yml'
@@ -588,13 +596,9 @@ paths:
     delete:
       $ref: 'resources/registry/delete_repository_tag.yml'
 
-  /registry/docker-credentials:
-    get:
-      $ref: 'resources/registry/get_docker_credentials.yml'
-
-  /registry/validate-name:
-    post:
-      $ref: 'resources/registry/validate_registry_name.yml'
+  /registry/{registry_name}/{repository_name}/digests/{manifest_digest}:
+    delete:
+      $ref: 'resources/registry/delete_repository_manifest.yml'
 
   /reports/droplet_neighbors_ids:
     get:
