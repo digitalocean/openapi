@@ -42,7 +42,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: openapi-bundled
-          path: tests/openapi-bundled.yaml
+          path: tests/
       - name: Upload PR spec
         run: >-
           aws s3 cp tests/openapi-bundled.yaml 
@@ -73,7 +73,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: openapi-bundled
-          path: tests/openapi-bundled.yaml
+          path: tests/
       - name: Upload Main spec
         run: >-
           aws s3 cp tests/openapi-bundled.yaml 
