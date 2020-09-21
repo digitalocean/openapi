@@ -29,3 +29,13 @@ RegistryName:
   schema:
     type: string
   example: example
+
+RegistryRepositoryName:
+  in: path
+  name: repository_name
+  description: The name of a container registry repository. If the name contains
+    `/` characters, they must be URL-encoded, e.g. `%2F`.
+  required: true
+  schema:
+    type: string
+  example: repo-1

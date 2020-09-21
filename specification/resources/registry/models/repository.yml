@@ -12,7 +12,7 @@ properties:
     description: The name of the repository.
 
   latest_tag:
-    $ref: 'latest_tag.yml'
+    $ref: 'repository_tag.yml'
 
   tag_count:
     type: integer
