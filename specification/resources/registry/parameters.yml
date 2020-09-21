@@ -20,3 +20,12 @@ RegistryReadWrite:
     type: boolean
     default: false
   example: true
+
+RegistryName:
+  in: path
+  name: registry_name
+  description: The name of a container registry.
+  required: true
+  schema:
+    type: string
+  example: example
