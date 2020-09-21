@@ -4,7 +4,7 @@ properties:
   name:
     type: string
     maxLength: 63
-    pattern: '/^[a-z0-9-]{1,63}$/'
+    pattern: '^[a-z0-9-]{1,63}$'
     example: example
     description: A globally unique name for the container registry. Must be
       lowercase and be composed only of numbers, letters and `-`, up to a limit
