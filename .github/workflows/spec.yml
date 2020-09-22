@@ -77,7 +77,7 @@ jobs:
       - name: Upload Main spec
         run: >-
           aws s3 cp tests/openapi-bundled.yaml 
-          s3://api-engineering/spec-ci/redoc-index.yaml
+          s3://api-engineering/spec-ci/DigitalOcean-public.v2.yaml
           --endpoint=${{ env.SPACES_ENDPOINT }} 
           --acl public-read
         env:
