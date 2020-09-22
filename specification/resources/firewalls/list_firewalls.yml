@@ -1,0 +1,27 @@
+operationId: list_firewalls
+
+summary: List All Firewalls
+
+description: >-
+  To list all of the firewalls available on your account, send a GET request to
+  `/v2/firewalls`.
+
+tags:
+  - Firewalls
+
+parameters:
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/list_firewalls_response.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

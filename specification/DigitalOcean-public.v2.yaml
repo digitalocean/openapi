@@ -167,6 +167,14 @@ tags:
       types. Find more information about each of these objects in their
       respective sections.
 
+  - name: Firewalls
+    description: |
+      [DigitalOcean Cloud Firewalls](https://www.digitalocean.com/docs/networking/firewalls/)
+      provide the ability to restrict network access to and from a Droplet
+      allowing you to define which ports will accept inbound or outbound
+      connections. By sending requests to the `/v2/firewalls` endpoint, you can
+      list, create, or delete firewalls as well as modify access rules.
+
   - name: Images
     description: |
       A DigitalOcean [image](https://www.digitalocean.com/docs/images/) can be used to create a Droplet and may come in a number of flavors. Currently, there are five types of images: snapshots, backups, applications, distributions, and custom images.
@@ -432,6 +440,12 @@ paths:
   /droplets/{droplet_id}/destroy_with_associated_resources/retry:
     post:
       $ref: 'resources/droplets/destroy_with_associated_resources_retry.yml'
+
+  /firewalls:
+    get:
+      $ref: 'resources/firewalls/list_firewalls.yml'
+    post:
+      $ref: 'resources/firewalls/create_firewall.yml'
 
   /images:
     get:
