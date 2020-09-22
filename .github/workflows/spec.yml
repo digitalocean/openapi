@@ -85,14 +85,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
           AWS_DEFAULT_OUTPUT: json
           SPACES_ENDPOINT: https://nyc3.digitaloceanspaces.com
-      - name: Update commit
-        uses: ouzi-dev/commit-status-updater@v1.0.7
-        with: 
-          description: "ReDoc Preview Ready"
-          status: "${{ job.status }}"
-          pendingComment: "Uploading preview"
-          successComment: "Main spec ready"
-          url: "https://api-engineering.nyc3.digitaloceanspaces.com/spec-ci/redoc-index.html"
 
   validate-contract-mocked:
     name: Validate contract (mocked)
