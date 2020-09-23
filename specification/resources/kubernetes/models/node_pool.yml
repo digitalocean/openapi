@@ -69,13 +69,14 @@ KubernetesNodePoolBase:
       description: An object containing a set of Kubernetes labels. The keys and
         are values are both user-defined.
 
-    nodes:
+    taints:
       type: array
-      readOnly: true
-      description: An object specifying the details of a specific worker node in
-        a node pool.
       items:
-        $ref: 'node.yml'
+        $ref: "#/KubernetesNodePoolTaint"
+      description: An array of taints to apply to all nodes in a pool. Taints
+        will automatically be applied to all existing nodes and any subsequent
+        nodes added to the pool. When a taint is removed, it is removed from
+        all nodes in the pool.
 
     auto_scale:
       type: boolean
@@ -95,3 +96,39 @@ KubernetesNodePoolBase:
       description: The maximum number of nodes that this node pool can be
         auto-scaled to. The value will be `0` if `auto_scale` is set to `false`.
 
+    nodes:
+      type: array
+      readOnly: true
+      description: An object specifying the details of a specific worker node in
+        a node pool.
+      items:
+        $ref: 'node.yml'
+
+KubernetesNodePoolTaint:
+  type: object
+  properties:
+    key:
+      type: string
+      example: priority
+      description: An arbitrary string. The `key` and `value` fields of the
+        `taint` object form a key-value pair. For example, if the value of the
+        `key` field is special" and the value of the `value` field is "gpu", the
+        key value pair would be `special=gpu`.
+
+    value:
+      type: string
+      example: high
+      description: An arbitrary string. The `key` and `value` fields of the
+        `taint` object form a key-value pair. For example, if the value of the
+        `key` field is special" and the value of the `value` field is "gpu", the
+        key value pair would be `special=gpu`.
+
+    effect:
+      type: string
+      enum:
+      - NoSchedule
+      - PreferNoSchedule
+      - NoExecute
+      example: NoSchedule
+      description: How the node reacts to pods that it won't tolerate. Available
+        effect values are `NoSchedule`, `PreferNoSchedule`, and `NoExecute`.

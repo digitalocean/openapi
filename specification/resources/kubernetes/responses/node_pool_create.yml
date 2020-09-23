@@ -31,6 +31,7 @@ content:
           - k8s:bd5f5959-5e1e-4205-a714-a914373942af
           - k8s:worker
           labels: null
+          taints: []
           auto_scale: true
           min_nodes: 3
           max_nodes: 6
