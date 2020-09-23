@@ -104,6 +104,17 @@ tags:
       open certificate authority. These certificates will also be automatically
       renewed as required.
 
+  - name: Container Registry
+    description: |
+      DigitalOcean offers the ability for you to create a
+      [private container registry](https://www.digitalocean.com/docs/images/container-registry/quickstart/)
+      to store your Docker images for use with your Kubernetes clusters. This
+      container registry runs inside the same datacenters as your cluster,
+      ensuring reliable and performant rollout of image deployments.
+
+      You can only create one registry per DigitalOcean account, but you can use
+      that registry to create as many repositories as you wish.
+
   - name: Domain Records
     description: |
       Domain record resources are used to set or retrieve information about the
@@ -554,6 +565,40 @@ paths:
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
+
+  /registry:
+    get:
+      $ref: 'resources/registry/get_registry.yml'
+
+    post:
+      $ref: 'resources/registry/configure_registry.yml'
+
+    delete:
+      $ref: 'resources/registry/delete_registry.yml'
+
+  /registry/docker-credentials:
+    get:
+      $ref: 'resources/registry/get_docker_credentials.yml'
+
+  /registry/validate-name:
+    post:
+      $ref: 'resources/registry/validate_registry_name.yml'
+
+  /registry/{registry_name}:
+    get:
+      $ref: 'resources/registry/list_registry_repositories.yml'
+
+  /registry/{registry_name}/{repository_name}/tags:
+    get:
+      $ref: 'resources/registry/list_repository_tags.yml'
+
+  /registry/{registry_name}/{repository_name}/tags/{repository_tag}:
+    delete:
+      $ref: 'resources/registry/delete_repository_tag.yml'
+
+  /registry/{registry_name}/{repository_name}/digests/{manifest_digest}:
+    delete:
+      $ref: 'resources/registry/delete_repository_manifest.yml'
 
   /reports/droplet_neighbors_ids:
     get:
