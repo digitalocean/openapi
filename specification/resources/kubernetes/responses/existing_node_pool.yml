@@ -30,6 +30,12 @@ content:
           - k8s:bd5f5959-5e1e-4205-a714-a914373942af
           - k8s:worker
           labels:
+            service: backend
+            priority: high
+          taints:
+            - key: priority
+              value: high
+              effect: NoSchedule
           auto_scale: false
           min_nodes: 0
           max_nodes: 0
