@@ -716,6 +716,9 @@ paths:
     put:
       $ref: 'resources/vpcs/update_vpc.yml'
 
+    patch:
+      $ref: 'resources/vpcs/patch_vpc.yml'
+
     delete:
       $ref: 'resources/vpcs/delete_vpc.yml'
 

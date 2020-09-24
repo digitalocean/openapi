@@ -1,11 +1,11 @@
-operationId: update_vpc
+operationId: patch_vpc
 
-summary: Update a VPC
+summary: Partially Update a VPC
 
 description: |
-  To update information about a VPC, send a PUT request to `/v2/vpcs/$VPC_ID`.
-  Currently, only the `name` and `description` attributes can be updated.
-  Excluding an attribute will reset it to its default.
+  To update a subset of information about a VPC, send a PATCH request to
+  `/v2/vpcs/$VPC_ID`. Currently, only the `name` and `description` attributes
+  can be updated.
 
 tags:
   - VPCs
@@ -19,12 +19,7 @@ requestBody:
   content:
     application/json:
       schema:
-        type: object
-        allOf:
-        - $ref: 'models/vpc.yml#/vpc_updatable'
-
-        required:
-        - name
+        $ref: 'models/vpc.yml#/vpc_updatable'
 
 responses:
   '200':
