@@ -706,6 +706,9 @@ paths:
     get:
       $ref: 'resources/vpcs/list_vpcs.yml'
 
+    post:
+      $ref: 'resources/vpcs/create_vpc.yml'
+
   /vpcs/{vpc_id}:
     get:
       $ref: 'resources/vpcs/get_vpc.yml'
