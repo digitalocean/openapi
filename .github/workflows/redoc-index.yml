@@ -1,0 +1,27 @@
+name: Redoc Index
+
+on:
+  push:
+    paths:
+      - 'docs-preview/redoc-index.html'
+    branches:
+      - main
+
+jobs:
+
+  push-redoc-index:
+    name: Upload Redoc index
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Upload file to spaces
+        run: >-
+          aws s3 cp docs-preview/redoc-index 
+          s3://api-engineering/spec-ci/redoc-index.html
+          --endpoint=${{ env.SPACES_ENDPOINT }} 
+          --acl public-read
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
+          AWS_DEFAULT_OUTPUT: json
+          SPACES_ENDPOINT: https://nyc3.digitaloceanspaces.com

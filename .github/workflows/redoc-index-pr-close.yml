@@ -1,0 +1,26 @@
+name: Redoc Index (PR) Clean Up
+
+on:
+  pull_request:
+    types:
+      - closed
+    paths:
+      - 'docs-preview/redoc-index.html'
+
+jobs:
+
+  push-redoc-index:
+    name: Clean up
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Remove file from spaces
+        run: >-
+          aws s3 rm
+          s3://api-engineering/spec-ci/redoc-index-pr-${{ github.event.number }}.html
+          --endpoint=${{ env.SPACES_ENDPOINT }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
+          AWS_DEFAULT_OUTPUT: json
+          SPACES_ENDPOINT: https://nyc3.digitaloceanspaces.com

@@ -79,8 +79,8 @@
     <div class="header">
         <label class="logo">DigitalOcean APIv2 OpenAPI Preview</label>
         <div class="header-right">
-            <a id="pr-link" href="#" target="_blank">PR: none</a>
-            <a id="spec-link" href="#" target="_blank">Spec File</a>
+            <a id="pr-link" href="#" target="https://github.com/digitalocean/apiv2-openapi">Main</a>
+            <a id="spec-link" href="DigitalOcean-public.v2.yaml" target="_blank">Spec File</a>
         </div>
     </div>
 
@@ -92,6 +92,7 @@
         const pr = urlParams.get('pr');
         
         let specUrl = "DigitalOcean-public.v2.yaml";
+        document.getElementById('spec-link').setAttribute('href', specUrl);
         
         if (pr) {
             specUrl = `previews/${pr}-spec.yaml`
