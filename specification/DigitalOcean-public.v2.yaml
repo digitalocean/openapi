@@ -713,6 +713,9 @@ paths:
     get:
       $ref: 'resources/vpcs/get_vpc.yml'
 
+    delete:
+      $ref: 'resources/vpcs/delete_vpc.yml'
+
 components:
   securitySchemes:
     bearerAuth:
