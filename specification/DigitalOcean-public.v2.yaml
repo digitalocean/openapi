@@ -706,6 +706,10 @@ paths:
     get:
       $ref: 'resources/vpcs/list_vpcs.yml'
 
+  /vpcs/{vpc_id}:
+    get:
+      $ref: 'resources/vpcs/get_vpc.yml'
+
 components:
   securitySchemes:
     bearerAuth:
