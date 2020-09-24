@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Upload file to spaces
         run: >-
-          aws s3 cp docs-preview/redoc-index 
+          aws s3 cp docs-preview/redoc-index.html 
           s3://api-engineering/spec-ci/redoc-index-pr-${{ github.event.number }}.html
           --endpoint=${{ env.SPACES_ENDPOINT }} 
           --acl public-read
