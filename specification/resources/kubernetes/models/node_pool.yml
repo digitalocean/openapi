@@ -112,7 +112,7 @@ KubernetesNodePoolTaint:
       example: priority
       description: An arbitrary string. The `key` and `value` fields of the
         `taint` object form a key-value pair. For example, if the value of the
-        `key` field is special" and the value of the `value` field is "gpu", the
+        `key` field is "special" and the value of the `value` field is "gpu", the
         key value pair would be `special=gpu`.
 
     value:
@@ -120,7 +120,7 @@ KubernetesNodePoolTaint:
       example: high
       description: An arbitrary string. The `key` and `value` fields of the
         `taint` object form a key-value pair. For example, if the value of the
-        `key` field is special" and the value of the `value` field is "gpu", the
+        `key` field is "special" and the value of the `value` field is "gpu", the
         key value pair would be `special=gpu`.
 
     effect:
