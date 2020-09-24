@@ -79,7 +79,7 @@
     <div class="header">
         <label class="logo">DigitalOcean APIv2 OpenAPI Preview</label>
         <div class="header-right">
-            <a id="pr-link" href="#" target="https://github.com/digitalocean/apiv2-openapi">Main</a>
+            <a id="gh-link" href="https://github.com/digitalocean/apiv2-openapi" target="_blank">Main</a>
             <a id="spec-link" href="DigitalOcean-public.v2.yaml" target="_blank">Spec File</a>
         </div>
     </div>
@@ -90,14 +90,11 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const pr = urlParams.get('pr');
-        
-        let specUrl = "DigitalOcean-public.v2.yaml";
-        document.getElementById('spec-link').setAttribute('href', specUrl);
-        
+                
         if (pr) {
-            specUrl = `previews/${pr}-spec.yaml`
-            document.getElementById('pr-link').setAttribute('href', `https://github.com/digitalocean/apiv2-openapi/pull/${pr}`);
-            document.getElementById('pr-link').textContent = `PR: ${pr}`;
+            let specUrl = `previews/${pr}-spec.yaml`
+            document.getElementById('gh-link').setAttribute('href', `https://github.com/digitalocean/apiv2-openapi/pull/${pr}`);
+            document.getElementById('gh-link').textContent = `PR: ${pr}`;
             document.getElementById('spec-link').setAttribute('href', specUrl);
         }
 
