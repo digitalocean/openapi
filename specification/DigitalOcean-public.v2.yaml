@@ -20,7 +20,7 @@ servers:
 
 tags:
   - name: 1-Click Applications
-    description: >
+    description: >-
       1-Click applications are pre-built Droplet images or Kubernetes apps with software,
       features, and configuration details already set up for you. They can be found in the
       [DigitalOcean Marketplace](https://www.digitalocean.com/docs/marketplace).
@@ -29,15 +29,13 @@ tags:
     description: Provides information about your current account.
 
   - name: Actions
-    description: >
+    description: >-
       Actions are records of events that have occurred on the resources in your account.
       These can be things like rebooting a Droplet, or transferring an image to a new region.
-
 
       An action object is created every time one of these actions is initiated. The action
       object contains information about the current status of the action, start and complete
       timestamps, and the associated resource type and ID.
-
 
       Every action that creates an action object is available through this endpoint. Completed
       actions are not removed from this list and are always available for querying.
@@ -48,7 +46,7 @@ tags:
       retrieve the balance information for the requested customer account.
 
   - name: Billing History
-    description: |
+    description: >-
       Billing history is a record of billing events for your account.
       For example, entries may include events like payments made, invoices
       issued, or credits granted.
@@ -58,10 +56,11 @@ tags:
       `/v2/customers/my/billing_history`.
 
   - name: Block Storage
-    description: |
+    description: >-
       [DigitalOcean Block Storage Volumes](https://www.digitalocean.com/docs/volumes/)
       provide expanded storage capacity for your Droplets and can be moved
       between Droplets within a specific region.
+
       Volumes function as raw block devices, meaning they appear to the
       operating system as locally attached storage which can be formatted using
       any file system supported by the OS. They may be created in sizes from
@@ -71,7 +70,7 @@ tags:
       delete volumes as well as attach and detach them from Droplets
 
   - name: Block Storage Actions
-    description: |
+    description: >-
       Block storage actions are commands that can be given to a DigitalOcean
       Block Storage Volume. An example would be detaching or attaching a volume
       from a Droplet. These requests are made on the
@@ -81,7 +80,7 @@ tags:
       requested action.
 
   - name: CDN Endpoints
-    description: |
+    description: >-
       Content hosted in DigitalOcean's object storage solution,
       [Spaces](https://www.digitalocean.com/docs/spaces/overview/),
       can optionally be served by our globally distributed Content Delivery
@@ -92,7 +91,7 @@ tags:
       for the custom subdomain.
 
   - name: Certificates
-    description: |
+    description: >-
       In order to perform SSL termination on load balancers, DigitalOcean offers
       two types of [SSL certificate management](https://www.digitalocean.com/docs/accounts/security/#certificates):
 
@@ -105,7 +104,7 @@ tags:
       renewed as required.
 
   - name: Container Registry
-    description: |
+    description: >-
       DigitalOcean offers the ability for you to create a
       [private container registry](https://www.digitalocean.com/docs/images/container-registry/quickstart/)
       to store your Docker images for use with your Kubernetes clusters. This
@@ -116,7 +115,7 @@ tags:
       that registry to create as many repositories as you wish.
 
   - name: Domain Records
-    description: |
+    description: >-
       Domain record resources are used to set or retrieve information about the
       individual DNS records configured for a domain. This allows you to build
       and manage DNS zone files by adding and modifying individual records for a
@@ -138,7 +137,7 @@ tags:
       SOA   | This record type defines administrative information about the zone. Can only have ttl changed, cannot be deleted                                   | The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"                                                                                                                                                                                                                                                                                        | CAA
 
   - name: Domains
-    description: |
+    description: >-
       Domain resources are domain names that you have purchased from a domain
       name registrar that you are managing through the
       [DigitalOcean DNS interface](https://www.digitalocean.com/docs/networking/dns/).
@@ -148,7 +147,7 @@ tags:
       [Domain Records](#tag/Domain-Records) resource.
 
   - name: Droplet Actions
-    description: |
+    description: >-
       Droplet actions are tasks that can be executed on a Droplet. These can be
       things like rebooting, resizing, snapshotting, etc.
 
@@ -168,7 +167,7 @@ tags:
       fail with a status of 422.
 
   - name: Droplets
-    description: |
+    description: >-
       A [Droplet](https://www.digitalocean.com/docs/droplets/) is a DigitalOcean
       virtual machine. By sending requests to the Droplet endpoint, you can
       list, create, or delete Droplets.
@@ -179,7 +178,7 @@ tags:
       respective sections.
 
   - name: Firewalls
-    description: |
+    description: >-
       [DigitalOcean Cloud Firewalls](https://www.digitalocean.com/docs/networking/firewalls/)
       provide the ability to restrict network access to and from a Droplet
       allowing you to define which ports will accept inbound or outbound
@@ -187,19 +186,34 @@ tags:
       list, create, or delete firewalls as well as modify access rules.
 
   - name: Images
-    description: |
-      A DigitalOcean [image](https://www.digitalocean.com/docs/images/) can be used to create a Droplet and may come in a number of flavors. Currently, there are five types of images: snapshots, backups, applications, distributions, and custom images.
+    description: >-
+      A DigitalOcean [image](https://www.digitalocean.com/docs/images/) can be
+      used to create a Droplet and may come in a number of flavors. Currently,
+      there are five types of images: snapshots, backups, applications,
+      distributions, and custom images.
 
-      * [Snapshots](https://www.digitalocean.com/docs/images/snapshots/) provide a full copy of an existing Droplet instance taken on demand.
-      * [Backups](https://www.digitalocean.com/docs/images/backups/) are similar to snapshots but are created automatically at regular intervals when enabled for a Droplet.
-      * [Custom images](https://www.digitalocean.com/docs/images/custom-images/) are Linux-based virtual machine images (raw, qcow2, vhdx, vdi, and vmdk formats are supported) that you may upload for use on DigitalOcean.
-      * Distributions are the public Linux distributions that are available to be used as a base to create Droplets.
-      * Applications, or [1-Click Apps](https://www.digitalocean.com/docs/one-clicks/), are distributions pre-configured with additional software.
+      * [Snapshots](https://www.digitalocean.com/docs/images/snapshots/) provide
+      a full copy of an existing Droplet instance taken on demand.
 
-      To interact with images, you will generally send requests to the images endpoint at /v2/images.
+      * [Backups](https://www.digitalocean.com/docs/images/backups/) are similar
+      to snapshots but are created automatically at regular intervals when
+      enabled for a Droplet.
+
+      * [Custom images](https://www.digitalocean.com/docs/images/custom-images/)
+      are Linux-based virtual machine images (raw, qcow2, vhdx, vdi, and vmdk
+      formats are supported) that you may upload for use on DigitalOcean.
+
+      * Distributions are the public Linux distributions that are available to
+      be used as a base to create Droplets.
+
+      * Applications, or [1-Click Apps](https://www.digitalocean.com/docs/one-clicks/),
+      are distributions pre-configured with additional software.
+
+      To interact with images, you will generally send requests to the images
+      endpoint at /v2/images.
 
   - name: Invoices
-    description: |
+    description: >-
       [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/)
       are generated on the first of each month for every DigitalOcean
       customer. An invoice preview is generated daily, which can be accessed
@@ -209,7 +223,7 @@ tags:
       invoices endpoint at `/v2/customers/my/invoices`.
 
   - name: Kubernetes
-    description: |
+    description: >-
       [DigitalOcean Kubernetes](https://www.digitalocean.com/docs/kubernetes/)
       allows you to quickly deploy scalable and secure Kubernetes clusters. By
       sending requests to the `/v2/kubernetes/clusters` endpoint, you can list,
@@ -218,7 +232,7 @@ tags:
       a cluster.
 
   - name: Load Balancers
-    description: |
+    description: >-
       [DigitalOcean Load Balancers](https://www.digitalocean.com/docs/networking/load-balancers/)
       provide a way to distribute traffic across multiple Droplets. By sending
       requests to the `/v2/load_balancers` endpoint, you can list, create, or
@@ -229,11 +243,10 @@ tags:
     description: Provides information about DigitalOcean data center regions.
 
   - name: Sizes
-    description: >
+    description: >-
       The sizes objects represent different packages of hardware resources that
       can be used for Droplets. When a Droplet is created, a size must be
       selected so that the correct resources can be allocated.
-
 
       Each size represents a plan that bundles together specific sets of
       resources. This includes the amount of RAM, the number of virtual CPUs,
@@ -241,7 +254,7 @@ tags:
       details and the regions that the size is available in.
 
   - name: Snapshots
-    description: |
+    description: >-
       [Snapshots](https://www.digitalocean.com/docs/images/snapshots/) are saved
       instances of a Droplet or a block storage volume, which is reflected in
       the `resource_type` attribute. In order to avoid problems with compressing
@@ -256,14 +269,16 @@ tags:
     description: Manage SSH keys available on your account.
 
   - name: Tags
-    description: |
-      A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters)
-      in order to better organize or facilitate the lookups and actions on it.
+    description: >-
+      A tag is a label that can be applied to a resource (currently Droplets,
+      Images, Volumes, Volume Snapshots, and Database clusters) in order to
+      better organize or facilitate the lookups and actions on it.
 
-      Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
+      Tags have two attributes: a user defined `name` attribute and an embedded
+      `resources` attribute with information about resources that have been tagged.
 
   - name: VPCs
-    description: |
+    description: >-
       [VPCs (virtual private clouds)](https://www.digitalocean.com/docs/networking/vpc/)
       allow you to create virtual networks containing resources that can
       communicate with each other in full isolation using private IP addresses.
