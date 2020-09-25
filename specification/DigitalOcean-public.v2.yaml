@@ -115,7 +115,7 @@ tags:
       that registry to create as many repositories as you wish.
 
   - name: Databases
-    description: |
+    description: >-
       DigitalOcean's [managed database service](https://www.digitalocean.com/docs/databases)
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://www.digitalocean.com/docs/databases/postgresql/),

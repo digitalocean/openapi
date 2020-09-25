@@ -11,11 +11,12 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         user:
-          type: object
-          properties:
-            $ref: '../models/user.yml'
+          $ref: '../models/user.yml'
+      required:
+        - user
     examples:
       New User:
         value:

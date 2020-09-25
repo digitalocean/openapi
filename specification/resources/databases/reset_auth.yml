@@ -24,7 +24,12 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/mysql_settings.yml'
+        type: object
+        properties:
+          mysql_settings:
+            $ref: 'models/mysql_settings.yml'
+        required:
+          - mysql_settings
       example:
         mysql_settings:
           auth_plugin: caching_sha2_password

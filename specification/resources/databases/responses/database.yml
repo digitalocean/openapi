@@ -11,11 +11,12 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         db:
-          type: object
-          properties:
-            $ref: '../models/database.yml'
+          $ref: '../models/database.yml'
+      required:
+        - db
     example:
       db:
         name: alpha
