@@ -1,0 +1,29 @@
+operationId: list_vpcs
+
+summary: List All VPCs
+
+description: To list all of the VPCs on your account, send a GET request
+  to `/v2/vpcs`.
+
+tags:
+  - VPCs
+
+parameters:
+  - $ref: '../../shared/parameters.yml#/PerPage'
+  - $ref: '../../shared/parameters.yml#/Page'
+
+responses:
+  '200':
+    $ref: 'responses/all_vpcs.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

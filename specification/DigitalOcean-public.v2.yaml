@@ -254,12 +254,23 @@ tags:
 
   - name: SSH Keys
     description: Manage SSH keys available on your account.
+
   - name: Tags
     description: |
       A tag is a label that can be applied to a resource (currently Droplets, Images, Volumes, Volume Snapshots, and Database clusters)
       in order to better organize or facilitate the lookups and actions on it.
 
       Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
+
+  - name: VPCs
+    description: |
+      [VPCs (virtual private clouds)](https://www.digitalocean.com/docs/networking/vpc/)
+      allow you to create virtual networks containing resources that can
+      communicate with each other in full isolation using private IP addresses.
+
+      By sending requests to the `/v2/vpcs` endpoint, you can create, configure,
+      list, and delete custom VPCs as well as retrieve information about the
+      resources assigned to them.
 
 paths:
   /1-clicks:
@@ -690,6 +701,30 @@ paths:
       $ref: 'resources/volumes/list_volume_snapshots.yml'
     post:
       $ref: 'resources/volumes/create_volume_snapshot.yml'
+
+  /vpcs:
+    get:
+      $ref: 'resources/vpcs/list_vpcs.yml'
+
+    post:
+      $ref: 'resources/vpcs/create_vpc.yml'
+
+  /vpcs/{vpc_id}:
+    get:
+      $ref: 'resources/vpcs/get_vpc.yml'
+
+    put:
+      $ref: 'resources/vpcs/update_vpc.yml'
+
+    patch:
+      $ref: 'resources/vpcs/patch_vpc.yml'
+
+    delete:
+      $ref: 'resources/vpcs/delete_vpc.yml'
+
+  /vpcs/{vpc_id}/members:
+    get:
+      $ref: 'resources/vpcs/list_vpc_members.yml'
 
 components:
   securitySchemes:
