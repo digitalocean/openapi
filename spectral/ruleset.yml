@@ -65,7 +65,7 @@ rules:
     description: Responses should contain common response - 401 (unauthorized)
     message: "{{description}}. Missing {{property}}"
     severity: error
-    given: $..responses
+    given: $.paths..responses
     then:
       - field: '401'
         function: truthy
@@ -74,7 +74,7 @@ rules:
     description: Responses should contain common response - 500 (server error)
     message: "{{description}}. Missing {{property}}"
     severity: error
-    given: $..responses
+    given: $.paths..responses
     then:
       - field: '500'
         function: truthy
