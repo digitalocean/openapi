@@ -19,7 +19,7 @@ content:
       Basic Create Response:
         $ref: 'examples.yml#/load_balancer_basic_response'
       SSL Termination Create Response:
-        $ref: 'examples.yml#/load_balancer_s_s_l_termination_response'
+        $ref: 'examples.yml#/load_balancer_ssl_termination_response'
       Create Response Using Droplet Tag:
         $ref: 'examples.yml#/load_balancer_using_tag_response'
       Sticky Sessions and Custom Health Check:

@@ -17,7 +17,7 @@ load_balancer_basic_create_request:
     - 3164444
     - 3164445
 
-load_balancer_s_s_l_termination_create_request:
+load_balancer_ssl_termination_create_request:
   description: Terminating SSL at the load balancer using a managed SSL
     certificate specifying Droplets using `droplet_ids`.
   value:

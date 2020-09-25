@@ -31,7 +31,7 @@ requestBody:
         Basic Create Request:
           $ref: 'examples.yml#/load_balancer_basic_create_request'
         SSL Termination Create Request:
-          $ref: 'examples.yml#/load_balancer_s_s_l_termination_create_request'
+          $ref: 'examples.yml#/load_balancer_ssl_termination_create_request'
         Create Request Using Droplet Tag:
           $ref: 'examples.yml#/load_balancer_using_tag_create_request'
         Sticky Sessions and Custom Health Check:

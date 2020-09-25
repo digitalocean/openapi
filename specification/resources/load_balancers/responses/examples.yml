@@ -64,7 +64,7 @@ load_balancer_basic_response:
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
 
-load_balancer_s_s_l_termination_response:
+load_balancer_ssl_termination_response:
   value:
     load_balancer:
       id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
