@@ -1,4 +1,4 @@
-LoadBalancerBasicResponse:
+load_balancer_basic_response:
   value:
     load_balancer:
       id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
@@ -64,7 +64,7 @@ LoadBalancerBasicResponse:
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
 
-LoadBalancerSSLTerminationResponse:
+load_balancer_ssl_termination_response:
   value:
     load_balancer:
       id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
@@ -123,7 +123,7 @@ LoadBalancerSSLTerminationResponse:
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
 
-LoadBalancerUsingTagResponse:
+load_balancer_using_tag_response:
   value:
     load_balancer:
       id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
@@ -182,7 +182,7 @@ LoadBalancerUsingTagResponse:
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
 
-LoadBalancerStickySessionsAndHealthCheckResponse:
+load_balancer_sticky_sessions_and_health_check_response:
   value:
     load_balancer:
       id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
@@ -243,7 +243,7 @@ LoadBalancerStickySessionsAndHealthCheckResponse:
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
 
-LoadBalancerUpdateResponse:
+load_balancer_update_response:
   value:
     load_balancer:
       id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
@@ -309,7 +309,7 @@ LoadBalancerUpdateResponse:
       enable_backend_keepalive: true
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
 
-LoadBalancersAll:
+load_balancers_all:
   value:
     load_balancers:
     - id: 4de7ac8b-495b-4884-9a69-1050c6793cd6

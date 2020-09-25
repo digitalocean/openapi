@@ -65,7 +65,7 @@ rules:
     description: Responses should contain common response - 401 (unauthorized)
     message: "{{description}}. Missing {{property}}"
     severity: error
-    given: $..responses
+    given: $.paths..responses
     then:
       - field: '401'
         function: truthy
@@ -74,7 +74,7 @@ rules:
     description: Responses should contain common response - 500 (server error)
     message: "{{description}}. Missing {{property}}"
     severity: error
-    given: $..responses
+    given: $.paths..responses
     then:
       - field: '500'
         function: truthy
@@ -94,3 +94,50 @@ rules:
     message: "{{error}}"
     then:
       function: ensureAllArraysHaveItemTypes
+
+  operationid-must-be-snake-cased:
+    description: operationIds must be snake cased (e.g. snake_case)
+    type: style
+    given: "$..operationId"
+    severity: error
+    message: "{{description}}; {{value}} incorrect"
+    then:
+      function: casing
+      functionOptions:
+        type: snake
+
+  schema-key-must-be-snake-cased:
+    description: schema key must be snake cased (e.g. snake_case)
+    type: style
+    given: "$.components['schemas'].*~"
+    severity: error
+    message: "{{error}}"
+    then:
+      function: ensureSnakeCaseWithDigits
+
+  parameter-key-must-be-snake-cased:
+    description: parameter key must be snake cased (e.g. snake_case)
+    type: style
+    given: "$.components['parameters'].*~"
+    severity: error
+    message: "{{error}}"
+    then:
+      function: ensureSnakeCaseWithDigits
+
+  example-key-must-be-snake-cased:
+    description: example key must be snake cased (e.g. snake_case)
+    type: style
+    given: "$.components['examples'].*~"
+    severity: error
+    message: "{{error}}"
+    then:
+      function: ensureSnakeCaseWithDigits
+
+  response-key-must-be-snake-cased:
+    description: response key must be snake cased (e.g. snake_case)
+    type: style
+    given: "$.components['responses'].*~"
+    severity: error
+    message: "{{error}}"
+    then:
+      function: ensureSnakeCaseWithDigits

@@ -1,33 +1,33 @@
-Pagination:
+pagination:
   type: object
   properties:
     links:
-      $ref: '#/PageLinks'
+      $ref: '#/page_links'
 
-PageLinks:
+page_links:
   type: object
   properties:
     pages:
       anyOf:
-        - $ref: '#/ForwardLinks'
-        - $ref: '#/BackwardLinks'
+        - $ref: '#/forward_links'
+        - $ref: '#/backward_links'
         - {}
       example:
         pages:
           first: "https://api.digitalocean.com/v2/account/keys?page=1"
           prev: "https://api.digitalocean.com/v2/account/keys?page=2"
  
-BackwardLinks:
+backward_links:
   allOf:
-    - $ref: '#/LinkToFirstPage'
-    - $ref: '#/LinkToPrevPage'
+    - $ref: '#/link_to_first_page'
+    - $ref: '#/link_to_prev_page'
 
-ForwardLinks:
+forward_links:
   allOf:
-    - $ref: '#/LinkToLastPage'
-    - $ref: '#/LinkToNextPage'
+    - $ref: '#/link_to_last_page'
+    - $ref: '#/link_to_next_page'
 
-LinkToFirstPage:
+link_to_first_page:
   type: object
   properties:
     first:
@@ -35,7 +35,7 @@ LinkToFirstPage:
       type: string
       example: "https://api.digitalocean.com/v2/images?page=1"
 
-LinkToPrevPage:
+link_to_prev_page:
   type: object
   properties:
     prev:
@@ -43,7 +43,7 @@ LinkToPrevPage:
       type: string
       example: "https://api.digitalocean.com/v2/images?page=1"
 
-LinkToNextPage:
+link_to_next_page:
   type: object
   properties:
     next:
@@ -51,7 +51,7 @@ LinkToNextPage:
       type: string
       example: "https://api.digitalocean.com/v2/images?page=2"
 
-LinkToLastPage:
+link_to_last_page:
   type: object
   properties:
     last:

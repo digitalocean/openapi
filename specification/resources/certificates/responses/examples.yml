@@ -1,4 +1,4 @@
-CertificatesAll:
+certificates_all:
   value:
     certificates:
     - id: 892071a0-bb95-49bc-8021-3afd67a210bf
@@ -24,7 +24,7 @@ CertificatesAll:
     meta:
       total: 2
 
-CertificatesCustom:
+certificates_custom:
   value:
     certificate:
       id: 892071a0-bb95-49bc-8021-3afd67a210bf
@@ -37,7 +37,7 @@ CertificatesCustom:
       state: verified
       type: custom
 
-CertificatesLetsEncrypt:
+certificates_lets_encrypt:
   value:
     certificate:
       id: ba9b9c18-6c59-46c2-99df-70da170a42ba
@@ -51,7 +51,7 @@ CertificatesLetsEncrypt:
       state: verified
       type: lets_encrypt
 
-CertificatesLetsEncryptPending:
+certificates_lets_encrypt_pending:
   value:
     certificate:
       id: ba9b9c18-6c59-46c2-99df-70da170a42ba

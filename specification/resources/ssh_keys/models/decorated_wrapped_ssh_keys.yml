@@ -13,5 +13,5 @@ allOf:
     required:
       - ssh_keys
 
-  - $ref: '../../../shared/pages.yml#/Pagination'
+  - $ref: '../../../shared/pages.yml#/pagination'
   - $ref: '../../../shared/meta.yml'

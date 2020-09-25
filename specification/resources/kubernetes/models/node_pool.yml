@@ -1,24 +1,24 @@
-KubernetesNodePool:
+kubernetes_node_pool:
   type: object
   allOf:
-  - $ref: "#/KubernetesNodePoolSize"
-  - $ref: "#/KubernetesNodePoolBase"
+  - $ref: "#/kubernetes_node_pool_size"
+  - $ref: "#/kubernetes_node_pool_base"
 
   required:
   - name
   - size
   - count
 
-KubernetesNodePoolUpdate:
+kubernetes_node_pool_update:
   type: object
   allOf:
-  - $ref: "#/KubernetesNodePoolBase"
+  - $ref: "#/kubernetes_node_pool_base"
 
   required:
   - name
   - count
 
-KubernetesNodePoolSize:
+kubernetes_node_pool_size:
   type: object
   properties:
     size:
@@ -27,7 +27,7 @@ KubernetesNodePoolSize:
       description: The slug identifier for the type of Droplet used as workers in
         the node pool.
 
-KubernetesNodePoolBase:
+kubernetes_node_pool_base:
   type: object
   properties:
     id:
@@ -72,7 +72,7 @@ KubernetesNodePoolBase:
     taints:
       type: array
       items:
-        $ref: "#/KubernetesNodePoolTaint"
+        $ref: "#/kubernetes_node_pool_taint"
       description: An array of taints to apply to all nodes in a pool. Taints
         will automatically be applied to all existing nodes and any subsequent
         nodes added to the pool. When a taint is removed, it is removed from
@@ -104,7 +104,7 @@ KubernetesNodePoolBase:
       items:
         $ref: 'node.yml'
 
-KubernetesNodePoolTaint:
+kubernetes_node_pool_taint:
   type: object
   properties:
     key:

@@ -17,10 +17,10 @@ content:
 
     examples:
       Basic Create Response:
-        $ref: 'examples.yml#/LoadBalancerBasicResponse'
+        $ref: 'examples.yml#/load_balancer_basic_response'
       SSL Termination Create Response:
-        $ref: 'examples.yml#/LoadBalancerSSLTerminationResponse'
+        $ref: 'examples.yml#/load_balancer_ssl_termination_response'
       Create Response Using Droplet Tag:
-        $ref: 'examples.yml#/LoadBalancerUsingTagResponse'
+        $ref: 'examples.yml#/load_balancer_using_tag_response'
       Sticky Sessions and Custom Health Check:
-        $ref: 'examples.yml#/LoadBalancerStickySessionsAndHealthCheckResponse'
+        $ref: 'examples.yml#/load_balancer_sticky_sessions_and_health_check_response'

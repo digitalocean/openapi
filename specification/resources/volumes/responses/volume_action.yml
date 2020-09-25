@@ -18,7 +18,7 @@ content:
           $ref: '../models/volume_action.yml'
 
     examples:
-      VolumeActionAttachResponse:
-        $ref: '../examples.yml#/VolumeActionAttachResponse'
+      volume_action_attach_response:
+        $ref: '../examples.yml#/volume_action_attach_response'
       VolumeActionDetatchResponse:
-        $ref: '../examples.yml#/VolumeActionDetachResponse'
+        $ref: '../examples.yml#/volume_action_detach_response'

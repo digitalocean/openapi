@@ -22,7 +22,7 @@ content:
                 $ref: '../models/image.yml'
           required:
             - images
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
     examples:
       All:

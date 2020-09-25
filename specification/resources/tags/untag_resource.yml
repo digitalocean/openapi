@@ -16,7 +16,7 @@ tags:
   - Tags
 
 parameters:
-  - $ref: 'parameters.yml#/TagId'
+  - $ref: 'parameters.yml#/tag_id'
 
 requestBody:
   required: true

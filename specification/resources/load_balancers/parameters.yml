@@ -1,4 +1,4 @@
-LoadBalancerId:
+load_balancer_id:
   in: path
   name: lb_id
   description: A unique identifier for a load balancer.

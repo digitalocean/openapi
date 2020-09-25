@@ -19,4 +19,4 @@ content:
           $ref: '../models/cluster.yml'
     examples:
       Updated Kubernetes Cluster:
-        $ref: 'examples.yml#/KubernetesUpdated'
+        $ref: 'examples.yml#/kubernetes_updated'

@@ -23,7 +23,7 @@ tags:
   -  Droplet Actions
 
 parameters:
-  - $ref: 'parameters.yml#/DropletTagName'
+  - $ref: 'parameters.yml#/droplet_tag_name'
 
 requestBody:
   description: |
@@ -35,20 +35,20 @@ requestBody:
     application/json:
       schema:
         oneOf:
-          - $ref: 'models/droplet_actions.yml#/DropletActionType'
-          - $ref: 'models/droplet_actions.yml#/DropletActionSnapshot'
+          - $ref: 'models/droplet_actions.yml#/droplet_action_type'
+          - $ref: 'models/droplet_actions.yml#/droplet_action_snapshot'
         discriminator:
           propertyName: type
           mapping:
-            enable_backups: 'models/droplet_actions.yml#/DropletActionType'
-            disable_backups: 'models/droplet_actions.yml#/DropletActionType'
-            power_cycle: 'models/droplet_actions.yml#/DropletActionType'
-            shutdown: 'models/droplet_actions.yml#/DropletActionType'
-            power_off: 'models/droplet_actions.yml#/DropletActionType'
-            power_on: 'models/droplet_actions.yml#/DropletActionType'
-            enable_ipv6: 'models/droplet_actions.yml#/DropletActionType'
-            enable_private_networking: 'models/droplet_actions.yml#/DropletActionType'
-            snapshot: 'models/droplet_actions.yml#/DropletActionSnapshot'
+            enable_backups: 'models/droplet_actions.yml#/droplet_action_type'
+            disable_backups: 'models/droplet_actions.yml#/droplet_action_type'
+            power_cycle: 'models/droplet_actions.yml#/droplet_action_type'
+            shutdown: 'models/droplet_actions.yml#/droplet_action_type'
+            power_off: 'models/droplet_actions.yml#/droplet_action_type'
+            power_on: 'models/droplet_actions.yml#/droplet_action_type'
+            enable_ipv6: 'models/droplet_actions.yml#/droplet_action_type'
+            enable_private_networking: 'models/droplet_actions.yml#/droplet_action_type'
+            snapshot: 'models/droplet_actions.yml#/droplet_action_snapshot'
 
 responses:
   '201':

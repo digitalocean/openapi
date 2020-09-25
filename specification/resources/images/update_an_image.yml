@@ -11,7 +11,7 @@ tags:
   - Images
 
 parameters:
-  - $ref: 'parameters.yml#/ImageId'
+  - $ref: 'parameters.yml#/image_id'
 
 requestBody:
   required: true

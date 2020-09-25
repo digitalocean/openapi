@@ -1,4 +1,4 @@
-CertificateId:
+certificate_id:
   in: path
   name: certificate_id
   description: A unique identifier for a certificate.

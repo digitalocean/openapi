@@ -1,4 +1,4 @@
-InvoiceUUID:
+invoice_uuid:
   name: invoice_uuid
   description: UUID of the invoice
   in: path

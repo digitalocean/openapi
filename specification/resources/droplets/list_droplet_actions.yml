@@ -14,9 +14,9 @@ tags:
   - Droplet Actions
 
 parameters:
-  - $ref: 'parameters.yml#/DropletId'
-  - $ref: '../../shared/parameters.yml#/PerPage'
-  - $ref: '../../shared/parameters.yml#/Page'
+  - $ref: 'parameters.yml#/droplet_id'
+  - $ref: '../../shared/parameters.yml#/per_page'
+  - $ref: '../../shared/parameters.yml#/page'
 
 responses:
   '200':

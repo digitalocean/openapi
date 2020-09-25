@@ -10,10 +10,10 @@ tags:
   - Block Storage Actions
 
 parameters:
-  - $ref: 'parameters.yml#/VolumeId'
-  - $ref: '../actions/parameters.yml#/actionId'
-  - $ref: '../../shared/parameters.yml#/PerPage'
-  - $ref: '../../shared/parameters.yml#/Page'
+  - $ref: 'parameters.yml#/volume_id'
+  - $ref: '../actions/parameters.yml#/action_id'
+  - $ref: '../../shared/parameters.yml#/per_page'
+  - $ref: '../../shared/parameters.yml#/page'
 
 responses:
   '200':

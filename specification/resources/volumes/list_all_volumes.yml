@@ -9,9 +9,9 @@ description: >+
   ## Filtering Results
 
   ### By Region
-  
+
   The `region` may be provided as query paramater in order to restrict results
-  to volumes available in a specific region. 
+  to volumes available in a specific region.
   For example: `/v2/volumes?region=nyc1`
 
   ### By Name
@@ -29,15 +29,15 @@ description: >+
   for the region it is located in as query parameters to
   `/v2/volumes?name=$VOLUME_NAME&region=nyc1`.
 
-  
+
 tags:
   - Block Storage
 
 parameters:
-  - $ref: 'parameters.yml#/VolumeName'
-  - $ref: '../../shared/parameters.yml#/Region'
-  - $ref: '../../shared/parameters.yml#/PerPage'
-  - $ref: '../../shared/parameters.yml#/Page'
+  - $ref: 'parameters.yml#/volume_name'
+  - $ref: '../../shared/parameters.yml#/region'
+  - $ref: '../../shared/parameters.yml#/per_page'
+  - $ref: '../../shared/parameters.yml#/page'
 
 responses:
   '200':

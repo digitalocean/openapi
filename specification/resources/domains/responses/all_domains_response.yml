@@ -25,7 +25,7 @@ content:
           required:
             - domains
 
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
     example:

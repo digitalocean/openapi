@@ -25,9 +25,9 @@ content:
               items:
                 $ref: '../models/domain_record.yml'
 
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
     examples:
       All Domain Records:
-        $ref: '../examples.yml#/DomainRecordsAll'
+        $ref: '../examples.yml#/domain_records_all'

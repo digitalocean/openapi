@@ -10,7 +10,7 @@ tags:
   - Block Storage
 
 parameters:
-  - $ref: 'parameters.yml#/VolumeId'
+  - $ref: 'parameters.yml#/volume_id'
 
 responses:
   '200':

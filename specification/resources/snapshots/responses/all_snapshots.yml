@@ -18,13 +18,13 @@ content:
               type: array
               items:
                 $ref: '../models/snapshot.yml'
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
     examples:
       All Snapshots:
-        $ref: 'examples.yml#/SnapshotsAll'
+        $ref: 'examples.yml#/snapshots_all'
       Droplets Snapshots:
-        $ref: 'examples.yml#/SnapshotsDropletsOnly'
+        $ref: 'examples.yml#/snapshots_droplets_only'
       Volume Snapshots:
-        $ref: 'examples.yml#/SnapshotsVolumesOnly'
+        $ref: 'examples.yml#/snapshots_volumes_only'

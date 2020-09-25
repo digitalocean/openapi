@@ -42,9 +42,9 @@ requestBody:
 
       examples:
         Single Droplet Create Request:
-          $ref: 'examples.yml#/DropletCreateRequest'
+          $ref: 'examples.yml#/droplet_create_request'
         Multiple Droplet Create Request:
-          $ref: 'examples.yml#/DropletMultiCreateRequest'
+          $ref: 'examples.yml#/droplet_multi_create_request'
 
 responses:
   '202':

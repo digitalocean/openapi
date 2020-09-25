@@ -1,4 +1,4 @@
-CdnEndpointId:
+cdn_endpoint_id:
   in: path
   name: cdn_id
   description: A unique identifier for a CDN endpoint.

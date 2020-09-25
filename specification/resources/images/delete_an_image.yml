@@ -9,7 +9,7 @@ tags:
   - Images
 
 parameters:
-  - $ref: 'parameters.yml#/ImageId'
+  - $ref: 'parameters.yml#/image_id'
 
 responses:
   '204':

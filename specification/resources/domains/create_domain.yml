@@ -19,7 +19,7 @@ requestBody:
 
       examples:
         All Domain Records:
-          $ref: 'examples.yml#/DomainRecordCreated'
+          $ref: 'examples.yml#/domain_record_created'
 
 responses:
   '202':

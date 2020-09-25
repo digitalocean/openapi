@@ -10,7 +10,7 @@ tags:
   - Domains
 
 parameters:
-  - $ref: 'parameters.yml#/DomainName'
+  - $ref: 'parameters.yml#/domain_name'
 
 responses:
   '200':

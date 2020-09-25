@@ -25,13 +25,13 @@ content:
           required:
             - volumes
 
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
     examples:
       All Volumes:
-        $ref: '../examples.yml#/VolumesAll'
+        $ref: '../examples.yml#/volumes_all'
       Filtered by Name:
-        $ref: '../examples.yml#/VolumesFilteredByName'
+        $ref: '../examples.yml#/volumes_filtered_by_name'
       Filtered by Region:
-        $ref: '../examples.yml#/VolumesFilteredByRegion'
+        $ref: '../examples.yml#/volumes_filtered_by_region'

@@ -13,7 +13,7 @@ tags:
   - Snapshots
 
 parameters:
-  - $ref: 'parameters.yml#/SnapshotId'
+  - $ref: 'parameters.yml#/snapshot_id'
 
 responses:
   '200':

@@ -15,10 +15,10 @@ tags:
   - Container Registry
 
 parameters:
-  - $ref: '../../shared/parameters.yml#/PerPage'
-  - $ref: '../../shared/parameters.yml#/Page'
-  - $ref: 'parameters.yml#/RegistryName'
-  - $ref: 'parameters.yml#/RegistryRepositoryName'
+  - $ref: '../../shared/parameters.yml#/per_page'
+  - $ref: '../../shared/parameters.yml#/page'
+  - $ref: 'parameters.yml#/registry_name'
+  - $ref: 'parameters.yml#/registry_repository_name'
 
 responses:
   '200':

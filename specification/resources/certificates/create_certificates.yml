@@ -23,8 +23,8 @@ requestBody:
     application/json:
       schema:
         oneOf:
-        - $ref: 'models/certificate_create.yml#/CertificateRequestLetsEncrypt'
-        - $ref: 'models/certificate_create.yml#/CertificateRequestCustom'
+        - $ref: 'models/certificate_create.yml#/certificate_request_lets_encrypt'
+        - $ref: 'models/certificate_create.yml#/certificate_request_custom'
 
 responses:
   '201':

@@ -1,4 +1,4 @@
-ImageId:
+image_id:
   in: path
   name: identifier
   description: A unique number that can be used to identify and reference a specific image.
@@ -7,7 +7,7 @@ ImageId:
     type: integer
   example: 62137902
 
-Type:
+type:
   in: query
   name: type
   description: Filters results based on image type which can be either `application` or `distribution`.
@@ -19,7 +19,7 @@ Type:
       - distribution
   example: distribution
 
-Private:
+private:
   in: query
   name: private
   description: Used to filter only user images.
@@ -28,7 +28,7 @@ Private:
     type: boolean
   example: true
 
-Tag:
+tag:
   in: query
   name: tag_name
   description: Used to filter images by a specific tag.

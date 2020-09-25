@@ -19,4 +19,4 @@ content:
           $ref: '../models/cluster.yml'
     examples:
       Single Kubernetes Cluster:
-        $ref: 'examples.yml#/KubernetesSingle'
+        $ref: 'examples.yml#/kubernetes_single'

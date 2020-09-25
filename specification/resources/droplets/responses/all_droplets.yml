@@ -18,10 +18,10 @@ content:
               type: array
               items:
                 $ref: '../models/droplet.yml'
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
     examples:
       All Droplets:
-        $ref: 'examples.yml#/DropletsAll'
+        $ref: 'examples.yml#/droplets_all'
       Droplets Filtered By Tag:
-        $ref: 'examples.yml#/DropletsTagged'
+        $ref: 'examples.yml#/droplets_tagged'

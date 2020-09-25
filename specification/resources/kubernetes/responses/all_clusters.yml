@@ -21,9 +21,9 @@ content:
               type: array
               items:
                 $ref: '../models/cluster.yml'
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
     examples:
       All Kubernetes Clusters:
-        $ref: 'examples.yml#/KubernetesClustersAll'
+        $ref: 'examples.yml#/kubernetes_clusters_all'

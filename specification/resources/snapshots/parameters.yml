@@ -1,4 +1,4 @@
-SnapshotResourceType:
+snapshot_resource_type:
   in: query
   name: resource_type
   description: Used to filter snapshots by a resource type.
@@ -10,7 +10,7 @@ SnapshotResourceType:
         - volume
   example: droplet
 
-SnapshotId:
+snapshot_id:
   in: path
   name: snapshot_id
   required: true

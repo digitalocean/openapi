@@ -30,7 +30,7 @@ tags:
   -  Droplet Actions
 
 parameters:
-  - $ref: 'parameters.yml#/DropletId'
+  - $ref: 'parameters.yml#/droplet_id'
 
 requestBody:
   description: |
@@ -42,32 +42,32 @@ requestBody:
     application/json:
       schema:
         oneOf:
-          - $ref: 'models/droplet_actions.yml#/DropletActionType'
-          - $ref: 'models/droplet_actions.yml#/DropletActionRestore'
-          - $ref: 'models/droplet_actions.yml#/DropletActionResize'
-          - $ref: 'models/droplet_actions.yml#/DropletActionRebuild'
-          - $ref: 'models/droplet_actions.yml#/DropletActionRename'
-          - $ref: 'models/droplet_actions.yml#/DropletActionChangeKernel'
-          - $ref: 'models/droplet_actions.yml#/DropletActionSnapshot'
+          - $ref: 'models/droplet_actions.yml#/droplet_action_type'
+          - $ref: 'models/droplet_actions.yml#/droplet_action_restore'
+          - $ref: 'models/droplet_actions.yml#/droplet_action_resize'
+          - $ref: 'models/droplet_actions.yml#/droplet_action_rebuild'
+          - $ref: 'models/droplet_actions.yml#/droplet_action_rename'
+          - $ref: 'models/droplet_actions.yml#/droplet_action_change_kernel'
+          - $ref: 'models/droplet_actions.yml#/droplet_action_snapshot'
         discriminator:
           propertyName: type
           mapping:
-            enable_backups: 'models/droplet_actions.yml#/DropletActionType'
-            disable_backups: 'models/droplet_actions.yml#/DropletActionType'
-            reboot: 'models/droplet_actions.yml#/DropletActionType'
-            power_cycle: 'models/droplet_actions.yml#/DropletActionType'
-            shutdown: 'models/droplet_actions.yml#/DropletActionType'
-            power_off: 'models/droplet_actions.yml#/DropletActionType'
-            power_on: 'models/droplet_actions.yml#/DropletActionType'
-            password_reset: 'models/droplet_actions.yml#/DropletActionType'
-            restore: 'models/droplet_actions.yml#/DropletActionRestore'
-            resize: 'models/droplet_actions.yml#/DropletActionResize'
-            rebuild: 'models/droplet_actions.yml#/DropletActionRebuild'
-            rename: 'models/droplet_actions.yml#/DropletActionRename'
-            change_kernel: 'models/droplet_actions.yml#/DropletActionChangeKernel'
-            enable_ipv6: 'models/droplet_actions.yml#/DropletActionType'
-            enable_private_networking: 'models/droplet_actions.yml#/DropletActionType'
-            snapshot: 'models/droplet_actions.yml#/DropletActionSnapshot'
+            enable_backups: 'models/droplet_actions.yml#/droplet_action_type'
+            disable_backups: 'models/droplet_actions.yml#/droplet_action_type'
+            reboot: 'models/droplet_actions.yml#/droplet_action_type'
+            power_cycle: 'models/droplet_actions.yml#/droplet_action_type'
+            shutdown: 'models/droplet_actions.yml#/droplet_action_type'
+            power_off: 'models/droplet_actions.yml#/droplet_action_type'
+            power_on: 'models/droplet_actions.yml#/droplet_action_type'
+            password_reset: 'models/droplet_actions.yml#/droplet_action_type'
+            restore: 'models/droplet_actions.yml#/droplet_action_restore'
+            resize: 'models/droplet_actions.yml#/droplet_action_resize'
+            rebuild: 'models/droplet_actions.yml#/droplet_action_rebuild'
+            rename: 'models/droplet_actions.yml#/droplet_action_rename'
+            change_kernel: 'models/droplet_actions.yml#/droplet_action_change_kernel'
+            enable_ipv6: 'models/droplet_actions.yml#/droplet_action_type'
+            enable_private_networking: 'models/droplet_actions.yml#/droplet_action_type'
+            snapshot: 'models/droplet_actions.yml#/droplet_action_snapshot'
 
 responses:
   '201':

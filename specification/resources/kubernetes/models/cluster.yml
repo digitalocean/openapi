@@ -82,7 +82,7 @@ properties:
     description: An object specifying the details of the worker nodes available
       to the Kubernetes cluster.
     items:
-      $ref: 'node_pool.yml#/KubernetesNodePool'
+      $ref: 'node_pool.yml#/kubernetes_node_pool'
 
   maintenance_policy:
     $ref: 'maintenance_policy.yml'

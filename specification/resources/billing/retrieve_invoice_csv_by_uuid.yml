@@ -10,7 +10,7 @@ tags:
   - Invoices
 
 parameters:
-  - $ref: 'parameters.yml#/InvoiceUUID'
+  - $ref: 'parameters.yml#/invoice_uuid'
 
 responses:
   '200':

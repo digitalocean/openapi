@@ -10,7 +10,7 @@ tags:
   - Kubernetes
 
 parameters:
-  - $ref: 'parameters.yml#/KubernetesClusterId'
+  - $ref: 'parameters.yml#/kubernetes_cluster_id'
 
 responses:
   '200':

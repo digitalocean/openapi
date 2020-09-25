@@ -26,9 +26,9 @@ requestBody:
 
       examples:
         Kubernetes Cluster Request:
-          $ref: 'examples.yml#/KubernetesClustersBasicRequest'
+          $ref: 'examples.yml#/kubernetes_clusters_basic_request'
         Kubernetes Cluster with Multiple Node Pools Request:
-          $ref: 'examples.yml#/KubernetesClustersMultiPoolRequest'
+          $ref: 'examples.yml#/kubernetes_clusters_multi_pool_request'
 
 responses:
   '201':

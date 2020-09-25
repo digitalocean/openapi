@@ -32,11 +32,11 @@ tags:
   - Images
 
 parameters:
-  - $ref: 'parameters.yml#/Type'
-  - $ref: 'parameters.yml#/Private'
-  - $ref: 'parameters.yml#/Tag'
-  - $ref: '../../shared/parameters.yml#/PerPage'
-  - $ref: '../../shared/parameters.yml#/Page'
+  - $ref: 'parameters.yml#/type'
+  - $ref: 'parameters.yml#/private'
+  - $ref: 'parameters.yml#/tag'
+  - $ref: '../../shared/parameters.yml#/per_page'
+  - $ref: '../../shared/parameters.yml#/page'
 
 responses:
   '200':

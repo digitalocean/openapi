@@ -15,8 +15,8 @@ tags:
   - Kubernetes
 
 parameters:
-  - $ref: 'parameters.yml#/KubernetesClusterId'
-  - $ref: 'parameters.yml#/ClusterlintRunId'
+  - $ref: 'parameters.yml#/kubernetes_cluster_id'
+  - $ref: 'parameters.yml#/clusterlint_run_id'
 
 responses:
   '200':

@@ -18,9 +18,9 @@ tags:
   - Domain Records
 
 parameters:
-  - $ref: 'parameters.yml#/DomainName'
-  - $ref: 'parameters.yml#/DomainNameQuery'
-  - $ref: 'parameters.yml#/DomainTypeQuery'
+  - $ref: 'parameters.yml#/domain_name'
+  - $ref: 'parameters.yml#/domain_name_query'
+  - $ref: 'parameters.yml#/domain_type_query'
 
 responses:
   '200':

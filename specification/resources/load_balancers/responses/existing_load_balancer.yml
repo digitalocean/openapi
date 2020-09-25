@@ -19,5 +19,5 @@ content:
           $ref: '../models/load_balancer.yml'
 
     examples:
-      LoadBalancerBasicResponse:
-        $ref: 'examples.yml#/LoadBalancerBasicResponse'
+      load_balancer_basic_response:
+        $ref: 'examples.yml#/load_balancer_basic_response'

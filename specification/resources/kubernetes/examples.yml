@@ -1,4 +1,4 @@
-KubernetesClustersBasicRequest:
+kubernetes_clusters_basic_request:
   value:
     name: prod-cluster-01
     region: nyc1
@@ -8,7 +8,7 @@ KubernetesClustersBasicRequest:
       count: 3
       name: worker-pool
 
-KubernetesClustersMultiPoolRequest:
+kubernetes_clusters_multi_pool_request:
   description: |
     This example request creates a Kubernetes cluster with two node pools. It
     also demonstrates setting tags, labels, auto scaling, and a maintenance

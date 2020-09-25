@@ -21,7 +21,7 @@ content:
               items:
                 $ref: '../models/volume_action.yml'
 
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
     example:

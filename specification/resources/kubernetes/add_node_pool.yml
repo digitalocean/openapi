@@ -11,7 +11,7 @@ tags:
   - Kubernetes
 
 parameters:
-  - $ref: 'parameters.yml#/KubernetesClusterId'
+  - $ref: 'parameters.yml#/kubernetes_cluster_id'
 
 requestBody:
   required: true
@@ -19,7 +19,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/node_pool.yml#/KubernetesNodePool'
+        $ref: 'models/node_pool.yml#/kubernetes_node_pool'
 
       example:
         size: s-1vcpu-2gb

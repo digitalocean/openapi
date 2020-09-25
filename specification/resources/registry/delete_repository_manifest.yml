@@ -18,9 +18,9 @@ tags:
   - Container Registry
 
 parameters:
-  - $ref: 'parameters.yml#/RegistryName'
-  - $ref: 'parameters.yml#/RegistryRepositoryName'
-  - $ref: 'parameters.yml#/RegistryManifestDigest'
+  - $ref: 'parameters.yml#/registry_name'
+  - $ref: 'parameters.yml#/registry_repository_name'
+  - $ref: 'parameters.yml#/registry_manifest_digest'
 
 responses:
   '204':

@@ -25,7 +25,7 @@ content:
 
     examples:
       Custom Certificate:
-        $ref: 'examples.yml#/CertificatesCustom'
+        $ref: 'examples.yml#/certificates_custom'
 
       Let's Encrypt Certificate:
-        $ref: 'examples.yml#/CertificatesLetsEncryptPending'
+        $ref: 'examples.yml#/certificates_lets_encrypt_pending'

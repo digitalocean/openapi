@@ -1,4 +1,4 @@
-KubernetesClustersAll:
+kubernetes_clusters_all:
   value:
     kubernetes_clusters:
     - id: bd5f5959-5e1e-4205-a714-a914373942af
@@ -99,7 +99,7 @@ KubernetesClustersAll:
     meta:
       total: 1
 
-KubernetesSingle:
+kubernetes_single:
   value:
     kubernetes_cluster:
       id: bd5f5959-5e1e-4205-a714-a914373942af
@@ -197,7 +197,7 @@ KubernetesSingle:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
 
-KubernetesUpdated:
+kubernetes_updated:
   value:
     kubernetes_cluster:
       id: bd5f5959-5e1e-4205-a714-a914373942af
@@ -295,7 +295,7 @@ KubernetesUpdated:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: true
 
-KubernetesClustersCreateBasicResponse:
+kubernetes_clusters_create_basic_response:
   value:
     kubernetes_cluster:
       id: bd5f5959-5e1e-4205-a714-a914373942af
@@ -358,7 +358,7 @@ KubernetesClustersCreateBasicResponse:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
 
-KubernetesClustersMultiPoolResponse:
+kubernetes_clusters_multi_pool_response:
   value:
     kubernetes_clusters:
       id: bd5f5959-5e1e-4205-a714-a914373942af
@@ -458,7 +458,7 @@ KubernetesClustersMultiPoolResponse:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
 
-KubernetesOptions:
+kubernetes_options:
   value:
     options:
       regions:

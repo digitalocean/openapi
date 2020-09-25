@@ -18,8 +18,8 @@ tags:
   - Droplets
 
 parameters:
-  - $ref: 'parameters.yml#/DropletId'
-  - $ref: 'parameters.yml#/X-Dangerous'
+  - $ref: 'parameters.yml#/droplet_id'
+  - $ref: 'parameters.yml#/x_dangerous'
 
 responses:
   '202':

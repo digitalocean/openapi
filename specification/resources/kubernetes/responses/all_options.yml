@@ -14,8 +14,8 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/options.yml#/KubernetesOptions'
+      $ref: '../models/options.yml#/kubernetes_options'
 
     examples:
       All Kubernetes Options:
-        $ref: 'examples.yml#/KubernetesOptions'
+        $ref: 'examples.yml#/kubernetes_options'

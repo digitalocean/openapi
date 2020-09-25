@@ -3,11 +3,11 @@ operationId: create_domain_record
 summary: Create a New Domain Record
 
 description: |
-  To create a new record to a domain, send a POST request to 
+  To create a new record to a domain, send a POST request to
   `/v2/domains/$DOMAIN_NAME/records`.
 
   The request must include all of the required fields for the domain record type
-  being added. 
+  being added.
 
   See the [attribute table](#tag/Domain-Records) for details regarding record
   types and their respective required attributes.
@@ -16,34 +16,34 @@ tags:
   - Domain Records
 
 parameters:
-  - $ref: 'parameters.yml#/DomainName'
+  - $ref: 'parameters.yml#/domain_name'
 
 requestBody:
   content:
     application/json:
       schema:
         anyOf:
-          - $ref: 'models/domain_record_types.yml#/DomainRecord-A'
-          - $ref: 'models/domain_record_types.yml#/DomainRecord-AAAA'
-          - $ref: 'models/domain_record_types.yml#/DomainRecord-CAA'
-          - $ref: 'models/domain_record_types.yml#/DomainRecord-CNAME'
-          - $ref: 'models/domain_record_types.yml#/DomainRecord-MX'
-          - $ref: 'models/domain_record_types.yml#/DomainRecord-NS'
-          - $ref: 'models/domain_record_types.yml#/DomainRecord-SOA'
-          - $ref: 'models/domain_record_types.yml#/DomainRecord-SRV'
-          - $ref: 'models/domain_record_types.yml#/DomainRecord-TXT'
+          - $ref: 'models/domain_record_types.yml#/domain_record_a'
+          - $ref: 'models/domain_record_types.yml#/domain_record_aaaa'
+          - $ref: 'models/domain_record_types.yml#/domain_record_caa'
+          - $ref: 'models/domain_record_types.yml#/domain_record_cname'
+          - $ref: 'models/domain_record_types.yml#/domain_record_mx'
+          - $ref: 'models/domain_record_types.yml#/domain_record_ns'
+          - $ref: 'models/domain_record_types.yml#/domain_record_soa'
+          - $ref: 'models/domain_record_types.yml#/domain_record_srv'
+          - $ref: 'models/domain_record_types.yml#/domain_record_txt'
         discriminator:
           propertyName: type
           mapping:
-            A: 'models/domain_record_types.yml#/DomainRecord-A'
-            AAAA: 'models/domain_record_types.yml#/DomainRecord-AAAA'
-            CAA: 'models/domain_record_types.yml#/DomainRecord-CAA'
-            CNAME: 'models/domain_record_types.yml#/DomainRecord-CNAME'
-            MX: 'models/domain_record_types.yml#/DomainRecord-MX'
-            NS: 'models/domain_record_types.yml#/DomainRecord-NS'
-            SOA: 'models/domain_record_types.yml#/DomainRecord-SOA'
-            SRV: 'models/domain_record_types.yml#/DomainRecord-SRV'
-            TXT: 'models/domain_record_types.yml#/DomainRecord-TXT'
+            A: 'models/domain_record_types.yml#/domain_record_a'
+            AAAA: 'models/domain_record_types.yml#/domain_record_aaaa'
+            CAA: 'models/domain_record_types.yml#/domain_record_caa'
+            CNAME: 'models/domain_record_types.yml#/domain_record_cname'
+            MX: 'models/domain_record_types.yml#/domain_record_mx'
+            NS: 'models/domain_record_types.yml#/domain_record_ns'
+            SOA: 'models/domain_record_types.yml#/domain_record_soa'
+            SRV: 'models/domain_record_types.yml#/domain_record_srv'
+            TXT: 'models/domain_record_types.yml#/domain_record_txt'
 
       example:
         type: A
