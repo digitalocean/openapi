@@ -111,45 +111,33 @@ rules:
     type: style
     given: "$.components['schemas'].*~"
     severity: error
-    message: "{{description}}; {{property}} incorrect"
+    message: "{{error}}"
     then:
-      function: casing
-      functionOptions:
-        type: snake
-        disallowDigits: false
+      function: ensureSnakeCaseWithDigits
 
   parameter-key-must-be-snake-cased:
     description: parameter key must be snake cased (e.g. snake_case)
     type: style
     given: "$.components['parameters'].*~"
     severity: error
-    message: "{{description}}; {{property}} incorrect"
+    message: "{{error}}"
     then:
-      function: casing
-      functionOptions:
-        type: snake
-        disallowDigits: false
+      function: ensureSnakeCaseWithDigits
 
   example-key-must-be-snake-cased:
     description: example key must be snake cased (e.g. snake_case)
     type: style
     given: "$.components['examples'].*~"
     severity: error
-    message: "{{description}}; {{property}} incorrect"
+    message: "{{error}}"
     then:
-      function: casing
-      functionOptions:
-        type: snake
-        disallowDigits: false
+      function: ensureSnakeCaseWithDigits
 
   response-key-must-be-snake-cased:
     description: response key must be snake cased (e.g. snake_case)
     type: style
     given: "$.components['responses'].*~"
     severity: error
-    message: "{{description}}; {{property}} incorrect"
+    message: "{{error}}"
     then:
-      function: casing
-      functionOptions:
-        type: snake
-        disallowDigits: false
+      function: ensureSnakeCaseWithDigits
