@@ -1,0 +1,19 @@
+type: object
+
+properties:
+  name:
+    type: string
+    example: nyc1-load-balancer-01
+    description: The name of the resource.
+
+  urn:
+    type: string
+    example: do:loadbalancer:fb294d78-d193-4cb2-8737-ea620993591b
+    description: The uniform resource name (URN) for the resource in the format
+      do:resource_type:resource_id.
+
+  created_at:
+    type: string
+    example: '2020-03-13T19:30:48Z'
+    description: A time value given in ISO8601 combined date and time format
+      that represents when the resource was created.

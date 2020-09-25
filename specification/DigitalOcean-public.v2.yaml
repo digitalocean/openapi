@@ -722,6 +722,10 @@ paths:
     delete:
       $ref: 'resources/vpcs/delete_vpc.yml'
 
+  /vpcs/{vpc_id}/members:
+    get:
+      $ref: 'resources/vpcs/list_vpc_members.yml'
+
 components:
   securitySchemes:
     bearerAuth:
