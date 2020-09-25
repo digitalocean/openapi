@@ -1,0 +1,27 @@
+database_id:
+  in: path
+  name: database_id
+  description: A unique identifier for a database cluster.
+  required: true
+  example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
+  schema:
+    type: string
+    format: uuid
+
+database_name:
+  in: path
+  name: database_name
+  description: The name of the database.
+  required: true
+  example: alpha
+  schema:
+    type: string
+
+username:
+  in: path
+  name: username
+  description: The name of the database user.
+  required: true
+  example: app-01
+  schema:
+    type: string

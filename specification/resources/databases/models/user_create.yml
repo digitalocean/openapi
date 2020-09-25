@@ -1,0 +1,12 @@
+type: object
+
+properties:
+  name:
+    type: string
+    example: app-01
+    description: The name to give the database user.
+  mysql_settings:
+    $ref: './mysql_settings.yml'
+
+required:
+  - name

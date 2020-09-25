@@ -1,0 +1,55 @@
+operationId: add_user
+
+summary: Add a Database User
+
+description: |
+  To add a new database user, send a POST request to `/v2/databases/$DATABASE_ID/users`
+  with the desired username.
+
+  Note: User management is not supported for Redis clusters.
+
+  When adding a user to a MySQL cluster, additional options can be configured in the
+  `mysql_settings` object.
+
+  The response will be a JSON object with a key called `user`. The value of this will be an
+  object that contains the standard attributes associated with a database user including
+  its randomly generated password.
+
+tags:
+  - Databases
+
+parameters:
+  - $ref: 'parameters.yml#/database_id'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/user.yml'
+      examples:
+        Add New User:
+          value:
+            name: app-01
+
+        Add New User with MySQL Auth Plugin:
+          value:
+            name: app-02
+            mysql_settings:
+              auth_plugins: mysql_native_password
+
+responses:
+  '201':
+    $ref: 'responses/user.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

@@ -1,0 +1,21 @@
+description: A JSON object with a key of `db`.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      properties:
+        db:
+          type: object
+          properties:
+            $ref: '../models/database.yml'
+    example:
+      db:
+        name: alpha
