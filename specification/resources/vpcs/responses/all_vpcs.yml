@@ -21,7 +21,7 @@ content:
               type: array
               items:
                 $ref: '../models/vpc.yml#/vpc'
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
     example:
