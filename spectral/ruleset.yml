@@ -94,3 +94,14 @@ rules:
     message: "{{error}}"
     then:
       function: ensureAllArraysHaveItemTypes
+
+  operationid-must-be-snake-cased:
+    description: operationIds must be snake cased (e.g. snake_case)
+    type: style
+    given: "$..operationId"
+    severity: error
+    message: "{{description}}; {{value}} incorrect"
+    then:
+      function: casing
+      functionOptions:
+        type: snake
