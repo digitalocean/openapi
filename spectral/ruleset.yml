@@ -105,3 +105,15 @@ rules:
       function: casing
       functionOptions:
         type: snake
+
+  component-key-must-be-snake-cased:
+    description: component key must be snake cased (e.g. snake_case)
+    type: style
+    given: "$.components.*.*~"
+    severity: error
+    message: "{{description}}; {{property}} incorrect"
+    then:
+      function: casing
+      functionOptions:
+        type: snake
+        disallowDigits: false

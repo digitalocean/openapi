@@ -42,8 +42,9 @@ test: dev-dependencies bundle collection start-mockedproxy _sleep ## Run Postman
 		--reporter-json-export newman-results.json
 
 .PHONY: lint
-lint: dev-dependencies ## Lint the OpenAPI spec using Spectral
-	npm run lint
+lint: dev-dependencies bundle ## Lint the OpenAPI spec using Spectral
+	npm run lint -- ${SPEC_FILE}
+	npm run lint -- --skip-rule endpoint-must-be-ref ${BUNDLE_PATH}
 
 .PHONY: collection
 collection: dev-dependencies bundle ## Use openapi-to-postmanv2 to generate a collection
