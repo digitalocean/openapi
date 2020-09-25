@@ -4,7 +4,7 @@ allOf:
   - $ref: 'volume_action_initiate_base.yml'
   - properties:
       droplet_id:
-        $ref: 'attributes.yml#/VolumeActionDropletId'
+        $ref: 'attributes.yml#/volume_action_droplet_id'
       tags:
         $ref: '../../../shared/attributes/tags_array.yml'
 

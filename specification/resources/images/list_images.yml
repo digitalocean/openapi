@@ -33,10 +33,10 @@ tags:
 
 parameters:
   - $ref: 'parameters.yml#/Type'
-  - $ref: 'parameters.yml#/Private'
+  - $ref: 'parameters.yml#/private'
   - $ref: 'parameters.yml#/Tag'
-  - $ref: '../../shared/parameters.yml#/PerPage'
-  - $ref: '../../shared/parameters.yml#/Page'
+  - $ref: '../../shared/parameters.yml#/per_page'
+  - $ref: '../../shared/parameters.yml#/page'
 
 responses:
   '200':

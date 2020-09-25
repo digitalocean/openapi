@@ -2,10 +2,10 @@ type: object
 
 properties:
   name:
-    $ref: '../attributes.yml#/ImageName'
+    $ref: '../attributes.yml#/image_name'
 
   distribution:
     $ref: '../../../shared/attributes/distribution.yml' 
 
   description:
-    $ref: '../attributes.yml#/ImageDescription'
+    $ref: '../attributes.yml#/image_description'

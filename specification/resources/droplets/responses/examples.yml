@@ -1,4 +1,4 @@
-DropletsAll:
+droplets_all:
   value:
     droplets:
     - id: 3164444
@@ -349,7 +349,7 @@ DropletsAll:
       total:
         3
 
-DropletsTagged:
+droplets_tagged:
   value:
     droplets:
     - id: 3164444
@@ -589,7 +589,7 @@ DropletsTagged:
       total:
         2
 
-DropletSingle:
+droplet_single:
   value:
     id: 3164444
     name: example.com
@@ -712,7 +712,7 @@ DropletSingle:
     - env:prod
     vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
 
-DropletCreateResponse:
+droplet_create_response:
   value:
     droplet:
       id: 3164444
@@ -825,7 +825,7 @@ DropletCreateResponse:
         rel: create
         href: https://api.digitalocean.com/v2/actions/7515
 
-DropletMultiCreateResponse:
+droplet_multi_create_response:
   value:
     droplets:
     - id: 3164444

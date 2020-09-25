@@ -34,10 +34,10 @@ tags:
   - Block Storage
 
 parameters:
-  - $ref: 'parameters.yml#/VolumeName'
+  - $ref: 'parameters.yml#/volume_name'
   - $ref: '../../shared/parameters.yml#/Region'
-  - $ref: '../../shared/parameters.yml#/PerPage'
-  - $ref: '../../shared/parameters.yml#/Page'
+  - $ref: '../../shared/parameters.yml#/per_page'
+  - $ref: '../../shared/parameters.yml#/page'
 
 responses:
   '200':

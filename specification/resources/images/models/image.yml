@@ -11,7 +11,7 @@ properties:
     readOnly: true
 
   name:
-    $ref: '../attributes.yml#/ImageName'
+    $ref: '../attributes.yml#/image_name'
 
   type:
     type: string
@@ -75,7 +75,7 @@ properties:
     example: 2.34
 
   description:
-    $ref: '../attributes.yml#/ImageDescription'
+    $ref: '../attributes.yml#/image_description'
 
   tags:
     $ref: '../../../shared/attributes/tags_array.yml'

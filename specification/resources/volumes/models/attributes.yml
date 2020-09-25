@@ -24,7 +24,7 @@ VolumeWriteFileSystemLabel:
   example: example
 
 
-VolumeActionDropletId:
+volume_action_droplet_id:
   type: integer
   description: >-
     The unique identifier for the Droplet the volume will be attached or

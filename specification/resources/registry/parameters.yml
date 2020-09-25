@@ -1,4 +1,4 @@
-RegistryExpirySeconds:
+registry_expiry_seconds:
   in: query
   name: expiry_seconds
   required: false
@@ -10,7 +10,7 @@ RegistryExpirySeconds:
     default: 0
   example: 3600
 
-RegistryReadWrite:
+registry_read_write:
   in: query
   name: read_write
   required: false
@@ -21,7 +21,7 @@ RegistryReadWrite:
     default: false
   example: true
 
-RegistryName:
+registry_name:
   in: path
   name: registry_name
   description: The name of a container registry.
@@ -30,7 +30,7 @@ RegistryName:
     type: string
   example: example
 
-RegistryRepositoryName:
+registry_repository_name:
   in: path
   name: repository_name
   description: The name of a container registry repository. If the name contains
@@ -40,7 +40,7 @@ RegistryRepositoryName:
     type: string
   example: repo-1
 
-RegistryRepositoryTag:
+registry_repository_tag:
   in: path
   name: repository_tag
   description: The name of a container registry repository tag.
@@ -49,7 +49,7 @@ RegistryRepositoryTag:
     type: string
   example: 06a447a
 
-RegistryManifestDigest:
+registry_manifest_digest:
   in: path
   name: manifest_digest
   description: The manifest digest of a container registry repository tag.

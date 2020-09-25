@@ -10,7 +10,7 @@ tags:
   - Block Storage
 
 parameters:
-  - $ref: '../snapshots/parameters.yml#/SnapshotId'
+  - $ref: '../snapshots/parameters.yml#/snapshot_id'
 
 responses:
   '200':

@@ -10,9 +10,9 @@ tags:
   - Block Storage
 
 parameters:
-  - $ref: 'parameters.yml#/VolumeId'
-  - $ref: '../../shared/parameters.yml#/PerPage'
-  - $ref: '../../shared/parameters.yml#/Page'
+  - $ref: 'parameters.yml#/volume_id'
+  - $ref: '../../shared/parameters.yml#/per_page'
+  - $ref: '../../shared/parameters.yml#/page'
 
 responses:
   '200':

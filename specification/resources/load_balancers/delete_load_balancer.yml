@@ -14,7 +14,7 @@ tags:
   - Load Balancers
 
 parameters:
-  - $ref: 'parameters.yml#/LoadBalancerId'
+  - $ref: 'parameters.yml#/load_balancer_id'
 
 responses:
   '204':

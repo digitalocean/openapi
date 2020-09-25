@@ -1,4 +1,4 @@
-DomainRecordsAll:
+domain_records_all:
   value:
     domain_records:
       - id: 28448429
@@ -48,7 +48,7 @@ DomainRecordsAll:
     meta:
       total: 4
 
-DomainRecordCreated:
+domain_record_created:
   value:
     domain_record:
       id: 28448433

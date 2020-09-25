@@ -1,4 +1,4 @@
-VolumesAll:
+volumes_all:
   value:
     volumes:
       - id: 506f78a4-e098-11e5-ad9f-000f53306ae1
@@ -74,7 +74,7 @@ VolumesAll:
     meta:
       total: 2
 
-VolumesFilteredByRegion:
+volumes_filtered_by_region:
   value:
     volumes:
       - id: 506f78a4-e098-11e5-ad9f-000f53306ae1
@@ -115,7 +115,7 @@ VolumesFilteredByRegion:
     meta:
       total: 1
 
-VolumesFilteredByName:
+volumes_filtered_by_name:
   value:
     volumes:
       - id: 506f78a4-e098-11e5-ad9f-000f53306ae1
@@ -156,7 +156,7 @@ VolumesFilteredByName:
     meta:
       total: 1
 
-VolumeActionAttachResponse:
+volume_action_attach_response:
   value:
     action:
       id: 72531856
@@ -191,7 +191,7 @@ VolumeActionAttachResponse:
         available: true
       region_slug: nyc1
 
-VolumeActionDetachResponse:
+volume_action_detach_response:
   value:
     action:
     id: 68212773

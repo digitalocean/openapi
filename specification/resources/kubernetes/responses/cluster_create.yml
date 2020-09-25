@@ -24,6 +24,6 @@ content:
           $ref: '../models/cluster.yml'
     examples:
       Kubernetes Cluster Response:
-        $ref: 'examples.yml#/KubernetesClustersCreateBasicResponse'
+        $ref: 'examples.yml#/kubernetes_clusters_create_basic_response'
       Kubernetes Cluster with Multiple Node Pools Response:
-         $ref: 'examples.yml#/KubernetesClustersMultiPoolResponse'
+         $ref: 'examples.yml#/kubernetes_clusters_multi_pool_response'

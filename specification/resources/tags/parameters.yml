@@ -1,4 +1,4 @@
-TagId:
+tag_id:
   in: path
   name: tag_id
   description: >-

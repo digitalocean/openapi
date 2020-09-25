@@ -1,4 +1,4 @@
-DropletActionType:
+droplet_action_type:
   type: object
   description: Specifies the action that will be taken on the Droplet.
   properties:
@@ -24,9 +24,9 @@ DropletActionType:
       example: reboot
       description: The type of action to initiate for the Droplet.
 
-DropletActionRestore:
+droplet_action_restore:
   allOf:
-  - $ref: '#/DropletActionType'
+  - $ref: '#/droplet_action_type'
   - type: object
     properties:
       image:
@@ -35,9 +35,9 @@ DropletActionRestore:
         description: The ID of a backup of the current Droplet instance to
           restore from.
 
-DropletActionResize:
+droplet_action_resize:
   allOf:
-  - $ref: '#/DropletActionType'
+  - $ref: '#/droplet_action_type'
   - type: object
     properties:
       disk:
@@ -52,9 +52,9 @@ DropletActionResize:
         description: The slug identifier for the size to which you wish to
           resize the Droplet.
 
-DropletActionRebuild:
+droplet_action_rebuild:
   allOf:
-  - $ref: '#/DropletActionType'
+  - $ref: '#/droplet_action_type'
   - type: object
     properties:
       image:
@@ -66,9 +66,9 @@ DropletActionRebuild:
           identifier for a public image. The Droplet will be rebuilt using this
           image as its base.
 
-DropletActionRename:
+droplet_action_rename:
   allOf:
-  - $ref: '#/DropletActionType'
+  - $ref: '#/droplet_action_type'
   - type: object
     properties:
       name:
@@ -76,9 +76,9 @@ DropletActionRename:
         example: "nifty-new-name"
         description: The new name for the Droplet.
 
-DropletActionChangeKernel:
+droplet_action_change_kernel:
   allOf:
-  - $ref: '#/DropletActionType'
+  - $ref: '#/droplet_action_type'
   - type: object
     properties:
       kernel:
@@ -87,9 +87,9 @@ DropletActionChangeKernel:
         description: A unique number used to identify and reference a
           specific kernel.
 
-DropletActionSnapshot:
+droplet_action_snapshot:
   allOf:
-  - $ref: '#/DropletActionType'
+  - $ref: '#/droplet_action_type'
   - type: object
     properties:
       name:

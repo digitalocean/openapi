@@ -1,4 +1,4 @@
-KubernetesClusterId:
+kubernetes_cluster_id:
   in: path
   name: cluster_id
   description: A unique ID that can be used to reference a Kubernetes cluster.
@@ -9,7 +9,7 @@ KubernetesClusterId:
     minimum: 1
   example: bd5f5959-5e1e-4205-a714-a914373942af
 
-KubernetesNodePoolId:
+kubernetes_node_pool_id:
   in: path
   name: node_pool_id
   description: A unique ID that can be used to reference a Kubernetes node pool.
@@ -20,7 +20,7 @@ KubernetesNodePoolId:
     minimum: 1
   example: cdda885e-7663-40c8-bc74-3a036c66545d
 
-KubernetesNodeId:
+kubernetes_node_id:
   in: path
   name: node_id
   description: A unique ID that can be used to reference a node in a Kubernetes
@@ -32,7 +32,7 @@ KubernetesNodeId:
     minimum: 1
   example: 478247f8-b1bb-4f7a-8db9-2a5f8d4b8f8f
 
-KubernetesExpirySeconds:
+kubernetes_expiry_seconds:
   in: query
   name: expiry_seconds
   required: false
@@ -44,7 +44,7 @@ KubernetesExpirySeconds:
     default: 0
   example: 300
 
-ClusterlintRunId:
+clusterlint_run_id:
   in: query
   name: run_id
   description: Specifies the clusterlint run whose results will be retrieved.
@@ -54,7 +54,7 @@ ClusterlintRunId:
     format: uuid
   example: 50c2f44c-011d-493e-aee5-361a4a0d1844
 
-KubernetesNodeSkipDrain:
+kubernetes_node_skip_drain:
   in: query
   name: skip_drain
   required: false
@@ -69,7 +69,7 @@ KubernetesNodeSkipDrain:
     default: 0
   example: 1
 
-KubernetesNodeReplace:
+kubernetes_node_replace:
   in: query
   name: replace
   required: false

@@ -1,4 +1,4 @@
-CertificateCreateBase:
+certificate_create_base:
   type: object
   properties:
     name:
@@ -19,10 +19,10 @@ CertificateCreateBase:
   required:
   - name
 
-CertificateRequestCustom:
+certificate_request_custom:
   title: Custom Certificate Request
   allOf:
-    - $ref: '#/CertificateCreateBase'
+    - $ref: '#/certificate_create_base'
 
     - type: object
       properties:
@@ -162,10 +162,10 @@ CertificateRequestCustom:
       - private_key
       - leaf_certificate
 
-CertificateRequestLetsEncrypt:
+certificate_request_lets_encrypt:
   title: Let's Encrypt Certificate Request
   allOf:
-    - $ref: '#/CertificateCreateBase'
+    - $ref: '#/certificate_create_base'
 
     - type: object
       properties:

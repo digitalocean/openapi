@@ -11,7 +11,7 @@ tags:
   - Tags
 
 parameters:
-  - $ref: 'parameters.yml#/TagId'
+  - $ref: 'parameters.yml#/tag_id'
 
 responses:
   '204':

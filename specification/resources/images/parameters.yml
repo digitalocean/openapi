@@ -1,4 +1,4 @@
-ImageId:
+image_id:
   in: path
   name: identifier
   description: A unique number that can be used to identify and reference a specific image.
@@ -19,7 +19,7 @@ Type:
       - distribution
   example: distribution
 
-Private:
+private:
   in: query
   name: private
   description: Used to filter only user images.

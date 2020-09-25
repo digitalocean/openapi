@@ -16,7 +16,7 @@ tags:
   - Domain Records
 
 parameters:
-  - $ref: 'parameters.yml#/DomainName'
+  - $ref: 'parameters.yml#/domain_name'
 
 requestBody:
   content:

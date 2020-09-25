@@ -16,7 +16,7 @@ content:
       $ref: '../models/decorated_wrapped_ssh_keys.yml'
 
     examples:
-      FirstPage:
+      first_page:
         value:
           ssh_keys:
             - id: 289794
@@ -31,7 +31,7 @@ content:
             total:
               3
 
-      LastPage:
+      last_page:
         value:
           ssh_keys:
             - id: 289794
@@ -46,7 +46,7 @@ content:
             total:
               3
 
-      MiddlePage:
+      middle_page:
         value:
           ssh_keys:
             - id: 289794
@@ -63,7 +63,7 @@ content:
             total:
               9
 
-      NoPagination:
+      no_pagination:
         value:
           ssh_keys:
             - id: 289794

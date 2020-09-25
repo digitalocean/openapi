@@ -20,9 +20,9 @@ content:
               type: array
               items:
                 $ref: '../models/certificate.yml'
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
     examples:
       AllCertificates:
-        $ref: 'examples.yml#/CertificatesAll'
+        $ref: 'examples.yml#/certificates_all'

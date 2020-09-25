@@ -28,7 +28,7 @@ content:
             invoice_preview:
               $ref: '../models/invoice_preview.yml'
 
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
     example:

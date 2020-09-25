@@ -14,7 +14,7 @@ tags:
   - Droplets
 
 parameters:
-  - $ref: 'parameters.yml#/DropletDeleteTagName'
+  - $ref: 'parameters.yml#/droplet_delete_tag_name'
 
 responses:
   '204':

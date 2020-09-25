@@ -15,7 +15,7 @@ tags:
   - Block Storage
 
 parameters:
-  - $ref: 'parameters.yml#/VolumeName'
+  - $ref: 'parameters.yml#/volume_name'
   - $ref: '../../shared/parameters.yml#/Region'
 
 responses:

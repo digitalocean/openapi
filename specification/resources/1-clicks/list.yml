@@ -14,7 +14,7 @@ tags:
   - 1-Click Applications
 
 parameters:
-  - $ref: 'parameters.yml#/1ClickType'
+  - $ref: 'parameters.yml#/1_click_type'
 
 responses:
   '200':

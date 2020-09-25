@@ -20,8 +20,8 @@ content:
               type: array
               items:
                 $ref: '../models/load_balancer.yml'
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
     examples:
       All Load Balancers:
-        $ref: 'examples.yml#/LoadBalancersAll'
+        $ref: 'examples.yml#/load_balancers_all'

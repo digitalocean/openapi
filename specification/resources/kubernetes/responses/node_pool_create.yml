@@ -15,7 +15,7 @@ content:
     schema:
       properties:
         node_pool:
-          $ref: '../models/node_pool.yml#/KubernetesNodePool'
+          $ref: '../models/node_pool.yml#/kubernetes_node_pool'
 
       example:
         node_pool:

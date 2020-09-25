@@ -29,13 +29,13 @@ requestBody:
 
       examples:
         Basic Create Request:
-          $ref: 'examples.yml#/LoadBalancerBasicCreateRequest'
+          $ref: 'examples.yml#/load_balancer_basic_create_request'
         SSL Termination Create Request:
-          $ref: 'examples.yml#/LoadBalancerSSLTerminationCreateRequest'
+          $ref: 'examples.yml#/load_balancer_s_s_l_termination_create_request'
         Create Request Using Droplet Tag:
-          $ref: 'examples.yml#/LoadBalancerUsingTagCreateRequest'
+          $ref: 'examples.yml#/load_balancer_using_tag_create_request'
         Sticky Sessions and Custom Health Check:
-          $ref: 'examples.yml#/LoadBalancerStickySessionsAndHealthCheckCreateRequest'
+          $ref: 'examples.yml#/load_balancer_sticky_sessions_and_health_check_create_request'
 
 responses:
   '202':

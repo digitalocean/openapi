@@ -1,4 +1,4 @@
-PerPage:
+per_page:
   in: query
   name: per_page
   required: false
@@ -10,7 +10,7 @@ PerPage:
     maximum: 200
   example: 2
 
-Page:
+page:
   in: query
   name: page
   required: false

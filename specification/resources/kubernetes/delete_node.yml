@@ -18,11 +18,11 @@ tags:
   - Kubernetes
 
 parameters:
-  - $ref: 'parameters.yml#/KubernetesClusterId'
-  - $ref: 'parameters.yml#/KubernetesNodePoolId'
-  - $ref: 'parameters.yml#/KubernetesNodeId'
-  - $ref: 'parameters.yml#/KubernetesNodeSkipDrain'
-  - $ref: 'parameters.yml#/KubernetesNodeReplace'
+  - $ref: 'parameters.yml#/kubernetes_cluster_id'
+  - $ref: 'parameters.yml#/kubernetes_node_pool_id'
+  - $ref: 'parameters.yml#/kubernetes_node_id'
+  - $ref: 'parameters.yml#/kubernetes_node_skip_drain'
+  - $ref: 'parameters.yml#/kubernetes_node_replace'
 
 responses:
   '202':

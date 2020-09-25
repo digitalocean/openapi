@@ -18,5 +18,5 @@ content:
         load_balancer:
           $ref: '../models/load_balancer.yml'
     examples:
-      LoadBalancerUpdateResponse:
-        $ref: 'examples.yml#/LoadBalancerUpdateResponse'
+      load_balancer_update_response:
+        $ref: 'examples.yml#/load_balancer_update_response'

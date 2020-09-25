@@ -13,8 +13,8 @@ tags:
   - Droplet Actions
 
 parameters:
-  - $ref: 'parameters.yml#/DropletId'
-  - $ref: '../actions/parameters.yml#/actionId'
+  - $ref: 'parameters.yml#/droplet_id'
+  - $ref: '../actions/parameters.yml#/action_id'
 
 responses:
   '200':

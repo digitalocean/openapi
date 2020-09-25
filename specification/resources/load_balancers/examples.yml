@@ -1,4 +1,4 @@
-LoadBalancerBasicCreateRequest:
+load_balancer_basic_create_request:
   description: Passing requests directly through to 80 and 443.
   value:
     name: example-lb-01
@@ -17,7 +17,7 @@ LoadBalancerBasicCreateRequest:
     - 3164444
     - 3164445
 
-LoadBalancerSSLTerminationCreateRequest:
+load_balancer_s_s_l_termination_create_request:
   description: Terminating SSL at the load balancer using a managed SSL
     certificate specifying Droplets using `droplet_ids`.
   value:
@@ -33,7 +33,7 @@ LoadBalancerSSLTerminationCreateRequest:
     - 3164444
     - 3164445
 
-LoadBalancerUsingTagCreateRequest:
+load_balancer_using_tag_create_request:
   description: Terminating SSL at the load balancer using a managed SSL
     certificate specifying Droplets using `tag`.
   value:
@@ -47,7 +47,7 @@ LoadBalancerUsingTagCreateRequest:
       certificate_id: 892071a0-bb95-49bc-8021-3afd67a210bf
     tag: prod:web
 
-LoadBalancerStickySessionsAndHealthCheckCreateRequest:
+load_balancer_sticky_sessions_and_health_check_create_request:
   description: Terminating SSL at the load balancer using a managed SSL
     certificate specifying Droplets using `tag`.
   value:
@@ -73,7 +73,7 @@ LoadBalancerStickySessionsAndHealthCheckCreateRequest:
       cookie_ttl_seconds: 300
     tag: prod:web
 
-LoadBalancerUpdateRequest:
+load_balancer_update_request:
   value:
     load_balancer:
       name: updated-example-lb-01

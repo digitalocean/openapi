@@ -14,7 +14,7 @@ tags:
   - CDN Endpoints
 
 parameters:
-  - $ref: 'parameters.yml#/CdnEndpointId'
+  - $ref: 'parameters.yml#/cdn_endpoint_id'
 
 requestBody:
   required: true

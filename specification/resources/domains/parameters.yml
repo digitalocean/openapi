@@ -1,4 +1,4 @@
-DomainName:
+domain_name:
   name: domain_name
   description: The name of the domain itself.
   in: path
@@ -7,7 +7,7 @@ DomainName:
   example: example.com
   required: true
 
-DomainRecordId:
+domain_record_id:
   name: domain_record_id
   description: The unique identifier of the domain record.
   in: path
@@ -16,7 +16,7 @@ DomainRecordId:
   example: 3352896
   required: true
 
-DomainNameQuery:
+domain_name_query:
   name: name
   description: >-
     A fully qualified record name. For example, to only include records matching
@@ -27,7 +27,7 @@ DomainNameQuery:
     type: string
   example: sub.example.com
 
-DomainTypeQuery:
+domain_type_query:
   name: type
   description: 'The type of the DNS record. For example: A, CNAME, TXT, ...'
   in: query

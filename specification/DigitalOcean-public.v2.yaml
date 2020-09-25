@@ -728,8 +728,8 @@ paths:
 
 components:
   securitySchemes:
-    bearerAuth:
+    bearer_auth:
       type: http
       scheme: bearer
 security:
-  - bearerAuth: []
+  - bearer_auth: []

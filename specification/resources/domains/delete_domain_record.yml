@@ -13,8 +13,8 @@ tags:
   - Domain Records
 
 parameters:
-  - $ref: 'parameters.yml#/DomainName'
-  - $ref: 'parameters.yml#/DomainRecordId'
+  - $ref: 'parameters.yml#/domain_name'
+  - $ref: 'parameters.yml#/domain_record_id'
 
 responses:
   '204':

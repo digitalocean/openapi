@@ -1,4 +1,4 @@
-KubernetesOptions:
+kubernetes_options:
   type: object
   properties:
     options:
@@ -6,17 +6,17 @@ KubernetesOptions:
         regions:
           type: array
           items:
-            $ref: '#/KubernetesRegion'
+            $ref: '#/kubernetes_region'
         versions:
           type: array
           items:
-            $ref: '#/KubernetesVersion'
+            $ref: '#/kubernetes_version'
         sizes:
           type: array
           items:
-            $ref: '#/KubernetesSize'
+            $ref: '#/kubernetes_size'
 
-KubernetesVersion:
+kubernetes_version:
   type: object
   properties:
     slug:
@@ -31,7 +31,7 @@ KubernetesVersion:
       description: The upstream version string for the version of Kubernetes
         provided by a given slug.
 
-KubernetesRegion:
+kubernetes_region:
   type: object
   properties:
     name:
@@ -43,7 +43,7 @@ KubernetesRegion:
       example: nyc3
       description: The identifier for a region for use when creating a new cluster.
 
-KubernetesSize:
+kubernetes_size:
   type: object
   properties:
     name:

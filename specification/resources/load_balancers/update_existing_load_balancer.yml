@@ -14,7 +14,7 @@ tags:
   - Load Balancers
 
 parameters:
-  - $ref: 'parameters.yml#/LoadBalancerId'
+  - $ref: 'parameters.yml#/load_balancer_id'
 
 requestBody:
   required: true
@@ -25,8 +25,8 @@ requestBody:
         $ref: 'models/load_balancer_create.yml'
 
       examples:
-        LoadBalancerUpdateRequest:
-          $ref: 'examples.yml#/LoadBalancerUpdateRequest'
+        load_balancer_update_request:
+          $ref: 'examples.yml#/load_balancer_update_request'
 
 responses:
   '200':

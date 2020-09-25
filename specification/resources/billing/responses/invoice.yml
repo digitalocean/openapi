@@ -22,7 +22,7 @@ content:
               items:
                 $ref: '../models/invoice_item.yml'
 
-        - $ref: '../../../shared/pages.yml#/Pagination'
+        - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
     example:

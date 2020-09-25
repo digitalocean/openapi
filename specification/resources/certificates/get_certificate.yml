@@ -10,7 +10,7 @@ tags:
   - Certificates
 
 parameters:
-  - $ref: 'parameters.yml#/CertificateId'
+  - $ref: 'parameters.yml#/certificate_id'
 
 responses:
   '200':

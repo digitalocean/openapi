@@ -1,4 +1,4 @@
-DropletId:
+droplet_id:
   in: path
   name: droplet_id
   description: A unique identifier for a Droplet instance.
@@ -8,7 +8,7 @@ DropletId:
     minimum: 1
   example: 3164444
 
-DropletTagName:
+droplet_tag_name:
   in: query
   name: tag_name
   description: Used to filter Droplets by a specific tag.
@@ -17,7 +17,7 @@ DropletTagName:
     type: string
   example: env:prod
 
-DropletDeleteTagName:
+droplet_delete_tag_name:
   in: query
   name: tag_name
   description: Specifies Droplets to be deleted by tag.
