@@ -26,7 +26,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/user.yml'
+        $ref: 'models/database_user.yml'
       examples:
         Add New User:
           value:

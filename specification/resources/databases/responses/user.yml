@@ -14,7 +14,7 @@ content:
       type: object
       properties:
         user:
-          $ref: '../models/user.yml'
+          $ref: '../models/database_user.yml'
       required:
         - user
     examples:

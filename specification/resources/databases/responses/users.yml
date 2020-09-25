@@ -15,7 +15,7 @@ content:
         users:
           type: array
           items:
-            $ref: '../models/user.yml'
+            $ref: '../models/database_user.yml'
     example:
       users:
         - name: app-01
