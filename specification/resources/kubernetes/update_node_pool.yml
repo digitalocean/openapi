@@ -21,7 +21,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/node_pool.yml#/kubernetes_node_poolUpdate'
+        $ref: 'models/node_pool.yml#/kubernetes_node_pool_update'
 
 responses:
   '202':

@@ -19,7 +19,7 @@ tags:
 
 parameters:
   - $ref: 'parameters.yml#/droplet_id'
-  - $ref: 'parameters.yml#/X-Dangerous'
+  - $ref: 'parameters.yml#/x_dangerous'
 
 responses:
   '202':

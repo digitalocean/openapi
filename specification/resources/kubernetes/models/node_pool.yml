@@ -9,7 +9,7 @@ kubernetes_node_pool:
   - size
   - count
 
-kubernetes_node_poolUpdate:
+kubernetes_node_pool_update:
   type: object
   allOf:
   - $ref: "#/kubernetes_node_pool_base"

@@ -26,7 +26,7 @@ droplet_delete_tag_name:
     type: string
   example: env:test
 
-X-Dangerous:
+x_dangerous:
   in: header
   name: X-Dangerous
   description: Acknowledge this action will destroy the Droplet and all

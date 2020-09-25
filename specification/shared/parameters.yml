@@ -21,10 +21,10 @@ page:
     default: 1
   example: 1
 
-Region:
+region:
   name: region
   in: query
-  description: >- 
+  description: >-
     The slug identifier for the region where the resource is available.
   schema:
     $ref: 'attributes/region_slug.yml'

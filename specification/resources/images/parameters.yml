@@ -7,7 +7,7 @@ image_id:
     type: integer
   example: 62137902
 
-Type:
+type:
   in: query
   name: type
   description: Filters results based on image type which can be either `application` or `distribution`.
@@ -28,7 +28,7 @@ private:
     type: boolean
   example: true
 
-Tag:
+tag:
   in: query
   name: tag_name
   description: Used to filter images by a specific tag.

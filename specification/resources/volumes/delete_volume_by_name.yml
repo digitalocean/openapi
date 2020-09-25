@@ -16,7 +16,7 @@ tags:
 
 parameters:
   - $ref: 'parameters.yml#/volume_name'
-  - $ref: '../../shared/parameters.yml#/Region'
+  - $ref: '../../shared/parameters.yml#/region'
 
 responses:
   '204':
