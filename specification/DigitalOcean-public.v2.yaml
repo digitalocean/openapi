@@ -484,6 +484,26 @@ paths:
     post:
       $ref: 'resources/firewalls/create_firewall.yml'
 
+  /firewalls/{firewall_id}:
+    get:
+      $ref: 'resources/firewalls/get_firewall.yml'
+    put:
+      $ref: 'resources/firewalls/put_firewall.yml'
+    delete:
+      $ref: 'resources/firewalls/delete_firewall.yml'
+
+  /firewalls/{firewall_id}/droplets:
+    post:
+      $ref: 'resources/firewalls/post_firewall_droplets.yml'
+    delete:
+      $ref: 'resources/firewalls/delete_firewall_droplets.yml'
+
+  /firewalls/{firewall_id}/tags:
+    post:
+      $ref: 'resources/firewalls/post_firewall_tags.yml'
+    delete:
+      $ref: 'resources/firewalls/delete_firewall_tags.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
