@@ -144,7 +144,7 @@ tags:
       db-s-16vcpu-64gb | 64 GB | 16 vCPU | 1.12 TB | True
 
   - name: Domain Records
-    description: >-
+    description: |
       Domain record resources are used to set or retrieve information about the
       individual DNS records configured for a domain. This allows you to build
       and manage DNS zone files by adding and modifying individual records for a
