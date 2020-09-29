@@ -268,6 +268,13 @@ tags:
       delete load balancers as well as add or remove Droplets, forwarding rules,
       and other configuration details.
 
+  - name: Projects
+    description: >-
+     Projects allow you to organize your resources into groups that fit the way
+     you work. You can group resources (like Droplets, Spaces, load balancers,
+     domains, and floating IPs) in ways that align with the applications
+     you host on DigitalOcean.
+
   - name: Regions
     description: Provides information about DigitalOcean data center regions.
 
@@ -678,6 +685,10 @@ paths:
 
     delete:
       $ref: 'resources/load_balancers/remove_forwarding_rules.yml'
+
+  /projects:
+    get:
+      $ref: 'resources/projects/list_projects.yml'
 
   /regions:
     get:
