@@ -12,7 +12,7 @@ content:
   application/json:
     schema:
       properties:
-        1-clicks:
+        1_clicks:
           type: array
           items:
             $ref: '../models/1_click.yml'
