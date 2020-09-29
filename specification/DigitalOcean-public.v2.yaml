@@ -713,6 +713,9 @@ paths:
     patch:
       $ref: 'resources/projects/patch_project.yml'
 
+    delete:
+      $ref: 'resources/projects/delete_project.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
