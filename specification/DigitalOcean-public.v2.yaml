@@ -697,6 +697,12 @@ paths:
     get:
       $ref: 'resources/projects/get_default_project.yml'
 
+    put:
+      $ref: 'resources/projects/update_default_project.yml'
+
+    patch:
+      $ref: 'resources/projects/patch_default_project.yml'
+
   /projects/{project_id}:
     get:
       $ref: 'resources/projects/get_project.yml'
