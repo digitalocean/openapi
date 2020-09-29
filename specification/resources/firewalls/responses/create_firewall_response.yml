@@ -13,7 +13,9 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/firewall.yml'
+      properties:
+        firewall:
+          $ref: '../models/firewall.yml'
 
     example:
       firewall:

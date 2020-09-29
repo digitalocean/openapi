@@ -27,6 +27,8 @@ firewall_rule_base:
     - ports
 
 firewall_rule_target:
+  # The common definition of a rule target used in both inbound (sources) and
+  # outbound (destinations)rules.
   type: object
   properties:
     addresses:
@@ -69,48 +71,36 @@ firewall_rule_target:
           example:
             - frontend
 
-firewall_rule_inbound:
-  allOf:
-    - $ref: '#/firewall_rule_base'
-    - properties:
-        sources:
-          allOf:
-            - $ref: '#/firewall_rule_target'
-            - description: >-
-                An object specifying locations from which inbound traffic will be
-                accepted. (See below for the available keys and the types.)
-              example:
-                - protocol: tcp
-                  ports: '80'
-                  sources:
-                    load_balancer_uids:
-                    - 4de7ac8b-495b-4884-9a69-1050c6793cd6
-                - protocol: tcp
-                  ports: '22'
-                  sources:
-                    tags:
-                    - gateway
-                    addresses:
-                    - 18.0.0.0/8
-      required:
-        - sources
+firewall_rules:
+  type: object
+  
+  properties:
+    inbound_rules:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/firewall_rule_base'
+          - properties:
+              sources:
+                allOf:
+                  - $ref: '#/firewall_rule_target'
+                  - description: >-
+                      An object specifying locations from which inbound traffic
+                      will be accepted.
+            required:
+              - sources
 
-firewall_rule_outbound:
-  allOf:
-    - $ref: '#/firewall_rule_base'
-    - properties:
-        destinations: 
-          allOf:
-            - $ref: '#/firewall_rule_target'
-            - description: >- 
-                An object specifying locations to which outbound traffic that will
-                be allowed. (See below for the available keys and the types.)
-              example:
-                - protocol: tcp
-                  ports: '80'
-                  destinations:
-                    addresses:
-                    - 0.0.0.0/0
-                    - "::/0"
-      required:
-        - destinations
+    outbound_rules:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/firewall_rule_base'
+          - properties: 
+              destinations:
+                allOf:
+                  - $ref: '#/firewall_rule_target'
+                  - description: >- 
+                      An object specifying locations to which outbound
+                      traffic that will be allowed.
+            required:
+              - destinations
