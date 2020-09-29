@@ -85,7 +85,3 @@ properties:
     example: "2018-09-27T20:10:35Z"
     description: A time value given in ISO8601 combined date and time format
       that represents when the project was updated.
-
-required:
-- name
-- purpose

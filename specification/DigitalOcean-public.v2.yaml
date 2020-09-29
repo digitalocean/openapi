@@ -690,6 +690,9 @@ paths:
     get:
       $ref: 'resources/projects/list_projects.yml'
 
+    post:
+      $ref: 'resources/projects/create_project.yml'
+
   /projects/default:
     get:
       $ref: 'resources/projects/get_default_project.yml'
