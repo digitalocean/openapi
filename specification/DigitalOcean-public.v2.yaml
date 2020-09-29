@@ -701,6 +701,12 @@ paths:
     get:
       $ref: 'resources/projects/get_project.yml'
 
+    put:
+      $ref: 'resources/projects/update_project.yml'
+
+    patch:
+      $ref: 'resources/projects/patch_project.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'
