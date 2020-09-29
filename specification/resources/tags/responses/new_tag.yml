@@ -13,19 +13,21 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/tag.yml'
-    example:
-      tag:
-        name: extra-awesome
-        resources:
-          count: 0
-          droplets:
+      properties:
+        tag:
+          $ref: '../models/tag.yml'
+      example:
+        tag:
+          name: extra-awesome
+          resources:
             count: 0
-          images:
-            count: 0
-          volumes:
-            count: 0
-          volume_snapshots:
-            count: 0
-          databases:
-            count: 0
+            droplets:
+              count: 0
+            images:
+              count: 0
+            volumes:
+              count: 0
+            volume_snapshots:
+              count: 0
+            databases:
+              count: 0
