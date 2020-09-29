@@ -18,6 +18,6 @@ content:
       InvalidCharacters:
         value:
           error: 'Error validating resource tag: \"tag-name \\\"здорово\\\" contains invalid characters\"'
-          message: null
+          messages: null
           root_causes:
             - 'rpc error: code = InvalidArgument desc = Error validating resource tag: \"tag-name \\\"здорово\\\" contains invalid characters\"'
