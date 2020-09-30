@@ -3,7 +3,9 @@ type: object
 properties:
   uri:
     type: string
-    description: A connection string in the format accepted by the psql command. This is provided as a convenience and should be able to be constructed by the other attributes.
+    description: >-
+      A connection string in the format accepted by the `psql` command. This is provided
+      as a convenience and should be able to be constructed by the other attributes.
     example: postgres://doadmin:wv78n3zpz42xezdk@backend-do-user-19081923-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require
     readOnly: true
   database:
