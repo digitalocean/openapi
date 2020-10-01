@@ -18,7 +18,15 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/firewall.yml'
+        allOf:
+          - $ref: 'models/firewall.yml'
+          - anyOf:
+            - title: Inbound Rules
+              required:
+                - inbound_rules
+            - title: Outbound Rules
+              required:
+                - outbound_rules
 
       example:
         name: frontend-firewall

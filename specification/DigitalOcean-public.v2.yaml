@@ -561,6 +561,12 @@ paths:
     delete:
       $ref: 'resources/firewalls/delete_firewall_tags.yml'
 
+  /firewalls/{firewall_id}/rules:
+    post:
+      $ref: 'resources/firewalls/post_firewall_rules.yml'
+    delete:
+      $ref: 'resources/firewalls/delete_firewall_rules.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
