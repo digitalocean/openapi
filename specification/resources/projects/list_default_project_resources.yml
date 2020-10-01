@@ -1,15 +1,12 @@
-operationId: list_project_resources
+operationId: list_default_project_resources
 
-summary: List Project Resources
+summary: List Default Project Resources
 
-description: To list all your resources in a project, send a GET request to
-  `/v2/projects/$PROJECT_ID/resources`.
+description: To list all your resources in your default project, send a GET
+  request to `/v2/projects/default/resources`.
 
 tags:
   - Project Resources
-
-parameters:
-  - $ref: 'parameters.yml#/project_id'
 
 responses:
   '200':
