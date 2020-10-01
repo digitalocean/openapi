@@ -1,0 +1,11 @@
+type: object
+
+properties:
+  resources:
+    type: array
+    items:
+      type: string
+      pattern: ^do:.*:.*
+    example:
+    - do:droplet:13457723
+    description: A list of uniform resource names (URNs) to be added to a project.
