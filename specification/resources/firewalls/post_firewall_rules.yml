@@ -25,10 +25,12 @@ requestBody:
         allOf:
           - $ref: 'models/firewall_rule.yml#/firewall_rules'
           - anyOf:
-            - required:
-              - inbound_rules
-            - required:
-              - outbound_rules
+            - title: Inbound Rules
+              required:
+                - inbound_rules
+            - title: Outbound Rules
+              required:
+                - outbound_rules
 
       example:
         inbound_rules:
