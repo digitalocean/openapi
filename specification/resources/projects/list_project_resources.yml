@@ -1,0 +1,28 @@
+operationId: list_project_resources
+
+summary: List All Resources
+
+description: To list all your resources in a project, send a GET request to
+ `/v2/projects/$PROJECT_ID/resources`.
+
+tags:
+  - Project Resources
+
+parameters:
+  - $ref: 'parameters.yml#/project_id'
+
+responses:
+  '200':
+    $ref: 'responses/resources_list.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
