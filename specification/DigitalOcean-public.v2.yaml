@@ -770,6 +770,9 @@ paths:
     get:
       $ref: 'resources/projects/list_default_project_resources.yml'
 
+    post:
+      $ref: 'resources/projects/assign_default_project_resources.yml'
+
   /regions:
     get:
       $ref: 'resources/regions/list_all_regions.yml'

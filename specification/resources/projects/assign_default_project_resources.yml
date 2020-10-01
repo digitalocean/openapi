@@ -1,15 +1,12 @@
-operationId: assign_project_resources
+operationId: assign_default_project_resources
 
-summary: Assign Resources to a Project
+summary: Assign Resources to Default Project
 
-description: To assign resources to a project, send a POST request to
-  `/v2/projects/$PROJECT_ID/resources`.
+description: To assign resources to your default project, send a POST request to
+  `/v2/projects/default/resources`.
 
 tags:
   - Project Resources
-
-parameters:
-  - $ref: 'parameters.yml#/project_id'
 
 requestBody:
   required: true
