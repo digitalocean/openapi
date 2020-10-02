@@ -15,17 +15,19 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/domain_record.yml'
+      properties:
+        domain_record:
+          $ref: '../models/domain_record.yml'
 
-    example:
-      domain_record:
-        id: 28448433
-        type: A
-        name: www
-        data: 162.10.66.0
-        priority: null
-        port: null
-        ttl: 1800
-        weight: null
-        flags: null
-        tag: null
+      example:
+        domain_record:
+          id: 28448433
+          type: A
+          name: www
+          data: 162.10.66.0
+          priority: null
+          port: null
+          ttl: 1800
+          weight: null
+          flags: null
+          tag: null

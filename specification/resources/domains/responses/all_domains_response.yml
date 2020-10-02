@@ -28,18 +28,18 @@ content:
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
-    example:
-      domains:
-        - name: example.com
-          ttl: 1800
-          zone_file: |
-            $ORIGIN example.com.
-            $TTL 1800
-            example.com. IN SOA ns1.digitalocean.com. hostmaster.example.com. 1415982609 10800 3600 604800 1800
-            example.com. 1800 IN NS ns1.digitalocean.com.
-            example.com. 1800 IN NS ns2.digitalocean.com.
-            example.com. 1800 IN NS ns3.digitalocean.com.
-            example.com. 1800 IN A 1.2.3.4
-      links: {}
-      meta:
-        total: 1
+      example:
+        domains:
+          - name: example.com
+            ttl: 1800
+            zone_file: |
+              $ORIGIN example.com.
+              $TTL 1800
+              example.com. IN SOA ns1.digitalocean.com. hostmaster.example.com. 1415982609 10800 3600 604800 1800
+              example.com. 1800 IN NS ns1.digitalocean.com.
+              example.com. 1800 IN NS ns2.digitalocean.com.
+              example.com. 1800 IN NS ns3.digitalocean.com.
+              example.com. 1800 IN A 1.2.3.4
+        links: {}
+        meta:
+          total: 1

@@ -14,10 +14,12 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/domain.yml'
+      properties:
+        domain:
+          $ref: '../models/domain.yml'
 
-    example:
-      domain:
-        name: example.com
-        ttl: 1800
-        zone_file: null
+      example:
+        domain:
+          name: example.com
+          ttl: 1800
+          zone_file: null

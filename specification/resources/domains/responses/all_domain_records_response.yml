@@ -3,7 +3,7 @@ description: >-
   value of this will be an array of domain record objects, each of which
   contains the standard domain record attributes. For attributes that are not
   used by a specific record type, a value of `null` will be returned. For
-  instance, all records other than SRV will have `null` for the `weight` and 
+  instance, all records other than SRV will have `null` for the `weight` and
   `port` attributes.
 
 headers:
