@@ -583,6 +583,10 @@ paths:
     post:
       $ref: 'resources/floating_ips/create_floating_ip.yml'
 
+  /floating_ips/{floating_ip}:
+    get:
+      $ref: 'resources/floating_ips/get_floating_ip.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
