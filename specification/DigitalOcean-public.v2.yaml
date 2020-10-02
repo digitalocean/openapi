@@ -587,6 +587,9 @@ paths:
     get:
       $ref: 'resources/floating_ips/get_floating_ip.yml'
 
+    delete:
+      $ref: 'resources/floating_ips/delete_floating_ip.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
