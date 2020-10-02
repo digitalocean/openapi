@@ -580,6 +580,9 @@ paths:
     get:
       $ref: 'resources/floating_ips/list_floating_ips.yml'
 
+    post:
+      $ref: 'resources/floating_ips/create_floating_ip.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
