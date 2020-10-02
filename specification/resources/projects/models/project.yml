@@ -52,7 +52,7 @@ properties:
       - IoT
       - Operational / Developer tooling
 
-      If specify another value for purpose, for example "your custom purpose",
+      If another value for purpose is specified, for example, "your custom purpose", 
       your purpose will be stored as `Other: your custom purpose`.
 
   environment:
