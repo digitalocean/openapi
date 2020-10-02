@@ -7,4 +7,4 @@ floating_ip:
     type: string
     format: ipv4
     minimum: 1
-    example: 45.55.96.47
+  example: 45.55.96.47
