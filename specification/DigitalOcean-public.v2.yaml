@@ -468,6 +468,8 @@ paths:
       $ref: 'resources/domains/create_domain_record.yml'
 
   /domains/{domain_name}/records/{domain_record_id}:
+    get:
+      $ref: 'resources/domains/get_domain_record.yml'
     patch:
       $ref: 'resources/domains/patch_update_domain_record.yml'
     put:
