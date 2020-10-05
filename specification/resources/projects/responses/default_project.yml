@@ -14,7 +14,7 @@ content:
     schema:
       properties:
         project:
-          $ref: '../models/project.yml'
+          $ref: '../models/project.yml#/project'
 
       example:
         project:

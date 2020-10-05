@@ -18,7 +18,7 @@ content:
             projects:
               type: array
               items:
-                $ref: '../models/project.yml'
+                $ref: '../models/project.yml#/project'
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
