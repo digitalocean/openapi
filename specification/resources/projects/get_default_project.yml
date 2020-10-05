@@ -1,0 +1,24 @@
+operationId: get_default_project
+
+summary: Retrieve the Default Project
+
+description: To get your default project, send a GET request to `/v2/projects/default`.
+
+tags:
+  - Projects
+
+responses:
+  '200':
+    $ref: 'responses/default_project.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
