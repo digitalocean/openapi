@@ -1,0 +1,26 @@
+operationId: get_domain_record
+
+summary: Retrieve an Existing Domain Record
+
+description: To retrieve a specific domain record, send a GET request to
+  `/v2/domains/$DOMAIN_NAME/records/$RECORD_ID`.
+
+tags:
+  - Domain Records
+
+parameters:
+  - $ref: 'parameters.yml#/domain_name'
+  - $ref: 'parameters.yml#/domain_record_id'
+
+responses:
+  '200':
+    $ref: 'responses/domain_record.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

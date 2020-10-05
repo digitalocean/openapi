@@ -1,7 +1,7 @@
 description: >-
-  The response will be a JSON object with a key called domain_record. The value
-  of this will be a domain record object which contains the standard domain
-  record attributes.
+  The response will be a JSON object with a key called `domain_record`. The
+  value of this will be a domain record object which contains the standard
+  domain record attributes.
 
 headers:
   ratelimit-limit:
