@@ -30,7 +30,12 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/database_cluster.yml'
+        allOf:
+          - $ref: 'models/database_cluster.yml'
+          - type: object
+            properties:
+              backup_restore:
+                $ref: 'models/database_backup.yml'
       examples:
         Create a New Database Cluster:
           value:

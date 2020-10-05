@@ -422,7 +422,7 @@ paths:
 
   /databases/{database_cluster_uuid}:
     get:
-      $ref: 'resources/databases/retrieve_database_cluster.yml'
+      $ref: 'resources/databases/get_database_cluster.yml'
 
   /databases/{database_id}/users:
     get:

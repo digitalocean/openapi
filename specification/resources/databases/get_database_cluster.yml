@@ -1,4 +1,4 @@
-operationId: retrieve_database_cluster
+operationId: get_database_cluster
 
 summary: Retrieve an Existing Database Cluster
 

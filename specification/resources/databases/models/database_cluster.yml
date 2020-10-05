@@ -49,6 +49,7 @@ properties:
     readOnly: true
   created_at:
     type: string
+    format: date-time
     example: 2019-01-11T18:37:36Z
     description:  >-
       A time value given in ISO8601 combined date and time format that represents
@@ -74,8 +75,6 @@ properties:
       type: string
     example:
       - doadmin
-  backup_restore:
-    $ref: './database_backup.yml'
   connection:
     $ref: './database_connection.yml'
   private_connection:
