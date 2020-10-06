@@ -293,17 +293,17 @@ tags:
 
       ### Resource Status Codes
 
-      When assigning and retrieving resources in projects, a status attribute
+      When assigning and retrieving resources in projects, a `status` attribute
       is returned that indicates if a resource was successfully retrieved or
       assigned. The status codes can be one of the following:
 
       Status Code | Explanation
       ------------|------------
-      ok          | There was no problem retrieving or assigning a resource.
-      not_found   | The resource was not found.
-      assigned    | The resource was successfully assigned.
-      already_assigned | The resource was already assigned.
-      service_down     | There was a problem retrieving or assigning a resource. Please try again.
+      `ok`          | There was no problem retrieving or assigning a resource.
+      `not_found`   | The resource was not found.
+      `assigned`    | The resource was successfully assigned.
+      `already_assigned` | The resource was already assigned.
+      `service_down`     | There was a problem retrieving or assigning a resource. Please try again.
 
   - name: Projects
     description: >-
