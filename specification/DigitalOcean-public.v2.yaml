@@ -421,6 +421,16 @@ paths:
     get:
       $ref: 'resources/billing/retrieve_invoice_summary_by_uuid.yml'
 
+  /databases:
+    get:
+      $ref: 'resources/databases/list_database_clusters.yml'
+    post:
+      $ref: 'resources/databases/create_database_cluster.yml'
+
+  /databases/{database_cluster_uuid}:
+    get:
+      $ref: 'resources/databases/get_database_cluster.yml'
+
   /databases/{database_id}/users:
     get:
       $ref: 'resources/databases/list_users.yml'
