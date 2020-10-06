@@ -3,7 +3,7 @@ type: object
 properties:
   urn:
     type: string
-    pattern: ^do:.*:.*
+    pattern: ^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume):.*
     example: do:droplet:13457723
     description: The uniform resource name of the resource.
 
