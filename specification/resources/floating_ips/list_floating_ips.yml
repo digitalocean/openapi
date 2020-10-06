@@ -1,0 +1,22 @@
+operationId: list_floating_ips
+
+summary: List All Floating IPs
+
+description: To list all of the floating IPs available on your account, send a
+  GET request to `/v2/floating_ips`.
+
+tags:
+  - Floating IPs
+
+responses:
+  '200':
+    $ref: 'responses/floating_ip_list.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

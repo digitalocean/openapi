@@ -214,6 +214,15 @@ tags:
       connections. By sending requests to the `/v2/firewalls` endpoint, you can
       list, create, or delete firewalls as well as modify access rules.
 
+  - name: Floating IPs
+    description: >-
+      [DigitalOcean Floating IPs](https://www.digitalocean.com/docs/networking/floating-ips/)
+      are publicly-accessible static IP addresses that can be mapped to one of
+      your Droplets. They can be used to create highly available setups or other
+      configurations requiring movable addresses.
+
+      Floating IPs are bound to a specific region.
+
   - name: Images
     description: >-
       A DigitalOcean [image](https://www.digitalocean.com/docs/images/) can be
@@ -585,6 +594,20 @@ paths:
       $ref: 'resources/firewalls/post_firewall_rules.yml'
     delete:
       $ref: 'resources/firewalls/delete_firewall_rules.yml'
+
+  /floating_ips:
+    get:
+      $ref: 'resources/floating_ips/list_floating_ips.yml'
+
+    post:
+      $ref: 'resources/floating_ips/create_floating_ip.yml'
+
+  /floating_ips/{floating_ip}:
+    get:
+      $ref: 'resources/floating_ips/get_floating_ip.yml'
+
+    delete:
+      $ref: 'resources/floating_ips/delete_floating_ip.yml'
 
   /images:
     get:
