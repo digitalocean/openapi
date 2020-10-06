@@ -7,10 +7,7 @@ properties:
     description: The name of the resource.
 
   urn:
-    type: string
-    example: do:loadbalancer:fb294d78-d193-4cb2-8737-ea620993591b
-    description: The uniform resource name (URN) for the resource in the format
-      do:resource_type:resource_id.
+    $ref: '../../../shared/attributes/urn.yml'
 
   created_at:
     type: string

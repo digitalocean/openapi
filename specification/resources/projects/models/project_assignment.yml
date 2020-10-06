@@ -4,8 +4,7 @@ properties:
   resources:
     type: array
     items:
-      type: string
-      pattern: ^do:.*:.*
+      $ref: '../../../shared/attributes/urn.yml'
     example:
     - do:droplet:13457723
     description: A list of uniform resource names (URNs) to be added to a project.
