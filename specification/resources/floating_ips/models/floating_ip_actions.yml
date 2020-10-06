@@ -1,0 +1,21 @@
+floating_ip_action_type:
+  type: object
+  description: Specifies the action that will be taken on the floating IP.
+  properties:
+    type:
+      type: string
+      enum:
+      - assign
+      - unassign
+      example: assign
+      description: The type of action to initiate for the floating IP.
+
+floating_ip_action_assign:
+  allOf:
+  - $ref: '#/floating_ip_action_type'
+  - type: object
+    properties:
+      droplet_id:
+        type: integer
+        example: 758604968
+        description: The ID of the Droplet that the floating IP will be assigned to.

@@ -13,15 +13,11 @@ headers:
 content:
   application/json:
     schema:
-      allOf:
-        - type: object
-          properties:
-            actions:
-              type: array
-              items:
-                $ref: '../../actions/models/action.yml'
-        - $ref: '../../../shared/pages.yml#/pagination'
-        - $ref: '../../../shared/meta.yml'
+      properties:
+        action:
+          type: array
+          items:
+            $ref: '../../actions/models/action.yml'
 
       example:
         action:

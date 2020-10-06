@@ -622,6 +622,9 @@ paths:
     get:
       $ref: 'resources/floating_ips/list_floating_ip_actions.yml'
 
+    post:
+      $ref: 'resources/floating_ips/post_floating_ip_action.yml'
+
   /floating_ips/{floating_ip}/actions/{action_id}:
     get:
       $ref: 'resources/floating_ips/get_floating_ip_action.yml'
