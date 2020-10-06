@@ -622,6 +622,10 @@ paths:
     get:
       $ref: 'resources/floating_ips/list_floating_ip_actions.yml'
 
+  /floating_ips/{floating_ip}/actions/{action_id}:
+    get:
+      $ref: 'resources/floating_ips/get_floating_ip_action.yml'
+
   /images:
     get:
       $ref: 'resources/images/list_images.yml'
