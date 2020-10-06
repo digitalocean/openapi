@@ -28,5 +28,5 @@ properties:
   locked:
     type: boolean
     example: true
-    description: A boolean value indicated whether or not the floating IP has
+    description: A boolean value indicating whether or not the floating IP has
       pending actions preventing new ones from being submitted.
