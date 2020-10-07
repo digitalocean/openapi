@@ -1,6 +1,6 @@
 image_id:
   in: path
-  name: identifier
+  name: image_id
   description: A unique number that can be used to identify and reference a specific image.
   required: true
   schema:

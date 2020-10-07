@@ -223,6 +223,15 @@ tags:
 
       Floating IPs are bound to a specific region.
 
+  - name: Image Actions
+    description: >+
+      Image actions are commands that can be given to a DigitalOcean image. In
+      general, these requests are made on the actions endpoint of a specific
+      image.
+
+      An image action object is returned. These objects hold the current status
+      of the requested action.
+
   - name: Images
     description: >-
       A DigitalOcean [image](https://www.digitalocean.com/docs/images/) can be
@@ -615,13 +624,23 @@ paths:
     post:
       $ref: 'resources/images/create_custom_image.yml'
 
-  /images/{identifier}:
+  /images/{image_id}:
     get:
       $ref: 'resources/images/retrieve_existing_image.yml'
     put:
       $ref: 'resources/images/update_an_image.yml'
     delete:
       $ref: 'resources/images/delete_an_image.yml'
+
+  /images/{image_id}/actions:
+    get:
+      $ref: 'resources/images/list_image_actions.yml'
+    post:
+      $ref: 'resources/images/post_image_action.yml'
+
+  /images/{image_id}/actions/{action_id}:
+    get:
+      $ref: 'resources/images/get_image_action.yml'
 
   /kubernetes/clusters:
     get:
