@@ -1,0 +1,59 @@
+operationId: post_image_action
+
+summary: Initiate an Image Action
+
+description: |
+  The following actions are available on an Image.
+
+  ## Convert an Image to a Snapshot
+
+  To convert an image, for example, a backup to a snapshot, send a POST request
+  to `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `convert`.
+
+  ## Transfer an Image
+
+  To transfer an image to another region, send a POST request to 
+  `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `transfer` and set
+  `region` attribute to the slug identifier of the region you wish to transfer
+  to.
+
+tags:
+  - Image Actions
+
+parameters:
+  - $ref: 'parameters.yml#/image_id'
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        oneOf:
+          - $ref: 'models/image_action.yml#/image_action_base'
+          - $ref: 'models/image_action.yml#/image_action_transfer'
+        discriminator:
+          propertyName: type
+          mapping:
+            Convert: 'models/image_action.yml#/image_action_base'
+            Transfer: 'models/image_action.yml#/image_action_transfer'
+
+      examples:
+        image_action_convert:
+          value:
+            type: convert
+        image_action_transfer:
+          value:
+            type: transfer
+            region: nyc3
+
+responses:
+  '202':
+    $ref: 'responses/post_image_action_response.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

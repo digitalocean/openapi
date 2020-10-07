@@ -11,7 +11,7 @@ tags:
 
 parameters:
   - in: path
-    name: identifier
+    name: image_id
     description: |
       A unique number (id) or string (slug) used to identify and reference a 
       specific image.
