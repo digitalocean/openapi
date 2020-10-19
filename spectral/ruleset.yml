@@ -50,6 +50,17 @@ rules:
     - field: $ref
       function: truthy
 
+  path-must-include-version:
+    description: Path must include the version
+    message: "{{description}}; {{property}} incorrect"
+    severity: error
+    resolved: false
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/v2/.*$"
+
   endpoint-ref-must-be-file:
     description: Endpoint must a $ref to a file in resources/
     message: "{{description}}; {{value}} incorrect"
