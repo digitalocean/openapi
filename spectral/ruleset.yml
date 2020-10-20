@@ -117,6 +117,15 @@ rules:
       functionOptions:
         type: snake
 
+  operationid-must-follow-naming-conventions:
+    description: operationIds must follow naming conventions for method
+    type: style
+    given: "$.paths[*]"
+    severity: error
+    message: "{{error}}"
+    then:
+      function: validateOperationIdNaming
+
   schema-key-must-be-snake-cased:
     description: schema key must be snake cased (e.g. snake_case)
     type: style
