@@ -1,4 +1,4 @@
-operationId: put_update_domain_record
+operationId: update_domain_record
 
 summary: Update a Domain Record
 

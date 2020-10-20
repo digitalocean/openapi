@@ -1,4 +1,4 @@
-operationId: update_a_key
+operationId: patch_ssh_key
 
 summary: Update an SSH Key's Name
 

@@ -1,4 +1,4 @@
-operationId: put_firewall
+operationId: update_firewall
 
 summary: Update a Firewall
 

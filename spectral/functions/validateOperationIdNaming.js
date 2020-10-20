@@ -5,7 +5,7 @@
  *
  */
 
-const DELETE = ["delete", "destroy", "purge"];
+const DELETE = ["delete", "destroy", "remove", "purge", "untag"];
 const GET = ["get", "list"];
 const PATCH = ["patch"];
 const POST = ["create", "post", "add", "tag", "install", "reset", "upgrade", "recycle", "run", "retry", "validate"];

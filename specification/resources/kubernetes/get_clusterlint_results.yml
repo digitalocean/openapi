@@ -1,4 +1,4 @@
-operationId: fetch_clusterlint_results
+operationId: get_clusterlint_results
 
 summary: Fetch Clusterlint Diagnostics for a Kubernetes Cluster
 
