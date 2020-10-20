@@ -1,4 +1,4 @@
-operationId: initiate_volume_action_by_id
+operationId: post_volume_action_by_id
 
 summary: Initiate A Block Storage Action By Volume Id
 
@@ -55,15 +55,15 @@ requestBody:
     application/json:
       schema:
         oneOf:
-          - $ref: 'models/volume_action_initiate_attach.yml'
-          - $ref: 'models/volume_action_initiate_detach.yml'
-          - $ref: 'models/volume_action_initiate_resize.yml'
+          - $ref: 'models/volume_action_post_attach.yml'
+          - $ref: 'models/volume_action_post_detach.yml'
+          - $ref: 'models/volume_action_post_resize.yml'
         discriminator:
           propertyName: type
           mapping:
-            attach: 'models/volume_action_initiate_attach.yml'
-            detach: 'models/volume_action_initiate_detach.yml'
-            resize: 'models/volume_action_initiate_resize.yml'
+            attach: 'models/volume_action_post_attach.yml'
+            detach: 'models/volume_action_post_detach.yml'
+            resize: 'models/volume_action_post_resize.yml'
 
       examples:
         VolumeActionAttach:

@@ -5,10 +5,10 @@
  *
  */
 
-const DELETE = ["delete", "destroy", "purge" ];
+const DELETE = ["delete", "destroy", "purge"];
 const GET = ["get", "list"];
 const PATCH = ["patch"];
-const POST = ["create", "add", "tag", "install", "reset", "upgrade", "recycle", "run", "retry", "validate"];
+const POST = ["create", "post", "add", "tag", "install", "reset", "upgrade", "recycle", "run", "retry", "validate"];
 const PUT = ["update"];
 
 module.exports = (endpoint, _, { given }) => {

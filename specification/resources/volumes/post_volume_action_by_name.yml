@@ -1,4 +1,4 @@
-operationId: initiate_volume_action_by_name
+operationId: post_volume_action_by_name
 
 summary: Initiate A Block Storage Action By Volume Name
 
@@ -46,13 +46,13 @@ requestBody:
     application/json:
       schema:
         oneOf:
-          - $ref: 'models/volume_action_initiate_attach.yml'
-          - $ref: 'models/volume_action_initiate_detach.yml'
+          - $ref: 'models/volume_action_post_attach.yml'
+          - $ref: 'models/volume_action_post_detach.yml'
         discriminator:
           propertyName: type
           mapping:
-            attach: 'models/volume_action_initiate_attach.yml'
-            detach: 'models/volume_action_initiate_detach.yml'
+            attach: 'models/volume_action_post_attach.yml'
+            detach: 'models/volume_action_post_detach.yml'
 
 
       examples:

@@ -1,7 +1,7 @@
 type: object
 
 allOf:
-  - $ref: 'volume_action_initiate_base.yml'
+  - $ref: 'volume_action_post_base.yml'
   - properties:
       size_gigabytes:
         type: integer

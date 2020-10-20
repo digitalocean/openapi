@@ -12,7 +12,7 @@ description: |
 
   ## Transfer an Image
 
-  To transfer an image to another region, send a POST request to 
+  To transfer an image to another region, send a POST request to
   `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `transfer` and set
   `region` attribute to the slug identifier of the region you wish to transfer
   to.
