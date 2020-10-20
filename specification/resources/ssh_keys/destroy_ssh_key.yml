@@ -1,4 +1,4 @@
-operationId: destroy_a_key
+operationId: destroy_ssh_key
 
 summary: Delete an SSH Key
 

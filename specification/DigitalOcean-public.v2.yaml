@@ -359,7 +359,7 @@ paths:
       $ref: 'resources/ssh_keys/list_all_keys.yml'
 
     post:
-      $ref: 'resources/ssh_keys/create_a_new_key.yml'
+      $ref: 'resources/ssh_keys/create_ssh_key.yml'
 
   /v2/account/keys/{ssh_key_identifier}:
     get:
@@ -369,7 +369,7 @@ paths:
       $ref: 'resources/ssh_keys/patch_ssh_key.yml'
 
     delete:
-      $ref: 'resources/ssh_keys/destroy_a_key.yml'
+      $ref: 'resources/ssh_keys/destroy_ssh_key.yml'
 
   /v2/actions:
     get:
@@ -628,9 +628,9 @@ paths:
     get:
       $ref: 'resources/images/get_image.yml'
     put:
-      $ref: 'resources/images/update_an_image.yml'
+      $ref: 'resources/images/update_image.yml'
     delete:
-      $ref: 'resources/images/delete_an_image.yml'
+      $ref: 'resources/images/delete_image.yml'
 
   /v2/images/{image_id}/actions:
     get:

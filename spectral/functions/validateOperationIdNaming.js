@@ -11,6 +11,8 @@ const PATCH = ["patch"];
 const POST = ["create", "post", "add", "tag", "install", "reset", "upgrade", "recycle", "run", "retry", "validate"];
 const PUT = ["update"];
 
+const articles = ["_a_", "_an_", "_the_"]
+
 module.exports = (endpoint, _, { given }) => {
   path = given[1];
   method = given[2];
@@ -56,5 +58,13 @@ module.exports = (endpoint, _, { given }) => {
       break;
     default:
       break;
+  }
+
+  for (i in articles) {
+    if (operationId.includes(articles[i])) {
+      return [{
+        message: `${operationId} - operationId should not include an article (a, an, or the).`
+      }];
+    }
   }
 }

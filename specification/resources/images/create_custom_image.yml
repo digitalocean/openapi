@@ -1,12 +1,12 @@
-operationId: create_a_custom_image
+operationId: create_custom_image
 
 summary: Create a Custom Image
 
 description: |
-  To create a new custom image, send a POST request to /v2/images. 
-  The body must contain a url attribute pointing to a Linux virtual machine 
-  image to be imported into DigitalOcean. 
-  The image must be in the raw, qcow2, vhdx, vdi, or vmdk format. 
+  To create a new custom image, send a POST request to /v2/images.
+  The body must contain a url attribute pointing to a Linux virtual machine
+  image to be imported into DigitalOcean.
+  The image must be in the raw, qcow2, vhdx, vdi, or vmdk format.
   It may be compressed using gzip or bzip2 and must be smaller than 100 GB after
    being decompressed.
 

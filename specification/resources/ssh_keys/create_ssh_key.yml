@@ -1,4 +1,4 @@
-operationId: create_a_new_key
+operationId: create_ssh_key
 
 summary: Create a New SSH Key
 

@@ -1,4 +1,4 @@
-operationId: delete_an_image
+operationId: delete_image
 
 summary: Delete an Image
 
@@ -17,7 +17,7 @@ responses:
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
-  
+
   '404':
     $ref: '../../shared/responses/not_found.yml'
 
