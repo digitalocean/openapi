@@ -13,11 +13,9 @@ const PUT = ["update"];
 
 module.exports = (endpoint, _, { given }) => {
   path = given[1];
-  method = Object.keys(endpoint)[0];
-  operationId = endpoint[method].operationId;
+  method = given[2];
+  operationId = endpoint.operationId;
   prefix = operationId.split("_")[0];
-
-  obj = JSON.stringify(endpoint);
 
   switch (method) {
     case "delete":

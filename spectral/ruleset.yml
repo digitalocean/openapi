@@ -120,7 +120,7 @@ rules:
   operationid-must-follow-naming-conventions:
     description: operationIds must follow naming conventions for method
     type: style
-    given: "$.paths[*]"
+    given: "$.paths[*][*]"
     severity: error
     message: "{{error}}"
     then:
