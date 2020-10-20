@@ -1,4 +1,4 @@
-operationId: retrieve_existing_snapshot
+operationId: get_snapshot
 
 summary: Retrieve an Existing Snapshot
 

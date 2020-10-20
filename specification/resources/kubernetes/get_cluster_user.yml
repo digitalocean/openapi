@@ -1,4 +1,4 @@
-operationId: retrieve_cluster_user
+operationId: get_cluster_user
 
 summary: Retrieve User Information for a Kubernetes Cluster
 

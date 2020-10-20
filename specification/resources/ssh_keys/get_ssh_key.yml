@@ -1,4 +1,4 @@
-operationId: retrieve_an_existing_key
+operationId: get_ssh_key
 
 summary: Retrieve an Existing SSH Key
 

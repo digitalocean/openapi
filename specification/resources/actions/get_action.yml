@@ -1,4 +1,4 @@
-operationId: retrieve_an_existing_action
+operationId: get_action
 
 summary: Retrieve an Existing Action
 

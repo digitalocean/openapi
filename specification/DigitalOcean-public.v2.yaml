@@ -363,7 +363,7 @@ paths:
 
   /v2/account/keys/{ssh_key_identifier}:
     get:
-      $ref: 'resources/ssh_keys/retrieve_an_existing_key.yml'
+      $ref: 'resources/ssh_keys/get_ssh_key.yml'
 
     patch:
       $ref: 'resources/ssh_keys/update_a_key.yml'
@@ -377,7 +377,7 @@ paths:
 
   /v2/actions/{action_id}:
     get:
-      $ref: 'resources/actions/retrieve_an_existing_action.yml'
+      $ref: 'resources/actions/get_action.yml'
 
   /v2/cdn/endpoints:
     get:
@@ -388,7 +388,7 @@ paths:
 
   /v2/cdn/endpoints/{cdn_id}:
     get:
-      $ref: 'resources/cdn/retrieve_existing_endpoint.yml'
+      $ref: 'resources/cdn/get_endpoint.yml'
 
     delete:
       $ref: 'resources/cdn/delete_endpoint.yml'
@@ -425,19 +425,19 @@ paths:
 
   /v2/customers/my/invoices/{invoice_uuid}:
     get:
-      $ref: 'resources/billing/retrieve_invoice_by_uuid.yml'
+      $ref: 'resources/billing/get_invoice_by_uuid.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}/csv:
     get:
-      $ref: 'resources/billing/retrieve_invoice_csv_by_uuid.yml'
+      $ref: 'resources/billing/get_invoice_csv_by_uuid.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}/pdf:
     get:
-      $ref: 'resources/billing/retrieve_invoice_pdf_by_uuid.yml'
+      $ref: 'resources/billing/get_invoice_pdf_by_uuid.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}/summary:
     get:
-      $ref: 'resources/billing/retrieve_invoice_summary_by_uuid.yml'
+      $ref: 'resources/billing/get_invoice_summary_by_uuid.yml'
 
   /v2/databases:
     get:
@@ -457,7 +457,7 @@ paths:
 
   /v2/databases/{database_id}/users/{username}:
     get:
-      $ref: 'resources/databases/retrieve_user.yml'
+      $ref: 'resources/databases/get_user.yml'
     delete:
       $ref: 'resources/databases/delete_user.yml'
 
@@ -473,7 +473,7 @@ paths:
 
   /v2/databases/{database_id}/dbs/{database_name}:
     get:
-      $ref: 'resources/databases/retrieve_database.yml'
+      $ref: 'resources/databases/get_database.yml'
     delete:
       $ref: 'resources/databases/delete_database.yml'
 
@@ -485,7 +485,7 @@ paths:
 
   /v2/domains/{domain_name}:
     get:
-      $ref: 'resources/domains/retrieve_existing_domain.yml'
+      $ref: 'resources/domains/get_domain.yml'
     delete:
       $ref: 'resources/domains/delete_domain.yml'
 
@@ -517,7 +517,7 @@ paths:
 
   /v2/droplets/{droplet_id}:
     get:
-      $ref: 'resources/droplets/retrieve_existing_droplet.yml'
+      $ref: 'resources/droplets/get_droplet.yml'
 
     delete:
       $ref: 'resources/droplets/destroy_droplet.yml'
@@ -542,7 +542,7 @@ paths:
 
   /v2/droplets/{droplet_id}/actions/{action_id}:
     get:
-      $ref: 'resources/droplets/retrieve_existing_droplet_action.yml'
+      $ref: 'resources/droplets/get_droplet_action.yml'
 
   /v2/droplets/{droplet_id}/kernels:
     get:
@@ -626,7 +626,7 @@ paths:
 
   /v2/images/{image_id}:
     get:
-      $ref: 'resources/images/retrieve_existing_image.yml'
+      $ref: 'resources/images/get_image.yml'
     put:
       $ref: 'resources/images/update_an_image.yml'
     delete:
@@ -651,7 +651,7 @@ paths:
 
   /v2/kubernetes/clusters/{cluster_id}:
     get:
-      $ref: 'resources/kubernetes/retrieve_existing_cluster.yml'
+      $ref: 'resources/kubernetes/get_cluster.yml'
 
     put:
       $ref: 'resources/kubernetes/update_cluster.yml'
@@ -661,15 +661,15 @@ paths:
 
   /v2/kubernetes/clusters/{cluster_id}/kubeconfig:
     get:
-      $ref: 'resources/kubernetes/retrieve_kubeconfig.yml'
+      $ref: 'resources/kubernetes/get_kubeconfig.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/credentials:
     get:
-      $ref: 'resources/kubernetes/retrieve_credentials.yml'
+      $ref: 'resources/kubernetes/get_credentials.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/upgrades:
     get:
-      $ref: 'resources/kubernetes/retrieve_available_upgrades.yml'
+      $ref: 'resources/kubernetes/get_available_upgrades.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/upgrade:
     post:
@@ -684,7 +684,7 @@ paths:
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}:
     get:
-      $ref: 'resources/kubernetes/retrieve_node_pool.yml'
+      $ref: 'resources/kubernetes/get_node_pool.yml'
 
     put:
       $ref: 'resources/kubernetes/update_node_pool.yml'
@@ -702,7 +702,7 @@ paths:
 
   /v2/kubernetes/clusters/{cluster_id}/user:
     get:
-      $ref: 'resources/kubernetes/retrieve_cluster_user.yml'
+      $ref: 'resources/kubernetes/get_cluster_user.yml'
 
   /v2/kubernetes/options:
     get:
@@ -724,10 +724,10 @@ paths:
 
   /v2/load_balancers/{lb_id}:
     get:
-      $ref: 'resources/load_balancers/retrieve_existing_load_balancer.yml'
+      $ref: 'resources/load_balancers/get_load_balancer.yml'
 
     put:
-      $ref: 'resources/load_balancers/update_existing_load_balancer.yml'
+      $ref: 'resources/load_balancers/update_load_balancer.yml'
 
     delete:
       $ref: 'resources/load_balancers/delete_load_balancer.yml'
@@ -828,7 +828,7 @@ paths:
 
   /v2/snapshots/{snapshot_id}:
     get:
-      $ref: 'resources/snapshots/retrieve_existing_snapshots.yml'
+      $ref: 'resources/snapshots/get_snapshots.yml'
 
     delete:
       $ref: 'resources/snapshots/delete_snapshot.yml'
@@ -865,13 +865,13 @@ paths:
 
   /v2/volumes/snapshot/{snapshot_id}:
     get:
-      $ref: 'resources/volumes/retrieve_volume_snapshot_by_id.yml'
+      $ref: 'resources/volumes/get_volume_snapshot_by_id.yml'
     delete:
       $ref: 'resources/volumes/delete_volume_snapshot_by_id.yml'
 
   /v2/volumes/{volume_id}:
     get:
-      $ref: 'resources/volumes/retrieve_existing_volume.yml'
+      $ref: 'resources/volumes/get_volume.yml'
     delete:
       $ref: 'resources/volumes/delete_volume.yml'
 
@@ -883,7 +883,7 @@ paths:
 
   /v2/volumes/{volume_id}/actions/{action_id}:
     get:
-      $ref: 'resources/volumes/retrieve_existing_volume_action.yml'
+      $ref: 'resources/volumes/get_volume_action.yml'
 
   /v2/volumes/{volume_id}/snapshots:
     get:

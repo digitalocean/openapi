@@ -1,4 +1,4 @@
-operationId: retrieve_existing_kubernetes_cluster
+operationId: get_kubernetes_cluster
 
 summary: Retrieve an Existing Kubernetes Cluster
 

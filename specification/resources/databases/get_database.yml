@@ -1,4 +1,4 @@
-operationId: retrieve_database
+operationId: get_database
 
 summary: Retrieve an Existing Database
 

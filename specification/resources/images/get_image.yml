@@ -1,4 +1,4 @@
-operationId: retrieve_existing_image
+operationId: get_image
 
 summary: Retrieve an Existing Image
 

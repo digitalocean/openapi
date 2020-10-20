@@ -1,4 +1,4 @@
-operationId: retrieve_available_upgrades
+operationId: get_available_upgrades
 
 summary: Retrieve Available Upgrades for an Existing Kubernetes Cluster
 

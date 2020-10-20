@@ -1,4 +1,4 @@
-operationId: retrieve_user
+operationId: get_user
 
 summary: Retrieve an Existing Database User
 

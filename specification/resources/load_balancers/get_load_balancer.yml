@@ -1,4 +1,4 @@
-operationId: retrieve_existing_load_balancer
+operationId: get_load_balancer
 
 summary: Retrieve an Existing Load Balancer
 

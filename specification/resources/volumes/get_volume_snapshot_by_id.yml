@@ -1,4 +1,4 @@
-operationId: retrieve_volume_snapshot_by_id
+operationId: get_volume_snapshot_by_id
 
 summary: Retreive an Existing Volume Snapshot
 

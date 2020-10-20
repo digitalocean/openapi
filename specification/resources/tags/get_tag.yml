@@ -1,4 +1,4 @@
-operationId: retrieve_tag
+operationId: get_tag
 
 summary: Retrieve a Tag
 

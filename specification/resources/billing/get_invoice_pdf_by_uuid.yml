@@ -1,4 +1,4 @@
-operationId: retrieve_invoice_pdf_by_uuid
+operationId: get_invoice_pdf_by_uuid
 
 summary: Retrieve an Invoice PDF by UUID
 

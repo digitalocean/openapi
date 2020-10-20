@@ -1,4 +1,4 @@
-operationId: retrieve_existing_domain
+operationId: get_domain
 
 summary: Retrieve an Existing Domain
 

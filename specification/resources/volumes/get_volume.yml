@@ -1,4 +1,4 @@
-operationId: retrieve_existing_volume
+operationId: get_volume
 
 summary: Retrieve an Existing Block Storage Volume
 
