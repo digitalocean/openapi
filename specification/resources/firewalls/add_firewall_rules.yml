@@ -1,4 +1,4 @@
-operationId: post_firewall_rules
+operationId: add_firewall_rules
 
 summary: Add Rules to a Firewall
 

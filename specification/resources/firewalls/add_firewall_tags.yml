@@ -1,11 +1,11 @@
-operationId: post_firewall_droplets
+operationId: add_firewall_tags
 
-summary: Add Droplets to a Firewall
+summary: Add Tags to a Firewall
 
 description: |
-  To assign a Droplet to a firewall, send a POST request to
-  `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there
-  should be a `droplet_ids` attribute containing a list of Droplet IDs.
+  To assign a tag representing a group of Droplets to a firewall, send a POST
+  request to `/v2/firewalls/$FIREWALL_ID/tags`. In the body of the request,
+  there should be a `tags` attribute containing a list of tag names.
 
   No response body will be sent back, but the response code will indicate
   success. Specifically, the response code will be a 204, which means that the
@@ -22,22 +22,19 @@ requestBody:
     application/json:
       schema:
         properties:
-          droplet_ids:
-            type: array
-            description: >-
-              An array containing the IDs of the Droplets to be assigned to
-              the firewall.
-            items:
-              type: integer
-            example: 
-              - 49696269
-        
+          tags:
+            allOf:
+              - $ref: '../../shared/attributes/tags_array.yml'
+              - description: >-
+                  An array containing the names of the Tags to be assigned to
+                  the firewall.
+
         required:
-          - droplet_ids
+          - tags
 
       example:
-        droplet_ids:
-          - 49696269
+        tags:
+          - frontend
 
 responses:
   '204':

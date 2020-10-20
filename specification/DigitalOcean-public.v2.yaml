@@ -566,11 +566,11 @@ paths:
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/status:
     get:
-      $ref: 'resources/droplets/destroy_with_associated_resources_status.yml'
+      $ref: 'resources/droplets/get_destroy_with_associated_resources_status.yml'
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/retry:
     post:
-      $ref: 'resources/droplets/destroy_with_associated_resources_retry.yml'
+      $ref: 'resources/droplets/retry_destroy_with_associated_resources.yml'
 
   /v2/firewalls:
     get:
@@ -588,19 +588,19 @@ paths:
 
   /v2/firewalls/{firewall_id}/droplets:
     post:
-      $ref: 'resources/firewalls/post_firewall_droplets.yml'
+      $ref: 'resources/firewalls/add_firewall_droplets.yml'
     delete:
       $ref: 'resources/firewalls/delete_firewall_droplets.yml'
 
   /v2/firewalls/{firewall_id}/tags:
     post:
-      $ref: 'resources/firewalls/post_firewall_tags.yml'
+      $ref: 'resources/firewalls/add_firewall_tags.yml'
     delete:
       $ref: 'resources/firewalls/delete_firewall_tags.yml'
 
   /v2/firewalls/{firewall_id}/rules:
     post:
-      $ref: 'resources/firewalls/post_firewall_rules.yml'
+      $ref: 'resources/firewalls/add_firewall_rules.yml'
     delete:
       $ref: 'resources/firewalls/delete_firewall_rules.yml'
 

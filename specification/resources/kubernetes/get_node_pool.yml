@@ -1,4 +1,4 @@
-operationId: retrievenode_pool
+operationId: get_node_pool
 
 summary: Retrieve a Node Pool for a Kubernetes Cluster
 
