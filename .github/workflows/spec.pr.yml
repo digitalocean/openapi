@@ -43,7 +43,7 @@ jobs:
         run: >-
           aws s3 cp tests/openapi-bundled.yaml 
           s3://$SPACES_PATH/previews/${{ github.event.number }}-spec.yaml
-          --endpoint=SPACES_ENDPOINT
+          --endpoint=$SPACES_ENDPOINT
           --acl public-read
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
