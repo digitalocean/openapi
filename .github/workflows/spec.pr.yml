@@ -7,7 +7,7 @@ name: Spec PR
 on:
   pull_request_target:
     paths:
-      - 'specification/**.yml'
+      - 'specification/**'
       - 'spectral/**'
 
 jobs:
