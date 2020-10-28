@@ -48,4 +48,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
           AWS_DEFAULT_OUTPUT: json
+          SPACES_PATH: ${{ secrets.SPACES_PATH }}
           SPACES_ENDPOINT: https://nyc3.digitaloceanspaces.com

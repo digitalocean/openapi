@@ -20,10 +20,11 @@ jobs:
       - name: Upload index to spaces
         env:
           REDOC_INDEX_FILENAME: redoc-index-pr-${{ github.event.number }}.html
+          SPACES_PATH: ${{ secrets.SPACES_PATH }}
         run: >-
           aws s3 cp docs-preview/redoc-index.html 
-          s3://api-engineering/spec-ci/$REDOC_INDEX_FILENAME
-          --endpoint=${{ env.SPACES_ENDPOINT }} 
+          s3://$SPACES_PATH/$REDOC_INDEX_FILENAME
+          --endpoint=$SPACES_ENDPOINT
           --acl public-read
 
       - name: Comment on PR with preview link
