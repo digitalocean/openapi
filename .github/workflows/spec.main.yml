@@ -6,7 +6,8 @@ on:
     branches:
       - main
     paths:
-      - 'specification/**.yml'
+      - 'specification/**'
+      - 'spectral/**'
 
 jobs:
 
