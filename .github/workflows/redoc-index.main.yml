@@ -23,6 +23,6 @@ jobs:
           SPACES_PATH: ${{ secrets.SPACES_PATH }}
         run: >-
           aws s3 cp docs-preview/redoc-index.html 
-          s3://$SPACES_PATH/redoc-index.html
-          --endpoint=$SPACES_ENDPOINT
+          s3://${{ env.SPACES_PATH }}/redoc-index.html
+          --endpoint=${{ env.SPACES_ENDPOINT }}
           --acl public-read

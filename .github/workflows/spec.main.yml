@@ -41,8 +41,8 @@ jobs:
       - name: Upload Main spec
         run: >-
           aws s3 cp tests/openapi-bundled.yaml 
-          s3://$SPACES_PATH/DigitalOcean-public.v2.yaml
-          --endpoint=$SPACES_ENDPOINT
+          s3://${{ env.SPACES_PATH }}/DigitalOcean-public.v2.yaml
+          --endpoint=${{ env.SPACES_ENDPOINT }}
           --acl public-read
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
