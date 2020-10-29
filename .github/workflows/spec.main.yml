@@ -41,11 +41,12 @@ jobs:
       - name: Upload Main spec
         run: >-
           aws s3 cp tests/openapi-bundled.yaml 
-          s3://$SPACES_PATH/DigitalOcean-public.v2.yaml
-          --endpoint=$SPACES_ENDPOINT
+          ${{ env.SPACES_PATH }}/DigitalOcean-public.v2.yaml
+          --endpoint=${{ env.SPACES_ENDPOINT }}
           --acl public-read
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
           AWS_DEFAULT_OUTPUT: json
-          SPACES_ENDPOINT: https://nyc3.digitaloceanspaces.com
+          SPACES_PATH: ${{ secrets.SPACES_PATH || 's3://api-engineering/spec-ci' }}
+          SPACES_ENDPOINT: ${{ secrets.SPACES_ENDPOINT || 'https://nyc3.digitaloceanspaces.com'}}
