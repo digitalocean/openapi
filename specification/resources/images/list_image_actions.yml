@@ -1,20 +1,20 @@
-operationId: get_tag
+operationId: list_image_actions
 
-summary: Retrieve a Tag
+summary: List All Actions for an Image
 
 description: >-
-  To retrieve an individual tag, you can send a `GET` request to 
-  `/v2/tags/$TAG_NAME`.
+  To retrieve all actions that have been executed on an image, send a GET
+  request to `/v2/images/$IMAGE_ID/actions`.
 
 tags:
-  - Tags
+  - Image Actions
 
 parameters:
-  - $ref: 'parameters.yml#/tag_id'
+  - $ref: 'parameters.yml#/image_id'
 
 responses:
   '200':
-    $ref: 'responses/existing_tag.yml'
+    $ref: 'responses/get_image_actions_response.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

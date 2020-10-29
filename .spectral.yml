@@ -8,6 +8,7 @@ functions:
   - ensurePropertiesExample
   - ensureAllArraysHaveItemTypes
   - ensureSnakeCaseWithDigits
+  - validateOperationIdNaming
 
 rules:
   contact-properties: off

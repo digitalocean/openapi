@@ -1,0 +1,27 @@
+operationId: get_destroy_with_associated_resources_status
+
+summary: Check Status of a Droplet Destroy with Associated Resources Request
+
+description: |
+  To check on the status of a request to destroy a Droplet with its associated
+  resources, send a GET request to the
+  `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/status` endpoint.
+
+tags:
+  - Droplets
+
+parameters:
+  - $ref: 'parameters.yml#/droplet_id'
+
+responses:
+  '200':
+    $ref: 'responses/associated_resources_status.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

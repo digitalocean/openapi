@@ -1,0 +1,62 @@
+name: Spec PR
+# This workflow uploads a copy of the spec with the respective changes in the PR
+# to the team spaces.
+# The name of the uplaoded file will be prefixed with the PR number.
+# e.g. `spec-ci/previews/123-spec.yaml
+
+on:
+  pull_request_target:
+    paths:
+      - 'specification/**'
+      - 'spectral/**'
+
+jobs:
+
+  lint:
+    name: Validate spec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run linter
+        run: make lint
+
+  generate-preview:
+    name: Generate Preview
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name: Bundle
+        run: make bundle
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: openapi-bundled
+          path: tests/openapi-bundled.yaml
+
+      - name: Upload PR spec
+        run: >-
+          aws s3 cp tests/openapi-bundled.yaml 
+          ${{ env.SPACES_PATH }}/previews/${{ github.event.number }}-spec.yaml
+          --endpoint=${{ env.SPACES_ENDPOINT }}
+          --acl public-read
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
+          AWS_DEFAULT_OUTPUT: json
+          SPACES_PATH: ${{ secrets.SPACES_PATH || 's3://api-engineering/spec-ci' }}
+          SPACES_ENDPOINT: ${{ secrets.SPACES_ENDPOINT || 'https://nyc3.digitaloceanspaces.com'}}
+
+      - uses: Sibz/github-status-action@v1
+        with:
+          authToken: ${{secrets.GITHUB_TOKEN}}
+          context: Spec Preview URL
+          description: Ready
+          state: success
+          sha: ${{ github.event.pull_request.head.sha }}
+          target_url: https://api-engineering.nyc3.digitaloceanspaces.com/spec-ci/redoc-index.html?pr=${{ github.event.number }}

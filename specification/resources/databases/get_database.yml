@@ -1,0 +1,35 @@
+operationId: get_database
+
+summary: Retrieve an Existing Database
+
+description: |
+  To show information about an existing database cluster, send a GET request to
+  `/v2/databases/$DATABASE_ID/dbs/$DB_NAME`.
+
+  Note: Database management is not supported for Redis clusters.
+
+  The response will be a JSON object with a `db` key. This will be set to an object
+  containing the standard database attributes.
+
+tags:
+  - Databases
+
+parameters:
+  - $ref: 'parameters.yml#/database_id'
+  - $ref: 'parameters.yml#/database_name'
+
+responses:
+  '200':
+    $ref: 'responses/database.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
