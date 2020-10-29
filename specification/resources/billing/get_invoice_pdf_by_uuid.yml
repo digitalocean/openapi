@@ -1,20 +1,20 @@
-operationId: get_tag
+operationId: get_invoice_pdf_by_uuid
 
-summary: Retrieve a Tag
+summary: Retrieve an Invoice PDF by UUID
 
 description: >-
-  To retrieve an individual tag, you can send a `GET` request to 
-  `/v2/tags/$TAG_NAME`.
+  To retrieve a PDF for an invoice, send a GET request to 
+  `/v2/customers/my/invoices/$INVOICE_UUID/pdf`.
 
 tags:
-  - Tags
+  - Invoices
 
 parameters:
-  - $ref: 'parameters.yml#/tag_id'
+  - $ref: 'parameters.yml#/invoice_uuid'
 
 responses:
   '200':
-    $ref: 'responses/existing_tag.yml'
+    $ref: 'responses/invoice_pdf.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

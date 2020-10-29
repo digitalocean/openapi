@@ -1,20 +1,19 @@
-operationId: get_tag
+operationId: get_floating_ip
 
-summary: Retrieve a Tag
+summary: Retrieve an Existing Floating IP
 
-description: >-
-  To retrieve an individual tag, you can send a `GET` request to 
-  `/v2/tags/$TAG_NAME`.
+description: To show information about a floating IP, send a GET request to
+  `/v2/floating_ips/$FLOATING_IP_ADDR`.
 
 tags:
-  - Tags
+  - Floating IPs
 
 parameters:
-  - $ref: 'parameters.yml#/tag_id'
+  - $ref: 'parameters.yml#/floating_ip'
 
 responses:
   '200':
-    $ref: 'responses/existing_tag.yml'
+    $ref: 'responses/floating_ip.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

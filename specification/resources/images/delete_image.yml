@@ -1,20 +1,19 @@
-operationId: get_tag
+operationId: delete_image
 
-summary: Retrieve a Tag
+summary: Delete an Image
 
-description: >-
-  To retrieve an individual tag, you can send a `GET` request to 
-  `/v2/tags/$TAG_NAME`.
+description: |
+  To delete a snapshot or custom image, send a `DELETE` request to `/v2/images/$IMAGE_ID`.
 
 tags:
-  - Tags
+  - Images
 
 parameters:
-  - $ref: 'parameters.yml#/tag_id'
+  - $ref: 'parameters.yml#/image_id'
 
 responses:
-  '200':
-    $ref: 'responses/existing_tag.yml'
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

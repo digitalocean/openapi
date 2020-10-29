@@ -1,0 +1,32 @@
+name: ReDoc Index Main
+# This workflow uploads the latest `docs-preview/redoc-index.html` to the
+# team spaces directory when a change is detected on the file.
+# The previous file will be overwritten.
+
+on:
+  push:
+    branches:
+        - main
+    paths:
+      - 'docs-preview/redoc-index.html'
+
+jobs:
+
+  upload-index-preview:
+    name: Upload Index Preview
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Upload index to spaces
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
+          AWS_DEFAULT_OUTPUT: json
+          SPACES_PATH: ${{ secrets.SPACES_PATH || 's3://api-engineering/spec-ci' }}
+          SPACES_ENDPOINT: ${{ secrets.SPACES_ENDPOINT || 'https://nyc3.digitaloceanspaces.com'}}
+        run: >-
+          aws s3 cp docs-preview/redoc-index.html 
+          ${{ env.SPACES_PATH }}/redoc-index.html
+          --endpoint=${{ env.SPACES_ENDPOINT }}
+          --acl public-read
