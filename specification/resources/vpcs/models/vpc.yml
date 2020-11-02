@@ -16,10 +16,7 @@ vpc_base:
       description: A unique ID that can be used to identify and reference the VPC.
 
     urn:
-      type: string
-      readOnly: true
-      example: do:vpc:5a4981aa-9653-4bd1-bef5-d6bff52042e4
-      description: The uniform resource name (URN) for the VPC.
+      $ref: '../../../shared/attributes/urn.yml'
 
     default:
       type: boolean
