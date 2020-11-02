@@ -27,7 +27,7 @@ stop-services: ## Stop the proxy with mock docker services
 
 .PHONY: start-prodproxy
 start-prodproxy: ## Start a proxy to the production
-	 PROXY_TARGET=https://api.digitalocean.com/v2 docker-compose up proxy
+	 PROXY_TARGET=https://api.digitalocean.com docker-compose up proxy
 
 .PHONY: _sleep
 _sleep:
