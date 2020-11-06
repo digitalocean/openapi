@@ -665,21 +665,20 @@ droplet_single:
       available: true
     size_slug: s-1vcpu-1gb
     networks:
-      properties:
-        v4:
-          - ip_address: '10.128.192.124'
-            netmask: '255.255.0.0'
-            gateway: nil
-            type: private
-          - ip_address: '192.241.165.154'
-            netmask: '255.255.255.0'
-            gateway: '192.241.165.1'
-            type: public
-        v6:
-          - ip_address: '2604:a880:0:1010::18a:a001'
-            netmask: 64
-            gateway: '2604:a880:0:1010::1'
-            type: public
+      v4:
+        - ip_address: '10.128.192.124'
+          netmask: '255.255.0.0'
+          gateway: nil
+          type: private
+        - ip_address: '192.241.165.154'
+          netmask: '255.255.255.0'
+          gateway: '192.241.165.1'
+          type: public
+      v6:
+        - ip_address: '2604:a880:0:1010::18a:a001'
+          netmask: 64
+          gateway: '2604:a880:0:1010::1'
+          type: public
     region:
       name: New York 3
       slug: nyc3
