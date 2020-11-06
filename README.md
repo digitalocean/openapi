@@ -31,7 +31,7 @@ The results can be found in `tests/postman.json`.
 
 ## Development
 
-To generate a bundle version of the specification locally, run:
+To generate a bundled version of the specification locally, run:
 
     make bundle
 
