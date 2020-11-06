@@ -13,7 +13,6 @@ description: |
   - `power_on`
   - `power_off`
   - `shutdown`
-  - `enable_private_networking`
   - `enable_ipv6`
   - `enable_backups`
   - `disable_backups`
@@ -47,7 +46,6 @@ requestBody:
             power_off: 'models/droplet_actions.yml#/droplet_action_type'
             power_on: 'models/droplet_actions.yml#/droplet_action_type'
             enable_ipv6: 'models/droplet_actions.yml#/droplet_action_type'
-            enable_private_networking: 'models/droplet_actions.yml#/droplet_action_type'
             snapshot: 'models/droplet_actions.yml#/droplet_action_snapshot'
 
 responses:

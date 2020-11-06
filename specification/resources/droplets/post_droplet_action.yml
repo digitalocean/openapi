@@ -23,7 +23,6 @@ description: |
     | <nobr>`rename`</nobr>                    | Renames a Droplet. |
     | <nobr>`change_kernel`</nobr>             | Changes a Droplet's kernel. Only applies to Droplets with externally managed kernels. All Droplets created after March 2017 use internal kernels by default. |
     | <nobr>`enable_ipv6`</nobr>               | Enables IPv6 for a Droplet. |
-    | <nobr>`enable_private_networking`</nobr> | Enables private networking for a Droplet. *Note*: When VPC is enabled on your account, this will add the Droplet to your account's default VPC for the region. |
     | <nobr>`snapshot`</nobr>                  | Takes a snapshot of a Droplet. |
 
 tags:
@@ -66,7 +65,6 @@ requestBody:
             rename: 'models/droplet_actions.yml#/droplet_action_rename'
             change_kernel: 'models/droplet_actions.yml#/droplet_action_change_kernel'
             enable_ipv6: 'models/droplet_actions.yml#/droplet_action_type'
-            enable_private_networking: 'models/droplet_actions.yml#/droplet_action_type'
             snapshot: 'models/droplet_actions.yml#/droplet_action_snapshot'
 
 responses:

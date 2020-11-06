@@ -14,7 +14,6 @@ droplet_create_request:
     - env:prod
     - web
     user_data: "#cloud-config\nruncmd:\n  - touch /test.txt\n"
-    private_networking: true
     vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
 
 droplet_multi_create_request:
@@ -35,5 +34,4 @@ droplet_multi_create_request:
     - env:prod
     - web
     user_data: "#cloud-config\nruncmd:\n  - touch /test.txt\n"
-    private_networking: true
     vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000

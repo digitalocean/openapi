@@ -19,7 +19,6 @@ droplet_action_type:
       - rename
       - change_kernel
       - enable_ipv6
-      - enable_private_networking
       - snapshot
       example: reboot
       description: The type of action to initiate for the Droplet.

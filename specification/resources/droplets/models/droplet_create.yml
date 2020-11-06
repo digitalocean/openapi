@@ -80,9 +80,10 @@ properties:
     type: boolean
     example: true
     default: false
-    description: A boolean indicating whether to enable private networking.
-      This will provision the Droplet inside of your account's default VPC for
-      the region. Use the `vpc_uuid` attribute to specify a different VPC.
+    deprecated: true
+    description: This parameter has been deprecated. Use `vpc_uuid` instead to
+      specify a VPC network for the Droplet. If no `vpc_uuid` is provided, the
+      Droplet will be placed in your account's default VPC for the region.
 
   vpc_uuid:
     type: string
