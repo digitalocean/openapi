@@ -1,0 +1,41 @@
+type: object
+
+properties:
+  name:
+    type: string
+    example: Basic
+    description: The name of the subscription tier.
+
+  slug:
+    type: string
+    example: basic
+    description: The slug identifier of the subscription tier.
+
+  included_repositories:
+    type: integer
+    example: 5
+    description: The number of repositories included in the subscription tier.
+      `0` indicates that the subscription tier includes unlimited repositories.
+
+  included_storage_bytes:
+    type: integer
+    example: 5368709120
+    description: The amount of storage included in the subscription tier in bytes.
+
+  allow_storage_overage:
+    type: boolean
+    example: true
+    description: A boolean indicating whether the subscription tier supports
+      additional storage above what is included in the base plan at an
+      additional cost per GiB used.
+
+  included_bandwidth_bytes:
+    type: integer
+    example: 5368709120
+    description: The amount of outbound data transfer included in the
+      subscription tier in bytes.
+
+  monthly_price_in_cents:
+    type: integer
+    example: 500
+    description: The monthly cost of the subscription tier in cents.
