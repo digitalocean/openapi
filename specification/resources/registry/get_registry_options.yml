@@ -1,0 +1,27 @@
+operationId: get_registry_options
+
+summary: List Available Subscription Tiers
+
+description: >-
+  There are multiple subscription tiers available for container registry. Each
+  tier allows a different number of image repositories to be created in your
+  registry, and has a different amount of storage and transfer included.
+
+  To list the available subscription tiers, send a GET request to
+  `/v2/registry/options`.
+
+tags:
+  - Container Registry
+
+responses:
+  '200':
+    $ref: 'responses/options_response.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

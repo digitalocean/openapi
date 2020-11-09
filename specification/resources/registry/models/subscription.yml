@@ -2,7 +2,7 @@ type: object
 
 properties:
   tier:
-    $ref: 'subscription_tier.yml'
+    $ref: 'subscription_tier.yml#/subscription_tier_base'
 
   created_at:
     type: string
