@@ -865,6 +865,9 @@ paths:
     get:
       $ref: 'resources/registry/get_registry_subscription.yml'
 
+    post:
+      $ref: 'resources/registry/post_registry_subscription.yml'
+
   /v2/registry/docker-credentials:
     get:
       $ref: 'resources/registry/get_docker_credentials.yml'
