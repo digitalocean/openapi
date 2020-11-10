@@ -772,6 +772,13 @@ paths:
     get:
       $ref: 'resources/kubernetes/get_clusterlint_results.yml'
 
+  /v2/kubernetes/registry:
+    post:
+      $ref: 'resources/kubernetes/add_registry.yml'
+
+    delete:
+      $ref: 'resources/kubernetes/remove_registry.yml'
+
   /v2/load_balancers:
     post:
       $ref: 'resources/load_balancers/create_load_balancer.yml'
