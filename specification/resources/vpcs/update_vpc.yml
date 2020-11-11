@@ -4,8 +4,6 @@ summary: Update a VPC
 
 description: |
   To update information about a VPC, send a PUT request to `/v2/vpcs/$VPC_ID`.
-  Currently, only the `name` and `description` attributes can be updated.
-  Excluding an attribute will reset it to its default.
 
 tags:
   - VPCs
@@ -22,6 +20,7 @@ requestBody:
         type: object
         allOf:
         - $ref: 'models/vpc.yml#/vpc_updatable'
+        - $ref: 'models/vpc.yml#/vpc_default'
 
         required:
         - name
