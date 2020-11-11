@@ -892,6 +892,21 @@ paths:
     delete:
       $ref: 'resources/registry/delete_repository_manifest.yml'
 
+  /v2/registry/{registry_name}/garbage-collection:
+    post:
+      $ref: 'resources/registry/run_garbage_collection.yml'
+
+    get:
+      $ref: 'resources/registry/get_garbage_collection.yml'
+
+  /v2/registry/{registry_name}/garbage-collections:
+    get:
+      $ref: 'resources/registry/list_garbage_collections.yml'
+
+  /v2/registry/{registry_name}/garbage-collection/{garbage_collection_uuid}:
+    put:
+      $ref: 'resources/registry/update_garbage_collection.yml'
+
   /v2/reports/droplet_neighbors_ids:
     get:
       $ref: 'resources/droplets/list_all_droplet_neighbors_ids.yml'
