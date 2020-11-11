@@ -4,8 +4,7 @@ summary: Partially Update a VPC
 
 description: |
   To update a subset of information about a VPC, send a PATCH request to
-  `/v2/vpcs/$VPC_ID`. Currently, only the `name` and `description` attributes
-  can be updated.
+  `/v2/vpcs/$VPC_ID`.
 
 tags:
   - VPCs
@@ -19,7 +18,9 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/vpc.yml#/vpc_updatable'
+        allOf:
+        - $ref: 'models/vpc.yml#/vpc_updatable'
+        - $ref: 'models/vpc.yml#/vpc_default'
 
 responses:
   '200':

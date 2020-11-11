@@ -3,6 +3,7 @@ vpc:
   allOf:
   - $ref: '#/vpc_updatable'
   - $ref: '#/vpc_create'
+  - $ref: '#/vpc_default'
   - $ref: '#/vpc_base'
 
 vpc_base:
@@ -17,13 +18,6 @@ vpc_base:
 
     urn:
       $ref: '../../../shared/attributes/urn.yml'
-
-    default:
-      type: boolean
-      readOnly: true
-      example: false
-      description: A boolean value indicating whether or not the VPC is the
-        default one for the region.
 
     created_at:
       type: string
@@ -48,6 +42,20 @@ vpc_updatable:
       example: VPC for production environment
       description: A free-form text field for describing the VPC's purpose. It
         may be a maximum of 255 characters.
+
+vpc_default:
+  type: object
+  properties:
+    default:
+      type: boolean
+      example: true
+      description: A boolean value indicating whether or not the VPC is the
+        default network for the region. All applicable resources are placed
+        into the default VPC network unless otherwise specified during their
+        creation. The `default` field cannot be unset from `true`. If you want
+        to set a new default VPC network, update the `default` field of another
+        VPC network in the same region. The previous network's `default` field
+        will be set to `false` when a new default VPC has been defined.
 
 vpc_create:
   type: object

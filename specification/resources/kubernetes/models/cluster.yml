@@ -143,6 +143,14 @@ properties:
       fast and reliable by bringing up new nodes before destroying the outdated
       nodes.
 
+  registry_enabled:
+    type: boolean
+    readOnly: true
+    example: true
+    description: A read-only boolean value indicating if a container registry is
+      integrated with the cluster.
+
+
 required:
   - name
   - region
