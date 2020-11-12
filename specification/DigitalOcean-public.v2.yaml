@@ -868,6 +868,13 @@ paths:
     delete:
       $ref: 'resources/registry/delete_registry.yml'
 
+  /v2/registry/subscription:
+    get:
+      $ref: 'resources/registry/get_registry_subscription.yml'
+
+    post:
+      $ref: 'resources/registry/post_registry_subscription.yml'
+
   /v2/registry/docker-credentials:
     get:
       $ref: 'resources/registry/get_docker_credentials.yml'
@@ -906,6 +913,10 @@ paths:
   /v2/registry/{registry_name}/garbage-collection/{garbage_collection_uuid}:
     put:
       $ref: 'resources/registry/update_garbage_collection.yml'
+
+  /v2/registry/options:
+    get:
+      $ref: 'resources/registry/get_registry_options.yml'
 
   /v2/reports/droplet_neighbors_ids:
     get:
