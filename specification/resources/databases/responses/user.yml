@@ -32,4 +32,4 @@ content:
             role: normal
             password: wv78n3zpz42xezdk
             mysql_settings:
-              auth_plugins: mysql_native_password
+              auth_plugin: mysql_native_password
