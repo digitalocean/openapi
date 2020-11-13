@@ -21,7 +21,7 @@ requestBody:
   content:
     application/json:
       schema:
-        oneOf:
+        anyOf:
           - $ref: 'models/new_volume_ext4.yml'
           - $ref: 'models/new_volume_xfs.yml'
         discriminator:
@@ -30,7 +30,7 @@ requestBody:
             ext4: 'models/new_volume_ext4.yml'
             xfs: 'models/new_volume_xfs.yml'
       examples:
-        ext4 volume: 
+        ext4 volume:
           value:
             size_gigabytes: 10
             name: ext4_example
@@ -38,7 +38,7 @@ requestBody:
             region: nyc1
             filesystem_type: ext4
             filesystem_label: ext4_volume_01
-        xfs volume: 
+        xfs volume:
           value:
             size_gigabytes: 10
             name: xfs_example
@@ -50,7 +50,7 @@ requestBody:
 responses:
   '201':
     $ref: 'responses/volume.yml'
-  
+
   '400':
     $ref: '../../shared/responses/bad_request.yml'
 
