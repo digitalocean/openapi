@@ -23,6 +23,11 @@ content:
                 type: array
                 items:
                   $ref: '../models/action_link.yml'
+
+        required:
+        - droplet
+        - links
+
       - title: Multiple Droplet Response
         properties:
           droplets:
@@ -36,6 +41,10 @@ content:
                 type: array
                 items:
                   $ref: '../models/action_link.yml'
+
+        required:
+        - droplets
+        - links
 
     examples:
       Single Droplet Create Response:
