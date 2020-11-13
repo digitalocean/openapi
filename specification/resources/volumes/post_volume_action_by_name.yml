@@ -70,12 +70,6 @@ requestBody:
             droplet_id: 11612190
             region: nyc1
 
-        VolumeActionResize:
-          value:
-            type: resize
-            size_gigabytes: 100
-            region: nyc1
-
 responses:
   '200':
     $ref: 'responses/volume_action.yml'
