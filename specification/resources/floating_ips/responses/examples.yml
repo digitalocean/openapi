@@ -157,7 +157,7 @@ floating_ip_reserved:
   value:
     floating_ip:
       ip: 45.55.96.47
-      droplet:
+      droplet: null
       region:
         name: New York 3
         slug: nyc3
