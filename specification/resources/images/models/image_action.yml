@@ -1,6 +1,5 @@
 image_action_base:
   type: object
-
   properties:
     type:
       type: string
@@ -11,12 +10,16 @@ image_action_base:
         - convert
         - transfer
       example: convert
+  required:
+  - type
 
 image_action_transfer:
-  type: object
-  
   allOf:
-    - $ref: '#/image_action_base'
-    - properties:
-        region:
-          $ref: '../../../shared/attributes/region_slug.yml'
+  - $ref: '#/image_action_base'
+  - type: object
+    properties:
+      region:
+        $ref: '../../../shared/attributes/region_slug.yml'
+  required:
+  - region
+  - type
