@@ -1,8 +1,0 @@
-type: object
-
-properties:
-  account:
-    $ref: 'account.yml'
-
-required:
-  - account
