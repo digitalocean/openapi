@@ -53,14 +53,12 @@ properties:
 
   ipv4:
     type: string
-    format: ipv4
     readOnly: true
     example: "68.183.121.157"
     description: The public IPv4 address of the Kubernetes master node.
 
   endpoint:
     type: string
-    format: uri
     readOnly: true
     example: https://bd5f5959-5e1e-4205-a714-a914373942af.k8s.ondigitalocean.com
     description: The base URL of the API server on the Kubernetes master node.
