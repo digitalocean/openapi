@@ -3,32 +3,32 @@ oneOf:
     allOf:
     - type: object
       properties:
-        $ref: 'attributes.yml#/LoadBalancerDropletIDs'
-      required:
-      - droplet_ids
+        $ref: 'attributes.yml#/load_balancer_droplet_ids'
 
     - type: object
       properties:
         region:
           $ref: '../../../shared/attributes/region_slug.yml'
-      required:
-      - region
 
     - $ref: 'load_balancer_base.yml'
+
+    required:
+    - droplet_ids
+    - region
 
   - title: Assign Droplets by Tag
     allOf:
     - type: object
       properties:
-        $ref: 'attributes.yml#/LoadBalancerDropletTag'
-      required:
-      - tag
+        $ref: 'attributes.yml#/load_balancer_droplet_tag'
 
     - type: object
       properties:
         region:
           $ref: '../../../shared/attributes/region_slug.yml'
-      required:
-      - region
 
     - $ref: 'load_balancer_base.yml'
+
+    required:
+    - tag
+    - region
