@@ -36,7 +36,7 @@ requestBody:
           value:
             name: app-02
             mysql_settings:
-              auth_plugins: mysql_native_password
+              auth_plugin: mysql_native_password
 
 responses:
   '201':

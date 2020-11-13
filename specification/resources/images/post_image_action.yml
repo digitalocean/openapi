@@ -33,17 +33,8 @@ requestBody:
         discriminator:
           propertyName: type
           mapping:
-            Convert: 'models/image_action.yml#/image_action_base'
-            Transfer: 'models/image_action.yml#/image_action_transfer'
-
-      examples:
-        image_action_convert:
-          value:
-            type: convert
-        image_action_transfer:
-          value:
-            type: transfer
-            region: nyc3
+            convert: 'models/image_action.yml#/image_action_base'
+            transfer: 'models/image_action.yml#/image_action_transfer'
 
 responses:
   '202':

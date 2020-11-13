@@ -7,7 +7,7 @@ properties:
       The name of the domain itself. This should follow the standard domain
       format of domain.TLD. For instance, `example.com` is a valid domain name.
     example: example.com
-  
+
   ttl:
     type: integer
     description: >-
@@ -15,10 +15,11 @@ properties:
       This defines the time frame that clients can cache queried information
       before a refresh should be requested.
     example: 1800
-  
+
   zone_file:
     type: string
     readOnly: true
+    nullable: true
     description: >-
       This attribute contains the complete contents of the zone file for the
       selected domain. Individual domain record resources should be used to get

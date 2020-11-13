@@ -15,8 +15,8 @@ allOf:
 
 - type: object
   properties:
-    $ref: 'attributes.yml#/LoadBalancerDropletIDs'
+    $ref: 'attributes.yml#/load_balancer_droplet_ids'
 
 - type: object
   properties:
-    $ref: 'attributes.yml#/LoadBalancerDropletTag'
+    $ref: 'attributes.yml#/load_balancer_droplet_tag'

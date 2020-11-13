@@ -308,8 +308,8 @@ kubernetes_clusters_create_basic_response:
       cluster_subnet: 10.244.0.0/16
       service_subnet: 10.245.0.0/16
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
-      ipv4: ' '
-      endpoint: ' '
+      ipv4: ''
+      endpoint: ''
       tags:
       - k8s
       - k8s:bd5f5959-5e1e-4205-a714-a914373942af
@@ -329,24 +329,24 @@ kubernetes_clusters_create_basic_response:
         max_nodes: 0
         nodes:
         - id: 478247f8-b1bb-4f7a-8db9-2a5f8d4b8f8f
-          name: ' '
+          name: ''
           status:
             state: provisioning
-          droplet_id: ' '
+          droplet_id: ''
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: ad12e744-c2a9-473d-8aa9-be5680500eb1
-          name: ' '
+          name: ''
           status:
             state: provisioning
-          droplet_id: ' '
+          droplet_id: ''
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: e46e8d07-f58f-4ff1-9737-97246364400e
-          name: ' '
+          name: ''
           status:
             state: provisioning
-          droplet_id: ' '
+          droplet_id: ''
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
       maintenance_policy:
@@ -372,8 +372,8 @@ kubernetes_clusters_multi_pool_response:
       cluster_subnet: 10.244.0.0/16
       service_subnet: 10.245.0.0/16
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
-      ipv4: ' '
-      endpoint: ' '
+      ipv4: ''
+      endpoint: ''
       tags:
       - production
       - web-team
@@ -398,24 +398,24 @@ kubernetes_clusters_multi_pool_response:
         max_nodes: 0
         nodes:
         - id: 478247f8-b1bb-4f7a-8db9-2a5f8d4b8f8f
-          name: ' '
+          name: ''
           status:
             state: provisioning
-          droplet_id: ' '
+          droplet_id: ''
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: ad12e744-c2a9-473d-8aa9-be5680500eb1
-          name: ' '
+          name: ''
           status:
             state: provisioning
-          droplet_id: ' '
+          droplet_id: ''
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: e46e8d07-f58f-4ff1-9737-97246364400e
-          name: ' '
+          name: ''
           status:
             state: provisioning
-          droplet_id: ' '
+          droplet_id: ''
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
       - id: f49f4379-7e7f-4af5-aeb6-0354bd840778
@@ -437,17 +437,17 @@ kubernetes_clusters_multi_pool_response:
         max_nodes: 5
         nodes:
         - id: 3385619f-8ec3-42ba-bb23-8d21b8ba7518
-          name: ' '
+          name: ''
           status:
             state: provisioning
-          droplet_id: ' '
+          droplet_id: ''
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
         - id: 4b8f60ff-ba06-4523-a6a4-b8148244c7e6
-          name: ' '
+          name: ''
           status:
             state: provisioning
-          droplet_id: ' '
+          droplet_id: ''
           created_at: '2018-11-15T16:00:11Z'
           updated_at: '2018-11-15T16:00:11Z'
       maintenance_policy:

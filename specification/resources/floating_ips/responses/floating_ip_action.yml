@@ -15,9 +15,7 @@ content:
     schema:
       properties:
         action:
-          type: array
-          items:
-            $ref: '../../actions/models/action.yml'
+          $ref: '../../actions/models/action.yml'
 
       example:
         action:

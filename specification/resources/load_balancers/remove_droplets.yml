@@ -24,7 +24,7 @@ requestBody:
     application/json:
       schema:
         properties:
-          $ref: 'models/attributes.yml#/LoadBalancerDropletIDs'
+          $ref: 'models/attributes.yml#/load_balancer_droplet_ids'
         required:
          - droplet_ids
 

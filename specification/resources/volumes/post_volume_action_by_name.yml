@@ -45,7 +45,7 @@ requestBody:
   content:
     application/json:
       schema:
-        oneOf:
+        anyOf:
           - $ref: 'models/volume_action_post_attach.yml'
           - $ref: 'models/volume_action_post_detach.yml'
         discriminator:
@@ -68,12 +68,6 @@ requestBody:
           value:
             type: detach
             droplet_id: 11612190
-            region: nyc1
-
-        VolumeActionResize:
-          value:
-            type: resize
-            size_gigabytes: 100
             region: nyc1
 
 responses:
