@@ -199,7 +199,7 @@ volume_action_detach_response:
       type: detach_volume
       started_at: '2015-10-15T17:46:15Z'
       completed_at: null
-      resource_id:
+      resource_id: null
       resource_type: backend
       region:
         name: New York 1
