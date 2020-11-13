@@ -45,7 +45,7 @@ requestBody:
   content:
     application/json:
       schema:
-        oneOf:
+        anyOf:
           - $ref: 'models/volume_action_post_attach.yml'
           - $ref: 'models/volume_action_post_detach.yml'
         discriminator:
