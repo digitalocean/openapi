@@ -1,11 +1,12 @@
 name: Spec PR
 # This workflow uploads a copy of the spec with the respective changes in the PR
-# to the team spaces.
-# The name of the uplaoded file will be prefixed with the PR number.
+# to the team Space.
+#
+# The name of the uploaded file will be prefixed with the PR number.
 # e.g. `spec-ci/previews/123-spec.yaml
 
 on:
-  pull_request_target:
+  pull_request:
     paths:
       - 'specification/**'
       - 'spectral/**'
@@ -21,6 +22,8 @@ jobs:
         run: make lint
 
   generate-preview:
+    # As this job needs access to secrets, skip it if the PR comes from a fork.
+    if: github.event.pull_request.head.repo.full_name == github.repository
     name: Generate Preview
     runs-on: ubuntu-latest
     needs: lint
@@ -41,7 +44,7 @@ jobs:
 
       - name: Upload PR spec
         run: >-
-          aws s3 cp tests/openapi-bundled.yaml 
+          aws s3 cp tests/openapi-bundled.yaml
           ${{ env.SPACES_PATH }}/previews/${{ github.event.number }}-spec.yaml
           --endpoint=${{ env.SPACES_ENDPOINT }}
           --acl public-read
