@@ -17,7 +17,7 @@ tags:
   - Databases
 
 parameters:
-  - $ref: 'parameters.yml#/database_id'
+  - $ref: 'parameters.yml#/database_cluster_uuid'
 
 responses:
   '200':

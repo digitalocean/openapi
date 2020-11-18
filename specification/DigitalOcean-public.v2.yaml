@@ -495,33 +495,75 @@ paths:
     get:
       $ref: 'resources/databases/get_database_cluster.yml'
 
-  /v2/databases/{database_id}/users:
+  /v2/databases/{database_cluster_uuid}/migrate:
+    put:
+      $ref: 'resources/databases/migrate_database_cluster.yml'
+
+  /v2/databases/{database_cluster_uuid}/firewall:
+    get:
+      $ref: 'resources/databases/list_firewalls.yml'
+    put:
+      $ref: 'resources/databases/update_firewall.yml'
+
+  /v2/databases/{database_cluster_uuid}/maintenance:
+    put:
+      $ref: 'resources/databases/update_maintenance_window.yml'
+
+  /v2/databases/{database_cluster_uuid}/backups:
+    get:
+      $ref: 'resources/databases/list_backups.yml'
+
+  /v2/databases/{database_cluster_uuid}/replicas:
+    get:
+      $ref: 'resources/databases/list_replicas.yml'
+    post:
+      $ref: 'resources/databases/create_replica.yml'
+
+  /v2/databases/{database_cluster_uuid}/replicas/{replica_name}:
+    get:
+      $ref: 'resources/databases/get_replica.yml'
+    delete:
+      $ref: 'resources/databases/destroy_replica.yml'
+
+  /v2/databases/{database_cluster_uuid}/users:
     get:
       $ref: 'resources/databases/list_users.yml'
     post:
       $ref: 'resources/databases/add_user.yml'
 
-  /v2/databases/{database_id}/users/{username}:
+  /v2/databases/{database_cluster_uuid}/users/{username}:
     get:
       $ref: 'resources/databases/get_user.yml'
     delete:
       $ref: 'resources/databases/delete_user.yml'
 
-  /v2/databases/{database_id}/users/{username}/reset_auth:
+  /v2/databases/{database_cluster_uuid}/users/{username}/reset_auth:
     post:
       $ref: 'resources/databases/reset_auth.yml'
 
-  /v2/databases/{database_id}/dbs:
+  /v2/databases/{database_cluster_uuid}/dbs:
     get:
       $ref: 'resources/databases/list_databases.yml'
     post:
       $ref: 'resources/databases/add_database.yml'
 
-  /v2/databases/{database_id}/dbs/{database_name}:
+  /v2/databases/{database_cluster_uuid}/dbs/{database_name}:
     get:
       $ref: 'resources/databases/get_database.yml'
     delete:
       $ref: 'resources/databases/delete_database.yml'
+
+  /v2/databases/{database_cluster_uuid}/eviction_policy:
+    get:
+      $ref: 'resources/databases/get_eviction_policy.yml'
+    put:
+      $ref: 'resources/databases/update_eviction_policy.yml'
+
+  /v2/databases/{database_cluster_uuid}/sql_mode:
+    get:
+      $ref: 'resources/databases/get_sql_mode.yml'
+    put:
+      $ref: 'resources/databases/update_sql_mode.yml'
 
   /v2/domains:
     get:

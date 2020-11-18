@@ -1,0 +1,44 @@
+type: object
+
+properties:
+  name:
+    type: string
+    example: read-nyc3-01
+    description: The name to give the read-only replicating
+
+  region:
+    type: string
+    example: nyc3
+    description: >-
+      A slug identifier for the region where the read-only replica will be
+      located. If excluded, the replica will be placed in the same region as
+      the cluster.
+
+  size:
+    type: string
+    example: db-s-2vcpu-4gb
+    description: >-
+      A slug identifier representing the size of the node for the read-only
+      replica. The size of the replica must be at least as large as the node
+      size for the database cluster from which it is replicating.
+
+  tags:
+    type: array
+    items:
+      type: string
+    example:
+      - production
+    description: >-
+      A flat array of tag names as strings to apply to the read-only replica
+      after it is created. Tag names can either be existing or new tags.
+
+  private_network_uuid:
+    type: string
+    example: 9423cbad-9211-442f-820b-ef6915e99b5f
+    description: >-
+      A string specifying the UUID of the VPC to which the read-only replica
+      will be assigned. If excluded, the replica will be assigned to your
+      account's default VPC for the region.
+
+required:
+  - name

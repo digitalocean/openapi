@@ -1,7 +1,7 @@
-database_id:
+database_cluster_uuid:
   in: path
-  name: database_id
-  description: A unique identifier for a database.
+  name: database_cluster_uuid
+  description: A unique identifier for a database cluster.
   required: true
   example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
   schema:
@@ -17,6 +17,15 @@ database_name:
   schema:
     type: string
 
+replica_name:
+  in: path
+  name: replica_name
+  description: The name of the database replica.
+  required: true
+  example: read-nyc3-01
+  schema:
+    type: string
+
 username:
   in: path
   name: username
@@ -25,16 +34,6 @@ username:
   example: app-01
   schema:
     type: string
-
-database_cluster_uuid:
-  in: path
-  name: database_cluster_uuid
-  description: A unique identifier for a database cluster.
-  required: true
-  example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
-  schema:
-    type: string
-    format: uuid
 
 tag_name:
   in: query

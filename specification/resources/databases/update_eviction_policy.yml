@@ -1,0 +1,39 @@
+operationId: update_eviction_policy
+
+summary: Configure the Eviction Policy for a Redis Cluster
+
+description: >-
+  To configure an eviction policy for an existing Redis cluster, send a PUT
+  request to `/v2/databases/$DATABASE_ID/eviction_policy` specifying the
+  desired policy.
+
+tags:
+  - Databases
+
+parameters:
+  - $ref: 'parameters.yml#/database_cluster_uuid'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/eviction_policy.yml'
+      example:
+        eviction_policy: allkeys_lru
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'

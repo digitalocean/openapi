@@ -1,0 +1,18 @@
+type: object
+
+properties:
+  eviction_policy:
+    type: string
+    enum:
+      - noeviction
+      - allkeys_lru
+      - allkeys_random
+      - volatile_lru
+      - volatile_random
+      - volatile_ttl
+    example: noeviction
+    description: >-
+      A string specifying the desired eviction policy for the Redis cluster.
+
+required:
+  - eviction_policy
