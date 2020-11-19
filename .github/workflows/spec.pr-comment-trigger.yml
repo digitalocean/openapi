@@ -11,21 +11,36 @@ on:
 jobs:
   generate-preview-on-trigger:
     # Check that the issue is a PR and that the comment starts with "!deploy"
-    # Also ensure that the comments is made by someone with commit access to the repo
-    if: |
-      github.event.issue.pull_request && startsWith(github.event.comment.body, '!deploy') && (
-        github.event.comment.author_association == 'OWNER' ||
-        github.event.comment.author_association == 'MEMBER' ||
-        github.event.comment.author_association == 'COLLABORATOR'
-      )
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '!deploy')
     name: Generate Preview on Comment Trigger
     runs-on: ubuntu-latest
     steps:
+    # Ensure that the comment is made by someone in the DigitalOcean org
+    - name: isDigitalOceanMember?
+      id: is-digitalocean-member
+      uses: actions/github-script@v3
+      with:
+        result-encoding: string
+        script: |
+          const organization = 'digitalocean';
+          const user = "${{ github.event.comment.user.login }}";
+
+          orgs = await github.orgs.listForUser({
+              username: user,
+              per_page: 100,
+          });
+
+          const isMember = orgs.data.some(({ login }) => login === organization);
+
+          return isMember ? 'true' : 'false';
+
     - uses: actions/setup-node@v1
+      if: steps.is-digitalocean-member.outputs.result == 'true'
       with:
         node-version: '14.x'
 
     - name: Get PR Branch
+      if: steps.is-digitalocean-member.outputs.result == 'true'
       id: get-pr-branch
       uses: actions/github-script@v3
       with:
@@ -40,23 +55,27 @@ jobs:
           return result.data.head
 
     - name: Checkout PR Branch
+      if: steps.is-digitalocean-member.outputs.result == 'true'
       uses: actions/checkout@v2
       with:
         repository: ${{ fromJSON(steps.get-pr-branch.outputs.result).repo.full_name }}
         ref: ${{ fromJSON(steps.get-pr-branch.outputs.result).ref }}
 
     - name: Bundle
+      if: steps.is-digitalocean-member.outputs.result == 'true'
       run: make bundle
 
     - uses: actions/upload-artifact@v2
+      if: steps.is-digitalocean-member.outputs.result == 'true'
       with:
         name: openapi-bundled
         path: tests/openapi-bundled.yaml
 
     - name: Upload PR spec
+      if: steps.is-digitalocean-member.outputs.result == 'true'
       run: >-
         aws s3 cp tests/openapi-bundled.yaml
-        ${{ env.SPACES_PATH }}/previews/${{ github.event.number }}-spec.yaml
+        ${{ env.SPACES_PATH }}/previews/${{ github.event.issue.number }}-spec.yaml
         --endpoint=${{ env.SPACES_ENDPOINT }}
         --acl public-read
       env:
@@ -67,7 +86,7 @@ jobs:
         SPACES_ENDPOINT: ${{ secrets.SPACES_ENDPOINT || 'https://nyc3.digitaloceanspaces.com'}}
 
     - name: Comment on PR
-      if: ${{ success() }}
+      if: steps.is-digitalocean-member.outputs.result == 'true' && success()
       uses: actions/github-script@v3
       with:
         script: |
