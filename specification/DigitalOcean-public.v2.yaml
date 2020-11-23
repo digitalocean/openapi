@@ -503,7 +503,7 @@ paths:
     get:
       $ref: 'resources/databases/list_firewalls.yml'
     put:
-      $ref: 'resources/databases/update_firewall.yml'
+      $ref: 'resources/databases/update_database_firewall.yml'
 
   /v2/databases/{database_cluster_uuid}/maintenance:
     put:
@@ -511,7 +511,7 @@ paths:
 
   /v2/databases/{database_cluster_uuid}/backups:
     get:
-      $ref: 'resources/databases/list_backups.yml'
+      $ref: 'resources/databases/list_database_backups.yml'
 
   /v2/databases/{database_cluster_uuid}/replicas:
     get:

@@ -1,4 +1,4 @@
-operationId: list_backups
+operationId: list_database_backups
 
 summary: List Backups for a Database Cluster
 

@@ -27,17 +27,10 @@ requestBody:
     application/json:
       schema:
         allOf:
-          - type: object
-            properties:
-              size:
-                type: string
-                description: >-
-                  A slug identifier representing the size of the node for the
-                  read-only replica. The size of the replica must be at least as
-                  large as the node size for the database cluster from which it is
-                  replicating.
-                example: db-s-2vcpu-4gb
-          - $ref: 'models/database_replica.yml'
+        - $ref: 'models/database_replica.yml'
+        required:
+          - name
+          - size
 
       example:
         name: read-nyc3-01
