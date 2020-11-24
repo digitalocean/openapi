@@ -69,22 +69,38 @@ properties:
       type: string
     example:
      - production
+    nullable: true
+    description: >-
+      An array of tags that have been applied to the database cluster.
   db_names:
     type: array
     items:
       type: string
     example:
       - doadmin
+    nullable: true
+    readOnly: true
+    description: >-
+      An array of strings containing the names of databases created in the
+      database cluster.
   connection:
-    $ref: './database_connection.yml'
+    allOf:
+    - $ref: './database_connection.yml'
+    - readOnly: true
   private_connection:
-    $ref: './database_connection.yml'
+    allOf:
+    - $ref: './database_connection.yml'
+    - readOnly: true
   users:
     type: array
+    nullable: true
     items:
       $ref: './database_user.yml'
+    readOnly: true
   maintenance_window:
-    $ref: './database_maintenance_window.yml'
+    allOf:
+    - $ref: './database_maintenance_window.yml'
+    - readOnly: true
 
 required:
   - name
