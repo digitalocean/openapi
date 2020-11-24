@@ -5,7 +5,7 @@ properties:
   id:
     type: integer
     description: >-
-      A unique number that can be used to identify and reference a specific 
+      A unique number that can be used to identify and reference a specific
       image.
     example: 7555620
     readOnly: true
@@ -16,12 +16,13 @@ properties:
   type:
     type: string
     description: >-
-      Describes the kind of image. It may be one of "snapshot", "backup", or 
-      "custom". 
-      This specifies whether an image is a user-generated Droplet snapshot, 
-      automatically created Droplet backup, or a user-provided virtual machine 
+      Describes the kind of image. It may be one of "snapshot", "backup", or
+      "custom".
+      This specifies whether an image is a user-generated Droplet snapshot,
+      automatically created Droplet backup, or a user-provided virtual machine
       image.
     enum:
+      - base
       - snapshot
       - backup
       - custom
@@ -34,18 +35,18 @@ properties:
     type: string
     nullable: true
     description: >-
-      A uniquely identifying string that is associated with each of the 
-      DigitalOcean-provided public images. 
-      These can be used to reference a public image as an alternative to the 
+      A uniquely identifying string that is associated with each of the
+      DigitalOcean-provided public images.
+      These can be used to reference a public image as an alternative to the
       numeric id.
     example: nifty1
 
   public:
     type: boolean
     description: >-
-      This is a boolean value that indicates whether the image in question is 
-      public or not. 
-      An image that is public is available to all accounts. A non-public image 
+      This is a boolean value that indicates whether the image in question is
+      public or not.
+      An image that is public is available to all accounts. A non-public image
       is only accessible from your account.
     example: true
 
@@ -56,7 +57,7 @@ properties:
     type: string
     format: date-time
     description: >-
-      A time value given in ISO8601 combined date and time format that 
+      A time value given in ISO8601 combined date and time format that
       represents when the image was created.
     example: 2020-05-04T22:23:02Z
 
