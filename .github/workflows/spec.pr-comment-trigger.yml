@@ -25,14 +25,19 @@ jobs:
           const organization = 'digitalocean';
           const user = "${{ github.event.comment.user.login }}";
 
-          orgs = await github.orgs.listForUser({
-              username: user,
-              per_page: 100,
-          });
+          try {
+              org = await github.orgs.checkMembershipForUser({
+                  org: organization,
+                  username: user,
+              });
 
-          const isMember = orgs.data.some(({ login }) => login === organization);
+              console.log(`${org.headers.status}: ${user} found in ${organization}`);
+              return 'true';
 
-          return isMember ? 'true' : 'false';
+          } catch(err) {
+              console.log(`${err.headers.status}: ${user} not found in ${organization}`);
+              return 'false';
+          };
 
     - uses: actions/setup-node@v1
       if: steps.is-digitalocean-member.outputs.result == 'true'
