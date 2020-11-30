@@ -636,6 +636,10 @@ paths:
     get:
       $ref: 'resources/droplets/list_droplet_kernels.yml'
 
+  /v2/droplets/{droplet_id}/firewalls:
+    get:
+      $ref: 'resources/droplets/list_droplet_firewalls.yml'
+
   /v2/droplets/{droplet_id}/neighbors:
     get:
       $ref: 'resources/droplets/list_droplet_neighbors.yml'
