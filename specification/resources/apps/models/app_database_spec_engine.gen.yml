@@ -1,0 +1,11 @@
+default: UNSET
+enum:
+- UNSET
+- MYSQL
+- PG
+- REDIS
+title: |-
+  - MYSQL: MySQL
+   - PG: PostgreSQL
+   - REDIS: Redis
+type: string

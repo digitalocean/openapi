@@ -1,0 +1,7 @@
+properties:
+  available:
+    format: boolean
+    type: boolean
+  suggestion:
+    type: string
+type: object

@@ -1,0 +1,34 @@
+description: Delete an existing app. Once deleted, all active deployments will be
+  permanently shut down and the app deleted. If needed, be sure to back up your app
+  specification so that you may re-create it at a later time.
+operationId: delete_app
+parameters:
+- description: The ID of the app
+  in: path
+  name: id
+  required: true
+  schema:
+    type: string
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: models/apps_delete_app_response.gen.yml
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: Delete an App
+tags:
+- Apps

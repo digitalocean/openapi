@@ -1,0 +1,8 @@
+properties:
+  name:
+    title: The name of this static site
+    type: string
+  source_commit_hash:
+    title: The commit hash of the repository that was used to build this static site
+    type: string
+type: object

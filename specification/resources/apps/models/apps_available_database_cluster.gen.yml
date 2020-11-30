@@ -1,0 +1,25 @@
+properties:
+  data_center:
+    type: string
+  databases:
+    items:
+      type: string
+    type: array
+  engine:
+    type: string
+  name:
+    type: string
+  region:
+    type: string
+  status:
+    type: string
+  trusted_sources:
+    format: boolean
+    type: boolean
+  users:
+    items:
+      type: string
+    type: array
+  version:
+    type: string
+type: object

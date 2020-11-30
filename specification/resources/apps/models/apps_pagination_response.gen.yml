@@ -1,0 +1,20 @@
+description: 'Note: This field is not expressed in DigitalOcean''s public API. Instead
+  pagation is handled according to DO API convention. https://developers.digitalocean.com/documentation/v2/#links'
+properties:
+  page:
+    format: int64
+    type: integer
+  pages:
+    format: int64
+    type: integer
+  per_page:
+    format: int64
+    type: integer
+  public_api_prefix:
+    description: ' '
+    title: public_api_prefix
+    type: string
+  total:
+    format: int64
+    type: integer
+type: object

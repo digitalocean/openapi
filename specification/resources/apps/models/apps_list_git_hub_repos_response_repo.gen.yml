@@ -1,0 +1,6 @@
+properties:
+  name:
+    type: string
+  owner:
+    type: string
+type: object

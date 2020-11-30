@@ -1,0 +1,18 @@
+properties:
+  branch:
+    type: string
+  component_types:
+    items:
+      type: string
+    type: array
+  environment_slug:
+    type: string
+  name:
+    type: string
+  repo_name:
+    type: string
+  repo_owner:
+    type: string
+  repo_url:
+    type: string
+type: object

@@ -1,0 +1,9 @@
+properties:
+  discount_percent:
+    format: float
+    type: number
+  instance_sizes:
+    items:
+      $ref: apps_instance_size.gen.yml
+    type: array
+type: object

@@ -1,0 +1,5 @@
+default: UNKNOWN
+enum:
+- UNKNOWN
+- GITHUB
+type: string

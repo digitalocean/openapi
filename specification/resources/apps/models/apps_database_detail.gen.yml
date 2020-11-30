@@ -1,0 +1,6 @@
+properties:
+  component_name:
+    type: string
+  dbaas_uuid:
+    type: string
+type: object

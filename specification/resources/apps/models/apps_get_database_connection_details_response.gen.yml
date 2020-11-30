@@ -1,0 +1,17 @@
+properties:
+  database_name:
+    type: string
+  database_url:
+    type: string
+  host:
+    type: string
+  password:
+    type: string
+  port:
+    format: int64
+    type: integer
+  ssl_mode:
+    type: string
+  username:
+    type: string
+type: object

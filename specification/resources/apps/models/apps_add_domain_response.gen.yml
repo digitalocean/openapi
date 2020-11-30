@@ -1,0 +1,4 @@
+properties:
+  domain:
+    $ref: apps_domain.gen.yml
+type: object
