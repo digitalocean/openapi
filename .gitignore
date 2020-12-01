@@ -2,6 +2,7 @@
 .idea/
 .vscode/
 !.vscode/extensions.json
+!.vscode/openapi.code-snippets
 node_modules/
 newman/
 newman-results.json
