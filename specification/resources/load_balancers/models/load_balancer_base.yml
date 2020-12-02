@@ -23,7 +23,12 @@ properties:
       load balancer.
 
   size:
-    type: string 
+    type: string
+    enum:
+    - lb-small
+    - lb-medium
+    - lb-large
+    default: lb-small
     example: lb-small
     description: The size of the load balancer. The available sizes are `lb-small`, `lb-medium`, or `lb-large`. Once you have created a load balancer, you can't change its size.
 
