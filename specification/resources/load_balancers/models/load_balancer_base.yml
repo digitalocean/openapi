@@ -25,7 +25,7 @@ properties:
   size:
     type: string 
     example: lb-small
-    description: The size of the load balancer.
+    description: The size of the load balancer. The available sizes are `lb-small`, `lb-medium`, or `lb-large`. Once you have created a load balancer, you can't change its size.
 
   algorithm:
     type: string
