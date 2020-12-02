@@ -22,6 +22,11 @@ properties:
     description: An attribute containing the public-facing IP address of the
       load balancer.
 
+  size:
+    type: string 
+    example: lb-small
+    description: The size of the load balancer.
+
   algorithm:
     type: string
     example: round_robin
