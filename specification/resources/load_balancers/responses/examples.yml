@@ -71,6 +71,7 @@ load_balancer_ssl_termination_response:
       id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
       name: example-lb-01
       ip: 104.131.186.241
+      size: lb-small
       algorithm: round_robin
       status: new
       created_at: '2017-02-01T22:22:58Z'
@@ -130,6 +131,7 @@ load_balancer_using_tag_response:
       id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
       name: example-lb-01
       ip: 104.131.186.241
+      size: lb-small
       algorithm: round_robin
       status: new
       created_at: '2017-02-01T22:22:58Z'
@@ -189,6 +191,7 @@ load_balancer_sticky_sessions_and_health_check_response:
       id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
       name: example-lb-01
       ip: 104.131.186.241
+      size: lb-small
       algorithm: round_robin
       status: new
       created_at: '2017-02-01T22:22:58Z'
@@ -250,6 +253,7 @@ load_balancer_update_response:
       id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
       name: updated-example-lb-01
       ip: 104.131.186.241
+      size: lb-small
       algorithm: round_robin
       status: new
       created_at: '2017-02-01T22:22:58Z'
@@ -316,6 +320,7 @@ load_balancers_all:
     - id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
       name: example-lb-01
       ip: 104.131.186.241
+      size: lb-small
       algorithm: round_robin
       status: new
       created_at: '2017-02-01T22:22:58Z'
@@ -378,6 +383,7 @@ load_balancers_all:
     - id: 56775c3f-04ab-4fb3-a7ed-40ef9bc8eece
       name: prod-web-lb-01
       ip: 45.55.125.24
+      size: lb-small
       algorithm: round_robin
       status: active
       created_at: '2020-09-08T18:58:04Z'
