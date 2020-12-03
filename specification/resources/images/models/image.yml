@@ -84,8 +84,8 @@ properties:
   status:
     type: string
     description: >-
-      A status string indicating the state of a custom image. This may be "NEW",
-       "available", "pending", "deleted", or "retired".
+      A status string indicating the state of a custom image. This may be `NEW`,
+       `available`, `pending`, `deleted`, or `retired`.
     enum:
       - NEW
       - available
