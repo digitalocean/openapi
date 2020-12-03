@@ -1,0 +1,62 @@
+description: An application's configuration and status.
+properties:
+  active_deployment:
+    $ref: apps_deployment.gen.yml
+  created_at:
+    format: date-time
+    readOnly: true
+    title: The creation time of the app
+    type: string
+  default_ingress:
+    readOnly: true
+    title: The default hostname on which the app is accessible
+    type: string
+  domains:
+    items:
+      $ref: apps_domain.gen.yml
+    readOnly: true
+    title: Contains all domains for the app
+    type: array
+  id:
+    readOnly: true
+    title: The ID of the application
+    type: string
+  in_progress_deployment:
+    $ref: apps_deployment.gen.yml
+  last_deployment_created_at:
+    format: date-time
+    readOnly: true
+    title: The creation time of the last deployment
+    type: string
+  live_domain:
+    readOnly: true
+    title: The live domain of the app
+    type: string
+  live_url:
+    readOnly: true
+    title: The live URL of the app
+    type: string
+  live_url_base:
+    readOnly: true
+    title: The live URL base of the app, the URL excluding the path
+    type: string
+  owner_uuid:
+    readOnly: true
+    title: The ID of the account to which the application belongs
+    type: string
+  region:
+    $ref: apps_region.gen.yml
+  spec:
+    $ref: apps_app_spec.gen.yml
+  tier_slug:
+    readOnly: true
+    title: The current pricing tier slug of the app
+    type: string
+  updated_at:
+    format: date-time
+    readOnly: true
+    title: Time of the app's last configuration update
+    type: string
+required:
+- spec
+type: object

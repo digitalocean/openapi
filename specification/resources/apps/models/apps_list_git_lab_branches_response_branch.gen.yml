@@ -1,0 +1,7 @@
+properties:
+  default:
+    format: boolean
+    type: boolean
+  name:
+    type: string
+type: object

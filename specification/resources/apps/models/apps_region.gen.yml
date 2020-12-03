@@ -1,0 +1,39 @@
+properties:
+  continent:
+    readOnly: true
+    title: The continent that this region is in
+    type: string
+  data_centers:
+    items:
+      type: string
+    readOnly: true
+    title: Data centers that are in this region
+    type: array
+  default:
+    description: Whether or not the region is presented as the default.
+    format: boolean
+    readOnly: true
+    type: boolean
+  disabled:
+    format: boolean
+    readOnly: true
+    title: Whether or not the region is open for new apps
+    type: boolean
+  flag:
+    readOnly: true
+    title: The flag of this region
+    type: string
+  label:
+    readOnly: true
+    title: A human-readable name of the region
+    type: string
+  reason:
+    readOnly: true
+    title: Reason that this region is not available
+    type: string
+  slug:
+    readOnly: true
+    title: The slug form of the region name
+    type: string
+title: Geographical information about an app origin
+type: object

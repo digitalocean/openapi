@@ -1,0 +1,7 @@
+default: UNSPECIFIED
+enum:
+- UNSPECIFIED
+- DOCKERFILE
+- BUILDPACK
+- HTML
+type: string

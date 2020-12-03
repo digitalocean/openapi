@@ -1,0 +1,20 @@
+properties:
+  components:
+    items:
+      $ref: detect_response_component.gen.yml
+    title: A list of detected app components
+    type: array
+  template:
+    $ref: apps_deploy_template.gen.yml
+  template_error:
+    title: The error that is causing the template to be invalid
+    type: string
+  template_found:
+    format: boolean
+    title: Whether or not a deploy template was found
+    type: boolean
+  template_valid:
+    format: boolean
+    title: Whether or not the deploy template is valid
+    type: boolean
+type: object

@@ -1,0 +1,33 @@
+description: Create a new app by submitting an app specification. For documentation
+  on app specifications (`AppSpec` objects), please refer to [the product documentation](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/).
+operationId: create_app
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: models/apps_create_app_request.gen.yml
+  required: true
+  x-originalParamName: body
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: models/apps_app_response.gen.yml
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: Create a New App
+tags:
+- Apps

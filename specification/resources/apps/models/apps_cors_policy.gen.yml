@@ -1,0 +1,7 @@
+properties:
+  allow_origins:
+    description: The set of allowed CORS origins.
+    items:
+      $ref: apps_string_match.gen.yml
+    type: array
+type: object

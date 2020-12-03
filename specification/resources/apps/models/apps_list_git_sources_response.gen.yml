@@ -1,0 +1,6 @@
+properties:
+  git_sources:
+    items:
+      $ref: apps_git_source.gen.yml
+    type: array
+type: object

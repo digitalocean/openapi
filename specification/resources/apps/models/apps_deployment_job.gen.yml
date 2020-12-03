@@ -1,0 +1,11 @@
+properties:
+  image:
+    title: The image that this job uses
+    type: string
+  name:
+    title: The name of this job
+    type: string
+  source_commit_hash:
+    title: The commit hash of the repository that was used to build this job
+    type: string
+type: object

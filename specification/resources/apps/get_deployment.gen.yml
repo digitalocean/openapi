@@ -1,0 +1,38 @@
+description: Retrieve information about an app deployment.
+operationId: get_deployment
+parameters:
+- description: The app ID
+  in: path
+  name: app_id
+  required: true
+  schema:
+    type: string
+- description: The deployment ID
+  in: path
+  name: deployment_id
+  required: true
+  schema:
+    type: string
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: models/apps_deployment_response.gen.yml
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: Retrieve an App Deployment
+tags:
+- Apps

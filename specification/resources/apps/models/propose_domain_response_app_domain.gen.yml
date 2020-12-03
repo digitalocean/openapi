@@ -1,0 +1,6 @@
+properties:
+  app_id:
+    type: string
+  domain:
+    type: string
+type: object

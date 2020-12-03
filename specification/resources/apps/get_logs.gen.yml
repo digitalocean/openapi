@@ -1,0 +1,76 @@
+description: Retrieve the logs of a past, in-progress, or active deployment. If a
+  component name is specified, the logs will be limited to only that component. The
+  response will include links to either real-time logs of an in-progress or active
+  deployment or archived logs of a past deployment.
+operationId: get_logs
+parameters:
+- description: The ID of the app
+  in: path
+  name: app_id
+  required: true
+  schema:
+    type: string
+- description: The ID of the deployment
+  in: path
+  name: deployment_id
+  required: true
+  schema:
+    type: string
+- description: An optional component name. If set, logs will be limited to this component
+    only.
+  in: path
+  name: component_name
+  required: true
+  schema:
+    type: string
+- description: Whether the logs should follow live updates.
+  in: query
+  name: follow
+  schema:
+    format: boolean
+    type: boolean
+- description: |-
+    The type of logs to retrieve
+
+     - BUILD: Build-time logs
+     - DEPLOY: Deploy-time logs
+     - RUN: Live run-time logs
+  in: query
+  name: type
+  schema:
+    default: UNSPECIFIED
+    enum:
+    - UNSPECIFIED
+    - BUILD
+    - DEPLOY
+    - RUN
+    type: string
+- description: 'An optional time duration to wait if the underlying component instance
+    is not immediately available. Default: `3m`.'
+  in: query
+  name: pod_connection_timeout
+  schema:
+    type: string
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: models/apps_get_logs_response.gen.yml
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: Retrieve Deployment Logs
+tags:
+- Apps

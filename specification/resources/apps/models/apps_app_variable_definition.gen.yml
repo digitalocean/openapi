@@ -1,0 +1,17 @@
+properties:
+  key:
+    description: The name
+    pattern: ^[_A-Za-z][_A-Za-z0-9]*$
+    title: key
+    type: string
+  scope:
+    $ref: apps_variable_scope.gen.yml
+  type:
+    $ref: apps_variable_type.gen.yml
+  value:
+    description: The value. If the type is `SECRET`, the value will be encrypted on
+      first submission. On following submissions, the encrypted value should be used.
+    type: string
+required:
+- key
+type: object

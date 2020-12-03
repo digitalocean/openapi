@@ -1,0 +1,37 @@
+properties:
+  cluster_name:
+    description: The name of the underlying DigitalOcean DBaaS cluster. This is required
+      for production databases. For dev databases, if cluster_name is not set, a new
+      cluster will be provisioned.
+    type: string
+  db_name:
+    description: The name of the MySQL or PostgreSQL database to configure.
+    type: string
+  db_user:
+    description: The name of the MySQL or PostgreSQL user to configure.
+    type: string
+  engine:
+    $ref: app_database_spec_engine.gen.yml
+  name:
+    description: The name. Must be unique across all components within the same app.
+    maxLength: 32
+    minLength: 2
+    pattern: ^[a-z][a-z0-9-]{0,30}[a-z0-9]$
+    type: string
+  num_nodes:
+    description: Deprecated.
+    format: int64
+    type: integer
+  production:
+    description: Whether this is a production or dev database.
+    format: boolean
+    type: boolean
+  size:
+    description: Deprecated.
+    type: string
+  version:
+    title: The version of the database engine
+    type: string
+required:
+- name
+type: object

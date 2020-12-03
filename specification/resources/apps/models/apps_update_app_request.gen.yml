@@ -1,0 +1,10 @@
+properties:
+  id:
+    title: The ID of the app
+    type: string
+  spec:
+    $ref: apps_app_spec.gen.yml
+required:
+- id
+- spec
+type: object

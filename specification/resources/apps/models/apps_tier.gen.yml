@@ -1,0 +1,20 @@
+properties:
+  build_seconds:
+    format: int64
+    title: The amount of included build time in seconds
+    type: string
+  egress_bandwidth_bytes:
+    format: int64
+    title: The amount of included outbound bandwidth in bytes
+    type: string
+  name:
+    title: A human-readable name of the tier
+    type: string
+  slug:
+    title: The slug of the tier
+    type: string
+  storage_bytes:
+    format: int64
+    title: The allotted disk space in bytes
+    type: string
+type: object

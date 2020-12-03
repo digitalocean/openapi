@@ -1,0 +1,13 @@
+properties:
+  branch:
+    title: The name of the branch to use
+    type: string
+  deploy_on_push:
+    format: boolean
+    title: Whether to automatically deploy new commits made to the repo
+    type: boolean
+  repo:
+    pattern: ^[^/]+/[^/]+$
+    title: 'The name of the repo in the format owner/repo. Example: `digitalocean/sample-golang`'
+    type: string
+type: object

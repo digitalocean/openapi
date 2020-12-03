@@ -1,0 +1,6 @@
+properties:
+  clusters:
+    items:
+      $ref: apps_available_database_cluster.gen.yml
+    type: array
+type: object

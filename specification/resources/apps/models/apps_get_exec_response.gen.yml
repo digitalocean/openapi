@@ -1,0 +1,4 @@
+properties:
+  url:
+    type: string
+type: object

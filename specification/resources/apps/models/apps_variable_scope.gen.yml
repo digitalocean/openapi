@@ -1,0 +1,11 @@
+default: UNSET
+enum:
+- UNSET
+- RUN_TIME
+- BUILD_TIME
+- RUN_AND_BUILD_TIME
+title: |-
+  - RUN_TIME: Made available only at run-time
+   - BUILD_TIME: Made available only at build-time
+   - RUN_AND_BUILD_TIME: Made available at both build and run-time
+type: string
