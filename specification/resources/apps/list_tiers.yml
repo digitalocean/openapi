@@ -5,7 +5,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/apps_list_tiers_response.gen.yml
+          $ref: models/apps_list_tiers_response.yml
     description: A successful response.
     headers:
       ratelimit-limit:

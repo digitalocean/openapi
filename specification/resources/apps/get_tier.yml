@@ -12,7 +12,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/apps_get_tier_response.gen.yml
+          $ref: models/apps_get_tier_response.yml
     description: A successful response.
     headers:
       ratelimit-limit:

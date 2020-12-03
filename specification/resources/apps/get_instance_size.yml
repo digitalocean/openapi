@@ -13,7 +13,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/apps_get_instance_size_response.gen.yml
+          $ref: models/apps_get_instance_size_response.yml
     description: A successful response.
     headers:
       ratelimit-limit:

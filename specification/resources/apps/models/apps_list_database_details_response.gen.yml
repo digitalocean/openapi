@@ -1,6 +1,0 @@
-properties:
-  database_details:
-    items:
-      $ref: apps_database_detail.gen.yml
-    type: array
-type: object

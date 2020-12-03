@@ -1,0 +1,11 @@
+properties:
+  id:
+    title: The ID of the domain
+    type: string
+  phase:
+    $ref: apps_domain_phase.yml
+  progress:
+    $ref: apps_domain_progress.yml
+  spec:
+    $ref: apps_app_domain_spec.yml
+type: object

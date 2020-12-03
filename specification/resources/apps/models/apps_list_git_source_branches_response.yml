@@ -1,0 +1,6 @@
+properties:
+  branches:
+    items:
+      $ref: apps_git_source_branch.yml
+    type: array
+type: object

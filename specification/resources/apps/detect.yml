@@ -7,7 +7,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: models/apps_detect_request.gen.yml
+        $ref: models/apps_detect_request.yml
   required: true
   x-originalParamName: body
 responses:
@@ -15,7 +15,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/apps_detect_response.gen.yml
+          $ref: models/apps_detect_response.yml
     description: A successful response.
     headers:
       ratelimit-limit:

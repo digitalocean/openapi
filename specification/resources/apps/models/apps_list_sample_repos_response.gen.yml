@@ -1,6 +1,0 @@
-properties:
-  sample_repos:
-    items:
-      $ref: apps_sample_repo.gen.yml
-    type: array
-type: object

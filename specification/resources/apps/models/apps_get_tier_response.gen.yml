@@ -1,4 +1,0 @@
-properties:
-  tier:
-    $ref: apps_tier.gen.yml
-type: object

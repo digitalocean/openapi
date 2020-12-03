@@ -14,7 +14,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/apps_delete_app_response.gen.yml
+          $ref: models/apps_delete_app_response.yml
     description: A successful response.
     headers:
       ratelimit-limit:

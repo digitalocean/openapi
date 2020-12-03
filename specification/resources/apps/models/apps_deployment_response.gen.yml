@@ -1,4 +1,0 @@
-properties:
-  deployment:
-    $ref: apps_deployment.gen.yml
-type: object

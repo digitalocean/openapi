@@ -18,7 +18,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/apps_deployment_response.gen.yml
+          $ref: models/apps_deployment_response.yml
     description: A successful response.
     headers:
       ratelimit-limit:

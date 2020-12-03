@@ -12,7 +12,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: models/apps_update_app_request.gen.yml
+        $ref: models/apps_update_app_request.yml
   required: true
   x-originalParamName: body
 responses:
@@ -20,7 +20,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/apps_app_response.gen.yml
+          $ref: models/apps_app_response.yml
     description: A successful response.
     headers:
       ratelimit-limit:

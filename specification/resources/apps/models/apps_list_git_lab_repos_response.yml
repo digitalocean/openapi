@@ -1,0 +1,6 @@
+properties:
+  repos:
+    items:
+      $ref: apps_list_git_lab_repos_response_repo.yml
+    type: array
+type: object

@@ -9,7 +9,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/apps_apps_response.gen.yml
+          $ref: models/apps_apps_response.yml
     description: A successful response.
     headers:
       ratelimit-limit:

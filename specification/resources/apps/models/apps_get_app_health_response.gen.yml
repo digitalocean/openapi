@@ -1,4 +1,0 @@
-properties:
-  app_health:
-    $ref: apps_app_health.gen.yml
-type: object

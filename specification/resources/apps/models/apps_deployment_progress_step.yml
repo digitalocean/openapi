@@ -1,0 +1,33 @@
+properties:
+  component_name:
+    title: The component name that this step is associated with
+    type: string
+  ended_at:
+    format: date-time
+    title: The end time of this step
+    type: string
+  message_base:
+    description: |-
+      The base of a human-readable description of the step intended to be combined with the component name for presentation. For example:
+
+      `message_base` = "Building service"
+      `component_name` = "api"
+    type: string
+  name:
+    title: The name of this step
+    type: string
+  reason:
+    $ref: apps_deployment_progress_step_reason.yml
+  started_at:
+    format: date-time
+    title: The start time of this step
+    type: string
+  status:
+    $ref: apps_deployment_progress_step_status.yml
+  steps:
+    items:
+      $ref: apps_deployment_progress_step.yml
+    title: Child steps of this step
+    type: array
+title: A step that is run as part of the deployment's lifecycle
+type: object

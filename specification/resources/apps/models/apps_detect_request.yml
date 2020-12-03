@@ -1,0 +1,19 @@
+properties:
+  commit_sha:
+    title: An optional commit hash to use instead of the branch specified in the source
+      spec
+    type: string
+  component_type:
+    description: 'An optional component type to target while running detection. Can
+      be one of: `service`, `static_site`, `worker`, `job`.'
+    type: string
+  git:
+    $ref: apps_git_source_spec.yml
+  github:
+    $ref: apps_git_hub_source_spec.yml
+  gitlab:
+    $ref: apps_git_lab_source_spec.yml
+  source_url:
+    description: Deprecated. Use either `git` or `github`.
+    type: string
+type: object

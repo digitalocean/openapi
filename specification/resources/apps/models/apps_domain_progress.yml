@@ -1,0 +1,7 @@
+properties:
+  steps:
+    items:
+      $ref: apps_domain_progress_step.yml
+    title: The steps of the domain's progress
+    type: array
+type: object

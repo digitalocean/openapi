@@ -1,6 +1,0 @@
-properties:
-  components:
-    items:
-      $ref: apps_component_health.gen.yml
-    type: array
-type: object

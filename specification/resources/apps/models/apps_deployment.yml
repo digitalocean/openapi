@@ -1,0 +1,54 @@
+properties:
+  cause:
+    title: What caused this deployment to be created
+    type: string
+  cloned_from:
+    title: The ID of a previous deployment that this deployment was cloned from
+    type: string
+  created_at:
+    format: date-time
+    title: The creation time of the deployment
+    type: string
+  id:
+    title: The ID of the deployment
+    type: string
+  jobs:
+    items:
+      $ref: apps_deployment_job.yml
+    title: Job components that are part of this deployment
+    type: array
+  phase:
+    $ref: apps_deployment_phase.yml
+  phase_last_updated_at:
+    format: date-time
+    title: When the deployment phase was last updated
+    type: string
+  progress:
+    $ref: apps_deployment_progress.yml
+  services:
+    items:
+      $ref: apps_deployment_service.yml
+    title: Service components that are part of this deployment
+    type: array
+  spec:
+    $ref: apps_app_spec.yml
+  static_sites:
+    items:
+      $ref: apps_deployment_static_site.yml
+    title: Static Site components that are part of this deployment
+    type: array
+  tier_slug:
+    readOnly: true
+    title: The current pricing tier slug of the deployment
+    type: string
+  updated_at:
+    format: date-time
+    title: When the deployment was last updated
+    type: string
+  workers:
+    items:
+      $ref: apps_deployment_worker.yml
+    title: Worker components that are part of this deployment
+    type: array
+title: An app deployment
+type: object

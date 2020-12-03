@@ -1,4 +1,0 @@
-properties:
-  app:
-    $ref: apps_app.gen.yml
-type: object
