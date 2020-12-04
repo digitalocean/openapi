@@ -7,7 +7,10 @@ content:
       $ref: ../models/apps_list_tiers_response.yml
     example:
       tiers:
-        - build_seconds: 800
+        - name: Test
+          slug: test
+          egress_bandwidth_bytes: "1023"
+          build_seconds: "233"
       
 headers:
   ratelimit-limit:
