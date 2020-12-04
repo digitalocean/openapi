@@ -1,0 +1,39 @@
+Description: A JSON object with a `deployments` key. This will be a list
+  of all app deployments
+ 
+content:
+  application/json:
+    schema:
+      $ref: ../models/apps_deployments_response.yml
+    example:
+      deployments:
+        - id: b6bdf840-2854-4f87-a36c-5f231c617c84
+          spec:
+            name: sample-golang
+            services:
+              - name: web 
+                github:
+                  repo: digitalocean/sample-golang
+                  branch: branch
+                run_command: bin/sample-golang
+                environment_slug: go
+                instance_size_slug: basic-xxs
+                instance_count: 2
+                routes:
+                  - path: "/"
+            region: ams
+          services:
+            - name: web
+              source_commit_hash: 9a4df0b8e161e323bc3cdf1dc71878080fe144fa
+          phase_last_updated_at: 0001-01-01T00:00:00Z
+          created_at: 020-07-28T18:00:00Z
+          updated_at: 020-07-28T18:00:00Z
+          cause: commit 9a4df0b pushed to github/digitalocean/sample-golang
+
+headers:
+  ratelimit-limit:
+    $ref: ../../../shared/headers.yml#/ratelimit-limit
+  ratelimit-remaining:
+    $ref: ../../../shared/headers.yml#/ratelimit-remaining
+  ratelimit-reset:
+    $ref: ../../../shared/headers.yml#/ratelimit-reset
