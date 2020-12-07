@@ -1,4 +1,4 @@
-Description: A JSON object with urls that point to archived logs
+description: A JSON object with urls that point to archived logs
 
 content:
   application/json:

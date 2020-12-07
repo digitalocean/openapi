@@ -1,4 +1,4 @@
-Description: A JSON object with a `deployments` key. This will be a list
+description: A JSON object with a `deployments` key. This will be a list
   of all app deployments
  
 content:

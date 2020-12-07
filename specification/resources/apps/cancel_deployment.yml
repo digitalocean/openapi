@@ -1,5 +1,5 @@
 description: Immediately cancel an in-progress deployment.
-operationId: cancel_deployment
+operationId: post_cancel_deployment
 parameters:
 - description: The app ID
   in: path

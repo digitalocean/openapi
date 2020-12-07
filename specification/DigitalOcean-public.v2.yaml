@@ -464,7 +464,7 @@ paths:
 
   /v2/apps/{app_id}/deployments/{deployment_id}/logs:
     get:
-      $ref: 'resources/apps/get_logs2.yml'
+      $ref: 'resources/apps/get_logs_aggregate.yml'
 
   /v2/apps/{id}:
     delete:

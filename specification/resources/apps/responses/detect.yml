@@ -1,17 +1,11 @@
-description: A JSON object with a `tiers` key. This will be a list
-  of all app tiers
+description: hello
 
 content:
   application/json:
     schema:
-      $ref: ../models/apps_list_tiers_response.yml
+      $ref: ../models/apps_detect_response.yml
     example:
-      tiers:
-        - name: Test
-          slug: test
-          egress_bandwidth_bytes: "1023"
-          build_seconds: "233"
-      
+      hello: world
 headers:
   ratelimit-limit:
     $ref: ../../../shared/headers.yml#/ratelimit-limit
@@ -19,4 +13,3 @@ headers:
     $ref: ../../../shared/headers.yml#/ratelimit-remaining
   ratelimit-reset:
     $ref: ../../../shared/headers.yml#/ratelimit-reset
-

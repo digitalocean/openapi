@@ -52,7 +52,7 @@ parameters:
     type: string
 responses:
   "200":
-    responses/list_logs_aggregate.yml
+    $ref: responses/list_logs_aggregate.yml
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
