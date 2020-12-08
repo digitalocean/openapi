@@ -1,11 +1,12 @@
-description: A JSON with supported apps and templates.
+description: unfinished
 
 content:
   application/json:
     schema:
-      $ref: ../models/apps_detect_response.yml
+      $ref: ../models/apps_list_instance_sizes_response.yml
     example:
       hello: world
+
 headers:
   ratelimit-limit:
     $ref: ../../../shared/headers.yml#/ratelimit-limit
