@@ -5,13 +5,9 @@ content:
   application/json:
     schema:
       $ref: ../models/apps_list_tiers_response.yml
-    example:
+    examples:     
       tiers:
-        - name: Test
-          slug: test
-          egress_bandwidth_bytes: "1023"
-          build_seconds: "233"
-      
+        $ref: examples.yml#/tiers
 headers:
   ratelimit-limit:
     $ref: ../../../shared/headers.yml#/ratelimit-limit

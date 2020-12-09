@@ -11,3 +11,4 @@ tests/postman.json
 tests/postman-temp.json
 *.swp
 *.swo
+output.txt
