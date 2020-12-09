@@ -818,7 +818,6 @@ droplet_create_response:
       tags:
       - web
       - env:prod
-      vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
     links:
       actions:
       - id: 7515
@@ -931,7 +930,6 @@ droplet_multi_create_response:
       tags:
       - web
       - env:prod
-      vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
     - id: 3164445
       name: sub-02.example.com
       memory: 1024
@@ -1035,7 +1033,6 @@ droplet_multi_create_response:
       tags:
       - web
       - env:prod
-      vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
     links:
       actions:
       - id: 7515

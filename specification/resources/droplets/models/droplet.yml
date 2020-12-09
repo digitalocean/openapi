@@ -181,4 +181,3 @@ required:
 - networks
 - region
 - tags
-- vpc_uuid
