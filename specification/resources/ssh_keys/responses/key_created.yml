@@ -16,14 +16,14 @@ content:
           $ref: '../models/ssh_key.yml'
 
 links:
-  GetSSHKeyById:
+  get_ssh_key_by_id:
     $ref: '../links/get_ssh_key_by_id.yml'
 
-  GetSSHKeyByFingerprint:
+  get_ssh_key_by_fingerprint:
     $ref: '../links/get_ssh_key_by_fingerprint.yml'
 
-  DeleteSSHKeyById:
+  delete_ssh_key_by_id:
     $ref: '../links/delete_ssh_key_by_id.yml'
 
-  DeleteSSHKeyByFingerprint:
+  delete_ssh_key_by_fingerprint:
     $ref: '../links/delete_ssh_key_by_fingerprint.yml'
