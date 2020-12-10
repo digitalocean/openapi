@@ -18,7 +18,5 @@ properties:
     $ref: '../attributes/ssh_key_name.yml'
 
 required:
-  - id
-  - fingerprint
   - public_key
   - name
