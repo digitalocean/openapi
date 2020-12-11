@@ -2,16 +2,20 @@ properties:
   cause:
     title: What caused this deployment to be created
     type: string
+    example: commit 9a4df0b pushed to github/digitalocean/sample-golang
   cloned_from:
     title: The ID of a previous deployment that this deployment was cloned from
     type: string
+    example: 
   created_at:
     format: date-time
     title: The creation time of the deployment
     type: string
+    example: 2020-07-28T18:00:00Z
   id:
     title: The ID of the deployment
     type: string
+    example: b6bdf840-2854-4f87-a36c-5f231c617c84
   jobs:
     items:
       $ref: apps_deployment_job.yml
@@ -23,6 +27,7 @@ properties:
     format: date-time
     title: When the deployment phase was last updated
     type: string
+    example: 0001-01-01T00:00:00Z
   progress:
     $ref: apps_deployment_progress.yml
   services:
@@ -45,6 +50,7 @@ properties:
     format: date-time
     title: When the deployment was last updated
     type: string
+    example: 2020-07-28T18:00:00Z
   workers:
     items:
       $ref: apps_deployment_worker.yml

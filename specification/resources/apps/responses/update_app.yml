@@ -1,11 +1,12 @@
-description: unfinished
+description: A JSON object of the updated `app`
 
 content:
   application/json:
     schema:
       $ref: ../models/apps_app_response.yml
-    example:
-      hello: world
+    examples:
+      app:
+        $ref: examples.yml#/app
 
 headers:
   ratelimit-limit:

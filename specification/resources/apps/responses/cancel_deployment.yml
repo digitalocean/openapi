@@ -1,11 +1,12 @@
-description: unfinished
+description: A JSON the `deployment` that was just cancelled.
 
 content:
   application/json:
     schema:
       $ref: ../models/apps_deployment_response.yml
-    example:
-      hello: world
+    examples:
+      deployment:
+        $ref: examples.yml#/deployment
 
 headers:
   ratelimit-limit:

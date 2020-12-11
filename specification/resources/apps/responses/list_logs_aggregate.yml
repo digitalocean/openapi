@@ -4,11 +4,9 @@ content:
   application/json:
     schema:
       $ref: ../models/apps_get_logs_response.yml
-    example:
-      live_url: https://logs-example/build.log
-      historic_logs: 
-        - https://logs-example/archive/build.log
-
+    examples:
+      logs:
+        $ref: examples.yml#/logs
 headers:
   ratelimit-limit:
     $ref: ../../../shared/headers.yml#/ratelimit-limit
