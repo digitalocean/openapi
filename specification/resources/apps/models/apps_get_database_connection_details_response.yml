@@ -1,17 +1,24 @@
 properties:
   database_name:
     type: string
+    example: DB
   database_url:
     type: string
+    example: db.com
   host:
     type: string
+    example: host
   password:
     type: string
+    example: password
   port:
     format: int64
     type: integer
+    example: 2333
   ssl_mode:
     type: string
+    example: ssl
   username:
     type: string
+    example: user
 type: object

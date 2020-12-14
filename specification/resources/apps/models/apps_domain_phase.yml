@@ -6,3 +6,4 @@ enum:
 - ACTIVE
 - ERROR
 type: string
+example: ACTIVE

@@ -5,3 +5,4 @@ enum:
 - MULTI_NODE_3
 title: ClusterLayout maps implicitly to dbaas.ClusterLayout
 type: string
+example: SINGLE_NODE

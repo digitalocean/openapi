@@ -9,7 +9,6 @@ properties:
     type: boolean
     example: true
   repo:
-    pattern: ^[^/]+/[^/]+$
     title: 'The name of the repo in the format owner/repo. Example: `digitalocean/sample-golang`'
     type: string
     example: origin/master

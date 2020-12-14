@@ -5,3 +5,4 @@ enum:
 - BUILDPACK
 - HTML
 type: string
+example: BUILDPACK

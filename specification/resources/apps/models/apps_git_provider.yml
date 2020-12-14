@@ -3,3 +3,4 @@ enum:
 - UNKNOWN
 - GITHUB
 type: string
+example: GITHUB

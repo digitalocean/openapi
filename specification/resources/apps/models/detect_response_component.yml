@@ -2,11 +2,13 @@ properties:
   build_command:
     title: The detected build command
     type: string
+    example: cat hello.txt
   dockerfiles:
     description: A list of Dockerfiles that were found for this component. The recommendation
       is to use the first Dockerfile.
     items:
       type: string
+      example: path/to/docker
     type: array
   env_vars:
     items:
@@ -16,21 +18,25 @@ properties:
   environment_slug:
     title: The detected environment
     type: string
+    example: basic
   http_ports:
     description: A list of HTTP ports that this component may listen on. The recommendation
       is to use the last port in the list.
     items:
       format: int64
       type: integer
+      example: 929
     type: array
   run_command:
     title: The detected run command
     type: string
+    example: cat hello.txt
   strategy:
     $ref: apps_detect_response_type.yml
   types:
     items:
       type: string
+      example: type
     title: A list of supported App Platform component types
     type: array
 title: Component

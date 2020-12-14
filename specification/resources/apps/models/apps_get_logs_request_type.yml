@@ -9,3 +9,4 @@ title: |-
    - DEPLOY: Deploy-time logs
    - RUN: Live run-time logs
 type: string
+example: RUN

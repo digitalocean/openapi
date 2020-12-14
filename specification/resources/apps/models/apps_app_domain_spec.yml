@@ -5,7 +5,7 @@ properties:
     pattern: ^((xn--)?[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}\.?$
     title: The hostname for the domain
     type: string
-    example: Hello!
+    example: xa-w.dd
   type:
     $ref: apps_app_domain_spec_type.yml
   wildcard:

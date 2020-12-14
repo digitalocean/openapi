@@ -2,6 +2,8 @@ properties:
   available:
     format: boolean
     type: boolean
+    example: true
   suggestion:
     type: string
+    example: suggestion
 type: object

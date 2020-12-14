@@ -3,10 +3,12 @@ properties:
     title: An optional commit hash to use instead of the branch specified in the source
       spec
     type: string
+    example: 54d4a727f457231062439895000d45437c7bb405
   component_type:
     description: 'An optional component type to target while running detection. Can
       be one of: `service`, `static_site`, `worker`, `job`.'
     type: string
+    example: service
   git:
     $ref: apps_git_source_spec.yml
   github:
@@ -16,4 +18,5 @@ properties:
   source_url:
     description: Deprecated. Use either `git` or `github`.
     type: string
+    example: git
 type: object

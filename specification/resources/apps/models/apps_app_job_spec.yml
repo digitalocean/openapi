@@ -47,7 +47,7 @@ properties:
     minLength: 2
     pattern: ^[a-z][a-z0-9-]{0,30}[a-z0-9]$
     type: string
-    example: name_of_job
+    example: nameofjob
   run_command:
     description: An optional run command to override the component's default.
     type: string

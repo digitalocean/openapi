@@ -4,17 +4,22 @@ properties:
   page:
     format: int64
     type: integer
+    example: 23
   pages:
     format: int64
     type: integer
+    example: 33
   per_page:
     format: int64
     type: integer
+    example: 3
   public_api_prefix:
     description: ' '
     title: public_api_prefix
     type: string
+    example: public api prefix
   total:
     format: int64
     type: integer
+    example: 23
 type: object

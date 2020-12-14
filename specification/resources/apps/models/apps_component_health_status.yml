@@ -4,3 +4,4 @@ enum:
 - HEALTHY
 - UNHEALTHY
 type: string
+example: HEALTHY

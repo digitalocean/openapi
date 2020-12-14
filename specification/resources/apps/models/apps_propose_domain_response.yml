@@ -8,7 +8,9 @@ properties:
   nameservers:
     items:
       type: string
+      example: name server
     type: array
   zone:
     type: string
+    example: zone
 type: object

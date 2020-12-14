@@ -2,26 +2,34 @@ properties:
   app_cost:
     format: float
     type: number
+    example: 23.23
   app_is_static:
     format: boolean
     type: boolean
+    example: true
   app_name_available:
     format: boolean
     type: boolean
+    example: true
   app_name_suggestion:
     type: string
+    example: app name
   app_tier_downgrade_cost:
     format: float
     type: number
+    example: 12.21
   app_tier_upgrade_cost:
     format: float
     type: number
+    example: 23.32
   existing_static_apps:
     format: int64
     type: string
+    example: 3
   max_free_static_apps:
     format: int64
     type: string
+    example: 90
   spec:
     $ref: apps_app_spec.yml
 type: object

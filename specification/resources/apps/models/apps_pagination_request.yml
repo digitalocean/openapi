@@ -4,12 +4,16 @@ properties:
   page:
     format: int64
     type: integer
+    example: 23
   per_page:
     format: int64
     type: integer
+    example: 21
   sort:
     type: string
+    example: sort
   sort_direction:
     type: string
+    example: down
 title: PaginationRequest
 type: object
