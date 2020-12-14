@@ -2,15 +2,19 @@ properties:
   branch:
     title: The name of the branch to use
     type: string
+    example: master
   repo:
     title: |-
       TODO(nan) enable once we fully deprecate all the old specs.
       option (grpc.gateway.protoc_gen_swagger.options.openapiv2_schema).json_schema.required = "repo_clone_url";
     type: string
+    example: my_repo
   repo_clone_url:
     title: 'The clone URL of the repo. Example: `https://github.com/digitalocean/sample-golang.git`'
     type: string
+    example: https://github.com/digitalocean/openapi
   requires_auth:
     format: boolean
     type: boolean
+    example: true
 type: object

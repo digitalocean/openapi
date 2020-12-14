@@ -6,3 +6,4 @@ enum:
 - ERROR
 - SUCCESS
 type: string
+example: RUNNING 

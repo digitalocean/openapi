@@ -2,12 +2,15 @@ properties:
   registry:
     description: The registry name. Must be left empty for the `DOCR` registry type.
     type: string
+    example: reg_name
   registry_type:
     $ref: image_source_spec_registry_type.yml
   repository:
     description: The repository name.
     type: string
+    example: origin/master
   tag:
     description: The repository tag. Defaults to `latest` if not provided.
     type: string
+    example: latest
 type: object

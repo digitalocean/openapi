@@ -10,3 +10,4 @@ enum:
 - POST_DEPLOY
 - FAILED_DEPLOY
 type: string
+example: PRE_DEPLOY

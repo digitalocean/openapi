@@ -10,3 +10,4 @@ enum:
 - ERROR
 - CANCELED
 type: string
+example: ACTIVE

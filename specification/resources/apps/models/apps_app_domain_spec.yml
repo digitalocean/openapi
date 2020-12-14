@@ -5,6 +5,7 @@ properties:
     pattern: ^((xn--)?[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}\.?$
     title: The hostname for the domain
     type: string
+    example: Hello!
   type:
     $ref: apps_app_domain_spec_type.yml
   wildcard:
@@ -12,12 +13,14 @@ properties:
     title: Indicates whether the domain includes all sub-domains, in addition to the
       given domain
     type: boolean
+    example: true
   zone:
     description: |-
       Optional. If the domain uses DigitalOcean DNS and you would like App Platform to automatically manage it for you, set this to the name of the domain on your account.
 
       For example, If the domain you are adding is `app.domain.com`, the zone could be `domain.com`.
     type: string
+    example: This is a description
 required:
 - domain
 type: object

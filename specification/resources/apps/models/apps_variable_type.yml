@@ -6,3 +6,4 @@ title: |-
   - GENERAL: A plain-text environment variable
    - SECRET: A secret encrypted environment variable
 type: string
+example: SECRET

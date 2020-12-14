@@ -9,3 +9,4 @@ title: |-
    - PG: PostgreSQL
    - REDIS: Redis
 type: string
+example: PG

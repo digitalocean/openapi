@@ -1,11 +1,12 @@
-description: unfinished
+description: A JSON with the key `tier`
 
 content:
   application/json:
     schema:
       $ref: ../models/apps_get_tier_response.yml
-    example:
-      hello: world
+    examples:
+      tier:
+        $ref: examples.yml#/tier
 
 headers:
   ratelimit-limit:

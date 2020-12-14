@@ -229,6 +229,15 @@ tiers:
         storage_bytes: "1000000"
         build_seconds: "233"
 
+tier:
+  value:
+    tier:
+      name: Test
+      slug: test
+      egress_bandwidth_bytes: "1023"
+      storage_bytes: "1000000"
+      build_seconds: "233"
+
 logs:
   value:
     live_url: https://logs-example/build.log
@@ -245,3 +254,31 @@ regions:
         data_centers:
           - ams3
         default: true
+
+instance_sizes:
+  value:
+    instance_sizes:
+      - name: Basic XXS
+        slug: basic-xxs
+        cpu_type: DEDICATED
+        cpus: "1"
+        memory_bytes: "234034"
+        usd_per_month: "5"
+        usd_per_second: "0.00000123847324"
+        tier_slug: basic
+        tier_upgrade_to: professional-xs
+        tier_downgrade_to: starter-xx
+
+instance_size:
+  value:
+    instance_size:
+      - name: Basic XXS
+        slug: basic-xxs
+        cpu_type: DEDICATED
+        cpus: "1"
+        memory_bytes: "234034"
+        usd_per_month: "5"
+        usd_per_second: "0.00000123847324"
+        tier_slug: basic
+        tier_upgrade_to: professional-xs
+        tier_downgrade_to: starter-xx

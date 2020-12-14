@@ -6,3 +6,4 @@ enum:
 - UNSPECIFIED
 - DOCR
 type: string
+example: DOCR

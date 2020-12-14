@@ -3,15 +3,18 @@ properties:
     description: An optional build command to run while building this component from
       source.
     type: string
+    example: cat hello.txt
   dockerfile_path:
     description: The path to the Dockerfile relative to the root of the repo. If set,
       it will be used to build this component. Otherwise, App Platform will attempt
       to build it using buildpacks.
     type: string
+    example: path/to/docker
   environment_slug:
     description: An environment slug describing the type of this app. For a full list,
       please refer to [the product documentation](https://www.digitalocean.com/docs/app-platform/).
     type: string
+    example: php
   envs:
     description: A list of environment variables made available to the component.
     items:
@@ -31,9 +34,11 @@ properties:
     title: 'The amount of instances that this component should be scaled to. Default:
       1'
     type: integer
+    example: 23
   instance_size_slug:
     description: The instance size to use for this component.
     type: string
+    example: 12
   kind:
     $ref: app_job_spec_kind.yml
   name:
@@ -42,14 +47,17 @@ properties:
     minLength: 2
     pattern: ^[a-z][a-z0-9-]{0,30}[a-z0-9]$
     type: string
+    example: name_of_job
   run_command:
     description: An optional run command to override the component's default.
     type: string
+    example: cat hello.txt
   source_dir:
     description: An optional path to the working directory to use for the build. For
       Dockerfile builds, this will be used as the build context. Must be relative
       to the root of the repo.
     type: string
+    example: master
 required:
 - name
 type: object

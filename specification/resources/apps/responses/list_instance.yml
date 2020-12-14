@@ -1,11 +1,12 @@
-description: unfinished
+description: A JSON with key `instance_sizes`
 
 content:
   application/json:
     schema:
       $ref: ../models/apps_list_instance_sizes_response.yml
-    example:
-      hello: world
+    examples:
+      instance_sizes:
+        $ref: examples.yml#/instance_sizes
 
 headers:
   ratelimit-limit:
