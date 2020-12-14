@@ -28,7 +28,7 @@ requestBody:
 
 responses:
   '202':
-    $ref: 'responses/floating_ip.yml'
+    $ref: 'responses/floating_ip_created.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
