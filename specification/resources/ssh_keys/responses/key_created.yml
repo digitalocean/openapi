@@ -1,6 +1,4 @@
-description: >-
-  A JSON object with the key set to `ssh_key`. The value is an `ssh_key` object
-  containing the standard `ssh_key` attributes.
+description: The response body will be a JSON object with a key set to `ssh_key`.
 
 headers:
   ratelimit-limit:
@@ -29,4 +27,3 @@ links:
 
   delete_ssh_key_by_fingerprint:
     $ref: '../links/delete_ssh_key_by_fingerprint.yml'
-

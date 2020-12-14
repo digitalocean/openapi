@@ -9,8 +9,8 @@ properties:
 
   public_key:
     description: >-
-      The entire public key string that was uploaded. Embedded into the root user's authorized_keys file 
-      if you include this key during Droplet creation.
+      The entire public key string that was uploaded. Embedded into the root
+      user's `authorized_keys` file if you include this key during Droplet creation.
     type: string
     example: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"
 
@@ -18,7 +18,5 @@ properties:
     $ref: '../attributes/ssh_key_name.yml'
 
 required:
-  - id
-  - fingerprint
   - public_key
   - name
