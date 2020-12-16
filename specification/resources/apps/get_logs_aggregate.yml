@@ -6,7 +6,6 @@ operationId: get_logs_aggregate
 parameters:
   - $ref: parameters.yml#/app_id
   - $ref: parameters.yml#/deployment_id
-  - $ref: parameters.yml#/component
   - $ref: parameters.yml#/live_updates
   - $ref: parameters.yml#/log_type
   - $ref: parameters.yml#/time_wait
