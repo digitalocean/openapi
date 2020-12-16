@@ -272,13 +272,13 @@ instance_sizes:
 instance_size:
   value:
     instance_size:
-      - name: Basic XXS
-        slug: basic-xxs
-        cpu_type: DEDICATED
-        cpus: "1"
-        memory_bytes: "234034"
-        usd_per_month: "5"
-        usd_per_second: "0.00000123847324"
-        tier_slug: basic
-        tier_upgrade_to: professional-xs
-        tier_downgrade_to: starter-xx
+      name: Basic XXS
+      slug: basic-xxs
+      cpu_type: DEDICATED
+      cpus: "1"
+      memory_bytes: "234034"
+      usd_per_month: "5"
+      usd_per_second: "0.00000123847324"
+      tier_slug: basic
+      tier_upgrade_to: professional-xs
+      tier_downgrade_to: starter-xx

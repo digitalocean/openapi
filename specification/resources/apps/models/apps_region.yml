@@ -7,10 +7,12 @@ properties:
   data_centers:
     items:
       type: string
-      example: ams
+      example: "ams"
     readOnly: true
     title: Data centers that are in this region
     type: array
+    example:
+      - ams
   default:
     description: Whether or not the region is presented as the default.
     format: boolean

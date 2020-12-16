@@ -3,12 +3,7 @@ description: Delete an existing app. Once deleted, all active deployments will b
   specification so that you may re-create it at a later time.
 operationId: delete_app
 parameters:
-- description: The ID of the app
-  in: path
-  name: id
-  required: true
-  schema:
-    type: string
+  - $ref: parameters.yml#/id_app
 responses:
   "200":
     $ref: responses/delete_app.yml

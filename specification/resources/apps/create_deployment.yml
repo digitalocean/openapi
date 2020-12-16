@@ -2,12 +2,7 @@ description: Creating an app deployment will pull the latest changes from your r
   and schedule a new deployment for your app.
 operationId: create_deployment
 parameters:
-- description: The app ID
-  in: path
-  name: app_id
-  required: true
-  schema:
-    type: string
+  - $ref: parameters.yml#/app_id
 requestBody:
   content:
     application/json:

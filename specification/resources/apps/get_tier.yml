@@ -1,12 +1,7 @@
 description: Retrieve information about a specific app tier.
 operationId: get_tier
 parameters:
-- description: The slug of the tier
-  in: path
-  name: slug
-  required: true
-  schema:
-    type: string
+  - $ref: parameters.yml#/slug_tier
 responses:
   "200":
     $ref: responses/get_tier.yml

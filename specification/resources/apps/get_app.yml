@@ -4,17 +4,8 @@ description: Retrieve details about an existing app by either its ID or name. To
   in the response.
 operationId: get_app
 parameters:
-- description: The ID of the app to retrieve. If set, the name field will be ignored.
-  in: path
-  name: id
-  required: true
-  schema:
-    type: string
-- description: The name of the app to retrieve.
-  in: query
-  name: name
-  schema:
-    type: string
+  - $ref: parameters.yml#/id_app
+  - $ref: parameters.yml#/app_name
 responses:
   "200":
     $ref: responses/get_app.yml

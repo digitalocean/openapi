@@ -2,12 +2,7 @@ description: Retrieve information about a specific instance size for `service`, 
   and `job` components.
 operationId: get_instance_size
 parameters:
-- description: The slug of the instance size
-  in: path
-  name: slug
-  required: true
-  schema:
-    type: string
+  - $ref: parameters.yml#/slug_size
 responses:
   "200":
     $ref: responses/get_instance.yml

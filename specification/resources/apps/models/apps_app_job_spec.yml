@@ -38,7 +38,7 @@ properties:
   instance_size_slug:
     description: The instance size to use for this component.
     type: string
-    example: 12
+    example: "s-1vcpu-1gb"
   kind:
     $ref: app_job_spec_kind.yml
   name:

@@ -1,18 +1,8 @@
 description: Immediately cancel an in-progress deployment.
 operationId: post_cancel_deployment
 parameters:
-- description: The app ID
-  in: path
-  name: app_id
-  required: true
-  schema:
-    type: string
-- description: The deployment ID
-  in: path
-  name: deployment_id
-  required: true
-  schema:
-    type: string
+  - $ref: parameters.yml#/app_id
+  - $ref: parameters.yml#/deployment_id
 responses:
   "200":
     $ref: responses/cancel_deployment.yml

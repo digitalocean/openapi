@@ -5,12 +5,12 @@ properties:
     format: int64
     title: The number of allotted vCPU cores
     type: string
-    example: 3
+    example: "3"
   memory_bytes:
     format: int64
     title: The allotted memory in bytes
     type: string
-    example: 1048
+    example: "1048"
   name:
     title: A human-readable name of the instance size
     type: string

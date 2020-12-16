@@ -4,53 +4,12 @@ description: Retrieve the logs of a past, in-progress, or active deployment. If 
   deployment or archived logs of a past deployment.
 operationId: get_logs
 parameters:
-- description: The ID of the app
-  in: path
-  name: app_id
-  required: true
-  schema:
-    type: string
-- description: The ID of the deployment
-  in: path
-  name: deployment_id
-  required: true
-  schema:
-    type: string
-- description: An optional component name. If set, logs will be limited to this component
-    only.
-  in: path
-  name: component_name
-  required: true
-  schema:
-    type: string
-- description: Whether the logs should follow live updates.
-  in: query
-  name: follow
-  schema:
-    format: boolean
-    type: boolean
-- description: |-
-    The type of logs to retrieve
-
-     - BUILD: Build-time logs
-     - DEPLOY: Deploy-time logs
-     - RUN: Live run-time logs
-  in: query
-  name: type
-  schema:
-    default: UNSPECIFIED
-    enum:
-    - UNSPECIFIED
-    - BUILD
-    - DEPLOY
-    - RUN
-    type: string
-- description: 'An optional time duration to wait if the underlying component instance
-    is not immediately available. Default: `3m`.'
-  in: query
-  name: pod_connection_timeout
-  schema:
-    type: string
+  - $ref: parameters.yml#/app_id
+  - $ref: parameters.yml#/deployment_id
+  - $ref: parameters.yml#/component
+  - $ref: parameters.yml#/live_updates
+  - $ref: parameters.yml#/log_type
+  - $ref: parameters.yml#/time_wait
 responses:
   "200":
     $ref: responses/list_logs.yml

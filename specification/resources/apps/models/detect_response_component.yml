@@ -10,6 +10,8 @@ properties:
       type: string
       example: path/to/docker
     type: array
+    example:
+      - path/to/docker
   env_vars:
     items:
       $ref: apps_app_variable_definition.yml
@@ -39,5 +41,7 @@ properties:
       example: type
     title: A list of supported App Platform component types
     type: array
+    example: 
+      - types
 title: Component
 type: object

@@ -1,14 +1,9 @@
 description: List all deployments of an app.
 operationId: list_deployments
 parameters:
-- description: The app ID
-  in: path
-  name: app_id
-  required: true
-  schema:
-    type: string
-- $ref: ../../shared/parameters.yml#/page
-- $ref: ../../shared/parameters.yml#/per_page
+  - $ref: parameters.yml#/app_id
+  - $ref: ../../shared/parameters.yml#/page
+  - $ref: ../../shared/parameters.yml#/per_page
 responses:
   "200":
     $ref: responses/existing_deployments.yml
