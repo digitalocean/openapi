@@ -10,7 +10,6 @@ parameters:
   - $ref: parameters.yml#/live_updates
   - $ref: parameters.yml#/log_type
   - $ref: parameters.yml#/time_wait
-
 responses:
   "200":
     $ref: responses/list_logs_aggregate.yml
