@@ -4,8 +4,10 @@ content:
   application/json:
     schema:
       $ref: ../models/apps_detect_response.yml
-    example:
-      hello: world
+    examples:
+      components:
+        $ref: examples.yml#/components
+
 headers:
   ratelimit-limit:
     $ref: ../../../shared/headers.yml#/ratelimit-limit

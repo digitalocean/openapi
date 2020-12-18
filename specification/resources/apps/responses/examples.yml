@@ -282,3 +282,19 @@ instance_size:
       tier_slug: basic
       tier_upgrade_to: professional-xs
       tier_downgrade_to: starter-xx
+
+components:
+  value:
+    components:
+      - build_command: makeFile build
+        dockerfiles:
+          - path/to/dockerfiles
+        environment_slug: s-1vcpu-1gb 
+        http_ports:
+          - 1202
+    template:
+      name: nameofjob
+      region: europe
+    template_error: "error!"
+    template_found: true
+    template_valid: true
