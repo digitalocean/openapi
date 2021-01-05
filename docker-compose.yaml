@@ -3,7 +3,7 @@ version: '3'
 services:
 
   mock:
-    image: stoplight/prism:4.1.0
+    image: stoplight/prism:4.1.2
     command: mock -h 0.0.0.0 /prism/DigitalOcean-public.v2.yaml
     volumes:
       - ./specification:/prism
@@ -11,7 +11,7 @@ services:
       - "4010:4010"
 
   proxy:
-    image: stoplight/prism:4.1.0
+    image: stoplight/prism:4.1.2
     command: proxy -h 0.0.0.0 /prism/DigitalOcean-public.v2.yaml ${PROXY_TARGET}
     volumes:
       - ./specification:/prism
