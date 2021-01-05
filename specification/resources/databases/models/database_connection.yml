@@ -11,7 +11,7 @@ properties:
   database:
     type: string
     description: The name of the default database.
-    example:
+    example: defaultdb
     readOnly: true
   host:
     type: string
