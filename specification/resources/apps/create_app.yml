@@ -15,8 +15,6 @@ requestBody:
         $ref: models/apps_create_app_request.yml
   required: true
     
-  x-originalParamName: body
-
 responses:
   "200":
     $ref: responses/new_app.yml

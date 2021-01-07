@@ -17,7 +17,6 @@ requestBody:
       schema:
         $ref: models/apps_update_app_request.yml
   required: true
-  x-originalParamName: body
 
 responses:
   "200":

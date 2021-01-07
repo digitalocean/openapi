@@ -17,8 +17,6 @@ requestBody:
         $ref: models/apps_detect_request.yml
   required: true
     
-  x-originalParamName: body
-
 responses:
   "200":
     $ref: responses/detect.yml
