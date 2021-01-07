@@ -1,20 +1,28 @@
+operationId: get_app
+
+summary: Retrieve an Existing App
+
 description: Retrieve details about an existing app by either its ID or name. To retrieve
   an app by its name, do not include an ID in the request path. Information about
   the current active deployment as well as any in progress ones will also be included
   in the response.
-operationId: get_app
+  
+tags:
+- Apps
+  
 parameters:
   - $ref: parameters.yml#/id_app
   - $ref: parameters.yml#/app_name
+
 responses:
   "200":
     $ref: responses/get_app.yml
+
   "401":
     $ref: ../../shared/responses/unauthorized.yml
+
   "500":
     $ref: ../../shared/responses/server_error.yml
+
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: Retrieve an Existing App
-tags:
-- Apps

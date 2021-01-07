@@ -1,18 +1,26 @@
+operationId: list_apps
+
+summary: List All Apps
+
 description: List all apps on your account. Information about the current active deployment
   as well as any in progress ones will also be included for each app.
-operationId: list_apps
+  
+tags:
+- Apps
+  
 parameters:
 - $ref: ../../shared/parameters.yml#/page
 - $ref: ../../shared/parameters.yml#/per_page
+
 responses:
   "200":
     $ref: responses/list_apps.yml
+
   "401":
     $ref: ../../shared/responses/unauthorized.yml
+
   "500":
     $ref: ../../shared/responses/server_error.yml
+
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: List All Apps
-tags:
-- Apps

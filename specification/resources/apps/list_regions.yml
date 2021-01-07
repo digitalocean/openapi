@@ -1,14 +1,21 @@
-description: List all regions supported by App Platform.
 operationId: list_regions
+
+summary: List App Regions
+
+description: List all regions supported by App Platform.
+  
+tags:
+- Apps
+
 responses:
   "200":
     $ref: responses/list_regions.yml
+
   "401":
     $ref: ../../shared/responses/unauthorized.yml
+
   "500":
     $ref: ../../shared/responses/server_error.yml
+
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: List App Regions
-tags:
-- Apps

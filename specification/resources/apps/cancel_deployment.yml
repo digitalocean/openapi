@@ -1,17 +1,25 @@
-description: Immediately cancel an in-progress deployment.
 operationId: post_cancel_deployment
+
+summary: Cancel a Deployment
+
+description: Immediately cancel an in-progress deployment.
+  
+tags:
+- Apps
+  
 parameters:
   - $ref: parameters.yml#/app_id
   - $ref: parameters.yml#/deployment_id
+
 responses:
   "200":
     $ref: responses/cancel_deployment.yml
+
   "401":
     $ref: ../../shared/responses/unauthorized.yml
+
   "500":
     $ref: ../../shared/responses/server_error.yml
+
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: Cancel a Deployment
-tags:
-- Apps
