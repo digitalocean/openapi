@@ -71,7 +71,7 @@ requestBody:
             region: nyc1
 
 responses:
-  '200':
+  '202':
     $ref: 'responses/volume_action.yml'
 
   '401':
