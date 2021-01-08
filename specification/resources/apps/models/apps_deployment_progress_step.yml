@@ -31,7 +31,10 @@ properties:
     $ref: apps_deployment_progress_step_status.yml
   steps:
     items:
-      $ref: apps_deployment_progress_step.yml
+      # FIXME: Circular refs are not currently supported by Prism
+      # https://github.com/stoplightio/prism/issues/1456
+      # $ref: apps_deployment_progress_step.yml
+      type: object
     title: Child steps of this step
     type: array
 title: A step that is run as part of the deployment's lifecycle
