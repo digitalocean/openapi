@@ -1,8 +1,0 @@
-properties:
-  name:
-    type: string
-    example: name
-  owner:
-    type: string
-    example: owner
-type: object
