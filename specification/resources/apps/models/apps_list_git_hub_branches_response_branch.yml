@@ -1,9 +1,0 @@
-properties:
-  default:
-    format: boolean
-    type: boolean
-    example: true
-  name:
-    type: string
-    example: name
-type: object
