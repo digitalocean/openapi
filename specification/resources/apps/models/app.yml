@@ -55,7 +55,7 @@ properties:
   region:
     $ref: apps_region.yml
   spec:
-    $ref: apps_app_spec.yml
+    $ref: app_spec.yml
   tier_slug:
     readOnly: true
     title: The current pricing tier slug of the app

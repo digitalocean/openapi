@@ -1,7 +1,7 @@
 properties:
   apps:
     items:
-      $ref: apps_app.yml
+      $ref: app.yml
     title: A list of apps
     type: array
   links:

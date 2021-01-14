@@ -14,7 +14,7 @@ properties:
       - path/to/docker
   env_vars:
     items:
-      $ref: apps_app_variable_definition.yml
+      $ref: app_variable_definition.yml
     title: A list of suggested environment variables
     type: array
   environment_slug:

@@ -36,7 +36,7 @@ properties:
     title: Service components that are part of this deployment
     type: array
   spec:
-    $ref: apps_app_spec.yml
+    $ref: app_spec.yml
   static_sites:
     items:
       $ref: apps_deployment_static_site.yml

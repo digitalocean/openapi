@@ -14,11 +14,11 @@ properties:
     description: An environment slug describing the type of this app. For a full list,
       please refer to [the product documentation](https://www.digitalocean.com/docs/app-platform/).
     type: string
-    example: php
+    example: basic-xxs
   envs:
     description: A list of environment variables made available to the component.
     items:
-      $ref: apps_app_variable_definition.yml
+      $ref: app_variable_definition.yml
     type: array
   git:
     $ref: apps_git_source_spec.yml
@@ -38,16 +38,14 @@ properties:
   instance_size_slug:
     description: The instance size to use for this component.
     type: string
-    example: "s-1vcpu-1gb"
-  kind:
-    $ref: app_job_spec_kind.yml
+    example: small-xxs
   name:
     description: The name. Must be unique across all components within the same app.
     maxLength: 32
     minLength: 2
     pattern: ^[a-z][a-z0-9-]{0,30}[a-z0-9]$
     type: string
-    example: nameofjob
+    example: hello
   run_command:
     description: An optional run command to override the component's default.
     type: string
@@ -57,7 +55,7 @@ properties:
       Dockerfile builds, this will be used as the build context. Must be relative
       to the root of the repo.
     type: string
-    example: master
+    example: path/to/dir
 required:
 - name
 type: object

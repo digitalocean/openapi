@@ -1,4 +1,4 @@
 properties:
   app_health:
-    $ref: apps_app_health.yml
+    $ref: app_health.yml
 type: object

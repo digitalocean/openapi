@@ -31,5 +31,5 @@ properties:
     type: string
     example: 90
   spec:
-    $ref: apps_app_spec.yml
+    $ref: app_spec.yml
 type: object

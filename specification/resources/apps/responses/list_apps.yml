@@ -3,7 +3,7 @@ description: A JSON object with a `apps` key. This is list of object `apps`.
 content:
   application/json:
     schema:
-      $ref: ../models/apps_apps_response.yml
+      $ref: ../models/apps_response.yml
     examples:
       apps:
         $ref: examples.yml#/apps
