@@ -4,7 +4,7 @@ properties:
     type: string
     example: 4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf
   spec:
-    $ref: apps_app_spec.yml
+    $ref: app_spec.yml
 required:
 - id
 - spec

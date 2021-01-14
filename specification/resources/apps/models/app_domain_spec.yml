@@ -7,7 +7,7 @@ properties:
     type: string
     example: xa-w.dd
   type:
-    $ref: apps_app_domain_spec_type.yml
+    $ref: app_domain_spec_type.yml
   wildcard:
     format: boolean
     title: Indicates whether the domain includes all sub-domains, in addition to the

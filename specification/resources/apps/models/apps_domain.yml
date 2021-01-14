@@ -8,5 +8,5 @@ properties:
   progress:
     $ref: apps_domain_progress.yml
   spec:
-    $ref: apps_app_domain_spec.yml
+    $ref: app_domain_spec.yml
 type: object

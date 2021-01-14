@@ -3,7 +3,7 @@ description: A JSON of a `spec` object.
 content:
   application/json:
     schema:
-      $ref: ../models/apps_app_response.yml
+      $ref: ../models/app_response.yml
     example:
       spec:
         name: sample-golang

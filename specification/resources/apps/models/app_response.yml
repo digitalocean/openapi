@@ -1,4 +1,4 @@
 properties:
   app:
-    $ref: apps_app.yml
+    $ref: app.yml
 type: object

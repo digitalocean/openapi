@@ -3,7 +3,7 @@ description: A JSON object of the updated `app`
 content:
   application/json:
     schema:
-      $ref: ../models/apps_app_response.yml
+      $ref: ../models/app_response.yml
     examples:
       app:
         $ref: examples.yml#/app
