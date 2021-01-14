@@ -40,6 +40,19 @@ tags:
       Every action that creates an action object is available through this endpoint. Completed
       actions are not removed from this list and are always available for querying.
 
+  - name: Apps
+    description: >-
+      App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
+      developers to publish code directly to DigitalOcean servers without worrying about the
+      underlying infrastructure.
+
+      Most API operations are centered around a few core object types. Following are the
+      definitions of these types. These definitions will be omitted from the operation-specific
+      documentation.
+
+      For documentation on app specifications (`AppSpec` objects), please refer to the
+      [product documentation](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/).
+
   - name: Balance
     description: >-
       By sending requests to the `/v2/customers/my/balance` endpoint, you can
@@ -424,6 +437,66 @@ paths:
   /v2/actions/{action_id}:
     get:
       $ref: 'resources/actions/get_action.yml'
+
+  /v2/apps/tiers:
+    get:
+      $ref: 'resources/apps/list_tiers.yml'
+
+  /v2/apps/{app_id}/deployments:
+    get:
+      $ref: 'resources/apps/list_deployments.yml'
+    post:
+      $ref: 'resources/apps/create_deployment.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
+    get:
+      $ref: 'resources/apps/get_logs.yml'
+
+  /v2/apps:
+    get:
+      $ref: 'resources/apps/list_apps.yml'
+    post:
+      $ref: 'resources/apps/create_app.yml'
+
+  /v2/apps/detect:
+    post:
+      $ref: 'resources/apps/detect.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/logs:
+    get:
+      $ref: 'resources/apps/get_logs_aggregate.yml'
+
+  /v2/apps/{id}:
+    delete:
+      $ref: 'resources/apps/delete_app.yml'
+    get:
+      $ref: 'resources/apps/get_app.yml'
+    put:
+      $ref: 'resources/apps/update_app.yml'
+
+  /v2/apps/tiers/instance_sizes:
+    get:
+      $ref: 'resources/apps/list_instance_sizes.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/cancel:
+    post:
+      $ref: 'resources/apps/cancel_deployment.yml'
+
+  /v2/apps/regions:
+    get:
+      $ref: 'resources/apps/list_regions.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}:
+    get:
+      $ref: 'resources/apps/get_deployment.yml'
+
+  /v2/apps/tiers/instance_sizes/{slug}:
+    get:
+      $ref: 'resources/apps/get_instance_size.yml'
+
+  /v2/apps/tiers/{slug}:
+    get:
+      $ref: 'resources/apps/get_tier.yml'
 
   /v2/cdn/endpoints:
     get:

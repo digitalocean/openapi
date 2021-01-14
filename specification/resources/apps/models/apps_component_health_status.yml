@@ -1,0 +1,7 @@
+default: UNKNOWN
+enum:
+- UNKNOWN
+- HEALTHY
+- UNHEALTHY
+type: string
+example: HEALTHY

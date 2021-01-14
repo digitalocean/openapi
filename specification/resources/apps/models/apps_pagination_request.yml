@@ -1,0 +1,19 @@
+description: 'Note: This field is not expressed in DigitalOcean''s public API. Instead
+  pagation is handled according to DO API convention. https://developers.digitalocean.com/documentation/v2/#links'
+properties:
+  page:
+    format: int64
+    type: integer
+    example: 23
+  per_page:
+    format: int64
+    type: integer
+    example: 21
+  sort:
+    type: string
+    example: sort
+  sort_direction:
+    type: string
+    example: down
+title: PaginationRequest
+type: object

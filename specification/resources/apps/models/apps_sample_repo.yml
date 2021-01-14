@@ -1,0 +1,25 @@
+properties:
+  branch:
+    type: string
+    example: main
+  component_types:
+    items:
+      type: string
+      example: component
+    type: array
+  environment_slug:
+    type: string
+    example: basic
+  name:
+    type: string
+    example: name
+  repo_name:
+    type: string
+    example: main repo
+  repo_owner:
+    type: string
+    example: me
+  repo_url:
+    type: string
+    example: hello.com
+type: object

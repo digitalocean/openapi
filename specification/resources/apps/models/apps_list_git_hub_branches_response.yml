@@ -1,0 +1,6 @@
+properties:
+  branches:
+    items:
+      $ref: apps_list_git_hub_branches_response_branch.yml
+    type: array
+type: object

@@ -1,0 +1,51 @@
+description: The desired configuration of an application.
+properties:
+  databases:
+    description: |-
+      Database instances which can provide persistence to workloads within the
+      application.
+    items:
+      $ref: apps_app_database_spec.yml
+    type: array
+  domains:
+    description: A set of hostnames where the application will be available.
+    items:
+      $ref: apps_app_domain_spec.yml
+    type: array
+  jobs:
+    description: Pre and post deployment workloads which do not expose publicly-accessible
+      HTTP routes.
+    items:
+      $ref: apps_app_job_spec.yml
+    type: array
+  name:
+    description: The name of the app. Must be unique across all apps in the same account.
+    maxLength: 32
+    minLength: 2
+    pattern: ^[a-z][a-z0-9-]{0,30}[a-z0-9]$
+    type: string
+    example: nameofjob
+  region:
+    title: 'The slug form of the geographical origin of the app. Default: `nearest
+      available`'
+    type: string
+    example: europe
+  services:
+    description: Workloads which expose publicy-accessible HTTP services.
+    items:
+      $ref: apps_app_service_spec.yml
+    type: array
+  static_sites:
+    description: Content which can be rendered to static web assets.
+    items:
+      $ref: apps_app_static_site_spec.yml
+    type: array
+  workers:
+    description: Workloads which do not expose publicly-accessible HTTP services.
+    items:
+      $ref: apps_app_worker_spec.yml
+    type: array
+required:
+- name
+title: AppSpec
+type: object

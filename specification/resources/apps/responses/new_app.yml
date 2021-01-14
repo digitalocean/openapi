@@ -1,0 +1,29 @@
+description: A JSON of a `spec` object.
+
+content:
+  application/json:
+    schema:
+      $ref: ../models/apps_app_response.yml
+    example:
+      spec:
+        name: sample-golang
+        services:
+          - name: web 
+            github:
+              repo: digitalocean/sample-golang
+              branch: branch
+            run_command: bin/sample-golang
+            environment_slug: go
+            instance_size_slug: basic-xxs
+            instance_count: 2
+            routes:
+              - path: "/"
+        region: ams
+
+headers:
+  ratelimit-limit:
+    $ref: ../../../shared/headers.yml#/ratelimit-limit
+  ratelimit-remaining:
+    $ref: ../../../shared/headers.yml#/ratelimit-remaining
+  ratelimit-reset:
+    $ref: ../../../shared/headers.yml#/ratelimit-reset

@@ -1,0 +1,11 @@
+properties:
+  cluster_name:
+    type: string
+    example: cluster
+  droplet_ids:
+    items:
+      format: int64
+      type: integer
+      example: 23234
+    type: array
+type: object

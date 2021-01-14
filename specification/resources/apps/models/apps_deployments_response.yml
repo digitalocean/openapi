@@ -1,0 +1,11 @@
+properties:
+  deployments:
+    items:
+      $ref: apps_deployment.yml
+    title: A list of deployments
+    type: array
+  links:
+    $ref: ../../../shared/pages.yml#/page_links
+  meta:
+    $ref: ../../../shared/meta.yml#/properties/meta
+type: object

@@ -1,0 +1,21 @@
+operationId: list_instance_sizes
+
+summary: List Instance Sizes
+
+description: List all instance sizes for `service`, `worker`, and `job` components.
+  
+tags:
+- Apps
+
+responses:
+  "200":
+    $ref: responses/list_instance.yml
+
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml

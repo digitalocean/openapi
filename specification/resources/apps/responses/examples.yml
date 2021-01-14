@@ -1,0 +1,300 @@
+apps:
+  value:
+    apps:
+      - id: 4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf
+        owner_uuid: ff36cbc6fd350fe12577f5123133bb5ba01a2419
+        spec:
+          name: sample-php
+          services: 
+            - name: sample-php
+              git: 
+                repo_clone_url: https://github.com/digitalocean/sample-php.git
+                branch: main
+              run_command: heroku-php-apache2
+              environment_slug: php
+              instance_size_slug: basic-xxs
+              instance_count: 1
+              http_port: 8080
+              routes: 
+                - path: /
+        default_ingress: https://sample-php-iaj87.ondigitalocean.app
+        created_at: 2020-11-19T20:27:18Z
+        updated_at: 2020-12-01T00:42:16Z
+        active_deployment: 
+          id: 3aa4d20e-5527-4c00-b496-601fbd22520a
+          spec: 
+            name: sample-php
+            services: 
+              - name: sample-php
+                git: 
+                  repo_clone_url: https://github.com/digitalocean/sample-php.git
+                  branch: main
+                run_command: heroku-php-apache2
+                environment_slug: php
+                instance_size_slug: basic-xxs
+                instance_count: 1
+                http_port: 8080
+                routes: 
+                  - path: /
+            region: fra
+          services: 
+            - name: sample-php
+              source_commit_hash: 54d4a727f457231062439895000d45437c7bb405
+          phase_last_updated_at: 2020-12-01T00:42:12Z
+          created_at: 2020-12-01T00:40:05Z
+          updated_at: 2020-12-01T00:42:12Z
+        cause: app spec updated
+        progress: 
+          success_steps: 6
+          total_steps: 6
+          steps: 
+            - name: build
+              status: SUCCESS
+              steps: 
+              - name: initialize
+                status: SUCCESS
+                started_at: 2020-12-01T00:40:11.979305214Z
+                ended_at: 2020-12-01T00:40:12.470972033Z
+              - name: components
+                status: SUCCESS
+                steps: 
+                - name: sample-php
+                  status: SUCCESS
+                  started_at: 0001-01-01T00:00:00Z
+                  ended_at: 0001-01-01T00:00:00Z
+                  component_name: sample-php
+                  message_base: Building service
+                started_at: 2020-12-01T00:40:12.470996857Z
+                ended_at: 2020-12-01T00:41:26.180360487Z
+              started_at: 2020-12-01T00:40:11.979257919Z
+              ended_at: 2020-12-01T00:41:26.653989756Z
+          phase: ACTIVE
+          tier_slug: basic
+        last_deployment_created_at: 2020-12-01T00:40:05Z
+        live_url: https://sample-php-iaj87.ondigitalocean.app
+        region: 
+          slug: fra
+          label: Frankfurt
+          flag: germany
+          continent: Europe
+          data_centers: 
+          - fra1
+        tier_slug: basic
+        live_url_base: https://sample-php-iaj87.ondigitalocean.app
+        live_domain: sample-php-iaj87.ondigitalocean.app
+
+app:
+  value:
+    app:
+      id: 4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf
+      owner_uuid: ff36cbc6fd350fe12577f5123133bb5ba01a2419
+      spec:
+        name: sample-php
+        services: 
+          - name: sample-php
+            git: 
+              repo_clone_url: https://github.com/digitalocean/sample-php.git
+              branch: main
+            run_command: heroku-php-apache2
+            environment_slug: php
+            instance_size_slug: basic-xxs
+            instance_count: 1
+            http_port: 8080
+            routes: 
+              - path: /
+      default_ingress: https://sample-php-iaj87.ondigitalocean.app
+      created_at: 2020-11-19T20:27:18Z
+      updated_at: 2020-12-01T00:42:16Z
+      active_deployment: 
+        id: 3aa4d20e-5527-4c00-b496-601fbd22520a
+        spec: 
+          name: sample-php
+          services: 
+            - name: sample-php
+              git: 
+                repo_clone_url: https://github.com/digitalocean/sample-php.git
+                branch: main
+              run_command: heroku-php-apache2
+              environment_slug: php
+              instance_size_slug: basic-xxs
+              instance_count: 1
+              http_port: 8080
+              routes: 
+                - path: /
+          region: fra
+        services: 
+          - name: sample-php
+            source_commit_hash: 54d4a727f457231062439895000d45437c7bb405
+        phase_last_updated_at: 2020-12-01T00:42:12Z
+        created_at: 2020-12-01T00:40:05Z
+        updated_at: 2020-12-01T00:42:12Z
+      cause: app spec updated
+      progress: 
+        success_steps: 6
+        total_steps: 6
+        steps: 
+          - name: build
+            status: SUCCESS
+            steps: 
+            - name: initialize
+              status: SUCCESS
+              started_at: 2020-12-01T00:40:11.979305214Z
+              ended_at: 2020-12-01T00:40:12.470972033Z
+            - name: components
+              status: SUCCESS
+              steps: 
+              - name: sample-php
+                status: SUCCESS
+                started_at: 0001-01-01T00:00:00Z
+                ended_at: 0001-01-01T00:00:00Z
+                component_name: sample-php
+                message_base: Building service
+              started_at: 2020-12-01T00:40:12.470996857Z
+              ended_at: 2020-12-01T00:41:26.180360487Z
+            started_at: 2020-12-01T00:40:11.979257919Z
+            ended_at: 2020-12-01T00:41:26.653989756Z
+        phase: ACTIVE
+        tier_slug: basic
+      last_deployment_created_at: 2020-12-01T00:40:05Z
+      live_url: https://sample-php-iaj87.ondigitalocean.app
+      region: 
+        slug: fra
+        label: Frankfurt
+        flag: germany
+        continent: Europe
+        data_centers: 
+        - fra1
+      tier_slug: basic
+      live_url_base: https://sample-php-iaj87.ondigitalocean.app
+      live_domain: sample-php-iaj87.ondigitalocean.app
+  
+deployments:
+  value:
+    deployments:
+      - id: b6bdf840-2854-4f87-a36c-5f231c617c84
+        spec:
+          name: sample-golang
+          services:
+            - name: web 
+              github:
+                repo: digitalocean/sample-golang
+                branch: branch
+              run_command: bin/sample-golang
+              environment_slug: go
+              instance_size_slug: basic-xxs
+              instance_count: 2
+              routes:
+                - path: "/"
+          region: ams
+        services:
+          - name: web
+            source_commit_hash: 9a4df0b8e161e323bc3cdf1dc71878080fe144fa
+        phase_last_updated_at: 0001-01-01T00:00:00Z
+        created_at: 2020-07-28T18:00:00Z
+        updated_at: 2020-07-28T18:00:00Z
+        cause: commit 9a4df0b pushed to github/digitalocean/sample-golang
+
+deployment:
+  value:
+    deployment:
+      id: b6bdf840-2854-4f87-a36c-5f231c617c84
+      spec:
+        name: sample-golang
+        services:
+          - name: web 
+            github:
+              repo: digitalocean/sample-golang
+              branch: branch
+            run_command: bin/sample-golang
+            environment_slug: go
+            instance_size_slug: basic-xxs
+            instance_count: 2
+            routes:
+              - path: "/"
+        region: ams
+      services:
+        - name: web
+          source_commit_hash: 9a4df0b8e161e323bc3cdf1dc71878080fe144fa
+      phase_last_updated_at: 0001-01-01T00:00:00Z
+      created_at: 2020-07-28T18:00:00Z
+      updated_at: 2020-07-28T18:00:00Z
+      cause: commit 9a4df0b pushed to github/digitalocean/sample-golang
+
+tiers:
+  value:
+    tiers:
+      - name: Test
+        slug: test
+        egress_bandwidth_bytes: "1023"
+        storage_bytes: "1000000"
+        build_seconds: "233"
+
+tier:
+  value:
+    tier:
+      name: Test
+      slug: test
+      egress_bandwidth_bytes: "1023"
+      storage_bytes: "1000000"
+      build_seconds: "233"
+
+logs:
+  value:
+    live_url: https://logs-example/build.log
+    historic_logs: 
+      - https://logs-example/archive/build.log
+
+regions:
+  value:
+    regions:
+      - slug: ams
+        label: Amsterdam
+        flag: netherlands
+        continent: Europe
+        data_centers:
+          - ams3
+        default: true
+
+instance_sizes:
+  value:
+    instance_sizes:
+      - name: Basic XXS
+        slug: basic-xxs
+        cpu_type: DEDICATED
+        cpus: "1"
+        memory_bytes: "234034"
+        usd_per_month: "5"
+        usd_per_second: "0.00000123847324"
+        tier_slug: basic
+        tier_upgrade_to: professional-xs
+        tier_downgrade_to: starter-xx
+
+instance_size:
+  value:
+    instance_size:
+      name: Basic XXS
+      slug: basic-xxs
+      cpu_type: DEDICATED
+      cpus: "1"
+      memory_bytes: "234034"
+      usd_per_month: "5"
+      usd_per_second: "0.00000123847324"
+      tier_slug: basic
+      tier_upgrade_to: professional-xs
+      tier_downgrade_to: starter-xx
+
+components:
+  value:
+    components:
+      - build_command: makeFile build
+        dockerfiles:
+          - path/to/dockerfiles
+        environment_slug: s-1vcpu-1gb 
+        http_ports:
+          - 1202
+    template:
+      name: nameofjob
+      region: europe
+    template_error: "error!"
+    template_found: true
+    template_valid: true

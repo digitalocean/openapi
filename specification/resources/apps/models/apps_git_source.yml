@@ -1,0 +1,20 @@
+properties:
+  full_name:
+    type: string
+    example: fullname
+  name:
+    type: string
+    example: name
+  owner:
+    type: string
+    example: owner
+  private:
+    format: boolean
+    type: boolean
+    example: owner
+  provider:
+    $ref: apps_git_provider.yml
+  url:
+    type: string
+    example: url.com
+type: object
