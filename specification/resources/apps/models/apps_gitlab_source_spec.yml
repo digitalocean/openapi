@@ -1,15 +1,16 @@
+type: object
 properties:
   branch:
-    title: The name of the branch to use
     type: string
-    example: master
+    description: The name of the branch to use
+    example: main
+
   deploy_on_push:
-    format: boolean
-    title: Whether to automatically deploy new commits made to the repo
     type: boolean
+    description: Whether to automatically deploy new commits made to the repo
     example: true
+
   repo:
-    title: 'The name of the repo in the format owner/repo. Example: `digitalocean/sample-golang`'
     type: string
-    example: origin/master
-type: object
+    description: 'The name of the repo in the format owner/repo. Example: `digitalocean/sample-golang`'
+    example: digitalocean/sample-golang

@@ -1,9 +1,0 @@
-default: UNSPECIFIED
-description: |2-
-   - UNSPECIFIED: Represents an unspecified registry type.
-   - DOCR: The DigitalOcean container registry type.
-enum:
-- UNSPECIFIED
-- DOCR
-type: string
-example: DOCR
