@@ -1,4 +1,0 @@
-properties:
-  domain:
-    $ref: apps_domain.yml
-type: object
