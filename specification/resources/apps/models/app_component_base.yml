@@ -13,10 +13,10 @@ properties:
     $ref: apps_git_source_spec.yml
 
   github:
-    $ref: apps_git_hub_source_spec.yml
+    $ref: apps_github_source_spec.yml
 
   gitlab:
-    $ref: apps_git_lab_source_spec.yml
+    $ref: apps_gitlab_source_spec.yml
 
   image:
     $ref: apps_image_source_spec.yml
