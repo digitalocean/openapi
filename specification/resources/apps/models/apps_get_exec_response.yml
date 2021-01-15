@@ -1,5 +1,0 @@
-properties:
-  url:
-    type: string
-    example: hello.com
-type: object

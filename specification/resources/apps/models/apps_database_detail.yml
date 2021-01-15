@@ -1,8 +1,0 @@
-properties:
-  component_name:
-    type: string
-    example: component
-  dbaas_uuid:
-    type: string
-    example: ff36cbc6fd350fe12577f5123133bb5ba01a2419
-type: object

@@ -1,8 +1,0 @@
-default: SINGLE_NODE
-enum:
-- SINGLE_NODE
-- MULTI_NODE_2
-- MULTI_NODE_3
-title: ClusterLayout maps implicitly to dbaas.ClusterLayout
-type: string
-example: SINGLE_NODE
