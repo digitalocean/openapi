@@ -23,6 +23,9 @@ droplet_action_type:
       example: reboot
       description: The type of action to initiate for the Droplet.
 
+  required:
+  - type
+
 droplet_action_restore:
   allOf:
   - $ref: '#/droplet_action_type'
