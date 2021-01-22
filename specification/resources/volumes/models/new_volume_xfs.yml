@@ -4,13 +4,14 @@ allOf:
 
   - $ref: 'volume_base.yml'
 
-  - properties:
+  - $ref: 'volume_base.yml'
 
+  - $ref: 'attributes.yml#/volume_write_file_system_type'
+
+  - type: object
+    properties:
       region:
         $ref: '../../../shared/attributes/region_slug.yml'
-
-      filesystem_type:
-        $ref: 'attributes.yml#/volume_write_file_system_type'
 
       filesystem_label:
         allOf:
