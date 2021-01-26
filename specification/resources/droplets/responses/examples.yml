@@ -73,6 +73,7 @@ droplets_all:
         - sgp1
         - tor1
         available: true
+        description: Basic
       size_slug: s-1vcpu-1gb
       networks:
         v4:
@@ -189,6 +190,7 @@ droplets_all:
         - sgp1
         - tor1
         available: true
+        description: Basic
       size_slug: s-1vcpu-1gb
       networks:
         v4:
@@ -301,6 +303,7 @@ droplets_all:
         - sgp1
         - tor1
         available: true
+        description: Basic
       size_slug: s-1vcpu-1gb
       networks:
         v4:
@@ -424,6 +427,7 @@ droplets_tagged:
         - sgp1
         - tor1
         available: true
+        description: Basic
       size_slug: s-1vcpu-1gb
       networks:
         v4:
@@ -540,6 +544,7 @@ droplets_tagged:
         - sgp1
         - tor1
         available: true
+        description: Basic
       size_slug: s-1vcpu-1gb
       networks:
         v4:
@@ -664,6 +669,7 @@ droplet_single:
         - sgp1
         - tor1
         available: true
+        description: Basic
       size_slug: s-1vcpu-1gb
       networks:
         v4:
@@ -784,6 +790,7 @@ droplet_create_response:
         - sgp1
         - tor1
         available: true
+        description: Basic
       size_slug: s-1vcpu-1gb
       networks:
         v4: []
@@ -896,6 +903,7 @@ droplet_multi_create_response:
         - sgp1
         - tor1
         available: true
+        description: Basic
       size_slug: s-1vcpu-1gb
       networks:
         v4: []
@@ -999,6 +1007,7 @@ droplet_multi_create_response:
         - sgp1
         - tor1
         available: true
+        description: Basic
       size_slug: s-1vcpu-1gb
       networks:
         v4: []
