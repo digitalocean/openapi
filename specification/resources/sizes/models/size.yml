@@ -86,6 +86,14 @@ properties:
     description: This is a boolean value that represents whether new Droplets
       can be created with this size.
 
+  description:
+    type: string
+    example: Basic
+    description: >-
+      A string describing the class of Droplets created from this size. For
+      example: Basic, General Purpose, CPU-Optimized, Memory-Optimized, or
+      Storage-Optimized.
+
 required:
   - available
   - disk
@@ -96,3 +104,4 @@ required:
   - slug
   - transfer
   - vcpus
+  - description
