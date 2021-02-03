@@ -41,7 +41,6 @@ properties:
 
   production:
     description: Whether this is a production or dev database.
-    format: boolean
     type: boolean
     example: true
 

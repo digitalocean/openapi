@@ -15,12 +15,10 @@ properties:
       - ams
   default:
     description: Whether or not the region is presented as the default.
-    format: boolean
     readOnly: true
     type: boolean
     example: true
   disabled:
-    format: boolean
     readOnly: true
     title: Whether or not the region is open for new apps
     type: boolean

@@ -11,12 +11,10 @@ properties:
     type: string
     example: Error
   template_found:
-    format: boolean
     title: Whether or not a deploy template was found
     type: boolean
     example: true
   template_valid:
-    format: boolean
     title: Whether or not the deploy template is valid
     type: boolean
     example: true

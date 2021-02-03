@@ -23,7 +23,7 @@ app_name:
   schema:
     type: string
   example: myApp
-    
+
 id_app:
   description: The ID of the app
   in: path
@@ -51,13 +51,12 @@ component:
   schema:
     type: string
   example: component
-    
+
 live_updates:
   description: Whether the logs should follow live updates.
   in: query
   name: follow
   schema:
-    format: boolean
     type: boolean
   example: true
 
