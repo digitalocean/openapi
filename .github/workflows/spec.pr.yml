@@ -10,6 +10,7 @@ on:
     paths:
       - 'specification/**'
       - 'spectral/**'
+      - '.github/workflows/spec.pr.yml'
 
 jobs:
 
