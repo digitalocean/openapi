@@ -89,6 +89,7 @@ jobs:
         AWS_DEFAULT_OUTPUT: json
         SPACES_PATH: ${{ secrets.SPACES_PATH || 's3://api-engineering/spec-ci' }}
         SPACES_ENDPOINT: ${{ secrets.SPACES_ENDPOINT || 'https://nyc3.digitaloceanspaces.com'}}
+        AWS_EC2_METADATA_DISABLED: true
 
     - name: Comment on PR
       if: steps.is-digitalocean-member.outputs.result == 'true' && success()

@@ -40,7 +40,7 @@ jobs:
 
       - name: Upload Main spec
         run: >-
-          aws s3 cp tests/openapi-bundled.yaml 
+          aws s3 cp tests/openapi-bundled.yaml
           ${{ env.SPACES_PATH }}/DigitalOcean-public.v2.yaml
           --endpoint=${{ env.SPACES_ENDPOINT }}
           --acl public-read
@@ -50,3 +50,4 @@ jobs:
           AWS_DEFAULT_OUTPUT: json
           SPACES_PATH: ${{ secrets.SPACES_PATH || 's3://api-engineering/spec-ci' }}
           SPACES_ENDPOINT: ${{ secrets.SPACES_ENDPOINT || 'https://nyc3.digitaloceanspaces.com'}}
+          AWS_EC2_METADATA_DISABLED: true
