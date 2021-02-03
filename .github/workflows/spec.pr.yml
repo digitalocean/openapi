@@ -45,7 +45,6 @@ jobs:
 
       - name: Upload PR spec
         run: >-
-          aws --version
           aws s3 cp tests/openapi-bundled.yaml
           ${{ env.SPACES_PATH }}/previews/${{ github.event.number }}-spec.yaml
           --endpoint=${{ env.SPACES_ENDPOINT }}
