@@ -44,10 +44,11 @@ jobs:
 
       - name: Upload PR spec
         run: >-
+          aws --version
           aws s3 cp tests/openapi-bundled.yaml
           ${{ env.SPACES_PATH }}/previews/${{ github.event.number }}-spec.yaml
           --endpoint=${{ env.SPACES_ENDPOINT }}
-          --acl public-read
+          --acl public-read --debug
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
