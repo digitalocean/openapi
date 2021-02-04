@@ -17,7 +17,7 @@ requestBody:
         $ref: 'models/tag.yml'
 
 responses:
-  '200':
+  '201':
     $ref: 'responses/new_tag.yml'
 
   '400':

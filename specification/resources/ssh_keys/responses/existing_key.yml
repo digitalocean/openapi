@@ -1,5 +1,5 @@
 description: >-
-  A JSON object with the key set to `ssh_key`. The value is an `ssh_key` object 
+  A JSON object with the key set to `ssh_key`. The value is an `ssh_key` object
   containing the standard `ssh_key` attributes.
 
 headers:
@@ -13,18 +13,20 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/wrapped_ssh_key.yml'
+      properties:
+        ssh_key:
+          $ref: '../models/ssh_key.yml'
 
 links:
-  GetSSHKeyById:
+  get_ssh_key_by_id:
     $ref: '../links/get_ssh_key_by_id.yml'
 
-  GetSSHKeyByFingerprint:
+  get_ssh_key_by_fingerprint:
     $ref: '../links/get_ssh_key_by_fingerprint.yml'
 
-  DeleteSSHKeyById:
+  delete_ssh_key_by_id:
     $ref: '../links/delete_ssh_key_by_id.yml'
 
-  DeleteSSHKeyByFingerprint:
+  delete_ssh_key_by_fingerprint:
     $ref: '../links/delete_ssh_key_by_fingerprint.yml'
 

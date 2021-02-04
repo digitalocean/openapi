@@ -1,3 +1,118 @@
+floating_ip_assigning:
+  summary: Assigning to Droplet
+  value:
+    floating_ip:
+      ip: 45.55.96.47
+      droplet: null
+      region:
+        name: New York 3
+        slug: nyc3
+        features:
+        - private_networking
+        - backups
+        - ipv6
+        - metadata
+        - install_agent
+        - storage
+        - image_transfer
+        available: true
+        sizes:
+        - s-1vcpu-1gb
+        - s-1vcpu-2gb
+        - s-1vcpu-3gb
+        - s-2vcpu-2gb
+        - s-3vcpu-1gb
+        - s-2vcpu-4gb
+        - s-4vcpu-8gb
+        - s-6vcpu-16gb
+        - s-8vcpu-32gb
+        - s-12vcpu-48gb
+        - s-16vcpu-64gb
+        - s-20vcpu-96gb
+        - s-24vcpu-128gb
+        - s-32vcpu-192g
+      locked: true
+    links:
+      droplets:
+      - id: 213939433
+        rel: droplet
+        href: https://api.digitalocean.com/v2/droplets/213939433
+      actions:
+      - id: 1088924622
+        rel: assign_ip
+        href: https://api.digitalocean.com/v2/actions/1088924622
+
+floating_ip_reserving:
+  summary: Reserving to Region
+  value:
+    floating_ip:
+      ip: 45.55.96.47
+      droplet: null
+      region:
+        name: New York 3
+        slug: nyc3
+        features:
+        - private_networking
+        - backups
+        - ipv6
+        - metadata
+        - install_agent
+        - storage
+        - image_transfer
+        available: true
+        sizes:
+        - s-1vcpu-1gb
+        - s-1vcpu-2gb
+        - s-1vcpu-3gb
+        - s-2vcpu-2gb
+        - s-3vcpu-1gb
+        - s-2vcpu-4gb
+        - s-4vcpu-8gb
+        - s-6vcpu-16gb
+        - s-8vcpu-32gb
+        - s-12vcpu-48gb
+        - s-16vcpu-64gb
+        - s-20vcpu-96gb
+        - s-24vcpu-128gb
+        - s-32vcpu-192g
+      locked: false
+    links: {}
+
+floating_ip_reserved:
+  summary: Reserved to Region
+  value:
+    floating_ip:
+      ip: 45.55.96.47
+      droplet: null
+      region:
+        name: New York 3
+        slug: nyc3
+        features:
+        - private_networking
+        - backups
+        - ipv6
+        - metadata
+        - install_agent
+        - storage
+        - image_transfer
+        available: true
+        sizes:
+        - s-1vcpu-1gb
+        - s-1vcpu-2gb
+        - s-1vcpu-3gb
+        - s-2vcpu-2gb
+        - s-3vcpu-1gb
+        - s-2vcpu-4gb
+        - s-4vcpu-8gb
+        - s-6vcpu-16gb
+        - s-8vcpu-32gb
+        - s-12vcpu-48gb
+        - s-16vcpu-64gb
+        - s-20vcpu-96gb
+        - s-24vcpu-128gb
+        - s-32vcpu-192g
+      locked: false
+
 floating_ip_assigned:
   summary: Assigned to Droplet
   value:
@@ -76,6 +191,7 @@ floating_ip_assigned:
           - sgp1
           - tor1
           available: true
+          description: Basic
         size_slug: s-1vcpu-1gb
         networks:
           v4:
@@ -123,41 +239,6 @@ floating_ip_assigned:
         - web
         - env:prod
         vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
-      region:
-        name: New York 3
-        slug: nyc3
-        features:
-        - private_networking
-        - backups
-        - ipv6
-        - metadata
-        - install_agent
-        - storage
-        - image_transfer
-        available: true
-        sizes:
-        - s-1vcpu-1gb
-        - s-1vcpu-2gb
-        - s-1vcpu-3gb
-        - s-2vcpu-2gb
-        - s-3vcpu-1gb
-        - s-2vcpu-4gb
-        - s-4vcpu-8gb
-        - s-6vcpu-16gb
-        - s-8vcpu-32gb
-        - s-12vcpu-48gb
-        - s-16vcpu-64gb
-        - s-20vcpu-96gb
-        - s-24vcpu-128gb
-        - s-32vcpu-192g
-      locked: false
-
-floating_ip_reserved:
-  summary: Reserved to Region
-  value:
-    floating_ip:
-      ip: 45.55.96.47
-      droplet: null
       region:
         name: New York 3
         slug: nyc3

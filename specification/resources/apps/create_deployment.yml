@@ -1,0 +1,32 @@
+operationId: create_deployment
+
+summary: Create an App Deployment
+
+description: Creating an app deployment will pull the latest changes from your repository
+  and schedule a new deployment for your app.
+  
+tags:
+- Apps
+  
+parameters:
+  - $ref: parameters.yml#/app_id
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: models/apps_create_deployment_request.yml
+  required: true
+
+responses:
+  "200":
+    $ref: responses/new_app_deployment.yml
+
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml

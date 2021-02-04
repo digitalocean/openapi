@@ -1,0 +1,24 @@
+operationId: get_tier
+
+summary: Retrieve an App Tier
+
+description: Retrieve information about a specific app tier.
+  
+tags:
+- Apps
+  
+parameters:
+  - $ref: parameters.yml#/slug_tier
+
+responses:
+  "200":
+    $ref: responses/get_tier.yml
+
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml

@@ -1,0 +1,11 @@
+type: object
+properties:
+  allow_origins:
+    type: array
+    description: The set of allowed CORS origins.
+    items:
+      $ref: apps_string_match.yml
+
+    example:
+    - exact: https://www.example.com
+    - regex: ^.*example.com

@@ -1,0 +1,25 @@
+operationId: get_deployment
+
+summary: Retrieve an App Deployment
+
+description: Retrieve information about an app deployment.
+  
+tags:
+- Apps
+  
+parameters:
+  - $ref: parameters.yml#/app_id
+  - $ref: parameters.yml#/deployment_id
+
+responses:
+  "200":
+    $ref: responses/list_deployment.yml
+
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml

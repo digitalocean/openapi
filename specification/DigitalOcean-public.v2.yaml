@@ -40,6 +40,19 @@ tags:
       Every action that creates an action object is available through this endpoint. Completed
       actions are not removed from this list and are always available for querying.
 
+  - name: Apps
+    description: >-
+      App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
+      developers to publish code directly to DigitalOcean servers without worrying about the
+      underlying infrastructure.
+
+      Most API operations are centered around a few core object types. Following are the
+      definitions of these types. These definitions will be omitted from the operation-specific
+      documentation.
+
+      For documentation on app specifications (`AppSpec` objects), please refer to the
+      [product documentation](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/).
+
   - name: Balance
     description: >-
       By sending requests to the `/v2/customers/my/balance` endpoint, you can
@@ -153,17 +166,17 @@ tags:
       The [DigitalOcean DNS management interface](https://www.digitalocean.com/docs/networking/dns/)
       allows you to configure the following DNS records:
 
-      Name  | Description                                                                                                                                        | Description                                                                                                                                                                                                                                                                                                                                                                 | Required
-      ------|----------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------
-      A     | This record type is used to map an IPv4 address to a hostname.                                                                                     | The record type (A, MX, CNAME, etc).                                                                                                                                                                                                                                                                                                                                        | All Records
-      AAAA  | This record type is used to map an IPv6 address to a hostname.                                                                                     | The host name, alias, or service being defined by the record.                                                                                                                                                                                                                                                                                                               | A, AAAA, CAA, CNAME, TXT, SRV
-      CAA   | As specified in RFC-6844, this record type can be used to restrict which certificate authorities are permitted to issue certificates for a domain. | Variable data depending on record type. For example, the "data" value for an A record would be the IPv4 address to which the domain will be mapped. For a CAA record, it would contain the domain name of the CA being granted permission to issue certificates.                                                                                                            | A, AAAA, CAA, CNAME, MX, TXT, SRV, NS
-      CNAME | This record type defines an alias for your canonical hostname (the one defined by an A or AAAA record).                                            | The priority of the host (for SRV and MX records. null otherwise).                                                                                                                                                                                                                                                                                                          | MX, SRV
-      MX    | This record type is used to define the mail exchanges used for the domain.                                                                         | The port that the service is accessible on (for SRV records only. null otherwise).                                                                                                                                                                                                                                                                                          | SRV
-      NS    | This record type defines the name servers that are used for this zone.                                                                             | This value is the time to live for the record, in seconds. This defines the time frame that clients can cache queried information before a refresh should be requested. There is a minimum ttl value of 30, unless it is not set. If not set, the default value is the value of the SOA record. For SOA records, defines the time to live for purposes of negative caching. | SOA
-      TXT   | This record type is used to associate a string of text with a hostname, primarily used for verification.                                           | The weight of records with the same priority (for SRV records only. null otherwise).                                                                                                                                                                                                                                                                                        | SRV
-      SRV   | This record type specifies the location (hostname and port number) of servers for specific services.                                               | An unsigned integer between 0-255 used for CAA records.                                                                                                                                                                                                                                                                                                                     | CAA
-      SOA   | This record type defines administrative information about the zone. Can only have ttl changed, cannot be deleted                                   | The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"                                                                                                                                                                                                                                                                                        | CAA
+      Name  | Description                                                                                                                                        |
+      ------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+      A     | This record type is used to map an IPv4 address to a hostname.                                                                                     |
+      AAAA  | This record type is used to map an IPv6 address to a hostname.                                                                                     |
+      CAA   | As specified in RFC-6844, this record type can be used to restrict which certificate authorities are permitted to issue certificates for a domain. |
+      CNAME | This record type defines an alias for your canonical hostname (the one defined by an A or AAAA record).                                            |
+      MX    | This record type is used to define the mail exchanges used for the domain.                                                                         |
+      NS    | This record type defines the name servers that are used for this zone.                                                                             |
+      TXT   | This record type is used to associate a string of text with a hostname, primarily used for verification.                                           |
+      SRV   | This record type specifies the location (hostname and port number) of servers for specific services.                                               |
+      SOA   | This record type defines administrative information about the zone. Can only have ttl changed, cannot be deleted                                   |
 
   - name: Domains
     description: >-
@@ -424,6 +437,66 @@ paths:
   /v2/actions/{action_id}:
     get:
       $ref: 'resources/actions/get_action.yml'
+
+  /v2/apps/tiers:
+    get:
+      $ref: 'resources/apps/list_tiers.yml'
+
+  /v2/apps/{app_id}/deployments:
+    get:
+      $ref: 'resources/apps/list_deployments.yml'
+    post:
+      $ref: 'resources/apps/create_deployment.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
+    get:
+      $ref: 'resources/apps/get_logs.yml'
+
+  /v2/apps:
+    get:
+      $ref: 'resources/apps/list_apps.yml'
+    post:
+      $ref: 'resources/apps/create_app.yml'
+
+  /v2/apps/detect:
+    post:
+      $ref: 'resources/apps/detect.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/logs:
+    get:
+      $ref: 'resources/apps/get_logs_aggregate.yml'
+
+  /v2/apps/{id}:
+    delete:
+      $ref: 'resources/apps/delete_app.yml'
+    get:
+      $ref: 'resources/apps/get_app.yml'
+    put:
+      $ref: 'resources/apps/update_app.yml'
+
+  /v2/apps/tiers/instance_sizes:
+    get:
+      $ref: 'resources/apps/list_instance_sizes.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/cancel:
+    post:
+      $ref: 'resources/apps/cancel_deployment.yml'
+
+  /v2/apps/regions:
+    get:
+      $ref: 'resources/apps/list_regions.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}:
+    get:
+      $ref: 'resources/apps/get_deployment.yml'
+
+  /v2/apps/tiers/instance_sizes/{slug}:
+    get:
+      $ref: 'resources/apps/get_instance_size.yml'
+
+  /v2/apps/tiers/{slug}:
+    get:
+      $ref: 'resources/apps/get_tier.yml'
 
   /v2/cdn/endpoints:
     get:

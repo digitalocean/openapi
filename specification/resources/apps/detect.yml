@@ -1,0 +1,31 @@
+operationId: post_detect
+
+summary: Run App Detection
+
+description: |-
+  Given a git repository, app detection will scan it for supported types of applications and return the first match. You can use this information to aid in the creation of app specifications.
+
+  You may specify either a branch in the source spec or a specific commit hash. Additionally, you may pass a preferred component type to target. For documentation on app specifications (`AppSpec` objects), please refer to [the product documentation](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/).
+  
+tags:
+- Apps
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: models/apps_detect_request.yml
+  required: true
+    
+responses:
+  "200":
+    $ref: responses/detect.yml
+
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml

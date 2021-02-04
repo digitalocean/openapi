@@ -27,12 +27,12 @@ requestBody:
     application/json:
       schema:
         oneOf:
-          - $ref: 'models/floating_ip_actions.yml#/floating_ip_action_type'
+          - $ref: 'models/floating_ip_actions.yml#/floating_ip_action_unassign'
           - $ref: 'models/floating_ip_actions.yml#/floating_ip_action_assign'
         discriminator:
           propertyName: type
           mapping:
-            unassign: 'models/floating_ip_actions.yml#/floating_ip_action_type'
+            unassign: 'models/floating_ip_actions.yml#/floating_ip_action_unassign'
             assign: 'models/floating_ip_actions.yml#/floating_ip_action_assign'
 
 responses:

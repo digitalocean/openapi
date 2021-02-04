@@ -2,14 +2,12 @@ type: object
 
 properties:
   slug:
-    title: slug
     type: string
     example: s-1vcpu-1gb
     description: A human-readable string that is used to uniquely identify each
       size.
 
   memory:
-    title: memory
     type: integer
     multipleOf: 8
     minimum: 8
@@ -18,20 +16,17 @@ properties:
       The value is represented in megabytes.
 
   vcpus:
-    title: vcpus
     type: integer
     example: 1
     description: The integer of number CPUs allocated to Droplets of this size.
 
   disk:
-    title: disk
     type: integer
     example: 25
     description: The amount of disk space set aside for Droplets of this size.
       The value is represented in gigabytes.
 
   transfer:
-    title: transfer
     type: number
     format: float
     example: 1.0
@@ -40,7 +35,6 @@ properties:
       The value is given in terabytes.
 
   price_monthly:
-    title: price_monthly
     type: number
     format: float
     example: 5.0
@@ -49,7 +43,6 @@ properties:
       US dollars.
 
   price_hourly:
-    title: price_hourly
     type: number
     format: float
     example: 0.00743999984115362
@@ -57,7 +50,6 @@ properties:
       The value is measured in US dollars.
 
   regions:
-    title: regions
     type: array
     items:
       type: string
@@ -79,12 +71,19 @@ properties:
       for Droplet creates.
 
   available:
-    title: available
     type: boolean
     default: true
     example: true
     description: This is a boolean value that represents whether new Droplets
       can be created with this size.
+
+  description:
+    type: string
+    example: Basic
+    description: >-
+      A string describing the class of Droplets created from this size. For
+      example: Basic, General Purpose, CPU-Optimized, Memory-Optimized, or
+      Storage-Optimized.
 
 required:
   - available
@@ -96,3 +95,4 @@ required:
   - slug
   - transfer
   - vcpus
+  - description

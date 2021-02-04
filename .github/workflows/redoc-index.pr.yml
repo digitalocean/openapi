@@ -14,7 +14,7 @@ jobs:
   upload-index-preview:
     name: Upload Index Preview
     runs-on: ubuntu-latest
-    
+
     env:
       REDOC_INDEX_FILENAME: redoc-index-pr-${{ github.event.number }}.html
 
@@ -28,8 +28,9 @@ jobs:
           AWS_DEFAULT_OUTPUT: json
           SPACES_PATH: ${{ secrets.SPACES_PATH || 's3://api-engineering/spec-ci' }}
           SPACES_ENDPOINT: ${{ secrets.SPACES_ENDPOINT || 'https://nyc3.digitaloceanspaces.com'}}
+          AWS_EC2_METADATA_DISABLED: true
         run: >-
-          aws s3 cp docs-preview/redoc-index.html 
+          aws s3 cp docs-preview/redoc-index.html
           ${{ env.SPACES_PATH }}/${{ env.REDOC_INDEX_FILENAME }}
           --endpoint=${{ env.SPACES_ENDPOINT }}
           --acl public-read

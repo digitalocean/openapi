@@ -1,11 +1,11 @@
 {
-  "name": "@digitalocean/apiv2-openapi",
+  "name": "@digitalocean/openapi",
   "version": "2.0.0",
   "description": "OpenAPI v3 specification for DigitalOcean's public API v2.",
   "dependencies": {},
   "devDependencies": {
     "@redocly/openapi-cli": "^1.0.0-beta.8",
-    "@stoplight/spectral": "^5.7.1",
+    "@stoplight/spectral": "^5.8.0",
     "newman": "^5.1.2",
     "openapi-to-postmanv2": "^1.2.6"
   },
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/digitalocean/apiv2-openapi.git"
+    "url": "git+https://github.com/digitalocean/openapi.git"
   },
   "keywords": [
     "openapi",
@@ -30,7 +30,7 @@
   "author": "DigitalOcean API Engineering",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/digitalocean/apiv2-openapi/issues"
+    "url": "https://github.com/digitalocean/openapi/issues"
   },
-  "homepage": "https://github.com/digitalocean/apiv2-openapi#readme"
+  "homepage": "https://github.com/digitalocean/openapi#readme"
 }
