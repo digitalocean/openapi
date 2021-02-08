@@ -839,6 +839,10 @@ paths:
     get:
       $ref: 'resources/kubernetes/list_associated_resources.yml'
 
+  /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/selective:
+    delete:
+      $ref: 'resources/kubernetes/destroy_with_associated_resources_selective.yml'
+
   /v2/kubernetes/clusters/{cluster_id}/kubeconfig:
     get:
       $ref: 'resources/kubernetes/get_kubeconfig.yml'
