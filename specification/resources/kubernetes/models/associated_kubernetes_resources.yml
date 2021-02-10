@@ -1,5 +1,5 @@
 type: object
-description: An objects containing the IDs of resources associated with a
+description: An object containing the IDs of resources associated with a
   Kubernetes cluster.
 properties:
   load_balancers:
