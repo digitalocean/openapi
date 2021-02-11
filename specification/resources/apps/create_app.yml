@@ -13,6 +13,22 @@ requestBody:
     application/json:
       schema:
         $ref: models/apps_create_app_request.yml
+      example:
+        spec:
+          name: web-app
+          region: nyc
+          services:
+            - name: api
+              github:
+                branch: main
+                deploy_on_push: true
+                repo: digitalocean/sample-golang
+              run_command: bin/api
+              environment_slug: node-js
+              instance_count: 2
+              instance_size_slug: basic-xxs
+              routes: 
+                - path: /api
   required: true
     
 responses:
