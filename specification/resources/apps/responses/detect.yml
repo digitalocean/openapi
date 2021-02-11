@@ -6,7 +6,7 @@ content:
       $ref: ../models/apps_detect_response.yml
     examples:
       components:
-        $ref: examples.yml#/components
+        $ref: examples.yml#/detect
 
 headers:
   ratelimit-limit:

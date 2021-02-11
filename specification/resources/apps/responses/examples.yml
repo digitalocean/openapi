@@ -86,87 +86,116 @@ apps:
 app:
   value:
     app:
-      id: 4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf
-      owner_uuid: ff36cbc6fd350fe12577f5123133bb5ba01a2419
+      id: c2a93513-8d9b-4223-9d61-5e7272c81cf5
+      owner_uuid: a4e16f25-cdd1-4483-b246-d77f283c9209
       spec:
-        name: sample-php
-        services: 
-          - name: sample-php
-            git: 
-              repo_clone_url: https://github.com/digitalocean/sample-php.git
+        name: sample-golang
+        services:
+        - name: web
+          github:
+            repo: ChiefMateStarbuck/sample-golang
+            branch: main
+          run_command: bin/sample-golang
+          environment_slug: go
+          instance_size_slug: basic-xxs
+          instance_count: 1
+          http_port: 8080
+          routes:
+          - path: "/"
+        region: ams
+      default_ingress: https://sample-golang-zyhgn.ondigitalocean.app
+      created_at: '2021-02-10T16:45:14Z'
+      updated_at: '2021-02-10T17:06:56Z'
+      active_deployment:
+        id: 991dfa59-6a23-459f-86d6-67dfa2c6f1e3
+        spec:
+          name: sample-golang
+          services:
+          - name: web
+            github:
+              repo: ChiefMateStarbuck/sample-golang
               branch: main
-            run_command: heroku-php-apache2
-            environment_slug: php
+            run_command: bin/sample-golang
+            environment_slug: go
             instance_size_slug: basic-xxs
             instance_count: 1
             http_port: 8080
-            routes: 
-              - path: /
-      default_ingress: https://sample-php-iaj87.ondigitalocean.app
-      created_at: 2020-11-19T20:27:18Z
-      updated_at: 2020-12-01T00:42:16Z
-      active_deployment: 
-        id: 3aa4d20e-5527-4c00-b496-601fbd22520a
-        spec: 
-          name: sample-php
-          services: 
-            - name: sample-php
-              git: 
-                repo_clone_url: https://github.com/digitalocean/sample-php.git
-                branch: main
-              run_command: heroku-php-apache2
-              environment_slug: php
-              instance_size_slug: basic-xxs
-              instance_count: 1
-              http_port: 8080
-              routes: 
-                - path: /
-          region: fra
-        services: 
-          - name: sample-php
-            source_commit_hash: 54d4a727f457231062439895000d45437c7bb405
-        phase_last_updated_at: 2020-12-01T00:42:12Z
-        created_at: 2020-12-01T00:40:05Z
-        updated_at: 2020-12-01T00:42:12Z
-      cause: app spec updated
-      progress: 
-        success_steps: 6
-        total_steps: 6
-        steps: 
+            routes:
+            - path: "/"
+          region: ams
+        services:
+        - name: web
+          source_commit_hash: db6936cb46047c576962962eed81ad52c21f35d7
+        phase_last_updated_at: '2021-02-10T17:06:53Z'
+        created_at: '2021-02-10T17:05:30Z'
+        updated_at: '2021-02-10T17:06:53Z'
+        cause: manual
+        progress:
+          success_steps: 6
+          total_steps: 6
+          steps:
           - name: build
             status: SUCCESS
-            steps: 
+            steps:
             - name: initialize
               status: SUCCESS
-              started_at: 2020-12-01T00:40:11.979305214Z
-              ended_at: 2020-12-01T00:40:12.470972033Z
+              started_at: '2021-02-10T17:05:35.572347485Z'
+              ended_at: '2021-02-10T17:05:36.093995229Z'
             - name: components
               status: SUCCESS
-              steps: 
-              - name: sample-php
+              steps:
+              - name: web
                 status: SUCCESS
-                started_at: 0001-01-01T00:00:00Z
-                ended_at: 0001-01-01T00:00:00Z
-                component_name: sample-php
+                component_name: web
                 message_base: Building service
-              started_at: 2020-12-01T00:40:12.470996857Z
-              ended_at: 2020-12-01T00:41:26.180360487Z
-            started_at: 2020-12-01T00:40:11.979257919Z
-            ended_at: 2020-12-01T00:41:26.653989756Z
+              started_at: '2021-02-10T17:05:36.094015928Z'
+              ended_at: '2021-02-10T17:06:19.461737040Z'
+            started_at: '2021-02-10T17:05:35.572287990Z'
+            ended_at: '2021-02-10T17:06:19.807834070Z'
+          - name: deploy
+            status: SUCCESS
+            steps:
+            - name: initialize
+              status: SUCCESS
+              started_at: '2021-02-10T17:06:25.143957508Z'
+              ended_at: '2021-02-10T17:06:26.120343872Z'
+            - name: components
+              status: SUCCESS
+              steps:
+              - name: web
+                status: SUCCESS
+                steps:
+                - name: deploy
+                  status: SUCCESS
+                  component_name: web
+                  message_base: Deploying service
+                - name: wait
+                  status: SUCCESS
+                  component_name: web
+                  message_base: Waiting for service
+                component_name: web
+              started_at: '2021-02-10T17:06:26.120385561Z'
+              ended_at: '2021-02-10T17:06:50.029695913Z'
+            - name: finalize
+              status: SUCCESS
+              started_at: '2021-02-10T17:06:50.348459495Z'
+              ended_at: '2021-02-10T17:06:53.404065961Z'
+            started_at: '2021-02-10T17:06:25.143932418Z'
+            ended_at: '2021-02-10T17:06:53.404104185Z'
         phase: ACTIVE
         tier_slug: basic
-      last_deployment_created_at: 2020-12-01T00:40:05Z
-      live_url: https://sample-php-iaj87.ondigitalocean.app
-      region: 
-        slug: fra
-        label: Frankfurt
-        flag: germany
+      last_deployment_created_at: '2021-02-10T17:05:30Z'
+      live_url: https://sample-golang-zyhgn.ondigitalocean.app
+      region:
+        slug: ams
+        label: Amsterdam
+        flag: netherlands
         continent: Europe
-        data_centers: 
-        - fra1
+        data_centers:
+        - ams3
       tier_slug: basic
-      live_url_base: https://sample-php-iaj87.ondigitalocean.app
-      live_domain: sample-php-iaj87.ondigitalocean.app
+      live_url_base: https://sample-golang-zyhgn.ondigitalocean.app
+      live_domain: sample-golang-zyhgn.ondigitalocean.app
   
 deployments:
   value:
@@ -193,6 +222,46 @@ deployments:
         created_at: 2020-07-28T18:00:00Z
         updated_at: 2020-07-28T18:00:00Z
         cause: commit 9a4df0b pushed to github/digitalocean/sample-golang
+        progress:
+          pending_steps: 6
+          total_steps: 6
+          steps:
+          - name: build
+            status: PENDING
+            steps:
+            - name: initialize
+              status: PENDING
+            - name: components
+              status: PENDING
+              steps:
+              - name: web
+                status: PENDING
+                component_name: web
+                message_base: Building service
+          - name: deploy
+            status: PENDING
+            steps:
+            - name: initialize
+              status: PENDING
+            - name: components
+              status: PENDING
+              steps:
+              - name: web
+                status: PENDING
+                steps:
+                - name: deploy
+                  status: PENDING
+                  component_name: web
+                  message_base: Deploying service
+                - name: wait
+                  status: PENDING
+                  component_name: web
+                  message_base: Waiting for service
+                component_name: web
+            - name: finalize
+              status: PENDING
+        phase: PENDING_BUILD
+        tier_slug: basic
 
 deployment:
   value:
@@ -219,6 +288,47 @@ deployment:
       created_at: 2020-07-28T18:00:00Z
       updated_at: 2020-07-28T18:00:00Z
       cause: commit 9a4df0b pushed to github/digitalocean/sample-golang
+      progress:
+        pending_steps: 6
+        total_steps: 6
+        steps:
+        - name: build
+          status: PENDING
+          steps:
+          - name: initialize
+            status: PENDING
+          - name: components
+            status: PENDING
+            steps:
+            - name: web
+              status: PENDING
+              component_name: web
+              message_base: Building service
+        - name: deploy
+          status: PENDING
+          steps:
+          - name: initialize
+            status: PENDING
+          - name: components
+            status: PENDING
+            steps:
+            - name: web
+              status: PENDING
+              steps:
+              - name: deploy
+                status: PENDING
+                component_name: web
+                message_base: Deploying service
+              - name: wait
+                status: PENDING
+                component_name: web
+                message_base: Waiting for service
+              component_name: web
+          - name: finalize
+            status: PENDING
+      phase: PENDING_BUILD
+      tier_slug: basic
+
 
 tiers:
   value:
@@ -241,6 +351,7 @@ tier:
 logs:
   value:
     live_url: https://logs-example/build.log
+    url: https://logs/build.log
     historic_logs: 
       - https://logs-example/archive/build.log
 
@@ -298,3 +409,29 @@ components:
     template_error: "error!"
     template_found: true
     template_valid: true
+
+detect:
+  value:
+    components:
+      - strategy: BUILDPACK
+        types:
+        - service
+        - static_site
+        - worker
+        - job
+        run_command: bin/sample-golang
+        environment_slug: go
+    template:
+      spec:
+        name: sample-golang
+        services:
+          - name: web
+            git:
+              repo_clone_url: https://github.com/digitalocean/sample-golang.git
+              branch: main
+            instance_count: 1
+            instance_size_slug: basic-xxs
+    template_found: true
+    template_valid: true
+
+
