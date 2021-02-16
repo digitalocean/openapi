@@ -4,21 +4,9 @@ content:
   application/json:
     schema:
       $ref: ../models/app_response.yml
-    example:
-      spec:
-        name: sample-golang
-        services:
-          - name: web 
-            github:
-              repo: digitalocean/sample-golang
-              branch: branch
-            run_command: bin/sample-golang
-            environment_slug: go
-            instance_size_slug: basic-xxs
-            instance_count: 2
-            routes:
-              - path: "/"
-        region: ams
+    examples:
+      app:
+        $ref: examples.yml#/app
 
 headers:
   ratelimit-limit:

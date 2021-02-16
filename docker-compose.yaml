@@ -16,4 +16,4 @@ services:
     volumes:
       - ./specification:/prism
     ports:
-      - "8080:4010"
+      - "8090:4010"

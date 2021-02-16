@@ -40,7 +40,7 @@ slug_size:
   required: true
   schema:
     type: string
-  example: s-1vcpu-1gb
+  example: basic-xxs
 
 component:
   description: An optional component name. If set, logs will be limited to this component
@@ -94,4 +94,4 @@ slug_tier:
   required: true
   schema:
     type: string
-  example: s-1vcpu-1gb
+  example: basic
