@@ -26,7 +26,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/associated_kubernetes_resources.yml'
+        $ref: 'models/associated_kubernetes_resources.yml#/destroy_associated_kubernetes_resources'
 
 responses:
   '204':
