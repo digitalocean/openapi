@@ -1,4 +1,6 @@
 droplet_action_type:
+  required:
+    - type
   type: object
   description: Specifies the action that will be taken on the Droplet.
   properties:

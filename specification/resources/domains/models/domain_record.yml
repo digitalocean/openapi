@@ -1,5 +1,6 @@
 type: object
-
+required:
+  - type
 properties:
   id:
     type: integer
