@@ -25,6 +25,7 @@ requestBody:
 
       example:
         name: blog
+        type: A
 
 responses:
   '200':

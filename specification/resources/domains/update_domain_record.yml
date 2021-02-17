@@ -25,6 +25,7 @@ requestBody:
 
       example:
         name: blog
+        type: CNAME
 
 responses:
   '200':
