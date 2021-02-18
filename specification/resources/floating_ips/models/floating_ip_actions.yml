@@ -2,6 +2,10 @@ floating_ip_action_type:
   type: object
   required:
     - type
+  properties:
+    type:
+      type: string
+      description: The type of action to initiate for the floating IP.
   discriminator:
     propertyName: type
     mapping:
@@ -14,9 +18,6 @@ floating_ip_action_unassign:
     - type: object
       required:
         - type
-      properties:
-        type:
-          type: string
 
 floating_ip_action_assign:
   allOf:
@@ -26,8 +27,6 @@ floating_ip_action_assign:
         - type
         - droplet_id
       properties:
-        type:
-          type: string
         droplet_id:
           type: integer
           example: 758604968
