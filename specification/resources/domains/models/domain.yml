@@ -10,6 +10,8 @@ properties:
 
   ttl:
     type: integer
+    readOnly: true
+    nullable: true
     description: >-
       This value is the time to live for the records on this domain, in seconds.
       This defines the time frame that clients can cache queried information

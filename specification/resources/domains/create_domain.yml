@@ -22,7 +22,7 @@ requestBody:
           $ref: 'examples.yml#/domain_record_created'
 
 responses:
-  '202':
+  '201':
     $ref: 'responses/create_domain_response.yml'
 
   '401':
