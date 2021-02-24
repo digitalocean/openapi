@@ -1,5 +1,5 @@
 type: object
-
+nullable: true
 description: An object specifying the maintenance window policy for the
   Kubernetes cluster.
 
