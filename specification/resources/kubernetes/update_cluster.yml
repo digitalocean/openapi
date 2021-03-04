@@ -22,7 +22,7 @@ requestBody:
         $ref: 'models/cluster_update.yml'
 
 responses:
-  '200':
+  '202':
     $ref: 'responses/updated_cluster.yml'
 
   '401':
