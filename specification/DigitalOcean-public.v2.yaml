@@ -458,9 +458,10 @@ paths:
     post:
       $ref: 'resources/apps/create_app.yml'
 
-  /v2/apps/detect:
-    post:
-      $ref: 'resources/apps/detect.yml'
+        # Curently hiding this enpoint per request of apps team
+        #/v2/apps/detect:
+        #post:
+        #$ref: 'resources/apps/detect.yml'
 
   /v2/apps/{app_id}/deployments/{deployment_id}/logs:
     get:
