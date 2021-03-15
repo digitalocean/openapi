@@ -1,0 +1,14 @@
+lang: Ruby
+source: |-
+  require 'droplet_kit'
+  token = '16f79fc8cd5adcfe528a0994311fa63cc877737b385b6ff7d12ed6684ba4fef5'
+  client = DropletKit::Client.new(access_token: token)
+
+  cdn = DropletKit::CDN.new(
+    origin: 'static-images.nyc3.digitaloceanspaces.com',
+    custom_domain: 'static.example.com',
+    certificate_id: '892071a0-bb95-49bc-8021-3afd67a210bf',
+    ttl: 3600
+  )
+
+  client.cdns.create(cdn)

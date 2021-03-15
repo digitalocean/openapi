@@ -3,7 +3,7 @@ operationId: list_all_actions
 summary: List All Actions
 
 description: >-
-  This will be the entire list of actions taken on your account, so it will be quite large. 
+  This will be the entire list of actions taken on your account, so it will be quite large.
   As with any large collection returned by the API, the results will be paginated with only 20 on each page by default.
 
 tags:
@@ -25,3 +25,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/list_all_actions.yml'
+  - $ref: 'examples/go/list_all_actions.yml'
+  - $ref: 'examples/ruby/list_all_actions.yml'

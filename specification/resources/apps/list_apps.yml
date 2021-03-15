@@ -4,10 +4,10 @@ summary: List All Apps
 
 description: List all apps on your account. Information about the current active deployment
   as well as any in progress ones will also be included for each app.
-  
+
 tags:
 - Apps
-  
+
 parameters:
 - $ref: ../../shared/parameters.yml#/page
 - $ref: ../../shared/parameters.yml#/per_page
@@ -24,3 +24,6 @@ responses:
 
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: 'examples/curl/list_apps.yml'

@@ -5,10 +5,10 @@ summary: Delete an App
 description: Delete an existing app. Once deleted, all active deployments will be
   permanently shut down and the app deleted. If needed, be sure to back up your app
   specification so that you may re-create it at a later time.
-  
+
 tags:
 - Apps
-  
+
 parameters:
   - $ref: parameters.yml#/id_app
 
@@ -24,3 +24,6 @@ responses:
 
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: 'examples/curl/delete_app.yml'

@@ -3,7 +3,7 @@ operationId: get_customer_balance
 summary: Get Customer Balance
 
 description: >-
-  To retrieve the balances on a customer's account, send a GET request to 
+  To retrieve the balances on a customer's account, send a GET request to
   `/v2/customers/my/balance`.
 
 tags:
@@ -24,3 +24,6 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/get_customer_balance.yml'

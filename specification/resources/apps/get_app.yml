@@ -6,10 +6,10 @@ description: Retrieve details about an existing app by either its ID or name. To
   an app by its name, do not include an ID in the request path. Information about
   the current active deployment as well as any in progress ones will also be included
   in the response.
-  
+
 tags:
 - Apps
-  
+
 parameters:
   - $ref: parameters.yml#/id_app
   - $ref: parameters.yml#/app_name
@@ -26,3 +26,6 @@ responses:
 
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: 'examples/curl/get_app.yml'

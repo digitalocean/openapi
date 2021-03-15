@@ -37,3 +37,7 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/list_database_clusters.yml'
+  - $ref: 'examples/go/list_database_clusters.yml'

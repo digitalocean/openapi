@@ -30,4 +30,4 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/1_click.yml'
+  - $ref: 'examples/curl/1_click.yml'

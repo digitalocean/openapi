@@ -60,3 +60,7 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/update_database_firewall.yml'
+  - $ref: 'examples/go/update_database_firewall.yml'

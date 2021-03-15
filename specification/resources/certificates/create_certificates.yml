@@ -38,3 +38,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/create_certificates.yml'
+  - $ref: 'examples/go/create_certificates.yml'
+  - $ref: 'examples/ruby/create_certificates.yml'
