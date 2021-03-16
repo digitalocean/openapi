@@ -3,7 +3,7 @@ operationId: delete_firewall_rules
 summary: Remove Rules from a Firewall
 
 description: |
-  To remove access rules from a firewall, send a DELETE request to 
+  To remove access rules from a firewall, send a DELETE request to
   `/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an
   `inbound_rules` and/or `outbound_rules` attribute containing an array of rules
   to be removed.
@@ -61,3 +61,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/delete_firewall_rules.yml'
+  - $ref: 'examples/go/delete_firewall_rules.yml'
+  - $ref: 'examples/ruby/delete_firewall_rules.yml'

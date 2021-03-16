@@ -1,0 +1,22 @@
+lang: Go
+source: |-
+  import (
+      "context"
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      pat := "mytoken"
+
+      client := godo.NewFromToken(pat)
+      ctx := context.TODO()
+
+      // Transfer an existing image
+      transferRequest := &godo.ActionRequest{
+          "type":   "transfer",
+          "region": "nyc2",
+      }
+
+      transfer, _, err := client.ImageActions.Transfer(ctx, 7938269, transferRequest)
+
+  }

@@ -1,0 +1,3 @@
+lang: cURL
+source: |-
+  curl -X DELETE -H "Content-Type: application/json" -H "Authorization: Bearer b7d03a6947b217efb6f3ec3bd3504582" "https://api.digitalocean.com/v2/floating_ips/45.55.96.47"

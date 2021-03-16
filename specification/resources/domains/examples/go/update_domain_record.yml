@@ -1,0 +1,20 @@
+lang: Go
+source: |-
+  import (
+      "context"
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      pat := "mytoken"
+
+      client := godo.NewFromToken(pat)
+      ctx := context.TODO()
+
+      editRequest := &godo.DomainRecordEditRequest{
+        Type: "A",
+        Name: "blog",
+      }
+
+      domainRecord, _, err := client.Domains.EditRecord(ctx, "example.com", 3352896, editRequest)
+  }

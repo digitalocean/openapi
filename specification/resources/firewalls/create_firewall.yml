@@ -4,7 +4,7 @@ summary: Create a New Firewall
 
 description: |
   To create a new firewall, send a POST request to `/v2/firewalls`. The request
-  must contain at least one inbound or outbound access rule. 
+  must contain at least one inbound or outbound access rule.
 
 tags:
   - Firewalls
@@ -52,7 +52,7 @@ requestBody:
 
 responses:
   '202':
-    $ref: 'responses/create_firewall_response.yml' 
+    $ref: 'responses/create_firewall_response.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -62,3 +62,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/create_firewall.yml'
+  - $ref: 'examples/go/create_firewall.yml'
+  - $ref: 'examples/ruby/create_firewall.yml'

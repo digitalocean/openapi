@@ -60,3 +60,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/post_droplet_action_by_tag.yml'
+  - $ref: 'examples/go/post_droplet_action_by_tag.yml'
+  - $ref: 'examples/ruby/post_droplet_action_by_tag.yml'
