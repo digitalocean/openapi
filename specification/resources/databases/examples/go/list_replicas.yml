@@ -11,7 +11,5 @@ source: |-
       client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
-      // ...
+      replicas, _, err := client.Databases.ListReplicas(ctx, "9cc10173-e9ea-4176-9dbc-a4cee4c4ff30", nil)
   }
-
-  replicas, _, err := client.Databases.ListReplicas(ctx, "9cc10173-e9ea-4176-9dbc-a4cee4c4ff30", nil)

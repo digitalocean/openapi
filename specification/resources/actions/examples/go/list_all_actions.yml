@@ -11,11 +11,9 @@ source: |-
     client := godo.NewFromToken(pat)
     ctx := context.TODO()
 
-    // ...
+    opt := &godo.ListOptions{
+        Page:    1,
+        PerPage: 200,
     }
-
-  opt := &godo.ListOptions{
-      Page:    1,
-      PerPage: 200,
-  }
-  actions, _, err := client.Actions.List(ctx, opt)
+    actions, _, err := client.Actions.List(ctx, opt)
+    }

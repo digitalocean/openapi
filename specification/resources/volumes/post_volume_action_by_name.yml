@@ -85,3 +85,6 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/post_volume_action_by_name.yml'

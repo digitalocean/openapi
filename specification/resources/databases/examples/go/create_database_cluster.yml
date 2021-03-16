@@ -11,16 +11,14 @@ source: |-
       client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
-      // ...
-  }
+      createRequest := &godo.DatabaseCreateRequest{
+          Name:       "backend",
+          EngineSlug: "pg",
+          Version:    "10",
+          Region:     "nyc3",
+          SizeSlug:   "db-s-2vcpu-4gb",
+          NumNodes:   2,
+      }
 
-  createRequest := &godo.DatabaseCreateRequest{
-      Name:       "backend",
-      EngineSlug: "pg",
-      Version:    "10",
-      Region:     "nyc3",
-      SizeSlug:   "db-s-2vcpu-4gb",
-      NumNodes:   2,
+      cluster, _, err := client.Databases.Create(ctx, createRequest)
   }
-
-  cluster, _, err := client.Databases.Create(ctx, createRequest)

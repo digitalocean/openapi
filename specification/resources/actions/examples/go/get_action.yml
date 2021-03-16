@@ -11,6 +11,5 @@ source: |-
       client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
-      // ...
+      action, _, err := client.Actions.Get(ctx, 36804636)
   }
-  action, _, err := client.Actions.Get(ctx, 36804636)

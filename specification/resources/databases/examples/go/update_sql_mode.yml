@@ -11,8 +11,6 @@ source: |-
       client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
-      // ...
+      sqlMode := "ANSI,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE"
+      _, err := client.Databases.SetSQLMode(ctx, "9cc10173-e9ea-4176-9dbc-a4cee4c4ff30", sqlMode)
   }
-
-  sqlMode := "ANSI,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE"
-  _, err := client.Databases.SetSQLMode(ctx, "9cc10173-e9ea-4176-9dbc-a4cee4c4ff30", sqlMode)

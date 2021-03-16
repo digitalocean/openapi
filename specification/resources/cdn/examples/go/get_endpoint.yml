@@ -11,7 +11,5 @@ source: |-
       client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
-      // ...
+      cdn, _, err := client.CDNs.Get(ctx, "19f06b6a-3ace-4315-b086-499a0e521b76")
   }
-
-  cdn, _, err := client.CDNs.Get(ctx, "19f06b6a-3ace-4315-b086-499a0e521b76")

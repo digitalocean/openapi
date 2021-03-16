@@ -3,7 +3,7 @@ operationId: get_volume
 summary: Retrieve an Existing Block Storage Volume
 
 description: >+
-  To show information about a block storage volume, send a GET request to 
+  To show information about a block storage volume, send a GET request to
   `/v2/volumes/$VOLUME_ID`.
 
 tags:
@@ -27,3 +27,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/get_volume.yml'
+  - $ref: 'examples/go/get_volume.yml'
+  - $ref: 'examples/ruby/get_volume.yml'

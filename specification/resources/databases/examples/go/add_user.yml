@@ -11,11 +11,10 @@ source: |-
       client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
-      // ...
-  }
+      addUserRequest := &godo.DatabaseCreateUserRequest{
+          Name: "app-01",
+      }
 
-  addUserRequest := &godo.DatabaseCreateUserRequest{
-      Name: "app-01",
-  }
+      user, _, err := client.Databases.CreateUser(ctx, "88055188-9e54-4f21-ab11-8a918ed79ee2", addUserRequest)
 
-  user, _, err := client.Databases.CreateUser(ctx, "88055188-9e54-4f21-ab11-8a918ed79ee2", addUserRequest)
+  }

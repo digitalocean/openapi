@@ -3,8 +3,8 @@ operationId: delete_tag
 summary: Delete a Tag
 
 description: >-
-  A tag can be deleted by sending a `DELETE` request to `/v2/tags/$TAG_NAME`. 
-  Deleting a tag also untags all the resources that have previously been tagged 
+  A tag can be deleted by sending a `DELETE` request to `/v2/tags/$TAG_NAME`.
+  Deleting a tag also untags all the resources that have previously been tagged
   by the Tag.
 
 tags:
@@ -29,4 +29,7 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
-  
+x-codeSamples:
+  - $ref: 'examples/curl/delete_tag.yml'
+  - $ref: 'examples/go/delete_tag.yml'
+  - $ref: 'examples/ruby/delete_tag.yml'

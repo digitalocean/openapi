@@ -1,0 +1,20 @@
+lang: Go
+source: |-
+  import (
+      "context"
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      pat := "mytoken"
+
+      client := godo.NewFromToken(pat)
+      ctx := context.TODO()
+
+      opt := &godo.ListOptions{
+          Page:    1,
+          PerPage: 200,
+      }
+
+      lbs, _, err := c.LoadBalancers.List(ctx, opt)
+  }

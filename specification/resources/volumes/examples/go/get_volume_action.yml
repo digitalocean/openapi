@@ -1,0 +1,15 @@
+lang: Go
+source: |-
+  import (
+      "context"
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      pat := "mytoken"
+
+      client := godo.NewFromToken(pat)
+      ctx := context.TODO()
+
+      action, _, err := client.StorageActions.Get(ctx, "7724db7c-e098-11e5-b522-000f53304e51", 72531856)
+  }

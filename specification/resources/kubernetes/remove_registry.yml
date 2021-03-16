@@ -26,3 +26,7 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/remove_registry.yml'
+  - $ref: 'examples/go/remove_registry.yml'

@@ -11,7 +11,5 @@ source: |-
       client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
-      // ...
+      _, err := client.Databases.DeleteDB(ctx, "9cc10173-e9ea-4176-9dbc-a4cee4c4ff30", "alpha")
   }
-
-  _, err := client.Databases.DeleteDB(ctx, "9cc10173-e9ea-4176-9dbc-a4cee4c4ff30", "alpha")

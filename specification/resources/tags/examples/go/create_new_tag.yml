@@ -1,0 +1,18 @@
+lang: Go
+source: |-
+  import (
+      "context"
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      pat := "mytoken"
+
+      client := godo.NewFromToken(pat)
+      ctx := context.TODO()
+
+      createRequest := &TagCreateRequest{
+          Name: "testing-1",
+      }
+      client.Tags.Create(ctx, request)
+  }

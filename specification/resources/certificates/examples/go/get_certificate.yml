@@ -11,7 +11,5 @@ source: |-
       client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
-      // ...
+      cert, _, err := client.Certificates.Get(ctx, "892071a0-bb95-49bc-8021-3afd67a210bf")
   }
-
-  cert, _, err := client.Certificates.Get(ctx, "892071a0-bb95-49bc-8021-3afd67a210bf")

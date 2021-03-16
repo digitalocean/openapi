@@ -34,7 +34,7 @@ requestBody:
 responses:
   '201':
     $ref: 'responses/volume_snapshot.yml'
-  
+
   '400':
     $ref: '../../shared/responses/bad_request.yml'
 
@@ -46,3 +46,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/create_volume_snapshot.yml'
+  - $ref: 'examples/go/create_volume_snapshot.yml'
+  - $ref: 'examples/ruby/create_volume_snapshot.yml'

@@ -11,12 +11,10 @@ source: |-
       client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
-      // ...
-  }
+      opt := &godo.ListOptions{
+          Page:    1,
+          PerPage: 200,
+      }
 
-  opt := &godo.ListOptions{
-      Page:    1,
-      PerPage: 200,
+      certs, _, err := client.Certificates.List(ctx, opt)
   }
-
-  certs, _, err := client.Certificates.List(ctx, opt)

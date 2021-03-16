@@ -3,13 +3,13 @@ operationId: tag_resource
 summary: Tag a Resource
 
 description: >-
-  Resources can be tagged by sending a POST request to 
-  `/v2/tags/$TAG_NAME/resources` with an array of json objects containing 
+  Resources can be tagged by sending a POST request to
+  `/v2/tags/$TAG_NAME/resources` with an array of json objects containing
   `resource_id` and `resource_type` attributes.
 
-  Currently only tagging of Droplets, Images, Volumes, and Volume Snapshots is 
-  supported. `resource_id` is expected to be the Droplet's id, Image's id, or 
-  Volume/Volume Snapshot's UUID attribute as a string, and `resource_type` is 
+  Currently only tagging of Droplets, Images, Volumes, and Volume Snapshots is
+  supported. `resource_id` is expected to be the Droplet's id, Image's id, or
+  Volume/Volume Snapshot's UUID attribute as a string, and `resource_type` is
   expected to be the string `droplet`, `image`, `volume` or `volume_snapshot`.
 
 tags:
@@ -41,4 +41,7 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
-  
+x-codeSamples:
+  - $ref: 'examples/curl/tag_resource.yml'
+  - $ref: 'examples/go/tag_resource.yml'
+  - $ref: 'examples/ruby/tag_resource.yml'

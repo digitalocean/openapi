@@ -28,3 +28,7 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/get_available_upgrades.yml'
+  - $ref: 'examples/go/get_available_upgrades.yml'

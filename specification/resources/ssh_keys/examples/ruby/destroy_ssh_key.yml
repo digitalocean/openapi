@@ -1,0 +1,7 @@
+lang: Ruby
+source: |-
+  require 'droplet_kit'
+  token = '16f79fc8cd5adcfe528a0994311fa63cc877737b385b6ff7d12ed6684ba4fef5'
+  client = DropletKit::Client.new(access_token: token)
+
+  client.ssh_keys.delete(id: 512190)
