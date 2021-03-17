@@ -1,10 +1,13 @@
 lang: cURL
 source: |-
   # List all snapshots
-  curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer $DIGITALOCEAN_TOKEN' "https://api.digitalocean.com/v2/snapshots?page=1&per_page=1"
+  curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer $DIGITALOCEAN_TOKEN' \
+    "https://api.digitalocean.com/v2/snapshots?page=1&per_page=1"
 
   # List all Droplet snapshots
-  curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer $DIGITALOCEAN_TOKEN' "https://api.digitalocean.com/v2/snapshots?page=1&per_page=1&resource_type=droplet"
+  curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer $DIGITALOCEAN_TOKEN' \
+    "https://api.digitalocean.com/v2/snapshots?page=1&per_page=1&resource_type=droplet"
 
   # List volume snapshots
-  curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer $DIGITALOCEAN_TOKEN' "https://api.digitalocean.com/v2/snapshots?page=1&per_page=1&resource_type=volume"
+  curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer $DIGITALOCEAN_TOKEN' \
+    "https://api.digitalocean.com/v2/snapshots?page=1&per_page=1&resource_type=volume"
