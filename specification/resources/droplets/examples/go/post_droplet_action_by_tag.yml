@@ -11,5 +11,5 @@ source: |-
       client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
-      // ...
+      action, _, err := client.DropletActions.PowerOffByTag(ctx, "awesome")
   }

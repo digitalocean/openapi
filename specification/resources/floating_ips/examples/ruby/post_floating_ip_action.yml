@@ -4,4 +4,8 @@ source: |-
   token = '16f79fc8cd5adcfe528a0994311fa63cc877737b385b6ff7d12ed6684ba4fef5'
   client = DropletKit::Client.new(access_token: token)
 
+  # Assign a Floating IP to a Droplet
   client.floating_ip_actions.assign(ip: '45.55.96.47', droplet_id: 8219222)
+
+  # Unassign a Floating IP
+  # client.floating_ip_actions.unassign(ip: '45.55.96.47')
