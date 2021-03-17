@@ -10,7 +10,7 @@ description: >+
   query parameters. For example, to only include A records for a domain, send a
   GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a
   fully qualified record name. For example, to only include records matching
-  `sub.example.com`, send a GET request to 
+  `sub.example.com`, send a GET request to
   `/v2/domains/$DOMAIN_NAME/records?name=sub.example.com`. Both name and type
   may be used together.
 
@@ -33,4 +33,9 @@ responses:
     $ref: '../../shared/responses/server_error.yml'
 
   default:
-    $ref: '../../shared/responses/unexpected_error.yml' 
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/list_all_domain_records.yml'
+  - $ref: 'examples/go/list_all_domain_records.yml'
+  - $ref: 'examples/ruby/list_all_domain_records.yml'

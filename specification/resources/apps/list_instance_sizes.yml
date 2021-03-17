@@ -3,7 +3,7 @@ operationId: list_instance_sizes
 summary: List Instance Sizes
 
 description: List all instance sizes for `service`, `worker`, and `job` components.
-  
+
 tags:
 - Apps
 
@@ -19,3 +19,6 @@ responses:
 
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: 'examples/curl/list_instance_sizes.yml'

@@ -3,7 +3,7 @@ operationId: delete_firewall_droplets
 summary: Remove Droplets from a Firewall
 
 description: |
-  To remove a Droplet from a firewall, send a DELETE request to 
+  To remove a Droplet from a firewall, send a DELETE request to
   `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there should
   be a `droplet_ids` attribute containing a list of Droplet IDs.
 
@@ -26,12 +26,12 @@ requestBody:
             type: array
             description: >-
               An array containing the IDs of the Droplets to be removed from
-              the firewall.	
+              the firewall.
             items:
               type: integer
-            example: 
+            example:
               - 49696269
-        
+
         required:
           - droplet_ids
 
@@ -54,3 +54,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/delete_firewall_droplets.yml'
+  - $ref: 'examples/go/delete_firewall_droplets.yml'
+  - $ref: 'examples/ruby/delete_firewall_droplets.yml'

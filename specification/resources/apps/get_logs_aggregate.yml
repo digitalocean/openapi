@@ -6,10 +6,10 @@ description: Retrieve the logs of a past, in-progress, or active deployment. If 
   component name is specified, the logs will be limited to only that component. The
   response will include links to either real-time logs of an in-progress or active
   deployment or archived logs of a past deployment.
-  
+
 tags:
 - Apps
-  
+
 parameters:
   - $ref: parameters.yml#/app_id
   - $ref: parameters.yml#/deployment_id
@@ -29,3 +29,6 @@ responses:
 
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: 'examples/curl/get_logs_aggregate.yml'

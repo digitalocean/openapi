@@ -1,0 +1,15 @@
+lang: Go
+source: |-
+  import (
+      "context"
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      pat := "mytoken"
+
+      client := godo.NewFromToken(pat)
+      ctx := context.TODO()
+
+      _, err := client.LoadBalancers.Delete(ctx, "4de7ac8b-495b-4884-9a69-1050c6793cd6")
+  }

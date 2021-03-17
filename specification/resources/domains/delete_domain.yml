@@ -26,3 +26,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/delete_domain.yml'
+  - $ref: 'examples/go/delete_domain.yml'
+  - $ref: 'examples/ruby/delete_domain.yml'

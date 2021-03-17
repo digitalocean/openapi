@@ -1,0 +1,16 @@
+lang: Ruby
+source: |-
+  require 'droplet_kit'
+  token = '16f79fc8cd5adcfe528a0994311fa63cc877737b385b6ff7d12ed6684ba4fef5'
+  client = DropletKit::Client.new(access_token: token)
+
+  droplet = DropletKit::Droplet.new(
+    name: 'example.com',
+    region: 'nyc3',
+    size: 's-1vcpu-1gb',
+    image: 'ubuntu-16-04-x64',
+    ssh_keys: [107149],
+    ipv6: true,
+    tags: ["web"]
+  )
+  client.droplets.create(droplet)   

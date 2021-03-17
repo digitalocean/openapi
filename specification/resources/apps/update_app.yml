@@ -4,13 +4,13 @@ summary: Update an App
 
 description: Update an existing app by submiting a new app specification. For documentation
   on app specifications (`AppSpec` objects), please refer to [the product documentation](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/).
-  
+
 tags:
 - Apps
-  
+
 parameters:
   - $ref: parameters.yml#/id_app
-    
+
 requestBody:
   content:
     application/json:
@@ -30,3 +30,6 @@ responses:
 
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: 'examples/curl/update_app.yml'

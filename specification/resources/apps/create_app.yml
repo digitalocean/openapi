@@ -4,7 +4,7 @@ summary: Create a New App
 
 description: Create a new app by submitting an app specification. For documentation
   on app specifications (`AppSpec` objects), please refer to [the product documentation](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/).
-  
+
 tags:
 - Apps
 
@@ -27,10 +27,10 @@ requestBody:
               environment_slug: node-js
               instance_count: 2
               instance_size_slug: basic-xxs
-              routes: 
+              routes:
                 - path: /api
   required: true
-    
+
 responses:
   "200":
     $ref: responses/new_app.yml
@@ -43,3 +43,6 @@ responses:
 
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: 'examples/curl/create_app.yml'

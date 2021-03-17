@@ -3,10 +3,10 @@ operationId: list_tiers
 summary: List App Tiers
 
 description: List all app tiers.
-  
+
 tags:
 - Apps
-  
+
 responses:
   "200":
     $ref: responses/all_tiers.yml
@@ -19,3 +19,6 @@ responses:
 
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: 'examples/curl/list_tiers.yml'

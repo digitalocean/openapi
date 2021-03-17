@@ -5,7 +5,7 @@ summary: List Snapshots for a Volume
 description: >+
   To retrieve the snapshots that have been created from a volume, send a GET
   request to `/v2/volumes/$VOLUME_ID/snapshots`.
-  
+
 tags:
   - Block Storage
 
@@ -29,3 +29,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/list_volume_snapshots.yml'
+  - $ref: 'examples/go/list_volume_snapshots.yml'
+  - $ref: 'examples/ruby/list_volume_snapshots.yml'

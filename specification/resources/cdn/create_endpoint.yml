@@ -47,3 +47,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/create_endpoint.yml'
+  - $ref: 'examples/go/create_endpoint.yml'
+  - $ref: 'examples/ruby/create_endpoint.yml'

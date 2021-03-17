@@ -27,3 +27,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/list_all_keys.yml'
+  - $ref: 'examples/go/list_all_keys.yml'
+  - $ref: 'examples/ruby/list_all_keys.yml'

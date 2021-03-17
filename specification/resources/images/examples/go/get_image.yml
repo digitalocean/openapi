@@ -1,0 +1,19 @@
+lang: Go
+source: |-
+  import (
+      "context"
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      pat := "mytoken"
+
+      client := godo.NewFromToken(pat)
+      ctx := context.TODO()
+
+      // Get existing image by ID
+      image, _, err := client.Images.GetByID(ctx, 7555620)
+
+      // Get existing image by slug
+      // image, _, err := client.Images.GetBySlug(ctx, "ubuntu-16-04-x64") 
+  }

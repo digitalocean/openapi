@@ -26,3 +26,7 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/get_vpc.yml'
+  - $ref: 'examples/go/get_vpc.yml'

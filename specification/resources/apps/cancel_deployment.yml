@@ -3,10 +3,10 @@ operationId: post_cancel_deployment
 summary: Cancel a Deployment
 
 description: Immediately cancel an in-progress deployment.
-  
+
 tags:
 - Apps
-  
+
 parameters:
   - $ref: parameters.yml#/app_id
   - $ref: parameters.yml#/deployment_id
@@ -23,3 +23,6 @@ responses:
 
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: 'examples/curl/cancel_deployment.yml'

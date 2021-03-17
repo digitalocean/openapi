@@ -1,0 +1,22 @@
+lang: Go
+source: |-
+  import (
+      "context"
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      pat := "mytoken"
+
+      client := godo.NewFromToken(pat)
+      ctx := context.TODO()
+
+      createRequest := &godo.CDNCreateRequest{
+          Origin:        "static-images.nyc3.digitaloceanspaces.com",
+          TTL:           3600,
+          CustomDomain:  "static.example.com",
+          CertificateID: "892071a0-bb95-49bc-8021-3afd67a210b",
+      }
+
+      cdn, _, err := client.CDNs.Create(ctx, createRequest)
+  }

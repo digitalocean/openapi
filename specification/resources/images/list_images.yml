@@ -50,3 +50,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/list_images.yml'
+  - $ref: 'examples/go/list_images.yml'
+  - $ref: 'examples/ruby/list_images.yml'

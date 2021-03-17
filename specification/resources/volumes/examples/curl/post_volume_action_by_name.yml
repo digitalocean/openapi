@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  # Attach a volume to a Droplet by name
+  curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer b7d03a6947b217efb6f3ec3bd3504582" -d '{"type": "attach", "volume_name": "example", "region": "nyc1", "droplet_id": "11612190","tags":["aninterestingtag"] }' "https://api.digitalocean.com/v2/volumes/actions"
+
+  # Remove a volume from a Droplet by name
+  curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer b7d03a6947b217efb6f3ec3bd3504582" -d '{"type": "detach", "droplet_id": "11612190", "volume_name": "example", "region": "nyc1"}' "https://api.digitalocean.com/v2/volumes/actions"

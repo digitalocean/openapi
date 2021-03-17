@@ -27,8 +27,8 @@ requestBody:
               - $ref: '../../shared/attributes/tags_array.yml'
               - description: >-
                   An array containing the names of the Tags to be removed from
-                  the firewall.	
-        
+                  the firewall.
+
         required:
           - tags
 
@@ -50,4 +50,9 @@ responses:
     $ref: '../../shared/responses/server_error.yml'
 
   default:
-    $ref: '../../shared/responses/unexpected_error.yml' 
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/delete_firewall_tags.yml'
+  - $ref: 'examples/go/delete_firewall_tags.yml'
+  - $ref: 'examples/ruby/delete_firewall_tags.yml'

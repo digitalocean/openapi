@@ -1,0 +1,21 @@
+lang: Go
+source: |-
+    import (
+      "context"
+      "github.com/digitalocean/godo"
+      )
+
+    func main() {
+      pat := "mytoken"
+
+      client := godo.NewFromToken(pat)
+      ctx := context.TODO()
+
+      createRequest := &godo.DomainCreateRequest{
+        Name:      "example.com",
+        IPAddress: "1.2.3.4",
+      }
+
+      domain, _, err := client.Domains.Create(ctx, createRequest)
+
+    }

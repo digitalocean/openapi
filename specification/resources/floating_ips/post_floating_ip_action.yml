@@ -50,3 +50,8 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/post_floating_ip_action.yml'
+  - $ref: 'examples/go/post_floating_ip_action.yml'
+  - $ref: 'examples/ruby/post_floating_ip_action.yml'
