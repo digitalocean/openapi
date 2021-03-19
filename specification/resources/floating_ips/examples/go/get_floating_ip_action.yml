@@ -2,13 +2,15 @@ lang: Go
 source: |-
   import (
       "context"
+      "os"
+
       "github.com/digitalocean/godo"
   )
 
   func main() {
-      pat := "mytoken"
+      token := os.Getenv("DIGITALOCEAN_TOKEN")
 
-      client := godo.NewFromToken(pat)
+      client := godo.NewFromToken(token)
       ctx := context.TODO()
 
       action, _, err := client.FloatingIPActions.Get(ctx, "45.55.96.47", 72531856)

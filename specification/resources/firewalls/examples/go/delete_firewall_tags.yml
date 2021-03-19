@@ -2,13 +2,15 @@ lang: Go
 source: |-
   import (
       "context"
+      "os"
+
       "github.com/digitalocean/godo"
   )
 
   func main() {
-      pat := "mytoken"
+      token := os.Getenv("DIGITALOCEAN_TOKEN")
 
-      client := godo.NewFromToken(pat)
+      client := godo.NewFromToken(token)
       ctx := context.TODO()
 
       _, err := client.Firewalls.RemoveTags(ctx, 'bb4b2611-3d72-467b-8602-280330ecd65c', 'frontend')

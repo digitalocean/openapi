@@ -2,13 +2,15 @@ lang: Go
 source: |-
   import (
       "context"
+      "os"
+
       "github.com/digitalocean/godo"
   )
 
   func main() {
-      pat := "mytoken"
+      token := os.Getenv("DIGITALOCEAN_TOKEN")
 
-      client := godo.NewFromToken(pat)
+      client := godo.NewFromToken(token)
       ctx := context.TODO()
 
       cert, _, err := client.Certificates.Get(ctx, "892071a0-bb95-49bc-8021-3afd67a210bf")

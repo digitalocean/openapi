@@ -1,7 +1,7 @@
 lang: Ruby
 source: |-
   require 'droplet_kit'
-  token = '16f79fc8cd5adcfe528a0994311fa63cc877737b385b6ff7d12ed6684ba4fef5'
+  token = ENV['DIGITALOCEAN_TOKEN']
   client = DropletKit::Client.new(access_token: token)
 
   client.firewalls.remove_droplets([49696269], id: 'bb4b2611-3d72-467b-8602-280330ecd65c')
