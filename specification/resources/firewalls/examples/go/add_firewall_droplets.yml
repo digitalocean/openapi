@@ -8,9 +8,9 @@ source: |-
   )
 
   func main() {
-      pat := os.Getenv("DIGITALOCEAN_TOKEN")
+      token := os.Getenv("DIGITALOCEAN_TOKEN")
 
-      client := godo.NewFromToken(pat)
+      client := godo.NewFromToken(token)
       ctx := context.TODO()
 
       _, err := client.Firewalls.AddDroplets(ctx, 'bb4b2611-3d72-467b-8602-280330ecd65c', 49696269) 
