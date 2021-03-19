@@ -8,9 +8,9 @@ source: |-
   )
 
   func main() {
-      pat := os.Getenv("DIGITALOCEAN_TOKEN")
+      token := os.Getenv("DIGITALOCEAN_TOKEN")
 
-      client := godo.NewFromToken(pat)
+      client := godo.NewFromToken(token)
       ctx := context.TODO()
 
       _, err := client.Storage.DeleteVolume(ctx, "7724db7c-e098-11e5-b522-000f53304e51")

@@ -8,22 +8,22 @@ source: |-
   )
 
   func main() {
-      pat := os.Getenv("DIGITALOCEAN_TOKEN")
+      token := os.Getenv("DIGITALOCEAN_TOKEN")
 
-      client := godo.NewFromToken(pat)
+      client := godo.NewFromToken(token)
       ctx := context.TODO()
 
-      key, err := ioutil.ReadFile("/path/to/privkey1.pem")
+      key, err := ioutil.ReadFile("/tokenh/to/privkey1.pem")
       if err != nil {
           fmt.Print(err)
       }
 
-      cert, err := ioutil.ReadFile("/path/to/cert1.pem")
+      cert, err := ioutil.ReadFile("/tokenh/to/cert1.pem")
       if err != nil {
           fmt.Print(err)
       }
 
-      chain, err := ioutil.ReadFile("/path/to/fullchain1.pem")
+      chain, err := ioutil.ReadFile("/tokenh/to/fullchain1.pem")
       if err != nil {
           fmt.Print(err)
       }

@@ -8,9 +8,9 @@ source: |-
   )
 
   func main() {
-      pat := os.Getenv("DIGITALOCEAN_TOKEN")
+      token := os.Getenv("DIGITALOCEAN_TOKEN")
 
-      client := godo.NewFromToken(pat)
+      client := godo.NewFromToken(token)
       ctx := context.TODO()
 
       action, _, err := client.DropletActions.Get(ctx, 3164450, 36804807)
