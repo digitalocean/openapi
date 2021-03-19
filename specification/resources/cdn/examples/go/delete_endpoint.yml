@@ -8,9 +8,9 @@ source: |-
   )
 
   func main() {
-      token := os.Getenv("DIGITALOCEAN_TOKEN")
+      pat := os.Getenv("DIGITALOCEAN_TOKEN")
 
-      client := godo.NewFromToken(token)
+      client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
       _, err := client.CDNs.Delete(ctx, "19f06b6a-3ace-4315-b086-499a0e521b76")

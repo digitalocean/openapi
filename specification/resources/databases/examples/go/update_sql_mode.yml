@@ -8,9 +8,9 @@ source: |-
   )
 
   func main() {
-      token := os.Getenv("DIGITALOCEAN_TOKEN")
+      pat := os.Getenv("DIGITALOCEAN_TOKEN")
 
-      client := godo.NewFromToken(token)
+      client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
       sqlMode := "ANSI,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE"

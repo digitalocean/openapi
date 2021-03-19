@@ -8,9 +8,9 @@ source: |-
   )
 
   func main() {
-      token := os.Getenv("DIGITALOCEAN_TOKEN")
+      pat := os.Getenv("DIGITALOCEAN_TOKEN")
 
-      client := godo.NewFromToken(token)
+      client := godo.NewFromToken(pat)
       ctx := context.TODO()
 
       createRequest := &godo.DomainRecordEditRequest{
