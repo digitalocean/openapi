@@ -31,7 +31,7 @@ vpc_updatable:
   properties:
     name:
       type: string
-      pattern: '^[a-zA-Z1-9\-\.]+$'
+      pattern: '^[a-zA-Z0-9\-\.]+$'
       example: env.prod-vpc
       description: The name of the VPC. Must be unique and may only contain
         alphanumeric characters, dashes, and periods.
