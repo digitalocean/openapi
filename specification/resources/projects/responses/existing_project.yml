@@ -15,7 +15,3 @@ content:
       properties:
         project:
           $ref: '../models/project.yml#/project'
-
-      required:
-      - name
-      - purpose
