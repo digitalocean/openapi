@@ -644,6 +644,10 @@ paths:
     post:
       $ref: 'resources/databases/add_connection_pool.yml'
 
+  /v2/databases/{database_cluster_uuid}/pools/{pool_name}:
+    get:
+      $ref: 'resources/databases/get_connection_pool.yml'
+
   /v2/databases/{database_cluster_uuid}/eviction_policy:
     get:
       $ref: 'resources/databases/get_eviction_policy.yml'

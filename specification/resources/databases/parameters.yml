@@ -43,3 +43,12 @@ tag_name:
   example: production
   schema:
     type: string
+
+pool_name:
+  in: path
+  name: pool_name
+  description: The name used to identify the connection pool.
+  required: true
+  example: backend-pool
+  schema:
+    type: string
