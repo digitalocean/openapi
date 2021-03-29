@@ -498,6 +498,10 @@ paths:
     get:
       $ref: 'resources/apps/get_tier.yml'
 
+  /v2/apps/propose:
+    post:
+      $ref: 'resources/apps/propose_app.yml'
+
   /v2/cdn/endpoints:
     get:
       $ref: 'resources/cdn/list_all_endpoints.yml'
@@ -573,6 +577,10 @@ paths:
   /v2/databases/{database_cluster_uuid}/migrate:
     put:
       $ref: 'resources/databases/migrate_database_cluster.yml'
+
+  /v2/databases/{database_cluster_uuid}/resize:
+    put:
+      $ref: 'resources/databases/resize_database_cluster.yml'
 
   /v2/databases/{database_cluster_uuid}/firewall:
     get:

@@ -5,9 +5,9 @@ apps:
         owner_uuid: ff36cbc6fd350fe12577f5123133bb5ba01a2419
         spec:
           name: sample-php
-          services: 
+          services:
             - name: sample-php
-              git: 
+              git:
                 repo_clone_url: https://github.com/digitalocean/sample-php.git
                 branch: main
               run_command: heroku-php-apache2
@@ -15,18 +15,18 @@ apps:
               instance_size_slug: basic-xxs
               instance_count: 1
               http_port: 8080
-              routes: 
+              routes:
                 - path: /
         default_ingress: https://sample-php-iaj87.ondigitalocean.app
         created_at: 2020-11-19T20:27:18Z
         updated_at: 2020-12-01T00:42:16Z
-        active_deployment: 
+        active_deployment:
           id: 3aa4d20e-5527-4c00-b496-601fbd22520a
-          spec: 
+          spec:
             name: sample-php
-            services: 
+            services:
               - name: sample-php
-                git: 
+                git:
                   repo_clone_url: https://github.com/digitalocean/sample-php.git
                   branch: main
                 run_command: heroku-php-apache2
@@ -34,30 +34,30 @@ apps:
                 instance_size_slug: basic-xxs
                 instance_count: 1
                 http_port: 8080
-                routes: 
+                routes:
                   - path: /
             region: fra
-          services: 
+          services:
             - name: sample-php
               source_commit_hash: 54d4a727f457231062439895000d45437c7bb405
           phase_last_updated_at: 2020-12-01T00:42:12Z
           created_at: 2020-12-01T00:40:05Z
           updated_at: 2020-12-01T00:42:12Z
         cause: app spec updated
-        progress: 
+        progress:
           success_steps: 6
           total_steps: 6
-          steps: 
+          steps:
             - name: build
               status: SUCCESS
-              steps: 
+              steps:
               - name: initialize
                 status: SUCCESS
                 started_at: 2020-12-01T00:40:11.979305214Z
                 ended_at: 2020-12-01T00:40:12.470972033Z
               - name: components
                 status: SUCCESS
-                steps: 
+                steps:
                 - name: sample-php
                   status: SUCCESS
                   started_at: 0001-01-01T00:00:00Z
@@ -72,12 +72,12 @@ apps:
           tier_slug: basic
         last_deployment_created_at: 2020-12-01T00:40:05Z
         live_url: https://sample-php-iaj87.ondigitalocean.app
-        region: 
+        region:
           slug: fra
           label: Frankfurt
           flag: germany
           continent: Europe
-          data_centers: 
+          data_centers:
           - fra1
         tier_slug: basic
         live_url_base: https://sample-php-iaj87.ondigitalocean.app
@@ -196,7 +196,7 @@ app:
       tier_slug: basic
       live_url_base: https://sample-golang-zyhgn.ondigitalocean.app
       live_domain: sample-golang-zyhgn.ondigitalocean.app
-  
+
 deployments:
   value:
     deployments:
@@ -204,7 +204,7 @@ deployments:
         spec:
           name: sample-golang
           services:
-            - name: web 
+            - name: web
               github:
                 repo: digitalocean/sample-golang
                 branch: branch
@@ -270,7 +270,7 @@ deployment:
       spec:
         name: sample-golang
         services:
-          - name: web 
+          - name: web
             github:
               repo: digitalocean/sample-golang
               branch: branch
@@ -352,7 +352,7 @@ logs:
   value:
     live_url: https://logs-example/build.log
     url: https://logs/build.log
-    historic_logs: 
+    historic_logs:
       - https://logs-example/archive/build.log
 
 regions:
@@ -400,7 +400,7 @@ components:
       - build_command: makeFile build
         dockerfiles:
           - path/to/dockerfiles
-        environment_slug: s-1vcpu-1gb 
+        environment_slug: s-1vcpu-1gb
         http_ports:
           - 1202
     template:
@@ -434,4 +434,25 @@ detect:
     template_found: true
     template_valid: true
 
-
+propose:
+  value:
+    app_name_available: true
+    existing_static_apps: '2'
+    max_free_static_apps: '3'
+    spec:
+      name: sample-golang
+      services:
+      - name: web
+        github:
+          repo: digitalocean/sample-golang
+          branch: branch
+        run_command: bin/sample-golang
+        environment_slug: go
+        instance_size_slug: basic-xxs
+        instance_count: 1
+        http_port: 8080
+        routes:
+        - path: "/"
+      region: ams
+    app_cost: 5
+    app_tier_upgrade_cost: 17

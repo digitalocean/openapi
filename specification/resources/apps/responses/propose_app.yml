@@ -1,0 +1,17 @@
+description: A JSON of a `spec` object.
+
+content:
+  application/json:
+    schema:
+      $ref: ../models/app_propose.yml
+    examples:
+      app:
+        $ref: examples.yml#/propose
+
+headers:
+  ratelimit-limit:
+    $ref: ../../../shared/headers.yml#/ratelimit-limit
+  ratelimit-remaining:
+    $ref: ../../../shared/headers.yml#/ratelimit-remaining
+  ratelimit-reset:
+    $ref: ../../../shared/headers.yml#/ratelimit-reset
