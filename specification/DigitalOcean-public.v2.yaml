@@ -509,6 +509,8 @@ paths:
     get:
       $ref: 'resources/cdn/get_endpoint.yml'
 
+    put:
+      $ref: 'resources/cdn/update_endpoint.yml'
     delete:
       $ref: 'resources/cdn/delete_endpoint.yml'
 
