@@ -571,7 +571,7 @@ paths:
       $ref: 'resources/databases/create_database_cluster.yml'
     delete:
       $ref: 'resources/databases/destroy_cluster.yml'
-      
+
   /v2/databases/{database_cluster_uuid}:
     get:
       $ref: 'resources/databases/get_database_cluster.yml'
@@ -637,6 +637,10 @@ paths:
       $ref: 'resources/databases/get_database.yml'
     delete:
       $ref: 'resources/databases/delete_database.yml'
+
+  /v2/databases/{database_cluster_uuid}/pools:
+    post:
+      $ref: 'resources/databases/add_connection_pool.yml'
 
   /v2/databases/{database_cluster_uuid}/eviction_policy:
     get:
