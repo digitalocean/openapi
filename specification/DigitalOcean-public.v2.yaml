@@ -569,7 +569,9 @@ paths:
       $ref: 'resources/databases/list_database_clusters.yml'
     post:
       $ref: 'resources/databases/create_database_cluster.yml'
-
+    delete:
+      $ref: 'resources/databases/destroy_cluster.yml'
+      
   /v2/databases/{database_cluster_uuid}:
     get:
       $ref: 'resources/databases/get_database_cluster.yml'
