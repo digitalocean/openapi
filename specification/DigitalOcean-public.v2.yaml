@@ -639,6 +639,8 @@ paths:
       $ref: 'resources/databases/delete_database.yml'
 
   /v2/databases/{database_cluster_uuid}/pools:
+    get:
+      $ref: 'resources/databases/list_connection_pools.yml'
     post:
       $ref: 'resources/databases/add_connection_pool.yml'
 
