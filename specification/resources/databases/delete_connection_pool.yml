@@ -1,0 +1,36 @@
+operationId: delete_connection_pool
+
+summary: Delete a Connection Pool (PostgreSQL)
+
+description: |
+  To delete a specific connection pool for a PostgreSQL database cluster, send
+  a DELETE request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`.
+
+  A status of 204 will be given. This indicates that the request was processed
+  successfully, but that no response body is needed.
+tags:
+  - Databases
+
+parameters:
+  - $ref: 'parameters.yml#/database_cluster_uuid'
+  - $ref: 'parameters.yml#/pool_name'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/delete_connection_pool.yml'
+  - $ref: 'examples/go/delete_connection_pool.yml'
