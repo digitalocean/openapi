@@ -582,6 +582,10 @@ paths:
     put:
       $ref: 'resources/databases/start_online_migration.yml'
 
+  /v2/databases/{database_cluster_uuid}/online-migration/{online_migration_id}:
+    delete:
+      $ref: 'resources/databases/stop_online_migration.yml'
+
   /v2/databases/{database_cluster_uuid}/migrate:
     put:
       $ref: 'resources/databases/migrate_database_cluster.yml'
