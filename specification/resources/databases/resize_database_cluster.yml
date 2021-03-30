@@ -1,4 +1,4 @@
-operationId: resize_database_cluster
+operationId: update_database_cluster_size
 
 summary: Resize a Database Cluster
 

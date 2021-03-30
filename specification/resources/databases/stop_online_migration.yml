@@ -1,4 +1,4 @@
-operationId: stop_online_migration
+operationId: delete_online_migration
 
 summary: Stop an Online Migration
 

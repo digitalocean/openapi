@@ -515,6 +515,7 @@ paths:
 
     put:
       $ref: 'resources/cdn/update_endpoint.yml'
+
     delete:
       $ref: 'resources/cdn/delete_endpoint.yml'
 
@@ -582,7 +583,7 @@ paths:
     put:
       $ref: 'resources/databases/start_online_migration.yml'
 
-  /v2/databases/{database_cluster_uuid}/online-migration/{online_migration_id}:
+  /v2/databases/{database_cluster_uuid}/online-migration/{migration_id}:
     delete:
       $ref: 'resources/databases/stop_online_migration.yml'
 

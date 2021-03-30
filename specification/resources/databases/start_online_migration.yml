@@ -1,4 +1,4 @@
-operationId: start_online_migration
+operationId: create_online_migration
 
 summary: Start an Online Migration
 
