@@ -1,4 +1,4 @@
-operationId: propose_app
+operationId: validate_app_spec
 
 summary: Propose an App Spec
 
@@ -16,7 +16,7 @@ requestBody:
     application/json:
       schema:
         $ref: models/apps_create_app_request.yml
-      example: >-
+      example:
         spec:
           name: web-app
           region: nyc
