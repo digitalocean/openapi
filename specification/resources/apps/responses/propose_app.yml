@@ -1,9 +1,9 @@
-description: A JSON of a `spec` object.
+description: A JSON object.
 
 content:
   application/json:
     schema:
-      $ref: ../models/app_propose.yml
+      $ref: ../models/app_propose_response.yml
     examples:
       app:
         $ref: examples.yml#/propose

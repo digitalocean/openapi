@@ -15,7 +15,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: models/apps_create_app_request.yml
+        $ref: models/app_propose.yml
       example:
         spec:
           name: web-app
@@ -32,6 +32,7 @@ requestBody:
               instance_size_slug: basic-xxs
               routes:
                 - path: /api
+        app_id: b6bdf840-2854-4f87-a36c-5f231c617c84
   required: true
 
 responses:
