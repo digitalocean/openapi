@@ -5,7 +5,7 @@ content:
     schema:
       $ref: ../models/app_propose_response.yml
     examples:
-      app:
+      propose:
         $ref: examples.yml#/propose
 
 headers:
