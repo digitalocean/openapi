@@ -16,7 +16,7 @@ requestBody:
     application/json:
       schema:
         $ref: models/apps_create_app_request.yml
-      example:
+      example: >-
         spec:
           name: web-app
           region: nyc
