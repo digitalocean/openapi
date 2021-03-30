@@ -13,6 +13,7 @@ properties:
   app_name_suggestion:
     type: string
     description: The suggested name if the proposed app name is unavailable.
+    example: newName
 
   existing_static_apps:
     type: string
