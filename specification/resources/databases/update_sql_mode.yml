@@ -1,6 +1,6 @@
 operationId: update_sql_mode
 
-summary: Configure the Eviction Policy for a Redis Cluster
+summary: Update SQL Mode for a Cluster
 
 description: >-
   To configure the SQL modes for an existing MySQL cluster, send a PUT

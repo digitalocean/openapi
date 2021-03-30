@@ -498,6 +498,10 @@ paths:
     get:
       $ref: 'resources/apps/get_tier.yml'
 
+  /v2/apps/propose:
+    post:
+      $ref: 'resources/apps/propose_app.yml'
+
   /v2/cdn/endpoints:
     get:
       $ref: 'resources/cdn/list_all_endpoints.yml'
@@ -508,6 +512,9 @@ paths:
   /v2/cdn/endpoints/{cdn_id}:
     get:
       $ref: 'resources/cdn/get_endpoint.yml'
+
+    put:
+      $ref: 'resources/cdn/update_endpoint.yml'
 
     delete:
       $ref: 'resources/cdn/delete_endpoint.yml'
@@ -567,10 +574,26 @@ paths:
   /v2/databases/{database_cluster_uuid}:
     get:
       $ref: 'resources/databases/get_database_cluster.yml'
+    delete:
+      $ref: 'resources/databases/destroy_cluster.yml'
+      
+  /v2/databases/{database_cluster_uuid}/online-migration:
+    get:
+      $ref: 'resources/databases/get_migration_status.yml'
+    put:
+      $ref: 'resources/databases/start_online_migration.yml'
+
+  /v2/databases/{database_cluster_uuid}/online-migration/{migration_id}:
+    delete:
+      $ref: 'resources/databases/stop_online_migration.yml'
 
   /v2/databases/{database_cluster_uuid}/migrate:
     put:
       $ref: 'resources/databases/migrate_database_cluster.yml'
+
+  /v2/databases/{database_cluster_uuid}/resize:
+    put:
+      $ref: 'resources/databases/resize_database_cluster.yml'
 
   /v2/databases/{database_cluster_uuid}/firewall:
     get:
@@ -625,6 +648,18 @@ paths:
       $ref: 'resources/databases/get_database.yml'
     delete:
       $ref: 'resources/databases/delete_database.yml'
+
+  /v2/databases/{database_cluster_uuid}/pools:
+    get:
+      $ref: 'resources/databases/list_connection_pools.yml'
+    post:
+      $ref: 'resources/databases/add_connection_pool.yml'
+
+  /v2/databases/{database_cluster_uuid}/pools/{pool_name}:
+    get:
+      $ref: 'resources/databases/get_connection_pool.yml'
+    delete:
+      $ref: 'resources/databases/delete_connection_pool.yml'
 
   /v2/databases/{database_cluster_uuid}/eviction_policy:
     get:
