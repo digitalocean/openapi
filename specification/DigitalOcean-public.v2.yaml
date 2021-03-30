@@ -576,6 +576,12 @@ paths:
     get:
       $ref: 'resources/databases/get_database_cluster.yml'
 
+  /v2/databases/{database_cluster_uuid}/online-migration:
+    get:
+      $ref: 'resources/databases/get_migration_status.yml'
+    put:
+      $ref: 'resources/databases/start_online_migration.yml'
+
   /v2/databases/{database_cluster_uuid}/migrate:
     put:
       $ref: 'resources/databases/migrate_database_cluster.yml'

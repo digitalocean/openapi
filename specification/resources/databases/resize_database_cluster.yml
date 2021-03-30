@@ -15,6 +15,9 @@ description: >-
 tags:
   - Databases
 
+parameters:
+  - $ref: 'parameters.yml#/database_cluster_uuid'
+
 requestBody:
   required: true
 

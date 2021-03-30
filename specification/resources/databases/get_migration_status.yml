@@ -1,0 +1,33 @@
+operationId: get_migration_status
+
+summary: Retrieve the Status of an Online Migration
+
+description: >-
+  To retrieve the status of an online migration, send a GET request to
+  `/v2/databases/$DATABASE_ID/online-migration`. If a migration has completed,
+  a 200 OK status is returned with no response body.
+
+tags:
+  - Databases
+
+parameters:
+  - $ref: 'parameters.yml#/database_cluster_uuid'
+
+responses:
+  '200':
+    $ref: 'responses/online_migration.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/get_migration_status.yml'
