@@ -20,7 +20,7 @@ properties:
     type: string
     description: The maximum number of free static apps the account can have.
       We will charge you for any additional static apps.
-    example: 2
+    example: '2'
 
   spec:
     $ref: app_spec.yml
