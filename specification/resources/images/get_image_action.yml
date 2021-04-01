@@ -1,6 +1,6 @@
 operationId: get_image_action
 
-summary: Retreive an Existing Action
+summary: Retrieve an Existing Action
 
 description: >-
   To retrieve the status of an image action, send a GET request to

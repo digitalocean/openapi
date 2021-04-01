@@ -4,7 +4,7 @@ summary: Update a Firewall
 
 description: |
   To update the configuration of an existing firewall, send a PUT request to
-  `/v2/firewalls/$FIREWALL_ID`. The requestshould contain a full representation
+  `/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation
   of the firewall including existing attributes. **Note that any attributes that
   are not provided will be reset to their default values.**
 
