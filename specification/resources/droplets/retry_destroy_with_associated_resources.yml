@@ -31,6 +31,9 @@ responses:
   '409':
     $ref: '../../shared/responses/conflict.yml'
 
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
   '500':
     $ref: '../../shared/responses/server_error.yml'
 
