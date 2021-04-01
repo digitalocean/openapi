@@ -11,3 +11,5 @@ tests/postman.json
 tests/postman-temp.json
 *.swp
 *.swo
+python-cg/
+resolved.yaml

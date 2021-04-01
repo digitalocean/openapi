@@ -410,30 +410,6 @@ components:
     template_found: true
     template_valid: true
 
-detect:
-  value:
-    components:
-      - strategy: BUILDPACK
-        types:
-        - service
-        - static_site
-        - worker
-        - job
-        run_command: bin/sample-golang
-        environment_slug: go
-    template:
-      spec:
-        name: sample-golang
-        services:
-          - name: web
-            git:
-              repo_clone_url: https://github.com/digitalocean/sample-golang.git
-              branch: main
-            instance_count: 1
-            instance_size_slug: basic-xxs
-    template_found: true
-    template_valid: true
-
 propose:
   value:
     app_name_available: true
