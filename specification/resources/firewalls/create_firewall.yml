@@ -57,6 +57,9 @@ responses:
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
 
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
   '500':
     $ref: '../../shared/responses/server_error.yml'
 
