@@ -1,12 +1,8 @@
 properties:
-  image:
-    title: The image that this worker uses
-    type: string
-    example: Ubuntu
   name:
     title: The name of this worker
     type: string
-    example: worker
+    example: queue-runner
   source_commit_hash:
     title: The commit hash of the repository that was used to build this worker
     type: string
