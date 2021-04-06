@@ -1,12 +1,8 @@
 properties:
-  image:
-    title: The image that this job uses
-    type: string
-    example: Ubuntu
   name:
     title: The name of this job
     type: string
-    example: Clean Old Droplets
+    example: migrate-db
   source_commit_hash:
     title: The commit hash of the repository that was used to build this job
     type: string

@@ -29,6 +29,9 @@ responses:
   '412':
     $ref: 'responses/precondition_failed.yml'
 
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
   '500':
     $ref: '../../shared/responses/server_error.yml'
 

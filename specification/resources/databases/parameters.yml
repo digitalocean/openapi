@@ -43,3 +43,21 @@ tag_name:
   example: production
   schema:
     type: string
+
+pool_name:
+  in: path
+  name: pool_name
+  description: The name used to identify the connection pool.
+  required: true
+  example: backend-pool
+  schema:
+    type: string
+
+migration_id:
+  in: path
+  name: migration_id
+  description: A unique identifier assigned to the online migration.
+  required: true
+  example: 77b28fc8-19ff-11eb-8c9c-c68e24557488
+  schema:
+    type: string

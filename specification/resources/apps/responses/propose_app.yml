@@ -1,12 +1,12 @@
-description: A JSON with supported apps and templates.
+description: A JSON object.
 
 content:
   application/json:
     schema:
-      $ref: ../models/apps_detect_response.yml
+      $ref: ../models/app_propose_response.yml
     examples:
-      components:
-        $ref: examples.yml#/detect
+      propose:
+        $ref: examples.yml#/propose
 
 headers:
   ratelimit-limit:

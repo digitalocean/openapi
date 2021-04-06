@@ -81,6 +81,24 @@ rules:
       - field: '401'
         function: truthy
 
+  common-responses-not-found:
+    description: Responses should contain common response - 404 (not found)
+    message: "{{description}}. Missing {{property}}"
+    severity: error
+    given: $.paths[?(@property.match(/.*\/{.*}.*/))]..responses
+    then:
+      - field: '404'
+        function: truthy
+
+  common-responses-too-many-requests:
+    description: Responses should contain common response - 429 (too many requests)
+    message: "{{description}}. Missing {{property}}"
+    severity: error
+    given: $.paths..responses
+    then:
+      - field: '429'
+        function: truthy
+
   common-responses-server-error:
     description: Responses should contain common response - 500 (server error)
     message: "{{description}}. Missing {{property}}"

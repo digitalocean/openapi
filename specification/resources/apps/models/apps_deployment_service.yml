@@ -1,12 +1,8 @@
 properties:
-  image:
-    title: The image that this service uses
-    type: string
-    example: Ubuntu
   name:
     title: The name of this service
     type: string
-    example: Service Name
+    example: web
   source_commit_hash:
     title: The commit hash of the repository that was used to build this service
     type: string
