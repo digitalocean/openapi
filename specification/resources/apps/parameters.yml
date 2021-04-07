@@ -68,6 +68,7 @@ log_type:
     - RUN: Live run-time logs
   in: query
   name: type
+  required: true
   schema:
     default: UNSPECIFIED
     enum:
