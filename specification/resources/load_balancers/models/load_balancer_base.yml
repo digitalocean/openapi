@@ -30,7 +30,10 @@ properties:
     - lb-large
     default: lb-small
     example: lb-small
-    description: The size of the load balancer. The available sizes are `lb-small`, `lb-medium`, or `lb-large`. Once you have created a load balancer, you can't change its size.
+    description: The size of the load balancer. The available sizes are
+      `lb-small`, `lb-medium`, or `lb-large`. You can resize load balancers up
+      to once per hour. You cannot resize a load balancer within the first hour
+      of its creation. 
 
   algorithm:
     type: string

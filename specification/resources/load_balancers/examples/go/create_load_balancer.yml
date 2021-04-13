@@ -15,6 +15,7 @@ source: |-
 
       createRequest := &godo.LoadBalancerRequest{
           Name:      "example-01",
+          Size:      "lb-medium",
           Algorithm: "round_robin",
           Region:    "nyc3",
           ForwardingRules: []godo.ForwardingRule{
