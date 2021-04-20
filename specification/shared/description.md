@@ -1,4 +1,5 @@
 # Introduction
+
 The DigitalOcean API allows you to manage Droplets and resources within the
 DigitalOcean cloud in a simple, programmatic way using conventional HTTP requests.
 
