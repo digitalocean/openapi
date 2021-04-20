@@ -7,7 +7,7 @@ description: >-
   `/v2/customers/my/balance`.
 
 tags:
-  - Balance
+  - Billing
 
 responses:
   '200':

@@ -7,7 +7,7 @@ description: >-
   `/v2/customers/my/invoices/$INVOICE_UUID/pdf`.
 
 tags:
-  - Invoices
+  - Billing
 
 parameters:
   - $ref: 'parameters.yml#/invoice_uuid'
