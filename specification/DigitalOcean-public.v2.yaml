@@ -4,7 +4,7 @@ info:
   title: DigitalOcean API
   version: '2.0'
   description:
-    $ref: 'shared/description.md'
+    $ref: 'description.md'
 
   license:
     name: Apache 2.0
