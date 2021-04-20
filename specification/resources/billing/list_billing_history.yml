@@ -7,7 +7,7 @@ description: >-
   `/v2/customers/my/billing_history`.
 
 tags:
-  - Billing History
+  - Billing
 
 responses:
   '200':

@@ -58,7 +58,7 @@ tags:
       By sending requests to the `/v2/customers/my/balance` endpoint, you can
       retrieve the balance information for the requested customer account.
 
-  - name: Billing History
+  - name: Billing
     description: >-
       Billing history is a record of billing events for your account.
       For example, entries may include events like payments made, invoices
@@ -572,7 +572,7 @@ paths:
       $ref: 'resources/databases/get_database_cluster.yml'
     delete:
       $ref: 'resources/databases/destroy_cluster.yml'
-      
+
   /v2/databases/{database_cluster_uuid}/online-migration:
     get:
       $ref: 'resources/databases/get_migration_status.yml'
