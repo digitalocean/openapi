@@ -29,7 +29,8 @@ properties:
     type: integer
     example: 3600
     description: The amount of time the content is cached by the CDN's edge
-      servers in seconds.
+      servers in seconds. TTL must be one of 60, 600, 3600, 86400, or 604800.
+      Defaults to 3600 (one hour) when excluded.
 
   certificate_id:
     type: string
