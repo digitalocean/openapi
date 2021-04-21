@@ -53,20 +53,29 @@ tags:
       For documentation on app specifications (`AppSpec` objects), please refer to the
       [product documentation](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/).
 
-  - name: Balance
+  - name: Billing
     description: >-
-      By sending requests to the `/v2/customers/my/balance` endpoint, you can
-      retrieve the balance information for the requested customer account.
+      The billing endpoints allow you to retrieve your account balance, invoices
+      and billing history.  
 
-  - name: Billing History
-    description: >-
-      Billing history is a record of billing events for your account.
+
+      **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
+      retrieve the balance information for the requested customer account.  
+
+
+      **Invoices:** [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/)
+      are generated on the first of each month for every DigitalOcean
+      customer. An invoice preview is generated daily, which can be accessed
+      with the `preview` keyword in place of `$INVOICE_UUID`. To interact with 
+      invoices, you will generally send requests to the invoices endpoint at
+      `/v2/customers/my/invoices`.  
+
+
+      **Billing History:** Billing history is a record of billing events for your account.
       For example, entries may include events like payments made, invoices
-      issued, or credits granted.
-
-      To interact with the billing history for an account, you will generally
-      send requests to the billing history endpoint at
-      `/v2/customers/my/billing_history`.
+      issued, or credits granted. To interact with invoices, you
+      will generally send requests to the invoices endpoint at
+      `/v2/customers/my/billing_history`.  
 
   - name: Block Storage
     description: >-
@@ -280,16 +289,6 @@ tags:
 
       To interact with images, you will generally send requests to the images
       endpoint at /v2/images.
-
-  - name: Invoices
-    description: >-
-      [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/)
-      are generated on the first of each month for every DigitalOcean
-      customer. An invoice preview is generated daily, which can be accessed
-      with the `preview` keyword in place of `$INVOICE_UUID`.
-
-      To interact with invoices, you will generally send requests to the
-      invoices endpoint at `/v2/customers/my/invoices`.
 
   - name: Kubernetes
     description: >-

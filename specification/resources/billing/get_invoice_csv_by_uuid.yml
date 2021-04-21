@@ -7,7 +7,7 @@ description: >-
   `/v2/customers/my/invoices/$INVOICE_UUID/csv`.
 
 tags:
-  - Invoices
+  - Billing
 
 parameters:
   - $ref: 'parameters.yml#/invoice_uuid'
@@ -32,4 +32,4 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_invoice_csv_by_uuid.yml' 
+  - $ref: 'examples/curl/get_invoice_csv_by_uuid.yml'
