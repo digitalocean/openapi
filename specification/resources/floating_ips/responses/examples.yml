@@ -142,6 +142,7 @@ floating_ip_assigned:
         image:
           id: 63663980
           name: 20.04 (LTS) x64
+          type: base
           distribution: Ubuntu
           slug: ubuntu-20-04-x64
           public: true
@@ -212,7 +213,6 @@ floating_ip_assigned:
           name: New York 3
           slug: nyc3
           features:
-              - private_networking
               - backups
               - ipv6
               - metadata
@@ -243,7 +243,6 @@ floating_ip_assigned:
         name: New York 3
         slug: nyc3
         features:
-        - private_networking
         - backups
         - ipv6
         - metadata
