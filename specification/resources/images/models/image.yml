@@ -66,11 +66,13 @@ properties:
     description: >-
       The minimum disk size in GB required for a Droplet to use this image.
     example: 20
+    nullable: true
     minimum: 0
 
   size_gigabytes:
     type: number
     format: float
+    nullable: true
     description: >-
       The size of the image in gigabytes.
     example: 2.34
