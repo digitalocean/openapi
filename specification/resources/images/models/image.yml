@@ -90,6 +90,7 @@ properties:
        `available`, `pending`, `deleted`, or `retired`.
     enum:
       - NEW
+      - new
       - available
       - pending
       - deleted
