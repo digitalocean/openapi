@@ -12,6 +12,7 @@ properties:
     type: array
     items:
       type: integer
+    nullable: true
     description: >-
       An array containing the IDs of the Droplets the volume is attached to.
       Note that at this time, a volume can only be attached to a single Droplet.
