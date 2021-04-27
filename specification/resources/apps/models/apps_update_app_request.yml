@@ -1,11 +1,6 @@
+type: object
 properties:
-  id:
-    title: The ID of the app
-    type: string
-    example: 4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf
   spec:
     $ref: app_spec.yml
 required:
-- id
 - spec
-type: object
