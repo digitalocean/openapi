@@ -8,7 +8,7 @@ allOf:
           A unique ID that can be used to identify and reference a firewall.
         readOnly: true
         example: bb4b2611-3d72-467b-8602-280330ecd65c
-      
+
       status:
         type: string
         description: >-
@@ -20,7 +20,7 @@ allOf:
           - failed
         readOnly: true
         example: waiting
-      
+
       created_at:
         type: string
         format: date-time
@@ -29,7 +29,7 @@ allOf:
           represents when the firewall was created.
         readOnly: true
         example: '2020-05-23T21:24:00Z'
-      
+
       pending_changes:
         type: array
         description: >-
@@ -43,20 +43,20 @@ allOf:
             droplet_id:
               type: integer
               example: 8043964
-            
+
             removing:
               type: boolean
               example: false
-            
+
             status:
               type: string
               example: waiting
         readOnly: true
-        example: 
+        example:
           - droplet_id: 8043964
             removing: false
             status: waiting
-      
+
       name:
         type: string
         description: >-
@@ -65,21 +65,22 @@ allOf:
           characters, a period (.), or a dash (-).
         pattern: '^[a-zA-Z0-9][a-zA-Z0-9\.-]+$'
         example: firewall
-      
+
       droplet_ids:
         type: array
         description: >-
           An array containing the IDs of the Droplets assigned to the firewall.
-        items: 
+        nullable: true
+        items:
           type: integer
-        example: 
+        example:
           - 8043964
-      
+
       tags:
         allOf:
           - $ref: '../../../shared/attributes/tags_array.yml'
           - description: >-
               An array containing the names of the Tags assigned to the firewall.
             example: gateway
-  
+
   - $ref: 'firewall_rule.yml#/firewall_rules'
