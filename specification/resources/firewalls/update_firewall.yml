@@ -56,7 +56,7 @@ requestBody:
           - frontend
 
 responses:
-  '202':
+  '200':
     $ref: 'responses/put_firewall_response.yml'
 
   '401':
