@@ -19,7 +19,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/registry.yml'
+        $ref: 'models/validate_registry.yml'
 
 responses:
   '204':

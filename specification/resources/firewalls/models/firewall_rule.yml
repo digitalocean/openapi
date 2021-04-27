@@ -1,6 +1,6 @@
 firewall_rule_base:
   type: object
-  
+
   properties:
     protocol:
       type: string
@@ -21,7 +21,7 @@ firewall_rule_base:
         ports are open for a protocol. For ICMP rules this parameter will always
         return "0".
       example: '8000'
-  
+
   required:
     - protocol
     - ports
@@ -33,39 +33,39 @@ firewall_rule_target:
   properties:
     addresses:
       type: array
-      items: 
+      items:
         type: string
-      description: >- 
+      description: >-
         An array of strings containing the IPv4 addresses, IPv6 addresses, IPv4
         CIDRs, and/or IPv6 CIDRs to which the firewall will allow traffic.
-      example: 
+      example:
         - '1.2.3.4'
         - '18.0.0.0/8'
 
     droplet_ids:
       type: array
-      items: 
+      items:
         type: integer
-      description: >- 
+      description: >-
         An array containing the IDs of the Droplets to which the firewall will
         allow traffic.
-      example: 
+      example:
         - 8043964
 
     load_balancer_uids:
       type: array
-      items: 
+      items:
         type: string
-      description: >- 
+      description: >-
         An array containing the IDs of the load balancers to which the firewall
         will allow traffic.
       example:
         - 4de7ac8b-495b-4884-9a69-1050c6793cd6
 
     tags:
-      allOf: 
+      allOf:
         - $ref: '../../../shared/attributes/tags_array.yml'
-        - description: >- 
+        - description: >-
             An array containing the names of Tags corresponding to groups of
             Droplets to which the firewall will allow traffic.
           example:
@@ -73,9 +73,10 @@ firewall_rule_target:
 
 firewall_rules:
   type: object
-  
+
   properties:
     inbound_rules:
+      nullable: true
       type: array
       items:
         allOf:
@@ -91,15 +92,16 @@ firewall_rules:
               - sources
 
     outbound_rules:
+      nullable: true
       type: array
       items:
         allOf:
           - $ref: '#/firewall_rule_base'
-          - properties: 
+          - properties:
               destinations:
                 allOf:
                   - $ref: '#/firewall_rule_target'
-                  - description: >- 
+                  - description: >-
                       An object specifying locations to which outbound
                       traffic that will be allowed.
             required:
