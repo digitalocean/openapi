@@ -20,6 +20,6 @@ image_action_transfer:
     properties:
       region:
         $ref: '../../../shared/attributes/region_slug.yml'
-  required:
-  - region
-  - type
+    required:
+    - type
+    - region
