@@ -7,7 +7,7 @@ description: >-
   `/v2/customers/my/invoices`.
 
 tags:
-  - Invoices
+  - Billing
 
 responses:
   '200':
