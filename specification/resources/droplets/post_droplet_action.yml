@@ -40,7 +40,7 @@ requestBody:
   content:
     application/json:
       schema:
-        oneOf:
+        anyOf:
           - $ref: 'models/droplet_actions.yml#/droplet_action_type'
           - $ref: 'models/droplet_actions.yml#/droplet_action_restore'
           - $ref: 'models/droplet_actions.yml#/droplet_action_resize'

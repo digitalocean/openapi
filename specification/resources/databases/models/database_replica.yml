@@ -30,6 +30,7 @@ properties:
       - online
       - resizing
       - migrating
+      - forking
     example: creating
     description: A string representing the current status of the database cluster.
     readOnly: true

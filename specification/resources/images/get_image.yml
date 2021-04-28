@@ -21,7 +21,7 @@ parameters:
       **Private** images *must* be identified by image `id`.
     required: true
     schema:
-      oneOf:
+      anyOf:
         - type: integer
         - type: string
     examples:

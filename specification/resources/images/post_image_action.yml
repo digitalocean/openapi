@@ -27,7 +27,7 @@ requestBody:
   content:
     application/json:
       schema:
-        oneOf:
+        anyOf:
           - $ref: 'models/image_action.yml#/image_action_base'
           - $ref: 'models/image_action.yml#/image_action_transfer'
         discriminator:
