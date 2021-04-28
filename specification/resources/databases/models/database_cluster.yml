@@ -58,7 +58,7 @@ properties:
     readOnly: true
   private_network_uuid:
     type: string
-    format: uuid
+    pattern: '^$|[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}'
     example: d455e75d-4858-4eec-8c95-da2f0a5f93a7
     description: >-
       A string specifying the UUID of the VPC to which the database cluster will be
