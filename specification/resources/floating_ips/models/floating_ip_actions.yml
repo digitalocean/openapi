@@ -1,31 +1,34 @@
 floating_ip_action_type:
   type: object
   required:
-    - type
+  - type
   properties:
     type:
       type: string
+      enum:
+      - assign
+      - unassign
       description: The type of action to initiate for the floating IP.
   discriminator:
     propertyName: type
     mapping:
-      ASSIGN: '#/floating_ip_action_unassign'
-      UNASSIGN: '#/floating_ip_action_assign'
+      assign: '#/floating_ip_action_assign'
+      unassign: '#/floating_ip_action_unassign'
 
 floating_ip_action_unassign:
   allOf:
     - $ref: '#/floating_ip_action_type'
     - type: object
       required:
-        - type
+      - type
 
 floating_ip_action_assign:
   allOf:
     - $ref: '#/floating_ip_action_type'
     - type: object
       required:
-        - type
-        - droplet_id
+      - type
+      - droplet_id
       properties:
         droplet_id:
           type: integer
