@@ -16,7 +16,7 @@ properties:
 
   ip:
     type: string
-    format: ipv4
+    pattern: '^$|^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
     readOnly: true
     example: '104.131.186.241'
     description: An attribute containing the public-facing IP address of the
@@ -33,7 +33,7 @@ properties:
     description: The size of the load balancer. The available sizes are
       `lb-small`, `lb-medium`, or `lb-large`. You can resize load balancers
       after creation up to once per hour. You cannot resize a load balancer
-      within the first hour of its creation. 
+      within the first hour of its creation.
 
   algorithm:
     type: string
