@@ -292,7 +292,7 @@ introduction: |
   #### Set and Export your OAuth Token
 
   ```
-  export TOKEN=your_token_here
+  export DIGITALOCEAN_TOKEN=your_token_here
   ```
 
   #### Set and Export a Variable
@@ -329,7 +329,7 @@ introduction: |
   #### Authenticate with a Bearer Authorization Header
 
   ```
-  curl -X $HTTP_METHOD -H "Authorization: Bearer $TOKEN" "https://api.digitalocean.com/v2/$OBJECT"
+  curl -X $HTTP_METHOD -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/$OBJECT"
   ```
 
   ### Parameters
