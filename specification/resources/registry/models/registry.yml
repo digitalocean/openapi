@@ -10,17 +10,6 @@ properties:
       lowercase and be composed only of numbers, letters and `-`, up to a limit
       of 63 characters.
 
-  subscription_tier_slug:
-    type: string
-    writeOnly: true
-    enum:
-    - starter
-    - basic
-    - professional
-    example: basic
-    description: The slug of the subscription tier to sign up for. Valid values
-      can be retrieved using the options endpoint.
-
   created_at:
     type: string
     format: date-time
@@ -48,7 +37,3 @@ properties:
     allOf:
     - readOnly: true
     - $ref: 'subscription.yml'
-
-required:
-- name
-- subscription_tier_slug
