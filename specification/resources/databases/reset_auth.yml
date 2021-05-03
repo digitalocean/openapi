@@ -1,6 +1,6 @@
 operationId: reset_auth
 
-summary: Reset a Database User's MySQL Authentication Method
+summary: Reset a Database User's Password or Authentication Method
 
 description: |
   To reset the MySQL authentication method for a user, send a POST request to
