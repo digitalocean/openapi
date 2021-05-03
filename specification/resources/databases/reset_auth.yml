@@ -17,8 +17,8 @@ tags:
   - Databases
 
 parameters:
-  - $ref: "parameters.yml#/database_cluster_uuid"
-  - $ref: "parameters.yml#/username"
+  - $ref: 'parameters.yml#/database_cluster_uuid'
+  - $ref: 'parameters.yml#/username'
 
 requestBody:
   required: true
@@ -28,30 +28,30 @@ requestBody:
         type: object
         properties:
           mysql_settings:
-            $ref: "models/mysql_settings.yml"
+            $ref: 'models/mysql_settings.yml'
       example:
         mysql_settings:
           auth_plugin: caching_sha2_password
 
 responses:
-  "200":
-    $ref: "responses/user.yml"
+  '200':
+    $ref: 'responses/user.yml'
 
-  "401":
-    $ref: "../../shared/responses/unauthorized.yml"
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
 
-  "404":
-    $ref: "../../shared/responses/not_found.yml"
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
 
-  "429":
-    $ref: "../../shared/responses/too_many_requests.yml"
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
 
-  "500":
-    $ref: "../../shared/responses/server_error.yml"
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
 
   default:
-    $ref: "../../shared/responses/unexpected_error.yml"
+    $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: "examples/curl/reset_auth.yml"
-  - $ref: "examples/go/reset_auth.yml"
+  - $ref: 'examples/curl/reset_auth.yml'
+  - $ref: 'examples/go/reset_auth.yml'
