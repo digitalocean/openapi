@@ -1,0 +1,13 @@
+type: object
+required:
+  - slack
+  - email
+properties:
+  email:
+    type: array
+    items:
+      type: string
+  slack:
+    type: array
+    items:
+      $ref: 'slack_details.yml'

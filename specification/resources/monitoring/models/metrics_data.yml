@@ -1,0 +1,17 @@
+type: object
+required:
+  - metric
+  - values
+properties:
+  metric:
+    type: object
+    additionalProperties:
+      type: string
+  values:
+    type: array
+    items:
+      type: array
+      items:
+        oneOf:
+          - type: integer
+          - type: string

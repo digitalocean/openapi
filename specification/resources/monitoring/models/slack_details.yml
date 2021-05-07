@@ -1,0 +1,11 @@
+type: object
+required:
+  - url
+  - channel
+properties:
+  channel:
+    type: string
+    format: string
+  url:
+    type: string
+    format: string

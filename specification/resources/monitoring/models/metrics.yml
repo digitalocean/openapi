@@ -1,0 +1,14 @@
+type: object
+required:
+  - status
+  - data
+properties:
+  data:
+    type: object
+    $ref: 'metrics_data.yml'
+  status:
+    type: string
+    format: string
+    enum:
+      - success
+      - error

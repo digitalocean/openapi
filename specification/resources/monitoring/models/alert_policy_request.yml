@@ -1,0 +1,58 @@
+type: object
+required:
+  - type
+  - description
+  - compare
+  - value
+  - window
+  - entities
+  - tags
+  - alerts
+  - enabled
+properties:
+  alerts:
+    type: object
+    $ref: 'alerts.yml'
+  compare:
+    type: string
+    format: string
+    enum:
+      - GreaterThan
+      - LessThan
+  description:
+    type: string
+    format: string
+  enabled:
+    type: boolean
+  entities:
+    type: array
+    items:
+      type: string
+  tags:
+    type: array
+    items:
+      type: string
+  type:
+    type: string
+    format: string
+    enum:
+      - v1/insights/droplet/load_1
+      - v1/insights/droplet/load_5
+      - v1/insights/droplet/load_15
+      - v1/insights/droplet/memory_utilization_percent
+      - v1/insights/droplet/disk_utilization_percent
+      - v1/insights/droplet/cpu
+      - v1/insights/droplet/disk_read
+      - v1/insights/droplet/disk_write
+      - v1/insights/droplet/public_outbound_bandwidth
+  value:
+    type: number
+    format: float
+  window:
+    type: string
+    format: string
+    enum:
+      - 5m
+      - 10m
+      - 30m
+      - 1h

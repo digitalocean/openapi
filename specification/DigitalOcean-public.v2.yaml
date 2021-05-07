@@ -290,6 +290,7 @@ tags:
       To interact with images, you will generally send requests to the images
       endpoint at /v2/images.
 
+
   - name: Kubernetes
     description: >-
       [DigitalOcean Kubernetes](https://www.digitalocean.com/docs/kubernetes/)
@@ -306,6 +307,12 @@ tags:
       requests to the `/v2/load_balancers` endpoint, you can list, create, or
       delete load balancers as well as add or remove Droplets, forwarding rules,
       and other configuration details.
+
+  - name: Monitoring
+    description: >-
+      The DigitalOcean Monitoring API makes it possible to programmatically retrieve metrics as well as configure alert
+      policies based on these metrics. The Monitoring API can help you gain insight into how your apps are performing
+      and consuming resources.
 
   - name: Project Resources
     description: |-
@@ -970,6 +977,28 @@ paths:
 
     delete:
       $ref: 'resources/load_balancers/remove_forwarding_rules.yml'
+
+  /v2/monitoring/alerts:
+    get:
+      $ref: 'resources/monitoring/list_alerts.yml'
+
+    post:
+      $ref: 'resources/monitoring/create_alert.yml'
+
+
+  /v2/monitoring/alerts/{alert_uuid}:
+    get:
+      $ref: 'resources/monitoring/get_alert.yml'
+
+    put:
+      $ref: 'resources/monitoring/update_alert.yml'
+
+    delete:
+      $ref: 'resources/monitoring/delete_alert.yml'
+
+  /v2/monitoring/metrics/droplet/bandwidth:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_bandwidth.yml'
 
   /v2/projects:
     get:
