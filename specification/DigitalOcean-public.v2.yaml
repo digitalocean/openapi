@@ -1185,5 +1185,8 @@ components:
     bearer_auth:
       type: http
       scheme: bearer
+    description:
+      $ref: 'authentication.yml#/auth'
+        
 security:
   - bearer_auth: []
