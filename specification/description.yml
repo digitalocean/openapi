@@ -292,7 +292,7 @@ introduction: |
   #### Set and Export your OAuth Token
 
   ```
-  export TOKEN=your_token_here
+  export DIGITALOCEAN_TOKEN=your_token_here
   ```
 
   #### Set and Export a Variable
@@ -300,5 +300,3 @@ introduction: |
   ```
   export DROPLET_ID=1111111
   ```
-
-
