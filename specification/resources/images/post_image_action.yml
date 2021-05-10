@@ -37,7 +37,7 @@ requestBody:
             transfer: 'models/image_action.yml#/image_action_transfer'
 
 responses:
-  '202':
+  '201':
     $ref: 'responses/post_image_action_response.yml'
 
   '401':
