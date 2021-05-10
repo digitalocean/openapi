@@ -18,7 +18,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/registry.yml'
+        $ref: 'models/registry_create.yml'
 
 responses:
   '201':
