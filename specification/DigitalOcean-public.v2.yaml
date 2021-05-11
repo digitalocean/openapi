@@ -1214,7 +1214,7 @@ components:
         #### Authenticate with a Bearer Authorization Header
 
         ```
-        curl -X $HTTP_METHOD -H "Authorization: Bearer $TOKEN" "https://api.digitalocean.com/v2/$OBJECT"
+        curl -X $HTTP_METHOD -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/$OBJECT"
         ```
 
         ### Parameters
@@ -1241,7 +1241,7 @@ components:
         #### Pass Parameters as a JSON Object
 
         ```
-            curl -H "Authorization: Bearer $TOKEN" \
+            curl -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                 -H "Content-Type: application/json" \
                 -d '{"name": "example.com", "ip_address": "127.0.0.1"}' \
                 -X POST "https://api.digitalocean.com/v2/domains"
@@ -1250,7 +1250,7 @@ components:
         #### Pass Filter Parameters as a Query String
 
         ```
-             curl -H "Authorization: Bearer $TOKEN" \
+             curl -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                  -X GET \
                  "https://api.digitalocean.com/v2/images?private=true"
         ```
