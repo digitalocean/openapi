@@ -1036,6 +1036,10 @@ paths:
     get:
       $ref: 'resources/monitoring/metrics_droplet_memory_total.yml'
 
+  /v2/monitoring/metrics/droplet/memory_available:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_memory_available.yml'
+
   /v2/projects:
     get:
       $ref: 'resources/projects/list_projects.yml'
