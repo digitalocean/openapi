@@ -32,4 +32,5 @@ requestBody:
         $ref: 'models/alert_policy_request.yml'
 
       examples:
-
+        Create Alert Request:
+          $ref: 'examples.yml#/create_alert_request'

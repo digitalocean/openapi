@@ -10,3 +10,21 @@ metric_response:
             - 1435781451.781
             - '1'
 
+alert_response:
+  value:
+    compare: GreaterThan
+    enabled: true
+    description: Example Alert
+    window: 5m
+    type: v1/insights/droplet/cpu
+    tags:
+      - droplet_tag
+    entities:
+      - 19209101
+    alerts:
+      email:
+        - bob@example.com
+      slack:
+        - channel: Production Alerts
+          url: https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ
+

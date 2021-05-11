@@ -13,3 +13,8 @@ content:
     schema:
       $ref: '../models/alert_policy.yml'
 
+    examples:
+      Alert Response:
+        $ref: 'examples.yml#/alert_response'
+
+
