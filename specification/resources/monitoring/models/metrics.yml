@@ -4,11 +4,11 @@ required:
   - data
 properties:
   data:
-    type: object
     $ref: 'metrics_data.yml'
   status:
     type: string
     format: string
+    example: "success"
     enum:
       - success
       - error

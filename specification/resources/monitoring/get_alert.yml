@@ -1,4 +1,4 @@
-operationId: GetAlertPolicy
+operationId: get_alert_policy
 
 summary: Retrieve an Existing Alert Policy
 
@@ -13,6 +13,9 @@ responses:
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
 
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'
 
@@ -22,3 +25,5 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
+parameters:
+  - $ref: 'parameters.yml#/alert_uuid'

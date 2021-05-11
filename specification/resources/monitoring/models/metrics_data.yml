@@ -1,17 +1,26 @@
 type: object
 required:
-  - metric
-  - values
+  - resultType
+  - result
 properties:
-  metric:
-    type: object
-    additionalProperties:
-      type: string
-  values:
+  result:
     type: array
+    description: >-
+      Result of query.
     items:
-      type: array
-      items:
-        oneOf:
-          - type: integer
-          - type: string
+      $ref: "metrics_result.yml"
+
+    example:
+      - metric:
+          host_id: "1950291"
+        value:
+          - 1435781451.781
+          - '1'
+
+  resultType:
+    type: string
+    format: string
+    enum:
+      - matrix
+
+    example: "matrix"

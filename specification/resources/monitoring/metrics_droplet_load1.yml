@@ -1,9 +1,9 @@
-operationId: get_droplet_bandwidth_metrics
+operationId: get_droplet_load1_metrics
 
-summary: Get Droplet Bandwidth Metrics
+summary: Get Droplet Load1 Metrics
 
 description: >-
-  To retrieve bandwidth metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/bandwidth`.
+  To retrieve 1 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_1`.
 tags:
   - Monitoring
 
@@ -26,7 +26,5 @@ responses:
 
 parameters:
   - $ref: 'parameters.yml#/droplet_id'
-  - $ref: 'parameters.yml#/network_interface'
-  - $ref: 'parameters.yml#/network_direction'
   - $ref: 'parameters.yml#/metric_timestamp_start'
   - $ref: 'parameters.yml#/metric_timestamp_end'

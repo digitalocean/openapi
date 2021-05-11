@@ -1,0 +1,12 @@
+metric_response:
+  value:
+    status: success
+    data:
+      resultType: matrix
+      result:
+        - metric:
+            host_id: "192019292"
+          value:
+            - 1435781451.781
+            - '1'
+

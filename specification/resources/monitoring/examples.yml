@@ -1,0 +1,28 @@
+create_alert_request:
+  description: Alerting on a CPU threshold
+  value:
+    compare: GreaterThan
+    enabled: true
+    description: Example Alert
+    window: 5m
+    type: v1/insights/droplet/cpu
+    tags:
+      - droplet_tag
+    entities:
+      - 19209101
+    alerts:
+      email: bob@example.com
+
+    forwarding_rules:
+      - entry_protocol: http
+        entry_port: 80
+        target_protocol: http
+        target_port: 80
+      - entry_protocol: https
+        entry_port: 443
+        target_protocol: https
+        target_port: 443
+        tls_passthrough: true
+    droplet_ids:
+      - 3164444
+      - 3164445

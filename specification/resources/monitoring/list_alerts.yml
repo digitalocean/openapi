@@ -1,4 +1,4 @@
-operationId: ListAlertPolicies
+operationId: list_alert_policies
 
 summary: List Alert Policies
 

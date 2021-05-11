@@ -1,4 +1,4 @@
-description: A Prometheus API compatible metirc response
+description: The response will be a prometheus-compatible JSON object with a key called `data` and `status`.
 
 headers:
   ratelimit-limit:
@@ -12,3 +12,7 @@ content:
   application/json:
     schema:
       $ref: '../models/metrics.yml'
+
+    examples:
+      Metric Response:
+        $ref: 'examples.yml#/metric_response'

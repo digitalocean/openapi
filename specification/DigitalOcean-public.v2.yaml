@@ -1000,6 +1000,42 @@ paths:
     get:
       $ref: 'resources/monitoring/metrics_droplet_bandwidth.yml'
 
+  /v2/monitoring/metrics/droplet/cpu:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_cpu.yml'
+
+  /v2/monitoring/metrics/droplet/filesystem_free:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_filesystem_free.yml'
+
+  /v2/monitoring/metrics/droplet/filesystem_size:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_filesystem_size.yml'
+
+  /v2/monitoring/metrics/droplet/load_1:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_load1.yml'
+
+  /v2/monitoring/metrics/droplet/load_5:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_load5.yml'
+
+  /v2/monitoring/metrics/droplet/load_15:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_load15.yml'
+
+  /v2/monitoring/metrics/droplet/memory_cached:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_memory_cached.yml'
+
+  /v2/monitoring/metrics/droplet/memory_free:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_memory_free.yml'
+
+  /v2/monitoring/metrics/droplet/memory_total:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_memory_total.yml'
+
   /v2/projects:
     get:
       $ref: 'resources/projects/list_projects.yml'
