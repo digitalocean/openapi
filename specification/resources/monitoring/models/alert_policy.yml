@@ -1,4 +1,5 @@
 type: object
+
 required:
   - uuid
   - type
@@ -10,9 +11,10 @@ required:
   - tags
   - alerts
   - enabled
+
+
 properties:
   alerts:
-    type: object
     $ref: 'alerts.yml'
   compare:
     type: string

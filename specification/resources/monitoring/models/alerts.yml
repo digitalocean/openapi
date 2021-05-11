@@ -5,7 +5,8 @@ required:
 properties:
   email:
     description: "An email to notify on an alert trigger."
-    example: "bob@exmaple.com"
+    example:
+      - "bob@exmaple.com"
     type: array
     items:
       type: string

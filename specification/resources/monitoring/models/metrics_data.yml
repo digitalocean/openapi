@@ -10,13 +10,6 @@ properties:
     items:
       $ref: "metrics_result.yml"
 
-    example:
-      - metric:
-          host_id: "1950291"
-        value:
-          - 1435781451.781
-          - '1'
-
   resultType:
     type: string
     format: string

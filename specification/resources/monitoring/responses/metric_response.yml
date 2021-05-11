@@ -12,7 +12,3 @@ content:
   application/json:
     schema:
       $ref: '../models/metrics.yml'
-
-    examples:
-      Metric Response:
-        $ref: 'examples.yml#/metric_response'
