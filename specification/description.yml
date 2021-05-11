@@ -70,7 +70,7 @@ introduction: |
       }
   ```
 
-  ### Responses
+  ## Responses
 
   When a request is successful, a response body will typically be sent back in
   the form of a JSON object. An exception to this is when a DELETE request is
@@ -119,7 +119,7 @@ introduction: |
       }
   ```
 
-  ### Meta
+  ## Meta
 
   In addition to the main resource root, the response may also contain a
   `meta` object. This object contains information about the response itself.
@@ -188,7 +188,7 @@ introduction: |
       }
   ```
 
-  ### Rate Limit
+  ## Rate Limit
 
   Requests through the API are rate limited per OAuth token. Current rate limits:
 
@@ -255,7 +255,7 @@ introduction: |
       }
   ```
 
-  ### Curl Examples
+  ## Curl Examples
 
   Throughout this document, some example API requests will be given using the
   `curl` command. This will allow us to demonstrate the various endpoints in a
@@ -300,3 +300,71 @@ introduction: |
   ```
   export DROPLET_ID=1111111
   ```
+
+  ## Parameters
+
+  There are two different ways to pass parameters in a request with the API.
+
+  When passing parameters to create or update an object, parameters should be
+  passed as a JSON object containing the appropriate attribute names and
+  values as key-value pairs. When you use this format, you should specify that
+  you are sending a JSON object in the header. This is done by setting the
+  `Content-Type` header to `application/json`. This ensures that your request
+  is interpreted correctly.
+
+  When passing parameters to filter a response on GET requests, parameters can
+  be passed using standard query attributes. In this case, the parameters
+  would be embedded into the URI itself by appending a `?` to the end of the
+  URI and then setting each attribute with an equal sign. Attributes can be
+  separated with a `&`. Tools like `curl` can create the appropriate URI when
+  given parameters and values; this can also be done using the `-F` flag and
+  then passing the key and value as an argument. The argument should take the
+  form of a quoted string with the attribute being set to a value with an
+  equal sign.
+
+  #### Pass Parameters as a JSON Object
+
+  ```
+      curl -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{"name": "example.com", "ip_address": "127.0.0.1"}' \
+          -X POST "https://api.digitalocean.com/v2/domains"
+  ```
+
+  #### Pass Filter Parameters as a Query String
+
+  ```
+       curl -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+           -X GET \
+           "https://api.digitalocean.com/v2/images?private=true"
+  ```
+
+  ## Cross Origin Resource Sharing
+
+  In order to make requests to the API from other domains, the API implements
+  Cross Origin Resource Sharing (CORS) support.
+
+  CORS support is generally used to create AJAX requests outside of the domain
+  that the request originated from. This is necessary to implement projects
+  like control panels utilizing the API. This tells the browser that it can
+  send requests to an outside domain.
+
+  The procedure that the browser initiates in order to perform these actions
+  (other than GET requests) begins by sending a "preflight" request. This sets
+  the `Origin` header and uses the `OPTIONS` method. The server will reply
+  back with the methods it allows and some of the limits it imposes. The
+  client then sends the actual request if it falls within the allowed
+  constraints.
+
+  This process is usually done in the background by the browser, but you can
+  use curl to emulate this process using the example provided. The headers
+  that will be set to show the constraints are:
+
+  *   **Access-Control-Allow-Origin**: This is the domain that is sent by the client or browser as the origin of the request. It is set through an `Origin` header.
+  *   **Access-Control-Allow-Methods**: This specifies the allowed options for requests from that domain. This will generally be all available methods.
+  *   **Access-Control-Expose-Headers**: This will contain the headers that will be available to requests from the origin domain.
+  *   **Access-Control-Max-Age**: This is the length of time that the access is considered valid. After this expires, a new preflight should be sent.
+  *   **Access-Control-Allow-Credentials**: This will be set to `true`. It basically allows you to send your OAuth token for authentication.
+
+  You should not need to be concerned with the details of these headers,
+  because the browser will typically do all of the work for you.
