@@ -4,9 +4,9 @@
   "description": "OpenAPI v3 specification for DigitalOcean's public API v2.",
   "devDependencies": {
     "@redocly/openapi-cli": "^1.0.0-beta.8",
-    "@stoplight/spectral": "^5.3.0",
-    "newman": "^2.1.2",
-    "openapi-to-postmanv2": "^2.6.0"
+    "@stoplight/spectral": "^5.9.1",
+    "newman": "^5.1.2",
+    "openapi-to-postmanv2": "^1.2.6"
   },
   "scripts": {
     "test": "make test",
