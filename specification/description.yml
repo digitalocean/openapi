@@ -60,7 +60,7 @@ introduction: |
   |message|string|A message providing additional information about the error, including details to help resolve it when possible.|
   |request_id|string|Optionally, some endpoints may include a request ID that should be provided when reporting bugs or opening support tickets to help identify the issue.|
 
-  #### Example Error Response
+  ### Example Error Response
 
   ```
       HTTP/1.1 403 Forbidden
@@ -91,7 +91,7 @@ introduction: |
   single object and an array of objects for a request on a collection of
   objects.
 
-  #### Response for a Single Object
+  ### Response for a Single Object
 
   ```
       {
@@ -102,7 +102,7 @@ introduction: |
       }
   ```
 
-  #### Response for an Object Collection
+  ### Response for an Object Collection
 
   ```
       {
@@ -133,7 +133,7 @@ introduction: |
   `droplets` or `domains`).
 
 
-  #### Sample Meta Object
+  ### Sample Meta Object
 
   ```
       {
@@ -173,7 +173,7 @@ introduction: |
   first page of results, no `first` or `prev` links will ever be set. This
   convention holds true in other situations where a link would not make sense.
 
-  #### Sample Links Object
+  ### Sample Links Object
 
   ```
       {
@@ -235,7 +235,7 @@ introduction: |
   *   Only 12 `POST` requests to the `/v2/floating_ips` endpoint to create Floating IPs can be made per 60 seconds.
   *   Only 10 `GET` requests to the `/v2/account/keys` endpoint to list SSH keys can be made per 60 seconds.
 
-  #### Sample Rate Limit Headers
+  ### Sample Rate Limit Headers
 
   ```
       . . .
@@ -245,7 +245,7 @@ introduction: |
       . . .
   ```
 
-  #### Sample Rate Exceeded Response
+  ### Sample Rate Exceeded Response
 
   ```
       429 Too Many Requests
@@ -289,13 +289,13 @@ introduction: |
   are only interested in the header, you can instead pass the `-I` flag, which
   will exclude the response body entirely.
 
-  #### Set and Export your OAuth Token
+  ### Set and Export your OAuth Token
 
   ```
   export DIGITALOCEAN_TOKEN=your_token_here
   ```
 
-  #### Set and Export a Variable
+  ### Set and Export a Variable
 
   ```
   export DROPLET_ID=1111111
@@ -322,7 +322,7 @@ introduction: |
   form of a quoted string with the attribute being set to a value with an
   equal sign.
 
-  #### Pass Parameters as a JSON Object
+  ### Pass Parameters as a JSON Object
 
   ```
       curl -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
@@ -331,7 +331,7 @@ introduction: |
           -X POST "https://api.digitalocean.com/v2/domains"
   ```
 
-  #### Pass Filter Parameters as a Query String
+  ### Pass Filter Parameters as a Query String
 
   ```
        curl -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
