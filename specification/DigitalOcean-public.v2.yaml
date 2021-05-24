@@ -1211,7 +1211,7 @@ components:
         `Authorization` header containing your OAuth token. All requests must be
         made over HTTPS.
         
-        #### Authenticate with a Bearer Authorization Header
+        ### Authenticate with a Bearer Authorization Header
         
         ```
         curl -X $HTTP_METHOD -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/$OBJECT"
