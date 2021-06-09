@@ -62,6 +62,16 @@ firewall_rule_target:
       example:
         - 4de7ac8b-495b-4884-9a69-1050c6793cd6
 
+    kubernetes_ids:
+      type: array
+      items:
+        type: string
+      description: >-
+        An array containing the IDs of the Kubernetes clusters to which the firewall
+        will allow traffic.
+      example:
+        - 41b74c5d-9bd0-5555-5555-a57c495b81a3
+
     tags:
       allOf:
         - $ref: '../../../shared/attributes/tags_array.yml'
