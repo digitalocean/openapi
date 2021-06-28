@@ -141,8 +141,9 @@ tags:
       DigitalOcean's [managed database service](https://www.digitalocean.com/docs/databases)
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://www.digitalocean.com/docs/databases/postgresql/),
-      [Redis](https://www.digitalocean.com/docs/databases/redis/), and
-      [MySQL](https://www.digitalocean.com/docs/databases/mysql/).
+      [Redis](https://www.digitalocean.com/docs/databases/redis/),
+      [MySQL](https://www.digitalocean.com/docs/databases/mysql/), and 
+      [MongoDB](https://www.digitalocean.com/docs/databases/mongodb/).
 
       By sending requests to the `/v2/databases` endpoint, you can list, create, or delete
       database clusters as well as scale the size of a cluster, add or remove read-only replicas,
