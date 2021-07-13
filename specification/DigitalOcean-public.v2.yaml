@@ -498,6 +498,14 @@ tags:
       Tags have two attributes: a user defined `name` attribute and an embedded
       `resources` attribute with information about resources that have been tagged.
 
+
+  - name: Uptime
+    description: >-
+        Uptime allows you to define health checks, and alerts to monitor the health and availability
+        of your web application.
+
+        Health checks can be configured to monitor performance and availability across multiple regions.
+
   - name: VPCs
     description: >-
       [VPCs (virtual private clouds)](https://www.digitalocean.com/docs/networking/vpc/)
@@ -1416,6 +1424,42 @@ paths:
   /v2/vpcs/{vpc_id}/members:
     get:
       $ref: 'resources/vpcs/list_vpc_members.yml'
+
+
+  /v2/uptime/checks:
+    get:
+      $ref: 'resources/uptime/list_checks.yml'
+
+    post:
+      $ref: 'resources/uptime/create_check.yml'
+
+  /v2/uptime/checks/{check_id}:
+    get:
+      $ref: 'resources/uptime/get_check.yml'
+
+    put:
+      $ref: 'resources/uptime/update_check.yml'
+
+    delete:
+      $ref: 'resources/uptime/delete_check.yml'
+
+  /v2/uptime/checks/{check_id}/alerts:
+    get:
+      $ref: 'resources/uptime/list_alerts.yml'
+
+    post:
+      $ref: 'resources/uptime/create_alert.yml'
+
+  /v2/uptime/checks/{check_id}/alerts/{alert_id}:
+    get:
+      $ref: 'resources/uptime/get_alert.yml'
+
+    put:
+      $ref: 'resources/uptime/update_alert.yml'
+
+    delete:
+      $ref: 'resources/uptime/delete_alert.yml'
+
 
 components:
   securitySchemes:
