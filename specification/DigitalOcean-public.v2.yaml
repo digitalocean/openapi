@@ -3,9 +3,9 @@ openapi: 3.0.0
 info:
   title: DigitalOcean API
   version: '2.0'
-  description: >
-    The DigitalOcean API allows you to manage Droplets and resources within the
-    DigitalOcean cloud in a simple, programmatic way using conventional HTTP requests.
+  description:
+    $ref: 'description.yml#/introduction'
+
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
@@ -141,8 +141,9 @@ tags:
       DigitalOcean's [managed database service](https://www.digitalocean.com/docs/databases)
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://www.digitalocean.com/docs/databases/postgresql/),
-      [Redis](https://www.digitalocean.com/docs/databases/redis/), and
-      [MySQL](https://www.digitalocean.com/docs/databases/mysql/).
+      [Redis](https://www.digitalocean.com/docs/databases/redis/),
+      [MySQL](https://www.digitalocean.com/docs/databases/mysql/), and 
+      [MongoDB](https://www.digitalocean.com/docs/databases/mongodb/).
 
       By sending requests to the `/v2/databases` endpoint, you can list, create, or delete
       database clusters as well as scale the size of a cluster, add or remove read-only replicas,
@@ -1254,5 +1255,37 @@ components:
     bearer_auth:
       type: http
       scheme: bearer
+      description: |
+        ## OAuth Authentication
+
+        In order to interact with the DigitalOcean API, you or your application must
+        authenticate.
+
+        The DigitalOcean API handles this through OAuth, an open standard for
+        authorization. OAuth allows you to delegate access to your account in full
+        or in read-only mode.
+
+        You can generate an OAuth token by visiting the [Apps & API](https://cloud.digitalocean.com/settings/applications)
+        section of the DigitalOcean control panel for your account.
+
+        An OAuth token functions as a complete authentication request. In effect, it
+        acts as a substitute for a username and password pair.
+
+        Because of this, it is absolutely **essential** that you keep your OAuth
+        tokens secure. In fact, upon generation, the web interface will only display
+        each token a single time in order to prevent the token from being compromised.
+
+        ### How to Authenticate with OAuth
+
+        In order to make an authenticated request, include a bearer-type
+        `Authorization` header containing your OAuth token. All requests must be
+        made over HTTPS.
+        
+        ### Authenticate with a Bearer Authorization Header
+        
+        ```
+        curl -X $HTTP_METHOD -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/$OBJECT"
+        ```
+        
 security:
   - bearer_auth: []
