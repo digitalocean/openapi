@@ -986,7 +986,6 @@ paths:
     post:
       $ref: 'resources/monitoring/create_alert.yml'
 
-
   /v2/monitoring/alerts/{alert_uuid}:
     get:
       $ref: 'resources/monitoring/get_alert.yml'
