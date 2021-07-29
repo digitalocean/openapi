@@ -28,4 +28,3 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
-
