@@ -291,7 +291,6 @@ tags:
       To interact with images, you will generally send requests to the images
       endpoint at /v2/images.
 
-
   - name: Kubernetes
     description: >-
       [DigitalOcean Kubernetes](https://www.digitalocean.com/docs/kubernetes/)
