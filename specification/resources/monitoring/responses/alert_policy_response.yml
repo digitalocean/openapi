@@ -12,4 +12,3 @@ content:
   application/json:
     schema:
       $ref: '../models/alert_policy.yml'
-
