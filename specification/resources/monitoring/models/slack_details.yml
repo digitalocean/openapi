@@ -13,4 +13,3 @@ properties:
     format: string
     description: "Slack Webhook URL."
     example: "https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ"
-
