@@ -55,5 +55,3 @@ alert_uuid:
   schema:
     type: string
   example: 4de7ac8b-495b-4884-9a69-1050c6793cd6
-
-
