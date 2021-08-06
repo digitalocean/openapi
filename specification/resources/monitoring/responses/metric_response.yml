@@ -1,4 +1,4 @@
-description: The response will be a prometheus-compatible JSON object with a key called `data` and `status`.
+description: The response will be a JSON object with a key called `data` and `status`.
 
 headers:
   ratelimit-limit:
