@@ -18,6 +18,7 @@ properties:
       - k8s
       - ip_addr
       - tag
+      - app
     example: droplet
     description: >-
       The type of resource that the firewall rule allows to access the database
