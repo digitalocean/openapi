@@ -93,6 +93,16 @@ properties:
       will be assigned. If excluded, the Droplet will be assigned to your
       account's default VPC for the region.
 
+  with_droplet_agent:
+    type: boolean
+    example: true
+    description: A boolean indicating whether to install the DigitalOcean agent
+      used for providing access to the Droplet web console in the control panel.
+      By default, the agent is installed on new Droplets but installation errors
+      (i.e. OS not supported) are ignored. To prevent it from being installed,
+      set to `false`. To make installation errors fatal, explicitly set it
+      to `true`.
+
 required:
 - region
 - size
