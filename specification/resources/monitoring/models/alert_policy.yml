@@ -1,0 +1,75 @@
+type: object
+
+required:
+  - uuid
+  - type
+  - description
+  - compare
+  - value
+  - window
+  - entities
+  - tags
+  - alerts
+  - enabled
+
+
+properties:
+  alerts:
+    $ref: 'alerts.yml'
+  compare:
+    type: string
+    format: string
+    example: GreaterThan
+    enum:
+      - GreaterThan
+      - LessThan
+  description:
+    type: string
+    format: string
+    example: CPU Alert
+  enabled:
+    type: boolean
+    example: true
+  entities:
+    type: array
+    items:
+      type: string
+    example:
+      - "192018292"
+  tags:
+    type: array
+    items:
+      type: string
+    example:
+      - droplet_tag
+  type:
+    type: string
+    format: string
+    enum:
+      - v1/insights/droplet/load_1
+      - v1/insights/droplet/load_5
+      - v1/insights/droplet/load_15
+      - v1/insights/droplet/memory_utilization_percent
+      - v1/insights/droplet/disk_utilization_percent
+      - v1/insights/droplet/cpu
+      - v1/insights/droplet/disk_read
+      - v1/insights/droplet/disk_write
+      - v1/insights/droplet/public_outbound_bandwidth
+    example: v1/insights/droplet/cpu
+  uuid:
+    type: string
+    format: string
+    example: 78b3da62-27e5-49ba-ac70-5db0b5935c64
+  value:
+    type: number
+    format: float
+    example: 80
+  window:
+    type: string
+    format: string
+    enum:
+      - 5m
+      - 10m
+      - 30m
+      - 1h
+    example: 5m
