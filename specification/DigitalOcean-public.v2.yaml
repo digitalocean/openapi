@@ -56,26 +56,26 @@ tags:
   - name: Billing
     description: >-
       The billing endpoints allow you to retrieve your account balance, invoices
-      and billing history.  
+      and billing history.
 
 
       **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
-      retrieve the balance information for the requested customer account.  
+      retrieve the balance information for the requested customer account.
 
 
       **Invoices:** [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/)
       are generated on the first of each month for every DigitalOcean
       customer. An invoice preview is generated daily, which can be accessed
-      with the `preview` keyword in place of `$INVOICE_UUID`. To interact with 
+      with the `preview` keyword in place of `$INVOICE_UUID`. To interact with
       invoices, you will generally send requests to the invoices endpoint at
-      `/v2/customers/my/invoices`.  
+      `/v2/customers/my/invoices`.
 
 
       **Billing History:** Billing history is a record of billing events for your account.
       For example, entries may include events like payments made, invoices
       issued, or credits granted. To interact with invoices, you
       will generally send requests to the invoices endpoint at
-      `/v2/customers/my/billing_history`.  
+      `/v2/customers/my/billing_history`.
 
   - name: Block Storage
     description: >-
@@ -142,7 +142,7 @@ tags:
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://www.digitalocean.com/docs/databases/postgresql/),
       [Redis](https://www.digitalocean.com/docs/databases/redis/),
-      [MySQL](https://www.digitalocean.com/docs/databases/mysql/), and 
+      [MySQL](https://www.digitalocean.com/docs/databases/mysql/), and
       [MongoDB](https://www.digitalocean.com/docs/databases/mongodb/).
 
       By sending requests to the `/v2/databases` endpoint, you can list, create, or delete
@@ -430,8 +430,8 @@ paths:
     get:
       $ref: 'resources/ssh_keys/get_ssh_key.yml'
 
-    patch:
-      $ref: 'resources/ssh_keys/patch_ssh_key.yml'
+    put:
+      $ref: 'resources/ssh_keys/update_ssh_key.yml'
 
     delete:
       $ref: 'resources/ssh_keys/destroy_ssh_key.yml'
@@ -1278,12 +1278,12 @@ components:
         In order to make an authenticated request, include a bearer-type
         `Authorization` header containing your OAuth token. All requests must be
         made over HTTPS.
-        
+
         ### Authenticate with a Bearer Authorization Header
-        
+
         ```
         curl -X $HTTP_METHOD -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/$OBJECT"
         ```
-        
+
 security:
   - bearer_auth: []
