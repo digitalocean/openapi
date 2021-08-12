@@ -55,6 +55,9 @@ properties:
       - v1/insights/droplet/disk_read
       - v1/insights/droplet/disk_write
       - v1/insights/droplet/public_outbound_bandwidth
+      - v1/insights/droplet/public_inbound_bandwidth
+      - v1/insights/droplet/private_outbound_bandwidth
+      - v1/insights/droplet/private_inbound_bandwidth
     example: v1/insights/droplet/cpu
   uuid:
     type: string
