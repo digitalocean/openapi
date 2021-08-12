@@ -46,6 +46,15 @@ requestBody:
             region: nyc1
             filesystem_type: xfs
             filesystem_label: xfs_volume01
+        Volume from a snapshot:
+          value:
+            size_gigabytes: 10
+            name: snapshot_example
+            snapshot_id: b0798135-fb76-11eb-946a-0a58ac146f33
+            region: nyc1
+            description: A new volume based on a snapshot
+            filesystem_type: ext4
+            filesystem_label: ext4_volume_01
 
 responses:
   '201':
