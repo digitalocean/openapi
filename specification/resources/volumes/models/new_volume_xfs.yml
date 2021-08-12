@@ -10,3 +10,8 @@ allOf:
         allOf:
           - $ref: 'attributes.yml#/volume_write_file_system_label'
           - maxLength: 12
+    required:
+      - name
+      - size_gigabytes
+      - region
+      - filesystem_type
