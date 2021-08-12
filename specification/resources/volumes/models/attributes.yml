@@ -1,6 +1,6 @@
 volume_write_file_system_type:
   type: object
-  required: 
+  required:
     - filesystem_type
   properties:
     filesystem_type:
@@ -38,3 +38,10 @@ volume_action_droplet_id:
     The unique identifier for the Droplet the volume will be attached or
     detached from.
   example: 11612190
+
+volume_snapshot_id:
+  properties:
+    snapshot_id:
+      type: string
+      description: The unique identifier for the volume snapshot from which to create the volume.
+      example: b0798135-fb76-11eb-946a-0a58ac146f33
