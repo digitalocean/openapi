@@ -579,6 +579,10 @@ paths:
     delete:
       $ref: 'resources/databases/destroy_cluster.yml'
 
+  /v2/databases/{database_cluster_uuid}/ca:
+    get:
+      $ref: 'resources/databases/get_ca.yml'
+
   /v2/databases/{database_cluster_uuid}/online-migration:
     get:
       $ref: 'resources/databases/get_migration_status.yml'
