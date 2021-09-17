@@ -444,29 +444,11 @@ paths:
     get:
       $ref: 'resources/actions/get_action.yml'
 
-  /v2/apps/tiers:
-    get:
-      $ref: 'resources/apps/list_tiers.yml'
-
-  /v2/apps/{app_id}/deployments:
-    get:
-      $ref: 'resources/apps/list_deployments.yml'
-    post:
-      $ref: 'resources/apps/create_deployment.yml'
-
-  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
-    get:
-      $ref: 'resources/apps/get_logs.yml'
-
   /v2/apps:
     get:
       $ref: 'resources/apps/list_apps.yml'
     post:
       $ref: 'resources/apps/create_app.yml'
-
-  /v2/apps/{app_id}/deployments/{deployment_id}/logs:
-    get:
-      $ref: 'resources/apps/get_logs_aggregate.yml'
 
   /v2/apps/{id}:
     delete:
@@ -476,29 +458,47 @@ paths:
     put:
       $ref: 'resources/apps/update_app.yml'
 
-  /v2/apps/tiers/instance_sizes:
+  /v2/apps/{app_id}/deployments:
     get:
-      $ref: 'resources/apps/list_instance_sizes.yml'
-
-  /v2/apps/{app_id}/deployments/{deployment_id}/cancel:
+      $ref: 'resources/apps/list_deployments.yml'
     post:
-      $ref: 'resources/apps/cancel_deployment.yml'
-
-  /v2/apps/regions:
-    get:
-      $ref: 'resources/apps/list_regions.yml'
+      $ref: 'resources/apps/create_deployment.yml'
 
   /v2/apps/{app_id}/deployments/{deployment_id}:
     get:
       $ref: 'resources/apps/get_deployment.yml'
 
-  /v2/apps/tiers/instance_sizes/{slug}:
+  /v2/apps/{app_id}/deployments/{deployment_id}/cancel:
+    post:
+      $ref: 'resources/apps/cancel_deployment.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
     get:
-      $ref: 'resources/apps/get_instance_size.yml'
+      $ref: 'resources/apps/get_logs.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/logs:
+    get:
+      $ref: 'resources/apps/get_logs_aggregate.yml'
+
+  /v2/apps/tiers:
+    get:
+      $ref: 'resources/apps/list_tiers.yml'
 
   /v2/apps/tiers/{slug}:
     get:
       $ref: 'resources/apps/get_tier.yml'
+
+  /v2/apps/tiers/instance_sizes:
+    get:
+      $ref: 'resources/apps/list_instance_sizes.yml'
+
+  /v2/apps/tiers/instance_sizes/{slug}:
+    get:
+      $ref: 'resources/apps/get_instance_size.yml'
+
+  /v2/apps/regions:
+    get:
+      $ref: 'resources/apps/list_regions.yml'
 
   /v2/apps/propose:
     post:
