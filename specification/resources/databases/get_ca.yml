@@ -4,7 +4,7 @@ summary: Retrieve the Public Certificate
 
 description: |
   To retrieve the public certificate used to secure the connection to the database cluster send a GET request to
-  `/v2/databases/$DATABASE_ID/ca.
+  `/v2/databases/$DATABASE_ID/ca`.
 
   The response will be a JSON object with a `ca` key. This will be set to an object
   containing the base64 encoding of the public key certificate.
