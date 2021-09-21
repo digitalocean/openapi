@@ -7,7 +7,7 @@ description: |
   `/v2/databases/$DATABASE_ID/ca.
 
   The response will be a JSON object with a `ca` key. This will be set to an object
-  containing the public key certificate.
+  containing the base64 encoding of the public key certificate.
 
 tags:
   - Databases
