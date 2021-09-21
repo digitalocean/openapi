@@ -9,22 +9,21 @@ properties:
     type: string
     example: backend
   spec:
-    title: Specifications for the app alert
     $ref: app_alert_spec.yml
   emails:
     title: Emails for alerts to go to
     type: array
     items:
       $ref: app_alert_email.yml
+    example:
+    - "sammy@digitalocean.com"
   slack_webhooks:
     title: Slack Webhooks to send alerts to
     type: array
     items:
       $ref: app_alert_slack_webhook.yml
   phase:
-    title: Phase of the alert
     $ref: app_alert_phase.yml
   progress:
-    title: progress of the alert
     $ref: app_alert_progress.yml
 type: object

@@ -1,4 +1,4 @@
-operationId: update_alert_destinations
+operationId: assign_alert_destinations
 
 summary: Update destinations for alerts
 
@@ -17,12 +17,12 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: models/apps_update_app_alert_destinations_request.yml
+        $ref: models/apps_assign_app_alert_destinations_request.yml
   required: true
 
 responses:
   "200":
-    $ref: responses/update_alert_destinations.yml
+    $ref: responses/assign_alert_destinations.yml
 
   "401":
     $ref: ../../shared/responses/unauthorized.yml
@@ -38,3 +38,6 @@ responses:
 
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: 'examples/curl/assign_alert_destinations.yml'

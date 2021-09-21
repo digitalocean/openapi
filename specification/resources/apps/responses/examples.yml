@@ -594,15 +594,16 @@ alerts:
 
 alert:
   value:
-  - id: e552e1f9-c1b0-4e6d-8777-ad6f27767306
-    spec:
-      rule: DEPLOYMENT_FAILED
-    emails:
-    - sammy@digitalocean.com
-    phase: ACTIVE
-    progress:
-      steps:
-      - name: alert-configure-insight-alert
-        status: SUCCESS
-        started_at: 2020-07-28T18:00:00Z
-        ended_at: 2020-07-28T18:00:00Z
+    alert:
+      id: e552e1f9-c1b0-4e6d-8777-ad6f27767306
+      spec:
+        rule: DEPLOYMENT_FAILED
+      emails:
+      - sammy@digitalocean.com
+      phase: ACTIVE
+      progress:
+        steps:
+        - name: alert-configure-insight-alert
+          status: SUCCESS
+          started_at: 2020-07-28T18:00:00Z
+          ended_at: 2020-07-28T18:00:00Z
