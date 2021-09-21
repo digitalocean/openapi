@@ -1,4 +1,4 @@
-description: A JSON object with a `apps` key. This is list of object `apps`.
+description: A JSON object with an `alert` key. This is an object of type `alert`.
 
 content:
   application/json:
