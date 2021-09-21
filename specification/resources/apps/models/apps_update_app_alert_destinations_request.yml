@@ -1,0 +1,10 @@
+properties:
+  emails:
+    type: array
+    items:
+      $ref: app_alert_email.yml
+  slack_webhooks:
+    type: array
+    items:
+      $ref: app_alert_slack_webhook.yml
+type: object
