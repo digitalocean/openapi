@@ -503,6 +503,14 @@ paths:
   /v2/apps/propose:
     post:
       $ref: 'resources/apps/propose_app.yml'
+  
+  /v2/apps/{app_id}/alerts:
+    get:
+      $ref: 'resources/apps/list_alerts.yml'
+  
+  /v2/apps/{app_id}/alerts/{alert_id}/destinations:
+    post:
+      $ref: 'resources/apps/assign_alert_destinations.yml'
 
   /v2/cdn/endpoints:
     get:

@@ -560,3 +560,50 @@ propose:
       region: ams
     app_cost: 5
     app_tier_upgrade_cost: 17
+
+alerts:
+  value:
+    alerts:
+    - id: e552e1f9-c1b0-4e6d-8777-ad6f27767306
+      spec:
+        rule: DEPLOYMENT_FAILED
+      emails:
+      - sammy@digitalocean.com
+      phase: ACTIVE
+      progress:
+        steps:
+        - name: alert-configure-insight-alert
+          status: SUCCESS
+          started_at: 2020-07-28T18:00:00Z
+          ended_at: 2020-07-28T18:00:00Z
+    - id: b58cc9d4-0702-4ffd-ab45-4c2a8d979527
+      spec:
+        rule: CPU_UTILIZATION
+        operator: GREATER_THAN
+        value: 85.0
+        window: FIVE_MINUTES
+      emails:
+      - sammy@digitalocean.com
+      phase: ACTIVE
+      progress:
+        steps:
+        - name: alert-configure-insight-alert
+          status: SUCCESS
+          started_at: 2020-07-28T18:00:00Z
+          ended_at: 2020-07-28T18:00:00Z
+
+alert:
+  value:
+    alert:
+      id: e552e1f9-c1b0-4e6d-8777-ad6f27767306
+      spec:
+        rule: DEPLOYMENT_FAILED
+      emails:
+      - sammy@digitalocean.com
+      phase: ACTIVE
+      progress:
+        steps:
+        - name: alert-configure-insight-alert
+          status: SUCCESS
+          started_at: 2020-07-28T18:00:00Z
+          ended_at: 2020-07-28T18:00:00Z

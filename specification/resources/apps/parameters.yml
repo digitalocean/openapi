@@ -96,3 +96,12 @@ slug_tier:
   schema:
     type: string
   example: basic
+
+alert_id:
+  description: The alert ID
+  in: path
+  name: alert_id
+  required: true
+  schema:
+    type: string
+  example: 5a624ab5-dd58-4b39-b7dd-8b7c36e8a91d
