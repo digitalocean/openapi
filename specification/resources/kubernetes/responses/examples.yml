@@ -490,10 +490,22 @@ kubernetes_options:
       versions:
         - slug: 1.18.8-do.0
           kubernetes_version: 1.18.8
+          supported_features:
+            - cluster-autoscaler
+            - docr-integration
+            - token-authentication
         - slug: 1.17.11-do.0
           kubernetes_version: 1.17.11
+          supported_features:
+            - cluster-autoscaler
+            - docr-integration
+            - token-authentication
         - slug: 1.16.14-do.0
           kubernetes_version: 1.16.14
+          supported_features:
+            - cluster-autoscaler
+            - docr-integration
+            - token-authentication
       sizes:
         - name: s-1vcpu-2gb
           slug: s-1vcpu-2gb

@@ -1,4 +1,5 @@
 kubernetes_options:
+
   type: object
   properties:
     options:
@@ -29,6 +30,16 @@ kubernetes_version:
       type: string
       example: '1.16.13'
       description: The upstream version string for the version of Kubernetes
+        provided by a given slug.
+    supported_features:
+      type: array
+      items:
+        type: string
+      example:
+      - cluster-autoscaler
+      - docr-integration
+      - token-authentication
+      description: The features available with the version of Kubernetes
         provided by a given slug.
 
 kubernetes_region:
