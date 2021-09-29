@@ -97,7 +97,6 @@ kubernetes_clusters_all:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
-      ha: false
     meta:
       total: 1
 
@@ -199,7 +198,6 @@ kubernetes_single:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
-      ha: false
 
 kubernetes_updated:
   value:
@@ -299,7 +297,6 @@ kubernetes_updated:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: true
       registry_enabled: false
-      ha: true
 
 kubernetes_clusters_create_basic_response:
   value:
@@ -364,7 +361,6 @@ kubernetes_clusters_create_basic_response:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
-      ha: false
 
 kubernetes_clusters_multi_pool_response:
   value:
@@ -466,7 +462,6 @@ kubernetes_clusters_multi_pool_response:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
-      ha: false
 
 kubernetes_options:
   value:
