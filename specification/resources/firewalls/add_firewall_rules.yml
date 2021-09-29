@@ -50,6 +50,9 @@ responses:
   '204':
     $ref: '../../shared/responses/no_content.yml'
 
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
 
