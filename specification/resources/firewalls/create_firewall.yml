@@ -54,6 +54,9 @@ responses:
   '202':
     $ref: 'responses/create_firewall_response.yml'
 
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
 
