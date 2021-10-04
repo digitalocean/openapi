@@ -64,6 +64,7 @@ load_balancer_basic_response:
       enable_proxy_protocol: false
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
+      disable_lets_encrypt_dns_records: false
 
 load_balancer_ssl_termination_response:
   value:
@@ -124,6 +125,7 @@ load_balancer_ssl_termination_response:
       enable_proxy_protocol: false
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
+      disable_lets_encrypt_dns_records: false
 
 load_balancer_using_tag_response:
   value:
@@ -184,6 +186,7 @@ load_balancer_using_tag_response:
       enable_proxy_protocol: false
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
+      disable_lets_encrypt_dns_records: false
 
 load_balancer_sticky_sessions_and_health_check_response:
   value:
@@ -246,6 +249,7 @@ load_balancer_sticky_sessions_and_health_check_response:
       enable_proxy_protocol: false
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
+      disable_lets_encrypt_dns_records: false
 
 load_balancer_update_response:
   value:
@@ -313,6 +317,7 @@ load_balancer_update_response:
       enable_proxy_protocol: true
       enable_backend_keepalive: true
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
+      disable_lets_encrypt_dns_records: false
 
 load_balancers_all:
   value:
@@ -380,6 +385,7 @@ load_balancers_all:
       enable_proxy_protocol: false
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
+      disable_lets_encrypt_dns_records: false
     - id: 56775c3f-04ab-4fb3-a7ed-40ef9bc8eece
       name: prod-web-lb-01
       ip: 45.55.125.24
@@ -440,6 +446,7 @@ load_balancers_all:
       enable_proxy_protocol: false
       enable_backend_keepalive: false
       vpc_uuid: 587d698c-de84-11e8-80bc-3cfdfea9fcd1
+      disable_lets_encrypt_dns_records: false
     links: {}
     meta:
       total: 2
