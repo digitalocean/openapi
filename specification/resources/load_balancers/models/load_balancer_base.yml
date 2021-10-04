@@ -106,5 +106,13 @@ properties:
     description: A string specifying the UUID of the VPC to which the load
       balancer is assigned.
 
+  disable_lets_encrypt_dns_records:
+    type: boolean
+    example: true
+    default: false
+    description: A boolean value indicating whether to disable automatic DNS
+      record creation for Let's Encrypt certificates that are added to the
+      load balancer.
+
 required:
 - forwarding_rules
