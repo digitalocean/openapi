@@ -299,7 +299,7 @@ kubernetes_updated:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: true
       registry_enabled: false
-      ha: true
+      ha: false
 
 kubernetes_clusters_create_basic_response:
   value:
