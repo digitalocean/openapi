@@ -15,6 +15,10 @@ content:
       allOf:
         - type: object
           properties:
+            floating_ips:
+              type: array
+              items:
+                $ref: '../models/associated_resource.yml'
             snapshots:
               type: array
               items:
@@ -29,6 +33,10 @@ content:
                 $ref: '../models/associated_resource.yml'
 
     example:
+      floating_ips:
+      - id: '6186916'
+        name: 45.55.96.47
+        cost: '4.00'
       snapshots:
       - id: '61486916'
         name: ubuntu-s-1vcpu-1gb-nyc1-01-1585758823330
