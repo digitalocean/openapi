@@ -5,8 +5,8 @@ content:
     schema:
       $ref: ../models/apps_deployment_response.yml
     examples:
-      deployment: 
-        $ref: examples.yml#/deployment 
+      deployment:
+        $ref: examples.yml#/deployment
 
 headers:
   ratelimit-limit:

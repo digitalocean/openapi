@@ -82,6 +82,11 @@ apps:
         tier_slug: basic
         live_url_base: https://sample-php-iaj87.ondigitalocean.app
         live_domain: sample-php-iaj87.ondigitalocean.app
+    links:
+      pages: {}
+    meta:
+      total:
+        1
 
 app:
   value:
@@ -262,6 +267,11 @@ deployments:
               status: PENDING
         phase: PENDING_BUILD
         tier_slug: basic
+    links:
+      pages: {}
+    meta:
+      total:
+        1
 
 deployment:
   value:

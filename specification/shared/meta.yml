@@ -3,9 +3,7 @@ type: object
 properties:
   meta:
     description: Information about the response itself.
-
     type: object
-
     properties:
       total:
         description: Number of objects returned by the request.
