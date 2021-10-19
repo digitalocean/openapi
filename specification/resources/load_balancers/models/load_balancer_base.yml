@@ -41,6 +41,7 @@ properties:
     - lb-small
     - lb-medium
     - lb-large
+    deprecated: true
     default: lb-small
     example: lb-small
     description: This field has been replaced by the `size_unit` field for all 
