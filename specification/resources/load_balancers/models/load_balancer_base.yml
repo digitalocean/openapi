@@ -21,6 +21,19 @@ properties:
     example: '104.131.186.241'
     description: An attribute containing the public-facing IP address of the
       load balancer.
+  
+  size_unit:
+    type: integer
+    default: 1
+    minimum: 1
+    maximum: 100
+    example: 3
+    description: How many nodes the load balancer contains. Each additional 
+      node increases the load balancer's ability to manage more connections.
+      Load balancers can be scaled up or down, and you can change the number of 
+      nodes after creation up to once per hour. This field is currently not 
+      available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to 
+      scale load balancers that reside in these regions.
 
   size:
     type: string
@@ -30,21 +43,19 @@ properties:
     - lb-large
     default: lb-small
     example: lb-small
-    description: The size of the load balancer. The available sizes are
-      `lb-small`, `lb-medium`, or `lb-large`. You can resize load balancers
-      after creation up to once per hour. You cannot resize a load balancer
-      within the first hour of its creation.
-
-  algorithm:
-    type: string
-    example: round_robin
-    enum:
-      - round_robin
-      - least_connections
-    default: round_robin
-    description: The load balancing algorithm used to determine which backend
-      Droplet will be selected by a client. It must be either `round_robin` or
-      `least_connections`.
+    description: This field has been replaced by the `size_unit` field for all 
+      regions except in AMS2, NYC2, and SFO1. Each available load balancer size 
+      now equates to the load balancer having a set number of nodes. 
+      
+      * `lb-small` = 1 node
+      
+      * `lb-medium` = 3 nodes
+      
+      * `lb-large` = 6 nodes
+      
+      
+      You can resize load balancers after creation up to once per hour. You 
+      cannot resize a load balancer within the first hour of its creation.
 
   status:
     type: string
