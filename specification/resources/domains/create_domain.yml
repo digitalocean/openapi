@@ -16,10 +16,8 @@ requestBody:
     application/json:
       schema:
         $ref: 'models/domain.yml'
-
-      examples:
-        All Domain Records:
-          $ref: 'examples.yml#/domain_record_created'
+      example:
+        name: example.com
 
 responses:
   '201':

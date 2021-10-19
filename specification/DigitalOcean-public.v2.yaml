@@ -56,26 +56,26 @@ tags:
   - name: Billing
     description: >-
       The billing endpoints allow you to retrieve your account balance, invoices
-      and billing history.  
+      and billing history.
 
 
       **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
-      retrieve the balance information for the requested customer account.  
+      retrieve the balance information for the requested customer account.
 
 
       **Invoices:** [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/)
       are generated on the first of each month for every DigitalOcean
       customer. An invoice preview is generated daily, which can be accessed
-      with the `preview` keyword in place of `$INVOICE_UUID`. To interact with 
+      with the `preview` keyword in place of `$INVOICE_UUID`. To interact with
       invoices, you will generally send requests to the invoices endpoint at
-      `/v2/customers/my/invoices`.  
+      `/v2/customers/my/invoices`.
 
 
       **Billing History:** Billing history is a record of billing events for your account.
       For example, entries may include events like payments made, invoices
       issued, or credits granted. To interact with invoices, you
       will generally send requests to the invoices endpoint at
-      `/v2/customers/my/billing_history`.  
+      `/v2/customers/my/billing_history`.
 
   - name: Block Storage
     description: >-
@@ -142,7 +142,7 @@ tags:
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://www.digitalocean.com/docs/databases/postgresql/),
       [Redis](https://www.digitalocean.com/docs/databases/redis/),
-      [MySQL](https://www.digitalocean.com/docs/databases/mysql/), and 
+      [MySQL](https://www.digitalocean.com/docs/databases/mysql/), and
       [MongoDB](https://www.digitalocean.com/docs/databases/mongodb/).
 
       By sending requests to the `/v2/databases` endpoint, you can list, create, or delete
@@ -308,6 +308,12 @@ tags:
       delete load balancers as well as add or remove Droplets, forwarding rules,
       and other configuration details.
 
+  - name: Monitoring
+    description: >-
+      The DigitalOcean Monitoring API makes it possible to programmatically retrieve metrics as well as configure alert
+      policies based on these metrics. The Monitoring API can help you gain insight into how your apps are performing
+      and consuming resources.
+
   - name: Project Resources
     description: |-
       Project Resources are resources that can be grouped into your projects.
@@ -424,8 +430,8 @@ paths:
     get:
       $ref: 'resources/ssh_keys/get_ssh_key.yml'
 
-    patch:
-      $ref: 'resources/ssh_keys/patch_ssh_key.yml'
+    put:
+      $ref: 'resources/ssh_keys/update_ssh_key.yml'
 
     delete:
       $ref: 'resources/ssh_keys/destroy_ssh_key.yml'
@@ -438,29 +444,11 @@ paths:
     get:
       $ref: 'resources/actions/get_action.yml'
 
-  /v2/apps/tiers:
-    get:
-      $ref: 'resources/apps/list_tiers.yml'
-
-  /v2/apps/{app_id}/deployments:
-    get:
-      $ref: 'resources/apps/list_deployments.yml'
-    post:
-      $ref: 'resources/apps/create_deployment.yml'
-
-  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
-    get:
-      $ref: 'resources/apps/get_logs.yml'
-
   /v2/apps:
     get:
       $ref: 'resources/apps/list_apps.yml'
     post:
       $ref: 'resources/apps/create_app.yml'
-
-  /v2/apps/{app_id}/deployments/{deployment_id}/logs:
-    get:
-      $ref: 'resources/apps/get_logs_aggregate.yml'
 
   /v2/apps/{id}:
     delete:
@@ -470,33 +458,59 @@ paths:
     put:
       $ref: 'resources/apps/update_app.yml'
 
-  /v2/apps/tiers/instance_sizes:
+  /v2/apps/{app_id}/deployments:
     get:
-      $ref: 'resources/apps/list_instance_sizes.yml'
-
-  /v2/apps/{app_id}/deployments/{deployment_id}/cancel:
+      $ref: 'resources/apps/list_deployments.yml'
     post:
-      $ref: 'resources/apps/cancel_deployment.yml'
-
-  /v2/apps/regions:
-    get:
-      $ref: 'resources/apps/list_regions.yml'
+      $ref: 'resources/apps/create_deployment.yml'
 
   /v2/apps/{app_id}/deployments/{deployment_id}:
     get:
       $ref: 'resources/apps/get_deployment.yml'
 
-  /v2/apps/tiers/instance_sizes/{slug}:
+  /v2/apps/{app_id}/deployments/{deployment_id}/cancel:
+    post:
+      $ref: 'resources/apps/cancel_deployment.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
     get:
-      $ref: 'resources/apps/get_instance_size.yml'
+      $ref: 'resources/apps/get_logs.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/logs:
+    get:
+      $ref: 'resources/apps/get_logs_aggregate.yml'
+
+  /v2/apps/tiers:
+    get:
+      $ref: 'resources/apps/list_tiers.yml'
 
   /v2/apps/tiers/{slug}:
     get:
       $ref: 'resources/apps/get_tier.yml'
 
+  /v2/apps/tiers/instance_sizes:
+    get:
+      $ref: 'resources/apps/list_instance_sizes.yml'
+
+  /v2/apps/tiers/instance_sizes/{slug}:
+    get:
+      $ref: 'resources/apps/get_instance_size.yml'
+
+  /v2/apps/regions:
+    get:
+      $ref: 'resources/apps/list_regions.yml'
+
   /v2/apps/propose:
     post:
       $ref: 'resources/apps/propose_app.yml'
+  
+  /v2/apps/{app_id}/alerts:
+    get:
+      $ref: 'resources/apps/list_alerts.yml'
+  
+  /v2/apps/{app_id}/alerts/{alert_id}/destinations:
+    post:
+      $ref: 'resources/apps/assign_alert_destinations.yml'
 
   /v2/cdn/endpoints:
     get:
@@ -572,6 +586,10 @@ paths:
       $ref: 'resources/databases/get_database_cluster.yml'
     delete:
       $ref: 'resources/databases/destroy_cluster.yml'
+
+  /v2/databases/{database_cluster_uuid}/ca:
+    get:
+      $ref: 'resources/databases/get_ca.yml'
 
   /v2/databases/{database_cluster_uuid}/online-migration:
     get:
@@ -972,6 +990,67 @@ paths:
     delete:
       $ref: 'resources/load_balancers/remove_forwarding_rules.yml'
 
+  /v2/monitoring/alerts:
+    get:
+      $ref: 'resources/monitoring/list_alerts.yml'
+
+    post:
+      $ref: 'resources/monitoring/create_alert.yml'
+
+  /v2/monitoring/alerts/{alert_uuid}:
+    get:
+      $ref: 'resources/monitoring/get_alert.yml'
+
+    put:
+      $ref: 'resources/monitoring/update_alert.yml'
+
+    delete:
+      $ref: 'resources/monitoring/delete_alert.yml'
+
+  /v2/monitoring/metrics/droplet/bandwidth:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_bandwidth.yml'
+
+  /v2/monitoring/metrics/droplet/cpu:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_cpu.yml'
+
+  /v2/monitoring/metrics/droplet/filesystem_free:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_filesystem_free.yml'
+
+  /v2/monitoring/metrics/droplet/filesystem_size:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_filesystem_size.yml'
+
+  /v2/monitoring/metrics/droplet/load_1:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_load1.yml'
+
+  /v2/monitoring/metrics/droplet/load_5:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_load5.yml'
+
+  /v2/monitoring/metrics/droplet/load_15:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_load15.yml'
+
+  /v2/monitoring/metrics/droplet/memory_cached:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_memory_cached.yml'
+
+  /v2/monitoring/metrics/droplet/memory_free:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_memory_free.yml'
+
+  /v2/monitoring/metrics/droplet/memory_total:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_memory_total.yml'
+
+  /v2/monitoring/metrics/droplet/memory_available:
+    get:
+      $ref: 'resources/monitoring/metrics_droplet_memory_available.yml'
+
   /v2/projects:
     get:
       $ref: 'resources/projects/list_projects.yml'
@@ -1211,12 +1290,12 @@ components:
         In order to make an authenticated request, include a bearer-type
         `Authorization` header containing your OAuth token. All requests must be
         made over HTTPS.
-        
+
         ### Authenticate with a Bearer Authorization Header
-        
+
         ```
         curl -X $HTTP_METHOD -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/$OBJECT"
         ```
-        
+
 security:
   - bearer_auth: []

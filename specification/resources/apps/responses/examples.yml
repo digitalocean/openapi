@@ -82,6 +82,11 @@ apps:
         tier_slug: basic
         live_url_base: https://sample-php-iaj87.ondigitalocean.app
         live_domain: sample-php-iaj87.ondigitalocean.app
+    links:
+      pages: {}
+    meta:
+      total:
+        1
 
 app:
   value:
@@ -262,6 +267,11 @@ deployments:
               status: PENDING
         phase: PENDING_BUILD
         tier_slug: basic
+    links:
+      pages: {}
+    meta:
+      total:
+        1
 
 deployment:
   value:
@@ -333,20 +343,26 @@ deployment:
 tiers:
   value:
     tiers:
-      - name: Test
-        slug: test
-        egress_bandwidth_bytes: "1023"
-        storage_bytes: "1000000"
-        build_seconds: "233"
+    - name: Starter
+      slug: starter
+      egress_bandwidth_bytes: '1073741824'
+      build_seconds: '6000'
+    - name: Basic
+      slug: basic
+      egress_bandwidth_bytes: '42949672960'
+      build_seconds: '24000'
+    - name: Professional
+      slug: professional
+      egress_bandwidth_bytes: '107374182400'
+      build_seconds: '60000'
 
 tier:
   value:
     tier:
-      name: Test
-      slug: test
-      egress_bandwidth_bytes: "1023"
-      storage_bytes: "1000000"
-      build_seconds: "233"
+      name: Basic
+      slug: basic
+      egress_bandwidth_bytes: '42949672960'
+      build_seconds: '24000'
 
 logs:
   value:
@@ -358,41 +374,163 @@ logs:
 regions:
   value:
     regions:
-      - slug: ams
-        label: Amsterdam
-        flag: netherlands
-        continent: Europe
-        data_centers:
-          - ams3
-        default: true
+    - slug: ams
+      label: Amsterdam
+      flag: netherlands
+      continent: Europe
+      data_centers:
+      - ams3
+    - slug: nyc
+      label: New York
+      flag: usa
+      continent: North America
+      data_centers:
+      - nyc1
+      - nyc3
+      default: true
+    - slug: fra
+      label: Frankfurt
+      flag: germany
+      continent: Europe
+      data_centers:
+      - fra1
+    - slug: sfo
+      label: San Francisco
+      flag: usa
+      continent: North America
+      data_centers:
+      - sfo3
+    - slug: sgp
+      label: Singapore
+      flag: singapore
+      continent: Asia
+      data_centers:
+      - sgp1
+    - slug: blr
+      label: Bangalore
+      flag: india
+      continent: Asia
+      data_centers:
+      - blr1
+    - slug: tor
+      label: Toronto
+      flag: canada
+      continent: North America
+      data_centers:
+      - tor1
+    - slug: lon
+      label: London
+      flag: uk
+      continent: Europe
+      data_centers:
+      - lon1
 
 instance_sizes:
   value:
     instance_sizes:
-      - name: Basic XXS
-        slug: basic-xxs
-        cpu_type: DEDICATED
-        cpus: "1"
-        memory_bytes: "234034"
-        usd_per_month: "5"
-        usd_per_second: "0.00000123847324"
-        tier_slug: basic
-        tier_upgrade_to: professional-xs
-        tier_downgrade_to: starter-xx
+    - name: Basic XXS
+      slug: basic-xxs
+      cpu_type: SHARED
+      cpus: '1'
+      memory_bytes: '536870912'
+      usd_per_month: '5.00'
+      usd_per_second: '0.000002066799'
+      tier_slug: basic
+      tier_upgrade_to: professional-xs
+    - name: Basic XS
+      slug: basic-xs
+      cpu_type: SHARED
+      cpus: '1'
+      memory_bytes: '1073741824'
+      usd_per_month: '10.00'
+      usd_per_second: '0.000004133598'
+      tier_slug: basic
+      tier_upgrade_to: professional-xs
+    - name: Basic S
+      slug: basic-s
+      cpu_type: SHARED
+      cpus: '1'
+      memory_bytes: '2147483648'
+      usd_per_month: '20.00'
+      usd_per_second: '0.000008267196'
+      tier_slug: basic
+      tier_upgrade_to: professional-s
+    - name: Basic M
+      slug: basic-m
+      cpu_type: SHARED
+      cpus: '2'
+      memory_bytes: '4294967296'
+      usd_per_month: '40.00'
+      usd_per_second: '0.000016534392'
+      tier_slug: basic
+      tier_upgrade_to: professional-m
+    - name: Professional XS
+      slug: professional-xs
+      cpu_type: SHARED
+      cpus: '1'
+      memory_bytes: '1073741824'
+      usd_per_month: '12.00'
+      usd_per_second: '0.000004960317'
+      tier_slug: professional
+      tier_downgrade_to: basic-xs
+    - name: Professional S
+      slug: professional-s
+      cpu_type: SHARED
+      cpus: '1'
+      memory_bytes: '2147483648'
+      usd_per_month: '25.00'
+      usd_per_second: '0.000010333995'
+      tier_slug: professional
+      tier_downgrade_to: basic-s
+    - name: Professional M
+      slug: professional-m
+      cpu_type: SHARED
+      cpus: '2'
+      memory_bytes: '4294967296'
+      usd_per_month: '50.00'
+      usd_per_second: '0.000020667989'
+      tier_slug: professional
+      tier_downgrade_to: basic-s
+    - name: Professional 1L
+      slug: professional-1l
+      cpu_type: DEDICATED
+      cpus: '1'
+      memory_bytes: '4294967296'
+      usd_per_month: '75.00'
+      usd_per_second: '0.000031001984'
+      tier_slug: professional
+      tier_downgrade_to: basic-m
+    - name: Professional L
+      slug: professional-l
+      cpu_type: DEDICATED
+      cpus: '2'
+      memory_bytes: '8589934592'
+      usd_per_month: '150.00'
+      usd_per_second: '0.000062003968'
+      tier_slug: professional
+      tier_downgrade_to: basic-s
+    - name: Professional XL
+      slug: professional-xl
+      cpu_type: DEDICATED
+      cpus: '4'
+      memory_bytes: '17179869184'
+      usd_per_month: '300.00'
+      usd_per_second: '0.000124007937'
+      tier_slug: professional
+      tier_downgrade_to: basic-s
 
 instance_size:
   value:
     instance_size:
       name: Basic XXS
       slug: basic-xxs
-      cpu_type: DEDICATED
-      cpus: "1"
-      memory_bytes: "234034"
-      usd_per_month: "5"
-      usd_per_second: "0.00000123847324"
+      cpu_type: SHARED
+      cpus: '1'
+      memory_bytes: '536870912'
+      usd_per_month: '5.00'
+      usd_per_second: '0.000002066799'
       tier_slug: basic
       tier_upgrade_to: professional-xs
-      tier_downgrade_to: starter-xx
 
 components:
   value:
@@ -432,3 +570,50 @@ propose:
       region: ams
     app_cost: 5
     app_tier_upgrade_cost: 17
+
+alerts:
+  value:
+    alerts:
+    - id: e552e1f9-c1b0-4e6d-8777-ad6f27767306
+      spec:
+        rule: DEPLOYMENT_FAILED
+      emails:
+      - sammy@digitalocean.com
+      phase: ACTIVE
+      progress:
+        steps:
+        - name: alert-configure-insight-alert
+          status: SUCCESS
+          started_at: 2020-07-28T18:00:00Z
+          ended_at: 2020-07-28T18:00:00Z
+    - id: b58cc9d4-0702-4ffd-ab45-4c2a8d979527
+      spec:
+        rule: CPU_UTILIZATION
+        operator: GREATER_THAN
+        value: 85.0
+        window: FIVE_MINUTES
+      emails:
+      - sammy@digitalocean.com
+      phase: ACTIVE
+      progress:
+        steps:
+        - name: alert-configure-insight-alert
+          status: SUCCESS
+          started_at: 2020-07-28T18:00:00Z
+          ended_at: 2020-07-28T18:00:00Z
+
+alert:
+  value:
+    alert:
+      id: e552e1f9-c1b0-4e6d-8777-ad6f27767306
+      spec:
+        rule: DEPLOYMENT_FAILED
+      emails:
+      - sammy@digitalocean.com
+      phase: ACTIVE
+      progress:
+        steps:
+        - name: alert-configure-insight-alert
+          status: SUCCESS
+          started_at: 2020-07-28T18:00:00Z
+          ended_at: 2020-07-28T18:00:00Z

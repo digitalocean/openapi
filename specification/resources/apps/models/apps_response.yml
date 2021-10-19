@@ -1,11 +1,10 @@
-properties:
-  apps:
-    items:
-      $ref: app.yml
-    title: A list of apps
-    type: array
-  links:
-    $ref: ../../../shared/pages.yml#/page_links
-  meta:
-    $ref: ../../../shared/meta.yml#/properties/meta
-type: object
+allOf:
+  - type: object
+    properties:
+      apps:
+        title: A list of apps
+        type: array
+        items:
+          $ref: app.yml
+  - $ref: ../../../shared/pages.yml#/pagination
+  - $ref: ../../../shared/meta.yml

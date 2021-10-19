@@ -177,7 +177,8 @@ certificate_request_lets_encrypt:
           - www.example.com
           - example.com
           description: An array of fully qualified domain names (FQDNs) for
-            which the certificate was issued.
+            which the certificate was issued. A certificate covering all
+            subdomains can be issued using a wildcard (e.g. `*.example.com`).
 
       required:
       - dns_names
