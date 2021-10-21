@@ -55,7 +55,7 @@ properties:
     type: string
     readOnly: true
     example: "68.183.121.157"
-    description: The public IPv4 address of the Kubernetes master node.
+    description: The public IPv4 address of the Kubernetes master node. This will not be set if high availability is configured on the cluster (v1.21+)
 
   endpoint:
     type: string
