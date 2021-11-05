@@ -27,3 +27,6 @@ responses:
 
 parameters:
   - $ref: 'parameters.yml#/alert_uuid'
+
+x-codeSamples:
+  - $ref: 'examples/curl/delete_alert.yml'

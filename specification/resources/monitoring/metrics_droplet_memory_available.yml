@@ -28,3 +28,6 @@ parameters:
   - $ref: 'parameters.yml#/droplet_id'
   - $ref: 'parameters.yml#/metric_timestamp_start'
   - $ref: 'parameters.yml#/metric_timestamp_end'
+
+x-codeSamples:
+  - $ref: 'examples/curl/metrics_droplet_memory_available.yml'
