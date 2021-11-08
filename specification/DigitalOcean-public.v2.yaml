@@ -587,6 +587,12 @@ paths:
     delete:
       $ref: 'resources/databases/destroy_cluster.yml'
 
+  /v2/databases/{database_cluster_uuid}/config:
+    get:
+      $ref: 'resources/databases/get_database_config.yml'
+    patch:
+      $ref: 'resources/databases/patch_database_config.yml'
+
   /v2/databases/{database_cluster_uuid}/ca:
     get:
       $ref: 'resources/databases/get_ca.yml'
