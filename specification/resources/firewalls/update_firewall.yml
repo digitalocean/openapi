@@ -18,6 +18,8 @@ requestBody:
   content:
     application/json:
       schema:
+        required:
+          - name
         allOf:
           - $ref: 'models/firewall.yml'
           - anyOf:
