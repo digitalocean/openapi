@@ -473,8 +473,8 @@ paths:
     post:
       $ref: 'resources/apps/cancel_deployment.yml'
 
-  ? /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs
-  : get:
+  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
+    get:
       $ref: 'resources/apps/get_logs.yml'
 
   /v2/apps/{app_id}/deployments/{deployment_id}/logs:
@@ -889,12 +889,12 @@ paths:
     get:
       $ref: 'resources/kubernetes/list_associated_resources.yml'
 
-  ? /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/selective
-  : delete:
+  /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/selective:
+    delete:
       $ref: 'resources/kubernetes/destroy_with_associated_resources_selective.yml'
 
-  ? /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/dangerous
-  : delete:
+  /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/dangerous:
+    delete:
       $ref: 'resources/kubernetes/destroy_with_associated_resources_dangerous.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/kubeconfig:
@@ -930,8 +930,8 @@ paths:
     delete:
       $ref: 'resources/kubernetes/delete_node_pool.yml'
 
-  ? /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id}
-  : delete:
+  /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id}:
+    delete:
       $ref: 'resources/kubernetes/delete_node.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle:
