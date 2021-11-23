@@ -1124,9 +1124,13 @@ paths:
     post:
       $ref: 'resources/registry/validate_registry_name.yml'
 
-  /v2/registry/{registry_name}:
+  /v2/registry/{registry_name}/repositories:
     get:
       $ref: 'resources/registry/list_registry_repositories.yml'
+
+  /v2/registry/{registry_name}/repositoriesV2:
+    get:
+      $ref: 'resources/registry/list_registry_repositories_v2.yml'
 
   /v2/registry/{registry_name}/{repository_name}/tags:
     get:
@@ -1135,6 +1139,10 @@ paths:
   /v2/registry/{registry_name}/{repository_name}/tags/{repository_tag}:
     delete:
       $ref: 'resources/registry/delete_repository_tag.yml'
+
+  /v2/registry/{registry_name}/{repository_name}/digests:
+    get:
+      $ref: 'resources/registry/list_repository_manifests.yml'
 
   /v2/registry/{registry_name}/{repository_name}/digests/{manifest_digest}:
     delete:
