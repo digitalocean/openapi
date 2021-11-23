@@ -7,6 +7,6 @@ properties:
     type: string
     example: /api
   preserve_path_prefix:
-    description: An Optional flag to preserve the path that is forwarded to the backend service. By default, the HTTP request path will be trimmed from the left when forwarded to the component. By default a component with path=/api, will have requests to "/api/list" trimmed to "/list"; if this value is true the path will remain "/api/list".
+    description:  Boolean. An optional flag to preserve the path that is forwarded to the backend service. By default, the HTTP request path will be trimmed from the left when forwarded to the component. For example, a component with `path=/api` will have requests to `/api/list` trimmed to `/list`. If this value is `true`, the path will remain `/api/list`.
     type: boolean
     example: true
