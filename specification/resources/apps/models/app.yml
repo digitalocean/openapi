@@ -69,7 +69,7 @@ properties:
     example: 2020-12-01T00:42:16Z
   pinned_deployment:
     allOf:
-      - description: The deployment that the app is pinned to
+      - description: The deployment that the app is pinned to.
       - $ref: apps_deployment.yml
 required:
 - spec
