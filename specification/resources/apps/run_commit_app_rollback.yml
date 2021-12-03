@@ -1,10 +1,9 @@
-operationId: revert_app_rollback
+operationId: run_commit_app_rollback
 
-summary: Revert App Rollback
+summary: Commit App Rollback
 
 description: |
-  Revert an app rollback. This action reverts the active rollback by creating a new deployment from the
-  latest app spec prior to the rollback and unpins the app to resume new deployments.
+  Commit an app rollback. This action permanently applies the rollback and unpins the app to resume new deployments.
 
 tags:
   - Apps
@@ -14,7 +13,7 @@ parameters:
 
 responses:
   "200":
-    $ref: responses/new_app_deployment.yml
+    $ref: "../../shared/responses/no_content.yml"
 
   "401":
     $ref: ../../shared/responses/unauthorized.yml
@@ -32,4 +31,4 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: "examples/curl/revert_app_rollback.yml"
+  - $ref: "examples/curl/commit_app_rollback.yml"

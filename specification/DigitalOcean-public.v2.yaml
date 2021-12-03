@@ -523,11 +523,11 @@ paths:
 
   /v2/apps/{app_id}/rollback/commit:
     post:
-      $ref: 'resources/apps/commit_app_rollback.yml'
+      $ref: 'resources/apps/run_commit_app_rollback.yml'
 
   /v2/apps/{app_id}/rollback/revert:
     post:
-      $ref: 'resources/apps/revert_app_rollback.yml'
+      $ref: 'resources/apps/run_revert_app_rollback.yml'
 
   /v2/cdn/endpoints:
     get:
