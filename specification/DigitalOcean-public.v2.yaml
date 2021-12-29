@@ -149,22 +149,37 @@ tags:
       database clusters as well as scale the size of a cluster, add or remove read-only replicas,
       and manage other configuration details.
 
-      The size of individual nodes in a database cluster is represented by a human-readable slug.
-      These slugs denote the underlying Droplet class, amount of RAM, and CPU count for the node.
-      Database clusters may be deployed in a multi-node, highly available configuration. In
-      addition to the primary node, up to two standby nodes may be added to a cluster with one
-      exception. High availability configurations are not available when using the smallest node
-      size. The currently available sizes and their corresponding slugs are:
+      Database clusters may be deployed in a multi-node, high-availability configuration.
+      If your machine type is above the basic nodes or your node plan is above the smallest option,
+      you may additionally include up to two standby nodes in your cluster.
 
-      Size Slug        | RAM   | CPU     | Storage | High Availability Plans
-      -----------------|-------|---------|---------|------------------------
-      db-s-1vcpu-1gb   | 1 GB  | 1 vCPU  | 10 GB   | False
-      db-s-1vcpu-2gb   | 2 GB  | 1 vCPU  | 25 GB   | True
-      db-s-2vcpu-4gb   | 4 GB  | 2 vCPU  | 38 GB   | True
-      db-s-4vcpu-8gb   | 8 GB  | 4 vCPU  | 115 GB  | True
-      db-s-6vcpu-16gb  | 16 GB | 6 vCPU  | 270 GB  | True
-      db-s-8vcpu-32gb  | 32 GB | 8 vCPU  | 580 GB  | True
-      db-s-16vcpu-64gb | 64 GB | 16 vCPU | 1.12 TB | True
+      The size of individual nodes in a database cluster is represented by a human-readable slug,
+      which is used in some of the following requests. Each slug denotes the node's identifier, amount
+      of RAM, and CPU count.
+
+      To find your node's slug, note its slug identifier based on machine type:
+
+      Slug Identifier | Machine Type
+      ----------------|-----------------------
+      db-s            | Basic Node
+      gd              | General Purpose Node
+      so1_5           | Storage-Optimized Node
+
+      Then, append a dash (`-`) and the appropriate slug size from the following list of node plans:
+
+      Slug Size    | RAM   | CPU     | Storage |
+      -------------|-------|---------|---------|
+      1vcpu-1gb    | 1 GB  | 1 vCPU  | 10 GB   |
+      1vcpu-2gb    | 2 GB  | 1 vCPU  | 25 GB   |
+      2vcpu-4gb    | 4 GB  | 2 vCPU  | 38 GB   |
+      4vcpu-8gb    | 8 GB  | 4 vCPU  | 115 GB  |
+      6vcpu-16gb   | 16 GB | 6 vCPU  | 270 GB  |
+      8vcpu-32gb   | 32 GB | 8 vCPU  | 580 GB  |
+      16vcpu-64gb  | 64 GB | 16 vCPU | 1.12 TB |
+
+      For example, the full slug of a storage-optimized node with 16 GB of RAM
+      and 6 vCPUs is `so1_5-6vcpu-16gb`.
+
 
   - name: Domain Records
     description: |
