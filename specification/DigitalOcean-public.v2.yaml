@@ -150,35 +150,46 @@ tags:
       and manage other configuration details.
 
       Database clusters may be deployed in a multi-node, high-availability configuration.
-      If your machine type is above the basic nodes or your node plan is above the smallest option,
-      you may additionally include up to two standby nodes in your cluster.
+      If your machine type is above the basic nodes, your node plan is above the smallest option,
+      or you are running MongoDB, you may additionally include up to two standby nodes in your cluster.
 
       The size of individual nodes in a database cluster is represented by a human-readable slug,
-      which is used in some of the following requests. Each slug denotes the node's identifier, amount
-      of RAM, and CPU count.
+      which is used in some of the following requests. Each slug denotes the node's identifier,
+      CPU count, and amount of RAM, in that order.
 
-      To find your node's slug, note its slug identifier based on machine type:
+      For Basic nodes, reference the following table for its slug:
 
-      Slug Identifier | Machine Type
-      ----------------|-----------------------
-      db-s            | Basic Node
-      gd              | General Purpose Node
-      so1_5           | Storage-Optimized Node
+      Slug               | Machine Type           | CPU     | RAM
+      -------------------|------------------------|---------|---------
+      db-s-1vcpu-1gb     | Basic node             | 1 vCPU  | 1 GB
+      db-s-1vcpu-2gb     | Basic node             | 1 vCPU  | 2 GB
+      db-s-2vcpu-4gb     | Basic node             | 2 vCPU  | 4 GB
+      db-s-4vcpu-8gb     | Basic node             | 4 vCPU  | 8 GB
+      db-s-6vcpu-16gb    | Basic node             | 6 vCPU  | 16 GB
+      db-s-8vcpu-32gb    | Basic node             | 8 vCPU  | 32 GB
+      db-s-16vcpu-64gb   | Basic node             | 16 vCPU | 64 GB
 
-      Then, append a dash (`-`) and the appropriate slug size from the following list of node plans:
+      For General Purpose nodes, reference the following table for its slug:
 
-      Slug Size    | RAM   | CPU     | Storage |
-      -------------|-------|---------|---------|
-      1vcpu-1gb    | 1 GB  | 1 vCPU  | 10 GB   |
-      1vcpu-2gb    | 2 GB  | 1 vCPU  | 25 GB   |
-      2vcpu-4gb    | 4 GB  | 2 vCPU  | 38 GB   |
-      4vcpu-8gb    | 8 GB  | 4 vCPU  | 115 GB  |
-      6vcpu-16gb   | 16 GB | 6 vCPU  | 270 GB  |
-      8vcpu-32gb   | 32 GB | 8 vCPU  | 580 GB  |
-      16vcpu-64gb  | 64 GB | 16 vCPU | 1.12 TB |
+      Slug               | Machine Type           | CPU     | RAM
+      -------------------|------------------------|---------|---------
+      gd-2vcpu-8gb       | General Purpose node   | 2 vCPU  | 8 GB
+      gd-4vcpu-16gb      | General Purpose node   | 4 vCPU  | 16 GB
+      gd-8vcpu-32gb      | General Purpose node   | 8 vCPU  | 32 GB
+      gd-16vcpu-64gb     | General Purpose node   | 16 vCPU | 64 GB
+      gd-32vcpu-128gb    | General Purpose node   | 32 vCPU | 128 GB
+      gd-40vcpu-160gb    | General Purpose node   | 40 vCPU | 160 GB
 
-      For example, the full slug of a storage-optimized node with 16 GB of RAM
-      and 6 vCPUs is `so1_5-6vcpu-16gb`.
+      For Storage-Optimized nodes, reference the following table for its slug:
+
+      Slug               | Machine Type           | CPU     | RAM
+      -------------------|------------------------|---------|---------
+      so1_5-2vcpu-16gb   | Storage-Optimized node | 2 vCPU  | 16 GB
+      so1_5-4vcpu-32gb   | Storage-Optimized node | 4 vCPU  | 32 GB
+      so1_5-8vcpu-64gb   | Storage-Optimized node | 8 vCPU  | 64 GB
+      so1_5-16vcpu-128gb | Storage-Optimized node | 16 vCPU | 128 GB
+      so1_5-24vcpu-192gb | Storage-Optimized node | 24 vCPU | 192 GB
+      so1_5-32vcpu-256gb | Storage-Optimized node | 32 vCPU | 256 GB
 
 
   - name: Domain Records
