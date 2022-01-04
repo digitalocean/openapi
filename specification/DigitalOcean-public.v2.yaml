@@ -157,39 +157,39 @@ tags:
       which is used in some of the following requests. Each slug denotes the node's identifier,
       CPU count, and amount of RAM, in that order.
 
-      For Basic nodes, reference the following table for its slug:
+      For **Basic nodes**, reference the following table for its slug:
 
-      Slug               | Machine Type           | CPU     | RAM
-      -------------------|------------------------|---------|---------
-      db-s-1vcpu-1gb     | Basic node             | 1 vCPU  | 1 GB
-      db-s-1vcpu-2gb     | Basic node             | 1 vCPU  | 2 GB
-      db-s-2vcpu-4gb     | Basic node             | 2 vCPU  | 4 GB
-      db-s-4vcpu-8gb     | Basic node             | 4 vCPU  | 8 GB
-      db-s-6vcpu-16gb    | Basic node             | 6 vCPU  | 16 GB
-      db-s-8vcpu-32gb    | Basic node             | 8 vCPU  | 32 GB
-      db-s-16vcpu-64gb   | Basic node             | 16 vCPU | 64 GB
+      Slug               | CPU     | RAM
+      -------------------|---------|---------
+      db-s-1vcpu-1gb     | 1 vCPU  | 1 GB
+      db-s-1vcpu-2gb     | 1 vCPU  | 2 GB
+      db-s-2vcpu-4gb     | 2 vCPU  | 4 GB
+      db-s-4vcpu-8gb     | 4 vCPU  | 8 GB
+      db-s-6vcpu-16gb    | 6 vCPU  | 16 GB
+      db-s-8vcpu-32gb    | 8 vCPU  | 32 GB
+      db-s-16vcpu-64gb   | 16 vCPU | 64 GB
 
-      For General Purpose nodes, reference the following table for its slug:
+      For **General Purpose nodes**, reference the following table for its slug:
 
-      Slug               | Machine Type           | CPU     | RAM
-      -------------------|------------------------|---------|---------
-      gd-2vcpu-8gb       | General Purpose node   | 2 vCPU  | 8 GB
-      gd-4vcpu-16gb      | General Purpose node   | 4 vCPU  | 16 GB
-      gd-8vcpu-32gb      | General Purpose node   | 8 vCPU  | 32 GB
-      gd-16vcpu-64gb     | General Purpose node   | 16 vCPU | 64 GB
-      gd-32vcpu-128gb    | General Purpose node   | 32 vCPU | 128 GB
-      gd-40vcpu-160gb    | General Purpose node   | 40 vCPU | 160 GB
+      Slug               | CPU     | RAM
+      -------------------|---------|---------
+      gd-2vcpu-8gb       | 2 vCPU  | 8 GB
+      gd-4vcpu-16gb      | 4 vCPU  | 16 GB
+      gd-8vcpu-32gb      | 8 vCPU  | 32 GB
+      gd-16vcpu-64gb     | 16 vCPU | 64 GB
+      gd-32vcpu-128gb    | 32 vCPU | 128 GB
+      gd-40vcpu-160gb    | 40 vCPU | 160 GB
 
-      For Storage-Optimized nodes, reference the following table for its slug:
+      For **Storage-Optimized nodes**, reference the following table for its slug:
 
-      Slug               | Machine Type           | CPU     | RAM
-      -------------------|------------------------|---------|---------
-      so1_5-2vcpu-16gb   | Storage-Optimized node | 2 vCPU  | 16 GB
-      so1_5-4vcpu-32gb   | Storage-Optimized node | 4 vCPU  | 32 GB
-      so1_5-8vcpu-64gb   | Storage-Optimized node | 8 vCPU  | 64 GB
-      so1_5-16vcpu-128gb | Storage-Optimized node | 16 vCPU | 128 GB
-      so1_5-24vcpu-192gb | Storage-Optimized node | 24 vCPU | 192 GB
-      so1_5-32vcpu-256gb | Storage-Optimized node | 32 vCPU | 256 GB
+      Slug               | CPU     | RAM
+      -------------------|---------|---------
+      so1_5-2vcpu-16gb   | 2 vCPU  | 16 GB
+      so1_5-4vcpu-32gb   | 4 vCPU  | 32 GB
+      so1_5-8vcpu-64gb   | 8 vCPU  | 64 GB
+      so1_5-16vcpu-128gb | 16 vCPU | 128 GB
+      so1_5-24vcpu-192gb | 24 vCPU | 192 GB
+      so1_5-32vcpu-256gb | 32 vCPU | 256 GB
 
 
   - name: Domain Records
