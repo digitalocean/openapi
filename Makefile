@@ -1,5 +1,5 @@
 
-POSTMAN_BASE_URL ?= http://localhost:8080
+POSTMAN_BASE_URL ?= http://localhost:8000
 PROXY_TARGET ?= http://mock:4010
 
 SPEC_FILE ?= specification/DigitalOcean-public.v2.yaml
@@ -18,7 +18,7 @@ dev-dependencies: ## Install development tooling using npm
 	npm install --only=dev
 
 .PHONY: start-mockedproxy
-start-mockedproxy: ## Start a prism proxy (port 8080) targeting a local mock api (port 4010)
+start-mockedproxy: ## Start a prism proxy (port 8000) targeting a local mock api (port 4010)
 	PROXY_TARGET=$(PROXY_TARGET) docker-compose up -d
 
 .PHONY: stop-services
