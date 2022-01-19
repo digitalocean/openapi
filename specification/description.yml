@@ -261,10 +261,11 @@ introduction: |
   `curl` command. This will allow us to demonstrate the various endpoints in a
   simple, textual format.
     
-  These examples assume that you are using a Linux or macOS command line. To run
-  these `curl` commands in a Windows command line, you must change all single
-  quotes (`''`) in the command to double quotes (`""`) and escape nested quotes
-  with a slash (`/`). For example, instead of `'{"size":"db-s-4vcpu-8gb", "num_nodes":3}'`,
+  These examples assume that you are using a Linux or macOS command line. To run 
+  these `curl` commands in Powershell, you must use `curl.exe` instead of `curl`. 
+  In a Windows command line, you must change all single quotes (`''`) in the 
+  command to double quotes (`""`) and escape nested quotes with a slash (`/`). 
+  For example, instead of `'{"size":"db-s-4vcpu-8gb", "num_nodes":3}'`,
   use `"{\"size\":\"db-s-4vcpu-8gb\", \"num_nodes\":3}"`.
 
   The names of account-specific references (like Droplet IDs, for instance)
