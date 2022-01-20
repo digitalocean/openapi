@@ -260,6 +260,19 @@ introduction: |
   Throughout this document, some example API requests will be given using the
   `curl` command. This will allow us to demonstrate the various endpoints in a
   simple, textual format.
+    
+    These examples assume that you are using a Linux or macOS command line. To run
+  these commands on a Windows machine, you can either use cmd.exe, PowerShell, or WSL:
+
+  * For cmd.exe, use the `set VAR=VALUE` [syntax](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/set_1)
+  to define environment variables, call them with `%VAR%`, then replace all backslashes (`\`) in the examples with carets (`^`).
+
+  * For PowerShell, use the `$Env:VAR = "VALUE"` [syntax](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.2)
+  to define environment variables, call them with `$Env:VAR`, then replace `curl` with `curl.exe` and all backslashes (`\`) in the examples with backticks (`` ` ``).
+
+  * WSL is a compatibility layer that allows you to emulate a Linux terminal on a Windows machine.
+  Install WSL with our [community tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-the-windows-subsystem-for-linux-2-on-microsoft-windows-10), 
+  then follow this API documentation normally.
 
   The names of account-specific references (like Droplet IDs, for instance)
   will be represented by variables. For instance, a Droplet ID may be
@@ -288,6 +301,7 @@ introduction: |
   the `-i` flag to display the header information along with the body. If you
   are only interested in the header, you can instead pass the `-I` flag, which
   will exclude the response body entirely.
+
 
   ### Set and Export your OAuth Token
 

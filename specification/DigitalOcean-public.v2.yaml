@@ -149,22 +149,48 @@ tags:
       database clusters as well as scale the size of a cluster, add or remove read-only replicas,
       and manage other configuration details.
 
-      The size of individual nodes in a database cluster is represented by a human-readable slug.
-      These slugs denote the underlying Droplet class, amount of RAM, and CPU count for the node.
-      Database clusters may be deployed in a multi-node, highly available configuration. In
-      addition to the primary node, up to two standby nodes may be added to a cluster with one
-      exception. High availability configurations are not available when using the smallest node
-      size. The currently available sizes and their corresponding slugs are:
+      Database clusters may be deployed in a multi-node, high-availability configuration.
+      If your machine type is above the basic nodes, your node plan is above the smallest option,
+      or you are running MongoDB, you may additionally include up to two standby nodes in your cluster.
 
-      Size Slug        | RAM   | CPU     | Storage | High Availability Plans
-      -----------------|-------|---------|---------|------------------------
-      db-s-1vcpu-1gb   | 1 GB  | 1 vCPU  | 10 GB   | False
-      db-s-1vcpu-2gb   | 2 GB  | 1 vCPU  | 25 GB   | True
-      db-s-2vcpu-4gb   | 4 GB  | 2 vCPU  | 38 GB   | True
-      db-s-4vcpu-8gb   | 8 GB  | 4 vCPU  | 115 GB  | True
-      db-s-6vcpu-16gb  | 16 GB | 6 vCPU  | 270 GB  | True
-      db-s-8vcpu-32gb  | 32 GB | 8 vCPU  | 580 GB  | True
-      db-s-16vcpu-64gb | 64 GB | 16 vCPU | 1.12 TB | True
+      The size of individual nodes in a database cluster is represented by a human-readable slug,
+      which is used in some of the following requests. Each slug denotes the node's identifier,
+      CPU count, and amount of RAM, in that order.
+
+      For **Basic nodes**, reference the following table for its slug:
+
+      Slug               | CPU     | RAM
+      -------------------|---------|---------
+      db-s-1vcpu-1gb     | 1 vCPU  | 1 GB
+      db-s-1vcpu-2gb     | 1 vCPU  | 2 GB
+      db-s-2vcpu-4gb     | 2 vCPU  | 4 GB
+      db-s-4vcpu-8gb     | 4 vCPU  | 8 GB
+      db-s-6vcpu-16gb    | 6 vCPU  | 16 GB
+      db-s-8vcpu-32gb    | 8 vCPU  | 32 GB
+      db-s-16vcpu-64gb   | 16 vCPU | 64 GB
+
+      For **General Purpose nodes**, reference the following table for its slug:
+
+      Slug               | CPU     | RAM
+      -------------------|---------|---------
+      gd-2vcpu-8gb       | 2 vCPU  | 8 GB
+      gd-4vcpu-16gb      | 4 vCPU  | 16 GB
+      gd-8vcpu-32gb      | 8 vCPU  | 32 GB
+      gd-16vcpu-64gb     | 16 vCPU | 64 GB
+      gd-32vcpu-128gb    | 32 vCPU | 128 GB
+      gd-40vcpu-160gb    | 40 vCPU | 160 GB
+
+      For **Storage-Optimized nodes**, reference the following table for its slug:
+
+      Slug               | CPU     | RAM
+      -------------------|---------|---------
+      so1_5-2vcpu-16gb   | 2 vCPU  | 16 GB
+      so1_5-4vcpu-32gb   | 4 vCPU  | 32 GB
+      so1_5-8vcpu-64gb   | 8 vCPU  | 64 GB
+      so1_5-16vcpu-128gb | 16 vCPU | 128 GB
+      so1_5-24vcpu-192gb | 24 vCPU | 192 GB
+      so1_5-32vcpu-256gb | 32 vCPU | 256 GB
+
 
   - name: Domain Records
     description: |
