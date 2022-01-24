@@ -7,7 +7,7 @@ description: >-
   `/v2/databases/$DATABASE_ID/online-migration` endpoint. Migrating a cluster
   establishes a connection with an existing cluster and replicates its
   contents to the target cluster. Online migration is only available for
-  PostgreSQL and Redis clusters.
+  MySQL, PostgreSQL, and Redis clusters.
 
 tags:
   - Databases
