@@ -6,6 +6,15 @@ properties:
     description: The number of failed health checks before considered unhealthy.
     example: 2
 
+  port:
+    type: integer
+    format: int64
+    description: The port on which the health check will be performed.
+      If not set, the health check will be performed on the component's http_port.
+    example: 80
+    maximum: 65535
+    minimum: 1
+
   http_path:
     type: string
     description: The route path used for the HTTP health check ping. If not set, the
