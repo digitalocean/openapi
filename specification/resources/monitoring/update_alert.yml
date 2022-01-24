@@ -35,3 +35,6 @@ requestBody:
     application/json:
       schema:
         $ref: 'models/alert_policy_request.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/update_alert.yml'
