@@ -6,7 +6,7 @@ source: |-
 
   load_balancer = DropletKit::LoadBalancer.new(
     name: 'example-lb-01',
-    size: 'lb-medium',
+    size_unit: '2',
     algorithm: 'round_robin',
     droplet_ids: [ 3164444, 3164445],
     redirect_http_to_https: true,
