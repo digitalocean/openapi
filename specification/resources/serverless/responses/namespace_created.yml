@@ -1,0 +1,11 @@
+description: The response will be a JSON object with a key called `namespace`.
+  The value of this will be an object that contains the standard attributes
+  associated with a namespace.
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        namespace:
+          $ref: '../models/namespace_info.yml'

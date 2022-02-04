@@ -388,6 +388,9 @@ tags:
   - name: Regions
     description: Provides information about DigitalOcean data center regions.
 
+  - name: Serverless
+    description: Provides methods for CRUD operations for namespaces.
+
   - name: Sizes
     description: >-
       The sizes objects represent different packages of hardware resources that
@@ -1197,6 +1200,10 @@ paths:
   /v2/reports/droplet_neighbors_ids:
     get:
       $ref: 'resources/droplets/list_all_droplet_neighbors_ids.yml'
+
+  /v2/function_namespaces:
+    post:
+      $ref: 'resources/serverless/create_namespace.yml'
 
   /v2/sizes:
     get:

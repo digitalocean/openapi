@@ -1,0 +1,14 @@
+type: object
+properties:
+  namespace:
+    type: object
+    properties:
+      region:
+        type: string
+        example: nyc
+        description: Region in which namespace will be created.
+
+      label:
+        type: string
+        example: my namespace
+        description: Namespace label.

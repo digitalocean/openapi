@@ -1,0 +1,39 @@
+operationId: create_namespace
+
+summary: Create a Namespace
+
+description: >-
+  Creates a new namespace for given user/team.
+
+  * To create a new namespace, send a POST
+    request to `/v2/function_namespaces` with the `region` and `label` attributes under `namespace` object.
+
+tags:
+  - Serverless
+
+requestBody:
+  required: true
+
+  content:
+    application/json:
+      schema:
+        $ref: 'models/create_namespace.yml'
+
+responses:
+  '202':
+    $ref: 'responses/namespace_created.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/create_namespace.yml'
