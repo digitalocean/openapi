@@ -43,4 +43,4 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/update_database_config.yml'
+  - $ref: 'examples/curl/patch_database_config.yml'
