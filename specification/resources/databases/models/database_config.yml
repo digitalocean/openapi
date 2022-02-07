@@ -1,0 +1,54 @@
+type: object
+
+properties:
+  connection_timeout:
+    type: integer
+    format: uint32
+    example: 28800
+    description: The number of seconds mysql server will wait for connect packets.
+  default_time_zone:
+    type: string
+    example: 'UTC'
+    description: The time zone mysql will use for zone-sensitive time values.
+  innodb_log_buffer_size:
+    type: integer
+    format: uint64
+    example: 16777216
+  innodb_online_alter_log_max_size:
+    type: integer
+    format: unit64
+    example: 134217728
+  innodby_lock_wait_timeout:
+    type: integer
+    format: uint32
+    example: 50
+  interative_timeout:
+    type: integer
+    format: uint32
+    example: 3600
+  max_allowed_packet:
+    type: integer
+    format: unit64
+    example: 67108864
+  read_timeout:
+    type: integer
+    format: uint32
+    example: 30
+  sort_buffer_size:
+    type: integer
+    format: uint64
+    example: 262144
+  sql_mode:
+    type: string
+    example: 'ANSI,TRADITIONAL'
+  sql_require_primary_key:
+    type: boolean
+    example: true
+  wait_timeout:
+    type: integer
+    format: uint32
+    example: 28800
+  write_timeout:
+    type: integer
+    format: uint32
+    example: 30
