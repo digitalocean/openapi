@@ -16,7 +16,7 @@ source: |-
       createRequest := &godo.DatabaseCreateRequest{
           Name:       "backend",
           EngineSlug: "pg",
-          Version:    "10",
+          Version:    "14",
           Region:     "nyc3",
           SizeSlug:   "db-s-2vcpu-4gb",
           NumNodes:   2,
