@@ -12,7 +12,6 @@ required:
   - alerts
   - enabled
 
-
 properties:
   alerts:
     $ref: 'alerts.yml'
@@ -58,6 +57,9 @@ properties:
       - v1/insights/droplet/public_inbound_bandwidth
       - v1/insights/droplet/private_outbound_bandwidth
       - v1/insights/droplet/private_inbound_bandwidth
+      - v1/insights/lbaas/avg_cpu_utilization_percent
+      - v1/insights/lbaas/connection_utilization_percent
+      - v1/insights/lbaas/droplet_health
     example: v1/insights/droplet/cpu
   uuid:
     type: string
