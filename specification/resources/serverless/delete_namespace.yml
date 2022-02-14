@@ -12,13 +12,7 @@ tags:
   - Serverless
 
 parameters:
-  - name: namespace_id
-    in: query
-    description: Namespace ID which want to delete.
-    schema:
-      type: string
-      required: true
-    example: namespace-id
+  - $ref: 'parameters.yml#/namespace_id'
 
 responses:
   '202':

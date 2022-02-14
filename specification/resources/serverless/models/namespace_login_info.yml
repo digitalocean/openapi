@@ -13,10 +13,10 @@ properties:
 
   uuid:
     type: string
-    example: ''
+    example: string
     description: UUID for the namespace.
 
   key:
     type: string
-    example: ''
+    example: string
     description: Key for the namespace.
