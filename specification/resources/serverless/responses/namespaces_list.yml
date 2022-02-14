@@ -25,4 +25,4 @@ content:
           namespace: namespace-id
           label: my namespace
           region: nyc
-          login_token:
+          login_token: ''
