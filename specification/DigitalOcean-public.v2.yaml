@@ -389,7 +389,7 @@ tags:
     description: Provides information about DigitalOcean data center regions.
 
   - name: Serverless
-    description: Provides methods for CRUD operations for namespaces.
+    description: Provides methods for CRUD operations for function namespaces.
 
   - name: Sizes
     description: >-
@@ -1204,6 +1204,30 @@ paths:
   /v2/function_namespaces:
     post:
       $ref: 'resources/serverless/create_namespace.yml'
+    get:
+      $ref: 'resources/serverless/list_namespaces.yml'
+
+  /v2/function_namespaces/{namespace_id}:
+    get:
+      $ref: 'resources/serverless/get_namespace.yml'
+    delete:
+      $ref: 'resources/serverless/delete_namespace.yml'
+
+  /v2/function_namespaces/login_token:
+    post:
+      $ref: 'resources/serverless/create_login_token.yml'
+
+  /v2/function_namespaces/revoke_token:
+    post:
+      $ref: 'resources/serverless/revoke_login_token.yml'
+
+  /v2/function_namespaces/rotate_token:
+    post:
+      $ref: 'resources/serverless/rotate_login_token.yml'
+
+  /v2/function_namespaces/namespace:
+    post:
+      $ref: 'resources/serverless/get_namespace_from_token.yml'
 
   /v2/sizes:
     get:

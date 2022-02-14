@@ -1,0 +1,28 @@
+description: The response will be a JSON object with a key called `namespaces`.
+  This will be set to an array of namespace objects, each of which will
+  contain the standard attributes associated with a namespace.
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      allOf:
+        - type: object
+          properties:
+            namespaces:
+              type: array
+              items:
+                $ref: '../models/namespace_info.yml'
+      example:
+        namespaces:
+        - api_host: https://api_host.io
+          namespace: namespace-id
+          label: my namespace
+          region: nyc
+          login_token:

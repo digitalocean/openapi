@@ -8,7 +8,7 @@ headers:
     $ref: '../../../shared/headers.yml#/ratelimit-remaining'
   ratelimit-reset:
     $ref: '../../../shared/headers.yml#/ratelimit-reset'
-    
+
 content:
   application/json:
     schema:
