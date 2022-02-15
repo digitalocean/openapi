@@ -6,7 +6,7 @@ description: >-
   Creates login token for given namespace-id.
 
   * To create a login token, send a POST
-    request to `/v2/function_namespaces/login_token` with the `namespace` attribute under `namespace` object.
+    request to `/v2/function/namespaces/login_token` with the `namespace` attribute under `namespace` object.
 
 tags:
   - Serverless

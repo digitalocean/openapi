@@ -6,7 +6,7 @@ description: >-
   Rotates login token for given namespace-id.
 
   * To rotate a login token, send a POST
-    request to `/v2/function_namespaces/rotate_token` with the `namespace` attribute under `namespace` object.
+    request to `/v2/function/namespaces/rotate_token` with the `namespace` attribute under `namespace` object.
 
 tags:
   - Serverless

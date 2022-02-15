@@ -6,7 +6,7 @@ description: >-
   Creates a new namespace for given user/team.
 
   * To create a new namespace, send a POST
-    request to `/v2/function_namespaces` with the `region` and `label` attributes under `namespace` object.
+    request to `/v2/function/namespaces` with the `region` and `label` attributes under `namespace` object.
 
 tags:
   - Serverless

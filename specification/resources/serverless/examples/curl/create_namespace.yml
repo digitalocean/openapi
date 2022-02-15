@@ -4,4 +4,4 @@ source: |-
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -d '{"namespace": { "region": "nyc", "label": "my namespace label"}}' \
-    "https://api.digitalocean.com/v2/function_namespaces" 
+    "https://api.digitalocean.com/v2/function/namespaces" 

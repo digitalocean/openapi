@@ -6,7 +6,7 @@ description: >-
   Get all namespaces for given user/team.
 
   * To get all namespace, send a GET
-    request to `/v2/function_namespaces`.
+    request to `/v2/function/namespaces`.
 
 tags:
   - Serverless

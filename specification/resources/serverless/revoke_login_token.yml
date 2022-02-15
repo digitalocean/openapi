@@ -6,7 +6,7 @@ description: >-
   Revokes login token for given namespace-id.
 
   * To revoke a login token, send a POST
-    request to `/v2/function_namespaces/revoke_token` with the `namespace` attribute under `namespace` object.
+    request to `/v2/function/namespaces/revoke_token` with the `namespace` attribute under `namespace` object.
 
 tags:
   - Serverless

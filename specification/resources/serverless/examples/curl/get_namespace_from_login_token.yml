@@ -4,4 +4,4 @@ source: |-
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -d '{"namespace": { "token": "<login_token>"}}' \
-    "https://api.digitalocean.com/v2/function_namespaces/namespace" 
+    "https://api.digitalocean.com/v2/function/namespaces/namespace" 

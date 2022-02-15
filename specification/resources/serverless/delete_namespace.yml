@@ -6,7 +6,7 @@ description: >-
   Deletes namespace for given namespace ID.
 
   * To get namespace, send a DELETE
-    request to `/v2/function_namespaces/$NAMESPACE_ID`.
+    request to `/v2/function/namespaces/$NAMESPACE_ID`.
 
 tags:
   - Serverless
