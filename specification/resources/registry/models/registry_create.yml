@@ -20,6 +20,18 @@ properties:
     description: The slug of the subscription tier to sign up for. Valid values
       can be retrieved using the options endpoint.
 
+  region:
+    type: string
+    enum:
+    - nyc3
+    - sfo3
+    - ams3
+    - sgp1
+    - fra1
+    example: fra1
+    description: Slug of the region where registry data is stored. When not provided, a region will be selected based
+      on current load.
+
 required:
 - name
 - subscription_tier_slug
