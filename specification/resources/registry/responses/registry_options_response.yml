@@ -17,6 +17,11 @@ content:
         options:
           type: object
           properties:
+            available_regions:
+              type: array
+              items:
+                allOf:
+                  - type: string
             subscription_tiers:
               type: array
               items:
@@ -26,6 +31,12 @@ content:
 
     example:
       options:
+        available_regions:
+          - nyc3
+          - sfo3
+          - ams3
+          - sgp1
+          - fra1
         subscription_tiers:
           - name: Starter
             slug: starter
