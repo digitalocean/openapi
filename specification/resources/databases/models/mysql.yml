@@ -1,0 +1,107 @@
+type: object
+
+properties:
+  sql_mode:
+    description: >-
+      Global SQL mode. Set to empty to use MySQL server defaults.
+      Must be uppercase alphabetic characters, underscores and commas
+    type: string
+    pattern: ^[A-Z_]*(,[A-Z_]+)*$
+    example: ANSI,TRADITIONAL
+    maxLength: 1024
+  connect_timeout:
+    description: >-
+      The number of seconds that the mysqld server waits for a connect packet
+      before responding with Bad handshake
+    type: integer
+    minimum: 2
+    maximum: 3600
+    example: 10
+  default_time_zone:
+    description: >-
+      Default server time zone as an offset from UTC (from -12:00 to +12:00), a
+      time zone name, or 'SYSTEM' to use the MySQL server default.
+    type: string
+    example: '+03:00'
+    minLength: 2
+    maxLength: 100
+  innodb_lock_wait_timeout:
+    description: >-
+      The length of time in seconds an InnoDB transaction waits for a row lock
+      before giving up.
+    type: integer
+    minimum: 1
+    maximum: 3600
+    example: 50
+  innodb_log_buffer_size:
+    description: >-
+      The size in bytes of the buffer that InnoDB uses to write to the log files
+      on disk.
+    type: integer
+    minimum: 1048576
+    maximum: 4294967295
+    example: 16777216
+  innodb_online_alter_log_max_size:
+    description: >-
+      The upper limit in bytes on the size of the temporary log files used
+      during online DDL operations for InnoDB tables.
+    type: integer
+    minimum: 65536
+    maximum: 1099511627776
+    example: 134217728
+  interactive_timeout:
+    description: >-
+      The number of seconds the server waits for activity on an interactive
+      connection before closing it.
+    type: integer
+    minimum: 30
+    maximum: 604800
+    example: 3600
+  net_read_timeout:
+    description: >-
+      The number of seconds to wait for more data from a connection before
+      aborting the read.
+    type: integer
+    minimum: 1
+    maximum: 3600
+    example: 30
+  net_write_timeout:
+    description: >-
+      The number of seconds to wait for a block to be written to a connection
+      before aborting the write.
+    type: integer
+    minimum: 1
+    maximum: 3600
+    example: 30
+  sql_require_primary_key:
+    description: >-
+      Require primary key to be defined for new tables or old tables modified
+      with ALTER TABLE and fail if missing. It is recommended to always have
+      primary keys because various functionality may break if any large table is
+      missing them.
+    type: boolean
+    example: true
+  wait_timeout:
+    description: >-
+      The number of seconds the server waits for activity on a noninteractive
+      connection before closing it.
+    type: integer
+    minimum: 1
+    maximum: 2147483
+    example: 28800
+  max_allowed_packet:
+    description: >-
+      Size of the largest message in bytes that can be received by the server.
+      Default is 67108864 (64M)
+    type: integer
+    minimum: 102400
+    maximum: 1073741824
+    example: 67108864
+  sort_buffer_size:
+    description: >-
+      Sort buffer size in bytes for ORDER BY optimization. Default is 262144
+      (256K)
+    type: integer
+    minimum: 32768
+    maximum: 1073741824
+    example: 262144

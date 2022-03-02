@@ -5,7 +5,6 @@ summary: Update the Database Configuration for an Existing Database
 description: |
   To update configuration for an existing database cluster, send a PATCH request to
   `/v2/databases/$DATABASE_ID/config`.
-  **Note:** Database configuration is not supported for Redis and Postgres clusters.
 tags:
   - Databases
 
