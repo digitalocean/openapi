@@ -1,0 +1,8 @@
+type: object
+
+properties:
+  config:
+    oneOf:
+      - $ref: './mysql.yml'
+      - $ref: './postgres.yml'
+      - $ref: './redis.yml'
