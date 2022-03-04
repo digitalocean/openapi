@@ -99,8 +99,8 @@ properties:
     example: 67108864
   sort_buffer_size:
     description: >-
-      Sort buffer size in bytes for ORDER BY optimization. Default is 262144
-      (256K)
+      Sort buffer size, in bytes, for ORDER BY optimization. Default is 262144
+      (256K).
     type: integer
     minimum: 32768
     maximum: 1073741824
