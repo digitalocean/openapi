@@ -12,7 +12,7 @@ properties:
   connect_timeout:
     description: >-
       The number of seconds that the mysqld server waits for a connect packet
-      before responding with Bad handshake
+      before responding with bad handshake.
     type: integer
     minimum: 2
     maximum: 3600
