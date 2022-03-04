@@ -277,7 +277,7 @@ properties:
       Must consist of alpha-numeric characters, dots, underscores, or dashes. May
       not start with dash or dot. Maximum of 64 characters.
   pg_partman_bgw.interval:
-    description: Sets the time interval to run pg_partman's scheduled tasks
+    description: Sets the time interval to run pg_partman's scheduled tasks.
     type: integer
     minimum: 3600
     maximum: 604800
