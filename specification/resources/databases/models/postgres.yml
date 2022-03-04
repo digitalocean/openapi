@@ -24,8 +24,8 @@ properties:
     example: 5
   autovacuum_naptime:
     description: >-
-      Specifies the minimum delay between autovacuum runs on any given database.
-      The delay is measured in seconds, and the default is one minute
+      Specifies the minimum delay, in seconds, between autovacuum runs on any given database.
+      The default is one minute.
     type: integer
     minimum: 0
     maximum: 86400
