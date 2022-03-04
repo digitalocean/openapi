@@ -48,9 +48,9 @@ properties:
     example: 50
   autovacuum_vacuum_scale_factor:
     description: >-
-      Specifies a fraction of the table size to add to
+      Specifies a fraction, in a decimal value, of the table size to add to
       autovacuum_vacuum_threshold when deciding whether to trigger a VACUUM. The
-      default is 0.2 (20% of table size)
+      default is 0.2 (20% of table size).
     type: number
     minimum: 0
     maximum: 1
