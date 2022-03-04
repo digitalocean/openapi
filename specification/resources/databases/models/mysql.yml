@@ -27,7 +27,7 @@ properties:
     maxLength: 100
   innodb_lock_wait_timeout:
     description: >-
-      The length of time in seconds an InnoDB transaction waits for a row lock
+      The number of seconds that an InnoDB transaction waits for a row lock.
       before giving up.
     type: integer
     minimum: 1
