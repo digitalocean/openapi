@@ -57,9 +57,9 @@ properties:
     example: 0.2
   autovacuum_analyze_scale_factor:
     description: >-
-      Specifies a fraction of the table size to add to
+      Specifies a fraction, in a decimal value, of the table size to add to
       autovacuum_analyze_threshold when deciding whether to trigger an ANALYZE.
-      The default is 0.2 (20% of table size)
+      The default is 0.2 (20% of table size).
     type: number
     minimum: 0
     maximum: 1
