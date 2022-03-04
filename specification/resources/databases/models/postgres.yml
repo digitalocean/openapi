@@ -90,10 +90,9 @@ properties:
     example: 200
   bgwriter_flush_after:
     description: >-
-      Whenever more than bgwriter_flush_after bytes have been written by the
-      background writer, attempt to force the OS to issue these writes to the
-      underlying storage. Specified in kilobytes, default is 512. Setting of 0
-      disables forced writeback.
+      The amount of kilobytes that need to be written by the background writer before
+      attempting to force the OS to issue these writes to underlying storage. Specified in kilobytes, default is 512. 
+      Setting of 0 disables forced writeback.
     type: integer
     minimum: 0
     maximum: 2048
