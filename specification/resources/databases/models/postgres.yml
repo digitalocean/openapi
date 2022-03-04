@@ -33,7 +33,7 @@ properties:
   autovacuum_vacuum_threshold:
     description: >-
       Specifies the minimum number of updated or deleted tuples needed to
-      trigger a VACUUM in any one table. The default is 50 tuples
+      trigger a VACUUM in any one table. The default is 50 tuples.
     type: integer
     minimum: 0
     maximum: 2147483647
