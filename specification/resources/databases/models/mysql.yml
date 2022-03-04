@@ -19,8 +19,8 @@ properties:
     example: 10
   default_time_zone:
     description: >-
-      Default server time zone as an offset from UTC (from -12:00 to +12:00), a
-      time zone name, or 'SYSTEM' to use the MySQL server default.
+      Default server time zone, in the form of an offset from UTC (from -12:00 to +12:00), a
+      time zone name (EST), or 'SYSTEM' to use the MySQL server default.
     type: string
     example: '+03:00'
     minLength: 2
