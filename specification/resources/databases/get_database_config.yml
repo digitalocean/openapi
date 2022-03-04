@@ -1,6 +1,6 @@
 operationId: get_database_config
 
-summary: Retrieve an Existing Database Configuration for an Existing Database
+summary: Retrieve an Existing Database Cluster Configuration
 
 description: |
   Shows configuration parameters for an existing database cluster by sending a GET request to

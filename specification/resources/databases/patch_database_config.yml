@@ -3,7 +3,7 @@ operationId: patch_database_config
 summary: Update the Database Configuration for an Existing Database
 
 description: |
-  To update configuration for an existing database cluster, send a PATCH request to
+  To update the configuration for an existing database cluster, send a PATCH request to
   `/v2/databases/$DATABASE_ID/config`.
 tags:
   - Databases
