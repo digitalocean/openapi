@@ -66,9 +66,8 @@ properties:
     example: 0.2
   autovacuum_vacuum_cost_delay:
     description: >-
-      Specifies the cost delay value that will be used in automatic VACUUM
-      operations. If -1 is specified, the regular vacuum_cost_delay value will
-      be used. The default value is 20 milliseconds
+      Specifies the cost delay value, in milliseconds, that will be used in automatic VACUUM
+      operations. If -1, uses the regular vacuum_cost_delay value, which is 20 milliseconds.
     type: integer
     minimum: -1
     maximum: 100
