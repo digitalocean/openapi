@@ -91,8 +91,8 @@ properties:
     example: 28800
   max_allowed_packet:
     description: >-
-      Size of the largest message in bytes that can be received by the server.
-      Default is 67108864 (64M)
+      The size of the largest message, in bytes, that can be received by the server.
+      Default is 67108864 (64M).
     type: integer
     minimum: 102400
     maximum: 1073741824
