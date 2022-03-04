@@ -35,7 +35,7 @@ properties:
     example: 50
   innodb_log_buffer_size:
     description: >-
-      The size in bytes of the buffer that InnoDB uses to write to the log files
+      The size of the buffer, in bytes, that InnoDB uses to write to the log files.
       on disk.
     type: integer
     minimum: 1048576
