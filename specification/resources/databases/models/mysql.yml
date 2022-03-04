@@ -43,7 +43,7 @@ properties:
     example: 16777216
   innodb_online_alter_log_max_size:
     description: >-
-      The upper limit in bytes on the size of the temporary log files used
+      The upper limit, in bytes, of the size of the temporary log files used
       during online DDL operations for InnoDB tables.
     type: integer
     minimum: 65536
