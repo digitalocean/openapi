@@ -3,10 +3,10 @@ operationId: get_database_config
 summary: Retrieve an Existing Database Configuration for an Existing Database
 
 description: |
-  To show configuration parameters for an existing database cluster, send a GET request to
+  Shows configuration parameters for an existing database cluster by sending a GET request to
   `/v2/databases/$DATABASE_ID/config`.
-  The response will be a JSON object with a `config` key. This will be set to an object
-  containing any extra database configuration.
+  The response is a JSON object with a `config` key, which is set to an object
+  containing any database configuration parameters.
 tags:
   - Databases
 
