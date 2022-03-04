@@ -3,8 +3,8 @@ type: object
 properties:
   sql_mode:
     description: >-
-      Global SQL mode. Set to empty to use MySQL server defaults.
-      Must be uppercase alphabetic characters, underscores and commas
+      Global SQL mode. If empty, uses MySQL server defaults.
+      Must only include uppercase alphabetic characters, underscores, and commas.
     type: string
     pattern: ^[A-Z_]*(,[A-Z_]+)*$
     example: ANSI,TRADITIONAL
