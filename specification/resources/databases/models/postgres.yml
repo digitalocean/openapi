@@ -121,7 +121,7 @@ properties:
     example: 2
   deadlock_timeout:
     description: >-
-      This is the amount of time, in milliseconds, to wait on a lock before
+      The amount of time, in milliseconds, to wait on a lock before
       checking to see if there is a deadlock condition.
     type: integer
     minimum: 500
@@ -143,7 +143,7 @@ properties:
     maximum: 604800000
     example: 10000
   jit:
-    description: Controls system-wide use of Just-in-Time Compilation (JIT).
+    description: Activates, in a boolean, the system-wide use of Just-in-Time Compilation (JIT).
     type: boolean
     example: true
   log_autovacuum_min_duration:
@@ -168,8 +168,8 @@ properties:
     example: VERBOSE
   log_line_prefix:
     description: >-
-      Choose from one of the available log-formats. These can support popular
-      log analyzers like pgbadger, pganalyze etc.
+      Selects one of the available log-formats. These can support popular
+      log analyzers like pgbadger, pganalyze, etc.
     type: string
     enum:
       - pid=%p,user=%u,db=%d,app=%a,client=%h
@@ -178,56 +178,56 @@ properties:
     example: pid=%p,user=%u,db=%d,app=%a,client=%h
   log_min_duration_statement:
     description: >-
-      Log statements that take more than this number of milliseconds to run, -1
-      disables
+      Log statements that take more than this number of milliseconds to run. If -1,
+      disables.
     type: integer
     minimum: -1
     maximum: 86400000
     example: -1
   max_files_per_process:
-    description: PostgreSQL maximum number of files that can be open per process
+    description: PostgreSQL maximum number of files that can be open per process.
     type: integer
     minimum: 1000
     maximum: 4096
     example: 2048
   max_prepared_transactions:
-    description: PostgreSQL maximum prepared transactions
+    description: PostgreSQL maximum prepared transactions.
     type: integer
     minimum: 0
     maximum: 10000
     example: 20
   max_pred_locks_per_transaction:
-    description: PostgreSQL maximum predicate locks per transaction
+    description: PostgreSQL maximum predicate locks per transaction.
     type: integer
     minimum: 64
     maximum: 640
     example: 128
   max_locks_per_transaction:
-    description: PostgreSQL maximum locks per transaction
+    description: PostgreSQL maximum locks per transaction.
     type: integer
     minimum: 64
     maximum: 6400
     example: 128
   max_stack_depth:
-    description: Maximum depth of the stack in bytes
+    description: Maximum depth of the stack in bytes.
     type: integer
     minimum: 2097152
     maximum: 6291456
     example: 2097152
   max_standby_archive_delay:
-    description: Max standby archive delay in milliseconds
+    description: Max standby archive delay in milliseconds.
     type: integer
     minimum: 1
     maximum: 43200000
     example: 43200
   max_standby_streaming_delay:
-    description: Max standby streaming delay in milliseconds
+    description: Max standby streaming delay in milliseconds.
     type: integer
     minimum: 1
     maximum: 43200000
     example: 43200
   max_replication_slots:
-    description: PostgreSQL maximum replication slots
+    description: PostgreSQL maximum replication slots.
     type: integer
     minimum: 8
     maximum: 64
@@ -235,7 +235,7 @@ properties:
   max_logical_replication_workers:
     description: >-
       PostgreSQL maximum logical replication workers (taken from the pool of
-      max_parallel_workers)
+      max_parallel_workers).
     type: integer
     minimum: 4
     maximum: 64
@@ -243,7 +243,7 @@ properties:
   max_parallel_workers:
     description: >-
       Sets the maximum number of workers that the system can support for
-      parallel queries
+      parallel queries.
     type: integer
     minimum: 0
     maximum: 96
@@ -251,7 +251,7 @@ properties:
   max_parallel_workers_per_gather:
     description: >-
       Sets the maximum number of workers that can be started by a single Gather
-      or Gather Merge node
+      or Gather Merge node.
     type: integer
     minimum: 0
     maximum: 96
