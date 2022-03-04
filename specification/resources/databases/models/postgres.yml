@@ -262,7 +262,7 @@ properties:
   max_worker_processes:
     description: >-
       Sets the maximum number of background processes that the system can
-      support
+      support.
     type: integer
     minimum: 8
     maximum: 96
