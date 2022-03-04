@@ -295,7 +295,7 @@ properties:
       - none
     example: all
   temp_file_limit:
-    description: PostgreSQL temporary file limit in KiB, -1 for unlimited
+    description: PostgreSQL temporary file limit in KiB. If -1, sets to unlimited.
     type: integer
     example: 5000000
     minimum: -1
