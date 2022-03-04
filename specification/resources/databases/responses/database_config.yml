@@ -14,7 +14,7 @@ content:
       type: object
       properties:
         config:
-          oneOf:
+          anyOf:
             - $ref: '../models/mysql.yml'
             - $ref: '../models/postgres.yml'
             - $ref: '../models/redis.yml'

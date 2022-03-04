@@ -13,6 +13,7 @@ properties:
       - volatile-lfu
       - allkeys-lfu
     default: noeviction
+    example: allkeys-lru
   redis_pubsub_client_output_buffer_limit:
     description: >-
       Set output buffer limit for pub / sub clients in MB. The value is the hard
@@ -24,12 +25,12 @@ properties:
     example: 64
   redis_number_of_databases:
     type: integer
-    example: 16
     minimum: 1
     maximum: 128
     description: >-
       Set number of redis databases. Changing this will cause a restart of redis
       service.
+    example: 16
   redis_io_threads:
     description: Redis IO thread count
     type: integer
@@ -44,28 +45,33 @@ properties:
     minimum: 0
     maximum: 100
     default: 10
+    example: 10
   redis_lfu_decay_time:
     description: LFU maxmemory-policy counter decay time in minutes
     type: integer
     minimum: 1
     maximum: 120
     default: 1
+    example: 1
   redis_ssl:
     description: Require SSL to access Redis
     type: boolean
     default: true
+    example: true
   redis_timeout:
     description: Redis idle connection timeout in seconds
     type: integer
     minimum: 0
     maximum: 31536000
     default: 300
+    example: 300
   redis_notify_keyspace_events:
     description: Set notify-keyspace-events option
     type: string
     pattern: ^[KEg\$lshzxeA]*$
     default: ''
     maxLength: 32
+    example: K
   redis_persistence:
     type: string
     enum:
@@ -77,6 +83,7 @@ properties:
       backup purposes. When persistence is 'off', no RDB dumps and backups are
       done, so data can be lost at any moment if service is restarted for any
       reason, or if service is powered off. Also service can't be forked.
+    example: rdb
   redis_acl_channels_default:
     type: string
     enum:
@@ -87,3 +94,4 @@ properties:
       supplied. When this option is not defined, all_channels is assumed to keep
       backward compatibility. This option doesn't affect Redis configuration
       acl-pubsub-default.
+    example: allchannels
