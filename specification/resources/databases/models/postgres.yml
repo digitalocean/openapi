@@ -83,8 +83,7 @@ properties:
     example: -1
   bgwriter_delay:
     description: >-
-      Specifies the delay between activity rounds for the background writer in
-      milliseconds. Default is 200.
+      Specifies the delay, in milliseconds, between activity rounds for the background writer. Default is 200 ms.
     type: integer
     minimum: 10
     maximum: 10000
