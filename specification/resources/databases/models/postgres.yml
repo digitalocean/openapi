@@ -21,6 +21,7 @@ properties:
     type: integer
     minimum: 1
     maximum: 20
+    example: 5
   autovacuum_naptime:
     description: >-
       Specifies the minimum delay between autovacuum runs on any given database.
@@ -28,6 +29,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 86400
+    example: 43200
   autovacuum_vacuum_threshold:
     description: >-
       Specifies the minimum number of updated or deleted tuples needed to
@@ -35,6 +37,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 2147483647
+    example: 50
   autovacuum_analyze_threshold:
     description: >-
       Specifies the minimum number of inserted, updated or deleted tuples needed
@@ -42,6 +45,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 2147483647
+    example: 50
   autovacuum_vacuum_scale_factor:
     description: >-
       Specifies a fraction of the table size to add to
@@ -50,6 +54,7 @@ properties:
     type: number
     minimum: 0
     maximum: 1
+    example: 0.2
   autovacuum_analyze_scale_factor:
     description: >-
       Specifies a fraction of the table size to add to
@@ -58,6 +63,7 @@ properties:
     type: number
     minimum: 0
     maximum: 1
+    example: 0.2
   autovacuum_vacuum_cost_delay:
     description: >-
       Specifies the cost delay value that will be used in automatic VACUUM
@@ -66,6 +72,7 @@ properties:
     type: integer
     minimum: -1
     maximum: 100
+    example: 20
   autovacuum_vacuum_cost_limit:
     description: >-
       Specifies the cost limit value that will be used in automatic VACUUM
@@ -74,6 +81,7 @@ properties:
     type: integer
     minimum: -1
     maximum: 10000
+    example: -1
   bgwriter_delay:
     description: >-
       Specifies the delay between activity rounds for the background writer in
@@ -133,9 +141,10 @@ properties:
     example: lz4
   idle_in_transaction_session_timeout:
     description: Time out sessions with open transactions after this number of milliseconds
+    type: integer
     minimum: 0
     maximum: 604800000
-    type: integer
+    example: 10000
   jit:
     description: Controls system-wide use of Just-in-Time Compilation (JIT).
     type: boolean
@@ -149,6 +158,7 @@ properties:
     type: integer
     minimum: -1
     maximum: 2147483647
+    example: -1
   log_error_verbosity:
     description: >-
       Controls the amount of detail written in the server log for each message
@@ -158,15 +168,17 @@ properties:
       - TERSE
       - DEFAULT
       - VERBOSE
+    example: VERBOSE
   log_line_prefix:
     description: >-
       Choose from one of the available log-formats. These can support popular
       log analyzers like pgbadger, pganalyze etc.
     type: string
     enum:
-      - '''pid=%p,user=%u,db=%d,app=%a,client=%h '''
-      - '''%m [%p] %q[user=%u,db=%d,app=%a] '''
-      - '''%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h '''
+      - pid=%p,user=%u,db=%d,app=%a,client=%h
+      - "%m [%p] %q[user=%u,db=%d,app=%a]"
+      - "%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h"
+    example: pid=%p,user=%u,db=%d,app=%a,client=%h
   log_min_duration_statement:
     description: >-
       Log statements that take more than this number of milliseconds to run, -1
@@ -174,46 +186,55 @@ properties:
     type: integer
     minimum: -1
     maximum: 86400000
+    example: -1
   max_files_per_process:
     description: PostgreSQL maximum number of files that can be open per process
     type: integer
     minimum: 1000
     maximum: 4096
+    example: 2048
   max_prepared_transactions:
     description: PostgreSQL maximum prepared transactions
     type: integer
     minimum: 0
     maximum: 10000
+    example: 20
   max_pred_locks_per_transaction:
     description: PostgreSQL maximum predicate locks per transaction
     type: integer
     minimum: 64
     maximum: 640
+    example: 128
   max_locks_per_transaction:
     description: PostgreSQL maximum locks per transaction
     type: integer
     minimum: 64
     maximum: 6400
+    example: 128
   max_stack_depth:
     description: Maximum depth of the stack in bytes
     type: integer
     minimum: 2097152
     maximum: 6291456
+    example: 2097152
   max_standby_archive_delay:
     description: Max standby archive delay in milliseconds
     type: integer
     minimum: 1
     maximum: 43200000
+    example: 43200
   max_standby_streaming_delay:
     description: Max standby streaming delay in milliseconds
     type: integer
     minimum: 1
     maximum: 43200000
+    example: 43200
   max_replication_slots:
     description: PostgreSQL maximum replication slots
     type: integer
     minimum: 8
     maximum: 64
+    example: 16
   max_logical_replication_workers:
     description: >-
       PostgreSQL maximum logical replication workers (taken from the pool of
@@ -221,6 +242,7 @@ properties:
     type: integer
     minimum: 4
     maximum: 64
+    example: 16
   max_parallel_workers:
     description: >-
       Sets the maximum number of workers that the system can support for
@@ -228,6 +250,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 96
+    example: 12
   max_parallel_workers_per_gather:
     description: >-
       Sets the maximum number of workers that can be started by a single Gather
@@ -235,6 +258,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 96
+    example: 16
   max_worker_processes:
     description: >-
       Sets the maximum number of background processes that the system can
@@ -242,6 +266,7 @@ properties:
     type: integer
     minimum: 8
     maximum: 96
+    example: 16
   pg_partman_bgw.role:
     type: string
     pattern: ^[_A-Za-z0-9][-._A-Za-z0-9]{0,63}$
@@ -252,23 +277,23 @@ properties:
       Must consist of alpha-numeric characters, dots, underscores or dashes, may
       not start with dash or dot, max 64 characters
   pg_partman_bgw.interval:
-    example: 3600
     description: Sets the time interval to run pg_partman's scheduled tasks
     type: integer
     minimum: 3600
     maximum: 604800
+    example: 3600
   pg_stat_statements.track:
     description: >-
       Controls which statements are counted. Specify top to track top-level
       statements (those issued directly by clients), all to also track nested
       statements (such as statements invoked within functions), or none to
       disable statement statistics collection. The default value is top.
-    type:
-      - string
+    type: string
     enum:
       - all
       - top
       - none
+    example: all
   temp_file_limit:
     description: PostgreSQL temporary file limit in KiB, -1 for unlimited
     type: integer
@@ -302,6 +327,7 @@ properties:
       - all
       - pl
       - none
+    example: all
   track_io_timing:
     description: >-
       Enables timing of database I/O calls. This parameter is off by default,
@@ -317,15 +343,16 @@ properties:
     type: integer
     minimum: 8
     maximum: 64
+    example: 8
   wal_sender_timeout:
     description: >-
       Terminate replication connections that are inactive for longer than this
       amount of time, in milliseconds. Setting this value to zero disables the
       timeout. Must be either 0 or between 5000 and 10800000.
     type: integer
-    example: 60000
     minimum: 0
     maximum: 10800000
+    example: 60000
   wal_writer_delay:
     description: >-
       WAL flush interval in milliseconds. Note that setting this value to lower

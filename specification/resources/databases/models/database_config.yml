@@ -2,7 +2,7 @@ type: object
 
 properties:
   config:
-    oneOf:
+    anyOf:
       - $ref: './mysql.yml'
       - $ref: './postgres.yml'
       - $ref: './redis.yml'
