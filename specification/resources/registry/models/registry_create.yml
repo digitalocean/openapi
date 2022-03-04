@@ -29,8 +29,7 @@ properties:
     - sgp1
     - fra1
     example: fra1
-    description: Slug of the region where registry data is stored. When not provided, a region will be selected based
-      on current load.
+    description: Slug of the region where registry data is stored. When not provided, a region will be selected.
 
 required:
 - name
