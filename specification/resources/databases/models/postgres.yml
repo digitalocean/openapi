@@ -40,8 +40,8 @@ properties:
     example: 50
   autovacuum_analyze_threshold:
     description: >-
-      Specifies the minimum number of inserted, updated or deleted tuples needed
-      to trigger an  ANALYZE in any one table. The default is 50 tuples.
+      Specifies the minimum number of inserted, updated, or deleted tuples needed
+      to trigger an ANALYZE in any one table. The default is 50 tuples.
     type: integer
     minimum: 0
     maximum: 2147483647
