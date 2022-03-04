@@ -99,8 +99,8 @@ properties:
     example: 512
   bgwriter_lru_maxpages:
     description: >-
-      In each round, no more than this many buffers will be written by the
-      background writer. Setting this to zero disables background writing.
+      The maximum number of buffers that the background writer can write.
+      Setting this to zero disables background writing.
       Default is 100.
     type: integer
     minimum: 0
