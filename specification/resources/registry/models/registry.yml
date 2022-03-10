@@ -18,6 +18,11 @@ properties:
     description: A time value given in ISO8601 combined date and time format
       that represents when the registry was created.
 
+  region:
+    type: string
+    example: fra1
+    description: Slug of the region where registry data is stored
+
   storage_usage_bytes:
     type: integer
     readOnly: true

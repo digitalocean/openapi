@@ -1,13 +1,19 @@
 operationId: get_registry_options
 
-summary: List Available Subscription Tiers
+summary: List Registry Options (Subscription Tiers and Available Regions)
 
 description: >-
+  This endpoint serves to provide additional information as to which option values
+  are available when creating a container registry.
+
   There are multiple subscription tiers available for container registry. Each
   tier allows a different number of image repositories to be created in your
   registry, and has a different amount of storage and transfer included.
 
-  To list the available subscription tiers, send a GET request to
+  There are multiple regions available for container registry and controls
+  where your data is stored.
+
+  To list the available options, send a GET request to
   `/v2/registry/options`.
 
 tags:
