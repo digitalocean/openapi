@@ -59,6 +59,7 @@ requestBody:
         VolumeActionAttach:
           value:
             type: attach
+            volume_name: example
             droplet_id: 11612190
             region: nyc1
             tags:
@@ -67,6 +68,7 @@ requestBody:
         VolumeActionDetatch:
           value:
             type: detach
+            volume_name: example
             droplet_id: 11612190
             region: nyc1
 
