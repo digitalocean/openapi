@@ -3,7 +3,7 @@ operationId: post_volume_action_by_name
 summary: Initiate A Block Storage Action By Volume Name
 
 description: |
-  To initiate an action on a block storage volume by Id, send a POST request to
+  To initiate an action on a block storage volume by Name, send a POST request to
   `~/v2/volumes/actions`. The body should contain the appropriate
   attributes for the respective action.
 
