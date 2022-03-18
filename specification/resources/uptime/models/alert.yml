@@ -30,6 +30,7 @@ alert_updatable:
       enum:
         - latency
         - down
+        - ssl_expiry
       description: The type of alert.
 
     threshold:
@@ -37,8 +38,29 @@ alert_updatable:
       example: 300
       description: The threshold at which the alert will enter a trigger state. The specific threshold is dependent on the alert type.
 
+    comparison:
+      type: string
+      example: "greater_than"
+      description: The comparison operator used against the alert's threshold.
+      enum:
+        - "greater_than"
+        - "less_than"
+
     notifications:
       $ref: './notification.yml'
+
+    period:
+      type: string
+      example: "2m"
+      description: Period of time the threshold must be exceeded to trigger the alert.
+      enum:
+        - 2m
+        - 3m
+        - 5m
+        - 10m
+        - 15m
+        - 30m
+        - 1h
 
 
 

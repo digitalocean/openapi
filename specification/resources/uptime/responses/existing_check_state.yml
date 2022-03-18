@@ -1,6 +1,6 @@
-description: The response will be a JSON object with a key called `alert`. The
+description: The response will be a JSON object with a key called `state`. The
   value of this will be an object that contains the standard attributes
-  associated with an uptime alert.
+  associated with an uptime check's state.
 
 headers:
   ratelimit-limit:
@@ -15,5 +15,5 @@ content:
     schema:
       type: object
       properties:
-        alert:
-          $ref: '../models/alert.yml#/alert'
+        state:
+          $ref: '../models/state.yml#/state'

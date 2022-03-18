@@ -1,20 +1,19 @@
-operationId: get_uptime_alert
+operationId: get_check_state
 
-summary: Retrieve an Existing Alert
+summary: Retrieve Check State
 
-description: To show information about an existing alert, send a GET request to
-  `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
+description: To show information about an existing check's state, send a GET request to
+  `/v2/uptime/checks/$CHECK_ID/state`.
 
 tags:
   - Uptime (Beta)
 
 parameters:
   - $ref: 'parameters.yml#/check_id'
-  - $ref: 'parameters.yml#/alert_id'
 
 responses:
   '200':
-    $ref: 'responses/existing_alert.yml'
+    $ref: 'responses/existing_check_state.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -32,4 +31,4 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-#  - $ref: 'examples/curl/get_vpc.yml'
+#  - $ref: 'examples/curl/get_check.yml'

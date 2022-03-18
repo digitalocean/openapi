@@ -45,14 +45,14 @@ check_updatable:
       items:
         type: string
         enum:
-          - us-east
-          - us-west
-          - eu-east
-          - eu-west
+          - us_east
+          - us_west
+          - eu_west
+          - se_asia
 
       example:
-        - us-east
-        - eu-east
+        - us_east
+        - eu_west
       description: An array containing the selected regions to perform healthchecks from.
 
     enabled:
@@ -60,14 +60,6 @@ check_updatable:
       example: true
       default: true
       description: A boolean value indicating whether the check is enabled/disabled.
-
-    interval:
-      type: integer
-      description: The interval for the health check in seconds.
-      example: 360
-      minimum: 60
-      maximum: 3600
-      default: 120
 
 
 

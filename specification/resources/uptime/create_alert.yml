@@ -7,7 +7,7 @@ description: |
   in the table below in the JSON body.
 
 tags:
-  - Uptime
+  - Uptime (Beta)
 parameters:
   - $ref: 'parameters.yml#/check_id'
 
@@ -21,7 +21,6 @@ requestBody:
         type: object
         allOf:
           - $ref: 'models/alert.yml#/alert'
-        #          - $ref: 'models/check.yml#/check_create'
 
         required:
           - name

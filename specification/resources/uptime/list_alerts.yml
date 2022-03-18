@@ -6,7 +6,7 @@ description: To list all of the alerts for an Uptime check, send a GET request
   to `/v2/uptime/checks/$CHECK_ID/alerts`.
 
 tags:
-  - Uptime
+  - Uptime (Beta)
 
 parameters:
   - $ref: 'parameters.yml#/check_id'

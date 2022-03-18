@@ -499,7 +499,7 @@ tags:
       `resources` attribute with information about resources that have been tagged.
 
 
-  - name: Uptime
+  - name: Uptime (Beta)
     description: >-
         Uptime allows you to define health checks, and alerts to monitor the health and availability
         of your web application.
@@ -1442,6 +1442,10 @@ paths:
 
     delete:
       $ref: 'resources/uptime/delete_check.yml'
+
+  /v2/uptime/checks/{check_id}/state:
+    get:
+      $ref: 'resources/uptime/get_check_state.yml'
 
   /v2/uptime/checks/{check_id}/alerts:
     get:
