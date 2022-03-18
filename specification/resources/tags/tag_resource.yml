@@ -7,10 +7,10 @@ description: >-
   `/v2/tags/$TAG_NAME/resources` with an array of json objects containing
   `resource_id` and `resource_type` attributes.
 
-  Currently only tagging of Droplets, Images, Volumes, and Volume Snapshots is
-  supported. `resource_id` is expected to be the Droplet's id, Image's id, or
-  Volume/Volume Snapshot's UUID attribute as a string, and `resource_type` is
-  expected to be the string `droplet`, `image`, `volume` or `volume_snapshot`.
+  Currently only tagging of Droplets, Databases, Images, Volumes, and Volume
+  Snapshots is supported. `resource_type` is expected to be the string `droplet`,
+  `database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected
+  to be the ID of the resource as a string.
 
 tags:
   - Tags
