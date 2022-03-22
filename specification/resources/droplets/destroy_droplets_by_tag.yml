@@ -7,7 +7,7 @@ description: |
   query parameter set to the name of the tag in your DELETE request. For
   example,  `/v2/droplets?tag_name=$TAG_NAME`.
 
-  A successful request will receive a 204 status code with no body in response.
+  A successful request will receive a 204 status code with an empty json in the response.
   This indicates that the request was processed successfully.
 
 tags:
@@ -18,7 +18,7 @@ parameters:
 
 responses:
   '204':
-    $ref: '../../shared/responses/no_content.yml'
+    $ref: '../../shared/responses/empty_content.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
