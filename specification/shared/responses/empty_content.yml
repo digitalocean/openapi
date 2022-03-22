@@ -1,4 +1,4 @@
-description: The action was successful and the response body is an empty json.
+description: The action was successful and the response body is empty. This response has content-type set.
 
 headers:
   ratelimit-limit:
