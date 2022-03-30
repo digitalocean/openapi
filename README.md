@@ -13,7 +13,7 @@ From the [OpenAPI Specification](https://swagger.io/specification/):
 
 ## Project Status
 
-The DigitalOcean OpenAPI Specification is currently in **Early Availability**. While the specification should be accurate, it is under active development. The structure of this repository may continue to evolve. If you encounter any inaccuracies or have feedback on how it can better suite your use case, please [open an issue](https://github.com/digitalocean/apiv2-openapi/issues/new) to let us know.
+The DigitalOcean OpenAPI Specification is currently in **Alpha**. While the specification should be accurate, it is under active development. The structure of this repository may continue to evolve. If you encounter any inaccuracies or have feedback on how it can better suite your use case, please [open an issue](https://github.com/digitalocean/apiv2-openapi/issues/new) to let us know.
 
 ## Specification
 
