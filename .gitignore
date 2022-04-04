@@ -1,6 +1,7 @@
 .DS_Store
 .idea/
 .vscode/
+.generated/
 !.vscode/extensions.json
 !.vscode/openapi.code-snippets
 node_modules/
