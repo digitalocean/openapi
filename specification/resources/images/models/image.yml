@@ -16,16 +16,17 @@ properties:
   type:
     type: string
     description: >-
-      Describes the kind of image. It may be one of "snapshot", "backup", or
-      "custom".
-      This specifies whether an image is a user-generated Droplet snapshot,
-      automatically created Droplet backup, or a user-provided virtual machine
-      image.
+      Describes the kind of image. It may be one of `base`, `snapshot`, `backup`,
+      `custom`, or `admin`. Respectively, this specifies whether an image is a
+      DigitalOcean base OS image, user-generated Droplet snapshot, automatically
+      created Droplet backup, user-provided virtual machine image, or an image
+      used for DigitalOcean managed resources (e.g. DOKS worker nodes).
     enum:
       - base
       - snapshot
       - backup
       - custom
+      - admin
     example: snapshot
 
   distribution:
