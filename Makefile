@@ -59,11 +59,11 @@ bundle: dev-dependencies ## Use openapi-cli to bundle the spec
 
 .PHONY: autorest-python
 autorest-python: dev-dependencies bundle 
-	npm run autorest -- --input-file=tests/openapi-bundled.yaml --python
+	npm run autorest -- --input-file=tests/openapi-bundled.yaml --verbose --python
 
 .PHONY: autorest-typescript
 autorest-typescript: dev-dependencies bundle 
-	npm run autorest -- --input-file=tests/openapi-bundled.yaml --typescript
+	npm run autorest -- --input-file=tests/openapi-bundled.yaml --verbose --typescript
 
 .PHONY: preview
 preview: dev-dependencies ## Launch the docs preview server (openapi) and watch for file changes
