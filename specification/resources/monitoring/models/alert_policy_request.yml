@@ -15,13 +15,11 @@ properties:
   compare:
     type: string
     example: GreaterThan
-    format: string
     enum:
       - GreaterThan
       - LessThan
   description:
     type: string
-    format: string
     example: CPU Alert
   enabled:
     type: boolean
@@ -40,7 +38,6 @@ properties:
       - droplet_tag
   type:
     type: string
-    format: string
     enum:
       - v1/insights/droplet/load_1
       - v1/insights/droplet/load_5
@@ -64,7 +61,6 @@ properties:
     example: 80
   window:
     type: string
-    format: string
     example: 5m
     enum:
       - 5m
