@@ -14,22 +14,18 @@ content:
     schema:
       type: object
       properties:
-        options:
-          type: object
-          properties:
-            available_regions:
-              type: array
-              items:
-                type: string
-            subscription_tiers:
-              type: array
-              items:
-                allOf:
-                - $ref: '../models/subscription_tier.yml#/subscription_tier_base'
-                - $ref: '../models/subscription_tier.yml#/subscription_tier_extended'
+        available_regions:
+          type: array
+          items:
+            type: string
+        subscription_tiers:
+          type: array
+          items:
+            allOf:
+            - $ref: '../models/subscription_tier.yml#/subscription_tier_base'
+            - $ref: '../models/subscription_tier.yml#/subscription_tier_extended'
 
-    example:
-      options:
+      example:
         available_regions:
           - nyc3
           - sfo3
