@@ -21,6 +21,8 @@ content:
               type: array
               items:
                 type: string
+              example: 
+              - nyc3
             subscription_tiers:
               type: array
               items:
