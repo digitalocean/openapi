@@ -1,0 +1,3 @@
+input-file: tests/openapi-bundled.yaml 
+modelerfour:
+  lenient-model-deduplication: true
