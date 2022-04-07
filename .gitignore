@@ -1,7 +1,7 @@
 .DS_Store
 .idea/
 .vscode/
-generated/
+#generated/ ADD BACK ONCE GENERATION RESEARCH IS COMPLETED
 !.vscode/extensions.json
 !.vscode/openapi.code-snippets
 node_modules/
