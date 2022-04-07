@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any, Optional, Union
 
+    from azure.core.credentials import TokenCredential
     from azure.core.rest import HttpRequest, HttpResponse
 
 class DigitalOceanAPI(DigitalOceanAPIOperationsMixin):    # pylint: disable=too-many-instance-attributes
@@ -538,6 +539,8 @@ class DigitalOceanAPI(DigitalOceanAPIOperationsMixin):    # pylint: disable=too-
     :vartype tag: digital_ocean_api.operations.TagOperations
     :ivar untag: UntagOperations operations
     :vartype untag: digital_ocean_api.operations.UntagOperations
+    :param credential: Credential needed for the client to connect to Azure.
+    :type credential: ~azure.core.credentials.TokenCredential
     :param ssh_key_identifier: Either the ID or the fingerprint of an existing SSH key.
     :type ssh_key_identifier: any
     :param action_id: A unique numeric ID that can be used to identify and reference an action.
@@ -680,6 +683,7 @@ class DigitalOceanAPI(DigitalOceanAPIOperationsMixin):    # pylint: disable=too-
 
     def __init__(
         self,
+        credential,  # type: "TokenCredential"
         ssh_key_identifier,  # type: Any
         action_id,  # type: int
         id,  # type: str
@@ -744,7 +748,7 @@ class DigitalOceanAPI(DigitalOceanAPIOperationsMixin):    # pylint: disable=too-
         **kwargs  # type: Any
     ):
         # type: (...) -> None
-        self._config = DigitalOceanAPIConfiguration(ssh_key_identifier=ssh_key_identifier, action_id=action_id, id=id, app_id=app_id, deployment_id=deployment_id, component_name=component_name, slug=slug, alert_id=alert_id, cdn_id=cdn_id, certificate_id=certificate_id, invoice_uuid=invoice_uuid, database_cluster_uuid=database_cluster_uuid, migration_id=migration_id, replica_name=replica_name, username=username, database_name=database_name, pool_name=pool_name, domain_name=domain_name, domain_record_id=domain_record_id, droplet_id=droplet_id, x_dangerous=x_dangerous, firewall_id=firewall_id, floating_ip=floating_ip, image_id=image_id, cluster_id=cluster_id, node_pool_id=node_pool_id, node_id=node_id, lb_id=lb_id, alert_uuid=alert_uuid, host_id=host_id, interface=interface, direction=direction, start=start, end=end, project_id=project_id, registry_name=registry_name, repository_name=repository_name, repository_tag=repository_tag, manifest_digest=manifest_digest, garbage_collection_uuid=garbage_collection_uuid, snapshot_id=snapshot_id, tag_id=tag_id, volume_id=volume_id, vpc_id=vpc_id, type=type, per_page=per_page, page=page, name=name, follow=follow, pod_connection_timeout=pod_connection_timeout, tag_name=tag_name, private=private, expiry_seconds=expiry_seconds, skip_drain=skip_drain, replace=replace, run_id=run_id, read_write=read_write, page_token=page_token, resource_type=resource_type, region=region, **kwargs)
+        self._config = DigitalOceanAPIConfiguration(credential=credential, ssh_key_identifier=ssh_key_identifier, action_id=action_id, id=id, app_id=app_id, deployment_id=deployment_id, component_name=component_name, slug=slug, alert_id=alert_id, cdn_id=cdn_id, certificate_id=certificate_id, invoice_uuid=invoice_uuid, database_cluster_uuid=database_cluster_uuid, migration_id=migration_id, replica_name=replica_name, username=username, database_name=database_name, pool_name=pool_name, domain_name=domain_name, domain_record_id=domain_record_id, droplet_id=droplet_id, x_dangerous=x_dangerous, firewall_id=firewall_id, floating_ip=floating_ip, image_id=image_id, cluster_id=cluster_id, node_pool_id=node_pool_id, node_id=node_id, lb_id=lb_id, alert_uuid=alert_uuid, host_id=host_id, interface=interface, direction=direction, start=start, end=end, project_id=project_id, registry_name=registry_name, repository_name=repository_name, repository_tag=repository_tag, manifest_digest=manifest_digest, garbage_collection_uuid=garbage_collection_uuid, snapshot_id=snapshot_id, tag_id=tag_id, volume_id=volume_id, vpc_id=vpc_id, type=type, per_page=per_page, page=page, name=name, follow=follow, pod_connection_timeout=pod_connection_timeout, tag_name=tag_name, private=private, expiry_seconds=expiry_seconds, skip_drain=skip_drain, replace=replace, run_id=run_id, read_write=read_write, page_token=page_token, resource_type=resource_type, region=region, **kwargs)
         self._client = PipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

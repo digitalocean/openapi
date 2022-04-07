@@ -59,7 +59,7 @@ bundle: dev-dependencies ## Use openapi-cli to bundle the spec
 
 .PHONY: autorest-python
 autorest-python: dev-dependencies bundle 
-	npm run autorest -- auto.yaml --verbose --python
+	npm run autorest -- auto.yaml --verbose --python --add-credential
 
 .PHONY: autorest-typescript
 autorest-typescript: dev-dependencies bundle 

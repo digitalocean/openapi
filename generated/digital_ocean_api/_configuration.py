@@ -13,6 +13,8 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any, Optional, Union
 
+    from azure.core.credentials import TokenCredential
+
 VERSION = "unknown"
 
 class DigitalOceanAPIConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
@@ -21,6 +23,8 @@ class DigitalOceanAPIConfiguration(Configuration):  # pylint: disable=too-many-i
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
+    :param credential: Credential needed for the client to connect to Azure.
+    :type credential: ~azure.core.credentials.TokenCredential
     :param ssh_key_identifier: Either the ID or the fingerprint of an existing SSH key.
     :type ssh_key_identifier: any
     :param action_id: A unique numeric ID that can be used to identify and reference an action.
@@ -161,6 +165,7 @@ class DigitalOceanAPIConfiguration(Configuration):  # pylint: disable=too-many-i
 
     def __init__(
         self,
+        credential,  # type: "TokenCredential"
         ssh_key_identifier,  # type: Any
         action_id,  # type: int
         id,  # type: str
@@ -225,6 +230,8 @@ class DigitalOceanAPIConfiguration(Configuration):  # pylint: disable=too-many-i
     ):
         # type: (...) -> None
         super(DigitalOceanAPIConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
         if ssh_key_identifier is None:
             raise ValueError("Parameter 'ssh_key_identifier' must not be None.")
         if action_id is None:
@@ -314,6 +321,7 @@ class DigitalOceanAPIConfiguration(Configuration):  # pylint: disable=too-many-i
         if vpc_id is None:
             raise ValueError("Parameter 'vpc_id' must not be None.")
 
+        self.credential = credential
         self.ssh_key_identifier = ssh_key_identifier
         self.action_id = action_id
         self.id = id
@@ -374,6 +382,7 @@ class DigitalOceanAPIConfiguration(Configuration):  # pylint: disable=too-many-i
         self.page_token = page_token
         self.resource_type = resource_type
         self.region = region
+        self.credential_scopes = kwargs.pop('credential_scopes', [])
         kwargs.setdefault('sdk_moniker', 'digitaloceanapi/{}'.format(VERSION))
         self._configure(**kwargs)
 
@@ -391,3 +400,7 @@ class DigitalOceanAPIConfiguration(Configuration):  # pylint: disable=too-many-i
         self.custom_hook_policy = kwargs.get('custom_hook_policy') or policies.CustomHookPolicy(**kwargs)
         self.redirect_policy = kwargs.get('redirect_policy') or policies.RedirectPolicy(**kwargs)
         self.authentication_policy = kwargs.get('authentication_policy')
+        if not self.credential_scopes and not self.authentication_policy:
+            raise ValueError("You must provide either credential_scopes or authentication_policy as kwargs")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(self.credential, *self.credential_scopes, **kwargs)
