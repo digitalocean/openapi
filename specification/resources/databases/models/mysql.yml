@@ -25,6 +25,36 @@ properties:
     example: '+03:00'
     minLength: 2
     maxLength: 100
+  group_concat_max_len:
+    description: >-
+      The maximum permitted result length in bytes for the GROUP_CONCAT()
+      function.
+    type: integer
+    minimum: 4
+    maximum: 18446744073709552000
+    example: 1024
+  information_schema_stats_expiry:
+    description: The time, in seconds, before cached statistics expire
+    type: integer
+    minimum: 900
+    maximum: 31536000
+    example: 86400
+  innodb_ft_min_token_size:
+    description: Minimum length of words that are stored in an InnoDB FULLTEXT index.
+    type: integer
+    minimum: 0
+    maximum: 16
+    example: 3
+  innodb_ft_server_stopword_table:
+    description: >-
+      This option is used to specify your own InnoDB FULLTEXT index stopword
+      list for all InnoDB tables.
+    type:
+      - 'null'
+      - string
+    pattern: ^.+/.+$
+    example: db_name/table_name
+    maxLength: 1024
   innodb_lock_wait_timeout:
     description: >-
       The number of seconds that an InnoDB transaction waits for a row lock.
@@ -49,6 +79,18 @@ properties:
     minimum: 65536
     maximum: 1099511627776
     example: 134217728
+  innodb_print_all_deadlocks:
+    description: >-
+      When enabled, information about all deadlocks in InnoDB user transactions
+      is recorded in the error log. Disabled by default.
+    type: boolean
+    example: true
+  innodb_rollback_on_timeout:
+    description: >-
+      When enabled a transaction timeout causes InnoDB to abort and roll back
+      the entire transaction.
+    type: boolean
+    example: true
   interactive_timeout:
     description: >-
       The number of seconds the server waits for activity on an interactive
@@ -57,6 +99,13 @@ properties:
     minimum: 30
     maximum: 604800
     example: 3600
+  internal_tmp_mem_storage_engine:
+    description: The storage engine for in-memory internal temporary tables.
+    type: string
+    enum:
+      - TempTable
+      - MEMORY
+    example: TempTable
   net_read_timeout:
     description: >-
       The number of seconds to wait for more data from a connection before
@@ -97,6 +146,14 @@ properties:
     minimum: 102400
     maximum: 1073741824
     example: 67108864
+  max_heap_table_size:
+    description: >-
+      Limits the size of internal in-memory tables. Also set tmp_table_size.
+      Default is 16777216 (16M)
+    type: integer
+    minimum: 1048576
+    maximum: 1073741824
+    example: 16777216
   sort_buffer_size:
     description: >-
       Sort buffer size, in bytes, for ORDER BY optimization. Default is 262144
@@ -105,3 +162,25 @@ properties:
     minimum: 32768
     maximum: 1073741824
     example: 262144
+  tmp_table_size:
+    description: >-
+      Limits the size of internal in-memory tables. Also set
+      max_heap_table_size. Default is 16777216 (16M)
+    type: integer
+    minimum: 1048576
+    maximum: 1073741824
+    example: 16777216
+  slow_query_log:
+    description: >-
+      Slow query log enables capturing of slow queries. Setting slow_query_log
+      to false also truncates the mysql.slow_log table. Default is off
+    type: boolean
+    example: true
+  long_query_time:
+    description: >-
+      The slow_query_logs work as SQL statements that take more than
+      long_query_time seconds to execute. Default is 10s
+    type: number
+    minimum: 0
+    maximum: 3600
+    example: 10
