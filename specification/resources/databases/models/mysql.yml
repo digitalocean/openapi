@@ -50,7 +50,6 @@ properties:
       The InnoDB FULLTEXT index stopword
       list for all InnoDB tables.
     type:
-      - 'null'
       - string
     pattern: ^.+/.+$
     example: db_name/table_name
