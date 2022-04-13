@@ -49,8 +49,7 @@ properties:
     description: >-
       The InnoDB FULLTEXT index stopword
       list for all InnoDB tables.
-    type:
-      - string
+    type: string
     pattern: ^.+/.+$
     example: db_name/table_name
     maxLength: 1024
