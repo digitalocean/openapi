@@ -35,7 +35,7 @@ properties:
     example: http
     description: >
       The protocol used for traffic from the load balancer to the backend
-      Droplets. The possible values are: `http`, `https`, `http2`, `tcp` or `udp`.
+      Droplets. The possible values are: `http`, `https`, `http2`, `tcp`, or `udp`.
       If you set the `target_protocol` to `upd`, the `entry_protocol` must be set to 
       `udp`. When using UDP, the load balancer requires that you set up a health 
       check with a port that uses TCP, HTTP, or HTTPS to work properly.
