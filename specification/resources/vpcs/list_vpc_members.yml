@@ -40,3 +40,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/list_vpc_members.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

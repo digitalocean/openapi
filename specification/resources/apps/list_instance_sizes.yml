@@ -25,3 +25,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/list_instance_sizes.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

@@ -39,3 +39,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_load_balancer.yml'
   - $ref: 'examples/go/delete_load_balancer.yml'
   - $ref: 'examples/ruby/delete_load_balancer.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -52,3 +52,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/run_garbage_collection.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

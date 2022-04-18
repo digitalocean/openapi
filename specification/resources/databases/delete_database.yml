@@ -40,3 +40,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/delete_database.yml'
   - $ref: 'examples/go/delete_database.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

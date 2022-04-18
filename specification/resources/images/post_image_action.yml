@@ -59,3 +59,8 @@ x-codeSamples:
   - $ref: 'examples/curl/post_image_action.yml'
   - $ref: 'examples/go/post_image_action.yml'
   - $ref: 'examples/ruby/post_image_action.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

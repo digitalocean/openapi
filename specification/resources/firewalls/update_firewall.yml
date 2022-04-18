@@ -83,3 +83,8 @@ x-codeSamples:
   - $ref: 'examples/curl/update_firewall.yml'
   - $ref: 'examples/go/update_firewall.yml'
   - $ref: 'examples/ruby/update_firewall.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -41,3 +41,8 @@ x-codeSamples:
   - $ref: 'examples/curl/create_project.yml'
   - $ref: 'examples/go/create_project.yml'
   - $ref: 'examples/ruby/create_project.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

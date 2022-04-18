@@ -31,3 +31,7 @@ parameters:
 
 x-codeSamples:
   - $ref: 'examples/curl/metrics_droplet_filesystem_free.yml'
+security:
+  - bearer_auth:
+    - 'read'
+

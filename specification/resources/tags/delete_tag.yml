@@ -36,3 +36,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_tag.yml'
   - $ref: 'examples/go/delete_tag.yml'
   - $ref: 'examples/ruby/delete_tag.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

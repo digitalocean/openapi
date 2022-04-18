@@ -44,3 +44,8 @@ x-codeSamples:
   - $ref: 'examples/curl/update_cluster.yml'
   - $ref: 'examples/go/update_cluster.yml'
   - $ref: 'examples/ruby/update_cluster.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

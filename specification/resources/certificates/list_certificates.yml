@@ -33,3 +33,8 @@ x-codeSamples:
   - $ref: 'examples/curl/list_certificates.yml'
   - $ref: 'examples/go/list_certificates.yml'
   - $ref: 'examples/ruby/list_certificates.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

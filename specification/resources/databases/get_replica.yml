@@ -40,3 +40,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/get_replica.yml'
   - $ref: 'examples/go/get_replica.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

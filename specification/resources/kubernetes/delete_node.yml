@@ -46,3 +46,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/delete_node.yml'
   - $ref: 'examples/go/delete_node.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -28,3 +28,8 @@ x-codeSamples:
   - $ref: 'examples/curl/list_floating_ips.yml'
   - $ref: 'examples/go/list_floating_ips.yml'
   - $ref: 'examples/ruby/list_floating_ips.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

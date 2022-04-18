@@ -65,3 +65,8 @@ x-codeSamples:
   - $ref: 'examples/curl/add_firewall_droplets.yml'
   - $ref: 'examples/go/add_firewall_droplets.yml'
   - $ref: 'examples/ruby/add_firewall_droplets.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

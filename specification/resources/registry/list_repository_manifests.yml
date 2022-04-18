@@ -41,3 +41,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/list_repository_manifests.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

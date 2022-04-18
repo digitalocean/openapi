@@ -57,3 +57,8 @@ requestBody:
 
 x-codeSamples:
   - $ref: 'examples/curl/update_alert.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -33,3 +33,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/list_deployments.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

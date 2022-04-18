@@ -26,3 +26,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/get_user_information.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

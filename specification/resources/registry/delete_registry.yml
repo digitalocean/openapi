@@ -29,3 +29,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/delete_registry.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

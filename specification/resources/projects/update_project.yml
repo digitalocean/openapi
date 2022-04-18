@@ -50,3 +50,8 @@ x-codeSamples:
   - $ref: 'examples/curl/update_project.yml'
   - $ref: 'examples/go/update_project.yml'
   - $ref: 'examples/ruby/update_project.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

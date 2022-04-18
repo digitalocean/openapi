@@ -42,3 +42,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_project.yml'
   - $ref: 'examples/go/delete_project.yml'
   - $ref: 'examples/ruby/delete_project.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

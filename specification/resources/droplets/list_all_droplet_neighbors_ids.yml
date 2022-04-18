@@ -36,3 +36,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/list_all_droplet_neighbors_ids.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

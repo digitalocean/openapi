@@ -38,3 +38,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/create_registry.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

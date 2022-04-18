@@ -48,3 +48,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/update_maintenance_window.yml'
   - $ref: 'examples/go/update_maintenance_window.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

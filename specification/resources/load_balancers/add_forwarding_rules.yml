@@ -56,3 +56,8 @@ x-codeSamples:
   - $ref: 'examples/curl/add_forwarding_rules.yml'
   - $ref: 'examples/go/add_forwarding_rules.yml'
   - $ref: 'examples/ruby/add_forwarding_rules.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -39,3 +39,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_domain_record.yml'
   - $ref: 'examples/go/delete_domain_record.yml'
   - $ref: 'examples/ruby/delete_domain_record.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

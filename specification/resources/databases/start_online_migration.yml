@@ -53,3 +53,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/start_online_migration.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

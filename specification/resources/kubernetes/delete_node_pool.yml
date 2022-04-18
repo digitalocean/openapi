@@ -39,3 +39,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_node_pool.yml'
   - $ref: 'examples/go/delete_node_pool.yml'
   - $ref: 'examples/ruby/delete_node_pool.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -90,3 +90,8 @@ x-codeSamples:
   - $ref: 'examples/curl/post_droplet_action.yml'
   - $ref: 'examples/go/post_droplet_action.yml'
   - $ref: 'examples/ruby/post_droplet_action.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

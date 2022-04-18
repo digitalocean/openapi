@@ -39,3 +39,8 @@ x-codeSamples:
   - $ref: 'examples/curl/create_new_tag.yml'
   - $ref: 'examples/go/create_new_tag.yml'
   - $ref: 'examples/ruby/create_new_tag.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -45,3 +45,8 @@ x-codeSamples:
   - $ref: 'examples/curl/list_all_domain_records.yml'
   - $ref: 'examples/go/list_all_domain_records.yml'
   - $ref: 'examples/ruby/list_all_domain_records.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

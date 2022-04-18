@@ -33,3 +33,8 @@ x-codeSamples:
   - $ref: 'examples/curl/get_project.yml'
   - $ref: 'examples/go/get_project.yml'
   - $ref: 'examples/ruby/get_project.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

@@ -35,3 +35,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/get_available_upgrades.yml'
   - $ref: 'examples/go/get_available_upgrades.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

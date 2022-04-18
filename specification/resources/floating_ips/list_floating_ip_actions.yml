@@ -34,3 +34,8 @@ x-codeSamples:
   - $ref: 'examples/curl/list_floating_ip_actions.yml'
   - $ref: 'examples/go/list_floating_ip_actions.yml'
   - $ref: 'examples/ruby/list_floating_ip_actions.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

@@ -48,3 +48,8 @@ x-codeSamples:
   - $ref: 'examples/curl/untag_resource.yml'
   - $ref: 'examples/go/untag_resource.yml'
   - $ref: 'examples/ruby/untag_resource.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

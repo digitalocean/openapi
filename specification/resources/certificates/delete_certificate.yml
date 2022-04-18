@@ -35,3 +35,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_certificate.yml'
   - $ref: 'examples/go/delete_certificate.yml'
   - $ref: 'examples/ruby/delete_certificate.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'
