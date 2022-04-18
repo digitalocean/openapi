@@ -37,3 +37,8 @@ x-codeSamples:
   - $ref: 'examples/curl/list_volume_snapshots.yml'
   - $ref: 'examples/go/list_volume_snapshots.yml'
   - $ref: 'examples/ruby/list_volume_snapshots.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

@@ -35,3 +35,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/destroy_with_associated_resources_dangerous.yml'
   - $ref: 'examples/go/destroy_with_associated_resources_dangerous.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

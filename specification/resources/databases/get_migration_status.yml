@@ -34,3 +34,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/get_migration_status.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

@@ -32,3 +32,8 @@ x-codeSamples:
   - $ref: 'examples/curl/list_options.yml'
   - $ref: 'examples/go/list_options.yml'
   - $ref: 'examples/ruby/list_options.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

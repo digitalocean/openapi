@@ -82,3 +82,8 @@ x-codeSamples:
   - $ref: 'examples/curl/create_new_volume.yml'
   - $ref: 'examples/go/create_new_volume.yml'
   - $ref: 'examples/ruby/create_new_volume.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

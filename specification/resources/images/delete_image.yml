@@ -34,3 +34,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_image.yml'
   - $ref: 'examples/go/delete_image.yml'
   - $ref: 'examples/ruby/delete_image.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

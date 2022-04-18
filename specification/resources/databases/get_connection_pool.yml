@@ -38,3 +38,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/get_connection_pool.yml'
   - $ref: 'examples/go/get_connection_pool.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

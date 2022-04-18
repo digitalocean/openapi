@@ -39,3 +39,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_snapshot.yml'
   - $ref: 'examples/go/delete_snapshot.yml'
   - $ref: 'examples/ruby/delete_snapshot.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

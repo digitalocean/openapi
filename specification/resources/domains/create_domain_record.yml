@@ -79,3 +79,8 @@ x-codeSamples:
   - $ref: 'examples/curl/create_domain_record.yml'
   - $ref: 'examples/go/create_domain_record.yml'
   - $ref: 'examples/ruby/create_domain_record.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

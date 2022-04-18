@@ -50,3 +50,8 @@ x-codeSamples:
   - $ref: 'examples/curl/create_cluster.yml'
   - $ref: 'examples/go/create_cluster.yml'
   - $ref: 'examples/ruby/create_cluster.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -58,3 +58,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/migrate_database_cluster.yml'
   - $ref: 'examples/go/migrate_database_cluster.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

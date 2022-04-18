@@ -93,3 +93,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/post_volume_action_by_name.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

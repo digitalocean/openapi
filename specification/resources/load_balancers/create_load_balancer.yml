@@ -57,3 +57,8 @@ x-codeSamples:
   - $ref: 'examples/curl/create_load_balancer.yml'
   - $ref: 'examples/go/create_load_balancer.yml'
   - $ref: 'examples/ruby/create_load_balancer.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -35,3 +35,8 @@ x-codeSamples:
   - $ref: 'examples/curl/list_node_pools.yml'
   - $ref: 'examples/go/list_node_pools.yml'
   - $ref: 'examples/ruby/list_node_pools.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

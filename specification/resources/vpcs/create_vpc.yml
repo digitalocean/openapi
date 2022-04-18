@@ -47,3 +47,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/create_vpc.yml'
   - $ref: 'examples/go/create_vpc.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

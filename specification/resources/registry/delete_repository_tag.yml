@@ -43,3 +43,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/delete_repository_tag.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

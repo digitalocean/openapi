@@ -34,3 +34,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/1_click.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

@@ -59,3 +59,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/create_replica.yml'
   - $ref: 'examples/go/create_replica.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

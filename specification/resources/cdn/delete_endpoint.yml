@@ -38,3 +38,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_endpoint.yml'
   - $ref: 'examples/go/delete_endpoint.yml'
   - $ref: 'examples/ruby/delete_endpoint.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -38,3 +38,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_volume_snapshot_by_id.yml'
   - $ref: 'examples/go/delete_volume_snapshot_by_id.yml'
   - $ref: 'examples/ruby/delete_volume_snapshot_by_id.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

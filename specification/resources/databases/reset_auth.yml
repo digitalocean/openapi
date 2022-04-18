@@ -55,3 +55,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/reset_auth.yml'
   - $ref: 'examples/go/reset_auth.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

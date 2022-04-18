@@ -39,3 +39,8 @@ x-codeSamples:
   - $ref: 'examples/curl/destroy_droplets_by_tag.yml'
   - $ref: 'examples/go/destroy_droplets_by_tag.yml'
   - $ref: 'examples/ruby/destroy_droplets_by_tag.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

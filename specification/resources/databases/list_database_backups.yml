@@ -40,3 +40,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/list_database_backups.yml'
   - $ref: 'examples/go/list_database_backups.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

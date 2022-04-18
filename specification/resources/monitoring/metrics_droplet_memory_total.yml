@@ -31,3 +31,7 @@ parameters:
 
 x-codeSamples:
   - $ref: 'examples/curl/metrics_droplet_memory_total.yml'
+security:
+  - bearer_auth:
+    - 'read'
+

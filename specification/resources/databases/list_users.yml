@@ -41,3 +41,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/list_users.yml'
   - $ref: 'examples/go/list_users.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

@@ -73,3 +73,8 @@ x-codeSamples:
   - $ref: 'examples/curl/create_firewall.yml'
   - $ref: 'examples/go/create_firewall.yml'
   - $ref: 'examples/ruby/create_firewall.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

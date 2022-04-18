@@ -48,3 +48,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/run_clusterlint.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

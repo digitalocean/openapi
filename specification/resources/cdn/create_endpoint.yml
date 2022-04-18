@@ -55,3 +55,8 @@ x-codeSamples:
   - $ref: 'examples/curl/create_endpoint.yml'
   - $ref: 'examples/go/create_endpoint.yml'
   - $ref: 'examples/ruby/create_endpoint.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

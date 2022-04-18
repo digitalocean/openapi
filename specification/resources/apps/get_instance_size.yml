@@ -32,3 +32,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/get_instance_size.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

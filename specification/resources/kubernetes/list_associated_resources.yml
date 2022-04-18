@@ -36,3 +36,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/list_associated_resources.yml'
   - $ref: 'examples/go/list_associated_resources.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

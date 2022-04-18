@@ -34,3 +34,8 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_domain.yml'
   - $ref: 'examples/go/delete_domain.yml'
   - $ref: 'examples/ruby/delete_domain.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

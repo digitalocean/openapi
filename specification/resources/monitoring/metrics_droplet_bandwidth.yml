@@ -37,3 +37,7 @@ parameters:
 
 x-codeSamples:
   - $ref: 'examples/curl/metrics_droplet_bandwidth.yml'
+security:
+  - bearer_auth:
+    - 'read'
+

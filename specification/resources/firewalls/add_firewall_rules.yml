@@ -72,3 +72,8 @@ x-codeSamples:
   - $ref: 'examples/curl/add_firewall_rules.yml'
   - $ref: 'examples/go/add_firewall_rules.yml'
   - $ref: 'examples/ruby/add_firewall_rules.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

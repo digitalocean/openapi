@@ -109,3 +109,8 @@ x-codeSamples:
   - $ref: 'examples/curl/post_volume_action_by_id.yml'
   - $ref: 'examples/go/post_volume_action_by_id.yml'
   - $ref: 'examples/ruby/post_volume_action_by_id.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -27,3 +27,8 @@ x-codeSamples:
   - $ref: 'examples/curl/list_projects.yml'
   - $ref: 'examples/go/list_projects.yml'
   - $ref: 'examples/ruby/list_projects.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

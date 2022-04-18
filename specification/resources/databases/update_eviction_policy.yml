@@ -44,3 +44,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/update_eviction_policy.yml'
   - $ref: 'examples/go/update_eviction_policy.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

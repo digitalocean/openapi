@@ -39,3 +39,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/create_custom_image.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

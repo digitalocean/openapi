@@ -39,3 +39,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/list_registry_repositories_v2.yml'
   - $ref: 'examples/curl/list_registry_repositories_v2_next_page.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

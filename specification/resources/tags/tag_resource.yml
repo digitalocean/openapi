@@ -48,3 +48,8 @@ x-codeSamples:
   - $ref: 'examples/curl/tag_resource.yml'
   - $ref: 'examples/go/tag_resource.yml'
   - $ref: 'examples/ruby/tag_resource.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

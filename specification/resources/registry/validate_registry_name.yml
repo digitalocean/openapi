@@ -42,3 +42,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/validate_registry_name.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

@@ -60,3 +60,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/add_user.yml'
   - $ref: 'examples/go/add_user.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

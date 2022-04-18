@@ -37,3 +37,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/list_firewalls.yml'
   - $ref: 'examples/go/list_firewalls.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

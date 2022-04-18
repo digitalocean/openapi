@@ -30,3 +30,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/get_customer_balance.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

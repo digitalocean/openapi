@@ -66,3 +66,8 @@ x-codeSamples:
   - $ref: 'examples/curl/create_droplet.yml'
   - $ref: 'examples/go/create_droplet.yml'
   - $ref: 'examples/ruby/create_droplet.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

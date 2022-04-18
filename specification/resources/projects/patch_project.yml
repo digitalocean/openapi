@@ -46,3 +46,8 @@ x-codeSamples:
   - $ref: 'examples/curl/patch_project.yml'
   - $ref: 'examples/go/patch_project.yml'
   - $ref: 'examples/ruby/patch_project.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

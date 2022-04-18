@@ -27,3 +27,8 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/list_invoices.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+

@@ -48,3 +48,8 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/add_database.yml'
   - $ref: 'examples/go/add_database.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'

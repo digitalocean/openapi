@@ -38,3 +38,8 @@ x-codeSamples:
   - $ref: 'examples/curl/create_ssh_key.yml'
   - $ref: 'examples/go/create_ssh_key.yml'
   - $ref: 'examples/ruby/create_ssh_key.yml'
+
+security:
+  - bearer_auth:
+    - 'read'
+    - 'write'
