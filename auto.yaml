@@ -1,7 +1,8 @@
 input-file: tests/openapi-bundled.yaml 
 
-directives:
-  - from: tests/openapi-bundled.yaml 
-    where: '$.paths["/v2/1-clicks"].get'
-    transform: >
-      $["operationId"] = "1Clicks_list";
+directive:
+  from: tests/openapi-bundled.yaml 
+  where: '$.paths["/v2/1-clicks"].get'
+  transform: >
+    $["operationId"] = "1Clicks_list";
+
