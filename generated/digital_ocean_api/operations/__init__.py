@@ -4,7 +4,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._digital_ocean_api_operations import DigitalOceanAPIOperationsMixin
+from ._one_clicks_operations import OneClicksOperations
 from ._install_operations import InstallOperations
 from ._get_operations import GetOperations
 from ._list_operations import ListOperations
@@ -31,7 +31,7 @@ from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 __all__ = [
-    'DigitalOceanAPIOperationsMixin',
+    'OneClicksOperations',
     'InstallOperations',
     'GetOperations',
     'ListOperations',

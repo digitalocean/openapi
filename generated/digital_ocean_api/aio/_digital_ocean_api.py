@@ -14,13 +14,13 @@ from azure.core.rest import AsyncHttpResponse, HttpRequest
 
 from .. import models
 from ._configuration import DigitalOceanAPIConfiguration
-from .operations import AddOperations, AssignOperations, CreateOperations, DeleteOperations, DestroyOperations, DigitalOceanAPIOperationsMixin, GetOperations, InstallOperations, ListOperations, PatchOperations, PostOperations, PurgeOperations, RecycleOperations, RemoveOperations, ResetOperations, RetryOperations, RunOperations, TagOperations, UntagOperations, UpdateOperations, UpgradeOperations, ValidateOperations
+from .operations import AddOperations, AssignOperations, CreateOperations, DeleteOperations, DestroyOperations, GetOperations, InstallOperations, ListOperations, OneClicksOperations, PatchOperations, PostOperations, PurgeOperations, RecycleOperations, RemoveOperations, ResetOperations, RetryOperations, RunOperations, TagOperations, UntagOperations, UpdateOperations, UpgradeOperations, ValidateOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials_async import AsyncTokenCredential
 
-class DigitalOceanAPI(DigitalOceanAPIOperationsMixin):    # pylint: disable=too-many-instance-attributes
+class DigitalOceanAPI:    # pylint: disable=too-many-instance-attributes
     """Introduction
     ============
 
@@ -495,6 +495,8 @@ class DigitalOceanAPI(DigitalOceanAPIOperationsMixin):    # pylint: disable=too-
     You should not need to be concerned with the details of these headers,
     because the browser will typically do all of the work for you.
 
+    :ivar one_clicks: OneClicksOperations operations
+    :vartype one_clicks: digital_ocean_api.aio.operations.OneClicksOperations
     :ivar install: InstallOperations operations
     :vartype install: digital_ocean_api.aio.operations.InstallOperations
     :ivar get: GetOperations operations
@@ -752,6 +754,9 @@ class DigitalOceanAPI(DigitalOceanAPIOperationsMixin):    # pylint: disable=too-
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
+        self.one_clicks = OneClicksOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.install = InstallOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
