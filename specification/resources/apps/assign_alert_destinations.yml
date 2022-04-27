@@ -43,5 +43,4 @@ x-codeSamples:
   - $ref: 'examples/curl/assign_alert_destinations.yml'
 security:
   - bearer_auth:
-    - 'read'
     - 'write'

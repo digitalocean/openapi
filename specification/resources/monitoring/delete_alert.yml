@@ -32,5 +32,4 @@ x-codeSamples:
   - $ref: 'examples/curl/delete_alert.yml'
 security:
   - bearer_auth:
-    - 'read'
     - 'write'
