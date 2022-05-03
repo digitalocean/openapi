@@ -708,11 +708,11 @@ paths:
     delete:
       $ref: 'resources/databases/delete_connection_pool.yml'
 
-  # /v2/databases/{database_cluster_uuid}/eviction_policy:
-  #   get:
-  #     $ref: 'resources/databases/get_eviction_policy.yml'
-  #   put:
-  #     $ref: 'resources/databases/update_eviction_policy.yml'
+  /v2/databases/{database_cluster_uuid}/eviction_policy:
+    get:
+      $ref: 'resources/databases/get_eviction_policy.yml'
+    put:
+      $ref: 'resources/databases/update_eviction_policy.yml'
 
   /v2/databases/{database_cluster_uuid}/sql_mode:
     get:
@@ -773,19 +773,19 @@ paths:
     get:
       $ref: 'resources/droplets/list_droplet_snapshots.yml'
 
-  # /v2/droplets/{droplet_id}/actions:
-  #   get:
-  #     $ref: 'resources/droplets/list_droplet_actions.yml'
-  #   post:
-  #     $ref: 'resources/droplets/post_droplet_action.yml'
+  /v2/droplets/{droplet_id}/actions:
+    get:
+      $ref: 'resources/droplets/list_droplet_actions.yml'
+    post:
+      $ref: 'resources/droplets/post_droplet_action.yml'
 
-  # /v2/droplets/actions:
-  #   post:
-  #     $ref: 'resources/droplets/post_droplet_action_by_tag.yml'
+  /v2/droplets/actions:
+    post:
+      $ref: 'resources/droplets/post_droplet_action_by_tag.yml'
 
-  # /v2/droplets/{droplet_id}/actions/{action_id}:
-  #   get:
-  #     $ref: 'resources/droplets/get_droplet_action.yml'
+  /v2/droplets/{droplet_id}/actions/{action_id}:
+    get:
+      $ref: 'resources/droplets/get_droplet_action.yml'
 
   /v2/droplets/{droplet_id}/kernels:
     get:
@@ -865,16 +865,16 @@ paths:
     delete:
       $ref: 'resources/floating_ips/delete_floating_ip.yml'
 
-  # /v2/floating_ips/{floating_ip}/actions:
-  #   get:
-  #     $ref: 'resources/floating_ips/list_floating_ip_actions.yml'
+  /v2/floating_ips/{floating_ip}/actions:
+    get:
+      $ref: 'resources/floating_ips/list_floating_ip_actions.yml'
 
-  #   post:
-  #     $ref: 'resources/floating_ips/post_floating_ip_action.yml'
+    post:
+      $ref: 'resources/floating_ips/post_floating_ip_action.yml'
 
-  # /v2/floating_ips/{floating_ip}/actions/{action_id}:
-  #   get:
-  #     $ref: 'resources/floating_ips/get_floating_ip_action.yml'
+  /v2/floating_ips/{floating_ip}/actions/{action_id}:
+    get:
+      $ref: 'resources/floating_ips/get_floating_ip_action.yml'
 
   /v2/images:
     get:
