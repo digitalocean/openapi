@@ -4,7 +4,7 @@ summary: Reset a Database User's Password or Authentication Method
 
 description: |
   To reset the password for a database user, send a POST request to
-  `/v2/databases/$DATABASE_ID/users/$USERNAME/reset_auth`. 
+  `/v2/databases/$DATABASE_ID/users/$USERNAME/reset_auth`.
 
   For `mysql` databases, the authentication method can be specifying by
   including a key in the JSON body called `mysql_settings` with the `auth_plugin`
@@ -58,5 +58,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'read'
     - 'write'

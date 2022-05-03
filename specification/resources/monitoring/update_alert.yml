@@ -49,6 +49,7 @@ requestBody:
     `v1/insights/lbaas/avg_cpu_utilization_percent`|alert on the percent of CPU utilization|load balancer ID
     `v1/insights/lbaas/connection_utilization_percent`|alert on the percent of connection utilization|load balancer ID
     `v1/insights/lbaas/droplet_health`|alert on Droplet health status changes|load balancer ID
+    `v1/insights/lbaas/tls_connections_per_second_utilization_percent`|alert on the percent of TLS connections per second utilization|load balancer ID
   required: true
   content:
     application/json:
@@ -60,5 +61,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'read'
     - 'write'
