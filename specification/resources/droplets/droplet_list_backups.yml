@@ -1,4 +1,4 @@
-operationId: list_droplet_backups
+operationId: droplet_list_backups
 
 summary: List Backups for a Droplet
 

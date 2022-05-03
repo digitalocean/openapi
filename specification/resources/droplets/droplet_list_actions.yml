@@ -1,4 +1,4 @@
-operationId: list_droplet_actions
+operationId: droplet_list_actions
 
 summary: List Actions for a Droplet
 

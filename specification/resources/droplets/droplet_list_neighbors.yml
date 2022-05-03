@@ -1,4 +1,4 @@
-operationId: list_droplet_neighbors
+operationId: droplet_list_neighbors
 
 summary: List Neighbors for a Droplet
 

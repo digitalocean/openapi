@@ -1,4 +1,4 @@
-operationId: get_destroy_with_associated_resources_status
+operationId: droplet_get_destroy_with_associated_resources_status
 
 summary: Check Status of a Droplet Destroy with Associated Resources Request
 

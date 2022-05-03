@@ -1,4 +1,4 @@
-operationId: get_droplet_action
+operationId: droplet_get_action
 
 summary: Retrieve a Droplet Action
 

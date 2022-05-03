@@ -1,4 +1,4 @@
-operationId: post_droplet_action
+operationId: droplet_post_action
 
 summary: Initiate a Droplet Action
 

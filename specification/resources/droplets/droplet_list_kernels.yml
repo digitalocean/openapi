@@ -1,4 +1,4 @@
-operationId: list_droplet_kernels
+operationId: droplet_list_kernels
 
 summary: List All Available Kernels for a Droplet
 

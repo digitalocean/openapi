@@ -1,4 +1,4 @@
-operationId: destroy_with_associated_resources_dangerous
+operationId: droplet_destroy_with_associated_resources_dangerous
 
 summary: Destroy a Droplet and All of its Associated Resources (Dangerous)
 

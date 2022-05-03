@@ -1,4 +1,4 @@
-operationId: destroy_droplet
+operationId: droplet_destroy
 
 summary: Delete an Existing Droplet
 

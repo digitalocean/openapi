@@ -1,4 +1,4 @@
-operationId: destroy_with_associated_resources_selective
+operationId: droplet_destroy_with_associated_resources_selective
 
 summary: Selectively Destroy a Droplet and its Associated Resources
 

@@ -1,4 +1,4 @@
-operationId: get_droplet
+operationId: droplet_get
 
 summary: Retrieve an Existing Droplet
 
