@@ -1,4 +1,4 @@
-operationId: post_volume_action_by_id
+operationId: volumeActions_create_byId
 
 summary: Initiate A Block Storage Action By Volume Id
 
@@ -88,7 +88,7 @@ requestBody:
 
 responses:
   '202':
-    $ref: 'responses/volume_action.yml'
+    $ref: 'responses/volumeAction.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -106,9 +106,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/post_volume_action_by_id.yml'
-  - $ref: 'examples/go/post_volume_action_by_id.yml'
-  - $ref: 'examples/ruby/post_volume_action_by_id.yml'
+  - $ref: 'examples/curl/volumeActions_post_byId.yml'
+  - $ref: 'examples/go/volumeActions_post_byId.yml'
+  - $ref: 'examples/ruby/volumeActions_post_byId.yml'
 
 security:
   - bearer_auth:

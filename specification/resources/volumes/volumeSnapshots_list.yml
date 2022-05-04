@@ -1,13 +1,13 @@
-operationId: list_all_volume_actions
+operationId: volumeSnapshots_list
 
-summary: List All Actions for a Volume
+summary: List Snapshots for a Volume
 
 description: >+
-  To retrieve all actions that have been executed on a volume, send a GET
-  request to `/v2/volumes/$VOLUME_ID/actions`.
+  To retrieve the snapshots that have been created from a volume, send a GET
+  request to `/v2/volumes/$VOLUME_ID/snapshots`.
 
 tags:
-  - Block Storage Actions
+  - Block Storage
 
 parameters:
   - $ref: 'parameters.yml#/volume_id'
@@ -16,7 +16,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/all_volume_actions.yml'
+    $ref: 'responses/volumeSnapshots.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -34,9 +34,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_volume_actions.yml'
-  - $ref: 'examples/go/list_all_volume_actions.yml'
-  - $ref: 'examples/ruby/list_all_volume_actions.yml'
+  - $ref: 'examples/curl/volumeSnapshots_list.yml'
+  - $ref: 'examples/go/volumeSnapshots_list.yml'
+  - $ref: 'examples/ruby/volumeSnapshots_list.yml'
 
 security:
   - bearer_auth:

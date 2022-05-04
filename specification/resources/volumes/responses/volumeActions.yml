@@ -19,7 +19,7 @@ content:
             actions:
               type: array
               items:
-                $ref: '../models/volume_action.yml'
+                $ref: '../models/volumeAction.yml'
 
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
