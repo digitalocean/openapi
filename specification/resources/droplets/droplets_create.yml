@@ -1,4 +1,4 @@
-operationId: droplet_create 
+operationId: droplets_create 
 
 summary: Create a New Droplet
 

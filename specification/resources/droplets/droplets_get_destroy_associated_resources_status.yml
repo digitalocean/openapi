@@ -1,10 +1,11 @@
-operationId: droplet_get
+operationId: droplets_get_destroy_associated_resources_status
 
-summary: Retrieve an Existing Droplet
+summary: Check Status of a Droplet Destroy with Associated Resources Request
 
 description: |
-  To show information about an individual Droplet, send a GET request to
-  `/v2/droplets/$DROPLET_ID`.
+  To check on the status of a request to destroy a Droplet with its associated
+  resources, send a GET request to the
+  `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/status` endpoint.
 
 tags:
   - Droplets
@@ -14,7 +15,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/existing_droplet.yml'
+    $ref: 'responses/associated_resources_status.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -32,9 +33,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_droplet.yml'
-  - $ref: 'examples/go/get_droplet.yml'
-  - $ref: 'examples/ruby/get_droplet.yml'
+  - $ref: 'examples/curl/get_destroy_with_associated_resources_status.yml'
 
 security:
   - bearer_auth:

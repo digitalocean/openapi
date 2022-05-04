@@ -1,4 +1,4 @@
-operationId: droplet_list_associated_resources
+operationId: droplet_list_associated
 
 summary: List Associated Resources for a Droplet
 

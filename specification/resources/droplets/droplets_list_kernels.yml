@@ -1,14 +1,14 @@
-operationId: droplet_list_backups
+operationId: droplets_list_kernels
 
-summary: List Backups for a Droplet
+summary: List All Available Kernels for a Droplet
 
 description: |
-  To retrieve any backups associated with a Droplet, send a GET request to
-  `/v2/droplets/$DROPLET_ID/backups`.
+  To retrieve a list of all kernels available to a Droplet, send a GET request
+  to `/v2/droplets/$DROPLET_ID/kernels`
 
-  You will get back a JSON object that has a `backups` key. This will be set to
-  an array of backup objects, each of which contain the standard
-  Droplet backup attributes.
+  The response will be a JSON object that has a key called `kernels`. This will
+  be set to an array of `kernel` objects, each of which contain the standard
+  `kernel` attributes.
 
 tags:
   - Droplets
@@ -20,7 +20,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/all_droplet_backups.yml'
+    $ref: 'responses/all_kernels.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -38,9 +38,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_droplet_backups.yml'
-  - $ref: 'examples/go/list_droplet_backups.yml'
-  - $ref: 'examples/ruby/list_droplet_backups.yml'
+  - $ref: 'examples/curl/list_droplet_kernels.yml'
+  - $ref: 'examples/go/list_droplet_kernels.yml'
+  - $ref: 'examples/ruby/list_droplet_kernels.yml'
 
 security:
   - bearer_auth:

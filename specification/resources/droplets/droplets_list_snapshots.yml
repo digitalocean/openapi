@@ -1,4 +1,4 @@
-operationId: droplet_list_snapshots
+operationId: droplets_list_snapshots
 
 summary: List Snapshots for a Droplet
 

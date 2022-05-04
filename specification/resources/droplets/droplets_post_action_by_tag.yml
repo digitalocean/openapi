@@ -1,4 +1,4 @@
-operationId: droplet_post_action_by_tag
+operationId: droplets_post_action_by_tag
 
 summary: Acting on Tagged Droplets
 

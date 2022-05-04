@@ -1,4 +1,4 @@
-operationId: droplet_list_all
+operationId: droplet_list
 
 summary: List All Droplets
 
