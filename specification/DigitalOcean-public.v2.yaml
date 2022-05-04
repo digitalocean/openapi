@@ -436,11 +436,11 @@ tags:
 paths:
   /v2/1-clicks:
     get:
-      $ref: 'resources/1-clicks/list.yml'
+      $ref: 'resources/1-clicks/1clicks_list.yml'
 
   /v2/1-clicks/kubernetes:
     post:
-      $ref: 'resources/1-clicks/install_kubernetes.yml'
+      $ref: 'resources/1-clicks/1clicks_install_kubernetes.yml'
 
   /v2/account:
     get:
