@@ -14,4 +14,4 @@ content:
     schema:
       properties:
         snapshot:
-          $ref: '../models/snapshot.yml'
+          $ref: '../models/snapshots.yml'

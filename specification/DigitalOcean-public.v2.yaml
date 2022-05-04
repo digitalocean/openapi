@@ -1210,14 +1210,14 @@ paths:
 
   /v2/snapshots:
     get:
-      $ref: 'resources/snapshots/list_all_snapshots.yml'
+      $ref: 'resources/snapshots/snapshots_list.yml'
 
   /v2/snapshots/{snapshot_id}:
     get:
-      $ref: 'resources/snapshots/get_snapshots.yml'
+      $ref: 'resources/snapshots/snapshots_get.yml'
 
     delete:
-      $ref: 'resources/snapshots/delete_snapshot.yml'
+      $ref: 'resources/snapshots/snapshots_delete.yml'
 
   /v2/tags:
     get:

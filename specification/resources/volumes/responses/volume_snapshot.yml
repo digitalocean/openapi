@@ -15,7 +15,7 @@ content:
     schema:
       properties:
         snapshot:
-          $ref: '../../snapshots/models/snapshot.yml'
+          $ref: '../../snapshots/models/snapshots.yml'
       example:
         snapshot:
           id: 8fa70202-873f-11e6-8b68-000f533176b1
