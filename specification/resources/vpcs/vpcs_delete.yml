@@ -1,4 +1,4 @@
-operationId: delete_vpc
+operationId: vpcs_delete
 
 summary: Delete a VPC
 
@@ -37,8 +37,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_vpc.yml'
-  - $ref: 'examples/go/delete_vpc.yml'
+  - $ref: 'examples/curl/vpcs_delete.yml'
+  - $ref: 'examples/go/vpcs_delete.yml'
 
 security:
   - bearer_auth:

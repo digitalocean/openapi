@@ -1,4 +1,4 @@
-operationId: list_vpcs
+operationId: vpcs_list
 
 summary: List All VPCs
 
@@ -32,8 +32,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_vpcs.yml'
-  - $ref: 'examples/go/list_vpcs.yml'
+  - $ref: 'examples/curl/vpcs_list.yml'
+  - $ref: 'examples/go/vpcs_list.yml'
 
 security:
   - bearer_auth:
