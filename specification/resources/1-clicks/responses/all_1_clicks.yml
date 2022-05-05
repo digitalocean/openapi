@@ -15,7 +15,7 @@ content:
         1_clicks:
           type: array
           items:
-            $ref: '../models/1clicks.yml'
+            $ref: '../models/1_click.yml'
     examples:
       All 1-Click Applications:
         value:
