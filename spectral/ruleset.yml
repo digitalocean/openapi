@@ -131,7 +131,7 @@ rules:
     severity: error
     message: "{{description}}; {{value}} incorrect"
     then:
-      function: 
+      function: ensureSnakeCaseWithDigits
 
   operationid-must-follow-naming-conventions:
     description: operationIds must follow naming conventions for method
