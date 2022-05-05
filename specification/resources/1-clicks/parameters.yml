@@ -1,4 +1,4 @@
-1clicks_type:
+1_click_type:
   in: query
   name: type
   description: Restrict results to a certain type of 1-Click.
