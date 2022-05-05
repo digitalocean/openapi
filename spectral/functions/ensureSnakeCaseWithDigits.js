@@ -7,7 +7,7 @@
  */
 
 module.exports = (param, _, paths) => {
-    const re = RegExp('^(([A-Z0-9a-z]+([A-Z])*)(\.|_))+[A-Z0-9a-z]+$');
+    const re = RegExp('^(([A-Z0-9a-z]+([A-Z])*)(\.|_)*)+$');
 
     if (re.test(param)) { return }
 
