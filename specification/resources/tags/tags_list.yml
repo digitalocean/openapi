@@ -1,4 +1,4 @@
-operationId: list_all_tags
+operationId: tags_list
 
 summary: List All Tags
 
@@ -9,7 +9,7 @@ tags:
 
 responses:
   '200':
-    $ref: 'responses/all_tags.yml'
+    $ref: 'responses/tags_all.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -24,9 +24,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_tags.yml'
-  - $ref: 'examples/go/list_all_tags.yml'
-  - $ref: 'examples/ruby/list_all_tags.yml'
+  - $ref: 'examples/curl/tags_list.yml'
+  - $ref: 'examples/go/tags_list.yml'
+  - $ref: 'examples/ruby/tags_list.yml'
 
 security:
   - bearer_auth:

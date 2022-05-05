@@ -1221,21 +1221,21 @@ paths:
 
   /v2/tags:
     get:
-      $ref: 'resources/tags/list_all_tags.yml'
+      $ref: 'resources/tags/tags_list.yml'
     post:
-      $ref: 'resources/tags/create_new_tag.yml'
+      $ref: 'resources/tags/tags_create.yml'
 
   /v2/tags/{tag_id}:
     get:
-      $ref: 'resources/tags/get_tag.yml'
+      $ref: 'resources/tags/tags_get.yml'
     delete:
-      $ref: 'resources/tags/delete_tag.yml'
+      $ref: 'resources/tags/tags_delete.yml'
 
   /v2/tags/{tag_id}/resources:
     post:
-      $ref: 'resources/tags/tag_resource.yml'
+      $ref: 'resources/tags/tags_assign_resources.yml'
     delete:
-      $ref: 'resources/tags/untag_resource.yml'
+      $ref: 'resources/tags/tags_unassign_resources.yml'
 
   /v2/volumes:
     get:

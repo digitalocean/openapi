@@ -16,7 +16,7 @@ content:
       type: object
       properties:
         tag:
-          $ref: '../models/tag.yml'
+          $ref: '../models/tags.yml'
 
       example:
         tag:

@@ -17,7 +17,7 @@ content:
             tags:
               type: array
               items:
-                $ref: '../models/tag.yml'
+                $ref: '../models/tags.yml'
 
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
