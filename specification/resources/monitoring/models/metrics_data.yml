@@ -12,7 +12,6 @@ properties:
 
   resultType:
     type: string
-    format: string
     enum:
       - matrix
 

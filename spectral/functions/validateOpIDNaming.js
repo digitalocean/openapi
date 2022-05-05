@@ -9,7 +9,7 @@ const DELETE = ["delete", "destroy", "remove", "purge", "untag"];
 const GET = ["get", "list"];
 const PATCH = ["patch"];
 const POST = ["create", "post", "add", "tag", "install", "reset", "upgrade",
-              "recycle", "run", "retry", "validate", "assign"];
+              "recycle", "run", "retry", "validate", "assign", , "unassign"];
 const PUT = ["update"];
 
 const articles = ["_a_", "_an_", "_the_"]

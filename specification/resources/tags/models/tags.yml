@@ -30,18 +30,18 @@ properties:
       It also includes a count of the total number of resources tagged with the current tag as well as a `last_tagged_uri` attribute set to the last resource tagged with the current tag.
     readOnly: true
     allOf:
-      - $ref: 'tag_metadata.yml'
+      - $ref: 'tags_metadata.yml'
       - properties:
           droplets:
-            $ref: 'tag_metadata.yml'
+            $ref: 'tags_metadata.yml'
           imgages:
-            $ref: 'tag_metadata.yml'
+            $ref: 'tags_metadata.yml'
           volumes:
-            $ref: 'tag_metadata.yml'
+            $ref: 'tags_metadata.yml'
           volume_snapshots:
-            $ref: 'tag_metadata.yml'
+            $ref: 'tags_metadata.yml'
           databases:
-            $ref: 'tag_metadata.yml'
+            $ref: 'tags_metadata.yml'
     example:
       count: 5
       last_tagged_uri: https://api.digitalocean.com/v2/images/7555620
