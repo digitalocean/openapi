@@ -16,11 +16,11 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/1clicks_create.yml'
+        $ref: 'models/1_click_create.yml'
 
 responses:
   '200':
-    $ref: 'responses/1clicks_create.yml'
+    $ref: 'responses/1_click_create.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -35,7 +35,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/1clicks_create.yml'
+  - $ref: 'examples/curl/1_click_create.yml'
 
 security:
   - bearer_auth:
