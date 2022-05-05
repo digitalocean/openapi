@@ -1,4 +1,4 @@
-operationId: 1clicks_install_kubernetes
+operationId: install_kubernetes
 
 summary: Install Kubernetes 1-Click Applications
 
