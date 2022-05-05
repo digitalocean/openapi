@@ -1,15 +1,17 @@
-operationId: update_vpc
+operationId: vpcs_create
 
-summary: Update a VPC
+summary: Create a New VPC
 
 description: |
-  To update information about a VPC, send a PUT request to `/v2/vpcs/$VPC_ID`.
+  To create a VPC, send a POST request to `/v2/vpcs` specifying the attributes
+  in the table below in the JSON body.
+
+  **Note:** If you do not currently have a VPC network in a specific datacenter
+  region, the first one that you create will be set as the default for that
+  region. The default VPC for a region cannot be changed or deleted.
 
 tags:
   - VPCs
-
-parameters:
-  - $ref: 'parameters.yml#/vpc_id'
 
 requestBody:
   required: true
@@ -20,20 +22,18 @@ requestBody:
         type: object
         allOf:
         - $ref: 'models/vpc.yml#/vpc_updatable'
-        - $ref: 'models/vpc.yml#/vpc_default'
+        - $ref: 'models/vpc.yml#/vpc_create'
 
         required:
         - name
+        - region
 
 responses:
-  '200':
+  '201':
     $ref: 'responses/existing_vpc.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
-
-  '404':
-    $ref: '../../shared/responses/not_found.yml'
 
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'
@@ -45,8 +45,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/update_vpc.yml'
-  - $ref: 'examples/go/update_vpc.yml'
+  - $ref: 'examples/curl/vpcs_create.yml'
+  - $ref: 'examples/go/vpcs_create.yml'
 
 security:
   - bearer_auth:

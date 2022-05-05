@@ -1,10 +1,9 @@
-operationId: patch_vpc
+operationId: vpcs_update
 
-summary: Partially Update a VPC
+summary: Update a VPC
 
 description: |
-  To update a subset of information about a VPC, send a PATCH request to
-  `/v2/vpcs/$VPC_ID`.
+  To update information about a VPC, send a PUT request to `/v2/vpcs/$VPC_ID`.
 
 tags:
   - VPCs
@@ -18,9 +17,13 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         allOf:
         - $ref: 'models/vpc.yml#/vpc_updatable'
         - $ref: 'models/vpc.yml#/vpc_default'
+
+        required:
+        - name
 
 responses:
   '200':
@@ -42,8 +45,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/patch_vpc.yml'
-  - $ref: 'examples/go/patch_vpc.yml'
+  - $ref: 'examples/curl/vpcs_update.yml'
+  - $ref: 'examples/go/vpcs_update.yml'
 
 security:
   - bearer_auth:
