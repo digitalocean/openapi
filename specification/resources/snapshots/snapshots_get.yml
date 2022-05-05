@@ -7,7 +7,7 @@ description: |
   `/v2/snapshots/$SNAPSHOT_ID`.
 
   The response will be a JSON object with a key called `snapshot`. The value of
-  this will be an snapshot object containing the standard snapshot attributes.
+  this will be an snapshot object containing the standard snapshot attributes
 
 tags:
   - Snapshots
