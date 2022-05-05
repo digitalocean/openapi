@@ -1,4 +1,4 @@
-operationId: destroy_a_key
+operationId: sshKeys_delete_by_id
 
 parameters:
   ssh_key_identifier: '$response.body#/ssh_key/id'

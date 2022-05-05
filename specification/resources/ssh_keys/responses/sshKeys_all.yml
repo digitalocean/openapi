@@ -18,7 +18,7 @@ content:
             ssh_keys:
               type: array
               items:
-                $ref: '../models/ssh_key.yml'
+                $ref: '../models/sshKeys.yml'
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 

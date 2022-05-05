@@ -1,4 +1,4 @@
-operationId: get_ssh_key_by_fingerprint
+operationId: sshKeys_get_by_fingerprint
 
 parameters:
   ssh_key_identifier: '$response.body#/ssh_key/fingerprint'
