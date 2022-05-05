@@ -15,7 +15,7 @@ content:
     schema:
       properties:
         action:
-          $ref: '../models/volume_action.yml'
+          $ref: '../models/volumeAction.yml'
 
     examples:
       volume_action_attach_response:

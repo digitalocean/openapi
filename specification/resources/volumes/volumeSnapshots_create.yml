@@ -1,4 +1,4 @@
-operationId: create_volume_snapshot
+operationId: volumeSnapshots_create
 
 summary: Create Snapshot from a Volume
 
@@ -33,7 +33,7 @@ requestBody:
 
 responses:
   '201':
-    $ref: 'responses/volume_snapshot.yml'
+    $ref: 'responses/volumeSnapshot.yml'
 
   '400':
     $ref: '../../shared/responses/bad_request.yml'
@@ -54,9 +54,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/create_volume_snapshot.yml'
-  - $ref: 'examples/go/create_volume_snapshot.yml'
-  - $ref: 'examples/ruby/create_volume_snapshot.yml'
+  - $ref: 'examples/curl/volumeSnapshots_create.yml'
+  - $ref: 'examples/go/volumeSnapshots_create.yml'
+  - $ref: 'examples/ruby/volumeSnapshots_create.yml'
 
 security:
   - bearer_auth:

@@ -1,4 +1,4 @@
-operationId: post_volume_action_by_name
+operationId: volumeActions_create_byName
 
 summary: Initiate A Block Storage Action By Volume Name
 
@@ -74,7 +74,7 @@ requestBody:
 
 responses:
   '202':
-    $ref: 'responses/volume_action.yml'
+    $ref: 'responses/volumeAction.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -92,7 +92,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/post_volume_action_by_name.yml'
+  - $ref: 'examples/curl/volumeActions_create_byName.yml'
 
 security:
   - bearer_auth:

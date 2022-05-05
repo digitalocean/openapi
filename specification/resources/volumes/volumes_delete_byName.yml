@@ -1,4 +1,4 @@
-operationId: delete_volume_by_name
+operationId: volumes_delete_byName
 
 summary: Delete a Block Storage Volume by Name
 
@@ -38,7 +38,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_volume_by_name.yml'
+  - $ref: 'examples/curl/volumes_delete_byName.yml'
 
 security:
   - bearer_auth:

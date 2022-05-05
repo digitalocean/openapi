@@ -1,4 +1,4 @@
-operationId: create_new_volume
+operationId: volumes_create
 
 summary: Create a New Block Storage Volume
 
@@ -22,13 +22,13 @@ requestBody:
     application/json:
       schema:
         anyOf:
-          - $ref: 'models/new_volume_ext4.yml'
-          - $ref: 'models/new_volume_xfs.yml'
+          - $ref: 'models/volumes_ext4.yml'
+          - $ref: 'models/volumes_xfs.yml'
         discriminator:
           propertyName: filesystem_type
           mapping:
-            ext4: 'models/new_volume_ext4.yml'
-            xfs: 'models/new_volume_xfs.yml'
+            ext4: 'models/volumes_ext4.yml'
+            xfs: 'models/volumes_xfs.yml'
       examples:
         ext4 volume:
           value:
@@ -79,9 +79,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/create_new_volume.yml'
-  - $ref: 'examples/go/create_new_volume.yml'
-  - $ref: 'examples/ruby/create_new_volume.yml'
+  - $ref: 'examples/curl/volumes_create.yml'
+  - $ref: 'examples/go/volumes_create.yml'
+  - $ref: 'examples/ruby/volumes_create.yml'
 
 security:
   - bearer_auth:
