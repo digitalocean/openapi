@@ -1,4 +1,4 @@
-operationId: list_all_keys
+operationId: sshKeys_list
 
 summary: List All SSH Keys
 
@@ -17,7 +17,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/all_keys.yml'
+    $ref: 'responses/sshKeys_all.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -32,9 +32,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_keys.yml'
-  - $ref: 'examples/go/list_all_keys.yml'
-  - $ref: 'examples/ruby/list_all_keys.yml'
+  - $ref: 'examples/curl/sshKeys_list.yml'
+  - $ref: 'examples/go/sshKeys_list.yml'
+  - $ref: 'examples/ruby/sshKeys_list.yml'
 
 security:
   - bearer_auth:

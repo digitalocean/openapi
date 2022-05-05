@@ -1,4 +1,4 @@
-operationId: destroy_a_key
+operationId: ssh_keys_delete_by_fingerprint
 
 parameters:
   ssh_key_identifier: '$response.body#/ssh_key/fingerprint'

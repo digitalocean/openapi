@@ -1,4 +1,4 @@
-operationId: get_ssh_key
+operationId: sshKeys_get
 
 summary: Retrieve an Existing SSH Key
 
@@ -17,7 +17,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/existing_key.yml'
+    $ref: 'responses/sshKeys_existing.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -35,9 +35,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_ssh_key.yml'
-  - $ref: 'examples/go/get_ssh_key.yml'
-  - $ref: 'examples/ruby/get_ssh_key.yml'
+  - $ref: 'examples/curl/sshKeys_get.yml'
+  - $ref: 'examples/go/sshKeys_get.yml'
+  - $ref: 'examples/ruby/sshKeys_get.yml'
 
 security:
   - bearer_auth:

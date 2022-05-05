@@ -15,18 +15,18 @@ content:
     schema:
       properties:
         ssh_key:
-          $ref: '../models/ssh_key.yml'
+          $ref: '../models/sshKeys.yml'
 
 links:
-  get_ssh_key_by_id:
-    $ref: '../links/get_ssh_key_by_id.yml'
+  sshKeys_get_by_id:
+    $ref: '../links/sshKeys_get_by_id.yml'
 
-  get_ssh_key_by_fingerprint:
-    $ref: '../links/get_ssh_key_by_fingerprint.yml'
+  sshKeys_get_by_fingerprint:
+    $ref: '../links/sshKeys_get_by_fingerprint.yml'
 
-  delete_ssh_key_by_id:
-    $ref: '../links/delete_ssh_key_by_id.yml'
+  sshKeys_delete_by_id:
+    $ref: '../links/sshKeys_delete_by_id.yml'
 
-  delete_ssh_key_by_fingerprint:
-    $ref: '../links/delete_ssh_key_by_fingerprint.yml'
+  sshKeys_delete_by_fingerprint:
+    $ref: '../links/sshKeys_delete_by_fingerprint.yml'
 
