@@ -523,20 +523,20 @@ paths:
 
   /v2/account/keys:
     get:
-      $ref: 'resources/ssh_keys/list_all_keys.yml'
+      $ref: 'resources/ssh_keys/sshKeys_list.yml'
 
     post:
-      $ref: 'resources/ssh_keys/create_ssh_key.yml'
+      $ref: 'resources/ssh_keys/sshKeys_create.yml'
 
   /v2/account/keys/{ssh_key_identifier}:
     get:
-      $ref: 'resources/ssh_keys/get_ssh_key.yml'
+      $ref: 'resources/ssh_keys/sshKeys_get.yml'
 
     put:
-      $ref: 'resources/ssh_keys/update_ssh_key.yml'
+      $ref: 'resources/ssh_keys/sshKeys_update.yml'
 
     delete:
-      $ref: 'resources/ssh_keys/destroy_ssh_key.yml'
+      $ref: 'resources/ssh_keys/sshKeys_delete.yml'
 
   /v2/actions:
     get:
