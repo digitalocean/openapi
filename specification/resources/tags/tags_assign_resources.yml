@@ -1,4 +1,4 @@
-operationId: tag_resource
+operationId: tags_assign_resources
 
 summary: Tag a Resource
 
@@ -23,7 +23,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/tag_resource.yml'
+        $ref: 'models/tags_resource.yml'
 
 responses:
   '204':
@@ -45,9 +45,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/tag_resource.yml'
-  - $ref: 'examples/go/tag_resource.yml'
-  - $ref: 'examples/ruby/tag_resource.yml'
+  - $ref: 'examples/curl/tags_assign_resources.yml'
+  - $ref: 'examples/go/tags_assign_resources.yml'
+  - $ref: 'examples/ruby/tags_assign_resources.yml'
 
 security:
   - bearer_auth:

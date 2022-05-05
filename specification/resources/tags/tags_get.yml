@@ -1,11 +1,10 @@
-operationId: delete_tag
+operationId: tags_get
 
-summary: Delete a Tag
+summary: Retrieve a Tag
 
 description: >-
-  A tag can be deleted by sending a `DELETE` request to `/v2/tags/$TAG_NAME`.
-  Deleting a tag also untags all the resources that have previously been tagged
-  by the Tag.
+  To retrieve an individual tag, you can send a `GET` request to
+  `/v2/tags/$TAG_NAME`.
 
 tags:
   - Tags
@@ -14,8 +13,8 @@ parameters:
   - $ref: 'parameters.yml#/tag_id'
 
 responses:
-  '204':
-    $ref: '../../shared/responses/no_content.yml'
+  '200':
+    $ref: 'responses/tags_existing.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -33,10 +32,11 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_tag.yml'
-  - $ref: 'examples/go/delete_tag.yml'
-  - $ref: 'examples/ruby/delete_tag.yml'
+  - $ref: 'examples/curl/tags_get.yml'
+  - $ref: 'examples/go/tags_get.yml'
+  - $ref: 'examples/ruby/tags_get.yml'
 
 security:
   - bearer_auth:
-    - 'write'
+    - 'read'
+
