@@ -5,7 +5,7 @@ summary: Delete a Tag
 description: >-
   A tag can be deleted by sending a `DELETE` request to `/v2/tags/$TAG_NAME`.
   Deleting a tag also untags all the resources that have previously been tagged
-  by the Tag.
+  by the Tag
 
 tags:
   - Tags
