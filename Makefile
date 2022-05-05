@@ -57,6 +57,14 @@ collection: dev-dependencies bundle ## Use openapi-to-postmanv2 to generate a co
 bundle: dev-dependencies ## Use openapi-cli to bundle the spec
 	npm run bundle -- ${SPEC_FILE} -o ${BUNDLE_PATH}
 
+.PHONY: autorest-python
+autorest-python: dev-dependencies bundle 
+	npm run autorest -- auto.yaml --verbose --python --add-credential
+
+.PHONY: autorest-typescript
+autorest-typescript: dev-dependencies bundle 
+	npm run autorest -- auto.yaml --verbose --typescript
+
 .PHONY: preview
 preview: dev-dependencies ## Launch the docs preview server (openapi) and watch for file changes
 	SPEC_FILE=${SPEC_FILE} npm run preview
