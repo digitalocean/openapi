@@ -1,4 +1,4 @@
-operationId: get_user_information
+operationId: account_get
 
 summary: Get User Information
 
@@ -25,7 +25,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_user_information.yml'
+  - $ref: 'examples/curl/account_get.yml'
 
 security:
   - bearer_auth:
