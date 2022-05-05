@@ -448,20 +448,20 @@ paths:
 
   /v2/account/keys:
     get:
-      $ref: 'resources/ssh_keys/list_all_keys.yml'
+      $ref: 'resources/ssh_keys/sshKeys_list.yml'
 
     post:
-      $ref: 'resources/ssh_keys/create_ssh_key.yml'
+      $ref: 'resources/ssh_keys/sshKeys_create.yml'
 
   /v2/account/keys/{ssh_key_identifier}:
     get:
-      $ref: 'resources/ssh_keys/get_ssh_key.yml'
+      $ref: 'resources/ssh_keys/sshKeys_get.yml'
 
     put:
-      $ref: 'resources/ssh_keys/update_ssh_key.yml'
+      $ref: 'resources/ssh_keys/sshKeys_update.yml'
 
     delete:
-      $ref: 'resources/ssh_keys/destroy_ssh_key.yml'
+      $ref: 'resources/ssh_keys/sshKeys_delete.yml'
 
   /v2/actions:
     get:
@@ -1210,96 +1210,96 @@ paths:
 
   /v2/snapshots:
     get:
-      $ref: 'resources/snapshots/list_all_snapshots.yml'
+      $ref: 'resources/snapshots/snapshots_list.yml'
 
   /v2/snapshots/{snapshot_id}:
     get:
-      $ref: 'resources/snapshots/get_snapshots.yml'
+      $ref: 'resources/snapshots/snapshots_get.yml'
 
     delete:
-      $ref: 'resources/snapshots/delete_snapshot.yml'
+      $ref: 'resources/snapshots/snapshots_delete.yml'
 
   /v2/tags:
     get:
-      $ref: 'resources/tags/list_all_tags.yml'
+      $ref: 'resources/tags/tags_list.yml'
     post:
-      $ref: 'resources/tags/create_new_tag.yml'
+      $ref: 'resources/tags/tags_create.yml'
 
   /v2/tags/{tag_id}:
     get:
-      $ref: 'resources/tags/get_tag.yml'
+      $ref: 'resources/tags/tags_get.yml'
     delete:
-      $ref: 'resources/tags/delete_tag.yml'
+      $ref: 'resources/tags/tags_delete.yml'
 
   /v2/tags/{tag_id}/resources:
     post:
-      $ref: 'resources/tags/tag_resource.yml'
+      $ref: 'resources/tags/tags_assign_resources.yml'
     delete:
-      $ref: 'resources/tags/untag_resource.yml'
+      $ref: 'resources/tags/tags_unassign_resources.yml'
 
   /v2/volumes:
     get:
-      $ref: 'resources/volumes/list_all_volumes.yml'
+      $ref: 'resources/volumes/volumes_list.yml'
     post:
-      $ref: 'resources/volumes/create_new_volume.yml'
+      $ref: 'resources/volumes/volumes_create.yml'
     delete:
-      $ref: 'resources/volumes/delete_volume_by_name.yml'
+      $ref: 'resources/volumes/volumes_delete_byName.yml'
 
   /v2/volumes/actions:
     post:
-      $ref: 'resources/volumes/post_volume_action_by_name.yml'
+      $ref: 'resources/volumes/volumeActions_create_byName.yml'
 
   /v2/volumes/snapshot/{snapshot_id}:
     get:
-      $ref: 'resources/volumes/get_volume_snapshot_by_id.yml'
+      $ref: 'resources/volumes/volumeSnapshots_get_byId.yml'
     delete:
-      $ref: 'resources/volumes/delete_volume_snapshot_by_id.yml'
+      $ref: 'resources/volumes/volumeSnapshots_delete_byId.yml'
 
   /v2/volumes/{volume_id}:
     get:
-      $ref: 'resources/volumes/get_volume.yml'
+      $ref: 'resources/volumes/volumes_get.yml'
     delete:
-      $ref: 'resources/volumes/delete_volume.yml'
+      $ref: 'resources/volumes/volumes_delete.yml'
 
   /v2/volumes/{volume_id}/actions:
     get:
-      $ref: 'resources/volumes/list_all_volume_actions.yml'
+      $ref: 'resources/volumes/volumeActions_list.yml'
     post:
-      $ref: 'resources/volumes/post_volume_action_by_id.yml'
+      $ref: 'resources/volumes/volumeActions_create_byId.yml'
 
   /v2/volumes/{volume_id}/actions/{action_id}:
     get:
-      $ref: 'resources/volumes/get_volume_action.yml'
+      $ref: 'resources/volumes/volumeActions_get.yml'
 
   /v2/volumes/{volume_id}/snapshots:
     get:
-      $ref: 'resources/volumes/list_volume_snapshots.yml'
+      $ref: 'resources/volumes/volumeSnapshots_list.yml'
     post:
-      $ref: 'resources/volumes/create_volume_snapshot.yml'
+      $ref: 'resources/volumes/volumeSnapshots_create.yml'
 
   /v2/vpcs:
     get:
-      $ref: 'resources/vpcs/list_vpcs.yml'
+      $ref: 'resources/vpcs/vpcs_list.yml'
 
     post:
-      $ref: 'resources/vpcs/create_vpc.yml'
+      $ref: 'resources/vpcs/vpcs_create.yml'
 
   /v2/vpcs/{vpc_id}:
     get:
-      $ref: 'resources/vpcs/get_vpc.yml'
+      $ref: 'resources/vpcs/vpcs_get.yml'
 
     put:
-      $ref: 'resources/vpcs/update_vpc.yml'
+      $ref: 'resources/vpcs/vpcs_update.yml'
 
     patch:
-      $ref: 'resources/vpcs/patch_vpc.yml'
+      $ref: 'resources/vpcs/vpcs_patch.yml'
 
     delete:
-      $ref: 'resources/vpcs/delete_vpc.yml'
+      $ref: 'resources/vpcs/vpcs_delete.yml'
 
   /v2/vpcs/{vpc_id}/members:
     get:
-      $ref: 'resources/vpcs/list_vpc_members.yml'
+      $ref: 'resources/vpcs/vpcs_list_members.yml'
 
 components:
   securitySchemes:
