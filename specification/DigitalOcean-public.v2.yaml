@@ -444,7 +444,7 @@ paths:
 
   /v2/account:
     get:
-      $ref: 'resources/account/get_user_information.yml'
+      $ref: 'resources/account/account_get.yml'
 
   /v2/account/keys:
     get:
