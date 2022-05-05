@@ -1,8 +1,9 @@
-operationId: get_vpc
+operationId: vpcs_patch
 
-summary: Retrieve an Existing VPC
+summary: Partially Update a VPC
 
-description: To show information about an existing VPC, send a GET request to
+description: |
+  To update a subset of information about a VPC, send a PATCH request to
   `/v2/vpcs/$VPC_ID`.
 
 tags:
@@ -10,6 +11,16 @@ tags:
 
 parameters:
   - $ref: 'parameters.yml#/vpc_id'
+
+requestBody:
+  required: true
+
+  content:
+    application/json:
+      schema:
+        allOf:
+        - $ref: 'models/vpc.yml#/vpc_updatable'
+        - $ref: 'models/vpc.yml#/vpc_default'
 
 responses:
   '200':
@@ -31,10 +42,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_vpc.yml'
-  - $ref: 'examples/go/get_vpc.yml'
+  - $ref: 'examples/curl/vpcs_patch.yml'
+  - $ref: 'examples/go/vpcs_patch.yml'
 
 security:
   - bearer_auth:
-    - 'read'
-
+    - 'write'

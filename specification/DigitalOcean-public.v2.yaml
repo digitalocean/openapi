@@ -1395,27 +1395,27 @@ paths:
 
   /v2/vpcs:
     get:
-      $ref: 'resources/vpcs/list_vpcs.yml'
+      $ref: 'resources/vpcs/vpcs_list.yml'
 
     post:
-      $ref: 'resources/vpcs/create_vpc.yml'
+      $ref: 'resources/vpcs/vpcs_create.yml'
 
   /v2/vpcs/{vpc_id}:
     get:
-      $ref: 'resources/vpcs/get_vpc.yml'
+      $ref: 'resources/vpcs/vpcs_get.yml'
 
     put:
-      $ref: 'resources/vpcs/update_vpc.yml'
+      $ref: 'resources/vpcs/vpcs_update.yml'
 
     patch:
-      $ref: 'resources/vpcs/patch_vpc.yml'
+      $ref: 'resources/vpcs/vpcs_patch.yml'
 
     delete:
-      $ref: 'resources/vpcs/delete_vpc.yml'
+      $ref: 'resources/vpcs/vpcs_delete.yml'
 
   /v2/vpcs/{vpc_id}/members:
     get:
-      $ref: 'resources/vpcs/list_vpc_members.yml'
+      $ref: 'resources/vpcs/vpcs_list_members.yml'
 
 components:
   securitySchemes:
