@@ -1,4 +1,4 @@
-operationId: list_all_snapshots
+operationId: snapshots_list
 
 summary: List All Snapshots
 
@@ -34,7 +34,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/all_snapshots.yml'
+    $ref: 'responses/snapshots.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -49,9 +49,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_snapshots.yml'
-  - $ref: 'examples/go/list_all_snapshots.yml'
-  - $ref: 'examples/ruby/list_all_snapshots.yml'
+  - $ref: 'examples/curl/snapshots_list.yml'
+  - $ref: 'examples/go/snapshots_list.yml'
+  - $ref: 'examples/ruby/snapshots_list.yml'
 
 security:
   - bearer_auth:

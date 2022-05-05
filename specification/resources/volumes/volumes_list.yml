@@ -1,4 +1,4 @@
-operationId: list_all_volumes
+operationId: volumes_list
 
 summary: List All Block Storage Volumes
 
@@ -41,7 +41,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/all_volumes.yml'
+    $ref: 'responses/volumes.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -56,9 +56,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_volumes.yml'
-  - $ref: 'examples/go/list_all_volumes.yml'
-  - $ref: 'examples/ruby/list_all_volumes.yml'
+  - $ref: 'examples/curl/volumes_list.yml'
+  - $ref: 'examples/go/volumes_list.yml'
+  - $ref: 'examples/ruby/volumes_list.yml'
 
 security:
   - bearer_auth:

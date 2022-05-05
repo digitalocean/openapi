@@ -1,4 +1,4 @@
-operationId: get_volume_snapshot_by_id
+operationId: volumeSnapshots_get_byId
 
 summary: Retreive an Existing Volume Snapshot
 
@@ -14,7 +14,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/volume_snapshot.yml'
+    $ref: 'responses/volumeSnapshot.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

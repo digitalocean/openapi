@@ -19,7 +19,7 @@ content:
             snapshots:
               type: array
               items:
-                $ref: '../../snapshots/models/snapshot.yml'
+                $ref: '../../snapshots/models/snapshots.yml'
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
       example:

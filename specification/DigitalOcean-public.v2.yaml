@@ -1210,14 +1210,14 @@ paths:
 
   /v2/snapshots:
     get:
-      $ref: 'resources/snapshots/list_all_snapshots.yml'
+      $ref: 'resources/snapshots/snapshots_list.yml'
 
   /v2/snapshots/{snapshot_id}:
     get:
-      $ref: 'resources/snapshots/get_snapshots.yml'
+      $ref: 'resources/snapshots/snapshots_get.yml'
 
     delete:
-      $ref: 'resources/snapshots/delete_snapshot.yml'
+      $ref: 'resources/snapshots/snapshots_delete.yml'
 
   /v2/tags:
     get:
@@ -1239,43 +1239,43 @@ paths:
 
   /v2/volumes:
     get:
-      $ref: 'resources/volumes/list_all_volumes.yml'
+      $ref: 'resources/volumes/volumes_list.yml'
     post:
-      $ref: 'resources/volumes/create_new_volume.yml'
+      $ref: 'resources/volumes/volumes_create.yml'
     delete:
-      $ref: 'resources/volumes/delete_volume_by_name.yml'
+      $ref: 'resources/volumes/volumes_delete_byName.yml'
 
   /v2/volumes/actions:
     post:
-      $ref: 'resources/volumes/post_volume_action_by_name.yml'
+      $ref: 'resources/volumes/volumeActions_create_byName.yml'
 
   /v2/volumes/snapshot/{snapshot_id}:
     get:
-      $ref: 'resources/volumes/get_volume_snapshot_by_id.yml'
+      $ref: 'resources/volumes/volumeSnapshots_get_byId.yml'
     delete:
-      $ref: 'resources/volumes/delete_volume_snapshot_by_id.yml'
+      $ref: 'resources/volumes/volumeSnapshots_delete_byId.yml'
 
   /v2/volumes/{volume_id}:
     get:
-      $ref: 'resources/volumes/get_volume.yml'
+      $ref: 'resources/volumes/volumes_get.yml'
     delete:
-      $ref: 'resources/volumes/delete_volume.yml'
+      $ref: 'resources/volumes/volumes_delete.yml'
 
   /v2/volumes/{volume_id}/actions:
     get:
-      $ref: 'resources/volumes/list_all_volume_actions.yml'
+      $ref: 'resources/volumes/volumeActions_list.yml'
     post:
-      $ref: 'resources/volumes/post_volume_action_by_id.yml'
+      $ref: 'resources/volumes/volumeActions_create_byId.yml'
 
   /v2/volumes/{volume_id}/actions/{action_id}:
     get:
-      $ref: 'resources/volumes/get_volume_action.yml'
+      $ref: 'resources/volumes/volumeActions_get.yml'
 
   /v2/volumes/{volume_id}/snapshots:
     get:
-      $ref: 'resources/volumes/list_volume_snapshots.yml'
+      $ref: 'resources/volumes/volumeSnapshots_list.yml'
     post:
-      $ref: 'resources/volumes/create_volume_snapshot.yml'
+      $ref: 'resources/volumes/volumeSnapshots_create.yml'
 
   /v2/vpcs:
     get:

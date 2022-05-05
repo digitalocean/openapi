@@ -9,7 +9,7 @@ allOf:
     required:
     - id
 
-  - $ref: '../../snapshots/models/snapshot_base.yml'
+  - $ref: '../../snapshots/models/snapshots_base.yml'
 
   - type: object
     properties:
