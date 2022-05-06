@@ -465,11 +465,11 @@ paths:
 
   /v2/actions:
     get:
-      $ref: 'resources/actions/list_all_actions.yml'
+      $ref: 'resources/actions/actions_list.yml'
 
   /v2/actions/{action_id}:
     get:
-      $ref: 'resources/actions/get_action.yml'
+      $ref: 'resources/actions/actions_get.yml'
 
   /v2/apps:
     get:
