@@ -1,4 +1,4 @@
-operationId: list_all_actions
+operationId: actions_list
 
 summary: List All Actions
 
@@ -15,7 +15,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/all_actions.yml'
+    $ref: 'responses/actions.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -30,9 +30,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_actions.yml'
-  - $ref: 'examples/go/list_all_actions.yml'
-  - $ref: 'examples/ruby/list_all_actions.yml'
+  - $ref: 'examples/curl/actions_list.yml'
+  - $ref: 'examples/go/actions_list.yml'
+  - $ref: 'examples/ruby/actions_list.yml'
 
 security:
   - bearer_auth:
