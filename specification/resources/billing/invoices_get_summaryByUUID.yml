@@ -1,17 +1,21 @@
-operationId: list_billing_history
+operationId: invoices_get_summaryByUUID
 
-summary: List Billing History
+
+summary: Retrieve an Invoice Summary by UUID
 
 description: >-
-  To retrieve a list of all billing history entries, send a GET request to
-  `/v2/customers/my/billing_history`.
+  To retrieve a summary for an invoice, send a GET request to
+  `/v2/customers/my/invoices/$INVOICE_UUID/summary`.
 
 tags:
   - Billing
 
+parameters:
+  - $ref: 'parameters.yml#/invoice_uuid'
+
 responses:
   '200':
-    $ref: 'responses/billing_history.yml'
+    $ref: 'responses/invoice_summary.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -29,7 +33,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_billing_history.yml'
+  - $ref: 'examples/curl/invoices_get_summaryByUUID.yml'
 
 security:
   - bearer_auth:
