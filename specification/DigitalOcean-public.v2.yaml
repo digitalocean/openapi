@@ -576,31 +576,31 @@ paths:
 
   /v2/customers/my/balance:
     get:
-      $ref: 'resources/billing/get_customer_balance.yml'
+      $ref: 'resources/billing/balance_get.yml'
 
   /v2/customers/my/billing_history:
     get:
-      $ref: 'resources/billing/list_billing_history.yml'
+      $ref: 'resources/billing/billingHistory_list.yml'
 
   /v2/customers/my/invoices:
     get:
-      $ref: 'resources/billing/list_invoices.yml'
+      $ref: 'resources/billing/invoices_list.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}:
     get:
-      $ref: 'resources/billing/get_invoice_by_uuid.yml'
+      $ref: 'resources/billing/invoices_get_byUUID.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}/csv:
     get:
-      $ref: 'resources/billing/get_invoice_csv_by_uuid.yml'
+      $ref: 'resources/billing/invoices_get_csvByUUID.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}/pdf:
     get:
-      $ref: 'resources/billing/get_invoice_pdf_by_uuid.yml'
+      $ref: 'resources/billing/invoices_get_pdfByUUID.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}/summary:
     get:
-      $ref: 'resources/billing/get_invoice_summary_by_uuid.yml'
+      $ref: 'resources/billing/invoices_get_summaryByUUID.yml'
 
   /v2/databases:
     get:

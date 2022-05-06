@@ -1,4 +1,4 @@
-operationId: get_customer_balance
+operationId: balance_get
 
 summary: Get Customer Balance
 
@@ -29,7 +29,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_customer_balance.yml'
+  - $ref: 'examples/curl/balance_get.yml'
 
 security:
   - bearer_auth:
