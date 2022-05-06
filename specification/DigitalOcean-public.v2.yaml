@@ -473,71 +473,71 @@ paths:
 
   /v2/apps:
     get:
-      $ref: 'resources/apps/list_apps.yml'
+      $ref: 'resources/apps/apps_list.yml'
     post:
-      $ref: 'resources/apps/create_app.yml'
+      $ref: 'resources/apps/apps_create.yml'
 
   /v2/apps/{id}:
     delete:
-      $ref: 'resources/apps/delete_app.yml'
+      $ref: 'resources/apps/apps_delete.yml'
     get:
-      $ref: 'resources/apps/get_app.yml'
+      $ref: 'resources/apps/apps_get.yml'
     put:
-      $ref: 'resources/apps/update_app.yml'
+      $ref: 'resources/apps/apps_update.yml'
 
   /v2/apps/{app_id}/deployments:
     get:
-      $ref: 'resources/apps/list_deployments.yml'
+      $ref: 'resources/apps/apps_list_deployments.yml'
     post:
-      $ref: 'resources/apps/create_deployment.yml'
+      $ref: 'resources/apps/apps_create_deployment.yml'
 
   /v2/apps/{app_id}/deployments/{deployment_id}:
     get:
-      $ref: 'resources/apps/get_deployment.yml'
+      $ref: 'resources/apps/apps_get_deployment.yml'
 
   /v2/apps/{app_id}/deployments/{deployment_id}/cancel:
     post:
-      $ref: 'resources/apps/cancel_deployment.yml'
+      $ref: 'resources/apps/apps_cancel_deployment.yml'
 
   /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
     get:
-      $ref: 'resources/apps/get_logs.yml'
+      $ref: 'resources/apps/apps_get_logs.yml'
 
   /v2/apps/{app_id}/deployments/{deployment_id}/logs:
     get:
-      $ref: 'resources/apps/get_logs_aggregate.yml'
+      $ref: 'resources/apps/apps_get_logsAggregate.yml'
 
   /v2/apps/tiers:
     get:
-      $ref: 'resources/apps/list_tiers.yml'
+      $ref: 'resources/apps/apps_list_tiers.yml'
 
   /v2/apps/tiers/{slug}:
     get:
-      $ref: 'resources/apps/get_tier.yml'
+      $ref: 'resources/apps/apps_get_tier.yml'
 
   /v2/apps/tiers/instance_sizes:
     get:
-      $ref: 'resources/apps/list_instance_sizes.yml'
+      $ref: 'resources/apps/apps_list_instanceSizes.yml'
 
   /v2/apps/tiers/instance_sizes/{slug}:
     get:
-      $ref: 'resources/apps/get_instance_size.yml'
+      $ref: 'resources/apps/apps_get_instanceSize.yml'
 
   /v2/apps/regions:
     get:
-      $ref: 'resources/apps/list_regions.yml'
+      $ref: 'resources/apps/apps_list_regions.yml'
 
   /v2/apps/propose:
     post:
-      $ref: 'resources/apps/propose_app.yml'
+      $ref: 'resources/apps/apps_validate_appSpec.yml'
 
   /v2/apps/{app_id}/alerts:
     get:
-      $ref: 'resources/apps/list_alerts.yml'
+      $ref: 'resources/apps/apps_list_alerts.yml'
 
   /v2/apps/{app_id}/alerts/{alert_id}/destinations:
     post:
-      $ref: 'resources/apps/assign_alert_destinations.yml'
+      $ref: 'resources/apps/apps_assign_alertDestinations.yml'
 
   /v2/cdn/endpoints:
     get:

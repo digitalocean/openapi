@@ -1,20 +1,20 @@
-operationId: delete_app
+operationId: apps_list_deployments
 
-summary: Delete an App
+summary: List App Deployments
 
-description: Delete an existing app. Once deleted, all active deployments will be
-  permanently shut down and the app deleted. If needed, be sure to back up your app
-  specification so that you may re-create it at a later time.
+description: List all deployments of an app.
 
 tags:
 - Apps
 
 parameters:
-  - $ref: parameters.yml#/id_app
+  - $ref: parameters.yml#/app_id
+  - $ref: ../../shared/parameters.yml#/page
+  - $ref: ../../shared/parameters.yml#/per_page
 
 responses:
   "200":
-    $ref: responses/delete_app.yml
+    $ref: responses/existing_deployments.yml
 
   "401":
     $ref: ../../shared/responses/unauthorized.yml
@@ -32,8 +32,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_app.yml'
+  - $ref: 'examples/curl/apps_list_deployments.yml'
 
 security:
   - bearer_auth:
-    - 'write'
+    - 'read'
+

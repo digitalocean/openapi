@@ -1,4 +1,4 @@
-operationId: list_apps
+operationId: apps_list
 
 summary: List All Apps
 
@@ -29,7 +29,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_apps.yml'
+  - $ref: 'examples/curl/apps_list.yml'
 
 security:
   - bearer_auth:

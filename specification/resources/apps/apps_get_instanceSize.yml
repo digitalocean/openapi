@@ -1,19 +1,19 @@
-operationId: get_deployment
+operationId: apps_get_instanceSize
 
-summary: Retrieve an App Deployment
+summary: Retrieve an Instance Size
 
-description: Retrieve information about an app deployment.
+description: Retrieve information about a specific instance size for `service`, `worker`,
+  and `job` components.
 
 tags:
 - Apps
 
 parameters:
-  - $ref: parameters.yml#/app_id
-  - $ref: parameters.yml#/deployment_id
+  - $ref: parameters.yml#/slug_size
 
 responses:
   "200":
-    $ref: responses/list_deployment.yml
+    $ref: responses/get_instance.yml
 
   "401":
     $ref: ../../shared/responses/unauthorized.yml
@@ -31,7 +31,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_deployment.yml'
+  - $ref: 'examples/curl/apps_get_instanceSize.yml'
 
 security:
   - bearer_auth:
