@@ -1130,7 +1130,7 @@ paths:
 
   /v2/regions:
     get:
-      $ref: 'resources/regions/list_all_regions.yml'
+      $ref: 'resources/regions/regions_list.yml'
 
   /v2/registry:
     get:
