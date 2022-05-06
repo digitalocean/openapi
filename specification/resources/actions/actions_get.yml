@@ -1,4 +1,4 @@
-operationId: get_action
+operationId: actions_get
 
 summary: Retrieve an Existing Action
 
@@ -12,7 +12,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/existing_action.yml'
+    $ref: 'responses/action.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -30,9 +30,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_action.yml'
-  - $ref: 'examples/go/get_action.yml'
-  - $ref: 'examples/ruby/get_action.yml'
+  - $ref: 'examples/curl/actions_get.yml'
+  - $ref: 'examples/go/actions_get.yml'
+  - $ref: 'examples/ruby/actions_get.yml'
   
 
 security:
