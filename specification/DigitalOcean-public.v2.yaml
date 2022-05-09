@@ -1322,7 +1322,7 @@ paths:
 
   /v2/sizes:
     get:
-      $ref: 'resources/sizes/list_all_sizes.yml'
+      $ref: 'resources/sizes/sizes_list.yml'
 
   /v2/snapshots:
     get:
