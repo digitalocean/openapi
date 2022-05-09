@@ -541,24 +541,24 @@ paths:
 
   /v2/cdn/endpoints:
     get:
-      $ref: 'resources/cdn/list_all_endpoints.yml'
+      $ref: 'resources/cdn/cdn_list_endpoints.yml'
 
     post:
-      $ref: 'resources/cdn/create_endpoint.yml'
+      $ref: 'resources/cdn/cdn_create_endpoint.yml'
 
   /v2/cdn/endpoints/{cdn_id}:
     get:
-      $ref: 'resources/cdn/get_endpoint.yml'
+      $ref: 'resources/cdn/cdn_get_endpoint.yml'
 
     put:
-      $ref: 'resources/cdn/update_endpoint.yml'
+      $ref: 'resources/cdn/cdn_update_endpoint.yml'
 
     delete:
-      $ref: 'resources/cdn/delete_endpoint.yml'
+      $ref: 'resources/cdn/cdn_delete_endpoint.yml'
 
   /v2/cdn/endpoints/{cdn_id}/cache:
     delete:
-      $ref: 'resources/cdn/purge_cdn_cache.yml'
+      $ref: 'resources/cdn/cdn_purge_cache.yml'
 
   /v2/certificates:
     get:
