@@ -1,4 +1,4 @@
-operationId: list_projects
+operationId: projects_list
 
 summary: List All Projects
 
@@ -24,9 +24,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_projects.yml'
-  - $ref: 'examples/go/list_projects.yml'
-  - $ref: 'examples/ruby/list_projects.yml'
+  - $ref: 'examples/curl/projects_list.yml'
+  - $ref: 'examples/go/projects_list.yml'
+  - $ref: 'examples/ruby/projects_list.yml'
 
 security:
   - bearer_auth:

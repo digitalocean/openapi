@@ -1,10 +1,9 @@
-operationId: patch_project
+operationId: projects_update
 
-summary: Patch a Project
+summary: Update a Project
 
-description: To update only specific attributes of a project, send a PATCH
-  request to `/v2/projects/$PROJECT_ID`. At least one of the following
-  attributes needs to be sent.
+description: To update a project, send a PUT request to `/v2/projects/$PROJECT_ID`.
+  All of the following attributes must be sent.
 
 tags:
   - Projects
@@ -18,10 +17,15 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/project.yml#/project'
+        allOf:
+        - $ref: 'models/project.yml#/project'
 
-      example:
-        name: my-web-api
+        required:
+        - name
+        - description
+        - purpose
+        - environment
+        - is_default
 
 responses:
   '200':
@@ -43,9 +47,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/patch_project.yml'
-  - $ref: 'examples/go/patch_project.yml'
-  - $ref: 'examples/ruby/patch_project.yml'
+  - $ref: 'examples/curl/projects_update.yml'
+  - $ref: 'examples/go/projects_update.yml'
+  - $ref: 'examples/ruby/projects_update.yml'
 
 security:
   - bearer_auth:

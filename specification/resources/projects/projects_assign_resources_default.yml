@@ -1,15 +1,12 @@
-operationId: assign_project_resources
+operationId: projects_assign_resources_default
 
-summary: Assign Resources to a Project
+summary: Assign Resources to Default Project
 
-description: To assign resources to a project, send a POST request to
-  `/v2/projects/$PROJECT_ID/resources`.
+description: To assign resources to your default project, send a POST request to
+  `/v2/projects/default/resources`.
 
 tags:
   - Project Resources
-
-parameters:
-  - $ref: 'parameters.yml#/project_id'
 
 requestBody:
   required: true
@@ -46,9 +43,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/assign_project_resources.yml'
-  - $ref: 'examples/go/assign_project_resources.yml'
-  - $ref: 'examples/ruby/assign_project_resources.yml'
+  - $ref: 'examples/curl/projects_assign_resources_default.yml'
+  - $ref: 'examples/go/projects_assign_resources_default.yml'
+  - $ref: 'examples/ruby/projects_assign_resources_default.yml'
 
 security:
   - bearer_auth:
