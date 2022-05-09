@@ -1,4 +1,4 @@
-operationId: list_garbage_collections
+operationId: registry_list_garbage_collections
 
 summary: List Garbage Collections
 
@@ -33,7 +33,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_garbage_collections.yml'
+  - $ref: 'examples/curl/registry_list_garbage_collections.yml'
 
 security:
   - bearer_auth:

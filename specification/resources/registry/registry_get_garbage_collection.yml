@@ -1,4 +1,4 @@
-operationId: get_garbage_collection
+operationId: registry_get_garbage_collection
 
 summary: Get Active Garbage Collection
 
@@ -31,7 +31,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_garbage_collection.yml'
+  - $ref: 'examples/curl/registry_get_garbage_collection.yml'
 
 security:
   - bearer_auth:

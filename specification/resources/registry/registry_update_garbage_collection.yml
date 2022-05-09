@@ -1,4 +1,4 @@
-operationId: update_garbage_collection
+operationId: registry_update_garbage_collection
 
 summary: Update Garbage Collection
 
@@ -41,7 +41,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/update_garbage_collection.yml'
+  - $ref: 'examples/curl/registry_update_garbage_collection.yml'
 
 security:
   - bearer_auth:

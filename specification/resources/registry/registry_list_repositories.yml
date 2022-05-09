@@ -1,4 +1,4 @@
-operationId: list_registry_repositories
+operationId: registry_list_repositories
 
 deprecated: true
 
@@ -39,7 +39,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_registry_repositories.yml'
+  - $ref: 'examples/curl/registry_list_repositories.yml'
 
 security:
   - bearer_auth:
