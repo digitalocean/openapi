@@ -1,4 +1,4 @@
-operationId: get_default_project
+operationId: projects_get_default
 
 summary: Retrieve the Default Project
 
@@ -27,9 +27,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_default_project.yml'
-  - $ref: 'examples/go/get_default_project.yml'
-  - $ref: 'examples/ruby/get_default_project.yml'
+  - $ref: 'examples/curl/projects_get_default.yml'
+  - $ref: 'examples/go/projects_get_default.yml'
+  - $ref: 'examples/ruby/projects_get_default.yml'
 
 security:
   - bearer_auth:

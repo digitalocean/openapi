@@ -1,15 +1,12 @@
-operationId: list_project_resources
+operationId: projects_list_resources_default
 
-summary: List Project Resources
+summary: List Default Project Resources
 
-description: To list all your resources in a project, send a GET request to
-  `/v2/projects/$PROJECT_ID/resources`.
+description: To list all your resources in your default project, send a GET
+  request to `/v2/projects/default/resources`.
 
 tags:
   - Project Resources
-
-parameters:
-  - $ref: 'parameters.yml#/project_id'
 
 responses:
   '200':
@@ -31,9 +28,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_project_resources.yml'
-  - $ref: 'examples/go/list_project_resources.yml'
-  - $ref: 'examples/ruby/list_project_resources.yml'
+  - $ref: 'examples/curl/projects_list_resources_default.yml'
+  - $ref: 'examples/go/projects_list_resources_default.yml'
+  - $ref: 'examples/ruby/projects_list_resources_default.yml'
 
 security:
   - bearer_auth:
