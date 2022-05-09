@@ -1,4 +1,4 @@
-operationId: list_all_regions
+operationId: regions_list
 
 summary: List All Data Center Regions
 
@@ -34,9 +34,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_regions.yml'
-  - $ref: 'examples/go/list_all_regions.yml'
-  - $ref: 'examples/ruby/list_all_regions.yml'
+  - $ref: 'examples/curl/regions_list.yml'
+  - $ref: 'examples/go/regions_list.yml'
+  - $ref: 'examples/ruby/regions_list.yml'
 
 security:
   - bearer_auth:
