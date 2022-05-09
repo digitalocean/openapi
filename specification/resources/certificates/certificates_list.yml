@@ -1,4 +1,4 @@
-operationId: list_certificates
+operationId: certificates_list
 
 summary: List All Certificates
 
@@ -30,9 +30,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_certificates.yml'
-  - $ref: 'examples/go/list_certificates.yml'
-  - $ref: 'examples/ruby/list_certificates.yml'
+  - $ref: 'examples/curl/certificates_list.yml'
+  - $ref: 'examples/go/certificates_list.yml'
+  - $ref: 'examples/ruby/certificates_list.yml'
 
 security:
   - bearer_auth:
