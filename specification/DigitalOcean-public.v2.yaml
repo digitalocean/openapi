@@ -1086,47 +1086,47 @@ paths:
 
   /v2/projects:
     get:
-      $ref: 'resources/projects/list_projects.yml'
+      $ref: 'resources/projects/projects_list.yml'
 
     post:
-      $ref: 'resources/projects/create_project.yml'
+      $ref: 'resources/projects/projects_create.yml'
 
   /v2/projects/default:
     get:
-      $ref: 'resources/projects/get_default_project.yml'
+      $ref: 'resources/projects/projects_get_default.yml'
 
     put:
-      $ref: 'resources/projects/update_default_project.yml'
+      $ref: 'resources/projects/projects_update_default.yml'
 
     patch:
-      $ref: 'resources/projects/patch_default_project.yml'
+      $ref: 'resources/projects/projects_patch_default.yml'
 
   /v2/projects/{project_id}:
     get:
-      $ref: 'resources/projects/get_project.yml'
+      $ref: 'resources/projects/projects_get.yml'
 
     put:
-      $ref: 'resources/projects/update_project.yml'
+      $ref: 'resources/projects/projects_update.yml'
 
     patch:
-      $ref: 'resources/projects/patch_project.yml'
+      $ref: 'resources/projects/projects_patch.yml'
 
     delete:
-      $ref: 'resources/projects/delete_project.yml'
+      $ref: 'resources/projects/projects_delete.yml'
 
   /v2/projects/{project_id}/resources:
     get:
-      $ref: 'resources/projects/list_project_resources.yml'
+      $ref: 'resources/projects/projects_list_resources.yml'
 
     post:
-      $ref: 'resources/projects/assign_project_resources.yml'
+      $ref: 'resources/projects/projects_assign_resources.yml'
 
   /v2/projects/default/resources:
     get:
-      $ref: 'resources/projects/list_default_project_resources.yml'
+      $ref: 'resources/projects/projects_list_resources_default.yml'
 
     post:
-      $ref: 'resources/projects/assign_default_project_resources.yml'
+      $ref: 'resources/projects/projects_assign_resources_default.yml'
 
   /v2/regions:
     get:

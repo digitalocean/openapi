@@ -1,9 +1,9 @@
-operationId: patch_default_project
+operationId: projects_patch_default
 
 summary: Patch the Default Project
 
-description: To update only specific attributes of a project, send a PATCH
-  request to `/v2/projects/default`. At least one of the following attributes
+description: To update only specific attributes of your default project, send a
+  PATCH request to `/v2/projects/default`. At least one of the following attributes
   needs to be sent.
 
 tags:
@@ -40,9 +40,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/patch_default_project.yml'
-  - $ref: 'examples/go/patch_default_project.yml'
-  - $ref: 'examples/ruby/patch_default_project.yml'
+  - $ref: 'examples/curl/projects_patch_default.yml'
+  - $ref: 'examples/go/projects_patch_default.yml'
+  - $ref: 'examples/ruby/projects_patch_default.yml'
 
 security:
   - bearer_auth:
