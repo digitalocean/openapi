@@ -1,4 +1,4 @@
-operationId: list_all_sizes
+operationId: sizes_list
 
 summary: List All Droplet Sizes
 
@@ -33,11 +33,10 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_sizes.yml'
-  - $ref: 'examples/go/list_all_sizes.yml'
-  - $ref: 'examples/ruby/list_all_sizes.yml'
+  - $ref: 'examples/curl/sizes_list.yml'
+  - $ref: 'examples/go/sizes_list.yml'
+  - $ref: 'examples/ruby/sizes_list.yml'
 
 security:
   - bearer_auth:
     - 'read'
-
