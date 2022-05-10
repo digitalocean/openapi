@@ -781,7 +781,7 @@ paths:
 
   /v2/droplets/actions:
     post:
-      $ref: 'resources/droplets/droplets_post_actionbyTag.yml'
+      $ref: 'resources/droplets/droplets_post_actionByTag.yml'
 
   /v2/droplets/{droplet_id}/actions/{action_id}:
     get:
