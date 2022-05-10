@@ -18,7 +18,7 @@ parameters:
 
 responses:
   '200':
-    $ref: '../actions/responses/existing_action.yml'
+    $ref: '../actions/responses/action.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

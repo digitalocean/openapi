@@ -20,8 +20,9 @@ content:
             available_regions:
               type: array
               items:
-                allOf:
-                  - type: string
+                type: string
+              example: 
+              - nyc3
             subscription_tiers:
               type: array
               items:
