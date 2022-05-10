@@ -1,4 +1,4 @@
-operationId: droplets_retry_destroy_with_associated_resource
+operationId: droplets_destroy_retryWithAssociatedResources
 
 summary: Retry a Droplet Destroy with Associated Resources Request
 

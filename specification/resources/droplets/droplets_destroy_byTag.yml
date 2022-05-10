@@ -1,4 +1,4 @@
-operationId: droplets_destroy_by_tag
+operationId: droplets_destroy_byTag
 
 summary: Deleting Droplets by Tag
 

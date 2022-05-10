@@ -756,7 +756,7 @@ paths:
       $ref: 'resources/droplets/droplets_create.yml'
 
     delete:
-      $ref: 'resources/droplets/droplets_destroy_by_tag.yml'
+      $ref: 'resources/droplets/droplets_destroy_byTag.yml'
 
   /v2/droplets/{droplet_id}:
     get:
@@ -781,7 +781,7 @@ paths:
 
   /v2/droplets/actions:
     post:
-      $ref: 'resources/droplets/droplets_post_action_by_tag.yml'
+      $ref: 'resources/droplets/droplets_post_action_byTag.yml'
 
   /v2/droplets/{droplet_id}/actions/{action_id}:
     get:
@@ -801,23 +801,23 @@ paths:
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources:
     get:
-      $ref: 'resources/droplets/droplets_list_associated_resources.yml'
+      $ref: 'resources/droplets/droplets_list_associatedResources.yml'
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/selective:
     delete:
-      $ref: 'resources/droplets/droplets_destroy_with_associated_resources_selective.yml'
+      $ref: 'resources/droplets/droplets_destroy_withAssociatedResourcesSelective.yml'
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/dangerous:
     delete:
-      $ref: 'resources/droplets/droplets_destroy_with_associated_resources_dangerous.yml'
+      $ref: 'resources/droplets/droplets_destroy_withAssociatedResourcesDangerous.yml'
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/status:
     get:
-      $ref: 'resources/droplets/droplets_get_destroy_associated_resources_status.yml'
+      $ref: 'resources/droplets/droplets_get_destroyAssociatedResourcesStatus.yml'
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/retry:
     post:
-      $ref: 'resources/droplets/droplets_retry_destroy_with_associated_resources.yml'
+      $ref: 'resources/droplets/droplets_retry_destroyWithAssociatedResources.yml'
 
   /v2/firewalls:
     get:
@@ -1202,7 +1202,7 @@ paths:
 
   /v2/reports/droplet_neighbors_ids:
     get:
-      $ref: 'resources/droplets/droplets_list_neighbors_ids.yml'
+      $ref: 'resources/droplets/droplets_list_neighborsIds.yml'
 
   /v2/sizes:
     get:
