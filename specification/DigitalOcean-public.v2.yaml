@@ -722,31 +722,31 @@ paths:
 
   /v2/domains:
     get:
-      $ref: 'resources/domains/list_all_domains.yml'
+      $ref: 'resources/domains/domains_list.yml'
     post:
-      $ref: 'resources/domains/create_domain.yml'
+      $ref: 'resources/domains/domains_create.yml'
 
   /v2/domains/{domain_name}:
     get:
-      $ref: 'resources/domains/get_domain.yml'
+      $ref: 'resources/domains/domains_get.yml'
     delete:
-      $ref: 'resources/domains/delete_domain.yml'
+      $ref: 'resources/domains/domains_delete.yml'
 
   /v2/domains/{domain_name}/records:
     get:
-      $ref: 'resources/domains/list_all_domain_records.yml'
+      $ref: 'resources/domains/domainRecords_list.yml'
     post:
-      $ref: 'resources/domains/create_domain_record.yml'
+      $ref: 'resources/domains/domainRecords_create.yml'
 
   /v2/domains/{domain_name}/records/{domain_record_id}:
     get:
-      $ref: 'resources/domains/get_domain_record.yml'
+      $ref: 'resources/domains/domainRecords_get.yml'
     patch:
-      $ref: 'resources/domains/patch_update_domain_record.yml'
+      $ref: 'resources/domains/domainRecords_update_patch.yml'
     put:
-      $ref: 'resources/domains/update_domain_record.yml'
+      $ref: 'resources/domains/domainRecords_update.yml'
     delete:
-      $ref: 'resources/domains/delete_domain_record.yml'
+      $ref: 'resources/domains/domainRecords_delete.yml'
 
   /v2/droplets:
     get:

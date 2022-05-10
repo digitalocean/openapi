@@ -1,4 +1,4 @@
-operationId: delete_domain
+operationId: domains_delete
 
 summary: Delete a Domain
 
@@ -31,9 +31,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_domain.yml'
-  - $ref: 'examples/go/delete_domain.yml'
-  - $ref: 'examples/ruby/delete_domain.yml'
+  - $ref: 'examples/curl/domains_delete.yml'
+  - $ref: 'examples/go/domains_delete.yml'
+  - $ref: 'examples/ruby/domains_delete.yml'
 
 security:
   - bearer_auth:
