@@ -34,9 +34,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/destroy_droplet.yml'
-  - $ref: 'examples/go/destroy_droplet.yml'
-  - $ref: 'examples/ruby/destroy_droplet.yml'
+  - $ref: 'examples/curl/droplets_destroy.yml'
+  - $ref: 'examples/go/droplets_destroy.yml'
+  - $ref: 'examples/ruby/droplets_destroy.yml'
 
 security:
   - bearer_auth:
