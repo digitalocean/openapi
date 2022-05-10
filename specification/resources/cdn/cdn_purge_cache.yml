@@ -1,4 +1,4 @@
-operationId: purge_cdn_cache
+operationId: cdn_purge_cache
 
 summary: Purge the Cache for an Existing CDN Endpoint
 
