@@ -1,4 +1,4 @@
-operationId: get_logs_aggregate
+operationId: apps_get_logsAggregate
 
 summary: Retrieve Aggregate Deployment Logs
 
@@ -37,7 +37,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_logs_aggregate.yml'
+  - $ref: 'examples/curl/apps_get_logsAggregate.yml'
 
 security:
   - bearer_auth:

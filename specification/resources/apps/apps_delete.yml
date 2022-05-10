@@ -1,20 +1,20 @@
-operationId: list_alerts
+operationId: apps_delete
 
-summary: List all app alerts
+summary: Delete an App
 
-description: List alerts associated to the app and any components. This includes
-  configuration information about the alerts including emails, slack webhooks,
-  and triggering events or conditions.
+description: Delete an existing app. Once deleted, all active deployments will be
+  permanently shut down and the app deleted. If needed, be sure to back up your app
+  specification so that you may re-create it at a later time.
 
 tags:
 - Apps
 
 parameters:
-  - $ref: parameters.yml#/app_id
+  - $ref: parameters.yml#/id_app
 
 responses:
   "200":
-    $ref: responses/list_alerts.yml
+    $ref: responses/delete_app.yml
 
   "401":
     $ref: ../../shared/responses/unauthorized.yml
@@ -32,8 +32,8 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_alerts.yml'
+  - $ref: 'examples/curl/apps_delete.yml'
+
 security:
   - bearer_auth:
-    - 'read'
-
+    - 'write'

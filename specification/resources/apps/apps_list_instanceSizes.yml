@@ -1,15 +1,15 @@
-operationId: list_tiers
+operationId: apps_list_instanceSizes
 
-summary: List App Tiers
+summary: List Instance Sizes
 
-description: List all app tiers.
+description: List all instance sizes for `service`, `worker`, and `job` components.
 
 tags:
 - Apps
 
 responses:
   "200":
-    $ref: responses/all_tiers.yml
+    $ref: responses/list_instance.yml
 
   "401":
     $ref: ../../shared/responses/unauthorized.yml
@@ -24,7 +24,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_tiers.yml'
+  - $ref: 'examples/curl/apps_list_instanceSizes.yml'
 
 security:
   - bearer_auth:

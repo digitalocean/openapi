@@ -1,26 +1,28 @@
-operationId: update_app
+operationId: apps_assign_alertDestinations
 
-summary: Update an App
+summary: Update destinations for alerts
 
-description: Update an existing app by submitting a new app specification. For documentation
-  on app specifications (`AppSpec` objects), please refer to [the product documentation](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/).
+description: Updates the emails and slack webhook destinations
+  for app alerts. Emails must be associated to a user with access
+  to the app.
 
 tags:
 - Apps
 
 parameters:
-  - $ref: parameters.yml#/id_app
+  - $ref: parameters.yml#/app_id
+  - $ref: parameters.yml#/alert_id
 
 requestBody:
   content:
     application/json:
       schema:
-        $ref: models/apps_update_app_request.yml
+        $ref: models/apps_assign_app_alert_destinations_request.yml
   required: true
 
 responses:
   "200":
-    $ref: responses/update_app.yml
+    $ref: responses/assign_alert_destinations.yml
 
   "401":
     $ref: ../../shared/responses/unauthorized.yml
@@ -38,8 +40,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/update_app.yml'
-
+  - $ref: 'examples/curl/apps_assign_alertDestinations.yml'
 security:
   - bearer_auth:
     - 'write'
