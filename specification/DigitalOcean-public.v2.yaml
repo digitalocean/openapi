@@ -562,17 +562,17 @@ paths:
 
   /v2/certificates:
     get:
-      $ref: 'resources/certificates/list_certificates.yml'
+      $ref: 'resources/certificates/certificates_list.yml'
 
     post:
-      $ref: 'resources/certificates/create_certificates.yml'
+      $ref: 'resources/certificates/certificates_create.yml'
 
   /v2/certificates/{certificate_id}:
     get:
-      $ref: 'resources/certificates/get_certificate.yml'
+      $ref: 'resources/certificates/certificates_get.yml'
 
     delete:
-      $ref: 'resources/certificates/delete_certificate.yml'
+      $ref: 'resources/certificates/certificates_delete.yml'
 
   /v2/customers/my/balance:
     get:
