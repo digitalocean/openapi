@@ -1,21 +1,20 @@
-operationId: get_image_action
+operationId: imageActions_list
 
-summary: Retrieve an Existing Action
+summary: List All Actions for an Image
 
 description: >-
-  To retrieve the status of an image action, send a GET request to
-  `/v2/images/$IMAGE_ID/actions/$IMAGE_ACTION_ID`.
+  To retrieve all actions that have been executed on an image, send a GET
+  request to `/v2/images/$IMAGE_ID/actions`.
 
 tags:
   - Image Actions
 
 parameters:
   - $ref: 'parameters.yml#/image_id'
-  - $ref: '../actions/parameters.yml#/action_id'
 
 responses:
   '200':
-    $ref: 'responses/get_image_action_response.yml'
+    $ref: 'responses/get_image_actions_response.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -33,9 +32,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_image_action.yml'
-  - $ref: 'examples/go/get_image_action.yml'
-  - $ref: 'examples/ruby/get_image_action.yml'
+  - $ref: 'examples/curl/imageActions_list.yml'
+  - $ref: 'examples/go/imageActions_list.yml'
 
 security:
   - bearer_auth:
