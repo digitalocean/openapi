@@ -1,9 +1,9 @@
-operationId: get_certificate
+operationId: certificates_delete
 
-summary: Retrieve an Existing Certificate
+summary: Delete a Certificate
 
-description: >-
-  To show information about an existing certificate, send a GET request to
+description: |
+  To delete a specific certificate, send a DELETE request to
   `/v2/certificates/$CERTIFICATE_ID`.
 
 tags:
@@ -13,8 +13,8 @@ parameters:
   - $ref: 'parameters.yml#/certificate_id'
 
 responses:
-  '200':
-    $ref: 'responses/existing_certificate.yml'
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -32,11 +32,10 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_certificate.yml'
-  - $ref: 'examples/go/get_certificate.yml'
-  - $ref: 'examples/ruby/get_certificate.yml'
+  - $ref: 'examples/curl/certificates_delete.yml'
+  - $ref: 'examples/go/certificates_delete.yml'
+  - $ref: 'examples/ruby/certificates_delete.yml'
 
 security:
   - bearer_auth:
-    - 'read'
-
+    - 'write'
