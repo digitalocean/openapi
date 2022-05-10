@@ -1,4 +1,4 @@
-operationId: delete_firewall
+operationId: firewalls_delete
 
 summary: Delete a Firewall
 
@@ -35,9 +35,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_firewall.yml'
-  - $ref: 'examples/go/delete_firewall.yml'
-  - $ref: 'examples/ruby/delete_firewall.yml'
+  - $ref: 'examples/curl/firewalls_delete.yml'
+  - $ref: 'examples/go/firewalls_delete.yml'
+  - $ref: 'examples/ruby/firewalls_delete.yml'
 
 security:
   - bearer_auth:

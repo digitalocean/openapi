@@ -1,4 +1,4 @@
-operationId: get_firewall
+operationId: firewalls_get
 
 summary: Retrieve an Existing Firewall
 
@@ -32,9 +32,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_firewall.yml'
-  - $ref: 'examples/go/get_firewall.yml'
-  - $ref: 'examples/ruby/get_firewall.yml'
+  - $ref: 'examples/curl/firewalls_get.yml'
+  - $ref: 'examples/go/firewalls_get.yml'
+  - $ref: 'examples/ruby/firewalls_get.yml'
 
 security:
   - bearer_auth:
