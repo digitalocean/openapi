@@ -1,35 +1,40 @@
-operationId: create_firewall
+operationId: firewalls_update
 
-summary: Create a New Firewall
+summary: Update a Firewall
 
 description: |
-  To create a new firewall, send a POST request to `/v2/firewalls`. The request
-  must contain at least one inbound or outbound access rule.
+  To update the configuration of an existing firewall, send a PUT request to
+  `/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation
+  of the firewall including existing attributes. **Note that any attributes that
+  are not provided will be reset to their default values.**
 
 tags:
   - Firewalls
+
+parameters:
+  - $ref: 'parameters.yml#/firewall_id'
 
 requestBody:
   content:
     application/json:
       schema:
+        required:
+          - name
         allOf:
           - $ref: 'models/firewall.yml'
-          - required:
-              - name
           - anyOf:
             - title: Inbound Rules
               required:
-              - inbound_rules
+                - inbound_rules
             - title: Outbound Rules
               required:
-              - outbound_rules
+                - outbound_rules
 
       example:
-        name: firewall
+        name: frontend-firewall
         inbound_rules:
           - protocol: tcp
-            ports: '80'
+            ports: '8080'
             sources:
               load_balancer_uids:
                 - 4de7ac8b-495b-4884-9a69-1050c6793cd6
@@ -42,23 +47,28 @@ requestBody:
                 - 18.0.0.0/8
         outbound_rules:
           - protocol: tcp
-            ports: '80'
+            ports: '8080'
             destinations:
               addresses:
                 - 0.0.0.0/0
                 - "::/0"
         droplet_ids:
           - 8043964
+        tags:
+          - frontend
 
 responses:
-  '202':
-    $ref: 'responses/create_firewall_response.yml'
+  '200':
+    $ref: 'responses/put_firewall_response.yml'
 
   '400':
     $ref: '../../shared/responses/bad_request.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
 
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'
@@ -70,9 +80,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/create_firewall.yml'
-  - $ref: 'examples/go/create_firewall.yml'
-  - $ref: 'examples/ruby/create_firewall.yml'
+  - $ref: 'examples/curl/firewalls_update.yml'
+  - $ref: 'examples/go/firewalls_update.yml'
+  - $ref: 'examples/ruby/firewalls_update.yml'
 
 security:
   - bearer_auth:

@@ -1,11 +1,11 @@
-operationId: delete_firewall_droplets
+operationId: firewalls_assign_droplets
 
-summary: Remove Droplets from a Firewall
+summary: Add Droplets to a Firewall
 
 description: |
-  To remove a Droplet from a firewall, send a DELETE request to
-  `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there should
-  be a `droplet_ids` attribute containing a list of Droplet IDs.
+  To assign a Droplet to a firewall, send a POST request to
+  `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there
+  should be a `droplet_ids` attribute containing a list of Droplet IDs.
 
   No response body will be sent back, but the response code will indicate
   success. Specifically, the response code will be a 204, which means that the
@@ -25,7 +25,7 @@ requestBody:
           droplet_ids:
             type: array
             description: >-
-              An array containing the IDs of the Droplets to be removed from
+              An array containing the IDs of the Droplets to be assigned to
               the firewall.
             items:
               type: integer
@@ -62,9 +62,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_firewall_droplets.yml'
-  - $ref: 'examples/go/delete_firewall_droplets.yml'
-  - $ref: 'examples/ruby/delete_firewall_droplets.yml'
+  - $ref: 'examples/curl/firewalls_assign_droplet.yml'
+  - $ref: 'examples/go/firewalls_assign_droplet.yml'
+  - $ref: 'examples/ruby/firewalls_assign_droplet.yml'
 
 security:
   - bearer_auth:

@@ -1,4 +1,4 @@
-operationId: list_firewalls
+operationId: firewalls_list
 
 summary: List All Firewalls
 
@@ -30,9 +30,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_firewalls.yml'
-  - $ref: 'examples/go/list_firewalls.yml'
-  - $ref: 'examples/ruby/list_firewalls.yml'
+  - $ref: 'examples/curl/firewalls_list.yml'
+  - $ref: 'examples/go/firewalls_list.yml'
+  - $ref: 'examples/ruby/firewalls_list.yml'
 
 security:
   - bearer_auth:

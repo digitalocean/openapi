@@ -1,11 +1,11 @@
-operationId: delete_firewall_tags
+operationId: firewalls_delete_droplets
 
-summary: Remove Tags from a Firewall
+summary: Remove Droplets from a Firewall
 
 description: |
-  To remove a tag representing a group of Droplets from a firewall, send a
-  DELETE request to `/v2/firewalls/$FIREWALL_ID/tags`. In the body of the
-  request, there should be a `tags` attribute containing a list of tag names.
+  To remove a Droplet from a firewall, send a DELETE request to
+  `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there should
+  be a `droplet_ids` attribute containing a list of Droplet IDs.
 
   No response body will be sent back, but the response code will indicate
   success. Specifically, the response code will be a 204, which means that the
@@ -22,19 +22,22 @@ requestBody:
     application/json:
       schema:
         properties:
-          tags:
-            allOf:
-              - $ref: '../../shared/attributes/tags_array.yml'
-              - description: >-
-                  An array containing the names of the Tags to be removed from
-                  the firewall.
+          droplet_ids:
+            type: array
+            description: >-
+              An array containing the IDs of the Droplets to be removed from
+              the firewall.
+            items:
+              type: integer
+            example:
+              - 49696269
 
         required:
-          - tags
+          - droplet_ids
 
       example:
-        tags:
-          - frontend
+        droplet_ids:
+          - 49696269
 
 responses:
   '204':
@@ -59,9 +62,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_firewall_tags.yml'
-  - $ref: 'examples/go/delete_firewall_tags.yml'
-  - $ref: 'examples/ruby/delete_firewall_tags.yml'
+  - $ref: 'examples/curl/firewalls_delete_droplets.yml'
+  - $ref: 'examples/go/firewalls_delete_droplets.yml'
+  - $ref: 'examples/ruby/firewalls_delete_droplets.yml'
 
 security:
   - bearer_auth:
