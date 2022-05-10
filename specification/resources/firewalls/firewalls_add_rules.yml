@@ -1,12 +1,12 @@
-operationId: delete_firewall_rules
+operationId: firewalls_add_rules
 
-summary: Remove Rules from a Firewall
+summary: Add Rules to a Firewall
 
 description: |
-  To remove access rules from a firewall, send a DELETE request to
+  To add additional access rules to a firewall, send a POST request to
   `/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an
-  `inbound_rules` and/or `outbound_rules` attribute containing an array of rules
-  to be removed.
+  inbound_rules and/or outbound_rules attribute containing an array of rules to
+  be added.
 
   No response body will be sent back, but the response code will indicate
   success. Specifically, the response code will be a 204, which means that the
@@ -69,9 +69,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_firewall_rules.yml'
-  - $ref: 'examples/go/delete_firewall_rules.yml'
-  - $ref: 'examples/ruby/delete_firewall_rules.yml'
+  - $ref: 'examples/curl/firewalls_add_rules.yml'
+  - $ref: 'examples/go/firewalls_add_rules.yml'
+  - $ref: 'examples/ruby/firewalls_add_rules.yml'
 
 security:
   - bearer_auth:

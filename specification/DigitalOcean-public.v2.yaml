@@ -912,35 +912,35 @@ paths:
 
   /v2/firewalls:
     get:
-      $ref: 'resources/firewalls/list_firewalls.yml'
+      $ref: 'resources/firewalls/firewalls_list.yml'
     post:
-      $ref: 'resources/firewalls/create_firewall.yml'
+      $ref: 'resources/firewalls/firewalls_create.yml'
 
   /v2/firewalls/{firewall_id}:
     get:
-      $ref: 'resources/firewalls/get_firewall.yml'
+      $ref: 'resources/firewalls/firewalls_get.yml'
     put:
-      $ref: 'resources/firewalls/update_firewall.yml'
+      $ref: 'resources/firewalls/firewalls_update.yml'
     delete:
-      $ref: 'resources/firewalls/delete_firewall.yml'
+      $ref: 'resources/firewalls/firewalls_delete.yml'
 
   /v2/firewalls/{firewall_id}/droplets:
     post:
-      $ref: 'resources/firewalls/add_firewall_droplets.yml'
+      $ref: 'resources/firewalls/firewalls_assign_droplets.yml'
     delete:
-      $ref: 'resources/firewalls/delete_firewall_droplets.yml'
+      $ref: 'resources/firewalls/firewalls_delete_droplets.yml'
 
   /v2/firewalls/{firewall_id}/tags:
     post:
-      $ref: 'resources/firewalls/add_firewall_tags.yml'
+      $ref: 'resources/firewalls/firewalls_add_tags.yml'
     delete:
-      $ref: 'resources/firewalls/delete_firewall_tags.yml'
+      $ref: 'resources/firewalls/firewalls_delete_tags.yml'
 
   /v2/firewalls/{firewall_id}/rules:
     post:
-      $ref: 'resources/firewalls/add_firewall_rules.yml'
+      $ref: 'resources/firewalls/firewalls_add_rules.yml'
     delete:
-      $ref: 'resources/firewalls/delete_firewall_rules.yml'
+      $ref: 'resources/firewalls/firewalls_delete_rules.yml'
 
   /v2/floating_ips:
     get:
