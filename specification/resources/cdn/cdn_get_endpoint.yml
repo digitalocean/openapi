@@ -1,10 +1,9 @@
-operationId: update_cdn_endpoint
+operationId: cdn_get_endpoint
 
-summary: Update a CDN Endpoint
+summary: Retrieve an Existing CDN Endpoint
 
-description: |
-  To update the TTL, certificate ID, or the FQDN of the custom subdomain for
-  an existing CDN endpoint, send a PUT request to
+description: >-
+  To show information about an existing CDN endpoint, send a GET request to
   `/v2/cdn/endpoints/$ENDPOINT_ID`.
 
 tags:
@@ -13,16 +12,8 @@ tags:
 parameters:
   - $ref: 'parameters.yml#/cdn_endpoint_id'
 
-requestBody:
-  required: true
-
-  content:
-    application/json:
-      schema:
-        $ref: 'models/update_endpoint.yml'
-
 responses:
-  '202':
+  '200':
     $ref: 'responses/existing_endpoint.yml'
 
   '401':
@@ -41,10 +32,11 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/update_endpoint.yml'
-  - $ref: 'examples/go/update_endpoint.yml'
-  - $ref: 'examples/ruby/update_endpoint.yml'
+  - $ref: 'examples/curl/endpoints_get.yml'
+  - $ref: 'examples/go/endpoints_get.yml'
+  - $ref: 'examples/ruby/endpoints_get.yml'
 
 security:
   - bearer_auth:
-    - 'write'
+    - 'read'
+

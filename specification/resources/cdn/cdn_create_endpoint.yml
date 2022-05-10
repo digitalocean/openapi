@@ -1,4 +1,4 @@
-operationId: create_cdn_endpoint
+operationId: cdn_create_endpoint
 
 summary: Create a New CDN Endpoint
 
@@ -52,9 +52,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/create_endpoint.yml'
-  - $ref: 'examples/go/create_endpoint.yml'
-  - $ref: 'examples/ruby/create_endpoint.yml'
+  - $ref: 'examples/curl/endpoints_create.yml'
+  - $ref: 'examples/go/endpoints_create.yml'
+  - $ref: 'examples/ruby/endpoints_create.yml'
 
 security:
   - bearer_auth:

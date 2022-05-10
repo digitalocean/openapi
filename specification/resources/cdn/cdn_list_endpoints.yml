@@ -1,4 +1,4 @@
-operationId: list_cdn_endpoints
+operationId: cdn_list_endpoints
 
 summary: List All CDN Endpoints
 
@@ -30,9 +30,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_endpoints.yml'
-  - $ref: 'examples/go/list_all_endpoints.yml'
-  - $ref: 'examples/ruby/list_all_endpoints.yml'
+  - $ref: 'examples/curl/endpoints_list.yml'
+  - $ref: 'examples/go/endpoints_list.yml'
+  - $ref: 'examples/ruby/endpoints_list.yml'
 
 security:
   - bearer_auth:
