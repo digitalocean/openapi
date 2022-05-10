@@ -781,7 +781,7 @@ paths:
 
   /v2/droplets/actions:
     post:
-      $ref: 'resources/droplets/droplets_post_action_byTag.yml'
+      $ref: 'resources/droplets/droplets_post_actionbyTag.yml'
 
   /v2/droplets/{droplet_id}/actions/{action_id}:
     get:
@@ -817,7 +817,7 @@ paths:
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/retry:
     post:
-      $ref: 'resources/droplets/droplets_retry_destroyWithAssociatedResources.yml'
+      $ref: 'resources/droplets/droplets_destroy_retryWithAssociatedResources.yml'
 
   /v2/firewalls:
     get:
