@@ -1,17 +1,18 @@
-operationId: get_customer_balance
+operationId: projects_get
 
-summary: Get Customer Balance
+summary: Retrieve an Existing Project
 
-description: >-
-  To retrieve the balances on a customer's account, send a GET request to
-  `/v2/customers/my/balance`.
+description: To get a project, send a GET request to `/v2/projects/$PROJECT_ID`.
 
 tags:
-  - Billing
+  - Projects
+
+parameters:
+  - $ref: 'parameters.yml#/project_id'
 
 responses:
   '200':
-    $ref: 'responses/balance.yml'
+    $ref: 'responses/existing_project.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -29,7 +30,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_customer_balance.yml'
+  - $ref: 'examples/curl/projects_get.yml'
+  - $ref: 'examples/go/projects_get.yml'
+  - $ref: 'examples/ruby/projects_get.yml'
 
 security:
   - bearer_auth:

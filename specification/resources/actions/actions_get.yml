@@ -1,20 +1,18 @@
-operationId: get_invoice_by_uuid
+operationId: actions_get
 
-summary: Retrieve an Invoice by UUID
+summary: Retrieve an Existing Action
 
-description: >-
-  To retrieve the invoice items for an invoice, send a GET request to
-  `/v2/customers/my/invoices/$INVOICE_UUID`.
+description: To retrieve a specific action object, send a GET request to `/v2/actions/$ACTION_ID`.
 
 tags:
-  - Billing
+  - Actions
 
 parameters:
-  - $ref: 'parameters.yml#/invoice_uuid'
+  - $ref: 'parameters.yml#/action_id'
 
 responses:
   '200':
-    $ref: 'responses/invoice.yml'
+    $ref: 'responses/action.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -32,7 +30,10 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_invoice_by_uuid.yml'
+  - $ref: 'examples/curl/actions_get.yml'
+  - $ref: 'examples/go/actions_get.yml'
+  - $ref: 'examples/ruby/actions_get.yml'
+  
 
 security:
   - bearer_auth:

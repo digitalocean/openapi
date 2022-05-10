@@ -465,11 +465,11 @@ paths:
 
   /v2/actions:
     get:
-      $ref: 'resources/actions/list_all_actions.yml'
+      $ref: 'resources/actions/actions_list.yml'
 
   /v2/actions/{action_id}:
     get:
-      $ref: 'resources/actions/get_action.yml'
+      $ref: 'resources/actions/actions_get.yml'
 
   /v2/apps:
     get:
@@ -576,31 +576,31 @@ paths:
 
   /v2/customers/my/balance:
     get:
-      $ref: 'resources/billing/get_customer_balance.yml'
+      $ref: 'resources/billing/balance_get.yml'
 
   /v2/customers/my/billing_history:
     get:
-      $ref: 'resources/billing/list_billing_history.yml'
+      $ref: 'resources/billing/billingHistory_list.yml'
 
   /v2/customers/my/invoices:
     get:
-      $ref: 'resources/billing/list_invoices.yml'
+      $ref: 'resources/billing/invoices_list.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}:
     get:
-      $ref: 'resources/billing/get_invoice_by_uuid.yml'
+      $ref: 'resources/billing/invoices_get_byUUID.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}/csv:
     get:
-      $ref: 'resources/billing/get_invoice_csv_by_uuid.yml'
+      $ref: 'resources/billing/invoices_get_csvByUUID.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}/pdf:
     get:
-      $ref: 'resources/billing/get_invoice_pdf_by_uuid.yml'
+      $ref: 'resources/billing/invoices_get_pdfByUUID.yml'
 
   /v2/customers/my/invoices/{invoice_uuid}/summary:
     get:
-      $ref: 'resources/billing/get_invoice_summary_by_uuid.yml'
+      $ref: 'resources/billing/invoices_get_summaryByUUID.yml'
 
   /v2/databases:
     get:
@@ -1086,51 +1086,51 @@ paths:
 
   /v2/projects:
     get:
-      $ref: 'resources/projects/list_projects.yml'
+      $ref: 'resources/projects/projects_list.yml'
 
     post:
-      $ref: 'resources/projects/create_project.yml'
+      $ref: 'resources/projects/projects_create.yml'
 
   /v2/projects/default:
     get:
-      $ref: 'resources/projects/get_default_project.yml'
+      $ref: 'resources/projects/projects_get_default.yml'
 
     put:
-      $ref: 'resources/projects/update_default_project.yml'
+      $ref: 'resources/projects/projects_update_default.yml'
 
     patch:
-      $ref: 'resources/projects/patch_default_project.yml'
+      $ref: 'resources/projects/projects_patch_default.yml'
 
   /v2/projects/{project_id}:
     get:
-      $ref: 'resources/projects/get_project.yml'
+      $ref: 'resources/projects/projects_get.yml'
 
     put:
-      $ref: 'resources/projects/update_project.yml'
+      $ref: 'resources/projects/projects_update.yml'
 
     patch:
-      $ref: 'resources/projects/patch_project.yml'
+      $ref: 'resources/projects/projects_patch.yml'
 
     delete:
-      $ref: 'resources/projects/delete_project.yml'
+      $ref: 'resources/projects/projects_delete.yml'
 
   /v2/projects/{project_id}/resources:
     get:
-      $ref: 'resources/projects/list_project_resources.yml'
+      $ref: 'resources/projects/projects_list_resources.yml'
 
     post:
-      $ref: 'resources/projects/assign_project_resources.yml'
+      $ref: 'resources/projects/projects_assign_resources.yml'
 
   /v2/projects/default/resources:
     get:
-      $ref: 'resources/projects/list_default_project_resources.yml'
+      $ref: 'resources/projects/projects_list_resources_default.yml'
 
     post:
-      $ref: 'resources/projects/assign_default_project_resources.yml'
+      $ref: 'resources/projects/projects_assign_resources_default.yml'
 
   /v2/regions:
     get:
-      $ref: 'resources/regions/list_all_regions.yml'
+      $ref: 'resources/regions/regions_list.yml'
 
   /v2/registry:
     get:
@@ -1206,7 +1206,7 @@ paths:
 
   /v2/sizes:
     get:
-      $ref: 'resources/sizes/list_all_sizes.yml'
+      $ref: 'resources/sizes/sizes_list.yml'
 
   /v2/snapshots:
     get:

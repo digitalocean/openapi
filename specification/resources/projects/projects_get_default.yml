@@ -1,17 +1,15 @@
-operationId: list_billing_history
+operationId: projects_get_default
 
-summary: List Billing History
+summary: Retrieve the Default Project
 
-description: >-
-  To retrieve a list of all billing history entries, send a GET request to
-  `/v2/customers/my/billing_history`.
+description: To get your default project, send a GET request to `/v2/projects/default`.
 
 tags:
-  - Billing
+  - Projects
 
 responses:
   '200':
-    $ref: 'responses/billing_history.yml'
+    $ref: 'responses/default_project.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -29,7 +27,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_billing_history.yml'
+  - $ref: 'examples/curl/projects_get_default.yml'
+  - $ref: 'examples/go/projects_get_default.yml'
+  - $ref: 'examples/ruby/projects_get_default.yml'
 
 security:
   - bearer_auth:

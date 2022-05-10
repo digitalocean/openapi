@@ -1,4 +1,4 @@
-operationId: list_invoices
+operationId: invoices_list
 
 summary: List All Invoices
 
@@ -26,7 +26,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_invoices.yml'
+  - $ref: 'examples/curl/invoices_list.yml'
 
 security:
   - bearer_auth:

@@ -1,10 +1,11 @@
-operationId: get_invoice_pdf_by_uuid
+operationId: invoices_get_summaryByUUID
 
-summary: Retrieve an Invoice PDF by UUID
+
+summary: Retrieve an Invoice Summary by UUID
 
 description: >-
-  To retrieve a PDF for an invoice, send a GET request to
-  `/v2/customers/my/invoices/$INVOICE_UUID/pdf`.
+  To retrieve a summary for an invoice, send a GET request to
+  `/v2/customers/my/invoices/$INVOICE_UUID/summary`.
 
 tags:
   - Billing
@@ -14,7 +15,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/invoice_pdf.yml'
+    $ref: 'responses/invoice_summary.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -32,7 +33,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_invoice_pdf_by_uuid.yml'
+  - $ref: 'examples/curl/invoices_get_summaryByUUID.yml'
 
 security:
   - bearer_auth:
