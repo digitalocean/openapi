@@ -1,20 +1,19 @@
-operationId: list_deployments
+operationId: apps_get_deployment
 
-summary: List App Deployments
+summary: Retrieve an App Deployment
 
-description: List all deployments of an app.
+description: Retrieve information about an app deployment.
 
 tags:
 - Apps
 
 parameters:
   - $ref: parameters.yml#/app_id
-  - $ref: ../../shared/parameters.yml#/page
-  - $ref: ../../shared/parameters.yml#/per_page
+  - $ref: parameters.yml#/deployment_id
 
 responses:
   "200":
-    $ref: responses/existing_deployments.yml
+    $ref: responses/list_deployment.yml
 
   "401":
     $ref: ../../shared/responses/unauthorized.yml
@@ -32,7 +31,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_deployments.yml'
+  - $ref: 'examples/curl/apps_get_deployment.yml'
 
 security:
   - bearer_auth:

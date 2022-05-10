@@ -1,19 +1,26 @@
-operationId: post_cancel_deployment
+operationId: apps_create_deployment
 
-summary: Cancel a Deployment
+summary: Create an App Deployment
 
-description: Immediately cancel an in-progress deployment.
+description: Creating an app deployment will pull the latest changes from your repository
+  and schedule a new deployment for your app.
 
 tags:
 - Apps
 
 parameters:
   - $ref: parameters.yml#/app_id
-  - $ref: parameters.yml#/deployment_id
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: models/apps_create_deployment_request.yml
+  required: true
 
 responses:
   "200":
-    $ref: responses/cancel_deployment.yml
+    $ref: responses/new_app_deployment.yml
 
   "401":
     $ref: ../../shared/responses/unauthorized.yml
@@ -31,7 +38,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/cancel_deployment.yml'
+  - $ref: 'examples/curl/apps_create_deployment.yml'
 
 security:
   - bearer_auth:
