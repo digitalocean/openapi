@@ -1,4 +1,4 @@
-operationId: post_image_action
+operationId: imageActions_post
 
 summary: Initiate an Image Action
 
@@ -56,9 +56,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/post_image_action.yml'
-  - $ref: 'examples/go/post_image_action.yml'
-  - $ref: 'examples/ruby/post_image_action.yml'
+  - $ref: 'examples/curl/imageActions_post.yml'
+  - $ref: 'examples/go/imageActions_post.yml'
+  - $ref: 'examples/ruby/imageActions_post.yml'
 
 security:
   - bearer_auth:

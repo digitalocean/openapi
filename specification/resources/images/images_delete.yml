@@ -1,4 +1,4 @@
-operationId: delete_image
+operationId: images_delete
 
 summary: Delete an Image
 
@@ -31,9 +31,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_image.yml'
-  - $ref: 'examples/go/delete_image.yml'
-  - $ref: 'examples/ruby/delete_image.yml'
+  - $ref: 'examples/curl/images_delete.yml'
+  - $ref: 'examples/go/images_delete.yml'
+  - $ref: 'examples/ruby/images_delete.yml'
 
 security:
   - bearer_auth:

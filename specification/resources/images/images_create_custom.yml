@@ -1,4 +1,4 @@
-operationId: create_custom_image
+operationId: images_create_custom
 
 summary: Create a Custom Image
 
@@ -38,7 +38,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/create_custom_image.yml'
+  - $ref: 'examples/curl/images_create_custom.yml'
 
 security:
   - bearer_auth:
