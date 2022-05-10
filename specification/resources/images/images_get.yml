@@ -1,4 +1,4 @@
-operationId: get_image
+operationId: images_get
 
 summary: Retrieve an Existing Image
 
@@ -52,9 +52,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_image.yml'
-  - $ref: 'examples/go/get_image.yml'
-  - $ref: 'examples/ruby/get_image.yml'
+  - $ref: 'examples/curl/images_get.yml'
+  - $ref: 'examples/go/images_get.yml'
+  - $ref: 'examples/ruby/images_get.yml'
 
 security:
   - bearer_auth:

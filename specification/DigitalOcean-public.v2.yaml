@@ -878,27 +878,27 @@ paths:
 
   /v2/images:
     get:
-      $ref: 'resources/images/list_images.yml'
+      $ref: 'resources/images/images_list.yml'
     post:
-      $ref: 'resources/images/create_custom_image.yml'
+      $ref: 'resources/images/images_create_custom.yml'
 
   /v2/images/{image_id}:
     get:
-      $ref: 'resources/images/get_image.yml'
+      $ref: 'resources/images/images_get.yml'
     put:
-      $ref: 'resources/images/update_image.yml'
+      $ref: 'resources/images/images_update.yml'
     delete:
-      $ref: 'resources/images/delete_image.yml'
+      $ref: 'resources/images/images_delete.yml'
 
   /v2/images/{image_id}/actions:
     get:
-      $ref: 'resources/images/list_image_actions.yml'
+      $ref: 'resources/images/imageActions_list.yml'
     post:
-      $ref: 'resources/images/post_image_action.yml'
+      $ref: 'resources/images/imageActions_post.yml'
 
   /v2/images/{image_id}/actions/{action_id}:
     get:
-      $ref: 'resources/images/get_image_action.yml'
+      $ref: 'resources/images/imageActions_get.yml'
 
   /v2/kubernetes/clusters:
     get:
