@@ -1,4 +1,4 @@
-operationId: create_domain_record
+operationId: domainRecords_create
 
 summary: Create a New Domain Record
 
@@ -76,9 +76,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/create_domain_record.yml'
-  - $ref: 'examples/go/create_domain_record.yml'
-  - $ref: 'examples/ruby/create_domain_record.yml'
+  - $ref: 'examples/curl/domainRecords_create.yml'
+  - $ref: 'examples/go/domainRecords_create.yml'
+  - $ref: 'examples/ruby/domainRecords_create.yml'
 
 security:
   - bearer_auth:

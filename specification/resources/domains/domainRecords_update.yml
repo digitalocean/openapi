@@ -1,9 +1,9 @@
-operationId: patch_update_domain_record
+operationId: domainRecords_update
 
 summary: Update a Domain Record
 
 description: |
-  To update an existing record, send a PATCH request to
+  To update an existing record, send a PUT request to
   `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for
   the record type can be set to a new value for the record.
 
@@ -25,7 +25,7 @@ requestBody:
 
       example:
         name: blog
-        type: A
+        type: CNAME
 
 responses:
   '200':
@@ -45,6 +45,12 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/domainRecords_update.yml'
+  - $ref: 'examples/go/domainRecords_update.yml'
+  - $ref: 'examples/ruby/domainRecords_update.yml'
+
 security:
   - bearer_auth:
     - 'write'

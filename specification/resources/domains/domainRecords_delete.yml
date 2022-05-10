@@ -1,4 +1,4 @@
-operationId: delete_domain_record
+operationId: domainRecords_delete
 
 summary: Delete a Domain Record
 
@@ -36,9 +36,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_domain_record.yml'
-  - $ref: 'examples/go/delete_domain_record.yml'
-  - $ref: 'examples/ruby/delete_domain_record.yml'
+  - $ref: 'examples/curl/domainRecords_delete.yml'
+  - $ref: 'examples/go/domainRecords_delete.yml'
+  - $ref: 'examples/ruby/domainRecords_delete.yml'
 
 security:
   - bearer_auth:

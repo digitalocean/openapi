@@ -1,4 +1,4 @@
-operationId: create_domain
+operationId: domains_create
 
 summary: Create a New Domain
 
@@ -36,9 +36,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/create_domain.yml'
-  - $ref: 'examples/go/create_domain.yml'
-  - $ref: 'examples/ruby/create_domain.yml'
+  - $ref: 'examples/curl/domains_create.yml'
+  - $ref: 'examples/go/domains_create.yml'
+  - $ref: 'examples/ruby/domains_create.yml'
 
 security:
   - bearer_auth:

@@ -1,20 +1,20 @@
-operationId: get_domain
+operationId: get_domain_record
 
-summary: Retrieve an Existing Domain
+summary: Retrieve an Existing Domain Record
 
-description: >-
-  To get details about a specific domain, send a GET request to
-  `/v2/domains/$DOMAIN_NAME`.
+description: To retrieve a specific domain record, send a GET request to
+  `/v2/domains/$DOMAIN_NAME/records/$RECORD_ID`.
 
 tags:
-  - Domains
+  - Domain Records
 
 parameters:
   - $ref: 'parameters.yml#/domain_name'
+  - $ref: 'parameters.yml#/domain_record_id'
 
 responses:
   '200':
-    $ref: 'responses/existing_domain.yml'
+    $ref: 'responses/domain_record.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -32,9 +32,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_domain.yml'
-  - $ref: 'examples/go/get_domain.yml'
-  - $ref: 'examples/ruby/get_domain.yml'
+  - $ref: 'examples/curl/domainRecords_get.yml'
+  - $ref: 'examples/go/domainRecords_get.yml'
+  - $ref: 'examples/ruby/domainRecords_get.yml'
 
 security:
   - bearer_auth:

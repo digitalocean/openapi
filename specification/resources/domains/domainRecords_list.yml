@@ -1,4 +1,4 @@
-operationId: list_all_domain_records
+operationId: domainRecords_list
 
 summary: List All Domain Records
 
@@ -42,9 +42,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_domain_records.yml'
-  - $ref: 'examples/go/list_all_domain_records.yml'
-  - $ref: 'examples/ruby/list_all_domain_records.yml'
+  - $ref: 'examples/curl/domainRecords_list.yml'
+  - $ref: 'examples/go/domainRecords_list.yml'
+  - $ref: 'examples/ruby/domainRecords_list.yml'
 
 security:
   - bearer_auth:
