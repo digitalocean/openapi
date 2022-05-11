@@ -1,10 +1,10 @@
-operationId: get_cluster_user
+operationId: kubernetes_get_cluster
 
-summary: Retrieve User Information for a Kubernetes Cluster
+summary: Retrieve an Existing Kubernetes Cluster
 
 description: |
-  To show information the user associated with a Kubernetes cluster, send a GET
-  request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/user`.
+  To show information about an existing Kubernetes cluster, send a GET request
+  to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.
 
 tags:
   - Kubernetes
@@ -14,7 +14,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/cluster_user.yml'
+    $ref: 'responses/existing_cluster.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -30,6 +30,12 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/kubernetes_get_cluster.yml'
+  - $ref: 'examples/go/kubernetes_get_cluster.yml'
+  - $ref: 'examples/ruby/kubernetes_get_cluster.yml'
+
 security:
   - bearer_auth:
     - 'read'

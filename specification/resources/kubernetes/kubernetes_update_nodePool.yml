@@ -1,4 +1,4 @@
-operationId: update_kubernetes_node_pool
+operationId: kubernetes_update_nodePool
 
 summary: Update a Node Pool in a Kubernetes Cluster
 
@@ -43,9 +43,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/update_node_pool.yml'
-  - $ref: 'examples/go/update_node_pool.yml'
-  - $ref: 'examples/ruby/update_node_pool.yml'
+  - $ref: 'examples/curl/kubernetes_update_nodePool.yml'
+  - $ref: 'examples/go/kubernetes_update_nodePool.yml'
+  - $ref: 'examples/ruby/kubernetes_update_nodePool.yml'
 
 security:
   - bearer_auth:

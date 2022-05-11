@@ -1,20 +1,17 @@
-operationId: recycle_kubernetes_node_pool
+operationId: kubernetes_update_cluster
 
-deprecated: true
-
-summary: Recycle a Kubernetes Node Pool
+summary: Update a Kubernetes Cluster
 
 description: |
-  The endpoint has been deprecated. Please use the DELETE
-  `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID`
-  method instead.
+  To update a Kubernetes cluster, send a PUT request to
+  `/v2/kubernetes/clusters/$K8S_CLUSTER_ID` and specify one or more of the
+  attributes below.
 
 tags:
   - Kubernetes
 
 parameters:
   - $ref: 'parameters.yml#/kubernetes_cluster_id'
-  - $ref: 'parameters.yml#/kubernetes_node_pool_id'
 
 requestBody:
   required: true
@@ -22,17 +19,11 @@ requestBody:
   content:
     application/json:
       schema:
-        properties:
-          nodes:
-            type: array
-            items:
-              type: string
-            example:
-            - d8db5e1a-6103-43b5-a7b3-8a948210a9fc
+        $ref: 'models/cluster_update.yml'
 
 responses:
   '202':
-    $ref: '../../shared/responses/accepted.yml'
+    $ref: 'responses/updated_cluster.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -48,6 +39,12 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/kubernetes_update_cluster.yml'
+  - $ref: 'examples/go/kubernetes_update_cluster.yml'
+  - $ref: 'examples/ruby/kubernetes_update_cluster.yml'
+
 security:
   - bearer_auth:
     - 'write'

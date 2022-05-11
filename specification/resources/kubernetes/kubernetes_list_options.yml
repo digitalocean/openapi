@@ -1,4 +1,4 @@
-operationId: list_kubernetes_options
+operationId: kubernetes_list_options
 
 summary: List Available Regions, Node Sizes, and Versions of Kubernetes
 
@@ -29,9 +29,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_options.yml'
-  - $ref: 'examples/go/list_options.yml'
-  - $ref: 'examples/ruby/list_options.yml'
+  - $ref: 'examples/curl/kubernetes_list_options.yml'
+  - $ref: 'examples/go/kubernetes_list_options.yml'
+  - $ref: 'examples/ruby/kubernetes_list_options.yml'
 
 security:
   - bearer_auth:

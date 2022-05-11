@@ -1,4 +1,4 @@
-operationId: get_node_pool
+operationId: kubernetes_get_nodePool
 
 summary: Retrieve a Node Pool for a Kubernetes Cluster
 
@@ -33,9 +33,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_node_pool.yml'
-  - $ref: 'examples/go/get_node_pool.yml'
-  - $ref: 'examples/ruby/get_node_pool.yml'
+  - $ref: 'examples/curl/kubernetes_get_nodePool.yml'
+  - $ref: 'examples/go/kubernetes_get_nodePool.yml'
+  - $ref: 'examples/ruby/kubernetes_get_nodePool.yml'
 
 security:
   - bearer_auth:
