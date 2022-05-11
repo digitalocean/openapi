@@ -1,4 +1,4 @@
-operationId: get_droplet_cpu_metrics
+operationId: monitoring_getDropletCpuMetrics
 
 summary: Get Droplet CPU Metrics
 
@@ -30,7 +30,7 @@ parameters:
   - $ref: 'parameters.yml#/metric_timestamp_end'
 
 x-codeSamples:
-  - $ref: 'examples/curl/metrics_droplet_cpu.yml'
+  - $ref: 'examples/curl/monitoring_getDropletCpuMetrics.yml'
 security:
   - bearer_auth:
     - 'read'

@@ -1,9 +1,9 @@
-operationId: get_droplet_load15_metrics
+operationId: monitoring_get_dropletMemoryFreeMetrics
 
-summary: Get Droplet Load15 Metrics
+summary: Get Droplet Free Memory Metrics
 
 description: >-
-  To retrieve 15 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_15`.
+  To retrieve free memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_free`.
 tags:
   - Monitoring
 
@@ -30,7 +30,7 @@ parameters:
   - $ref: 'parameters.yml#/metric_timestamp_end'
 
 x-codeSamples:
-  - $ref: 'examples/curl/metrics_droplet_load15.yml'
+  - $ref: 'examples/curl/monitoring_get_dropletMemoryFreeMetrics.yml'
 security:
   - bearer_auth:
     - 'read'

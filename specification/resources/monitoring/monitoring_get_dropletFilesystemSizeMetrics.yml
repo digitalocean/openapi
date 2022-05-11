@@ -1,15 +1,15 @@
-operationId: get_droplet_memory_total_metrics
+operationId: monitoring_get_dropletFilesystemSizeMetrics
 
-summary: Get Droplet Total Memory Metrics
+summary: Get Droplet Filesystem Size Metrics
 
 description: >-
-  To retrieve total memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_total`.
+  To retrieve filesystem size metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_size`.
 tags:
   - Monitoring
 
 responses:
   '200':
-    $ref: 'responses/metric_response.yml'
+    $ref: 'responses/droplet_filesystem_metric_response.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -30,7 +30,7 @@ parameters:
   - $ref: 'parameters.yml#/metric_timestamp_end'
 
 x-codeSamples:
-  - $ref: 'examples/curl/metrics_droplet_memory_total.yml'
+  - $ref: 'examples/curl/monitoring_get_dropletFilesystemSizeMetrics.yml'
 security:
   - bearer_auth:
     - 'read'
