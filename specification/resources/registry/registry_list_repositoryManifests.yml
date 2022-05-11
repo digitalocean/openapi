@@ -1,4 +1,4 @@
-operationId: list_repository_digests
+operationId: registry_list_repositoryManifests
 
 summary: List All Container Registry Repository Manifests
 
