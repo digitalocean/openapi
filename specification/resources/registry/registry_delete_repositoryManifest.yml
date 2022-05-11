@@ -1,4 +1,4 @@
-operationId: registry_delete_repository_manifest
+operationId: registry_delete_repositoryManifest
 
 summary: Delete Container Registry Repository Manifest
 
@@ -42,7 +42,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/registry_delete_repository_manifest.yml'
+  - $ref: 'examples/curl/registry_delete_repositoryManifest.yml'
 
 security:
   - bearer_auth:

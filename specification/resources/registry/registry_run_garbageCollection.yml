@@ -1,4 +1,4 @@
-operationId: registry_run_garbage_collection
+operationId: registry_run_garbageCollection
 
 summary: Start Garbage Collection
 
@@ -51,7 +51,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/registry_run_garbage_collection.yml'
+  - $ref: 'examples/curl/registry_run_garbageCollection.yml'
 
 security:
   - bearer_auth:

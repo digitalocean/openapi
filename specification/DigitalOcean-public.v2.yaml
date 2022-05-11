@@ -1151,7 +1151,7 @@ paths:
 
   /v2/registry/docker-credentials:
     get:
-      $ref: 'resources/registry/registry_get_docker_credentials.yml'
+      $ref: 'resources/registry/registry_get_dockerCredentials.yml'
 
   /v2/registry/validate-name:
     post:
@@ -1163,38 +1163,38 @@ paths:
 
   /v2/registry/{registry_name}/repositoriesV2:
     get:
-      $ref: 'resources/registry/registry_list_repositories_v2.yml'
+      $ref: 'resources/registry/registry_list_repositoriesV2.yml'
 
   /v2/registry/{registry_name}/{repository_name}/tags:
     get:
-      $ref: 'resources/registry/registry_list_repository_tags.yml'
+      $ref: 'resources/registry/registry_list_repositoryTags.yml'
 
   /v2/registry/{registry_name}/{repository_name}/tags/{repository_tag}:
     delete:
-      $ref: 'resources/registry/registry_delete_repository_tag.yml'
+      $ref: 'resources/registry/registry_delete_repositoryTag.yml'
 
   /v2/registry/{registry_name}/{repository_name}/digests:
     get:
-      $ref: 'resources/registry/registry_list_repository_manifests.yml'
+      $ref: 'resources/registry/registry_list_repositoryManifests.yml'
 
   /v2/registry/{registry_name}/{repository_name}/digests/{manifest_digest}:
     delete:
-      $ref: 'resources/registry/registry_delete_repository_manifest.yml'
+      $ref: 'resources/registry/registry_delete_repositoryManifest.yml'
 
   /v2/registry/{registry_name}/garbage-collection:
     post:
-      $ref: 'resources/registry/registry_run_garbage_collection.yml'
+      $ref: 'resources/registry/registry_run_garbageCollection.yml'
 
     get:
-      $ref: 'resources/registry/registry_get_garbage_collection.yml'
+      $ref: 'resources/registry/registry_get_garbageCollection.yml'
 
   /v2/registry/{registry_name}/garbage-collections:
     get:
-      $ref: 'resources/registry/registry_list_garbage_collections.yml'
+      $ref: 'resources/registry/registry_list_garbageCollections.yml'
 
   /v2/registry/{registry_name}/garbage-collection/{garbage_collection_uuid}:
     put:
-      $ref: 'resources/registry/registry_update_garbage_collection.yml'
+      $ref: 'resources/registry/registry_update_garbageCollection.yml'
 
   /v2/registry/options:
     get:

@@ -1,4 +1,4 @@
-operationId: registry_delete_repository_tag
+operationId: registry_delete_repositoryTag
 
 summary: Delete Container Registry Repository Tag
 
@@ -42,7 +42,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/registry_delete_repository_tag.yml'
+  - $ref: 'examples/curl/registry_delete_repositoryTag.yml'
 
 security:
   - bearer_auth:
