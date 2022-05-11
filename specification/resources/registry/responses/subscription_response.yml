@@ -12,4 +12,6 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/subscription.yml'
+      properties:
+        subscription:
+          $ref: '../models/subscription.yml'
