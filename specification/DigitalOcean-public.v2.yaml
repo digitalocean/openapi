@@ -1046,7 +1046,7 @@ paths:
 
   /v2/monitoring/metrics/droplet/cpu:
     get:
-      $ref: 'resources/monitoring/monitoring_getDropletCpuMetrics.yml'
+      $ref: 'resources/monitoring/monitoring_get_DropletCpuMetrics.yml'
 
   /v2/monitoring/metrics/droplet/filesystem_free:
     get:
