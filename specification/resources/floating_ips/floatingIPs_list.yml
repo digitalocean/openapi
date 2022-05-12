@@ -1,4 +1,4 @@
-operationId: list_floating_ips
+operationId: floatingIPs_list
 
 summary: List All Floating IPs
 

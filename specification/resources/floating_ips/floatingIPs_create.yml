@@ -1,4 +1,4 @@
-operationId: create_floating_ip
+operationId: floatingIPs_create
 
 summary: Create a New Floating IP
 

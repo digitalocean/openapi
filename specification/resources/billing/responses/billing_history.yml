@@ -20,7 +20,7 @@ content:
               items:
                 $ref: '../models/billing_history.yml'
         - $ref: '../../../shared/pages.yml#/pagination'
-        - $ref: '../../../shared/meta.yml'
+        - $ref: '../../../shared/meta_optional_total.yml'
 
       example:
         billing_history:
