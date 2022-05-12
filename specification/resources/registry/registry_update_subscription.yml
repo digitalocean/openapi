@@ -1,4 +1,4 @@
-operationId: post_registry_subscription
+operationId: registry_update_subscription
 
 summary: Update Subscription Tier
 
@@ -41,7 +41,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/post_registry_subscription.yml'
+  - $ref: 'examples/curl/registry_update_subscription.yml'
 
 security:
   - bearer_auth:

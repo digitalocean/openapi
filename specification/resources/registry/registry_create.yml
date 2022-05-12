@@ -1,4 +1,4 @@
-operationId: create_registry
+operationId: registry_create
 
 summary: Create Container Registry
 
@@ -37,7 +37,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/create_registry.yml'
+  - $ref: 'examples/curl/registry_create.yml'
 
 security:
   - bearer_auth:

@@ -1134,71 +1134,71 @@ paths:
 
   /v2/registry:
     get:
-      $ref: 'resources/registry/get_registry.yml'
+      $ref: 'resources/registry/registry_get.yml'
 
     post:
-      $ref: 'resources/registry/create_registry.yml'
+      $ref: 'resources/registry/registry_create.yml'
 
     delete:
-      $ref: 'resources/registry/delete_registry.yml'
+      $ref: 'resources/registry/registry_delete.yml'
 
   /v2/registry/subscription:
     get:
-      $ref: 'resources/registry/get_registry_subscription.yml'
+      $ref: 'resources/registry/registry_get_subscription.yml'
 
     post:
-      $ref: 'resources/registry/post_registry_subscription.yml'
+      $ref: 'resources/registry/registry_update_subscription.yml'
 
   /v2/registry/docker-credentials:
     get:
-      $ref: 'resources/registry/get_docker_credentials.yml'
+      $ref: 'resources/registry/registry_get_dockerCredentials.yml'
 
   /v2/registry/validate-name:
     post:
-      $ref: 'resources/registry/validate_registry_name.yml'
+      $ref: 'resources/registry/registry_validate_name.yml'
 
   /v2/registry/{registry_name}/repositories:
     get:
-      $ref: 'resources/registry/list_registry_repositories.yml'
+      $ref: 'resources/registry/registry_list_repositories.yml'
 
   /v2/registry/{registry_name}/repositoriesV2:
     get:
-      $ref: 'resources/registry/list_registry_repositories_v2.yml'
+      $ref: 'resources/registry/registry_list_repositoriesV2.yml'
 
   /v2/registry/{registry_name}/{repository_name}/tags:
     get:
-      $ref: 'resources/registry/list_repository_tags.yml'
+      $ref: 'resources/registry/registry_list_repositoryTags.yml'
 
   /v2/registry/{registry_name}/{repository_name}/tags/{repository_tag}:
     delete:
-      $ref: 'resources/registry/delete_repository_tag.yml'
+      $ref: 'resources/registry/registry_delete_repositoryTag.yml'
 
   /v2/registry/{registry_name}/{repository_name}/digests:
     get:
-      $ref: 'resources/registry/list_repository_manifests.yml'
+      $ref: 'resources/registry/registry_list_repositoryManifests.yml'
 
   /v2/registry/{registry_name}/{repository_name}/digests/{manifest_digest}:
     delete:
-      $ref: 'resources/registry/delete_repository_manifest.yml'
+      $ref: 'resources/registry/registry_delete_repositoryManifest.yml'
 
   /v2/registry/{registry_name}/garbage-collection:
     post:
-      $ref: 'resources/registry/run_garbage_collection.yml'
+      $ref: 'resources/registry/registry_run_garbageCollection.yml'
 
     get:
-      $ref: 'resources/registry/get_garbage_collection.yml'
+      $ref: 'resources/registry/registry_get_garbageCollection.yml'
 
   /v2/registry/{registry_name}/garbage-collections:
     get:
-      $ref: 'resources/registry/list_garbage_collections.yml'
+      $ref: 'resources/registry/registry_list_garbageCollections.yml'
 
   /v2/registry/{registry_name}/garbage-collection/{garbage_collection_uuid}:
     put:
-      $ref: 'resources/registry/update_garbage_collection.yml'
+      $ref: 'resources/registry/registry_update_garbageCollection.yml'
 
   /v2/registry/options:
     get:
-      $ref: 'resources/registry/get_registry_options.yml'
+      $ref: 'resources/registry/registry_get_options.yml'
 
   /v2/reports/droplet_neighbors_ids:
     get:

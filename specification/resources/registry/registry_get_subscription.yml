@@ -1,4 +1,4 @@
-operationId: get_registry_subscription
+operationId: registry_get_subscription
 
 summary: Get Subscription Information
 
@@ -26,7 +26,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_registry_subscription.yml'
+  - $ref: 'examples/curl/registry_get_subscription.yml'
 
 security:
   - bearer_auth:

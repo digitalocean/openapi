@@ -1,4 +1,4 @@
-operationId: list_registry_repositories_v2
+operationId: registry_list_repositoriesV2
 
 summary: List All Container Registry Repositories (V2)
 
@@ -37,8 +37,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_registry_repositories_v2.yml'
-  - $ref: 'examples/curl/list_registry_repositories_v2_next_page.yml'
+  - $ref: 'examples/curl/registry_list_repositoriesV2.yml'
+  - $ref: 'examples/curl/registry_list_repositoriesV2_next_page.yml'
 
 security:
   - bearer_auth:
