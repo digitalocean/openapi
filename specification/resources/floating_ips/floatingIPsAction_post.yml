@@ -1,4 +1,4 @@
-operationId: post_floating_ip_action
+operationId: floatingIPsAction_post
 
 summary: Initiate a Floating IP Action
 

@@ -1,4 +1,4 @@
-operationId: list_floating_ip_actions
+operationId: floatingIPsAction_list
 
 summary: List All Actions for a Floating IP
 
