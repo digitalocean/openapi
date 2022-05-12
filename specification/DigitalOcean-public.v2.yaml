@@ -944,28 +944,28 @@ paths:
 
   /v2/floating_ips:
     get:
-      $ref: 'resources/floating_ips/list_floating_ips.yml'
+      $ref: 'resources/floating_ips/floatingIPs_list.yml'
 
     post:
-      $ref: 'resources/floating_ips/create_floating_ip.yml'
+      $ref: 'resources/floating_ips/floatingIPs_create.yml'
 
   /v2/floating_ips/{floating_ip}:
     get:
-      $ref: 'resources/floating_ips/get_floating_ip.yml'
+      $ref: 'resources/floating_ips/floatingIPs_get.yml'
 
     delete:
-      $ref: 'resources/floating_ips/delete_floating_ip.yml'
+      $ref: 'resources/floating_ips/floatingIPs_delete.yml'
 
   /v2/floating_ips/{floating_ip}/actions:
     get:
-      $ref: 'resources/floating_ips/list_floating_ip_actions.yml'
+      $ref: 'resources/floating_ips/floatingIPsAction_list.yml'
 
     post:
-      $ref: 'resources/floating_ips/post_floating_ip_action.yml'
+      $ref: 'resources/floating_ips/floatingIPsAction_post.yml'
 
   /v2/floating_ips/{floating_ip}/actions/{action_id}:
     get:
-      $ref: 'resources/floating_ips/get_floating_ip_action.yml'
+      $ref: 'resources/floating_ips/floatingIPsAction_get.yml'
 
   /v2/images:
     get:

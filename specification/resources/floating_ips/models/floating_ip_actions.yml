@@ -1,4 +1,4 @@
-floating_ip_action_type:
+floatingIPsAction:
   type: object
   required:
   - type
@@ -17,14 +17,14 @@ floating_ip_action_type:
 
 floating_ip_action_unassign:
   allOf:
-    - $ref: '#/floating_ip_action_type'
+    - $ref: '#/floatingIPsAction'
     - type: object
       required:
       - type
 
 floating_ip_action_assign:
   allOf:
-    - $ref: '#/floating_ip_action_type'
+    - $ref: '#/floatingIPsAction'
     - type: object
       required:
       - type
