@@ -22,7 +22,7 @@ content:
         id: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
         name: backend
         engine: pg
-        version: '10'
+        version: '14'
         connection:
           uri: postgres://doadmin:wv78n3zpz42xezdk@backend-do-user-19081923-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require
           database: ''
