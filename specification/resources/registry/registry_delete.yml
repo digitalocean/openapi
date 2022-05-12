@@ -1,4 +1,4 @@
-operationId: delete_registry
+operationId: registry_delete
 
 summary: Delete Container Registry
 
@@ -28,7 +28,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_registry.yml'
+  - $ref: 'examples/curl/registry_delete.yml'
 
 security:
   - bearer_auth:

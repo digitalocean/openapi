@@ -1,15 +1,15 @@
-operationId: list_repository_tags
+operationId: registry_list_repositoryManifests
 
-summary: List All Container Registry Repository Tags
+summary: List All Container Registry Repository Manifests
 
 description: |
-  To list all tags in your container registry repository, send a GET
-  request to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags`.
+  To list all manifests in your container registry repository, send a GET
+  request to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests`.
 
   Note that if your repository name contains `/` characters, it must be
-  URL-encoded in the request URL. For example, to list tags for
+  URL-encoded in the request URL. For example, to list manifests for
   `registry.digitalocean.com/example/my/repo`, the path would be
-  `/v2/registry/example/repositories/my%2Frepo/tags`.
+  `/v2/registry/example/repositories/my%2Frepo/digests`.
 
 tags:
   - Container Registry
@@ -22,7 +22,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/repository_tags.yml'
+    $ref: 'responses/repository_manifests.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -40,7 +40,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_repository_tags.yml'
+  - $ref: 'examples/curl/registry_list_repositoryManifests.yml'
 
 security:
   - bearer_auth:

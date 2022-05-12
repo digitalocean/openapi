@@ -1,4 +1,4 @@
-operationId: validate_registry_name
+operationId: registry_validate_name
 
 summary: Validate a Container Registry Name
 
@@ -41,7 +41,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/validate_registry_name.yml'
+  - $ref: 'examples/curl/registry_validate_name.yml'
 
 security:
   - bearer_auth:

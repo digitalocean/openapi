@@ -1,4 +1,4 @@
-operationId: get_registry_options
+operationId: registry_get_options
 
 summary: List Registry Options (Subscription Tiers and Available Regions)
 
@@ -36,7 +36,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_registry_options.yml'
+  - $ref: 'examples/curl/registry_get_options.yml'
 
 security:
   - bearer_auth:
