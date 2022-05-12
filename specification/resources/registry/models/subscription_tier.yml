@@ -40,6 +40,12 @@ subscription_tier_base:
       example: 500
       description: The monthly cost of the subscription tier in cents.
 
+    storage_overage_price_in_cents:
+      type: integer
+      example: 2
+      description: The price paid in cents per GiB for additional storage beyond
+        what is included in the subscription plan.
+
 subscription_tier_extended:
   type: object
   properties:
