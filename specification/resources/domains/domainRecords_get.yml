@@ -1,4 +1,4 @@
-operationId: get_domain_record
+operationId: domainRecords_get
 
 summary: Retrieve an Existing Domain Record
 
