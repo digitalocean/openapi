@@ -1,12 +1,12 @@
-operationId: add_load_balancer_forwarding_rules
+operationId: loadBalancers_remove_forwardingRules
 
-summary: Add Forwarding Rules to a Load Balancer
+summary: Remove Forwarding Rules from a Load Balancer
 
 description: |
-  To add an additional forwarding rule to a load balancer instance, send a POST
-  request to `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the body
-  of the request, there should be a `forwarding_rules` attribute containing an
-  array of rules to be added.
+  To remove forwarding rules from a load balancer instance, send a DELETE
+  request to `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the
+  body of the request, there should be a `forwarding_rules` attribute containing
+  an array of rules to be removed.
 
   No response body will be sent back, but the response code will indicate
   success. Specifically, the response code will be a 204, which means that the
@@ -53,9 +53,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/add_forwarding_rules.yml'
-  - $ref: 'examples/go/add_forwarding_rules.yml'
-  - $ref: 'examples/ruby/add_forwarding_rules.yml'
+  - $ref: 'examples/curl/loadBalancers_remove_forwardingRules.yml'
+  - $ref: 'examples/go/loadBalancers_remove_forwardingRules.yml'
+  - $ref: 'examples/ruby/loadBalancers_remove_forwardingRules.yml'
 
 security:
   - bearer_auth:

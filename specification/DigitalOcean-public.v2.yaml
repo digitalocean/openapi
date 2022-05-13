@@ -355,6 +355,7 @@ tags:
 
       Resource Type      | Example URN
       -------------------|------------
+      App Platform App   | `do:app:be5aab85-851b-4cab-b2ed-98d5a63ba4e8`
       Database           | `do:dbaas:83c7a55f-0d84-4760-9245-aba076ec2fb2`
       Domain             | `do:domain:example.com`
       Droplet            | `do:droplet:4126873`
@@ -994,34 +995,34 @@ paths:
 
   /v2/load_balancers:
     post:
-      $ref: 'resources/load_balancers/create_load_balancer.yml'
+      $ref: 'resources/load_balancers/loadBalancers_create.yml'
 
     get:
-      $ref: 'resources/load_balancers/list_all_load_balancers.yml'
+      $ref: 'resources/load_balancers/loadBalancers_list.yml'
 
   /v2/load_balancers/{lb_id}:
     get:
-      $ref: 'resources/load_balancers/get_load_balancer.yml'
+      $ref: 'resources/load_balancers/loadBalancers_get.yml'
 
     put:
-      $ref: 'resources/load_balancers/update_load_balancer.yml'
+      $ref: 'resources/load_balancers/loadBalancers_update.yml'
 
     delete:
-      $ref: 'resources/load_balancers/delete_load_balancer.yml'
+      $ref: 'resources/load_balancers/loadBalancers_delete.yml'
 
   /v2/load_balancers/{lb_id}/droplets:
     post:
-      $ref: 'resources/load_balancers/add_droplets.yml'
+      $ref: 'resources/load_balancers/loadBalancers_add_droplets.yml'
 
     delete:
-      $ref: 'resources/load_balancers/remove_droplets.yml'
+      $ref: 'resources/load_balancers/loadBalancers_remove_droplets.yml'
 
   /v2/load_balancers/{lb_id}/forwarding_rules:
     post:
-      $ref: 'resources/load_balancers/add_forwarding_rules.yml'
+      $ref: 'resources/load_balancers/loadBalancers_add_forwardingRules.yml'
 
     delete:
-      $ref: 'resources/load_balancers/remove_forwarding_rules.yml'
+      $ref: 'resources/load_balancers/loadBalancers_remove_forwardingRules.yml'
 
   /v2/monitoring/alerts:
     get:
