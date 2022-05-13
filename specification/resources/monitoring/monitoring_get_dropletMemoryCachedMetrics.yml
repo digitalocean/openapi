@@ -1,9 +1,9 @@
-operationId: get_droplet_memory_available_metrics
+operationId: monitoring_get_dropletMemoryCachedMetrics
 
-summary: Get Droplet Available Memory Metrics
+summary: Get Droplet Cached Memory Metrics
 
 description: >-
-  To retrieve available memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_available`.
+  To retrieve cached memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_cached`.
 tags:
   - Monitoring
 
@@ -30,7 +30,7 @@ parameters:
   - $ref: 'parameters.yml#/metric_timestamp_end'
 
 x-codeSamples:
-  - $ref: 'examples/curl/metrics_droplet_memory_available.yml'
+  - $ref: 'examples/curl/monitoring_get_dropletMemoryCachedMetrics.yml'
 security:
   - bearer_auth:
     - 'read'

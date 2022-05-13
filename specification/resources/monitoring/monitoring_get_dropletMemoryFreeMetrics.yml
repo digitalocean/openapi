@@ -1,9 +1,9 @@
-operationId: get_droplet_memory_total_metrics
+operationId: monitoring_get_dropletMemoryFreeMetrics
 
-summary: Get Droplet Total Memory Metrics
+summary: Get Droplet Free Memory Metrics
 
 description: >-
-  To retrieve total memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_total`.
+  To retrieve free memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_free`.
 tags:
   - Monitoring
 
@@ -30,7 +30,7 @@ parameters:
   - $ref: 'parameters.yml#/metric_timestamp_end'
 
 x-codeSamples:
-  - $ref: 'examples/curl/metrics_droplet_memory_total.yml'
+  - $ref: 'examples/curl/monitoring_get_dropletMemoryFreeMetrics.yml'
 security:
   - bearer_auth:
     - 'read'

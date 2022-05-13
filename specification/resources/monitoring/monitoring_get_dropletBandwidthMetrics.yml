@@ -1,4 +1,4 @@
-operationId: get_droplet_bandwidth_metrics
+operationId: monitoring_get_dropletBandwidthMetrics
 
 summary: Get Droplet Bandwidth Metrics
 
@@ -36,7 +36,7 @@ parameters:
   - $ref: 'parameters.yml#/metric_timestamp_end'
 
 x-codeSamples:
-  - $ref: 'examples/curl/metrics_droplet_bandwidth.yml'
+  - $ref: 'examples/curl/monitoring_get_dropletBandwidthMetrics.yml'
 security:
   - bearer_auth:
     - 'read'
