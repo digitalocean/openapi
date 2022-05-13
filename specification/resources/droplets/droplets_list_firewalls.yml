@@ -1,4 +1,4 @@
-operationId: list_droplet_firewalls
+operationId: droplets_list_firewalls
 
 summary: List all Firewalls Applied to a Droplet
 

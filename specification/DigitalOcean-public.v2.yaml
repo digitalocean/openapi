@@ -841,74 +841,74 @@ paths:
 
   /v2/droplets:
     get:
-      $ref: 'resources/droplets/list_all_droplets.yml'
+      $ref: 'resources/droplets/droplets_list.yml'
 
     post:
-      $ref: 'resources/droplets/create_droplet.yml'
+      $ref: 'resources/droplets/droplets_create.yml'
 
     delete:
-      $ref: 'resources/droplets/destroy_droplets_by_tag.yml'
+      $ref: 'resources/droplets/droplets_destroy_byTag.yml'
 
   /v2/droplets/{droplet_id}:
     get:
-      $ref: 'resources/droplets/get_droplet.yml'
+      $ref: 'resources/droplets/droplets_get.yml'
 
     delete:
-      $ref: 'resources/droplets/destroy_droplet.yml'
+      $ref: 'resources/droplets/droplets_destroy.yml'
 
   /v2/droplets/{droplet_id}/backups:
     get:
-      $ref: 'resources/droplets/list_droplet_backups.yml'
+      $ref: 'resources/droplets/droplets_list_backups.yml'
 
   /v2/droplets/{droplet_id}/snapshots:
     get:
-      $ref: 'resources/droplets/list_droplet_snapshots.yml'
+      $ref: 'resources/droplets/droplets_list_snapshots.yml'
 
   /v2/droplets/{droplet_id}/actions:
     get:
-      $ref: 'resources/droplets/list_droplet_actions.yml'
+      $ref: 'resources/droplets/droplets_list_actions.yml'
     post:
-      $ref: 'resources/droplets/post_droplet_action.yml'
+      $ref: 'resources/droplets/droplets_post_action.yml'
 
   /v2/droplets/actions:
     post:
-      $ref: 'resources/droplets/post_droplet_action_by_tag.yml'
+      $ref: 'resources/droplets/droplets_post_actionByTag.yml'
 
   /v2/droplets/{droplet_id}/actions/{action_id}:
     get:
-      $ref: 'resources/droplets/get_droplet_action.yml'
+      $ref: 'resources/droplets/droplets_get_action.yml'
 
   /v2/droplets/{droplet_id}/kernels:
     get:
-      $ref: 'resources/droplets/list_droplet_kernels.yml'
+      $ref: 'resources/droplets/droplets_list_kernels.yml'
 
   /v2/droplets/{droplet_id}/firewalls:
     get:
-      $ref: 'resources/droplets/list_droplet_firewalls.yml'
+      $ref: 'resources/droplets/droplets_list_firewalls.yml'
 
   /v2/droplets/{droplet_id}/neighbors:
     get:
-      $ref: 'resources/droplets/list_droplet_neighbors.yml'
+      $ref: 'resources/droplets/droplets_list_neighbors.yml'
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources:
     get:
-      $ref: 'resources/droplets/list_associated_resources.yml'
+      $ref: 'resources/droplets/droplets_list_associatedResources.yml'
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/selective:
     delete:
-      $ref: 'resources/droplets/destroy_with_associated_resources_selective.yml'
+      $ref: 'resources/droplets/droplets_destroy_withAssociatedResourcesSelective.yml'
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/dangerous:
     delete:
-      $ref: 'resources/droplets/destroy_with_associated_resources_dangerous.yml'
+      $ref: 'resources/droplets/droplets_destroy_withAssociatedResourcesDangerous.yml'
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/status:
     get:
-      $ref: 'resources/droplets/get_destroy_with_associated_resources_status.yml'
+      $ref: 'resources/droplets/droplets_get_destroyAssociatedResourcesStatus.yml'
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/retry:
     post:
-      $ref: 'resources/droplets/retry_destroy_with_associated_resources.yml'
+      $ref: 'resources/droplets/droplets_destroy_retryWithAssociatedResources.yml'
 
   /v2/firewalls:
     get:
@@ -1293,7 +1293,7 @@ paths:
 
   /v2/reports/droplet_neighbors_ids:
     get:
-      $ref: 'resources/droplets/list_all_droplet_neighbors_ids.yml'
+      $ref: 'resources/droplets/droplets_list_neighborsIds.yml'
 
   /v2/reserved_ips:
     get:
