@@ -1,4 +1,4 @@
-operationId: get_clusterlint_results
+operationId: kubernetes_get_clusterLintResults
 
 summary: Fetch Clusterlint Diagnostics for a Kubernetes Cluster
 
@@ -38,7 +38,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/get_clusterlint_results.yml'
+  - $ref: 'examples/curl/kubernetes_get_clusterLintResults.yml'
 
 security:
   - bearer_auth:

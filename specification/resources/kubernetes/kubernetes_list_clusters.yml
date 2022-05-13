@@ -1,4 +1,4 @@
-operationId: list_all_kubernetes_clusters
+operationId: kubernetes_list_clusters
 
 summary: List All Kubernetes Clusters
 
@@ -30,9 +30,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_all_clusters.yml'
-  - $ref: 'examples/go/list_all_clusters.yml'
-  - $ref: 'examples/ruby/list_all_clusters.yml'
+  - $ref: 'examples/curl/kubernetes_list_clusters.yml'
+  - $ref: 'examples/go/kubernetes_list_clusters.yml'
+  - $ref: 'examples/ruby/kubernetes_list_clusters.yml'
 
 security:
   - bearer_auth:

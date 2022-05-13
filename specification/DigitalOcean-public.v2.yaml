@@ -902,95 +902,95 @@ paths:
 
   /v2/kubernetes/clusters:
     get:
-      $ref: 'resources/kubernetes/list_all_clusters.yml'
+      $ref: 'resources/kubernetes/kubernetes_list_clusters.yml'
 
     post:
-      $ref: 'resources/kubernetes/create_cluster.yml'
+      $ref: 'resources/kubernetes/kubernetes_create_cluster.yml'
 
   /v2/kubernetes/clusters/{cluster_id}:
     get:
-      $ref: 'resources/kubernetes/get_cluster.yml'
+      $ref: 'resources/kubernetes/kubernetes_get_cluster.yml'
 
     put:
-      $ref: 'resources/kubernetes/update_cluster.yml'
+      $ref: 'resources/kubernetes/kubernetes_update_cluster.yml'
 
     delete:
-      $ref: 'resources/kubernetes/delete_cluster.yml'
+      $ref: 'resources/kubernetes/kubernetes_delete_cluster.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources:
     get:
-      $ref: 'resources/kubernetes/list_associated_resources.yml'
+      $ref: 'resources/kubernetes/kubernetes_list_associatedResources.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/selective:
     delete:
-      $ref: 'resources/kubernetes/destroy_with_associated_resources_selective.yml'
+      $ref: 'resources/kubernetes/kubernetes_destroy_associatedResourcesSelective.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/dangerous:
     delete:
-      $ref: 'resources/kubernetes/destroy_with_associated_resources_dangerous.yml'
+      $ref: 'resources/kubernetes/kubernetes_destroy_associatedResourcesDangerous.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/kubeconfig:
     get:
-      $ref: 'resources/kubernetes/get_kubeconfig.yml'
+      $ref: 'resources/kubernetes/kubernetes_get_kubeconfig.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/credentials:
     get:
-      $ref: 'resources/kubernetes/get_credentials.yml'
+      $ref: 'resources/kubernetes/kubernetes_get_credentials.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/upgrades:
     get:
-      $ref: 'resources/kubernetes/get_available_upgrades.yml'
+      $ref: 'resources/kubernetes/kubernetes_get_availableUpgrades.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/upgrade:
     post:
-      $ref: 'resources/kubernetes/upgrade_cluster.yml'
+      $ref: 'resources/kubernetes/kubernetes_upgrade_cluster.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools:
     get:
-      $ref: 'resources/kubernetes/list_node_pools.yml'
+      $ref: 'resources/kubernetes/kubernetes_list_nodePools.yml'
 
     post:
-      $ref: 'resources/kubernetes/add_node_pool.yml'
+      $ref: 'resources/kubernetes/kubernetes_add_nodePool.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}:
     get:
-      $ref: 'resources/kubernetes/get_node_pool.yml'
+      $ref: 'resources/kubernetes/kubernetes_get_nodePool.yml'
 
     put:
-      $ref: 'resources/kubernetes/update_node_pool.yml'
+      $ref: 'resources/kubernetes/kubernetes_update_nodePool.yml'
 
     delete:
-      $ref: 'resources/kubernetes/delete_node_pool.yml'
+      $ref: 'resources/kubernetes/kubernetes_delete_nodePool.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id}:
     delete:
-      $ref: 'resources/kubernetes/delete_node.yml'
+      $ref: 'resources/kubernetes/kubernetes_delete_node.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle:
     post:
-      $ref: 'resources/kubernetes/recycle_node_pool.yml'
+      $ref: 'resources/kubernetes/kubernetes_delete_RecycleNodePool.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/user:
     get:
-      $ref: 'resources/kubernetes/get_cluster_user.yml'
+      $ref: 'resources/kubernetes/kubernetes_get_clusterUser.yml'
 
   /v2/kubernetes/options:
     get:
-      $ref: 'resources/kubernetes/list_options.yml'
+      $ref: 'resources/kubernetes/kubernetes_list_options.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/clusterlint:
     post:
-      $ref: 'resources/kubernetes/run_clusterlint.yml'
+      $ref: 'resources/kubernetes/kubernetes_run_clusterLint.yml'
 
     get:
-      $ref: 'resources/kubernetes/get_clusterlint_results.yml'
+      $ref: 'resources/kubernetes/kubernetes_get_clusterLintResults.yml'
 
   /v2/kubernetes/registry:
     post:
-      $ref: 'resources/kubernetes/add_registry.yml'
+      $ref: 'resources/kubernetes/kubernetes_add_registry.yml'
 
     delete:
-      $ref: 'resources/kubernetes/remove_registry.yml'
+      $ref: 'resources/kubernetes/kubernetes_remove_registry.yml'
 
   /v2/load_balancers:
     post:

@@ -1,4 +1,4 @@
-operationId: destroy_kubernetes_associated_resources_selective
+operationId: kubernetes_destroy_associatedResourcesSelective
 
 summary: Selectively Delete a Cluster and its Associated Resources
 
@@ -48,8 +48,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/destroy_with_associated_resources_selective.yml'
-  - $ref: 'examples/go/destroy_with_associated_resources_selective.yml'
+  - $ref: 'examples/curl/kubernetes_destroy_associatedResourcesSelective.yml'
+  - $ref: 'examples/go/kubernetes_destroy_associatedResourcesSelective.yml'
 
 security:
   - bearer_auth:
