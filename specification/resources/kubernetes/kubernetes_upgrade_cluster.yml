@@ -1,4 +1,4 @@
-operationId: upgrade_kubernetes_cluster
+operationId: kubernetes_upgrade_cluster
 
 summary: Upgrade a Kubernetes Cluster
 
@@ -49,8 +49,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/upgrade_cluster.yml'
-  - $ref: 'examples/go/upgrade_cluster.yml'
+  - $ref: 'examples/curl/kubernetes_upgrade_cluster.yml'
+  - $ref: 'examples/go/kubernetes_upgrade_cluster.yml'
 
 security:
   - bearer_auth:

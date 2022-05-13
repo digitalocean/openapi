@@ -1,4 +1,4 @@
-operationId: delete_kubernetes_node
+operationId: kubernetes_delete_node
 
 summary: Delete a Node in a Kubernetes Cluster
 
@@ -44,8 +44,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_node.yml'
-  - $ref: 'examples/go/delete_node.yml'
+  - $ref: 'examples/curl/kubernetes_delete_node.yml'
+  - $ref: 'examples/go/kubernetes_delete_node.yml'
 
 security:
   - bearer_auth:

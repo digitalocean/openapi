@@ -1,4 +1,4 @@
-operationId: delete_kubernetes_node_pool
+operationId: kubernetes_delete_nodePool
 
 summary: Delete a Node Pool in a Kubernetes Cluster
 
@@ -36,9 +36,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_node_pool.yml'
-  - $ref: 'examples/go/delete_node_pool.yml'
-  - $ref: 'examples/ruby/delete_node_pool.yml'
+  - $ref: 'examples/curl/kubernetes_delete_nodePool.yml'
+  - $ref: 'examples/go/kubernetes_delete_nodePool.yml'
+  - $ref: 'examples/ruby/kubernetes_delete_nodePool.yml'
 
 security:
   - bearer_auth:

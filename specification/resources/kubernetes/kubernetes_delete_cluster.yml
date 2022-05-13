@@ -1,4 +1,4 @@
-operationId: delete_kubernetes_cluster
+operationId: kubernetes_delete_cluster
 
 summary: Delete a Kubernetes Cluster
 
@@ -35,9 +35,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/delete_cluster.yml'
-  - $ref: 'examples/go/delete_cluster.yml'
-  - $ref: 'examples/ruby/delete_cluster.yml'
+  - $ref: 'examples/curl/kubernetes_delete_cluster.yml'
+  - $ref: 'examples/go/kubernetes_delete_cluster.yml'
+  - $ref: 'examples/ruby/kubernetes_delete_cluster.yml'
 
 security:
   - bearer_auth:

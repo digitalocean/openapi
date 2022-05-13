@@ -1,4 +1,4 @@
-operationId: list_kubernetes_associated_resources
+operationId: kubernetes_list_associatedResources
 
 summary: List Associated Resources for Cluster Deletion
 
@@ -34,8 +34,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_associated_resources.yml'
-  - $ref: 'examples/go/list_associated_resources.yml'
+  - $ref: 'examples/curl/kubernetes_list_associatedResources.yml'
+  - $ref: 'examples/go/kubernetes_list_associatedResources.yml'
 
 security:
   - bearer_auth:

@@ -1,4 +1,4 @@
-operationId: destroy_kubernetes_associated_resources_dangerous
+operationId: kubernetes_destroy_associatedResourcesDangerous
 
 summary: Delete a Cluster and All of its Associated Resources (Dangerous)
 
@@ -33,8 +33,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/destroy_with_associated_resources_dangerous.yml'
-  - $ref: 'examples/go/destroy_with_associated_resources_dangerous.yml'
+  - $ref: 'examples/curl/kubernetes_destroy_associatedResourcesDangerous.yml'
+  - $ref: 'examples/go/kubernetes_destroy_associatedResourcesDangerous.yml'
 
 security:
   - bearer_auth:

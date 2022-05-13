@@ -1,4 +1,4 @@
-operationId: list_node_pools
+operationId: kubernetes_list_nodePools
 
 summary: List All Node Pools in a Kubernetes Clusters
 
@@ -32,9 +32,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_node_pools.yml'
-  - $ref: 'examples/go/list_node_pools.yml'
-  - $ref: 'examples/ruby/list_node_pools.yml'
+  - $ref: 'examples/curl/kubernetes_list_nodePools.yml'
+  - $ref: 'examples/go/kubernetes_list_nodePools.yml'
+  - $ref: 'examples/ruby/kubernetes_list_nodePools.yml'
 
 security:
   - bearer_auth:
