@@ -355,6 +355,7 @@ tags:
 
       Resource Type      | Example URN
       -------------------|------------
+      App Platform App   | `do:app:be5aab85-851b-4cab-b2ed-98d5a63ba4e8`
       Database           | `do:dbaas:83c7a55f-0d84-4760-9245-aba076ec2fb2`
       Domain             | `do:domain:example.com`
       Droplet            | `do:droplet:4126873`
