@@ -1,4 +1,4 @@
-operationId: update_load_balancer
+operationId: loadBalancers_update
 
 summary: Update a Load Balancer
 
@@ -48,9 +48,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/update_load_balancer.yml'
-  - $ref: 'examples/go/update_load_balancer.yml'
-  - $ref: 'examples/ruby/update_load_balancer.yml'
+  - $ref: 'examples/curl/loadBalancers_update.yml'
+  - $ref: 'examples/go/loadBalancers_update.yml'
+  - $ref: 'examples/ruby/loadBalancers_update.yml'
 
 security:
   - bearer_auth:
