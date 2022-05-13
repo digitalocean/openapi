@@ -1116,64 +1116,64 @@ paths:
 
   /v2/monitoring/alerts:
     get:
-      $ref: 'resources/monitoring/list_alerts.yml'
+      $ref: 'resources/monitoring/monitoring_list_alertPolicy.yml'
 
     post:
-      $ref: 'resources/monitoring/create_alert.yml'
+      $ref: 'resources/monitoring/monitoring_create_alertPolicy.yml'
 
   /v2/monitoring/alerts/{alert_uuid}:
     get:
-      $ref: 'resources/monitoring/get_alert.yml'
+      $ref: 'resources/monitoring/monitoring_get_alertPolicy.yml'
 
     put:
-      $ref: 'resources/monitoring/update_alert.yml'
+      $ref: 'resources/monitoring/monitoring_update_alertPolicy.yml'
 
     delete:
-      $ref: 'resources/monitoring/delete_alert.yml'
+      $ref: 'resources/monitoring/monitoring_delete_alertPolicy.yml'
 
   /v2/monitoring/metrics/droplet/bandwidth:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_bandwidth.yml'
+      $ref: 'resources/monitoring/monitoring_get_dropletBandwidthMetrics.yml'
 
   /v2/monitoring/metrics/droplet/cpu:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_cpu.yml'
+      $ref: 'resources/monitoring/monitoring_get_DropletCpuMetrics.yml'
 
   /v2/monitoring/metrics/droplet/filesystem_free:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_filesystem_free.yml'
+      $ref: 'resources/monitoring/monitoring_get_dropletFilesystemFreeMetrics.yml'
 
   /v2/monitoring/metrics/droplet/filesystem_size:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_filesystem_size.yml'
+      $ref: 'resources/monitoring/monitoring_get_dropletFilesystemSizeMetrics.yml'
 
   /v2/monitoring/metrics/droplet/load_1:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_load1.yml'
+      $ref: 'resources/monitoring/monitoring_get_dropletLoad1Metrics.yml'
 
   /v2/monitoring/metrics/droplet/load_5:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_load5.yml'
+      $ref: 'resources/monitoring/monitoring_get_dropletLoad5Metrics.yml'
 
   /v2/monitoring/metrics/droplet/load_15:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_load15.yml'
+      $ref: 'resources/monitoring/monitoring_get_dropletLoad15Metrics.yml'
 
   /v2/monitoring/metrics/droplet/memory_cached:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_memory_cached.yml'
+      $ref: 'resources/monitoring/monitoring_get_dropletMemoryCachedMetrics.yml'
 
   /v2/monitoring/metrics/droplet/memory_free:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_memory_free.yml'
+      $ref: 'resources/monitoring/monitoring_get_dropletMemoryFreeMetrics.yml'
 
   /v2/monitoring/metrics/droplet/memory_total:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_memory_total.yml'
+      $ref: 'resources/monitoring/monitoring_get_dropletMemoryTotalMetrics.yml'
 
   /v2/monitoring/metrics/droplet/memory_available:
     get:
-      $ref: 'resources/monitoring/metrics_droplet_memory_available.yml'
+      $ref: 'resources/monitoring/monitoring_get_dropletMemoryAvailableMetrics.yml'
 
   /v2/projects:
     get:
