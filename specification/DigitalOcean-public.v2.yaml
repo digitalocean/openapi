@@ -434,872 +434,872 @@ tags:
       resources assigned to them.
 
 paths:
-  /v2/1-clicks:
-    get:
-      $ref: 'resources/1-clicks/list.yml'
+  # /v2/1-clicks:
+  #   get:
+  #     $ref: 'resources/1-clicks/list.yml'
 
-  /v2/1-clicks/kubernetes:
-    post:
-      $ref: 'resources/1-clicks/install_kubernetes.yml'
+  # /v2/1-clicks/kubernetes:
+  #   post:
+  #     $ref: 'resources/1-clicks/install_kubernetes.yml'
 
-  /v2/account:
-    get:
-      $ref: 'resources/account/get_user_information.yml'
+  # /v2/account:
+  #   get:
+  #     $ref: 'resources/account/get_user_information.yml'
 
-  /v2/account/keys:
-    get:
-      $ref: 'resources/ssh_keys/list_all_keys.yml'
+  # /v2/account/keys:
+  #   get:
+  #     $ref: 'resources/ssh_keys/list_all_keys.yml'
 
-    post:
-      $ref: 'resources/ssh_keys/create_ssh_key.yml'
+  #   post:
+  #     $ref: 'resources/ssh_keys/create_ssh_key.yml'
 
-  /v2/account/keys/{ssh_key_identifier}:
-    get:
-      $ref: 'resources/ssh_keys/get_ssh_key.yml'
+  # /v2/account/keys/{ssh_key_identifier}:
+  #   get:
+  #     $ref: 'resources/ssh_keys/get_ssh_key.yml'
 
-    put:
-      $ref: 'resources/ssh_keys/update_ssh_key.yml'
+  #   put:
+  #     $ref: 'resources/ssh_keys/update_ssh_key.yml'
 
-    delete:
-      $ref: 'resources/ssh_keys/destroy_ssh_key.yml'
+  #   delete:
+  #     $ref: 'resources/ssh_keys/destroy_ssh_key.yml'
 
-  /v2/actions:
-    get:
-      $ref: 'resources/actions/list_all_actions.yml'
+  # /v2/actions:
+  #   get:
+  #     $ref: 'resources/actions/list_all_actions.yml'
 
-  /v2/actions/{action_id}:
-    get:
-      $ref: 'resources/actions/get_action.yml'
+  # /v2/actions/{action_id}:
+  #   get:
+  #     $ref: 'resources/actions/get_action.yml'
 
-  /v2/apps:
-    get:
-      $ref: 'resources/apps/list_apps.yml'
-    post:
-      $ref: 'resources/apps/create_app.yml'
+  # /v2/apps:
+  #   get:
+  #     $ref: 'resources/apps/list_apps.yml'
+  #   post:
+  #     $ref: 'resources/apps/create_app.yml'
 
-  /v2/apps/{id}:
-    delete:
-      $ref: 'resources/apps/delete_app.yml'
-    get:
-      $ref: 'resources/apps/get_app.yml'
-    put:
-      $ref: 'resources/apps/update_app.yml'
+  # /v2/apps/{id}:
+  #   delete:
+  #     $ref: 'resources/apps/delete_app.yml'
+  #   get:
+  #     $ref: 'resources/apps/get_app.yml'
+  #   put:
+  #     $ref: 'resources/apps/update_app.yml'
 
-  /v2/apps/{app_id}/deployments:
-    get:
-      $ref: 'resources/apps/list_deployments.yml'
-    post:
-      $ref: 'resources/apps/create_deployment.yml'
+  # /v2/apps/{app_id}/deployments:
+  #   get:
+  #     $ref: 'resources/apps/list_deployments.yml'
+  #   post:
+  #     $ref: 'resources/apps/create_deployment.yml'
 
-  /v2/apps/{app_id}/deployments/{deployment_id}:
-    get:
-      $ref: 'resources/apps/get_deployment.yml'
+  # /v2/apps/{app_id}/deployments/{deployment_id}:
+  #   get:
+  #     $ref: 'resources/apps/get_deployment.yml'
 
-  /v2/apps/{app_id}/deployments/{deployment_id}/cancel:
-    post:
-      $ref: 'resources/apps/cancel_deployment.yml'
+  # /v2/apps/{app_id}/deployments/{deployment_id}/cancel:
+  #   post:
+  #     $ref: 'resources/apps/cancel_deployment.yml'
 
-  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
-    get:
-      $ref: 'resources/apps/get_logs.yml'
+  # /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
+  #   get:
+  #     $ref: 'resources/apps/get_logs.yml'
 
-  /v2/apps/{app_id}/deployments/{deployment_id}/logs:
-    get:
-      $ref: 'resources/apps/get_logs_aggregate.yml'
+  # /v2/apps/{app_id}/deployments/{deployment_id}/logs:
+  #   get:
+  #     $ref: 'resources/apps/get_logs_aggregate.yml'
 
-  /v2/apps/tiers:
-    get:
-      $ref: 'resources/apps/list_tiers.yml'
+  # /v2/apps/tiers:
+  #   get:
+  #     $ref: 'resources/apps/list_tiers.yml'
 
-  /v2/apps/tiers/{slug}:
-    get:
-      $ref: 'resources/apps/get_tier.yml'
+  # /v2/apps/tiers/{slug}:
+  #   get:
+  #     $ref: 'resources/apps/get_tier.yml'
 
-  /v2/apps/tiers/instance_sizes:
-    get:
-      $ref: 'resources/apps/list_instance_sizes.yml'
+  # /v2/apps/tiers/instance_sizes:
+  #   get:
+  #     $ref: 'resources/apps/list_instance_sizes.yml'
 
-  /v2/apps/tiers/instance_sizes/{slug}:
-    get:
-      $ref: 'resources/apps/get_instance_size.yml'
+  # /v2/apps/tiers/instance_sizes/{slug}:
+  #   get:
+  #     $ref: 'resources/apps/get_instance_size.yml'
 
-  /v2/apps/regions:
-    get:
-      $ref: 'resources/apps/list_regions.yml'
+  # /v2/apps/regions:
+  #   get:
+  #     $ref: 'resources/apps/list_regions.yml'
 
-  /v2/apps/propose:
-    post:
-      $ref: 'resources/apps/propose_app.yml'
+  # /v2/apps/propose:
+  #   post:
+  #     $ref: 'resources/apps/propose_app.yml'
 
-  /v2/apps/{app_id}/alerts:
-    get:
-      $ref: 'resources/apps/list_alerts.yml'
+  # /v2/apps/{app_id}/alerts:
+  #   get:
+  #     $ref: 'resources/apps/list_alerts.yml'
 
-  /v2/apps/{app_id}/alerts/{alert_id}/destinations:
-    post:
-      $ref: 'resources/apps/assign_alert_destinations.yml'
+  # /v2/apps/{app_id}/alerts/{alert_id}/destinations:
+  #   post:
+  #     $ref: 'resources/apps/assign_alert_destinations.yml'
 
-  /v2/cdn/endpoints:
-    get:
-      $ref: 'resources/cdn/list_all_endpoints.yml'
+  # /v2/cdn/endpoints:
+  #   get:
+  #     $ref: 'resources/cdn/list_all_endpoints.yml'
 
-    post:
-      $ref: 'resources/cdn/create_endpoint.yml'
+  #   post:
+  #     $ref: 'resources/cdn/create_endpoint.yml'
 
-  /v2/cdn/endpoints/{cdn_id}:
-    get:
-      $ref: 'resources/cdn/get_endpoint.yml'
+  # /v2/cdn/endpoints/{cdn_id}:
+  #   get:
+  #     $ref: 'resources/cdn/get_endpoint.yml'
 
-    put:
-      $ref: 'resources/cdn/update_endpoint.yml'
+  #   put:
+  #     $ref: 'resources/cdn/update_endpoint.yml'
 
-    delete:
-      $ref: 'resources/cdn/delete_endpoint.yml'
+  #   delete:
+  #     $ref: 'resources/cdn/delete_endpoint.yml'
 
-  /v2/cdn/endpoints/{cdn_id}/cache:
-    delete:
-      $ref: 'resources/cdn/purge_cdn_cache.yml'
+  # /v2/cdn/endpoints/{cdn_id}/cache:
+  #   delete:
+  #     $ref: 'resources/cdn/purge_cdn_cache.yml'
 
-  /v2/certificates:
-    get:
-      $ref: 'resources/certificates/list_certificates.yml'
+  # /v2/certificates:
+  #   get:
+  #     $ref: 'resources/certificates/list_certificates.yml'
 
-    post:
-      $ref: 'resources/certificates/create_certificates.yml'
+  #   post:
+  #     $ref: 'resources/certificates/create_certificates.yml'
 
-  /v2/certificates/{certificate_id}:
-    get:
-      $ref: 'resources/certificates/get_certificate.yml'
+  # /v2/certificates/{certificate_id}:
+  #   get:
+  #     $ref: 'resources/certificates/get_certificate.yml'
 
-    delete:
-      $ref: 'resources/certificates/delete_certificate.yml'
+  #   delete:
+  #     $ref: 'resources/certificates/delete_certificate.yml'
 
-  /v2/customers/my/balance:
-    get:
-      $ref: 'resources/billing/get_customer_balance.yml'
+  # /v2/customers/my/balance:
+  #   get:
+  #     $ref: 'resources/billing/get_customer_balance.yml'
 
-  /v2/customers/my/billing_history:
-    get:
-      $ref: 'resources/billing/list_billing_history.yml'
+  # /v2/customers/my/billing_history:
+  #   get:
+  #     $ref: 'resources/billing/list_billing_history.yml'
 
-  /v2/customers/my/invoices:
-    get:
-      $ref: 'resources/billing/list_invoices.yml'
+  # /v2/customers/my/invoices:
+  #   get:
+  #     $ref: 'resources/billing/list_invoices.yml'
 
-  /v2/customers/my/invoices/{invoice_uuid}:
-    get:
-      $ref: 'resources/billing/get_invoice_by_uuid.yml'
+  # /v2/customers/my/invoices/{invoice_uuid}:
+  #   get:
+  #     $ref: 'resources/billing/get_invoice_by_uuid.yml'
 
-  /v2/customers/my/invoices/{invoice_uuid}/csv:
-    get:
-      $ref: 'resources/billing/get_invoice_csv_by_uuid.yml'
+  # /v2/customers/my/invoices/{invoice_uuid}/csv:
+  #   get:
+  #     $ref: 'resources/billing/get_invoice_csv_by_uuid.yml'
 
-  /v2/customers/my/invoices/{invoice_uuid}/pdf:
-    get:
-      $ref: 'resources/billing/get_invoice_pdf_by_uuid.yml'
+  # /v2/customers/my/invoices/{invoice_uuid}/pdf:
+  #   get:
+  #     $ref: 'resources/billing/get_invoice_pdf_by_uuid.yml'
 
-  /v2/customers/my/invoices/{invoice_uuid}/summary:
-    get:
-      $ref: 'resources/billing/get_invoice_summary_by_uuid.yml'
+  # /v2/customers/my/invoices/{invoice_uuid}/summary:
+  #   get:
+  #     $ref: 'resources/billing/get_invoice_summary_by_uuid.yml'
 
   /v2/databases:
     get:
-      $ref: 'resources/databases/list_database_clusters.yml'
+      $ref: 'resources/databases/databases_list_clusters.yml'
     post:
-      $ref: 'resources/databases/create_database_cluster.yml'
+      $ref: 'resources/databases/databases_create_cluster.yml'
 
   /v2/databases/{database_cluster_uuid}:
     get:
-      $ref: 'resources/databases/get_database_cluster.yml'
+      $ref: 'resources/databases/databases_get_cluster.yml'
     delete:
-      $ref: 'resources/databases/destroy_cluster.yml'
+      $ref: 'resources/databases/databases_destroy_cluster.yml'
 
   /v2/databases/{database_cluster_uuid}/config:
     get:
-      $ref: 'resources/databases/get_database_config.yml'
+      $ref: 'resources/databases/databases_get_config.yml'
     patch:
-      $ref: 'resources/databases/patch_database_config.yml'
+      $ref: 'resources/databases/databases_patch_config.yml'
 
   /v2/databases/{database_cluster_uuid}/ca:
     get:
-      $ref: 'resources/databases/get_ca.yml'
+      $ref: 'resources/databases/databases_get_ca.yml'
 
   /v2/databases/{database_cluster_uuid}/online-migration:
     get:
-      $ref: 'resources/databases/get_migration_status.yml'
+      $ref: 'resources/databases/databases_get_migrationStatus.yml'
     put:
-      $ref: 'resources/databases/start_online_migration.yml'
+      $ref: 'resources/databases/databases_update_onlineMigration.yml'
 
   /v2/databases/{database_cluster_uuid}/online-migration/{migration_id}:
     delete:
-      $ref: 'resources/databases/stop_online_migration.yml'
+      $ref: 'resources/databases/databases_delete_onlineMigration.yml'
 
   /v2/databases/{database_cluster_uuid}/migrate:
     put:
-      $ref: 'resources/databases/migrate_database_cluster.yml'
+      $ref: 'resources/databases/databases_update_region.yml'
 
   /v2/databases/{database_cluster_uuid}/resize:
     put:
-      $ref: 'resources/databases/resize_database_cluster.yml'
+      $ref: 'resources/databases/databases_update_clusterSize.yml'
 
   /v2/databases/{database_cluster_uuid}/firewall:
     get:
-      $ref: 'resources/databases/list_firewalls.yml'
+      $ref: 'resources/databases/databases_list_firewalls.yml'
     put:
-      $ref: 'resources/databases/update_database_firewall.yml'
+      $ref: 'resources/databases/databases_update_firewall.yml'
 
   /v2/databases/{database_cluster_uuid}/maintenance:
     put:
-      $ref: 'resources/databases/update_maintenance_window.yml'
+      $ref: 'resources/databases/databases_update_maintenanceWindow.yml'
 
   /v2/databases/{database_cluster_uuid}/backups:
     get:
-      $ref: 'resources/databases/list_database_backups.yml'
+      $ref: 'resources/databases/databases_list_backups.yml'
 
   /v2/databases/{database_cluster_uuid}/replicas:
     get:
-      $ref: 'resources/databases/list_replicas.yml'
+      $ref: 'resources/databases/databases_list_replicas.yml'
     post:
-      $ref: 'resources/databases/create_replica.yml'
+      $ref: 'resources/databases/databases_create_replica.yml'
 
   /v2/databases/{database_cluster_uuid}/replicas/{replica_name}:
     get:
-      $ref: 'resources/databases/get_replica.yml'
+      $ref: 'resources/databases/databases_get_replica.yml'
     delete:
-      $ref: 'resources/databases/destroy_replica.yml'
+      $ref: 'resources/databases/databases_destroy_replica.yml'
 
   /v2/databases/{database_cluster_uuid}/users:
     get:
-      $ref: 'resources/databases/list_users.yml'
+      $ref: 'resources/databases/databases_list_users.yml'
     post:
-      $ref: 'resources/databases/add_user.yml'
+      $ref: 'resources/databases/databases_add_user.yml'
 
   /v2/databases/{database_cluster_uuid}/users/{username}:
     get:
-      $ref: 'resources/databases/get_user.yml'
+      $ref: 'resources/databases/databases_get_user.yml'
     delete:
-      $ref: 'resources/databases/delete_user.yml'
+      $ref: 'resources/databases/databases_delete_user.yml'
 
   /v2/databases/{database_cluster_uuid}/users/{username}/reset_auth:
     post:
-      $ref: 'resources/databases/reset_auth.yml'
+      $ref: 'resources/databases/databases_reset_auth.yml'
 
   /v2/databases/{database_cluster_uuid}/dbs:
     get:
-      $ref: 'resources/databases/list_databases.yml'
+      $ref: 'resources/databases/databases_list.yml'
     post:
-      $ref: 'resources/databases/add_database.yml'
+      $ref: 'resources/databases/databases_add.yml'
 
   /v2/databases/{database_cluster_uuid}/dbs/{database_name}:
     get:
-      $ref: 'resources/databases/get_database.yml'
+      $ref: 'resources/databases/databases_get.yml'
     delete:
-      $ref: 'resources/databases/delete_database.yml'
+      $ref: 'resources/databases/databases_delete.yml'
 
   /v2/databases/{database_cluster_uuid}/pools:
     get:
-      $ref: 'resources/databases/list_connection_pools.yml'
+      $ref: 'resources/databases/databases_list_connectionPools.yml'
     post:
-      $ref: 'resources/databases/add_connection_pool.yml'
+      $ref: 'resources/databases/databases_add_connectionPool.yml'
 
   /v2/databases/{database_cluster_uuid}/pools/{pool_name}:
     get:
-      $ref: 'resources/databases/get_connection_pool.yml'
+      $ref: 'resources/databases/databases_get_connectionPool.yml'
     delete:
-      $ref: 'resources/databases/delete_connection_pool.yml'
+      $ref: 'resources/databases/databases_delete_connectionPool.yml'
 
   /v2/databases/{database_cluster_uuid}/eviction_policy:
     get:
-      $ref: 'resources/databases/get_eviction_policy.yml'
+      $ref: 'resources/databases/databases_get_evictionPolicy.yml'
     put:
-      $ref: 'resources/databases/update_eviction_policy.yml'
+      $ref: 'resources/databases/databases_update_evictionPolicy.yml'
 
   /v2/databases/{database_cluster_uuid}/sql_mode:
     get:
-      $ref: 'resources/databases/get_sql_mode.yml'
+      $ref: 'resources/databases/databases_get_sql_mode.yml'
     put:
-      $ref: 'resources/databases/update_sql_mode.yml'
-
-  /v2/domains:
-    get:
-      $ref: 'resources/domains/list_all_domains.yml'
-    post:
-      $ref: 'resources/domains/create_domain.yml'
-
-  /v2/domains/{domain_name}:
-    get:
-      $ref: 'resources/domains/get_domain.yml'
-    delete:
-      $ref: 'resources/domains/delete_domain.yml'
-
-  /v2/domains/{domain_name}/records:
-    get:
-      $ref: 'resources/domains/list_all_domain_records.yml'
-    post:
-      $ref: 'resources/domains/create_domain_record.yml'
-
-  /v2/domains/{domain_name}/records/{domain_record_id}:
-    get:
-      $ref: 'resources/domains/get_domain_record.yml'
-    patch:
-      $ref: 'resources/domains/patch_update_domain_record.yml'
-    put:
-      $ref: 'resources/domains/update_domain_record.yml'
-    delete:
-      $ref: 'resources/domains/delete_domain_record.yml'
-
-  /v2/droplets:
-    get:
-      $ref: 'resources/droplets/list_all_droplets.yml'
-
-    post:
-      $ref: 'resources/droplets/create_droplet.yml'
-
-    delete:
-      $ref: 'resources/droplets/destroy_droplets_by_tag.yml'
-
-  /v2/droplets/{droplet_id}:
-    get:
-      $ref: 'resources/droplets/get_droplet.yml'
-
-    delete:
-      $ref: 'resources/droplets/destroy_droplet.yml'
-
-  /v2/droplets/{droplet_id}/backups:
-    get:
-      $ref: 'resources/droplets/list_droplet_backups.yml'
-
-  /v2/droplets/{droplet_id}/snapshots:
-    get:
-      $ref: 'resources/droplets/list_droplet_snapshots.yml'
-
-  /v2/droplets/{droplet_id}/actions:
-    get:
-      $ref: 'resources/droplets/list_droplet_actions.yml'
-    post:
-      $ref: 'resources/droplets/post_droplet_action.yml'
-
-  /v2/droplets/actions:
-    post:
-      $ref: 'resources/droplets/post_droplet_action_by_tag.yml'
-
-  /v2/droplets/{droplet_id}/actions/{action_id}:
-    get:
-      $ref: 'resources/droplets/get_droplet_action.yml'
-
-  /v2/droplets/{droplet_id}/kernels:
-    get:
-      $ref: 'resources/droplets/list_droplet_kernels.yml'
-
-  /v2/droplets/{droplet_id}/firewalls:
-    get:
-      $ref: 'resources/droplets/list_droplet_firewalls.yml'
-
-  /v2/droplets/{droplet_id}/neighbors:
-    get:
-      $ref: 'resources/droplets/list_droplet_neighbors.yml'
-
-  /v2/droplets/{droplet_id}/destroy_with_associated_resources:
-    get:
-      $ref: 'resources/droplets/list_associated_resources.yml'
-
-  /v2/droplets/{droplet_id}/destroy_with_associated_resources/selective:
-    delete:
-      $ref: 'resources/droplets/destroy_with_associated_resources_selective.yml'
-
-  /v2/droplets/{droplet_id}/destroy_with_associated_resources/dangerous:
-    delete:
-      $ref: 'resources/droplets/destroy_with_associated_resources_dangerous.yml'
-
-  /v2/droplets/{droplet_id}/destroy_with_associated_resources/status:
-    get:
-      $ref: 'resources/droplets/get_destroy_with_associated_resources_status.yml'
-
-  /v2/droplets/{droplet_id}/destroy_with_associated_resources/retry:
-    post:
-      $ref: 'resources/droplets/retry_destroy_with_associated_resources.yml'
-
-  /v2/firewalls:
-    get:
-      $ref: 'resources/firewalls/list_firewalls.yml'
-    post:
-      $ref: 'resources/firewalls/create_firewall.yml'
-
-  /v2/firewalls/{firewall_id}:
-    get:
-      $ref: 'resources/firewalls/get_firewall.yml'
-    put:
-      $ref: 'resources/firewalls/update_firewall.yml'
-    delete:
-      $ref: 'resources/firewalls/delete_firewall.yml'
-
-  /v2/firewalls/{firewall_id}/droplets:
-    post:
-      $ref: 'resources/firewalls/add_firewall_droplets.yml'
-    delete:
-      $ref: 'resources/firewalls/delete_firewall_droplets.yml'
-
-  /v2/firewalls/{firewall_id}/tags:
-    post:
-      $ref: 'resources/firewalls/add_firewall_tags.yml'
-    delete:
-      $ref: 'resources/firewalls/delete_firewall_tags.yml'
-
-  /v2/firewalls/{firewall_id}/rules:
-    post:
-      $ref: 'resources/firewalls/add_firewall_rules.yml'
-    delete:
-      $ref: 'resources/firewalls/delete_firewall_rules.yml'
-
-  /v2/floating_ips:
-    get:
-      $ref: 'resources/floating_ips/list_floating_ips.yml'
-
-    post:
-      $ref: 'resources/floating_ips/create_floating_ip.yml'
-
-  /v2/floating_ips/{floating_ip}:
-    get:
-      $ref: 'resources/floating_ips/get_floating_ip.yml'
-
-    delete:
-      $ref: 'resources/floating_ips/delete_floating_ip.yml'
-
-  /v2/floating_ips/{floating_ip}/actions:
-    get:
-      $ref: 'resources/floating_ips/list_floating_ip_actions.yml'
-
-    post:
-      $ref: 'resources/floating_ips/post_floating_ip_action.yml'
-
-  /v2/floating_ips/{floating_ip}/actions/{action_id}:
-    get:
-      $ref: 'resources/floating_ips/get_floating_ip_action.yml'
-
-  /v2/images:
-    get:
-      $ref: 'resources/images/list_images.yml'
-    post:
-      $ref: 'resources/images/create_custom_image.yml'
-
-  /v2/images/{image_id}:
-    get:
-      $ref: 'resources/images/get_image.yml'
-    put:
-      $ref: 'resources/images/update_image.yml'
-    delete:
-      $ref: 'resources/images/delete_image.yml'
-
-  /v2/images/{image_id}/actions:
-    get:
-      $ref: 'resources/images/list_image_actions.yml'
-    post:
-      $ref: 'resources/images/post_image_action.yml'
-
-  /v2/images/{image_id}/actions/{action_id}:
-    get:
-      $ref: 'resources/images/get_image_action.yml'
-
-  /v2/kubernetes/clusters:
-    get:
-      $ref: 'resources/kubernetes/list_all_clusters.yml'
-
-    post:
-      $ref: 'resources/kubernetes/create_cluster.yml'
-
-  /v2/kubernetes/clusters/{cluster_id}:
-    get:
-      $ref: 'resources/kubernetes/get_cluster.yml'
-
-    put:
-      $ref: 'resources/kubernetes/update_cluster.yml'
-
-    delete:
-      $ref: 'resources/kubernetes/delete_cluster.yml'
-
-  /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources:
-    get:
-      $ref: 'resources/kubernetes/list_associated_resources.yml'
-
-  /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/selective:
-    delete:
-      $ref: 'resources/kubernetes/destroy_with_associated_resources_selective.yml'
-
-  /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/dangerous:
-    delete:
-      $ref: 'resources/kubernetes/destroy_with_associated_resources_dangerous.yml'
-
-  /v2/kubernetes/clusters/{cluster_id}/kubeconfig:
-    get:
-      $ref: 'resources/kubernetes/get_kubeconfig.yml'
-
-  /v2/kubernetes/clusters/{cluster_id}/credentials:
-    get:
-      $ref: 'resources/kubernetes/get_credentials.yml'
-
-  /v2/kubernetes/clusters/{cluster_id}/upgrades:
-    get:
-      $ref: 'resources/kubernetes/get_available_upgrades.yml'
+      $ref: 'resources/databases/databases_update_sql_mode.yml'
+
+  # /v2/domains:
+  #   get:
+  #     $ref: 'resources/domains/list_all_domains.yml'
+  #   post:
+  #     $ref: 'resources/domains/create_domain.yml'
+
+  # /v2/domains/{domain_name}:
+  #   get:
+  #     $ref: 'resources/domains/get_domain.yml'
+  #   delete:
+  #     $ref: 'resources/domains/delete_domain.yml'
+
+  # /v2/domains/{domain_name}/records:
+  #   get:
+  #     $ref: 'resources/domains/list_all_domain_records.yml'
+  #   post:
+  #     $ref: 'resources/domains/create_domain_record.yml'
+
+  # /v2/domains/{domain_name}/records/{domain_record_id}:
+  #   get:
+  #     $ref: 'resources/domains/get_domain_record.yml'
+  #   patch:
+  #     $ref: 'resources/domains/patch_update_domain_record.yml'
+  #   put:
+  #     $ref: 'resources/domains/update_domain_record.yml'
+  #   delete:
+  #     $ref: 'resources/domains/delete_domain_record.yml'
+
+  # /v2/droplets:
+  #   get:
+  #     $ref: 'resources/droplets/list_all_droplets.yml'
+
+  #   post:
+  #     $ref: 'resources/droplets/create_droplet.yml'
+
+  #   delete:
+  #     $ref: 'resources/droplets/destroy_droplets_by_tag.yml'
+
+  # /v2/droplets/{droplet_id}:
+  #   get:
+  #     $ref: 'resources/droplets/get_droplet.yml'
+
+  #   delete:
+  #     $ref: 'resources/droplets/destroy_droplet.yml'
+
+  # /v2/droplets/{droplet_id}/backups:
+  #   get:
+  #     $ref: 'resources/droplets/list_droplet_backups.yml'
+
+  # /v2/droplets/{droplet_id}/snapshots:
+  #   get:
+  #     $ref: 'resources/droplets/list_droplet_snapshots.yml'
+
+  # /v2/droplets/{droplet_id}/actions:
+  #   get:
+  #     $ref: 'resources/droplets/list_droplet_actions.yml'
+  #   post:
+  #     $ref: 'resources/droplets/post_droplet_action.yml'
+
+  # /v2/droplets/actions:
+  #   post:
+  #     $ref: 'resources/droplets/post_droplet_action_by_tag.yml'
+
+  # /v2/droplets/{droplet_id}/actions/{action_id}:
+  #   get:
+  #     $ref: 'resources/droplets/get_droplet_action.yml'
+
+  # /v2/droplets/{droplet_id}/kernels:
+  #   get:
+  #     $ref: 'resources/droplets/list_droplet_kernels.yml'
+
+  # /v2/droplets/{droplet_id}/firewalls:
+  #   get:
+  #     $ref: 'resources/droplets/list_droplet_firewalls.yml'
+
+  # /v2/droplets/{droplet_id}/neighbors:
+  #   get:
+  #     $ref: 'resources/droplets/list_droplet_neighbors.yml'
+
+  # /v2/droplets/{droplet_id}/destroy_with_associated_resources:
+  #   get:
+  #     $ref: 'resources/droplets/list_associated_resources.yml'
+
+  # /v2/droplets/{droplet_id}/destroy_with_associated_resources/selective:
+  #   delete:
+  #     $ref: 'resources/droplets/destroy_with_associated_resources_selective.yml'
+
+  # /v2/droplets/{droplet_id}/destroy_with_associated_resources/dangerous:
+  #   delete:
+  #     $ref: 'resources/droplets/destroy_with_associated_resources_dangerous.yml'
+
+  # /v2/droplets/{droplet_id}/destroy_with_associated_resources/status:
+  #   get:
+  #     $ref: 'resources/droplets/get_destroy_with_associated_resources_status.yml'
+
+  # /v2/droplets/{droplet_id}/destroy_with_associated_resources/retry:
+  #   post:
+  #     $ref: 'resources/droplets/retry_destroy_with_associated_resources.yml'
+
+  # /v2/firewalls:
+  #   get:
+  #     $ref: 'resources/firewalls/list_firewalls.yml'
+  #   post:
+  #     $ref: 'resources/firewalls/create_firewall.yml'
+
+  # /v2/firewalls/{firewall_id}:
+  #   get:
+  #     $ref: 'resources/firewalls/get_firewall.yml'
+  #   put:
+  #     $ref: 'resources/firewalls/update_firewall.yml'
+  #   delete:
+  #     $ref: 'resources/firewalls/delete_firewall.yml'
+
+  # /v2/firewalls/{firewall_id}/droplets:
+  #   post:
+  #     $ref: 'resources/firewalls/add_firewall_droplets.yml'
+  #   delete:
+  #     $ref: 'resources/firewalls/delete_firewall_droplets.yml'
+
+  # /v2/firewalls/{firewall_id}/tags:
+  #   post:
+  #     $ref: 'resources/firewalls/add_firewall_tags.yml'
+  #   delete:
+  #     $ref: 'resources/firewalls/delete_firewall_tags.yml'
+
+  # /v2/firewalls/{firewall_id}/rules:
+  #   post:
+  #     $ref: 'resources/firewalls/add_firewall_rules.yml'
+  #   delete:
+  #     $ref: 'resources/firewalls/delete_firewall_rules.yml'
+
+  # /v2/floating_ips:
+  #   get:
+  #     $ref: 'resources/floating_ips/list_floating_ips.yml'
+
+  #   post:
+  #     $ref: 'resources/floating_ips/create_floating_ip.yml'
+
+  # /v2/floating_ips/{floating_ip}:
+  #   get:
+  #     $ref: 'resources/floating_ips/get_floating_ip.yml'
+
+  #   delete:
+  #     $ref: 'resources/floating_ips/delete_floating_ip.yml'
+
+  # /v2/floating_ips/{floating_ip}/actions:
+  #   get:
+  #     $ref: 'resources/floating_ips/list_floating_ip_actions.yml'
+
+  #   post:
+  #     $ref: 'resources/floating_ips/post_floating_ip_action.yml'
+
+  # /v2/floating_ips/{floating_ip}/actions/{action_id}:
+  #   get:
+  #     $ref: 'resources/floating_ips/get_floating_ip_action.yml'
+
+  # /v2/images:
+  #   get:
+  #     $ref: 'resources/images/list_images.yml'
+  #   post:
+  #     $ref: 'resources/images/create_custom_image.yml'
+
+  # /v2/images/{image_id}:
+  #   get:
+  #     $ref: 'resources/images/get_image.yml'
+  #   put:
+  #     $ref: 'resources/images/update_image.yml'
+  #   delete:
+  #     $ref: 'resources/images/delete_image.yml'
+
+  # /v2/images/{image_id}/actions:
+  #   get:
+  #     $ref: 'resources/images/list_image_actions.yml'
+  #   post:
+  #     $ref: 'resources/images/post_image_action.yml'
+
+  # /v2/images/{image_id}/actions/{action_id}:
+  #   get:
+  #     $ref: 'resources/images/get_image_action.yml'
+
+  # /v2/kubernetes/clusters:
+  #   get:
+  #     $ref: 'resources/kubernetes/list_all_clusters.yml'
+
+  #   post:
+  #     $ref: 'resources/kubernetes/create_cluster.yml'
+
+  # /v2/kubernetes/clusters/{cluster_id}:
+  #   get:
+  #     $ref: 'resources/kubernetes/get_cluster.yml'
+
+  #   put:
+  #     $ref: 'resources/kubernetes/update_cluster.yml'
+
+  #   delete:
+  #     $ref: 'resources/kubernetes/delete_cluster.yml'
+
+  # /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources:
+  #   get:
+  #     $ref: 'resources/kubernetes/list_associated_resources.yml'
+
+  # /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/selective:
+  #   delete:
+  #     $ref: 'resources/kubernetes/destroy_with_associated_resources_selective.yml'
+
+  # /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/dangerous:
+  #   delete:
+  #     $ref: 'resources/kubernetes/destroy_with_associated_resources_dangerous.yml'
+
+  # /v2/kubernetes/clusters/{cluster_id}/kubeconfig:
+  #   get:
+  #     $ref: 'resources/kubernetes/get_kubeconfig.yml'
+
+  # /v2/kubernetes/clusters/{cluster_id}/credentials:
+  #   get:
+  #     $ref: 'resources/kubernetes/get_credentials.yml'
+
+  # /v2/kubernetes/clusters/{cluster_id}/upgrades:
+  #   get:
+  #     $ref: 'resources/kubernetes/get_available_upgrades.yml'
 
-  /v2/kubernetes/clusters/{cluster_id}/upgrade:
-    post:
-      $ref: 'resources/kubernetes/upgrade_cluster.yml'
+  # /v2/kubernetes/clusters/{cluster_id}/upgrade:
+  #   post:
+  #     $ref: 'resources/kubernetes/upgrade_cluster.yml'
 
-  /v2/kubernetes/clusters/{cluster_id}/node_pools:
-    get:
-      $ref: 'resources/kubernetes/list_node_pools.yml'
+  # /v2/kubernetes/clusters/{cluster_id}/node_pools:
+  #   get:
+  #     $ref: 'resources/kubernetes/list_node_pools.yml'
 
-    post:
-      $ref: 'resources/kubernetes/add_node_pool.yml'
-
-  /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}:
-    get:
-      $ref: 'resources/kubernetes/get_node_pool.yml'
-
-    put:
-      $ref: 'resources/kubernetes/update_node_pool.yml'
+  #   post:
+  #     $ref: 'resources/kubernetes/add_node_pool.yml'
+
+  # /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}:
+  #   get:
+  #     $ref: 'resources/kubernetes/get_node_pool.yml'
+
+  #   put:
+  #     $ref: 'resources/kubernetes/update_node_pool.yml'
 
-    delete:
-      $ref: 'resources/kubernetes/delete_node_pool.yml'
+  #   delete:
+  #     $ref: 'resources/kubernetes/delete_node_pool.yml'
 
-  /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id}:
-    delete:
-      $ref: 'resources/kubernetes/delete_node.yml'
+  # /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id}:
+  #   delete:
+  #     $ref: 'resources/kubernetes/delete_node.yml'
 
-  /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle:
-    post:
-      $ref: 'resources/kubernetes/recycle_node_pool.yml'
+  # /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle:
+  #   post:
+  #     $ref: 'resources/kubernetes/recycle_node_pool.yml'
 
-  /v2/kubernetes/clusters/{cluster_id}/user:
-    get:
-      $ref: 'resources/kubernetes/get_cluster_user.yml'
+  # /v2/kubernetes/clusters/{cluster_id}/user:
+  #   get:
+  #     $ref: 'resources/kubernetes/get_cluster_user.yml'
 
-  /v2/kubernetes/options:
-    get:
-      $ref: 'resources/kubernetes/list_options.yml'
+  # /v2/kubernetes/options:
+  #   get:
+  #     $ref: 'resources/kubernetes/list_options.yml'
 
-  /v2/kubernetes/clusters/{cluster_id}/clusterlint:
-    post:
-      $ref: 'resources/kubernetes/run_clusterlint.yml'
+  # /v2/kubernetes/clusters/{cluster_id}/clusterlint:
+  #   post:
+  #     $ref: 'resources/kubernetes/run_clusterlint.yml'
 
-    get:
-      $ref: 'resources/kubernetes/get_clusterlint_results.yml'
+  #   get:
+  #     $ref: 'resources/kubernetes/get_clusterlint_results.yml'
 
-  /v2/kubernetes/registry:
-    post:
-      $ref: 'resources/kubernetes/add_registry.yml'
+  # /v2/kubernetes/registry:
+  #   post:
+  #     $ref: 'resources/kubernetes/add_registry.yml'
 
-    delete:
-      $ref: 'resources/kubernetes/remove_registry.yml'
+  #   delete:
+  #     $ref: 'resources/kubernetes/remove_registry.yml'
 
-  /v2/load_balancers:
-    post:
-      $ref: 'resources/load_balancers/create_load_balancer.yml'
+  # /v2/load_balancers:
+  #   post:
+  #     $ref: 'resources/load_balancers/create_load_balancer.yml'
 
-    get:
-      $ref: 'resources/load_balancers/list_all_load_balancers.yml'
+  #   get:
+  #     $ref: 'resources/load_balancers/list_all_load_balancers.yml'
 
-  /v2/load_balancers/{lb_id}:
-    get:
-      $ref: 'resources/load_balancers/get_load_balancer.yml'
+  # /v2/load_balancers/{lb_id}:
+  #   get:
+  #     $ref: 'resources/load_balancers/get_load_balancer.yml'
 
-    put:
-      $ref: 'resources/load_balancers/update_load_balancer.yml'
+  #   put:
+  #     $ref: 'resources/load_balancers/update_load_balancer.yml'
 
-    delete:
-      $ref: 'resources/load_balancers/delete_load_balancer.yml'
+  #   delete:
+  #     $ref: 'resources/load_balancers/delete_load_balancer.yml'
 
-  /v2/load_balancers/{lb_id}/droplets:
-    post:
-      $ref: 'resources/load_balancers/add_droplets.yml'
+  # /v2/load_balancers/{lb_id}/droplets:
+  #   post:
+  #     $ref: 'resources/load_balancers/add_droplets.yml'
 
-    delete:
-      $ref: 'resources/load_balancers/remove_droplets.yml'
+  #   delete:
+  #     $ref: 'resources/load_balancers/remove_droplets.yml'
 
-  /v2/load_balancers/{lb_id}/forwarding_rules:
-    post:
-      $ref: 'resources/load_balancers/add_forwarding_rules.yml'
+  # /v2/load_balancers/{lb_id}/forwarding_rules:
+  #   post:
+  #     $ref: 'resources/load_balancers/add_forwarding_rules.yml'
 
-    delete:
-      $ref: 'resources/load_balancers/remove_forwarding_rules.yml'
+  #   delete:
+  #     $ref: 'resources/load_balancers/remove_forwarding_rules.yml'
 
-  /v2/monitoring/alerts:
-    get:
-      $ref: 'resources/monitoring/list_alerts.yml'
+  # /v2/monitoring/alerts:
+  #   get:
+  #     $ref: 'resources/monitoring/list_alerts.yml'
 
-    post:
-      $ref: 'resources/monitoring/create_alert.yml'
+  #   post:
+  #     $ref: 'resources/monitoring/create_alert.yml'
 
-  /v2/monitoring/alerts/{alert_uuid}:
-    get:
-      $ref: 'resources/monitoring/get_alert.yml'
+  # /v2/monitoring/alerts/{alert_uuid}:
+  #   get:
+  #     $ref: 'resources/monitoring/get_alert.yml'
 
-    put:
-      $ref: 'resources/monitoring/update_alert.yml'
+  #   put:
+  #     $ref: 'resources/monitoring/update_alert.yml'
 
-    delete:
-      $ref: 'resources/monitoring/delete_alert.yml'
+  #   delete:
+  #     $ref: 'resources/monitoring/delete_alert.yml'
 
-  /v2/monitoring/metrics/droplet/bandwidth:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_bandwidth.yml'
+  # /v2/monitoring/metrics/droplet/bandwidth:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_bandwidth.yml'
 
-  /v2/monitoring/metrics/droplet/cpu:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_cpu.yml'
+  # /v2/monitoring/metrics/droplet/cpu:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_cpu.yml'
 
-  /v2/monitoring/metrics/droplet/filesystem_free:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_filesystem_free.yml'
+  # /v2/monitoring/metrics/droplet/filesystem_free:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_filesystem_free.yml'
 
-  /v2/monitoring/metrics/droplet/filesystem_size:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_filesystem_size.yml'
+  # /v2/monitoring/metrics/droplet/filesystem_size:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_filesystem_size.yml'
 
-  /v2/monitoring/metrics/droplet/load_1:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_load1.yml'
+  # /v2/monitoring/metrics/droplet/load_1:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_load1.yml'
 
-  /v2/monitoring/metrics/droplet/load_5:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_load5.yml'
+  # /v2/monitoring/metrics/droplet/load_5:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_load5.yml'
 
-  /v2/monitoring/metrics/droplet/load_15:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_load15.yml'
+  # /v2/monitoring/metrics/droplet/load_15:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_load15.yml'
 
-  /v2/monitoring/metrics/droplet/memory_cached:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_memory_cached.yml'
+  # /v2/monitoring/metrics/droplet/memory_cached:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_memory_cached.yml'
 
-  /v2/monitoring/metrics/droplet/memory_free:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_memory_free.yml'
+  # /v2/monitoring/metrics/droplet/memory_free:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_memory_free.yml'
 
-  /v2/monitoring/metrics/droplet/memory_total:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_memory_total.yml'
+  # /v2/monitoring/metrics/droplet/memory_total:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_memory_total.yml'
 
-  /v2/monitoring/metrics/droplet/memory_available:
-    get:
-      $ref: 'resources/monitoring/metrics_droplet_memory_available.yml'
+  # /v2/monitoring/metrics/droplet/memory_available:
+  #   get:
+  #     $ref: 'resources/monitoring/metrics_droplet_memory_available.yml'
 
-  /v2/projects:
-    get:
-      $ref: 'resources/projects/list_projects.yml'
+  # /v2/projects:
+  #   get:
+  #     $ref: 'resources/projects/list_projects.yml'
 
-    post:
-      $ref: 'resources/projects/create_project.yml'
+  #   post:
+  #     $ref: 'resources/projects/create_project.yml'
 
-  /v2/projects/default:
-    get:
-      $ref: 'resources/projects/get_default_project.yml'
+  # /v2/projects/default:
+  #   get:
+  #     $ref: 'resources/projects/get_default_project.yml'
 
-    put:
-      $ref: 'resources/projects/update_default_project.yml'
+  #   put:
+  #     $ref: 'resources/projects/update_default_project.yml'
 
-    patch:
-      $ref: 'resources/projects/patch_default_project.yml'
+  #   patch:
+  #     $ref: 'resources/projects/patch_default_project.yml'
 
-  /v2/projects/{project_id}:
-    get:
-      $ref: 'resources/projects/get_project.yml'
+  # /v2/projects/{project_id}:
+  #   get:
+  #     $ref: 'resources/projects/get_project.yml'
 
-    put:
-      $ref: 'resources/projects/update_project.yml'
+  #   put:
+  #     $ref: 'resources/projects/update_project.yml'
 
-    patch:
-      $ref: 'resources/projects/patch_project.yml'
+  #   patch:
+  #     $ref: 'resources/projects/patch_project.yml'
 
-    delete:
-      $ref: 'resources/projects/delete_project.yml'
+  #   delete:
+  #     $ref: 'resources/projects/delete_project.yml'
 
-  /v2/projects/{project_id}/resources:
-    get:
-      $ref: 'resources/projects/list_project_resources.yml'
+  # /v2/projects/{project_id}/resources:
+  #   get:
+  #     $ref: 'resources/projects/list_project_resources.yml'
 
-    post:
-      $ref: 'resources/projects/assign_project_resources.yml'
+  #   post:
+  #     $ref: 'resources/projects/assign_project_resources.yml'
 
-  /v2/projects/default/resources:
-    get:
-      $ref: 'resources/projects/list_default_project_resources.yml'
+  # /v2/projects/default/resources:
+  #   get:
+  #     $ref: 'resources/projects/list_default_project_resources.yml'
 
-    post:
-      $ref: 'resources/projects/assign_default_project_resources.yml'
+  #   post:
+  #     $ref: 'resources/projects/assign_default_project_resources.yml'
 
-  /v2/regions:
-    get:
-      $ref: 'resources/regions/list_all_regions.yml'
+  # /v2/regions:
+  #   get:
+  #     $ref: 'resources/regions/list_all_regions.yml'
 
-  /v2/registry:
-    get:
-      $ref: 'resources/registry/get_registry.yml'
+  # /v2/registry:
+  #   get:
+  #     $ref: 'resources/registry/get_registry.yml'
 
-    post:
-      $ref: 'resources/registry/create_registry.yml'
+  #   post:
+  #     $ref: 'resources/registry/create_registry.yml'
 
-    delete:
-      $ref: 'resources/registry/delete_registry.yml'
+  #   delete:
+  #     $ref: 'resources/registry/delete_registry.yml'
 
-  /v2/registry/subscription:
-    get:
-      $ref: 'resources/registry/get_registry_subscription.yml'
+  # /v2/registry/subscription:
+  #   get:
+  #     $ref: 'resources/registry/get_registry_subscription.yml'
 
-    post:
-      $ref: 'resources/registry/post_registry_subscription.yml'
+  #   post:
+  #     $ref: 'resources/registry/post_registry_subscription.yml'
 
-  /v2/registry/docker-credentials:
-    get:
-      $ref: 'resources/registry/get_docker_credentials.yml'
+  # /v2/registry/docker-credentials:
+  #   get:
+  #     $ref: 'resources/registry/get_docker_credentials.yml'
 
-  /v2/registry/validate-name:
-    post:
-      $ref: 'resources/registry/validate_registry_name.yml'
+  # /v2/registry/validate-name:
+  #   post:
+  #     $ref: 'resources/registry/validate_registry_name.yml'
 
-  /v2/registry/{registry_name}/repositories:
-    get:
-      $ref: 'resources/registry/list_registry_repositories.yml'
-
-  /v2/registry/{registry_name}/repositoriesV2:
-    get:
-      $ref: 'resources/registry/list_registry_repositories_v2.yml'
-
-  /v2/registry/{registry_name}/{repository_name}/tags:
-    get:
-      $ref: 'resources/registry/list_repository_tags.yml'
-
-  /v2/registry/{registry_name}/{repository_name}/tags/{repository_tag}:
-    delete:
-      $ref: 'resources/registry/delete_repository_tag.yml'
-
-  /v2/registry/{registry_name}/{repository_name}/digests:
-    get:
-      $ref: 'resources/registry/list_repository_manifests.yml'
-
-  /v2/registry/{registry_name}/{repository_name}/digests/{manifest_digest}:
-    delete:
-      $ref: 'resources/registry/delete_repository_manifest.yml'
-
-  /v2/registry/{registry_name}/garbage-collection:
-    post:
-      $ref: 'resources/registry/run_garbage_collection.yml'
-
-    get:
-      $ref: 'resources/registry/get_garbage_collection.yml'
-
-  /v2/registry/{registry_name}/garbage-collections:
-    get:
-      $ref: 'resources/registry/list_garbage_collections.yml'
-
-  /v2/registry/{registry_name}/garbage-collection/{garbage_collection_uuid}:
-    put:
-      $ref: 'resources/registry/update_garbage_collection.yml'
-
-  /v2/registry/options:
-    get:
-      $ref: 'resources/registry/get_registry_options.yml'
-
-  /v2/reports/droplet_neighbors_ids:
-    get:
-      $ref: 'resources/droplets/list_all_droplet_neighbors_ids.yml'
-
-  /v2/sizes:
-    get:
-      $ref: 'resources/sizes/list_all_sizes.yml'
-
-  /v2/snapshots:
-    get:
-      $ref: 'resources/snapshots/list_all_snapshots.yml'
-
-  /v2/snapshots/{snapshot_id}:
-    get:
-      $ref: 'resources/snapshots/get_snapshots.yml'
-
-    delete:
-      $ref: 'resources/snapshots/delete_snapshot.yml'
-
-  /v2/tags:
-    get:
-      $ref: 'resources/tags/list_all_tags.yml'
-    post:
-      $ref: 'resources/tags/create_new_tag.yml'
-
-  /v2/tags/{tag_id}:
-    get:
-      $ref: 'resources/tags/get_tag.yml'
-    delete:
-      $ref: 'resources/tags/delete_tag.yml'
-
-  /v2/tags/{tag_id}/resources:
-    post:
-      $ref: 'resources/tags/tag_resource.yml'
-    delete:
-      $ref: 'resources/tags/untag_resource.yml'
-
-  /v2/volumes:
-    get:
-      $ref: 'resources/volumes/list_all_volumes.yml'
-    post:
-      $ref: 'resources/volumes/create_new_volume.yml'
-    delete:
-      $ref: 'resources/volumes/delete_volume_by_name.yml'
-
-  /v2/volumes/actions:
-    post:
-      $ref: 'resources/volumes/post_volume_action_by_name.yml'
-
-  /v2/volumes/snapshot/{snapshot_id}:
-    get:
-      $ref: 'resources/volumes/get_volume_snapshot_by_id.yml'
-    delete:
-      $ref: 'resources/volumes/delete_volume_snapshot_by_id.yml'
-
-  /v2/volumes/{volume_id}:
-    get:
-      $ref: 'resources/volumes/get_volume.yml'
-    delete:
-      $ref: 'resources/volumes/delete_volume.yml'
-
-  /v2/volumes/{volume_id}/actions:
-    get:
-      $ref: 'resources/volumes/list_all_volume_actions.yml'
-    post:
-      $ref: 'resources/volumes/post_volume_action_by_id.yml'
-
-  /v2/volumes/{volume_id}/actions/{action_id}:
-    get:
-      $ref: 'resources/volumes/get_volume_action.yml'
-
-  /v2/volumes/{volume_id}/snapshots:
-    get:
-      $ref: 'resources/volumes/list_volume_snapshots.yml'
-    post:
-      $ref: 'resources/volumes/create_volume_snapshot.yml'
-
-  /v2/vpcs:
-    get:
-      $ref: 'resources/vpcs/list_vpcs.yml'
-
-    post:
-      $ref: 'resources/vpcs/create_vpc.yml'
-
-  /v2/vpcs/{vpc_id}:
-    get:
-      $ref: 'resources/vpcs/get_vpc.yml'
-
-    put:
-      $ref: 'resources/vpcs/update_vpc.yml'
-
-    patch:
-      $ref: 'resources/vpcs/patch_vpc.yml'
-
-    delete:
-      $ref: 'resources/vpcs/delete_vpc.yml'
-
-  /v2/vpcs/{vpc_id}/members:
-    get:
-      $ref: 'resources/vpcs/list_vpc_members.yml'
+  # /v2/registry/{registry_name}/repositories:
+  #   get:
+  #     $ref: 'resources/registry/list_registry_repositories.yml'
+
+  # /v2/registry/{registry_name}/repositoriesV2:
+  #   get:
+  #     $ref: 'resources/registry/list_registry_repositories_v2.yml'
+
+  # /v2/registry/{registry_name}/{repository_name}/tags:
+  #   get:
+  #     $ref: 'resources/registry/list_repository_tags.yml'
+
+  # /v2/registry/{registry_name}/{repository_name}/tags/{repository_tag}:
+  #   delete:
+  #     $ref: 'resources/registry/delete_repository_tag.yml'
+
+  # /v2/registry/{registry_name}/{repository_name}/digests:
+  #   get:
+  #     $ref: 'resources/registry/list_repository_manifests.yml'
+
+  # /v2/registry/{registry_name}/{repository_name}/digests/{manifest_digest}:
+  #   delete:
+  #     $ref: 'resources/registry/delete_repository_manifest.yml'
+
+  # /v2/registry/{registry_name}/garbage-collection:
+  #   post:
+  #     $ref: 'resources/registry/run_garbage_collection.yml'
+
+  #   get:
+  #     $ref: 'resources/registry/get_garbage_collection.yml'
+
+  # /v2/registry/{registry_name}/garbage-collections:
+  #   get:
+  #     $ref: 'resources/registry/list_garbage_collections.yml'
+
+  # /v2/registry/{registry_name}/garbage-collection/{garbage_collection_uuid}:
+  #   put:
+  #     $ref: 'resources/registry/update_garbage_collection.yml'
+
+  # /v2/registry/options:
+  #   get:
+  #     $ref: 'resources/registry/get_registry_options.yml'
+
+  # /v2/reports/droplet_neighbors_ids:
+  #   get:
+  #     $ref: 'resources/droplets/list_all_droplet_neighbors_ids.yml'
+
+  # /v2/sizes:
+  #   get:
+  #     $ref: 'resources/sizes/list_all_sizes.yml'
+
+  # /v2/snapshots:
+  #   get:
+  #     $ref: 'resources/snapshots/list_all_snapshots.yml'
+
+  # /v2/snapshots/{snapshot_id}:
+  #   get:
+  #     $ref: 'resources/snapshots/get_snapshots.yml'
+
+  #   delete:
+  #     $ref: 'resources/snapshots/delete_snapshot.yml'
+
+  # /v2/tags:
+  #   get:
+  #     $ref: 'resources/tags/list_all_tags.yml'
+  #   post:
+  #     $ref: 'resources/tags/create_new_tag.yml'
+
+  # /v2/tags/{tag_id}:
+  #   get:
+  #     $ref: 'resources/tags/get_tag.yml'
+  #   delete:
+  #     $ref: 'resources/tags/delete_tag.yml'
+
+  # /v2/tags/{tag_id}/resources:
+  #   post:
+  #     $ref: 'resources/tags/tag_resource.yml'
+  #   delete:
+  #     $ref: 'resources/tags/untag_resource.yml'
+
+  # /v2/volumes:
+  #   get:
+  #     $ref: 'resources/volumes/list_all_volumes.yml'
+  #   post:
+  #     $ref: 'resources/volumes/create_new_volume.yml'
+  #   delete:
+  #     $ref: 'resources/volumes/delete_volume_by_name.yml'
+
+  # /v2/volumes/actions:
+  #   post:
+  #     $ref: 'resources/volumes/post_volume_action_by_name.yml'
+
+  # /v2/volumes/snapshot/{snapshot_id}:
+  #   get:
+  #     $ref: 'resources/volumes/get_volume_snapshot_by_id.yml'
+  #   delete:
+  #     $ref: 'resources/volumes/delete_volume_snapshot_by_id.yml'
+
+  # /v2/volumes/{volume_id}:
+  #   get:
+  #     $ref: 'resources/volumes/get_volume.yml'
+  #   delete:
+  #     $ref: 'resources/volumes/delete_volume.yml'
+
+  # /v2/volumes/{volume_id}/actions:
+  #   get:
+  #     $ref: 'resources/volumes/list_all_volume_actions.yml'
+  #   post:
+  #     $ref: 'resources/volumes/post_volume_action_by_id.yml'
+
+  # /v2/volumes/{volume_id}/actions/{action_id}:
+  #   get:
+  #     $ref: 'resources/volumes/get_volume_action.yml'
+
+  # /v2/volumes/{volume_id}/snapshots:
+  #   get:
+  #     $ref: 'resources/volumes/list_volume_snapshots.yml'
+  #   post:
+  #     $ref: 'resources/volumes/create_volume_snapshot.yml'
+
+  # /v2/vpcs:
+  #   get:
+  #     $ref: 'resources/vpcs/list_vpcs.yml'
+
+  #   post:
+  #     $ref: 'resources/vpcs/create_vpc.yml'
+
+  # /v2/vpcs/{vpc_id}:
+  #   get:
+  #     $ref: 'resources/vpcs/get_vpc.yml'
+
+  #   put:
+  #     $ref: 'resources/vpcs/update_vpc.yml'
+
+  #   patch:
+  #     $ref: 'resources/vpcs/patch_vpc.yml'
+
+  #   delete:
+  #     $ref: 'resources/vpcs/delete_vpc.yml'
+
+  # /v2/vpcs/{vpc_id}/members:
+  #   get:
+  #     $ref: 'resources/vpcs/list_vpc_members.yml'
 
 components:
   securitySchemes:
