@@ -1,4 +1,4 @@
-operationId: list_droplet_actions
+operationId: droplets_list_actions
 
 summary: List Actions for a Droplet
 
@@ -38,9 +38,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_droplet_actions.yml'
-  - $ref: 'examples/go/list_droplet_actions.yml'
-  - $ref: 'examples/ruby/list_droplet_actions.yml'
+  - $ref: 'examples/curl/droplets_list_actions.yml'
+  - $ref: 'examples/go/droplets_list_actions.yml'
+  - $ref: 'examples/ruby/droplets_list_actions.yml'
 
 security:
   - bearer_auth:

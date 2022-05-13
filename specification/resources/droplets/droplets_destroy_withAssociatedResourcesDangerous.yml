@@ -1,4 +1,4 @@
-operationId: destroy_with_associated_resources_dangerous
+operationId: droplets_destroy_withAssociatedResourcesDangerous
 
 summary: Destroy a Droplet and All of its Associated Resources (Dangerous)
 
@@ -41,7 +41,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/destroy_with_associated_resources_dangerous.yml'
+  - $ref: 'examples/curl/droplets_destroy_withAssociatedResourcesDangerous.yml'
 
 security:
   - bearer_auth:

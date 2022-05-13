@@ -1,4 +1,4 @@
-operationId: list_droplet_associated_resources
+operationId: droplet_list_associatedResources
 
 summary: List Associated Resources for a Droplet
 
@@ -37,7 +37,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/list_associated_resources.yml'
+  - $ref: 'examples/curl/droplets_list_actions.yml'
 
 security:
   - bearer_auth:

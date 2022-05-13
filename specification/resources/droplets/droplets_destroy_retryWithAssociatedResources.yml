@@ -1,4 +1,4 @@
-operationId: retry_destroy_with_associated_resource
+operationId: droplets_destroy_retryWithAssociatedResources
 
 summary: Retry a Droplet Destroy with Associated Resources Request
 
@@ -41,7 +41,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/retry_destroy_with_associated_resources.yml'
+  - $ref: 'examples/curl/droplets_destroy_retryWithAssociatedResources.yml'
+
 
 security:
   - bearer_auth:
