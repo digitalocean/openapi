@@ -9,6 +9,7 @@ functions:
   - ensureAllArraysHaveItemTypes
   - ensureSnakeCaseWithDigits
   - validateOperationIdNaming
+  - validateOpIDNaming
 
 rules:
   contact-properties: off
