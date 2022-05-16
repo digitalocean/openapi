@@ -1,4 +1,4 @@
-operationId: droplets_get_action
+operationId: dropletsActions_get
 
 summary: Retrieve a Droplet Action
 
@@ -36,9 +36,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/droplets_get_action.yml'
-  - $ref: 'examples/go/droplets_get_action.yml'
-  - $ref: 'examples/ruby/droplets_get_action.yml'
+  - $ref: 'examples/curl/dropletsActions_list.yml'
+  - $ref: 'examples/go/dropletsActions_list.yml'
+  - $ref: 'examples/ruby/dropletsActions_list.yml'
 
 security:
   - bearer_auth:

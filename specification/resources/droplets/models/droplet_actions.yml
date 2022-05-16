@@ -1,4 +1,4 @@
-droplet_action_type:
+droplet_action:
   required:
     - type
   type: object
@@ -27,7 +27,7 @@ droplet_action_type:
 
 droplet_action_restore:
   allOf:
-  - $ref: '#/droplet_action_type'
+  - $ref: '#/droplet_action'
   - type: object
     properties:
       image:
@@ -38,7 +38,7 @@ droplet_action_restore:
 
 droplet_action_resize:
   allOf:
-  - $ref: '#/droplet_action_type'
+  - $ref: '#/droplet_action'
   - type: object
     properties:
       disk:
@@ -55,7 +55,7 @@ droplet_action_resize:
 
 droplet_action_rebuild:
   allOf:
-  - $ref: '#/droplet_action_type'
+  - $ref: '#/droplet_action'
   - type: object
     properties:
       image:
@@ -69,7 +69,7 @@ droplet_action_rebuild:
 
 droplet_action_rename:
   allOf:
-  - $ref: '#/droplet_action_type'
+  - $ref: '#/droplet_action'
   - type: object
     properties:
       name:
@@ -79,7 +79,7 @@ droplet_action_rename:
 
 droplet_action_change_kernel:
   allOf:
-  - $ref: '#/droplet_action_type'
+  - $ref: '#/droplet_action'
   - type: object
     properties:
       kernel:
@@ -90,7 +90,7 @@ droplet_action_change_kernel:
 
 droplet_action_snapshot:
   allOf:
-  - $ref: '#/droplet_action_type'
+  - $ref: '#/droplet_action'
   - type: object
     properties:
       name:
