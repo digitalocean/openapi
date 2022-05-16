@@ -605,121 +605,121 @@ paths:
 
   /v2/databases:
     get:
-      $ref: 'resources/databases/list_database_clusters.yml'
+      $ref: 'resources/databases/databases_list_clusters.yml'
     post:
-      $ref: 'resources/databases/create_database_cluster.yml'
+      $ref: 'resources/databases/databases_create_cluster.yml'
 
   /v2/databases/{database_cluster_uuid}:
     get:
-      $ref: 'resources/databases/get_database_cluster.yml'
+      $ref: 'resources/databases/databases_get_cluster.yml'
     delete:
-      $ref: 'resources/databases/destroy_cluster.yml'
+      $ref: 'resources/databases/databases_destroy_cluster.yml'
 
   /v2/databases/{database_cluster_uuid}/config:
     get:
-      $ref: 'resources/databases/get_database_config.yml'
+      $ref: 'resources/databases/databases_get_config.yml'
     patch:
-      $ref: 'resources/databases/patch_database_config.yml'
+      $ref: 'resources/databases/databases_patch_config.yml'
 
   /v2/databases/{database_cluster_uuid}/ca:
     get:
-      $ref: 'resources/databases/get_ca.yml'
+      $ref: 'resources/databases/databases_get_ca.yml'
 
   /v2/databases/{database_cluster_uuid}/online-migration:
     get:
-      $ref: 'resources/databases/get_migration_status.yml'
+      $ref: 'resources/databases/databases_get_migrationStatus.yml'
     put:
-      $ref: 'resources/databases/start_online_migration.yml'
+      $ref: 'resources/databases/databases_update_onlineMigration.yml'
 
   /v2/databases/{database_cluster_uuid}/online-migration/{migration_id}:
     delete:
-      $ref: 'resources/databases/stop_online_migration.yml'
+      $ref: 'resources/databases/databases_delete_onlineMigration.yml'
 
   /v2/databases/{database_cluster_uuid}/migrate:
     put:
-      $ref: 'resources/databases/migrate_database_cluster.yml'
+      $ref: 'resources/databases/databases_update_region.yml'
 
   /v2/databases/{database_cluster_uuid}/resize:
     put:
-      $ref: 'resources/databases/resize_database_cluster.yml'
+      $ref: 'resources/databases/databases_update_clusterSize.yml'
 
   /v2/databases/{database_cluster_uuid}/firewall:
     get:
-      $ref: 'resources/databases/list_firewalls.yml'
+      $ref: 'resources/databases/databases_list_firewalls.yml'
     put:
-      $ref: 'resources/databases/update_database_firewall.yml'
+      $ref: 'resources/databases/databases_update_firewall.yml'
 
   /v2/databases/{database_cluster_uuid}/maintenance:
     put:
-      $ref: 'resources/databases/update_maintenance_window.yml'
+      $ref: 'resources/databases/databases_update_maintenanceWindow.yml'
 
   /v2/databases/{database_cluster_uuid}/backups:
     get:
-      $ref: 'resources/databases/list_database_backups.yml'
+      $ref: 'resources/databases/databases_list_backups.yml'
 
   /v2/databases/{database_cluster_uuid}/replicas:
     get:
-      $ref: 'resources/databases/list_replicas.yml'
+      $ref: 'resources/databases/databases_list_replicas.yml'
     post:
-      $ref: 'resources/databases/create_replica.yml'
+      $ref: 'resources/databases/databases_create_replica.yml'
 
   /v2/databases/{database_cluster_uuid}/replicas/{replica_name}:
     get:
-      $ref: 'resources/databases/get_replica.yml'
+      $ref: 'resources/databases/databases_get_replica.yml'
     delete:
-      $ref: 'resources/databases/destroy_replica.yml'
+      $ref: 'resources/databases/databases_destroy_replica.yml'
 
   /v2/databases/{database_cluster_uuid}/users:
     get:
-      $ref: 'resources/databases/list_users.yml'
+      $ref: 'resources/databases/databases_list_users.yml'
     post:
-      $ref: 'resources/databases/add_user.yml'
+      $ref: 'resources/databases/databases_add_user.yml'
 
   /v2/databases/{database_cluster_uuid}/users/{username}:
     get:
-      $ref: 'resources/databases/get_user.yml'
+      $ref: 'resources/databases/databases_get_user.yml'
     delete:
-      $ref: 'resources/databases/delete_user.yml'
+      $ref: 'resources/databases/databases_delete_user.yml'
 
   /v2/databases/{database_cluster_uuid}/users/{username}/reset_auth:
     post:
-      $ref: 'resources/databases/reset_auth.yml'
+      $ref: 'resources/databases/databases_reset_auth.yml'
 
   /v2/databases/{database_cluster_uuid}/dbs:
     get:
-      $ref: 'resources/databases/list_databases.yml'
+      $ref: 'resources/databases/databases_list.yml'
     post:
-      $ref: 'resources/databases/add_database.yml'
+      $ref: 'resources/databases/databases_add.yml'
 
   /v2/databases/{database_cluster_uuid}/dbs/{database_name}:
     get:
-      $ref: 'resources/databases/get_database.yml'
+      $ref: 'resources/databases/databases_get.yml'
     delete:
-      $ref: 'resources/databases/delete_database.yml'
+      $ref: 'resources/databases/databases_delete.yml'
 
   /v2/databases/{database_cluster_uuid}/pools:
     get:
-      $ref: 'resources/databases/list_connection_pools.yml'
+      $ref: 'resources/databases/databases_list_connectionPools.yml'
     post:
-      $ref: 'resources/databases/add_connection_pool.yml'
+      $ref: 'resources/databases/databases_add_connectionPool.yml'
 
   /v2/databases/{database_cluster_uuid}/pools/{pool_name}:
     get:
-      $ref: 'resources/databases/get_connection_pool.yml'
+      $ref: 'resources/databases/databases_get_connectionPool.yml'
     delete:
-      $ref: 'resources/databases/delete_connection_pool.yml'
+      $ref: 'resources/databases/databases_delete_connectionPool.yml'
 
   /v2/databases/{database_cluster_uuid}/eviction_policy:
     get:
-      $ref: 'resources/databases/get_eviction_policy.yml'
+      $ref: 'resources/databases/databases_get_evictionPolicy.yml'
     put:
-      $ref: 'resources/databases/update_eviction_policy.yml'
+      $ref: 'resources/databases/databases_update_evictionPolicy.yml'
 
   /v2/databases/{database_cluster_uuid}/sql_mode:
     get:
-      $ref: 'resources/databases/get_sql_mode.yml'
+      $ref: 'resources/databases/databases_get_sql_mode.yml'
     put:
-      $ref: 'resources/databases/update_sql_mode.yml'
+      $ref: 'resources/databases/databases_update_sql_mode.yml'
 
   /v2/domains:
     get:
