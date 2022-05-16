@@ -1,4 +1,4 @@
-operationId: get_floating_ip
+operationId: floatingIPs_get
 
 summary: Retrieve an Existing Floating IP
 

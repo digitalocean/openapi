@@ -825,19 +825,19 @@ paths:
 
   /v2/domains/{domain_name}/records:
     get:
-      $ref: 'resources/domains/domainRecords_list.yml'
+      $ref: 'resources/domains/domains_list_records.yml'
     post:
-      $ref: 'resources/domains/domainRecords_create.yml'
+      $ref: 'resources/domains/domains_create_record.yml'
 
   /v2/domains/{domain_name}/records/{domain_record_id}:
     get:
-      $ref: 'resources/domains/domainRecords_get.yml'
+      $ref: 'resources/domains/domains_get_record.yml'
     patch:
-      $ref: 'resources/domains/domainRecords_update_patch.yml'
+      $ref: 'resources/domains/domains_patch_record.yml'
     put:
-      $ref: 'resources/domains/domainRecords_update.yml'
+      $ref: 'resources/domains/domains_update_record.yml'
     delete:
-      $ref: 'resources/domains/domainRecords_delete.yml'
+      $ref: 'resources/domains/domains_delete_record.yml'
 
   /v2/droplets:
     get:
@@ -866,17 +866,17 @@ paths:
 
   /v2/droplets/{droplet_id}/actions:
     get:
-      $ref: 'resources/droplets/dropletsActions_list.yml'
+      $ref: 'resources/droplets/dropletActions_list.yml'
     post:
-      $ref: 'resources/droplets/dropletsActions_post.yml'
+      $ref: 'resources/droplets/dropletActions_post.yml'
 
   /v2/droplets/actions:
     post:
-      $ref: 'resources/droplets/dropletsActions_post_byTag.yml'
+      $ref: 'resources/droplets/dropletActions_post_byTag.yml'
 
   /v2/droplets/{droplet_id}/actions/{action_id}:
     get:
-      $ref: 'resources/droplets/dropletsActions_get.yml'
+      $ref: 'resources/droplets/dropletActions_get.yml'
 
   /v2/droplets/{droplet_id}/kernels:
     get:
