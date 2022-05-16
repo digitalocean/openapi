@@ -1,4 +1,4 @@
-operationId: droplets_post_actionByTag
+operationId: dropletsActions_post_byTag
 
 summary: Acting on Tagged Droplets
 
@@ -34,23 +34,23 @@ requestBody:
     application/json:
       schema:
         oneOf:
-          - $ref: 'models/droplet_actions.yml#/droplet_action_type'
+          - $ref: 'models/droplet_actions.yml#/droplet_action'
           - $ref: 'models/droplet_actions.yml#/droplet_action_snapshot'
         discriminator:
           propertyName: type
           mapping:
-            enable_backups: 'models/droplet_actions.yml#/droplet_action_type'
-            disable_backups: 'models/droplet_actions.yml#/droplet_action_type'
-            power_cycle: 'models/droplet_actions.yml#/droplet_action_type'
-            shutdown: 'models/droplet_actions.yml#/droplet_action_type'
-            power_off: 'models/droplet_actions.yml#/droplet_action_type'
-            power_on: 'models/droplet_actions.yml#/droplet_action_type'
-            enable_ipv6: 'models/droplet_actions.yml#/droplet_action_type'
+            enable_backups: 'models/droplet_actions.yml#/droplet_action'
+            disable_backups: 'models/droplet_actions.yml#/droplet_action'
+            power_cycle: 'models/droplet_actions.yml#/droplet_action'
+            shutdown: 'models/droplet_actions.yml#/droplet_action'
+            power_off: 'models/droplet_actions.yml#/droplet_action'
+            power_on: 'models/droplet_actions.yml#/droplet_action'
+            enable_ipv6: 'models/droplet_actions.yml#/droplet_action'
             snapshot: 'models/droplet_actions.yml#/droplet_action_snapshot'
 
 responses:
   '201':
-    $ref: 'responses/droplet_actions.yml'
+    $ref: 'responses/droplet_actions_response.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -65,9 +65,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/droplets_post_actionByTag.yml'
-  - $ref: 'examples/go/droplets_post_actionByTag.yml'
-  - $ref: 'examples/ruby/droplets_post_actionByTag.yml'
+  - $ref: 'examples/curl/dropletsActions_post_byTag.yml'
+  - $ref: 'examples/go/dropletsActions_post_byTag.yml'
+  - $ref: 'examples/ruby/dropletsActions_post_byTag.yml'
 
 security:
   - bearer_auth:
