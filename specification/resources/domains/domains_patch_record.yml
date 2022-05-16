@@ -1,4 +1,4 @@
-operationId: domainRecords_update_patch
+operationId: domains_patch_record
 
 summary: Update a Domain Record
 

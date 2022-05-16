@@ -1,4 +1,4 @@
-operationId: dropletsActions_post_byTag
+operationId: dropletActions_post_byTag
 
 summary: Acting on Tagged Droplets
 
@@ -65,9 +65,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/dropletsActions_post_byTag.yml'
-  - $ref: 'examples/go/dropletsActions_post_byTag.yml'
-  - $ref: 'examples/ruby/dropletsActions_post_byTag.yml'
+  - $ref: 'examples/curl/dropletActions_post_byTag.yml'
+  - $ref: 'examples/go/dropletActions_post_byTag.yml'
+  - $ref: 'examples/ruby/dropletActions_post_byTag.yml'
 
 security:
   - bearer_auth:
