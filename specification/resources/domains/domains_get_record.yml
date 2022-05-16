@@ -1,4 +1,4 @@
-operationId: domainRecords_get
+operationId: domains_get_record
 
 summary: Retrieve an Existing Domain Record
 
@@ -32,9 +32,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/domainRecords_get.yml'
-  - $ref: 'examples/go/domainRecords_get.yml'
-  - $ref: 'examples/ruby/domainRecords_get.yml'
+  - $ref: 'examples/curl/domains_get_record.yml'
+  - $ref: 'examples/go/domains_get_record.yml'
+  - $ref: 'examples/ruby/domains_get_record.yml'
 
 security:
   - bearer_auth:

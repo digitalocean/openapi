@@ -1,4 +1,4 @@
-operationId: dropletsActions_post
+operationId: dropletActions_post
 
 summary: Initiate a Droplet Action
 
@@ -87,9 +87,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/dropletsActions_post.yml'
-  - $ref: 'examples/go/dropletsActions_post.yml'
-  - $ref: 'examples/ruby/dropletsActions_post.yml'
+  - $ref: 'examples/curl/dropletActions_post.yml'
+  - $ref: 'examples/go/dropletActions_post.yml'
+  - $ref: 'examples/ruby/dropletActions_post.yml'
 
 security:
   - bearer_auth:

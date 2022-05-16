@@ -1,4 +1,4 @@
-operationId: domainRecords_update
+operationId: domains_update_record
 
 summary: Update a Domain Record
 
@@ -47,9 +47,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/domainRecords_update.yml'
-  - $ref: 'examples/go/domainRecords_update.yml'
-  - $ref: 'examples/ruby/domainRecords_update.yml'
+  - $ref: 'examples/curl/domains_update_record.yml'
+  - $ref: 'examples/go/domains_update_record.yml'
+  - $ref: 'examples/ruby/domains_update_record.yml'
 
 security:
   - bearer_auth:
