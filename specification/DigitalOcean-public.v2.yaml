@@ -866,17 +866,17 @@ paths:
 
   /v2/droplets/{droplet_id}/actions:
     get:
-      $ref: 'resources/droplets/droplets_list_actions.yml'
+      $ref: 'resources/droplets/dropletsActions_list.yml'
     post:
-      $ref: 'resources/droplets/droplets_post_action.yml'
+      $ref: 'resources/droplets/dropletsActions_post.yml'
 
   /v2/droplets/actions:
     post:
-      $ref: 'resources/droplets/droplets_post_actionByTag.yml'
+      $ref: 'resources/droplets/dropletsActions_post_byTag.yml'
 
   /v2/droplets/{droplet_id}/actions/{action_id}:
     get:
-      $ref: 'resources/droplets/droplets_get_action.yml'
+      $ref: 'resources/droplets/dropletsActions_get.yml'
 
   /v2/droplets/{droplet_id}/kernels:
     get:

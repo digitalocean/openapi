@@ -1,4 +1,4 @@
-operationId: droplets_post_action
+operationId: dropletsActions_post
 
 summary: Initiate a Droplet Action
 
@@ -41,7 +41,7 @@ requestBody:
     application/json:
       schema:
         anyOf:
-          - $ref: 'models/droplet_actions.yml#/droplet_action_type'
+          - $ref: 'models/droplet_actions.yml#/droplet_action'
           - $ref: 'models/droplet_actions.yml#/droplet_action_restore'
           - $ref: 'models/droplet_actions.yml#/droplet_action_resize'
           - $ref: 'models/droplet_actions.yml#/droplet_action_rebuild'
@@ -51,20 +51,20 @@ requestBody:
         discriminator:
           propertyName: type
           mapping:
-            enable_backups: 'models/droplet_actions.yml#/droplet_action_type'
-            disable_backups: 'models/droplet_actions.yml#/droplet_action_type'
-            reboot: 'models/droplet_actions.yml#/droplet_action_type'
-            power_cycle: 'models/droplet_actions.yml#/droplet_action_type'
-            shutdown: 'models/droplet_actions.yml#/droplet_action_type'
-            power_off: 'models/droplet_actions.yml#/droplet_action_type'
-            power_on: 'models/droplet_actions.yml#/droplet_action_type'
-            password_reset: 'models/droplet_actions.yml#/droplet_action_type'
+            enable_backups: 'models/droplet_actions.yml#/droplet_action'
+            disable_backups: 'models/droplet_actions.yml#/droplet_action'
+            reboot: 'models/droplet_actions.yml#/droplet_action'
+            power_cycle: 'models/droplet_actions.yml#/droplet_action'
+            shutdown: 'models/droplet_actions.yml#/droplet_action'
+            power_off: 'models/droplet_actions.yml#/droplet_action'
+            power_on: 'models/droplet_actions.yml#/droplet_action'
+            password_reset: 'models/droplet_actions.yml#/droplet_action'
             restore: 'models/droplet_actions.yml#/droplet_action_restore'
             resize: 'models/droplet_actions.yml#/droplet_action_resize'
             rebuild: 'models/droplet_actions.yml#/droplet_action_rebuild'
             rename: 'models/droplet_actions.yml#/droplet_action_rename'
             change_kernel: 'models/droplet_actions.yml#/droplet_action_change_kernel'
-            enable_ipv6: 'models/droplet_actions.yml#/droplet_action_type'
+            enable_ipv6: 'models/droplet_actions.yml#/droplet_action'
             snapshot: 'models/droplet_actions.yml#/droplet_action_snapshot'
 
 responses:
@@ -87,9 +87,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/droplets_post_action.yml'
-  - $ref: 'examples/go/droplets_post_action.yml'
-  - $ref: 'examples/ruby/droplets_post_action.yml'
+  - $ref: 'examples/curl/dropletsActions_post.yml'
+  - $ref: 'examples/go/dropletsActions_post.yml'
+  - $ref: 'examples/ruby/dropletsActions_post.yml'
 
 security:
   - bearer_auth:
