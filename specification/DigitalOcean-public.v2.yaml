@@ -265,6 +265,12 @@ tags:
 
   - name: Floating IP Actions
     description: >-
+      The Floating IPs service is now the Reserved IPs service. The Reserved 
+      IPs service endpoints function the exact same way as the Floating IP service. 
+      The only difference is the name change through out the URLs and fields. 
+      The Floating IP endpoints will remain active until spring 2023 before being 
+      permanently deprecated.
+
       Floating IP actions are commands that can be given to a DigitalOcean
       floating IP. These requests are made on the actions endpoint of a specific
       floating IP.
@@ -388,6 +394,30 @@ tags:
 
   - name: Regions
     description: Provides information about DigitalOcean data center regions.
+
+  - name: Reserved IP Actions
+    description: >-
+      Reserved IP actions are commands that can be given to a DigitalOcean
+      reserved IP. These requests are made on the actions endpoint of a specific
+      reserved IP.
+
+      An action object is returned. These objects hold the current status of the
+      requested action.
+
+  - name: Reserved IPs
+    description: >-
+      The Floating IPs service is now the Reserved IPs service. The Reserved 
+      IPs service endpoints function the exact same way as the Floating IP service. 
+      The only difference is the name change through out the URLs and fields. 
+      The Floating IP endpoints will remain active until spring 2023 before being 
+      permanently deprecated.
+
+      [DigitalOcean Reserved IPs](https://www.digitalocean.com/docs/networking/reserved-ips/)
+      are publicly-accessible static IP addresses that can be mapped to one of
+      your Droplets. They can be used to create highly available setups or other
+      configurations requiring movable addresses.
+
+      Reserved IPs are bound to a specific region.
 
   - name: Sizes
     description: >-
@@ -1204,6 +1234,31 @@ paths:
   /v2/reports/droplet_neighbors_ids:
     get:
       $ref: 'resources/droplets/list_all_droplet_neighbors_ids.yml'
+
+  /v2/reserved_ips:
+    get:
+      $ref: 'resources/reserved_ips/list_reserved_ips.yml'
+
+    post:
+      $ref: 'resources/reserved_ips/create_reserved_ip.yml'
+
+  /v2/reserved_ips/{reserved_ip}:
+    get:
+      $ref: 'resources/reserved_ips/get_reserved_ip.yml'
+
+    delete:
+      $ref: 'resources/reserved_ips/delete_reserved_ip.yml'
+
+  /v2/reserved_ips/{reserved_ip}/actions:
+    get:
+      $ref: 'resources/reserved_ips/list_reserved_ip_actions.yml'
+
+    post:
+      $ref: 'resources/reserved_ips/post_reserved_ip_action.yml'
+
+  /v2/reserved_ips/{reserved_ip}/actions/{action_id}:
+    get:
+      $ref: 'resources/reserved_ips/get_reserved_ip_action.yml'
 
   /v2/sizes:
     get:
