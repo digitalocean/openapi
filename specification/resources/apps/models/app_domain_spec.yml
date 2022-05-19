@@ -40,7 +40,7 @@ properties:
     type: string
     format: hostname
     example: example.com
-  minimumTLSVersion:
+  minimum_tls_version:
     type: string
     format: string
     maxLength: 3
