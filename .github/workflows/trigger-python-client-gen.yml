@@ -5,7 +5,7 @@ on:
       - 'specification/**'
 jobs:
   build:
-    name: Re-generate Python Client
+    name: Trigger digitalocean-client-python Workflow
     runs-on: ubuntu-latest
     steps:
       - uses: convictional/trigger-workflow-and-wait@v1.3.0
