@@ -42,7 +42,6 @@ properties:
     example: example.com
   minimum_tls_version:
     type: string
-    format: string
     maxLength: 3
     minLength: 3
     pattern: ^1.[2 | 3]$
