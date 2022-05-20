@@ -1,0 +1,16 @@
+name: Trigger Python Client Generation
+on: 
+  push:
+    paths:
+      - 'specification/**'
+jobs:
+  build:
+    name: Re-generate Python Client
+    runs-on: ubuntu-latest
+    steps:
+      - uses: convictional/trigger-workflow-and-wait@v1.3.0
+        with:
+          owner: digitalocean
+          repo: digitalocean-client-python
+          github_token: ${{ secrets.OPENAPI_SECRET }}
+          workflow_file_name: python-client-gen.yml
