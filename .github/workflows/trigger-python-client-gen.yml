@@ -1,6 +1,8 @@
 name: Trigger Python Client Generation
 on: 
   push:
+    branches:
+      - main
     paths:
       - 'specification/**'
 jobs:
@@ -8,9 +10,7 @@ jobs:
     name: Trigger digitalocean-client-python Workflow
     runs-on: ubuntu-latest
     steps:
-      - uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: digitalocean
-          repo: digitalocean-client-python
-          github_token: ${{ secrets.OPENAPI_SECRET }}
-          workflow_file_name: python-client-gen.yml
+      - name: trigger-workflow
+        run: gh workflow run --repo digitalocean/digitalocean-client-python python-client-gen.yml --ref main
+        env:
+          GITHUB_TOKEN: ${{ secrets.OPENAPI_SECRET }}
