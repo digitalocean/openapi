@@ -81,6 +81,22 @@ properties:
     minimum: -1
     maximum: 10000
     example: -1
+  backup_hour:
+    description: >-
+      The hour of day (in UTC) when backup for the service is started. New backup
+      is only started if previous backup has already completed.
+    minimum: 0
+    maximum: 23
+    type: integer
+    example: 3
+  backup_minute:
+    description: >-
+      The minute of an hour when backup for the service is started. New backup is
+      only started if previous backup has already completed.
+    minimum: 0
+    maximum: 59
+    type: integer
+    example: 30
   bgwriter_delay:
     description: >-
       Specifies the delay, in milliseconds, between activity rounds for the background writer. Default is 200 ms.
@@ -358,4 +374,83 @@ properties:
     minimum: 10
     maximum: 200
     example: 50
+  pgbouncer:
+    title: PGBouncer connection pooling settings
+    type: object
+    properties:
+      server_reset_query_always:
+        description: Run server_reset_query (DISCARD ALL) in all pooling modes
+        type: boolean
+        example: false
+      ignore_startup_parameters:
+        description: List of parameters to ignore when given in startup packet
+        type: array
+        example:
+          - extra_float_digits
+          - search_path
+        items:
+          description: Enum of parameters to ignore when given in startup packet
+          type: string
+          enum:
+            - extra_float_digits
+            - search_path
+        maxItems: 32
+      min_pool_size:
+        description: >-
+          Add more server connections to pool if below this number. Improves
+          behavior when usual load comes suddenly back after period of total
+          inactivity. The value is effectively capped at the pool size.
+        type: integer
+        minimum: 0
+        maximum: 10000
+        example: 0
+      server_lifetime:
+        description: >-
+          The pooler will close an unused server connection that has been
+          connected longer than this. [seconds]
+        type: integer
+        minimum: 60
+        maximum: 86400
+        example: 3600
+      server_idle_timeout:
+        description: >-
+          If a server connection has been idle more than this many seconds it will
+          be dropped. If 0 then timeout is disabled. [seconds]
+        type: integer
+        minimum: 0
+        maximum: 86400
+        example: 600
+      autodb_pool_size:
+        description: >-
+          If non-zero then create automatically a pool of that size per user when
+          a pool doesn't exist.
+        type: integer
+        minimum: 0
+        maximum: 10000
+        example: 0
+      autodb_pool_mode:
+        enum:
+          - session
+          - transaction
+          - statement
+        example: session
+        description: PGBouncer pool mode
+        type: string
+      autodb_max_db_connections:
+        description: >-
+          Do not allow more than this many server connections per database
+          (regardless of user). Setting it to 0 means unlimited.
+        type: integer
+        minimum: 0
+        maximum: 2147483647
+        example: 0
+      autodb_idle_timeout:
+        description: >-
+          If the automatically created database pools have been unused this many
+          seconds, they are freed. If 0 then timeout is disabled. [seconds]
+        type: integer
+        minimum: 0
+        maximum: 86400
+        example: 3600
+
 
