@@ -1,4 +1,4 @@
-operationId: droplets_getDestroyAssociatedResourcesStatus
+operationId: droplets_get_DestroyAssociatedResourcesStatus
 
 summary: Check Status of a Droplet Destroy with Associated Resources Request
 
@@ -33,7 +33,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/droplets_getDestroyAssociatedResourcesStatus.yml'
+  - $ref: 'examples/curl/droplets_get_DestroyAssociatedResourcesStatus.yml'
 
 security:
   - bearer_auth:
