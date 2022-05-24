@@ -83,15 +83,15 @@ properties:
     example: -1
   backup_hour:
     description: >-
-      The hour of day (in UTC) when backup for the service is started. New backup
-      is only started if previous backup has already completed.
+      The hour of day (in UTC) when backup for the service starts. New backup
+     only starts if previous backup has already completed.
     minimum: 0
     maximum: 23
     type: integer
     example: 3
   backup_minute:
     description: >-
-      The minute of an hour when backup for the service is started. New backup is
+      The minute of the backup hour when backup for the service starts. New backup is
       only started if previous backup has already completed.
     minimum: 0
     maximum: 59
