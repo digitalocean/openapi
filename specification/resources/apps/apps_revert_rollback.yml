@@ -1,4 +1,4 @@
-operationId: run_revert_app_rollback
+operationId: apps_revert_rollback
 
 summary: Revert App Rollback
 

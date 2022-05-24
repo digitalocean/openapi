@@ -554,7 +554,7 @@ paths:
 
   /v2/apps/{app_id}/rollback/revert:
     post:
-      $ref: 'resources/apps/run_revert_app_rollback.yml'
+      $ref: 'resources/apps/apps_revert_rollback.yml'
 
   /v2/cdn/endpoints:
     get:
