@@ -27,7 +27,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 10000
-    example: 0
+    example: 1
   server_lifetime:
     description: >-
       The pooler closes any unused server connection that has been
@@ -51,7 +51,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 10000
-    example: 0
+    example: 1
   autodb_pool_mode:
     enum:
       - session
@@ -67,7 +67,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 2147483647
-    example: 0
+    example: 1
   autodb_idle_timeout:
     description: >-
       If the automatically-created database pools have been unused this many

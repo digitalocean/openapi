@@ -84,7 +84,7 @@ properties:
   backup_hour:
     description: >-
       The hour of day (in UTC) when backup for the service starts. New backup
-     only starts if previous backup has already completed.
+      only starts if previous backup has already completed.
     minimum: 0
     maximum: 23
     type: integer
