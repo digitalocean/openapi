@@ -540,6 +540,22 @@ paths:
     post:
       $ref: 'resources/apps/apps_assign_alertDestinations.yml'
 
+  /v2/apps/{app_id}/rollback:
+    post:
+      $ref: 'resources/apps/rollback_app.yml'
+
+  /v2/apps/{app_id}/rollback/validate:
+    post:
+      $ref: 'resources/apps/validate_app_rollback.yml'
+
+  /v2/apps/{app_id}/rollback/commit:
+    post:
+      $ref: 'resources/apps/run_commit_app_rollback.yml'
+
+  /v2/apps/{app_id}/rollback/revert:
+    post:
+      $ref: 'resources/apps/run_revert_app_rollback.yml'
+
   /v2/cdn/endpoints:
     get:
       $ref: 'resources/cdn/cdn_list_endpoints.yml'
