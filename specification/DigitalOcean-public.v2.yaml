@@ -550,7 +550,7 @@ paths:
 
   /v2/apps/{app_id}/rollback/commit:
     post:
-      $ref: 'resources/apps/run_commit_app_rollback.yml'
+      $ref: 'resources/apps/apps_commit_rollback.yml'
 
   /v2/apps/{app_id}/rollback/revert:
     post:

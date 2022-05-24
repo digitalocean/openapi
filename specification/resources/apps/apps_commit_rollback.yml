@@ -1,4 +1,4 @@
-operationId: run_commit_app_rollback
+operationId: apps_commit_rollback
 
 summary: Commit App Rollback
 
