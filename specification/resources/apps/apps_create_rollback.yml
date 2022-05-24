@@ -1,4 +1,4 @@
-operationId: create_app_rollback
+operationId: apps_create_rollback
 
 summary: Rollback App
 
@@ -44,4 +44,4 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: "examples/curl/rollback_app.yml"
+  - $ref: "examples/curl/apps_create_rollback.yml"
