@@ -546,7 +546,7 @@ paths:
 
   /v2/apps/{app_id}/rollback/validate:
     post:
-      $ref: 'resources/apps/validate_app_rollback.yml'
+      $ref: 'resources/apps/apps_validate_rollback.yml'
 
   /v2/apps/{app_id}/rollback/commit:
     post:
