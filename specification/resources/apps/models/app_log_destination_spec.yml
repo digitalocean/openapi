@@ -1,0 +1,15 @@
+
+- AppLogDestinationSpecHeader:
+  type: object
+  properties:
+    key:
+      type: string
+      description: The name
+      title: key
+      pattern: ^[!-9;-~]*$
+    value:
+      type: string
+      description: The header value.
+  title: '[skip-docs]'
+  required:
+    - key

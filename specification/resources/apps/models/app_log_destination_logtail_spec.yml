@@ -1,0 +1,8 @@
+- type: object
+  properties:
+    endpoint:
+      type: string
+      description: Papertrail syslog endpoint.
+  description: Papertrail configuration.
+  required:
+    - endpoint

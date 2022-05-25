@@ -1,0 +1,11 @@
+- type: object
+  properties:
+    endpoint:
+      type: string
+      description: Datadog HTTP log intake endpoint.
+    api_key:
+      type: string
+      description: Datadog API key.
+  description: DataDog configuration.
+  required:
+    - api_key

@@ -57,3 +57,9 @@ properties:
     description: An environment slug describing the type of this app. For a full list,
       please refer to [the product documentation](https://www.digitalocean.com/docs/app-platform/).
     example: node-js
+    
+  log_destinations:
+    type: array
+    items:
+      $ref: app_log_destination_definition.yml
+    description: A list of configured log forwarding destinations.
