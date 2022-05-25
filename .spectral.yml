@@ -8,7 +8,6 @@ functions:
   - ensurePropertiesExample
   - ensureAllArraysHaveItemTypes
   - ensureSnakeCaseWithDigits
-  - validateOperationIdNaming
   - validateOpIDNaming
 
 rules:

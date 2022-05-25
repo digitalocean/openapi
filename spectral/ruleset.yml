@@ -133,20 +133,12 @@ rules:
     then:
       function: ensureSnakeCaseWithDigits
 
-  operationid-must-follow-naming-conventions:
-    description: operationIds must follow naming conventions for method
-    type: style
-    given: "$.paths[*][*]"
-    severity: info
-    message: "{{error}}"
-    then:
-      function: validateOperationIdNaming
 
   operationid-must-follow-new-naming-conventions:
     description: operationIds must follow naming conventions for method
     type: style
     given: "$.paths[*][*]"
-    severity: warn  
+    severity: error  
     message: "{{error}}"
     then:
       function: validateOpIDNaming
