@@ -35,19 +35,17 @@ properties:
       $ref: app_variable_definition.yml
     description: A list of environment variables made available to the component.
 
-  oneOf:
-    git:
-      $ref: apps_git_source_spec.yml
+  git:
+    $ref: apps_git_source_spec.yml
 
-    github:
-      $ref: apps_github_source_spec.yml
+  github:
+    $ref: apps_github_source_spec.yml
 
-    gitlab:
-      $ref: apps_gitlab_source_spec.yml
+  gitlab:
+    $ref: apps_gitlab_source_spec.yml
+
   log_destinations:
-    type: array
-    items:
-      $ref: app_log_destination_definition.yml
-    description: A list of configured log forwarding destinations.
+    $ref: app_log_destination_definition.yml
+
 required:
 - name
