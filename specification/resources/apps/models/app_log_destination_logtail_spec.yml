@@ -1,8 +1,9 @@
-- type: object
-  properties:
-    endpoint:
-      type: string
-      description: Papertrail syslog endpoint.
-  description: Papertrail configuration.
-  required:
-    - endpoint
+type: object
+properties:
+  token:
+    type: string
+    description: Logtail token.
+    example: abcdefghijklmnopqrstuvwxyz0123456789
+description: Logtail configuration.
+required:
+  - endpoint
