@@ -27,7 +27,8 @@ properties:
     example: path/to/dir
   alerts:
     type: array
-    $ref: app_alert_spec.yml
+    items:
+      $ref: app_alert_spec.yml
   envs:
     type: array
     items:
