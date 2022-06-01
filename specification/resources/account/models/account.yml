@@ -42,6 +42,21 @@ properties:
     type: string
     example: " "
 
+  team:
+    type: object
+    description: When authorized in a team context, includes information about
+      the current team.
+    properties:
+      uuid:
+        description: The unique universal identifier for the current team.
+        type: string
+        example: 5df3e3004a17e242b7c20ca6c9fc25b701a47ece
+
+      name:
+        description: The name for the current team.
+        type: string
+        example: "My Team"
+
 required:
   - droplet_limit
   - floating_ip_limit
