@@ -272,6 +272,12 @@ tags:
       The Floating IP endpoints will remain active until fall 2023 before being 
       permanently deprecated.
 
+      With the exception of the [Projects API](https://docs.digitalocean.com/reference/api/api-reference/#tag/Projects), 
+      we will update all other instances of floating IP fields across the API 
+      (such as the `floating_ips` field in a Droplet response) to reflect this name 
+      change. Floating IPs retrieved using the Projects API will retain the 
+      original name.
+
       Floating IP actions are commands that can be given to a DigitalOcean
       floating IP. These requests are made on the actions endpoint of a specific
       floating IP.
@@ -287,6 +293,12 @@ tags:
       For example, the `floating_ips` field is now the `reserved_ips` field.
       The Floating IP endpoints will remain active until fall 2023 before being 
       permanently deprecated.
+
+      With the exception of the [Projects API](https://docs.digitalocean.com/reference/api/api-reference/#tag/Projects), 
+      we will update all other instances of floating IP fields across the API 
+      (such as the `floating_ips` field in a Droplet response) to reflect this name 
+      change. Floating IPs retrieved using the Projects API will retain the 
+      original name.
 
       [DigitalOcean Floating IPs](https://www.digitalocean.com/docs/networking/floating-ips/)
       are publicly-accessible static IP addresses that can be mapped to one of
@@ -412,6 +424,12 @@ tags:
       The Floating IP endpoints will remain active until fall 2023 before being 
       permanently deprecated. These endpoints will become available on 16 June 2022.
 
+      With the exception of the [Projects API](https://docs.digitalocean.com/reference/api/api-reference/#tag/Projects), 
+      we will update all other instances of floating IP fields across the API 
+      (such as the `floating_ips` field in a Droplet response) to reflect this name 
+      change. Floating IPs retrieved using the Projects API will retain the 
+      original name.
+
       Reserved IP actions are commands that can be given to a DigitalOcean
       reserved IP. These requests are made on the actions endpoint of a specific
       reserved IP.
@@ -427,6 +445,12 @@ tags:
       URLs and fields. For example, the `floating_ips` field is now the `reserved_ips` field. 
       The Floating IP endpoints will remain active until fall 2023 before being 
       permanently deprecated. These endpoints will become available on 16 June 2022.
+
+      With the exception of the [Projects API](https://docs.digitalocean.com/reference/api/api-reference/#tag/Projects), 
+      we will update all other instances of floating IP fields across the API 
+      (such as the `floating_ips` field in a Droplet response) to reflect this name 
+      change. Floating IPs retrieved using the Projects API will retain the 
+      original name.
 
       DigitalOcean Reserved IPs are publicly-accessible static IP addresses that can be 
       mapped to one of your Droplets. They can be used to create highly available 
