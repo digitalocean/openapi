@@ -3,7 +3,7 @@ operationId: list_reserved_ip_actions
 summary: List All Actions for a Reserved IP
 
 description: To retrieve all actions that have been executed on a reserved IP,
-  send a GET request to `/v2/reserved_ips/$FLOATING_IP/actions`.
+  send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions`.
 
 tags:
   - Reserved IP Actions
