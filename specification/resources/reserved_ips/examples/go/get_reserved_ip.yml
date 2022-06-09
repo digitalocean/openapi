@@ -13,5 +13,5 @@ source: |-
       client := godo.NewFromToken(token)
       ctx := context.TODO()
 
-      floatingIP, _, err := client.FloatingIPs.Get(ctx, "45.55.96.47")
+      reservedIP, _, err := client.ReservedIPs.Get(ctx, "45.55.96.47")
   }

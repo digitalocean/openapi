@@ -13,7 +13,7 @@ source: |-
       client := godo.NewFromToken(token)
       ctx := context.TODO()
 
-      createRequest := &godo.FloatingIPCreateRequest{
+      createRequest := &godo.ReservedIPCreateRequest{
           DropletID: 123456,
 
       }
