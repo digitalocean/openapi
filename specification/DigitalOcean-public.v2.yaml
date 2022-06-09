@@ -265,10 +265,10 @@ tags:
 
   - name: Floating IP Actions
     description: >-
-      The Floating IPs service is now the Reserved IPs service. The Reserved 
-      IPs service endpoints function the exact same way as the Floating IP service. 
+      As of 16 June 2022, we are renaming the Floating IP product to [Reserved IPs](https://docs.digitalocean.com/reference/api/api-reference/#tag/Reserved-IPs). 
+      The Reserved IP product's endpoints function the exact same way as Floating IPs. 
       The only difference is the name change through out the URLs and fields. 
-      The Floating IP endpoints will remain active until spring 2023 before being 
+      The Floating IP endpoints will remain active until fall 2023 before being 
       permanently deprecated.
 
       Floating IP actions are commands that can be given to a DigitalOcean
@@ -280,6 +280,12 @@ tags:
 
   - name: Floating IPs
     description: >-
+      As of 16 June 2022, we are renaming the Floating IP product to [Reserved IPs](https://docs.digitalocean.com/reference/api/api-reference/#tag/Reserved-IPs). 
+      The Reserved IP product's endpoints function the exact same way as Floating IPs. 
+      The only difference is the name change through out the URLs and fields. 
+      The Floating IP endpoints will remain active until fall 2023 before being 
+      permanently deprecated.
+
       [DigitalOcean Floating IPs](https://www.digitalocean.com/docs/networking/floating-ips/)
       are publicly-accessible static IP addresses that can be mapped to one of
       your Droplets. They can be used to create highly available setups or other
@@ -397,6 +403,12 @@ tags:
 
   - name: Reserved IP Actions
     description: >-
+      As of 16 June 2022, we are renaming the Floating IP product to Reserved IPs. 
+      The Reserved IP product's endpoints function the exact same way as Floating IPs. 
+      The only difference is the name change through out the URLs and fields. 
+      The Floating IP endpoints will remain active until fall 2023 before being 
+      permanently deprecated. These endpoints will become available on 16 June 2022.
+
       Reserved IP actions are commands that can be given to a DigitalOcean
       reserved IP. These requests are made on the actions endpoint of a specific
       reserved IP.
@@ -406,16 +418,15 @@ tags:
 
   - name: Reserved IPs
     description: >-
-      The Floating IPs service is now the Reserved IPs service. The Reserved 
-      IPs service endpoints function the exact same way as the Floating IP service. 
+      As of 16 June 2022, we are renaming the Floating IP product to Reserved IPs. 
+      The Reserved IP product's endpoints function the exact same way as Floating IPs. 
       The only difference is the name change through out the URLs and fields. 
-      The Floating IP endpoints will remain active until spring 2023 before being 
-      permanently deprecated.
+      The Floating IP endpoints will remain active until fall 2023 before being 
+      permanently deprecated. These endpoints will become available on 16 June 2022.
 
-      [DigitalOcean Reserved IPs](https://www.digitalocean.com/docs/networking/reserved-ips/)
-      are publicly-accessible static IP addresses that can be mapped to one of
-      your Droplets. They can be used to create highly available setups or other
-      configurations requiring movable addresses.
+      DigitalOcean Reserved IPs are publicly-accessible static IP addresses that can be 
+      mapped to one of your Droplets. They can be used to create highly available 
+      setups or other configurations requiring movable addresses.
 
       Reserved IPs are bound to a specific region.
 
