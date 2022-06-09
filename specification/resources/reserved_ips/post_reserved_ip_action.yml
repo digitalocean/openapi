@@ -4,7 +4,7 @@ summary: Initiate a Reserved IP Action
 
 description: |
     To initiate an action on a reserved IP send a POST request to
-    `/v2/reserved_ips/$FLOATING_IP/actions`. In the JSON body to the request,
+    `/v2/reserved_ips/$RESERVED_IP/actions`. In the JSON body to the request,
     set the `type` attribute to on of the supported action types:
 
     | Action     | Details
