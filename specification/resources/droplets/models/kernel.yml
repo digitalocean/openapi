@@ -29,3 +29,5 @@ properties:
     example: 2016.07.13-DigitalOcean_loader_Ubuntu
     description: A standard kernel version string representing the version,
       patch, and release information.
+
+readOnly: true
