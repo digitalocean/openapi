@@ -6,6 +6,7 @@ properties:
     example: 3164444
     description: A unique identifier for each Droplet instance. This is
       automatically generated upon Droplet creation.
+    readOnly: true
 
   name:
     type: string
@@ -17,22 +18,26 @@ properties:
     multipleOf: 8
     example: 1024
     description: Memory of the Droplet in megabytes.
+    readOnly: true
 
   vcpus:
     type: integer
     example: 1
     description: The number of virtual CPUs.
+    readOnly: true
 
   disk:
     type: integer
     example: 25
     description: The size of the Droplet's disk in gigabytes.
+    readOnly: true
 
   locked:
     type: boolean
     example: false
     description: A boolean value indicating whether the Droplet has been locked,
       preventing actions by users.
+    readOnly: true
 
   status:
     type: string
@@ -44,9 +49,11 @@ properties:
     example: active
     description: A status string indicating the state of the Droplet instance.
       This may be "new", "active", "off", or "archive".
+    readOnly: true
 
   kernel:
     $ref: './kernel.yml'
+    readOnly: true
 
   created_at:
     type: string
@@ -54,6 +61,7 @@ properties:
     example: '2020-07-21T18:37:44Z'
     description: A time value given in ISO8601 combined date and time format
       that represents when the Droplet was created.
+    readOnly: true
 
   features:
     type: array
@@ -64,6 +72,7 @@ properties:
     - private_networking
     - ipv6
     description: An array of features enabled on this Droplet.
+    readOnly: true
 
   backup_ids:
     type: array
@@ -74,6 +83,7 @@ properties:
     description: An array of backup IDs of any backups that have been taken
       of the Droplet instance.  Droplet backups are enabled at the time of the
       instance creation.
+    readOnly: true
 
   next_backup_window:
     type: object
@@ -94,6 +104,7 @@ properties:
         example: "2019-12-04T23:00:00Z"
         description: A time value given in ISO8601 combined date and time format
           specifying the end of the Droplet's backup window.
+    readOnly: true
 
   snapshot_ids:
     type: array
@@ -103,6 +114,7 @@ properties:
     - 67512819
     description: An array of snapshot IDs of any snapshots created from the
       Droplet instance.
+    readOnly: true
 
   image:
     $ref: '../../images/models/image.yml'
@@ -115,6 +127,7 @@ properties:
     - '506f78a4-e098-11e5-ad9f-000f53306ae1'
     description: A flat array including the unique identifier for each Block
       Storage volume attached to the Droplet.
+    readOnly: true
 
   size:
     $ref: '../../sizes/models/size.yml'
@@ -123,6 +136,7 @@ properties:
     type: string
     example: s-1vcpu-1gb
     description: The unique slug identifier for the size of this Droplet.
+    readOnly: true    
 
   networks:
     type: object
@@ -141,6 +155,7 @@ properties:
         type: array
         items:
           $ref: 'network_v6.yml'
+    readOnly: true
 
   region:
     $ref: '../../regions/models/region.yml'
@@ -161,23 +176,7 @@ properties:
       is assigned.
 
 required:
-- id
 - name
-- memory
-- vcpus
-- disk
-- locked
-- status
-- kernel
-- created_at
-- features
-- backup_ids
-- next_backup_window
-- snapshot_ids
-- image
-- volume_ids
-- size
-- size_slug
-- networks
 - region
-- tags
+- size
+- image
