@@ -18,7 +18,7 @@ parameters:
 
 responses:
   '204':
-    $ref: '../../shared/responses/no_content.yml'
+    $ref: '../../shared/responses/no_content_with_content_type.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
