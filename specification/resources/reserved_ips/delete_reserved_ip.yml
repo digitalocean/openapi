@@ -1,22 +1,23 @@
-operationId: droplets_destroy
+operationId: delete_reserved_ip
 
-summary: Delete an Existing Droplet
+summary: Delete a Reserved IPs
 
 description: |
-  To delete a Droplet, send a DELETE request to `/v2/droplets/$DROPLET_ID`.
+  To delete a reserved IP and remove it from your account, send a DELETE request
+  to `/v2/reserved_ips/$RESERVED_IP_ADDR`.
 
   A successful request will receive a 204 status code with no body in response.
   This indicates that the request was processed successfully.
 
 tags:
-  - Droplets
+  - Reserved IPs
 
 parameters:
-  - $ref: 'parameters.yml#/droplet_id'
+  - $ref: 'parameters.yml#/reserved_ip'
 
 responses:
   '204':
-    $ref: '../../shared/responses/no_content_with_content_type.yml'
+    $ref: '../../shared/responses/no_content.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -34,9 +35,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/droplets_destroy.yml'
-  - $ref: 'examples/go/droplets_destroy.yml'
-  - $ref: 'examples/ruby/droplets_destroy.yml'
+  - $ref: 'examples/curl/delete_reserved_ip.yml'
+  - $ref: 'examples/go/delete_reserved_ip.yml'
+  - $ref: 'examples/ruby/delete_reserved_ip.yml'
 
 security:
   - bearer_auth:

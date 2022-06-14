@@ -41,7 +41,7 @@ module.exports =(item, _, paths) => {
 
   // if the item does not have an example
   // throw an error
-  if (!item.example) {
+  if (item.example == undefined) {
     return [
       {
         message: `${paths.target ? paths.target.join('.') : 'property'} does not include example`,

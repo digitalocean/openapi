@@ -81,6 +81,22 @@ properties:
     minimum: -1
     maximum: 10000
     example: -1
+  backup_hour:
+    description: >-
+      The hour of day (in UTC) when backup for the service starts. New backup
+      only starts if previous backup has already completed.
+    minimum: 0
+    maximum: 23
+    type: integer
+    example: 3
+  backup_minute:
+    description: >-
+      The minute of the backup hour when backup for the service starts. New backup is
+      only started if previous backup has already completed.
+    minimum: 0
+    maximum: 59
+    type: integer
+    example: 30
   bgwriter_delay:
     description: >-
       Specifies the delay, in milliseconds, between activity rounds for the background writer. Default is 200 ms.
@@ -358,4 +374,8 @@ properties:
     minimum: 10
     maximum: 200
     example: 50
+  pgbouncer:
+    $ref: './pgbouncer.yml'
+
+
 

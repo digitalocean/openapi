@@ -51,6 +51,12 @@ properties:
       $ref: app_worker_spec.yml
     type: array
 
+  functions:
+    description: Workloads which expose publicly-accessible HTTP services via Functions Components.
+    items:
+      $ref: app_functions_spec.yml
+    type: array
+
   databases:
     description: |-
       Database instances which can provide persistence to workloads within the
