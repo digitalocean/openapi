@@ -10,7 +10,7 @@ const GET = ["get", "list"];
 const PATCH = ["patch"];
 const POST = ["create", "post", "add", "tag", "install", "reset", "upgrade",
   "recycle", "run", "retry", "validate", "assign", "unassign", "cancel", 
-  "destroy", "delete", "update"];
+  "destroy", "delete", "update", "revert"];
 const PUT = ["update"];
 
 const articles = ["_a_", "_an_", "_the_"]
