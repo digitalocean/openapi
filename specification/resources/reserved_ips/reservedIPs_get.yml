@@ -1,4 +1,4 @@
-operationId: get_reserved_ip
+operationId: reservedIPs_get
 
 summary: Retrieve an Existing Reserved IP
 

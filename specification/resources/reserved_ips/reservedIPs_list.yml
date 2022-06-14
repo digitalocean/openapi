@@ -1,4 +1,4 @@
-operationId: list_reserved_ips
+operationId: reservedIPs_list
 
 summary: List All Reserved IPs
 

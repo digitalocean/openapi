@@ -1292,28 +1292,28 @@ paths:
 
   /v2/reserved_ips:
     get:
-      $ref: 'resources/reserved_ips/list_reserved_ips.yml'
+      $ref: 'resources/reserved_ips/reservedIPs_list.yml'
 
     post:
-      $ref: 'resources/reserved_ips/create_reserved_ip.yml'
+      $ref: 'resources/reserved_ips/reservedIPs_create.yml'
 
   /v2/reserved_ips/{reserved_ip}:
     get:
-      $ref: 'resources/reserved_ips/get_reserved_ip.yml'
+      $ref: 'resources/reserved_ips/reservedIPs_get.yml'
 
     delete:
-      $ref: 'resources/reserved_ips/delete_reserved_ip.yml'
+      $ref: 'resources/reserved_ips/reservedIPs_delete.yml'
 
   /v2/reserved_ips/{reserved_ip}/actions:
     get:
-      $ref: 'resources/reserved_ips/list_reserved_ip_actions.yml'
+      $ref: 'resources/reserved_ips/reservedIPsActions_list.yml'
 
     post:
-      $ref: 'resources/reserved_ips/post_reserved_ip_action.yml'
+      $ref: 'resources/reserved_ips/reservedIPsActions_post.yml'
 
   /v2/reserved_ips/{reserved_ip}/actions/{action_id}:
     get:
-      $ref: 'resources/reserved_ips/get_reserved_ip_action.yml'
+      $ref: 'resources/reserved_ips/reservedIPsActions_get.yml'
 
   /v2/sizes:
     get:
