@@ -27,7 +27,7 @@ properties:
       $ref: app_domain_spec.yml
 
   services:
-    description: Workloads which expose publicy-accessible HTTP services.
+    description: Workloads which expose publicly-accessible HTTP services.
     type: array
     items:
       $ref: app_service_spec.yml
@@ -49,6 +49,12 @@ properties:
     description: Workloads which do not expose publicly-accessible HTTP services.
     items:
       $ref: app_worker_spec.yml
+    type: array
+
+  functions:
+    description: Workloads which expose publicly-accessible HTTP services via Functions Components.
+    items:
+      $ref: app_functions_spec.yml
     type: array
 
   databases:

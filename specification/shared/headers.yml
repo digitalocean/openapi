@@ -1,5 +1,5 @@
 content-disposition:
-  description: >- 
+  description: >-
     Indicates if the content is expected to be displayed *inline* in the 
     browser, that is, as a Web page or as part of a Web page, or as an 
     *attachment*, that is downloaded and saved locally.
@@ -37,8 +37,15 @@ ratelimit-reset:
 x-request-id:
   description: >-
     Optionally, some endpoints may include a request ID that should be provided 
-    when reporting bugs or opening support tickets to help identify the issue. 
+    when reporting bugs or opening support tickets to help identify the issue.
   schema:
     type: string
     format: uuid
   example: 515850a0-a812-50bf-aa3c-d0d21d287e40
+
+content-type:
+  description: >-
+    The type of data that is returned from a request. 
+  schema:
+    type: string
+  example: application/json; charset=utf-8

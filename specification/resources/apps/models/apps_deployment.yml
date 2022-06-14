@@ -21,6 +21,11 @@ properties:
       $ref: apps_deployment_job.yml
     title: Job components that are part of this deployment
     type: array
+  functions:
+    type: array
+    items:
+      $ref: apps_deployment_functions.yml
+    title: Functions components that are part of this deployment
   phase:
     $ref: apps_deployment_phase.yml
   phase_last_updated_at:
