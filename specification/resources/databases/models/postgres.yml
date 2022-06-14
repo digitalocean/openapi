@@ -358,4 +358,14 @@ properties:
     minimum: 10
     maximum: 200
     example: 50
+  shared_buffers_percentage:
+    description: >-
+      Percentage of total RAM that the database server uses for shared memory buffers. 
+      Valid range is 20-60 (float), which corresponds to 20% - 60%. 
+      This setting adjusts the shared_buffers configuration value.
+    type: number
+    minimum: 20.0
+    maximum: 60.0
+    example: 41.5
+
 
