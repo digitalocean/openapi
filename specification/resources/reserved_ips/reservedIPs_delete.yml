@@ -1,4 +1,4 @@
-operationId: delete_reserved_ip
+operationId: reservedIPs_delete
 
 summary: Delete a Reserved IPs
 

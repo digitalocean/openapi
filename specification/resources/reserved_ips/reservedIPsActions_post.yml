@@ -1,4 +1,4 @@
-operationId: post_reserved_ip_action
+operationId: reservedIPsActions_post
 
 summary: Initiate a Reserved IP Action
 

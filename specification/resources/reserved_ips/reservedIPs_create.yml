@@ -1,4 +1,4 @@
-operationId: create_reserved_ip
+operationId: reservedIPs_create
 
 summary: Create a New Reserved IP
 
