@@ -20,6 +20,10 @@ content:
         name: ubuntu-s-1vcpu-1gb-nyc1-01
         destroyed_at: '2020-04-01T18:11:49Z'
       resources:
+        reserved_ips:
+        - id: '6186916'
+          name: 45.55.96.47
+          destroyed_at: '2020-04-01T18:11:44Z'
         floating_ips:
         - id: '6186916'
           name: 45.55.96.47
