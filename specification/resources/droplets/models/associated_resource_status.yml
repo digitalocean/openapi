@@ -12,6 +12,10 @@ properties:
     description: An object containing additional information about resource
       related to a Droplet requested to be destroyed.
     properties:
+      reserved_ips:
+        type: array
+        items:
+          $ref: 'destroyed_associated_resource.yml'
       floating_ips:
         type: array
         items:
