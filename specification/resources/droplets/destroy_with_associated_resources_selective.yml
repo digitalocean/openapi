@@ -21,6 +21,12 @@ tags:
 parameters:
   - $ref: 'parameters.yml#/droplet_id'
 
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: 'models/selective_destroy_associated_resource.yml'
+
 responses:
   '202':
     $ref: '../../shared/responses/accepted.yml'
