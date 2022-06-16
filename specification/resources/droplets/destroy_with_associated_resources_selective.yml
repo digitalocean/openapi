@@ -5,7 +5,7 @@ summary: Selectively Destroy a Droplet and its Associated Resources
 description: |
   To destroy a Droplet along with a sub-set of its associated resources, send a
   DELETE request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/selective`
-  endpoint. The JSON body of the request should include `floating_ips`, `snapshots`, `volumes`,
+  endpoint. The JSON body of the request should include `reserved_ips`, `snapshots`, `volumes`,
   or `volume_snapshots` keys each set to an array of IDs for the associated
   resources to be destroyed. The IDs can be found by querying the Droplet's
   associated resources. Any associated resource not included in the request
