@@ -13,5 +13,5 @@ content:
     schema:
       $ref: '../models/error.yml'
     example:
-      id: im_a_teapot
-      message: how do you do?
+      id: example_error
+      message: some error message
