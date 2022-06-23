@@ -44,8 +44,10 @@ properties:
     type: string
     maxLength: 3
     minLength: 3
-    pattern: ^1.[2 | 3]$
-    description: 'The minimum version of TLS a client application can use to access resources for the domain.  Must be one of the following values wrapped within quotations: `\"1.2\"` or `\"1.3\"`.'
+    enum:
+      - "1.2"
+      - "1.3"
+    description: 'The minimum version of TLS a client application can use to access resources for the domain.  Must be one of the following values wrapped within quotations: `"1.2"` or `"1.3"`.'
     example: "1.3"
 required:
 - domain
