@@ -10,6 +10,7 @@ properties:
     - https
     - http2
     - tcp
+    - udp
     example: https
     description: >
       The protocol used for traffic to the load balancer. The possible values
