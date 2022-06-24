@@ -138,7 +138,7 @@ rules:
     description: operationIds must follow naming conventions for method
     type: style
     given: "$.paths[*][*]"
-    severity: error  
+    severity: warn
     message: "{{error}}"
     then:
       function: validateOpIDNaming

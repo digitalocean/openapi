@@ -40,6 +40,11 @@ tags:
       Every action that creates an action object is available through this endpoint. Completed
       actions are not removed from this list and are always available for querying.
 
+      **Note:** You can pass the following HTTP header with the request to have the API return 
+      the `reserved_ips` stanza instead of the `floating_ips` stanza:
+
+      `Accept: application/vnd.digitalocean.reserveip+json`
+
   - name: Apps
     description: >-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -264,7 +269,20 @@ tags:
       list, create, or delete firewalls as well as modify access rules.
 
   - name: Floating IP Actions
-    description: >-
+    description: |
+      As of 16 June 2022, we have renamed the Floating IP product to [Reserved IPs](https://docs.digitalocean.com/reference/api/api-reference/#tag/Reserved-IPs). 
+      The Reserved IP product's endpoints function the exact same way as Floating IPs. 
+      The only difference is the name change throughout the URLs and fields.
+      For example, the `floating_ips` field is now the `reserved_ips` field. 
+      The Floating IP endpoints will remain active until fall 2023 before being 
+      permanently deprecated.
+
+      With the exception of the [Projects API](https://docs.digitalocean.com/reference/api/api-reference/#tag/Projects), 
+      we will reflect this change as an additional field in the responses across the API 
+      where the `floating_ip` field is used. For example, the Droplet metadata response 
+      will contain the field `reserved_ips` in addition to the `floating_ips` field.
+      Floating IPs retrieved using the Projects API will retain the original name.
+
       Floating IP actions are commands that can be given to a DigitalOcean
       floating IP. These requests are made on the actions endpoint of a specific
       floating IP.
@@ -273,7 +291,20 @@ tags:
       requested action.
 
   - name: Floating IPs
-    description: >-
+    description: |
+      As of 16 June 2022, we have renamed the Floating IP product to [Reserved IPs](https://docs.digitalocean.com/reference/api/api-reference/#tag/Reserved-IPs). 
+      The Reserved IP product's endpoints function the exact same way as Floating IPs. 
+      The only difference is the name change throughout the URLs and fields.
+      For example, the `floating_ips` field is now the `reserved_ips` field. 
+      The Floating IP endpoints will remain active until fall 2023 before being 
+      permanently deprecated.
+
+      With the exception of the [Projects API](https://docs.digitalocean.com/reference/api/api-reference/#tag/Projects), 
+      we will reflect this change as an additional field in the responses across the API 
+      where the `floating_ip` field is used. For example, the Droplet metadata response 
+      will contain the field `reserved_ips` in addition to the `floating_ips` field.
+      Floating IPs retrieved using the Projects API will retain the original name.
+
       [DigitalOcean Floating IPs](https://www.digitalocean.com/docs/networking/floating-ips/)
       are publicly-accessible static IP addresses that can be mapped to one of
       your Droplets. They can be used to create highly available setups or other
@@ -388,6 +419,49 @@ tags:
 
   - name: Regions
     description: Provides information about DigitalOcean data center regions.
+
+  - name: Reserved IP Actions
+    description: |
+      As of 16 June 2022, we have renamed the [Floating IP](https://docs.digitalocean.com/reference/api/api-reference/#tag/Floating-IPs) 
+      product to Reserved IPs. The Reserved IP product's endpoints function the exact 
+      same way as Floating IPs. The only difference is the name change throughout the 
+      URLs and fields. For example, the `floating_ips` field is now the `reserved_ips` field. 
+      The Floating IP endpoints will remain active until fall 2023 before being 
+      permanently deprecated.
+
+      With the exception of the [Projects API](https://docs.digitalocean.com/reference/api/api-reference/#tag/Projects), 
+      we will reflect this change as an additional field in the responses across the API 
+      where the `floating_ip` field is used. For example, the Droplet metadata response 
+      will contain the field `reserved_ips` in addition to the `floating_ips` field.
+      Floating IPs retrieved using the Projects API will retain the original name.
+
+      Reserved IP actions are commands that can be given to a DigitalOcean
+      reserved IP. These requests are made on the actions endpoint of a specific
+      reserved IP.
+
+      An action object is returned. These objects hold the current status of the
+      requested action.
+
+  - name: Reserved IPs
+    description: |
+      As of 16 June 2022, we have renamed the [Floating IP](https://docs.digitalocean.com/reference/api/api-reference/#tag/Floating-IPs) 
+      product to Reserved IPs. The Reserved IP product's endpoints function the exact 
+      same way as Floating IPs. The only difference is the name change throughout the 
+      URLs and fields. For example, the `floating_ips` field is now the `reserved_ips` field. 
+      The Floating IP endpoints will remain active until fall 2023 before being 
+      permanently deprecated.
+
+      With the exception of the [Projects API](https://docs.digitalocean.com/reference/api/api-reference/#tag/Projects), 
+      we will reflect this change as an additional field in the responses across the API 
+      where the `floating_ip` field is used. For example, the Droplet metadata response 
+      will contain the field `reserved_ips` in addition to the `floating_ips` field.
+      Floating IPs retrieved using the Projects API will retain the original name.
+
+      DigitalOcean Reserved IPs are publicly-accessible static IP addresses that can be 
+      mapped to one of your Droplets. They can be used to create highly available 
+      setups or other configurations requiring movable addresses.
+
+      Reserved IPs are bound to a specific region.
 
   - name: Sizes
     description: >-
@@ -1220,6 +1294,31 @@ paths:
   /v2/reports/droplet_neighbors_ids:
     get:
       $ref: 'resources/droplets/droplets_list_neighborsIds.yml'
+
+  /v2/reserved_ips:
+    get:
+      $ref: 'resources/reserved_ips/reservedIPs_list.yml'
+
+    post:
+      $ref: 'resources/reserved_ips/reservedIPs_create.yml'
+
+  /v2/reserved_ips/{reserved_ip}:
+    get:
+      $ref: 'resources/reserved_ips/reservedIPs_get.yml'
+
+    delete:
+      $ref: 'resources/reserved_ips/reservedIPs_delete.yml'
+
+  /v2/reserved_ips/{reserved_ip}/actions:
+    get:
+      $ref: 'resources/reserved_ips/reservedIPsActions_list.yml'
+
+    post:
+      $ref: 'resources/reserved_ips/reservedIPsActions_post.yml'
+
+  /v2/reserved_ips/{reserved_ip}/actions/{action_id}:
+    get:
+      $ref: 'resources/reserved_ips/reservedIPsActions_get.yml'
 
   /v2/sizes:
     get:
