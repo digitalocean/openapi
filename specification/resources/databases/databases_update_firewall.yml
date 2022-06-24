@@ -9,14 +9,12 @@ description: >-
   able to open connections to the database. You may limit connections to
   specific Droplets, Kubernetes clusters, or IP addresses. When a tag is
   provided, any Droplet or Kubernetes node with that tag applied to it will
-  have access. When possible, we recommend [placing your databases into a VPC network](https://www.digitalocean.com/docs/networking/vpc/)
+  have access. The firewall is limited to 100 rules (or trusted sources). When
+  possible, we recommend
+  [placing your databases into a VPC network](https://www.digitalocean.com/docs/networking/vpc/)
   to limit access to them instead of using a firewall.
-  
-  By default, database clusters only support up to 100 IP addresses.
-  Note that different resources add varying numbers of IP addresses to 
-  your cluster. For example, Droplets typically have two IP addresses, 
-  one public and one private, both of which count towards the 100-address
-  maximum. To add more than 100 IP addresses, contact support.
+
+  A successful
 
 tags:
   - Databases

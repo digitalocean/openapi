@@ -630,22 +630,6 @@ paths:
     post:
       $ref: 'resources/apps/apps_revert_rollback.yml'
 
-  /v2/apps/{app_id}/rollback:
-    post:
-      $ref: 'resources/apps/rollback_app.yml'
-
-  /v2/apps/{app_id}/rollback/validate:
-    post:
-      $ref: 'resources/apps/validate_app_rollback.yml'
-
-  /v2/apps/{app_id}/rollback/commit:
-    post:
-      $ref: 'resources/apps/run_commit_app_rollback.yml'
-
-  /v2/apps/{app_id}/rollback/revert:
-    post:
-      $ref: 'resources/apps/run_revert_app_rollback.yml'
-
   /v2/cdn/endpoints:
     get:
       $ref: 'resources/cdn/cdn_list_endpoints.yml'
@@ -1335,31 +1319,6 @@ paths:
   /v2/reserved_ips/{reserved_ip}/actions/{action_id}:
     get:
       $ref: 'resources/reserved_ips/reservedIPsActions_get.yml'
-
-  /v2/reserved_ips:
-    get:
-      $ref: 'resources/reserved_ips/list_reserved_ips.yml'
-
-    post:
-      $ref: 'resources/reserved_ips/create_reserved_ip.yml'
-
-  /v2/reserved_ips/{reserved_ip}:
-    get:
-      $ref: 'resources/reserved_ips/get_reserved_ip.yml'
-
-    delete:
-      $ref: 'resources/reserved_ips/delete_reserved_ip.yml'
-
-  /v2/reserved_ips/{reserved_ip}/actions:
-    get:
-      $ref: 'resources/reserved_ips/list_reserved_ip_actions.yml'
-
-    post:
-      $ref: 'resources/reserved_ips/post_reserved_ip_action.yml'
-
-  /v2/reserved_ips/{reserved_ip}/actions/{action_id}:
-    get:
-      $ref: 'resources/reserved_ips/get_reserved_ip_action.yml'
 
   /v2/sizes:
     get:
