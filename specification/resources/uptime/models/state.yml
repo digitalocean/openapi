@@ -31,7 +31,7 @@ region_state:
       type: string
       example: "2022-03-17T22:28:51Z"
     thirty_day_uptime_percentage:
-      type: float
+      type: number
       example: 97.99
 
 
@@ -48,7 +48,7 @@ previous_outage:
       type: string
       example: "2022-03-17T18:06:55Z"
     duration_seconds:
-      type: int
+      type: integer
       example: 120
 
 

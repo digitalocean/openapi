@@ -501,10 +501,9 @@ tags:
 
   - name: Uptime (Beta)
     description: >-
-        Uptime allows you to define health checks, and alerts to monitor the health and availability
-        of your web application.
-
-        Health checks can be configured to monitor performance and availability across multiple regions.
+        [DigitalOcean Uptime Checks](https://docs.google.com/document/d/1STRo6zn5xWMkOOhKDEeu80lu1BAduEBwqrlQWWiGgdU/edit?mkt_tok=MTEzLURUTi0yNjYAAAGExFc3grpvavfaELuoyKFjR_Y2yBQcVjb9XUw4c9jjShiaj5pGoWnU3SIxRgzNWUBmnK55culRdO_MmWNuwT-Ojgdvl45oXVx7fDi1w3lA) provide the ability to monitor your endpoints from around the world, and alert you when they're slow, unavailable, or SSL certificates are expiring. 
+        
+        To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
 
   - name: VPCs
     description: >-
