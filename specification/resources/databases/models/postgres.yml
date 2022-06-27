@@ -387,7 +387,7 @@ properties:
     $ref: './pgbouncer.yml'
   work_mem:
     description: >-
-      Sets the maximum amount of memory to be used by a query operation (such as a sort or hash table) before writing to temporary disk files, in MB. 
+      The maximum amount of memory, in MB, used by a query operation (such as a sort or hash table) before writing to temporary disk files.
       Default is 1MB + 0.075% of total RAM (up to 32MB).
     type: integer
     minimum: 1
