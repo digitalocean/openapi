@@ -200,8 +200,8 @@ properties:
     example: 10
   binlog_retention_period:
     description: >-
-      The minimum amount of time in seconds to keep binlog entries before deletion. 
-      This may be extended for services that require binlog entries for longer than the default for example if using the MySQL Debezium Kafka connector.
+      The minimum amount of time, in seconds, to keep binlog entries before deletion. 
+      This may be extended for services that require binlog entries for longer than the default, for example if using the MySQL Debezium Kafka connector.
     type: number
     minimum: 600
     maximum: 86400
