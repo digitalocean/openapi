@@ -1059,7 +1059,7 @@ paths:
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle:
     post:
-      $ref: 'resources/kubernetes/kubernetes_delete_RecycleNodePool.yml'
+      $ref: 'resources/kubernetes/kubernetes_recycle_nodePool.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/user:
     get:
