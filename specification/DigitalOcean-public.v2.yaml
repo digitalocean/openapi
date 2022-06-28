@@ -1363,7 +1363,7 @@ paths:
 
   /v2/volumes/actions:
     post:
-      $ref: 'resources/volumes/volumeActions_attach.yml'
+      $ref: 'resources/volumes/volumeActions_post.yml'
 
   /v2/volumes/snapshot/{snapshot_id}:
     get:
@@ -1381,7 +1381,7 @@ paths:
     get:
       $ref: 'resources/volumes/volumeActions_list.yml'
     post:
-      $ref: 'resources/volumes/volumeActions_attach_byId.yml'
+      $ref: 'resources/volumes/volumeActions_post_byId.yml'
 
   /v2/volumes/{volume_id}/actions/{action_id}:
     get:
