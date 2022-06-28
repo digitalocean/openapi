@@ -14,3 +14,4 @@ tests/postman-temp.json
 *.swo
 python-cg/
 resolved.yaml
+src/

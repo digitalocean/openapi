@@ -125,24 +125,23 @@ rules:
       function: ensureAllArraysHaveItemTypes
 
   operationid-must-be-snake-cased:
-    description: operationIds must be snake cased (e.g. snake_case)
+    description: operationIds must be snake cased (This may include camelCase e.g. snakeAndCamel_case).
     type: style
     given: "$..operationId"
     severity: error
     message: "{{description}}; {{value}} incorrect"
     then:
-      function: casing
-      functionOptions:
-        type: snake
+      function: ensureSnakeCaseWithDigits
 
-  operationid-must-follow-naming-conventions:
+
+  operationid-must-follow-new-naming-conventions:
     description: operationIds must follow naming conventions for method
     type: style
     given: "$.paths[*][*]"
-    severity: error
+    severity: warn
     message: "{{error}}"
     then:
-      function: validateOperationIdNaming
+      function: validateOpIDNaming
 
   schema-key-must-be-snake-cased:
     description: schema key must be snake cased (e.g. snake_case)
