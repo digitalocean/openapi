@@ -3,7 +3,7 @@ operationId: create_uptime_alert
 summary: Create a New Alert
 
 description: |
-  To create an Uptime alert, send a POST request to `/v2/uptime/checks/{check_id/alerts` specifying the attributes
+  To create an Uptime alert, send a POST request to `/v2/uptime/checks/$CHECK_ID/alerts` specifying the attributes
   in the table below in the JSON body.
 
 tags:
@@ -14,7 +14,14 @@ parameters:
 requestBody:
   required: true
 
-  description: 'The ''type'' field defines the type of query the policy is evalued against, and hence what type of value to pass into the threshold property.<table><thead><tr><td>Type</td><td>Description</td><td>Threshold Value</td></tr></thead><tbody><tr><td>latency</td><td>alert on the response latency</td><td>milliseconds</td></tr><tr><td>down</td><td>alert on a target being down</td><td>N/A (Not Required)</td></tr></tbody></table>'
+  description: |
+    The ''type'' field dictates the type of alert, and hence what type of value to pass into the threshold property.
+    Type | Description | Threshold Value
+    -----|-------------|--------------------
+    `latency` | alerts on the response latency | milliseconds
+    `down` | alerts on a target registering as down | N/A (Not required)
+    `ssl_expiry` | alerts on a SSL certificate expiring within $threshold days | days
+
   content:
     application/json:
       schema:
@@ -29,7 +36,7 @@ requestBody:
 
 responses:
   '201':
-    $ref: 'responses/existing_check.yml'
+    $ref: 'responses/existing_alert.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
