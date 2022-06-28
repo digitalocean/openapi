@@ -735,9 +735,9 @@ paths:
 
   /v2/databases/{database_cluster_uuid}/firewall:
     get:
-      $ref: 'resources/databases/databases_list_firewalls.yml'
+      $ref: 'resources/databases/databases_list_firewall_rules.yml'
     put:
-      $ref: 'resources/databases/databases_update_firewall.yml'
+      $ref: 'resources/databases/databases_update_firewall_rules.yml'
 
   /v2/databases/{database_cluster_uuid}/maintenance:
     put:
@@ -1059,7 +1059,7 @@ paths:
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle:
     post:
-      $ref: 'resources/kubernetes/kubernetes_delete_RecycleNodePool.yml'
+      $ref: 'resources/kubernetes/kubernetes_recycle_nodePool.yml'
 
   /v2/kubernetes/clusters/{cluster_id}/user:
     get:
@@ -1363,7 +1363,7 @@ paths:
 
   /v2/volumes/actions:
     post:
-      $ref: 'resources/volumes/volumeActions_attach.yml'
+      $ref: 'resources/volumes/volumeActions_post.yml'
 
   /v2/volumes/snapshot/{snapshot_id}:
     get:
@@ -1381,7 +1381,7 @@ paths:
     get:
       $ref: 'resources/volumes/volumeActions_list.yml'
     post:
-      $ref: 'resources/volumes/volumeActions_attach_byId.yml'
+      $ref: 'resources/volumes/volumeActions_post_byId.yml'
 
   /v2/volumes/{volume_id}/actions/{action_id}:
     get:

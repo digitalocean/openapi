@@ -1,4 +1,4 @@
-operationId: kubernetes_delete_RecycleNodePool
+operationId: kubernetes_recycle_node_pool
 
 deprecated: true
 
