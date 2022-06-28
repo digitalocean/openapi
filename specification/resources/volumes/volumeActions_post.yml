@@ -1,4 +1,4 @@
-operationId: volumeActions_run
+operationId: volumeActions_post
 
 summary: Initiate A Block Storage Action By Volume Name
 
