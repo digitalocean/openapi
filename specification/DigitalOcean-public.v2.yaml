@@ -735,9 +735,9 @@ paths:
 
   /v2/databases/{database_cluster_uuid}/firewall:
     get:
-      $ref: 'resources/databases/databases_list_firewalls.yml'
+      $ref: 'resources/databases/databases_list_firewall_rules.yml'
     put:
-      $ref: 'resources/databases/databases_update_firewall.yml'
+      $ref: 'resources/databases/databases_update_firewall_rules.yml'
 
   /v2/databases/{database_cluster_uuid}/maintenance:
     put:
