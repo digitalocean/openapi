@@ -11,7 +11,8 @@ droplet_id:
 droplet_tag_name:
   in: query
   name: tag_name
-  description: Used to filter Droplets by a specific tag.
+  description: Used to filter Droplets by a specific tag. Can not be combined
+    with `name`.
   required: false
   schema:
     type: string
@@ -25,6 +26,16 @@ droplet_delete_tag_name:
   schema:
     type: string
   example: env:test
+
+droplet_name:
+  in: query
+  name: name
+  description: Used to filter list response by Droplet name returning only exact
+    matches. It is case-insensitive and can not be combined with `tag_name`.
+  required: false
+  schema:
+    type: string
+  example: web-01
 
 x_dangerous:
   in: header
