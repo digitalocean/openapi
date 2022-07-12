@@ -7,6 +7,10 @@ description: To list all of your tags, you can send a GET request to `/v2/tags`.
 tags:
   - Tags
 
+parameters:
+  - $ref: '../../shared/parameters.yml#/per_page'
+  - $ref: '../../shared/parameters.yml#/page'
+
 responses:
   '200':
     $ref: 'responses/tags_all.yml'
