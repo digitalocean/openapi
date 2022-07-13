@@ -49,6 +49,26 @@ requestBody:
             tags:
             - production
 
+        Create a New Database Cluster with trusted sources:
+          value:
+            name: backend
+            engine: pg
+            version: '14'
+            region: nyc3
+            size: db-s-2vcpu-4gb
+            num_nodes: 2
+            tags:
+              - production
+            rules:
+              - type: ip_addr
+                value: '192.168.1.1'
+              - type: k8s
+                value: ff2a6c52-5a44-4b63-b99c-0e98e7a63d61
+              - type: droplet
+                value: '163973392'
+              - type: tag
+                value: test
+
         Restore from a Database Cluster Backup:
           value:
             name: backend-restored
