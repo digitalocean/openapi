@@ -2,7 +2,7 @@ operationId: apps_validate_appSpec
 
 summary: Propose an App Spec
 
-description: To propose and validate a spec for a new or existing app, send a PUT
+description: To propose and validate a spec for a new or existing app, send a POST
   request to the `/v2/apps/propose` endpoint. The request returns some
   information about the proposed app, including app cost and upgrade cost. If
   an existing app ID is specified, the app spec is treated as a proposed update
