@@ -108,6 +108,10 @@ properties:
     format: uuid
     example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
     description: The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project.
+  rules:
+    type: array
+    items:
+      $ref: './firewall_rule.yml'
 
 required:
   - name
