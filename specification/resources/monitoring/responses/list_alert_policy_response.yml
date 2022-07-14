@@ -11,6 +11,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       allOf:
         - $ref: '../models/list_alert_policy.yml'
         - $ref: '../../../shared/pages.yml#/pagination'
@@ -30,7 +31,7 @@ content:
             entities:
               - 192018292
             tags:
-              - "production_droplets"
+              - 'production_droplets'
             type: v1/insights/droplet/cpu
             uuid: 78b3da62-27e5-49ba-ac70-5db0b5935c64
             value: 80

@@ -33,13 +33,15 @@ properties:
     description: The name of the user for use with the connection pool.
     example: doadmin
   connection:
+    type: object
     allOf:
-    - $ref: './database_connection.yml'
-    - readOnly: true
+      - $ref: './database_connection.yml'
+      - readOnly: true
   private_connection:
+    type: object
     allOf:
-    - $ref: './database_connection.yml'
-    - readOnly: true
+      - $ref: './database_connection.yml'
+      - readOnly: true
 required:
   - name
   - mode

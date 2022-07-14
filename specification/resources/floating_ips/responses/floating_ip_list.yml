@@ -13,6 +13,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       allOf:
         - type: object
           properties:
@@ -25,36 +26,36 @@ content:
 
       example:
         floating_ips:
-        - ip: 45.55.96.47
-          droplet: null
-          region:
-            name: New York 3
-            slug: nyc3
-            features:
-            - private_networking
-            - backups
-            - ipv6
-            - metadata
-            - install_agent
-            - storage
-            - image_transfer
-            available: true
-            sizes:
-            - s-1vcpu-1gb
-            - s-1vcpu-2gb
-            - s-1vcpu-3gb
-            - s-2vcpu-2gb
-            - s-3vcpu-1gb
-            - s-2vcpu-4gb
-            - s-4vcpu-8gb
-            - s-6vcpu-16gb
-            - s-8vcpu-32gb
-            - s-12vcpu-48gb
-            - s-16vcpu-64gb
-            - s-20vcpu-96gb
-            - s-24vcpu-128gb
-            - s-32vcpu-192g
-          locked: false
+          - ip: 45.55.96.47
+            droplet: null
+            region:
+              name: New York 3
+              slug: nyc3
+              features:
+                - private_networking
+                - backups
+                - ipv6
+                - metadata
+                - install_agent
+                - storage
+                - image_transfer
+              available: true
+              sizes:
+                - s-1vcpu-1gb
+                - s-1vcpu-2gb
+                - s-1vcpu-3gb
+                - s-2vcpu-2gb
+                - s-3vcpu-1gb
+                - s-2vcpu-4gb
+                - s-4vcpu-8gb
+                - s-6vcpu-16gb
+                - s-8vcpu-32gb
+                - s-12vcpu-48gb
+                - s-16vcpu-64gb
+                - s-20vcpu-96gb
+                - s-24vcpu-128gb
+                - s-32vcpu-192g
+            locked: false
         links: {}
         meta:
           total: 1

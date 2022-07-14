@@ -8,21 +8,24 @@ page_links:
   type: object
   properties:
     pages:
+      type: object
       anyOf:
         - $ref: '#/forward_links'
         - $ref: '#/backward_links'
         - {}
       example:
         pages:
-          first: "https://api.digitalocean.com/v2/account/keys?page=1"
-          prev: "https://api.digitalocean.com/v2/account/keys?page=2"
- 
+          first: 'https://api.digitalocean.com/v2/account/keys?page=1'
+          prev: 'https://api.digitalocean.com/v2/account/keys?page=2'
+
 backward_links:
+  type: object
   allOf:
     - $ref: '#/link_to_first_page'
     - $ref: '#/link_to_prev_page'
 
 forward_links:
+  type: object
   allOf:
     - $ref: '#/link_to_last_page'
     - $ref: '#/link_to_next_page'
@@ -33,7 +36,7 @@ link_to_first_page:
     first:
       description: URI of the first page of the results.
       type: string
-      example: "https://api.digitalocean.com/v2/images?page=1"
+      example: 'https://api.digitalocean.com/v2/images?page=1'
 
 link_to_prev_page:
   type: object
@@ -41,7 +44,7 @@ link_to_prev_page:
     prev:
       description: URI of the previous page of the results.
       type: string
-      example: "https://api.digitalocean.com/v2/images?page=1"
+      example: 'https://api.digitalocean.com/v2/images?page=1'
 
 link_to_next_page:
   type: object
@@ -49,7 +52,7 @@ link_to_next_page:
     next:
       description: URI of the next page of the results.
       type: string
-      example: "https://api.digitalocean.com/v2/images?page=2"
+      example: 'https://api.digitalocean.com/v2/images?page=2'
 
 link_to_last_page:
   type: object
@@ -57,4 +60,4 @@ link_to_last_page:
     last:
       description: URI of the last page of the results.
       type: string
-      example: "https://api.digitalocean.com/v2/images?page=2"
+      example: 'https://api.digitalocean.com/v2/images?page=2'

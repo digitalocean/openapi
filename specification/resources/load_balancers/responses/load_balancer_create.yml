@@ -11,6 +11,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         load_balancer:
           $ref: '../models/load_balancer.yml'

@@ -13,10 +13,10 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       allOf:
         - type: object
           properties:
-
             invoice_items:
               type: array
               items:
@@ -27,7 +27,6 @@ content:
 
       example:
         invoice_items:
-
           - product: Kubernetes Clusters
             resource_uuid: 711157cb-37c8-4817-b371-44fa3504a39c
             group_description: my-doks-cluster

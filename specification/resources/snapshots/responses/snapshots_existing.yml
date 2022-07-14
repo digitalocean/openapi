@@ -12,6 +12,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         snapshot:
           $ref: '../models/snapshots.yml'

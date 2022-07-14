@@ -12,6 +12,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         project:
           $ref: '../models/project.yml#/project'

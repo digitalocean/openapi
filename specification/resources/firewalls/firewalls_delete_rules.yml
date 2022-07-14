@@ -22,15 +22,17 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         allOf:
           - $ref: 'models/firewall_rule.yml#/firewall_rules'
-          - anyOf:
-            - title: Inbound Rules
-              required:
-                - inbound_rules
-            - title: Outbound Rules
-              required:
-                - outbound_rules
+          - type: object
+            anyOf:
+              - title: Inbound Rules
+                required:
+                  - inbound_rules
+              - title: Outbound Rules
+                required:
+                  - outbound_rules
 
       example:
         inbound_rules:
@@ -75,4 +77,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

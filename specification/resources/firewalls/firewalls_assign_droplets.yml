@@ -21,6 +21,7 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         properties:
           droplet_ids:
             type: array
@@ -68,4 +69,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

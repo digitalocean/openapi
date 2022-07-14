@@ -11,13 +11,14 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       allOf:
         - type: object
           properties:
             firewalls:
               type: array
               items:
-                $ref: '../../firewalls/models/firewall.yml' 
+                $ref: '../../firewalls/models/firewall.yml'
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
@@ -45,13 +46,13 @@ content:
                   - 1.2.3.4
                   - 18.0.0.0/8
                 droplet_ids:
-                    - 8282823
-                    - 3930392
+                  - 8282823
+                  - 3930392
                 load_balancer_uids:
-                    - 4de7ac8b-495b-4884-9a69-1050c6793cd6
+                  - 4de7ac8b-495b-4884-9a69-1050c6793cd6
                 tags:
-                    - base-image
-                    - dev
+                  - base-image
+                  - dev
           outbound_rules:
             - protocol: tcp
               ports: 7000-9000

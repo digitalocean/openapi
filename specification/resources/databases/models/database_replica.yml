@@ -49,7 +49,7 @@ properties:
     type: string
     format: date-time
     example: 2019-01-11T18:37:36Z
-    description:  >-
+    description: >-
       A time value given in ISO8601 combined date and time format that represents
       when the database cluster was created.
     readOnly: true
@@ -63,14 +63,16 @@ properties:
       account's default VPC for the region.
 
   connection:
+    type: object
     allOf:
-    - readOnly: true
-    - $ref: './database_connection.yml'
+      - readOnly: true
+      - $ref: './database_connection.yml'
 
   private_connection:
+    type: object
     allOf:
-    - readOnly: true
-    - $ref: './database_connection.yml'
+      - readOnly: true
+      - $ref: './database_connection.yml'
 
 required:
   - name

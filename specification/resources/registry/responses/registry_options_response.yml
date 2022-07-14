@@ -21,14 +21,15 @@ content:
               type: array
               items:
                 type: string
-              example: 
-              - nyc3
+              example:
+                - nyc3
             subscription_tiers:
               type: array
               items:
+                type: object
                 allOf:
-                - $ref: '../models/subscription_tier.yml#/subscription_tier_base'
-                - $ref: '../models/subscription_tier.yml#/subscription_tier_extended'
+                  - $ref: '../models/subscription_tier.yml#/subscription_tier_base'
+                  - $ref: '../models/subscription_tier.yml#/subscription_tier_extended'
 
     example:
       options:

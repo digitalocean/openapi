@@ -14,9 +14,11 @@ properties:
     example: nyc3
 
   features:
+    type: array
     items:
       type: string
-    description: This attribute is set to an array which contains features available
+    description:
+      This attribute is set to an array which contains features available
       in this region
     example:
       - private_networking
@@ -36,7 +38,8 @@ properties:
   sizes:
     items:
       type: string
-    description: This attribute is set to an array which contains the identifying
+    description:
+      This attribute is set to an array which contains the identifying
       slugs for the sizes available in this region.
     example:
       - s-1vcpu-1gb

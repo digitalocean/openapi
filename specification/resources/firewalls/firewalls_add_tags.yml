@@ -21,8 +21,10 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         properties:
           tags:
+            type: object
             allOf:
               - $ref: '../../shared/attributes/tags_array.yml'
               - description: >-
@@ -65,4 +67,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

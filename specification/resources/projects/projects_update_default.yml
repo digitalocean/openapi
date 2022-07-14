@@ -2,7 +2,8 @@ operationId: projects_update_default
 
 summary: Update the Default Project
 
-description: To update you default project, send a PUT request to `/v2/projects/default`.
+description:
+  To update you default project, send a PUT request to `/v2/projects/default`.
   All of the following attributes must be sent.
 
 tags:
@@ -14,15 +15,16 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         allOf:
-        - $ref: 'models/project.yml#/project'
-
-        required:
-        - name
-        - description
-        - purpose
-        - environment
-        - is_default
+          - $ref: 'models/project.yml#/project'
+          - type: object
+            required:
+              - name
+              - description
+              - purpose
+              - environment
+              - is_default
 
 responses:
   '200':
@@ -50,4 +52,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

@@ -13,17 +13,19 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         allOf:
           - $ref: 'models/firewall.yml'
           - required:
               - name
-          - anyOf:
-            - title: Inbound Rules
-              required:
-              - inbound_rules
-            - title: Outbound Rules
-              required:
-              - outbound_rules
+          - type: object
+            anyOf:
+              - title: Inbound Rules
+                required:
+                  - inbound_rules
+              - title: Outbound Rules
+                required:
+                  - outbound_rules
 
       example:
         name: firewall
@@ -46,7 +48,7 @@ requestBody:
             destinations:
               addresses:
                 - 0.0.0.0/0
-                - "::/0"
+                - '::/0'
         droplet_ids:
           - 8043964
 
@@ -76,4 +78,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

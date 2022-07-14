@@ -11,6 +11,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       allOf:
         - type: object
           properties:
@@ -23,17 +24,17 @@ content:
 
     example:
       backups:
-      - id: 67539192
-        name: web-01- 2020-07-29
-        distribution: Ubuntu
-        slug: null
-        public: false
-        regions:
-        - nyc3
-        created_at: '2020-07-29T01:44:35Z'
-        min_disk_size: 50
-        size_gigabytes: 2.34
-        type: backup
+        - id: 67539192
+          name: web-01- 2020-07-29
+          distribution: Ubuntu
+          slug: null
+          public: false
+          regions:
+            - nyc3
+          created_at: '2020-07-29T01:44:35Z'
+          min_disk_size: 50
+          size_gigabytes: 2.34
+          type: backup
       links: {}
       meta:
         total: 1

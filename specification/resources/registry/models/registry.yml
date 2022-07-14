@@ -39,6 +39,7 @@ properties:
       the registry.
 
   subscription:
+    type: object
     allOf:
-    - readOnly: true
-    - $ref: 'subscription.yml'
+      - readOnly: true
+      - $ref: 'subscription.yml'

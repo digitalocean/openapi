@@ -14,9 +14,10 @@ properties:
       for this Droplet.
 
   image:
+    type: object
     oneOf:
-    - type: string
-    - type: integer
+      - type: string
+      - type: integer
     example: ubuntu-20-04-x64
     description: The image ID of a public or private image or the slug
       identifier for a public image. This image will be the base image for
@@ -25,12 +26,13 @@ properties:
   ssh_keys:
     type: array
     items:
+      type: object
       anyOf:
-      - type: string
-      - type: integer
+        - type: string
+        - type: integer
     example:
-    - 289794
-    - 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
+      - 289794
+      - 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
     default: []
     description: An array containing the IDs or fingerprints of the SSH keys
       that you wish to embed in the Droplet's root account upon creation.
@@ -39,7 +41,8 @@ properties:
     type: boolean
     example: true
     default: false
-    description: A boolean indicating whether automated backups should be enabled
+    description:
+      A boolean indicating whether automated backups should be enabled
       for the Droplet.
 
   ipv6:
@@ -61,8 +64,8 @@ properties:
       type: string
     nullable: true
     example:
-    - env:prod
-    - web
+      - env:prod
+      - web
     default: []
     description: A flat array of tag names as strings to apply to the Droplet
       after it is created. Tag names can either be existing or new tags.
@@ -104,6 +107,6 @@ properties:
       to `true`.
 
 required:
-- region
-- size
-- image
+  - region
+  - size
+  - image

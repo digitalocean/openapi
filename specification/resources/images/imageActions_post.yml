@@ -27,6 +27,7 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         anyOf:
           - $ref: 'models/image_action.yml#/image_action_base'
           - $ref: 'models/image_action.yml#/image_action_transfer'
@@ -62,4 +63,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

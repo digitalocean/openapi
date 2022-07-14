@@ -14,10 +14,11 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       allOf:
         - type: object
           properties:
-            actions: 
+            actions:
               type: array
               items:
                 $ref: '../../actions/models/action.yml'

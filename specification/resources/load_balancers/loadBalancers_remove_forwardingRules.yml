@@ -24,6 +24,7 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         properties:
           forwarding_rules:
             type: array
@@ -31,7 +32,7 @@ requestBody:
             items:
               $ref: 'models/forwarding_rule.yml'
         required:
-         - forwarding_rules
+          - forwarding_rules
 
 responses:
   '204':
@@ -59,4 +60,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

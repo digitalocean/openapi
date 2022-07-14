@@ -2,10 +2,11 @@ type: object
 
 properties:
   meta:
+    type: object
     allOf:
       - $ref: './models/meta_properties.yml'
-      - required:
-          - total
+    required:
+      - total
 
 required:
   - meta

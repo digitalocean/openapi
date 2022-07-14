@@ -31,6 +31,7 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         allOf:
           - $ref: 'models/database_cluster.yml'
           - type: object
@@ -47,7 +48,7 @@ requestBody:
             size: db-s-2vcpu-4gb
             num_nodes: 2
             tags:
-            - production
+              - production
 
         Create a New Database Cluster with trusted sources:
           value:
@@ -106,4 +107,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

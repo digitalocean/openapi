@@ -13,6 +13,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         ssh_key:
           $ref: '../models/sshKeys.yml'
@@ -29,4 +30,3 @@ links:
 
   sshKeys_delete_by_fingerprint:
     $ref: '../links/sshKeys_delete_by_fingerprint.yml'
-

@@ -46,9 +46,13 @@ properties:
     example: droplet
 
   region:
-      $ref: '../../regions/models/region.yml'
+    $ref: '../../regions/models/region.yml'
 
   region_slug:
+    # This results in a PreCheck/SchemaMissingType warning during client gen
+    # because the region_slug property doesn't have a type defined
+    # but the type is defined in the allOf ref as well and is included in the
+    # second allOf value
     allOf:
       - $ref: '../../regions/models/region.yml#/properties/slug'
       - type: string

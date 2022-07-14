@@ -7,7 +7,6 @@ description: >-
   Tags have two attributes: a user defined `name` attribute and an embedded `resources` attribute with information about resources that have been tagged.
 
 properties:
-
   name:
     type: string
     description: |
@@ -31,7 +30,8 @@ properties:
     readOnly: true
     allOf:
       - $ref: 'tags_metadata.yml'
-      - properties:
+      - type: object
+        properties:
           droplets:
             $ref: 'tags_metadata.yml'
           imgages:

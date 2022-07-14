@@ -11,40 +11,43 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       oneOf:
-      - title: Single Droplet Response
-        properties:
-          droplet:
-            $ref: '../models/droplet.yml'
-          links:
-            type: object
-            properties:
-              actions:
-                type: array
-                items:
-                  $ref: '../../../shared/models/action_link.yml'
-
-        required:
-        - droplet
-        - links
-
-      - title: Multiple Droplet Response
-        properties:
-          droplets:
-            type: array
-            items:
+        - title: Single Droplet Response
+          type: object
+          properties:
+            droplet:
               $ref: '../models/droplet.yml'
-          links:
-            type: object
-            properties:
-              actions:
-                type: array
-                items:
-                  $ref: '../../../shared/models/action_link.yml'
+            links:
+              type: object
+              properties:
+                actions:
+                  type: array
+                  items:
+                    $ref: '../../../shared/models/action_link.yml'
 
-        required:
-        - droplets
-        - links
+          required:
+            - droplet
+            - links
+
+        - title: Multiple Droplet Response
+          type: object
+          properties:
+            droplets:
+              type: array
+              items:
+                $ref: '../models/droplet.yml'
+            links:
+              type: object
+              properties:
+                actions:
+                  type: array
+                  items:
+                    $ref: '../../../shared/models/action_link.yml'
+
+          required:
+            - droplets
+            - links
 
     examples:
       Single Droplet Create Response:

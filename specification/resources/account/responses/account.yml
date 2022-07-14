@@ -12,6 +12,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         account:
           $ref: '../models/account.yml'

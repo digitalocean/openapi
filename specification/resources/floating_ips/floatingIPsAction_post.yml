@@ -3,17 +3,17 @@ operationId: floatingIPsAction_post
 summary: Initiate a Floating IP Action
 
 description: |
-    To initiate an action on a floating IP send a POST request to
-    `/v2/floating_ips/$FLOATING_IP/actions`. In the JSON body to the request,
-    set the `type` attribute to on of the supported action types:
+  To initiate an action on a floating IP send a POST request to
+  `/v2/floating_ips/$FLOATING_IP/actions`. In the JSON body to the request,
+  set the `type` attribute to on of the supported action types:
 
-    | Action     | Details
-    |------------|--------
-    | `assign`   | Assigns a floating IP to a Droplet
-    | `unassign` | Unassign a floating IP from a Droplet
+  | Action     | Details
+  |------------|--------
+  | `assign`   | Assigns a floating IP to a Droplet
+  | `unassign` | Unassign a floating IP from a Droplet
 
 tags:
-  -  Floating IP Actions
+  - Floating IP Actions
 
 parameters:
   - $ref: 'parameters.yml#/floating_ip'
@@ -26,6 +26,7 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         anyOf:
           - $ref: 'models/floating_ip_actions.yml#/floating_ip_action_unassign'
           - $ref: 'models/floating_ip_actions.yml#/floating_ip_action_assign'
@@ -61,4 +62,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

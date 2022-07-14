@@ -13,10 +13,11 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       allOf:
         - type: object
           properties:
-            images: 
+            images:
               type: array
               items:
                 $ref: '../models/image.yml'
@@ -31,9 +32,9 @@ content:
         $ref: 'examples.yml#/images_snapshots'
       Distribution:
         $ref: 'examples.yml#/images_distribution'
-      Custom: 
+      Custom:
         $ref: 'examples.yml#/images_custom'
-      Application: 
+      Application:
         $ref: 'examples.yml#/images_application'
-      Tagged: 
+      Tagged:
         $ref: 'examples.yml#/images_tagged'

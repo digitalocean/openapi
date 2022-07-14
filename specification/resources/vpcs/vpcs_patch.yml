@@ -18,9 +18,10 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         allOf:
-        - $ref: 'models/vpc.yml#/vpc_updatable'
-        - $ref: 'models/vpc.yml#/vpc_default'
+          - $ref: 'models/vpc.yml#/vpc_updatable'
+          - $ref: 'models/vpc.yml#/vpc_default'
 
 responses:
   '200':
@@ -47,4 +48,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

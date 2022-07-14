@@ -1,34 +1,38 @@
+type: object
+
 oneOf:
   - title: Assign Droplets by ID
+    type: object
     allOf:
-    - type: object
-      properties:
-        $ref: 'attributes.yml#/load_balancer_droplet_ids'
+      - type: object
+        properties:
+          $ref: 'attributes.yml#/load_balancer_droplet_ids'
 
-    - type: object
-      properties:
-        region:
-          $ref: '../../../shared/attributes/region_slug.yml'
+      - type: object
+        properties:
+          region:
+            $ref: '../../../shared/attributes/region_slug.yml'
 
-    - $ref: 'load_balancer_base.yml'
+      - $ref: 'load_balancer_base.yml'
 
     required:
-    - droplet_ids
-    - region
+      - droplet_ids
+      - region
 
   - title: Assign Droplets by Tag
+    type: object
     allOf:
-    - type: object
-      properties:
-        $ref: 'attributes.yml#/load_balancer_droplet_tag'
+      - type: object
+        properties:
+          $ref: 'attributes.yml#/load_balancer_droplet_tag'
 
-    - type: object
-      properties:
-        region:
-          $ref: '../../../shared/attributes/region_slug.yml'
+      - type: object
+        properties:
+          region:
+            $ref: '../../../shared/attributes/region_slug.yml'
 
-    - $ref: 'load_balancer_base.yml'
+      - $ref: 'load_balancer_base.yml'
 
     required:
-    - tag
-    - region
+      - tag
+      - region

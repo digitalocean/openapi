@@ -1,4 +1,3 @@
-
 operationId: projects_create
 
 summary: Create a Project
@@ -14,12 +13,13 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         allOf:
-        - $ref: 'models/project.yml#/project_base'
+          - $ref: 'models/project.yml#/project_base'
 
         required:
-        - name
-        - purpose
+          - name
+          - purpose
 
 responses:
   '201':
@@ -44,4 +44,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

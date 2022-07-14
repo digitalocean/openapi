@@ -22,6 +22,7 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         anyOf:
           - $ref: 'models/domain_record_types.yml#/domain_record_a'
           - $ref: 'models/domain_record_types.yml#/domain_record_aaaa'
@@ -82,4 +83,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

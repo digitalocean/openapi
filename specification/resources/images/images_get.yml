@@ -21,6 +21,7 @@ parameters:
       **Private** images *must* be identified by image `id`.
     required: true
     schema:
+      # This schema results in a PreCheck/SchemaMissingType during client gen
       anyOf:
         - type: integer
         - type: string
@@ -58,5 +59,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'read'
-
+      - 'read'

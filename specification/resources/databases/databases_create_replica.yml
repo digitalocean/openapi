@@ -26,8 +26,9 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         allOf:
-        - $ref: 'models/database_replica.yml'
+          - $ref: 'models/database_replica.yml'
         required:
           - name
           - size
@@ -62,4 +63,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

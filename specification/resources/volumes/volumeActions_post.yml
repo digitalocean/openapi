@@ -45,6 +45,7 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         anyOf:
           - $ref: 'models/volume_action_post_attach.yml'
           - $ref: 'models/volume_action_post_detach.yml'
@@ -53,7 +54,6 @@ requestBody:
           mapping:
             attach: 'models/volume_action_post_attach.yml'
             detach: 'models/volume_action_post_detach.yml'
-
 
       examples:
         VolumeActionAttach:
@@ -96,4 +96,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

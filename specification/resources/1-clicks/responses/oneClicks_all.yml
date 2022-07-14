@@ -11,6 +11,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         1_clicks:
           type: array
@@ -20,7 +21,7 @@ content:
       All 1-Click Applications:
         value:
           1_clicks:
-          - slug: monitoring
-            type: kubernetes
-          - slug: wordpress-18-04
-            type: droplet
+            - slug: monitoring
+              type: kubernetes
+            - slug: wordpress-18-04
+              type: droplet

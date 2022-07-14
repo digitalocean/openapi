@@ -1,4 +1,5 @@
 domain_record_a:
+  type: object
   allOf:
     - $ref: domain_record.yml
     - required:
@@ -7,6 +8,7 @@ domain_record_a:
         - data
 
 domain_record_aaaa:
+  type: object
   allOf:
     - $ref: domain_record.yml
     - required:
@@ -15,6 +17,7 @@ domain_record_aaaa:
         - data
 
 domain_record_caa:
+  type: object
   allOf:
     - $ref: domain_record.yml
     - required:
@@ -25,6 +28,7 @@ domain_record_caa:
         - tag
 
 domain_record_cname:
+  type: object
   allOf:
     - $ref: domain_record.yml
     - required:
@@ -33,6 +37,7 @@ domain_record_cname:
         - data
 
 domain_record_mx:
+  type: object
   allOf:
     - $ref: domain_record.yml
     - required:
@@ -41,6 +46,7 @@ domain_record_mx:
         - priority
 
 domain_record_ns:
+  type: object
   allOf:
     - $ref: domain_record.yml
     - required:
@@ -51,6 +57,7 @@ domain_record_ns:
         - tag
 
 domain_record_soa:
+  type: object
   allOf:
     - $ref: domain_record.yml
     - required:
@@ -58,6 +65,7 @@ domain_record_soa:
         - ttl
 
 domain_record_srv:
+  type: object
   allOf:
     - $ref: domain_record.yml
     - required:
@@ -70,6 +78,7 @@ domain_record_srv:
         - tag
 
 domain_record_txt:
+  type: object
   allOf:
     - $ref: domain_record.yml
     - required:

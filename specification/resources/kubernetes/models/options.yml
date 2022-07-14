@@ -1,8 +1,8 @@
 kubernetes_options:
-
   type: object
   properties:
     options:
+      type: object
       properties:
         regions:
           type: array
@@ -36,9 +36,9 @@ kubernetes_version:
       items:
         type: string
       example:
-      - cluster-autoscaler
-      - docr-integration
-      - token-authentication
+        - cluster-autoscaler
+        - docr-integration
+        - token-authentication
       description: The features available with the version of Kubernetes
         provided by a given slug.
 

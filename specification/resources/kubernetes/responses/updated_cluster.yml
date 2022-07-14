@@ -14,6 +14,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         kubernetes_cluster:
           $ref: '../models/cluster.yml'

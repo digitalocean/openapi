@@ -5,16 +5,17 @@ properties:
     description: >-
       An array of objects containing resource_id and resource_type 
       attributes.
-    
+
     type: array
-    
+
     items:
+      type: object
       properties:
         resource_id:
           type: string
           description: The identifier of a resource.
           example: 3d80cb72-342b-4aaa-b92e-4e4abb24a933
-        
+
         resource_type:
           type: string
           description: The type of the resource.
@@ -24,7 +25,7 @@ properties:
             - image
             - volume
             - volume_snapshot
-    
+
     example:
       - resource_id: '9569411'
         resource_type: droplet

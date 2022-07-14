@@ -21,7 +21,6 @@ volume_write_file_system_type:
       EXT4: './volumes_ext4.yml'
       XFS: './volumes_xfs.yml'
 
-
 volume_write_file_system_label:
   type: string
   description: >-
@@ -31,7 +30,6 @@ volume_write_file_system_label:
     May only be used in conjunction with filesystem_type.
   example: example
 
-
 volume_action_droplet_id:
   type: integer
   description: >-
@@ -40,6 +38,7 @@ volume_action_droplet_id:
   example: 11612190
 
 volume_snapshot_id:
+  type: object
   properties:
     snapshot_id:
       type: string

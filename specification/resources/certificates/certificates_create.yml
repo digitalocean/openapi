@@ -22,9 +22,10 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         oneOf:
-        - $ref: 'models/certificate_create.yml#/certificate_request_lets_encrypt'
-        - $ref: 'models/certificate_create.yml#/certificate_request_custom'
+          - $ref: 'models/certificate_create.yml#/certificate_request_lets_encrypt'
+          - $ref: 'models/certificate_create.yml#/certificate_request_custom'
 
 responses:
   '201':
@@ -49,4 +50,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

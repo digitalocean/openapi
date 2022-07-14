@@ -22,13 +22,14 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         properties:
           nodes:
             type: array
             items:
               type: string
             example:
-            - d8db5e1a-6103-43b5-a7b3-8a948210a9fc
+              - d8db5e1a-6103-43b5-a7b3-8a948210a9fc
 
 responses:
   '202':
@@ -50,4 +51,4 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

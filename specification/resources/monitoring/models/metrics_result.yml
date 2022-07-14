@@ -10,18 +10,20 @@ properties:
     additionalProperties:
       type: string
     example:
-      host_id: "19201920"
+      host_id: '19201920'
   values:
     type: array
     example:
       - - 1435781430
-        - "1"
+        - '1'
       - - 1435781445
-        - "1"
+        - '1'
 
     items:
       type: array
       items:
+        # Client gen reports a PreCheck/SchemaMissingType warning here.
+        # However, this is a valid configuration.
         oneOf:
           - type: integer
           - type: string

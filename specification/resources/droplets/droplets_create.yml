@@ -36,6 +36,7 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         oneOf:
           - $ref: 'models/droplet_single_create.yml'
           - $ref: 'models/droplet_multi_create.yml'

@@ -13,6 +13,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         action:
           $ref: '../models/volumeAction.yml'

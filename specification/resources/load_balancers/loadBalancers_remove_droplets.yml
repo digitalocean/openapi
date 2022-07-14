@@ -23,10 +23,11 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         properties:
           $ref: 'models/attributes.yml#/load_balancer_droplet_ids'
         required:
-         - droplet_ids
+          - droplet_ids
 
 responses:
   '204':
@@ -54,4 +55,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

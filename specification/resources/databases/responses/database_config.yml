@@ -14,6 +14,7 @@ content:
       type: object
       properties:
         config:
+          type: object
           anyOf:
             - $ref: '../models/mysql.yml'
             - $ref: '../models/postgres.yml'

@@ -9,6 +9,7 @@ content:
           type: boolean
           description: Indicates whether the app can be rolled back to the specified deployment.
         error:
+          type: object
           allOf:
             - description: Contains the failing condition that is causing the rollback to be invalid.
             - $ref: ../models/app_rollback_validation_condition.yml
@@ -18,17 +19,17 @@ content:
           items:
             $ref: ../models/app_rollback_validation_condition.yml
     examples:
-      "Valid rollback":
+      'Valid rollback':
         value:
           valid: true
-      "Valid rollback with warnings":
+      'Valid rollback with warnings':
         value:
           valid: true
           warnings:
             - code: image_source_missing_digest
-              components: ["docker-worker"]
+              components: ['docker-worker']
               message: one or more components are missing an image digest and are not guaranteed rollback to the old version
-      "Invalid rollback":
+      'Invalid rollback':
         value:
           valid: false
           error:

@@ -19,6 +19,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         kubernetes_cluster:
           $ref: '../models/cluster.yml'
@@ -26,4 +27,4 @@ content:
       Kubernetes Cluster Response:
         $ref: 'examples.yml#/kubernetes_clusters_create_basic_response'
       Kubernetes Cluster with Multiple Node Pools Response:
-         $ref: 'examples.yml#/kubernetes_clusters_multi_pool_response'
+        $ref: 'examples.yml#/kubernetes_clusters_multi_pool_response'

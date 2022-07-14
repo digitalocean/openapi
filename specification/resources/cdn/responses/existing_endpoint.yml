@@ -13,6 +13,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         endpoint:
           $ref: '../models/cdn_endpoint.yml'

@@ -11,6 +11,7 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         dbs:
           type: array

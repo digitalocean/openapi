@@ -8,7 +8,7 @@ properties:
 
   billing_period:
     type: string
-    description: >- 
+    description: >-
       Billing period of usage for which the invoice is issued, in `YYYY-MM` 
       format.
     example: 2020-01
@@ -27,7 +27,8 @@ properties:
 
   user_billing_address:
     allOf:
-      - description: The billing address of the customer being invoiced.
+      - type: object
+        description: The billing address of the customer being invoiced.
       - $ref: 'billing_address.yml'
 
   user_company:
@@ -50,16 +51,19 @@ properties:
 
   overages:
     allOf:
-      - description: A summary of the overages contributing to the invoice.
+      - type: object
+        description: A summary of the overages contributing to the invoice.
       - $ref: 'simple_charge.yml'
 
   taxes:
     allOf:
-      - description: A summary of the taxes contributing to the invoice.
+      - type: object
+        description: A summary of the taxes contributing to the invoice.
       - $ref: 'simple_charge.yml'
 
   credits_and_adjustments:
     allOf:
-      - description: >- 
+      - type: object
+        description: >-
           A summary of the credits and adjustments contributing to the invoice.
       - $ref: 'simple_charge.yml'

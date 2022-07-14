@@ -15,12 +15,12 @@ tags:
   - Block Storage
 
 requestBody:
-
   required: true
 
   content:
     application/json:
       schema:
+        type: object
         anyOf:
           - $ref: 'models/volumes_ext4.yml'
           - $ref: 'models/volumes_xfs.yml'
@@ -85,4 +85,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

@@ -2,6 +2,7 @@ type: object
 
 properties:
   config:
+    type: object
     anyOf:
       - $ref: './mysql.yml'
       - $ref: './postgres.yml'

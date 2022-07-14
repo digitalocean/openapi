@@ -22,6 +22,7 @@ requestBody:
   content:
     application/json:
       schema:
+        type: object
         properties:
           version:
             type: string
@@ -54,4 +55,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

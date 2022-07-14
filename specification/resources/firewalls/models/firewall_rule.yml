@@ -73,6 +73,7 @@ firewall_rule_target:
         - 41b74c5d-9bd0-5555-5555-a57c495b81a3
 
     tags:
+      type: object
       allOf:
         - $ref: '../../../shared/attributes/tags_array.yml'
         - description: >-
@@ -89,10 +90,13 @@ firewall_rules:
       nullable: true
       type: array
       items:
+        type: object
         allOf:
           - $ref: '#/firewall_rule_base'
-          - properties:
+          - type: object
+            properties:
               sources:
+                type: object
                 allOf:
                   - $ref: '#/firewall_rule_target'
                   - description: >-
@@ -105,10 +109,13 @@ firewall_rules:
       nullable: true
       type: array
       items:
+        type: object
         allOf:
           - $ref: '#/firewall_rule_base'
-          - properties:
+          - type: object
+            properties:
               destinations:
+                type: object
                 allOf:
                   - $ref: '#/firewall_rule_target'
                   - description: >-

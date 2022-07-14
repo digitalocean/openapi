@@ -2,7 +2,8 @@ operationId: projects_update
 
 summary: Update a Project
 
-description: To update a project, send a PUT request to `/v2/projects/$PROJECT_ID`.
+description:
+  To update a project, send a PUT request to `/v2/projects/$PROJECT_ID`.
   All of the following attributes must be sent.
 
 tags:
@@ -18,14 +19,14 @@ requestBody:
     application/json:
       schema:
         allOf:
-        - $ref: 'models/project.yml#/project'
-
-        required:
-        - name
-        - description
-        - purpose
-        - environment
-        - is_default
+          - $ref: 'models/project.yml#/project'
+          - type: object
+            required:
+              - name
+              - description
+              - purpose
+              - environment
+              - is_default
 
 responses:
   '200':
@@ -53,4 +54,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'

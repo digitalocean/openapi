@@ -18,10 +18,11 @@ headers:
 content:
   application/json:
     schema:
+      type: object
       properties:
         image:
           $ref: '../models/image.yml'
-    
+
     example:
       image:
         created_at: '2018-09-20T19:28:00Z'
@@ -33,6 +34,6 @@ content:
         regions: []
         type: custom
         tags:
-        - base-image
-        - prod
+          - base-image
+          - prod
         status: NEW

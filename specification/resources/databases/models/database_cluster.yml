@@ -53,7 +53,7 @@ properties:
     type: string
     format: date-time
     example: 2019-01-11T18:37:36Z
-    description:  >-
+    description: >-
       A time value given in ISO8601 combined date and time format that represents
       when the database cluster was created.
     readOnly: true
@@ -70,7 +70,7 @@ properties:
     items:
       type: string
     example:
-     - production
+      - production
     nullable: true
     description: >-
       An array of tags that have been applied to the database cluster.
@@ -86,13 +86,15 @@ properties:
       An array of strings containing the names of databases created in the
       database cluster.
   connection:
+    type: object
     allOf:
-    - $ref: './database_connection.yml'
-    - readOnly: true
+      - $ref: './database_connection.yml'
+      - readOnly: true
   private_connection:
+    type: object
     allOf:
-    - $ref: './database_connection.yml'
-    - readOnly: true
+      - $ref: './database_connection.yml'
+      - readOnly: true
   users:
     type: array
     nullable: true
@@ -100,9 +102,10 @@ properties:
       $ref: './database_user.yml'
     readOnly: true
   maintenance_window:
+    type: object
     allOf:
-    - $ref: './database_maintenance_window.yml'
-    - readOnly: true
+      - $ref: './database_maintenance_window.yml'
+      - readOnly: true
   project_id:
     type: string
     format: uuid
