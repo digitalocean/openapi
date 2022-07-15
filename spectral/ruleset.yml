@@ -1,9 +1,3 @@
-aliases:
-  PathItem:
-    - $.paths[*]
-  OperationObject:
-    - '#PathItem[get,put,post,delete,options,head,patch,trace]'
-
 functions:
   - ensurePropertiesExample
   - ensureAllArraysHaveItemTypes
@@ -139,7 +133,7 @@ rules:
   operationid-must-follow-new-naming-conventions:
     description: operationIds must follow naming conventions for method
     type: style
-    given: '#OperationObject'
+    given: '$.paths[*][*]'
     severity: warn
     message: '{{error}}'
     then:
