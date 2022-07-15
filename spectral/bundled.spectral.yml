@@ -1,6 +1,6 @@
 extends:
   - [spectral:oas, all]
-  - ./spectral/ruleset.yml
+  - ./ruleset.yml
 
 formats: [oas3]
 
@@ -9,3 +9,4 @@ functionsDir: ./spectral/functions
 rules:
   contact-properties: off
   operation-singular-tag: off
+  endpoint-must-be-ref: off

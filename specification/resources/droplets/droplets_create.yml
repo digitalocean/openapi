@@ -1,4 +1,4 @@
-operationId: droplets_create 
+operationId: droplets_create
 
 summary: Create a New Droplet
 
@@ -69,4 +69,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'
