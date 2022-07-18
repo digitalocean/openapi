@@ -15,7 +15,7 @@ help:
 
 .PHONY: dev-dependencies
 dev-dependencies: ## Install development tooling using npm
-	npm install --only=dev
+	npm install
 
 .PHONY: start-mockedproxy
 start-mockedproxy: ## Start a prism proxy (port 8000) targeting a local mock api (port 4010)
