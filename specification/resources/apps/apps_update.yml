@@ -3,7 +3,7 @@ operationId: apps_update
 summary: Update an App
 
 description: Update an existing app by submitting a new app specification. For documentation
-  on app specifications (`AppSpec` objects), please refer to [the product documentation](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/).
+  on app specifications (`AppSpec` objects), please refer to [the product documentation](https://docs.digitalocean.com/products/app-platform/reference/app-spec/).
 
 tags:
 - Apps
