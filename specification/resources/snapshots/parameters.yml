@@ -18,7 +18,6 @@ snapshot_id:
     Either the ID of an existing snapshot. This will be an integer for
     a Droplet snapshot or a string for a volume snapshot.
   schema:
-    type: object
     anyOf:
       - type: integer
         description: The ID of a Droplet snapshot.

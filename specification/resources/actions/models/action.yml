@@ -49,10 +49,11 @@ properties:
     $ref: '../../regions/models/region.yml'
 
   region_slug:
-    # This results in a PreCheck/SchemaMissingType warning during client gen
-    # because the region_slug property doesn't have a type defined
-    # but the type is defined in the allOf ref as well and is included in the
-    # second allOf value
+    # This results in a the following warnings during client gen
+    # - PreCheck/SchemaMissingType
+    # - Modler/MissingType
+    # Although the region_slug property doesn't have a type defined the type is
+    # defined in the allOf refs
     allOf:
       - $ref: '../../regions/models/region.yml#/properties/slug'
       - type: string

@@ -29,7 +29,7 @@ content:
             description: CPU Alert
             enabled: true
             entities:
-              - 192018292
+              - '192018292'
             tags:
               - 'production_droplets'
             type: v1/insights/droplet/cpu

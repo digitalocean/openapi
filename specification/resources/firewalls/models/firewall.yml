@@ -77,11 +77,11 @@ allOf:
           - 8043964
 
       tags:
-        type: object
         allOf:
           - $ref: '../../../shared/attributes/tags_array.yml'
           - description: >-
               An array containing the names of the Tags assigned to the firewall.
-            example: gateway
+            example:
+              - gateway
 
   - $ref: 'firewall_rule.yml#/firewall_rules'

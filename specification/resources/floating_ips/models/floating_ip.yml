@@ -15,24 +15,23 @@ properties:
       The region that the floating IP is reserved to. When you query a floating
       IP, the entire region object will be returned.
     allOf:
-      - $ref: "../../regions/models/region.yml"
+      - $ref: '../../regions/models/region.yml'
       - type: object
         description: The region that the floating IP is reserved to. When you
           query a floating IP, the entire region object will be returned.
 
   droplet:
-    type: object
     description: The Droplet that the floating IP has been assigned to. When
       you query a floating IP, if it is assigned to a Droplet, the entire
       Droplet object will be returned. If it is not assigned, the value will
       be null.
     anyOf:
-      - title: "null"
+      - title: 'null'
         type: object
         nullable: true
         description: If the floating IP is not assigned to a Droplet, the
           value will be null.
-      - $ref: "../../droplets/models/droplet.yml"
+      - $ref: '../../droplets/models/droplet.yml'
     example: null
 
   locked:

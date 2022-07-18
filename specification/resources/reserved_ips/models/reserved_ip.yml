@@ -11,24 +11,23 @@ properties:
   region:
     type: object
     allOf:
-      - $ref: "../../regions/models/region.yml"
+      - $ref: '../../regions/models/region.yml'
       - type: object
         description: The region that the reserved IP is reserved to. When you
           query a reserved IP, the entire region object will be returned.
 
   droplet:
-    type: object
     description: The Droplet that the reserved IP has been assigned to. When
       you query a reserved IP, if it is assigned to a Droplet, the entire
       Droplet object will be returned. If it is not assigned, the value will
       be null.
     anyOf:
-      - title: "null"
+      - title: 'null'
         type: object
         nullable: true
         description: If the reserved IP is not assigned to a Droplet, the
           value will be null.
-      - $ref: "../../droplets/models/droplet.yml"
+      - $ref: '../../droplets/models/droplet.yml'
     example: null
 
   locked:
