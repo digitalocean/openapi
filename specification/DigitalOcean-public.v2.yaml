@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: '3.0.0'
 
 info:
   title: DigitalOcean API
@@ -192,7 +192,6 @@ tags:
       so1_5-16vcpu-128gb | 16 vCPU | 128 GB
       so1_5-24vcpu-192gb | 24 vCPU | 192 GB
       so1_5-32vcpu-256gb | 32 vCPU | 256 GB
-
 
   - name: Domain Records
     description: |-
@@ -571,7 +570,7 @@ paths:
     post:
       $ref: 'resources/apps/apps_cancel_deployment.yml'
 
-  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
+  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs: 
     get:
       $ref: 'resources/apps/apps_get_logs.yml'
 

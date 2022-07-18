@@ -6,12 +6,12 @@
  *
  */
 
-module.exports = (param, _, paths) => {
+export default (input, _, context) => {
     const re = RegExp('^(([A-Z0-9a-z]+([A-Z])*)(\.|_)*)+[A-Z0-9a-z]+$');
 
-    if (re.test(param)) { return }
+    if (re.test(input)) { return }
 
     return [{
-        message: `${paths.target ? paths.target.join('.') : 'property'} is not snake_case`
+        message: `${context.path ? context.path : 'property'} is not snake_case`
     }]
 }

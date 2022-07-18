@@ -19,33 +19,33 @@
   *
   */
 
-module.exports =(item, _, paths) => {
+export default (input, _, context) => {
   if (
-      paths.target.join('.').includes('properties.properties') ||
-      // skip if this is an example
-      paths.target.includes('example') ||
-      paths.target.includes('examples') ||
-      // objects are not basic values
-      item.type === 'object' ||
-      // binary values are not basic values
-      item.format === 'binary' ||
-      // arrays can be skipped unless they are string arrays
-      (item.type === 'array' && item.items && item.items.type !== 'string') ||
-      // skip if the property as a reference
-      item['$ref'] !== undefined ||
-      item.allOf !== undefined ||
-      // skip if this is a boolean; false is a valid example
-      item.type === 'boolean' ||
-      // allow an explicit example value of null
-      item.example === null ) { return }
+    context.path.join('.').includes('properties.properties') ||
+    // skip if this is an example
+    context.path.includes('example') ||
+    context.path.includes('examples') ||
+    // objects are not basic values
+    input.type === 'object' ||
+    // binary values are not basic values
+    input.format === 'binary' ||
+    // arrays can be skipped unless they are string arrays
+    (input.type === 'array' && input.items && input.items.type !== 'string') ||
+    // skip if the property as a reference
+    input['$ref'] !== undefined ||
+    input.allOf !== undefined ||
+    // skip if this is a boolean; false is a valid example
+    input.type === 'boolean' ||
+    // allow an explicit example value of null
+    input.example === null) { return }
 
   // if the item does not have an example
   // throw an error
-  if (item.example == undefined) {
+  if (input.example == undefined) {
     return [
       {
-        message: `${paths.target ? paths.target.join('.') : 'property'} does not include example`,
+        message: `${context.path ? context.path.join('.') : 'property'} does not include example`,
       }
     ]
   }
-}
+};
