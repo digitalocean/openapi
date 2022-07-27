@@ -64,7 +64,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ${{ fromJSON(steps.get-pr-branch.outputs.result).repo.full_name }}
-        ref: ${{ fromJSON(steps.get-pr-branch.outputs.result).ref }}
+        ref: ${{ fromJSON(steps.get-pr-branch.outputs.result).sha }}
 
     - name: Bundle
       if: steps.is-digitalocean-member.outputs.result == 'true'
