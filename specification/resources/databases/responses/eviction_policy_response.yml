@@ -11,6 +11,10 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/eviction_policy_model.yml'
-    example:
-      eviction_policy: noeviction
+      required:
+        - eviction_policy
+      properties:
+        eviction_policy:
+          allOf:
+            - $ref: '../models/eviction_policy_model.yml'
+          example: noeviction
