@@ -2,16 +2,8 @@ type: object
 
 properties:
   redis_maxmemory_policy:
-    type: string
-    enum:
-      - noeviction
-      - allkeys-lru
-      - volatile-lru
-      - allkeys-random
-      - volatile-random
-      - volatile-ttl
-      - volatile-lfu
-      - allkeys-lfu
+    allOf:
+      - $ref: 'eviction_policy_model.yml'
     default: noeviction
     example: allkeys-lru
   redis_pubsub_client_output_buffer_limit:
