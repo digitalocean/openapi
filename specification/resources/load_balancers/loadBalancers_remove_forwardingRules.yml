@@ -27,11 +27,11 @@ requestBody:
         properties:
           forwarding_rules:
             type: array
-            minimum: 1
+            minItems: 1
             items:
               $ref: 'models/forwarding_rule.yml'
         required:
-         - forwarding_rules
+          - forwarding_rules
 
 responses:
   '204':
@@ -59,4 +59,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'
