@@ -395,4 +395,11 @@ properties:
     example: 4
   timescaledb:
     $ref: './timescaledb.yml'
+  synchronous_replication:
+    description: Synchronous replication type. Note that the service plan also needs to support synchronous replication.
+    type: string
+    example: "off"
+    enum:
+      - 'off'
+      - 'quorum'
 
