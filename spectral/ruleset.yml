@@ -174,3 +174,19 @@ rules:
     message: '{{error}}'
     then:
       function: ensureSnakeCaseWithDigits
+  
+  oas3-operation-security-defined:
+    description: Check operation security is defined
+    severity: "error"
+    given: "$.paths.*.*"
+    then:
+      field: 'security'
+      function: truthy
+
+  oas3-operation-security-scopes-defined:
+    description: Check operation security's bearer_auth is defined
+    severity: "error"
+    given: "$.paths[*][*]..security.*"
+    then:
+      field: 'bearer_auth'
+      function: truthy
