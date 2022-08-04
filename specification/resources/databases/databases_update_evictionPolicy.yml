@@ -23,9 +23,7 @@ requestBody:
           - eviction_policy
         properties:
           eviction_policy:
-            allOf:
-              - $ref: 'models/eviction_policy_model.yml'
-            example: noeviction
+            $ref: 'models/eviction_policy_model.yml'
       example:
         eviction_policy: allkeys_lru
 
@@ -54,4 +52,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'
