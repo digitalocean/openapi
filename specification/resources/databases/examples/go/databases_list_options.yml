@@ -13,5 +13,5 @@ source: |-
       client := godo.NewFromToken(token)
       ctx := context.TODO()
 
-      rules, _, err := client.Databases.GetDBOptions(ctx)
+      options, _, err := client.Databases.ListDBOptions(ctx)
   }
