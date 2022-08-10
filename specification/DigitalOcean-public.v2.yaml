@@ -700,6 +700,10 @@ paths:
     get:
       $ref: 'resources/billing/invoices_get_summaryByUUID.yml'
 
+  /v2/databases/options:
+    get:
+      $ref: 'resources/databases/databases_list_options.yml'
+
   /v2/databases:
     get:
       $ref: 'resources/databases/databases_list_clusters.yml'
