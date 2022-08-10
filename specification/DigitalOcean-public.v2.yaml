@@ -1372,7 +1372,7 @@ paths:
     post:
       $ref: 'resources/volumes/volumeActions_post.yml'
 
-  /v2/volumes/snapshot/{snapshot_id}:
+  /v2/volumes/snapshots/{snapshot_id}:
     get:
       $ref: 'resources/volumes/volumeSnapshots_get_byId.yml'
     delete:
