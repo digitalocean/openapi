@@ -30,7 +30,9 @@ properties:
     example: defaultdb
   user:
     type: string
-    description: The name of the user for use with the connection pool.
+    description: >-
+      The name of the user for use with the connection pool. When excluded,
+      all sessions connect to the database as the inbound user.
     example: doadmin
   connection:
     allOf:
@@ -45,4 +47,3 @@ required:
   - mode
   - size
   - db
-  - user
