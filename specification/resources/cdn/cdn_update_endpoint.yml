@@ -22,7 +22,7 @@ requestBody:
         $ref: 'models/update_endpoint.yml'
 
 responses:
-  '202':
+  '200':
     $ref: 'responses/existing_endpoint.yml'
 
   '401':
