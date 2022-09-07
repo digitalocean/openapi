@@ -471,7 +471,7 @@ tags:
       Reserved IPs are bound to a specific region.
   
   - name: Serverless
-    description: Provides methods for CRUD operations for namespaces.
+    description: Provides methods for CRUD operations for function namespaces.
   
   - name: Sizes
     description: |-
