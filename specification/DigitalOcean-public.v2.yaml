@@ -1336,21 +1336,21 @@ paths:
 
   /v2/functions/namespaces:
     get:
-      $ref: 'resources/serverless/list_namespaces_get.yml'
+      $ref: 'resources/serverless/list_namespaces.yml'
 
     post:
-      $ref: 'resources/serverless/create_namespace_post.yml'
+      $ref: 'resources/serverless/create_namespace.yml'
 
   /v2/functions/namespaces/{namespace_id}:
     get:
-      $ref: 'resources/serverless/get_namespace_get.yml'
+      $ref: 'resources/serverless/get_namespace.yml'
 
     delete:
-      $ref: 'resources/serverless/delete_namespace_delete.yml'
+      $ref: 'resources/serverless/delete_namespace.yml'
 
   /v2/functions/sandbox:
     post:
-      $ref: 'resources/serverless/get_sandbox_post.yml'
+      $ref: 'resources/serverless/sandbox_post.yml'
 
   /v2/sizes:
     get:

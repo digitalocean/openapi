@@ -1,4 +1,4 @@
-operationId: create_namespace
+operationId: namespace_create
 
 summary: Create Namespace
 
@@ -37,3 +37,7 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/create_namespace.yml'
+
+security:
+  - bearer_auth:
+    - 'write'

@@ -1,0 +1,8 @@
+namespace_id:
+  name: namespace_id
+  description: The namespace-id of the account to be modified.
+  in: path
+  schema:
+    type: string
+  example: fn-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  required: true

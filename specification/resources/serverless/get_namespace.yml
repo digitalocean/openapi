@@ -1,12 +1,16 @@
-operationId: get_namespace
+operationId: namespace_get
 
 summary: Get Namespace
 
 description: >-
   Creates or Gets existing sandbox namespace for the given uuid.
-  * To get or create a new sandbox namespace, send a POST request to `/v2/functions/sandbox` with no params.
+  To get or create a new sandbox namespace, send a POST request to `/v2/functions/sandbox` with no params.
+
 tags:
   - Serverless
+
+parameters:
+  - $ref: 'parameters.yml#/namespace_id'
 
 responses:
   '200':
@@ -32,3 +36,7 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/sandbox_namespace.yml'
+
+security:
+  - bearer_auth:
+    - 'read'

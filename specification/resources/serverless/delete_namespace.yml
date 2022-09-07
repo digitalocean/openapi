@@ -1,16 +1,19 @@
-operationId: delete_namespace
+operationId: namespace_delete
 
 summary: Delete Namespace
 
 description: >-
   Deletes the given namespace.  When a namespace is deleted all assets in the namespace are deleted, this includes packages, functions and triggers. Deleting a namespace is a destructive operation and assets in the namespace are not recoverable when the namespace is deleted. Some metadata is retained (activations specifically) or soft deleted for reporting purposes (ie to show deleted namespaces in funcadmin).
-  * To delete namespace, send a DELETE request to `/v2/functions/namespaces/{{namespace_id}}`.
+  To delete namespace, send a DELETE request to `/v2/functions/namespaces/{{namespace_id}}`.
 
   A status of 204 will be given. This indicates that the request was processed
   successfully, but that no response body is needed.
 
 tags:
   - Serverless
+
+parameters:
+  - $ref: 'parameters.yml#/namespace_id'
 
 responses:
   '204':
@@ -33,3 +36,7 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/sandbox_namespace.yml'
+
+security:
+  - bearer_auth:
+    - 'write'
