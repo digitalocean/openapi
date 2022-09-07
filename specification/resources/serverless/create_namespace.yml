@@ -1,0 +1,39 @@
+operationId: create_namespace
+
+summary: Create Namespace
+
+description: >-
+  The API creates a new function namespace for the authenticated user (aka the subject) in the desired region and associates the given label to it. 
+  To create namespace, send a POST request to `/v2/functions/namespaces` with the `region` and `label` params.
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/create_namespace.yml'
+
+tags:
+  - Serverless
+
+responses:
+  '200':
+    $ref: 'responses/namespace_created.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/namespace_bad_request.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/create_namespace.yml'
