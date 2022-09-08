@@ -35,7 +35,7 @@ properties:
     description: A boolean value indicating whether or not the floating IP has
       pending actions preventing new ones from being submitted.
 
-  project_uuid:
+  project_id:
     type: string
     format: uuid
     example: 746c6152-2fa2-11ed-92d3-27aaa54e4988

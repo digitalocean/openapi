@@ -16,7 +16,7 @@ oneOf:
       type: string
       example: nyc3
       description: The slug identifier for the region the floating IP will be reserved to.
-    project_uuid:
+    project_id:
       type: string
       format: uuid
       example: 746c6152-2fa2-11ed-92d3-27aaa54e4988
