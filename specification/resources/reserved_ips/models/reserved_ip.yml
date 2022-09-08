@@ -34,3 +34,9 @@ properties:
     example: true
     description: A boolean value indicating whether or not the reserved IP has
       pending actions preventing new ones from being submitted.
+
+  project_uuid:
+    type: string
+    format: uuid
+    example: 746c6152-2fa2-11ed-92d3-27aaa54e4988
+    description: The UUID of the project to which the reserved IP currently belongs.

@@ -55,6 +55,7 @@ content:
             - s-24vcpu-128gb
             - s-32vcpu-192g
           locked: false
+          project_uuid: 746c6152-2fa2-11ed-92d3-27aaa54e4988
         links: {}
         meta:
           total: 1
