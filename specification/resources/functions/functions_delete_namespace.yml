@@ -1,4 +1,4 @@
-operationId: namespaces_delete
+operationId: functions_delete_namespace
 
 summary: Delete Namespace
 
@@ -10,7 +10,7 @@ description: >-
   successfully, but that no response body is needed.
 
 tags:
-  - Serverless
+  - Functions
 
 parameters:
   - $ref: 'parameters.yml#/namespace_id'

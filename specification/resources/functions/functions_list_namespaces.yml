@@ -1,4 +1,4 @@
-operationId: namespaces_list
+operationId: functions_list_namespaces
 
 summary: List Namespaces
 
@@ -7,7 +7,7 @@ description: >-
   To get all namespaces, send a GET request to `/v2/functions/namespaces`.
 
 tags:
-  - Serverless
+  - Functions
 
 responses:
   '200':

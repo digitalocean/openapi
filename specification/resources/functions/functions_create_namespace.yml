@@ -1,4 +1,4 @@
-operationId: namespaces_create
+operationId: functions_create_namespace
 
 summary: Create Namespace
 
@@ -14,7 +14,7 @@ requestBody:
         $ref: 'models/create_namespace.yml'
 
 tags:
-  - Serverless
+  - Functions
 
 responses:
   '200':

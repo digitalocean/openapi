@@ -318,6 +318,9 @@ tags:
       configurations requiring movable addresses.
 
       Floating IPs are bound to a specific region.
+  
+  - name: Functions
+    description: Provides methods for CRUD operations for function namespaces.
 
   - name: Image Actions
     description: |-
@@ -469,9 +472,6 @@ tags:
       setups or other configurations requiring movable addresses.
 
       Reserved IPs are bound to a specific region.
-  
-  - name: Serverless
-    description: Provides methods for CRUD operations for function namespaces.
   
   - name: Sizes
     description: |-
@@ -981,6 +981,24 @@ paths:
     get:
       $ref: 'resources/floating_ips/floatingIPsAction_get.yml'
 
+  /v2/functions/namespaces:
+    get:
+      $ref: 'resources/functions/functions_list_namespaces.yml'
+
+    post:
+      $ref: 'resources/functions/functions_create_namespace.yml'
+
+  /v2/functions/namespaces/{namespace_id}:
+    get:
+      $ref: 'resources/functions/functions_get_namespace.yml'
+
+    delete:
+      $ref: 'resources/functions/functions_delete_namespace.yml'
+
+  /v2/functions/sandbox:
+    post:
+      $ref: 'resources/functions/functions_create_sandbox.yml'
+
   /v2/images:
     get:
       $ref: 'resources/images/images_list.yml'
@@ -1333,24 +1351,6 @@ paths:
   /v2/reserved_ips/{reserved_ip}/actions/{action_id}:
     get:
       $ref: 'resources/reserved_ips/reservedIPsActions_get.yml'
-
-  /v2/functions/namespaces:
-    get:
-      $ref: 'resources/serverless/namespaces_list.yml'
-
-    post:
-      $ref: 'resources/serverless/namespaces_create.yml'
-
-  /v2/functions/namespaces/{namespace_id}:
-    get:
-      $ref: 'resources/serverless/namespaces_get.yml'
-
-    delete:
-      $ref: 'resources/serverless/namespaces_delete.yml'
-
-  /v2/functions/sandbox:
-    post:
-      $ref: 'resources/serverless/sandbox_get.yml'
 
   /v2/sizes:
     get:
