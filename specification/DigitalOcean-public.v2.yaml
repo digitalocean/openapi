@@ -472,7 +472,7 @@ tags:
       setups or other configurations requiring movable addresses.
 
       Reserved IPs are bound to a specific region.
-  
+
   - name: Sizes
     description: |-
       The sizes objects represent different packages of hardware resources that
