@@ -1,17 +1,17 @@
-operationId: sandbox_post
+operationId: namespaces_list
 
-summary: Sandbox
+summary: List Namespaces
 
 description: >-
-  Creates or Gets existing sandbox namespace for the given uuid.
-  To get or create a new sandbox namespace, send a POST request to `/v2/functions/sandbox` with no params.
+  Fetch all the functions namespaces associated with UUID. (List will not include AP- namespaces.)
+  To get all namespaces, send a GET request to `/v2/functions/namespaces`.
 
 tags:
   - Serverless
 
 responses:
   '200':
-    $ref: 'responses/namespace_created.yml'
+    $ref: 'responses/list_namespaces.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -26,8 +26,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/sandbox_namespace.yml'
+  - $ref: 'examples/curl/list_namespaces.yml'
 
 security:
   - bearer_auth:
-    - 'write'
+    - 'read'

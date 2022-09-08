@@ -1,4 +1,4 @@
-operationId: namespace_delete
+operationId: namespaces_delete
 
 summary: Delete Namespace
 

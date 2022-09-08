@@ -1,4 +1,4 @@
-operationId: namespace_create
+operationId: namespaces_create
 
 summary: Create Namespace
 
