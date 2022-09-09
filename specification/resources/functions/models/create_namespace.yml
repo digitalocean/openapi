@@ -2,7 +2,7 @@ type: object
 properties:
   region:
     type: string
-    example: nyc
+    example: nyc1
     description: The [datacenter region](https://docs.digitalocean.com/products/platform/availability-matrix/#available-datacenters) in which to create the namespace.
 
   label:

@@ -18,7 +18,7 @@ properties:
 
   region:
     type: string
-    example: nyc3
+    example: nyc1
     description: The namespace's datacenter region.
 
   uuid:
