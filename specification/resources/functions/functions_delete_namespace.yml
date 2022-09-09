@@ -35,7 +35,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/sandbox_namespace.yml'
+  - $ref: 'examples/curl/delete_namespace.yml'
 
 security:
   - bearer_auth:

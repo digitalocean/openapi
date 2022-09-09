@@ -3,8 +3,8 @@ operationId: functions_get_namespace
 summary: Get Namespace
 
 description: >-
-  Creates or Gets existing sandbox namespace for the given uuid.
-  To get or create a new sandbox namespace, send a POST request to `/v2/functions/sandbox` with no params.
+  Gets the namespace details for the given namespace id.
+  To get namespace details, send a GET request to `/v2/functions/namespaces/{{namespace_id}}` with no params.
 
 tags:
   - Functions
@@ -35,7 +35,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/sandbox_namespace.yml'
+  - $ref: 'examples/curl/get_namespace.yml'
 
 security:
   - bearer_auth:

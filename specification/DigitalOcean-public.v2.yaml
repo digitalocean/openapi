@@ -995,10 +995,6 @@ paths:
     delete:
       $ref: 'resources/functions/functions_delete_namespace.yml'
 
-  /v2/functions/sandbox:
-    post:
-      $ref: 'resources/functions/functions_create_sandbox.yml'
-
   /v2/images:
     get:
       $ref: 'resources/images/images_list.yml'
