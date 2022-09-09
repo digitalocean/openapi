@@ -1,6 +1,6 @@
-description: The response will be an array of JSON objects with a key called `namespaces`.
-  This will be set to an array of namespace objects, each of which will
-  contain the standard attributes associated with a namespace.
+description: |- 
+  An array of JSON objects with a key called `namespaces`.  Each object represents a namespace and contains
+  the properties associated with it. 
 
 headers:
   ratelimit-limit:

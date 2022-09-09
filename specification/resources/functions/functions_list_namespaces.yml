@@ -3,7 +3,7 @@ operationId: functions_list_namespaces
 summary: List Namespaces
 
 description: >-
-  Fetch all the functions namespaces for the user. (List will not include AP- namespaces.)
+  Returns a list of namespaces associated with the current user.
   To get all namespaces, send a GET request to `/v2/functions/namespaces`.
 
 tags:

@@ -14,19 +14,21 @@ properties:
   label:
     type: string
     example: my namespace
-    description: Namespace label. A unique identifier string.
+    description: The namespace's unique name.
 
   region:
     type: string
-    example: nyc
-    description: Region in which namespace created.
+    example: nyc3
+    description: The namespace's datacenter region.
 
   uuid:
     type: string
     example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-    description: A string format of uuid.
+    description: The namespace's Universally Unique Identifier.
 
   key:
     type: string
     example: d1zcd455h01mqjfs4s2eaewyejehi5f2uj4etqq3h7cera8iwkub6xg5of1wdde2
-    description: A random alpha numeric string.
+    description: |- 
+      A random alpha numeric string. This key is used in conjunction with the namespace's UUID to authenticate 
+      a user to use the namespace via `doctl`, DigitalOcean's official CLI.

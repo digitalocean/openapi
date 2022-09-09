@@ -3,8 +3,8 @@ operationId: functions_create_namespace
 summary: Create Namespace
 
 description: >-
-  The API creates a new function namespace for the authenticated user (aka the subject) in the desired region and associates the given label to it. 
-  To create namespace, send a POST request to `/v2/functions/namespaces` with the `region` and `label` params.
+  Creates a new serverless functions namespace in the desired region and associates it with the provided label. A namespace is a collection of functions and their associated packages, triggers, and project specifications.
+  To create namespace, send a POST request to `/v2/functions/namespaces` with the `region` and `label` properties.
 
 requestBody:
   required: true

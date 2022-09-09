@@ -320,7 +320,11 @@ tags:
       Floating IPs are bound to a specific region.
   
   - name: Functions
-    description: Provides methods for CRUD operations for function namespaces.
+    description: |-
+      [Serverless functions](https://docs.digitalocean.com/products/functions) are blocks of code that run on demand without the need to manage any infrastructure.
+      You can develop functions on your local machine and then deploy them to a namespace using `doctl`, the [official DigitalOcean CLI tool](https://docs.digitalocean.com/reference/doctl). 
+
+      The Serverless Functions API currently only supports creating and managing namespaces.
 
   - name: Image Actions
     description: |-

@@ -3,12 +3,12 @@ properties:
   region:
     type: string
     example: nyc
-    description: Region in which namespace will be created.
+    description: The [datacenter region](https://docs.digitalocean.com/products/platform/availability-matrix/#available-datacenters) in which to create the namespace.
 
   label:
     type: string
     example: my namespace
-    description: Namespace label.
+    description: The namespace's unique name.
 
 required:
   - region

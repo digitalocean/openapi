@@ -1,7 +1,7 @@
 
-description: The response will be a JSON object with a key called `namespace`.
-  The value of this will be an object that contains the standard attributes
-  associated with a namespace.
+description: |-
+  A JSON response object with a key called `namespace`. The object contains the properties associated
+  with the namespace.
 
 headers:
   ratelimit-limit:
