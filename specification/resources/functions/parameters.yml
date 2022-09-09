@@ -1,6 +1,6 @@
 namespace_id:
   name: namespace_id
-  description: The namespace-id of the account to be modified.
+  description: The ID of the namespace to be managed.
   in: path
   schema:
     type: string

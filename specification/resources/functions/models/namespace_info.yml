@@ -4,12 +4,13 @@ properties:
   api_host:
     type: string
     example: https://api_host.io
-    description: The api host for the namespace.
+    description: |- 
+      The namespace's API hostname. Each function in a namespace is provided an endpoint at the namespace's hostname.
 
   namespace:
     type: string
     example: fn-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-    description: A unique string format of uuid with a prefix fn-.
+    description: A unique string format of UUID with a prefix fn-.
 
   label:
     type: string

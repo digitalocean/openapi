@@ -3,8 +3,8 @@ operationId: functions_get_namespace
 summary: Get Namespace
 
 description: >-
-  Gets the namespace details for the given namespace id.
-  To get namespace details, send a GET request to `/v2/functions/namespaces/{{namespace_id}}` with no params.
+  Gets the namespace details for the given namespace UUID.
+  To get namespace details, send a GET request to `/v2/functions/namespaces/{{namespace_id}}` with no parameters.
 
 tags:
   - Functions
