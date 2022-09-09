@@ -11,4 +11,8 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/not_allowed.yml'
+      $ref: '../../../shared/models/error.yml'
+    example:
+      id: forbidden
+      message: 'not allowed to get namespace'
+      request_id: b11e45a4-892c-48c9-9001-b6cffe9fe795
