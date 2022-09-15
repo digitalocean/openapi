@@ -26,6 +26,9 @@ responses:
   '404':
     $ref: 'responses/namespace_bad_request.yml'
 
+  '422':
+    $ref: 'responses/namespace_limit_reached.yml'
+
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'
 

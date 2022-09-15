@@ -7,7 +7,7 @@ description: >-
   includes packages, functions and triggers. Deleting a namespace is a destructive operation and assets in the
   namespace are not recoverable after deletion. Some metadata is retained, such as activations, or soft deleted for reporting purposes.
 
-  To delete namespace, send a DELETE request to `/v2/functions/namespaces/{{namespace_id}}`.
+  To delete namespace, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID`.
 
   A successful deletion returns a 204 response.
 

@@ -11,6 +11,16 @@ properties:
     type: string
     example: fn-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     description: A unique string format of UUID with a prefix fn-.
+  
+  created_at:
+    type: string
+    example: 2022-09-14T04:16:45Z
+    description: UTC time string.
+
+  updated_at:
+    type: string
+    example: 2022-09-14T04:16:45Z
+    description: UTC time string.
 
   label:
     type: string
