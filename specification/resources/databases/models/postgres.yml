@@ -402,4 +402,8 @@ properties:
     enum:
       - 'off'
       - 'quorum'
-
+  stat_monitor_enable:
+    description: >-
+      Enable the pg_stat_monitor extension. <b>Enabling this extension will cause the cluster to be restarted.</b> When this extension is enabled, pg_stat_statements results for utility commands are unreliable.
+    type: boolean
+    example: false
