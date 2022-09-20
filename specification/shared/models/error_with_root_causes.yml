@@ -7,7 +7,7 @@ properties:
     example: not_found
 
   messages:
-    description: A list of legacy error messages.
+    description: A list of error messages.
     type: array
     items: 
       type: string
