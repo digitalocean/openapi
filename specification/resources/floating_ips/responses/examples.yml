@@ -32,6 +32,7 @@ floating_ip_assigning:
         - s-24vcpu-128gb
         - s-32vcpu-192g
       locked: true
+      project_id: 746c6152-2fa2-11ed-92d3-27aaa54e4988
     links:
       droplets:
       - id: 213939433
@@ -76,6 +77,7 @@ floating_ip_reserving:
         - s-24vcpu-128gb
         - s-32vcpu-192g
       locked: false
+      project_id: 746c6152-2fa2-11ed-92d3-27aaa54e4988
     links: {}
 
 floating_ip_reserved:
@@ -112,6 +114,7 @@ floating_ip_reserved:
         - s-24vcpu-128gb
         - s-32vcpu-192g
       locked: false
+      project_id: 746c6152-2fa2-11ed-92d3-27aaa54e4988
 
 floating_ip_assigned:
   summary: Assigned to Droplet
@@ -265,3 +268,4 @@ floating_ip_assigned:
         - s-24vcpu-128gb
         - s-32vcpu-192g
       locked: false
+      project_id: 746c6152-2fa2-11ed-92d3-27aaa54e4988

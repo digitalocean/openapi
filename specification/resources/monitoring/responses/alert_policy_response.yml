@@ -11,4 +11,6 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/alert_policy.yml'
+      properties:
+          policy:
+            $ref: '../models/alert_policy.yml'

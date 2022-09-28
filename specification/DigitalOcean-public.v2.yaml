@@ -193,6 +193,17 @@ tags:
       so1_5-24vcpu-192gb | 24 vCPU | 192 GB
       so1_5-32vcpu-256gb | 32 vCPU | 256 GB
 
+      For **Memory-Optimized nodes**, reference the following table for its slug:
+
+      Slug               | CPU     | RAM
+      -------------------|---------|---------
+      m-2vcpu-16gb       | 2 vCPU  | 16 GB
+      m-4vcpu-32gb       | 4 vCPU  | 32 GB
+      m-8vcpu-64gb       | 8 vCPU  | 64 GB
+      m-16vcpu-128gb     | 16 vCPU | 128 GB
+      m-24vcpu-192gb     | 24 vCPU | 192 GB
+      m-32vcpu-256gb     | 32 vCPU | 256 GB
+
   - name: Domain Records
     description: |-
       Domain record resources are used to set or retrieve information about the
@@ -307,6 +318,13 @@ tags:
       configurations requiring movable addresses.
 
       Floating IPs are bound to a specific region.
+  
+  - name: Functions
+    description: |-
+      [Serverless functions](https://docs.digitalocean.com/products/functions) are blocks of code that run on demand without the need to manage any infrastructure.
+      You can develop functions on your local machine and then deploy them to a namespace using `doctl`, the [official DigitalOcean CLI tool](https://docs.digitalocean.com/reference/doctl). 
+
+      The Serverless Functions API currently only supports creating and managing namespaces.
 
   - name: Image Actions
     description: |-
@@ -689,6 +707,10 @@ paths:
     get:
       $ref: 'resources/billing/invoices_get_summaryByUUID.yml'
 
+  /v2/databases/options:
+    get:
+      $ref: 'resources/databases/databases_list_options.yml'
+
   /v2/databases:
     get:
       $ref: 'resources/databases/databases_list_clusters.yml'
@@ -962,6 +984,20 @@ paths:
   /v2/floating_ips/{floating_ip}/actions/{action_id}:
     get:
       $ref: 'resources/floating_ips/floatingIPsAction_get.yml'
+
+  /v2/functions/namespaces:
+    get:
+      $ref: 'resources/functions/functions_list_namespaces.yml'
+
+    post:
+      $ref: 'resources/functions/functions_create_namespace.yml'
+
+  /v2/functions/namespaces/{namespace_id}:
+    get:
+      $ref: 'resources/functions/functions_get_namespace.yml'
+
+    delete:
+      $ref: 'resources/functions/functions_delete_namespace.yml'
 
   /v2/images:
     get:
@@ -1361,7 +1397,7 @@ paths:
     post:
       $ref: 'resources/volumes/volumeActions_post.yml'
 
-  /v2/volumes/snapshot/{snapshot_id}:
+  /v2/volumes/snapshots/{snapshot_id}:
     get:
       $ref: 'resources/volumes/volumeSnapshots_get_byId.yml'
     delete:
