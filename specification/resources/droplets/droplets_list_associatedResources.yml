@@ -37,7 +37,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/dropletActions_list.yml'
+  - $ref: 'examples/curl/droplets_list_associatedResources.yml'
 
 security:
   - bearer_auth:
