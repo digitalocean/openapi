@@ -512,6 +512,13 @@ tags:
       Tags have two attributes: a user defined `name` attribute and an embedded
       `resources` attribute with information about resources that have been tagged.
 
+
+  - name: Uptime
+    description: >-
+        [DigitalOcean Uptime Checks](https://docs.digitalocean.com/products/uptime/) provide the ability to monitor your endpoints from around the world, and alert you when they're slow, unavailable, or SSL certificates are expiring. 
+        
+        To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
+
   - name: VPCs
     description: |-
       [VPCs (virtual private clouds)](https://www.digitalocean.com/docs/networking/vpc/)
@@ -1448,6 +1455,46 @@ paths:
   /v2/vpcs/{vpc_id}/members:
     get:
       $ref: 'resources/vpcs/vpcs_list_members.yml'
+
+
+  /v2/uptime/checks:
+    get:
+      $ref: 'resources/uptime/list_checks.yml'
+
+    post:
+      $ref: 'resources/uptime/create_check.yml'
+
+  /v2/uptime/checks/{check_id}:
+    get:
+      $ref: 'resources/uptime/get_check.yml'
+
+    put:
+      $ref: 'resources/uptime/update_check.yml'
+
+    delete:
+      $ref: 'resources/uptime/delete_check.yml'
+
+  /v2/uptime/checks/{check_id}/state:
+    get:
+      $ref: 'resources/uptime/get_check_state.yml'
+
+  /v2/uptime/checks/{check_id}/alerts:
+    get:
+      $ref: 'resources/uptime/list_alerts.yml'
+
+    post:
+      $ref: 'resources/uptime/create_alert.yml'
+
+  /v2/uptime/checks/{check_id}/alerts/{alert_id}:
+    get:
+      $ref: 'resources/uptime/get_alert.yml'
+
+    put:
+      $ref: 'resources/uptime/update_alert.yml'
+
+    delete:
+      $ref: 'resources/uptime/delete_alert.yml'
+
 
 components:
   securitySchemes:
