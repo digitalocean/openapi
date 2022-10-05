@@ -6,7 +6,7 @@ description: To show information about an existing alert, send a GET request to
   `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
 
 tags:
-  - - Uptime
+  - Uptime
 
 parameters:
   - $ref: 'parameters.yml#/check_id'

@@ -8,7 +8,7 @@ description: |
 
 
 tags:
-  - - Uptime
+  - Uptime
 
 parameters:
   - $ref: 'parameters.yml#/check_id'

@@ -6,7 +6,7 @@ description: To show information about an existing check's state, send a GET req
   `/v2/uptime/checks/$CHECK_ID/state`.
 
 tags:
-  - - Uptime
+  - Uptime
 
 parameters:
   - $ref: 'parameters.yml#/check_id'

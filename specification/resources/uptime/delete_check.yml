@@ -10,7 +10,7 @@ description: |
   Deleting a check will also delete alerts assicoiated with the check.
 
 tags:
-  - - Uptime
+  - Uptime
 
 parameters:
   - $ref: 'parameters.yml#/check_id'

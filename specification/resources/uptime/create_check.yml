@@ -7,7 +7,7 @@ description: |
   in the table below in the JSON body.
 
 tags:
-  - - Uptime
+  - Uptime
 
 requestBody:
   required: true

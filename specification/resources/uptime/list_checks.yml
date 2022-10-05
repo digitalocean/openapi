@@ -6,7 +6,7 @@ description: To list all of the Uptime checks on your account, send a GET reques
   to `/v2/uptime/checks`.
 
 tags:
-  - - Uptime
+  - Uptime
 
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'
