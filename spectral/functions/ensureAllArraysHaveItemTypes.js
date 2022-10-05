@@ -20,22 +20,22 @@
   * Based on:
   * https://github.com/box/box-openapi/blob/184889a4b5b6156e0e2719bd513d93f994c6c50e/src/spectral/ensureAllArraysHaveItemTypes.js
   */
-module.exports = (param, _, paths) => {
+export default (input, _, context) => {
   // if this is actually a property called properties, ignore
-  if (paths.target.join('.').includes('properties.properties')) { return }
+  if (context.path.join('.').includes('properties.properties')) { return }
 
   // if this is a list, check if the first item matches instead
-  if (param.items && param.items.oneOf) { return }
+  if (input.items && input.items.oneOf) { return }
 
   // check if the param is an array
-  if (param.type === 'array' &&
+  if (input.type === 'array' &&
     // if the param has items, ensure it has a type, $ref, or properties
-    !(param.items && (param.items.type || param.items['$ref']
-    || param.items['anyOf'] || param.items['allOf']
-    || param.items['properties']))) {
+    !(input.items && (input.items.type || input.items['$ref']
+      || input.items['anyOf'] || input.items['allOf']
+      || input.items['properties']))) {
     return [
       {
-        message: `${paths.target ? paths.target.join('.') : 'property'}; type array need an item type, $ref, or properties`
+        message: `${context.path.target ? context.path.join('.') : 'property'}; type array need an item type, $ref, or properties`
       }
     ]
   }

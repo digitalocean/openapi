@@ -1,16 +1,17 @@
 name: Trigger Python Client Generation
-on: 
-  push:
-    branches:
-      - main
-    paths:
-      - 'specification/**'
+on:
+  workflow_run:
+    workflows: [Spec Main]
+    types:
+      - completed
+
 jobs:
   build:
     name: Trigger digitalocean-client-python Workflow
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: trigger-workflow
         run: gh workflow run --repo digitalocean/digitalocean-client-python python-client-gen.yml --ref main -f commit_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA
         env:
-          GITHUB_TOKEN: ${{ secrets.OPENAPI_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}

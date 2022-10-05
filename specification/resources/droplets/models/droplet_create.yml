@@ -5,7 +5,10 @@ properties:
     type: string
     example: nyc3
     description: The slug identifier for the region that you wish to
-      deploy the Droplet in.
+      deploy the Droplet in. If the specific datacenter is not not important, a
+      slug prefix (e.g. `nyc`) can be used to deploy the Droplet in any of the
+      that region's locations (`nyc1`, `nyc2`, or `nyc3`). If the region is
+      omitted from the create request completely, the Droplet may deploy in any region.
 
   size:
     type: string
@@ -104,6 +107,5 @@ properties:
       to `true`.
 
 required:
-- region
 - size
 - image

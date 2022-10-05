@@ -385,5 +385,25 @@ properties:
     example: 41.5
   pgbouncer:
     $ref: './pgbouncer.yml'
-
-
+  work_mem:
+    description: >-
+      The maximum amount of memory, in MB, used by a query operation (such as a sort or hash table) before writing to temporary disk files.
+      Default is 1MB + 0.075% of total RAM (up to 32MB).
+    type: integer
+    minimum: 1
+    maximum: 1024
+    example: 4
+  timescaledb:
+    $ref: './timescaledb.yml'
+  synchronous_replication:
+    description: Synchronous replication type. Note that the service plan also needs to support synchronous replication.
+    type: string
+    example: "off"
+    enum:
+      - 'off'
+      - 'quorum'
+  stat_monitor_enable:
+    description: >-
+      Enable the pg_stat_monitor extension. <b>Enabling this extension will cause the cluster to be restarted.</b> When this extension is enabled, pg_stat_statements results for utility commands are unreliable.
+    type: boolean
+    example: false

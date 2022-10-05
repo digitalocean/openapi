@@ -2,15 +2,10 @@ extends:
   - [spectral:oas, all]
   - ./spectral/ruleset.yml
 
-functionsDir: ./spectral/functions
+formats: [oas3]
 
-functions:
-  - ensurePropertiesExample
-  - ensureAllArraysHaveItemTypes
-  - ensureSnakeCaseWithDigits
-  - validateOperationIdNaming
+functionsDir: ./spectral/functions
 
 rules:
   contact-properties: off
-  operation-default-response: off
   operation-singular-tag: off

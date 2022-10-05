@@ -21,32 +21,32 @@ properties:
     example: '104.131.186.241'
     description: An attribute containing the public-facing IP address of the
       load balancer.
-      
+
   size_unit:
     type: integer
     default: 1
     minimum: 1
     maximum: 100
     example: 3
-    description: How many nodes the load balancer contains. Each additional 
+    description: How many nodes the load balancer contains. Each additional
       node increases the load balancer's ability to manage more connections.
-      Load balancers can be scaled up or down, and you can change the number of 
-      nodes after creation up to once per hour. This field is currently not 
-      available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to 
+      Load balancers can be scaled up or down, and you can change the number of
+      nodes after creation up to once per hour. This field is currently not
+      available in the AMS2, NYC2, or SFO1 regions. Use the `size` field to
       scale load balancers that reside in these regions.
 
   size:
     type: string
     enum:
-    - lb-small
-    - lb-medium
-    - lb-large
+      - lb-small
+      - lb-medium
+      - lb-large
     deprecated: true
     default: lb-small
     example: lb-small
-    description: This field has been replaced by the `size_unit` field for all 
-      regions except in AMS2, NYC2, and SFO1. Each available load balancer size 
-      now equates to the load balancer having a set number of nodes. 
+    description: This field has been replaced by the `size_unit` field for all
+      regions except in AMS2, NYC2, and SFO1. Each available load balancer size
+      now equates to the load balancer having a set number of nodes.
 
       * `lb-small` = 1 node
 
@@ -55,7 +55,7 @@ properties:
       * `lb-large` = 6 nodes
 
 
-      You can resize load balancers after creation up to once per hour. You 
+      You can resize load balancers after creation up to once per hour. You
       cannot resize a load balancer within the first hour of its creation.
 
   algorithm:
@@ -66,7 +66,7 @@ properties:
       - least_connections
     deprecated: true
     default: round_robin
-    description: This field has been deprecated. You can no longer specify an 
+    description: This field has been deprecated. You can no longer specify an
       algorithm for load balancers.
 
   status:
@@ -90,7 +90,7 @@ properties:
 
   forwarding_rules:
     type: array
-    minimum: 1
+    minItems: 1
     items:
       $ref: 'forwarding_rule.yml'
     description: An array of objects specifying the forwarding rules for a
@@ -138,4 +138,4 @@ properties:
       load balancer.
 
 required:
-- forwarding_rules
+  - forwarding_rules

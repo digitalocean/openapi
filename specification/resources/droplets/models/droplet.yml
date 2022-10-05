@@ -37,10 +37,10 @@ properties:
   status:
     type: string
     enum:
-    - new
-    - active
-    - off
-    - archive
+      - new
+      - active
+      - off
+      - archive
     example: active
     description: A status string indicating the state of the Droplet instance.
       This may be "new", "active", "off", or "archive".
@@ -60,9 +60,9 @@ properties:
     items:
       type: string
     example:
-    - backups
-    - private_networking
-    - ipv6
+      - backups
+      - private_networking
+      - ipv6
     description: An array of features enabled on this Droplet.
 
   backup_ids:
@@ -70,7 +70,7 @@ properties:
     items:
       type: integer
     example:
-    - 53893572
+      - 53893572
     description: An array of backup IDs of any backups that have been taken
       of the Droplet instance.  Droplet backups are enabled at the time of the
       instance creation.
@@ -85,13 +85,13 @@ properties:
       start:
         type: string
         format: date-time
-        example: "2019-12-04T00:00:00Z"
+        example: '2019-12-04T00:00:00Z'
         description: A time value given in ISO8601 combined date and time format
           specifying the start of the Droplet's backup window.
       end:
         type: string
         format: date-time
-        example: "2019-12-04T23:00:00Z"
+        example: '2019-12-04T23:00:00Z'
         description: A time value given in ISO8601 combined date and time format
           specifying the end of the Droplet's backup window.
 
@@ -100,7 +100,7 @@ properties:
     items:
       type: integer
     example:
-    - 67512819
+      - 67512819
     description: An array of snapshot IDs of any snapshots created from the
       Droplet instance.
 
@@ -112,7 +112,7 @@ properties:
     items:
       type: string
     example:
-    - '506f78a4-e098-11e5-ad9f-000f53306ae1'
+      - '506f78a4-e098-11e5-ad9f-000f53306ae1'
     description: A flat array including the unique identifier for each Block
       Storage volume attached to the Droplet.
 
@@ -150,8 +150,8 @@ properties:
     items:
       type: string
     example:
-    - web
-    - env:prod
+      - web
+      - env:prod
     description: An array of Tags the Droplet has been tagged with.
 
   vpc_uuid:
@@ -161,23 +161,22 @@ properties:
       is assigned.
 
 required:
-- id
-- name
-- memory
-- vcpus
-- disk
-- locked
-- status
-- kernel
-- created_at
-- features
-- backup_ids
-- next_backup_window
-- snapshot_ids
-- image
-- volume_ids
-- size
-- size_slug
-- networks
-- region
-- tags
+  - id
+  - name
+  - memory
+  - vcpus
+  - disk
+  - locked
+  - status
+  - created_at
+  - features
+  - backup_ids
+  - next_backup_window
+  - snapshot_ids
+  - image
+  - volume_ids
+  - size
+  - size_slug
+  - networks
+  - region
+  - tags

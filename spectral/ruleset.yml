@@ -1,22 +1,28 @@
+functions:
+  - ensurePropertiesExample
+  - ensureAllArraysHaveItemTypes
+  - ensureSnakeCaseWithDigits
+  - validateOpIDNaming
+
 rules:
   ratelimit-headers:
     description: Response must include ratelimit-x headers
-    message: "{{description}}; missing {{property}}"
+    message: '{{description}}; missing {{property}}'
     severity: error
     given: $..responses.*
     then:
-    - field: headers.ratelimit-limit
-      function: truthy
-    - field: headers.ratelimit-remaining
-      function: truthy
-    - field: headers.ratelimit-reset
-      function: truthy
+      - field: headers.ratelimit-limit
+        function: truthy
+      - field: headers.ratelimit-remaining
+        function: truthy
+      - field: headers.ratelimit-reset
+        function: truthy
 
   properties-must-include-examples:
     description: Object properties must include examples
     given: $..properties..properties.*
     severity: error
-    message: "{{error}}"
+    message: '{{description}}; {{property}}'
     then:
       function: ensurePropertiesExample
 
@@ -24,7 +30,7 @@ rules:
     description: Parameters must include examples
     given: $..parameters.*
     severity: error
-    message: "{{description}}; missing {{property}}"
+    message: '{{description}}; missing {{property}}'
     then:
       function: xor
       functionOptions:
@@ -36,34 +42,34 @@ rules:
     description: Headers must include examples
     given: $..headers.*
     severity: error
-    message: "{{description}}; missing {{property}}"
+    message: '{{description}}; missing {{property}}'
     then:
       function: ensurePropertiesExample
 
   endpoint-must-be-ref:
     description: Endpoint must be a $ref
-    message: "{{description}}; {{property}} incorrect"
+    message: '{{description}}; {{property}} incorrect'
     severity: error
     resolved: false
     given: $.paths.*.*
     then:
-    - field: $ref
+      field: $ref
       function: truthy
 
   path-must-include-version:
     description: Path must include the version
-    message: "{{description}}; {{property}} incorrect"
+    message: '{{description}}; {{property}} incorrect'
     severity: error
     resolved: false
-    given: "$.paths[*]~"
+    given: '$.paths[*]~'
     then:
       function: pattern
       functionOptions:
-        match: "^/v2/.*$"
+        match: '^/v2/.*$'
 
   endpoint-ref-must-be-file:
     description: Endpoint must a $ref to a file in resources/
-    message: "{{description}}; {{value}} incorrect"
+    message: '{{description}}; {{value}} incorrect'
     severity: error
     resolved: false
     given: $.paths.*.$ref
@@ -74,45 +80,45 @@ rules:
 
   common-responses-unauthorized:
     description: Responses should contain common response - 401 (unauthorized)
-    message: "{{description}}. Missing {{property}}"
+    message: '{{description}}. Missing {{property}}'
     severity: error
     given: $.paths..responses
     then:
-      - field: '401'
-        function: truthy
+      field: '401'
+      function: truthy
 
   common-responses-not-found:
     description: Responses should contain common response - 404 (not found)
-    message: "{{description}}. Missing {{property}}"
+    message: '{{description}}. Missing {{property}}'
     severity: error
     given: $.paths[?(@property.match(/.*\/{.*}.*/))]..responses
     then:
-      - field: '404'
-        function: truthy
+      field: '404'
+      function: truthy
 
   common-responses-too-many-requests:
     description: Responses should contain common response - 429 (too many requests)
-    message: "{{description}}. Missing {{property}}"
+    message: '{{description}}. Missing {{property}}'
     severity: error
     given: $.paths..responses
     then:
-      - field: '429'
-        function: truthy
+      field: '429'
+      function: truthy
 
   common-responses-server-error:
     description: Responses should contain common response - 500 (server error)
-    message: "{{description}}. Missing {{property}}"
+    message: '{{description}}. Missing {{property}}'
     severity: error
     given: $.paths..responses
     then:
-      - field: '500'
-        function: truthy
+      field: '500'
+      function: truthy
 
   array-properties-must-have-items-with-type:
     description: Array properties must have an items attribute with a type
     given: '$..*.properties[*]'
     severity: error
-    message: "{{error}}"
+    message: '{{error}}'
     then:
       function: ensureAllArraysHaveItemTypes
 
@@ -120,36 +126,25 @@ rules:
     description: Array parameters must have an items attribute with a type
     given: '$..*.parameters[*]'
     severity: error
-    message: "{{error}}"
+    message: '{{error}}'
     then:
       function: ensureAllArraysHaveItemTypes
 
-  operationid-must-be-snake-cased:
-    description: operationIds must be snake cased (e.g. snake_case)
-    type: style
-    given: "$..operationId"
-    severity: error
-    message: "{{description}}; {{value}} incorrect"
-    then:
-      function: casing
-      functionOptions:
-        type: snake
-
-  operationid-must-follow-naming-conventions:
+  operationid-must-follow-new-naming-conventions:
     description: operationIds must follow naming conventions for method
     type: style
-    given: "$.paths[*][*]"
-    severity: error
-    message: "{{error}}"
+    given: '$.paths[*][*]'
+    severity: warn
+    message: '{{error}}'
     then:
-      function: validateOperationIdNaming
+      function: validateOpIDNaming
 
   schema-key-must-be-snake-cased:
     description: schema key must be snake cased (e.g. snake_case)
     type: style
     given: "$.components['schemas'].*~"
     severity: error
-    message: "{{error}}"
+    message: '{{error}}'
     then:
       function: ensureSnakeCaseWithDigits
 
@@ -158,7 +153,7 @@ rules:
     type: style
     given: "$.components['parameters'].*~"
     severity: error
-    message: "{{error}}"
+    message: '{{error}}'
     then:
       function: ensureSnakeCaseWithDigits
 
@@ -167,7 +162,7 @@ rules:
     type: style
     given: "$.components['examples'].*~"
     severity: error
-    message: "{{error}}"
+    message: '{{error}}'
     then:
       function: ensureSnakeCaseWithDigits
 
@@ -176,6 +171,22 @@ rules:
     type: style
     given: "$.components['responses'].*~"
     severity: error
-    message: "{{error}}"
+    message: '{{error}}'
     then:
       function: ensureSnakeCaseWithDigits
+  
+  oas3-operation-security-defined:
+    description: Check operation security is defined
+    severity: "error"
+    given: "$.paths.*.*"
+    then:
+      field: 'security'
+      function: truthy
+
+  oas3-operation-security-scopes-defined:
+    description: Check operation security's bearer_auth is defined
+    severity: "error"
+    given: "$.paths[*][*]..security.*"
+    then:
+      field: 'bearer_auth'
+      function: truthy
