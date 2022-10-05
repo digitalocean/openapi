@@ -1,4 +1,4 @@
-operationId: get_uptime_alert
+operationId: uptime_alert_get
 
 summary: Retrieve an Existing Alert
 
@@ -6,7 +6,7 @@ description: To show information about an existing alert, send a GET request to
   `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
 
 tags:
-  - Uptime (Beta)
+  - - Uptime
 
 parameters:
   - $ref: 'parameters.yml#/check_id'
@@ -31,5 +31,7 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
-x-codeSamples:
-#  - $ref: 'examples/curl/get_vpc.yml'
+
+security:
+  - bearer_auth:
+      - 'read'

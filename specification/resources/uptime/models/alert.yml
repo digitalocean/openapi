@@ -30,6 +30,7 @@ alert_updatable:
       enum:
         - latency
         - down
+        - down_global
         - ssl_expiry
       description: The type of alert.
 

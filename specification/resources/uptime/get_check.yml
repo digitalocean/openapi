@@ -1,4 +1,4 @@
-operationId: get_check
+operationId: check_get
 
 summary: Retrieve an Existing Check
 
@@ -6,7 +6,7 @@ description: To show information about an existing check, send a GET request to
   `/v2/uptime/checks/$CHECK_ID`.
 
 tags:
-  - Uptime (Beta)
+  - - Uptime
 
 parameters:
   - $ref: 'parameters.yml#/check_id'
@@ -30,5 +30,7 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
-x-codeSamples:
-#  - $ref: 'examples/curl/get_check.yml'
+
+security:
+  - bearer_auth:
+      - 'read'

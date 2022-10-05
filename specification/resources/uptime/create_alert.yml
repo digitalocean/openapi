@@ -1,4 +1,4 @@
-operationId: create_uptime_alert
+operationId: uptime_alert_create
 
 summary: Create a New Alert
 
@@ -7,7 +7,7 @@ description: |
   in the table below in the JSON body.
 
 tags:
-  - Uptime (Beta)
+  - - Uptime
 parameters:
   - $ref: 'parameters.yml#/check_id'
 
@@ -19,7 +19,8 @@ requestBody:
     Type | Description | Threshold Value
     -----|-------------|--------------------
     `latency` | alerts on the response latency | milliseconds
-    `down` | alerts on a target registering as down | N/A (Not required)
+    `down` | alerts on a target registering as down in any region | N/A (Not required)
+    `down_global` | alerts on a target registering as down globally | N/A (Not required)
     `ssl_expiry` | alerts on a SSL certificate expiring within $threshold days | days
 
   content:
@@ -53,6 +54,7 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
-x-codeSamples:
-#  - $ref: 'examples/curl/create_check.yml'
+security:
+  - bearer_auth:
+      - 'write'
 

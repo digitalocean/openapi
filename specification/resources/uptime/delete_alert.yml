@@ -1,4 +1,4 @@
-operationId: delete_uptime_alert
+operationId: uptime_alert_delete
 
 summary: Delete an Alert
 
@@ -8,7 +8,7 @@ description: |
 
 
 tags:
-  - Uptime (Beta)
+  - - Uptime
 
 parameters:
   - $ref: 'parameters.yml#/check_id'
@@ -33,5 +33,7 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
-x-codeSamples:
-#  - $ref: 'examples/curl/delete_check.yml'
+
+security:
+  - bearer_auth:
+      - 'write'

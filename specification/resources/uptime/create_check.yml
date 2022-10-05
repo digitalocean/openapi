@@ -1,4 +1,4 @@
-operationId: create_check
+operationId: check_create
 
 summary: Create a New Check
 
@@ -7,7 +7,7 @@ description: |
   in the table below in the JSON body.
 
 tags:
-  - Uptime (Beta)
+  - - Uptime
 
 requestBody:
   required: true
@@ -40,5 +40,7 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
-x-codeSamples:
-#  - $ref: 'examples/curl/create_check.yml'
+
+security:
+  - bearer_auth:
+      - 'write'

@@ -1,4 +1,4 @@
-operationId: update_uptime_alert
+operationId: uptime_alert_update
 
 summary: Update an Alert
 
@@ -6,7 +6,7 @@ description: |
   To update the settings of an Uptime alert, send a PUT request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
 
 tags:
-  - Uptime (Beta)
+  - - Uptime
 
 parameters:
   - $ref: 'parameters.yml#/check_id'
@@ -41,5 +41,7 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
-x-codeSamples:
-#  - $ref: 'examples/curl/update_alert.yml'
+
+security:
+  - bearer_auth:
+      - 'write'
