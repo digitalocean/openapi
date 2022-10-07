@@ -30,6 +30,8 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
+x-codeSamples:
+  - $ref: 'examples/curl/check_get.yml'
 
 security:
   - bearer_auth:

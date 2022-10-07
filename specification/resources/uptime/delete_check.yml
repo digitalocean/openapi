@@ -7,7 +7,7 @@ description: |
   code with no body will be returned in response to a successful request.
 
 
-  Deleting a check will also delete alerts assicoiated with the check.
+  Deleting a check will also delete alerts associated with the check.
 
 tags:
   - Uptime
@@ -33,6 +33,9 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/check_delete.yml'
 
 
 security:

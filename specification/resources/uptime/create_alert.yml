@@ -54,6 +54,11 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
+
+
+x-codeSamples:
+  - $ref: 'examples/curl/alert_create.yml'
+
 security:
   - bearer_auth:
       - 'write'

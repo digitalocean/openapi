@@ -7,7 +7,7 @@ properties:
   email:
     description: "An email to notify on an alert trigger."
     example:
-      - "bob@exmaple.com"
+      - "bob@example.com"
     type: array
     items:
       type: string
