@@ -3,7 +3,7 @@ operationId: tags_unassign_resources
 summary: Untag a Resource
 
 description: >-
-  Resources can be tagged by sending a DELETE request to
+  Resources can be untagged by sending a DELETE request to
   `/v2/tags/$TAG_NAME/resources` with an array of json objects containing
   `resource_id` and `resource_type` attributes.
 
