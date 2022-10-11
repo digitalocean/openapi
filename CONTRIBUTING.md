@@ -35,7 +35,7 @@ the browser at the address listed in the startup output (http://localhost:8080).
 ### Tooling
 
 The tooling chosen supports either authoring, validation, testing, or 
-publishing. Respective Make targest 
+publishing. Respective Make target 
 
 * [Spectral](https://stoplight.io/open-source/spectral/): JSON/YAML linter with 
   support for OpenAPI v3, custom rules, built-in functions, and custom functions
