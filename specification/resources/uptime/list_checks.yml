@@ -1,8 +1,9 @@
-operationId: checks_list
+operationId: uptime_checks_list
 
 summary: List All Checks
 
-description: To list all of the Uptime checks on your account, send a GET request
+description:
+  To list all of the Uptime checks on your account, send a GET request
   to `/v2/uptime/checks`.
 
 tags:
@@ -31,11 +32,9 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
-
 x-codeSamples:
   - $ref: 'examples/curl/check_list.yml'
 
 security:
   - bearer_auth:
       - 'read'
-
