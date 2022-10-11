@@ -1,4 +1,4 @@
-operationId: check_get
+operationId: uptime_check_get
 
 summary: Retrieve an Existing Check
 

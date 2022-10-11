@@ -1,4 +1,4 @@
-operationId: check_alerts_list
+operationId: uptime_check_alerts_list
 
 summary: List All Alerts
 
@@ -38,4 +38,3 @@ x-codeSamples:
 security:
   - bearer_auth:
       - 'read'
-

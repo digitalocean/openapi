@@ -1,4 +1,4 @@
-operationId: check_delete
+operationId: uptime_check_delete
 
 summary: Delete a Check
 
@@ -36,7 +36,6 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/check_delete.yml'
-
 
 security:
   - bearer_auth:

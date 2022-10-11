@@ -1,8 +1,9 @@
-operationId: check_state_get
+operationId: uptime_check_state_get
 
 summary: Retrieve Check State
 
-description: To show information about an existing check's state, send a GET request to
+description:
+  To show information about an existing check's state, send a GET request to
   `/v2/uptime/checks/$CHECK_ID/state`.
 
 tags:
@@ -29,7 +30,6 @@ responses:
 
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
-
 
 x-codeSamples:
   - $ref: 'examples/curl/check_state_get.yml'
