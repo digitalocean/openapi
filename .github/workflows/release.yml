@@ -36,6 +36,5 @@ jobs:
           asset_name: openapi-bundled.yaml
           asset_content_type: application/yaml
       - name: Trigger digitalocean-client-python Workflow
-        run: gh workflow run --repo danaelhe/digitalocean-client-python python-client-gen.yml --ref main -f commit_url=${{ github.ref }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
+        run: |
+          curl -XPOST -u "${{ secrets.WORKFLOW_TRIGGER_TOKEN }}" -H "Accept:application/vnd.github" -H "Content-Type:application/json" https://github.com/danaelhe/digitalocean-client-python/blob/main/.github/workflows/python-client-gen.yml --data '{"ref": "main" }'
