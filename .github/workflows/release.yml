@@ -36,7 +36,6 @@ jobs:
           asset_name: openapi-bundled.yaml
           asset_content_type: application/yaml
       - name: Trigger digitalocean-client-python Workflow
-        if: ${{ github.upload-release-asset.outcome == 'success' }}
         run: gh workflow run --repo danane/digitalocean-client-python python-client-gen.yml --ref main -f release_version=${{ github.ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
