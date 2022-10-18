@@ -9,6 +9,10 @@ TMP_COLLECTION_PATH ?= tests/postman-temp.json
 
 DO_TOKEN ?= XXXXXX
 
+# ORIGIN is used when testing release code
+ORIGIN ?= origin
+BUMP ?= patch
+
 .PHONY: help
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -68,3 +72,25 @@ autorest-typescript: dev-dependencies bundle
 .PHONY: preview
 preview: dev-dependencies ## Launch the docs preview server (openapi) and watch for file changes
 	SPEC_FILE=${SPEC_FILE} npm run preview
+
+.PHONY: _install_sembump
+_install_sembump:
+	@echo "=> installing/updating sembump tool"
+	@echo ""
+	@GO111MODULE=off go get -u github.com/jessfraz/junk/sembump
+
+.PHONY: tag
+tag: _install_sembump
+	@echo "==> BUMP=${BUMP} tag"
+	@echo ""
+	@ORIGIN=${ORIGIN} scripts/bumpversion.sh
+
+.PHONY: _install_github_release_notes
+_install_github_release_notes:
+	@GO111MODULE=off go get -u github.com/digitalocean/github-changelog-generator
+
+.PHONY: changes
+changes: _install_github_release_notes
+	@echo "==> list merged PRs since last release"
+	@echo ""
+	@changes=$(shell scripts/changelog.sh) && cat $$changes && rm -f $$changes
