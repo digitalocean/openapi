@@ -87,10 +87,10 @@ tag: _install_sembump
 
 .PHONY: _install_github_release_notes
 _install_github_release_notes:
-	@GO111MODULE=off go get -u github.com/digitalocean/github-changelog-generator
+	GO111MODULE=off go get -u github.com/digitalocean/github-changelog-generator
 
 .PHONY: changes
 changes: _install_github_release_notes
-	@echo "==> list merged PRs since last release"
-	@echo ""
-	@changes=$(shell scripts/changelog.sh) && cat $$changes && rm -f $$changes
+	echo "==> list merged PRs since last release"
+	echo ""
+	changes=$(shell scripts/changelog.sh) && cat $$changes && rm -f $$changes
