@@ -14,4 +14,4 @@ jobs:
       - name: trigger-workflow
         run: gh workflow run --repo danaelhe/readthedocstest python-client-gen.yml --ref main -f commit_url=${{ github.ref }}
         env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
