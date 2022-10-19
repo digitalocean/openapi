@@ -84,3 +84,27 @@ These files and directories contain the API specification broken down to
 │   │   │   ├── <response_name>.yml:  Individual response definition
 │   └── tests/:  Placeholder directory for test generation and output
 ```
+
+## Releasing
+
+To cut a release, push a new tag (versioning discussed below).
+
+### Tagging a release
+
+##### Prerequisites
+
+1. Run `make changes` to review the changes since the last
+   release. Based on the changes, decide what kind of release you are
+   doing (bugfix, feature or breaking).
+   `digitalocean/openapi` follows [semantic versioning](https://semver.org), ask if you aren't sure.
+
+2. Tag the release using `BUMP=(bugfix|feature|breaking) make tag`.
+   (Bugfix, feature and breaking are aliases for semver's patch, minor and major.
+   BUMP will also accept `patch`, `minor` and `major`, if you prefer). The command
+   assumes you have a remote repository named `origin` pointing to this
+   repository. If you'd prefer to specify a different remote repository, you can
+   do so by setting `ORIGIN=(preferred remote name)`.
+
+3. The release will trigger a workflow in [digitalocean/pydo](https://github.com/digitalocean/pydo) to update the DigitalOcean Python Client, Pydo, to ensure the spec changes are reflected in the client. The workflow will create a PR to be reviewed by the owners of the Pydo repo. 
+
+The new tag triggers the release.
