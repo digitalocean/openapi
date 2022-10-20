@@ -1,7 +1,7 @@
 name: Trigger Python Client Generation
 on:
   workflow_run:
-    workflows: [Spec Main]
+    workflows: [tagged-release]
     types:
       - completed
 
@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: "Determine tag"
+        run: echo "TAG_RELEASE=`curl  "https://api.github.com/repos/digitalocean/openapi/tags" | jq -r '.[0].name'`" >> $GITHUB_ENV
       - name: trigger-workflow
-        run: gh workflow run --repo digitalocean/digitalocean-client-python python-client-gen.yml --ref main -f commit_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA
+        run: gh workflow run --repo digitalocean/digitalocean-client-python python-client-gen.yml --ref main -f release_version=$TAG_RELEASE 
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
