@@ -1,4 +1,7 @@
 name: Trigger Python Client Generation
+# this workflow triggers a workflow in the pydo repo when a 
+# new release is cut in digitalocean/openapi
+
 on:
   workflow_run:
     workflows: [tagged-release]

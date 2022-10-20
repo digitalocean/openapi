@@ -1,5 +1,6 @@
 name: tagged-release
-
+# this workflow occurs on every release
+# it uploads the bundled spec as an artifact of the release
 on:
   push:
     tags:
