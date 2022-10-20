@@ -19,7 +19,7 @@ servers:
     description: production
 
 tags:
-  - name: 1-Click Applications
+  - name: 1-Click Applications DELETE-ME
     description: |-
       1-Click applications are pre-built Droplet images or Kubernetes apps with software,
       features, and configuration details already set up for you. They can be found in the

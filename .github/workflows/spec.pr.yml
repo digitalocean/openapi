@@ -5,11 +5,7 @@ name: Spec PR
 # The name of the uploaded file will be prefixed with the PR number.
 # e.g. `spec-ci/previews/123-spec.yaml
 
-on:
-  pull_request:
-    paths:
-      - 'specification/**'
-      - 'spectral/**'
+on: [push, pull_request]
 
 jobs:
   lint:
