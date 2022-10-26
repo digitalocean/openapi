@@ -1,6 +1,9 @@
 properties:
   spec:
     $ref: app_spec.yml
+  project_id:
+    type: string
+    description: The UUID of the project the app should be assigned.
 required:
 - spec
 type: object
