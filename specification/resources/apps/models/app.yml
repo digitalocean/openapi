@@ -56,7 +56,7 @@ properties:
     readOnly: true
     type: string
     example: 88b72d1a-b78a-4d9f-9090-b53c4399073f
-    title: The id of the project for the app. This will be empty if there is a fleet (project) lookup failure.
+    title: The id of the project for the app. This will be empty if there is a lookup failure.
   region:
     $ref: apps_region.yml
   spec:
