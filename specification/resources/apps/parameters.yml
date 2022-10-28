@@ -1,3 +1,27 @@
+accept:
+  description: The content-type that should be used by the response. By default,
+    the response will be `application/json`. `application/yaml` is also supported.
+  in: header
+  name: Accept
+  schema:
+    type: string
+    enum:
+    - application/json
+    - application/yaml
+  example: application/json
+
+content-type:
+  description: The content-type used for the request. By default, the requests
+    are assumed to use `application/json`. `application/yaml` is also supported.
+  in: header
+  name: Content-Type
+  schema:
+    type: string
+    enum:
+    - application/json
+    - application/yaml
+  example: application/json
+
 app_id:
   description: The app ID
   in: path
