@@ -1,4 +1,4 @@
-description: A JSON of a `spec` object.
+description: A JSON or YAML of a `spec` object.
 
 content:
   application/json:
@@ -7,6 +7,121 @@ content:
     examples:
       app:
         $ref: examples.yml#/app
+  application/yaml:
+    example: |
+      ---
+      app:
+        id: c2a93513-8d9b-4223-9d61-5e7272c81cf5
+        owner_uuid: a4e16f25-cdd1-4483-b246-d77f283c9209
+        spec:
+          name: sample-golang
+          services:
+            - name: web
+              github:
+                repo: ChiefMateStarbuck/sample-golang
+                branch: main
+              run_command: bin/sample-golang
+              environment_slug: go
+              instance_size_slug: basic-xxs
+              instance_count: 1
+              http_port: 8080
+              routes:
+                - path: "/"
+          region: ams
+        default_ingress: https://sample-golang-zyhgn.ondigitalocean.app
+        created_at: '2021-02-10T16:45:14Z'
+        updated_at: '2021-02-10T17:06:56Z'
+        active_deployment:
+          id: 991dfa59-6a23-459f-86d6-67dfa2c6f1e3
+          spec:
+            name: sample-golang
+            services:
+              - name: web
+                github:
+                  repo: ChiefMateStarbuck/sample-golang
+                  branch: main
+                run_command: bin/sample-golang
+                environment_slug: go
+                instance_size_slug: basic-xxs
+                instance_count: 1
+                http_port: 8080
+                routes:
+                  - path: "/"
+            region: ams
+          services:
+            - name: web
+              source_commit_hash: db6936cb46047c576962962eed81ad52c21f35d7
+          phase_last_updated_at: '2021-02-10T17:06:53Z'
+          created_at: '2021-02-10T17:05:30Z'
+          updated_at: '2021-02-10T17:06:53Z'
+          cause: manual
+          progress:
+            success_steps: 6
+            total_steps: 6
+            steps:
+              - name: build
+                status: SUCCESS
+                steps:
+                  - name: initialize
+                    status: SUCCESS
+                    started_at: '2021-02-10T17:05:35.572347485Z'
+                    ended_at: '2021-02-10T17:05:36.093995229Z'
+                  - name: components
+                    status: SUCCESS
+                    steps:
+                      - name: web
+                        status: SUCCESS
+                        component_name: web
+                        message_base: Building service
+                    started_at: '2021-02-10T17:05:36.094015928Z'
+                    ended_at: '2021-02-10T17:06:19.461737040Z'
+                started_at: '2021-02-10T17:05:35.572287990Z'
+                ended_at: '2021-02-10T17:06:19.807834070Z'
+              - name: deploy
+                status: SUCCESS
+                steps:
+                  - name: initialize
+                    status: SUCCESS
+                    started_at: '2021-02-10T17:06:25.143957508Z'
+                    ended_at: '2021-02-10T17:06:26.120343872Z'
+                  - name: components
+                    status: SUCCESS
+                    steps:
+                      - name: web
+                        status: SUCCESS
+                        steps:
+                          - name: deploy
+                            status: SUCCESS
+                            component_name: web
+                            message_base: Deploying service
+                          - name: wait
+                            status: SUCCESS
+                            component_name: web
+                            message_base: Waiting for service
+                        component_name: web
+                    started_at: '2021-02-10T17:06:26.120385561Z'
+                    ended_at: '2021-02-10T17:06:50.029695913Z'
+                  - name: finalize
+                    status: SUCCESS
+                    started_at: '2021-02-10T17:06:50.348459495Z'
+                    ended_at: '2021-02-10T17:06:53.404065961Z'
+                started_at: '2021-02-10T17:06:25.143932418Z'
+                ended_at: '2021-02-10T17:06:53.404104185Z'
+          phase: ACTIVE
+          tier_slug: basic
+        last_deployment_created_at: '2021-02-10T17:05:30Z'
+        live_url: https://sample-golang-zyhgn.ondigitalocean.app
+        region:
+          slug: ams
+          label: Amsterdam
+          flag: netherlands
+          continent: Europe
+          data_centers:
+            - ams3
+        tier_slug: basic
+        live_url_base: https://sample-golang-zyhgn.ondigitalocean.app
+        live_domain: sample-golang-zyhgn.ondigitalocean.app
+
 
 headers:
   ratelimit-limit:
