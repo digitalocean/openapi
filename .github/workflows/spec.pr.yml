@@ -95,7 +95,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: digitalocean/digitalocean-client-python
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/download-artifact@v3
         with:
