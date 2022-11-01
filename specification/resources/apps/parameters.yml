@@ -84,6 +84,14 @@ live_updates:
     type: boolean
   example: true
 
+with_projects:
+  description: Whether the project_id of listed apps should be fetched and included.
+  in: query
+  name: with_projects
+  schema:
+    type: boolean
+  example: true
+
 log_type:
   description: |-
     The type of logs to retrieve

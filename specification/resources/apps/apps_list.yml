@@ -11,6 +11,7 @@ tags:
 parameters:
 - $ref: ../../shared/parameters.yml#/page
 - $ref: ../../shared/parameters.yml#/per_page
+- $ref: parameters.yml#/with_projects
 
 responses:
   "200":
