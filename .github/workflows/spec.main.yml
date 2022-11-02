@@ -47,8 +47,9 @@ jobs:
           ${{ secrets.SPACES_PATH }}/DigitalOcean-public.v2.yaml
           --endpoint=${{ secrets.SPACES_ENDPOINT }}
           --acl public-read
-      # the spec that will be associated with the generated Pydo client
       - name: Upload revision spec
+        # this uploads a duplicate of the bundled spec with the short sha
+        # appended to the file name for reference during client generation.
         run: >-
           aws s3 cp tests/openapi-bundled.yaml
           ${{ secrets.SPACES_PATH }}/DigitalOcean-public-${{ steps.vars.outputs.sha_short }}.v2.yaml
