@@ -8,8 +8,9 @@ content:
       app:
         $ref: examples.yml#/app
   application/yaml:
+    schema:
+      $ref: ../models/app_response.yml
     example: |
-      ---
       app:
         id: c2a93513-8d9b-4223-9d61-5e7272c81cf5
         owner_uuid: a4e16f25-cdd1-4483-b246-d77f283c9209
@@ -121,7 +122,6 @@ content:
         tier_slug: basic
         live_url_base: https://sample-golang-zyhgn.ondigitalocean.app
         live_domain: sample-golang-zyhgn.ondigitalocean.app
-
 
 headers:
   ratelimit-limit:
