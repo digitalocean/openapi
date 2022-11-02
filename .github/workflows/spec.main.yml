@@ -37,8 +37,11 @@ jobs:
         with:
           name: openapi-bundled
           path: tests/openapi-bundled.yaml
-      - name: Add SHORT_SHA env property with commit short sha
-        run: echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_ENV
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
       - name: Upload Main spec
         run: >-
           aws s3 cp tests/openapi-bundled.yaml
@@ -49,7 +52,7 @@ jobs:
       - name: Upload Pydo spec
         run: >-
           aws s3 cp tests/openapi-bundled.yaml
-          ${{ env.SPACES_PATH }}/DigitalOcean-public-${SHORT_SHA}.v2.yaml
+          ${{ env.SPACES_PATH }}/DigitalOcean-public-${{ steps.vars.outputs.sha_short }}.v2.yaml
           --endpoint=${{ env.SPACES_ENDPOINT }}
           --acl public-read
         env:
