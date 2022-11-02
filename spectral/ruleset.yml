@@ -1,8 +1,20 @@
 functions:
   - ensurePropertiesExample
   - ensureAllArraysHaveItemTypes
+  - ensureSchemaHasType
   - ensureSnakeCaseWithDigits
   - validateOpIDNaming
+
+overrides:
+  - files:
+      - 'tests/openapi-bundled.yaml'
+    rules:
+      endpoint-must-be-ref: off
+  - files:
+      - 'specification/resources/apps/apps_create.yml#/requestBody/content/application~1yaml'
+      - 'tests/openapi-bundled.yaml#/paths/~1v2~1apps/post/requestBody/content/application~1yaml'
+    rules:
+      oas3-valid-media-example: off
 
 rules:
   ratelimit-headers:
@@ -174,19 +186,28 @@ rules:
     message: '{{error}}'
     then:
       function: ensureSnakeCaseWithDigits
-  
+
   oas3-operation-security-defined:
     description: Check operation security is defined
-    severity: "error"
-    given: "$.paths.*.*"
+    severity: 'error'
+    given: '$.paths.*.*'
     then:
       field: 'security'
       function: truthy
 
   oas3-operation-security-scopes-defined:
     description: Check operation security's bearer_auth is defined
-    severity: "error"
-    given: "$.paths[*][*]..security.*"
+    severity: 'error'
+    given: '$.paths[*][*]..security.*'
     then:
       field: 'bearer_auth'
       function: truthy
+
+  application-content-must-have-type-or-ref:
+    description: application/* content must have a type
+    given: $..content[*]
+    severity: error
+    recommended: true
+    message: '{{error}}'
+    then:
+      function: ensureSchemaHasType
