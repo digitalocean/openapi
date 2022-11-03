@@ -45,9 +45,16 @@ jobs:
       - name: Upload Main spec
         run: >-
           aws s3 cp tests/openapi-bundled.yaml
-          ${{ secrets.SPACES_PATH }}/DigitalOcean-public.v2.yaml
-          --endpoint=${{ secrets.SPACES_ENDPOINT }}
+          ${{ env.SPACES_PATH }}/DigitalOcean-public.v2.yaml
+          --endpoint=${{ env.SPACES_ENDPOINT }}
           --acl public-read
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
+          AWS_DEFAULT_OUTPUT: json
+          SPACES_PATH: ${{ secrets.SPACES_PATH }}
+          SPACES_ENDPOINT: ${{ secrets.SPACES_ENDPOINT }}
+          AWS_EC2_METADATA_DISABLED: true
       - name: Upload revision spec
         # this uploads a duplicate of the bundled spec with the short sha
         # appended to the file name for reference during client generation.
