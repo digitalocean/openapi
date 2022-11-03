@@ -8,6 +8,7 @@ on:
     paths:
       - 'specification/**'
       - 'spectral/**'
+  workflow_dispatch:
 
 jobs:
   lint:
