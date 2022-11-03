@@ -201,6 +201,7 @@ app:
       tier_slug: basic
       live_url_base: https://sample-golang-zyhgn.ondigitalocean.app
       live_domain: sample-golang-zyhgn.ondigitalocean.app
+      project_id: 88b72d1a-b78a-4d9f-9090-b53c4399073f
 
 deployments:
   value:
