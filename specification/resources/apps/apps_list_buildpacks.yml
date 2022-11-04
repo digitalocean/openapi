@@ -1,0 +1,35 @@
+operationId: apps_list_buildpacks
+
+summary: List Buildpacks
+
+description: >-
+  List all buildpacks available on App Platform.
+
+
+  Buildpacks are one of the ways App Platform can build apps from source. For more information, see: [Builds with Buildpacks](https://docs.digitalocean.com/products/app-platform/reference/buildpacks/).
+
+tags:
+  - Apps
+
+responses:
+  "200":
+    $ref: responses/list_buildpacks.yml
+
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+
+  "429":
+    $ref: "../../shared/responses/too_many_requests.yml"
+
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+
+x-codeSamples:
+  - $ref: "examples/curl/apps_list_buildpacks.yml"
+
+security:
+  - bearer_auth:
+      - "read"
