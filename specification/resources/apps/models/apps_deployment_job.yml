@@ -4,7 +4,11 @@ properties:
     type: string
     example: migrate-db
   source_commit_hash:
-    title: The commit hash of the repository that was used to build this job
+    title: The commit hash of the repository that was used to build this job if a Git source was used
     type: string
     example: 54d4a727f457231062439895000d45437c7bb405
+  source_image_digest:
+    title: The digest of the container image that was used for this job if an Image source was used
+    type: string
+    example: sha256:0285555a44f1a279ea91428ebb7ec27d2110f623739838837b070611060cd992
 type: object
