@@ -24,11 +24,6 @@ requestBody:
         anyOf:
           - $ref: 'models/volumes_ext4.yml'
           - $ref: 'models/volumes_xfs.yml'
-        discriminator:
-          propertyName: filesystem_type
-          mapping:
-            ext4: 'models/volumes_ext4.yml'
-            xfs: 'models/volumes_xfs.yml'
       examples:
         ext4 volume:
           value:
