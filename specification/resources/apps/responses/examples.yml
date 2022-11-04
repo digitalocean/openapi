@@ -201,6 +201,21 @@ app:
       live_url_base: https://sample-golang-zyhgn.ondigitalocean.app
       live_domain: sample-golang-zyhgn.ondigitalocean.app
       project_id: 88b72d1a-b78a-4d9f-9090-b53c4399073f
+      build_config:
+        cnb_versioning:
+          buildpacks:
+            - id: digitalocean/python
+              version: "1.0.0"
+              major_version: 1
+              latest: true
+              name: Python
+              docs_link: https://docs.digitalocean.com/products/app-platform/reference/buildpacks/python/
+            - id: digitalocean/node
+              version: "0.0.5"
+              major_version: 0
+              latest: false
+              name: Node.js (v0, deprecated)
+              docs_link: https://docs.digitalocean.com/products/app-platform/reference/buildpacks/nodejs/
 
 deployments:
   value:

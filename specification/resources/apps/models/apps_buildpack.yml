@@ -14,8 +14,8 @@ properties:
     example: 1
   latest:
     title: >-
-      Indicates whether the buildpack is on the latest major version line available. For example, if `false`, it means 
-      that there is another buildpack with the same ID and a newer major version.
+      Indicates whether the buildpack is on the latest major version line available. A value of `false` means there is
+      another buildpack with the same ID and a newer major version.
     type: boolean
     example: true
   name:
