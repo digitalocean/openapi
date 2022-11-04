@@ -6,6 +6,7 @@ properties:
   version:
     title: The buildpack's version number.
     type: string
+    format: semver
     example: "1.2.0"
   major_version:
     title: The major component of the buildpack's version number. This signifies the "major version line" of the buildpack.

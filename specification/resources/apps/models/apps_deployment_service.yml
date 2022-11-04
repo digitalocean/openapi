@@ -11,4 +11,10 @@ properties:
     title: The digest of the container image that was used for this service if an Image source was used
     type: string
     example: sha256:0285555a44f1a279ea91428ebb7ec27d2110f623739838837b070611060cd992
+  buildpacks:
+    type: array
+    items:
+      $ref: apps_buildpack.yml
+    description: >-
+      The list of buildpacks used to build this component. The buildpacks' full version numbers are included.
 type: object
