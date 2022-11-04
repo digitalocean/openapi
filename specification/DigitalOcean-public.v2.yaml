@@ -655,6 +655,10 @@ paths:
     get:
       $ref: 'resources/apps/apps_list_buildpacks.yml'
 
+  /v2/apps/{app_id}/upgrade_buildpack:
+    post:
+      $ref: 'resources/apps/apps_upgrade_buildpack.yml'
+
   /v2/cdn/endpoints:
     get:
       $ref: 'resources/cdn/cdn_list_endpoints.yml'

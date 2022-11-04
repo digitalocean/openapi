@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{ "id": "digitalocean/node" }' \
+    "https://api.digitalocean.com/v2/apps/{app_id}/upgrade_buildpack"

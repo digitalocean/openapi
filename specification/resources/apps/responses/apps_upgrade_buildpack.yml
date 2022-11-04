@@ -1,0 +1,34 @@
+description: A JSON object with the upgrade results.
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        affected_components:
+          type: array
+          description: Contains a list of components affected by the buildpack upgrade.
+          items:
+            type: string
+          example:
+            - component name
+        deployment:
+          allOf:
+            - description: >-
+                The new deployment that was created for the buildpack upgrade if `trigger_deployment` was
+                specified in the request.
+            - $ref: ../models/apps_deployment.yml
+    examples:
+      Request with `trigger_deployment` set to `false`:
+        value:
+          affected_components:
+            - api
+            - frontend
+
+headers:
+  ratelimit-limit:
+    $ref: ../../../shared/headers.yml#/ratelimit-limit
+  ratelimit-remaining:
+    $ref: ../../../shared/headers.yml#/ratelimit-remaining
+  ratelimit-reset:
+    $ref: ../../../shared/headers.yml#/ratelimit-reset

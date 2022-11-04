@@ -1,0 +1,22 @@
+type: object
+properties:
+  buildpack_id:
+    type: string
+    description: The ID of the buildpack to upgrade.
+    example: digitalocean/node
+  major_version:
+    type: integer
+    format: int32
+    description: >-
+      The major version line to upgrade the buildpack to. If omitted, the latest available major version line will be
+      used.
+    example: 2
+  trigger_deployment:
+    type: boolean
+    description: >-
+      Whether to trigger a new app deployment to apply the buildpack upgrade. If `false`, the upgrade will be applied by
+      the next app deployment.
+    default: true
+    example: true
+required:
+  - buildpack_id

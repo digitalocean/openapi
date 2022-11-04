@@ -1,4 +1,4 @@
-description: A JSON object with key `buildpacks`
+description: A JSON object with a list of buildpacks.
 
 content:
   application/json:
