@@ -65,6 +65,7 @@ load_balancer_basic_response:
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
       disable_lets_encrypt_dns_records: false
+      project_id: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
 
 load_balancer_ssl_termination_response:
   value:
@@ -187,6 +188,7 @@ load_balancer_using_tag_response:
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
       disable_lets_encrypt_dns_records: false
+      project_id: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
 
 load_balancer_sticky_sessions_and_health_check_response:
   value:
@@ -250,6 +252,7 @@ load_balancer_sticky_sessions_and_health_check_response:
       enable_backend_keepalive: false
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
       disable_lets_encrypt_dns_records: false
+      project_id: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
 
 load_balancer_update_response:
   value:
@@ -318,6 +321,7 @@ load_balancer_update_response:
       enable_backend_keepalive: true
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
       disable_lets_encrypt_dns_records: false
+      project_id: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
 
 load_balancers_all:
   value:
@@ -447,6 +451,7 @@ load_balancers_all:
       enable_backend_keepalive: false
       vpc_uuid: 587d698c-de84-11e8-80bc-3cfdfea9fcd1
       disable_lets_encrypt_dns_records: false
+      project_id: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
     links: {}
     meta:
       total: 2
