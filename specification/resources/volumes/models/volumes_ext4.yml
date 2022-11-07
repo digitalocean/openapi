@@ -13,4 +13,5 @@ allOf:
     required:
       - name
       - size_gigabytes
+      - filesystem_type
       - region
