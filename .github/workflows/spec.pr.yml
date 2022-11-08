@@ -90,12 +90,14 @@ jobs:
     needs:
       - bundle-spec
 
+    environment: PR
+
     steps:
-      - name: Check out digitalocean-client-python repo
+      - name: Check out pydo repo
         uses: actions/checkout@v2
         with:
-          repository: digitalocean/digitalocean-client-python
-          token: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
+          repository: digitalocean/pydo
+          token: ${{ secrets.PYDO_GITHUB_TOKEN }}
 
       - name: Install Poetry
         uses: snok/install-poetry@v1.3.1
