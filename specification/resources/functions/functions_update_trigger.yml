@@ -33,7 +33,7 @@ responses:
     $ref: 'responses/trigger_not_found.yml'
 
   '429':
-    $ref: 'responses/trigger_limit_reached.yml'
+    $ref: '../../shared/responses/too_many_requests.yml'
 
   '500':
     $ref: '../../shared/responses/server_error.yml'
