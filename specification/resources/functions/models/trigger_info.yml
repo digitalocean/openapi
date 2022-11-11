@@ -1,0 +1,70 @@
+type: object
+
+properties:
+  namespace:
+    type: string
+    example: fn-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    description: A unique string format of UUID with a prefix fn-.
+
+  name:
+    type: string
+    example: my trigger
+    description: The trigger's unique name within the namespace.
+
+  function:
+    type: string
+    example: hello
+    description: Name of function(action) exist in given namespace.
+
+  type:
+    type: string
+    example: SCHEDULED
+    description: String which indicates the type of trigger source like SCHEDULED.
+  
+  is_enabled:
+    type: boolean
+    example: true
+    description: Indicates weather the trigger is paused or unpaused.
+  
+  created_at:
+    type: string
+    example: 2022-11-11T04:16:45Z
+    description: UTC time string.
+
+  updated_at:
+    type: string
+    example: 2022-11-11T04:16:45Z
+    description: UTC time string.
+
+  scheduled_details:
+    type: object
+    description: Trigger details for SCHEDULED type, where body is optional.
+    properties:
+      cron:
+        description: valid cron expression string which is required for SCHEDULED type triggers.
+        type: string
+        example: '* * * * *'
+
+      body:
+        description: Optional data to be sent to function while triggering the function.
+        type: object
+        properties:
+          name:
+            type: string
+            example: Welcome to DO!
+
+  scheduled_runs:
+    type: object
+    properties:
+      last_run_at:
+        description: Indicates last run time. null value indicates trigger not run yet.
+        type: string
+        example: 2022-11-11T04:16:45Z
+
+      next_run_at:
+        description: Indicates nex run time. null value indicates trigger will not run.
+        type: object
+        properties:
+          name:
+            type: string
+            example: 2022-11-11T04:16:45Z

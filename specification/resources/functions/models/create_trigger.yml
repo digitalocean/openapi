@@ -1,0 +1,47 @@
+type: object
+properties:
+  name:
+    type: string
+    example: my trigger
+    description: The trigger's unique name within the namespace.
+
+  function:
+    type: string
+    example: hello
+    description: Name of function(action) exist in given namespace.
+
+  type:
+    type: string
+    example: SCHEDULED
+    description: One of different type of triggers. Currently only SCHEDULED we are supporting.
+  
+  is_enabled:
+    type: boolean
+    example: true
+    description: Indicates weather the trigger is paused or unpaused.
+  
+  scheduled_details:
+    type: object
+    description: Trigger details for SCHEDULED type, where body is optional.
+    properties:
+      cron:
+        description: valid cron expression string which is required for SCHEDULED type triggers.
+        type: string
+        example: '* * * * *'
+
+      body:
+        description: Optional data to be sent to function while triggering the function.
+        type: object
+        properties:
+          name:
+            type: string
+            example: Welcome to DO!
+    required: 
+      - cron
+
+required:
+  - name
+  - function
+  - type
+  - is_enabled
+  - scheduled_details
