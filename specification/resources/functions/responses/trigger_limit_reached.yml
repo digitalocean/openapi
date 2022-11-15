@@ -14,6 +14,6 @@ content:
     schema:
       $ref: '../../../shared/models/error.yml'
     example:
-      id: unknown
-      message: 'adding trigger to database: triggers: limit reached'
+      id: unprocessable_entity
+      message: 'triggers limit reached'
       request_id: 7ba99a43-6618-4fe0-9af7-092752ad0d56
