@@ -14,7 +14,7 @@ properties:
   function:
     type: string
     example: hello
-    description: Name of function(action) exist in given namespace.
+    description: Name of function(action) that exists in the given namespace.
 
   type:
     type: string
