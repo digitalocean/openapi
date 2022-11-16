@@ -19,6 +19,6 @@ jobs:
       - name: Check outputs
         run: echo ${{ steps.vars.outputs.sha_short }}
       - name: trigger-workflow
-        run: gh workflow run --repo digitalocean/digitalocean-client-python python-client-gen.yml --ref main -f openapi_short_sha=${{ steps.vars.outputs.sha_short }}
+        run: gh workflow run --repo digitalocean/pydo python-client-gen.yml --ref main -f openapi_short_sha=${{ steps.vars.outputs.sha_short }}
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
