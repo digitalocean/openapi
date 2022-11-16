@@ -3,8 +3,8 @@ operationId: functions_get_trigger
 summary: Get Trigger
 
 description: >-
-  Gets the trigger details
-  To get all triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.
+  Gets the trigger details.
+  To get the trigger details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.
 
 parameters:
   - $ref: 'parameters.yml#/namespace_id'

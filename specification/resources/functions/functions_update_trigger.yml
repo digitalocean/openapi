@@ -3,7 +3,7 @@ operationId: functions_update_trigger
 summary: Update Trigger
 
 description: >-
-  Creates a new trigger for a given function in a namespace. To create a trigger, send a POST request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME` with the `name`, `function`, `type`, `is_enabled` and `scheduled_details` properties.
+  Updates the details of the given trigger. To update a trigger, send a PUT request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME` with new values for the `is_enabled ` or `scheduled_details` properties.
 
 parameters:
   - $ref: 'parameters.yml#/namespace_id'
