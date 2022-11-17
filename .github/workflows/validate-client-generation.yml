@@ -1,0 +1,78 @@
+name: Validate Client Generation
+
+on:
+  workflow_run:
+    workflows:
+      - 'Spec PR'
+    types:
+      - completed
+
+jobs:
+  validate-client-gen:
+    name: Validate Client Generation
+
+    if: >
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      target_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+    steps:
+      - name: Check out openapi
+        uses: actions/checkout@v2.5.0
+
+      - name: Add check to PR
+        run: |
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            /repos/scotchneat/openapi/statuses/${{ github.event.workflow_run.head_sha }} \
+            -f state='pending' \
+            -f target_url='${{ env.target_url }}' \
+            -f description='Starting pydo validation' \
+            -f context='${{ github.workflow }}'
+      - name: Check out pydo repo
+        uses: actions/checkout@v2.5.0
+        with:
+          repository: digitalocean/pydo
+          path: pydo
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.3.1
+        with:
+          version: 1.1.13
+          virtualenvs-path: .venv
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: false
+
+      - name: Download PR spec
+        run: |
+          gh run download ${{ github.event.workflow_run.id }} -n openapi-bundled
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test Python client generation
+        id: test-client
+        working-directory: pydo
+        run: |
+          SPEC_FILE=../openapi-bundled.yaml make generate
+          make test-mocked
+      - name: Results
+        if: always()
+        run: |
+          if [[ ${{ steps.test-client.outcome }} == 'success' ]]; then
+            echo "test_result=success" >> $GITHUB_ENV
+            echo "check_description=Successfully validated generated client" >> $GITHUB_ENV
+          else
+            echo "test_result=failure" >> $GITHUB_ENV
+            echo "check_description=Failed to validate generated client" >> $GITHUB_ENV
+          fi
+      - name: Update check on PR
+        run: |
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            /repos/scotchneat/openapi/statuses/${{ github.event.workflow_run.head_sha }} \
+            -f state='${{ env.test_result }}' \
+            -f target_url='${{ env.target_url }}' \
+            -f description='${{ env.check_description }}' \
+            -f context='${{ github.workflow }}'
