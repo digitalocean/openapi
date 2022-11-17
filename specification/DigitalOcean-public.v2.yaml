@@ -1006,6 +1006,23 @@ paths:
     delete:
       $ref: 'resources/functions/functions_delete_namespace.yml'
 
+  /v2/functions/namespaces/{namespace_id}/triggers:
+    get:
+      $ref: 'resources/functions/functions_list_triggers.yml'
+
+    post:
+      $ref: 'resources/functions/functions_create_trigger.yml'
+
+  /v2/functions/namespaces/{namespace_id}/triggers/{trigger_name}:
+    get:
+      $ref: 'resources/functions/functions_get_trigger.yml'
+
+    put:
+      $ref: 'resources/functions/functions_update_trigger.yml'
+
+    delete:
+      $ref: 'resources/functions/functions_delete_trigger.yml'
+
   /v2/images:
     get:
       $ref: 'resources/images/images_list.yml'
