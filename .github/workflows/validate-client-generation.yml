@@ -26,7 +26,7 @@ jobs:
       - name: Add check to PR
         run: |
           gh api --method POST -H "Accept: application/vnd.github+json" \
-            /repos/scotchneat/openapi/statuses/${{ github.event.workflow_run.head_sha }} \
+            /repos/${{ github.repository }}/statuses/${{ github.event.workflow_run.head_sha }} \
             -f state='pending' \
             -f target_url='${{ env.target_url }}' \
             -f description='Starting pydo validation' \
@@ -71,7 +71,7 @@ jobs:
       - name: Update check on PR
         run: |
           gh api --method POST -H "Accept: application/vnd.github+json" \
-            /repos/scotchneat/openapi/statuses/${{ github.event.workflow_run.head_sha }} \
+            /repos/${{ github.repository }}/statuses/${{ github.event.workflow_run.head_sha }} \
             -f state='${{ env.test_result }}' \
             -f target_url='${{ env.target_url }}' \
             -f description='${{ env.check_description }}' \
