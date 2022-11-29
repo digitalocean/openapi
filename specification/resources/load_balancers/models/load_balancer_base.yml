@@ -136,7 +136,7 @@ properties:
     default: 60
     minimum: 30
     maximum: 600
-    description: An integer value which configures the idle timeout for http requests
+    description: An integer value which configures the idle timeout for HTTP requests
      to the target droplets.
 
   vpc_uuid:
