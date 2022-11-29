@@ -17,6 +17,7 @@ load_balancer_basic_create_request:
     - 3164444
     - 3164445
     project_id: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
+    http_idle_timeout_seconds: 60
 
 load_balancer_ssl_termination_create_request:
   description: Terminating SSL at the load balancer using a managed SSL
@@ -110,3 +111,4 @@ load_balancer_update_request:
     enable_backend_keepalive: true
     vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
     project_id: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
+    http_idle_timeout_seconds: 60
