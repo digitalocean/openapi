@@ -58,8 +58,10 @@ properties:
       - v1/insights/lbaas/connection_utilization_percent
       - v1/insights/lbaas/droplet_health
       - v1/insights/lbaas/tls_connections_per_second_utilization_percent
-      - v1/insights/lbaas/increase_in_http_error_rate_percentage
-      - v1/insights/lbaas/increase_in_http_error_rate_count
+      - v1/insights/lbaas/increase_in_http_error_rate_percentage_5xx
+      - v1/insights/lbaas/increase_in_http_error_rate_percentage_4xx
+      - v1/insights/lbaas/increase_in_http_error_rate_count_5xx
+      - v1/insights/lbaas/increase_in_http_error_rate_count_4xx
       - v1/insights/lbaas/high_http_request_response_time
       - v1/insights/lbaas/high_http_request_response_time_50p
       - v1/insights/lbaas/high_http_request_response_time_95p
