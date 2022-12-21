@@ -155,7 +155,6 @@ properties:
       load balancer.
 
   firewall:
-    title: firewall
     $ref: 'lb_firewall.yml'
 
 required:
