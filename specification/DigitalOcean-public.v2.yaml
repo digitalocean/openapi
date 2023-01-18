@@ -821,6 +821,8 @@ paths:
   /v2/databases/{database_cluster_uuid}/pools/{pool_name}:
     get:
       $ref: 'resources/databases/databases_get_connectionPool.yml'
+    put:
+      $ref: 'resources/databases/databases_update_connectionPool.yml'
     delete:
       $ref: 'resources/databases/databases_delete_connectionPool.yml'
 
