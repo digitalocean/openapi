@@ -4,7 +4,17 @@ properties:
     type: string
     example: web
   source_commit_hash:
-    title: The commit hash of the repository that was used to build this service
+    title: The commit hash of the repository that was used to build this service if a Git source was used
     type: string
     example: 54d4a727f457231062439895000d45437c7bb405
+  source_image_digest:
+    title: The digest of the container image that was used for this service if an Image source was used
+    type: string
+    example: sha256:0285555a44f1a279ea91428ebb7ec27d2110f623739838837b070611060cd992
+  buildpacks:
+    type: array
+    items:
+      $ref: apps_buildpack.yml
+    description: >-
+      The list of buildpacks used to build this component. The buildpacks' full version numbers are included.
 type: object

@@ -1,0 +1,38 @@
+properties:
+  id:
+    title: The buildpack's ID.
+    type: string
+    example: digitalocean/node
+  version:
+    title: The buildpack's version number.
+    type: string
+    format: semver
+    example: "1.2.0"
+  major_version:
+    title: The major component of the buildpack's version number. This signifies the "major version line" of the buildpack.
+    type: integer
+    format: int32
+    example: 1
+  latest:
+    title: >-
+      Indicates whether the buildpack is on the latest major version line available. A value of `false` means there is
+      another buildpack with the same ID and a newer major version.
+    type: boolean
+    example: true
+  name:
+    title: A human-friendly name.
+    type: string
+    example: Node.js
+  description:
+    items:
+      type: string
+    title: A description of the buildpack's purpose and steps performed at build time.
+    type: array
+    example:
+      - Install Node.js, NPM, and Yarn.
+      - Install dependencies using `npm ci` or `yarn install`.
+  docs_link:
+    title: A link to the buildpack's documentation.
+    type: string
+    example: https://docs.digitalocean.com/products/app-platform/reference/buildpacks/nodejs/
+type: object

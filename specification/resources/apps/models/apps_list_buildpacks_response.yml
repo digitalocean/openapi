@@ -1,0 +1,6 @@
+properties:
+  buildpacks:
+    items:
+      $ref: apps_buildpack.yml
+    type: array
+type: object

@@ -1,0 +1,19 @@
+title: The app's build configuration.
+type: object
+properties:
+  cnb_versioning:
+    type: object
+    description: >-
+      Versioning configuration for Cloud Native Buildpacks-based builds.
+
+
+      Buildpacks are one of the ways App Platform can build apps from source. For more information, see:
+      [Builds with Buildpacks](https://docs.digitalocean.com/products/app-platform/reference/buildpacks/).
+    properties:
+      buildpacks:
+        type: array
+        description: >-
+          A list of versioned buildpacks used for the app's builds. Buildpacks are versioned at the major semver version
+          component, therefore exact version numbers are not available in the app's build configuration.
+        items:
+          $ref: apps_buildpack.yml
