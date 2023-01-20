@@ -651,6 +651,14 @@ paths:
     post:
       $ref: 'resources/apps/apps_revert_rollback.yml'
 
+  /v2/apps/{app_id}/metrics/bandwidth_daily:
+    get:
+      $ref: 'resources/apps/apps_get_metrics_bandwidth_usage.yml'
+
+  /v2/apps/metrics/bandwidth_daily:
+    post:
+      $ref: 'resources/apps/apps_list_metrics_bandwidth_usage.yml'
+
   /v2/cdn/endpoints:
     get:
       $ref: 'resources/cdn/cdn_list_endpoints.yml'
