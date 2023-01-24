@@ -114,3 +114,10 @@ content:
           - end_of_life: 2026-11-12T00:00:00Z
             end_of_availability: 2026-05-12T00:00:00Z
             version: '14'
+        mongodb:
+          - end_of_life: 2024-02-01T08:00:00Z
+            end_of_availability: null
+            version: '4.4'
+          - end_of_life: 2024-10-01T07:00:00Z
+            end_of_availability: null
+            version: '5.0'

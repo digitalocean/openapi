@@ -36,3 +36,6 @@ properties:
       redis:
         allOf:
           - $ref: './database_version_availability.yml'
+      mongodb:
+        allOf:
+          - $ref: './database_version_availability.yml'
