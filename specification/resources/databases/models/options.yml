@@ -28,14 +28,10 @@ properties:
     type: object
     properties:
       pg:
-        allOf:
-          - $ref: './database_version_availabilities.yml'
+        $ref: './database_version_availabilities.yml'
       mysql:
-        allOf:
-          - $ref: './database_version_availabilities.yml'
+        $ref: './database_version_availabilities.yml'
       redis:
-        allOf:
-          - $ref: './database_version_availabilities.yml'
+        $ref: './database_version_availabilities.yml'
       mongodb:
-        allOf:
-          - $ref: './database_version_availabilities.yml'
+        $ref: './database_version_availabilities.yml'
