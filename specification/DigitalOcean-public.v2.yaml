@@ -846,6 +846,10 @@ paths:
     put:
       $ref: 'resources/databases/databases_update_sql_mode.yml'
 
+  /v2/databases/{database_cluster_uuid}/upgrade:
+    put:
+      $ref: 'resources/databases/databases_upgrade_major_version.yml'
+
   /v2/domains:
     get:
       $ref: 'resources/domains/domains_list.yml'
