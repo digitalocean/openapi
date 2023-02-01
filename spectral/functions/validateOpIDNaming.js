@@ -15,47 +15,49 @@ const PUT = ["update"];
 
 const articles = ["_a_", "_an_", "_the_"]
 
+const NAMING_DOCS = "https://github.com/digitalocean/openapi/blob/main/CONTRIBUTING.md#operationid-naming"
+
 export default (input, _, context) => {
   if (context.path[0] == "paths") {
     var path = context.path[1];
     var method = context.path[2];
     var operationId = input.operationId;
-    var suffix = operationId.split("_")[1];
+    var opAlias = operationId.split("_")[1];
 
     switch (method) {
       case "delete":
-        if (!(DELETE.includes(suffix))) {
+        if (!(DELETE.includes(opAlias))) {
           return [{
             message:
-              `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${DELETE.join(", ")}. Prefer 'delete'. Example OperationID: droplet_delete`
+              `${method.toUpperCase()} ${path} - ${operationId}: '${opAlias}' is an invalid {opAlias}: ${DELETE.join(", ")}. Prefer 'delete'. ${NAMING_DOCS}`
           }];
         }
         break;
       case "get":
-        if (!(GET.includes(suffix))) {
+        if (!(GET.includes(opAlias))) {
           return [{
-            message: `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${GET.join(", ")}. Prefer 'get' for retrieving a single object and 'list' for multiple objects. Example OperationID: droplet_get`
+            message: `${method.toUpperCase()} ${path} - ${operationId}: '${opAlias}' is an invalid {opAlias}: ${GET.join(", ")}. Prefer 'get' for retrieving a single object and 'list' for multiple objects. ${NAMING_DOCS}`
           }];
         }
         break;
       case "patch":
-        if (!(PATCH.includes(suffix))) {
+        if (!(PATCH.includes(opAlias))) {
           return [{
-            message: `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${PATCH.join(", ")}. Prefer 'patch'. Example OperationID: droplet_patch`
+            message: `${method.toUpperCase()} ${path} - ${operationId}: '${opAlias}' is an invalid {opAlias}: ${PATCH.join(", ")}. Prefer 'patch'. ${NAMING_DOCS}`
           }];
         }
         break;
       case "post":
-        if (!(POST.includes(suffix))) {
+        if (!(POST.includes(opAlias))) {
           return [{
-            message: `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${POST.join(", ")}. Prefer 'create' for new resources. Custom verbs may be acceptable for clarity. Example OperationID: droplet_create`
+            message: `${method.toUpperCase()} ${path} - ${operationId}: '${opAlias}' is an invalid {opAlias}: ${POST.join(", ")}. Prefer 'create' for new resources. Custom verbs may be acceptable for clarity. ${NAMING_DOCS}`
           }];
         }
         break;
       case "put":
-        if (!(PUT.includes(suffix))) {
+        if (!(PUT.includes(opAlias))) {
           return [{
-            message: `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${PUT.join(", ")}. Prefer 'update'. Example OperationID: droplet_update`
+            message: `${method.toUpperCase()} ${path} - ${operationId} is an invalid {opAlias}: ${PUT.join(", ")}. Prefer 'update'. ${NAMING_DOCS}`
           }];
         }
         break;
