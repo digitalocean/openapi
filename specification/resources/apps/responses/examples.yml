@@ -201,6 +201,7 @@ app:
       tier_slug: basic
       live_url_base: https://sample-golang-zyhgn.ondigitalocean.app
       live_domain: sample-golang-zyhgn.ondigitalocean.app
+      project_id: 88b72d1a-b78a-4d9f-9090-b53c4399073f
 
 deployments:
   value:
@@ -617,3 +618,19 @@ alert:
           status: SUCCESS
           started_at: 2020-07-28T18:00:00Z
           ended_at: 2020-07-28T18:00:00Z
+
+app_bandwidth_usage:
+  value:
+    app_bandwidth_usage:
+      - app_id: 4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf
+        bandwidth_bytes: '513668'
+    date: 2023-01-17T00:00:00Z
+
+app_bandwidth_usage_multiple:
+  value:
+    app_bandwidth_usage:
+      - app_id: 4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf
+        bandwidth_bytes: '513668'
+      - app_id: c2a93513-8d9b-4223-9d61-5e7272c81cf5
+        bandwidth_bytes: '254847'
+    date: 2023-01-17T00:00:00Z

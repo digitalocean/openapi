@@ -14,4 +14,3 @@ allOf:
       - name
       - size_gigabytes
       - region
-      - filesystem_type
