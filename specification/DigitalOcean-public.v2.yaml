@@ -657,7 +657,7 @@ paths:
 
   /v2/apps/metrics/bandwidth_daily:
     post:
-      $ref: 'resources/apps/apps_list_metrics_bandwidth_usage.yml'
+      $ref: 'resources/apps/apps_post_metrics_bandwidth_usage_list.yml'
 
   /v2/cdn/endpoints:
     get:

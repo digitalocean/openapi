@@ -1,4 +1,4 @@
-operationId: apps_list_metrics_bandwidth_daily
+operationId: apps_post_metrics_bandwidth_daily_list
 
 summary: "Retrieve Multiple Apps' Daily Bandwidth Metrics"
 
