@@ -1,10 +1,10 @@
-operationId: databases_destroy_replica
+operationId: databases_promote_replica
 
-summary: Destroy a Read-only Replica
+summary: Promote a Read-only Replica to become a Primary Cluster
 
 description: >-
-  To destroy a specific read-only replica, send a DELETE request to
-  `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`.
+  To promote a specific read-only replica, send a PUT request to
+  `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME/promote`.
 
 
   **Note**: Read-only replicas are not supported for Redis clusters.
@@ -40,9 +40,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/databases_destroy_replica.yml'
-  - $ref: 'examples/go/databases_destroy_replica.yml'
+  - $ref: 'examples/curl/databases_promote_replica.yml'
+  - $ref: 'examples/go/databases_promote_replica.yml'
 
 security:
   - bearer_auth:
-    - 'write'
+      - 'write'
