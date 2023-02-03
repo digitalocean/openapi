@@ -792,6 +792,10 @@ paths:
     delete:
       $ref: 'resources/databases/databases_destroy_replica.yml'
 
+  /v2/databases/{database_cluster_uuid}/replicas/{replica_name}/promote:
+    put:
+      $ref: 'resources/databases/databases_promote_replica.yml'
+
   /v2/databases/{database_cluster_uuid}/users:
     get:
       $ref: 'resources/databases/databases_list_users.yml'
