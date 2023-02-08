@@ -58,6 +58,7 @@ jobs:
         run: |
           SPEC_FILE=../openapi-bundled.yaml make generate
           make test-mocked
+
       - name: Results
         if: always()
         run: |
@@ -68,7 +69,9 @@ jobs:
             echo "test_result=failure" >> $GITHUB_ENV
             echo "check_description=Failed to validate generated client" >> $GITHUB_ENV
           fi
+
       - name: Update check on PR
+        if: always()
         run: |
           gh api --method POST -H "Accept: application/vnd.github+json" \
             /repos/${{ github.repository }}/statuses/${{ github.event.workflow_run.head_sha }} \
