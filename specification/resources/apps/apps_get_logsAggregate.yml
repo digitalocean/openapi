@@ -19,7 +19,7 @@ parameters:
 
 responses:
   "200":
-    $ref: responses/list_logs_aggregate.yml
+    $ref: responses/list_logs.yml
 
   "401":
     $ref: ../../shared/responses/unauthorized.yml

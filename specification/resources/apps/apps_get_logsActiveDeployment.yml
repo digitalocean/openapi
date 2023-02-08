@@ -1,17 +1,19 @@
-operationId: apps_get_logs
+operationId: apps_get_logsActiveDeployment
 
-summary: Retrieve Deployment Logs
+summary: Retrieve Active Deployment Logs
 
-description: Retrieve the logs of a past, in-progress, or active deployment. The
-  response will include links to either real-time logs of an in-progress or active
-  deployment or archived logs of a past deployment.
+description: Retrieve the logs of the active deployment if one exists. The 
+  response will include links to either real-time logs of an in-progress or
+  active deployment or archived logs of a past deployment. Note log_type=BUILD
+  logs will return logs associated with the current active deployment (being
+  served). To view build logs associated with in-progress build, the query must
+  explicitly reference the deployment id. 
 
 tags:
 - Apps
 
 parameters:
   - $ref: parameters.yml#/app_id
-  - $ref: parameters.yml#/deployment_id
   - $ref: parameters.yml#/component
   - $ref: parameters.yml#/live_updates
   - $ref: parameters.yml#/log_type
@@ -37,7 +39,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/apps_get_logs.yml'
+  - $ref: 'examples/curl/apps_get_logsActiveDeployment.yml'
 
 security:
   - bearer_auth:
