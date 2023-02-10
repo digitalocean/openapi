@@ -1,6 +1,6 @@
-operationId: apps_get_logsActiveDeploymentAggregate
+operationId: apps_get_logs_active_deployment
 
-summary: Retrieve Active Deployment Aggregate Logs
+summary: Retrieve Active Deployment Logs
 
 description: Retrieve the logs of the active deployment if one exists. The 
   response will include links to either real-time logs of an in-progress or
@@ -14,6 +14,7 @@ tags:
 
 parameters:
   - $ref: parameters.yml#/app_id
+  - $ref: parameters.yml#/component
   - $ref: parameters.yml#/live_updates
   - $ref: parameters.yml#/log_type
   - $ref: parameters.yml#/time_wait
@@ -38,7 +39,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/apps_get_logsActiveDeploymentAggregate.yml'
+  - $ref: 'examples/curl/apps_get_logs_active_deployment.yml'
 
 security:
   - bearer_auth:
