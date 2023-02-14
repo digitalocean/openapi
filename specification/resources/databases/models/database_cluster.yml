@@ -26,6 +26,11 @@ properties:
     type: string
     example: '10'
     description: A string representing the version of the database engine in use for the cluster.
+  semantic_version:
+    type: string
+    example: '10.3.2'
+    description:  A string representing the semantic version of the database engine in use for the cluster.
+    readOnly: true
   num_nodes:
     type: integer
     example: 2
