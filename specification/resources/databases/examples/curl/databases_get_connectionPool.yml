@@ -2,5 +2,5 @@ lang: cURL
 source: |-
   curl -X GET /
   -H "Content-Type: application/json" /
-  -H "Authorization: Bearer b7d03a6947b217efb6f3ec3bd3504582" /
+  -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" /
   "https://api.digitalocean.com/v2/databases/9cc10173-e9ea-4176-9dbc-a4cee4c4ff30/pools/backend-pool" 

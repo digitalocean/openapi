@@ -18,6 +18,12 @@ properties:
     - ams
     - nyc
     - fra
+    - sfo
+    - sgp
+    - blr
+    - tor
+    - lon
+    - syd
     example: nyc
 
   domains:
