@@ -154,5 +154,8 @@ properties:
       record creation for Let's Encrypt certificates that are added to the
       load balancer.
 
+  firewall:
+    $ref: 'lb_firewall.yml'
+
 required:
   - forwarding_rules

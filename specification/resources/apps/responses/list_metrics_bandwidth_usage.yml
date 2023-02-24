@@ -1,12 +1,13 @@
-description: A JSON object with urls that point to archived logs
+description: 'A JSON object with a `app_bandwidth_usage` key'
 
 content:
   application/json:
     schema:
-      $ref: ../models/apps_get_logs_response.yml
+      $ref: ../models/app_metrics_bandwidth_usage.yml
     examples:
-      logs:
-        $ref: examples.yml#/logs
+      app_bandwidth_usage:
+        $ref: examples.yml#/app_bandwidth_usage_multiple
+
 headers:
   ratelimit-limit:
     $ref: ../../../shared/headers.yml#/ratelimit-limit
