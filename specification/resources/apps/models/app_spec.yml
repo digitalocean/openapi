@@ -71,5 +71,8 @@ properties:
     items:
       $ref: app_database_spec.yml
 
+  ingress:
+    $ref: app_ingress_spec.yml
+
 required:
 - name
