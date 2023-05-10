@@ -13,7 +13,7 @@ properties:
     description: A unique, human-readable name referring to a database cluster.
   engine:
     type: string
-    example: pg
+    example: mysql
     enum:
       - pg
       - mysql
@@ -24,8 +24,13 @@ properties:
       are: "pg" for PostgreSQL, "mysql" for MySQL, "redis" for Redis, and "mongodb" for MongoDB.
   version:
     type: string
-    example: '10'
+    example: '8'
     description: A string representing the version of the database engine in use for the cluster.
+  semantic_version:
+    type: string
+    example: '8.0.28'
+    description:  A string representing the semantic version of the database engine in use for the cluster.
+    readOnly: true
   num_nodes:
     type: integer
     example: 2
@@ -112,6 +117,21 @@ properties:
     type: array
     items:
       $ref: './firewall_rule.yml'
+  version_end_of_life:
+    type: string
+    example: '2023-11-09T00:00:00Z'
+    readOnly: true
+    description: >-
+      A timestamp referring to the date when the particular version will no longer be supported. If null, the version
+      does not have an end of life timeline.
+  version_end_of_availability:
+    type: string
+    example: '2023-05-09T00:00:00Z'
+    readOnly: true
+    description: >-
+      A timestamp referring to the date when the particular version will no longer be available for creating new
+      clusters. If null, the version does not have an end of availability timeline.
+
 
 required:
   - name

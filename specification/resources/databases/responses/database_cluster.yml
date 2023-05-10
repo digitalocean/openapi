@@ -23,6 +23,7 @@ content:
         name: backend
         engine: pg
         version: '14'
+        semantic_version: '14.5'
         connection:
           uri: postgres://doadmin:wv78n3zpz42xezdk@backend-do-user-19081923-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require
           database: ''
@@ -60,3 +61,5 @@ content:
         tags:
         - production
         private_network_uuid: d455e75d-4858-4eec-8c95-da2f0a5f93a7
+        version_end_of_life: '2023-11-09T00:00:00Z'
+        version_end_of_availability: '2023-05-09T00:00:00Z'

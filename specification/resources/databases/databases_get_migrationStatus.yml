@@ -3,9 +3,8 @@ operationId: databases_get_migrationStatus
 summary: Retrieve the Status of an Online Migration
 
 description: >-
-  To retrieve the status of an online migration, send a GET request to
-  `/v2/databases/$DATABASE_ID/online-migration`. If a migration has completed,
-  a 200 OK status is returned with no response body.
+  To retrieve the status of the most recent online migration, send a GET request to
+  `/v2/databases/$DATABASE_ID/online-migration`. 
 
 tags:
   - Databases
