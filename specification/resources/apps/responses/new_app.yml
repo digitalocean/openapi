@@ -1,4 +1,4 @@
-description: A JSON of a `spec` object.
+description: A JSON or YAML of a `spec` object.
 
 content:
   application/json:
