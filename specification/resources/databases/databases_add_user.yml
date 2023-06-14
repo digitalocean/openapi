@@ -38,6 +38,11 @@ requestBody:
             mysql_settings:
               auth_plugin: mysql_native_password
 
+        Add New Read Only User (MongoDB Only):
+          value:
+            name: my-readonly
+            readonly: true
+
 responses:
   '201':
     $ref: 'responses/user.yml'
