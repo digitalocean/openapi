@@ -26,7 +26,16 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/database_user.yml'
+        allOf:
+        - $ref: 'models/database_user.yml'
+        - type: object
+          properties:
+            readonly:
+              type: boolean
+              example: true
+              description: |
+                For MongoDB clusters, set to `true` to create a read-only user.
+                This option is not currently supported for other database engines.
       examples:
         Add New User:
           value:
