@@ -10,3 +10,4 @@ rules:
   contact-properties: off
   operation-singular-tag: off
   endpoint-must-be-ref: off
+  

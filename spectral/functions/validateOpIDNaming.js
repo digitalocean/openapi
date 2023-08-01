@@ -9,9 +9,9 @@ const DELETE = ["delete", "destroy", "remove", "purge", "untag", "unassign"];
 const GET = ["get", "list"];
 const PATCH = ["patch"];
 const POST = ["create", "post", "add", "tag", "install", "reset", "upgrade",
-  "recycle", "run", "retry", "validate", "assign", "unassign", "cancel",
+  "recycle", "run", "retry", "validate", "assign", "unassign", "cancel", "list",
   "destroy", "delete", "update", "attach", "revert", "commit"];
-const PUT = ["update"];
+const PUT = ["update", "promote"];
 
 const articles = ["_a_", "_an_", "_the_"]
 
