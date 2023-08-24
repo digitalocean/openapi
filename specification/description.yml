@@ -228,7 +228,7 @@ introduction: |
 
   If the `ratelimit-remaining` reaches zero, subsequent requests will receive
   a 429 error code until the request reset has been reached. Also, the `retry-after` 
-  response header will be set to indicate how long to wait (in seconds) before the request
+  response header will be set to indicate how long to wait (in seconds) until the request
   reset has been reached, allowing further requests to be made successfully without a 429 error code. 
   You can see the format of the response in the examples. `ratelimit-remaining` reaching zero 
   can also indicate that the 250 requests per minute limit was met, even if 
