@@ -205,7 +205,7 @@ introduction: |
   *   **ratelimit-limit**: The number of requests that can be made per hour.
   *   **ratelimit-remaining**: The number of requests that remain before you hit your request limit. See the information below for how the request limits expire.
   *   **ratelimit-reset**: This represents the time when the oldest request will expire. The value is given in [Unix epoch time](http://en.wikipedia.org/wiki/Unix_time). See below for more information about how request limits expire.
-  *   **retry-after**: The number of seconds to wait after the request limit has been met to make another request.
+  *   **retry-after**: The number of seconds to wait before making another request when rate limited.
 
   As long as the `ratelimit-remaining` count is above zero, you will be able
   to make additional requests.
