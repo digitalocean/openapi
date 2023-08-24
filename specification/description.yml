@@ -262,7 +262,7 @@ introduction: |
 
   ```
       . . .
-      ratelimit-limit: 1200
+      ratelimit-limit: 5000
       ratelimit-remaining: 0
       rateLimit-reset: 1402425459
       retry-after: 29
