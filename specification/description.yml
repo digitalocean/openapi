@@ -205,6 +205,7 @@ introduction: |
   *   **ratelimit-limit**: The number of requests that can be made per hour.
   *   **ratelimit-remaining**: The number of requests that remain before you hit your request limit. See the information below for how the request limits expire.
   *   **ratelimit-reset**: This represents the time when the oldest request will expire. The value is given in [Unix epoch time](http://en.wikipedia.org/wiki/Unix_time). See below for more information about how request limits expire.
+  *   **retry-after**: The number of seconds to wait after the request limit has been met to make another request.
 
   As long as the `ratelimit-remaining` count is above zero, you will be able
   to make additional requests.
@@ -226,8 +227,10 @@ introduction: |
   move an entire hour into the future.
 
   If the `ratelimit-remaining` reaches zero, subsequent requests will receive
-  a 429 error code until the request reset has been reached. You can see the
-  format of the response in the examples. `ratelimit-remaining` reaching zero 
+  a 429 error code until the request reset has been reached. Also, the `retry-after` 
+  response header will be set to indicate how long to wait (in seconds) before the request
+  reset has been reached, allowing further requests to be made successfully without a 429 error code. 
+  You can see the format of the response in the examples. `ratelimit-remaining` reaching zero 
   can also indicate that the 250 requests per minute limit was met, even if 
   the 5,000 requests per hour limit was not. 
 
