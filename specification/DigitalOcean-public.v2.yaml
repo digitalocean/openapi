@@ -530,13 +530,13 @@ tags:
       resources assigned to them.
 
 paths:
-  # /v2/1-clicks:
-  #   get:
-  #     $ref: 'resources/1-clicks/oneClicks_list.yml'
+  /v2/1-clicks:
+    get:
+      $ref: 'resources/1-clicks/oneClicks_list.yml'
 
-  # /v2/1-clicks/kubernetes:
-  #   post:
-  #     $ref: 'resources/1-clicks/oneClicks_install_kubernetes.yml'
+  /v2/1-clicks/kubernetes:
+    post:
+      $ref: 'resources/1-clicks/oneClicks_install_kubernetes.yml'
 
   /v2/account:
     get:
