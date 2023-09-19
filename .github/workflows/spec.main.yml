@@ -30,13 +30,13 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: Bundle
-        run: make bundle
+      # - name: Bundle
+      #   run: make bundle
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: openapi-bundled
-          path: tests/openapi-bundled.yaml
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: openapi-bundled
+      #     path: tests/openapi-bundled.yaml
       - name: Set outputs
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
@@ -44,11 +44,11 @@ jobs:
         run: echo ${{ steps.vars.outputs.sha_short }}
       - name: Print Title of PR
         id: title_var
-        run: echo "::set-output name=pr_title::$(gh pr list --search "${{ steps.vars.outputs.sha_short }}" --json title --jq '.[0].title')"
+        run: echo "{PR_TITLE}={gh pr list --search "${{ steps.vars.outputs.sha_short }}" --json title --jq '.[0].title'}" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
-      - name: Check outputs
-        run: echo ${{ steps.title_var.outputs.pr_title }}
+      - name: Check PR TITLE outputs
+        run: echo ${{ steps.title_var.outputs.PR_TITLE }}
       # - name: Upload Main spec
       #   run: >-
       #     aws s3 cp tests/openapi-bundled.yaml
