@@ -52,13 +52,13 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: Bundle
-        run: make bundle
+      # - name: Bundle
+      #   run: make bundle
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: openapi-bundled
-          path: tests/openapi-bundled.yaml
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: openapi-bundled
+      #     path: tests/openapi-bundled.yaml
 
       # - name: Upload PR spec
       #   run: >-
