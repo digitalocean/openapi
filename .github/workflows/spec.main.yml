@@ -44,7 +44,7 @@ jobs:
         run: echo ${{ steps.vars.outputs.sha_short }}
       - name: Print Title of PR
         id: title_var
-        run: echo "{PR_TITLE}={gh pr list --search "${{ steps.vars.outputs.sha_short }}" --json title --jq '.[0].title'}" >> $GITHUB_OUTPUT
+        run: echo "PR_TITLE=gh pr list --search "${{ steps.vars.outputs.sha_short }}" --json title --jq '.[0].title'" >> "$GITHUB_OUTPUT"
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
       - name: Check PR TITLE outputs
