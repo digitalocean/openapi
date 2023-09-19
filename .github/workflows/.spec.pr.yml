@@ -60,25 +60,25 @@ jobs:
           name: openapi-bundled
           path: tests/openapi-bundled.yaml
 
-      - name: Upload PR spec
-        run: >-
-          aws s3 cp tests/openapi-bundled.yaml
-          ${{ env.SPACES_PATH }}/previews/${{ github.event.number }}-spec.yaml
-          --endpoint=${{ env.SPACES_ENDPOINT }}
-          --acl public-read
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
-          AWS_DEFAULT_OUTPUT: json
-          SPACES_PATH: ${{ secrets.SPACES_PATH }}
-          SPACES_ENDPOINT: ${{ secrets.SPACES_ENDPOINT }}
-          AWS_EC2_METADATA_DISABLED: true
+      # - name: Upload PR spec
+      #   run: >-
+      #     aws s3 cp tests/openapi-bundled.yaml
+      #     ${{ env.SPACES_PATH }}/previews/${{ github.event.number }}-spec.yaml
+      #     --endpoint=${{ env.SPACES_ENDPOINT }}
+      #     --acl public-read
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_ACCESS_SECRET }}
+      #     AWS_DEFAULT_OUTPUT: json
+      #     SPACES_PATH: ${{ secrets.SPACES_PATH }}
+      #     SPACES_ENDPOINT: ${{ secrets.SPACES_ENDPOINT }}
+      #     AWS_EC2_METADATA_DISABLED: true
 
-      - uses: Sibz/github-status-action@v1
-        with:
-          authToken: ${{secrets.GITHUB_TOKEN}}
-          context: Spec Preview URL
-          description: Ready
-          state: success
-          sha: ${{ github.event.pull_request.head.sha }}
-          target_url: https://api-engineering.nyc3.digitaloceanspaces.com/spec-ci/redoc-index.html?pr=${{ github.event.number }}
+      # - uses: Sibz/github-status-action@v1
+      #   with:
+      #     authToken: ${{secrets.GITHUB_TOKEN}}
+      #     context: Spec Preview URL
+      #     description: Ready
+      #     state: success
+      #     sha: ${{ github.event.pull_request.head.sha }}
+      #     target_url: https://api-engineering.nyc3.digitaloceanspaces.com/spec-ci/redoc-index.html?pr=${{ github.event.number }}
