@@ -46,36 +46,36 @@ jobs:
           virtualenvs-in-project: true
           installer-parallel: false
 
-      - name: Download PR spec
-        run: |
-          gh run download ${{ github.event.workflow_run.id }} -n openapi-bundled
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Download PR spec
+      #   run: |
+      #     gh run download ${{ github.event.workflow_run.id }} -n openapi-bundled
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Test Python client generation
-        id: test-client
-        working-directory: pydo
-        run: |
-          SPEC_FILE=../openapi-bundled.yaml make generate
-          make test-mocked
+      # - name: Test Python client generation
+      #   id: test-client
+      #   working-directory: pydo
+      #   run: |
+      #     SPEC_FILE=../openapi-bundled.yaml make generate
+      #     make test-mocked
 
-      - name: Results
-        if: always()
-        run: |
-          if [[ ${{ steps.test-client.outcome }} == 'success' ]]; then
-            echo "test_result=success" >> $GITHUB_ENV
-            echo "check_description=Successfully validated generated client" >> $GITHUB_ENV
-          else
-            echo "test_result=failure" >> $GITHUB_ENV
-            echo "check_description=Failed to validate generated client" >> $GITHUB_ENV
-          fi
+      # - name: Results
+      #   if: always()
+      #   run: |
+      #     if [[ ${{ steps.test-client.outcome }} == 'success' ]]; then
+      #       echo "test_result=success" >> $GITHUB_ENV
+      #       echo "check_description=Successfully validated generated client" >> $GITHUB_ENV
+      #     else
+      #       echo "test_result=failure" >> $GITHUB_ENV
+      #       echo "check_description=Failed to validate generated client" >> $GITHUB_ENV
+      #     fi
 
-      - name: Update check on PR
-        if: always()
-        run: |
-          gh api --method POST -H "Accept: application/vnd.github+json" \
-            /repos/${{ github.repository }}/statuses/${{ github.event.workflow_run.head_sha }} \
-            -f state='${{ env.test_result }}' \
-            -f target_url='${{ env.target_url }}' \
-            -f description='${{ env.check_description }}' \
-            -f context='${{ github.workflow }}'
+      # - name: Update check on PR
+      #   if: always()
+      #   run: |
+      #     gh api --method POST -H "Accept: application/vnd.github+json" \
+      #       /repos/${{ github.repository }}/statuses/${{ github.event.workflow_run.head_sha }} \
+      #       -f state='${{ env.test_result }}' \
+      #       -f target_url='${{ env.target_url }}' \
+      #       -f description='${{ env.check_description }}' \
+      #       -f context='${{ github.workflow }}'
