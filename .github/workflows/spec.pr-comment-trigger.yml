@@ -66,15 +66,15 @@ jobs:
         repository: ${{ fromJSON(steps.get-pr-branch.outputs.result).repo.full_name }}
         ref: ${{ github.event.review.commit_id }}
 
-    - name: Bundle
-      if: steps.is-digitalocean-member.outputs.result == 'true'
-      run: make bundle
+    # - name: Bundle
+    #   if: steps.is-digitalocean-member.outputs.result == 'true'
+    #   run: make bundle
 
-    - uses: actions/upload-artifact@v2
-      if: steps.is-digitalocean-member.outputs.result == 'true'
-      with:
-        name: openapi-bundled
-        path: tests/openapi-bundled.yaml
+    # - uses: actions/upload-artifact@v2
+    #   if: steps.is-digitalocean-member.outputs.result == 'true'
+    #   with:
+    #     name: openapi-bundled
+    #     path: tests/openapi-bundled.yaml
 
     # - name: Upload PR spec
     #   if: steps.is-digitalocean-member.outputs.result == 'true'
