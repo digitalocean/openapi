@@ -16,8 +16,10 @@ jobs:
       - name: Set outputs
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-      - name: Check outputs
+      - name: Check short sha outputs
         run: echo ${{ steps.vars.outputs.sha_short }}
+      - name: Check pr title outputs
+        run: echo ${{ github.event.pull_request.title }}
       - name: trigger-workflow
         run: gh workflow run --repo danaelhe/pydo python-client-gen.yml --ref main -f openapi_short_sha=${{ steps.vars.outputs.sha_short }} pr_title=${{ github.event.pull_request.title }}
         env:
