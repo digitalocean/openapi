@@ -45,7 +45,6 @@ jobs:
       - name : set Title of PR
         env:
             TITLE: ${{ github.event.pull_request.title }}
-      - name: Check pr title outputs
         run: echo $TITLE
       # - name: Upload Main spec
       #   run: >-
