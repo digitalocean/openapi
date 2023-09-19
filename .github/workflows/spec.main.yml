@@ -42,10 +42,10 @@ jobs:
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Check outputs
         run: echo ${{ steps.vars.outputs.sha_short }}
-      - name : set Title of PR
+      - name: Print Title of PR
+        run: gh pr list --search "${{ steps.vars.outputs.sha_short }}" --json title --jq '.[0].title'
         env:
-            TITLE: ${{ github.event.pull_request.title }}
-        run: echo $TITLE
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
       # - name: Upload Main spec
       #   run: >-
       #     aws s3 cp tests/openapi-bundled.yaml
