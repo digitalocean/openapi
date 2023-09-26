@@ -253,4 +253,4 @@ properties:
     type: integer
     minimum: 1024
     maximum: 1048576
-    example: 50
+    example: 4096
