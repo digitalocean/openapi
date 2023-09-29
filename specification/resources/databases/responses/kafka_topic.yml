@@ -52,7 +52,7 @@ content:
           min_cleanable_dirty_ratio: 0.5
           min_compaction_lag_ms: 0
           min_insync_replicas: 1
-          preallocate: false,
+          preallocate: false
           retention_bytes: -1
           retention_ms: 604800000
           segment_bytes: 209715200

@@ -21,10 +21,11 @@ properties:
   earliest_offset:
     type: integer
     description: The earliest consumer offset amongst consumer groups.
-    examples: 0
+    example: 0
 
   consumer_groups:
     type: array
+    nullable: true
     items:
       type: object
       properties:
