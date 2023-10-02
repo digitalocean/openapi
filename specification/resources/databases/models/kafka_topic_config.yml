@@ -154,6 +154,8 @@ properties:
     format: float
     default: 0.5
     example: 0.5
+    minimum: 0
+    maximum: 1
     description: >-
       The min_cleanable_dirty_ratio specifies the frequency of log
       compaction (if enabled) in relation to duplicates present in the
@@ -171,6 +173,7 @@ properties:
     type: integer
     example: 1
     default: 1
+    minimum: 1
     description: >-
       The min_insync_replicas specifies the number of replicas that must
       ACK a write for the write to be considered successful.
@@ -199,6 +202,7 @@ properties:
     type: integer
     example: 209715200
     default: 209715200
+    minimum: 14
     description: >-
       The segment_bytes specifies the maximum size of a single log file
       (in bytes).
@@ -214,6 +218,7 @@ properties:
     type: integer
     example: 604800000
     default: 604800000
+    minimum: 1
     description: >-
       The segment_ms specifies the period of time after which the log will
       be forced to roll if the segment file isn't full. This ensures that
