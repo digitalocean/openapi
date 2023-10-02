@@ -20,16 +20,17 @@ requestBody:
     application/json:
       schema:
         allOf:
-          - $ref: 'models/kafka_topic_create_update.yml'
+          - $ref: 'models/kafka_topic_update.yml'
         required:
-          - name
+          - topic
       example:
-        name: customer-events
-        partitions: 3
-        replication: 2
-        config:
-          retention_bytes: -1
-          retention_ms: 100000
+        topic:
+          name: customer-events
+          partitions: 3
+          replication: 2
+          config:
+            retention_bytes: -1
+            retention_ms: 100000
 
 responses:
   '200':
