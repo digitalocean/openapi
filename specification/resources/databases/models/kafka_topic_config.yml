@@ -5,6 +5,7 @@ properties:
     enum:
       - delete
       - compact
+      - compact_delete
     example: delete
     default: delete
     description: >-
