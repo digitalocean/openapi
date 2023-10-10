@@ -22,6 +22,11 @@ properties:
 
   tag:
     type: string
-    description: The repository tag. Defaults to `latest` if not provided.
+    description: The repository tag. Defaults to `latest` if not provided and no digest is provided. Cannot be specified if digest is provided.
     example: latest
     default: latest
+  
+  digest:
+    type: string
+    description: The image digest. Cannot be specified if tag is provided.
+    example: sha256:795e91610e9cccb7bb80893fbabf9c808df7d52ae1f39cd1158618b4a33041ac
