@@ -16,12 +16,12 @@ app_id:
   schema:
     type: string
 
-component_id:
+app_component:
   in: query
-  name: component_id
-  description: The App's component ID.
+  name: app_component
+  description: The App's component.
   example: "sample-application"
-  required: true
+  required: false
   schema:
     type: string
 
