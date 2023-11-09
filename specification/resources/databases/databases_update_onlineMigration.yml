@@ -31,7 +31,7 @@ requestBody:
           username: doadmin
           password: paakjnfe10rsrsmf
         disable_ssl: false
-        ignore_dbs: "['db0','db1']"
+        ignore_dbs: ["db0","db1"]
 
 responses:
   "200":
