@@ -793,6 +793,10 @@ paths:
       $ref: 'resources/databases/databases_list_replicas.yml'
     post:
       $ref: 'resources/databases/databases_create_replica.yml'
+  
+  /v2/databases/{database_cluster_uuid}/events:
+    get:
+      $ref: 'resources/databases/databases_events_logs.yml'
 
   /v2/databases/{database_cluster_uuid}/replicas/{replica_name}:
     get:
