@@ -159,7 +159,7 @@ tags:
       which is used in some of the following requests. Each slug denotes the node's identifier,
       CPU count, and amount of RAM, in that order.
 
-      For a list of currently available database slugs and options, use the `/v2/databases/options` or use the 
+      For a list of currently available database slugs and options, use the `/v2/databases/options` endpoint or use the 
       `doctl databases options` [command](https://docs.digitalocean.com/reference/doctl/reference/databases/options).
 
   - name: Domain Records
