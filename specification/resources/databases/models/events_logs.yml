@@ -11,6 +11,14 @@ properties:
     example: 'sample_cluster'
   event_type:
     type: string
+    enum:
+      - cluster_maintenance_perform
+      - cluster_master_promotion
+      - cluster_create
+      - cluster_update
+      - cluster_delete
+      - cluster_poweron
+      - cluster_poweroff
     description: Type of the event.
     example: 'cluster_create'
   create_time:
