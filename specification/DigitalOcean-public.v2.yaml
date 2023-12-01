@@ -815,6 +815,8 @@ paths:
       $ref: 'resources/databases/databases_get_user.yml'
     delete:
       $ref: 'resources/databases/databases_delete_user.yml'
+    put:
+      $ref: 'resources/databases/databases_update_user.yml'
 
   /v2/databases/{database_cluster_uuid}/users/{username}/reset_auth:
     post:
