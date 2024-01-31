@@ -1,0 +1,10 @@
+type: object
+
+allOf:
+- $ref: './logsink_base_verbose.yml'
+- properties:
+    config:
+      anyOf:
+      - $ref: './rsyslog.yml'
+      - $ref: './elasticsearch.yml'
+      - $ref: './opensearch.yml'
