@@ -21,6 +21,7 @@ content:
     example:
       sink_name: logs-sink
       sink_type: rsyslog
+      sink_id: 799990b6-d551-454b-9ffe-b8618e9d6272
       config:
         server: 192.168.0.1
         port: 514
