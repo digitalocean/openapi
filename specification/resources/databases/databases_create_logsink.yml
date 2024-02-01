@@ -52,6 +52,9 @@ responses:
   default:
     $ref: "../../shared/responses/unexpected_error.yml"
 
+x-codeSamples:
+  - $ref: "examples/curl/databases_create_logsink.yml"
+
 security:
   - bearer_auth:
       - "write"

@@ -13,15 +13,15 @@ tags:
   - Databases
 
 parameters:
-  - $ref: 'parameters.yml#/database_cluster_uuid'
-  - $ref: 'parameters.yml#/logsink_id'
+  - $ref: "parameters.yml#/database_cluster_uuid"
+  - $ref: "parameters.yml#/logsink_id"
 
 requestBody:
   required: true
   content:
     application/json:
       schema:
-        $ref: 'models/logsink_update.yml'
+        $ref: "models/logsink_update.yml"
       example:
         config:
           server: 192.168.0.1
@@ -30,24 +30,27 @@ requestBody:
           format: rfc3164
 
 responses:
-  '200':
-    $ref: '../../shared/responses/no_content.yml'
+  "200":
+    $ref: "../../shared/responses/no_content.yml"
 
-  '401':
-    $ref: '../../shared/responses/unauthorized.yml'
+  "401":
+    $ref: "../../shared/responses/unauthorized.yml"
 
-  '404':
-    $ref: '../../shared/responses/not_found.yml'
+  "404":
+    $ref: "../../shared/responses/not_found.yml"
 
-  '429':
-    $ref: '../../shared/responses/too_many_requests.yml'
+  "429":
+    $ref: "../../shared/responses/too_many_requests.yml"
 
-  '500':
-    $ref: '../../shared/responses/server_error.yml'
+  "500":
+    $ref: "../../shared/responses/server_error.yml"
 
   default:
-    $ref: '../../shared/responses/unexpected_error.yml'
+    $ref: "../../shared/responses/unexpected_error.yml"
+
+x-codeSamples:
+  - $ref: "examples/curl/databases_update_logsink.yml"
 
 security:
   - bearer_auth:
-    - 'write'
+      - "write"
