@@ -38,13 +38,7 @@ requestBody:
               example: true
               description: |
                 For MongoDB clusters, set to `true` to create a read-only user.
-                This option is not currently supported for other database engines.
-            pg_allow_replication:
-              type: boolean
-              example: true
-              description: |
-                For Postgres clusters, set to `true` to create a user with replication rights.
-                This option is not currently supported for other database engines.
+                This option is not currently supported for other database engines.             
 
       examples:
         Add New User:
@@ -64,8 +58,9 @@ requestBody:
         
         Add New User for Postgres with replication rights:
           value:
-            name: pg_allow_replication
-            pg_allow_replication: true
+            name: app-02
+            access_control:
+              pg_allow_replication: true
 
         Add New User with Kafka ACLs:
           value:

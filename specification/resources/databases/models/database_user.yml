@@ -43,7 +43,8 @@ properties:
         type: boolean
         example: true
         description: |
-          Postgres cluster specific access control rules for user.
+          For Postgres clusters, set to `true` for a user with replication rights.
+          This option is not currently supported for other database engines.
 
   mysql_settings:
     $ref: './mysql_settings.yml'
