@@ -40,7 +40,7 @@ content:
             name: app-02
             role: normal
             password: wv78n3zpz42xezdk
-            access_control::
+            settings:
               pg_allow_replication: true 
 
       Kafka User:

@@ -59,7 +59,7 @@ requestBody:
         Add New User for Postgres with replication rights:
           value:
             name: app-02
-            access_control:
+            settings:
               pg_allow_replication: true
 
         Add New User with Kafka ACLs:
