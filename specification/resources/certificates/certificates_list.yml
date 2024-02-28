@@ -9,7 +9,7 @@ description: >-
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'
   - $ref: '../../shared/parameters.yml#/page'
-  - $ref: "parameters.yml#/name"
+  - $ref: "parameters.yml#/certificate_name"
 
 tags:
   - Certificates
