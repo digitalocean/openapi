@@ -7,6 +7,11 @@ on:
     types:
       - completed
 
+permissions:
+  contents: read
+  statuses: write
+  actions: read
+
 jobs:
   validate-client-gen:
     name: Validate Client Generation
@@ -31,6 +36,7 @@ jobs:
             -f target_url='${{ env.target_url }}' \
             -f description='Starting pydo validation' \
             -f context='${{ github.workflow }}'
+
       - name: Check out pydo repo
         uses: actions/checkout@v2.5.0
         with:
