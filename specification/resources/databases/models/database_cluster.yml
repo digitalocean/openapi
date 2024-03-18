@@ -147,6 +147,15 @@ properties:
     description: >-
       Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond
       what is provided as a base amount from the 'size' and any previously added additional storage.
+  metrics_endpoints:
+    type: array
+    items:
+      $ref: './database_service_endpoint.yml'
+    description: >-
+      Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the cluster's primary node and
+      a second entry for the cluster's standby node(s).
+
+
 
 
 required:
