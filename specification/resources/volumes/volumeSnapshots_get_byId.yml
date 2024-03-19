@@ -4,7 +4,7 @@ summary: Retrieve an Existing Volume Snapshot
 
 description: >+
   To retrieve the details of a snapshot that has been created from a volume,
-  send a GET request to `/v2/volumes/snapshots/$SNAPSHOT_ID`.
+  send a GET request to `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`.
 
 tags:
   - Block Storage
