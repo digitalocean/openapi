@@ -27,6 +27,8 @@ requestBody:
           - sink_type
           - config
       example:
+        sink_name: "logs-sink"
+        sink_type: "rsyslog"
         config:
           server: 192.168.0.1
           port: 514
