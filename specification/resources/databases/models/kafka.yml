@@ -16,6 +16,7 @@ properties:
     - zstd
     - uncompressed
     - producer
+    example: gzip
   group_initial_rebalance_delay_ms:
     description: >-
       The amount of time, in milliseconds, the group coordinator
@@ -100,6 +101,7 @@ properties:
     type: integer
     minimum: 30000
     maximum: 9223372036854776000
+    example: 60000
   log_cleaner_min_compaction_lag_ms:
     description: >-
       The minimum time a message will remain uncompacted in the
@@ -107,6 +109,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 9223372036854776000
+    example: 100000
   log_cleanup_policy:
     description: >-
       The default cleanup policy for segments beyond the retention
@@ -133,6 +136,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 9223372036854776000
+    example: 1000000
   log_index_interval_bytes:
     description: >-
       The interval with which Kafka adds an entry to the offset
@@ -162,6 +166,7 @@ properties:
     enum:
     - CreateTime
     - LogAppendTime
+    example: CreateTime
   log_message_timestamp_difference_max_ms:
     description: >-
       The maximum difference allowed between the timestamp when
@@ -169,6 +174,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 9223372036854776000
+    example: 1000000
   log_preallocate:
     description: >-
       Controls whether to preallocate a file when creating a new segment
@@ -180,12 +186,14 @@ properties:
     type: integer
     minimum: -1
     maximum: 9223372036854776000
+    example: 1000000
   log_retention_hours:
     description: >-
       The number of hours to keep a log file before deleting it
     type: integer
     minimum: -1
     maximum: 2147483647
+    example: 1000000
   log_retention_ms:
     description: >-
       The number of milliseconds to keep a log file before deleting
@@ -194,6 +202,7 @@ properties:
     type: integer
     minimum: -1
     maximum: 9223372036854776000
+    example: 100000000
   log_roll_jitter_ms:
     description: >-
       The maximum jitter to subtract from logRollTimeMillis (in
@@ -201,6 +210,7 @@ properties:
     type: integer
     minimum: 0
     maximum: 9223372036854776000
+    example: 10000000
   log_roll_ms:
     description: >-
       The maximum time before a new log segment is rolled out
@@ -208,12 +218,14 @@ properties:
     type: integer
     minimum: 1
     maximum: 9223372036854776000
+    example: 1000000
   log_segment_bytes:
     description: >-
       The maximum size of a single log file
     type: integer
     minimum: 10485760
     maximum: 1073741824
+    example: 100000000
   log_segment_delete_delay_ms:
     description: >-
       The amount of time to wait before deleting a file from
@@ -242,12 +254,14 @@ properties:
     type: integer
     minimum: 1
     maximum: 1000
+    example: 10
   default_replication_factor:
     description: >-
       Replication factor for autocreated topics
     type: integer
     minimum: 1
     maximum: 10
+    example: 2
   replica_fetch_max_bytes:
     description: >-
       The number of bytes of messages to attempt to fetch for
@@ -258,6 +272,7 @@ properties:
     type: integer
     minimum: 1048576
     maximum: 104857600
+    example: 2097152
   replica_fetch_response_max_bytes:
     description: >-
       Maximum bytes expected for the entire fetch response (defaults
@@ -268,6 +283,7 @@ properties:
     type: integer
     minimum: 10485760
     maximum: 1048576000
+    example: 20971520
   max_connections_per_ip:
     description: >-
       The maximum number of connections allowed from each ip
@@ -275,6 +291,7 @@ properties:
     type: integer
     minimum: 256
     maximum: 2147483647
+    example: 512
   producer_purgatory_purge_interval_requests:
     description: >-
       The purge interval (in number of requests) of the producer
@@ -282,6 +299,7 @@ properties:
     type: integer
     minimum: 10
     maximum: 10000
+    example: 100
   socket_request_max_bytes:
     description: >-
       The maximum number of bytes in a socket request (defaults
@@ -289,6 +307,7 @@ properties:
     type: integer
     minimum: 10485760
     maximum: 209715200
+    example: 20971520
   transaction_state_log_segment_bytes:
     description: >-
       The transaction topic segment bytes should be kept relatively
