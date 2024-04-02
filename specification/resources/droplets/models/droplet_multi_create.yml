@@ -7,6 +7,8 @@ allOf:
         type: array
         items:
           type: string
+          maxLength: 255
+          pattern: ^[a-z][a-z0-9-]{0,30}[a-z0-9]$
         example:
         - sub-01.example.com
         - sub-02.example.com
