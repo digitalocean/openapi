@@ -161,7 +161,7 @@ properties:
     description: >-
       Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the cluster's primary node and
       a second entry for the cluster's standby node(s).
-
+    readOnly: true
 
 
 
