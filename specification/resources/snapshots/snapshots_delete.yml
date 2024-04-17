@@ -46,4 +46,5 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'write'
+    - 'image:delete'
+    - 'snapshot:delete'
