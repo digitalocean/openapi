@@ -192,6 +192,13 @@ apps:
               name: configuration-alert
               started_at: '2023-01-30T22:15:46.278987808Z'
               status: SUCCESS
+        dedicated_ips:
+          - ip: 192.168.1.1
+            id: c24d8f48-3bc4-49f5-8ca0-58e8164427ac
+            status: ASSIGNED
+          - ip: 192.168.1.2
+            id: 4768fb15-2837-4dda-9be5-3951df4bc3d0
+            status: ASSIGNED
     links:
       pages: {}
     meta:
@@ -414,6 +421,13 @@ app:
             name: configuration-alert
             started_at: '0001-01-01T00:00:00'
             status: PENDING
+      dedicated_ips:
+        - ip: 192.168.1.1
+          id: c24d8f48-3bc4-49f5-8ca0-58e8164427ac
+          status: ASSIGNED
+        - ip: 192.168.1.2
+          id: 4768fb15-2837-4dda-9be5-3951df4bc3d0
+          status: ASSIGNED
 
 
 deployments:
