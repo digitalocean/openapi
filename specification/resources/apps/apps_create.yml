@@ -34,6 +34,8 @@ requestBody:
               instance_size_slug: apps-s-1vcpu-0.5gb
               routes:
                 - path: /api
+          egress:
+            type: DEDICATED_IP
   required: true
 
 responses:
