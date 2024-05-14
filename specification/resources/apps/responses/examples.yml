@@ -331,24 +331,6 @@ app:
               http_port: 8080
               routes:
                 - path: /
-              log_destinations:
-                - name: my_papertrail
-                  papertrail:
-                    endpoint: https://mypapertrailendpoint.com
-                - name: my_datadog
-                  datadog:
-                    endpoint: https://mydatadogendpoint.com
-                    api_key: abcdefghijklmnopqrstuvwxyz0123456789
-                - name: my_logtail
-                  logtail:
-                    token: abcdefghijklmnopqrstuvwxyz0123456789
-                - name: my_opensearch
-                  open_search:
-                    endpoint: https://myopensearchendpoint.com:9300
-                    index_name: logs
-                    basic_auth:
-                      user: username
-                      password: password
           region: fra
           domains:
             - domain: "sample-php.example.com"
