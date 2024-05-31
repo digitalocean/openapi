@@ -13,7 +13,7 @@ properties:
     type: integer
     default: 7
     example: 5
-    maximum: 1000
+    maximum: 10000
     minimum: 1
     description: >-
       Maximum number of days of logs to keep
