@@ -11,7 +11,7 @@ properties:
     description: Elasticsearch index prefix
   index_days_max:
     type: integer
-    default: 3
+    default: 7
     example: 5
     maximum: 1000
     minimum: 1
