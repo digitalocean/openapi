@@ -1,11 +1,9 @@
 operationId: databases_list_logsink
 
 summary: >
-  Beta: List Logsinks for a Database Cluster
+  List Logsinks for a Database Cluster
 
 description: |
-  ![Beta](https://img.shields.io/badge/Status-Beta-yellow)
-
   To list logsinks for a database cluster, send a GET request to
   `/v2/databases/$DATABASE_ID/logsink`.
 

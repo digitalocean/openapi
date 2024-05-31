@@ -1,11 +1,9 @@
 operationId: databases_update_logsink
 
 summary: >
-  Beta: Update Logsink for a Database Cluster
+  Update Logsink for a Database Cluster
 
 description: |
-  ![Beta](https://img.shields.io/badge/Status-Beta-yellow)
-
   To update a logsink for a database cluster, send a PUT request to
   `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
 

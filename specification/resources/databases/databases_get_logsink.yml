@@ -1,11 +1,9 @@
 operationId: databases_get_logsink
 
 summary: >
-  Beta: Get Logsink for a Database Cluster
+  Get Logsink for a Database Cluster
 
 description: |
-  ![Beta](https://img.shields.io/badge/Status-Beta-yellow)
-
   To get a logsink for a database cluster, send a GET request to
   `/v2/databases/$DATABASE_ID/logsink/$LOGSINK_ID`.
 

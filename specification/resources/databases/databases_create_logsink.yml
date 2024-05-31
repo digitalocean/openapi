@@ -1,11 +1,9 @@
 operationId: databases_create_logsink
 
 summary: >
-  Beta: Create Logsink for a Database Cluster
+  Create Logsink for a Database Cluster
 
 description: |
-  ![Beta](https://img.shields.io/badge/Status-Beta-yellow)
-
   To create logsink for a database cluster, send a POST request to
   `/v2/databases/$DATABASE_ID/logsink`.
 
