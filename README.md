@@ -25,7 +25,9 @@ This repository contains the source files used to compile the specification. On 
 
 In order to generate a collection that may be imported to Postman, run:
 
-    make collection
+```sh
+make collection
+```
 
 The results can be found in `tests/postman.json`.
 
@@ -33,13 +35,17 @@ The results can be found in `tests/postman.json`.
 
 To generate a bundled version of the specification locally, run:
 
-    make bundle
+```sh
+make bundle
+```
 
 To preview the documentation locally, run:
 
-    make preview
+```sh
+make preview
+```
 
-The documentation will be available at: `http://127.0.0.1:8080`
+The documentation will be available at: `http://127.0.0.1:8080`.
 
 For more details on our development process and the structure of this repository, see [CONTRIBUTING.md](/CONTRIBUTING.md).
 
