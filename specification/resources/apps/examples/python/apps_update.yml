@@ -204,7 +204,7 @@ source: |-
                         "token": "abcdefghijklmnopqrstuvwxyz0123456789"
                     },
                    "open_search": {
-                        "endpoint": "https://myopensearchendpoint.com:9300"
+                        "endpoint": "myopensearchendpoint.com:9300"
                         "index_name": "logs"
                         "basic_auth": {
                             "user": "doadmin",
