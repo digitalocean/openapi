@@ -20,4 +20,5 @@ properties:
     description: |-
       The name of a DigitalOcean DBaaS OpenSearch cluster to use as a log forwarding destination.
       Cannot be specified if `endpoint` is also specified.
+    example: my-opensearch-cluster
 description: OpenSearch configuration.
