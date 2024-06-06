@@ -2,9 +2,9 @@ type: object
 properties:
   endpoint:
     type: string
-    description: >-
-      OpenSearch API Endpoint. Only HTTPS is supported. Format: `https://<host>:<port>`.
-    example: "https://example.com:9300"
+    description: |-
+      OpenSearch API Endpoint. Only HTTPS is supported. Format: https://<host>:<port>.
+      Cannot be specified if `cluster_name` is also specified.
   basic_auth:
     $ref: app_log_destination_open_search_spec_basic_auth.yml
   index_name:
@@ -14,6 +14,9 @@ properties:
       The index name to use for the logs. If not set, the default index name
       is "logs".
     example: logs
+  cluster_name:
+    type: string
+    description: |-
+      The name of a DigitalOcean DBaaS OpenSearch cluster to use as a log forwarding destination.
+      Cannot be specified if `endpoint` is also specified.
 description: OpenSearch configuration.
-required:
-  - endpoint
