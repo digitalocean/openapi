@@ -1,4 +1,4 @@
-operationId: toggleDatabaseTrustedSource
+operationId: apps_toggle_database_trusted_source
 
 summary: Toggle Database Trusted Source
 
