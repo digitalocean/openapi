@@ -22,7 +22,7 @@ The following tools are required
 Once the prerequisites are installed, the source can be downloaded and the 
 dependencies can be installed:
 
-```
+```sh
 git clone git@github.com:digitalocean/apiv2-openapi.git
 cd apiv2-openapi
 make preview
