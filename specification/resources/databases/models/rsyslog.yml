@@ -11,7 +11,7 @@ properties:
     maximum: 65535
     description: The internal port on which the rsyslog server is listening
   tls:
-    type: bool
+    type: boolean
     example: false
     description: >-
       Use TLS (as the messages are not filtered and may contain sensitive information, it is highly recommended to set this to true if the remote server supports it)
