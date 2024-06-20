@@ -1,0 +1,11 @@
+type: object
+
+properties:
+  config:
+    anyOf:
+      - $ref: './rsyslog.yml'
+      - $ref: './elasticsearch.yml'
+      - $ref: './opensearch.yml'
+
+required:
+  - config
