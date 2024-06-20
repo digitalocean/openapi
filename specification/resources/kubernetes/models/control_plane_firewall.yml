@@ -6,13 +6,11 @@ properties:
   enable:
     type: boolean
     description: Indicates whether the control plane firewall is enabled.
-    nullable: true
     example: true
 
   allowed_addresses:
     type: array
     description: An array of addresses (IPv4 or CIDR) allowed to access the control plane.
-    nullable: true
     items:
       type: string
     example:
