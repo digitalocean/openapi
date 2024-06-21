@@ -10,9 +10,9 @@ properties:
 
   allowed_addresses:
     type: array
-    description: An array of addresses (IPv4 or CIDR) allowed to access the control plane.
+    description: An array of public addresses (IPv4 or CIDR) allowed to access the control plane.
     items:
       type: string
     example:
-      - 1.2.3.4
-      - 4.3.2.1/32
+      - "1.2.3.4/32"
+      - "1.1.0.0/16"
