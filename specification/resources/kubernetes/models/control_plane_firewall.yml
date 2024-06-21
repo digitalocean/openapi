@@ -1,7 +1,7 @@
 type: object
 nullable: true
 description: An object specifying the control plane firewall for the Kubernetes cluster.
-  Control plane firewall is in early access. To request access, [contact support](https://cloudsupport.digitalocean.com).
+  Control plane firewall is in early availability. To request access, [contact support](https://cloudsupport.digitalocean.com).
 properties:
   enable:
     type: boolean
