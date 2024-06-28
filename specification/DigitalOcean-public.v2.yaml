@@ -569,14 +569,6 @@ paths:
     get:
       $ref: 'resources/apps/apps_get_logs_active_deployment_aggregate.yml'
 
-  /v2/apps/tiers:
-    get:
-      $ref: 'resources/apps/apps_list_tiers.yml'
-
-  /v2/apps/tiers/{slug}:
-    get:
-      $ref: 'resources/apps/apps_get_tier.yml'
-
   /v2/apps/tiers/instance_sizes:
     get:
       $ref: 'resources/apps/apps_list_instanceSizes.yml'
