@@ -831,6 +831,21 @@ paths:
        $ref: 'resources/databases/databases_update_kafka_topic.yml'
     delete:
        $ref: 'resources/databases/databases_delete_kafka_topic.yml'
+  
+  /v2/databases/{database_cluster_uuid}/logsink:
+    get:
+      $ref: 'resources/databases/databases_list_logsink.yml'
+    post:
+      $ref: 'resources/databases/databases_create_logsink.yml'
+
+  /v2/databases/{database_cluster_uuid}/logsink/{logsink_id}:
+    get:
+      $ref: 'resources/databases/databases_get_logsink.yml'
+    put:
+      $ref: 'resources/databases/databases_update_logsink.yml'
+    delete:
+      $ref: 'resources/databases/databases_delete_logsink.yml'
+
 
   /v2/databases/metrics/credentials:
     get:
