@@ -384,7 +384,7 @@ properties:
     maximum: 60.0
     example: 41.5
   pgbouncer:
-    $ref: './pgbouncer.yml'
+    $ref: './pgbouncer_advanced_config.yml'
   work_mem:
     description: >-
       The maximum amount of memory, in MB, used by a query operation (such as a sort or hash table) before writing to temporary disk files.
@@ -394,7 +394,7 @@ properties:
     maximum: 1024
     example: 4
   timescaledb:
-    $ref: './timescaledb.yml'
+    $ref: './timescaledb_advanced_config.yml'
   synchronous_replication:
     description: Synchronous replication type. Note that the service plan also needs to support synchronous replication.
     type: string
