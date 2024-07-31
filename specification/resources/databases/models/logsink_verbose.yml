@@ -5,9 +5,9 @@ allOf:
   - properties:
       config:
         anyOf:
-          - $ref: "./rsyslog.yml"
-          - $ref: "./elasticsearch.yml"
-          - $ref: "./opensearch.yml"
+          - $ref: './logsink/rsyslog_logsink.yml'
+          - $ref: './logsink/elasticsearch_logsink.yml'
+          - $ref: './logsink/opensearch_logsink.yml'
         example:
           config:
             server: 192.168.0.1
