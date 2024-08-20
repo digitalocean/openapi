@@ -861,7 +861,15 @@ paths:
       $ref: 'resources/databases/databases_get_cluster_metrics_credentials.yml'
     put:
       $ref: 'resources/databases/databases_update_cluster_metrics_credentials.yml'
-
+  
+  /v2/databases/{database_cluster_uuid}/indexes:
+    get:
+      $ref: 'resources/databases/databases_list_opensearch_indexes.yml'
+  
+  /v2/databases/{database_cluster_uuid}/indexes/{index_name}:
+    delete:
+      $ref: 'resources/databases/databases_delete_opensearch_index.yml'
+  
   /v2/domains:
     get:
       $ref: 'resources/domains/domains_list.yml'
