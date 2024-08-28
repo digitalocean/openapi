@@ -29,7 +29,8 @@ properties:
             Permission set applied to the ACL. 'read' allows user to
             read from the index. 'write' allows for user to write
             to the index. 'readwrite' allows for both 'read' and
-            'write' permission. 'admin' allows for 'readwrite' as
+            'write' permission. 'deny'(default) restricts user from performing
+            any operation over an index. 'admin' allows for 'readwrite' as
             well as any operations to administer the index.
     description: >-
       ACLs (Access Control Lists) specifying permissions on index within a
