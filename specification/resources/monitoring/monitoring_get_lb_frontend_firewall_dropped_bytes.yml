@@ -1,6 +1,6 @@
 operationId: monitoring_get_lb_frontend_firewall_dropped_bytes
 
-summary: Get Load Balancer Firewall Dropped Bytes Metrics
+summary: Get Load Balancer Frontend Firewall Dropped Bytes Metrics
 
 description: >-
   To retrieve firewall dropped bytes for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes`. This is currently only supported for network load balancers.
