@@ -1281,6 +1281,110 @@ paths:
     get:
       $ref: 'resources/monitoring/monitoring_get_lb_frontend_http_requests_per_second.yml'
 
+  /v2/monitoring/metrics/load_balancer/frontend_connections_current:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_connections_current.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_connections_limit:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_connections_limit.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_cpu_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_cpu_utilization.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_network_throughput_http:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_network_throughput_http.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_network_throughput_udp.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_network_throughput_tcp.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_http_responses:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_http_responses.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_tls_connections_current:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_tls_connections_current.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_tls_connections_limit.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_tls_connections_exceeding_rate_limit.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_session_duration_avg.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_session_duration_50p.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_session_duration_95p.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_response_time_avg.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_response_time_50p.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_response_time_95p.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_response_time_99p.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_queue_size:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_queue_size.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_http_responses:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_responses.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_connections:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_connections.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_health_checks:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_health_checks.yml'
+
+  /v2/monitoring/metrics/load_balancer/droplets_downtime:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_droplets_downtime.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_nlb_tcp_network_throughput.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_nlb_udp_network_throughput.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_firewall_dropped_bytes.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_firewall_dropped_packets.yml'
+
   /v2/projects:
     get:
       $ref: 'resources/projects/projects_list.yml'
