@@ -1277,6 +1277,10 @@ paths:
     get:
       $ref: 'resources/monitoring/monitoring_get_appRestartCountMetrics.yml'
 
+  /v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_http_requests_per_second.yml'
+
   /v2/projects:
     get:
       $ref: 'resources/projects/projects_list.yml'
