@@ -1277,10 +1277,6 @@ paths:
     get:
       $ref: 'resources/monitoring/monitoring_get_appRestartCountMetrics.yml'
 
-  /v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second:
-    get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_http_requests_per_second.yml'
-
   /v2/monitoring/metrics/load_balancer/frontend_connections_current:
     get:
       $ref: 'resources/monitoring/monitoring_get_lb_frontend_connections_current.yml'
@@ -1292,6 +1288,22 @@ paths:
   /v2/monitoring/metrics/load_balancer/frontend_cpu_utilization:
     get:
       $ref: 'resources/monitoring/monitoring_get_lb_frontend_cpu_utilization.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_firewall_dropped_bytes.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_firewall_dropped_packets.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_http_responses:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_http_responses.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_http_requests_per_second.yml'
 
   /v2/monitoring/metrics/load_balancer/frontend_network_throughput_http:
     get:
@@ -1305,9 +1317,13 @@ paths:
     get:
       $ref: 'resources/monitoring/monitoring_get_lb_frontend_network_throughput_tcp.yml'
 
-  /v2/monitoring/metrics/load_balancer/frontend_http_responses:
+  /v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_http_responses.yml'
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_nlb_tcp_network_throughput.yml'
+
+  /v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_lb_frontend_nlb_udp_network_throughput.yml'
 
   /v2/monitoring/metrics/load_balancer/frontend_tls_connections_current:
     get:
@@ -1368,22 +1384,6 @@ paths:
   /v2/monitoring/metrics/load_balancer/droplets_downtime:
     get:
       $ref: 'resources/monitoring/monitoring_get_lb_droplets_downtime.yml'
-
-  /v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput:
-    get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_nlb_tcp_network_throughput.yml'
-
-  /v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput:
-    get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_nlb_udp_network_throughput.yml'
-
-  /v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes:
-    get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_firewall_dropped_bytes.yml'
-
-  /v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets:
-    get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_firewall_dropped_packets.yml'
 
   /v2/projects:
     get:
