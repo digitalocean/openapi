@@ -735,6 +735,10 @@ paths:
     put:
       $ref: 'resources/databases/databases_update_maintenanceWindow.yml'
 
+  /v2/databases/{database_cluster_uuid}/install_update:
+    put:
+      $ref: 'resources/databases/databases_update_installUpdate.yml'
+
   /v2/databases/{database_cluster_uuid}/backups:
     get:
       $ref: 'resources/databases/databases_list_backups.yml'
