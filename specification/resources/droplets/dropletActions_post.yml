@@ -42,6 +42,7 @@ requestBody:
       schema:
         anyOf:
           - $ref: 'models/droplet_actions.yml#/droplet_action'
+          - $ref: 'models/droplet_actions.yml#/droplet_action_enable_backups'
           - $ref: 'models/droplet_actions.yml#/droplet_action_restore'
           - $ref: 'models/droplet_actions.yml#/droplet_action_resize'
           - $ref: 'models/droplet_actions.yml#/droplet_action_rebuild'
@@ -51,7 +52,7 @@ requestBody:
         discriminator:
           propertyName: type
           mapping:
-            enable_backups: 'models/droplet_actions.yml#/droplet_action'
+            enable_backups: 'models/droplet_actions.yml#/droplet_action_enable_backups'
             disable_backups: 'models/droplet_actions.yml#/droplet_action'
             reboot: 'models/droplet_actions.yml#/droplet_action'
             power_cycle: 'models/droplet_actions.yml#/droplet_action'
