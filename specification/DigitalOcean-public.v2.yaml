@@ -911,6 +911,10 @@ paths:
     get:
       $ref: 'resources/droplets/droplets_list_backups.yml'
 
+  /v2/droplets/backups/supported_policies:
+    get:
+      $ref: 'resources/droplets/droplets_list_supported_backup_policies.yml'
+
   /v2/droplets/{droplet_id}/snapshots:
     get:
       $ref: 'resources/droplets/droplets_list_snapshots.yml'
