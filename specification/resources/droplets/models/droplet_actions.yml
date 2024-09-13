@@ -36,6 +36,12 @@ droplet_action_enable_backups:
         - description: An object specifying the backup policy for the Droplet. If
             omitted, the default backup policy will be used.
 
+  example:
+    type: enable_backups
+    backup_policy:
+      plan: daily
+      hour: 20
+
 droplet_action_change_backup_policy:
   allOf:
   - $ref: '#/droplet_action'
@@ -47,6 +53,13 @@ droplet_action_change_backup_policy:
         - description: An object specifying the backup policy for the Droplet.
   required:
   - backup_policy
+
+  example:
+    type: enable_backups
+    backup_policy:
+      plan: weekly
+      day: SUN
+      hour: 20
 
 droplet_action_restore:
   allOf:

@@ -33,7 +33,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/dropletActions_get.yml'
+  - $ref: 'examples/curl/droplets_list_backup_policies.yml'
 
 security:
   - bearer_auth:
