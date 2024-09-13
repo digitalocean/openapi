@@ -21,7 +21,7 @@ content:
                 A map where the keys are the Droplet IDs and the values are
                 objects containing the backup policy information for each Droplet.
               additionalProperties:
-                $ref: '../models/droplet_backup_policy_status.yml'
+                $ref: '../models/droplet_backup_policy_record.yml'
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
