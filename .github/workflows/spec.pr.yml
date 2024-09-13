@@ -32,7 +32,7 @@ jobs:
       - name: Bundle
         run: make bundle
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: openapi-bundled
           path: tests/openapi-bundled.yaml
@@ -55,7 +55,7 @@ jobs:
       - name: Bundle
         run: make bundle
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: openapi-bundled
           path: tests/openapi-bundled.yaml
