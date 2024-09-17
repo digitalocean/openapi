@@ -16,8 +16,6 @@ tags:
 parameters:
   - $ref: 'parameters.yml#/database_cluster_uuid'
 
-
-
 responses:
   '204':
     $ref: '../../shared/responses/no_content.yml'
