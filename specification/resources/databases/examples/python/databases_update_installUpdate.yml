@@ -5,4 +5,4 @@ source: |-
 
   client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
 
-  update_resp = client.databases.update_install_update(database_cluster_uuid="a7a8bas", body=None)
+  update_resp = client.databases.install_update(database_cluster_uuid="a7a8bas")
