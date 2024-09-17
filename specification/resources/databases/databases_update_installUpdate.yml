@@ -3,7 +3,7 @@ operationId: databases_install_update
 summary: Start Database Maintenance
 
 description: >-
-  To start the installation of updates now for a
+  To start the installation of updates for a
   database cluster, send a PUT request to
   `/v2/databases/$DATABASE_ID/install_update`.
 
