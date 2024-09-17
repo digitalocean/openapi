@@ -1,4 +1,4 @@
-operationId: databases_update_installUpdate
+operationId: databases_install_update
 
 summary: Start Database Maintenance
 
