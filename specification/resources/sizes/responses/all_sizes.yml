@@ -54,7 +54,7 @@ content:
           disk_info:
             - type: "local"
               size:
-                amount: 25,
+                amount: 25
                 unit: "gib"
         links:
           pages:
