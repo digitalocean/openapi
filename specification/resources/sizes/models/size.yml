@@ -85,6 +85,11 @@ properties:
       example: Basic, General Purpose, CPU-Optimized, Memory-Optimized, or
       Storage-Optimized.
 
+  disk_info:
+    type: array
+    items:
+      $ref: './disk_info.yml'
+
 required:
   - available
   - disk
