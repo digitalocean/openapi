@@ -112,7 +112,9 @@ tags:
       create, or delete CDN Endpoints as well as purge cached content. To use a
       custom subdomain to access the CDN Endpoint, provide the ID of a
       DigitalOcean managed TLS certificate and the fully qualified domain name
-      for the custom subdomain.
+      for the custom subdomain. 
+
+      CDN endpoints have a rate limit of five requests per 10 seconds.
 
   - name: Certificates
     description: |-
