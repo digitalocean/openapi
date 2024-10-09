@@ -1,4 +1,4 @@
-operationId: vpc_peerings_delete
+operationId: vpcPeerings_delete
 
 summary: Delete a VPC peering
 

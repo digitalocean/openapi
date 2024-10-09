@@ -1,4 +1,4 @@
-operationId: vpc_peerings_create
+operationId: vpcPeerings_create
 
 summary: Create a New VPC Peering
 

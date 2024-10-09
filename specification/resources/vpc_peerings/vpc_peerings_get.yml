@@ -1,4 +1,4 @@
-operationId: vpc_peerings_get
+operationId: vpcPeerings_get
 
 summary: Retrieve an Existing VPC Peering
 

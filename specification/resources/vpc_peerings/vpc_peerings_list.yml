@@ -1,4 +1,4 @@
-operationId: vpc_peerings_list
+operationId: vpcPeerings_list
 
 summary: List All VPC Peerings
 
