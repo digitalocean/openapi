@@ -480,6 +480,13 @@ tags:
 
         To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
 
+  - name: VPC Peerings
+    description: |-
+      [VPC Peerings](https://docs.digitalocean.com/products/networking/vpc/how-to/create-peering/) 
+      join two VPC networks with a secure, private connection. This allows 
+      resources in those networks to connect to each other's private IP addresses 
+      as if they were in the same network.
+
   - name: VPCs
     description: |-
       [VPCs (virtual private clouds)](https://docs.digitalocean.com/products/networking/vpc/)
@@ -489,13 +496,6 @@ tags:
       By sending requests to the `/v2/vpcs` endpoint, you can create, configure,
       list, and delete custom VPCs as well as retrieve information about the
       resources assigned to them.
-
-  - name: VPC Peerings
-    description: |-
-      [VPC Peerings](https://docs.digitalocean.com/products/networking/vpc/how-to/create-peering/) 
-      join two VPC networks with a secure, private connection. This allows 
-      resources in those networks to connect to each other's private IP addresses 
-      as if they were in the same network.
 
 paths:
   /v2/1-clicks:
