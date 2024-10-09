@@ -28,7 +28,6 @@ vpc_peering_base:
         - PROVISIONING
         - ACTIVE
         - DELETING
-        - ERROR
       readOnly: true
       example: "ACTIVE"
       description: The current status of the VPC peering.
@@ -44,7 +43,7 @@ vpc_peering_create:
         minItems: 2
         maxItems: 2
         example:
-        - 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+        - c140286f-e6ce-4131-8b7b-df4590ce8d6a
         - 994a2735-dc84-11e8-80bc-3cfdfea9fba1
         description: An array of the two peered VPCs IDs.
 
