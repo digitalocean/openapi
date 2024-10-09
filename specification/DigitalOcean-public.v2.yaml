@@ -1637,6 +1637,12 @@ paths:
     get:
       $ref: 'resources/vpcs/vpcs_list_members.yml'
 
+  /v2/vpc_peerings:
+    # get:
+    #   $ref: 'resources/vpcs/vpcs_list.yml'
+
+    post:
+      $ref: 'resources/vpc_peerings/vpc_peerings_create.yml'
 
   /v2/uptime/checks:
     get:
