@@ -20,7 +20,7 @@ content:
 
       example:
         peering:
-        - id: 6b5c619c-359c-44ca-87e2-47e98170c01d
+          id: 6b5c619c-359c-44ca-87e2-47e98170c01d
           name: example-vpc-peering
           vpc_ids:
           - 997615ce-132d-4bae-9270-9ee21b395e5d
