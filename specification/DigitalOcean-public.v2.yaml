@@ -480,6 +480,13 @@ tags:
 
         To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
 
+  - name: VPC Peerings
+    description: |-
+      [VPC Peerings](https://docs.digitalocean.com/products/networking/vpc/how-to/create-peering/) 
+      join two VPC networks with a secure, private connection. This allows 
+      resources in those networks to connect to each other's private IP addresses 
+      as if they were in the same network.
+
   - name: VPCs
     description: |-
       [VPCs (virtual private clouds)](https://docs.digitalocean.com/products/networking/vpc/)
@@ -1637,6 +1644,33 @@ paths:
     get:
       $ref: 'resources/vpcs/vpcs_list_members.yml'
 
+  /v2/vpcs/{vpc_id}/peerings:
+    get:
+      $ref: 'resources/vpcs/vpcs_list_peerings.yml'
+
+    post:
+      $ref: 'resources/vpcs/vpcs_create_peerings.yml'
+
+  /v2/vpcs/{vpc_id}/peerings/{vpc_peering_id}:
+    patch:
+      $ref: 'resources/vpcs/vpcs_update_peerings.yml'
+
+  /v2/vpc_peerings:
+    get:
+      $ref: 'resources/vpc_peerings/vpc_peerings_list.yml'
+
+    post:
+      $ref: 'resources/vpc_peerings/vpc_peerings_create.yml'
+
+  /v2/vpc_peerings/{vpc_peering_id}:
+    get:
+      $ref: 'resources/vpc_peerings/vpc_peerings_get.yml'
+
+    patch:
+      $ref: 'resources/vpc_peerings/vpc_peerings_update.yml'
+
+    delete:
+      $ref: 'resources/vpc_peerings/vpc_peerings_delete.yml'
 
   /v2/uptime/checks:
     get:
