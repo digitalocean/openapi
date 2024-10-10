@@ -38,4 +38,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'vpc:read'
+    - 'vpc_peering:read'
