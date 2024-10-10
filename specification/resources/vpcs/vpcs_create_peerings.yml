@@ -37,7 +37,7 @@ requestBody:
         - vpc_id
 
 responses:
-  '200':
+  '202':
     $ref: 'responses/vpc_peering.yml'
 
   '401':

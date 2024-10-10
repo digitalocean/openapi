@@ -12,7 +12,7 @@ parameters:
   - $ref: 'parameters.yml#/vpc_peering_id'
 
 responses:
-  '202':
+  '200':
     $ref: 'responses/active_vpc_peering.yml'
 
   '401':

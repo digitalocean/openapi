@@ -17,7 +17,7 @@ content:
       allOf:
         - type: object
           properties:
-            vpcs:
+            vpc_peerings:
               type: array
               items:
                 $ref: '../models/vpc_peering.yml#/vpc_peering'

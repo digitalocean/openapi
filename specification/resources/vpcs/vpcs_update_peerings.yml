@@ -28,7 +28,7 @@ requestBody:
         - name
 
 responses:
-  '202':
+  '200':
     $ref: 'responses/vpc_peering.yml'
 
   '401':
