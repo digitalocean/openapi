@@ -1,4 +1,4 @@
-operationId: vpcsPeerings_patch
+operationId: vpcs_patch_peerings
 
 summary: Update a VPC Peering
 
