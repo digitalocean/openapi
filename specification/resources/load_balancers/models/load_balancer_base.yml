@@ -166,7 +166,8 @@ properties:
     default: EXTERNAL
     description: A string indicating whether the load balancer should be external 
       or internal. Internal load balancers have no public IPs and are only accessible 
-      to resources on the same VPC.
+      to resources on the same VPC network. This property cannot be updated after
+      creating the load balancer.
 
 required:
   - forwarding_rules
