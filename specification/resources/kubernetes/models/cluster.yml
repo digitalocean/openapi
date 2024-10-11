@@ -32,14 +32,13 @@ properties:
   cluster_subnet:
     type: string
     format: cidr
-    readOnly: true
     example: 10.244.0.0/16
-    description: The range of IP addresses in the overlay network of the
+    description: The range of IP addresses for the overlay network of the
       Kubernetes cluster in CIDR notation.
 
   service_subnet:
     type: string
-    readOnly: true
+    format: cidr
     example: 10.245.0.0/16
     description: The range of assignable IP addresses for services running in
       the Kubernetes cluster in CIDR notation.
