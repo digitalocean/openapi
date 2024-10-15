@@ -51,4 +51,4 @@ For more details on our development process and the structure of this repository
 
 ## License
 
-This specification is licensed under the Apache License 2.0.
+This specification is licensed under the [Apache License 2.0](/LICENSE).
