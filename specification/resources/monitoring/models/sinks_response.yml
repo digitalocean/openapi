@@ -8,4 +8,4 @@ properties:
     type: array
     description: "list of resources identified by urn"
     items:
-      $ref: '../models/resource.yml'
+      $ref: '../models/sink_resource.yml'

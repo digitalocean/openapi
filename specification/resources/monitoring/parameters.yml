@@ -30,7 +30,7 @@ resource_id:
   name: resource_id
   description: A unique urn for a resource.
   schema:
-    $ref: '../../../shared/attributes/urn.yml' 
+    $ref: '../../shared/attributes/urn.yml' 
   example: do:kubernetes:5ba4518b-b9e2-4978-aa92-2d4c727e8824
 
 app_component:

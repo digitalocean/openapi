@@ -33,6 +33,6 @@ properties:
     description: "Opensearch index to send logs"
     example: "logs"
   retention_days:
-    type: int
+    type: integer
     description: "Number of days to retain logs in Opensearch (default: 14)"
     example: 14
