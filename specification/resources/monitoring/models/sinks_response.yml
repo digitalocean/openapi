@@ -1,0 +1,11 @@
+type: object
+required:
+  - urn
+properties:
+  destination:
+    $ref: '../models/destination.yml'
+  resources:
+    type: array
+    description: "list of resources identified by urn"
+    items:
+      $ref: '../models/resource.yml'

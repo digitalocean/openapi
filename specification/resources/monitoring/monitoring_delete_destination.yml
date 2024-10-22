@@ -1,0 +1,25 @@
+operationId: monitoring_delete_destination
+
+summary: Delete Logging Destination
+
+description: To delete a destination and all associated sinks, send a DELETE request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
+
+tags:
+  - Monitoring
+
+parameters:
+  - $ref: 'parameters.yml#/destination_uuid'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/monitoring_delete_destination.yml'
+  
+security:
+  - bearer_auth:
+    - 'monitoring:delete'

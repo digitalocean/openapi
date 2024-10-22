@@ -1,0 +1,40 @@
+operationId: monitoring_create_sink
+
+summary: Create Sink
+
+description: |
+  To create a new sink, send a POST request to `/v2/monitoring/sinks`. Forwards logs from the 
+  resources identified in `resources` to the specified pre-existing destination.
+
+tags:
+  - Monitoring
+
+responses:
+  '202':
+    $ref: '../../shared/responses/accepted.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        properties:
+          destination_uuid:
+            type: string
+            example: "9df2b7e9-3fb2-4577-b60a-e9c0d53f9a99"
+            description: "uuid of an already-existing destination"
+          resources:
+            type: array
+            description: "list of resources identified by urn"
+            items:
+              $ref: 'models/resource.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/monitoring_create_sink.yml'
+  
+security:
+  - bearer_auth:
+    - 'monitoring:create'

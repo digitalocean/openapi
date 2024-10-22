@@ -82,3 +82,21 @@ alert_uuid:
   schema:
     type: string
   example: 4de7ac8b-495b-4884-9a69-1050c6793cd6
+
+destination_uuid:
+  in: path
+  name: destination_uuid
+  description: A unique identifier for a detination.
+  required: true
+  schema:
+    type: string
+  example: 1a64809f-1708-48ee-a742-dec8d481b8d1
+
+sink_uuid:
+  in: path
+  name: sink_uuid
+  description: A unique identifier for a sink.
+  required: true
+  schema:
+    type: string
+  example: 78b172b6-52c3-4a4b-96d5-78d3f1a0b18c

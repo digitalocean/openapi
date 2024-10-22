@@ -1,0 +1,22 @@
+operationId: monitoring_list_sinks
+
+summary: Lists all sinks
+
+description: To list all sinks, send a GET request to `/v2/monitoring/sinks`.
+
+tags:
+  - Monitoring
+
+responses:
+  '200':
+    $ref: 'responses/list_sinks.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/monitoring_list_sinks.yml'
+
+security:
+  - bearer_auth:
+    - 'monitoring:read'

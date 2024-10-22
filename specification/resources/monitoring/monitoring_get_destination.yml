@@ -1,0 +1,21 @@
+operationId: monitoring_get_destination
+
+summary: Get Logging Destination
+
+description: To get the details of a destination, send a GET request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
+
+tags:
+  - Monitoring
+
+responses:
+  '200':
+    $ref: 'responses/destination.yml'
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/monitoring_get_destination.yml'
+  
+security:
+  - bearer_auth:
+    - 'monitoring:read'

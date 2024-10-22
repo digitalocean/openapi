@@ -1,0 +1,29 @@
+operationId: monitoring_create_destination
+
+summary: Create Logging Destination
+
+description: To create a new destination, send a POST request to `/v2/monitoring/sinks/destinations`.
+
+tags:
+  - Monitoring
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/destination_request.yml'
+
+responses:
+  '200':
+    $ref: 'responses/destination.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/monitoring_create_destination.yml'
+  
+security:
+  - bearer_auth:
+    - 'monitoring:create'
