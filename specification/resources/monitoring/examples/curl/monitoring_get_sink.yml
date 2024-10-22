@@ -1,7 +1,6 @@
 lang: cURL
 source: |-
-  curl -X POST \
+  curl -X GET \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    "https://api.digitalocean.com/v2/monitoring/alerts" \
-    --data '{"alerts":{"email":["alerts@example.com"]},"compare":"GreaterThan","description":"CPU Alert","enabled":true,"entities":["12345678"],"tags":["droplet_tag"],"type":"v1/insights/droplet/cpu","value":80,"window":"5m"}'
+    "https://api.digitalocean.com/v2/monitoring/sinks/f945d774-86e8-4dc8-8f60-cfc76dd3d098"

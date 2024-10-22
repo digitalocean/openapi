@@ -36,5 +36,3 @@ properties:
     type: int
     description: "Number of days to retain logs in Opensearch (default: 14)"
     example: 14
-
-

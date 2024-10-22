@@ -20,5 +20,3 @@ x-codeSamples:
 security:
   - bearer_auth:
     - 'monitoring:read'
-
-

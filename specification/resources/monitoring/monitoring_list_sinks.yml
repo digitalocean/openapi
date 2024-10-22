@@ -7,6 +7,9 @@ description: To list all sinks, send a GET request to `/v2/monitoring/sinks`.
 tags:
   - Monitoring
 
+parameters:
+  - $ref: 'parameters.yml#/resource_id'
+
 responses:
   '200':
     $ref: 'responses/list_sinks.yml'
