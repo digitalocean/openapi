@@ -4,7 +4,7 @@ required:
 properties:
   id:
     type: string
-    description: "A uuid uniquely identifying a destination"
+    description: "A unique identifier for a destination."
     example: "01f30bfa-319a-4769-ba95-9d43971fb514"
   name:
     type: string

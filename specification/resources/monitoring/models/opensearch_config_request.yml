@@ -4,7 +4,7 @@ required:
 properties:
   credentials:
     type: object
-    description: "credentials for Opensearch cluster user. Optional if `cluster_uuid` is passed."
+    description: "Credentials for an OpenSearch cluster user. Optional if `cluster_uuid` is passed."
     properties:
       username:
         type: string
@@ -19,18 +19,19 @@ properties:
   cluster_uuid:
     type: string
     example: "85148069-7e35-4999-80bd-6fa1637ca385"
-    description: "Uuid of managed Opensearch cluster"
+    description: "A unique identifier for a managed OpenSearch cluster."
   cluster_name:
     type: string
     example: "managed_dbaas_cluster"
-    description: "Name of managed Opensearch cluster"
+    description: "Name of a managed OpenSearch cluster."
   index_name:
     type: string
-    description: "Opensearch index to send logs"
+    description: "OpenSearch index to send logs to."
     example: "logs"
   retention_days:
     type: integer
-    description: "Number of days to retain logs in Opensearch (default: 14)"
+    description: "Number of days to retain logs in an OpenSearch cluster."
     example: 14
+    default: 14
 
 

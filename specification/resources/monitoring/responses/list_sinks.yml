@@ -1,4 +1,4 @@
-description: The response will be a JSON object with a `sinks` key.
+description: The response is a JSON object with a `sinks` key.
 
 headers:
   ratelimit-limit:
@@ -14,6 +14,6 @@ content:
       properties:
         sinks:
           type: array
-          description: "list of sinks identified by urn"
+          description: "List of sinks identified by their URNs."
           items:
             $ref: '../models/sinks_response.yml'

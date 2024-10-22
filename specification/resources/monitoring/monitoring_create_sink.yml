@@ -37,10 +37,10 @@ requestBody:
           destination_uuid:
             type: string
             example: "9df2b7e9-3fb2-4577-b60a-e9c0d53f9a99"
-            description: "uuid of an already-existing destination"
+            description: "A unique identifier for an already-existing destination."
           resources:
             type: array
-            description: "list of resources identified by urn"
+            description: "List of resources identified by their URNs."
             items:
               $ref: 'models/sink_resource.yml'
 

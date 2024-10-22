@@ -1,4 +1,4 @@
-description: The response will be a JSON object with a `sink` key.
+description: The response is a JSON object with a `sink` key.
 
 headers:
   ratelimit-limit:

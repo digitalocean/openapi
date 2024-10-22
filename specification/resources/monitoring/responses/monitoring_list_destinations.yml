@@ -1,4 +1,4 @@
-description: The response will be a JSON object with a `destinations` key.
+description: The response is a JSON object with a `destinations` key.
 
 headers:
   ratelimit-limit:

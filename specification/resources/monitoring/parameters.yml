@@ -28,7 +28,7 @@ load_balancer_id:
 resource_id:
   in: query
   name: resource_id
-  description: A unique urn for a resource.
+  description: A unique URN for a resource.
   schema:
     $ref: '../../shared/attributes/urn.yml' 
   example: do:kubernetes:5ba4518b-b9e2-4978-aa92-2d4c727e8824
@@ -94,7 +94,7 @@ alert_uuid:
 destination_uuid:
   in: path
   name: destination_uuid
-  description: A unique identifier for a detination.
+  description: A unique identifier for a destination.
   required: true
   schema:
     type: string

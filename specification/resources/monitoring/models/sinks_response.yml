@@ -6,6 +6,6 @@ properties:
     $ref: '../models/destination.yml'
   resources:
     type: array
-    description: "list of resources identified by urn"
+    description: "List of resources identified by their URNs."
     items:
       $ref: '../models/sink_resource.yml'
