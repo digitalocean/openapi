@@ -17,6 +17,7 @@ properties:
     - uncompressed
     - producer
     example: gzip
+    default: uncompressed
   group_initial_rebalance_delay_ms:
     description: >-
       The amount of time, in milliseconds, the group coordinator
@@ -29,6 +30,7 @@ properties:
     example: 3000
     minimum: 0
     maximum: 300000
+    default: 3000
   group_min_session_timeout_ms:
     description: >-
       The minimum allowed session timeout for registered consumers.
@@ -38,6 +40,7 @@ properties:
     example: 6000
     minimum: 0
     maximum: 60000
+    default: 6000
   group_max_session_timeout_ms:
     description: >-
       The maximum allowed session timeout for registered consumers.
@@ -47,6 +50,7 @@ properties:
     example: 1800000
     minimum: 0
     maximum: 1800000
+    default: 1800000
   connections_max_idle_ms:
     description: >-
       Idle connections timeout: the server socket processor
@@ -55,6 +59,7 @@ properties:
     minimum: 1000
     example: 540000
     maximum: 3600000
+    default: 600000
   max_incremental_fetch_session_cache_slots:
     description: >-
       The maximum number of incremental fetch sessions that the
@@ -63,6 +68,7 @@ properties:
     example: 1000
     minimum: 1000
     maximum: 10000
+    default: 1000
   message_max_bytes:
     description: >-
       The maximum size of message that the server can receive.
@@ -70,6 +76,7 @@ properties:
     example: 1048588
     minimum: 0
     maximum: 100001200
+    default: 1048588
   offsets_retention_minutes:
     description: >-
       Log retention window in minutes for offsets topic
@@ -77,6 +84,7 @@ properties:
     example: 10080
     minimum: 1
     maximum: 2147483647
+    default: 10080
   log_cleaner_delete_retention_ms:
     description: >-
       How long are delete records retained?
@@ -84,6 +92,7 @@ properties:
     minimum: 0
     maximum: 315569260000
     example: 86400000
+    default: 86400000
   log_cleaner_min_cleanable_ratio:
     description: >-
       Controls log compactor frequency. Larger value means more
@@ -94,6 +103,7 @@ properties:
     minimum: 0.2
     maximum: 0.9
     example: 0.5
+    default: 0.5
   log_cleaner_max_compaction_lag_ms:
     description: >-
       The maximum amount of time message will remain uncompacted.
@@ -102,6 +112,7 @@ properties:
     minimum: 30000
     maximum: 9223372036854776000
     example: 60000
+    defeault: 9223372036854775807
   log_cleaner_min_compaction_lag_ms:
     description: >-
       The minimum time a message will remain uncompacted in the
@@ -120,6 +131,7 @@ properties:
     - compact
     - compact,delete
     example: delete
+    default: delete
   log_flush_interval_messages:
     description: >-
       The number of messages accumulated on a log partition before
@@ -137,6 +149,7 @@ properties:
     minimum: 0
     maximum: 9223372036854776000
     example: 1000000
+    default: 9223372036854775807
   log_index_interval_bytes:
     description: >-
       The interval with which Kafka adds an entry to the offset
@@ -145,6 +158,7 @@ properties:
     minimum: 0
     maximum: 104857600
     example: 4096
+    default: 4096
   log_index_size_max_bytes:
     description: >-
       The maximum size in bytes of the offset index
@@ -152,12 +166,14 @@ properties:
     minimum: 1048576
     maximum: 104857600
     example: 10485760
+    default: 10485760
   log_message_downconversion_enable:
     description: >-
       This configuration controls whether down-conversion of
       message formats is enabled to satisfy consume requests.
     type: boolean
     example: true
+    default: true
   log_message_timestamp_type:
     description: >-
       Define whether the timestamp in the message is message
@@ -167,6 +183,7 @@ properties:
     - CreateTime
     - LogAppendTime
     example: CreateTime
+    default: CreateTime
   log_message_timestamp_difference_max_ms:
     description: >-
       The maximum difference allowed between the timestamp when
@@ -175,11 +192,13 @@ properties:
     minimum: 0
     maximum: 9223372036854776000
     example: 1000000
+    default: 9223372036854775807
   log_preallocate:
     description: >-
       Controls whether to preallocate a file when creating a new segment
     type: boolean
     example: false
+    default: false
   log_retention_bytes:
     description: >-
       The maximum size of the log before deleting messages
@@ -187,6 +206,7 @@ properties:
     minimum: -1
     maximum: 9223372036854776000
     example: 1000000
+    default: -1
   log_retention_hours:
     description: >-
       The number of hours to keep a log file before deleting it
@@ -194,6 +214,7 @@ properties:
     minimum: -1
     maximum: 2147483647
     example: 1000000
+    default: 168
   log_retention_ms:
     description: >-
       The number of milliseconds to keep a log file before deleting
@@ -203,6 +224,7 @@ properties:
     minimum: -1
     maximum: 9223372036854776000
     example: 100000000
+    default: 604800000
   log_roll_jitter_ms:
     description: >-
       The maximum jitter to subtract from logRollTimeMillis (in
@@ -211,6 +233,7 @@ properties:
     minimum: 0
     maximum: 9223372036854776000
     example: 10000000
+    default: 604800000
   log_roll_ms:
     description: >-
       The maximum time before a new log segment is rolled out
@@ -219,6 +242,7 @@ properties:
     minimum: 1
     maximum: 9223372036854776000
     example: 1000000
+    default: 604800000
   log_segment_bytes:
     description: >-
       The maximum size of a single log file
@@ -226,6 +250,7 @@ properties:
     minimum: 10485760
     maximum: 1073741824
     example: 100000000
+    default: 1073741824
   log_segment_delete_delay_ms:
     description: >-
       The amount of time to wait before deleting a file from
@@ -234,11 +259,13 @@ properties:
     minimum: 0
     maximum: 3600000
     example: 60000
+    default: 60000
   auto_create_topics_enable:
     description: >-
       Enable auto creation of topics
     type: boolean
     example: true
+    default: true
   min_insync_replicas:
     description: >-
       When a producer sets acks to 'all' (or '-1'), min_insync_replicas
@@ -248,6 +275,7 @@ properties:
     minimum: 1
     maximum: 7
     example: 1
+    default: 1
   num_partitions:
     description: >-
       Number of partitions for autocreated topics
@@ -255,6 +283,7 @@ properties:
     minimum: 1
     maximum: 1000
     example: 10
+    default: 1
   default_replication_factor:
     description: >-
       Replication factor for autocreated topics
@@ -262,6 +291,7 @@ properties:
     minimum: 1
     maximum: 10
     example: 2
+    default: 3
   replica_fetch_max_bytes:
     description: >-
       The number of bytes of messages to attempt to fetch for
@@ -273,6 +303,7 @@ properties:
     minimum: 1048576
     maximum: 104857600
     example: 2097152
+    default: 1048576
   replica_fetch_response_max_bytes:
     description: >-
       Maximum bytes expected for the entire fetch response (defaults
@@ -284,6 +315,7 @@ properties:
     minimum: 10485760
     maximum: 1048576000
     example: 20971520
+    default: 10485760
   max_connections_per_ip:
     description: >-
       The maximum number of connections allowed from each ip
@@ -292,6 +324,7 @@ properties:
     minimum: 256
     maximum: 2147483647
     example: 512
+    default: 2147483647
   producer_purgatory_purge_interval_requests:
     description: >-
       The purge interval (in number of requests) of the producer
@@ -300,6 +333,7 @@ properties:
     minimum: 10
     maximum: 10000
     example: 100
+    default: 1000
   socket_request_max_bytes:
     description: >-
       The maximum number of bytes in a socket request (defaults
@@ -308,6 +342,7 @@ properties:
     minimum: 10485760
     maximum: 209715200
     example: 20971520
+    default: 104857600
   transaction_state_log_segment_bytes:
     description: >-
       The transaction topic segment bytes should be kept relatively
@@ -317,6 +352,7 @@ properties:
     minimum: 1048576
     maximum: 2147483647
     example: 104857600
+    default: 104857600
   transaction_remove_expired_transaction_cleanup_interval_ms:
     description: >-
       The interval at which to remove transactions that have
@@ -326,3 +362,4 @@ properties:
     minimum: 600000
     maximum: 3600000
     example: 3600000
+    default: 3600000
