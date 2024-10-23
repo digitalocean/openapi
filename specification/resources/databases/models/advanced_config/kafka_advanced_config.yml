@@ -17,7 +17,7 @@ properties:
     - uncompressed
     - producer
     example: gzip
-    default: uncompressed
+    default: producer
   group_initial_rebalance_delay_ms:
     description: >-
       The amount of time, in milliseconds, the group coordinator
