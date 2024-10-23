@@ -110,17 +110,18 @@ properties:
       Only applicable for logs that are being compacted
     type: integer
     minimum: 30000
-    maximum: 9223372036854776000
+    maximum: 9223372036854775807
     example: 60000
-    defeault: 9223372036854775807
+    default: 9223372036854775807
   log_cleaner_min_compaction_lag_ms:
     description: >-
       The minimum time a message will remain uncompacted in the
       log. Only applicable for logs that are being compacted.
     type: integer
     minimum: 0
-    maximum: 9223372036854776000
+    maximum: 9223372036854775807
     example: 100000
+    default: 0
   log_cleanup_policy:
     description: >-
       The default cleanup policy for segments beyond the retention
@@ -138,8 +139,9 @@ properties:
       messages are flushed to disk
     type: integer
     minimum: 1
-    maximum: 9223372036854776000
-    example: 9223372036854776000
+    maximum: 9223372036854775807
+    example: 9223372036854775807
+    default: 9223372036854775807
   log_flush_interval_ms:
     description: >-
       The maximum time in ms that a message in any topic is kept
@@ -147,7 +149,7 @@ properties:
       is used
     type: integer
     minimum: 0
-    maximum: 9223372036854776000
+    maximum: 9223372036854775807
     example: 1000000
     default: 9223372036854775807
   log_index_interval_bytes:
@@ -190,7 +192,7 @@ properties:
       a broker receives a message and the timestamp specified in the message
     type: integer
     minimum: 0
-    maximum: 9223372036854776000
+    maximum: 9223372036854775807
     example: 1000000
     default: 9223372036854775807
   log_preallocate:
@@ -204,7 +206,7 @@ properties:
       The maximum size of the log before deleting messages
     type: integer
     minimum: -1
-    maximum: 9223372036854776000
+    maximum: 9223372036854775807
     example: 1000000
     default: -1
   log_retention_hours:
@@ -222,7 +224,7 @@ properties:
       is used. If set to -1, no time limit is applied.
     type: integer
     minimum: -1
-    maximum: 9223372036854776000
+    maximum: 9223372036854775807
     example: 100000000
     default: 604800000
   log_roll_jitter_ms:
@@ -231,7 +233,7 @@ properties:
       milliseconds). If not set, the value in log.roll.jitter.hours is used
     type: integer
     minimum: 0
-    maximum: 9223372036854776000
+    maximum: 9223372036854775807
     example: 10000000
     default: 604800000
   log_roll_ms:
@@ -240,7 +242,7 @@ properties:
       (in milliseconds).
     type: integer
     minimum: 1
-    maximum: 9223372036854776000
+    maximum: 9223372036854775807
     example: 1000000
     default: 604800000
   log_segment_bytes:
