@@ -4,7 +4,7 @@ required:
 properties:
   urn:
     type: string
-    pattern: ^do:(dbaas|domain|droplet|floatingip|loadbalancer|space|volume|kubernetes|vpc):.*
+    pattern: ^do:kubernetes:.*
     example: do:kubernetes:f453aa14-646e-4cf8-8c62-75a19fb24ec2
     description: The uniform resource name (URN) for the resource in the format 
       do:resource_type:resource_id.

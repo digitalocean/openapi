@@ -14,6 +14,29 @@ requestBody:
       schema:
         $ref: 'models/destination_request.yml'
 
+      examples:
+        Managed OpenSearch Cluster:
+          value:
+            name: managed_opensearch_cluster
+            type: opensearch_dbaas
+            config:
+              endpoint: db-opensearch-nyc3-123456-do-user-123456-0.g.db.ondigitalocean.com
+              cluster_uuid: 85148069-7e35-4999-80bd-6fa1637ca385
+              cluster_name: managed_dbaas_cluster
+              index_name: logs
+              retention_days: 14
+        External OpenSearch Cluster:
+          value:
+            name: external_opensearch
+            type: opensearch_ext
+            config:
+              endpoint: example.com
+              credentials:
+                username: username
+                password: password
+              index_name: logs
+              retention_days: 14
+
 responses:
   '200':
     $ref: 'responses/destination.yml'

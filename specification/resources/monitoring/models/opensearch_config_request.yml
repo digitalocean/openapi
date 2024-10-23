@@ -15,7 +15,7 @@ properties:
   endpoint:
     type: string
     example: "example.com"
-    description: "host of the Opensearch cluster"
+    description: "host of the OpenSearch cluster"
   cluster_uuid:
     type: string
     example: "85148069-7e35-4999-80bd-6fa1637ca385"
