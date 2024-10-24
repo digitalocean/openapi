@@ -1,0 +1,15 @@
+type: object
+required:
+  - config
+  - type
+properties:
+  name:
+    type: string
+    description: "destination name"
+    example: "managed_opensearch_cluster"    
+  type:
+    type: string
+    description: "destination type, one of `opensearch_dbaas` or `opensearch_ext`."
+    example: "opensearch_dbaas"      
+  config:
+    $ref: 'opensearch_config_request.yml'
