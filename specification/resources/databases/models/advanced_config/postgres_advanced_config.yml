@@ -413,4 +413,4 @@ properties:
     type: integer
     minimum: 10
     maximum: 9223372036854776000
-    example: 4
+    example: 50
