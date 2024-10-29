@@ -12,7 +12,7 @@ properties:
   instance_size_slug:
     description: 'The instance size to use for this component. Default: `apps-s-1vcpu-0.5gb`'
     oneOf:
-      - $ref: 'old_instance_size_slug'
+      - $ref: '#/properties/old_instance_size_slug'
       - type: string
         enum:
         - apps-s-1vcpu-0.5gb
