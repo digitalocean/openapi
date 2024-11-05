@@ -549,6 +549,10 @@ paths:
     put:
       $ref: 'resources/apps/apps_update.yml'
 
+  /v2/apps/{app_id}/restart:
+    post:
+      $ref: 'resources/apps/apps_restart.yml'
+
   /v2/apps/{app_id}/components/{component_name}/logs:
     get:
       $ref: 'resources/apps/apps_get_logs_active_deployment.yml'
