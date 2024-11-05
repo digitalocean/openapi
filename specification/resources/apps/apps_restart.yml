@@ -15,7 +15,6 @@ requestBody:
     application/json:
       schema:
         $ref: models/apps_restart_request.yml
-  required: true
 
 responses:
   "200":
