@@ -1485,6 +1485,9 @@ paths:
 
     delete:
       $ref: 'resources/registry/registry_delete.yml'
+  /v2/registries:
+    get:
+      $ref: 'resources/registry/named_registry_get.yml'
 
   /v2/registry/subscription:
     get:
