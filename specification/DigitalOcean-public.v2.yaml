@@ -1488,6 +1488,10 @@ paths:
 
   /v2/registries:
     get:
+      $ref: 'resources/registry/multiregistry_get_all.yml'
+
+  /v2/registries/{registry_name}:
+    get:
       $ref: 'resources/registry/multiregistry_get.yml'
     
     post:
