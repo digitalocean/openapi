@@ -4,4 +4,4 @@ source: |-
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -d '{"name": "example", "region": "fra1"}' \
-    "https://api.digitalocean.com/v2/registry"
+    "https://api.digitalocean.com/v2/registries"

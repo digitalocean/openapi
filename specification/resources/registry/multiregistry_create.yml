@@ -1,4 +1,4 @@
-operationId: named_registry_create
+operationId: multiregistry_create
 
 summary: Create Named Container Registry (Beta)
 
@@ -18,7 +18,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/named_registry_create.yml'
+        $ref: 'models/multiregistry_create.yml'
 
 responses:
   '201':
@@ -37,8 +37,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/named_registry_create.yml'
-  - $ref: 'examples/python/named_registry_create.yml'
+  - $ref: 'examples/curl/multiregistry_create.yml'
+  - $ref: 'examples/python/multiregistry_create.yml'
 
 security:
   - bearer_auth:

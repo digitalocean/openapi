@@ -1,4 +1,4 @@
-operationId: named_registry_get
+operationId: multiregistry_get
 
 summary: Get Named Container Registry (Beta)
 

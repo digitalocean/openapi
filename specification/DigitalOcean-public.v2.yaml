@@ -1488,10 +1488,13 @@ paths:
 
   /v2/registries:
     get:
-      $ref: 'resources/registry/named_registry_get.yml'
+      $ref: 'resources/registry/multiregistry_get.yml'
     
     post:
-      $ref: 'resources/registry/named_registry_create.yml'
+      $ref: 'resources/registry/multiregistry_create.yml'
+
+    delete:
+      $ref: 'resources/registry/multiregistry_delete.yml'
 
   /v2/registry/subscription:
     get:
