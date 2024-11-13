@@ -1500,6 +1500,10 @@ paths:
     delete:
       $ref: 'resources/registry/multiregistry_delete.yml'
 
+  /v2/registries/{registry_name}/docker-credentials:
+    get:
+      $ref: 'resources/registry/multiregistry_get_dockerCredentials.yml'
+
   /v2/registry/subscription:
     get:
       $ref: 'resources/registry/registry_get_subscription.yml'
