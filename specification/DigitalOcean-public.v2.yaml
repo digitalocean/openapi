@@ -553,6 +553,10 @@ paths:
     get:
       $ref: 'resources/apps/apps_get_logs_active_deployment.yml'
 
+  /v2/apps/{app_id}/components/{component_name}/exec:
+    get:
+      $ref: 'resources/apps/apps_get_exec_active_deployment.yml'
+
   /v2/apps/{app_id}/deployments:
     get:
       $ref: 'resources/apps/apps_list_deployments.yml'
@@ -574,6 +578,10 @@ paths:
   /v2/apps/{app_id}/deployments/{deployment_id}/logs:
     get:
       $ref: 'resources/apps/apps_get_logs_aggregate.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/exec:
+    get:
+      $ref: 'resources/apps/apps_get_exec.yml'
 
   /v2/apps/{app_id}/logs:
     get:
