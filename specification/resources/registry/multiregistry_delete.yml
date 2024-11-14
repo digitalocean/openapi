@@ -8,6 +8,9 @@ description: To delete your container registry, destroying all container image
 tags:
   - Container Registry
 
+parameters:
+  - $ref: 'parameters.yml#/registry_name'
+
 responses:
   '204':
     $ref: '../../shared/responses/no_content.yml'

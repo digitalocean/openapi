@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "make test",
-    "lint": "spectral lint",
+    "lint": "spectral lint --debug",
     "bundle": "openapi bundle",
     "collection": "openapi2postmanv2",
     "autorest": " autorest",

@@ -1491,17 +1491,9 @@ paths:
       $ref: 'resources/registry/multiregistry_get_all.yml'
 
   /v2/registries/{registry_name}:
-    parameters:
-      - name: registry_name
-        in: path
-        required: true
-        description: The name of the registry
-        schema:
-          type: string
-
     get:
       $ref: 'resources/registry/multiregistry_get.yml'
-    
+
     post:
       $ref: 'resources/registry/multiregistry_create.yml'
 
@@ -1509,14 +1501,6 @@ paths:
       $ref: 'resources/registry/multiregistry_delete.yml'
 
   /v2/registries/{registry_name}/docker-credentials:
-    parameters:
-      - name: registry_name
-        in: path
-        required: true
-        description: The name of the registry
-        schema:
-          type: string
-
     get:
       $ref: 'resources/registry/multiregistry_get_dockerCredentials.yml'
 

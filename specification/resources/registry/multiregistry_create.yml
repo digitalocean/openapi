@@ -12,6 +12,9 @@ description: |
 tags:
   - Container Registry
 
+parameters:
+  - $ref: 'parameters.yml#/registry_name'
+
 requestBody:
   required: true
 
