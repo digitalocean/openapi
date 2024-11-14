@@ -13,7 +13,7 @@ content:
   application/json:
     schema:
       properties:
-        registry:
+        registries:
           type: array
           items:
             oneOf:
