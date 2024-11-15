@@ -8,9 +8,6 @@ description: To get information about any container registry in your account, se
 tags:
   - Container Registry
 
-parameters:
-  - $ref: 'parameters.yml#/registry_name'
-
 responses:
   '200':
     $ref: 'responses/all_registries_info.yml'
