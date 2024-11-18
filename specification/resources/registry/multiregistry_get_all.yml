@@ -1,6 +1,6 @@
-operationId: multiregistry_get_all
+operationId: registries_list
 
-summary: Get All Container Registries (Beta)
+summary: "[Beta] List All Container Registries"
 
 description: To get information about any container registry in your account, send a GET
   request to `/v2/registries/`.
