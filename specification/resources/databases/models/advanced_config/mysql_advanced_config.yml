@@ -264,3 +264,4 @@ properties:
       - INSIGHTS,TABLE
       - NONE
     example: INSIGHTS
+    default: NONE
