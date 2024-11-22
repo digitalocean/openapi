@@ -58,6 +58,14 @@ tags:
       For documentation on app specifications (`AppSpec` objects), please refer to the
       [product documentation](https://docs.digitalocean.com/products/app-platform/reference/app-spec/)).
 
+  - name: Autoscale Pools
+    description: |-
+      Droplet Autoscaling is a new DigitalOcean product that manages the horizontal scaling of customers' applications based on resource usage or a static configuration. 
+      Customers create one or many autoscaling pools. An autoscaling pool has 2 components, scaling configuration and a droplet template.
+      To use Autoscaling you will need to use an image that automatically runs your application when the Droplet starts or pass a cloud-config in the user_data parameter of the Droplet template.
+
+      **Droplet autoscaling will only be supported with Dedicated CPU droplets**
+
   - name: Billing
     description: |-
       The billing endpoints allow you to retrieve your account balance, invoices
@@ -997,6 +1005,32 @@ paths:
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/retry:
     post:
       $ref: 'resources/droplets/droplets_destroy_retryWithAssociatedResources.yml'
+
+  /v2/droplets/autoscale:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_list.yml'
+    post:
+      $ref: 'resources/autoscale_pools/autoscale_pool_create.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_get.yml'
+    put:
+      $ref: 'resources/autoscale_pools/autoscale_pool_update.yml'
+    delete:
+      $ref: 'resources/autoscale_pools/autoscale_pool_delete.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}/dangerous:
+    delete:
+      $ref: 'resources/autoscale_pools/autoscale_pool_delete_dangerous.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}/members:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_list_members.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}/history:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_list_history.yml'
 
   /v2/firewalls:
     get:

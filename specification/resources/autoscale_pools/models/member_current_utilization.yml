@@ -1,0 +1,11 @@
+type: object
+
+properties:
+  memory:
+    type: float
+    example: 0.3588531587713522
+    description: The memory utilization average of the individual resource.
+  cpu:
+    type: float
+    example: 0.0007338008770232183
+    description: The cpu utilization average of the individual resource.

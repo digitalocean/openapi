@@ -1,0 +1,80 @@
+properties:
+  name:
+    type: string
+    example: my-droplet-name
+    description: "The name(s) to be applied to all droplets in the autoscale pool."
+  
+  region:
+    type: string
+    enum:
+      - nyc1
+      - nyc2
+      - nyc3
+      - ams2
+      - ams3
+      - sfo1
+      - sfo2
+      - sfo3
+      - sgp1
+      - lon1
+      - fra1
+      - tor1
+      - blr1
+      - syd1
+    description: The datacenter in which all of the droplets will be created.
+  
+  size:
+    type: string
+    example: c-2
+    description: The droplet size to be used for all droplets in the autoscale pool. 
+      You may specify the slug or the image id. **Note that only dedicated cpus will be supported with autoscale pools.**
+  
+  ssh_keys:
+    type: array
+    items: 
+      type: string
+      example: "88:66:90:d2:68:d5:b5:85:e3:26:26:11:31:57:e6:f8"
+    description: Used to specify which keys should be installed on the droplets. You can either specify the key id or the fingerprint.
+  
+  tags:
+    type: array
+    items:
+      type: string
+      example: my-tag
+    description: Used to apply tags to each of the droplets in the autoscale pool.
+  
+  vpc_uuid:
+    type: string
+    description: Used to specify the VPC where the droplets will be created. Note that the VPC needs to exist in the region you intend to create the droplets in.
+  
+  with_droplet_agent:
+    type: boolean
+    description: Installs the droplet agent. In order for DO to monitor the droplet utilization used for the resource utilization scaling this needs to be set to true.
+  
+  project_id:
+    type: string
+    description: Allows you to specify which project the droplets will belong to.
+  
+  ipv6:
+    type: boolean
+    description: Will assign a unique IPV6 to each of the droplets.
+  
+  user_data:
+    type: string
+    example: |
+      #cloud-config
+      runcmd:
+        - touch /test.txt
+    description: A string containing 'user data' which may be used to configure
+      the Droplet on first boot, often a 'cloud-config' file or Bash script.
+      It must be plain text and may not exceed 64 KiB in size.
+
+required:
+  - name
+  - region
+  - size
+  - ssh_keys
+  - tags
+  - vpc_uuid
+  - with_droplet_agent
+  - user_data

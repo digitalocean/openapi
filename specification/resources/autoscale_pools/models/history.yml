@@ -1,0 +1,50 @@
+type: object
+
+properties:
+  history_event_id:
+    type: string
+    example: 01936530-4471-7b86-9634-32d8fcfecbc6
+    description: the unique identifier of the history event
+  current_instance_count: 
+    type: integer
+    example: 2
+    description: the current number of instances in the autoscale pool
+  desired_instance_count: 
+    type: integer
+    example: 2
+    description: the desired instances for the autoscale pool
+  reason:
+    type: string
+    enum:
+      - CONFIGURATION_CHANGE
+      - SCALE_UP
+      - SCALE_DOWN    
+    description: the reason for the scaling event
+  status:
+    type: string
+    enum:
+      - in_progress
+      - success
+      - error
+    description: status of the scaling event
+  created_at:
+    format: date-time
+    description: A time value given in ISO8601 combined date and time format
+      that represents when the History Event was created.
+    type: string
+    example: 2020-07-28T18:00:00Z  
+  updated_at:
+    format: date-time
+    description: A time value given in ISO8601 combined date and time format
+      that represents when the History Event was last updated.
+    type: string
+    example: 2020-07-28T18:00:00Z
+
+required:
+  - history_event_id
+  - current_instance_count
+  - desired_instance_count
+  - reason
+  - status
+  - created_at
+  - updated_at

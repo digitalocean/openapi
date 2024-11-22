@@ -1,0 +1,36 @@
+properties:
+  min_instances:
+    type: integer
+    example: 5
+    description: The lower bound of the number of resources in a dynamically scaling pool.
+    minimum: 0
+    maximum: 500
+  max_instances:
+    type: integer
+    example: 10
+    description: The upper bound of the number of resources in a dynamically scaling pool.
+    minimum: 0
+    maximum: 1000
+  target_cpu_utilization:
+    type: float
+    example: 0.6
+    description: Target cpu utilization as a decimal.
+    minimum: 0
+    maximum: 1
+  target_memory_utilization:
+    type: float
+    example: 0.6
+    description: Target memory utilization as a decimal.
+    minimum: 0
+    maximum: 1
+  cooldown_minutes:
+    type: integer
+    example: 5
+    description: To prevent thrashing there is a cool down period which may be provided 
+      this will default to 10 minutes if not provided.
+    minimum: 5
+    maximum: 20
+
+required:
+  - min_instances
+  - max_instances

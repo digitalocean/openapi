@@ -1,0 +1,41 @@
+type: object
+
+properties:
+  droplet_id:
+    type: integer
+    example: 459903570
+    description: The unique identifier of the droplet.
+  created_at:
+    format: date-time
+    description: A time value given in ISO8601 combined date and time format
+      that represents when the Resource was created.
+    type: string
+    example: 2020-07-28T18:00:00Z  
+  updated_at:
+    format: date-time
+    description: A time value given in ISO8601 combined date and time format
+      that represents when the Resource was last updated.
+    type: string
+    example: 2020-07-28T18:00:00Z
+  health_status:
+    type: string
+    example: 'active'
+    description: The health status of the resource.
+  status:
+    type: string
+    enum:
+      - provisioning
+      - active
+      - deleting
+      - "off"
+    description: The status of the resource (droplet).
+  current_utilization:
+      $ref: ../models/member_current_utilization.yml
+
+required:
+  - droplet_id
+  - created_at
+  - updated_at
+  - health_status
+  - status
+  - current_utilization

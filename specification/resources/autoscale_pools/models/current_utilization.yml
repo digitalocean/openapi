@@ -1,0 +1,15 @@
+type: object
+
+properties:
+  memory:
+    type: float
+    example: 0.3588531587713522
+    description: The average memory utilization of the autoscale pool.
+    minimum: 0
+    maximum: 1
+  cpu:
+    type: float
+    example: 0.0007338008770232183
+    description: The average cpu utilization the autoscale pool.
+    minimum: 0
+    maximum: 1
