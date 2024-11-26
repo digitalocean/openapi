@@ -22,7 +22,7 @@ requestBody:
 
 responses:
   '202':
-    $ref: 'responses/reserved_ipv6_created.yml'
+    $ref: 'responses/reserved_ipv6_create.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

@@ -29,5 +29,5 @@ content:
                 $ref: '../../../shared/models/action_link.yml'
 
     examples:
-      reserved_ipv6_reserving:
-        $ref: 'examples.yml#/reserved_ipv6_reserving'
+      reserved_ipv6_reserved:
+        $ref: 'examples.yml#/reserved_ipv6_reserved'

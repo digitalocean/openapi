@@ -445,6 +445,13 @@ tags:
       setups or other configurations requiring movable addresses.
 
       Reserved IPv6s are bound to a specific region.
+  - name: Reserved IPv6 Actions
+    description: |-
+      Reserved IPv6 actions requests are made on the actions endpoint of a specific
+      reserved IPv6.
+
+      An action object is returned. These objects hold the current status of the
+      requested action.
 
   - name: Sizes
     description: |-

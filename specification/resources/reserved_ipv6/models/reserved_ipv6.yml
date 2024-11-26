@@ -16,9 +16,5 @@ properties:
         
   droplet:
     $ref: '../../droplets/models/droplet.yml'
-    type: object
-    description: The Droplet that the reserved IPv6 has been assigned to. When
-      you query a reserved IPv6, if it is assigned to a Droplet, the entire
-      Droplet object will be returned. If it is not assigned, nothing will be returned
-    
+
     
