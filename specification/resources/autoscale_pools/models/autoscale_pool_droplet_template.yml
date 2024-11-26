@@ -74,7 +74,3 @@ required:
   - region
   - size
   - ssh_keys
-  - tags
-  - vpc_uuid
-  - with_droplet_agent
-  - user_data

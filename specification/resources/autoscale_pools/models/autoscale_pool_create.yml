@@ -4,7 +4,7 @@ properties:
   name: 
     example: "my-autoscaler-group"
     type: string
-    description: "The human-readable name of the autoscaler group."
+    description: "The human-readable name of the autoscaler group. This field cannot be updated"
   config:
     oneOf:
       - $ref: ../models/autoscale_pool_static_config.yml

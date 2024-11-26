@@ -63,7 +63,7 @@ autoscale_pool_single:
 members_all:
   value:
     droplets:
-      - id: 123456
+      - droplet_id: 123456
         created_at: 2020-11-19T20:27:18Z
         updated_at: 2020-12-01T00:42:16Z
         health_status: "healthy"

@@ -23,7 +23,7 @@ requestBody:
           $ref: 'examples.yml#/autoscale_update_request'
 
 responses:
-  '202':
+  '200':
     $ref: 'responses/autoscale_pool_create.yml'
 
   '401':

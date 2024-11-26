@@ -14,7 +14,7 @@ source: |-
       "droplet_template": {
         "size": "c-2",
         "region": "tor1",
-        "image": 'ubuntu-20-04-x64',
+        "image": "ubuntu-20-04-x64",
         "tags": [
           "test-ag-01"
         ],
