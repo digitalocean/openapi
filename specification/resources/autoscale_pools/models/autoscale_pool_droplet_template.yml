@@ -2,7 +2,7 @@ properties:
   name:
     type: string
     example: my-droplet-name
-    description: "The name(s) to be applied to all droplets in the autoscale pool."
+    description: "The name(s) to be applied to all Droplets in the autoscale pool."
   
   region:
     type: string
@@ -21,43 +21,43 @@ properties:
       - tor1
       - blr1
       - syd1
-    description: The datacenter in which all of the droplets will be created.
+    description: The datacenter in which all of the Droplets will be created.
   
   size:
     type: string
     example: c-2
-    description: The droplet size to be used for all droplets in the autoscale pool. 
-      You may specify the slug or the image id. **Note that only dedicated cpus will be supported with autoscale pools.**
-  
+    description: The Droplet size to be used for all Droplets in the autoscale pool. 
+      You may specify the slug or the image ID.
+
   ssh_keys:
     type: array
     items: 
       type: string
       example: "88:66:90:d2:68:d5:b5:85:e3:26:26:11:31:57:e6:f8"
-    description: Used to specify which keys should be installed on the droplets. You can either specify the key id or the fingerprint.
+    description: The SSH keys to be installed on the Droplets in the autoscale pool. You can either specify the key ID or the fingerprint.
   
   tags:
     type: array
     items:
       type: string
       example: my-tag
-    description: Used to apply tags to each of the droplets in the autoscale pool.
+    description: The tags to apply to each of the Droplets in the autoscale pool.
   
   vpc_uuid:
     type: string
-    description: Used to specify the VPC where the droplets will be created. Note that the VPC needs to exist in the region you intend to create the droplets in.
+    description: The VPC where the Droplets in the autoscale pool will be created. The VPC must be in the region where you want to create the Droplets.
   
   with_droplet_agent:
     type: boolean
-    description: Installs the droplet agent. In order for DO to monitor the droplet utilization used for the resource utilization scaling this needs to be set to true.
+    description: Installs the Droplet agent. This must be set to true to monitor Droplets for resource utilization scaling.
   
   project_id:
     type: string
-    description: Allows you to specify which project the droplets will belong to.
+    description: The project that the Droplets in the autoscaling pool will belong to.
   
   ipv6:
     type: boolean
-    description: Will assign a unique IPV6 to each of the droplets.
+    description: Assigns a unique IPv6 address to each of the Droplets in the autoscaling pool.
   
   user_data:
     type: string
@@ -65,9 +65,8 @@ properties:
       #cloud-config
       runcmd:
         - touch /test.txt
-    description: A string containing 'user data' which may be used to configure
-      the Droplet on first boot, often a 'cloud-config' file or Bash script.
-      It must be plain text and may not exceed 64 KiB in size.
+    description: A string containing user data that cloud-init consumes to configure a Droplet on first boot.
+      User data is often a cloud-config file or Bash script. It must be plain text and may not exceed 64 KiB in size.
 
 required:
   - name

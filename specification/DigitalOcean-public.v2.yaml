@@ -60,11 +60,9 @@ tags:
 
   - name: Autoscale Pools
     description: |-
-      Droplet Autoscaling is a new DigitalOcean product that manages the horizontal scaling of customers' applications based on resource usage or a static configuration. 
-      Customers create one or many autoscaling pools. An autoscaling pool has 2 components, scaling configuration and a droplet template.
-      To use Autoscaling you will need to use an image that automatically runs your application when the Droplet starts or pass a cloud-config in the user_data parameter of the Droplet template.
-
-      **Droplet autoscaling will only be supported with Dedicated CPU droplets**
+      Autoscale for droplets manages horizontal scaling for your applications based on resource usage or a static configuration.
+      When you use autoscaling, you create one or more autoscaling pools. An autoscaling pool has 2 components: scaling configuration, which determines how the pool scales up and down, 
+      and a Droplet template, which defines the configuration of the Droplets in the pool.
 
   - name: Billing
     description: |-

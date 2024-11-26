@@ -3,12 +3,9 @@ operationId: autoscale_pool_create
 summary: Create a New Autoscale Pool
 
 description: |
-  To create a new Autoscale Pool, send a POST request to `/v2/droplets/autoscale` setting the
-  required attributes.
+  To create a new autoscale pool, send a POST request to `/v2/droplets/autoscale` setting the required attributes.
 
-  An Autoscale Pool will be created using the provided information. The response body
-  will contain a JSON object with a key called `autoscale_pool`. The value will be an
-  object containing the standard attributes for your new Autoscale Pool. 
+  The response body will contain a JSON object with a key called `autoscale_pool` containing the standard attributes for the new autoscale pool.
 
 tags:
   - Autoscale Pools

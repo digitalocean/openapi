@@ -3,9 +3,7 @@ operationID: autoscale_delete
 summary: Delete autoscale pool
 
 description: |
-  To destroy an Autoscale Pool, send a
-  DELETE request to the `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`
-  endpoint. 
+  To destroy an autoscale pool, send a DELETE request to the `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID` endpoint.
 
   A successful response will include a 202 response code and no content. 
 

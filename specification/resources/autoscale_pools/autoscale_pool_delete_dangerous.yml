@@ -3,12 +3,8 @@ operationID: autoscale_delete_dangerouts
 summary: Delete autoscale pool and resources
 
 description: |
-  To destroy an Autoscale Pool, send a
-  DELETE request to the `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/dangerous`
-  endpoint. This will delete an autoscale pool and all of the underlying resources
-  (droplets)
-
-  A successful response will include a 202 response code and no content. 
+  To destroy an autoscale pool and its associated resources (Droplets),
+  send a DELETE request to the `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/dangerous` endpoint.
 
 tags:
   - Autoscale Pools

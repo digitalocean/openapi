@@ -1,4 +1,4 @@
-description: A JSON object with a key of `autoscale_pools`.
+description: A JSON object with a key of `history`.
 
 headers:
   ratelimit-limit:

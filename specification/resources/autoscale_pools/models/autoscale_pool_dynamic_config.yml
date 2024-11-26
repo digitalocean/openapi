@@ -2,19 +2,19 @@ properties:
   min_instances:
     type: integer
     example: 5
-    description: The lower bound of the number of resources in a dynamically scaling pool.
+    description: The minimum number of Droplets in an autoscaling pool.
     minimum: 0
     maximum: 500
   max_instances:
     type: integer
     example: 10
-    description: The upper bound of the number of resources in a dynamically scaling pool.
+    description: The maximum number of Droplets in an autoscaling pool.
     minimum: 0
     maximum: 1000
   target_cpu_utilization:
     type: float
     example: 0.6
-    description: Target cpu utilization as a decimal.
+    description: Target CPU utilization as a decimal.
     minimum: 0
     maximum: 1
   target_memory_utilization:
@@ -26,8 +26,7 @@ properties:
   cooldown_minutes:
     type: integer
     example: 5
-    description: To prevent thrashing there is a cool down period which may be provided 
-      this will default to 10 minutes if not provided.
+    description: The number of minutes to wait between scaling events in an autoscaling pool. Defaults to 10 minutes.
     minimum: 5
     maximum: 20
 

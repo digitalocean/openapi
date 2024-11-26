@@ -7,20 +7,18 @@ properties:
     description: The unique identifier of the droplet.
   created_at:
     format: date-time
-    description: A time value given in ISO8601 combined date and time format
-      that represents when the Resource was created.
+    description: The creation time of the Droplet in ISO8601 combined date and time format.
     type: string
     example: 2020-07-28T18:00:00Z  
   updated_at:
     format: date-time
-    description: A time value given in ISO8601 combined date and time format
-      that represents when the Resource was last updated.
+    description: The last updated time of the Droplet in ISO8601 combined date and time format.
     type: string
     example: 2020-07-28T18:00:00Z
   health_status:
     type: string
     example: 'active'
-    description: The health status of the resource.
+    description: The health status of the Droplet.
   status:
     type: string
     enum:
@@ -28,7 +26,7 @@ properties:
       - active
       - deleting
       - "off"
-    description: The status of the resource (droplet).
+    description: The power status of the Droplet.
   current_utilization:
       $ref: ../models/member_current_utilization.yml
 

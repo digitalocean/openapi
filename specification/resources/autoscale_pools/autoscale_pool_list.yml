@@ -3,11 +3,9 @@ operationId: autoscale_pools_list
 summary: List All Autoscale Pools
 
 description: |
-  To list all Autoscale Pools in your account, send a GET request to `/v2/droplets/autoscale`.
-
-  The response body will be a JSON object with a key of `autoscale_pools`. This will be
-  set to an array containing objects each representing an Autoscale Pool. These will
-  contain the standard Autoscale Pool attributes.
+  To list all autoscale pools in your team, send a GET request to `/v2/droplets/autoscale`.
+  The response body will be a JSON object with a key of `autoscale_pools` containing an array of autoscale pool objects.
+  These each contain the standard autoscale pool attributes.
 
 tags:
   - Autoscale Pools

@@ -1,7 +1,7 @@
 autoscale_pool_id:
   in: path
   name: autoscale_pool_id
-  description: A unique identifier for a Autoscale Pool instance.
+  description: A unique identifier for an autoscale pool.
   required: true
   schema:
     type: string

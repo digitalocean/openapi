@@ -1,6 +1,6 @@
 description: |
   The response will be a JSON object with a key called `autoscale_pool`. This will be
-  set to a JSON object that contains the standard Autoscale Pool attributes.
+  set to a JSON object that contains the standard autoscale pool attributes.
 
 headers:
   ratelimit-limit:

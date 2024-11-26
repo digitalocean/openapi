@@ -4,39 +4,37 @@ properties:
   history_event_id:
     type: string
     example: 01936530-4471-7b86-9634-32d8fcfecbc6
-    description: the unique identifier of the history event
+    description: The unique identifier of the history event.
   current_instance_count: 
     type: integer
     example: 2
-    description: the current number of instances in the autoscale pool
+    description: The current number of Droplets in the autoscale pool.
   desired_instance_count: 
     type: integer
     example: 2
-    description: the desired instances for the autoscale pool
+    description: The target number of Droplets for the autoscale pool after the scaling event.
   reason:
     type: string
     enum:
       - CONFIGURATION_CHANGE
       - SCALE_UP
       - SCALE_DOWN    
-    description: the reason for the scaling event
+    description: The reason for the scaling event.
   status:
     type: string
     enum:
       - in_progress
       - success
       - error
-    description: status of the scaling event
+    description: The status of the scaling event.
   created_at:
     format: date-time
-    description: A time value given in ISO8601 combined date and time format
-      that represents when the History Event was created.
+    description: The creation time of the history event in ISO8601 combined date and time format.
     type: string
     example: 2020-07-28T18:00:00Z  
   updated_at:
     format: date-time
-    description: A time value given in ISO8601 combined date and time format
-      that represents when the History Event was last updated.
+    description: The last updated time of the history event in ISO8601 combined date and time format.
     type: string
     example: 2020-07-28T18:00:00Z
 

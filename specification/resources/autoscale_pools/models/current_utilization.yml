@@ -10,6 +10,6 @@ properties:
   cpu:
     type: float
     example: 0.0007338008770232183
-    description: The average cpu utilization the autoscale pool.
+    description: The average CPU utilization of the autoscale pool.
     minimum: 0
     maximum: 1
