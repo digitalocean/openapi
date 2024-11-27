@@ -1,4 +1,4 @@
-operationID: autoscale_delete
+operationId: autoscalepools_delete
 
 summary: Delete autoscale pool
 

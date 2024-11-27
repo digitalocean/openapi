@@ -14,3 +14,9 @@ content:
       properties:
         autoscale_pool:
           $ref: '../models/autoscale_pool.yml'
+
+    examples:
+      Autoscale Create Response Dynamic Config:
+        $ref: 'examples.yml#/autoscale_create_response_dynamic'
+      Autoscale Create Response Static Config:
+        $ref: 'examples.yml#/autoscale_create_response_static'

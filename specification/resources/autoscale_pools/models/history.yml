@@ -20,6 +20,7 @@ properties:
       - SCALE_UP
       - SCALE_DOWN    
     description: The reason for the scaling event.
+    example: 'CONFIGURATION_CHANGE'
   status:
     type: string
     enum:
@@ -27,6 +28,7 @@ properties:
       - success
       - error
     description: The status of the scaling event.
+    example: 'success'
   created_at:
     format: date-time
     description: The creation time of the history event in ISO8601 combined date and time format.

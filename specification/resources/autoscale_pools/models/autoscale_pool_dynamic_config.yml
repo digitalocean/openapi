@@ -1,3 +1,5 @@
+type: object
+
 properties:
   min_instances:
     type: integer
@@ -12,13 +14,15 @@ properties:
     minimum: 0
     maximum: 1000
   target_cpu_utilization:
-    type: float
+    type: number
+    format: float
     example: 0.6
     description: Target CPU utilization as a decimal.
     minimum: 0
     maximum: 1
   target_memory_utilization:
-    type: float
+    type: number
+    format: float
     example: 0.6
     description: Target memory utilization as a decimal.
     minimum: 0

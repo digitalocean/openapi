@@ -27,6 +27,7 @@ properties:
       - deleting
       - "off"
     description: The power status of the Droplet.
+    example: "active"
   current_utilization:
       $ref: ../models/member_current_utilization.yml
 

@@ -1,3 +1,5 @@
+type: object
+
 properties:
   name:
     type: string
@@ -6,6 +8,7 @@ properties:
   
   region:
     type: string
+    example: tor1
     enum:
       - nyc1
       - nyc2
@@ -33,31 +36,37 @@ properties:
     type: array
     items: 
       type: string
-      example: "88:66:90:d2:68:d5:b5:85:e3:26:26:11:31:57:e6:f8"
+    example: 
+      - "88:66:90:d2:68:d5:b5:85:e3:26:26:11:31:57:e6:f8"
     description: The SSH keys to be installed on the Droplets in the autoscale pool. You can either specify the key ID or the fingerprint.
   
   tags:
     type: array
     items:
       type: string
-      example: my-tag
+    example: 
+      - my-tag
     description: The tags to apply to each of the Droplets in the autoscale pool.
   
   vpc_uuid:
     type: string
     description: The VPC where the Droplets in the autoscale pool will be created. The VPC must be in the region where you want to create the Droplets.
+    example: 760e09ef-dc84-11e8-981e-3cfdfeaae000
   
   with_droplet_agent:
     type: boolean
     description: Installs the Droplet agent. This must be set to true to monitor Droplets for resource utilization scaling.
+    example: true
   
   project_id:
     type: string
     description: The project that the Droplets in the autoscaling pool will belong to.
+    example: 746c6152-2fa2-11ed-92d3-27aaa54e4988
   
   ipv6:
     type: boolean
     description: Assigns a unique IPv6 address to each of the Droplets in the autoscaling pool.
+    example: true
   
   user_data:
     type: string

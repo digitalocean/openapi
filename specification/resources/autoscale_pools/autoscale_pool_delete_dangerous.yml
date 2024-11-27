@@ -1,4 +1,4 @@
-operationID: autoscale_delete_dangerouts
+operationId: autoscalepools_delete_dangerous
 
 summary: Delete autoscale pool and resources
 

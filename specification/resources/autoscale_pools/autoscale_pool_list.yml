@@ -1,4 +1,4 @@
-operationId: autoscale_pools_list
+operationId: autoscalepools_list
 
 summary: List All Autoscale Pools
 

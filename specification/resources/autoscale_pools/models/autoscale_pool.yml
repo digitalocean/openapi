@@ -50,6 +50,7 @@ properties:
       - deleting
       - error
     description: The current status of the autoscale pool.
+    example: active
 
   active_resources_count:
     type: integer

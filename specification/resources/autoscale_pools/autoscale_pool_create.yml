@@ -1,4 +1,4 @@
-operationId: autoscale_pool_create
+operationId: autoscalepools_create
 
 summary: Create a New Autoscale Pool
 
@@ -16,8 +16,10 @@ requestBody:
       schema:
         $ref: 'models/autoscale_pool_create.yml'
       examples:
-        Autoscale Create Request:
-          $ref: 'examples.yml#/autoscale_create_request'
+        Autoscale Create Request Dynamic Config:
+          $ref: 'examples.yml#/autoscale_create_request_dynamic'
+        Autoscale Create Request Static Config:
+          $ref: 'examples.yml#/autoscale_create_request_static'
 
 responses:
   '202':

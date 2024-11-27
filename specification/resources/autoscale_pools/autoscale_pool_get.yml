@@ -1,4 +1,4 @@
-operationId: autoscale_pool_get
+operationId: autoscalepools_get
 
 summary: Retrieve an Existing Autoscale Pool
 

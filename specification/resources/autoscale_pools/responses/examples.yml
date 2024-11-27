@@ -9,13 +9,13 @@ autoscale_pools_all:
         target_cpu_utilization: 0.5
         cooldown_minutes: 10
       droplet_template:
+        name: "droplet-name"
         size: c-2
         region: tor1
         image: ubuntu-20-04-x64
         tags:
         - my-tag 
         ssh_keys:
-        - 289794
         - 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
         vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
         with_droplet_agent: true
@@ -29,6 +29,10 @@ autoscale_pools_all:
         cpu: 0.0007338008770232183
       status: active
       active_resources_count: 1
+    links:
+      pages:
+    meta:
+      total: 1
 autoscale_pool_single:
   value:
     autoscale_pool:
@@ -40,13 +44,13 @@ autoscale_pool_single:
         target_cpu_utilization: 0.5
         cooldown_minutes: 10
       droplet_template:
+        name: "droplet-name"
         size: c-2
         region: tor1
         image: 'ubuntu-20-04-x64'
         tags:
         - my-tag 
         ssh_keys:
-        - 289794
         - 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
         vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
         with_droplet_agent: true
@@ -71,6 +75,10 @@ members_all:
         current_utilization:
           memory: 0.3588531587713522
           cpu: 0.0007338008770232183
+    links:
+      pages:
+    meta:
+      total: 1
 history_all:
   value:
     history:
@@ -81,3 +89,60 @@ history_all:
         status: "success"
         created_at: 2020-11-19T20:27:18Z
         updated_at: 2020-12-01T00:42:16Z
+    links:
+      pages:
+    meta:
+      total: 1
+autoscale_create_response_dynamic:
+  value:
+    autoscale_pool:
+      id: 0d3db13e-a604-4944-9827-7ec2642d32ac
+      name: "test-autoscaler-group-01"
+      config: 
+        min_instances: 1
+        max_instances: 5
+        target_cpu_utilization: 0.5
+        cooldown_minutes: 10
+      droplet_template:
+        name: "droplet-name"
+        size: c-2
+        region: tor1
+        image: 'ubuntu-20-04-x64'
+        tags:
+        - my-tag 
+        ssh_keys:
+        - 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
+        vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
+        with_droplet_agent: true
+        project_id: 746c6152-2fa2-11ed-92d3-27aaa54e4988
+        ipv6: true
+        user_data: "#cloud-config\nruncmd:\n  - touch /test.txt\n"
+      created_at: 2020-11-19T20:27:18Z
+      updated_at: 2020-12-01T00:42:16Z
+      status: active
+      active_resources_count: 1
+autoscale_create_response_static:
+  value:
+    autoscale_pool:
+      id: 0d3db13e-a604-4944-9827-7ec2642d32ac
+      name: "test-autoscaler-group-01"
+      config: 
+        target_number_instances: 1
+      droplet_template:
+        name: "droplet-name"
+        size: c-2
+        region: tor1
+        image: 'ubuntu-20-04-x64'
+        tags:
+        - my-tag 
+        ssh_keys:
+        - 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
+        vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
+        with_droplet_agent: true
+        project_id: 746c6152-2fa2-11ed-92d3-27aaa54e4988
+        ipv6: true
+        user_data: "#cloud-config\nruncmd:\n  - touch /test.txt\n"
+      created_at: 2020-11-19T20:27:18Z
+      updated_at: 2020-12-01T00:42:16Z
+      status: active
+      active_resources_count: 1
