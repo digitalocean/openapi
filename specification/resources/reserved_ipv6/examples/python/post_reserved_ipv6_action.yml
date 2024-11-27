@@ -9,4 +9,4 @@ source: |-
     "type": "unassign"
   }
 
-  resp = client.reserved_ips_actions.post(ip="2409:40d0:f7:1017:74b4:3a96:105e:4c6e", body=req)
+  resp = client.reserved_ipv6_actions.post(ip="2409:40d0:f7:1017:74b4:3a96:105e:4c6e", body=req)

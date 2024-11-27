@@ -1,10 +1,10 @@
-operationId: reservedIPv6sActions_post
+operationId: reservedIPv6Actions_post
 
-summary: Initiate a Reserved IPv6 Action
+summary: "[Beta] Initiate a Reserved IPv6 Action"
 
 description: |
     To initiate an action on a reserved IPv6 send a POST request to
-    `/v2/reserved_ipv6/$RESERVED_IP/actions`. In the JSON body to the request,
+    `/v2/reserved_ipv6/$RESERVED_IPV6/actions`. In the JSON body to the request,
     set the `type` attribute to on of the supported action types:
 
     | Action     | Details
@@ -13,7 +13,7 @@ description: |
     | `unassign` | Unassign a reserved IPv6 from a Droplet
 
 tags:
-  -  Reserved IPv6 Actions
+  -  "[Beta] Reserved IPv6 Actions"
 
 parameters:
   - $ref: 'parameters.yml#/reserved_ipv6'

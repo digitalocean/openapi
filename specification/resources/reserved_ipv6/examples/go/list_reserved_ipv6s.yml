@@ -18,5 +18,5 @@ source: |-
           PerPage: 200,
       }
 
-      reservedIPs, _, err := client.ReservedIPV6s.List(ctx, opt)
+      reservedIPs, _, err := client.ReservedIPV6.List(ctx, opt)
   }

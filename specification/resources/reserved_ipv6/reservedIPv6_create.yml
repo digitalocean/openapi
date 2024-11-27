@@ -1,6 +1,6 @@
-operationId: reservedIPv6s_create
+operationId: reservedIPv6_create
 
-summary: Create a New Reserved IPv6
+summary: "[Beta] Create a New Reserved IPv6"
 
 description: >-
   On creation, a reserved IPv6 must be reserved to a region.
@@ -10,7 +10,7 @@ description: >-
 
 
 tags:
-  - Reserved IPv6s
+  - "[Beta] Reserved IPv6"
 
 requestBody:
   required: true
@@ -21,7 +21,7 @@ requestBody:
         $ref: 'models/reserved_ipv6_create.yml'
 
 responses:
-  '202':
+  '200':
     $ref: 'responses/reserved_ipv6_create.yml'
 
   '401':

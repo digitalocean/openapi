@@ -4,4 +4,4 @@ source: |-
   token = ENV['DIGITALOCEAN_TOKEN']
   client = DropletKit::Client.new(access_token: token)
 
-  client.reserved_ipv6s.find(ip: '2409:40d0:f7:1017:74b4:3a96:105e:4c6e')
+  client.reserved_ipv6.find(ip: '2409:40d0:f7:1017:74b4:3a96:105e:4c6e')

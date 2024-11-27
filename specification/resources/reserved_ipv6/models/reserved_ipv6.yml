@@ -7,6 +7,12 @@ properties:
     example: 2409:40d0:f7:1017:74b4:3a96:105e:4c6e
     description: The public IP address of the reserved IPv6. It also serves as its
       identifier.
+  
+  reserved_at: 
+    type: string
+    format: date-time
+    example: "2024-11-20T11:08:30Z"
+    description: The date and time when the reserved IPv6 was reserved.
 
   region_slug:
     type: string

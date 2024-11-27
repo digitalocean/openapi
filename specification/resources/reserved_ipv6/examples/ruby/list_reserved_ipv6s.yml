@@ -4,5 +4,5 @@ source: |-
   token = ENV['DIGITALOCEAN_TOKEN']
   client = DropletKit::Client.new(access_token: token)
 
-  reserved_ips = client.reserved_ipv6s.all
+  reserved_ips = client.reserved_ipv6.all
   reserved_ips.each

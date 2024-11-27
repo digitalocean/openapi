@@ -5,4 +5,4 @@ source: |-
   client = DropletKit::Client.new(access_token: token)
 
   reserved_ip = DropletKit::ReservedIpv6.new(region_slug: nyc3)
-  client.reserved_ipv6s.create(reserved_ip) 
+  client.reserved_ipv6.create(reserved_ip) 

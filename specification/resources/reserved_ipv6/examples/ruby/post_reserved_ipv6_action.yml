@@ -5,7 +5,7 @@ source: |-
   client = DropletKit::Client.new(access_token: token)
 
   # Assign a Reserved IPv6 to a Droplet
-  client.reserved_ip_actions.assign(ip: '2409:40d0:f7:1017:74b4:3a96:105e:4c6e', droplet_id: 8219222)
+  client.reserved_ipv6_actions.assign(ip: '2409:40d0:f7:1017:74b4:3a96:105e:4c6e', droplet_id: 8219222)
 
   # Unassign a Reserved IPv6
-  # client.reserved_ip_actions.unassign(ip: '2409:40d0:f7:1017:74b4:3a96:105e:4c6e')
+  # client.reserved_ipv6_actions.unassign(ip: '2409:40d0:f7:1017:74b4:3a96:105e:4c6e')

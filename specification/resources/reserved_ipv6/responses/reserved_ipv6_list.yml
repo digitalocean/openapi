@@ -14,19 +14,19 @@ content:
   application/json:
     schema:
       allOf:
-        - type: object
-          properties:
-            reserved_ips:
-              type: array
-              items:
-                $ref: '../models/reserved_ipv6.yml'
+        - $ref: '../models/reserved_ipv6_list.yml'
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 
       example:
-        reserved_ipv6s:
-        - ip: fd53:616d:6d60::dc9:c001
-          region_slug: nyc3
         links: {}
         meta:
           total: 1
+        reserved_ipv6s:
+        - ip: fd53:616d:6d60::dc9:c001
+          region_slug: nyc3
+          reserved_at: '2020-01-01T00:00:00Z'
+        - ip: fd53:616d:6d60::dc9:c002
+          region_slug: nyc1
+          reserved_at: '2020-01-01T00:00:00Z'
+       
