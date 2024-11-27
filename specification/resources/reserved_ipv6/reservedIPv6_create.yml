@@ -21,7 +21,7 @@ requestBody:
         $ref: 'models/reserved_ipv6_create.yml'
 
 responses:
-  '200':
+  '201':
     $ref: 'responses/reserved_ipv6_create.yml'
 
   '401':

@@ -1,4 +1,4 @@
-description: The response will be a JSON object. The value of this will be an object that contains the standard attributes
+description: The response will be a JSON object with key `reserved_ipv6`. The value of this will be an object that contains the standard attributes
   associated with a reserved IPv6.
 
 headers:
@@ -12,7 +12,10 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/reserved_ipv6.yml'
+      type: object
+      properties:
+        reserved_ipv6:
+          $ref: '../models/reserved_ipv6.yml'
 
     examples:
       reserved_ipv6_assigned:
