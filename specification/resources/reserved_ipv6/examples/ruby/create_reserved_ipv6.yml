@@ -1,8 +1,0 @@
-lang: Ruby
-source: |-
-  require 'droplet_kit'
-  token = ENV['DIGITALOCEAN_TOKEN']
-  client = DropletKit::Client.new(access_token: token)
-
-  reserved_ip = DropletKit::ReservedIpv6.new(region_slug: nyc3)
-  client.reserved_ipv6.create(reserved_ip) 
