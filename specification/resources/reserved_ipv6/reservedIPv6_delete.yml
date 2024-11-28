@@ -37,7 +37,6 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/delete_reserved_ipv6.yml'
   - $ref: 'examples/go/delete_reserved_ipv6.yml'
-  - $ref: 'examples/ruby/delete_reserved_ipv6.yml'
   - $ref: 'examples/python/delete_reserved_ipv6.yml'
 
 security:

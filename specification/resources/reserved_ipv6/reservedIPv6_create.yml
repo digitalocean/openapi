@@ -39,7 +39,6 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/create_reserved_ipv6.yml'
   - $ref: 'examples/go/create_reserved_ipv6.yml'
-  - $ref: 'examples/ruby/create_reserved_ipv6.yml'
   - $ref: 'examples/python/create_reserved_ipv6.yml'
 
 security:

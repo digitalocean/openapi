@@ -57,7 +57,6 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/post_reserved_ipv6_action.yml'
   - $ref: 'examples/go/post_reserved_ipv6_action.yml'
-  - $ref: 'examples/ruby/post_reserved_ipv6_action.yml'
   - $ref: 'examples/python/post_reserved_ipv6_action.yml'
 
 security:

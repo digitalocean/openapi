@@ -31,7 +31,6 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/list_reserved_ipv6s.yml'
   - $ref: 'examples/go/list_reserved_ipv6s.yml'
-  - $ref: 'examples/ruby/list_reserved_ipv6s.yml'
   - $ref: 'examples/python/list_reserved_ipv6s.yml'
 
 security:
