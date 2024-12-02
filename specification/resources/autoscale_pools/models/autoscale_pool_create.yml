@@ -2,17 +2,17 @@ type: object
 
 properties:
   name: 
-    example: "my-autoscaler-group"
+    example: "my-autoscale-pool"
     type: string
-    description: "The human-readable name of the autoscaler group. This field cannot be updated"
+    description: "The human-readable name of the autoscale pool. This field cannot be updated"
   config:
     oneOf:
       - $ref: ../models/autoscale_pool_static_config.yml
       - $ref: ../models/autoscale_pool_dynamic_config.yml
     type: object
-    description: This is the scaling configuration for an autoscale pool
-      Currently 2 methods are supported for how an autoscaling pool scales up and down. 
-      Additional methods may be added in future releases.    
+    description: The scaling configuration for an autoscale pool, which
+      is how the pool scales up and down (either by resource utilization
+      or static configuration).
   droplet_template:    
     $ref: ../models/autoscale_pool_droplet_template.yml
 

@@ -4,13 +4,13 @@ properties:
   min_instances:
     type: integer
     example: 5
-    description: The minimum number of Droplets in an autoscaling pool.
+    description: The minimum number of Droplets in an autoscale pool.
     minimum: 0
     maximum: 500
   max_instances:
     type: integer
     example: 10
-    description: The maximum number of Droplets in an autoscaling pool.
+    description: The maximum number of Droplets in an autoscale pool.
     minimum: 0
     maximum: 1000
   target_cpu_utilization:
@@ -30,7 +30,7 @@ properties:
   cooldown_minutes:
     type: integer
     example: 5
-    description: The number of minutes to wait between scaling events in an autoscaling pool. Defaults to 10 minutes.
+    description: The number of minutes to wait between scaling events in an autoscale pool. Defaults to 10 minutes.
     minimum: 5
     maximum: 20
 

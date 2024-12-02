@@ -3,7 +3,7 @@ operationId: autoscalepools_list_members
 summary: List members
 
 description: |
-  To list the members (resources) in an autoscale pool, send a GET request to `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/members`.
+  To list the Droplets in an autoscale pool, send a GET request to `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/members`.
 
   The response body will be a JSON object with a key of `droplets`. This will be
   set to an array containing information about each of the Droplets in the autoscale pool.

@@ -4,7 +4,7 @@ properties:
   droplet_id:
     type: integer
     example: 459903570
-    description: The unique identifier of the droplet.
+    description: The unique identifier of the Droplet.
   created_at:
     format: date-time
     description: The creation time of the Droplet in ISO8601 combined date and time format.

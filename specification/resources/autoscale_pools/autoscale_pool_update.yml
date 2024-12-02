@@ -4,7 +4,7 @@ summary: Update Autoscale Pool
 
 description: |
   To update the configuration of an existing autoscale pool, send a PUT request to
-  `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`. The request should contain a full representation
+  `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`. The request must contain a full representation
   of the autoscale pool including existing attributes. 
 
 tags:
