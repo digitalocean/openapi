@@ -16,4 +16,6 @@ source: |-
       createRequest := &godo.ReservedIPV6CreateRequest{
           RegionSlug: "nyc3",
       }
+
+      reservedIPV6, _, err := client.ReservedIPV6s.Create(ctx, createRequest)
   }

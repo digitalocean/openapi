@@ -33,7 +33,7 @@ content:
           started_at: '2015-11-12T17:51:03Z'
           completed_at: '2015-11-12T17:51:14Z'
           resource_id: 758604968
-          resource_type: reserved_ip
+          resource_type: reserved_ipv6
           region:
             name: New York 3
             slug: nyc3

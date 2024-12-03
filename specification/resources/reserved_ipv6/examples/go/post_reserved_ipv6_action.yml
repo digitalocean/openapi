@@ -17,5 +17,5 @@ source: |-
       action, _, err := client.ReservedIPV6Actions.Assign(ctx, "2409:40d0:f7:1017:74b4:3a96:105e:4c6e", 8219222)
 
     // Unassign a Reserved IPv6
-    // action, _, err := client.ReservedIPV6Actions.Unassign(ctx, "2409:40d0:f7:1017:74b4:3a96:105e:4c6e")  
+     action, _, err := client.ReservedIPV6Actions.Unassign(ctx, "2409:40d0:f7:1017:74b4:3a96:105e:4c6e")  
   }
