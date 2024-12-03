@@ -549,9 +549,17 @@ paths:
     put:
       $ref: 'resources/apps/apps_update.yml'
 
+  /v2/apps/{app_id}/restart:
+    post:
+      $ref: 'resources/apps/apps_restart.yml'
+
   /v2/apps/{app_id}/components/{component_name}/logs:
     get:
       $ref: 'resources/apps/apps_get_logs_active_deployment.yml'
+
+  /v2/apps/{app_id}/components/{component_name}/exec:
+    get:
+      $ref: 'resources/apps/apps_get_exec_active_deployment.yml'
 
   /v2/apps/{app_id}/deployments:
     get:
@@ -574,6 +582,10 @@ paths:
   /v2/apps/{app_id}/deployments/{deployment_id}/logs:
     get:
       $ref: 'resources/apps/apps_get_logs_aggregate.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/exec:
+    get:
+      $ref: 'resources/apps/apps_get_exec.yml'
 
   /v2/apps/{app_id}/logs:
     get:
