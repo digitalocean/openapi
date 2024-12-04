@@ -5,4 +5,4 @@ source: |-
 
   client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
 
-  resp = client.reserved_ipv6.list()
+  resp = client.reserved_ipv6s.list()
