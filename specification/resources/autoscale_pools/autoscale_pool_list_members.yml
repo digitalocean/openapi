@@ -9,7 +9,7 @@ description: |
   set to an array containing information about each of the Droplets in the autoscale pool.
 
 tags:
-  - Autoscale Pools
+  - Droplet Autoscale Pools
 
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'

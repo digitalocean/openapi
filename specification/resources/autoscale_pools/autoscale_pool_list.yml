@@ -8,7 +8,7 @@ description: |
   These each contain the standard autoscale pool attributes.
 
 tags:
-  - Autoscale Pools
+  - Droplet Autoscale Pools
 
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'

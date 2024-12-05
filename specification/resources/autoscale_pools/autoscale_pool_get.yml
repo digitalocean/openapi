@@ -7,7 +7,7 @@ description: |
   `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`.
 
 tags:
-  - Autoscale Pools
+  - Droplet Autoscale Pools
 
 parameters:
   - $ref: 'parameters.yml#/autoscale_pool_id'

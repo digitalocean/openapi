@@ -8,7 +8,7 @@ description: |
   of the autoscale pool including existing attributes. 
 
 tags:
-  - Autoscale Pools
+  - Droplet Autoscale Pools
 
 parameters:
   - $ref: 'parameters.yml#/autoscale_pool_id'

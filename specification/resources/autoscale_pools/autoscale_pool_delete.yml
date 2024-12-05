@@ -8,7 +8,7 @@ description: |
   A successful response will include a 202 response code and no content. 
 
 tags:
-  - Autoscale Pools
+  - Droplet Autoscale Pools
 
 parameters:
   - $ref: 'parameters.yml#/autoscale_pool_id'

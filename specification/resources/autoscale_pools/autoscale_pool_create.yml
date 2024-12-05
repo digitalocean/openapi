@@ -8,7 +8,7 @@ description: |
   The response body will contain a JSON object with a key called `autoscale_pool` containing the standard attributes for the new autoscale pool.
 
 tags:
-  - Autoscale Pools
+  - Droplet Autoscale Pools
 
 requestBody:
   content:

@@ -7,7 +7,7 @@ description: |
   send a DELETE request to the `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/dangerous` endpoint.
 
 tags:
-  - Autoscale Pools
+  - Droplet Autoscale Pools
 
 parameters:
   - $ref: 'parameters.yml#/autoscale_pool_id'
