@@ -30,6 +30,11 @@ properties:
     type: string
     example: c-2
     description: The Droplet size to be used for all Droplets in the autoscale pool. 
+
+  image:
+    type: string
+    example: ubuntu-20-04-x64
+    description: The Droplet image to be used for all Droplets in the autoscale pool.
       You may specify the slug or the image ID.
 
   ssh_keys:
@@ -78,7 +83,7 @@ properties:
       User data is often a cloud-config file or Bash script. It must be plain text and may not exceed 64 KiB in size.
 
 required:
-  - name
   - region
+  - image
   - size
   - ssh_keys
