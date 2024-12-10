@@ -175,10 +175,11 @@ properties:
     enum:
       - REGIONAL
       - REGIONAL_NETWORK
+      - GLOBAL
     default: REGIONAL
     description: A string indicating whether the load balancer should be a standard
-      regional load balancer or a regional network load balancer that routes traffic
-      at the TCP/UDP transport layer.
+      regional HTTP load balancer, a regional network load balancer that routes traffic
+      at the TCP/UDP transport layer, or a global load balancer.
 
 required:
   - forwarding_rules
