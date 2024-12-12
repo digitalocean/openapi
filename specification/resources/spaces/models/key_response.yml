@@ -1,0 +1,31 @@
+type: object
+
+properties:
+  name:
+    type: string
+    description: The name of your access key.
+    example: "my-access-key"
+
+  grants:
+    type: array
+    description: The grants set to this access key.
+    items:
+      $ref: 'grant.yml'
+    default: []
+
+  access_key:
+    type: string
+    description: The access key.
+    example: DOACCESSKEYEXAMPLE
+
+  created_at:
+    type: string
+    format: date-time
+    description: The date and time the key was created.
+    example: '2018-07-19T15:04:16Z'
+
+required:
+- name
+- grants
+- access_key
+- created_at

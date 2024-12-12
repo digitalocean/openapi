@@ -461,6 +461,12 @@ tags:
       To interact with snapshots, you will generally send requests to the
       snapshots endpoint at `/v2/snapshots`.
 
+  - name: Spaces Keys
+    description: |-
+      Spaces keys are used to authenticate requests to DigitalOcean Spaces Buckets. By
+      sending requests to the `/v2/spaces/keys` endpoint, you can list, create, or
+      update, delete Spaces keys.
+
   - name: SSH Keys
     description: Manage SSH keys available on your account.
 
@@ -1599,6 +1605,23 @@ paths:
 
     delete:
       $ref: 'resources/snapshots/snapshots_delete.yml'
+
+  /v2/spaces/keys:
+    get:
+      $ref: 'resources/spaces/key_list.yml'
+    
+    post:
+      $ref: 'resources/spaces/key_create.yml'
+  
+  /v2/spaces/keys/{access_key}:
+    delete:
+      $ref: 'resources/spaces/key_delete.yml'
+
+    put:
+      $ref: 'resources/spaces/key_update.yml'
+    
+    patch:
+      $ref: 'resources/spaces/key_patch.yml'
 
   /v2/tags:
     get:

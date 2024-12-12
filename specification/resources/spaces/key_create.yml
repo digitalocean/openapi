@@ -1,0 +1,69 @@
+operationId: key_create
+
+summary: Create a New Spaces Access Key
+
+description: |
+  To create a new Spaces Access Key, send a POST request to `/v2/spaces/keys`.
+
+tags:
+  - Spaces Keys
+
+requestBody:
+  required: true
+
+  content:
+    application/json:
+      schema:
+        $ref: 'models/key_request.yml'
+
+      examples:
+        Read Only Key:
+          value:
+            name: 'read-only-key'
+            grants: [{ "bucket": "my-bucket", "permission": "read" }]
+
+        Read Write Key:
+          value:
+            name: 'read-write-key'
+            grants: [{ "bucket": "my-bucket", "permission": "readwrite" }]
+
+        Full Access Key:
+          value:
+            name: 'full-access-key'
+            grants: [{ "bucket": "my-bucket", "permission": "fullaccess" }]
+
+        Multiple Grants Key:
+          value:
+            name: 'multiple-grants-key'
+            grants: [
+              { "bucket": "my-bucket", "permission": "read" },
+              { "bucket": "my-bucket2", "permission": "readwrite" }
+            ]
+
+        No Grant Key:
+          value:
+            name: 'no-grant-key'
+            grants: []
+
+responses:
+  '201':
+    $ref: 'responses/key_create.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+  
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+  
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+security:
+  - bearer_auth:
+    - 'spaces_key:create_credentials'
