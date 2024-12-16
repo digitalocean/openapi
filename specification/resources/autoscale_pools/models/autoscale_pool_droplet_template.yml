@@ -65,12 +65,12 @@ properties:
   
   project_id:
     type: string
-    description: The project that the Droplets in the autoscaling pool will belong to.
+    description: The project that the Droplets in the autoscale pool will belong to.
     example: 746c6152-2fa2-11ed-92d3-27aaa54e4988
   
   ipv6:
     type: boolean
-    description: Assigns a unique IPv6 address to each of the Droplets in the autoscaling pool.
+    description: Assigns a unique IPv6 address to each of the Droplets in the autoscale pool.
     example: true
   
   user_data:

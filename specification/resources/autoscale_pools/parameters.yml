@@ -15,3 +15,10 @@ x_dangerous:
     type: boolean
   example: true
   required: true
+autoscale_pool_name:
+  name: name
+  in: query
+  description: The name of the autoscale pool
+  schema:
+    type: string
+  example: my-autoscale-pool

@@ -230,9 +230,7 @@ tags:
 
   - name: Droplet Autoscale Pools
     description: |-
-      Autoscaling for Droplets manages horizontal scaling for your applications based on resource usage or a static configuration.
-      When you use autoscaling, you create one or more autoscaling pools. An autoscaling pool has 2 components: scaling configuration, which determines how the pool scales up and down, 
-      and a Droplet template, which defines the configuration of the Droplets in the pool.
+      Droplet autoscale pools manage automatic horizontal scaling for your applications based on resource usage (CPU, memory, or both) or a static configuration.
 
   - name: Firewalls
     description: |-
