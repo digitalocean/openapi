@@ -1,6 +1,6 @@
-operationId: key_patch
+operationId: spacesKey_patch
 
-summary: Update Spaces Access Keys
+summary: "[Beta] Update Spaces Access Keys"
 
 description: |
   To update Spaces Access Key, send a PUT or PATCH request to `/v2/spaces/keys/$ACCESS_KEY`.

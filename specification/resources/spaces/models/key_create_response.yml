@@ -17,6 +17,7 @@ properties:
     type: string
     description: The access key.
     example: DOACCESSKEYEXAMPLE
+    readOnly: true
 
   secret_key:
     type: string
@@ -28,6 +29,7 @@ properties:
     format: date-time
     description: The date and time the key was created.
     example: '2018-07-19T15:04:16Z'
+    readOnly: true
 
 required:
 - name

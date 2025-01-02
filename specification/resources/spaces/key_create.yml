@@ -1,6 +1,6 @@
-operationId: key_create
+operationId: spacesKey_create
 
-summary: Create a New Spaces Access Key
+summary: "[Beta] Create a New Spaces Access Key"
 
 description: |
   To create a new Spaces Access Key, send a POST request to `/v2/spaces/keys`.

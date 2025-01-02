@@ -12,8 +12,7 @@ headers:
 content:
   application/json:
     schema:
-      properties:
-        $ref: '../models/key_response.yml'
+      $ref: '../models/key_response.yml'
 
     examples:
       Read Only Key:

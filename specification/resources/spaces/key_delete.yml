@@ -1,6 +1,6 @@
-operationId: key_delete
+operationId: spacesKey_delete
 
-summary: Delete a Spaces Access Key
+summary: "[Beta] Delete a Spaces Access Key"
 
 description: |
   To delete a Spaces Access Key, send a DELETE request to `/v2/spaces/keys/$ACCESS_KEY`.
