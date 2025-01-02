@@ -4,7 +4,7 @@ items:
 nullable: true
 description: >-
   A flat array of tag names as strings to be applied to the resource.
-  Tag names may be for either existing or new tags.
+  Tag names must exist in order to be referenced in a request.
 example:
   - base-image
   - prod
