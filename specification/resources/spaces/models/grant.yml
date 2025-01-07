@@ -8,12 +8,7 @@ properties:
 
   permission:
     type: string
-    description: The permission to grant to the user.
-    enum:
-    - read
-    - readwrite
-    - fullaccess
-    - ''
+    description: The permission to grant to the user. Possible values are `read`, `readwrite`, `fullaccess`, or an empty string.
     example: read
 
 required:

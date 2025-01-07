@@ -49,12 +49,7 @@ permission:
   in: query
   name: permission
   required: false
-  description: The permission of the access key.
+  description: The permission of the access key. Possible values are `read`, `readwrite`, `fullaccess`, or an empty string.
   schema:
     type: string
-    enum:
-      - read
-      - readwrite
-      - fullaccess
-      - ""
   example: read
