@@ -34,7 +34,6 @@ name:
   description: The name of the access key.
   schema:
     type: string
-    default: ""
   example: my-access-key
 
 bucket:
@@ -44,7 +43,6 @@ bucket:
   description: The name of the bucket.
   schema:
     type: string
-    default: ""
   example: my-bucket
 
 permission:
@@ -54,5 +52,9 @@ permission:
   description: The permission of the access key.
   schema:
     type: string
-    default: ""
+    enum:
+      - read
+      - readwrite
+      - fullaccess
+      - ""
   example: read

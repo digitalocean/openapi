@@ -9,6 +9,11 @@ properties:
   permission:
     type: string
     description: The permission to grant to the user.
+    enum:
+    - read
+    - readwrite
+    - fullaccess
+    - ''
     example: read
 
 required:
