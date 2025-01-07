@@ -33,6 +33,9 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
+x-codeSamples:
+  - $ref: 'examples/curl/spaces_key_list.yml'
+
 security:
   - bearer_auth:
     - 'spaces_key:read'
