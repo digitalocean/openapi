@@ -3,7 +3,7 @@ nullable: true
 description: An object specifying custom cluster autoscaler configuration.
 properties:
   scaleDownUtilizationThreshold:
-    type: float
+    type: number
     description: Used to customize when cluster autoscaler scales down non-empty nodes by setting the node utilization threshold.
     example: 0.65
 
