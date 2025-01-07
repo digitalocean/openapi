@@ -104,8 +104,8 @@ kubernetes_clusters_all:
           - "1.2.3.4/32"
           - "1.1.0.0/16"
       cluster_autoscaler_configuration:
-        scaleDownUtilizationThreshold: 0.65
-        scaleDownUnneededTime: "1m"
+        scale_down_utilization_threshold: 0.65
+        scale_down_unneeded_time: "1m"
     meta:
       total: 1
 
@@ -214,8 +214,8 @@ kubernetes_single:
           - "1.2.3.4/32"
           - "1.1.0.0/16"
       cluster_autoscaler_configuration:
-        scaleDownUtilizationThreshold: 0.65
-        scaleDownUnneededTime: "1m"
+        scale_down_utilization_threshold: 0.65
+        scale_down_unneeded_time: "1m"
 
 kubernetes_updated:
   value:
@@ -322,8 +322,8 @@ kubernetes_updated:
           - "1.2.3.4/32"
           - "1.1.0.0/16"
       cluster_autoscaler_configuration:
-        scaleDownUtilizationThreshold: 0.65
-        scaleDownUnneededTime: "1m"
+        scale_down_utilization_threshold: 0.65
+        scale_down_unneeded_time: "1m"
 
 kubernetes_clusters_create_basic_response:
   value:
@@ -395,8 +395,8 @@ kubernetes_clusters_create_basic_response:
           - "1.2.3.4/32"
           - "1.1.0.0/16"
       cluster_autoscaler_configuration:
-        scaleDownUtilizationThreshold: 0.65
-        scaleDownUnneededTime: "1m"
+        scale_down_utilization_threshold: 0.65
+        scale_down_unneeded_time: "1m"
 
 kubernetes_clusters_multi_pool_response:
   value:
@@ -505,8 +505,8 @@ kubernetes_clusters_multi_pool_response:
           - "1.2.3.4/32"
           - "1.1.0.0/16"
       cluster_autoscaler_configuration:
-        scaleDownUtilizationThreshold: 0.65
-        scaleDownUnneededTime: "1m"
+        scale_down_utilization_threshold: 0.65
+        scale_down_unneeded_time: "1m"
 
 kubernetes_options:
   value:
