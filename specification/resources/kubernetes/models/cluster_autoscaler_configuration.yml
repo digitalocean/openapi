@@ -1,0 +1,13 @@
+type: object
+nullable: true
+description: An object specifying custom cluster autoscaler configuration.
+properties:
+  scaleDownUtilizationThreshold:
+    type: float
+    description: Used to customize when cluster autoscaler scales down non-empty nodes by setting the node utilization threshold.
+    example: 0.65
+
+  scaleDownUnneededTime:
+    type: string
+    description: Used to customize how long a node is unneeded before being scaled down.
+    example: "1m0s"
