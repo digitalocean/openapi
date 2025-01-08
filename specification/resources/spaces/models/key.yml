@@ -25,9 +25,3 @@ properties:
     description: The date and time the key was created.
     example: '2018-07-19T15:04:16Z'
     readOnly: true
-
-required:
-- name
-- grants
-- access_key
-- created_at

@@ -18,7 +18,7 @@ content:
             keys:
               type: array
               items:
-                $ref: '../models/key_response.yml'
+                $ref: '../models/key.yml'
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
 

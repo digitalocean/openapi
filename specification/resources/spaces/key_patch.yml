@@ -17,7 +17,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/key_request.yml'
+        $ref: 'models/key.yml'
 
 responses:
   '200':
