@@ -1,7 +1,7 @@
 description: |-
   put /v2/gen-ai/agents/{uuid}/deployment_visibility
 
-  Update Agent Deployment Visibility.
+  This endpoint allows developers to update agent status on whether it is public or privat
 operationId: GenAIAPI_UpdateAgentDeploymentVisibilityPublic
 parameters:
 - description: unique id
@@ -17,6 +17,10 @@ requestBody:
         $ref: ./definitions.yml#/apiUpdateAgentDeploymentVisibilityInputPublic
 responses:
   "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiUpdateAgentDeploymentVisbilityOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -25,14 +29,12 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-    schema:
-      $ref: ./definitions.yml#/apiUpdateAgentDeploymentVisbilityOutput
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: Update Agent Deployment Visibility
+summary: update agent status on whether it is public or private.
 tags:
 - GenAIAPI

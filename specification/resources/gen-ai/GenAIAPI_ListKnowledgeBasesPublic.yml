@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/knowledge_bases
 
-  Provides a list of knowledge bases for the user context.
+  This endpoint allows developers to provides a list of knowledge bases for the user context.
 operationId: GenAIAPI_ListKnowledgeBasesPublic
 parameters:
 - description: page number.
@@ -16,6 +16,10 @@ parameters:
   type: integer
 responses:
   "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListKnowledgeBasesOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -24,14 +28,12 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-    schema:
-      $ref: ./definitions.yml#/apiListKnowledgeBasesOutput
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: List Knowledge bases
+summary: list knowledge bases.
 tags:
 - GenAIAPI

@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/agents
 
-  Returns a list of agents specific to the users context.
+  This endpoint allows developers to returns a list of agents specific to the users context.
 operationId: GenAIAPI_ListAgentsPublic
 parameters:
 - description: only list agents that are deployed.
@@ -27,6 +27,10 @@ parameters:
   type: integer
 responses:
   "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListAgentsOutputPublic
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -35,14 +39,12 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-    schema:
-      $ref: ./definitions.yml#/apiListAgentsOutputPublic
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: List Agents
+summary: list agents.
 tags:
 - GenAIAPI

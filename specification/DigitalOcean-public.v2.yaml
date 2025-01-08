@@ -287,6 +287,13 @@ tags:
 
       The Serverless Functions API currently only supports creating and managing namespaces.
 
+  - name: gen-ai
+    description: |-
+      [Serverless functions](https://docs.digitalocean.com/products/gen-ai) are blocks of code that run on demand without the need to manage any infrastructure.
+      You can develop functions on your local machine and then deploy them to a namespace using `doctl`, the [official DigitalOcean CLI tool](https://docs.digitalocean.com/reference/gen-ai).
+
+      The Serverless Functions API currently only supports creating and managing namespaces.
+
   - name: Image Actions
     description: |-
       Image actions are commands that can be given to a DigitalOcean image. In
@@ -1747,6 +1754,13 @@ paths:
 
     delete:
       $ref: 'resources/uptime/delete_alert.yml'
+
+  /v2/gen-ai/agents:
+    get:
+      $ref: 'resources/gen-ai/GenAIAPI_CreateAgentPublic.yml'
+
+    post:
+      $ref: 'resources/gen-ai/GenAIAPI_ListAgentsPublic.yml'
 
 
 components:

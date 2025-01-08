@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/indexing_jobs
 
-  List Knowledge base Indexing jobs.
+  This endpoint allows developers to list knowledge base indexing jobs.
 operationId: GenAIAPI_ListKnowledgeBaseIndexingJobsPublic
 parameters:
 - description: page number.
@@ -16,6 +16,10 @@ parameters:
   type: integer
 responses:
   "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListKnowledgeBaseIndexingJobsOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -24,14 +28,12 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-    schema:
-      $ref: ./definitions.yml#/apiListKnowledgeBaseIndexingJobsOutput
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: List Knowledge base Indexing jobs
+summary: list knowledge base indexing jobs.
 tags:
 - GenAIAPI

@@ -1,7 +1,7 @@
 description: |-
   delete /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}
 
-  Delete one Knowledge Base Data Source.
+  This endpoint allows developers to delete one knowledge base data source.
 operationId: GenAIAPI_DeleteKnowledgeBaseDataSourcePublic
 parameters:
 - description: knowledge base id
@@ -18,6 +18,10 @@ parameters:
   type: string
 responses:
   "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiDeleteKnowledgeBaseDataSourceOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -26,14 +30,12 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-    schema:
-      $ref: ./definitions.yml#/apiDeleteKnowledgeBaseDataSourceOutput
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: Delete one Knowledge Base Data Source
+summary: delete one knowledge base data source.
 tags:
 - GenAIAPI

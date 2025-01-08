@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/agents/{uuid}/child_agents
 
-  whos children?
+  This endpoint allows developers to whos children?
 operationId: GenAIAPI_GetChildrenPublic
 parameters:
 - description: agent id
@@ -12,6 +12,10 @@ parameters:
   type: string
 responses:
   "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiGetChildrenOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -20,14 +24,12 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-    schema:
-      $ref: ./definitions.yml#/apiGetChildrenOutput
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: GetChildren?
+summary: getchildren?.
 tags:
 - GenAIAPI

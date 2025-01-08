@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/agents/{agent_uuid}/api_keys
 
-  List Agent API Keys.
+  This endpoint allows developers to list agent api keys.
 operationId: GenAIAPI_ListAgentAPIKeysPublic
 parameters:
 - description: agent id
@@ -22,6 +22,10 @@ parameters:
   type: integer
 responses:
   "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListAgentAPIKeysOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -30,14 +34,12 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-    schema:
-      $ref: ./definitions.yml#/apiListAgentAPIKeysOutput
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: List Agent API Keys
+summary: list agent api keys.
 tags:
 - GenAIAPI

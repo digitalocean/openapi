@@ -1,7 +1,7 @@
 description: |-
   put /v2/gen-ai/auth/agents/{agent_uuid}/token
 
-  Refresh Agent Token.
+  This endpoint allows developers to refresh agent token.
 operationId: GenAIAPI_RefreshAgentTokenPublic
 parameters:
 - description: Agent ID
@@ -12,6 +12,10 @@ parameters:
   type: string
 responses:
   "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiRefreshAgentTokenOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -20,14 +24,12 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-    schema:
-      $ref: ./definitions.yml#/apiRefreshAgentTokenOutput
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: Refresh Agent Token
+summary: refresh agent token.
 tags:
 - GenAIAPI

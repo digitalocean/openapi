@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/agents/{uuid}
 
-  Query one specific Agent.
+  This endpoint allows developers to query one specific agent.
 operationId: GenAIAPI_GetAgentPublic
 parameters:
 - description: unique agent id
@@ -19,6 +19,10 @@ parameters:
   type: array
 responses:
   "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiGetAgentOutputPublic
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -27,14 +31,12 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-    schema:
-      $ref: ./definitions.yml#/apiGetAgentOutputPublic
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: Get one Agent
+summary: get one agent.
 tags:
 - GenAIAPI

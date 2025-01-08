@@ -10,6 +10,10 @@ requestBody:
         $ref: ./definitions.yml#/apiCreateAgentFromTemplateInputPublic
 responses:
   "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiCreateAgentFromTemplateOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -18,8 +22,6 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-    schema:
-      $ref: ./definitions.yml#/apiCreateAgentFromTemplateOutput
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "500":
