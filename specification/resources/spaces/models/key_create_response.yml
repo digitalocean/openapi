@@ -1,39 +1,10 @@
-type: object
+allOf:
+  - type: object
+    properties:
+      secret_key:
+        type: string
+        description: The secret key. This is the only time the secret key will be returned.
+        example: DOSECRETKEYEXAMPLE
+        readOnly: true
 
-properties:
-  name:
-    type: string
-    description: The name of your access key.
-    example: "my-access-key"
-
-  grants:
-    type: array
-    description: The grants set to this access key.
-    items:
-      $ref: 'grant.yml'
-    default: []
-
-  access_key:
-    type: string
-    description: The access key.
-    example: DOACCESSKEYEXAMPLE
-    readOnly: true
-
-  secret_key:
-    type: string
-    description: The secret key.
-    example: DOSECRETKEYEXAMPLE
-
-  created_at:
-    type: string
-    format: date-time
-    description: The date and time the key was created.
-    example: '2018-07-19T15:04:16Z'
-    readOnly: true
-
-required:
-- name
-- grants
-- access_key
-- secret_key
-- created_at
+  - $ref: 'key.yml'
