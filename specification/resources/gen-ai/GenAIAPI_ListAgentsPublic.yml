@@ -1,0 +1,48 @@
+description: |-
+  get /v2/gen-ai/agents
+
+  Returns a list of agents specific to the users context.
+operationId: GenAIAPI_ListAgentsPublic
+parameters:
+- description: only list agents that are deployed.
+  in: query
+  name: only_deployed
+  type: boolean
+- collectionFormat: multi
+  description: The set of field mask paths.
+  in: query
+  items:
+    type: string
+  name: field_mask.paths
+  type: array
+- description: page number.
+  format: int64
+  in: query
+  name: page
+  type: integer
+- description: items per page.
+  format: int64
+  in: query
+  name: per_page
+  type: integer
+responses:
+  "200":
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    schema:
+      $ref: ./definitions.yml#/apiListAgentsOutputPublic
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: List Agents
+tags:
+- GenAIAPI

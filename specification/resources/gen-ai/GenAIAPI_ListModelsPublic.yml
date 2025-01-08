@@ -1,0 +1,53 @@
+description: |-
+  get /v2/gen-ai/models
+
+  Provides a list of Models available to the user.
+operationId: GenAIAPI_ListModelsPublic
+parameters:
+- collectionFormat: multi
+  in: query
+  items:
+    enum:
+    - MODEL_USECASE_UNKNOWN
+    - MODEL_USECASE_AGENT
+    - MODEL_USECASE_FINETUNED
+    - MODEL_USECASE_KNOWLEDGEBASE
+    - MODEL_USECASE_GUARDRAIL
+    type: string
+  name: usecases
+  type: array
+- description: only include models that are publicly available.
+  in: query
+  name: public_only
+  type: boolean
+- description: page number.
+  format: int64
+  in: query
+  name: page
+  type: integer
+- description: items per page.
+  format: int64
+  in: query
+  name: per_page
+  type: integer
+responses:
+  "200":
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    schema:
+      $ref: ./definitions.yml#/apiListModelsOutputPublic
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: List Models
+tags:
+- GenAIAPI

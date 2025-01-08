@@ -1,0 +1,33 @@
+description: |-
+  get /v2/gen-ai/regions
+
+  List Regions.
+operationId: GenAIAPI_ListRegions
+parameters:
+- in: query
+  name: serves_inference
+  type: boolean
+- in: query
+  name: serves_batch
+  type: boolean
+responses:
+  "200":
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    schema:
+      $ref: ./definitions.yml#/apiListRegionsOutput
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: List Regions
+tags:
+- GenAIAPI

@@ -1,0 +1,39 @@
+description: |-
+  delete /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}
+
+  Delete Agent API Key.
+operationId: GenAIAPI_DeleteAgentAPIKeyPublic
+parameters:
+- description: agent id
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
+  in: path
+  name: agent_uuid
+  required: true
+  type: string
+- description: api key id
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
+  in: path
+  name: api_key_uuid
+  required: true
+  type: string
+responses:
+  "200":
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    schema:
+      $ref: ./definitions.yml#/apiDeleteAgentAPIKeyOutput
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: Delete Agent API Key
+tags:
+- GenAIAPI

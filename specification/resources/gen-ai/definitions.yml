@@ -1,0 +1,2353 @@
+apiAcceptAgreementOutput:
+  properties:
+    team_agreement:
+      $ref: '#/apiTeamAgreement'
+  title: AcceptAgreementOutput Description
+  type: object
+apiAgent:
+  properties:
+    api_key_infos:
+      items:
+        $ref: '#/apiAgentAPIKeyInfo'
+      title: api key infos
+      type: array
+    api_keys:
+      items:
+        $ref: '#/apiAgentAPIKey'
+      title: api keys
+      type: array
+    chatbot:
+      $ref: '#/apiChatbot'
+    chatbot_identifiers:
+      items:
+        $ref: '#/apiAgentChatbotIdentifier'
+      title: chatbot identifiers
+      type: array
+    child_agents:
+      items:
+        $ref: '#/apiAgent'
+      title: child agents
+      type: array
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    deployment:
+      $ref: '#/apiDeployment'
+    description:
+      example: example
+      title: description of agent
+      type: string
+    functions:
+      items:
+        $ref: '#/apiAgentFunction'
+      type: array
+    guardrails:
+      items:
+        $ref: '#/apiAgentGuardrail'
+      title: the guardrails the agent is attached to
+      type: array
+    if_case:
+      example: example
+      type: string
+    instruction:
+      example: example
+      title: first instruction for agent
+      type: string
+    k:
+      format: int64
+      type: integer
+    knowledge_bases:
+      items:
+        $ref: '#/apiKnowledgeBase'
+      title: knowledge bases
+      type: array
+    max_tokens:
+      format: int64
+      type: integer
+    model:
+      $ref: '#/apiModel'
+      title: model the agent is based on
+    name:
+      example: some name
+      title: agent name
+      type: string
+    parent_agents:
+      items:
+        $ref: '#/apiAgent'
+      title: parent agents
+      type: array
+    project_id:
+      example: example
+      type: string
+    region:
+      example: example
+      title: region code
+      type: string
+    route_created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation of route date / time
+      type: string
+    route_created_by:
+      example: example
+      format: uint64
+      type: string
+    route_name:
+      example: some name
+      title: route name
+      type: string
+    route_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    tags:
+      items:
+        example: example
+        type: string
+      type: array
+    temperature:
+      example: 123
+      format: float
+      type: number
+    template:
+      $ref: '#/apiAgentTemplate'
+      title: template if agent is created from a template
+    top_p:
+      example: 123
+      format: float
+      type: number
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    url:
+      example: example
+      title: access your agent under this url
+      type: string
+    user_id:
+      example: example
+      format: uint64
+      title: id of user that created the agent
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique agent id
+      type: string
+  title: An Agent
+  type: object
+apiAgentAPIKey:
+  properties:
+    api_key:
+      example: example
+      title: api key
+      type: string
+  title: Agent API Key
+  type: object
+apiAgentAPIKeyInfo:
+  properties:
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date
+      type: string
+    created_by:
+      example: example
+      format: uint64
+      title: created by
+      type: string
+    deleted_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: deleted date
+      type: string
+    name:
+      example: some name
+      title: name
+      type: string
+    secret_key:
+      example: example
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: uuid
+      type: string
+  title: Agent API Key Info
+  type: object
+apiAgentChatbotIdentifier:
+  properties:
+    agent_chatbot_identifier:
+      example: example
+      title: agent chatbot identifier
+      type: string
+  title: Agent Chatbot Identifier
+  type: object
+apiAgentFunction:
+  properties:
+    api_key:
+      example: example
+      title: api key
+      type: string
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    description:
+      example: example
+      title: agent description
+      type: string
+    faas_name:
+      example: some name
+      type: string
+    faas_namespace:
+      example: some name
+      type: string
+    input_schema:
+      type: object
+    name:
+      example: some name
+      title: name
+      type: string
+    output_schema:
+      type: object
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    url:
+      example: example
+      title: download your agent here
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id
+      type: string
+  title: description missing
+  type: object
+apiAgentGuardrail:
+  properties:
+    agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    default_response:
+      example: example
+      type: string
+    description:
+      example: example
+      type: string
+    guardrail_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    is_attached:
+      example: true
+      type: boolean
+    is_default:
+      example: true
+      type: boolean
+    metadata:
+      type: object
+    name:
+      example: some name
+      type: string
+    priority:
+      format: int32
+      type: integer
+    type:
+      $ref: '#/apiGuardrailType'
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  title: A Agent Guardrail
+  type: object
+apiAgentPrice:
+  properties:
+    attributes:
+      items:
+        $ref: '#/apiBillingAttribute'
+      type: array
+    display_name:
+      example: some name
+      type: string
+    model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    prices:
+      items:
+        $ref: '#/apiBillingPrice'
+      type: array
+  type: object
+apiAgentPublic:
+  properties:
+    chatbot:
+      $ref: '#/apiChatbot'
+    chatbot_identifiers:
+      items:
+        $ref: '#/apiAgentChatbotIdentifier'
+      title: chatbot identifiers
+      type: array
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    deployment:
+      $ref: '#/apiDeployment'
+    description:
+      example: example
+      title: description of agent
+      type: string
+    if_case:
+      example: example
+      type: string
+    instruction:
+      example: example
+      title: first instruction for agent
+      type: string
+    k:
+      format: int64
+      type: integer
+    max_tokens:
+      format: int64
+      type: integer
+    model:
+      $ref: '#/apiModel'
+      title: model the agent is based on
+    name:
+      example: some name
+      title: agent name
+      type: string
+    project_id:
+      example: example
+      type: string
+    region:
+      example: example
+      title: region code
+      type: string
+    route_created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation of route date / time
+      type: string
+    route_created_by:
+      example: example
+      format: uint64
+      type: string
+    route_name:
+      example: some name
+      title: route name
+      type: string
+    route_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    tags:
+      items:
+        example: example
+        type: string
+      type: array
+    temperature:
+      example: 123
+      format: float
+      type: number
+    template:
+      $ref: '#/apiAgentTemplate'
+      title: template if agent is created from a template
+    top_p:
+      example: 123
+      format: float
+      type: number
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    url:
+      example: example
+      title: access your agent under this url
+      type: string
+    user_id:
+      example: example
+      format: uint64
+      title: id of user that created the agent
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique agent id
+      type: string
+  title: An Agent
+  type: object
+apiAgentTemplate:
+  properties:
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: The agent template's creation date
+      type: string
+    description:
+      example: example
+      title: description of the agent template
+      type: string
+    instruction:
+      example: example
+      title: instructions for the agent template
+      type: string
+    k:
+      format: int64
+      title: The 'k' value for the agent template
+      type: integer
+    knowledge_bases:
+      items:
+        $ref: '#/apiKnowledgeBase'
+      title: List of knowledge bases associated with the agent template
+      type: array
+    max_tokens:
+      format: int64
+      title: The max_tokens setting for the agent template
+      type: integer
+    model:
+      $ref: '#/apiModel'
+      title: The model associated with the agent template
+    name:
+      example: some name
+      title: name of the agent template
+      type: string
+    temperature:
+      example: 123
+      format: float
+      title: The temperature setting for the agent template
+      type: number
+    top_p:
+      example: 123
+      format: float
+      title: The top_p setting for the agent template
+      type: number
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: The agent template's last updated date
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id
+      type: string
+  title: Represents an AgentTemplate entity
+  type: object
+apiAgreement:
+  properties:
+    description:
+      example: example
+      type: string
+    name:
+      example: some name
+      type: string
+    url:
+      example: example
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  title: Agreement Description
+  type: object
+apiAuditHeader:
+  description: An alternative way to provide auth information. for internal use only.
+  properties:
+    actor_id:
+      example: example
+      format: uint64
+      type: string
+    actor_ip:
+      example: example
+      type: string
+    actor_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    context_urn:
+      example: example
+      type: string
+    origin_application:
+      example: example
+      type: string
+    user_id:
+      example: example
+      format: uint64
+      type: string
+    user_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiBatchJobPhase:
+  default: BATCH_JOB_PHASE_UNKNOWN
+  enum:
+  - BATCH_JOB_PHASE_UNKNOWN
+  - BATCH_JOB_PHASE_PENDING
+  - BATCH_JOB_PHASE_RUNNING
+  - BATCH_JOB_PHASE_SUCCEEDED
+  - BATCH_JOB_PHASE_FAILED
+  - BATCH_JOB_PHASE_ERROR
+  example: example
+  type: string
+apiBillingAttribute:
+  properties:
+    name:
+      example: some name
+      type: string
+    value:
+      example: example
+      type: string
+  type: object
+apiBillingPrice:
+  properties:
+    rate:
+      example: example
+      type: string
+    region:
+      example: example
+      type: string
+  type: object
+apiCancelKnowledgeBaseIndexingJobInputPublic:
+  properties:
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  title: CancelKnowledgeBaseIndexingJobInputPublic description
+  type: object
+apiCancelKnowledgeBaseIndexingJobOutput:
+  properties:
+    job:
+      $ref: '#/apiIndexingJob'
+  title: CancelKnowledgeBaseIndexingJobOutput description
+  type: object
+apiChatbot:
+  properties:
+    button_background_color:
+      example: example
+      type: string
+    logo:
+      example: example
+      type: string
+    name:
+      example: some name
+      title: name of chatbot
+      type: string
+    primary_color:
+      example: example
+      type: string
+    secondary_color:
+      example: example
+      type: string
+    starting_message:
+      example: example
+      type: string
+  title: A Chatbot
+  type: object
+apiCreateAgentAPIKeyInputPublic:
+  properties:
+    agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: agent id
+      type: string
+    name:
+      example: some name
+      title: name
+      type: string
+  type: object
+apiCreateAgentAPIKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiAgentAPIKeyInfo'
+      title: api key info
+  type: object
+apiCreateAgentFromTemplateInputPublic:
+  properties:
+    project_id:
+      example: example
+      title: project id
+      type: string
+    region:
+      example: example
+      title: region code
+      type: string
+    template_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: template id to create agent from
+      type: string
+  type: object
+apiCreateAgentFromTemplateOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+  type: object
+apiCreateAgentInputPublic:
+  properties:
+    description:
+      example: example
+      title: agent description
+      type: string
+    instruction:
+      example: example
+      title: agent instruction
+      type: string
+    knowledge_base_uuid:
+      items:
+        example: example
+        type: string
+      type: array
+    model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: model id
+      type: string
+    name:
+      example: some name
+      title: agent name
+      type: string
+    project_id:
+      example: example
+      type: string
+    region:
+      example: example
+      title: region code
+      type: string
+    tags:
+      items:
+        example: example
+        type: string
+      type: array
+  title: Data for Agent Creation
+  type: object
+apiCreateAgentOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+      title: The created agent
+  title: Information about a newly created Agent
+  type: object
+apiCreateChatbotOutput:
+  properties:
+    chatbot:
+      $ref: '#/apiChatbot'
+      title: the chatbot
+  title: info about a newly created chatbot
+  type: object
+apiCreateGuardrailOutput:
+  properties:
+    guardrail:
+      $ref: '#/apiGuardrail'
+  title: CreateGuardrailOutput description
+  type: object
+apiCreateKnowledgeBaseDataSourceInputPublic:
+  properties:
+    bucket_name:
+      example: some name
+      title: name of storage bucket
+      type: string
+    item_path:
+      example: example
+      type: string
+    knowledge_base_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: knowledge base id
+      type: string
+    region:
+      example: example
+      title: region code
+      type: string
+  title: data to create a knowledge base data source
+  type: object
+apiCreateKnowledgeBaseDataSourceOutput:
+  properties:
+    knowledge_base_data_source:
+      $ref: '#/apiKnowledgeBaseDataSource'
+      title: the data source created
+  title: information about a newly created knowldege base data source
+  type: object
+apiCreateKnowledgeBaseInputPublic:
+  properties:
+    database_id:
+      example: example
+      type: string
+    datasources:
+      items:
+        $ref: '#/apiKBDataSource'
+      type: array
+    embedding_model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: model id
+      type: string
+    name:
+      example: some name
+      title: knowledge base name
+      type: string
+    project_id:
+      example: example
+      type: string
+    region:
+      example: example
+      title: region code
+      type: string
+    tags:
+      items:
+        example: example
+        type: string
+      type: array
+    vpc_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  title: data to create a new knowledge base
+  type: object
+apiCreateKnowledgeBaseOutput:
+  properties:
+    knowledge_base:
+      $ref: '#/apiKnowledgeBase'
+      title: the knowledge base
+  title: information about a newly created knowledge base
+  type: object
+apiCreateModelOutput:
+  properties:
+    model:
+      $ref: '#/apiModel'
+      title: the model
+  title: information about a newly created model
+  type: object
+apiDeleteAgentAPIKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiAgentAPIKeyInfo'
+      title: api key info
+  type: object
+apiDeleteAgentOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+  title: Info about a deleted agent
+  type: object
+apiDeleteChatbotOutput:
+  properties:
+    agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: agent id
+      type: string
+  title: information about a delete chatbot
+  type: object
+apiDeleteGuardrailOutput:
+  properties:
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  title: DeleteGuardrailOutput description
+  type: object
+apiDeleteKnowledgeBaseDataSourceOutput:
+  properties:
+    data_source_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: data source id
+      type: string
+    knowledge_base_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: knowledge base id
+      type: string
+  title: information about a newly deleted knowledge base data source
+  type: object
+apiDeleteKnowledgeBaseOutput:
+  properties:
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: the id of the deleted knowledge base
+      type: string
+  title: information about a deleted knowledge base
+  type: object
+apiDeployment:
+  properties:
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    name:
+      example: some name
+      title: name
+      type: string
+    status:
+      $ref: '#/apiDeploymentStatus'
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    url:
+      example: example
+      title: access your deployed agent here
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id
+      type: string
+    visibility:
+      $ref: '#/apiDeploymentVisibility'
+  title: description of deployment
+  type: object
+apiDeploymentStatus:
+  default: STATUS_UNKNOWN
+  enum:
+  - STATUS_UNKNOWN
+  - STATUS_WAITING_FOR_DEPLOYMENT
+  - STATUS_DEPLOYING
+  - STATUS_RUNNING
+  - STATUS_FAILED
+  - STATUS_WAITING_FOR_UNDEPLOYMENT
+  - STATUS_UNDEPLOYING
+  - STATUS_UNDEPLOYMENT_FAILED
+  - STATUS_DELETED
+  example: example
+  type: string
+apiDeploymentVisibility:
+  default: VISIBILITY_UNKNOWN
+  enum:
+  - VISIBILITY_UNKNOWN
+  - VISIBILITY_DISABLED
+  - VISIBILITY_PLAYGROUND
+  - VISIBILITY_PUBLIC
+  - VISIBILITY_PRIVATE
+  example: example
+  title: '- VISIBILITY_PLAYGROUND: Deprecated: No longer a valid state'
+  type: string
+apiGetAgentOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+      title: the agent
+  title: One Agent
+  type: object
+apiGetAgentOutputPublic:
+  properties:
+    agent:
+      $ref: '#/apiAgentPublic'
+      title: the agent
+  title: One Agent
+  type: object
+apiGetAgentTemplateOutput:
+  properties:
+    template:
+      $ref: '#/apiAgentTemplate'
+      title: the agent template
+  type: object
+apiGetAgentUsageOutput:
+  properties:
+    usage:
+      $ref: '#/apiResourceUsage'
+  title: agent usage
+  type: object
+apiGetChildrenOutput:
+  properties:
+    children:
+      items:
+        $ref: '#/apiAgent'
+      title: child agents
+      type: array
+  title: child list for an agent
+  type: object
+apiGetGuardrailOutput:
+  properties:
+    guardrail:
+      $ref: '#/apiGuardrail'
+  type: object
+apiGetGuardrailUsageOutput:
+  properties:
+    usage:
+      $ref: '#/apiResourceUsage'
+  title: guardrail usage output
+  type: object
+apiGetKnowledgeBaseIndexingJobOutput:
+  properties:
+    job:
+      $ref: '#/apiIndexingJob'
+  title: GetKnowledgeBaseIndexingJobOutput description
+  type: object
+apiGetKnowledgeBaseIndexingJobUsageOutput:
+  properties:
+    usage:
+      $ref: '#/apiResourceUsage'
+  title: knowledge base indexing job usage
+  type: object
+apiGetKnowledgeBaseOutput:
+  properties:
+    database_status:
+      $ref: '#/dbaasClusterStatus'
+    knowledge_base:
+      $ref: '#/apiKnowledgeBase'
+      title: the knowledge base
+  title: the knowledge base
+  type: object
+apiGetModelOutput:
+  properties:
+    model:
+      $ref: '#/apiModel'
+      title: the model
+  title: a specific model
+  type: object
+apiGetModelPlaygroundTokensOutput:
+  properties:
+    tokens_remaining:
+      format: int64
+      type: integer
+  title: GetModelPlaygroundTokensOutput description
+  type: object
+apiGetModelUsageOutput:
+  properties:
+    usage:
+      $ref: '#/apiResourceUsage'
+      title: the model usage
+  title: information about model usage
+  type: object
+apiGetPreferredRegionOutput:
+  properties:
+    region:
+      $ref: '#/genaiapiRegion'
+      title: region code
+  title: Region code of preferred Regions
+  type: object
+apiGetTeamAgreementOutput:
+  properties:
+    team_agreement:
+      $ref: '#/apiTeamAgreement'
+  title: GetTeamAgreementOutput Output
+  type: object
+apiGuardrail:
+  properties:
+    agent_uuids:
+      items:
+        example: example
+        type: string
+      title: list of attached agents uuids
+      type: array
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    default_response:
+      example: example
+      type: string
+    description:
+      example: example
+      type: string
+    is_default:
+      example: true
+      type: boolean
+    metadata:
+      type: object
+    name:
+      example: some name
+      type: string
+    template_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    type:
+      $ref: '#/apiGuardrailType'
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  title: Guardrail description
+  type: object
+apiGuardrailPrice:
+  properties:
+    attributes:
+      items:
+        $ref: '#/apiBillingAttribute'
+      type: array
+    display_name:
+      example: some name
+      type: string
+    guardrail_template_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    prices:
+      items:
+        $ref: '#/apiBillingPrice'
+      type: array
+  type: object
+apiGuardrailTemplate:
+  properties:
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    default_response:
+      example: example
+      type: string
+    description:
+      example: example
+      type: string
+    metadata:
+      type: object
+    name:
+      example: some name
+      type: string
+    type:
+      $ref: '#/apiGuardrailType'
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  title: GuardrailTemplate description
+  type: object
+apiGuardrailType:
+  default: GUARDRAIL_TYPE_UNKNOWN
+  enum:
+  - GUARDRAIL_TYPE_UNKNOWN
+  - GUARDRAIL_TYPE_JAILBREAK
+  - GUARDRAIL_TYPE_SENSITIVE_DATA
+  - GUARDRAIL_TYPE_CONTENT_MODERATION
+  example: example
+  type: string
+apiIndexedDataSource:
+  properties:
+    completed_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: timestamp when data source completed indexing
+      type: string
+    data_source_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: uuid of the indexed data source
+      type: string
+    indexed_file_count:
+      example: example
+      format: uint64
+      title: total count of files that have been indexed
+      type: string
+    started_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: timestamp when data source started indexing
+      type: string
+    total_bytes:
+      example: example
+      format: uint64
+      title: total size of files in data source in bytes
+      type: string
+    total_bytes_indexed:
+      example: example
+      format: uint64
+      title: total size of files in data source in bytes that have been indexed
+      type: string
+    total_file_count:
+      example: example
+      format: uint64
+      title: total file count in the data source
+      type: string
+  type: object
+apiIndexingJob:
+  properties:
+    completed_datasources:
+      format: int64
+      title: number of datasources indexed completed
+      type: integer
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    data_source_uuids:
+      items:
+        example: example
+        type: string
+      type: array
+    finished_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    knowledge_base_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: knowledge base id
+      type: string
+    phase:
+      $ref: '#/apiBatchJobPhase'
+    started_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    tokens:
+      format: int64
+      title: number of tokens
+      type: integer
+    total_datasources:
+      format: int64
+      title: number of datasources being indexed
+      type: integer
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id
+      type: string
+  title: IndexingJob description
+  type: object
+apiIssueAgentTokenInputPublic:
+  properties:
+    agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: Agent ID
+      type: string
+  title: Input for issuing a token for an agent
+  type: object
+apiIssueAgentTokenOutput:
+  properties:
+    access_token:
+      example: example
+      title: the token
+      type: string
+    refresh_token:
+      example: example
+      title: the token used to refresh
+      type: string
+  title: information about a newly issued token
+  type: object
+apiIssueModelPlaygroundTokenOutput:
+  properties:
+    access_token:
+      example: example
+      type: string
+    refresh_token:
+      example: example
+      type: string
+  title: IssueModelPlaygroundTokenOutput description
+  type: object
+apiKBDataSource:
+  properties:
+    bucket_name:
+      example: some name
+      type: string
+    bucket_region:
+      example: example
+      type: string
+    item_path:
+      example: example
+      type: string
+  type: object
+apiKnowledgeBase:
+  properties:
+    added_to_agent_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: time when the knowledge base was added to the agent
+      type: string
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    database_id:
+      example: example
+      type: string
+    embedding_model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    is_public:
+      example: true
+      title: whether the knowledge base is public or not
+      type: boolean
+    last_indexing_job:
+      $ref: '#/apiIndexingJob'
+    name:
+      example: some name
+      title: name of knowledge base
+      type: string
+    project_id:
+      example: example
+      type: string
+    region:
+      example: example
+      title: region code
+      type: string
+    tags:
+      items:
+        example: example
+        type: string
+      type: array
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    user_id:
+      example: example
+      format: int64
+      title: id of user that created the knowledge base
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id for knowledge base
+      type: string
+  title: Knowledgebase Description
+  type: object
+apiKnowledgeBaseDataSource:
+  properties:
+    bucket_name:
+      example: some name
+      title: name of storage bucket
+      type: string
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    item_path:
+      example: example
+      title: path of folder or object in bucket
+      type: string
+    last_indexing_job:
+      $ref: '#/apiIndexingJob'
+      title: the last job the data source was indexed
+    region:
+      example: example
+      title: region code
+      type: string
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id of knowledge base
+      type: string
+  title: Data Source configuration for Knowledge Bases
+  type: object
+apiKnowledgeBasePrice:
+  properties:
+    attributes:
+      items:
+        $ref: '#/apiBillingAttribute'
+      type: array
+    display_name:
+      example: some name
+      type: string
+    model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    prices:
+      items:
+        $ref: '#/apiBillingPrice'
+      type: array
+  type: object
+apiLinkAgentFunctionInputPublic:
+  properties:
+    agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: agnet id
+      type: string
+    description:
+      example: example
+      title: function description
+      type: string
+    faas_name:
+      example: some name
+      type: string
+    faas_namespace:
+      example: some name
+      type: string
+    function_name:
+      example: some name
+      title: function name
+      type: string
+    input_schema:
+      type: object
+    output_schema:
+      type: object
+  title: information for a agent function link
+  type: object
+apiLinkAgentFunctionOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+      title: the agent
+  title: information about a newly function linked agent
+  type: object
+apiLinkAgentGuardrailOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+      title: the agent
+  title: information about an updated agent
+  type: object
+apiLinkAgentInputPublic:
+  properties:
+    child_agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: child agent id
+      type: string
+    if_case:
+      example: example
+      type: string
+    parent_agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: parent agent id
+      type: string
+    route_name:
+      example: some name
+      title: name of route
+      type: string
+  title: information for linking an agent
+  type: object
+apiLinkAgentOutput:
+  properties:
+    child_agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: child agent id
+      type: string
+    parent_agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: parent agent id
+      type: string
+  title: information about a newly linked agent
+  type: object
+apiLinkKnowledgeBaseOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+  title: information about a linked knowledge base
+  type: object
+apiLinks:
+  properties:
+    pages:
+      $ref: '#/apiPages'
+      title: Links to other pages
+  title: Links to other pages
+  type: object
+apiListAgentAPIKeysOutput:
+  properties:
+    api_key_infos:
+      items:
+        $ref: '#/apiAgentAPIKeyInfo'
+      title: api key infos
+      type: array
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+  type: object
+apiListAgentPricesOutput:
+  properties:
+    agent_prices:
+      items:
+        $ref: '#/apiAgentPrice'
+      type: array
+  type: object
+apiListAgentTemplatesOutput:
+  properties:
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+    templates:
+      items:
+        $ref: '#/apiAgentTemplate'
+      type: array
+  type: object
+apiListAgentsOutput:
+  properties:
+    agents:
+      items:
+        $ref: '#/apiAgent'
+      title: Agents
+      type: array
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+  title: List of Agents
+  type: object
+apiListAgentsOutputPublic:
+  properties:
+    agents:
+      items:
+        $ref: '#/apiAgentPublic'
+      title: Agents
+      type: array
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+  title: List of Agents
+  type: object
+apiListGuardrailAgentsOutput:
+  properties:
+    agents:
+      items:
+        $ref: '#/apiAgent'
+      type: array
+  type: object
+apiListGuardrailPricesOutput:
+  properties:
+    guardrail_prices:
+      items:
+        $ref: '#/apiGuardrailPrice'
+      type: array
+  type: object
+apiListGuardrailTemplatesOutput:
+  properties:
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+    templates:
+      items:
+        $ref: '#/apiGuardrailTemplate'
+      type: array
+  title: ListGuardrailTemplatesOutput description
+  type: object
+apiListGuardrailsOutput:
+  properties:
+    guardrails:
+      items:
+        $ref: '#/apiGuardrail'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+  title: ListGuardrailsOutput description
+  type: object
+apiListIndexingJobDataSourcesOutput:
+  properties:
+    indexedDataSources:
+      items:
+        $ref: '#/apiIndexedDataSource'
+      type: array
+  type: object
+apiListKnowledgeBaseAgentsOutput:
+  properties:
+    agents:
+      items:
+        $ref: '#/apiAgent'
+      title: the agents
+      type: array
+  title: list of agents
+  type: object
+apiListKnowledgeBaseDataSourcesOutput:
+  properties:
+    knowledge_base_data_sources:
+      items:
+        $ref: '#/apiKnowledgeBaseDataSource'
+      title: the data sources
+      type: array
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+  title: a list of knowledge base data sources
+  type: object
+apiListKnowledgeBaseIndexingJobsOutput:
+  properties:
+    jobs:
+      items:
+        $ref: '#/apiIndexingJob'
+      title: the indexing jobs
+      type: array
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+  title: indexing jobs
+  type: object
+apiListKnowledgeBasePricesOutput:
+  properties:
+    knowledge_base_prices:
+      items:
+        $ref: '#/apiKnowledgeBasePrice'
+      type: array
+  type: object
+apiListKnowledgeBasesOutput:
+  properties:
+    knowledge_bases:
+      items:
+        $ref: '#/apiKnowledgeBase'
+      title: the knowledge bases
+      type: array
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+  title: list of knowledge bases
+  type: object
+apiListModelPricesOutput:
+  properties:
+    model_prices:
+      items:
+        $ref: '#/apiModelPrice'
+      type: array
+  type: object
+apiListModelsOutput:
+  properties:
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+    models:
+      items:
+        $ref: '#/apiModel'
+      title: the models
+      type: array
+  title: a list of models
+  type: object
+apiListModelsOutputPublic:
+  properties:
+    links:
+      $ref: '#/apiLinks'
+      title: links to other pages
+    meta:
+      $ref: '#/apiMeta'
+      title: information about the data set
+    models:
+      items:
+        $ref: '#/apiModelPublic'
+      title: the models
+      type: array
+  title: a list of models
+  type: object
+apiListRegionsOutput:
+  properties:
+    regions:
+      items:
+        $ref: '#/genaiapiRegion'
+      title: region code
+      type: array
+  title: Region Codes
+  type: object
+apiMeta:
+  properties:
+    page:
+      format: int64
+      title: the current page
+      type: integer
+    pages:
+      format: int64
+      title: total number of pages
+      type: integer
+    total:
+      format: int64
+      title: total amount of items over all pages
+      type: integer
+  title: Meta information about the data set
+  type: object
+apiModel:
+  properties:
+    agreement:
+      $ref: '#/apiAgreement'
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    inference_name:
+      example: some name
+      title: internally used name
+      type: string
+    inference_version:
+      example: example
+      title: internally used version
+      type: string
+    is_foundational:
+      example: true
+      title: true if it is a foundational model provided by do
+      type: boolean
+    metadata:
+      title: additional meta data
+      type: object
+    name:
+      example: some name
+      title: name of the model
+      type: string
+    parent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id of the model, this model is based on
+      type: string
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    upload_complete:
+      example: true
+      title: model has been fully uploaded
+      type: boolean
+    url:
+      example: example
+      title: download url
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id
+      type: string
+    version:
+      $ref: '#/apiModelVersion'
+      title: version
+  title: Description of a Model
+  type: object
+apiModelPrice:
+  properties:
+    attributes:
+      items:
+        $ref: '#/apiBillingAttribute'
+      type: array
+    display_name:
+      example: some name
+      type: string
+    model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    prices:
+      items:
+        $ref: '#/apiBillingPrice'
+      type: array
+  type: object
+apiModelPublic:
+  properties:
+    agreement:
+      $ref: '#/apiAgreement'
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: creation date / time
+      type: string
+    inference_name:
+      example: some name
+      title: internally used name
+      type: string
+    inference_version:
+      example: example
+      title: internally used version
+      type: string
+    is_foundational:
+      example: true
+      title: true if it is a foundational model provided by do
+      type: boolean
+    name:
+      example: some name
+      title: name of the model
+      type: string
+    parent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id of the model, this model is based on
+      type: string
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      title: last modified
+      type: string
+    upload_complete:
+      example: true
+      title: model has been fully uploaded
+      type: boolean
+    url:
+      example: example
+      title: download url
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id
+      type: string
+    version:
+      $ref: '#/apiModelVersion'
+      title: version
+  title: Description of a Model
+  type: object
+apiModelUploadCompleteOutput:
+  properties:
+    model:
+      $ref: '#/apiModel'
+      title: the model
+  title: information about an updated model
+  type: object
+apiModelUsecase:
+  default: MODEL_USECASE_UNKNOWN
+  enum:
+  - MODEL_USECASE_UNKNOWN
+  - MODEL_USECASE_AGENT
+  - MODEL_USECASE_FINETUNED
+  - MODEL_USECASE_KNOWLEDGEBASE
+  - MODEL_USECASE_GUARDRAIL
+  example: example
+  type: string
+apiModelVersion:
+  properties:
+    major:
+      format: int64
+      title: major version number
+      type: integer
+    minor:
+      format: int64
+      title: minor version number
+      type: integer
+    patch:
+      format: int64
+      title: patch version number
+      type: integer
+  title: Version Information about a Model
+  type: object
+apiPages:
+  properties:
+    first:
+      example: example
+      title: first page
+      type: string
+    last:
+      example: example
+      title: last page
+      type: string
+    next:
+      example: example
+      title: next page
+      type: string
+    previous:
+      example: example
+      title: previous page
+      type: string
+  title: Information about how to reach other pages
+  type: object
+apiRefreshAgentTokenOutput:
+  properties:
+    access_token:
+      example: example
+      title: the token
+      type: string
+    refresh_token:
+      example: example
+      title: rhe refreshed token
+      type: string
+  title: information about a refreshed token
+  type: object
+apiRefreshModelPlaygroundTokenOutput:
+  properties:
+    access_token:
+      example: example
+      type: string
+    refresh_token:
+      example: example
+      type: string
+  title: RefreshModelPlaygroundTokenOutput description
+  type: object
+apiRegenerateAgentAPIKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiAgentAPIKeyInfo'
+      title: api key info
+  type: object
+apiResourceUsage:
+  properties:
+    measurements:
+      items:
+        $ref: '#/apiUsageMeasurement'
+      type: array
+    start:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    stop:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+  title: Resource Usage Description
+  type: object
+apiStartKnowledgeBaseIndexingJobInputPublic:
+  properties:
+    data_source_uuids:
+      items:
+        example: example
+        type: string
+      type: array
+    knowledge_base_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  title: StartKnowledgeBaseIndexingJobInputPublic description
+  type: object
+apiStartKnowledgeBaseIndexingJobOutput:
+  properties:
+    job:
+      $ref: '#/apiIndexingJob'
+  title: StartKnowledgeBaseIndexingJobOutput description
+  type: object
+apiTeamAgreement:
+  properties:
+    accepted_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    agreement_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  title: Team Agreement Description
+  type: object
+apiTeamModelURLOutput:
+  properties:
+    url:
+      example: example
+      title: the signed url that can be used to upload one file
+      type: string
+  title: model url output
+  type: object
+apiUnlinkAgentFunctionOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+      title: the agent
+  title: information about a newly unlinked agent
+  type: object
+apiUnlinkAgentGuardrailOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+  title: UnlinkAgentGuardrailOutput description
+  type: object
+apiUnlinkAgentOutput:
+  properties:
+    child_agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: child agent id
+      type: string
+    parent_agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: pagent agent id
+      type: string
+  title: information about a removed linkage
+  type: object
+apiUnlinkKnowledgeBaseOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+      title: agent
+  title: informatinon about a unlinked knowledge base
+  type: object
+apiUpdateAgentAPIKeyInputPublic:
+  properties:
+    agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: agent id
+      type: string
+    api_key_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: api key id
+      type: string
+    name:
+      example: some name
+      title: name
+      type: string
+  type: object
+apiUpdateAgentAPIKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiAgentAPIKeyInfo'
+      title: api key info
+  type: object
+apiUpdateAgentDeploymentVisbilityOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+      title: the agent
+  title: UpdateAgentDeploymentVisbilityOutput description
+  type: object
+apiUpdateAgentDeploymentVisibilityInputPublic:
+  properties:
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id
+      type: string
+    visibility:
+      $ref: '#/apiDeploymentVisibility'
+  title: UpdateAgentDeploymentVisibilityInputPublic description
+  type: object
+apiUpdateAgentFunctionInputPublic:
+  properties:
+    agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: agent id
+      type: string
+    description:
+      example: example
+      title: funciton description
+      type: string
+    faas_name:
+      example: some name
+      type: string
+    faas_namespace:
+      example: some name
+      type: string
+    function_name:
+      example: some name
+      title: function name
+      type: string
+    function_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: function id
+      type: string
+    input_schema:
+      type: object
+    output_schema:
+      type: object
+  title: information about updating an agent function
+  type: object
+apiUpdateAgentFunctionOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+      title: the agent
+  title: the updated agent
+  type: object
+apiUpdateAgentInputPublic:
+  properties:
+    description:
+      example: example
+      title: agent description
+      type: string
+    instruction:
+      example: example
+      title: agent instruction
+      type: string
+    k:
+      format: int64
+      type: integer
+    max_tokens:
+      format: int64
+      type: integer
+    model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: model id
+      type: string
+    name:
+      example: some name
+      title: agent name
+      type: string
+    project_id:
+      example: example
+      type: string
+    tags:
+      items:
+        example: example
+        type: string
+      type: array
+    temperature:
+      example: 123
+      format: float
+      type: number
+    top_p:
+      example: 123
+      format: float
+      type: number
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique agent id
+      type: string
+  title: Data to modify an existing Agent
+  type: object
+apiUpdateAgentOutput:
+  properties:
+    agent:
+      $ref: '#/apiAgent'
+      title: the updated agent
+  title: information about an updated agent
+  type: object
+apiUpdateChatbotOutput:
+  properties:
+    chatbot:
+      $ref: '#/apiChatbot'
+      title: the chatbot
+  title: info about an updated chatbot
+  type: object
+apiUpdateGuardrailOutput:
+  properties:
+    guardrail:
+      $ref: '#/apiGuardrail'
+  title: UpdateGuardrailOutput description
+  type: object
+apiUpdateKnowledgeBaseInputPublic:
+  properties:
+    database_id:
+      example: example
+      type: string
+    embedding_model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: model id
+      type: string
+    name:
+      example: some name
+      title: knowledge base name
+      type: string
+    project_id:
+      example: example
+      type: string
+    tags:
+      items:
+        example: example
+        type: string
+      type: array
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: knowledge base id
+      type: string
+  title: information about updating a knowledge base
+  type: object
+apiUpdateKnowledgeBaseOutput:
+  properties:
+    knowledge_base:
+      $ref: '#/apiKnowledgeBase'
+      title: the knowldege base
+  title: information about an updated knowledge base
+  type: object
+apiUpdateLinkedAgentInputPublic:
+  properties:
+    child_agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: child agent id
+      type: string
+    if_case:
+      example: example
+      type: string
+    parent_agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: parent agent id
+      type: string
+    route_name:
+      example: some name
+      title: route name
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id of linkage
+      type: string
+  title: information about updating the linkage of an agent
+  type: object
+apiUpdateLinkedAgentOutput:
+  properties:
+    child_agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: child agent id
+      type: string
+    parent_agent_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: parent agent id
+      type: string
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      title: unique id of linkage
+      type: string
+  title: information about an updated linkage
+  type: object
+apiUpdateModelMetadataOutput:
+  properties:
+    model:
+      $ref: '#/apiModel'
+      title: the model
+  title: information about updated meta data for a model
+  type: object
+apiUsageMeasurement:
+  properties:
+    tokens:
+      format: int64
+      type: integer
+    usage_type:
+      example: example
+      type: string
+  title: Usage Measurement Description
+  type: object
+dbaasClusterStatus:
+  default: CREATING
+  enum:
+  - CREATING
+  - ONLINE
+  - POWEROFF
+  - REBUILDING
+  - REBALANCING
+  - DECOMMISSIONED
+  - FORKING
+  - MIGRATING
+  - RESIZING
+  - RESTORING
+  - POWERING_ON
+  - UNHEALTHY
+  example: example
+  type: string
+genaiapiRegion:
+  properties:
+    inference_url:
+      example: example
+      title: url for inference server
+      type: string
+    region:
+      example: example
+      title: region code
+      type: string
+    serves_batch:
+      example: true
+      type: boolean
+    serves_inference:
+      example: true
+      type: boolean
+    stream_inference_url:
+      example: example
+      type: string
+  title: Description for a specific Region
+  type: object
+protobufFieldMask:
+  description: |-
+    paths: "f.a"
+        paths: "f.b.d"
+
+    Here `f` represents a field in some root message, `a` and `b`
+    fields in the message found in `f`, and `d` a field found in the
+    message in `f.b`.
+
+    Field masks are used to specify a subset of fields that should be
+    returned by a get operation or modified by an update operation.
+    Field masks also have a custom JSON encoding (see below).
+
+    # Field Masks in Projections
+
+    When used in the context of a projection, a response message or
+    sub-message is filtered by the API to only contain those fields as
+    specified in the mask. For example, if the mask in the previous
+    example is applied to a response message as follows:
+
+        f {
+          a : 22
+          b {
+            d : 1
+            x : 2
+          }
+          y : 13
+        }
+        z: 8
+
+    The result will not contain specific values for fields x,y and z
+    (their value will be set to the default, and omitted in proto text
+    output):
+
+
+        f {
+          a : 22
+          b {
+            d : 1
+          }
+        }
+
+    A repeated field is not allowed except at the last position of a
+    paths string.
+
+    If a FieldMask object is not present in a get operation, the
+    operation applies to all fields (as if a FieldMask of all fields
+    had been specified).
+
+    Note that a field mask does not necessarily apply to the
+    top-level response message. In case of a REST get operation, the
+    field mask applies directly to the response, but in case of a REST
+    list operation, the mask instead applies to each individual message
+    in the returned resource list. In case of a REST custom method,
+    other definitions may be used. Where the mask applies will be
+    clearly documented together with its declaration in the API.  In
+    any case, the effect on the returned resource/resources is required
+    behavior for APIs.
+
+    # Field Masks in Update Operations
+
+    A field mask in update operations specifies which fields of the
+    targeted resource are going to be updated. The API is required
+    to only change the values of the fields as specified in the mask
+    and leave the others untouched. If a resource is passed in to
+    describe the updated values, the API ignores the values of all
+    fields not covered by the mask.
+
+    If a repeated field is specified for an update operation, new values will
+    be appended to the existing repeated field in the target resource. Note that
+    a repeated field is only allowed in the last position of a `paths` string.
+
+    If a sub-message is specified in the last position of the field mask for an
+    update operation, then new value will be merged into the existing sub-message
+    in the target resource.
+
+    For example, given the target message:
+
+        f {
+          b {
+            d: 1
+            x: 2
+          }
+          c: [1]
+        }
+
+    And an update message:
+
+        f {
+          b {
+            d: 10
+          }
+          c: [2]
+        }
+
+    then if the field mask is:
+
+     paths: ["f.b", "f.c"]
+
+    then the result will be:
+
+        f {
+          b {
+            d: 10
+            x: 2
+          }
+          c: [1, 2]
+        }
+
+    An implementation may provide options to override this default behavior for
+    repeated and message fields.
+
+    In order to reset a field's value to the default, the field must
+    be in the mask and set to the default value in the provided resource.
+    Hence, in order to reset all fields of a resource, provide a default
+    instance of the resource and set all fields in the mask, or do
+    not provide a mask as described below.
+
+    If a field mask is not present on update, the operation applies to
+    all fields (as if a field mask of all fields has been specified).
+    Note that in the presence of schema evolution, this may mean that
+    fields the client does not know and has therefore not filled into
+    the request will be reset to their default. If this is unwanted
+    behavior, a specific service may require a client to always specify
+    a field mask, producing an error if not.
+
+    As with get operations, the location of the resource which
+    describes the updated values in the request message depends on the
+    operation kind. In any case, the effect of the field mask is
+    required to be honored by the API.
+
+    ## Considerations for HTTP REST
+
+    The HTTP kind of an update operation which uses a field mask must
+    be set to PATCH instead of PUT in order to satisfy HTTP semantics
+    (PUT must only be used for full updates).
+
+    # JSON Encoding of Field Masks
+
+    In JSON, a field mask is encoded as a single string where paths are
+    separated by a comma. Fields name in each path are converted
+    to/from lower-camel naming conventions.
+
+    As an example, consider the following message declarations:
+
+        message Profile {
+          User user = 1;
+          Photo photo = 2;
+        }
+        message User {
+          string display_name = 1;
+          string address = 2;
+        }
+
+    In proto a field mask for `Profile` may look as such:
+
+        mask {
+          paths: "user.display_name"
+          paths: "photo"
+        }
+
+    In JSON, the same mask is represented as below:
+
+        {
+          mask: "user.displayName,photo"
+        }
+
+    # Field Masks and Oneof Fields
+
+    Field masks treat fields in oneofs just as regular fields. Consider the
+    following message:
+
+        message SampleMessage {
+          oneof test_oneof {
+            string name = 4;
+            SubMessage sub_message = 9;
+          }
+        }
+
+    The field mask can be:
+
+        mask {
+          paths: "name"
+        }
+
+    Or:
+
+        mask {
+          paths: "sub_message"
+        }
+
+    Note that oneof type names ("test_oneof" in this case) cannot be used in
+    paths.
+
+    ## Field Mask Verification
+
+    The implementation of any API method which has a FieldMask type field in the
+    request should verify the included field paths, and return an
+    `INVALID_ARGUMENT` error if any path is unmappable.
+  properties:
+    paths:
+      description: The set of field mask paths.
+      items:
+        example: example
+        type: string
+      type: array
+  title: '`FieldMask` represents a set of symbolic field paths, for example:'
+  type: object
+protobufNullValue:
+  default: NULL_VALUE
+  description: |-
+    `NullValue` is a singleton enumeration to represent the null value for the
+    `Value` type union.
+
+     The JSON representation for `NullValue` is JSON `null`.
+
+     - NULL_VALUE: Null value.
+  enum:
+  - NULL_VALUE
+  example: example
+  type: string

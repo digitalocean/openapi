@@ -1,0 +1,37 @@
+description: |-
+  get /v2/gen-ai/knowledge_bases
+
+  Provides a list of knowledge bases for the user context.
+operationId: GenAIAPI_ListKnowledgeBasesPublic
+parameters:
+- description: page number.
+  format: int64
+  in: query
+  name: page
+  type: integer
+- description: items per page.
+  format: int64
+  in: query
+  name: per_page
+  type: integer
+responses:
+  "200":
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    schema:
+      $ref: ./definitions.yml#/apiListKnowledgeBasesOutput
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: List Knowledge bases
+tags:
+- GenAIAPI

@@ -1,0 +1,33 @@
+description: |-
+  get /v2/gen-ai/knowledge_bases/{uuid}
+
+  lists one specific Knowledge base.
+operationId: GenAIAPI_GetKnowledgeBasePublic
+parameters:
+- description: knowledge base id
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
+  in: path
+  name: uuid
+  required: true
+  type: string
+responses:
+  "200":
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    schema:
+      $ref: ./definitions.yml#/apiGetKnowledgeBaseOutput
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: Get one Knowledge base
+tags:
+- GenAIAPI

@@ -1,0 +1,37 @@
+description: |-
+  put /v2/gen-ai/indexing_jobs/{uuid}/cancel
+
+  Cancel Knowledge base Indexing job.
+operationId: GenAIAPI_CancelKnowledgeBaseIndexingJobPublic
+parameters:
+- example: '"123e4567-e89b-12d3-a456-426614174000"'
+  in: path
+  name: uuid
+  required: true
+  type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiCancelKnowledgeBaseIndexingJobInputPublic
+responses:
+  "200":
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    schema:
+      $ref: ./definitions.yml#/apiCancelKnowledgeBaseIndexingJobOutput
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: Cancel Knowledge base Indexing job
+tags:
+- GenAIAPI
