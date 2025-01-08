@@ -12,14 +12,17 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/key.yml'
+      properties:
+        key:
+          $ref: '../models/key.yml'
 
     examples:
       Read Only Key:
         value:
-          name: read-only-key
-          access_key: DOACCESSKEYEXAMPLE
-          grants:
-            - bucket: my-bucket
-              permission: read
-          created_at: '2018-07-19T15:04:16Z'
+          key:
+            name: read-only-key
+            access_key: DOACCESSKEYEXAMPLE
+            grants:
+              - bucket: my-bucket
+                permission: read
+            created_at: '2018-07-19T15:04:16Z'
