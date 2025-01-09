@@ -36,7 +36,7 @@ apiAgent:
     deployment:
       $ref: '#/apiDeployment'
     description:
-      example: example
+      example: example string
       title: description of agent
       type: string
     functions:
@@ -49,10 +49,10 @@ apiAgent:
       title: the guardrails the agent is attached to
       type: array
     if_case:
-      example: example
+      example: example string
       type: string
     instruction:
-      example: example
+      example: example string
       title: first instruction for agent
       type: string
     k:
@@ -70,7 +70,7 @@ apiAgent:
       $ref: '#/apiModel'
       title: model the agent is based on
     name:
-      example: some name
+      example: example name
       title: agent name
       type: string
     parent_agents:
@@ -79,10 +79,10 @@ apiAgent:
       title: parent agents
       type: array
     project_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     region:
-      example: example
+      example: example string
       title: region code
       type: string
     route_created_at:
@@ -91,11 +91,11 @@ apiAgent:
       title: creation of route date / time
       type: string
     route_created_by:
-      example: example
+      example: 12345
       format: uint64
       type: string
     route_name:
-      example: some name
+      example: example name
       title: route name
       type: string
     route_uuid:
@@ -103,7 +103,7 @@ apiAgent:
       type: string
     tags:
       items:
-        example: example
+        example: example string
         type: string
       type: array
     temperature:
@@ -123,11 +123,11 @@ apiAgent:
       title: last modified
       type: string
     url:
-      example: example
+      example: example string
       title: access your agent under this url
       type: string
     user_id:
-      example: example
+      example: 12345
       format: uint64
       title: id of user that created the agent
       type: string
@@ -140,7 +140,7 @@ apiAgent:
 apiAgentAPIKey:
   properties:
     api_key:
-      example: example
+      example: example string
       title: api key
       type: string
   title: Agent API Key
@@ -153,7 +153,7 @@ apiAgentAPIKeyInfo:
       title: creation date
       type: string
     created_by:
-      example: example
+      example: 12345
       format: uint64
       title: created by
       type: string
@@ -163,11 +163,11 @@ apiAgentAPIKeyInfo:
       title: deleted date
       type: string
     name:
-      example: some name
+      example: example name
       title: name
       type: string
     secret_key:
-      example: example
+      example: example string
       type: string
     uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -178,7 +178,7 @@ apiAgentAPIKeyInfo:
 apiAgentChatbotIdentifier:
   properties:
     agent_chatbot_identifier:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       title: agent chatbot identifier
       type: string
   title: Agent Chatbot Identifier
@@ -186,7 +186,7 @@ apiAgentChatbotIdentifier:
 apiAgentFunction:
   properties:
     api_key:
-      example: example
+      example: example string
       title: api key
       type: string
     created_at:
@@ -195,19 +195,19 @@ apiAgentFunction:
       title: creation date / time
       type: string
     description:
-      example: example
+      example: example string
       title: agent description
       type: string
     faas_name:
-      example: some name
+      example: example name
       type: string
     faas_namespace:
-      example: some name
+      example: example name
       type: string
     input_schema:
       type: object
     name:
-      example: some name
+      example: example name
       title: name
       type: string
     output_schema:
@@ -218,7 +218,7 @@ apiAgentFunction:
       title: last modified
       type: string
     url:
-      example: example
+      example: example string
       title: download your agent here
       type: string
     uuid:
@@ -237,10 +237,10 @@ apiAgentGuardrail:
       format: date-time
       type: string
     default_response:
-      example: example
+      example: example string
       type: string
     description:
-      example: example
+      example: example string
       type: string
     guardrail_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -254,7 +254,7 @@ apiAgentGuardrail:
     metadata:
       type: object
     name:
-      example: some name
+      example: example name
       type: string
     priority:
       format: int32
@@ -277,7 +277,7 @@ apiAgentPrice:
         $ref: '#/apiBillingAttribute'
       type: array
     display_name:
-      example: some name
+      example: example name
       type: string
     model_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -304,14 +304,14 @@ apiAgentPublic:
     deployment:
       $ref: '#/apiDeployment'
     description:
-      example: example
+      example: example string
       title: description of agent
       type: string
     if_case:
-      example: example
+      example: example string
       type: string
     instruction:
-      example: example
+      example: example string
       title: first instruction for agent
       type: string
     k:
@@ -324,14 +324,14 @@ apiAgentPublic:
       $ref: '#/apiModel'
       title: model the agent is based on
     name:
-      example: some name
+      example: example name
       title: agent name
       type: string
     project_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     region:
-      example: example
+      example: example string
       title: region code
       type: string
     route_created_at:
@@ -340,11 +340,11 @@ apiAgentPublic:
       title: creation of route date / time
       type: string
     route_created_by:
-      example: example
+      example: 12345
       format: uint64
       type: string
     route_name:
-      example: some name
+      example: example name
       title: route name
       type: string
     route_uuid:
@@ -352,7 +352,7 @@ apiAgentPublic:
       type: string
     tags:
       items:
-        example: example
+        example: example string
         type: string
       type: array
     temperature:
@@ -372,11 +372,11 @@ apiAgentPublic:
       title: last modified
       type: string
     url:
-      example: example
+      example: example string
       title: access your agent under this url
       type: string
     user_id:
-      example: example
+      example: 12345
       format: uint64
       title: id of user that created the agent
       type: string
@@ -394,11 +394,11 @@ apiAgentTemplate:
       title: The agent template's creation date
       type: string
     description:
-      example: example
+      example: example string
       title: description of the agent template
       type: string
     instruction:
-      example: example
+      example: example string
       title: instructions for the agent template
       type: string
     k:
@@ -418,7 +418,7 @@ apiAgentTemplate:
       $ref: '#/apiModel'
       title: The model associated with the agent template
     name:
-      example: some name
+      example: example name
       title: name of the agent template
       type: string
     temperature:
@@ -445,13 +445,13 @@ apiAgentTemplate:
 apiAgreement:
   properties:
     description:
-      example: example
+      example: example string
       type: string
     name:
-      example: some name
+      example: example name
       type: string
     url:
-      example: example
+      example: example string
       type: string
     uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -462,23 +462,23 @@ apiAuditHeader:
   description: An alternative way to provide auth information. for internal use only.
   properties:
     actor_id:
-      example: example
+      example: 12345
       format: uint64
       type: string
     actor_ip:
-      example: example
+      example: example string
       type: string
     actor_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     context_urn:
-      example: example
+      example: example string
       type: string
     origin_application:
-      example: example
+      example: example string
       type: string
     user_id:
-      example: example
+      example: 12345
       format: uint64
       type: string
     user_uuid:
@@ -494,24 +494,24 @@ apiBatchJobPhase:
   - BATCH_JOB_PHASE_SUCCEEDED
   - BATCH_JOB_PHASE_FAILED
   - BATCH_JOB_PHASE_ERROR
-  example: example
+  example: example string
   type: string
 apiBillingAttribute:
   properties:
     name:
-      example: some name
+      example: example name
       type: string
     value:
-      example: example
+      example: example string
       type: string
   type: object
 apiBillingPrice:
   properties:
     rate:
-      example: example
+      example: example string
       type: string
     region:
-      example: example
+      example: example string
       type: string
   type: object
 apiCancelKnowledgeBaseIndexingJobInputPublic:
@@ -530,23 +530,23 @@ apiCancelKnowledgeBaseIndexingJobOutput:
 apiChatbot:
   properties:
     button_background_color:
-      example: example
+      example: example string
       type: string
     logo:
-      example: example
+      example: example string
       type: string
     name:
-      example: some name
+      example: example name
       title: name of chatbot
       type: string
     primary_color:
-      example: example
+      example: example string
       type: string
     secondary_color:
-      example: example
+      example: example string
       type: string
     starting_message:
-      example: example
+      example: example string
       type: string
   title: A Chatbot
   type: object
@@ -557,7 +557,7 @@ apiCreateAgentAPIKeyInputPublic:
       title: agent id
       type: string
     name:
-      example: some name
+      example: example name
       title: name
       type: string
   type: object
@@ -570,11 +570,11 @@ apiCreateAgentAPIKeyOutput:
 apiCreateAgentFromTemplateInputPublic:
   properties:
     project_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       title: project id
       type: string
     region:
-      example: example
+      example: example string
       title: region code
       type: string
     template_uuid:
@@ -590,16 +590,16 @@ apiCreateAgentFromTemplateOutput:
 apiCreateAgentInputPublic:
   properties:
     description:
-      example: example
+      example: example string
       title: agent description
       type: string
     instruction:
-      example: example
+      example: example string
       title: agent instruction
       type: string
     knowledge_base_uuid:
       items:
-        example: example
+        example: example string
         type: string
       type: array
     model_uuid:
@@ -607,19 +607,19 @@ apiCreateAgentInputPublic:
       title: model id
       type: string
     name:
-      example: some name
+      example: albert einstein
       title: agent name
       type: string
     project_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     region:
-      example: example
+      example: example string
       title: region code
       type: string
     tags:
       items:
-        example: example
+        example: example string
         type: string
       type: array
   title: Data for Agent Creation
@@ -647,18 +647,18 @@ apiCreateGuardrailOutput:
 apiCreateKnowledgeBaseDataSourceInputPublic:
   properties:
     bucket_name:
-      example: some name
+      example: example name
       title: name of storage bucket
       type: string
     item_path:
-      example: example
+      example: example string
       type: string
     knowledge_base_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       title: knowledge base id
       type: string
     region:
-      example: example
+      example: example string
       title: region code
       type: string
   title: data to create a knowledge base data source
@@ -673,7 +673,7 @@ apiCreateKnowledgeBaseDataSourceOutput:
 apiCreateKnowledgeBaseInputPublic:
   properties:
     database_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     datasources:
       items:
@@ -684,19 +684,19 @@ apiCreateKnowledgeBaseInputPublic:
       title: model id
       type: string
     name:
-      example: some name
+      example: example name
       title: knowledge base name
       type: string
     project_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     region:
-      example: example
+      example: example string
       title: region code
       type: string
     tags:
       items:
-        example: example
+        example: example string
         type: string
       type: array
     vpc_uuid:
@@ -773,7 +773,7 @@ apiDeployment:
       title: creation date / time
       type: string
     name:
-      example: some name
+      example: example name
       title: name
       type: string
     status:
@@ -784,7 +784,7 @@ apiDeployment:
       title: last modified
       type: string
     url:
-      example: example
+      example: example string
       title: access your deployed agent here
       type: string
     uuid:
@@ -807,7 +807,7 @@ apiDeploymentStatus:
   - STATUS_UNDEPLOYING
   - STATUS_UNDEPLOYMENT_FAILED
   - STATUS_DELETED
-  example: example
+  example: example string
   type: string
 apiDeploymentVisibility:
   default: VISIBILITY_UNKNOWN
@@ -817,7 +817,7 @@ apiDeploymentVisibility:
   - VISIBILITY_PLAYGROUND
   - VISIBILITY_PUBLIC
   - VISIBILITY_PRIVATE
-  example: example
+  example: example string
   title: '- VISIBILITY_PLAYGROUND: Deprecated: No longer a valid state'
   type: string
 apiGetAgentOutput:
@@ -925,7 +925,7 @@ apiGuardrail:
   properties:
     agent_uuids:
       items:
-        example: example
+        example: example string
         type: string
       title: list of attached agents uuids
       type: array
@@ -935,10 +935,10 @@ apiGuardrail:
       title: creation date / time
       type: string
     default_response:
-      example: example
+      example: example string
       type: string
     description:
-      example: example
+      example: example string
       type: string
     is_default:
       example: true
@@ -946,7 +946,7 @@ apiGuardrail:
     metadata:
       type: object
     name:
-      example: some name
+      example: example name
       type: string
     template_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -970,7 +970,7 @@ apiGuardrailPrice:
         $ref: '#/apiBillingAttribute'
       type: array
     display_name:
-      example: some name
+      example: example name
       type: string
     guardrail_template_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -988,15 +988,15 @@ apiGuardrailTemplate:
       title: creation date / time
       type: string
     default_response:
-      example: example
+      example: example string
       type: string
     description:
-      example: example
+      example: example string
       type: string
     metadata:
       type: object
     name:
-      example: some name
+      example: example name
       type: string
     type:
       $ref: '#/apiGuardrailType'
@@ -1017,7 +1017,7 @@ apiGuardrailType:
   - GUARDRAIL_TYPE_JAILBREAK
   - GUARDRAIL_TYPE_SENSITIVE_DATA
   - GUARDRAIL_TYPE_CONTENT_MODERATION
-  example: example
+  example: example string
   type: string
 apiIndexedDataSource:
   properties:
@@ -1031,7 +1031,7 @@ apiIndexedDataSource:
       title: uuid of the indexed data source
       type: string
     indexed_file_count:
-      example: example
+      example: 12345
       format: uint64
       title: total count of files that have been indexed
       type: string
@@ -1041,17 +1041,17 @@ apiIndexedDataSource:
       title: timestamp when data source started indexing
       type: string
     total_bytes:
-      example: example
+      example: 12345
       format: uint64
       title: total size of files in data source in bytes
       type: string
     total_bytes_indexed:
-      example: example
+      example: 12345
       format: uint64
       title: total size of files in data source in bytes that have been indexed
       type: string
     total_file_count:
-      example: example
+      example: 12345
       format: uint64
       title: total file count in the data source
       type: string
@@ -1069,7 +1069,7 @@ apiIndexingJob:
       type: string
     data_source_uuids:
       items:
-        example: example
+        example: example string
         type: string
       type: array
     finished_at:
@@ -1116,11 +1116,11 @@ apiIssueAgentTokenInputPublic:
 apiIssueAgentTokenOutput:
   properties:
     access_token:
-      example: example
+      example: example string
       title: the token
       type: string
     refresh_token:
-      example: example
+      example: example string
       title: the token used to refresh
       type: string
   title: information about a newly issued token
@@ -1128,23 +1128,23 @@ apiIssueAgentTokenOutput:
 apiIssueModelPlaygroundTokenOutput:
   properties:
     access_token:
-      example: example
+      example: example string
       type: string
     refresh_token:
-      example: example
+      example: example string
       type: string
   title: IssueModelPlaygroundTokenOutput description
   type: object
 apiKBDataSource:
   properties:
     bucket_name:
-      example: some name
+      example: example name
       type: string
     bucket_region:
-      example: example
+      example: example string
       type: string
     item_path:
-      example: example
+      example: example string
       type: string
   type: object
 apiKnowledgeBase:
@@ -1160,7 +1160,7 @@ apiKnowledgeBase:
       title: creation date / time
       type: string
     database_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     embedding_model_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -1172,19 +1172,19 @@ apiKnowledgeBase:
     last_indexing_job:
       $ref: '#/apiIndexingJob'
     name:
-      example: some name
+      example: example name
       title: name of knowledge base
       type: string
     project_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     region:
-      example: example
+      example: example string
       title: region code
       type: string
     tags:
       items:
-        example: example
+        example: example string
         type: string
       type: array
     updated_at:
@@ -1193,7 +1193,7 @@ apiKnowledgeBase:
       title: last modified
       type: string
     user_id:
-      example: example
+      example: 12345
       format: int64
       title: id of user that created the knowledge base
       type: string
@@ -1206,7 +1206,7 @@ apiKnowledgeBase:
 apiKnowledgeBaseDataSource:
   properties:
     bucket_name:
-      example: some name
+      example: example name
       title: name of storage bucket
       type: string
     created_at:
@@ -1215,14 +1215,14 @@ apiKnowledgeBaseDataSource:
       title: creation date / time
       type: string
     item_path:
-      example: example
+      example: example string
       title: path of folder or object in bucket
       type: string
     last_indexing_job:
       $ref: '#/apiIndexingJob'
       title: the last job the data source was indexed
     region:
-      example: example
+      example: example string
       title: region code
       type: string
     updated_at:
@@ -1243,7 +1243,7 @@ apiKnowledgeBasePrice:
         $ref: '#/apiBillingAttribute'
       type: array
     display_name:
-      example: some name
+      example: example name
       type: string
     model_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -1260,17 +1260,17 @@ apiLinkAgentFunctionInputPublic:
       title: agnet id
       type: string
     description:
-      example: example
+      example: example string
       title: function description
       type: string
     faas_name:
-      example: some name
+      example: example name
       type: string
     faas_namespace:
-      example: some name
+      example: example name
       type: string
     function_name:
-      example: some name
+      example: example name
       title: function name
       type: string
     input_schema:
@@ -1300,14 +1300,14 @@ apiLinkAgentInputPublic:
       title: child agent id
       type: string
     if_case:
-      example: example
+      example: example string
       type: string
     parent_agent_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       title: parent agent id
       type: string
     route_name:
-      example: some name
+      example: example name
       title: name of route
       type: string
   title: information for linking an agent
@@ -1583,11 +1583,11 @@ apiModel:
       title: creation date / time
       type: string
     inference_name:
-      example: some name
+      example: example name
       title: internally used name
       type: string
     inference_version:
-      example: example
+      example: example string
       title: internally used version
       type: string
     is_foundational:
@@ -1598,7 +1598,7 @@ apiModel:
       title: additional meta data
       type: object
     name:
-      example: some name
+      example: example name
       title: name of the model
       type: string
     parent_uuid:
@@ -1615,7 +1615,7 @@ apiModel:
       title: model has been fully uploaded
       type: boolean
     url:
-      example: example
+      example: example string
       title: download url
       type: string
     uuid:
@@ -1634,7 +1634,7 @@ apiModelPrice:
         $ref: '#/apiBillingAttribute'
       type: array
     display_name:
-      example: some name
+      example: example name
       type: string
     model_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -1654,11 +1654,11 @@ apiModelPublic:
       title: creation date / time
       type: string
     inference_name:
-      example: some name
+      example: example name
       title: internally used name
       type: string
     inference_version:
-      example: example
+      example: example string
       title: internally used version
       type: string
     is_foundational:
@@ -1666,7 +1666,7 @@ apiModelPublic:
       title: true if it is a foundational model provided by do
       type: boolean
     name:
-      example: some name
+      example: example name
       title: name of the model
       type: string
     parent_uuid:
@@ -1683,7 +1683,7 @@ apiModelPublic:
       title: model has been fully uploaded
       type: boolean
     url:
-      example: example
+      example: example string
       title: download url
       type: string
     uuid:
@@ -1710,7 +1710,7 @@ apiModelUsecase:
   - MODEL_USECASE_FINETUNED
   - MODEL_USECASE_KNOWLEDGEBASE
   - MODEL_USECASE_GUARDRAIL
-  example: example
+  example: example string
   type: string
 apiModelVersion:
   properties:
@@ -1731,19 +1731,19 @@ apiModelVersion:
 apiPages:
   properties:
     first:
-      example: example
+      example: example string
       title: first page
       type: string
     last:
-      example: example
+      example: example string
       title: last page
       type: string
     next:
-      example: example
+      example: example string
       title: next page
       type: string
     previous:
-      example: example
+      example: example string
       title: previous page
       type: string
   title: Information about how to reach other pages
@@ -1751,11 +1751,11 @@ apiPages:
 apiRefreshAgentTokenOutput:
   properties:
     access_token:
-      example: example
+      example: example string
       title: the token
       type: string
     refresh_token:
-      example: example
+      example: example string
       title: rhe refreshed token
       type: string
   title: information about a refreshed token
@@ -1763,10 +1763,10 @@ apiRefreshAgentTokenOutput:
 apiRefreshModelPlaygroundTokenOutput:
   properties:
     access_token:
-      example: example
+      example: example string
       type: string
     refresh_token:
-      example: example
+      example: example string
       type: string
   title: RefreshModelPlaygroundTokenOutput description
   type: object
@@ -1796,7 +1796,7 @@ apiStartKnowledgeBaseIndexingJobInputPublic:
   properties:
     data_source_uuids:
       items:
-        example: example
+        example: example string
         type: string
       type: array
     knowledge_base_uuid:
@@ -1824,7 +1824,7 @@ apiTeamAgreement:
 apiTeamModelURLOutput:
   properties:
     url:
-      example: example
+      example: example string
       title: the signed url that can be used to upload one file
       type: string
   title: model url output
@@ -1872,7 +1872,7 @@ apiUpdateAgentAPIKeyInputPublic:
       title: api key id
       type: string
     name:
-      example: some name
+      example: example name
       title: name
       type: string
   type: object
@@ -1906,17 +1906,17 @@ apiUpdateAgentFunctionInputPublic:
       title: agent id
       type: string
     description:
-      example: example
+      example: example string
       title: funciton description
       type: string
     faas_name:
-      example: some name
+      example: example name
       type: string
     faas_namespace:
-      example: some name
+      example: example name
       type: string
     function_name:
-      example: some name
+      example: example name
       title: function name
       type: string
     function_uuid:
@@ -1939,11 +1939,11 @@ apiUpdateAgentFunctionOutput:
 apiUpdateAgentInputPublic:
   properties:
     description:
-      example: example
+      example: example string
       title: agent description
       type: string
     instruction:
-      example: example
+      example: example string
       title: agent instruction
       type: string
     k:
@@ -1957,15 +1957,15 @@ apiUpdateAgentInputPublic:
       title: model id
       type: string
     name:
-      example: some name
+      example: example name
       title: agent name
       type: string
     project_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     tags:
       items:
-        example: example
+        example: example string
         type: string
       type: array
     temperature:
@@ -2005,22 +2005,22 @@ apiUpdateGuardrailOutput:
 apiUpdateKnowledgeBaseInputPublic:
   properties:
     database_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     embedding_model_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       title: model id
       type: string
     name:
-      example: some name
+      example: example name
       title: knowledge base name
       type: string
     project_id:
-      example: example
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     tags:
       items:
-        example: example
+        example: example string
         type: string
       type: array
     uuid:
@@ -2043,14 +2043,14 @@ apiUpdateLinkedAgentInputPublic:
       title: child agent id
       type: string
     if_case:
-      example: example
+      example: example string
       type: string
     parent_agent_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       title: parent agent id
       type: string
     route_name:
-      example: some name
+      example: example name
       title: route name
       type: string
     uuid:
@@ -2088,7 +2088,7 @@ apiUsageMeasurement:
       format: int64
       type: integer
     usage_type:
-      example: example
+      example: example string
       type: string
   title: Usage Measurement Description
   type: object
@@ -2107,16 +2107,16 @@ dbaasClusterStatus:
   - RESTORING
   - POWERING_ON
   - UNHEALTHY
-  example: example
+  example: example string
   type: string
 genaiapiRegion:
   properties:
     inference_url:
-      example: example
+      example: example string
       title: url for inference server
       type: string
     region:
-      example: example
+      example: example string
       title: region code
       type: string
     serves_batch:
@@ -2126,7 +2126,7 @@ genaiapiRegion:
       example: true
       type: boolean
     stream_inference_url:
-      example: example
+      example: example string
       type: string
   title: Description for a specific Region
   type: object
@@ -2333,7 +2333,7 @@ protobufFieldMask:
     paths:
       description: The set of field mask paths.
       items:
-        example: example
+        example: example string
         type: string
       type: array
   title: '`FieldMask` represents a set of symbolic field paths, for example:'
@@ -2349,5 +2349,5 @@ protobufNullValue:
      - NULL_VALUE: Null value.
   enum:
   - NULL_VALUE
-  example: example
+  example: example string
   type: string
