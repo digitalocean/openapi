@@ -1249,6 +1249,10 @@ paths:
     delete:
       $ref: 'resources/load_balancers/loadBalancers_delete.yml'
 
+  /v2/load_balancers/{lb_id}/cache:
+    delete:
+      $ref: 'resources/load_balancers/loadBalancers_delete_cache.yml'
+
   /v2/load_balancers/{lb_id}/droplets:
     post:
       $ref: 'resources/load_balancers/loadBalancers_add_droplets.yml'
