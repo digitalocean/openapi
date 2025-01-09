@@ -1448,6 +1448,30 @@ paths:
     get:
       $ref: 'resources/monitoring/monitoring_get_lb_droplets_downtime.yml'
 
+  /v2/monitoring/metrics/droplet_autoscale/current_instances:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_instances.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_instances:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_instances.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_cpu_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_cpu_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_memory_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_memory_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_memory_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_memory_utilization.yml'
+
   /v2/monitoring/sinks/destinations:
     post:
       $ref: 'resources/monitoring/monitoring_create_destination.yml'
