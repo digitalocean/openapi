@@ -44,3 +44,5 @@ responses:
 summary: update agent funciton.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_UpdateAgentFunctionPublic.yml

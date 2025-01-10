@@ -5,6 +5,14 @@ description: |-
 operationId: GenAIAPI_ListModelsPublic
 parameters:
 - collectionFormat: multi
+  description: |-
+    include only models defined for the listed usecases.
+
+     - MODEL_USECASE_UNKNOWN: The use case of the model is unknown
+     - MODEL_USECASE_AGENT: The model maybe used in an agent
+     - MODEL_USECASE_FINETUNED: The model maybe used for fine tuning
+     - MODEL_USECASE_KNOWLEDGEBASE: The model maybe used for knowledge bases (embedding models)
+     - MODEL_USECASE_GUARDRAIL: The model maybe used for guardrails
   in: query
   items:
     enum:
@@ -53,3 +61,5 @@ responses:
 summary: list models.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_ListModelsPublic.yml

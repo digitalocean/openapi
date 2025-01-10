@@ -33,3 +33,5 @@ responses:
 summary: delete a knowledge base.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_DeleteKnowledgeBasePublic.yml

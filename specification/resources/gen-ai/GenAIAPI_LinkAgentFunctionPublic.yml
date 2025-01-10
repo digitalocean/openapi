@@ -38,3 +38,5 @@ responses:
 summary: link agent funciton.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_LinkAgentFunctionPublic.yml

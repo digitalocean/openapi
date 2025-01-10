@@ -48,3 +48,5 @@ responses:
 summary: list agents.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_ListAgentsPublic.yml

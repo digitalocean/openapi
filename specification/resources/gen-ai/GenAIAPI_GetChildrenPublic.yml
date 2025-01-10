@@ -33,3 +33,5 @@ responses:
 summary: getchildren?.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_GetChildrenPublic.yml

@@ -4,7 +4,8 @@ description: |-
   This endpoint allows developers to list knowledge base indexing job data sources.
 operationId: GenAIAPI_ListIndexingJobDataSourcesPublic
 parameters:
-- example: '"123e4567-e89b-12d3-a456-426614174000"'
+- description: uuid of the indexing job
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: indexing_job_uuid
   required: true
@@ -32,3 +33,5 @@ responses:
 summary: list knowledge base indexing job data sources.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_ListIndexingJobDataSourcesPublic.yml

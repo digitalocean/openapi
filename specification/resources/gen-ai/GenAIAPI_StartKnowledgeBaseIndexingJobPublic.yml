@@ -31,3 +31,5 @@ responses:
 summary: start knowledge base indexing job.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_StartKnowledgeBaseIndexingJobPublic.yml

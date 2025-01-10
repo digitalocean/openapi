@@ -39,3 +39,5 @@ responses:
 summary: regenerate agent api key.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_RegenerateAgentAPIKeyPublic.yml

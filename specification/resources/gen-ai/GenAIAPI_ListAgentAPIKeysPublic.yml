@@ -43,3 +43,5 @@ responses:
 summary: list agent api keys.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_ListAgentAPIKeysPublic.yml

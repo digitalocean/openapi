@@ -40,3 +40,5 @@ responses:
 summary: get one agent.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_GetAgentPublic.yml

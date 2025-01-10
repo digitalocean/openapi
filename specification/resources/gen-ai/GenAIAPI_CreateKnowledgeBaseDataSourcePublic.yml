@@ -38,3 +38,5 @@ responses:
 summary: add a knowledge base data source.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_CreateKnowledgeBaseDataSourcePublic.yml

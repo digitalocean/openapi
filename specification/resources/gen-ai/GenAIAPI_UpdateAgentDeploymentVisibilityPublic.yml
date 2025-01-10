@@ -38,3 +38,5 @@ responses:
 summary: update agent status on whether it is public or private.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_UpdateAgentDeploymentVisibilityPublic.yml

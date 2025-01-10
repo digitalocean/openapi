@@ -4,7 +4,8 @@ description: |-
   This endpoint allows developers to get knowledge base indexing job.
 operationId: GenAIAPI_GetKnowledgeBaseIndexingJobPublic
 parameters:
-- example: '"123e4567-e89b-12d3-a456-426614174000"'
+- description: indexing job id
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: uuid
   required: true
@@ -32,3 +33,5 @@ responses:
 summary: get knowledge base indexing job.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_GetKnowledgeBaseIndexingJobPublic.yml

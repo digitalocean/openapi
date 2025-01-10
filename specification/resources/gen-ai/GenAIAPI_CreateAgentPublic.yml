@@ -31,3 +31,5 @@ responses:
 summary: create an agent.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_CreateAgentPublic.yml

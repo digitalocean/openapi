@@ -39,3 +39,5 @@ responses:
 summary: delete one knowledge base data source.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_DeleteKnowledgeBaseDataSourcePublic.yml

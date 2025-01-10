@@ -37,3 +37,5 @@ responses:
 summary: list knowledge base indexing jobs.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_ListKnowledgeBaseIndexingJobsPublic.yml

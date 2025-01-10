@@ -33,3 +33,5 @@ responses:
 summary: list regions.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_ListRegions.yml

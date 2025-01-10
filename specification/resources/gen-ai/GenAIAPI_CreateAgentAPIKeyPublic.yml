@@ -38,3 +38,5 @@ responses:
 summary: create agent api key.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_CreateAgentAPIKeyPublic.yml

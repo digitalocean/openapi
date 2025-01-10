@@ -44,3 +44,5 @@ responses:
 summary: link agent.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_LinkAgentPublic.yml

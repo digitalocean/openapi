@@ -44,3 +44,5 @@ responses:
 summary: update agent api key.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_UpdateAgentAPIKeyPublic.yml

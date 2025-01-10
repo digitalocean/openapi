@@ -228,6 +228,23 @@ definitions:
         type: string
     title: A Agent Guardrail
     type: object
+  apiAgentModelUsage:
+    properties:
+      agent_name:
+        title: agent name
+        type: string
+      agent_uuid:
+        title: agent id
+        type: string
+      requests_used:
+        format: uint64
+        title: requests used
+        type: string
+      tokens_used:
+        format: uint64
+        title: tokens  used
+        type: string
+    type: object
   apiAgentPrice:
     properties:
       attributes:
@@ -247,6 +264,7 @@ definitions:
     properties:
       chatbot:
         $ref: '#/definitions/apiChatbot'
+        title: details about the chatbot widget so you can embed it in your website
       chatbot_identifiers:
         items:
           $ref: '#/definitions/apiAgentChatbotIdentifier'
@@ -258,18 +276,24 @@ definitions:
         type: string
       deployment:
         $ref: '#/definitions/apiDeployment'
+        title: more details about how to access the agent
       description:
         title: description of agent
         type: string
       if_case:
+        title: Instructions to the agent on how to use the route
         type: string
       instruction:
         title: first instruction for agent
         type: string
       k:
         format: int64
+        title: how many results should be considered from an attached knowledge base
         type: integer
       max_tokens:
+        description: Specifies the maximum number of tokens the model can process
+          in a single input or output, set as a number between 1 and 512. This determines
+          the length of each response.
         format: int64
         type: integer
       model:
@@ -279,6 +303,7 @@ definitions:
         title: agent name
         type: string
       project_id:
+        title: The DigitalOcean project ID associated with the agent
         type: string
       region:
         title: region code
@@ -289,23 +314,32 @@ definitions:
         type: string
       route_created_by:
         format: uint64
+        title: id of user that created the route
         type: string
       route_name:
         title: route name
         type: string
       route_uuid:
+        title: route uuid
         type: string
       tags:
         items:
           type: string
+        title: A set of abitrary tags to organize your agent
         type: array
       temperature:
+        description: Controls the model’s creativity, specified as a number between
+          0 and 1. Lower values produce more predictable and conservative responses,
+          while higher values encourage creativity and variation.
         format: float
         type: number
       template:
         $ref: '#/definitions/apiAgentTemplate'
         title: template if agent is created from a template
       top_p:
+        description: Defines the cumulative probability threshold for word selection,
+          specified as a number between 0 and 1. Higher values allow for more diverse
+          outputs, while lower values ensure focused and coherent responses.
         format: float
         type: number
       updated_at:
@@ -322,7 +356,7 @@ definitions:
       uuid:
         title: unique agent id
         type: string
-    title: An Agent
+    title: A GenAI Agent's configuration
     type: object
   apiAgentTemplate:
     properties:
@@ -432,6 +466,7 @@ definitions:
   apiCancelKnowledgeBaseIndexingJobInputPublic:
     properties:
       uuid:
+        title: indexing job id
         type: string
     title: CancelKnowledgeBaseIndexingJobInputPublic description
     type: object
@@ -464,7 +499,7 @@ definitions:
         title: agent id
         type: string
       name:
-        title: name
+        title: a human friendly name to identify the key
         type: string
     type: object
   apiCreateAgentAPIKeyOutput:
@@ -472,18 +507,6 @@ definitions:
       api_key_info:
         $ref: '#/definitions/apiAgentAPIKeyInfo'
         title: api key info
-    type: object
-  apiCreateAgentFromTemplateInputPublic:
-    properties:
-      project_id:
-        title: project id
-        type: string
-      region:
-        title: region code
-        type: string
-      template_uuid:
-        title: template id to create agent from
-        type: string
     type: object
   apiCreateAgentFromTemplateOutput:
     properties:
@@ -493,7 +516,7 @@ definitions:
   apiCreateAgentInputPublic:
     properties:
       description:
-        title: agent description
+        title: a text description of the agent, not used in inference
         type: string
       instruction:
         title: agent instruction
@@ -501,6 +524,7 @@ definitions:
       knowledge_base_uuid:
         items:
           type: string
+        title: ids of the knowledge base(s) to attach to the agent
         type: array
       model_uuid:
         title: model id
@@ -509,15 +533,16 @@ definitions:
         title: agent name
         type: string
       project_id:
+        title: the id of the DigitalOcean this agent will belong to
         type: string
       region:
-        title: region code
+        title: The DigitalOcean region to deploy your agent in
         type: string
       tags:
         items:
           type: string
         type: array
-    title: Data for Agent Creation
+    title: Parameters for Agent Creation
     type: object
   apiCreateAgentOutput:
     properties:
@@ -533,6 +558,18 @@ definitions:
         title: the chatbot
     title: info about a newly created chatbot
     type: object
+  apiCreateDataSourceFileUploadPresignedUrlsOutput:
+    description: Response with pre-signed urls to upload files.
+    properties:
+      request_id:
+        description: The ID generated for the request for Presigned URLs.
+        type: string
+      uploads:
+        description: A list of generated presigned URLs and object keys, one per file.
+        items:
+          $ref: '#/definitions/apiFilePresignedUrlResponse'
+        type: array
+    type: object
   apiCreateGuardrailOutput:
     properties:
       guardrail:
@@ -545,6 +582,7 @@ definitions:
         title: name of storage bucket
         type: string
       item_path:
+        title: path of optional folder or object in bucket
         type: string
       knowledge_base_uuid:
         title: knowledge base id
@@ -564,10 +602,15 @@ definitions:
   apiCreateKnowledgeBaseInputPublic:
     properties:
       database_id:
+        description: |-
+          the id of the DigitalOcean database this knowledge base will use, optiona.
+          If not provided, a new database will be created for the knowledge base in
+          the same region as the knowledge base.
         type: string
       datasources:
         items:
           $ref: '#/definitions/apiKBDataSource'
+        title: The data sources to use for this knowledge base
         type: array
       embedding_model_uuid:
         title: model id
@@ -576,15 +619,19 @@ definitions:
         title: knowledge base name
         type: string
       project_id:
+        title: the id of the DigitalOcean project this knowledge base will belong
+          to
         type: string
       region:
-        title: region code
+        title: The region to deploy the knowledge base in
         type: string
       tags:
         items:
           type: string
+        title: A set of abitrary tags to organize your knowledge base
         type: array
       vpc_uuid:
+        title: The VPC to deploy the knowledge base database in
         type: string
     title: data to create a new knowledge base
     type: object
@@ -690,8 +737,31 @@ definitions:
     - VISIBILITY_PLAYGROUND
     - VISIBILITY_PUBLIC
     - VISIBILITY_PRIVATE
-    title: '- VISIBILITY_PLAYGROUND: Deprecated: No longer a valid state'
+    title: |-
+      - VISIBILITY_UNKNOWN: The status of the deployment is unknown
+       - VISIBILITY_DISABLED: The deployment is disabled and will no longer service requests
+       - VISIBILITY_PLAYGROUND: Deprecated: No longer a valid state
+       - VISIBILITY_PUBLIC: The deployment is public and will service requests from the public internet
+       - VISIBILITY_PRIVATE: The deployment is private and will only service requests from other agents, or through API keys
     type: string
+  apiFilePresignedUrlResponse:
+    description: Detailed info about each presigned URL returned to the client.
+    properties:
+      expires_at:
+        description: The time the url expires at.
+        format: date-time
+        type: string
+      object_key:
+        description: The unique object key to store the file as.
+        type: string
+      original_file_name:
+        description: The original file name.
+        type: string
+      presigned_url:
+        description: The actual presigned URL the client can use to upload the file
+          directly.
+        type: string
+    type: object
   apiGetAgentOutput:
     properties:
       agent:
@@ -786,6 +856,33 @@ definitions:
         $ref: '#/definitions/genaiapiRegion'
         title: region code
     title: Region code of preferred Regions
+    type: object
+  apiGetResourceLimitsOutput:
+    properties:
+      agent_count:
+        format: int64
+        title: total agents used
+        type: integer
+      agent_limit:
+        format: int64
+        title: total permitted agents
+        type: integer
+      guardrail_count:
+        format: int64
+        title: total guardrails used
+        type: integer
+      guardrail_limit:
+        format: int64
+        title: total permitted guardrails
+        type: integer
+      knowledge_base_count:
+        format: int64
+        title: total knowledge bases used
+        type: integer
+      knowledge_base_limit:
+        format: int64
+        title: total permitted knowledge bases
+        type: integer
     type: object
   apiGetTeamAgreementOutput:
     properties:
@@ -1074,15 +1171,20 @@ definitions:
         title: function description
         type: string
       faas_name:
+        title: The name of the function in the DigitalOcean functions platform
         type: string
       faas_namespace:
+        title: The namespace of the function in the DigitalOcean functions platform
         type: string
       function_name:
         title: function name
         type: string
       input_schema:
+        title: Describe the input schema for the function so the agent may call it
         type: object
       output_schema:
+        title: Describe the output schema for the function so the agent handle its
+          response
         type: object
     title: information for a agent function link
     type: object
@@ -1199,7 +1301,7 @@ definitions:
         title: links to other pages
       meta:
         $ref: '#/definitions/apiMeta'
-        title: information about the data set
+        title: information about the paginated data set
     title: List of Agents
     type: object
   apiListGuardrailAgentsOutput:
@@ -1319,6 +1421,33 @@ definitions:
           $ref: '#/definitions/apiModelPrice'
         type: array
     type: object
+  apiListModelUsagesByAgentOutput:
+    properties:
+      links:
+        $ref: '#/definitions/apiLinks'
+        title: links to other pages
+      meta:
+        $ref: '#/definitions/apiMeta'
+        title: information about the data set
+      request_limit_per_minute:
+        format: uint64
+        title: total request limit per minute
+        type: string
+      token_limit_per_day:
+        format: uint64
+        title: total token limit per day
+        type: string
+      token_limit_per_minute:
+        format: uint64
+        title: total token limit per minute
+        type: string
+      usages:
+        items:
+          $ref: '#/definitions/apiAgentModelUsage'
+        title: the model's usage by agent
+        type: array
+    title: ListModelUsagesByAgentOutput description
+    type: object
   apiListModelsOutput:
     properties:
       links:
@@ -1437,15 +1566,10 @@ definitions:
     properties:
       agreement:
         $ref: '#/definitions/apiAgreement'
+        title: the legal agreement required to use this model
       created_at:
         format: date-time
         title: creation date / time
-        type: string
-      inference_name:
-        title: internally used name
-        type: string
-      inference_version:
-        title: internally used version
         type: string
       is_foundational:
         title: true if it is a foundational model provided by do
@@ -1472,7 +1596,7 @@ definitions:
       version:
         $ref: '#/definitions/apiModelVersion'
         title: version
-    title: Description of a Model
+    title: A machine learning model stored on the GenAI platform
     type: object
   apiModelUploadCompleteOutput:
     properties:
@@ -1489,6 +1613,12 @@ definitions:
     - MODEL_USECASE_FINETUNED
     - MODEL_USECASE_KNOWLEDGEBASE
     - MODEL_USECASE_GUARDRAIL
+    title: |-
+      - MODEL_USECASE_UNKNOWN: The use case of the model is unknown
+       - MODEL_USECASE_AGENT: The model maybe used in an agent
+       - MODEL_USECASE_FINETUNED: The model maybe used for fine tuning
+       - MODEL_USECASE_KNOWLEDGEBASE: The model maybe used for knowledge bases (embedding models)
+       - MODEL_USECASE_GUARDRAIL: The model maybe used for guardrails
     type: string
   apiModelVersion:
     properties:
@@ -1521,6 +1651,17 @@ definitions:
         title: previous page
         type: string
     title: Information about how to reach other pages
+    type: object
+  apiPresignedUrlFile:
+    description: A single file’s metadata in the request.
+    properties:
+      file_name:
+        title: local filename
+        type: string
+      file_size:
+        description: The size of the file in bytes.
+        format: int64
+        type: string
     type: object
   apiRefreshAgentTokenOutput:
     properties:
@@ -1565,8 +1706,11 @@ definitions:
       data_source_uuids:
         items:
           type: string
+        title: list of data source ids to index, if none are provided, all data sources
+          will be indexed
         type: array
       knowledge_base_uuid:
+        title: knowledge base id
         type: string
     title: StartKnowledgeBaseIndexingJobInputPublic description
     type: object
@@ -1654,6 +1798,7 @@ definitions:
         type: string
       visibility:
         $ref: '#/definitions/apiDeploymentVisibility'
+        title: who can interact with the deployed agent
     title: UpdateAgentDeploymentVisibilityInputPublic description
     type: object
   apiUpdateAgentFunctionInputPublic:
@@ -1665,8 +1810,10 @@ definitions:
         title: funciton description
         type: string
       faas_name:
+        title: The name of the function in the DigitalOcean functions platform
         type: string
       faas_namespace:
+        title: The namespace of the function in the DigitalOcean functions platform
         type: string
       function_name:
         title: function name
@@ -1675,8 +1822,11 @@ definitions:
         title: function id
         type: string
       input_schema:
+        title: Describe the input schema for the function so the agent may call it
         type: object
       output_schema:
+        title: Describe the output schema for the function so the agent handle its
+          response
         type: object
     title: information about updating an agent function
     type: object
@@ -1697,8 +1847,12 @@ definitions:
         type: string
       k:
         format: int64
+        title: how many results should be considered from an attached knowledge base
         type: integer
       max_tokens:
+        description: Specifies the maximum number of tokens the model can process
+          in a single input or output, set as a number between 1 and 512. This determines
+          the length of each response.
         format: int64
         type: integer
       model_uuid:
@@ -1708,15 +1862,23 @@ definitions:
         title: agent name
         type: string
       project_id:
+        title: the id of the DigitalOcean project this agent will belong to
         type: string
       tags:
         items:
           type: string
+        title: A set of abitrary tags to organize your agent
         type: array
       temperature:
+        description: Controls the model’s creativity, specified as a number between
+          0 and 1. Lower values produce more predictable and conservative responses,
+          while higher values encourage creativity and variation.
         format: float
         type: number
       top_p:
+        description: Defines the cumulative probability threshold for word selection,
+          specified as a number between 0 and 1. Higher values allow for more diverse
+          outputs, while lower values ensure focused and coherent responses.
         format: float
         type: number
       uuid:
@@ -1747,6 +1909,8 @@ definitions:
   apiUpdateKnowledgeBaseInputPublic:
     properties:
       database_id:
+        description: the id of the DigitalOcean database this knowledge base will
+          use, optiona.
         type: string
       embedding_model_uuid:
         title: model id
@@ -1755,10 +1919,13 @@ definitions:
         title: knowledge base name
         type: string
       project_id:
+        title: the id of the DigitalOcean project this knowledge base will belong
+          to
         type: string
       tags:
         items:
           type: string
+        title: A set of abitrary tags to organize your knowledge base
         type: array
       uuid:
         title: knowledge base id
@@ -1778,6 +1945,7 @@ definitions:
         title: child agent id
         type: string
       if_case:
+        title: describes the case in which the child agent should be used
         type: string
       parent_agent_uuid:
         title: parent agent id
@@ -2081,47 +2249,6 @@ info:
   version: version not set
 openapi: ""
 paths:
-  /v2/genai/agent_templates:
-    get:
-      description: List Agent Templates.
-      operationId: GenAIAPI_ListAgentTemplatesPublic
-      parameters:
-      - description: page number.
-        format: int64
-        in: query
-        name: page
-        type: integer
-      - description: items per page.
-        format: int64
-        in: query
-        name: per_page
-        type: integer
-      responses:
-        "200":
-          description: A successful response.
-          schema:
-            $ref: '#/definitions/apiListAgentTemplatesOutput'
-      summary: List Agent Templates
-      tags:
-      - GenAIAPI
-  /v2/genai/agent_templates/{uuid}:
-    get:
-      description: Get Agent Template.
-      operationId: GenAIAPI_GetAgentTemplatePublic
-      parameters:
-      - description: agent template id
-        in: path
-        name: uuid
-        required: true
-        type: string
-      responses:
-        "200":
-          description: A successful response.
-          schema:
-            $ref: '#/definitions/apiGetAgentTemplateOutput'
-      summary: Get Agent Template
-      tags:
-      - GenAIAPI
   /v2/genai/agents:
     get:
       description: This endpoint allows developers to returns a list of agents specific
@@ -2326,12 +2453,14 @@ paths:
       description: This endpoint allows developers to unlink agent funciton.
       operationId: GenAIAPI_UnlinkAgentFunctionPublic
       parameters:
-      - description: agent id
+      - description: The id of the agent to unlink the function from
         in: path
         name: agent_uuid
         required: true
         type: string
-      - description: function id
+      - description: |-
+          The function to remove from the agent
+          FIXME: @afreda is the id of the DO function or the agent function linkage?
         in: path
         name: function_uuid
         required: true
@@ -2599,25 +2728,6 @@ paths:
       summary: update agent status on whether it is public or private.
       tags:
       - GenAIAPI
-  /v2/genai/agents/template:
-    post:
-      description: Creates a new Agent from a Template and returns the newly created
-        Agent Object.
-      operationId: GenAIAPI_CreateAgentFromTemplatePublic
-      parameters:
-      - in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/apiCreateAgentFromTemplateInputPublic'
-      responses:
-        "200":
-          description: A successful response.
-          schema:
-            $ref: '#/definitions/apiCreateAgentFromTemplateOutput'
-      summary: Create an Agent from a Template
-      tags:
-      - GenAIAPI
   /v2/genai/auth/agents/{agent_uuid}/token:
     post:
       description: This endpoint allows developers to issue agent token.
@@ -2706,7 +2816,8 @@ paths:
         job data sources.
       operationId: GenAIAPI_ListIndexingJobDataSourcesPublic
       parameters:
-      - in: path
+      - description: uuid of the indexing job
+        in: path
         name: indexing_job_uuid
         required: true
         type: string
@@ -2724,7 +2835,8 @@ paths:
         job.
       operationId: GenAIAPI_GetKnowledgeBaseIndexingJobPublic
       parameters:
-      - in: path
+      - description: indexing job id
+        in: path
         name: uuid
         required: true
         type: string
@@ -2742,7 +2854,8 @@ paths:
         job.
       operationId: GenAIAPI_CancelKnowledgeBaseIndexingJobPublic
       parameters:
-      - in: path
+      - description: indexing job id
+        in: path
         name: uuid
         required: true
         type: string
@@ -2939,6 +3052,14 @@ paths:
       operationId: GenAIAPI_ListModelsPublic
       parameters:
       - collectionFormat: multi
+        description: |-
+          include only models defined for the listed usecases.
+
+           - MODEL_USECASE_UNKNOWN: The use case of the model is unknown
+           - MODEL_USECASE_AGENT: The model maybe used in an agent
+           - MODEL_USECASE_FINETUNED: The model maybe used for fine tuning
+           - MODEL_USECASE_KNOWLEDGEBASE: The model maybe used for knowledge bases (embedding models)
+           - MODEL_USECASE_GUARDRAIL: The model maybe used for guardrails
         in: query
         items:
           enum:

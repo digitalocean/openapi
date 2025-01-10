@@ -4,13 +4,15 @@ description: |-
   This endpoint allows developers to unlink agent funciton.
 operationId: GenAIAPI_UnlinkAgentFunctionPublic
 parameters:
-- description: agent id
+- description: The id of the agent to unlink the function from
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: agent_uuid
   required: true
   type: string
-- description: function id
+- description: |-
+    The function to remove from the agent
+    FIXME: @afreda is the id of the DO function or the agent function linkage?
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: function_uuid
@@ -39,3 +41,5 @@ responses:
 summary: unlink agent funciton.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_UnlinkAgentFunctionPublic.yml

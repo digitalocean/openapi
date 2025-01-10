@@ -31,3 +31,5 @@ responses:
 summary: create a knowledge base.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_CreateKnowledgeBasePublic.yml

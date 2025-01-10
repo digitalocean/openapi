@@ -38,3 +38,5 @@ responses:
 summary: update one knowledge base.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_UpdateKnowledgeBasePublic.yml

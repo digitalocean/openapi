@@ -38,3 +38,5 @@ responses:
 summary: update an agent.
 tags:
 - GenAIAPI
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_UpdateAgentPublic.yml
