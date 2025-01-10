@@ -1,0 +1,10 @@
+allOf:
+  - type: object
+    properties:
+      secret_key:
+        type: string
+        description: The secret key. This is the only time the secret key will be returned.
+        example: DOSECRETKEYEXAMPLE
+        readOnly: true
+
+  - $ref: 'key.yml'
