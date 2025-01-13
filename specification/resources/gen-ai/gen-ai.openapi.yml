@@ -578,18 +578,15 @@ definitions:
     type: object
   apiCreateKnowledgeBaseDataSourceInputPublic:
     properties:
-      bucket_name:
-        title: name of storage bucket
-        type: string
-      item_path:
-        title: path of optional folder or object in bucket
-        type: string
+      file_upload_data_source:
+        $ref: '#/definitions/apiFileUploadDataSource'
+        title: file Upload Data Source content
       knowledge_base_uuid:
         title: knowledge base id
         type: string
-      region:
-        title: region code
-        type: string
+      spaces_data_source:
+        $ref: '#/definitions/apiSpacesDataSource'
+        title: spaces Bucket Data Source content
     title: data to create a knowledge base data source
     type: object
   apiCreateKnowledgeBaseDataSourceOutput:
@@ -760,6 +757,15 @@ definitions:
       presigned_url:
         description: The actual presigned URL the client can use to upload the file
           directly.
+        type: string
+    type: object
+  apiFileUploadDataSource:
+    properties:
+      original_file_name:
+        title: The original file name
+        type: string
+      stored_object_key:
+        title: The object key the file was stored as
         type: string
     type: object
   apiGetAgentOutput:
@@ -1070,11 +1076,19 @@ definitions:
   apiKBDataSource:
     properties:
       bucket_name:
+        title: Deprecated, moved to data_source_details
         type: string
       bucket_region:
+        title: Deprecated, moved to data_source_details
         type: string
+      file_upload_data_source:
+        $ref: '#/definitions/apiFileUploadDataSource'
+        title: File Upload Data Source
       item_path:
         type: string
+      spaces_data_source:
+        $ref: '#/definitions/apiSpacesDataSource'
+        title: Spaces Data Source
     type: object
   apiKnowledgeBase:
     properties:
@@ -1123,21 +1137,25 @@ definitions:
   apiKnowledgeBaseDataSource:
     properties:
       bucket_name:
-        title: name of storage bucket
+        title: name of storage bucket - Deprecated, moved to data_source_details
         type: string
       created_at:
         format: date-time
         title: creation date / time
         type: string
+      file_upload_data_source:
+        $ref: '#/definitions/apiFileUploadDataSource'
       item_path:
-        title: path of folder or object in bucket
+        title: path of folder or object in bucket - Deprecated, moved to data_source_details
         type: string
       last_indexing_job:
         $ref: '#/definitions/apiIndexingJob'
         title: the last job the data source was indexed
       region:
-        title: region code
+        title: region code - Deprecated, moved to data_source_details
         type: string
+      spaces_data_source:
+        $ref: '#/definitions/apiSpacesDataSource'
       updated_at:
         format: date-time
         title: last modified
@@ -1348,7 +1366,7 @@ definitions:
     type: object
   apiListIndexingJobDataSourcesOutput:
     properties:
-      indexedDataSources:
+      indexed_data_sources:
         items:
           $ref: '#/definitions/apiIndexedDataSource'
         type: array
@@ -1700,6 +1718,18 @@ definitions:
         format: date-time
         type: string
     title: Resource Usage Description
+    type: object
+  apiSpacesDataSource:
+    properties:
+      bucket_name:
+        title: Spaces bucket name
+        type: string
+      item_path:
+        type: string
+      region:
+        title: Region of bucket
+        type: string
+    title: Spaces Bucket Data Source
     type: object
   apiStartKnowledgeBaseIndexingJobInputPublic:
     properties:

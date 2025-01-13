@@ -706,22 +706,17 @@ apiCreateGuardrailOutput:
   type: object
 apiCreateKnowledgeBaseDataSourceInputPublic:
   properties:
-    bucket_name:
-      example: '"my-data"'
-      title: name of storage bucket
-      type: string
-    item_path:
+    file_upload_data_source:
+      $ref: '#/apiFileUploadDataSource'
       example: '"my-folder/"'
-      title: path of optional folder or object in bucket
-      type: string
+      title: file Upload Data Source content
     knowledge_base_uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
       title: knowledge base id
       type: string
-    region:
-      example: '"tor1"'
-      title: region code
-      type: string
+    spaces_data_source:
+      $ref: '#/apiSpacesDataSource'
+      title: spaces Bucket Data Source content
   title: data to create a knowledge base data source
   type: object
 apiCreateKnowledgeBaseDataSourceOutput:
@@ -938,6 +933,17 @@ apiFilePresignedUrlResponse:
       description: The actual presigned URL the client can use to upload the file
         directly.
       example: example string
+      type: string
+  type: object
+apiFileUploadDataSource:
+  properties:
+    original_file_name:
+      example: example name
+      title: The original file name
+      type: string
+    stored_object_key:
+      example: example string
+      title: The object key the file was stored as
       type: string
   type: object
 apiGetAgentInputPublic:
@@ -1344,13 +1350,21 @@ apiKBDataSource:
   properties:
     bucket_name:
       example: example name
+      title: Deprecated, moved to data_source_details
       type: string
     bucket_region:
       example: example string
+      title: Deprecated, moved to data_source_details
       type: string
+    file_upload_data_source:
+      $ref: '#/apiFileUploadDataSource'
+      title: File Upload Data Source
     item_path:
       example: example string
       type: string
+    spaces_data_source:
+      $ref: '#/apiSpacesDataSource'
+      title: Spaces Data Source
   type: object
 apiKnowledgeBase:
   properties:
@@ -1412,24 +1426,28 @@ apiKnowledgeBaseDataSource:
   properties:
     bucket_name:
       example: example name
-      title: name of storage bucket
+      title: name of storage bucket - Deprecated, moved to data_source_details
       type: string
     created_at:
       example: "2023-01-01T00:00:00Z"
       format: date-time
       title: creation date / time
       type: string
+    file_upload_data_source:
+      $ref: '#/apiFileUploadDataSource'
     item_path:
       example: example string
-      title: path of folder or object in bucket
+      title: path of folder or object in bucket - Deprecated, moved to data_source_details
       type: string
     last_indexing_job:
       $ref: '#/apiIndexingJob'
       title: the last job the data source was indexed
     region:
       example: example string
-      title: region code
+      title: region code - Deprecated, moved to data_source_details
       type: string
+    spaces_data_source:
+      $ref: '#/apiSpacesDataSource'
     updated_at:
       example: "2023-01-01T00:00:00Z"
       format: date-time
@@ -1693,7 +1711,7 @@ apiListIndexingJobDataSourcesInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
 apiListIndexingJobDataSourcesOutput:
   properties:
-    indexedDataSources:
+    indexed_data_sources:
       items:
         $ref: '#/apiIndexedDataSource'
       type: array
@@ -2131,6 +2149,21 @@ apiResourceUsage:
       format: date-time
       type: string
   title: Resource Usage Description
+  type: object
+apiSpacesDataSource:
+  properties:
+    bucket_name:
+      example: example name
+      title: Spaces bucket name
+      type: string
+    item_path:
+      example: example string
+      type: string
+    region:
+      example: example string
+      title: Region of bucket
+      type: string
+  title: Spaces Bucket Data Source
   type: object
 apiStartKnowledgeBaseIndexingJobInputPublic:
   properties:
