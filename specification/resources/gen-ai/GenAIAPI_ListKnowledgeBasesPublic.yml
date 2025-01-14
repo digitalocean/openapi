@@ -1,15 +1,12 @@
-description: |-
-  get /v2/gen-ai/knowledge_bases
-
-  To attach a knowledge base to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`.
+description: To attach a knowledge base to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`.
 operationId: List_Knowledge_Bases
 parameters:
-- description: page number.
+- description: Page number.
   format: int64
   in: query
   name: page
   type: integer
-- description: items per page.
+- description: Items per page.
   format: int64
   in: query
   name: per_page

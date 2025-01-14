@@ -1,16 +1,14 @@
-description: |-
-  delete /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}
-
-  To delete a data source from a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
+description: To delete a data source from a knowledge base, send a DELETE request
+  to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
 operationId: Delete_a_Data_Source_from_a_Knowledge_Base
 parameters:
-- description: knowledge base id
+- description: Knowledge base id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: knowledge_base_uuid
   required: true
   type: string
-- description: data source id
+- description: Data source id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: data_source_uuid

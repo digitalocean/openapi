@@ -1,10 +1,7 @@
-description: |-
-  get /v2/gen-ai/agents/{uuid}/child_agents
-
-  To view agent routes for an agent, send a GET requtest to `/v2/gen-ai/agents/{uuid}/child_agents`.
+description: To view agent routes for an agent, send a GET requtest to `/v2/gen-ai/agents/{uuid}/child_agents`.
 operationId: View_Agent_Routes
 parameters:
-- description: agent id
+- description: Agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: uuid

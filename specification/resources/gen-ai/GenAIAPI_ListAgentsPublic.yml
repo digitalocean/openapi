@@ -1,10 +1,7 @@
-description: |-
-  get /v2/gen-ai/agents
-
-  To list all agents, send a GET request to `/v2/gen-ai/agents`.
+description: To list all agents, send a GET request to `/v2/gen-ai/agents`.
 operationId: List_Agents
 parameters:
-- description: only list agents that are deployed.
+- description: Only list agents that are deployed.
   in: query
   name: only_deployed
   type: boolean
@@ -15,12 +12,12 @@ parameters:
     type: string
   name: field_mask.paths
   type: array
-- description: page number.
+- description: Page number.
   format: int64
   in: query
   name: page
   type: integer
-- description: items per page.
+- description: Items per page.
   format: int64
   in: query
   name: per_page

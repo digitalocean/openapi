@@ -1,10 +1,7 @@
-description: |-
-  post /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources
-
-  To add a data source to a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
+description: To add a data source to a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
 operationId: Add_Data_Source_to_a_Knowledge_Base
 parameters:
-- description: knowledge base id
+- description: Knowledge base id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: knowledge_base_uuid

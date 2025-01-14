@@ -1,7 +1,4 @@
-description: |-
-  post /v2/gen-ai/knowledge_bases
-
-  To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
+description: To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
 operationId: Create_a_Knowledge_Base
 requestBody:
   content:

@@ -1,7 +1,4 @@
-description: |-
-  get /v2/gen-ai/regions
-
-  To list all datacenter regions, send a GET request to `/v2/gen-ai/regions`.
+description: To list all datacenter regions, send a GET request to `/v2/gen-ai/regions`.
 operationId: List_Datacenter_Regions
 parameters:
 - in: query

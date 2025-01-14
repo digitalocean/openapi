@@ -1,16 +1,13 @@
-description: |-
-  put /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}
-
-  To update the function route, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
+description: To update the function route, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
 operationId: Update_Function_Route_for_an_Agent
 parameters:
-- description: agent id
+- description: Agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: agent_uuid
   required: true
   type: string
-- description: function id
+- description: Function id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: function_uuid

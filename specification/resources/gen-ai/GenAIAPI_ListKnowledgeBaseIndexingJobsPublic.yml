@@ -1,15 +1,13 @@
-description: |-
-  get /v2/gen-ai/indexing_jobs
-
-  To list all indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs`.
+description: To list all indexing jobs for a knowledge base, send a GET request to
+  `/v2/gen-ai/indexing_jobs`.
 operationId: List_Indexing_Jobs_for_a_Knowledge_Base
 parameters:
-- description: page number.
+- description: Page number.
   format: int64
   in: query
   name: page
   type: integer
-- description: items per page.
+- description: Items per page.
   format: int64
   in: query
   name: per_page

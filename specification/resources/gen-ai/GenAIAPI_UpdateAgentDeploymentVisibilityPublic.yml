@@ -1,10 +1,8 @@
-description: |-
-  put /v2/gen-ai/agents/{uuid}/deployment_visibility
-
-  Check whether an agent is public or private. To get the agent status, send a PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
+description: Check whether an agent is public or private. To get the agent status,
+  send a PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
 operationId: Check_Agent_Status
 parameters:
-- description: unique id
+- description: Unique id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: uuid

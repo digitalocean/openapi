@@ -1,7 +1,5 @@
-description: |-
-  post /v2/gen-ai/indexing_jobs
-
-  To start an indexing job for a knowledge base, send a POST request to `/v2/gen-ai/indexing_jobs`.
+description: To start an indexing job for a knowledge base, send a POST request to
+  `/v2/gen-ai/indexing_jobs`.
 operationId: Start_Knowledge_Base_Indexing_Job
 requestBody:
   content:

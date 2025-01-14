@@ -1,21 +1,19 @@
-description: |-
-  get /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources
-
-  To list all data sources for a knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
+description: To list all data sources for a knowledge base, send a GET request to
+  `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
 operationId: List_Data_Sources_for_a_Knowledge_Base
 parameters:
-- description: knowledge base id
+- description: Knowledge base id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: knowledge_base_uuid
   required: true
   type: string
-- description: page number.
+- description: Page number.
   format: int64
   in: query
   name: page
   type: integer
-- description: items per page.
+- description: Items per page.
   format: int64
   in: query
   name: per_page

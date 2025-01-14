@@ -1,12 +1,9 @@
-description: |-
-  get /v2/gen-ai/models
-
-  To list all models, send a GET request to `/v2/gen-ai/models`.
+description: To list all models, send a GET request to `/v2/gen-ai/models`.
 operationId: List_Available_Models
 parameters:
 - collectionFormat: multi
   description: |-
-    include only models defined for the listed usecases.
+    Include only models defined for the listed usecases.
 
      - MODEL_USECASE_UNKNOWN: The use case of the model is unknown
      - MODEL_USECASE_AGENT: The model maybe used in an agent
@@ -24,16 +21,16 @@ parameters:
     type: string
   name: usecases
   type: array
-- description: only include models that are publicly available.
+- description: Only include models that are publicly available.
   in: query
   name: public_only
   type: boolean
-- description: page number.
+- description: Page number.
   format: int64
   in: query
   name: page
   type: integer
-- description: items per page.
+- description: Items per page.
   format: int64
   in: query
   name: per_page

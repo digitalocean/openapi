@@ -7,96 +7,96 @@ apiAcceptAgreementOutput:
 apiAgent:
   properties:
     api_key_infos:
+      description: Api key infos
       items:
         $ref: '#/apiAgentAPIKeyInfo'
-      title: api key infos
       type: array
     api_keys:
+      description: Api keys
       items:
         $ref: '#/apiAgentAPIKey'
-      title: api keys
       type: array
     chatbot:
       $ref: '#/apiChatbot'
     chatbot_identifiers:
+      description: Chatbot identifiers
       items:
         $ref: '#/apiAgentChatbotIdentifier'
-      title: chatbot identifiers
       type: array
     child_agents:
+      description: Child agents
       items:
         $ref: '#/apiAgent'
-      title: child agents
       type: array
     created_at:
+      description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     deployment:
       $ref: '#/apiDeployment'
     description:
+      description: Description of agent
       example: example string
-      title: description of agent
       type: string
     functions:
       items:
         $ref: '#/apiAgentFunction'
       type: array
     guardrails:
+      description: The guardrails the agent is attached to
       items:
         $ref: '#/apiAgentGuardrail'
-      title: the guardrails the agent is attached to
       type: array
     if_case:
       example: example string
       type: string
     instruction:
+      description: First instruction for agent
       example: example string
-      title: first instruction for agent
       type: string
     k:
       format: int64
       type: integer
     knowledge_bases:
+      description: Knowledge bases
       items:
         $ref: '#/apiKnowledgeBase'
-      title: knowledge bases
       type: array
     max_tokens:
       format: int64
       type: integer
     model:
       $ref: '#/apiModel'
-      title: model the agent is based on
+      description: Model the agent is based on
     name:
+      description: Agent name
       example: example name
-      title: agent name
       type: string
     parent_agents:
+      description: Parent agents
       items:
         $ref: '#/apiAgent'
-      title: parent agents
       type: array
     project_id:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     region:
+      description: Region code
       example: example string
-      title: region code
       type: string
     route_created_at:
+      description: Creation of route date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation of route date / time
       type: string
     route_created_by:
       example: 12345
       format: uint64
       type: string
     route_name:
+      description: Route name
       example: example name
-      title: route name
       type: string
     route_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -112,91 +112,91 @@ apiAgent:
       type: number
     template:
       $ref: '#/apiAgentTemplate'
-      title: template if agent is created from a template
+      description: Template if agent is created from a template
     top_p:
       example: 123
       format: float
       type: number
     updated_at:
+      description: Last modified
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     url:
+      description: Access your agent under this url
       example: example string
-      title: access your agent under this url
       type: string
     user_id:
+      description: Id of user that created the agent
       example: 12345
       format: uint64
-      title: id of user that created the agent
       type: string
     uuid:
+      description: Unique agent id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: unique agent id
       type: string
   title: An Agent
   type: object
 apiAgentAPIKey:
   properties:
     api_key:
+      description: Api key
       example: example string
-      title: api key
       type: string
   title: Agent API Key
   type: object
 apiAgentAPIKeyInfo:
   properties:
     created_at:
+      description: Creation date
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation date
       type: string
     created_by:
+      description: Created by
       example: 12345
       format: uint64
-      title: created by
       type: string
     deleted_at:
+      description: Deleted date
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: deleted date
       type: string
     name:
+      description: Name
       example: example name
-      title: name
       type: string
     secret_key:
       example: example string
       type: string
     uuid:
+      description: Uuid
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: uuid
       type: string
   title: Agent API Key Info
   type: object
 apiAgentChatbotIdentifier:
   properties:
     agent_chatbot_identifier:
+      description: Agent chatbot identifier
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: agent chatbot identifier
       type: string
   title: Agent Chatbot Identifier
   type: object
 apiAgentFunction:
   properties:
     api_key:
+      description: Api key
       example: example string
-      title: api key
       type: string
     created_at:
+      description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     description:
+      description: Agent description
       example: example string
-      title: agent description
       type: string
     faas_name:
       example: example name
@@ -207,23 +207,23 @@ apiAgentFunction:
     input_schema:
       type: object
     name:
+      description: Name
       example: example name
-      title: name
       type: string
     output_schema:
       type: object
     updated_at:
+      description: Last modified
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     url:
+      description: Download your agent here
       example: example string
-      title: download your agent here
       type: string
     uuid:
+      description: Unique id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: unique id
       type: string
   title: description missing
   type: object
@@ -273,22 +273,22 @@ apiAgentGuardrail:
 apiAgentModelUsage:
   properties:
     agent_name:
+      description: Agent name
       example: example name
-      title: agent name
       type: string
     agent_uuid:
+      description: Agent id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: agent id
       type: string
     requests_used:
+      description: Requests used
       example: 12345
       format: uint64
-      title: requests used
       type: string
     tokens_used:
+      description: Tokens  used
       example: 12345
       format: uint64
-      title: tokens  used
       type: string
   type: object
 apiAgentPrice:
@@ -312,40 +312,41 @@ apiAgentPublic:
   properties:
     chatbot:
       $ref: '#/apiChatbot'
+      description: Details about the chatbot widget so you can embed it in your website
       example: '{"name": "My Chatbot", "primary_color": "#000000", "secondary_color":
         "#FFFFFF", "starting_message": "Hello, how can I help you?", "button_background_color":
         "#000000", "logo": "https://example.com/logo.png"}'
-      title: details about the chatbot widget so you can embed it in your website
     chatbot_identifiers:
+      description: Chatbot identifiers
       example: '["12345678-1234-1234-1234-123456789012"]'
       items:
         $ref: '#/apiAgentChatbotIdentifier'
-      title: chatbot identifiers
       type: array
     created_at:
+      description: Creation date / time
       example: "2021-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     deployment:
       $ref: '#/apiDeployment'
-      title: more details about how to access the agent
+      description: More details about how to access the agent
     description:
+      description: Description of agent
       example: This is a chatbot that can help you with your questions.
-      title: description of agent
       type: string
     if_case:
+      description: Instructions to the agent on how to use the route
       example: if talking about the weather use this route
-      title: Instructions to the agent on how to use the route
       type: string
     instruction:
+      description: First instruction for agent
       example: Hello, how can I help you?
-      title: first instruction for agent
       type: string
     k:
+      description: How many results should be considered from an attached knowledge
+        base
       example: "5"
       format: int64
-      title: how many results should be considered from an attached knowledge base
       type: integer
     max_tokens:
       description: Specifies the maximum number of tokens the model can process in
@@ -356,43 +357,43 @@ apiAgentPublic:
       type: integer
     model:
       $ref: '#/apiModel'
-      title: model the agent is based on
+      description: Model the agent is based on
     name:
+      description: Agent name
       example: My Agent
-      title: agent name
       type: string
     project_id:
+      description: The DigitalOcean project ID associated with the agent
       example: 12345678-1234-1234-1234-123456789012
-      title: The DigitalOcean project ID associated with the agent
       type: string
     region:
+      description: Region code
       example: '"tor1"'
-      title: region code
       type: string
     route_created_at:
+      description: Creation of route date / time
       example: "2021-01-01T00:00:00Z"
       format: date-time
-      title: creation of route date / time
       type: string
     route_created_by:
+      description: Id of user that created the route
       example: "12345678"
       format: uint64
-      title: id of user that created the route
       type: string
     route_name:
+      description: Route name
       example: Route Name
-      title: route name
       type: string
     route_uuid:
+      description: Route uuid
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: route uuid
       type: string
     tags:
+      description: A set of abitrary tags to organize your agent
       example: '["tag1", "tag2"]'
       items:
         example: example string
         type: string
-      title: A set of abitrary tags to organize your agent
       type: array
     temperature:
       description: Controls the model’s creativity, specified as a number between
@@ -403,7 +404,7 @@ apiAgentPublic:
       type: number
     template:
       $ref: '#/apiAgentTemplate'
-      title: template if agent is created from a template
+      description: Template if agent is created from a template
     top_p:
       description: Defines the cumulative probability threshold for word selection,
         specified as a number between 0 and 1. Higher values allow for more diverse
@@ -412,78 +413,78 @@ apiAgentPublic:
       format: float
       type: number
     updated_at:
+      description: Last modified
       example: "2021-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     url:
+      description: Access your agent under this url
       example: https://example.com/agent
-      title: access your agent under this url
       type: string
     user_id:
+      description: Id of user that created the agent
       example: "12345678"
       format: uint64
-      title: id of user that created the agent
       type: string
     uuid:
+      description: Unique agent id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: unique agent id
       type: string
   title: A GenAI Agent's configuration
   type: object
 apiAgentTemplate:
   properties:
     created_at:
+      description: The agent template's creation date
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: The agent template's creation date
       type: string
     description:
+      description: Description of the agent template
       example: example string
-      title: description of the agent template
       type: string
     instruction:
+      description: Instructions for the agent template
       example: example string
-      title: instructions for the agent template
       type: string
     k:
+      description: The 'k' value for the agent template
       format: int64
-      title: The 'k' value for the agent template
       type: integer
     knowledge_bases:
+      description: List of knowledge bases associated with the agent template
       items:
         $ref: '#/apiKnowledgeBase'
-      title: List of knowledge bases associated with the agent template
       type: array
     max_tokens:
+      description: The max_tokens setting for the agent template
       format: int64
-      title: The max_tokens setting for the agent template
       type: integer
     model:
       $ref: '#/apiModel'
-      title: The model associated with the agent template
+      description: The model associated with the agent template
     name:
+      description: Name of the agent template
       example: example name
-      title: name of the agent template
       type: string
     temperature:
+      description: The temperature setting for the agent template
       example: 123
       format: float
-      title: The temperature setting for the agent template
       type: number
     top_p:
+      description: The top_p setting for the agent template
       example: 123
       format: float
-      title: The top_p setting for the agent template
       type: number
     updated_at:
+      description: The agent template's last updated date
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: The agent template's last updated date
       type: string
     uuid:
+      description: Unique id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: unique id
       type: string
   title: Represents an AgentTemplate entity
   type: object
@@ -582,8 +583,8 @@ apiChatbot:
       example: example string
       type: string
     name:
+      description: Name of chatbot
       example: example name
-      title: name of chatbot
       type: string
     primary_color:
       example: example string
@@ -599,19 +600,19 @@ apiChatbot:
 apiCreateAgentAPIKeyInputPublic:
   properties:
     agent_uuid:
+      description: Agent id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: agent id
       type: string
     name:
+      description: A human friendly name to identify the key
       example: Production Key
-      title: a human friendly name to identify the key
       type: string
   type: object
 apiCreateAgentAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiAgentAPIKeyInfo'
-      title: api key info
+      description: Api key info
   type: object
 apiCreateAgentFromTemplateInputPublic:
   properties:
@@ -629,35 +630,35 @@ apiCreateAgentFromTemplateOutput:
 apiCreateAgentInputPublic:
   properties:
     description:
+      description: A text description of the agent, not used in inference
       example: '"My Agent Description"'
-      title: a text description of the agent, not used in inference
       type: string
     instruction:
+      description: Agent instruction
       example: '"You are an agent who thinks deeply about the world"'
-      title: agent instruction
       type: string
     knowledge_base_uuid:
+      description: Ids of the knowledge base(s) to attach to the agent
       example: '["12345678-1234-1234-1234-123456789012"]'
       items:
         example: example string
         type: string
-      title: ids of the knowledge base(s) to attach to the agent
       type: array
     model_uuid:
+      description: Model id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: model id
       type: string
     name:
+      description: Agent name
       example: '"My Agent"'
-      title: agent name
       type: string
     project_id:
+      description: The id of the DigitalOcean this agent will belong to
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: the id of the DigitalOcean this agent will belong to
       type: string
     region:
+      description: The DigitalOcean region to deploy your agent in
       example: '"tor1"'
-      title: The DigitalOcean region to deploy your agent in
       type: string
     tags:
       example: '["tag1", "tag2"]'
@@ -671,7 +672,7 @@ apiCreateAgentOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
-      title: The created agent
+      description: The created agent
   title: Information about a newly created Agent
   type: object
 apiCreateChatbotInputPublic:
@@ -682,7 +683,7 @@ apiCreateChatbotOutput:
   properties:
     chatbot:
       $ref: '#/apiChatbot'
-      title: the chatbot
+      description: The chatbot
   title: info about a newly created chatbot
   type: object
 apiCreateDataSourceFileUploadPresignedUrlsOutput:
@@ -708,22 +709,22 @@ apiCreateKnowledgeBaseDataSourceInputPublic:
   properties:
     file_upload_data_source:
       $ref: '#/apiFileUploadDataSource'
+      description: File Upload Data Source content
       example: '"my-folder/"'
-      title: file Upload Data Source content
     knowledge_base_uuid:
+      description: Knowledge base id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: knowledge base id
       type: string
     spaces_data_source:
       $ref: '#/apiSpacesDataSource'
-      title: spaces Bucket Data Source content
+      description: Spaces Bucket Data Source content
   title: data to create a knowledge base data source
   type: object
 apiCreateKnowledgeBaseDataSourceOutput:
   properties:
     knowledge_base_data_source:
       $ref: '#/apiKnowledgeBaseDataSource'
-      title: the data source created
+      description: The data source created
   title: information about a newly created knowldege base data source
   type: object
 apiCreateKnowledgeBaseInputPublic:
@@ -767,22 +768,22 @@ apiCreateKnowledgeBaseInputPublic:
         type: string
       type: array
     vpc_uuid:
+      description: The VPC to deploy the knowledge base database in
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: The VPC to deploy the knowledge base database in
       type: string
   type: object
 apiCreateKnowledgeBaseOutput:
   properties:
     knowledge_base:
       $ref: '#/apiKnowledgeBase'
-      title: the knowledge base
+      description: The knowledge base
   title: information about a newly created knowledge base
   type: object
 apiCreateModelOutput:
   properties:
     model:
       $ref: '#/apiModel'
-      title: the model
+      description: The model
   title: information about a newly created model
   type: object
 apiDeleteAgentAPIKeyInputPublic:
@@ -795,7 +796,7 @@ apiDeleteAgentAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiAgentAPIKeyInfo'
-      title: api key info
+      description: Api key info
   type: object
 apiDeleteAgentInputPublic:
   properties:
@@ -814,8 +815,8 @@ apiDeleteChatbotInputPublic:
 apiDeleteChatbotOutput:
   properties:
     agent_uuid:
+      description: Agent id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: agent id
       type: string
   title: information about a delete chatbot
   type: object
@@ -835,12 +836,12 @@ apiDeleteKnowledgeBaseDataSourceInputPublic:
 apiDeleteKnowledgeBaseDataSourceOutput:
   properties:
     data_source_uuid:
+      description: Data source id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: data source id
       type: string
     knowledge_base_uuid:
+      description: Knowledge base id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: knowledge base id
       type: string
   title: information about a newly deleted knowledge base data source
   type: object
@@ -851,36 +852,36 @@ apiDeleteKnowledgeBaseInputPublic:
 apiDeleteKnowledgeBaseOutput:
   properties:
     uuid:
+      description: The id of the deleted knowledge base
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: the id of the deleted knowledge base
       type: string
   title: information about a deleted knowledge base
   type: object
 apiDeployment:
   properties:
     created_at:
+      description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     name:
+      description: Name
       example: example name
-      title: name
       type: string
     status:
       $ref: '#/apiDeploymentStatus'
     updated_at:
+      description: Last modified
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     url:
+      description: Access your deployed agent here
       example: example string
-      title: access your deployed agent here
       type: string
     uuid:
+      description: Unique id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: unique id
       type: string
     visibility:
       $ref: '#/apiDeploymentVisibility'
@@ -942,12 +943,12 @@ apiFileUploadDataSource:
   description: File to upload as data source for knowledge base.
   properties:
     original_file_name:
+      description: The original file name
       example: example name
-      title: The original file name
       type: string
     stored_object_key:
+      description: The object key the file was stored as
       example: example string
-      title: The object key the file was stored as
       type: string
   type: object
 apiGetAgentInputPublic:
@@ -960,26 +961,26 @@ apiGetAgentOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
-      title: the agent
+      description: The agent
   title: One Agent
   type: object
 apiGetAgentOutputPublic:
   properties:
     agent:
       $ref: '#/apiAgentPublic'
-      title: the agent
+      description: The agent
   title: One Agent
   type: object
 apiGetAgentPlaygroundTokensOutput:
   properties:
     token_limit_per_day:
+      description: Daily token limit
       example: 12345
       format: uint64
-      title: daily token limit
       type: string
     tokens_remaining:
+      description: Tokens remaining
       format: int64
-      title: tokens remaining
       type: integer
   type: object
 apiGetAgentTemplateInputPublic:
@@ -990,7 +991,7 @@ apiGetAgentTemplateOutput:
   properties:
     template:
       $ref: '#/apiAgentTemplate'
-      title: the agent template
+      description: The agent template
   type: object
 apiGetAgentUsageInputPublic:
   properties:
@@ -1013,9 +1014,9 @@ apiGetChildrenInputPublic:
 apiGetChildrenOutput:
   properties:
     children:
+      description: Child agents
       items:
         $ref: '#/apiAgent'
-      title: child agents
       type: array
   title: child list for an agent
   type: object
@@ -1064,7 +1065,7 @@ apiGetKnowledgeBaseOutput:
       $ref: '#/dbaasClusterStatus'
     knowledge_base:
       $ref: '#/apiKnowledgeBase'
-      title: the knowledge base
+      description: The knowledge base
   title: the knowledge base
   type: object
 apiGetModelInputPublic:
@@ -1075,7 +1076,7 @@ apiGetModelOutput:
   properties:
     model:
       $ref: '#/apiModel'
-      title: the model
+      description: The model
   title: a specific model
   type: object
 apiGetModelPlaygroundTokensInputPublic:
@@ -1085,13 +1086,13 @@ apiGetModelPlaygroundTokensInputPublic:
 apiGetModelPlaygroundTokensOutput:
   properties:
     token_limit_per_day:
+      description: Daily token limit
       example: 12345
       format: uint64
-      title: daily token limit
       type: string
     tokens_remaining:
+      description: Tokens remaining
       format: int64
-      title: tokens remaining
       type: integer
   title: GetModelPlaygroundTokensOutput description
   type: object
@@ -1107,7 +1108,7 @@ apiGetModelUsageOutput:
   properties:
     usage:
       $ref: '#/apiResourceUsage'
-      title: the model usage
+      description: The model usage
   title: information about model usage
   type: object
 apiGetModelVersionsInputPublic:
@@ -1118,34 +1119,34 @@ apiGetPreferredRegionOutput:
   properties:
     region:
       $ref: '#/genaiapiRegion'
-      title: region code
+      description: Region code
   title: Region code of preferred Regions
   type: object
 apiGetResourceLimitsOutput:
   properties:
     agent_count:
+      description: Total agents used
       format: int64
-      title: total agents used
       type: integer
     agent_limit:
+      description: Total permitted agents
       format: int64
-      title: total permitted agents
       type: integer
     guardrail_count:
+      description: Total guardrails used
       format: int64
-      title: total guardrails used
       type: integer
     guardrail_limit:
+      description: Total permitted guardrails
       format: int64
-      title: total permitted guardrails
       type: integer
     knowledge_base_count:
+      description: Total knowledge bases used
       format: int64
-      title: total knowledge bases used
       type: integer
     knowledge_base_limit:
+      description: Total permitted knowledge bases
       format: int64
-      title: total permitted knowledge bases
       type: integer
   type: object
 apiGetTeamAgreementOutput:
@@ -1157,15 +1158,15 @@ apiGetTeamAgreementOutput:
 apiGuardrail:
   properties:
     agent_uuids:
+      description: List of attached agents uuids
       items:
         example: example string
         type: string
-      title: list of attached agents uuids
       type: array
     created_at:
+      description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     default_response:
       example: example string
@@ -1187,9 +1188,9 @@ apiGuardrail:
     type:
       $ref: '#/apiGuardrailType'
     updated_at:
+      description: Last modified
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -1216,9 +1217,9 @@ apiGuardrailPrice:
 apiGuardrailTemplate:
   properties:
     created_at:
+      description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     default_response:
       example: example string
@@ -1234,9 +1235,9 @@ apiGuardrailTemplate:
     type:
       $ref: '#/apiGuardrailType'
     updated_at:
+      description: Last modified
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -1255,50 +1256,50 @@ apiGuardrailType:
 apiIndexedDataSource:
   properties:
     completed_at:
+      description: Timestamp when data source completed indexing
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: timestamp when data source completed indexing
       type: string
     data_source_uuid:
+      description: Uuid of the indexed data source
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: uuid of the indexed data source
       type: string
     indexed_file_count:
+      description: Total count of files that have been indexed
       example: 12345
       format: uint64
-      title: total count of files that have been indexed
       type: string
     started_at:
+      description: Timestamp when data source started indexing
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: timestamp when data source started indexing
       type: string
     total_bytes:
+      description: Total size of files in data source in bytes
       example: 12345
       format: uint64
-      title: total size of files in data source in bytes
       type: string
     total_bytes_indexed:
+      description: Total size of files in data source in bytes that have been indexed
       example: 12345
       format: uint64
-      title: total size of files in data source in bytes that have been indexed
       type: string
     total_file_count:
+      description: Total file count in the data source
       example: 12345
       format: uint64
-      title: total file count in the data source
       type: string
   type: object
 apiIndexingJob:
   properties:
     completed_datasources:
+      description: Number of datasources indexed completed
       format: int64
-      title: number of datasources indexed completed
       type: integer
     created_at:
+      description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     data_source_uuids:
       items:
@@ -1310,8 +1311,8 @@ apiIndexingJob:
       format: date-time
       type: string
     knowledge_base_uuid:
+      description: Knowledge base id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: knowledge base id
       type: string
     phase:
       $ref: '#/apiBatchJobPhase'
@@ -1320,41 +1321,41 @@ apiIndexingJob:
       format: date-time
       type: string
     tokens:
+      description: Number of tokens
       format: int64
-      title: number of tokens
       type: integer
     total_datasources:
+      description: Number of datasources being indexed
       format: int64
-      title: number of datasources being indexed
       type: integer
     updated_at:
+      description: Last modified
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     uuid:
+      description: Unique id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: unique id
       type: string
   title: IndexingJob description
   type: object
 apiIssueAgentTokenInputPublic:
   properties:
     agent_uuid:
+      description: Agent ID
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: Agent ID
       type: string
   title: Input for issuing a token for an agent
   type: object
 apiIssueAgentTokenOutput:
   properties:
     access_token:
+      description: The token
       example: example string
-      title: the token
       type: string
     refresh_token:
+      description: The token used to refresh
       example: example string
-      title: the token used to refresh
       type: string
   title: information about a newly issued token
   type: object
@@ -1371,34 +1372,34 @@ apiIssueModelPlaygroundTokenOutput:
 apiKBDataSource:
   properties:
     bucket_name:
+      description: Deprecated, moved to data_source_details
       example: example name
-      title: Deprecated, moved to data_source_details
       type: string
     bucket_region:
+      description: Deprecated, moved to data_source_details
       example: example string
-      title: Deprecated, moved to data_source_details
       type: string
     file_upload_data_source:
       $ref: '#/apiFileUploadDataSource'
-      title: File Upload Data Source
+      description: File Upload Data Source
     item_path:
       example: example string
       type: string
     spaces_data_source:
       $ref: '#/apiSpacesDataSource'
-      title: Spaces Data Source
+      description: Spaces Data Source
   type: object
 apiKnowledgeBase:
   properties:
     added_to_agent_at:
+      description: Time when the knowledge base was added to the agent
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: time when the knowledge base was added to the agent
       type: string
     created_at:
+      description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     database_id:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -1407,21 +1408,21 @@ apiKnowledgeBase:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     is_public:
+      description: Whether the knowledge base is public or not
       example: true
-      title: whether the knowledge base is public or not
       type: boolean
     last_indexing_job:
       $ref: '#/apiIndexingJob'
     name:
+      description: Name of knowledge base
       example: example name
-      title: name of knowledge base
       type: string
     project_id:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     region:
+      description: Region code
       example: example string
-      title: region code
       type: string
     tags:
       items:
@@ -1429,55 +1430,55 @@ apiKnowledgeBase:
         type: string
       type: array
     updated_at:
+      description: Last modified
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     user_id:
+      description: Id of user that created the knowledge base
       example: 12345
       format: int64
-      title: id of user that created the knowledge base
       type: string
     uuid:
+      description: Unique id for knowledge base
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: unique id for knowledge base
       type: string
   title: Knowledgebase Description
   type: object
 apiKnowledgeBaseDataSource:
   properties:
     bucket_name:
+      description: Name of storage bucket - Deprecated, moved to data_source_details
       example: example name
-      title: name of storage bucket - Deprecated, moved to data_source_details
       type: string
     created_at:
+      description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     file_upload_data_source:
       $ref: '#/apiFileUploadDataSource'
     item_path:
+      description: Path of folder or object in bucket - Deprecated, moved to data_source_details
       example: example string
-      title: path of folder or object in bucket - Deprecated, moved to data_source_details
       type: string
     last_indexing_job:
       $ref: '#/apiIndexingJob'
-      title: the last job the data source was indexed
+      description: The last job the data source was indexed
     region:
+      description: Region code - Deprecated, moved to data_source_details
       example: example string
-      title: region code - Deprecated, moved to data_source_details
       type: string
     spaces_data_source:
       $ref: '#/apiSpacesDataSource'
     updated_at:
+      description: Last modified
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     uuid:
+      description: Unique id of knowledge base
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: unique id of knowledge base
       type: string
   title: Data Source configuration for Knowledge Bases
   type: object
@@ -1501,34 +1502,36 @@ apiKnowledgeBasePrice:
 apiLinkAgentFunctionInputPublic:
   properties:
     agent_uuid:
+      description: Agent id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: agent id
       type: string
     description:
+      description: Function description
       example: '"My Function Description"'
-      title: function description
       type: string
     faas_name:
+      description: The name of the function in the DigitalOcean functions platform
       example: '"my-function"'
-      title: The name of the function in the DigitalOcean functions platform
       type: string
     faas_namespace:
+      description: The namespace of the function in the DigitalOcean functions platform
       example: '"default"'
-      title: The namespace of the function in the DigitalOcean functions platform
       type: string
     function_name:
+      description: Function name
       example: '"My Function"'
-      title: function name
       type: string
     input_schema:
+      description: Describe the input schema for the function so the agent may call
+        it
       example: '{ "fields": { "name": { "type": "string", "required": true, "description":
         "The name parameter" } }'
-      title: Describe the input schema for the function so the agent may call it
       type: object
     output_schema:
+      description: Describe the output schema for the function so the agent handle
+        its response
       example: '{ "fields": { "name": { "type": "string", "description": "The name
         parameter" } }'
-      title: Describe the output schema for the function so the agent handle its response
       type: object
   title: information for a agent function link
   type: object
@@ -1536,21 +1539,21 @@ apiLinkAgentFunctionOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
-      title: the agent
+      description: The agent
   title: information about a newly function linked agent
   type: object
 apiLinkAgentGuardrailOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
-      title: the agent
+      description: The agent
   title: information about an updated agent
   type: object
 apiLinkAgentInputPublic:
   properties:
     child_agent_uuid:
+      description: Routed agent id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: routed agent id
       type: string
     if_case:
       example: '"use this to get weather information"'
@@ -1560,16 +1563,16 @@ apiLinkAgentInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     route_name:
+      description: Name of route
       example: '"weather_route"'
-      title: name of route
       type: string
   title: information for linking an agent
   type: object
 apiLinkAgentOutput:
   properties:
     child_agent_uuid:
+      description: Routed agent id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: routed agent id
       type: string
     parent_agent_uuid:
       description: A unique identifier for the parent agent.
@@ -1593,7 +1596,7 @@ apiLinks:
   properties:
     pages:
       $ref: '#/apiPages'
-      title: Links to other pages
+      description: Links to other pages
   title: Links to other pages
   type: object
 apiListAgentAPIKeysInputPublic:
@@ -1607,16 +1610,16 @@ apiListAgentAPIKeysInputPublic:
 apiListAgentAPIKeysOutput:
   properties:
     api_key_infos:
+      description: Api key infos
       items:
         $ref: '#/apiAgentAPIKeyInfo'
-      title: api key infos
       type: array
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
-      title: information about the data set
+      description: Information about the data set
   type: object
 apiListAgentPricesOutput:
   properties:
@@ -1635,10 +1638,10 @@ apiListAgentTemplatesOutput:
   properties:
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
-      title: information about the data set
+      description: Information about the data set
     templates:
       items:
         $ref: '#/apiAgentTemplate'
@@ -1657,32 +1660,32 @@ apiListAgentsInputPublic:
 apiListAgentsOutput:
   properties:
     agents:
+      description: Agents
       items:
         $ref: '#/apiAgent'
-      title: Agents
       type: array
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
-      title: information about the data set
+      description: Information about the data set
   title: List of Agents
   type: object
 apiListAgentsOutputPublic:
   properties:
     agents:
+      description: Agents
       items:
         $ref: '#/apiAgentPublic'
-      title: Agents
       type: array
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
+      description: Information about the paginated data set
       example: '{ "total": 10, "page": 1, "pages": 1 }'
-      title: information about the paginated data set
   title: List of Agents
   type: object
 apiListGuardrailAgentsOutput:
@@ -1703,10 +1706,10 @@ apiListGuardrailTemplatesOutput:
   properties:
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
-      title: information about the data set
+      description: Information about the data set
     templates:
       items:
         $ref: '#/apiGuardrailTemplate'
@@ -1721,10 +1724,10 @@ apiListGuardrailsOutput:
       type: array
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
-      title: information about the data set
+      description: Information about the data set
   title: ListGuardrailsOutput description
   type: object
 apiListIndexingJobDataSourcesInputPublic:
@@ -1745,9 +1748,9 @@ apiListKnowledgeBaseAgentsInputPublic:
 apiListKnowledgeBaseAgentsOutput:
   properties:
     agents:
+      description: The agents
       items:
         $ref: '#/apiAgent'
-      title: the agents
       type: array
   title: list of agents
   type: object
@@ -1762,16 +1765,16 @@ apiListKnowledgeBaseDataSourcesInputPublic:
 apiListKnowledgeBaseDataSourcesOutput:
   properties:
     knowledge_base_data_sources:
+      description: The data sources
       items:
         $ref: '#/apiKnowledgeBaseDataSource'
-      title: the data sources
       type: array
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
-      title: information about the data set
+      description: Information about the data set
   title: a list of knowledge base data sources
   type: object
 apiListKnowledgeBaseIndexingJobsInputPublic:
@@ -1783,16 +1786,16 @@ apiListKnowledgeBaseIndexingJobsInputPublic:
 apiListKnowledgeBaseIndexingJobsOutput:
   properties:
     jobs:
+      description: The indexing jobs
       items:
         $ref: '#/apiIndexingJob'
-      title: the indexing jobs
       type: array
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
-      title: information about the data set
+      description: Information about the data set
   title: indexing jobs
   type: object
 apiListKnowledgeBasePricesOutput:
@@ -1811,16 +1814,16 @@ apiListKnowledgeBasesInputPublic:
 apiListKnowledgeBasesOutput:
   properties:
     knowledge_bases:
+      description: The knowledge bases
       items:
         $ref: '#/apiKnowledgeBase'
-      title: the knowledge bases
       type: array
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
-      title: information about the data set
+      description: Information about the data set
   title: list of knowledge bases
   type: object
 apiListModelPricesOutput:
@@ -1834,29 +1837,29 @@ apiListModelUsagesByAgentOutput:
   properties:
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
-      title: information about the data set
+      description: Information about the data set
     request_limit_per_minute:
+      description: Total request limit per minute
       example: 12345
       format: uint64
-      title: total request limit per minute
       type: string
     token_limit_per_day:
+      description: Total token limit per day
       example: 12345
       format: uint64
-      title: total token limit per day
       type: string
     token_limit_per_minute:
+      description: Total token limit per minute
       example: 12345
       format: uint64
-      title: total token limit per minute
       type: string
     usages:
+      description: The model's usage by agent
       items:
         $ref: '#/apiAgentModelUsage'
-      title: the model's usage by agent
       type: array
   title: ListModelUsagesByAgentOutput description
   type: object
@@ -1874,14 +1877,14 @@ apiListModelsOutput:
   properties:
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
-      title: information about the data set
+      description: Information about the data set
     models:
+      description: The models
       items:
         $ref: '#/apiModel'
-      title: the models
       type: array
   title: a list of models
   type: object
@@ -1889,40 +1892,40 @@ apiListModelsOutputPublic:
   properties:
     links:
       $ref: '#/apiLinks'
-      title: links to other pages
+      description: Links to other pages
     meta:
       $ref: '#/apiMeta'
+      description: Information about the data set
       example: '{"total": 1, "page": 1, "per_page": 20}'
-      title: information about the data set
     models:
+      description: The models
       items:
         $ref: '#/apiModelPublic'
-      title: the models
       type: array
   title: a list of models
   type: object
 apiListRegionsOutput:
   properties:
     regions:
+      description: Region code
       items:
         $ref: '#/genaiapiRegion'
-      title: region code
       type: array
   title: Region Codes
   type: object
 apiMeta:
   properties:
     page:
+      description: The current page
       format: int64
-      title: the current page
       type: integer
     pages:
+      description: Total number of pages
       format: int64
-      title: total number of pages
       type: integer
     total:
+      description: Total amount of items over all pages
       format: int64
-      title: total amount of items over all pages
       type: integer
   title: Meta information about the data set
   type: object
@@ -1931,53 +1934,53 @@ apiModel:
     agreement:
       $ref: '#/apiAgreement'
     created_at:
+      description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     inference_name:
+      description: Internally used name
       example: example name
-      title: internally used name
       type: string
     inference_version:
+      description: Internally used version
       example: example string
-      title: internally used version
       type: string
     is_foundational:
+      description: True if it is a foundational model provided by do
       example: true
-      title: true if it is a foundational model provided by do
       type: boolean
     metadata:
-      title: additional meta data
+      description: Additional meta data
       type: object
     name:
+      description: Name of the model
       example: example name
-      title: name of the model
       type: string
     parent_uuid:
+      description: Unique id of the model, this model is based on
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: unique id of the model, this model is based on
       type: string
     updated_at:
+      description: Last modified
       example: "2023-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     upload_complete:
+      description: Model has been fully uploaded
       example: true
-      title: model has been fully uploaded
       type: boolean
     url:
+      description: Download url
       example: example string
-      title: download url
       type: string
     uuid:
+      description: Unique id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: unique id
       type: string
     version:
       $ref: '#/apiModelVersion'
-      title: version
+      description: Version
   title: Description of a Model
   type: object
 apiModelPrice:
@@ -2001,54 +2004,54 @@ apiModelPublic:
   properties:
     agreement:
       $ref: '#/apiAgreement'
+      description: The legal agreement required to use this model
       example: '{"uuid": "12345678-1234-1234-1234-123456789012", "name": "LLAMA TOS",
         "description": "LAMA TERMS", "url": "https://example.com/agreement"}'
-      title: the legal agreement required to use this model
     created_at:
+      description: Creation date / time
       example: "2021-01-01T00:00:00Z"
       format: date-time
-      title: creation date / time
       type: string
     is_foundational:
+      description: True if it is a foundational model provided by do
       example: "true"
-      title: true if it is a foundational model provided by do
       type: boolean
     name:
+      description: Name of the model
       example: Llama 3.3 (70b)
-      title: name of the model
       type: string
     parent_uuid:
+      description: Unique id of the model, this model is based on
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: unique id of the model, this model is based on
       type: string
     updated_at:
+      description: Last modified
       example: "2021-01-01T00:00:00Z"
       format: date-time
-      title: last modified
       type: string
     upload_complete:
+      description: Model has been fully uploaded
       example: "true"
-      title: model has been fully uploaded
       type: boolean
     url:
+      description: Download url
       example: https://example.com/model.zip
-      title: download url
       type: string
     uuid:
+      description: Unique id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: unique id
       type: string
     version:
       $ref: '#/apiModelVersion'
+      description: Version
       example: '{"major": 1, "minor": 2, "patch": 3}'
-      title: version
   title: A machine learning model stored on the GenAI platform
   type: object
 apiModelUploadCompleteOutput:
   properties:
     model:
       $ref: '#/apiModel'
-      title: the model
+      description: The model
   title: information about an updated model
   type: object
 apiModelUsecase:
@@ -2070,36 +2073,36 @@ apiModelUsecase:
 apiModelVersion:
   properties:
     major:
+      description: Major version number
       format: int64
-      title: major version number
       type: integer
     minor:
+      description: Minor version number
       format: int64
-      title: minor version number
       type: integer
     patch:
+      description: Patch version number
       format: int64
-      title: patch version number
       type: integer
   title: Version Information about a Model
   type: object
 apiPages:
   properties:
     first:
+      description: First page
       example: example string
-      title: first page
       type: string
     last:
+      description: Last page
       example: example string
-      title: last page
       type: string
     next:
+      description: Next page
       example: example string
-      title: next page
       type: string
     previous:
+      description: Previous page
       example: example string
-      title: previous page
       type: string
   title: Information about how to reach other pages
   type: object
@@ -2107,8 +2110,8 @@ apiPresignedUrlFile:
   description: A single file’s metadata in the request.
   properties:
     file_name:
+      description: Local filename
       example: example name
-      title: local filename
       type: string
     file_size:
       description: The size of the file in bytes.
@@ -2125,12 +2128,12 @@ apiRefreshAgentTokenInputPublic:
 apiRefreshAgentTokenOutput:
   properties:
     access_token:
+      description: The token
       example: example string
-      title: the token
       type: string
     refresh_token:
+      description: Rhe refreshed token
       example: example string
-      title: rhe refreshed token
       type: string
   title: information about a refreshed token
   type: object
@@ -2154,7 +2157,7 @@ apiRegenerateAgentAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiAgentAPIKeyInfo'
-      title: api key info
+      description: Api key info
   type: object
 apiResourceUsage:
   properties:
@@ -2175,31 +2178,31 @@ apiResourceUsage:
 apiSpacesDataSource:
   properties:
     bucket_name:
+      description: Spaces bucket name
       example: example name
-      title: Spaces bucket name
       type: string
     item_path:
       example: example string
       type: string
     region:
+      description: Region of bucket
       example: example string
-      title: Region of bucket
       type: string
   title: Spaces Bucket Data Source
   type: object
 apiStartKnowledgeBaseIndexingJobInputPublic:
   properties:
     data_source_uuids:
+      description: List of data source ids to index, if none are provided, all data
+        sources will be indexed
       example: '["12345678-1234-1234-1234-123456789012"]'
       items:
         example: example string
         type: string
-      title: list of data source ids to index, if none are provided, all data sources
-        will be indexed
       type: array
     knowledge_base_uuid:
+      description: Knowledge base id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: knowledge base id
       type: string
   title: StartKnowledgeBaseIndexingJobInputPublic description
   type: object
@@ -2223,8 +2226,8 @@ apiTeamAgreement:
 apiTeamModelURLOutput:
   properties:
     url:
+      description: The signed url that can be used to upload one file
       example: example string
-      title: the signed url that can be used to upload one file
       type: string
   title: model url output
   type: object
@@ -2238,7 +2241,7 @@ apiUnlinkAgentFunctionOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
-      title: the agent
+      description: The agent
   title: information about a newly unlinked agent
   type: object
 apiUnlinkAgentGuardrailOutput:
@@ -2256,12 +2259,12 @@ apiUnlinkAgentInputPublic:
 apiUnlinkAgentOutput:
   properties:
     child_agent_uuid:
+      description: Routed agent id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: routed agent id
       type: string
     parent_agent_uuid:
+      description: Pagent agent id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: pagent agent id
       type: string
   title: information about a removed linkage
   type: object
@@ -2275,84 +2278,86 @@ apiUnlinkKnowledgeBaseOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
-      title: agent
+      description: Agent
   title: informatinon about a unlinked knowledge base
   type: object
 apiUpdateAgentAPIKeyInputPublic:
   properties:
     agent_uuid:
+      description: Agent id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: agent id
       type: string
     api_key_uuid:
+      description: Api key id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: api key id
       type: string
     name:
+      description: Name
       example: '"Production Key"'
-      title: name
       type: string
   type: object
 apiUpdateAgentAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiAgentAPIKeyInfo'
-      title: api key info
+      description: Api key info
   type: object
 apiUpdateAgentDeploymentVisbilityOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
-      title: the agent
+      description: The agent
   title: UpdateAgentDeploymentVisbilityOutput description
   type: object
 apiUpdateAgentDeploymentVisibilityInputPublic:
   properties:
     uuid:
+      description: Unique id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: unique id
       type: string
     visibility:
       $ref: '#/apiDeploymentVisibility'
+      description: Who can interact with the deployed agent
       example: PUBLIC
-      title: who can interact with the deployed agent
   title: UpdateAgentDeploymentVisibilityInputPublic description
   type: object
 apiUpdateAgentFunctionInputPublic:
   properties:
     agent_uuid:
+      description: Agent id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: agent id
       type: string
     description:
+      description: Funciton description
       example: '"My Function Description"'
-      title: funciton description
       type: string
     faas_name:
+      description: The name of the function in the DigitalOcean functions platform
       example: '"my-function"'
-      title: The name of the function in the DigitalOcean functions platform
       type: string
     faas_namespace:
+      description: The namespace of the function in the DigitalOcean functions platform
       example: '"default"'
-      title: The namespace of the function in the DigitalOcean functions platform
       type: string
     function_name:
+      description: Function name
       example: '"My Function"'
-      title: function name
       type: string
     function_uuid:
+      description: Function id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: function id
       type: string
     input_schema:
+      description: Describe the input schema for the function so the agent may call
+        it
       example: '{ "fields": { "name": { "type": "string", "required": true, "description":
         "The name parameter" } }'
-      title: Describe the input schema for the function so the agent may call it
       type: object
     output_schema:
+      description: Describe the output schema for the function so the agent handle
+        its response
       example: '{ "fields": { "name": { "type": "string", "description": "The name
         parameter" } }'
-      title: Describe the output schema for the function so the agent handle its response
       type: object
   title: information about updating an agent function
   type: object
@@ -2360,23 +2365,24 @@ apiUpdateAgentFunctionOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
-      title: the agent
+      description: The agent
   title: the updated agent
   type: object
 apiUpdateAgentInputPublic:
   properties:
     description:
+      description: Agent description
       example: '"My Agent Description"'
-      title: agent description
       type: string
     instruction:
+      description: Agent instruction
       example: '"You are an agent who thinks deeply about the world"'
-      title: agent instruction
       type: string
     k:
+      description: How many results should be considered from an attached knowledge
+        base
       example: "5"
       format: int64
-      title: how many results should be considered from an attached knowledge base
       type: integer
     max_tokens:
       description: Specifies the maximum number of tokens the model can process in
@@ -2386,23 +2392,23 @@ apiUpdateAgentInputPublic:
       format: int64
       type: integer
     model_uuid:
+      description: Model id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: model id
       type: string
     name:
+      description: Agent name
       example: '"My New Agent Name"'
-      title: agent name
       type: string
     project_id:
+      description: The id of the DigitalOcean project this agent will belong to
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: the id of the DigitalOcean project this agent will belong to
       type: string
     tags:
+      description: A set of abitrary tags to organize your agent
       example: '["tag1", "tag2"]'
       items:
         example: example string
         type: string
-      title: A set of abitrary tags to organize your agent
       type: array
     temperature:
       description: Controls the model’s creativity, specified as a number between
@@ -2419,8 +2425,8 @@ apiUpdateAgentInputPublic:
       format: float
       type: number
     uuid:
+      description: Unique agent id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: unique agent id
       type: string
   title: Data to modify an existing Agent
   type: object
@@ -2428,7 +2434,7 @@ apiUpdateAgentOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
-      title: the updated agent
+      description: The updated agent
   title: information about an updated agent
   type: object
 apiUpdateChatbotInputPublic:
@@ -2451,7 +2457,7 @@ apiUpdateChatbotOutput:
   properties:
     chatbot:
       $ref: '#/apiChatbot'
-      title: the chatbot
+      description: The chatbot
   title: info about an updated chatbot
   type: object
 apiUpdateGuardrailOutput:
@@ -2463,21 +2469,22 @@ apiUpdateGuardrailOutput:
 apiUpdateKnowledgeBaseInputPublic:
   properties:
     database_id:
-      description: the id of the DigitalOcean database this knowledge base will use,
+      description: The id of the DigitalOcean database this knowledge base will use,
         optiona.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     embedding_model_uuid:
+      description: Model id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: model id
       type: string
     name:
+      description: Knowledge base name
       example: '"My Knowledge Base"'
-      title: knowledge base name
       type: string
     project_id:
+      description: The id of the DigitalOcean project this knowledge base will belong
+        to
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: the id of the DigitalOcean project this knowledge base will belong to
       type: string
     tags:
       description: Tags to organize your knowledge base.
@@ -2487,8 +2494,8 @@ apiUpdateKnowledgeBaseInputPublic:
         type: string
       type: array
     uuid:
+      description: Knowledge base id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: knowledge base id
       type: string
   title: information about updating a knowledge base
   type: object
@@ -2496,46 +2503,46 @@ apiUpdateKnowledgeBaseOutput:
   properties:
     knowledge_base:
       $ref: '#/apiKnowledgeBase'
-      title: the knowldege base
+      description: The knowldege base
   title: information about an updated knowledge base
   type: object
 apiUpdateLinkedAgentInputPublic:
   properties:
     child_agent_uuid:
+      description: Routed agent id
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: routed agent id
       type: string
     if_case:
+      description: Describes the case in which the child agent should be used
       example: '"use this to get weather information"'
-      title: describes the case in which the child agent should be used
       type: string
     parent_agent_uuid:
       description: A unique identifier for the parent agent.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     route_name:
+      description: Route name
       example: '"weather_route"'
-      title: route name
       type: string
     uuid:
+      description: Unique id of linkage
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: unique id of linkage
       type: string
   title: information about updating the linkage of an agent
   type: object
 apiUpdateLinkedAgentOutput:
   properties:
     child_agent_uuid:
+      description: Routed agent id
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: routed agent id
       type: string
     parent_agent_uuid:
       description: A unique identifier for the parent agent.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     uuid:
+      description: Unique id of linkage
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: unique id of linkage
       type: string
   title: information about an updated linkage
   type: object
@@ -2543,7 +2550,7 @@ apiUpdateModelMetadataOutput:
   properties:
     model:
       $ref: '#/apiModel'
-      title: the model
+      description: The model
   title: information about updated meta data for a model
   type: object
 apiUsageMeasurement:
@@ -2576,12 +2583,12 @@ dbaasClusterStatus:
 genaiapiRegion:
   properties:
     inference_url:
+      description: Url for inference server
       example: example string
-      title: url for inference server
       type: string
     region:
+      description: Region code
       example: example string
-      title: region code
       type: string
     serves_batch:
       example: true
