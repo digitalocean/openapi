@@ -1,7 +1,7 @@
 description: |-
   post /v2/gen-ai/agents
 
-  This endpoint allows developers to creates a new agent and returns the newly created agent object.
+  To create a new agent, send a POST request to `/v2/gen-ai/agents`. The response body contains a JSON object with the newly created agent object.
 operationId: GenAIAPI_CreateAgentPublic
 requestBody:
   content:
@@ -28,8 +28,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: create an agent.
+summary: Create an Agent
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_CreateAgentPublic.yml

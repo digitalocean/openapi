@@ -37,8 +37,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: get one agent.
+summary: Retrieve an Existing Agent
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_GetAgentPublic.yml

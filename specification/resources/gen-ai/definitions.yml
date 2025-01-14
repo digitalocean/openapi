@@ -562,8 +562,8 @@ apiBillingPrice:
 apiCancelKnowledgeBaseIndexingJobInputPublic:
   properties:
     uuid:
+      description: A unique identifier for an indexing job.
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: indexing job id
       type: string
   title: CancelKnowledgeBaseIndexingJobInputPublic description
   type: object
@@ -727,46 +727,49 @@ apiCreateKnowledgeBaseDataSourceOutput:
   title: information about a newly created knowldege base data source
   type: object
 apiCreateKnowledgeBaseInputPublic:
+  description: Data to create a new knowledge base.
   properties:
     database_id:
       description: |-
-        the id of the DigitalOcean database this knowledge base will use, optiona.
-        If not provided, a new database will be created for the knowledge base in
+        Identifier of the DigitalOcean OpenSearch database this knowledge base will use, optional.
+        If not provided, we create a new database for the knowledge base in
         the same region as the knowledge base.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     datasources:
+      description: The data sources to use for this knowledge base. See [Organize
+        Data Sources](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#spaces-buckets)
+        for more information on data sources best practices.
       items:
         $ref: '#/apiKBDataSource'
-      title: The data sources to use for this knowledge base
       type: array
     embedding_model_uuid:
+      description: Identifier for the [embedding model](https://docs.digitalocean.com/products/genai-platform/details/models/#embedding-models).
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: model id
       type: string
     name:
+      description: Name of the knowledge base.
       example: '"My Knowledge Base"'
-      title: knowledge base name
       type: string
     project_id:
+      description: Identifier of the DigitalOcean project this knowledge base will
+        belong to.
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: the id of the DigitalOcean project this knowledge base will belong to
       type: string
     region:
+      description: The datacenter region to deploy the knowledge base in.
       example: '"tor1"'
-      title: The region to deploy the knowledge base in
       type: string
     tags:
+      description: Tags to organize your knowledge base.
       items:
         example: example string
         type: string
-      title: A set of abitrary tags to organize your knowledge base
       type: array
     vpc_uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
       title: The VPC to deploy the knowledge base database in
       type: string
-  title: data to create a new knowledge base
   type: object
 apiCreateKnowledgeBaseOutput:
   properties:
@@ -936,6 +939,7 @@ apiFilePresignedUrlResponse:
       type: string
   type: object
 apiFileUploadDataSource:
+  description: File to upload as data source for knowledge base.
   properties:
     original_file_name:
       example: example name
@@ -965,6 +969,18 @@ apiGetAgentOutputPublic:
       $ref: '#/apiAgentPublic'
       title: the agent
   title: One Agent
+  type: object
+apiGetAgentPlaygroundTokensOutput:
+  properties:
+    token_limit_per_day:
+      example: 12345
+      format: uint64
+      title: daily token limit
+      type: string
+    tokens_remaining:
+      format: int64
+      title: tokens remaining
+      type: integer
   type: object
 apiGetAgentTemplateInputPublic:
   properties:
@@ -1068,8 +1084,14 @@ apiGetModelPlaygroundTokensInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
 apiGetModelPlaygroundTokensOutput:
   properties:
+    token_limit_per_day:
+      example: 12345
+      format: uint64
+      title: daily token limit
+      type: string
     tokens_remaining:
       format: int64
+      title: tokens remaining
       type: integer
   title: GetModelPlaygroundTokensOutput description
   type: object
@@ -1480,7 +1502,7 @@ apiLinkAgentFunctionInputPublic:
   properties:
     agent_uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: agnet id
+      title: agent id
       type: string
     description:
       example: '"My Function Description"'
@@ -1528,14 +1550,14 @@ apiLinkAgentInputPublic:
   properties:
     child_agent_uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: child agent id
+      title: routed agent id
       type: string
     if_case:
       example: '"use this to get weather information"'
       type: string
     parent_agent_uuid:
+      description: A unique identifier for the parent agent.
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: parent agent id
       type: string
     route_name:
       example: '"weather_route"'
@@ -1547,11 +1569,11 @@ apiLinkAgentOutput:
   properties:
     child_agent_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: child agent id
+      title: routed agent id
       type: string
     parent_agent_uuid:
+      description: A unique identifier for the parent agent.
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: parent agent id
       type: string
   title: information about a newly linked agent
   type: object
@@ -2235,7 +2257,7 @@ apiUnlinkAgentOutput:
   properties:
     child_agent_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: child agent id
+      title: routed agent id
       type: string
     parent_agent_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -2458,11 +2480,11 @@ apiUpdateKnowledgeBaseInputPublic:
       title: the id of the DigitalOcean project this knowledge base will belong to
       type: string
     tags:
+      description: Tags to organize your knowledge base.
       example: '["tag1", "tag2"]'
       items:
         example: example string
         type: string
-      title: A set of abitrary tags to organize your knowledge base
       type: array
     uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
@@ -2481,15 +2503,15 @@ apiUpdateLinkedAgentInputPublic:
   properties:
     child_agent_uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: child agent id
+      title: routed agent id
       type: string
     if_case:
       example: '"use this to get weather information"'
       title: describes the case in which the child agent should be used
       type: string
     parent_agent_uuid:
+      description: A unique identifier for the parent agent.
       example: '"12345678-1234-1234-1234-123456789012"'
-      title: parent agent id
       type: string
     route_name:
       example: '"weather_route"'
@@ -2505,11 +2527,11 @@ apiUpdateLinkedAgentOutput:
   properties:
     child_agent_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: child agent id
+      title: routed agent id
       type: string
     parent_agent_uuid:
+      description: A unique identifier for the parent agent.
       example: 123e4567-e89b-12d3-a456-426614174000
-      title: parent agent id
       type: string
     uuid:
       example: 123e4567-e89b-12d3-a456-426614174000

@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/knowledge_bases
 
-  This endpoint allows developers to provides a list of knowledge bases for the user context.
+  To attach a knowledge base to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`.
 operationId: GenAIAPI_ListKnowledgeBasesPublic
 parameters:
 - description: page number.
@@ -34,8 +34,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: list knowledge bases.
+summary: List knowledge bases.
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_ListKnowledgeBasesPublic.yml

@@ -35,8 +35,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: update an agent.
+summary: Update an Agent
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_UpdateAgentPublic.yml

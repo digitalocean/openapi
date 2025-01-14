@@ -1,7 +1,7 @@
 description: |-
   put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate
 
-  This endpoint allows developers to regenerate agent api key.
+  This endpoint allows developers to regenerate an agent api key.
 operationId: GenAIAPI_RegenerateAgentAPIKeyPublic
 parameters:
 - description: agent id
@@ -36,8 +36,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: regenerate agent api key.
+summary: Regenerate agent api key.
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_RegenerateAgentAPIKeyPublic.yml

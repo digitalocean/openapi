@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/indexing_jobs/{uuid}
 
-  This endpoint allows developers to get knowledge base indexing job.
+  This endpoint allows developers to get knowledge base indexing job status.
 operationId: GenAIAPI_GetKnowledgeBaseIndexingJobPublic
 parameters:
 - description: indexing job id
@@ -30,8 +30,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: get knowledge base indexing job.
+summary: 'Retrieve Status of Indexing Job for a Knowledge Base '
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_GetKnowledgeBaseIndexingJobPublic.yml

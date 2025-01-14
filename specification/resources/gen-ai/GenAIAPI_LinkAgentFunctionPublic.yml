@@ -1,10 +1,10 @@
 description: |-
   post /v2/gen-ai/agents/{agent_uuid}/functions
 
-  This endpoint allows developers to link agent funciton.
+  This endpoint allows developers to create a function route for an agent.
 operationId: GenAIAPI_LinkAgentFunctionPublic
 parameters:
-- description: agnet id
+- description: agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: agent_uuid
@@ -35,8 +35,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: link agent funciton.
+summary: Add Function Route to an Agent
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_LinkAgentFunctionPublic.yml

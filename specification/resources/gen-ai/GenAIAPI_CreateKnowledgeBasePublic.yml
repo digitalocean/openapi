@@ -1,7 +1,7 @@
 description: |-
   post /v2/gen-ai/knowledge_bases
 
-  This endpoint allows developers to create a knowledge base.
+  To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
 operationId: GenAIAPI_CreateKnowledgeBasePublic
 requestBody:
   content:
@@ -28,8 +28,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: create a knowledge base.
+summary: Create a Knowledge Base
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_CreateKnowledgeBasePublic.yml

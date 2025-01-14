@@ -35,8 +35,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: update one knowledge base.
+summary: Update a Knowledge Base
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_UpdateKnowledgeBasePublic.yml

@@ -1,7 +1,7 @@
 description: |-
   put /v2/gen-ai/agents/{uuid}/deployment_visibility
 
-  This endpoint allows developers to update agent status on whether it is public or privat
+  Check whether an agent is public or private. To get the agent status, send a PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
 operationId: GenAIAPI_UpdateAgentDeploymentVisibilityPublic
 parameters:
 - description: unique id
@@ -35,8 +35,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: update agent status on whether it is public or private.
+summary: Check Agent Status
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_UpdateAgentDeploymentVisibilityPublic.yml

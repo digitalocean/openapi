@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/agents/{uuid}/child_agents
 
-  This endpoint allows developers to whos children?
+  This endpoint allows developers to view an agent's agent routes.
 operationId: GenAIAPI_GetChildrenPublic
 parameters:
 - description: agent id
@@ -30,8 +30,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: getchildren?.
+summary: View Agent Routes
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_GetChildrenPublic.yml

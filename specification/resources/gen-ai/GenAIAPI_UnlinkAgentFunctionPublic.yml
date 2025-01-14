@@ -1,18 +1,17 @@
 description: |-
   delete /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}
 
-  This endpoint allows developers to unlink agent funciton.
+  This endpoint allows developers to destroy an agent's function route.
 operationId: GenAIAPI_UnlinkAgentFunctionPublic
 parameters:
-- description: The id of the agent to unlink the function from
+- description: The id of the agent the function route belongs to.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: agent_uuid
   required: true
   type: string
-- description: |-
-    The function to remove from the agent
-    FIXME: @afreda is the id of the DO function or the agent function linkage?
+- description: The function route to be destroyed. This does not destroy the function
+    itself.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: function_uuid
@@ -38,8 +37,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: unlink agent funciton.
+summary: Delete Function Route for an Agent
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_UnlinkAgentFunctionPublic.yml

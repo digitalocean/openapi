@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/knowledge_bases/{uuid}
 
-  This endpoint allows developers to lists one specific knowledge base.
+  This endpoint allows developers to list one specific knowledge base.
 operationId: GenAIAPI_GetKnowledgeBasePublic
 parameters:
 - description: knowledge base id
@@ -30,8 +30,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: get one knowledge base.
+summary: Retrieve Information About an Existing Knowledge Base
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_GetKnowledgeBasePublic.yml

@@ -1,16 +1,16 @@
 description: |-
   put /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}
 
-  This endpoint allows developers to update linked agent.
+  This endpoint allows developers to update an agent route.
 operationId: GenAIAPI_UpdateLinkedAgentPublic
 parameters:
-- description: parent agent id
+- description: A unique identifier for the parent agent.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: parent_agent_uuid
   required: true
   type: string
-- description: child agent id
+- description: routed agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: child_agent_uuid
@@ -41,8 +41,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: update linked agent.
+summary: Update Agent Route for an Agent
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_UpdateLinkedAgentPublic.yml

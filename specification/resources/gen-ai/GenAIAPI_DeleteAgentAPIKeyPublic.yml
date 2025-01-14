@@ -1,16 +1,16 @@
 description: |-
   delete /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}
 
-  This endpoint allows developers to delete agent api key.
+  To delete an API key for an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.
 operationId: GenAIAPI_DeleteAgentAPIKeyPublic
 parameters:
-- description: agent id
+- description: A unique identifier for your agent.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: agent_uuid
   required: true
   type: string
-- description: api key id
+- description: API key for an agent.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: api_key_uuid
@@ -36,8 +36,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: delete agent api key.
+summary: 'Delete API Key for an Agent '
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_DeleteAgentAPIKeyPublic.yml

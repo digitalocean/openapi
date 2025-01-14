@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/agents
 
-  This endpoint allows developers to returns a list of agents specific to the users context.
+  This endpoint returns a list of all agents.
 operationId: GenAIAPI_ListAgentsPublic
 parameters:
 - description: only list agents that are deployed.
@@ -45,8 +45,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: list agents.
+summary: List agents.
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_ListAgentsPublic.yml

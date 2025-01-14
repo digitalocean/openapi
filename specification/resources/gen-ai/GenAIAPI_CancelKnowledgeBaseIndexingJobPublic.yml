@@ -1,10 +1,10 @@
 description: |-
   put /v2/gen-ai/indexing_jobs/{uuid}/cancel
 
-  This endpoint allows developers to cancel knowledge base indexing job.
+  To cancel an indexing job for a knowledge base, send a PUT request to `/v2/gen-ai/indexing_jobs/{uuid}/cancel`.
 operationId: GenAIAPI_CancelKnowledgeBaseIndexingJobPublic
 parameters:
-- description: indexing job id
+- description: A unique identifier for an indexing job.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: uuid
@@ -35,8 +35,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: cancel knowledge base indexing job.
+summary: Cancel Indexing Job for a Knowledge Base
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_CancelKnowledgeBaseIndexingJobPublic.yml

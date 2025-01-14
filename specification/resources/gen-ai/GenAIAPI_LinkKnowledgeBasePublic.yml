@@ -1,16 +1,16 @@
 description: |-
   post /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}
 
-  This endpoint allows developers to link knowledge base.
+  This endpoint allows developers to attach a knowledge base to an agent.
 operationId: GenAIAPI_LinkKnowledgeBasePublic
 parameters:
-- description: agent id
+- description: A unique identifier for an agent.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: agent_uuid
   required: true
   type: string
-- description: knowledge base id
+- description: A unique identifier for a knowledge base.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: knowledge_base_uuid
@@ -36,8 +36,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: link knowledge base.
+summary: Attach knowledge base to agent.
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_LinkKnowledgeBasePublic.yml

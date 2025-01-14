@@ -287,12 +287,11 @@ tags:
 
       The Serverless Functions API currently only supports creating and managing namespaces.
 
-  - name: GenAIAPI
+  - name: GenAI Platform
     description: |-
-      [Serverless functions](https://docs.digitalocean.com/products/gen-ai) are blocks of code that run on demand without the need to manage any infrastructure.
-      You can develop functions on your local machine and then deploy them to a namespace using `doctl`, the [official DigitalOcean CLI tool](https://docs.digitalocean.com/reference/gen-ai).
+      The GenAI Platform API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
 
-      The Serverless Functions API currently only supports creating and managing namespaces.
+      Use the API to create agents and knowledge bases, add agent and function routes to agents and data sources to knowledge bases, start indexing jobs, and so on.
 
   - name: Image Actions
     description: |-
@@ -1756,23 +1755,38 @@ paths:
       $ref: 'resources/uptime/delete_alert.yml'
 
 
+  /v2/gen-ai/indexing_jobs/{uuid}/cancel:
+    put:
+      $ref: 'resources/gen-ai/GenAIAPI_CancelKnowledgeBaseIndexingJobPublic.yml'
 
-  /v2/gen-ai/indexing_jobs:
-    get:
-      $ref: 'resources/gen-ai/GenAIAPI_ListKnowledgeBaseIndexingJobsPublic.yml'
+
+  /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/GenAIAPI_UnlinkKnowledgeBasePublic.yml'
 
     post:
-      $ref: 'resources/gen-ai/GenAIAPI_StartKnowledgeBaseIndexingJobPublic.yml'
+      $ref: 'resources/gen-ai/GenAIAPI_LinkKnowledgeBasePublic.yml'
+
+
+  /v2/gen-ai/agents/{agent_uuid}/functions:
+    post:
+      $ref: 'resources/gen-ai/GenAIAPI_LinkAgentFunctionPublic.yml'
+
+
+  /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/GenAIAPI_UnlinkAgentPublic.yml'
+
+    post:
+      $ref: 'resources/gen-ai/GenAIAPI_LinkAgentPublic.yml'
+
+    put:
+      $ref: 'resources/gen-ai/GenAIAPI_UpdateLinkedAgentPublic.yml'
 
 
   /v2/gen-ai/agents/{uuid}/child_agents:
     get:
       $ref: 'resources/gen-ai/GenAIAPI_GetChildrenPublic.yml'
-
-
-  /v2/gen-ai/indexing_jobs/{uuid}/cancel:
-    put:
-      $ref: 'resources/gen-ai/GenAIAPI_CancelKnowledgeBaseIndexingJobPublic.yml'
 
 
   /v2/gen-ai/agents:
@@ -1783,15 +1797,27 @@ paths:
       $ref: 'resources/gen-ai/GenAIAPI_CreateAgentPublic.yml'
 
 
-  /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}:
-    post:
-      $ref: 'resources/gen-ai/GenAIAPI_LinkAgentPublic.yml'
-
+  /v2/gen-ai/agents/{uuid}/deployment_visibility:
     put:
-      $ref: 'resources/gen-ai/GenAIAPI_UpdateLinkedAgentPublic.yml'
+      $ref: 'resources/gen-ai/GenAIAPI_UpdateAgentDeploymentVisibilityPublic.yml'
 
-    delete:
-      $ref: 'resources/gen-ai/GenAIAPI_UnlinkAgentPublic.yml'
+
+  /v2/gen-ai/knowledge_bases:
+    post:
+      $ref: 'resources/gen-ai/GenAIAPI_CreateKnowledgeBasePublic.yml'
+
+    get:
+      $ref: 'resources/gen-ai/GenAIAPI_ListKnowledgeBasesPublic.yml'
+
+
+  /v2/gen-ai/models:
+    get:
+      $ref: 'resources/gen-ai/GenAIAPI_ListModelsPublic.yml'
+
+
+  /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate:
+    put:
+      $ref: 'resources/gen-ai/GenAIAPI_RegenerateAgentAPIKeyPublic.yml'
 
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys:
@@ -1800,34 +1826,6 @@ paths:
 
     post:
       $ref: 'resources/gen-ai/GenAIAPI_CreateAgentAPIKeyPublic.yml'
-
-
-  /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources:
-    get:
-      $ref: 'resources/gen-ai/GenAIAPI_ListKnowledgeBaseDataSourcesPublic.yml'
-
-    post:
-      $ref: 'resources/gen-ai/GenAIAPI_CreateKnowledgeBaseDataSourcePublic.yml'
-
-
-  /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
-    delete:
-      $ref: 'resources/gen-ai/GenAIAPI_DeleteKnowledgeBaseDataSourcePublic.yml'
-
-
-  /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources:
-    get:
-      $ref: 'resources/gen-ai/GenAIAPI_ListIndexingJobDataSourcesPublic.yml'
-
-
-  /v2/gen-ai/agents/{uuid}/deployment_visibility:
-    put:
-      $ref: 'resources/gen-ai/GenAIAPI_UpdateAgentDeploymentVisibilityPublic.yml'
-
-
-  /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate:
-    put:
-      $ref: 'resources/gen-ai/GenAIAPI_RegenerateAgentAPIKeyPublic.yml'
 
 
   /v2/gen-ai/agents/{uuid}:
@@ -1841,17 +1839,17 @@ paths:
       $ref: 'resources/gen-ai/GenAIAPI_UpdateAgentPublic.yml'
 
 
-  /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}:
+  /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources:
+    get:
+      $ref: 'resources/gen-ai/GenAIAPI_ListIndexingJobDataSourcesPublic.yml'
+
+
+  /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}:
     delete:
-      $ref: 'resources/gen-ai/GenAIAPI_UnlinkAgentFunctionPublic.yml'
+      $ref: 'resources/gen-ai/GenAIAPI_DeleteAgentAPIKeyPublic.yml'
 
     put:
-      $ref: 'resources/gen-ai/GenAIAPI_UpdateAgentFunctionPublic.yml'
-
-
-  /v2/gen-ai/indexing_jobs/{uuid}:
-    get:
-      $ref: 'resources/gen-ai/GenAIAPI_GetKnowledgeBaseIndexingJobPublic.yml'
+      $ref: 'resources/gen-ai/GenAIAPI_UpdateAgentAPIKeyPublic.yml'
 
 
   /v2/gen-ai/regions:
@@ -1859,9 +1857,9 @@ paths:
       $ref: 'resources/gen-ai/GenAIAPI_ListRegions.yml'
 
 
-  /v2/gen-ai/agents/{agent_uuid}/functions:
-    post:
-      $ref: 'resources/gen-ai/GenAIAPI_LinkAgentFunctionPublic.yml'
+  /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/GenAIAPI_DeleteKnowledgeBaseDataSourcePublic.yml'
 
 
   /v2/gen-ai/knowledge_bases/{uuid}:
@@ -1875,34 +1873,33 @@ paths:
       $ref: 'resources/gen-ai/GenAIAPI_UpdateKnowledgeBasePublic.yml'
 
 
-  /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}:
+  /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources:
+    get:
+      $ref: 'resources/gen-ai/GenAIAPI_ListKnowledgeBaseDataSourcesPublic.yml'
+
+    post:
+      $ref: 'resources/gen-ai/GenAIAPI_CreateKnowledgeBaseDataSourcePublic.yml'
+
+
+  /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}:
     delete:
-      $ref: 'resources/gen-ai/GenAIAPI_DeleteAgentAPIKeyPublic.yml'
+      $ref: 'resources/gen-ai/GenAIAPI_UnlinkAgentFunctionPublic.yml'
 
     put:
-      $ref: 'resources/gen-ai/GenAIAPI_UpdateAgentAPIKeyPublic.yml'
+      $ref: 'resources/gen-ai/GenAIAPI_UpdateAgentFunctionPublic.yml'
 
 
-  /v2/gen-ai/models:
+  /v2/gen-ai/indexing_jobs:
     get:
-      $ref: 'resources/gen-ai/GenAIAPI_ListModelsPublic.yml'
-
-
-  /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}:
-    post:
-      $ref: 'resources/gen-ai/GenAIAPI_LinkKnowledgeBasePublic.yml'
-
-    delete:
-      $ref: 'resources/gen-ai/GenAIAPI_UnlinkKnowledgeBasePublic.yml'
-
-
-  /v2/gen-ai/knowledge_bases:
-    get:
-      $ref: 'resources/gen-ai/GenAIAPI_ListKnowledgeBasesPublic.yml'
+      $ref: 'resources/gen-ai/GenAIAPI_ListKnowledgeBaseIndexingJobsPublic.yml'
 
     post:
-      $ref: 'resources/gen-ai/GenAIAPI_CreateKnowledgeBasePublic.yml'
+      $ref: 'resources/gen-ai/GenAIAPI_StartKnowledgeBaseIndexingJobPublic.yml'
 
+
+  /v2/gen-ai/indexing_jobs/{uuid}:
+    get:
+      $ref: 'resources/gen-ai/GenAIAPI_GetKnowledgeBaseIndexingJobPublic.yml'
 
 
 

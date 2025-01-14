@@ -1,7 +1,7 @@
 description: |-
   put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}
 
-  This endpoint allows developers to update agent api key.
+  This endpoint allows developers to update an agent api key.
 operationId: GenAIAPI_UpdateAgentAPIKeyPublic
 parameters:
 - description: agent id
@@ -41,8 +41,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: update agent api key.
+summary: Update API Key for an Agent
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_UpdateAgentAPIKeyPublic.yml

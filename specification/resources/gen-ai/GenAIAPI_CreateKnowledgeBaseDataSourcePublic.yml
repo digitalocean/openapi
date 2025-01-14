@@ -1,7 +1,7 @@
 description: |-
   post /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources
 
-  This endpoint allows developers to create knowledge base data source.
+  To add a data source to a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
 operationId: GenAIAPI_CreateKnowledgeBaseDataSourcePublic
 parameters:
 - description: knowledge base id
@@ -35,8 +35,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: add a knowledge base data source.
+summary: 'Add Data Source to a Knowledge Base '
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_CreateKnowledgeBaseDataSourcePublic.yml

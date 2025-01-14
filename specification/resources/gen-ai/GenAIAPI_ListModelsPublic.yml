@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/models
 
-  This endpoint allows developers to provides a list of models available to the user.
+  This endpoint provides a list of all available knowledge bases.
 operationId: GenAIAPI_ListModelsPublic
 parameters:
 - collectionFormat: multi
@@ -58,8 +58,8 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: list models.
+summary: List available models
 tags:
-- GenAIAPI
+- GenAI Platform
 x-codeSamples:
 - $ref: examples/curl/GenAIAPI_ListModelsPublic.yml
