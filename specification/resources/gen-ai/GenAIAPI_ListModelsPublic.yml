@@ -1,8 +1,8 @@
 description: |-
   get /v2/gen-ai/models
 
-  This endpoint provides a list of all available knowledge bases.
-operationId: List_available_models
+  To list all models, send a GET request to `/v2/gen-ai/models`.
+operationId: List_Available_Models
 parameters:
 - collectionFormat: multi
   description: |-
@@ -58,7 +58,7 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: List available models
+summary: List Available Models
 tags:
 - GenAI Platform
 x-codeSamples:

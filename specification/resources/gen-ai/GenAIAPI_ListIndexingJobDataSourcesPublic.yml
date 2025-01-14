@@ -1,8 +1,8 @@
 description: |-
   get /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources
 
-  This endpoint allows developers to list knowledge base indexing job data sources.
-operationId: List_knowledge_base_indexing_job_data_sources
+  To list all datasources for an indexing job, send a GET request to `/v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources`.
+operationId: List_Data_Sources_for_Indexing_Job_for_a_Knowledge_Base
 parameters:
 - description: uuid of the indexing job
   example: '"123e4567-e89b-12d3-a456-426614174000"'
@@ -30,7 +30,7 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: List knowledge base indexing job data sources.
+summary: List Data Sources for Indexing Job for a Knowledge Base
 tags:
 - GenAI Platform
 x-codeSamples:

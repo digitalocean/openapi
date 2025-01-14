@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/agents/{uuid}
 
-  This endpoint allows developers to query one specific agent.
+  To retrieve details of an agent, GET request to `/v2/gen-ai/agents/{uuid}`. The response body is a JSON object containing the agent.
 operationId: Retrieve_an_Existing_Agent
 parameters:
 - description: unique agent id

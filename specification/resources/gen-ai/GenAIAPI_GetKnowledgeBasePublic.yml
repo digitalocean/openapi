@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/knowledge_bases/{uuid}
 
-  This endpoint allows developers to list one specific knowledge base.
+  To retrive information about an existing knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{uuid}`.
 operationId: Retrieve_Information_About_an_Existing_Knowledge_Base
 parameters:
 - description: knowledge base id

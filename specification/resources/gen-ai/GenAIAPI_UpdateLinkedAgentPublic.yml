@@ -1,7 +1,7 @@
 description: |-
   put /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}
 
-  This endpoint allows developers to update an agent route.
+  To update an agent route for an agent, send a PUT request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
 operationId: Update_Agent_Route_for_an_Agent
 parameters:
 - description: A unique identifier for the parent agent.

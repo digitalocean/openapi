@@ -1,8 +1,8 @@
 description: |-
   get /v2/gen-ai/indexing_jobs
 
-  This endpoint allows developers to list knowledge base indexing jobs.
-operationId: List_knowledge_base_indexing_jobs
+  To list all indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs`.
+operationId: List_Indexing_Jobs_for_a_Knowledge_Base
 parameters:
 - description: page number.
   format: int64
@@ -34,7 +34,7 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: List knowledge base indexing jobs.
+summary: List Indexing Jobs for a Knowledge Base
 tags:
 - GenAI Platform
 x-codeSamples:

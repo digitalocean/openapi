@@ -1,7 +1,7 @@
 description: |-
   post /v2/gen-ai/agents/{agent_uuid}/functions
 
-  This endpoint allows developers to create a function route for an agent.
+  To create a function route for an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/functions`.
 operationId: Add_Function_Route_to_an_Agent
 parameters:
 - description: agent id

@@ -1,7 +1,7 @@
 description: |-
   put /v2/gen-ai/agents/{uuid}
 
-  This endpoint allows developers to update an agent.
+  To update an agent, send a PUT request to `/v2/gen-ai/agents/{uuid}`. The response body is a JSON object containing the agent.
 operationId: Update_an_Agent
 parameters:
 - description: unique agent id

@@ -2,7 +2,7 @@ description: |-
   get /v2/gen-ai/agents
 
   To list all agents, send a GET request to `/v2/gen-ai/agents`.
-operationId: List_agents
+operationId: List_Agents
 parameters:
 - description: only list agents that are deployed.
   in: query
@@ -45,7 +45,7 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: List agents.
+summary: List Agents
 tags:
 - GenAI Platform
 x-codeSamples:

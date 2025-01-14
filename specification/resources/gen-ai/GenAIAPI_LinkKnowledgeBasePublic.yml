@@ -1,8 +1,8 @@
 description: |-
   post /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}
 
-  This endpoint allows developers to attach a knowledge base to an agent.
-operationId: Attach_knowledge_base_to_agent
+  To attach a knowledge base to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`
+operationId: Attach_Knowledge_base_to_Agent
 parameters:
 - description: A unique identifier for an agent.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
@@ -36,7 +36,7 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: Attach knowledge base to agent.
+summary: Attach Knowledge base to Agent
 tags:
 - GenAI Platform
 x-codeSamples:

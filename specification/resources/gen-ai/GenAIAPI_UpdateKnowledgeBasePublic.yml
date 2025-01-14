@@ -1,7 +1,7 @@
 description: |-
   put /v2/gen-ai/knowledge_bases/{uuid}
 
-  This endpoint allows developers to update one knowledge base.
+  To update a knowledge base, send a PUT request to `/v2/gen-ai/knowledge_bases/{uuid}`.
 operationId: Update_a_Knowledge_Base
 parameters:
 - description: knowledge base id

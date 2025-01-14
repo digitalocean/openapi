@@ -1,7 +1,7 @@
 description: |-
   delete /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}
 
-  This endpoint allows developers to delete an agent route from a parent agent.
+  To delete an agent route from a parent agent, send a DELETE request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
 operationId: Delete_Agent_Route_for_an_Agent
 parameters:
 - description: pagent agent id

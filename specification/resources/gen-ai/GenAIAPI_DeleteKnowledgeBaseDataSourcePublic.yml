@@ -1,7 +1,7 @@
 description: |-
   delete /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}
 
-  This endpoint allows developers to delete one knowledge base data source.
+  To delete a data source from a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
 operationId: Delete_a_Data_Source_from_a_Knowledge_Base
 parameters:
 - description: knowledge base id
@@ -36,7 +36,7 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: 'Delete a Data Source from a Knowledge Base '
+summary: Delete a Data Source from a Knowledge Base
 tags:
 - GenAI Platform
 x-codeSamples:

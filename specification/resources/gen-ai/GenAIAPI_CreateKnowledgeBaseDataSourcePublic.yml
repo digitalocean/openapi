@@ -35,7 +35,7 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: 'Add Data Source to a Knowledge Base '
+summary: Add Data Source to a Knowledge Base
 tags:
 - GenAI Platform
 x-codeSamples:
