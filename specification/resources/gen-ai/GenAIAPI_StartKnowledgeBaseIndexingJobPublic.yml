@@ -2,7 +2,7 @@ description: |-
   post /v2/gen-ai/indexing_jobs
 
   This endpoint allows developers to start a knowledge base indexing job.
-operationId: GenAIAPI_StartKnowledgeBaseIndexingJobPublic
+operationId: Start_knowledge_base_indexing_job
 requestBody:
   content:
     application/json:

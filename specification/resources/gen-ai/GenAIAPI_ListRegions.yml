@@ -2,7 +2,7 @@ description: |-
   get /v2/gen-ai/regions
 
   This endpoint allows developers to list regions.
-operationId: GenAIAPI_ListRegions
+operationId: List_regions
 parameters:
 - in: query
   name: serves_inference

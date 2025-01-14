@@ -2,7 +2,7 @@ description: |-
   delete /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}
 
   This endpoint allows developers to destroy an agent's function route.
-operationId: GenAIAPI_UnlinkAgentFunctionPublic
+operationId: Delete_Function_Route_for_an_Agent
 parameters:
 - description: The id of the agent the function route belongs to.
   example: '"123e4567-e89b-12d3-a456-426614174000"'

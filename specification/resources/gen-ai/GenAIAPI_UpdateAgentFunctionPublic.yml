@@ -2,7 +2,7 @@ description: |-
   put /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}
 
   Update an agent's function route. To update the function route, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
-operationId: GenAIAPI_UpdateAgentFunctionPublic
+operationId: Update_Function_Route_for_an_Agent
 parameters:
 - description: agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

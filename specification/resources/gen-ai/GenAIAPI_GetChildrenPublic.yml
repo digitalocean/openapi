@@ -2,7 +2,7 @@ description: |-
   get /v2/gen-ai/agents/{uuid}/child_agents
 
   This endpoint allows developers to view an agent's agent routes.
-operationId: GenAIAPI_GetChildrenPublic
+operationId: View_Agent_Routes
 parameters:
 - description: agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

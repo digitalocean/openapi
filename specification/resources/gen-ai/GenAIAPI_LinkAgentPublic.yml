@@ -2,7 +2,7 @@ description: |-
   post /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}
 
   To add an agent route to an agent, send a POST request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
-operationId: GenAIAPI_LinkAgentPublic
+operationId: Add_Agent_Route_to_an_Agent
 parameters:
 - description: A unique identifier for the parent agent.
   example: '"123e4567-e89b-12d3-a456-426614174000"'

@@ -2,7 +2,7 @@ description: |-
   get /v2/gen-ai/indexing_jobs
 
   This endpoint allows developers to list knowledge base indexing jobs.
-operationId: GenAIAPI_ListKnowledgeBaseIndexingJobsPublic
+operationId: List_knowledge_base_indexing_jobs
 parameters:
 - description: page number.
   format: int64

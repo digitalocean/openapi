@@ -2,7 +2,7 @@ description: |-
   get /v2/gen-ai/agents/{uuid}
 
   This endpoint allows developers to query one specific agent.
-operationId: GenAIAPI_GetAgentPublic
+operationId: Retrieve_an_Existing_Agent
 parameters:
 - description: unique agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

@@ -2,7 +2,7 @@ description: |-
   get /v2/gen-ai/models
 
   This endpoint provides a list of all available knowledge bases.
-operationId: GenAIAPI_ListModelsPublic
+operationId: List_available_models
 parameters:
 - collectionFormat: multi
   description: |-

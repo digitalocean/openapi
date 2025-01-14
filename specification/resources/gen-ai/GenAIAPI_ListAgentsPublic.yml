@@ -2,7 +2,7 @@ description: |-
   get /v2/gen-ai/agents
 
   This endpoint returns a list of all agents.
-operationId: GenAIAPI_ListAgentsPublic
+operationId: List_agents
 parameters:
 - description: only list agents that are deployed.
   in: query

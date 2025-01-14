@@ -2,7 +2,7 @@ description: |-
   put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate
 
   This endpoint allows developers to regenerate an agent api key.
-operationId: GenAIAPI_RegenerateAgentAPIKeyPublic
+operationId: Regenerate_agent_api_key
 parameters:
 - description: agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

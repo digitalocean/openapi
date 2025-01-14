@@ -2,7 +2,7 @@ description: |-
   delete /v2/gen-ai/knowledge_bases/{uuid}
 
   This endpoint allows developers to delete a knowledge base.
-operationId: GenAIAPI_DeleteKnowledgeBasePublic
+operationId: Delete_a_Knowledge_Base
 parameters:
 - description: knowledge base id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
