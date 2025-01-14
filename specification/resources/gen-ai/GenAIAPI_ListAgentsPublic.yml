@@ -1,7 +1,7 @@
 description: |-
   get /v2/gen-ai/agents
 
-  This endpoint returns a list of all agents.
+  To list all agents, send a GET request to `/v2/gen-ai/agents`.
 operationId: List_agents
 parameters:
 - description: only list agents that are deployed.
