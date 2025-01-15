@@ -1255,6 +1255,10 @@ paths:
     delete:
       $ref: 'resources/load_balancers/loadBalancers_delete.yml'
 
+  /v2/load_balancers/{lb_id}/cache:
+    delete:
+      $ref: 'resources/load_balancers/loadBalancers_delete_cache.yml'
+
   /v2/load_balancers/{lb_id}/droplets:
     post:
       $ref: 'resources/load_balancers/loadBalancers_add_droplets.yml'
@@ -1449,6 +1453,30 @@ paths:
   /v2/monitoring/metrics/load_balancer/droplets_downtime:
     get:
       $ref: 'resources/monitoring/monitoring_get_lb_droplets_downtime.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_instances:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_instances.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_instances:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_instances.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_cpu_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_cpu_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_memory_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_memory_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_memory_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_memory_utilization.yml'
 
   /v2/monitoring/sinks/destinations:
     post:
