@@ -7,14 +7,16 @@ parameters:
   in: path
   name: uuid
   required: true
-  type: string
+  schema:
+    type: string
 - collectionFormat: multi
   description: The set of field mask paths.
   in: query
   items:
     type: string
   name: field_mask.paths
-  type: array
+  schema:
+    type: array
 responses:
   "200":
     content:
@@ -31,6 +33,10 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-reset
   "401":
     $ref: ../../shared/responses/unauthorized.yml
+  "404":
+    $ref: ../../shared/responses/not_found.yml
+  "429":
+    $ref: ../../shared/responses/too_many_requests.yml
   "500":
     $ref: ../../shared/responses/server_error.yml
   default:

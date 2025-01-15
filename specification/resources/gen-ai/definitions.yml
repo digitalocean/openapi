@@ -545,7 +545,7 @@ apiBatchJobPhase:
   - BATCH_JOB_PHASE_SUCCEEDED
   - BATCH_JOB_PHASE_FAILED
   - BATCH_JOB_PHASE_ERROR
-  example: example string
+  example: BATCH_JOB_PHASE_UNKNOWN
   type: string
 apiBillingAttribute:
   properties:
@@ -907,7 +907,7 @@ apiDeploymentStatus:
   - STATUS_UNDEPLOYING
   - STATUS_UNDEPLOYMENT_FAILED
   - STATUS_DELETED
-  example: example string
+  example: STATUS_UNKNOWN
   type: string
 apiDeploymentVisibility:
   default: VISIBILITY_UNKNOWN
@@ -923,7 +923,7 @@ apiDeploymentVisibility:
   - VISIBILITY_PLAYGROUND
   - VISIBILITY_PUBLIC
   - VISIBILITY_PRIVATE
-  example: example string
+  example: VISIBILITY_UNKNOWN
   type: string
 apiFilePresignedUrlResponse:
   description: Detailed info about each presigned URL returned to the client.
@@ -1259,7 +1259,7 @@ apiGuardrailType:
   - GUARDRAIL_TYPE_JAILBREAK
   - GUARDRAIL_TYPE_SENSITIVE_DATA
   - GUARDRAIL_TYPE_CONTENT_MODERATION
-  example: example string
+  example: GUARDRAIL_TYPE_UNKNOWN
   type: string
 apiIndexedDataSource:
   properties:
@@ -2077,7 +2077,7 @@ apiModelUsecase:
   - MODEL_USECASE_FINETUNED
   - MODEL_USECASE_KNOWLEDGEBASE
   - MODEL_USECASE_GUARDRAIL
-  example: example string
+  example: MODEL_USECASE_UNKNOWN
   type: string
 apiModelVersion:
   description: Version Information about a Model
@@ -2589,7 +2589,7 @@ dbaasClusterStatus:
   - RESTORING
   - POWERING_ON
   - UNHEALTHY
-  example: example string
+  example: CREATING
   type: string
 genaiapiRegion:
   description: Description for a specific Region
@@ -2831,5 +2831,5 @@ protobufNullValue:
      - NULL_VALUE: Null value.
   enum:
   - NULL_VALUE
-  example: example string
+  example: NULL_VALUE
   type: string
