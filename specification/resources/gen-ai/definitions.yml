@@ -653,7 +653,7 @@ apiCreateAgentInputPublic:
         type: string
       type: array
     model_uuid:
-      description: Model id
+      description: Identifier for the foundation model.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     name:
@@ -2404,7 +2404,7 @@ apiUpdateAgentInputPublic:
       format: int64
       type: integer
     model_uuid:
-      description: Model id
+      description: Identifier for the foundation model.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     name:
@@ -2486,7 +2486,7 @@ apiUpdateKnowledgeBaseInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     embedding_model_uuid:
-      description: Model id
+      description: Identifier for the foundation model.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     name:
