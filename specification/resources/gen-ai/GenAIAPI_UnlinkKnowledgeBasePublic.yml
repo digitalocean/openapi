@@ -1,5 +1,5 @@
 description: To detach a knowledge base from an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`.
-operationId: Detach_Knowledge_Base_from_an_Agent
+operationId: genAI_detach_knowledge_base_from_an_agent
 parameters:
 - description: Agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

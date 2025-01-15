@@ -1,6 +1,6 @@
 description: To list all data sources for a knowledge base, send a GET request to
   `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
-operationId: List_Data_Sources_for_a_Knowledge_Base
+operationId: genAI_list_data_sources_for_a_knowledge_base
 parameters:
 - description: Knowledge base id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

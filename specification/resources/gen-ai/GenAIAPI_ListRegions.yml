@@ -1,5 +1,5 @@
 description: To list all datacenter regions, send a GET request to `/v2/gen-ai/regions`.
-operationId: List_Datacenter_Regions
+operationId: genAI_list_datacenter_regions
 parameters:
 - in: query
   name: serves_inference

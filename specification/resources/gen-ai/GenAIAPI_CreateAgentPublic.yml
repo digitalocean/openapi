@@ -1,6 +1,6 @@
 description: To create a new agent, send a POST request to `/v2/gen-ai/agents`. The
   response body contains a JSON object with the newly created agent object.
-operationId: Create_an_Agent
+operationId: genAI_create_an_agent
 requestBody:
   content:
     application/json:

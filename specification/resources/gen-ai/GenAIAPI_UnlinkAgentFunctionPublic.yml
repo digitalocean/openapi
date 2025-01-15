@@ -1,5 +1,5 @@
 description: To delete a function route from an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
-operationId: Delete_Function_Route_for_an_Agent
+operationId: genAI_delete_function_route_for_an_agent
 parameters:
 - description: The id of the agent the function route belongs to.
   example: '"123e4567-e89b-12d3-a456-426614174000"'

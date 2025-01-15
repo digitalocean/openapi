@@ -1,5 +1,5 @@
 description: To update an agent route for an agent, send a PUT request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
-operationId: Update_Agent_Route_for_an_Agent
+operationId: genAI_update_agent_route_for_an_agent
 parameters:
 - description: A unique identifier for the parent agent.
   example: '"123e4567-e89b-12d3-a456-426614174000"'

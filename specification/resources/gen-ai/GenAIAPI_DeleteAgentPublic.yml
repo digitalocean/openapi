@@ -1,5 +1,5 @@
 description: To delete an agent, send a DELETE request to `/v2/gen-ai/agents/{uuid}`.
-operationId: Delete_an_Agent
+operationId: genAI_delete_an_agent
 parameters:
 - description: Unique agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
