@@ -34,6 +34,9 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+security:
+- bearer_auth:
+  - genai:delete
 summary: Delete a Data Source from a Knowledge Base
 tags:
 - GenAI Platform

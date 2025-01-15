@@ -38,6 +38,9 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+security:
+- bearer_auth:
+  - genai:update
 summary: Update API Key for an Agent
 tags:
 - GenAI Platform

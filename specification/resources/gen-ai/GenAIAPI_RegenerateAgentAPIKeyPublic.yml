@@ -33,6 +33,9 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+security:
+- bearer_auth:
+  - genai:update
 summary: Regenerate API Key for an Agent
 tags:
 - GenAI Platform

@@ -55,6 +55,9 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
+security:
+- bearer_auth:
+  - genai:read
 summary: List Available Models
 tags:
 - GenAI Platform
