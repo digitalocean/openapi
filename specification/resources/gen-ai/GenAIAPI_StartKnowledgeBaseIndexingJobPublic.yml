@@ -1,6 +1,6 @@
 description: To start an indexing job for a knowledge base, send a POST request to
   `/v2/gen-ai/indexing_jobs`.
-operationId: Start_Knowledge_Base_Indexing_Job
+operationId: Start_Indexing_Job_for_a_Knowledge_Base
 requestBody:
   content:
     application/json:
@@ -26,7 +26,7 @@ responses:
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-summary: Start Knowledge Base Indexing Job
+summary: Start Indexing Job for a Knowledge Base
 tags:
 - GenAI Platform
 x-codeSamples:

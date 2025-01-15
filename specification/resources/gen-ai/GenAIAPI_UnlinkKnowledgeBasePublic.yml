@@ -7,7 +7,7 @@ parameters:
   name: agent_uuid
   required: true
   type: string
-- description: Knowledge base
+- description: Knowledge base id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: knowledge_base_uuid
