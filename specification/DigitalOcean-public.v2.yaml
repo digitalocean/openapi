@@ -228,6 +228,10 @@ tags:
       types. Find more information about each of these objects in their
       respective sections.
 
+  - name: Droplet Autoscale Pools
+    description: |-
+      Droplet autoscale pools manage automatic horizontal scaling for your applications based on resource usage (CPU, memory, or both) or a static configuration.
+
   - name: Firewalls
     description: |-
       [DigitalOcean Cloud Firewalls](https://docs.digitalocean.com/products/networking/firewalls/)
@@ -1013,6 +1017,32 @@ paths:
     post:
       $ref: 'resources/droplets/droplets_destroy_retryWithAssociatedResources.yml'
 
+  /v2/droplets/autoscale:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_list.yml'
+    post:
+      $ref: 'resources/autoscale_pools/autoscale_pool_create.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_get.yml'
+    put:
+      $ref: 'resources/autoscale_pools/autoscale_pool_update.yml'
+    delete:
+      $ref: 'resources/autoscale_pools/autoscale_pool_delete.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}/dangerous:
+    delete:
+      $ref: 'resources/autoscale_pools/autoscale_pool_delete_dangerous.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}/members:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_list_members.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}/history:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_list_history.yml'
+
   /v2/firewalls:
     get:
       $ref: 'resources/firewalls/firewalls_list.yml'
@@ -1234,6 +1264,10 @@ paths:
     delete:
       $ref: 'resources/load_balancers/loadBalancers_delete.yml'
 
+  /v2/load_balancers/{lb_id}/cache:
+    delete:
+      $ref: 'resources/load_balancers/loadBalancers_delete_cache.yml'
+
   /v2/load_balancers/{lb_id}/droplets:
     post:
       $ref: 'resources/load_balancers/loadBalancers_add_droplets.yml'
@@ -1428,6 +1462,30 @@ paths:
   /v2/monitoring/metrics/load_balancer/droplets_downtime:
     get:
       $ref: 'resources/monitoring/monitoring_get_lb_droplets_downtime.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_instances:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_instances.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_instances:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_instances.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_cpu_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_cpu_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_memory_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_memory_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_memory_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_memory_utilization.yml'
 
   /v2/monitoring/sinks/destinations:
     post:
