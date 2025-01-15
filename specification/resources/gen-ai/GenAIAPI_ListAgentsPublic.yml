@@ -1,0 +1,49 @@
+description: To list all agents, send a GET request to `/v2/gen-ai/agents`.
+operationId: List_Agents
+parameters:
+- description: Only list agents that are deployed.
+  in: query
+  name: only_deployed
+  type: boolean
+- collectionFormat: multi
+  description: The set of field mask paths.
+  in: query
+  items:
+    type: string
+  name: field_mask.paths
+  type: array
+- description: Page number.
+  format: int64
+  in: query
+  name: page
+  type: integer
+- description: Items per page.
+  format: int64
+  in: query
+  name: per_page
+  type: integer
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListAgentsOutputPublic
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: List Agents
+tags:
+- GenAI Platform
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_ListAgentsPublic.yml

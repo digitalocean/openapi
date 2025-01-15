@@ -1,0 +1,40 @@
+description: To attach a knowledge base to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`
+operationId: Attach_Knowledge_base_to_Agent
+parameters:
+- description: A unique identifier for an agent.
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
+  in: path
+  name: agent_uuid
+  required: true
+  type: string
+- description: A unique identifier for a knowledge base.
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
+  in: path
+  name: knowledge_base_uuid
+  required: true
+  type: string
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiLinkKnowledgeBaseOutput
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: Attach Knowledge base to Agent
+tags:
+- GenAI Platform
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_LinkKnowledgeBasePublic.yml

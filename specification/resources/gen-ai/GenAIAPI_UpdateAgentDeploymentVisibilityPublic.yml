@@ -1,0 +1,40 @@
+description: Check whether an agent is public or private. To get the agent status,
+  send a PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
+operationId: Check_Agent_Status
+parameters:
+- description: Unique id
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
+  in: path
+  name: uuid
+  required: true
+  type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiUpdateAgentDeploymentVisibilityInputPublic
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiUpdateAgentDeploymentVisbilityOutput
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: Check Agent Status
+tags:
+- GenAI Platform
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_UpdateAgentDeploymentVisibilityPublic.yml

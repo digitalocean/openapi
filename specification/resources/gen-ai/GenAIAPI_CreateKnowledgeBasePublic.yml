@@ -1,0 +1,32 @@
+description: To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
+operationId: Create_a_Knowledge_Base
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiCreateKnowledgeBaseInputPublic
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiCreateKnowledgeBaseOutput
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: Create a Knowledge Base
+tags:
+- GenAI Platform
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_CreateKnowledgeBasePublic.yml

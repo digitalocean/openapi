@@ -1,0 +1,34 @@
+description: To list all datacenter regions, send a GET request to `/v2/gen-ai/regions`.
+operationId: List_Datacenter_Regions
+parameters:
+- in: query
+  name: serves_inference
+  type: boolean
+- in: query
+  name: serves_batch
+  type: boolean
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListRegionsOutput
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+summary: List Datacenter Regions
+tags:
+- GenAI Platform
+x-codeSamples:
+- $ref: examples/curl/GenAIAPI_ListRegions.yml
