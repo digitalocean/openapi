@@ -1,6 +1,6 @@
 description: To retrive information about an existing knowledge base, send a GET request
   to `/v2/gen-ai/knowledge_bases/{uuid}`.
-operationId: genAigenai_get_knowledge_base
+operationId: genai_get_knowledge_base
 parameters:
 - description: Knowledge base id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

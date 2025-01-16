@@ -1,5 +1,5 @@
 description: To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
-operationId: genAigenai_create_knowledge_base
+operationId: genai_create_knowledge_base
 requestBody:
   content:
     application/json:

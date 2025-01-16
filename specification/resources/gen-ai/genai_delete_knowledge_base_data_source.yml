@@ -1,6 +1,6 @@
 description: To delete a data source from a knowledge base, send a DELETE request
   to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
-operationId: genAigenai_delete_knowledge_base_data_source
+operationId: genai_delete_knowledge_base_data_source
 parameters:
 - description: Knowledge base id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

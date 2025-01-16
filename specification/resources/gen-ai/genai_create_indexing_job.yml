@@ -1,6 +1,6 @@
 description: To start an indexing job for a knowledge base, send a POST request to
   `/v2/gen-ai/indexing_jobs`.
-operationId: genAigenai_create_indexing_job
+operationId: genai_create_indexing_job
 requestBody:
   content:
     application/json:

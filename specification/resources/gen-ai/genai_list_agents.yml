@@ -1,5 +1,5 @@
 description: To list all agents, send a GET request to `/v2/gen-ai/agents`.
-operationId: genAigenai_list_agents
+operationId: genai_list_agents
 parameters:
 - description: Only list agents that are deployed.
   example: true

@@ -1,6 +1,6 @@
 description: To retrieve details of an agent, GET request to `/v2/gen-ai/agents/{uuid}`.
   The response body is a JSON object containing the agent.
-operationId: genAigenai_get_agent
+operationId: genai_get_agent
 parameters:
 - description: Unique agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

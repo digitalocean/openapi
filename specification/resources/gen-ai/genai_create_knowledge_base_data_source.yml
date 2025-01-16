@@ -1,5 +1,5 @@
 description: To add a data source to a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
-operationId: genAigenai_create_knowledge_base_data_source
+operationId: genai_create_knowledge_base_data_source
 parameters:
 - description: Knowledge base id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

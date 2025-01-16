@@ -1,6 +1,6 @@
 description: To get status of an indexing Job for a knowledge base, send a GET request
   to `/v2/gen-ai/indexing_jobs/{uuid}`.
-operationId: genAigenai_get_indexing_job
+operationId: genai_get_indexing_job
 parameters:
 - description: Indexing job id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

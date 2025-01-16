@@ -1,5 +1,5 @@
 description: To delete an API key for an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.
-operationId: genAigenai_delete_agent_api_key
+operationId: genai_delete_agent_api_key
 parameters:
 - description: A unique identifier for your agent.
   example: '"123e4567-e89b-12d3-a456-426614174000"'

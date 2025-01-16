@@ -1,6 +1,6 @@
 description: To list all indexing jobs for a knowledge base, send a GET request to
   `/v2/gen-ai/indexing_jobs`.
-operationId: genAigenai_list_indexing_jobs
+operationId: genai_list_indexing_jobs
 parameters:
 - description: Page number.
   example: 1

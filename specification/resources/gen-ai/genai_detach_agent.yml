@@ -1,6 +1,6 @@
 description: To delete an agent route from a parent agent, send a DELETE request to
   `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
-operationId: genAigenai_detach_agent
+operationId: genai_detach_agent
 parameters:
 - description: Pagent agent id
   example: '"123e4567-e89b-12d3-a456-426614174000"'

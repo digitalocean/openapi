@@ -1,5 +1,5 @@
 description: To list all models, send a GET request to `/v2/gen-ai/models`.
-operationId: genAigenai_list_models
+operationId: genai_list_models
 parameters:
 - description: |-
     Include only models defined for the listed usecases.
