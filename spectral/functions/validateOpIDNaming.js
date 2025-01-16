@@ -5,13 +5,13 @@
  *
  */
 
-const DELETE = ["delete", "destroy", "remove", "purge", "untag", "unassign"];
+const DELETE = ["delete", "destroy", "remove", "purge", "untag", "unassign", "detach"];
 const GET = ["get", "list"];
 const PATCH = ["patch"];
 const POST = ["create", "post", "add", "tag", "install", "reset", "upgrade",
   "recycle", "run", "retry", "validate", "assign", "unassign", "cancel", "list",
   "destroy", "delete", "update", "attach", "revert", "commit", "restart"];
-const PUT = ["update", "promote", "install"];
+const PUT = ["update", "promote", "install", "regenerate", "cancel"];
 
 const articles = ["_a_", "_an_", "_the_"]
 
