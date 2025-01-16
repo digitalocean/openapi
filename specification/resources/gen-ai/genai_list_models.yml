@@ -14,6 +14,14 @@ parameters:
   in: query
   name: usecases
   schema:
+    items:
+      enum:
+      - MODEL_USECASE_UNKNOWN
+      - MODEL_USECASE_AGENT
+      - MODEL_USECASE_FINETUNED
+      - MODEL_USECASE_KNOWLEDGEBASE
+      - MODEL_USECASE_GUARDRAIL
+      type: string
     type: array
 - description: Only include models that are publicly available.
   example: true
