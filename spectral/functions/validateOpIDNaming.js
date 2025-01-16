@@ -5,13 +5,13 @@
  *
  */
 
-const DELETE = ["delete", "destroy", "remove", "purge", "untag", "unassign"];
+const DELETE = ["delete", "destroy", "remove", "purge", "untag", "unassign", "detach"];
 const GET = ["get", "list"];
 const PATCH = ["patch"];
 const POST = ["create", "post", "add", "tag", "install", "reset", "upgrade",
   "recycle", "run", "retry", "validate", "assign", "unassign", "cancel", "list",
   "destroy", "delete", "update", "attach", "revert", "commit", "restart"];
-const PUT = ["update", "promote", "install"];
+const PUT = ["update", "promote", "install", "regenerate", "cancel"];
 
 const articles = ["_a_", "_an_", "_the_"]
 
@@ -27,35 +27,35 @@ export default (input, _, context) => {
         if (!(DELETE.includes(suffix))) {
           return [{
             message:
-              `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${DELETE.join(", ")}. Prefer 'delete'. Example OperationID: droplet_delete`
+              `${method.toUpperCase()} ${path} - ${operationId}: first segment after the namespace should start with one of: ${DELETE.join(", ")}. Prefer 'delete'. Example OperationID: droplet_delete`
           }];
         }
         break;
       case "get":
         if (!(GET.includes(suffix))) {
           return [{
-            message: `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${GET.join(", ")}. Prefer 'get' for retrieving a single object and 'list' for multiple objects. Example OperationID: droplet_get`
+            message: `${method.toUpperCase()} ${path} - ${operationId}: first segment after the namespace should start with one of: ${GET.join(", ")}. Prefer 'get' for retrieving a single object and 'list' for multiple objects. Example OperationID: droplet_get, droplets_list_firewalls`
           }];
         }
         break;
       case "patch":
         if (!(PATCH.includes(suffix))) {
           return [{
-            message: `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${PATCH.join(", ")}. Prefer 'patch'. Example OperationID: droplet_patch`
+            message: `${method.toUpperCase()} ${path} - ${operationId}: first segment after the namespace should start with one of: ${PATCH.join(", ")}. Prefer 'patch'. Example OperationID: droplet_patch`
           }];
         }
         break;
       case "post":
         if (!(POST.includes(suffix))) {
           return [{
-            message: `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${POST.join(", ")}. Prefer 'create' for new resources. Custom verbs may be acceptable for clarity. Example OperationID: droplet_create`
+            message: `${method.toUpperCase()} ${path} - ${operationId}: first segment after the namespace should start with one of: ${POST.join(", ")}. Prefer 'create' for new resources. Custom verbs may be acceptable for clarity. Example OperationID: droplet_create`
           }];
         }
         break;
       case "put":
         if (!(PUT.includes(suffix))) {
           return [{
-            message: `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${PUT.join(", ")}. Prefer 'update'. Example OperationID: droplet_update`
+            message: `${method.toUpperCase()} ${path} - ${operationId}: first segment after the namespace should start with one of: ${PUT.join(", ")}. Prefer 'update'. Example OperationID: droplet_update`
           }];
         }
         break;
