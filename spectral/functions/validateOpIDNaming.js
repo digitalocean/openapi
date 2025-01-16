@@ -34,7 +34,7 @@ export default (input, _, context) => {
       case "get":
         if (!(GET.includes(suffix))) {
           return [{
-            message: `${method.toUpperCase()} ${path} - ${operationId} should end with one of: ${GET.join(", ")}. Prefer 'get' for retrieving a single object and 'list' for multiple objects. Example OperationID: droplet_get`
+            message: `${method.toUpperCase()} ${suffix} - ${operationId} should end with one of: ${GET.join(", ")}. Prefer 'get' for retrieving a single object and 'list' for multiple objects. Example OperationID: droplet_get`
           }];
         }
         break;
