@@ -71,5 +71,6 @@ security:
 summary: List Available Models
 tags:
 - GenAI Platform
+- GenAI Platform (Early Availability)
 x-codeSamples:
 - $ref: examples/curl/genai_list_models.yml

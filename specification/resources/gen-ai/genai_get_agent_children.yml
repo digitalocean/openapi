@@ -38,5 +38,6 @@ security:
 summary: View Agent Routes
 tags:
 - GenAI Platform
+- GenAI Platform (Early Availability)
 x-codeSamples:
 - $ref: examples/curl/genai_get_agent_children.yml

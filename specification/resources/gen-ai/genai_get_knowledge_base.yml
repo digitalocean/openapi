@@ -39,5 +39,6 @@ security:
 summary: Retrieve Information About an Existing Knowledge Base
 tags:
 - GenAI Platform
+- GenAI Platform (Early Availability)
 x-codeSamples:
 - $ref: examples/curl/genai_get_knowledge_base.yml

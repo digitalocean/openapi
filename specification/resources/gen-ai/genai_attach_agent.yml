@@ -50,5 +50,6 @@ security:
 summary: Add Agent Route to an Agent
 tags:
 - GenAI Platform
+- GenAI Platform (Early Availability)
 x-codeSamples:
 - $ref: examples/curl/genai_attach_agent.yml

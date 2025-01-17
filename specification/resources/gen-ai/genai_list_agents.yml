@@ -49,5 +49,6 @@ security:
 summary: List Agents
 tags:
 - GenAI Platform
+- GenAI Platform (Early Availability)
 x-codeSamples:
 - $ref: examples/curl/genai_list_agents.yml

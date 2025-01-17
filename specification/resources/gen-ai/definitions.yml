@@ -7,6 +7,8 @@ apiAcceptAgreementOutput:
 apiAgent:
   description: An Agent
   properties:
+    anthropic_api_key:
+      $ref: '#/apiAnthropicAPIKeyInfo'
     api_key_infos:
       description: Api key infos
       items:
@@ -506,6 +508,38 @@ apiAgreement:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
   type: object
+apiAnthropicAPIKeyInfo:
+  description: Anthropic API Key Info
+  properties:
+    created_at:
+      description: Key creation date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by:
+      description: Created by user id from DO
+      example: '"12345"'
+      format: uint64
+      type: string
+    deleted_at:
+      description: Key deleted date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    name:
+      description: Name
+      example: '"example name"'
+      type: string
+    updated_at:
+      description: Key last updated date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    uuid:
+      description: Uuid
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
+  type: object
 apiAuditHeader:
   description: An alternative way to provide auth information. for internal use only.
   properties:
@@ -680,6 +714,13 @@ apiCreateAgentOutput:
     agent:
       $ref: '#/apiAgent'
   type: object
+apiCreateAnthropicAPIKeyOutput:
+  description: CreateAnthropicAPIKeyOutput is used to return the newly created Anthropic
+    API key.
+  properties:
+    api_key_info:
+      $ref: '#/apiAnthropicAPIKeyInfo'
+  type: object
 apiCreateChatbotInputPublic:
   properties:
     agent_uuid:
@@ -806,6 +847,13 @@ apiDeleteAgentOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
+  type: object
+apiDeleteAnthropicAPIKeyOutput:
+  description: DeleteAnthropicAPIKeyOutput is used to return the deleted Anthropic
+    API key.
+  properties:
+    api_key_info:
+      $ref: '#/apiAnthropicAPIKeyInfo'
   type: object
 apiDeleteChatbotInputPublic:
   properties:
@@ -945,6 +993,11 @@ apiFileUploadDataSource:
       description: The original file name
       example: '"example name"'
       type: string
+    size_in_bytes:
+      description: The size of the file in bytes
+      example: '"12345"'
+      format: uint64
+      type: string
     stored_object_key:
       description: The object key the file was stored as
       example: '"example string"'
@@ -965,19 +1018,6 @@ apiGetAgentOutputPublic:
   properties:
     agent:
       $ref: '#/apiAgentPublic'
-  type: object
-apiGetAgentPlaygroundTokensOutput:
-  properties:
-    token_limit_per_day:
-      description: Daily token limit
-      example: '"12345"'
-      format: uint64
-      type: string
-    tokens_remaining:
-      description: Tokens remaining
-      example: 123
-      format: int64
-      type: integer
   type: object
 apiGetAgentTemplateInputPublic:
   properties:
@@ -1001,6 +1041,11 @@ apiGetAgentUsageOutput:
   properties:
     usage:
       $ref: '#/apiResourceUsage'
+  type: object
+apiGetAnthropicAPIKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiAnthropicAPIKeyInfo'
   type: object
 apiGetChildrenInputPublic:
   properties:
@@ -1641,6 +1686,18 @@ apiListAgentTemplatesOutput:
         $ref: '#/apiAgentTemplate'
       type: array
   type: object
+apiListAgentsByAnthropicKeyOutput:
+  description: List of Agents that linked to a specific Anthropic Key
+  properties:
+    agents:
+      items:
+        $ref: '#/apiAgent'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+  type: object
 apiListAgentsInputPublic:
   properties:
     only_deployed:
@@ -1669,6 +1726,20 @@ apiListAgentsOutputPublic:
       description: Agents
       items:
         $ref: '#/apiAgentPublic'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+  type: object
+apiListAnthropicAPIKeysOutput:
+  description: ListAnthropicAPIKeysOutput is used to return the list of Anthropic
+    API keys for a specific agent.
+  properties:
+    api_key_infos:
+      description: Api key infos
+      items:
+        $ref: '#/apiAnthropicAPIKeyInfo'
       type: array
     links:
       $ref: '#/apiLinks'
@@ -1935,6 +2006,8 @@ apiModel:
       description: Unique id of the model, this model is based on
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
+    provider:
+      $ref: '#/apiModelProvider'
     updated_at:
       description: Last modified
       example: "2023-01-01T00:00:00Z"
@@ -1972,6 +2045,13 @@ apiModelPrice:
         $ref: '#/apiBillingPrice'
       type: array
   type: object
+apiModelProvider:
+  default: MODEL_PROVIDER_DIGITALOCEAN
+  enum:
+  - MODEL_PROVIDER_DIGITALOCEAN
+  - MODEL_PROVIDER_ANTHROPIC
+  example: MODEL_PROVIDER_DIGITALOCEAN
+  type: string
 apiModelPublic:
   description: A machine learning model stored on the GenAI platform
   properties:
@@ -2396,6 +2476,13 @@ apiUpdateAgentOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
+  type: object
+apiUpdateAnthropicAPIKeyOutput:
+  description: UpdateAnthropicAPIKeyOutput is used to return the updated Anthropic
+    API key.
+  properties:
+    api_key_info:
+      $ref: '#/apiAnthropicAPIKeyInfo'
   type: object
 apiUpdateChatbotInputPublic:
   properties:

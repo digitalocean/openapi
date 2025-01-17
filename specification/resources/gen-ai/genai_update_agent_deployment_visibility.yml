@@ -44,5 +44,6 @@ security:
 summary: Check Agent Status
 tags:
 - GenAI Platform
+- GenAI Platform (Early Availability)
 x-codeSamples:
 - $ref: examples/curl/genai_update_agent_deployment_visibility.yml

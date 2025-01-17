@@ -38,5 +38,6 @@ security:
 summary: List Data Sources for Indexing Job for a Knowledge Base
 tags:
 - GenAI Platform
+- GenAI Platform (Early Availability)
 x-codeSamples:
 - $ref: examples/curl/genai_list_indexing_job_data_sources.yml

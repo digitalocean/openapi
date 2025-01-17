@@ -39,5 +39,6 @@ security:
 summary: Retrieve an Existing Agent
 tags:
 - GenAI Platform
+- GenAI Platform (Early Availability)
 x-codeSamples:
 - $ref: examples/curl/genai_get_agent.yml
