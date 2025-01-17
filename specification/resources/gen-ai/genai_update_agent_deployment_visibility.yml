@@ -45,5 +45,7 @@ summary: Check Agent Status
 tags:
 - GenAI Platform
 - GenAI Platform (Early Availability)
+- GenAI Platform (Private Preview)
+- GenAI Platform (Public Preview)
 x-codeSamples:
 - $ref: examples/curl/genai_update_agent_deployment_visibility.yml

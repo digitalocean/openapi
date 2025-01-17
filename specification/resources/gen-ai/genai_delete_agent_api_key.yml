@@ -46,5 +46,7 @@ summary: 'Delete API Key for an Agent '
 tags:
 - GenAI Platform
 - GenAI Platform (Early Availability)
+- GenAI Platform (Private Preview)
+- GenAI Platform (Public Preview)
 x-codeSamples:
 - $ref: examples/curl/genai_delete_agent_api_key.yml

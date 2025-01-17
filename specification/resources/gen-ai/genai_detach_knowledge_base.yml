@@ -46,5 +46,7 @@ summary: Detach Knowledge Base from an Agent
 tags:
 - GenAI Platform
 - GenAI Platform (Early Availability)
+- GenAI Platform (Private Preview)
+- GenAI Platform (Public Preview)
 x-codeSamples:
 - $ref: examples/curl/genai_detach_knowledge_base.yml

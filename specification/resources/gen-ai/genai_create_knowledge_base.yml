@@ -36,5 +36,7 @@ summary: Create a Knowledge Base
 tags:
 - GenAI Platform
 - GenAI Platform (Early Availability)
+- GenAI Platform (Private Preview)
+- GenAI Platform (Public Preview)
 x-codeSamples:
 - $ref: examples/curl/genai_create_knowledge_base.yml

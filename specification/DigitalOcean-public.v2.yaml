@@ -292,7 +292,7 @@ tags:
       The Serverless Functions API currently only supports creating and managing namespaces.
 
 
-  - name: GenAI Platform (Early Availability)
+  - name: GenAI Platform (Public Preview)
     description: |-
       **The GenAI Platform API is in [early availability](https://docs.digitalocean.com/platform/product-lifecycle/#early-availability) for select customers.**
       
