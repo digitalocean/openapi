@@ -42,9 +42,6 @@ security:
   - genai:update
 summary: Update a Knowledge Base
 tags:
-- GenAI Platform
-- GenAI Platform (Early Availability)
-- GenAI Platform (Private Preview)
 - GenAI Platform (Public Preview)
 x-codeSamples:
 - $ref: examples/curl/genai_update_knowledge_base.yml
