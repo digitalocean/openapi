@@ -42,9 +42,6 @@ security:
   - genai:read
 summary: List Datacenter Regions
 tags:
-- GenAI Platform
-- GenAI Platform (Early Availability)
-- GenAI Platform (Private Preview)
 - GenAI Platform (Public Preview)
 x-codeSamples:
 - $ref: examples/curl/genai_list_datacenter_regions.yml

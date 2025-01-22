@@ -49,9 +49,6 @@ security:
   - genai:create
 summary: Add Agent Route to an Agent
 tags:
-- GenAI Platform
-- GenAI Platform (Early Availability)
-- GenAI Platform (Private Preview)
 - GenAI Platform (Public Preview)
 x-codeSamples:
 - $ref: examples/curl/genai_attach_agent.yml

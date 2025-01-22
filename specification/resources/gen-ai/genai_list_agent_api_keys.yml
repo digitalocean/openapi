@@ -49,9 +49,6 @@ security:
   - genai:read
 summary: List Agent API Keys
 tags:
-- GenAI Platform
-- GenAI Platform (Early Availability)
-- GenAI Platform (Private Preview)
 - GenAI Platform (Public Preview)
 x-codeSamples:
 - $ref: examples/curl/genai_list_agent_api_keys.yml
