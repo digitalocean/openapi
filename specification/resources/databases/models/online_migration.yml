@@ -10,7 +10,7 @@ properties:
     description: The current status of the migration.
     enum:
       - running
-      - synching
+      - syncing
       - canceled
       - error
       - done
