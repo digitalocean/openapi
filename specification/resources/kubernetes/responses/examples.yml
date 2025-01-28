@@ -103,6 +103,9 @@ kubernetes_clusters_all:
         allowed_addresses:
           - "1.2.3.4/32"
           - "1.1.0.0/16"
+      cluster_autoscaler_configuration:
+        scale_down_utilization_threshold: 0.65
+        scale_down_unneeded_time: "1m"
     meta:
       total: 1
 
@@ -210,6 +213,9 @@ kubernetes_single:
         allowed_addresses:
           - "1.2.3.4/32"
           - "1.1.0.0/16"
+      cluster_autoscaler_configuration:
+        scale_down_utilization_threshold: 0.65
+        scale_down_unneeded_time: "1m"
 
 kubernetes_updated:
   value:
@@ -315,6 +321,9 @@ kubernetes_updated:
         allowed_addresses:
           - "1.2.3.4/32"
           - "1.1.0.0/16"
+      cluster_autoscaler_configuration:
+        scale_down_utilization_threshold: 0.65
+        scale_down_unneeded_time: "1m"
 
 kubernetes_clusters_create_basic_response:
   value:
@@ -385,6 +394,9 @@ kubernetes_clusters_create_basic_response:
         allowed_addresses:
           - "1.2.3.4/32"
           - "1.1.0.0/16"
+      cluster_autoscaler_configuration:
+        scale_down_utilization_threshold: 0.65
+        scale_down_unneeded_time: "1m"
 
 kubernetes_clusters_multi_pool_response:
   value:
@@ -492,6 +504,9 @@ kubernetes_clusters_multi_pool_response:
         allowed_addresses:
           - "1.2.3.4/32"
           - "1.1.0.0/16"
+      cluster_autoscaler_configuration:
+        scale_down_utilization_threshold: 0.65
+        scale_down_unneeded_time: "1m"
 
 kubernetes_options:
   value:
