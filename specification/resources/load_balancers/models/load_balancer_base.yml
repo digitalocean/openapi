@@ -29,6 +29,13 @@ properties:
     example: '104.131.186.241'
     description: An attribute containing the public-facing IP address of the
       load balancer.
+  
+  ipv6:
+    type: string
+    readOnly: true
+    example: '2604:a880:800:14::85f5:c000'
+    description: An attribute containing the public-facing IPv6 address of the
+      load balancer. Note that this feature is currently in private preview.
 
   size_unit:
     type: integer
@@ -168,6 +175,17 @@ properties:
       or internal. Internal load balancers have no public IPs and are only accessible 
       to resources on the same VPC network. This property cannot be updated after
       creating the load balancer.
+
+  network_stack:
+    type: string
+    example: IPV4
+    enum:
+      - IPV4
+      - DUALSTACK
+    default: IPV4
+    description: A string indicating whether the load balancer will support IPv4 
+      or both IPv4 and IPv6 networking. This property cannot be updated after
+      creating the load balancer. Note that this feature is in private preview.
 
   type:
     type: string
