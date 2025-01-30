@@ -1,6 +1,6 @@
 operationId: reservedIPv6_delete
 
-summary: "[Beta] Delete a Reserved IPv6"
+summary: "[Public Preview] Delete a Reserved IPv6"
 
 description: |
   To delete a reserved IP and remove it from your account, send a DELETE request
@@ -10,7 +10,7 @@ description: |
   This indicates that the request was processed successfully.
 
 tags:
-  - "[Beta] Reserved IPv6"
+  - "[Public Preview] Reserved IPv6"
 
 parameters:
   - $ref: 'parameters.yml#/reserved_ipv6'

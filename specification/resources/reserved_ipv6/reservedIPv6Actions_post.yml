@@ -1,6 +1,6 @@
 operationId: reservedIPv6Actions_post
 
-summary: "[Beta] Initiate a Reserved IPv6 Action"
+summary: "[Public Preview] Initiate a Reserved IPv6 Action"
 
 description: |
     To initiate an action on a reserved IPv6 send a POST request to
@@ -13,7 +13,7 @@ description: |
     | `unassign` | Unassign a reserved IPv6 from a Droplet
 
 tags:
-  -  "[Beta] Reserved IPv6 Actions"
+  -  "[Public Preview] Reserved IPv6 Actions"
 
 parameters:
   - $ref: 'parameters.yml#/reserved_ipv6'

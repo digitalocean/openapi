@@ -442,14 +442,14 @@ tags:
 
       Reserved IPs are bound to a specific region.
   
-  - name: "[Beta] Reserved IPv6"
+  - name: "[Public Preview] Reserved IPv6"
     description: |-
       DigitalOcean Reserved IPv6s are publicly-accessible static IP addresses that can be
       mapped to one of your Droplets. They can be used to create highly available
       setups or other configurations requiring movable addresses.
 
       Reserved IPv6s are bound to a specific region.
-  - name: "[Beta] Reserved IPv6 Actions"
+  - name: "[Public Preview] Reserved IPv6 Actions"
     description: |-
       Reserved IPv6 actions requests are made on the actions endpoint of a specific
       reserved IPv6.
