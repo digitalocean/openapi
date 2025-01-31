@@ -665,6 +665,9 @@ apiCreateAgentFromTemplateOutput:
 apiCreateAgentInputPublic:
   description: Parameters for Agent Creation
   properties:
+    anthropic_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
     description:
       description: A text description of the agent, not used in inference
       example: '"My Agent Description"'
@@ -713,6 +716,19 @@ apiCreateAgentOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
+  type: object
+apiCreateAnthropicAPIKeyInputPublic:
+  description: CreateAnthropicAPIKeyInputPublic is used to create a new Anthropic
+    API key for a specific agent.
+  properties:
+    api_key:
+      description: API key
+      example: '"sk-ant-12345678901234567890123456789012"'
+      type: string
+    name:
+      description: Name
+      example: '"Production Key"'
+      type: string
   type: object
 apiCreateAnthropicAPIKeyOutput:
   description: CreateAnthropicAPIKeyOutput is used to return the newly created Anthropic
@@ -848,6 +864,10 @@ apiDeleteAgentOutput:
     agent:
       $ref: '#/apiAgent'
   type: object
+apiDeleteAnthropicAPIKeyInputPublic:
+  properties:
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
 apiDeleteAnthropicAPIKeyOutput:
   description: DeleteAnthropicAPIKeyOutput is used to return the deleted Anthropic
     API key.
@@ -1042,6 +1062,10 @@ apiGetAgentUsageOutput:
     usage:
       $ref: '#/apiResourceUsage'
   type: object
+apiGetAnthropicAPIKeyInputPublic:
+  properties:
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
 apiGetAnthropicAPIKeyOutput:
   properties:
     api_key_info:
@@ -1188,6 +1212,40 @@ apiGetResourceLimitsOutput:
       type: integer
     knowledge_base_limit:
       description: Total permitted knowledge bases
+      example: 123
+      format: int64
+      type: integer
+  type: object
+apiGetResourceUsageOutput:
+  description: Resource usage output
+  properties:
+    agent_count:
+      description: Total agents used
+      example: 123
+      format: int64
+      type: integer
+    agent_usage:
+      description: Agent usage
+      items:
+        $ref: '#/apiResourceUsage'
+      type: array
+    guardrail_count:
+      description: Total guardrails used
+      example: 123
+      format: int64
+      type: integer
+    guardrail_usage:
+      description: Guardrail usage
+      items:
+        $ref: '#/apiResourceUsage'
+      type: array
+    indexing_job_usage:
+      description: Indexing job usage
+      items:
+        $ref: '#/apiResourceUsage'
+      type: array
+    knowledge_base_count:
+      description: Total knowledge bases used
       example: 123
       format: int64
       type: integer
@@ -1686,6 +1744,14 @@ apiListAgentTemplatesOutput:
         $ref: '#/apiAgentTemplate'
       type: array
   type: object
+apiListAgentsByAnthropicKeyInputPublic:
+  properties:
+    page:
+      example: "1"
+    per_page:
+      example: "20"
+    uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
 apiListAgentsByAnthropicKeyOutput:
   description: List of Agents that linked to a specific Anthropic Key
   properties:
@@ -1732,6 +1798,12 @@ apiListAgentsOutputPublic:
     meta:
       $ref: '#/apiMeta'
   type: object
+apiListAnthropicAPIKeysInputPublic:
+  properties:
+    page:
+      example: "1"
+    per_page:
+      example: "20"
 apiListAnthropicAPIKeysOutput:
   description: ListAnthropicAPIKeysOutput is used to return the list of Anthropic
     API keys for a specific agent.
@@ -2214,6 +2286,9 @@ apiResourceUsage:
       items:
         $ref: '#/apiUsageMeasurement'
       type: array
+    resource_uuid:
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
     start:
       example: "2023-01-01T00:00:00Z"
       format: date-time
@@ -2409,6 +2484,9 @@ apiUpdateAgentFunctionOutput:
 apiUpdateAgentInputPublic:
   description: Data to modify an existing Agent
   properties:
+    anthropic_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
     description:
       description: Agent description
       example: '"My Agent Description"'
@@ -2476,6 +2554,23 @@ apiUpdateAgentOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
+  type: object
+apiUpdateAnthropicAPIKeyInputPublic:
+  description: UpdateAnthropicAPIKeyInputPublic is used to update an existing Anthropic
+    API key for a specific agent.
+  properties:
+    api_key:
+      description: Anthropic api key
+      example: '"example string"'
+      type: string
+    api_key_uuid:
+      description: Api key id
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    name:
+      description: Name
+      example: '"example name"'
+      type: string
   type: object
 apiUpdateAnthropicAPIKeyOutput:
   description: UpdateAnthropicAPIKeyOutput is used to return the updated Anthropic
