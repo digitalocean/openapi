@@ -1,7 +1,7 @@
 description: List Agents by Anthropic Key.
 operationId: genai_list_agents_by_anthropic_key
 parameters:
-- description: Unique anthropic key id
+- description: Unique ID of Anthropic key
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: uuid
@@ -47,7 +47,7 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: List Agents by Anthropic Key
+summary: List agents by Anthropic key
 tags:
 - GenAI Platform (Public Preview)
 x-codeSamples:

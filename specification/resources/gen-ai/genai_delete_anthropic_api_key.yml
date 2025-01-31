@@ -1,7 +1,7 @@
 description: To delete an Anthropic API key, send a DELETE request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
 operationId: genai_delete_anthropic_api_key
 parameters:
-- description: Api key id
+- description: API key ID
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: api_key_uuid
