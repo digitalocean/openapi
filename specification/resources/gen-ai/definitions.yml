@@ -666,6 +666,7 @@ apiCreateAgentInputPublic:
   description: Parameters for Agent Creation
   properties:
     anthropic_key_uuid:
+      description: Optional anthropic key uuid for use with anthropic models
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     description:
@@ -2485,6 +2486,7 @@ apiUpdateAgentInputPublic:
   description: Data to modify an existing Agent
   properties:
     anthropic_key_uuid:
+      description: Optional anthropic key uuid for use with anthropic models
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     description:
