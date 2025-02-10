@@ -29,6 +29,13 @@ properties:
     example: '104.131.186.241'
     description: An attribute containing the public-facing IP address of the
       load balancer.
+  
+  ipv6:
+    type: string
+    readOnly: true
+    example: '2604:a880:800:14::85f5:c000'
+    description: An attribute containing the public-facing IPv6 address of the
+      load balancer. Note that this feature is currently in private preview.
 
   size_unit:
     type: integer
@@ -168,6 +175,49 @@ properties:
       or internal. Internal load balancers have no public IPs and are only accessible 
       to resources on the same VPC network. This property cannot be updated after
       creating the load balancer.
+
+  network_stack:
+    type: string
+    example: IPV4
+    enum:
+      - IPV4
+      - DUALSTACK
+    default: IPV4
+    description: A string indicating whether the load balancer will support IPv4 
+      or both IPv4 and IPv6 networking. This property cannot be updated after
+      creating the load balancer. Note that this feature is in private preview.
+
+  type:
+    type: string
+    example: REGIONAL
+    enum:
+      - REGIONAL
+      - REGIONAL_NETWORK
+      - GLOBAL
+    default: REGIONAL
+    description: A string indicating whether the load balancer should be a standard
+      regional HTTP load balancer, a regional network load balancer that routes traffic
+      at the TCP/UDP transport layer, or a global load balancer.
+
+  domains:
+    type: array
+    items:
+      $ref: 'domains.yml'
+    description: An array of objects specifying the domain configurations for a 
+      Global load balancer.
+
+  glb_settings:
+    $ref: 'glb_settings.yml'
+
+  target_load_balancer_ids:
+    type: array
+    items:
+      type: string
+    example:
+      - 7dbf91fe-cbdb-48dc-8290-c3a181554905
+      - 996fa239-fac3-42a2-b9a1-9fa822268b7a
+    description: An array containing the UUIDs of the Regional load balancers to be used as target
+      backends for a Global load balancer.
 
 required:
   - forwarding_rules

@@ -112,7 +112,7 @@ tags:
       create, or delete CDN Endpoints as well as purge cached content. To use a
       custom subdomain to access the CDN Endpoint, provide the ID of a
       DigitalOcean managed TLS certificate and the fully qualified domain name
-      for the custom subdomain. 
+      for the custom subdomain.
 
       CDN endpoints have a rate limit of five requests per 10 seconds.
 
@@ -146,7 +146,7 @@ tags:
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://docs.digitalocean.com/products/databases/postgresql/),
       [Redis](https://docs.digitalocean.com/products/databases/redis/),
-      [MySQL](https://docs.digitalocean.com/products/databases/mysql/), 
+      [MySQL](https://docs.digitalocean.com/products/databases/mysql/),
       [MongoDB](https://docs.digitalocean.com/products/databases/mongodb/), and
       [OpenSearch](https://docs.digitalocean.com/products/databases/opensearch/).
 
@@ -162,7 +162,7 @@ tags:
       which is used in some of the following requests. Each slug denotes the node's identifier,
       CPU count, and amount of RAM, in that order.
 
-      For a list of currently available database slugs and options, use the `/v2/databases/options` endpoint or use the 
+      For a list of currently available database slugs and options, use the `/v2/databases/options` endpoint or use the
       `doctl databases options` [command](https://docs.digitalocean.com/reference/doctl/reference/databases/options).
 
   - name: Domain Records
@@ -228,6 +228,10 @@ tags:
       types. Find more information about each of these objects in their
       respective sections.
 
+  - name: Droplet Autoscale Pools
+    description: |-
+      Droplet autoscale pools manage automatic horizontal scaling for your applications based on resource usage (CPU, memory, or both) or a static configuration.
+
   - name: Firewalls
     description: |-
       [DigitalOcean Cloud Firewalls](https://docs.digitalocean.com/products/networking/firewalls/)
@@ -286,6 +290,14 @@ tags:
       You can develop functions on your local machine and then deploy them to a namespace using `doctl`, the [official DigitalOcean CLI tool](https://docs.digitalocean.com/reference/doctl).
 
       The Serverless Functions API currently only supports creating and managing namespaces.
+
+
+  - name: GenAI Platform (Public Preview)
+    description: |-
+      **The GenAI Platform API is in [public preview](https://docs.digitalocean.com/platform/product-lifecycle/#public-preview) for select customers.**
+
+      The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+
 
   - name: Image Actions
     description: |-
@@ -482,9 +494,9 @@ tags:
 
   - name: VPC Peerings
     description: |-
-      [VPC Peerings](https://docs.digitalocean.com/products/networking/vpc/how-to/create-peering/) 
-      join two VPC networks with a secure, private connection. This allows 
-      resources in those networks to connect to each other's private IP addresses 
+      [VPC Peerings](https://docs.digitalocean.com/products/networking/vpc/how-to/create-peering/)
+      join two VPC networks with a secure, private connection. This allows
+      resources in those networks to connect to each other's private IP addresses
       as if they were in the same network.
 
   - name: VPCs
@@ -549,9 +561,17 @@ paths:
     put:
       $ref: 'resources/apps/apps_update.yml'
 
+  /v2/apps/{app_id}/restart:
+    post:
+      $ref: 'resources/apps/apps_restart.yml'
+
   /v2/apps/{app_id}/components/{component_name}/logs:
     get:
       $ref: 'resources/apps/apps_get_logs_active_deployment.yml'
+
+  /v2/apps/{app_id}/components/{component_name}/exec:
+    get:
+      $ref: 'resources/apps/apps_get_exec_active_deployment.yml'
 
   /v2/apps/{app_id}/deployments:
     get:
@@ -574,6 +594,10 @@ paths:
   /v2/apps/{app_id}/deployments/{deployment_id}/logs:
     get:
       $ref: 'resources/apps/apps_get_logs_aggregate.yml'
+
+  /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/exec:
+    get:
+      $ref: 'resources/apps/apps_get_exec.yml'
 
   /v2/apps/{app_id}/logs:
     get:
@@ -757,7 +781,7 @@ paths:
       $ref: 'resources/databases/databases_list_replicas.yml'
     post:
       $ref: 'resources/databases/databases_create_replica.yml'
-  
+
   /v2/databases/{database_cluster_uuid}/events:
     get:
       $ref: 'resources/databases/databases_events_logs.yml'
@@ -845,7 +869,7 @@ paths:
        $ref: 'resources/databases/databases_update_kafka_topic.yml'
     delete:
        $ref: 'resources/databases/databases_delete_kafka_topic.yml'
-  
+
   /v2/databases/{database_cluster_uuid}/logsink:
     get:
       $ref: 'resources/databases/databases_list_logsink.yml'
@@ -866,15 +890,15 @@ paths:
       $ref: 'resources/databases/databases_get_cluster_metrics_credentials.yml'
     put:
       $ref: 'resources/databases/databases_update_cluster_metrics_credentials.yml'
-  
+
   /v2/databases/{database_cluster_uuid}/indexes:
     get:
       $ref: 'resources/databases/databases_list_opensearch_indexes.yml'
-  
+
   /v2/databases/{database_cluster_uuid}/indexes/{index_name}:
     delete:
       $ref: 'resources/databases/databases_delete_opensearch_index.yml'
-  
+
   /v2/domains:
     get:
       $ref: 'resources/domains/domains_list.yml'
@@ -985,6 +1009,32 @@ paths:
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/retry:
     post:
       $ref: 'resources/droplets/droplets_destroy_retryWithAssociatedResources.yml'
+
+  /v2/droplets/autoscale:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_list.yml'
+    post:
+      $ref: 'resources/autoscale_pools/autoscale_pool_create.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_get.yml'
+    put:
+      $ref: 'resources/autoscale_pools/autoscale_pool_update.yml'
+    delete:
+      $ref: 'resources/autoscale_pools/autoscale_pool_delete.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}/dangerous:
+    delete:
+      $ref: 'resources/autoscale_pools/autoscale_pool_delete_dangerous.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}/members:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_list_members.yml'
+
+  /v2/droplets/autoscale/{autoscale_pool_id}/history:
+    get:
+      $ref: 'resources/autoscale_pools/autoscale_pool_list_history.yml'
 
   /v2/firewalls:
     get:
@@ -1207,6 +1257,10 @@ paths:
     delete:
       $ref: 'resources/load_balancers/loadBalancers_delete.yml'
 
+  /v2/load_balancers/{lb_id}/cache:
+    delete:
+      $ref: 'resources/load_balancers/loadBalancers_delete_cache.yml'
+
   /v2/load_balancers/{lb_id}/droplets:
     post:
       $ref: 'resources/load_balancers/loadBalancers_add_droplets.yml'
@@ -1401,6 +1455,56 @@ paths:
   /v2/monitoring/metrics/load_balancer/droplets_downtime:
     get:
       $ref: 'resources/monitoring/monitoring_get_lb_droplets_downtime.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_instances:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_instances.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_instances:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_instances.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_cpu_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_cpu_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/current_memory_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_memory_utilization.yml'
+
+  /v2/monitoring/metrics/droplet_autoscale/target_memory_utilization:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_memory_utilization.yml'
+
+  /v2/monitoring/sinks/destinations:
+    post:
+      $ref: 'resources/monitoring/monitoring_create_destination.yml'
+    get:
+      $ref: 'resources/monitoring/monitoring_list_destinations.yml'
+
+  /v2/monitoring/sinks/destinations/{destination_uuid}:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_destination.yml'
+    post:
+      $ref: 'resources/monitoring/monitoring_update_destination.yml'
+    delete:
+      $ref: 'resources/monitoring/monitoring_delete_destination.yml'
+
+  /v2/monitoring/sinks:
+    post:
+      $ref: 'resources/monitoring/monitoring_create_sink.yml'
+    get:
+      $ref: 'resources/monitoring/monitoring_list_sinks.yml'
+
+  /v2/monitoring/sinks/{sink_uuid}:
+    get:
+      $ref: 'resources/monitoring/monitoring_get_sink.yml'
+    delete:
+      $ref: 'resources/monitoring/monitoring_delete_sink.yml'
 
   /v2/projects:
     get:
@@ -1709,6 +1813,185 @@ paths:
 
     delete:
       $ref: 'resources/uptime/delete_alert.yml'
+
+
+
+
+
+  /v2/gen-ai/agents:
+    post:
+      $ref: 'resources/gen-ai/genai_create_agent.yml'
+
+    get:
+      $ref: 'resources/gen-ai/genai_list_agents.yml'
+
+
+  /v2/gen-ai/agents/{agent_uuid}/api_keys:
+    get:
+      $ref: 'resources/gen-ai/genai_list_agent_api_keys.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_agent_api_key.yml'
+
+
+  /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_agent_api_key.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_agent_api_key.yml'
+
+
+  /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate:
+    put:
+      $ref: 'resources/gen-ai/genai_regenerate_agent_api_key.yml'
+
+
+  /v2/gen-ai/agents/{agent_uuid}/functions:
+    post:
+      $ref: 'resources/gen-ai/genai_attach_agent_function.yml'
+
+
+  /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}:
+    put:
+      $ref: 'resources/gen-ai/genai_update_agent_function.yml'
+
+    delete:
+      $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
+
+
+  /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_detach_knowledge_base.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_attach_knowledge_base.yml'
+
+
+  /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_detach_agent.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_attach_agent.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_attached_agent.yml'
+
+
+  /v2/gen-ai/agents/{uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_agent.yml'
+
+    get:
+      $ref: 'resources/gen-ai/genai_get_agent.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_agent.yml'
+
+
+  /v2/gen-ai/agents/{uuid}/child_agents:
+    get:
+      $ref: 'resources/gen-ai/genai_get_agent_children.yml'
+
+
+  /v2/gen-ai/agents/{uuid}/deployment_visibility:
+    put:
+      $ref: 'resources/gen-ai/genai_update_agent_deployment_visibility.yml'
+
+
+  /v2/gen-ai/anthropic/keys:
+    get:
+      $ref: 'resources/gen-ai/genai_list_anthropic_api_keys.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_anthropic_api_key.yml'
+
+
+  /v2/gen-ai/anthropic/keys/{api_key_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_anthropic_api_key.yml'
+
+    get:
+      $ref: 'resources/gen-ai/genai_get_anthropic_api_key.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_anthropic_api_key.yml'
+
+
+  /v2/gen-ai/anthropic/keys/{uuid}/agents:
+    get:
+      $ref: 'resources/gen-ai/genai_list_agents_by_anthropic_key.yml'
+
+
+  /v2/gen-ai/indexing_jobs:
+    get:
+      $ref: 'resources/gen-ai/genai_list_indexing_jobs.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_indexing_job.yml'
+
+
+  /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources:
+    get:
+      $ref: 'resources/gen-ai/genai_list_indexing_job_data_sources.yml'
+
+
+  /v2/gen-ai/indexing_jobs/{uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_indexing_job.yml'
+
+
+  /v2/gen-ai/indexing_jobs/{uuid}/cancel:
+    put:
+      $ref: 'resources/gen-ai/genai_cancel_indexing_job.yml'
+
+
+  /v2/gen-ai/knowledge_bases:
+    get:
+      $ref: 'resources/gen-ai/genai_list_knowledge_bases.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_knowledge_base.yml'
+
+
+  /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources:
+    get:
+      $ref: 'resources/gen-ai/genai_list_knowledge_base_data_sources.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_knowledge_base_data_source.yml'
+
+
+  /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_knowledge_base_data_source.yml'
+
+
+  /v2/gen-ai/knowledge_bases/{uuid}:
+    put:
+      $ref: 'resources/gen-ai/genai_update_knowledge_base.yml'
+
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
+
+    get:
+      $ref: 'resources/gen-ai/genai_get_knowledge_base.yml'
+
+
+  /v2/gen-ai/models:
+    get:
+      $ref: 'resources/gen-ai/genai_list_models.yml'
+
+
+  /v2/gen-ai/regions:
+    get:
+      $ref: 'resources/gen-ai/genai_list_datacenter_regions.yml'
+
+
+
+
+
 
 
 components:
