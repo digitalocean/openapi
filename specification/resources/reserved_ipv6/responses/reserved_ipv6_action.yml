@@ -19,11 +19,18 @@ content:
             - $ref: '../../actions/models/action.yml'
             - type: object
               properties:
-                project_id:
+                resource_id:
+                  type: integer
+                  example: 758604968
+                  description: The ID of the resource that the action is being taken on.
+                resource_type:
                   type: string
-                  format: uuid
-                  example: 746c6152-2fa2-11ed-92d3-27aaa54e4988
-                  description: The UUID of the project to which the reserved IP currently belongs.
+                  example: reserved_ipv6
+                  description: The type of resource that the action is being taken on.
+                region_slug:
+                  type: string
+                  example: nyc3
+                  description: The slug identifier for the region the resource is located in.
 
       example:
         action:
@@ -34,29 +41,5 @@ content:
           completed_at: '2015-11-12T17:51:14Z'
           resource_id: 758604968
           resource_type: reserved_ipv6
-          region:
-            name: New York 3
-            slug: nyc3
-            sizes:
-            - s-1vcpu-1gb
-            - s-1vcpu-2gb
-            - s-1vcpu-3gb
-            - s-2vcpu-2gb
-            - s-3vcpu-1gb
-            - s-2vcpu-4gb
-            - s-4vcpu-8gb
-            - s-6vcpu-16gb
-            - s-8vcpu-32gb
-            - s-12vcpu-48gb
-            - s-16vcpu-64gb
-            - s-20vcpu-96gb
-            - s-24vcpu-128gb
-            - s-32vcpu-192gb
-            features:
-            - private_networking
-            - backups
-            - ipv6
-            - metadata
-            available: true
+          region: null
           region_slug: nyc3
-          project_id: 746c6152-2fa2-11ed-92d3-27aaa54e4988
