@@ -17,6 +17,7 @@ reserved_ipv6_reserved:
       ip: 2409:40d0:f7:1017:74b4:3a96:105e:4c6e
       region_slug: nyc3
       reserved_at: 2024-11-20T11:08:30Z
+      droplet: null
         
 reserved_ipv6_assigned:
   summary: Assigned to Droplet
