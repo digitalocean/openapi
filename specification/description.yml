@@ -406,3 +406,7 @@ introduction: |
 
   You should not need to be concerned with the details of these headers,
   because the browser will typically do all of the work for you.
+
+  ## Authorization
+
+  <!-- Redoc-Inject: <security-definitions> -->
