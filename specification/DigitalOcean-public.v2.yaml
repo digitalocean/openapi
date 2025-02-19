@@ -449,6 +449,21 @@ tags:
       setups or other configurations requiring movable addresses.
 
       Reserved IPs are bound to a specific region.
+  
+  - name: "[Public Preview] Reserved IPv6"
+    description: |-
+      DigitalOcean Reserved IPv6s are publicly-accessible static IP addresses that can be
+      mapped to one of your Droplets. They can be used to create highly available
+      setups or other configurations requiring movable addresses.
+
+      Reserved IPv6s are bound to a specific region.
+  - name: "[Public Preview] Reserved IPv6 Actions"
+    description: |-
+      Reserved IPv6 actions requests are made on the actions endpoint of a specific
+      reserved IPv6.
+
+      An action object is returned. These objects hold the current status of the
+      requested action.
 
   - name: Sizes
     description: |-
@@ -1650,6 +1665,24 @@ paths:
   /v2/reserved_ips/{reserved_ip}/actions/{action_id}:
     get:
       $ref: 'resources/reserved_ips/reservedIPsActions_get.yml'
+
+  /v2/reserved_ipv6:
+    get:
+      $ref: 'resources/reserved_ipv6/reservedIPv6_list.yml'
+
+    post:
+      $ref: 'resources/reserved_ipv6/reservedIPv6_create.yml'
+
+  /v2/reserved_ipv6/{reserved_ipv6}:
+    get:
+      $ref: 'resources/reserved_ipv6/reservedIPv6_get.yml'
+
+    delete:
+      $ref: 'resources/reserved_ipv6/reservedIPv6_delete.yml'
+
+  /v2/reserved_ipv6/{reserved_ipv6}/actions:
+    post:
+      $ref: 'resources/reserved_ipv6/reservedIPv6Actions_post.yml'
 
   /v2/sizes:
     get:
