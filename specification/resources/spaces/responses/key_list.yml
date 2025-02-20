@@ -1,5 +1,5 @@
 description: >-
-  The result will be a JSON object with a `keys` key.
+  A JSON response containing a list of keys.
 
 headers:
   ratelimit-limit:

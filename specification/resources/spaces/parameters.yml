@@ -1,7 +1,7 @@
 access_key_name:
   in: path
   name: access_key
-  description: The name of your access key.
+  description: The access key's name.
   required: true
   schema:
     type: string
@@ -21,7 +21,7 @@ sort_direction:
   in: query
   name: sort_direction
   required: false
-  description: The direction to sort by.
+  description: The direction to sort by. Possible values are `asc` or `desc`.
   schema:
     type: string
     default: "desc"
@@ -31,7 +31,7 @@ name:
   in: query
   name: name
   required: false
-  description: The name of the access key.
+  description: The access key's name.
   schema:
     type: string
   example: my-access-key
@@ -40,7 +40,7 @@ bucket:
   in: query
   name: bucket
   required: false
-  description: The name of the bucket.
+  description: The bucket's name.
   schema:
     type: string
   example: my-bucket
