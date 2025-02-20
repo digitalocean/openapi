@@ -3,7 +3,9 @@ operationId: spacesKey_create
 summary: "[Beta] Create a New Spaces Access Key"
 
 description: |
-  To create a new Spaces Access Key, send a POST request to `/v2/spaces/keys`.
+  To create a new Spaces Access Key, send a POST request to `/v2/spaces/keys`. 
+  At the moment, you cannot mix a fullaccess permission with scoped permissions.
+  A fullaccess permission will be prioritized if fullaccess and scoped permissions are both added.
 
 tags:
   - Spaces Keys
@@ -50,7 +52,7 @@ responses:
     $ref: 'responses/key_create.yml'
 
   '400':
-    $ref: '../../shared/responses/bad_request.yml'
+    $ref: 'responses/bad_request.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

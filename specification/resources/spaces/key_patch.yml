@@ -3,7 +3,8 @@ operationId: spacesKey_patch
 summary: "[Beta] Update Spaces Access Keys"
 
 description: |
-  To update Spaces Access Key, send a PUT or PATCH request to `/v2/spaces/keys/$ACCESS_KEY`.
+  To update Spaces Access Key, send a PUT or PATCH request to `/v2/spaces/keys/$ACCESS_KEY`. At the moment, you cannot convert a
+  fullaccess key to a scoped key or vice versa. You can only update the name of the key.
 
 tags:
   - Spaces Keys
@@ -22,6 +23,9 @@ requestBody:
 responses:
   '200':
     $ref: 'responses/key_update.yml'
+
+  '400':
+    $ref: 'responses/bad_request.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

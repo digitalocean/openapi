@@ -3,7 +3,7 @@ allOf:
     properties:
       secret_key:
         type: string
-        description: The secret key. This is the only time the secret key will be returned.
+        description: The secret key used to access the bucket. We return secret keys only once upon creation. Make sure to copy the key and securely store it.
         example: DOSECRETKEYEXAMPLE
         readOnly: true
 

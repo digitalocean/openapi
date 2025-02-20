@@ -3,19 +3,19 @@ type: object
 properties:
   name:
     type: string
-    description: The name of your access key.
+    description: The access key's name.
     example: "my-access-key"
 
   grants:
     type: array
-    description: The grants set to this access key.
+    description: The list of permissions for the access key.
     items:
       $ref: 'grant.yml'
     default: []
 
   access_key:
     type: string
-    description: The access key.
+    description: An encrypted string used to access a bucket. 
     example: DOACCESSKEYEXAMPLE
     readOnly: true
 

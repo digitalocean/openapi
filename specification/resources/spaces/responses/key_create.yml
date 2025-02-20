@@ -1,5 +1,5 @@
 description: >-
-  The response will be a JSON object
+  A JSON response containing details about the new key.
 
 headers:
   ratelimit-limit:
