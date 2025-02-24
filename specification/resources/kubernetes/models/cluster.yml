@@ -161,6 +161,9 @@ properties:
   cluster_autoscaler_configuration:
     $ref: "cluster_autoscaler_configuration.yml"
 
+  routing_agent:
+    $ref: "routing_agent.yml"
+
 required:
   - name
   - region
