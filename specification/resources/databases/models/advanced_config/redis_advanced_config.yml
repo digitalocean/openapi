@@ -2,7 +2,24 @@ type: object
 
 properties:
   redis_maxmemory_policy:
-    $ref: "../eviction_policy_model.yml"
+    type: string
+    enum:
+      - noeviction
+      - allkeys-lru
+      - allkeys-random
+      - volatile-lru
+      - volatile-random
+      - volatile-ttl
+    description: |2-
+      A string specifying the desired eviction policy for the Redis cluster.
+
+      - `noeviction`: Don't evict any data, returns error when memory limit is reached.
+      - `allkeys-lru:` Evict any key, least recently used (LRU) first.
+      - `allkeys-random`: Evict keys in a random order.
+      - `volatile-lru`: Evict keys with expiration only, least recently used (LRU) first.
+      - `volatile-random`: Evict keys with expiration only in a random order.
+      - `volatile-ttl`: Evict keys with expiration only, shortest time-to-live (TTL) first.
+    example: allkeys-lru
   redis_pubsub_client_output_buffer_limit:
     description: >-
       Set output buffer limit for pub / sub clients in MB. The value is the hard

@@ -48,5 +48,11 @@ properties:
   control_plane_firewall:
     $ref: 'control_plane_firewall.yml'
 
+  cluster_autoscaler_configuration:
+    $ref: 'cluster_autoscaler_configuration.yml'
+
+  routing_agent:
+    $ref: 'routing_agent.yml'
+
 required:
   - name

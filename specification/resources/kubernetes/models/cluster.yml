@@ -67,10 +67,10 @@ properties:
     items:
       type: string
     example:
-    - k8s
-    - k8s:bd5f5959-5e1e-4205-a714-a914373942af
-    - production
-    - web-team
+      - k8s
+      - k8s:bd5f5959-5e1e-4205-a714-a914373942af
+      - production
+      - web-team
     description: An array of tags applied to the Kubernetes cluster. All
       clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`.
 
@@ -79,10 +79,10 @@ properties:
     description: An object specifying the details of the worker nodes available
       to the Kubernetes cluster.
     items:
-      $ref: 'node_pool.yml#/kubernetes_node_pool'
+      $ref: "node_pool.yml#/kubernetes_node_pool"
 
   maintenance_policy:
-    $ref: 'maintenance_policy.yml'
+    $ref: "maintenance_policy.yml"
 
   auto_upgrade:
     type: boolean
@@ -100,13 +100,13 @@ properties:
       state:
         type: string
         enum:
-        - running
-        - provisioning
-        - degraded
-        - error
-        - deleted
-        - upgrading
-        - deleting
+          - running
+          - provisioning
+          - degraded
+          - error
+          - deleted
+          - upgrading
+          - deleting
         example: provisioning
         description: A string indicating the current status of the cluster.
       message:
@@ -156,7 +156,13 @@ properties:
       integrated with the cluster.
 
   control_plane_firewall:
-    $ref: 'control_plane_firewall.yml'
+    $ref: "control_plane_firewall.yml"
+
+  cluster_autoscaler_configuration:
+    $ref: "cluster_autoscaler_configuration.yml"
+
+  routing_agent:
+    $ref: "routing_agent.yml"
 
 required:
   - name
