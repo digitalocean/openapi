@@ -32,7 +32,7 @@ requestBody:
         Full Access Key:
           value:
             name: 'full-access-key'
-            grants: [{ "bucket": "my-bucket", "permission": "fullaccess" }]
+            grants: [{ "permission": "fullaccess" }]
 
         Multiple Grants Key:
           value:
