@@ -10,12 +10,12 @@ properties:
     type: array
     description: The list of permissions for the access key.
     items:
-      $ref: 'grant.yml'
+      $ref: "grant.yml"
     default: []
 
   access_key:
     type: string
-    description: An encrypted string used to access a bucket. 
+    description: The Access Key ID used to access a bucket.
     example: DOACCESSKEYEXAMPLE
     readOnly: true
 
@@ -23,5 +23,5 @@ properties:
     type: string
     format: date-time
     description: The date and time the key was created.
-    example: '2018-07-19T15:04:16Z'
+    example: "2018-07-19T15:04:16Z"
     readOnly: true

@@ -1,11 +1,11 @@
 operationId: spacesKey_delete
 
-summary: "[Beta] Delete a Spaces Access Key"
+summary: "[Beta] Get a Spaces Access Key"
 
 description: |
-  To delete a Spaces Access Key, send a DELETE request to `/v2/spaces/keys/$ACCESS_KEY`.
+  To get a Spaces Access Key, send a GET request to `/v2/spaces/keys/$ACCESS_KEY`.
 
-  A successful request will return a `204 No Content` status code.
+  A successful request will return the Access Key.
 
 tags:
   - Spaces Keys
@@ -14,8 +14,8 @@ parameters:
   - $ref: "parameters.yml#/access_key_id"
 
 responses:
-  "204":
-    $ref: "../../shared/responses/no_content.yml"
+  "200":
+    $ref: "responses/key_get.yml"
 
   "401":
     $ref: "../../shared/responses/unauthorized.yml"
@@ -33,8 +33,8 @@ responses:
     $ref: "../../shared/responses/unexpected_error.yml"
 
 x-codeSamples:
-  - $ref: "examples/curl/spaces_key_delete.yml"
+  - $ref: "examples/curl/spaces_key_get.yml"
 
 security:
   - bearer_auth:
-      - "spaces_key:delete"
+      - "spaces_key:read"

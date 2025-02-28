@@ -1,7 +1,7 @@
-access_key_name:
+access_key_id:
   in: path
   name: access_key
-  description: The access key's name.
+  description: The access key's ID.
   required: true
   schema:
     type: string

@@ -1,21 +1,21 @@
-openapi: '3.0.0'
+openapi: "3.0.0"
 
 info:
   title: DigitalOcean API
-  version: '2.0'
+  version: "2.0"
   description:
-    $ref: 'description.yml#/introduction'
+    $ref: "description.yml#/introduction"
 
   license:
     name: Apache 2.0
-    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+    url: "https://www.apache.org/licenses/LICENSE-2.0.html"
   contact:
     name: DigitalOcean API Team
     email: api-engineering@digitalocean.com
-  termsOfService: 'https://www.digitalocean.com/legal/terms-of-service-agreement/'
+  termsOfService: "https://www.digitalocean.com/legal/terms-of-service-agreement/"
 
 servers:
-  - url: 'https://api.digitalocean.com'
+  - url: "https://api.digitalocean.com"
     description: production
 
 tags:
@@ -291,13 +291,11 @@ tags:
 
       The Serverless Functions API currently only supports creating and managing namespaces.
 
-
   - name: GenAI Platform (Public Preview)
     description: |-
       **The GenAI Platform API is in [public preview](https://docs.digitalocean.com/platform/product-lifecycle/#public-preview) for select customers.**
 
       The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
-
 
   - name: Image Actions
     description: |-
@@ -450,6 +448,21 @@ tags:
 
       Reserved IPs are bound to a specific region.
 
+  - name: "[Public Preview] Reserved IPv6"
+    description: |-
+      DigitalOcean Reserved IPv6s are publicly-accessible static IP addresses that can be
+      mapped to one of your Droplets. They can be used to create highly available
+      setups or other configurations requiring movable addresses.
+
+      Reserved IPv6s are bound to a specific region.
+  - name: "[Public Preview] Reserved IPv6 Actions"
+    description: |-
+      Reserved IPv6 actions requests are made on the actions endpoint of a specific
+      reserved IPv6.
+
+      An action object is returned. These objects hold the current status of the
+      requested action.
+
   - name: Sizes
     description: |-
       The sizes objects represent different packages of hardware resources that
@@ -491,12 +504,11 @@ tags:
       Tags have two attributes: a user defined `name` attribute and an embedded
       `resources` attribute with information about resources that have been tagged.
 
-
   - name: Uptime
     description: >-
-        [DigitalOcean Uptime Checks](https://docs.digitalocean.com/products/uptime/) provide the ability to monitor your endpoints from around the world, and alert you when they're slow, unavailable, or SSL certificates are expiring.
+      [DigitalOcean Uptime Checks](https://docs.digitalocean.com/products/uptime/) provide the ability to monitor your endpoints from around the world, and alert you when they're slow, unavailable, or SSL certificates are expiring.
 
-        To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
+      To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
 
   - name: VPC Peerings
     description: |-
@@ -518,1504 +530,1491 @@ tags:
 paths:
   /v2/1-clicks:
     get:
-      $ref: 'resources/1-clicks/oneClicks_list.yml'
+      $ref: "resources/1-clicks/oneClicks_list.yml"
 
   /v2/1-clicks/kubernetes:
     post:
-      $ref: 'resources/1-clicks/oneClicks_install_kubernetes.yml'
+      $ref: "resources/1-clicks/oneClicks_install_kubernetes.yml"
 
   /v2/account:
     get:
-      $ref: 'resources/account/account_get.yml'
+      $ref: "resources/account/account_get.yml"
 
   /v2/account/keys:
     get:
-      $ref: 'resources/ssh_keys/sshKeys_list.yml'
+      $ref: "resources/ssh_keys/sshKeys_list.yml"
 
     post:
-      $ref: 'resources/ssh_keys/sshKeys_create.yml'
+      $ref: "resources/ssh_keys/sshKeys_create.yml"
 
   /v2/account/keys/{ssh_key_identifier}:
     get:
-      $ref: 'resources/ssh_keys/sshKeys_get.yml'
+      $ref: "resources/ssh_keys/sshKeys_get.yml"
 
     put:
-      $ref: 'resources/ssh_keys/sshKeys_update.yml'
+      $ref: "resources/ssh_keys/sshKeys_update.yml"
 
     delete:
-      $ref: 'resources/ssh_keys/sshKeys_delete.yml'
+      $ref: "resources/ssh_keys/sshKeys_delete.yml"
 
   /v2/actions:
     get:
-      $ref: 'resources/actions/actions_list.yml'
+      $ref: "resources/actions/actions_list.yml"
 
   /v2/actions/{action_id}:
     get:
-      $ref: 'resources/actions/actions_get.yml'
+      $ref: "resources/actions/actions_get.yml"
 
   /v2/apps:
     get:
-      $ref: 'resources/apps/apps_list.yml'
+      $ref: "resources/apps/apps_list.yml"
     post:
-      $ref: 'resources/apps/apps_create.yml'
+      $ref: "resources/apps/apps_create.yml"
 
   /v2/apps/{id}:
     delete:
-      $ref: 'resources/apps/apps_delete.yml'
+      $ref: "resources/apps/apps_delete.yml"
     get:
-      $ref: 'resources/apps/apps_get.yml'
+      $ref: "resources/apps/apps_get.yml"
     put:
-      $ref: 'resources/apps/apps_update.yml'
+      $ref: "resources/apps/apps_update.yml"
 
   /v2/apps/{app_id}/restart:
     post:
-      $ref: 'resources/apps/apps_restart.yml'
+      $ref: "resources/apps/apps_restart.yml"
 
   /v2/apps/{app_id}/components/{component_name}/logs:
     get:
-      $ref: 'resources/apps/apps_get_logs_active_deployment.yml'
+      $ref: "resources/apps/apps_get_logs_active_deployment.yml"
 
   /v2/apps/{app_id}/components/{component_name}/exec:
     get:
-      $ref: 'resources/apps/apps_get_exec_active_deployment.yml'
+      $ref: "resources/apps/apps_get_exec_active_deployment.yml"
 
   /v2/apps/{app_id}/deployments:
     get:
-      $ref: 'resources/apps/apps_list_deployments.yml'
+      $ref: "resources/apps/apps_list_deployments.yml"
     post:
-      $ref: 'resources/apps/apps_create_deployment.yml'
+      $ref: "resources/apps/apps_create_deployment.yml"
 
   /v2/apps/{app_id}/deployments/{deployment_id}:
     get:
-      $ref: 'resources/apps/apps_get_deployment.yml'
+      $ref: "resources/apps/apps_get_deployment.yml"
 
   /v2/apps/{app_id}/deployments/{deployment_id}/cancel:
     post:
-      $ref: 'resources/apps/apps_cancel_deployment.yml'
+      $ref: "resources/apps/apps_cancel_deployment.yml"
 
   /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs:
     get:
-      $ref: 'resources/apps/apps_get_logs.yml'
+      $ref: "resources/apps/apps_get_logs.yml"
 
   /v2/apps/{app_id}/deployments/{deployment_id}/logs:
     get:
-      $ref: 'resources/apps/apps_get_logs_aggregate.yml'
+      $ref: "resources/apps/apps_get_logs_aggregate.yml"
 
   /v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/exec:
     get:
-      $ref: 'resources/apps/apps_get_exec.yml'
+      $ref: "resources/apps/apps_get_exec.yml"
 
   /v2/apps/{app_id}/logs:
     get:
-      $ref: 'resources/apps/apps_get_logs_active_deployment_aggregate.yml'
+      $ref: "resources/apps/apps_get_logs_active_deployment_aggregate.yml"
 
   /v2/apps/tiers/instance_sizes:
     get:
-      $ref: 'resources/apps/apps_list_instanceSizes.yml'
+      $ref: "resources/apps/apps_list_instanceSizes.yml"
 
   /v2/apps/tiers/instance_sizes/{slug}:
     get:
-      $ref: 'resources/apps/apps_get_instanceSize.yml'
+      $ref: "resources/apps/apps_get_instanceSize.yml"
 
   /v2/apps/regions:
     get:
-      $ref: 'resources/apps/apps_list_regions.yml'
+      $ref: "resources/apps/apps_list_regions.yml"
 
   /v2/apps/propose:
     post:
-      $ref: 'resources/apps/apps_validate_appSpec.yml'
+      $ref: "resources/apps/apps_validate_appSpec.yml"
 
   /v2/apps/{app_id}/alerts:
     get:
-      $ref: 'resources/apps/apps_list_alerts.yml'
+      $ref: "resources/apps/apps_list_alerts.yml"
 
   /v2/apps/{app_id}/alerts/{alert_id}/destinations:
     post:
-      $ref: 'resources/apps/apps_assign_alertDestinations.yml'
+      $ref: "resources/apps/apps_assign_alertDestinations.yml"
 
   /v2/apps/{app_id}/rollback:
     post:
-      $ref: 'resources/apps/apps_create_rollback.yml'
+      $ref: "resources/apps/apps_create_rollback.yml"
 
   /v2/apps/{app_id}/rollback/validate:
     post:
-      $ref: 'resources/apps/apps_validate_rollback.yml'
+      $ref: "resources/apps/apps_validate_rollback.yml"
 
   /v2/apps/{app_id}/rollback/commit:
     post:
-      $ref: 'resources/apps/apps_commit_rollback.yml'
+      $ref: "resources/apps/apps_commit_rollback.yml"
 
   /v2/apps/{app_id}/rollback/revert:
     post:
-      $ref: 'resources/apps/apps_revert_rollback.yml'
+      $ref: "resources/apps/apps_revert_rollback.yml"
 
   /v2/apps/{app_id}/metrics/bandwidth_daily:
     get:
-      $ref: 'resources/apps/apps_get_metrics_bandwidth_usage.yml'
+      $ref: "resources/apps/apps_get_metrics_bandwidth_usage.yml"
 
   /v2/apps/metrics/bandwidth_daily:
     post:
-      $ref: 'resources/apps/apps_list_metrics_bandwidth_usage.yml'
+      $ref: "resources/apps/apps_list_metrics_bandwidth_usage.yml"
 
   /v2/cdn/endpoints:
     get:
-      $ref: 'resources/cdn/cdn_list_endpoints.yml'
+      $ref: "resources/cdn/cdn_list_endpoints.yml"
 
     post:
-      $ref: 'resources/cdn/cdn_create_endpoint.yml'
+      $ref: "resources/cdn/cdn_create_endpoint.yml"
 
   /v2/cdn/endpoints/{cdn_id}:
     get:
-      $ref: 'resources/cdn/cdn_get_endpoint.yml'
+      $ref: "resources/cdn/cdn_get_endpoint.yml"
 
     put:
-      $ref: 'resources/cdn/cdn_update_endpoint.yml'
+      $ref: "resources/cdn/cdn_update_endpoint.yml"
 
     delete:
-      $ref: 'resources/cdn/cdn_delete_endpoint.yml'
+      $ref: "resources/cdn/cdn_delete_endpoint.yml"
 
   /v2/cdn/endpoints/{cdn_id}/cache:
     delete:
-      $ref: 'resources/cdn/cdn_purge_cache.yml'
+      $ref: "resources/cdn/cdn_purge_cache.yml"
 
   /v2/certificates:
     get:
-      $ref: 'resources/certificates/certificates_list.yml'
+      $ref: "resources/certificates/certificates_list.yml"
 
     post:
-      $ref: 'resources/certificates/certificates_create.yml'
+      $ref: "resources/certificates/certificates_create.yml"
 
   /v2/certificates/{certificate_id}:
     get:
-      $ref: 'resources/certificates/certificates_get.yml'
+      $ref: "resources/certificates/certificates_get.yml"
 
     delete:
-      $ref: 'resources/certificates/certificates_delete.yml'
+      $ref: "resources/certificates/certificates_delete.yml"
 
   /v2/customers/my/balance:
     get:
-      $ref: 'resources/billing/balance_get.yml'
+      $ref: "resources/billing/balance_get.yml"
 
   /v2/customers/my/billing_history:
     get:
-      $ref: 'resources/billing/billingHistory_list.yml'
+      $ref: "resources/billing/billingHistory_list.yml"
 
   /v2/customers/my/invoices:
     get:
-      $ref: 'resources/billing/invoices_list.yml'
+      $ref: "resources/billing/invoices_list.yml"
 
   /v2/customers/my/invoices/{invoice_uuid}:
     get:
-      $ref: 'resources/billing/invoices_get_byUUID.yml'
+      $ref: "resources/billing/invoices_get_byUUID.yml"
 
   /v2/customers/my/invoices/{invoice_uuid}/csv:
     get:
-      $ref: 'resources/billing/invoices_get_csvByUUID.yml'
+      $ref: "resources/billing/invoices_get_csvByUUID.yml"
 
   /v2/customers/my/invoices/{invoice_uuid}/pdf:
     get:
-      $ref: 'resources/billing/invoices_get_pdfByUUID.yml'
+      $ref: "resources/billing/invoices_get_pdfByUUID.yml"
 
   /v2/customers/my/invoices/{invoice_uuid}/summary:
     get:
-      $ref: 'resources/billing/invoices_get_summaryByUUID.yml'
+      $ref: "resources/billing/invoices_get_summaryByUUID.yml"
 
   /v2/databases/options:
     get:
-      $ref: 'resources/databases/databases_list_options.yml'
+      $ref: "resources/databases/databases_list_options.yml"
 
   /v2/databases:
     get:
-      $ref: 'resources/databases/databases_list_clusters.yml'
+      $ref: "resources/databases/databases_list_clusters.yml"
     post:
-      $ref: 'resources/databases/databases_create_cluster.yml'
+      $ref: "resources/databases/databases_create_cluster.yml"
 
   /v2/databases/{database_cluster_uuid}:
     get:
-      $ref: 'resources/databases/databases_get_cluster.yml'
+      $ref: "resources/databases/databases_get_cluster.yml"
     delete:
-      $ref: 'resources/databases/databases_destroy_cluster.yml'
+      $ref: "resources/databases/databases_destroy_cluster.yml"
 
   /v2/databases/{database_cluster_uuid}/config:
     get:
-      $ref: 'resources/databases/databases_get_config.yml'
+      $ref: "resources/databases/databases_get_config.yml"
     patch:
-      $ref: 'resources/databases/databases_patch_config.yml'
+      $ref: "resources/databases/databases_patch_config.yml"
 
   /v2/databases/{database_cluster_uuid}/ca:
     get:
-      $ref: 'resources/databases/databases_get_ca.yml'
+      $ref: "resources/databases/databases_get_ca.yml"
 
   /v2/databases/{database_cluster_uuid}/online-migration:
     get:
-      $ref: 'resources/databases/databases_get_migrationStatus.yml'
+      $ref: "resources/databases/databases_get_migrationStatus.yml"
     put:
-      $ref: 'resources/databases/databases_update_onlineMigration.yml'
+      $ref: "resources/databases/databases_update_onlineMigration.yml"
 
   /v2/databases/{database_cluster_uuid}/online-migration/{migration_id}:
     delete:
-      $ref: 'resources/databases/databases_delete_onlineMigration.yml'
+      $ref: "resources/databases/databases_delete_onlineMigration.yml"
 
   /v2/databases/{database_cluster_uuid}/migrate:
     put:
-      $ref: 'resources/databases/databases_update_region.yml'
+      $ref: "resources/databases/databases_update_region.yml"
 
   /v2/databases/{database_cluster_uuid}/resize:
     put:
-      $ref: 'resources/databases/databases_update_clusterSize.yml'
+      $ref: "resources/databases/databases_update_clusterSize.yml"
 
   /v2/databases/{database_cluster_uuid}/firewall:
     get:
-      $ref: 'resources/databases/databases_list_firewall_rules.yml'
+      $ref: "resources/databases/databases_list_firewall_rules.yml"
     put:
-      $ref: 'resources/databases/databases_update_firewall_rules.yml'
+      $ref: "resources/databases/databases_update_firewall_rules.yml"
 
   /v2/databases/{database_cluster_uuid}/maintenance:
     put:
-      $ref: 'resources/databases/databases_update_maintenanceWindow.yml'
+      $ref: "resources/databases/databases_update_maintenanceWindow.yml"
 
   /v2/databases/{database_cluster_uuid}/install_update:
     put:
-      $ref: 'resources/databases/databases_update_installUpdate.yml'
+      $ref: "resources/databases/databases_update_installUpdate.yml"
 
   /v2/databases/{database_cluster_uuid}/backups:
     get:
-      $ref: 'resources/databases/databases_list_backups.yml'
+      $ref: "resources/databases/databases_list_backups.yml"
 
   /v2/databases/{database_cluster_uuid}/replicas:
     get:
-      $ref: 'resources/databases/databases_list_replicas.yml'
+      $ref: "resources/databases/databases_list_replicas.yml"
     post:
-      $ref: 'resources/databases/databases_create_replica.yml'
+      $ref: "resources/databases/databases_create_replica.yml"
 
   /v2/databases/{database_cluster_uuid}/events:
     get:
-      $ref: 'resources/databases/databases_events_logs.yml'
+      $ref: "resources/databases/databases_events_logs.yml"
 
   /v2/databases/{database_cluster_uuid}/replicas/{replica_name}:
     get:
-      $ref: 'resources/databases/databases_get_replica.yml'
+      $ref: "resources/databases/databases_get_replica.yml"
     delete:
-      $ref: 'resources/databases/databases_destroy_replica.yml'
+      $ref: "resources/databases/databases_destroy_replica.yml"
 
   /v2/databases/{database_cluster_uuid}/replicas/{replica_name}/promote:
     put:
-      $ref: 'resources/databases/databases_promote_replica.yml'
+      $ref: "resources/databases/databases_promote_replica.yml"
 
   /v2/databases/{database_cluster_uuid}/users:
     get:
-      $ref: 'resources/databases/databases_list_users.yml'
+      $ref: "resources/databases/databases_list_users.yml"
     post:
-      $ref: 'resources/databases/databases_add_user.yml'
+      $ref: "resources/databases/databases_add_user.yml"
 
   /v2/databases/{database_cluster_uuid}/users/{username}:
     get:
-      $ref: 'resources/databases/databases_get_user.yml'
+      $ref: "resources/databases/databases_get_user.yml"
     delete:
-      $ref: 'resources/databases/databases_delete_user.yml'
+      $ref: "resources/databases/databases_delete_user.yml"
     put:
-      $ref: 'resources/databases/databases_update_user.yml'
+      $ref: "resources/databases/databases_update_user.yml"
 
   /v2/databases/{database_cluster_uuid}/users/{username}/reset_auth:
     post:
-      $ref: 'resources/databases/databases_reset_auth.yml'
+      $ref: "resources/databases/databases_reset_auth.yml"
 
   /v2/databases/{database_cluster_uuid}/dbs:
     get:
-      $ref: 'resources/databases/databases_list.yml'
+      $ref: "resources/databases/databases_list.yml"
     post:
-      $ref: 'resources/databases/databases_add.yml'
+      $ref: "resources/databases/databases_add.yml"
 
   /v2/databases/{database_cluster_uuid}/dbs/{database_name}:
     get:
-      $ref: 'resources/databases/databases_get.yml'
+      $ref: "resources/databases/databases_get.yml"
     delete:
-      $ref: 'resources/databases/databases_delete.yml'
+      $ref: "resources/databases/databases_delete.yml"
 
   /v2/databases/{database_cluster_uuid}/pools:
     get:
-      $ref: 'resources/databases/databases_list_connectionPools.yml'
+      $ref: "resources/databases/databases_list_connectionPools.yml"
     post:
-      $ref: 'resources/databases/databases_add_connectionPool.yml'
+      $ref: "resources/databases/databases_add_connectionPool.yml"
 
   /v2/databases/{database_cluster_uuid}/pools/{pool_name}:
     get:
-      $ref: 'resources/databases/databases_get_connectionPool.yml'
+      $ref: "resources/databases/databases_get_connectionPool.yml"
     put:
-      $ref: 'resources/databases/databases_update_connectionPool.yml'
+      $ref: "resources/databases/databases_update_connectionPool.yml"
     delete:
-      $ref: 'resources/databases/databases_delete_connectionPool.yml'
+      $ref: "resources/databases/databases_delete_connectionPool.yml"
 
   /v2/databases/{database_cluster_uuid}/eviction_policy:
     get:
-      $ref: 'resources/databases/databases_get_evictionPolicy.yml'
+      $ref: "resources/databases/databases_get_evictionPolicy.yml"
     put:
-      $ref: 'resources/databases/databases_update_evictionPolicy.yml'
+      $ref: "resources/databases/databases_update_evictionPolicy.yml"
 
   /v2/databases/{database_cluster_uuid}/sql_mode:
     get:
-      $ref: 'resources/databases/databases_get_sql_mode.yml'
+      $ref: "resources/databases/databases_get_sql_mode.yml"
     put:
-      $ref: 'resources/databases/databases_update_sql_mode.yml'
+      $ref: "resources/databases/databases_update_sql_mode.yml"
 
   /v2/databases/{database_cluster_uuid}/upgrade:
     put:
-      $ref: 'resources/databases/databases_upgrade_major_version.yml'
+      $ref: "resources/databases/databases_upgrade_major_version.yml"
 
   /v2/databases/{database_cluster_uuid}/topics:
     get:
-      $ref: 'resources/databases/databases_list_kafka_topics.yml'
+      $ref: "resources/databases/databases_list_kafka_topics.yml"
     post:
-      $ref: 'resources/databases/databases_create_kafka_topic.yml'
+      $ref: "resources/databases/databases_create_kafka_topic.yml"
 
   /v2/databases/{database_cluster_uuid}/topics/{topic_name}:
     get:
-       $ref: 'resources/databases/databases_get_kafka_topic.yml'
+      $ref: "resources/databases/databases_get_kafka_topic.yml"
     put:
-       $ref: 'resources/databases/databases_update_kafka_topic.yml'
+      $ref: "resources/databases/databases_update_kafka_topic.yml"
     delete:
-       $ref: 'resources/databases/databases_delete_kafka_topic.yml'
+      $ref: "resources/databases/databases_delete_kafka_topic.yml"
 
   /v2/databases/{database_cluster_uuid}/logsink:
     get:
-      $ref: 'resources/databases/databases_list_logsink.yml'
+      $ref: "resources/databases/databases_list_logsink.yml"
     post:
-      $ref: 'resources/databases/databases_create_logsink.yml'
+      $ref: "resources/databases/databases_create_logsink.yml"
 
   /v2/databases/{database_cluster_uuid}/logsink/{logsink_id}:
     get:
-      $ref: 'resources/databases/databases_get_logsink.yml'
+      $ref: "resources/databases/databases_get_logsink.yml"
     put:
-      $ref: 'resources/databases/databases_update_logsink.yml'
+      $ref: "resources/databases/databases_update_logsink.yml"
     delete:
-      $ref: 'resources/databases/databases_delete_logsink.yml'
-
+      $ref: "resources/databases/databases_delete_logsink.yml"
 
   /v2/databases/metrics/credentials:
     get:
-      $ref: 'resources/databases/databases_get_cluster_metrics_credentials.yml'
+      $ref: "resources/databases/databases_get_cluster_metrics_credentials.yml"
     put:
-      $ref: 'resources/databases/databases_update_cluster_metrics_credentials.yml'
+      $ref: "resources/databases/databases_update_cluster_metrics_credentials.yml"
 
   /v2/databases/{database_cluster_uuid}/indexes:
     get:
-      $ref: 'resources/databases/databases_list_opensearch_indexes.yml'
+      $ref: "resources/databases/databases_list_opensearch_indexes.yml"
 
   /v2/databases/{database_cluster_uuid}/indexes/{index_name}:
     delete:
-      $ref: 'resources/databases/databases_delete_opensearch_index.yml'
+      $ref: "resources/databases/databases_delete_opensearch_index.yml"
 
   /v2/domains:
     get:
-      $ref: 'resources/domains/domains_list.yml'
+      $ref: "resources/domains/domains_list.yml"
     post:
-      $ref: 'resources/domains/domains_create.yml'
+      $ref: "resources/domains/domains_create.yml"
 
   /v2/domains/{domain_name}:
     get:
-      $ref: 'resources/domains/domains_get.yml'
+      $ref: "resources/domains/domains_get.yml"
     delete:
-      $ref: 'resources/domains/domains_delete.yml'
+      $ref: "resources/domains/domains_delete.yml"
 
   /v2/domains/{domain_name}/records:
     get:
-      $ref: 'resources/domains/domains_list_records.yml'
+      $ref: "resources/domains/domains_list_records.yml"
     post:
-      $ref: 'resources/domains/domains_create_record.yml'
+      $ref: "resources/domains/domains_create_record.yml"
 
   /v2/domains/{domain_name}/records/{domain_record_id}:
     get:
-      $ref: 'resources/domains/domains_get_record.yml'
+      $ref: "resources/domains/domains_get_record.yml"
     patch:
-      $ref: 'resources/domains/domains_patch_record.yml'
+      $ref: "resources/domains/domains_patch_record.yml"
     put:
-      $ref: 'resources/domains/domains_update_record.yml'
+      $ref: "resources/domains/domains_update_record.yml"
     delete:
-      $ref: 'resources/domains/domains_delete_record.yml'
+      $ref: "resources/domains/domains_delete_record.yml"
 
   /v2/droplets:
     get:
-      $ref: 'resources/droplets/droplets_list.yml'
+      $ref: "resources/droplets/droplets_list.yml"
 
     post:
-      $ref: 'resources/droplets/droplets_create.yml'
+      $ref: "resources/droplets/droplets_create.yml"
 
     delete:
-      $ref: 'resources/droplets/droplets_destroy_byTag.yml'
+      $ref: "resources/droplets/droplets_destroy_byTag.yml"
 
   /v2/droplets/{droplet_id}:
     get:
-      $ref: 'resources/droplets/droplets_get.yml'
+      $ref: "resources/droplets/droplets_get.yml"
 
     delete:
-      $ref: 'resources/droplets/droplets_destroy.yml'
+      $ref: "resources/droplets/droplets_destroy.yml"
 
   /v2/droplets/{droplet_id}/backups:
     get:
-      $ref: 'resources/droplets/droplets_list_backups.yml'
+      $ref: "resources/droplets/droplets_list_backups.yml"
 
   /v2/droplets/{droplet_id}/backups/policy:
     get:
-      $ref: 'resources/droplets/droplets_get_backup_policy.yml'
+      $ref: "resources/droplets/droplets_get_backup_policy.yml"
 
   /v2/droplets/backups/policies:
     get:
-      $ref: 'resources/droplets/droplets_list_backup_policies.yml'
+      $ref: "resources/droplets/droplets_list_backup_policies.yml"
 
   /v2/droplets/backups/supported_policies:
     get:
-      $ref: 'resources/droplets/droplets_list_supported_backup_policies.yml'
+      $ref: "resources/droplets/droplets_list_supported_backup_policies.yml"
 
   /v2/droplets/{droplet_id}/snapshots:
     get:
-      $ref: 'resources/droplets/droplets_list_snapshots.yml'
+      $ref: "resources/droplets/droplets_list_snapshots.yml"
 
   /v2/droplets/{droplet_id}/actions:
     get:
-      $ref: 'resources/droplets/dropletActions_list.yml'
+      $ref: "resources/droplets/dropletActions_list.yml"
     post:
-      $ref: 'resources/droplets/dropletActions_post.yml'
+      $ref: "resources/droplets/dropletActions_post.yml"
 
   /v2/droplets/actions:
     post:
-      $ref: 'resources/droplets/dropletActions_post_byTag.yml'
+      $ref: "resources/droplets/dropletActions_post_byTag.yml"
 
   /v2/droplets/{droplet_id}/actions/{action_id}:
     get:
-      $ref: 'resources/droplets/dropletActions_get.yml'
+      $ref: "resources/droplets/dropletActions_get.yml"
 
   /v2/droplets/{droplet_id}/kernels:
     get:
-      $ref: 'resources/droplets/droplets_list_kernels.yml'
+      $ref: "resources/droplets/droplets_list_kernels.yml"
 
   /v2/droplets/{droplet_id}/firewalls:
     get:
-      $ref: 'resources/droplets/droplets_list_firewalls.yml'
+      $ref: "resources/droplets/droplets_list_firewalls.yml"
 
   /v2/droplets/{droplet_id}/neighbors:
     get:
-      $ref: 'resources/droplets/droplets_list_neighbors.yml'
+      $ref: "resources/droplets/droplets_list_neighbors.yml"
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources:
     get:
-      $ref: 'resources/droplets/droplets_list_associatedResources.yml'
+      $ref: "resources/droplets/droplets_list_associatedResources.yml"
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/selective:
     delete:
-      $ref: 'resources/droplets/droplets_destroy_withAssociatedResourcesSelective.yml'
+      $ref: "resources/droplets/droplets_destroy_withAssociatedResourcesSelective.yml"
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/dangerous:
     delete:
-      $ref: 'resources/droplets/droplets_destroy_withAssociatedResourcesDangerous.yml'
+      $ref: "resources/droplets/droplets_destroy_withAssociatedResourcesDangerous.yml"
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/status:
     get:
-      $ref: 'resources/droplets/droplets_get_destroyAssociatedResourcesStatus.yml'
+      $ref: "resources/droplets/droplets_get_destroyAssociatedResourcesStatus.yml"
 
   /v2/droplets/{droplet_id}/destroy_with_associated_resources/retry:
     post:
-      $ref: 'resources/droplets/droplets_destroy_retryWithAssociatedResources.yml'
+      $ref: "resources/droplets/droplets_destroy_retryWithAssociatedResources.yml"
 
   /v2/droplets/autoscale:
     get:
-      $ref: 'resources/autoscale_pools/autoscale_pool_list.yml'
+      $ref: "resources/autoscale_pools/autoscale_pool_list.yml"
     post:
-      $ref: 'resources/autoscale_pools/autoscale_pool_create.yml'
+      $ref: "resources/autoscale_pools/autoscale_pool_create.yml"
 
   /v2/droplets/autoscale/{autoscale_pool_id}:
     get:
-      $ref: 'resources/autoscale_pools/autoscale_pool_get.yml'
+      $ref: "resources/autoscale_pools/autoscale_pool_get.yml"
     put:
-      $ref: 'resources/autoscale_pools/autoscale_pool_update.yml'
+      $ref: "resources/autoscale_pools/autoscale_pool_update.yml"
     delete:
-      $ref: 'resources/autoscale_pools/autoscale_pool_delete.yml'
+      $ref: "resources/autoscale_pools/autoscale_pool_delete.yml"
 
   /v2/droplets/autoscale/{autoscale_pool_id}/dangerous:
     delete:
-      $ref: 'resources/autoscale_pools/autoscale_pool_delete_dangerous.yml'
+      $ref: "resources/autoscale_pools/autoscale_pool_delete_dangerous.yml"
 
   /v2/droplets/autoscale/{autoscale_pool_id}/members:
     get:
-      $ref: 'resources/autoscale_pools/autoscale_pool_list_members.yml'
+      $ref: "resources/autoscale_pools/autoscale_pool_list_members.yml"
 
   /v2/droplets/autoscale/{autoscale_pool_id}/history:
     get:
-      $ref: 'resources/autoscale_pools/autoscale_pool_list_history.yml'
+      $ref: "resources/autoscale_pools/autoscale_pool_list_history.yml"
 
   /v2/firewalls:
     get:
-      $ref: 'resources/firewalls/firewalls_list.yml'
+      $ref: "resources/firewalls/firewalls_list.yml"
     post:
-      $ref: 'resources/firewalls/firewalls_create.yml'
+      $ref: "resources/firewalls/firewalls_create.yml"
 
   /v2/firewalls/{firewall_id}:
     get:
-      $ref: 'resources/firewalls/firewalls_get.yml'
+      $ref: "resources/firewalls/firewalls_get.yml"
     put:
-      $ref: 'resources/firewalls/firewalls_update.yml'
+      $ref: "resources/firewalls/firewalls_update.yml"
     delete:
-      $ref: 'resources/firewalls/firewalls_delete.yml'
+      $ref: "resources/firewalls/firewalls_delete.yml"
 
   /v2/firewalls/{firewall_id}/droplets:
     post:
-      $ref: 'resources/firewalls/firewalls_assign_droplets.yml'
+      $ref: "resources/firewalls/firewalls_assign_droplets.yml"
     delete:
-      $ref: 'resources/firewalls/firewalls_delete_droplets.yml'
+      $ref: "resources/firewalls/firewalls_delete_droplets.yml"
 
   /v2/firewalls/{firewall_id}/tags:
     post:
-      $ref: 'resources/firewalls/firewalls_add_tags.yml'
+      $ref: "resources/firewalls/firewalls_add_tags.yml"
     delete:
-      $ref: 'resources/firewalls/firewalls_delete_tags.yml'
+      $ref: "resources/firewalls/firewalls_delete_tags.yml"
 
   /v2/firewalls/{firewall_id}/rules:
     post:
-      $ref: 'resources/firewalls/firewalls_add_rules.yml'
+      $ref: "resources/firewalls/firewalls_add_rules.yml"
     delete:
-      $ref: 'resources/firewalls/firewalls_delete_rules.yml'
+      $ref: "resources/firewalls/firewalls_delete_rules.yml"
 
   /v2/floating_ips:
     get:
-      $ref: 'resources/floating_ips/floatingIPs_list.yml'
+      $ref: "resources/floating_ips/floatingIPs_list.yml"
 
     post:
-      $ref: 'resources/floating_ips/floatingIPs_create.yml'
+      $ref: "resources/floating_ips/floatingIPs_create.yml"
 
   /v2/floating_ips/{floating_ip}:
     get:
-      $ref: 'resources/floating_ips/floatingIPs_get.yml'
+      $ref: "resources/floating_ips/floatingIPs_get.yml"
 
     delete:
-      $ref: 'resources/floating_ips/floatingIPs_delete.yml'
+      $ref: "resources/floating_ips/floatingIPs_delete.yml"
 
   /v2/floating_ips/{floating_ip}/actions:
     get:
-      $ref: 'resources/floating_ips/floatingIPsAction_list.yml'
+      $ref: "resources/floating_ips/floatingIPsAction_list.yml"
 
     post:
-      $ref: 'resources/floating_ips/floatingIPsAction_post.yml'
+      $ref: "resources/floating_ips/floatingIPsAction_post.yml"
 
   /v2/floating_ips/{floating_ip}/actions/{action_id}:
     get:
-      $ref: 'resources/floating_ips/floatingIPsAction_get.yml'
+      $ref: "resources/floating_ips/floatingIPsAction_get.yml"
 
   /v2/functions/namespaces:
     get:
-      $ref: 'resources/functions/functions_list_namespaces.yml'
+      $ref: "resources/functions/functions_list_namespaces.yml"
 
     post:
-      $ref: 'resources/functions/functions_create_namespace.yml'
+      $ref: "resources/functions/functions_create_namespace.yml"
 
   /v2/functions/namespaces/{namespace_id}:
     get:
-      $ref: 'resources/functions/functions_get_namespace.yml'
+      $ref: "resources/functions/functions_get_namespace.yml"
 
     delete:
-      $ref: 'resources/functions/functions_delete_namespace.yml'
+      $ref: "resources/functions/functions_delete_namespace.yml"
 
   /v2/functions/namespaces/{namespace_id}/triggers:
     get:
-      $ref: 'resources/functions/functions_list_triggers.yml'
+      $ref: "resources/functions/functions_list_triggers.yml"
 
     post:
-      $ref: 'resources/functions/functions_create_trigger.yml'
+      $ref: "resources/functions/functions_create_trigger.yml"
 
   /v2/functions/namespaces/{namespace_id}/triggers/{trigger_name}:
     get:
-      $ref: 'resources/functions/functions_get_trigger.yml'
+      $ref: "resources/functions/functions_get_trigger.yml"
 
     put:
-      $ref: 'resources/functions/functions_update_trigger.yml'
+      $ref: "resources/functions/functions_update_trigger.yml"
 
     delete:
-      $ref: 'resources/functions/functions_delete_trigger.yml'
+      $ref: "resources/functions/functions_delete_trigger.yml"
 
   /v2/images:
     get:
-      $ref: 'resources/images/images_list.yml'
+      $ref: "resources/images/images_list.yml"
     post:
-      $ref: 'resources/images/images_create_custom.yml'
+      $ref: "resources/images/images_create_custom.yml"
 
   /v2/images/{image_id}:
     get:
-      $ref: 'resources/images/images_get.yml'
+      $ref: "resources/images/images_get.yml"
     put:
-      $ref: 'resources/images/images_update.yml'
+      $ref: "resources/images/images_update.yml"
     delete:
-      $ref: 'resources/images/images_delete.yml'
+      $ref: "resources/images/images_delete.yml"
 
   /v2/images/{image_id}/actions:
     get:
-      $ref: 'resources/images/imageActions_list.yml'
+      $ref: "resources/images/imageActions_list.yml"
     post:
-      $ref: 'resources/images/imageActions_post.yml'
+      $ref: "resources/images/imageActions_post.yml"
 
   /v2/images/{image_id}/actions/{action_id}:
     get:
-      $ref: 'resources/images/imageActions_get.yml'
+      $ref: "resources/images/imageActions_get.yml"
 
   /v2/kubernetes/clusters:
     get:
-      $ref: 'resources/kubernetes/kubernetes_list_clusters.yml'
+      $ref: "resources/kubernetes/kubernetes_list_clusters.yml"
 
     post:
-      $ref: 'resources/kubernetes/kubernetes_create_cluster.yml'
+      $ref: "resources/kubernetes/kubernetes_create_cluster.yml"
 
   /v2/kubernetes/clusters/{cluster_id}:
     get:
-      $ref: 'resources/kubernetes/kubernetes_get_cluster.yml'
+      $ref: "resources/kubernetes/kubernetes_get_cluster.yml"
 
     put:
-      $ref: 'resources/kubernetes/kubernetes_update_cluster.yml'
+      $ref: "resources/kubernetes/kubernetes_update_cluster.yml"
 
     delete:
-      $ref: 'resources/kubernetes/kubernetes_delete_cluster.yml'
+      $ref: "resources/kubernetes/kubernetes_delete_cluster.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources:
     get:
-      $ref: 'resources/kubernetes/kubernetes_list_associatedResources.yml'
+      $ref: "resources/kubernetes/kubernetes_list_associatedResources.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/selective:
     delete:
-      $ref: 'resources/kubernetes/kubernetes_destroy_associatedResourcesSelective.yml'
+      $ref: "resources/kubernetes/kubernetes_destroy_associatedResourcesSelective.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/dangerous:
     delete:
-      $ref: 'resources/kubernetes/kubernetes_destroy_associatedResourcesDangerous.yml'
+      $ref: "resources/kubernetes/kubernetes_destroy_associatedResourcesDangerous.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/kubeconfig:
     get:
-      $ref: 'resources/kubernetes/kubernetes_get_kubeconfig.yml'
+      $ref: "resources/kubernetes/kubernetes_get_kubeconfig.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/credentials:
     get:
-      $ref: 'resources/kubernetes/kubernetes_get_credentials.yml'
+      $ref: "resources/kubernetes/kubernetes_get_credentials.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/upgrades:
     get:
-      $ref: 'resources/kubernetes/kubernetes_get_availableUpgrades.yml'
+      $ref: "resources/kubernetes/kubernetes_get_availableUpgrades.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/upgrade:
     post:
-      $ref: 'resources/kubernetes/kubernetes_upgrade_cluster.yml'
+      $ref: "resources/kubernetes/kubernetes_upgrade_cluster.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools:
     get:
-      $ref: 'resources/kubernetes/kubernetes_list_nodePools.yml'
+      $ref: "resources/kubernetes/kubernetes_list_nodePools.yml"
 
     post:
-      $ref: 'resources/kubernetes/kubernetes_add_nodePool.yml'
+      $ref: "resources/kubernetes/kubernetes_add_nodePool.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}:
     get:
-      $ref: 'resources/kubernetes/kubernetes_get_nodePool.yml'
+      $ref: "resources/kubernetes/kubernetes_get_nodePool.yml"
 
     put:
-      $ref: 'resources/kubernetes/kubernetes_update_nodePool.yml'
+      $ref: "resources/kubernetes/kubernetes_update_nodePool.yml"
 
     delete:
-      $ref: 'resources/kubernetes/kubernetes_delete_nodePool.yml'
+      $ref: "resources/kubernetes/kubernetes_delete_nodePool.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id}:
     delete:
-      $ref: 'resources/kubernetes/kubernetes_delete_node.yml'
+      $ref: "resources/kubernetes/kubernetes_delete_node.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle:
     post:
-      $ref: 'resources/kubernetes/kubernetes_recycle_nodePool.yml'
+      $ref: "resources/kubernetes/kubernetes_recycle_nodePool.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/user:
     get:
-      $ref: 'resources/kubernetes/kubernetes_get_clusterUser.yml'
+      $ref: "resources/kubernetes/kubernetes_get_clusterUser.yml"
 
   /v2/kubernetes/options:
     get:
-      $ref: 'resources/kubernetes/kubernetes_list_options.yml'
+      $ref: "resources/kubernetes/kubernetes_list_options.yml"
 
   /v2/kubernetes/clusters/{cluster_id}/clusterlint:
     post:
-      $ref: 'resources/kubernetes/kubernetes_run_clusterLint.yml'
+      $ref: "resources/kubernetes/kubernetes_run_clusterLint.yml"
 
     get:
-      $ref: 'resources/kubernetes/kubernetes_get_clusterLintResults.yml'
+      $ref: "resources/kubernetes/kubernetes_get_clusterLintResults.yml"
 
   /v2/kubernetes/registry:
     post:
-      $ref: 'resources/kubernetes/kubernetes_add_registry.yml'
+      $ref: "resources/kubernetes/kubernetes_add_registry.yml"
 
     delete:
-      $ref: 'resources/kubernetes/kubernetes_remove_registry.yml'
+      $ref: "resources/kubernetes/kubernetes_remove_registry.yml"
 
   /v2/load_balancers:
     post:
-      $ref: 'resources/load_balancers/loadBalancers_create.yml'
+      $ref: "resources/load_balancers/loadBalancers_create.yml"
 
     get:
-      $ref: 'resources/load_balancers/loadBalancers_list.yml'
+      $ref: "resources/load_balancers/loadBalancers_list.yml"
 
   /v2/load_balancers/{lb_id}:
     get:
-      $ref: 'resources/load_balancers/loadBalancers_get.yml'
+      $ref: "resources/load_balancers/loadBalancers_get.yml"
 
     put:
-      $ref: 'resources/load_balancers/loadBalancers_update.yml'
+      $ref: "resources/load_balancers/loadBalancers_update.yml"
 
     delete:
-      $ref: 'resources/load_balancers/loadBalancers_delete.yml'
+      $ref: "resources/load_balancers/loadBalancers_delete.yml"
 
   /v2/load_balancers/{lb_id}/cache:
     delete:
-      $ref: 'resources/load_balancers/loadBalancers_delete_cache.yml'
+      $ref: "resources/load_balancers/loadBalancers_delete_cache.yml"
 
   /v2/load_balancers/{lb_id}/droplets:
     post:
-      $ref: 'resources/load_balancers/loadBalancers_add_droplets.yml'
+      $ref: "resources/load_balancers/loadBalancers_add_droplets.yml"
 
     delete:
-      $ref: 'resources/load_balancers/loadBalancers_remove_droplets.yml'
+      $ref: "resources/load_balancers/loadBalancers_remove_droplets.yml"
 
   /v2/load_balancers/{lb_id}/forwarding_rules:
     post:
-      $ref: 'resources/load_balancers/loadBalancers_add_forwardingRules.yml'
+      $ref: "resources/load_balancers/loadBalancers_add_forwardingRules.yml"
 
     delete:
-      $ref: 'resources/load_balancers/loadBalancers_remove_forwardingRules.yml'
+      $ref: "resources/load_balancers/loadBalancers_remove_forwardingRules.yml"
 
   /v2/monitoring/alerts:
     get:
-      $ref: 'resources/monitoring/monitoring_list_alertPolicy.yml'
+      $ref: "resources/monitoring/monitoring_list_alertPolicy.yml"
 
     post:
-      $ref: 'resources/monitoring/monitoring_create_alertPolicy.yml'
+      $ref: "resources/monitoring/monitoring_create_alertPolicy.yml"
 
   /v2/monitoring/alerts/{alert_uuid}:
     get:
-      $ref: 'resources/monitoring/monitoring_get_alertPolicy.yml'
+      $ref: "resources/monitoring/monitoring_get_alertPolicy.yml"
 
     put:
-      $ref: 'resources/monitoring/monitoring_update_alertPolicy.yml'
+      $ref: "resources/monitoring/monitoring_update_alertPolicy.yml"
 
     delete:
-      $ref: 'resources/monitoring/monitoring_delete_alertPolicy.yml'
+      $ref: "resources/monitoring/monitoring_delete_alertPolicy.yml"
 
   /v2/monitoring/metrics/droplet/bandwidth:
     get:
-      $ref: 'resources/monitoring/monitoring_get_dropletBandwidthMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_dropletBandwidthMetrics.yml"
 
   /v2/monitoring/metrics/droplet/cpu:
     get:
-      $ref: 'resources/monitoring/monitoring_get_DropletCpuMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_DropletCpuMetrics.yml"
 
   /v2/monitoring/metrics/droplet/filesystem_free:
     get:
-      $ref: 'resources/monitoring/monitoring_get_dropletFilesystemFreeMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_dropletFilesystemFreeMetrics.yml"
 
   /v2/monitoring/metrics/droplet/filesystem_size:
     get:
-      $ref: 'resources/monitoring/monitoring_get_dropletFilesystemSizeMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_dropletFilesystemSizeMetrics.yml"
 
   /v2/monitoring/metrics/droplet/load_1:
     get:
-      $ref: 'resources/monitoring/monitoring_get_dropletLoad1Metrics.yml'
+      $ref: "resources/monitoring/monitoring_get_dropletLoad1Metrics.yml"
 
   /v2/monitoring/metrics/droplet/load_5:
     get:
-      $ref: 'resources/monitoring/monitoring_get_dropletLoad5Metrics.yml'
+      $ref: "resources/monitoring/monitoring_get_dropletLoad5Metrics.yml"
 
   /v2/monitoring/metrics/droplet/load_15:
     get:
-      $ref: 'resources/monitoring/monitoring_get_dropletLoad15Metrics.yml'
+      $ref: "resources/monitoring/monitoring_get_dropletLoad15Metrics.yml"
 
   /v2/monitoring/metrics/droplet/memory_cached:
     get:
-      $ref: 'resources/monitoring/monitoring_get_dropletMemoryCachedMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_dropletMemoryCachedMetrics.yml"
 
   /v2/monitoring/metrics/droplet/memory_free:
     get:
-      $ref: 'resources/monitoring/monitoring_get_dropletMemoryFreeMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_dropletMemoryFreeMetrics.yml"
 
   /v2/monitoring/metrics/droplet/memory_total:
     get:
-      $ref: 'resources/monitoring/monitoring_get_dropletMemoryTotalMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_dropletMemoryTotalMetrics.yml"
 
   /v2/monitoring/metrics/droplet/memory_available:
     get:
-      $ref: 'resources/monitoring/monitoring_get_dropletMemoryAvailableMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_dropletMemoryAvailableMetrics.yml"
 
   /v2/monitoring/metrics/apps/memory_percentage:
     get:
-      $ref: 'resources/monitoring/monitoring_get_appMemoryPercentageMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_appMemoryPercentageMetrics.yml"
 
   /v2/monitoring/metrics/apps/cpu_percentage:
     get:
-      $ref: 'resources/monitoring/monitoring_get_appCPUPercentageMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_appCPUPercentageMetrics.yml"
 
   /v2/monitoring/metrics/apps/restart_count:
     get:
-      $ref: 'resources/monitoring/monitoring_get_appRestartCountMetrics.yml'
+      $ref: "resources/monitoring/monitoring_get_appRestartCountMetrics.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_connections_current:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_connections_current.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_connections_current.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_connections_limit:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_connections_limit.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_connections_limit.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_cpu_utilization:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_cpu_utilization.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_cpu_utilization.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_firewall_dropped_bytes.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_firewall_dropped_bytes.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_firewall_dropped_packets.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_firewall_dropped_packets.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_http_responses:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_http_responses.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_http_responses.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_http_requests_per_second.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_http_requests_per_second.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_network_throughput_http:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_network_throughput_http.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_network_throughput_http.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_network_throughput_udp.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_network_throughput_udp.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_network_throughput_tcp.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_network_throughput_tcp.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_nlb_tcp_network_throughput.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_nlb_tcp_network_throughput.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_nlb_udp_network_throughput.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_nlb_udp_network_throughput.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_tls_connections_current:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_tls_connections_current.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_tls_connections_current.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_tls_connections_limit.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_tls_connections_limit.yml"
 
   /v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_frontend_tls_connections_exceeding_rate_limit.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_frontend_tls_connections_exceeding_rate_limit.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_session_duration_avg.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_http_session_duration_avg.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_session_duration_50p.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_http_session_duration_50p.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_session_duration_95p.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_http_session_duration_95p.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_response_time_avg.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_http_response_time_avg.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_response_time_50p.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_http_response_time_50p.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_response_time_95p.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_http_response_time_95p.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_response_time_99p.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_http_response_time_99p.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_queue_size:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_queue_size.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_queue_size.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_http_responses:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_http_responses.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_http_responses.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_connections:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_connections.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_connections.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_health_checks:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_health_checks.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_health_checks.yml"
 
   /v2/monitoring/metrics/load_balancer/droplets_downtime:
     get:
-      $ref: 'resources/monitoring/monitoring_get_lb_droplets_downtime.yml'
+      $ref: "resources/monitoring/monitoring_get_lb_droplets_downtime.yml"
 
   /v2/monitoring/metrics/droplet_autoscale/current_instances:
     get:
-      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_instances.yml'
+      $ref: "resources/monitoring/monitoring_get_droplet_autoscale_current_instances.yml"
 
   /v2/monitoring/metrics/droplet_autoscale/target_instances:
     get:
-      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_instances.yml'
+      $ref: "resources/monitoring/monitoring_get_droplet_autoscale_target_instances.yml"
 
   /v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization:
     get:
-      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_cpu_utilization.yml'
+      $ref: "resources/monitoring/monitoring_get_droplet_autoscale_current_cpu_utilization.yml"
 
   /v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization:
     get:
-      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_cpu_utilization.yml'
+      $ref: "resources/monitoring/monitoring_get_droplet_autoscale_target_cpu_utilization.yml"
 
   /v2/monitoring/metrics/droplet_autoscale/current_memory_utilization:
     get:
-      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_current_memory_utilization.yml'
+      $ref: "resources/monitoring/monitoring_get_droplet_autoscale_current_memory_utilization.yml"
 
   /v2/monitoring/metrics/droplet_autoscale/target_memory_utilization:
     get:
-      $ref: 'resources/monitoring/monitoring_get_droplet_autoscale_target_memory_utilization.yml'
+      $ref: "resources/monitoring/monitoring_get_droplet_autoscale_target_memory_utilization.yml"
 
   /v2/monitoring/sinks/destinations:
     post:
-      $ref: 'resources/monitoring/monitoring_create_destination.yml'
+      $ref: "resources/monitoring/monitoring_create_destination.yml"
     get:
-      $ref: 'resources/monitoring/monitoring_list_destinations.yml'
+      $ref: "resources/monitoring/monitoring_list_destinations.yml"
 
   /v2/monitoring/sinks/destinations/{destination_uuid}:
     get:
-      $ref: 'resources/monitoring/monitoring_get_destination.yml'
+      $ref: "resources/monitoring/monitoring_get_destination.yml"
     post:
-      $ref: 'resources/monitoring/monitoring_update_destination.yml'
+      $ref: "resources/monitoring/monitoring_update_destination.yml"
     delete:
-      $ref: 'resources/monitoring/monitoring_delete_destination.yml'
+      $ref: "resources/monitoring/monitoring_delete_destination.yml"
 
   /v2/monitoring/sinks:
     post:
-      $ref: 'resources/monitoring/monitoring_create_sink.yml'
+      $ref: "resources/monitoring/monitoring_create_sink.yml"
     get:
-      $ref: 'resources/monitoring/monitoring_list_sinks.yml'
+      $ref: "resources/monitoring/monitoring_list_sinks.yml"
 
   /v2/monitoring/sinks/{sink_uuid}:
     get:
-      $ref: 'resources/monitoring/monitoring_get_sink.yml'
+      $ref: "resources/monitoring/monitoring_get_sink.yml"
     delete:
-      $ref: 'resources/monitoring/monitoring_delete_sink.yml'
+      $ref: "resources/monitoring/monitoring_delete_sink.yml"
 
   /v2/projects:
     get:
-      $ref: 'resources/projects/projects_list.yml'
+      $ref: "resources/projects/projects_list.yml"
 
     post:
-      $ref: 'resources/projects/projects_create.yml'
+      $ref: "resources/projects/projects_create.yml"
 
   /v2/projects/default:
     get:
-      $ref: 'resources/projects/projects_get_default.yml'
+      $ref: "resources/projects/projects_get_default.yml"
 
     put:
-      $ref: 'resources/projects/projects_update_default.yml'
+      $ref: "resources/projects/projects_update_default.yml"
 
     patch:
-      $ref: 'resources/projects/projects_patch_default.yml'
+      $ref: "resources/projects/projects_patch_default.yml"
 
   /v2/projects/{project_id}:
     get:
-      $ref: 'resources/projects/projects_get.yml'
+      $ref: "resources/projects/projects_get.yml"
 
     put:
-      $ref: 'resources/projects/projects_update.yml'
+      $ref: "resources/projects/projects_update.yml"
 
     patch:
-      $ref: 'resources/projects/projects_patch.yml'
+      $ref: "resources/projects/projects_patch.yml"
 
     delete:
-      $ref: 'resources/projects/projects_delete.yml'
+      $ref: "resources/projects/projects_delete.yml"
 
   /v2/projects/{project_id}/resources:
     get:
-      $ref: 'resources/projects/projects_list_resources.yml'
+      $ref: "resources/projects/projects_list_resources.yml"
 
     post:
-      $ref: 'resources/projects/projects_assign_resources.yml'
+      $ref: "resources/projects/projects_assign_resources.yml"
 
   /v2/projects/default/resources:
     get:
-      $ref: 'resources/projects/projects_list_resources_default.yml'
+      $ref: "resources/projects/projects_list_resources_default.yml"
 
     post:
-      $ref: 'resources/projects/projects_assign_resources_default.yml'
+      $ref: "resources/projects/projects_assign_resources_default.yml"
 
   /v2/regions:
     get:
-      $ref: 'resources/regions/regions_list.yml'
+      $ref: "resources/regions/regions_list.yml"
 
   /v2/registry:
     get:
-      $ref: 'resources/registry/registry_get.yml'
+      $ref: "resources/registry/registry_get.yml"
 
     post:
-      $ref: 'resources/registry/registry_create.yml'
+      $ref: "resources/registry/registry_create.yml"
 
     delete:
-      $ref: 'resources/registry/registry_delete.yml'
+      $ref: "resources/registry/registry_delete.yml"
 
   /v2/registry/subscription:
     get:
-      $ref: 'resources/registry/registry_get_subscription.yml'
+      $ref: "resources/registry/registry_get_subscription.yml"
 
     post:
-      $ref: 'resources/registry/registry_update_subscription.yml'
+      $ref: "resources/registry/registry_update_subscription.yml"
 
   /v2/registry/docker-credentials:
     get:
-      $ref: 'resources/registry/registry_get_dockerCredentials.yml'
+      $ref: "resources/registry/registry_get_dockerCredentials.yml"
 
   /v2/registry/validate-name:
     post:
-      $ref: 'resources/registry/registry_validate_name.yml'
+      $ref: "resources/registry/registry_validate_name.yml"
 
   /v2/registry/{registry_name}/repositories:
     get:
-      $ref: 'resources/registry/registry_list_repositories.yml'
+      $ref: "resources/registry/registry_list_repositories.yml"
 
   /v2/registry/{registry_name}/repositoriesV2:
     get:
-      $ref: 'resources/registry/registry_list_repositoriesV2.yml'
+      $ref: "resources/registry/registry_list_repositoriesV2.yml"
 
   /v2/registry/{registry_name}/repositories/{repository_name}/tags:
     get:
-      $ref: 'resources/registry/registry_list_repositoryTags.yml'
+      $ref: "resources/registry/registry_list_repositoryTags.yml"
 
   /v2/registry/{registry_name}/repositories/{repository_name}/tags/{repository_tag}:
     delete:
-      $ref: 'resources/registry/registry_delete_repositoryTag.yml'
+      $ref: "resources/registry/registry_delete_repositoryTag.yml"
 
   /v2/registry/{registry_name}/repositories/{repository_name}/digests:
     get:
-      $ref: 'resources/registry/registry_list_repositoryManifests.yml'
+      $ref: "resources/registry/registry_list_repositoryManifests.yml"
 
   /v2/registry/{registry_name}/repositories/{repository_name}/digests/{manifest_digest}:
     delete:
-      $ref: 'resources/registry/registry_delete_repositoryManifest.yml'
+      $ref: "resources/registry/registry_delete_repositoryManifest.yml"
 
   /v2/registry/{registry_name}/garbage-collection:
     post:
-      $ref: 'resources/registry/registry_run_garbageCollection.yml'
+      $ref: "resources/registry/registry_run_garbageCollection.yml"
 
     get:
-      $ref: 'resources/registry/registry_get_garbageCollection.yml'
+      $ref: "resources/registry/registry_get_garbageCollection.yml"
 
   /v2/registry/{registry_name}/garbage-collections:
     get:
-      $ref: 'resources/registry/registry_list_garbageCollections.yml'
+      $ref: "resources/registry/registry_list_garbageCollections.yml"
 
   /v2/registry/{registry_name}/garbage-collection/{garbage_collection_uuid}:
     put:
-      $ref: 'resources/registry/registry_update_garbageCollection.yml'
+      $ref: "resources/registry/registry_update_garbageCollection.yml"
 
   /v2/registry/options:
     get:
-      $ref: 'resources/registry/registry_get_options.yml'
+      $ref: "resources/registry/registry_get_options.yml"
 
   /v2/reports/droplet_neighbors_ids:
     get:
-      $ref: 'resources/droplets/droplets_list_neighborsIds.yml'
+      $ref: "resources/droplets/droplets_list_neighborsIds.yml"
 
   /v2/reserved_ips:
     get:
-      $ref: 'resources/reserved_ips/reservedIPs_list.yml'
+      $ref: "resources/reserved_ips/reservedIPs_list.yml"
 
     post:
-      $ref: 'resources/reserved_ips/reservedIPs_create.yml'
+      $ref: "resources/reserved_ips/reservedIPs_create.yml"
 
   /v2/reserved_ips/{reserved_ip}:
     get:
-      $ref: 'resources/reserved_ips/reservedIPs_get.yml'
+      $ref: "resources/reserved_ips/reservedIPs_get.yml"
 
     delete:
-      $ref: 'resources/reserved_ips/reservedIPs_delete.yml'
+      $ref: "resources/reserved_ips/reservedIPs_delete.yml"
 
   /v2/reserved_ips/{reserved_ip}/actions:
     get:
-      $ref: 'resources/reserved_ips/reservedIPsActions_list.yml'
+      $ref: "resources/reserved_ips/reservedIPsActions_list.yml"
 
     post:
-      $ref: 'resources/reserved_ips/reservedIPsActions_post.yml'
+      $ref: "resources/reserved_ips/reservedIPsActions_post.yml"
 
   /v2/reserved_ips/{reserved_ip}/actions/{action_id}:
     get:
-      $ref: 'resources/reserved_ips/reservedIPsActions_get.yml'
+      $ref: "resources/reserved_ips/reservedIPsActions_get.yml"
+
+  /v2/reserved_ipv6:
+    get:
+      $ref: "resources/reserved_ipv6/reservedIPv6_list.yml"
+
+    post:
+      $ref: "resources/reserved_ipv6/reservedIPv6_create.yml"
+
+  /v2/reserved_ipv6/{reserved_ipv6}:
+    get:
+      $ref: "resources/reserved_ipv6/reservedIPv6_get.yml"
+
+    delete:
+      $ref: "resources/reserved_ipv6/reservedIPv6_delete.yml"
+
+  /v2/reserved_ipv6/{reserved_ipv6}/actions:
+    post:
+      $ref: "resources/reserved_ipv6/reservedIPv6Actions_post.yml"
 
   /v2/sizes:
     get:
-      $ref: 'resources/sizes/sizes_list.yml'
+      $ref: "resources/sizes/sizes_list.yml"
 
   /v2/snapshots:
     get:
-      $ref: 'resources/snapshots/snapshots_list.yml'
+      $ref: "resources/snapshots/snapshots_list.yml"
 
   /v2/snapshots/{snapshot_id}:
     get:
-      $ref: 'resources/snapshots/snapshots_get.yml'
+      $ref: "resources/snapshots/snapshots_get.yml"
 
     delete:
-      $ref: 'resources/snapshots/snapshots_delete.yml'
+      $ref: "resources/snapshots/snapshots_delete.yml"
 
   /v2/spaces/keys:
     get:
-      $ref: 'resources/spaces/key_list.yml'
-    
+      $ref: "resources/spaces/key_list.yml"
+
     post:
-      $ref: 'resources/spaces/key_create.yml'
-  
+      $ref: "resources/spaces/key_create.yml"
+
   /v2/spaces/keys/{access_key}:
+    get:
+      $ref: "resources/spaces/key_get.yml"
+
     delete:
-      $ref: 'resources/spaces/key_delete.yml'
+      $ref: "resources/spaces/key_delete.yml"
 
     put:
-      $ref: 'resources/spaces/key_update.yml'
-    
+      $ref: "resources/spaces/key_update.yml"
+
     patch:
-      $ref: 'resources/spaces/key_patch.yml'
+      $ref: "resources/spaces/key_patch.yml"
 
   /v2/tags:
     get:
-      $ref: 'resources/tags/tags_list.yml'
+      $ref: "resources/tags/tags_list.yml"
     post:
-      $ref: 'resources/tags/tags_create.yml'
+      $ref: "resources/tags/tags_create.yml"
 
   /v2/tags/{tag_id}:
     get:
-      $ref: 'resources/tags/tags_get.yml'
+      $ref: "resources/tags/tags_get.yml"
     delete:
-      $ref: 'resources/tags/tags_delete.yml'
+      $ref: "resources/tags/tags_delete.yml"
 
   /v2/tags/{tag_id}/resources:
     post:
-      $ref: 'resources/tags/tags_assign_resources.yml'
+      $ref: "resources/tags/tags_assign_resources.yml"
     delete:
-      $ref: 'resources/tags/tags_unassign_resources.yml'
+      $ref: "resources/tags/tags_unassign_resources.yml"
 
   /v2/volumes:
     get:
-      $ref: 'resources/volumes/volumes_list.yml'
+      $ref: "resources/volumes/volumes_list.yml"
     post:
-      $ref: 'resources/volumes/volumes_create.yml'
+      $ref: "resources/volumes/volumes_create.yml"
     delete:
-      $ref: 'resources/volumes/volumes_delete_byName.yml'
+      $ref: "resources/volumes/volumes_delete_byName.yml"
 
   /v2/volumes/actions:
     post:
-      $ref: 'resources/volumes/volumeActions_post.yml'
+      $ref: "resources/volumes/volumeActions_post.yml"
 
   /v2/volumes/snapshots/{snapshot_id}:
     get:
-      $ref: 'resources/volumes/volumeSnapshots_get_byId.yml'
+      $ref: "resources/volumes/volumeSnapshots_get_byId.yml"
     delete:
-      $ref: 'resources/volumes/volumeSnapshots_delete_byId.yml'
+      $ref: "resources/volumes/volumeSnapshots_delete_byId.yml"
 
   /v2/volumes/{volume_id}:
     get:
-      $ref: 'resources/volumes/volumes_get.yml'
+      $ref: "resources/volumes/volumes_get.yml"
     delete:
-      $ref: 'resources/volumes/volumes_delete.yml'
+      $ref: "resources/volumes/volumes_delete.yml"
 
   /v2/volumes/{volume_id}/actions:
     get:
-      $ref: 'resources/volumes/volumeActions_list.yml'
+      $ref: "resources/volumes/volumeActions_list.yml"
     post:
-      $ref: 'resources/volumes/volumeActions_post_byId.yml'
+      $ref: "resources/volumes/volumeActions_post_byId.yml"
 
   /v2/volumes/{volume_id}/actions/{action_id}:
     get:
-      $ref: 'resources/volumes/volumeActions_get.yml'
+      $ref: "resources/volumes/volumeActions_get.yml"
 
   /v2/volumes/{volume_id}/snapshots:
     get:
-      $ref: 'resources/volumes/volumeSnapshots_list.yml'
+      $ref: "resources/volumes/volumeSnapshots_list.yml"
     post:
-      $ref: 'resources/volumes/volumeSnapshots_create.yml'
+      $ref: "resources/volumes/volumeSnapshots_create.yml"
 
   /v2/vpcs:
     get:
-      $ref: 'resources/vpcs/vpcs_list.yml'
+      $ref: "resources/vpcs/vpcs_list.yml"
 
     post:
-      $ref: 'resources/vpcs/vpcs_create.yml'
+      $ref: "resources/vpcs/vpcs_create.yml"
 
   /v2/vpcs/{vpc_id}:
     get:
-      $ref: 'resources/vpcs/vpcs_get.yml'
+      $ref: "resources/vpcs/vpcs_get.yml"
 
     put:
-      $ref: 'resources/vpcs/vpcs_update.yml'
+      $ref: "resources/vpcs/vpcs_update.yml"
 
     patch:
-      $ref: 'resources/vpcs/vpcs_patch.yml'
+      $ref: "resources/vpcs/vpcs_patch.yml"
 
     delete:
-      $ref: 'resources/vpcs/vpcs_delete.yml'
+      $ref: "resources/vpcs/vpcs_delete.yml"
 
   /v2/vpcs/{vpc_id}/members:
     get:
-      $ref: 'resources/vpcs/vpcs_list_members.yml'
+      $ref: "resources/vpcs/vpcs_list_members.yml"
 
   /v2/vpcs/{vpc_id}/peerings:
     get:
-      $ref: 'resources/vpcs/vpcs_list_peerings.yml'
+      $ref: "resources/vpcs/vpcs_list_peerings.yml"
 
     post:
-      $ref: 'resources/vpcs/vpcs_create_peerings.yml'
+      $ref: "resources/vpcs/vpcs_create_peerings.yml"
 
   /v2/vpcs/{vpc_id}/peerings/{vpc_peering_id}:
     patch:
-      $ref: 'resources/vpcs/vpcs_update_peerings.yml'
+      $ref: "resources/vpcs/vpcs_update_peerings.yml"
 
   /v2/vpc_peerings:
     get:
-      $ref: 'resources/vpc_peerings/vpc_peerings_list.yml'
+      $ref: "resources/vpc_peerings/vpc_peerings_list.yml"
 
     post:
-      $ref: 'resources/vpc_peerings/vpc_peerings_create.yml'
+      $ref: "resources/vpc_peerings/vpc_peerings_create.yml"
 
   /v2/vpc_peerings/{vpc_peering_id}:
     get:
-      $ref: 'resources/vpc_peerings/vpc_peerings_get.yml'
+      $ref: "resources/vpc_peerings/vpc_peerings_get.yml"
 
     patch:
-      $ref: 'resources/vpc_peerings/vpc_peerings_update.yml'
+      $ref: "resources/vpc_peerings/vpc_peerings_update.yml"
 
     delete:
-      $ref: 'resources/vpc_peerings/vpc_peerings_delete.yml'
+      $ref: "resources/vpc_peerings/vpc_peerings_delete.yml"
 
   /v2/uptime/checks:
     get:
-      $ref: 'resources/uptime/list_checks.yml'
+      $ref: "resources/uptime/list_checks.yml"
 
     post:
-      $ref: 'resources/uptime/create_check.yml'
+      $ref: "resources/uptime/create_check.yml"
 
   /v2/uptime/checks/{check_id}:
     get:
-      $ref: 'resources/uptime/get_check.yml'
+      $ref: "resources/uptime/get_check.yml"
 
     put:
-      $ref: 'resources/uptime/update_check.yml'
+      $ref: "resources/uptime/update_check.yml"
 
     delete:
-      $ref: 'resources/uptime/delete_check.yml'
+      $ref: "resources/uptime/delete_check.yml"
 
   /v2/uptime/checks/{check_id}/state:
     get:
-      $ref: 'resources/uptime/get_check_state.yml'
+      $ref: "resources/uptime/get_check_state.yml"
 
   /v2/uptime/checks/{check_id}/alerts:
     get:
-      $ref: 'resources/uptime/list_alerts.yml'
+      $ref: "resources/uptime/list_alerts.yml"
 
     post:
-      $ref: 'resources/uptime/create_alert.yml'
+      $ref: "resources/uptime/create_alert.yml"
 
   /v2/uptime/checks/{check_id}/alerts/{alert_id}:
     get:
-      $ref: 'resources/uptime/get_alert.yml'
+      $ref: "resources/uptime/get_alert.yml"
 
     put:
-      $ref: 'resources/uptime/update_alert.yml'
+      $ref: "resources/uptime/update_alert.yml"
 
     delete:
-      $ref: 'resources/uptime/delete_alert.yml'
-
-
-
-
+      $ref: "resources/uptime/delete_alert.yml"
 
   /v2/gen-ai/agents:
     post:
-      $ref: 'resources/gen-ai/genai_create_agent.yml'
+      $ref: "resources/gen-ai/genai_create_agent.yml"
 
     get:
-      $ref: 'resources/gen-ai/genai_list_agents.yml'
-
+      $ref: "resources/gen-ai/genai_list_agents.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys:
     get:
-      $ref: 'resources/gen-ai/genai_list_agent_api_keys.yml'
+      $ref: "resources/gen-ai/genai_list_agent_api_keys.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_agent_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_create_agent_api_key.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}:
     delete:
-      $ref: 'resources/gen-ai/genai_delete_agent_api_key.yml'
+      $ref: "resources/gen-ai/genai_delete_agent_api_key.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_agent_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_update_agent_api_key.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate:
     put:
-      $ref: 'resources/gen-ai/genai_regenerate_agent_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_regenerate_agent_api_key.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/functions:
     post:
-      $ref: 'resources/gen-ai/genai_attach_agent_function.yml'
-
+      $ref: "resources/gen-ai/genai_attach_agent_function.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}:
     put:
-      $ref: 'resources/gen-ai/genai_update_agent_function.yml'
+      $ref: "resources/gen-ai/genai_update_agent_function.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
-
+      $ref: "resources/gen-ai/genai_detach_agent_function.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}:
     delete:
-      $ref: 'resources/gen-ai/genai_detach_knowledge_base.yml'
+      $ref: "resources/gen-ai/genai_detach_knowledge_base.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_attach_knowledge_base.yml'
-
+      $ref: "resources/gen-ai/genai_attach_knowledge_base.yml"
 
   /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}:
     delete:
-      $ref: 'resources/gen-ai/genai_detach_agent.yml'
+      $ref: "resources/gen-ai/genai_detach_agent.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_attach_agent.yml'
+      $ref: "resources/gen-ai/genai_attach_agent.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_attached_agent.yml'
-
+      $ref: "resources/gen-ai/genai_update_attached_agent.yml"
 
   /v2/gen-ai/agents/{uuid}:
     delete:
-      $ref: 'resources/gen-ai/genai_delete_agent.yml'
+      $ref: "resources/gen-ai/genai_delete_agent.yml"
 
     get:
-      $ref: 'resources/gen-ai/genai_get_agent.yml'
+      $ref: "resources/gen-ai/genai_get_agent.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_agent.yml'
-
+      $ref: "resources/gen-ai/genai_update_agent.yml"
 
   /v2/gen-ai/agents/{uuid}/child_agents:
     get:
-      $ref: 'resources/gen-ai/genai_get_agent_children.yml'
-
+      $ref: "resources/gen-ai/genai_get_agent_children.yml"
 
   /v2/gen-ai/agents/{uuid}/deployment_visibility:
     put:
-      $ref: 'resources/gen-ai/genai_update_agent_deployment_visibility.yml'
-
+      $ref: "resources/gen-ai/genai_update_agent_deployment_visibility.yml"
 
   /v2/gen-ai/anthropic/keys:
     get:
-      $ref: 'resources/gen-ai/genai_list_anthropic_api_keys.yml'
+      $ref: "resources/gen-ai/genai_list_anthropic_api_keys.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_anthropic_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_create_anthropic_api_key.yml"
 
   /v2/gen-ai/anthropic/keys/{api_key_uuid}:
     delete:
-      $ref: 'resources/gen-ai/genai_delete_anthropic_api_key.yml'
+      $ref: "resources/gen-ai/genai_delete_anthropic_api_key.yml"
 
     get:
-      $ref: 'resources/gen-ai/genai_get_anthropic_api_key.yml'
+      $ref: "resources/gen-ai/genai_get_anthropic_api_key.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_anthropic_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_update_anthropic_api_key.yml"
 
   /v2/gen-ai/anthropic/keys/{uuid}/agents:
     get:
-      $ref: 'resources/gen-ai/genai_list_agents_by_anthropic_key.yml'
-
+      $ref: "resources/gen-ai/genai_list_agents_by_anthropic_key.yml"
 
   /v2/gen-ai/indexing_jobs:
     get:
-      $ref: 'resources/gen-ai/genai_list_indexing_jobs.yml'
+      $ref: "resources/gen-ai/genai_list_indexing_jobs.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_indexing_job.yml'
-
+      $ref: "resources/gen-ai/genai_create_indexing_job.yml"
 
   /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources:
     get:
-      $ref: 'resources/gen-ai/genai_list_indexing_job_data_sources.yml'
-
+      $ref: "resources/gen-ai/genai_list_indexing_job_data_sources.yml"
 
   /v2/gen-ai/indexing_jobs/{uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_indexing_job.yml'
-
+      $ref: "resources/gen-ai/genai_get_indexing_job.yml"
 
   /v2/gen-ai/indexing_jobs/{uuid}/cancel:
     put:
-      $ref: 'resources/gen-ai/genai_cancel_indexing_job.yml'
-
+      $ref: "resources/gen-ai/genai_cancel_indexing_job.yml"
 
   /v2/gen-ai/knowledge_bases:
     get:
-      $ref: 'resources/gen-ai/genai_list_knowledge_bases.yml'
+      $ref: "resources/gen-ai/genai_list_knowledge_bases.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_knowledge_base.yml'
-
+      $ref: "resources/gen-ai/genai_create_knowledge_base.yml"
 
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources:
     get:
-      $ref: 'resources/gen-ai/genai_list_knowledge_base_data_sources.yml'
+      $ref: "resources/gen-ai/genai_list_knowledge_base_data_sources.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_knowledge_base_data_source.yml'
-
+      $ref: "resources/gen-ai/genai_create_knowledge_base_data_source.yml"
 
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
     delete:
-      $ref: 'resources/gen-ai/genai_delete_knowledge_base_data_source.yml'
-
+      $ref: "resources/gen-ai/genai_delete_knowledge_base_data_source.yml"
 
   /v2/gen-ai/knowledge_bases/{uuid}:
     put:
-      $ref: 'resources/gen-ai/genai_update_knowledge_base.yml'
+      $ref: "resources/gen-ai/genai_update_knowledge_base.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
+      $ref: "resources/gen-ai/genai_delete_knowledge_base.yml"
 
     get:
-      $ref: 'resources/gen-ai/genai_get_knowledge_base.yml'
-
+      $ref: "resources/gen-ai/genai_get_knowledge_base.yml"
 
   /v2/gen-ai/models:
     get:
-      $ref: 'resources/gen-ai/genai_list_models.yml'
-
+      $ref: "resources/gen-ai/genai_list_models.yml"
 
   /v2/gen-ai/regions:
     get:
-      $ref: 'resources/gen-ai/genai_list_datacenter_regions.yml'
-
-
-
-
-
-
+      $ref: "resources/gen-ai/genai_list_datacenter_regions.yml"
 
 components:
   securitySchemes:
