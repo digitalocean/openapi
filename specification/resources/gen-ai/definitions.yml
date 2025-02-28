@@ -576,6 +576,7 @@ apiBatchJobPhase:
   - BATCH_JOB_PHASE_SUCCEEDED
   - BATCH_JOB_PHASE_FAILED
   - BATCH_JOB_PHASE_ERROR
+  - BATCH_JOB_PHASE_CANCELLED
   example: BATCH_JOB_PHASE_UNKNOWN
   type: string
 apiBillingAttribute:
@@ -633,6 +634,24 @@ apiChatbot:
       example: '"example string"'
       type: string
   type: object
+apiCrawlingOption:
+  default: UNKNOWN
+  description: |-
+    Options for specifying how URLs found on pages should be handled.
+
+     - UNKNOWN: Default unknown value
+     - SCOPED: Only include the base URL.
+     - PATH: Crawl the base URL and linked pages within the URL path.
+     - DOMAIN: Crawl the base URL and linked pages within the same domain.
+     - SUBDOMAINS: Crawl the base URL and linked pages for any subdomain.
+  enum:
+  - UNKNOWN
+  - SCOPED
+  - PATH
+  - DOMAIN
+  - SUBDOMAINS
+  example: UNKNOWN
+  type: string
 apiCreateAgentAPIKeyInputPublic:
   properties:
     agent_uuid:
@@ -1033,12 +1052,6 @@ apiGetAgentOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
-  type: object
-apiGetAgentOutputPublic:
-  description: One Agent
-  properties:
-    agent:
-      $ref: '#/apiAgentPublic'
   type: object
 apiGetAgentTemplateInputPublic:
   properties:
@@ -1495,6 +1508,8 @@ apiKBDataSource:
       type: string
     spaces_data_source:
       $ref: '#/apiSpacesDataSource'
+    web_crawler_data_source:
+      $ref: '#/apiWebCrawlerDataSource'
   type: object
 apiKnowledgeBase:
   description: Knowledgebase Description
@@ -1590,6 +1605,8 @@ apiKnowledgeBaseDataSource:
       description: Unique id of knowledge base
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
+    web_crawler_data_source:
+      $ref: '#/apiWebCrawlerDataSource'
   type: object
 apiKnowledgeBasePrice:
   properties:
@@ -2705,6 +2722,20 @@ apiUsageMeasurement:
     usage_type:
       example: '"example string"'
       type: string
+  type: object
+apiWebCrawlerDataSource:
+  description: WebCrawlerDataSource
+  properties:
+    base_url:
+      description: The base url to crawl.
+      example: '"example string"'
+      type: string
+    crawling_option:
+      $ref: '#/apiCrawlingOption'
+    embed_media:
+      description: Whether to ingest and index media (images, etc.) on web pages.
+      example: true
+      type: boolean
   type: object
 dbaasClusterStatus:
   default: CREATING
