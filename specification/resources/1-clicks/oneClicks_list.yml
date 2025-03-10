@@ -37,6 +37,4 @@ x-codeSamples:
   - $ref: 'examples/python/oneClicks.yml'
 
 security:
-  - bearer_auth:
-    - 'addon:read'
-
+  - bearer_auth: []
