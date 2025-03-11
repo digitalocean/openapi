@@ -1887,41 +1887,41 @@ paths:
 
 
   /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}:
-    put:
-      $ref: 'resources/gen-ai/genai_update_agent_function.yml'
-
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
 
+    put:
+      $ref: 'resources/gen-ai/genai_update_agent_function.yml'
+
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}:
-    delete:
-      $ref: 'resources/gen-ai/genai_detach_knowledge_base.yml'
-
     post:
       $ref: 'resources/gen-ai/genai_attach_knowledge_base.yml'
 
+    delete:
+      $ref: 'resources/gen-ai/genai_detach_knowledge_base.yml'
+
 
   /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}:
-    put:
-      $ref: 'resources/gen-ai/genai_update_attached_agent.yml'
-
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent.yml'
 
     post:
       $ref: 'resources/gen-ai/genai_attach_agent.yml'
 
+    put:
+      $ref: 'resources/gen-ai/genai_update_attached_agent.yml'
+
 
   /v2/gen-ai/agents/{uuid}:
-    delete:
-      $ref: 'resources/gen-ai/genai_delete_agent.yml'
-
     get:
       $ref: 'resources/gen-ai/genai_get_agent.yml'
 
     put:
       $ref: 'resources/gen-ai/genai_update_agent.yml'
+
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_agent.yml'
 
 
   /v2/gen-ai/agents/{uuid}/child_agents:
@@ -1959,11 +1959,11 @@ paths:
 
 
   /v2/gen-ai/indexing_jobs:
-    get:
-      $ref: 'resources/gen-ai/genai_list_indexing_jobs.yml'
-
     post:
       $ref: 'resources/gen-ai/genai_create_indexing_job.yml'
+
+    get:
+      $ref: 'resources/gen-ai/genai_list_indexing_jobs.yml'
 
 
   /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources:
@@ -1982,11 +1982,11 @@ paths:
 
 
   /v2/gen-ai/knowledge_bases:
-    get:
-      $ref: 'resources/gen-ai/genai_list_knowledge_bases.yml'
-
     post:
       $ref: 'resources/gen-ai/genai_create_knowledge_base.yml'
+
+    get:
+      $ref: 'resources/gen-ai/genai_list_knowledge_bases.yml'
 
 
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources:
@@ -2003,14 +2003,14 @@ paths:
 
 
   /v2/gen-ai/knowledge_bases/{uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
+
     get:
       $ref: 'resources/gen-ai/genai_get_knowledge_base.yml'
 
     put:
       $ref: 'resources/gen-ai/genai_update_knowledge_base.yml'
-
-    delete:
-      $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
 
 
   /v2/gen-ai/models:

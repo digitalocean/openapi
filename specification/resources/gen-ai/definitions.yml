@@ -2,34 +2,34 @@ apiAcceptAgreementOutput:
   description: AcceptAgreementOutput Description
   properties:
     team_agreement:
-      $ref: "#/apiTeamAgreement"
+      $ref: '#/apiTeamAgreement'
   type: object
 apiAgent:
   description: An Agent
   properties:
     anthropic_api_key:
-      $ref: "#/apiAnthropicAPIKeyInfo"
+      $ref: '#/apiAnthropicAPIKeyInfo'
     api_key_infos:
       description: Api key infos
       items:
-        $ref: "#/apiAgentAPIKeyInfo"
+        $ref: '#/apiAgentAPIKeyInfo'
       type: array
     api_keys:
       description: Api keys
       items:
-        $ref: "#/apiAgentAPIKey"
+        $ref: '#/apiAgentAPIKey'
       type: array
     chatbot:
-      $ref: "#/apiChatbot"
+      $ref: '#/apiChatbot'
     chatbot_identifiers:
       description: Chatbot identifiers
       items:
-        $ref: "#/apiAgentChatbotIdentifier"
+        $ref: '#/apiAgentChatbotIdentifier'
       type: array
     child_agents:
       description: Child agents
       items:
-        $ref: "#/apiAgent"
+        $ref: '#/apiAgent'
       type: array
     created_at:
       description: Creation date / time
@@ -37,26 +37,25 @@ apiAgent:
       format: date-time
       type: string
     deployment:
-      $ref: "#/apiDeployment"
+      $ref: '#/apiDeployment'
     description:
       description: Description of agent
       example: '"example string"'
       type: string
     functions:
       items:
-        $ref: "#/apiAgentFunction"
+        $ref: '#/apiAgentFunction'
       type: array
     guardrails:
       description: The guardrails the agent is attached to
       items:
-        $ref: "#/apiAgentGuardrail"
+        $ref: '#/apiAgentGuardrail'
       type: array
     if_case:
       example: '"example string"'
       type: string
     instruction:
-      description:
-        Agent instruction. Instructions help your agent to perform its
+      description: Agent instruction. Instructions help your agent to perform its
         job effectively. See [Write Effective Agent Instructions](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#agent-instructions)
         for best practices.
       example: '"example string"'
@@ -68,24 +67,24 @@ apiAgent:
     knowledge_bases:
       description: Knowledge bases
       items:
-        $ref: "#/apiKnowledgeBase"
+        $ref: '#/apiKnowledgeBase'
       type: array
     max_tokens:
       example: 123
       format: int64
       type: integer
     model:
-      $ref: "#/apiModel"
+      $ref: '#/apiModel'
     name:
       description: Agent name
       example: '"example name"'
       type: string
     openai_api_key:
-      $ref: "#/apiOpenAIAPIKeyInfo"
+      $ref: '#/apiOpenAIAPIKeyInfo'
     parent_agents:
       description: Parent agents
       items:
-        $ref: "#/apiAgent"
+        $ref: '#/apiAgent'
       type: array
     project_id:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
@@ -94,6 +93,8 @@ apiAgent:
       description: Region code
       example: '"example string"'
       type: string
+    retrieval_method:
+      $ref: '#/apiRetrievalMethod'
     route_created_at:
       description: Creation of route date / time
       example: "2023-01-01T00:00:00Z"
@@ -113,7 +114,7 @@ apiAgent:
     tags:
       description: Agent tag to organize related resources
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
@@ -123,7 +124,7 @@ apiAgent:
       format: float
       type: number
     template:
-      $ref: "#/apiAgentTemplate"
+      $ref: '#/apiAgentTemplate'
     top_p:
       example: 123
       format: float
@@ -272,7 +273,7 @@ apiAgentGuardrail:
       format: int32
       type: integer
     type:
-      $ref: "#/apiGuardrailType"
+      $ref: '#/apiGuardrailType'
     updated_at:
       example: "2023-01-01T00:00:00Z"
       format: date-time
@@ -306,7 +307,7 @@ apiAgentPrice:
   properties:
     attributes:
       items:
-        $ref: "#/apiBillingAttribute"
+        $ref: '#/apiBillingAttribute'
       type: array
     display_name:
       example: '"example name"'
@@ -316,18 +317,18 @@ apiAgentPrice:
       type: string
     prices:
       items:
-        $ref: "#/apiBillingPrice"
+        $ref: '#/apiBillingPrice'
       type: array
   type: object
 apiAgentPublic:
   description: A GenAI Agent's configuration
   properties:
     chatbot:
-      $ref: "#/apiChatbot"
+      $ref: '#/apiChatbot'
     chatbot_identifiers:
       description: Chatbot identifiers
       items:
-        $ref: "#/apiAgentChatbotIdentifier"
+        $ref: '#/apiAgentChatbotIdentifier'
       type: array
     created_at:
       description: Creation date / time
@@ -335,7 +336,7 @@ apiAgentPublic:
       format: date-time
       type: string
     deployment:
-      $ref: "#/apiDeployment"
+      $ref: '#/apiDeployment'
     description:
       description: Description of agent
       example: This is a chatbot that can help you with your questions.
@@ -345,29 +346,26 @@ apiAgentPublic:
       example: if talking about the weather use this route
       type: string
     instruction:
-      description:
-        Agent instruction. Instructions help your agent to perform its
+      description: Agent instruction. Instructions help your agent to perform its
         job effectively. See [Write Effective Agent Instructions](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#agent-instructions)
         for best practices.
       example: Hello, how can I help you?
       type: string
     k:
-      description:
-        How many results should be considered from an attached knowledge
+      description: How many results should be considered from an attached knowledge
         base
       example: 5
       format: int64
       type: integer
     max_tokens:
-      description:
-        Specifies the maximum number of tokens the model can process in
+      description: Specifies the maximum number of tokens the model can process in
         a single input or output, set as a number between 1 and 512. This determines
         the length of each response.
       example: 100
       format: int64
       type: integer
     model:
-      $ref: "#/apiModel"
+      $ref: '#/apiModel'
     name:
       description: Agent name
       example: My Agent
@@ -380,6 +378,8 @@ apiAgentPublic:
       description: Region code
       example: '"tor1"'
       type: string
+    retrieval_method:
+      $ref: '#/apiRetrievalMethod'
     route_created_at:
       description: Creation of route date / time
       example: "2021-01-01T00:00:00Z"
@@ -401,24 +401,22 @@ apiAgentPublic:
     tags:
       description: A set of abitrary tags to organize your agent
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
       type: array
     temperature:
-      description:
-        Controls the model’s creativity, specified as a number between
+      description: Controls the model’s creativity, specified as a number between
         0 and 1. Lower values produce more predictable and conservative responses,
         while higher values encourage creativity and variation.
       example: 0.5
       format: float
       type: number
     template:
-      $ref: "#/apiAgentTemplate"
+      $ref: '#/apiAgentTemplate'
     top_p:
-      description:
-        Defines the cumulative probability threshold for word selection,
+      description: Defines the cumulative probability threshold for word selection,
         specified as a number between 0 and 1. Higher values allow for more diverse
         outputs, while lower values ensure focused and coherent responses.
       example: 0.9
@@ -467,7 +465,7 @@ apiAgentTemplate:
     knowledge_bases:
       description: List of knowledge bases associated with the agent template
       items:
-        $ref: "#/apiKnowledgeBase"
+        $ref: '#/apiKnowledgeBase'
       type: array
     max_tokens:
       description: The max_tokens setting for the agent template
@@ -475,7 +473,7 @@ apiAgentTemplate:
       format: int64
       type: integer
     model:
-      $ref: "#/apiModel"
+      $ref: '#/apiModel'
     name:
       description: Name of the agent template
       example: '"example name"'
@@ -578,13 +576,13 @@ apiAuditHeader:
 apiBatchJobPhase:
   default: BATCH_JOB_PHASE_UNKNOWN
   enum:
-    - BATCH_JOB_PHASE_UNKNOWN
-    - BATCH_JOB_PHASE_PENDING
-    - BATCH_JOB_PHASE_RUNNING
-    - BATCH_JOB_PHASE_SUCCEEDED
-    - BATCH_JOB_PHASE_FAILED
-    - BATCH_JOB_PHASE_ERROR
-    - BATCH_JOB_PHASE_CANCELLED
+  - BATCH_JOB_PHASE_UNKNOWN
+  - BATCH_JOB_PHASE_PENDING
+  - BATCH_JOB_PHASE_RUNNING
+  - BATCH_JOB_PHASE_SUCCEEDED
+  - BATCH_JOB_PHASE_FAILED
+  - BATCH_JOB_PHASE_ERROR
+  - BATCH_JOB_PHASE_CANCELLED
   example: BATCH_JOB_PHASE_UNKNOWN
   type: string
 apiBillingAttribute:
@@ -617,7 +615,7 @@ apiCancelKnowledgeBaseIndexingJobOutput:
   description: CancelKnowledgeBaseIndexingJobOutput description
   properties:
     job:
-      $ref: "#/apiIndexingJob"
+      $ref: '#/apiIndexingJob'
   type: object
 apiChatbot:
   description: A Chatbot
@@ -653,11 +651,11 @@ apiCrawlingOption:
      - DOMAIN: Crawl the base URL and linked pages within the same domain.
      - SUBDOMAINS: Crawl the base URL and linked pages for any subdomain.
   enum:
-    - UNKNOWN
-    - SCOPED
-    - PATH
-    - DOMAIN
-    - SUBDOMAINS
+  - UNKNOWN
+  - SCOPED
+  - PATH
+  - DOMAIN
+  - SUBDOMAINS
   example: UNKNOWN
   type: string
 apiCreateAgentAPIKeyInputPublic:
@@ -674,7 +672,7 @@ apiCreateAgentAPIKeyInputPublic:
 apiCreateAgentAPIKeyOutput:
   properties:
     api_key_info:
-      $ref: "#/apiAgentAPIKeyInfo"
+      $ref: '#/apiAgentAPIKeyInfo'
   type: object
 apiCreateAgentFromTemplateInputPublic:
   properties:
@@ -687,7 +685,7 @@ apiCreateAgentFromTemplateInputPublic:
 apiCreateAgentFromTemplateOutput:
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiCreateAgentInputPublic:
   description: Parameters for Agent Creation
@@ -701,8 +699,7 @@ apiCreateAgentInputPublic:
       example: '"My Agent Description"'
       type: string
     instruction:
-      description:
-        Agent instruction. Instructions help your agent to perform its
+      description: Agent instruction. Instructions help your agent to perform its
         job effectively. See [Write Effective Agent Instructions](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#agent-instructions)
         for best practices.
       example: '"You are an agent who thinks deeply about the world"'
@@ -710,7 +707,7 @@ apiCreateAgentInputPublic:
     knowledge_base_uuid:
       description: Ids of the knowledge base(s) to attach to the agent
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
@@ -738,7 +735,7 @@ apiCreateAgentInputPublic:
     tags:
       description: Agent tag to organize related resources
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
@@ -748,11 +745,10 @@ apiCreateAgentOutput:
   description: Information about a newly created Agent
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiCreateAnthropicAPIKeyInputPublic:
-  description:
-    CreateAnthropicAPIKeyInputPublic is used to create a new Anthropic
+  description: CreateAnthropicAPIKeyInputPublic is used to create a new Anthropic
     API key for a specific agent.
   properties:
     api_key:
@@ -765,12 +761,11 @@ apiCreateAnthropicAPIKeyInputPublic:
       type: string
   type: object
 apiCreateAnthropicAPIKeyOutput:
-  description:
-    CreateAnthropicAPIKeyOutput is used to return the newly created Anthropic
+  description: CreateAnthropicAPIKeyOutput is used to return the newly created Anthropic
     API key.
   properties:
     api_key_info:
-      $ref: "#/apiAnthropicAPIKeyInfo"
+      $ref: '#/apiAnthropicAPIKeyInfo'
   type: object
 apiCreateChatbotInputPublic:
   properties:
@@ -780,7 +775,7 @@ apiCreateChatbotOutput:
   description: Info about a newly created chatbot
   properties:
     chatbot:
-      $ref: "#/apiChatbot"
+      $ref: '#/apiChatbot'
   type: object
 apiCreateDataSourceFileUploadPresignedUrlsOutput:
   description: Response with pre-signed urls to upload files.
@@ -792,32 +787,32 @@ apiCreateDataSourceFileUploadPresignedUrlsOutput:
     uploads:
       description: A list of generated presigned URLs and object keys, one per file.
       items:
-        $ref: "#/apiFilePresignedUrlResponse"
+        $ref: '#/apiFilePresignedUrlResponse'
       type: array
   type: object
 apiCreateGuardrailOutput:
   description: CreateGuardrailOutput description
   properties:
     guardrail:
-      $ref: "#/apiGuardrail"
+      $ref: '#/apiGuardrail'
   type: object
 apiCreateKnowledgeBaseDataSourceInputPublic:
   description: Data to create a knowledge base data source
   properties:
     file_upload_data_source:
-      $ref: "#/apiFileUploadDataSource"
+      $ref: '#/apiFileUploadDataSource'
     knowledge_base_uuid:
       description: Knowledge base id
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     spaces_data_source:
-      $ref: "#/apiSpacesDataSource"
+      $ref: '#/apiSpacesDataSource'
   type: object
 apiCreateKnowledgeBaseDataSourceOutput:
   description: Information about a newly created knowldege base data source
   properties:
     knowledge_base_data_source:
-      $ref: "#/apiKnowledgeBaseDataSource"
+      $ref: '#/apiKnowledgeBaseDataSource'
   type: object
 apiCreateKnowledgeBaseInputPublic:
   description: Data to create a new knowledge base.
@@ -830,12 +825,11 @@ apiCreateKnowledgeBaseInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     datasources:
-      description:
-        The data sources to use for this knowledge base. See [Organize
+      description: The data sources to use for this knowledge base. See [Organize
         Data Sources](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#spaces-buckets)
         for more information on data sources best practices.
       items:
-        $ref: "#/apiKBDataSource"
+        $ref: '#/apiKBDataSource'
       type: array
     embedding_model_uuid:
       description: Identifier for the [embedding model](https://docs.digitalocean.com/products/genai-platform/details/models/#embedding-models).
@@ -846,8 +840,7 @@ apiCreateKnowledgeBaseInputPublic:
       example: '"My Knowledge Base"'
       type: string
     project_id:
-      description:
-        Identifier of the DigitalOcean project this knowledge base will
+      description: Identifier of the DigitalOcean project this knowledge base will
         belong to.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
@@ -858,7 +851,7 @@ apiCreateKnowledgeBaseInputPublic:
     tags:
       description: Tags to organize your knowledge base.
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
@@ -872,17 +865,16 @@ apiCreateKnowledgeBaseOutput:
   description: Information about a newly created knowledge base
   properties:
     knowledge_base:
-      $ref: "#/apiKnowledgeBase"
+      $ref: '#/apiKnowledgeBase'
   type: object
 apiCreateModelOutput:
   description: Information about a newly created model
   properties:
     model:
-      $ref: "#/apiModel"
+      $ref: '#/apiModel'
   type: object
 apiCreateOpenAIAPIKeyInputPublic:
-  description:
-    CreateOpenAIAPIKeyInputPublic is used to create a new OpenAI API key
+  description: CreateOpenAIAPIKeyInputPublic is used to create a new OpenAI API key
     for a specific agent.
   properties:
     api_key:
@@ -895,12 +887,11 @@ apiCreateOpenAIAPIKeyInputPublic:
       type: string
   type: object
 apiCreateOpenAIAPIKeyOutput:
-  description:
-    CreateOpenAIAPIKeyOutput is used to return the newly created OpenAI
+  description: CreateOpenAIAPIKeyOutput is used to return the newly created OpenAI
     API key.
   properties:
     api_key_info:
-      $ref: "#/apiOpenAIAPIKeyInfo"
+      $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
 apiDeleteAgentAPIKeyInputPublic:
   properties:
@@ -911,7 +902,7 @@ apiDeleteAgentAPIKeyInputPublic:
 apiDeleteAgentAPIKeyOutput:
   properties:
     api_key_info:
-      $ref: "#/apiAgentAPIKeyInfo"
+      $ref: '#/apiAgentAPIKeyInfo'
   type: object
 apiDeleteAgentInputPublic:
   properties:
@@ -921,19 +912,18 @@ apiDeleteAgentOutput:
   description: Info about a deleted agent
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiDeleteAnthropicAPIKeyInputPublic:
   properties:
     api_key_uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
 apiDeleteAnthropicAPIKeyOutput:
-  description:
-    DeleteAnthropicAPIKeyOutput is used to return the deleted Anthropic
+  description: DeleteAnthropicAPIKeyOutput is used to return the deleted Anthropic
     API key.
   properties:
     api_key_info:
-      $ref: "#/apiAnthropicAPIKeyInfo"
+      $ref: '#/apiAnthropicAPIKeyInfo'
   type: object
 apiDeleteChatbotInputPublic:
   properties:
@@ -992,7 +982,7 @@ apiDeleteOpenAIAPIKeyOutput:
   description: DeleteOpenAIAPIKeyOutput is used to return the deleted OpenAI API key.
   properties:
     api_key_info:
-      $ref: "#/apiOpenAIAPIKeyInfo"
+      $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
 apiDeployment:
   description: Description of deployment
@@ -1007,7 +997,7 @@ apiDeployment:
       example: '"example name"'
       type: string
     status:
-      $ref: "#/apiDeploymentStatus"
+      $ref: '#/apiDeploymentStatus'
     updated_at:
       description: Last modified
       example: "2023-01-01T00:00:00Z"
@@ -1022,20 +1012,20 @@ apiDeployment:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
     visibility:
-      $ref: "#/apiDeploymentVisibility"
+      $ref: '#/apiDeploymentVisibility'
   type: object
 apiDeploymentStatus:
   default: STATUS_UNKNOWN
   enum:
-    - STATUS_UNKNOWN
-    - STATUS_WAITING_FOR_DEPLOYMENT
-    - STATUS_DEPLOYING
-    - STATUS_RUNNING
-    - STATUS_FAILED
-    - STATUS_WAITING_FOR_UNDEPLOYMENT
-    - STATUS_UNDEPLOYING
-    - STATUS_UNDEPLOYMENT_FAILED
-    - STATUS_DELETED
+  - STATUS_UNKNOWN
+  - STATUS_WAITING_FOR_DEPLOYMENT
+  - STATUS_DEPLOYING
+  - STATUS_RUNNING
+  - STATUS_FAILED
+  - STATUS_WAITING_FOR_UNDEPLOYMENT
+  - STATUS_UNDEPLOYING
+  - STATUS_UNDEPLOYMENT_FAILED
+  - STATUS_DELETED
   example: STATUS_UNKNOWN
   type: string
 apiDeploymentVisibility:
@@ -1047,11 +1037,11 @@ apiDeploymentVisibility:
      - VISIBILITY_PUBLIC: The deployment is public and will service requests from the public internet
      - VISIBILITY_PRIVATE: The deployment is private and will only service requests from other agents, or through API keys
   enum:
-    - VISIBILITY_UNKNOWN
-    - VISIBILITY_DISABLED
-    - VISIBILITY_PLAYGROUND
-    - VISIBILITY_PUBLIC
-    - VISIBILITY_PRIVATE
+  - VISIBILITY_UNKNOWN
+  - VISIBILITY_DISABLED
+  - VISIBILITY_PLAYGROUND
+  - VISIBILITY_PUBLIC
+  - VISIBILITY_PRIVATE
   example: VISIBILITY_UNKNOWN
   type: string
 apiFilePresignedUrlResponse:
@@ -1071,8 +1061,7 @@ apiFilePresignedUrlResponse:
       example: '"example name"'
       type: string
     presigned_url:
-      description:
-        The actual presigned URL the client can use to upload the file
+      description: The actual presigned URL the client can use to upload the file
         directly.
       example: '"example string"'
       type: string
@@ -1102,7 +1091,7 @@ apiGetAgentOutput:
   description: One Agent
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiGetAgentTemplateInputPublic:
   properties:
@@ -1111,7 +1100,7 @@ apiGetAgentTemplateInputPublic:
 apiGetAgentTemplateOutput:
   properties:
     template:
-      $ref: "#/apiAgentTemplate"
+      $ref: '#/apiAgentTemplate'
   type: object
 apiGetAgentUsageInputPublic:
   properties:
@@ -1125,7 +1114,7 @@ apiGetAgentUsageOutput:
   description: Agent usage
   properties:
     usage:
-      $ref: "#/apiResourceUsage"
+      $ref: '#/apiResourceUsage'
   type: object
 apiGetAnthropicAPIKeyInputPublic:
   properties:
@@ -1134,7 +1123,7 @@ apiGetAnthropicAPIKeyInputPublic:
 apiGetAnthropicAPIKeyOutput:
   properties:
     api_key_info:
-      $ref: "#/apiAnthropicAPIKeyInfo"
+      $ref: '#/apiAnthropicAPIKeyInfo'
   type: object
 apiGetChildrenInputPublic:
   properties:
@@ -1146,19 +1135,19 @@ apiGetChildrenOutput:
     children:
       description: Child agents
       items:
-        $ref: "#/apiAgent"
+        $ref: '#/apiAgent'
       type: array
   type: object
 apiGetGuardrailOutput:
   properties:
     guardrail:
-      $ref: "#/apiGuardrail"
+      $ref: '#/apiGuardrail'
   type: object
 apiGetGuardrailUsageOutput:
   description: Guardrail usage output
   properties:
     usage:
-      $ref: "#/apiResourceUsage"
+      $ref: '#/apiResourceUsage'
   type: object
 apiGetKnowledgeBaseIndexingJobInputPublic:
   properties:
@@ -1168,7 +1157,7 @@ apiGetKnowledgeBaseIndexingJobOutput:
   description: GetKnowledgeBaseIndexingJobOutput description
   properties:
     job:
-      $ref: "#/apiIndexingJob"
+      $ref: '#/apiIndexingJob'
   type: object
 apiGetKnowledgeBaseIndexingJobUsageInputPublic:
   properties:
@@ -1182,7 +1171,7 @@ apiGetKnowledgeBaseIndexingJobUsageOutput:
   description: Knowledge base indexing job usage
   properties:
     usage:
-      $ref: "#/apiResourceUsage"
+      $ref: '#/apiResourceUsage'
   type: object
 apiGetKnowledgeBaseInputPublic:
   properties:
@@ -1192,9 +1181,9 @@ apiGetKnowledgeBaseOutput:
   description: The knowledge base
   properties:
     database_status:
-      $ref: "#/dbaasClusterStatus"
+      $ref: '#/dbaasClusterStatus'
     knowledge_base:
-      $ref: "#/apiKnowledgeBase"
+      $ref: '#/apiKnowledgeBase'
   type: object
 apiGetModelInputPublic:
   properties:
@@ -1204,7 +1193,7 @@ apiGetModelOutput:
   description: A specific model
   properties:
     model:
-      $ref: "#/apiModel"
+      $ref: '#/apiModel'
   type: object
 apiGetModelPlaygroundTokensInputPublic:
   properties:
@@ -1236,7 +1225,7 @@ apiGetModelUsageOutput:
   description: Information about model usage
   properties:
     usage:
-      $ref: "#/apiResourceUsage"
+      $ref: '#/apiResourceUsage'
   type: object
 apiGetModelVersionsInputPublic:
   properties:
@@ -1249,13 +1238,13 @@ apiGetOpenAIAPIKeyInputPublic:
 apiGetOpenAIAPIKeyOutput:
   properties:
     api_key_info:
-      $ref: "#/apiOpenAIAPIKeyInfo"
+      $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
 apiGetPreferredRegionOutput:
   description: Region code of preferred Regions
   properties:
     region:
-      $ref: "#/genaiapiRegion"
+      $ref: '#/genaiapiRegion'
   type: object
 apiGetResourceLimitsOutput:
   properties:
@@ -1301,7 +1290,7 @@ apiGetResourceUsageOutput:
     agent_usage:
       description: Agent usage
       items:
-        $ref: "#/apiResourceUsage"
+        $ref: '#/apiResourceUsage'
       type: array
     guardrail_count:
       description: Total guardrails used
@@ -1311,12 +1300,12 @@ apiGetResourceUsageOutput:
     guardrail_usage:
       description: Guardrail usage
       items:
-        $ref: "#/apiResourceUsage"
+        $ref: '#/apiResourceUsage'
       type: array
     indexing_job_usage:
       description: Indexing job usage
       items:
-        $ref: "#/apiResourceUsage"
+        $ref: '#/apiResourceUsage'
       type: array
     knowledge_base_count:
       description: Total knowledge bases used
@@ -1328,7 +1317,7 @@ apiGetTeamAgreementOutput:
   description: GetTeamAgreementOutput Output
   properties:
     team_agreement:
-      $ref: "#/apiTeamAgreement"
+      $ref: '#/apiTeamAgreement'
   type: object
 apiGuardrail:
   description: Guardrail description
@@ -1336,7 +1325,7 @@ apiGuardrail:
     agent_uuids:
       description: List of attached agents uuids
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
@@ -1364,7 +1353,7 @@ apiGuardrail:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
     type:
-      $ref: "#/apiGuardrailType"
+      $ref: '#/apiGuardrailType'
     updated_at:
       description: Last modified
       example: "2023-01-01T00:00:00Z"
@@ -1378,7 +1367,7 @@ apiGuardrailPrice:
   properties:
     attributes:
       items:
-        $ref: "#/apiBillingAttribute"
+        $ref: '#/apiBillingAttribute'
       type: array
     display_name:
       example: '"example name"'
@@ -1388,7 +1377,7 @@ apiGuardrailPrice:
       type: string
     prices:
       items:
-        $ref: "#/apiBillingPrice"
+        $ref: '#/apiBillingPrice'
       type: array
   type: object
 apiGuardrailTemplate:
@@ -1411,7 +1400,7 @@ apiGuardrailTemplate:
       example: '"example name"'
       type: string
     type:
-      $ref: "#/apiGuardrailType"
+      $ref: '#/apiGuardrailType'
     updated_at:
       description: Last modified
       example: "2023-01-01T00:00:00Z"
@@ -1424,10 +1413,10 @@ apiGuardrailTemplate:
 apiGuardrailType:
   default: GUARDRAIL_TYPE_UNKNOWN
   enum:
-    - GUARDRAIL_TYPE_UNKNOWN
-    - GUARDRAIL_TYPE_JAILBREAK
-    - GUARDRAIL_TYPE_SENSITIVE_DATA
-    - GUARDRAIL_TYPE_CONTENT_MODERATION
+  - GUARDRAIL_TYPE_UNKNOWN
+  - GUARDRAIL_TYPE_JAILBREAK
+  - GUARDRAIL_TYPE_SENSITIVE_DATA
+  - GUARDRAIL_TYPE_CONTENT_MODERATION
   example: GUARDRAIL_TYPE_UNKNOWN
   type: string
 apiIndexedDataSource:
@@ -1441,23 +1430,28 @@ apiIndexedDataSource:
       description: Uuid of the indexed data source
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
-    indexed_item_count:
-      description: Total count of items that have been indexed
+    failed_item_count:
+      description: Total count of files that have failed
       example: '"12345"'
       format: uint64
       type: string
-    skipped_item_count:
-      description: Total count of items that have been skipped
+    indexed_file_count:
+      description: Total count of files that have been indexed
+      example: '"12345"'
+      format: uint64
+      type: string
+    indexed_item_count:
+      description: Total count of files that have been indexed
       example: '"12345"'
       format: uint64
       type: string
     removed_item_count:
-      description: Total count of items that have been removed
+      description: Total count of files that have been removed
       example: '"12345"'
       format: uint64
       type: string
-    failed_item_count:
-      description: Total count of items that have failed
+    skipped_item_count:
+      description: Total count of files that have been skipped
       example: '"12345"'
       format: uint64
       type: string
@@ -1497,7 +1491,7 @@ apiIndexingJob:
       type: string
     data_source_uuids:
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
@@ -1511,7 +1505,7 @@ apiIndexingJob:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
     phase:
-      $ref: "#/apiBatchJobPhase"
+      $ref: '#/apiBatchJobPhase'
     started_at:
       example: "2023-01-01T00:00:00Z"
       format: date-time
@@ -1577,14 +1571,14 @@ apiKBDataSource:
       example: '"example string"'
       type: string
     file_upload_data_source:
-      $ref: "#/apiFileUploadDataSource"
+      $ref: '#/apiFileUploadDataSource'
     item_path:
       example: '"example string"'
       type: string
     spaces_data_source:
-      $ref: "#/apiSpacesDataSource"
+      $ref: '#/apiSpacesDataSource'
     web_crawler_data_source:
-      $ref: "#/apiWebCrawlerDataSource"
+      $ref: '#/apiWebCrawlerDataSource'
   type: object
 apiKnowledgeBase:
   description: Knowledgebase Description
@@ -1610,7 +1604,7 @@ apiKnowledgeBase:
       example: true
       type: boolean
     last_indexing_job:
-      $ref: "#/apiIndexingJob"
+      $ref: '#/apiIndexingJob'
     name:
       description: Name of knowledge base
       example: '"example name"'
@@ -1625,7 +1619,7 @@ apiKnowledgeBase:
     tags:
       description: Tags to organize related resources
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
@@ -1658,19 +1652,19 @@ apiKnowledgeBaseDataSource:
       format: date-time
       type: string
     file_upload_data_source:
-      $ref: "#/apiFileUploadDataSource"
+      $ref: '#/apiFileUploadDataSource'
     item_path:
       description: Path of folder or object in bucket - Deprecated, moved to data_source_details
       example: '"example string"'
       type: string
     last_indexing_job:
-      $ref: "#/apiIndexingJob"
+      $ref: '#/apiIndexingJob'
     region:
       description: Region code - Deprecated, moved to data_source_details
       example: '"example string"'
       type: string
     spaces_data_source:
-      $ref: "#/apiSpacesDataSource"
+      $ref: '#/apiSpacesDataSource'
     updated_at:
       description: Last modified
       example: "2023-01-01T00:00:00Z"
@@ -1681,13 +1675,13 @@ apiKnowledgeBaseDataSource:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
     web_crawler_data_source:
-      $ref: "#/apiWebCrawlerDataSource"
+      $ref: '#/apiWebCrawlerDataSource'
   type: object
 apiKnowledgeBasePrice:
   properties:
     attributes:
       items:
-        $ref: "#/apiBillingAttribute"
+        $ref: '#/apiBillingAttribute'
       type: array
     display_name:
       example: '"example name"'
@@ -1697,7 +1691,7 @@ apiKnowledgeBasePrice:
       type: string
     prices:
       items:
-        $ref: "#/apiBillingPrice"
+        $ref: '#/apiBillingPrice'
       type: array
   type: object
 apiLinkAgentFunctionInputPublic:
@@ -1724,13 +1718,11 @@ apiLinkAgentFunctionInputPublic:
       example: '"My Function"'
       type: string
     input_schema:
-      description:
-        Describe the input schema for the function so the agent may call
+      description: Describe the input schema for the function so the agent may call
         it
       type: object
     output_schema:
-      description:
-        Describe the output schema for the function so the agent handle
+      description: Describe the output schema for the function so the agent handle
         its response
       type: object
   type: object
@@ -1738,13 +1730,13 @@ apiLinkAgentFunctionOutput:
   description: Information about a newly function linked agent
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiLinkAgentGuardrailOutput:
   description: Information about an updated agent
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiLinkAgentInputPublic:
   description: Information for linking an agent
@@ -1787,13 +1779,13 @@ apiLinkKnowledgeBaseOutput:
   description: Information about a linked knowledge base
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiLinks:
   description: Links to other pages
   properties:
     pages:
-      $ref: "#/apiPages"
+      $ref: '#/apiPages'
   type: object
 apiListAgentAPIKeysInputPublic:
   properties:
@@ -1808,18 +1800,18 @@ apiListAgentAPIKeysOutput:
     api_key_infos:
       description: Api key infos
       items:
-        $ref: "#/apiAgentAPIKeyInfo"
+        $ref: '#/apiAgentAPIKeyInfo'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListAgentPricesOutput:
   properties:
     agent_prices:
       items:
-        $ref: "#/apiAgentPrice"
+        $ref: '#/apiAgentPrice'
       type: array
   type: object
 apiListAgentTemplatesInputPublic:
@@ -1831,12 +1823,12 @@ apiListAgentTemplatesInputPublic:
 apiListAgentTemplatesOutput:
   properties:
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
     templates:
       items:
-        $ref: "#/apiAgentTemplate"
+        $ref: '#/apiAgentTemplate'
       type: array
   type: object
 apiListAgentsByAnthropicKeyInputPublic:
@@ -1852,12 +1844,12 @@ apiListAgentsByAnthropicKeyOutput:
   properties:
     agents:
       items:
-        $ref: "#/apiAgent"
+        $ref: '#/apiAgent'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListAgentsByOpenAIKeyInputPublic:
   properties:
@@ -1872,12 +1864,12 @@ apiListAgentsByOpenAIKeyOutput:
   properties:
     agents:
       items:
-        $ref: "#/apiAgent"
+        $ref: '#/apiAgent'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListAgentsInputPublic:
   properties:
@@ -1893,12 +1885,12 @@ apiListAgentsOutput:
     agents:
       description: Agents
       items:
-        $ref: "#/apiAgent"
+        $ref: '#/apiAgent'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListAgentsOutputPublic:
   description: List of Agents
@@ -1906,12 +1898,12 @@ apiListAgentsOutputPublic:
     agents:
       description: Agents
       items:
-        $ref: "#/apiAgentPublic"
+        $ref: '#/apiAgentPublic'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListAnthropicAPIKeysInputPublic:
   properties:
@@ -1920,44 +1912,43 @@ apiListAnthropicAPIKeysInputPublic:
     per_page:
       example: "20"
 apiListAnthropicAPIKeysOutput:
-  description:
-    ListAnthropicAPIKeysOutput is used to return the list of Anthropic
+  description: ListAnthropicAPIKeysOutput is used to return the list of Anthropic
     API keys for a specific agent.
   properties:
     api_key_infos:
       description: Api key infos
       items:
-        $ref: "#/apiAnthropicAPIKeyInfo"
+        $ref: '#/apiAnthropicAPIKeyInfo'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListGuardrailAgentsOutput:
   properties:
     agents:
       items:
-        $ref: "#/apiAgent"
+        $ref: '#/apiAgent'
       type: array
   type: object
 apiListGuardrailPricesOutput:
   properties:
     guardrail_prices:
       items:
-        $ref: "#/apiGuardrailPrice"
+        $ref: '#/apiGuardrailPrice'
       type: array
   type: object
 apiListGuardrailTemplatesOutput:
   description: ListGuardrailTemplatesOutput description
   properties:
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
     templates:
       items:
-        $ref: "#/apiGuardrailTemplate"
+        $ref: '#/apiGuardrailTemplate'
       type: array
   type: object
 apiListGuardrailsOutput:
@@ -1965,12 +1956,12 @@ apiListGuardrailsOutput:
   properties:
     guardrails:
       items:
-        $ref: "#/apiGuardrail"
+        $ref: '#/apiGuardrail'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListIndexingJobDataSourcesInputPublic:
   properties:
@@ -1980,7 +1971,7 @@ apiListIndexingJobDataSourcesOutput:
   properties:
     indexed_data_sources:
       items:
-        $ref: "#/apiIndexedDataSource"
+        $ref: '#/apiIndexedDataSource'
       type: array
   type: object
 apiListKnowledgeBaseAgentsInputPublic:
@@ -1993,7 +1984,7 @@ apiListKnowledgeBaseAgentsOutput:
     agents:
       description: The agents
       items:
-        $ref: "#/apiAgent"
+        $ref: '#/apiAgent'
       type: array
   type: object
 apiListKnowledgeBaseDataSourcesInputPublic:
@@ -2010,12 +2001,12 @@ apiListKnowledgeBaseDataSourcesOutput:
     knowledge_base_data_sources:
       description: The data sources
       items:
-        $ref: "#/apiKnowledgeBaseDataSource"
+        $ref: '#/apiKnowledgeBaseDataSource'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListKnowledgeBaseIndexingJobsInputPublic:
   properties:
@@ -2029,18 +2020,18 @@ apiListKnowledgeBaseIndexingJobsOutput:
     jobs:
       description: The indexing jobs
       items:
-        $ref: "#/apiIndexingJob"
+        $ref: '#/apiIndexingJob'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListKnowledgeBasePricesOutput:
   properties:
     knowledge_base_prices:
       items:
-        $ref: "#/apiKnowledgeBasePrice"
+        $ref: '#/apiKnowledgeBasePrice'
       type: array
   type: object
 apiListKnowledgeBasesByDatabaseOutput:
@@ -2049,7 +2040,7 @@ apiListKnowledgeBasesByDatabaseOutput:
     knowledge_bases:
       description: The knowledge bases
       items:
-        $ref: "#/apiKnowledgeBase"
+        $ref: '#/apiKnowledgeBase'
       type: array
   type: object
 apiListKnowledgeBasesInputPublic:
@@ -2064,27 +2055,27 @@ apiListKnowledgeBasesOutput:
     knowledge_bases:
       description: The knowledge bases
       items:
-        $ref: "#/apiKnowledgeBase"
+        $ref: '#/apiKnowledgeBase'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListModelPricesOutput:
   properties:
     model_prices:
       items:
-        $ref: "#/apiModelPrice"
+        $ref: '#/apiModelPrice'
       type: array
   type: object
 apiListModelUsagesByAgentOutput:
   description: ListModelUsagesByAgentOutput description
   properties:
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
     request_limit_per_minute:
       description: Total request limit per minute
       example: '"12345"'
@@ -2103,7 +2094,7 @@ apiListModelUsagesByAgentOutput:
     usages:
       description: The model's usage by agent
       items:
-        $ref: "#/apiAgentModelUsage"
+        $ref: '#/apiAgentModelUsage'
       type: array
   type: object
 apiListModelsInputPublic:
@@ -2120,26 +2111,26 @@ apiListModelsOutput:
   description: A list of models
   properties:
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
     models:
       description: The models
       items:
-        $ref: "#/apiModel"
+        $ref: '#/apiModel'
       type: array
   type: object
 apiListModelsOutputPublic:
   description: A list of models
   properties:
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
     models:
       description: The models
       items:
-        $ref: "#/apiModelPublic"
+        $ref: '#/apiModelPublic'
       type: array
   type: object
 apiListOpenAIAPIKeysInputPublic:
@@ -2149,19 +2140,18 @@ apiListOpenAIAPIKeysInputPublic:
     per_page:
       example: "20"
 apiListOpenAIAPIKeysOutput:
-  description:
-    ListOpenAIAPIKeysOutput is used to return the list of OpenAI API keys
+  description: ListOpenAIAPIKeysOutput is used to return the list of OpenAI API keys
     for a specific agent.
   properties:
     api_key_infos:
       description: Api key infos
       items:
-        $ref: "#/apiOpenAIAPIKeyInfo"
+        $ref: '#/apiOpenAIAPIKeyInfo'
       type: array
     links:
-      $ref: "#/apiLinks"
+      $ref: '#/apiLinks'
     meta:
-      $ref: "#/apiMeta"
+      $ref: '#/apiMeta'
   type: object
 apiListRegionsOutput:
   description: Region Codes
@@ -2169,7 +2159,7 @@ apiListRegionsOutput:
     regions:
       description: Region code
       items:
-        $ref: "#/genaiapiRegion"
+        $ref: '#/genaiapiRegion'
       type: array
   type: object
 apiMeta:
@@ -2195,7 +2185,7 @@ apiModel:
   description: Description of a Model
   properties:
     agreement:
-      $ref: "#/apiAgreement"
+      $ref: '#/apiAgreement'
     created_at:
       description: Creation date / time
       example: "2023-01-01T00:00:00Z"
@@ -2225,7 +2215,7 @@ apiModel:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
     provider:
-      $ref: "#/apiModelProvider"
+      $ref: '#/apiModelProvider'
     updated_at:
       description: Last modified
       example: "2023-01-01T00:00:00Z"
@@ -2241,21 +2231,24 @@ apiModel:
       type: string
     usecases:
       description: Usecases of the model
+      example:
+      - MODEL_USECASE_AGENT
+      - MODEL_USECASE_GUARDRAIL
       items:
-        $ref: "#/apiModelUsecase"
+        $ref: '#/apiModelUsecase'
       type: array
     uuid:
       description: Unique id
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
     version:
-      $ref: "#/apiModelVersion"
+      $ref: '#/apiModelVersion'
   type: object
 apiModelPrice:
   properties:
     attributes:
       items:
-        $ref: "#/apiBillingAttribute"
+        $ref: '#/apiBillingAttribute'
       type: array
     display_name:
       example: '"example name"'
@@ -2265,22 +2258,22 @@ apiModelPrice:
       type: string
     prices:
       items:
-        $ref: "#/apiBillingPrice"
+        $ref: '#/apiBillingPrice'
       type: array
   type: object
 apiModelProvider:
   default: MODEL_PROVIDER_DIGITALOCEAN
   enum:
-    - MODEL_PROVIDER_DIGITALOCEAN
-    - MODEL_PROVIDER_ANTHROPIC
-    - MODEL_PROVIDER_OPENAI
+  - MODEL_PROVIDER_DIGITALOCEAN
+  - MODEL_PROVIDER_ANTHROPIC
+  - MODEL_PROVIDER_OPENAI
   example: MODEL_PROVIDER_DIGITALOCEAN
   type: string
 apiModelPublic:
   description: A machine learning model stored on the GenAI platform
   properties:
     agreement:
-      $ref: "#/apiAgreement"
+      $ref: '#/apiAgreement'
     created_at:
       description: Creation date / time
       example: "2021-01-01T00:00:00Z"
@@ -2316,13 +2309,13 @@ apiModelPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     version:
-      $ref: "#/apiModelVersion"
+      $ref: '#/apiModelVersion'
   type: object
 apiModelUploadCompleteOutput:
   description: Information about an updated model
   properties:
     model:
-      $ref: "#/apiModel"
+      $ref: '#/apiModel'
   type: object
 apiModelUsecase:
   default: MODEL_USECASE_UNKNOWN
@@ -2334,12 +2327,12 @@ apiModelUsecase:
      - MODEL_USECASE_GUARDRAIL: The model maybe used for guardrails
      - MODEL_USECASE_REASONING: The model usecase for reasoning
   enum:
-    - MODEL_USECASE_UNKNOWN
-    - MODEL_USECASE_AGENT
-    - MODEL_USECASE_FINETUNED
-    - MODEL_USECASE_KNOWLEDGEBASE
-    - MODEL_USECASE_GUARDRAIL
-    - MODEL_USECASE_REASONING
+  - MODEL_USECASE_UNKNOWN
+  - MODEL_USECASE_AGENT
+  - MODEL_USECASE_FINETUNED
+  - MODEL_USECASE_KNOWLEDGEBASE
+  - MODEL_USECASE_GUARDRAIL
+  - MODEL_USECASE_REASONING
   example: MODEL_USECASE_UNKNOWN
   type: string
 apiModelVersion:
@@ -2382,7 +2375,7 @@ apiOpenAIAPIKeyInfo:
     models:
       description: Models supported by the openAI api key
       items:
-        $ref: "#/apiModel"
+        $ref: '#/apiModel'
       type: array
     name:
       description: Name
@@ -2468,14 +2461,14 @@ apiRegenerateAgentAPIKeyInputPublic:
 apiRegenerateAgentAPIKeyOutput:
   properties:
     api_key_info:
-      $ref: "#/apiAgentAPIKeyInfo"
+      $ref: '#/apiAgentAPIKeyInfo'
   type: object
 apiResourceUsage:
   description: Resource Usage Description
   properties:
     measurements:
       items:
-        $ref: "#/apiUsageMeasurement"
+        $ref: '#/apiUsageMeasurement'
       type: array
     resource_uuid:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
@@ -2489,6 +2482,22 @@ apiResourceUsage:
       format: date-time
       type: string
   type: object
+apiRetrievalMethod:
+  default: RETRIEVAL_METHOD_UNKNOWN
+  description: |-
+    - RETRIEVAL_METHOD_UNKNOWN: The retrieval method is unknown
+     - RETRIEVAL_METHOD_REWRITE: The retrieval method is rewrite
+     - RETRIEVAL_METHOD_STEP_BACK: The retrieval method is step back
+     - RETRIEVAL_METHOD_SUB_QUERIES: The retrieval method is sub queries
+     - RETRIEVAL_METHOD_NONE: The retrieval method is none
+  enum:
+  - RETRIEVAL_METHOD_UNKNOWN
+  - RETRIEVAL_METHOD_REWRITE
+  - RETRIEVAL_METHOD_STEP_BACK
+  - RETRIEVAL_METHOD_SUB_QUERIES
+  - RETRIEVAL_METHOD_NONE
+  example: RETRIEVAL_METHOD_UNKNOWN
+  type: string
 apiSpacesDataSource:
   description: Spaces Bucket Data Source
   properties:
@@ -2508,11 +2517,10 @@ apiStartKnowledgeBaseIndexingJobInputPublic:
   description: StartKnowledgeBaseIndexingJobInputPublic description
   properties:
     data_source_uuids:
-      description:
-        List of data source ids to index, if none are provided, all data
+      description: List of data source ids to index, if none are provided, all data
         sources will be indexed
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
@@ -2526,7 +2534,7 @@ apiStartKnowledgeBaseIndexingJobOutput:
   description: StartKnowledgeBaseIndexingJobOutput description
   properties:
     job:
-      $ref: "#/apiIndexingJob"
+      $ref: '#/apiIndexingJob'
   type: object
 apiTeamAgreement:
   description: Team Agreement Description
@@ -2557,13 +2565,13 @@ apiUnlinkAgentFunctionOutput:
   description: Information about a newly unlinked agent
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiUnlinkAgentGuardrailOutput:
   description: UnlinkAgentGuardrailOutput description
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiUnlinkAgentInputPublic:
   properties:
@@ -2593,7 +2601,7 @@ apiUnlinkKnowledgeBaseOutput:
   description: Informatinon about a unlinked knowledge base
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiUpdateAgentAPIKeyInputPublic:
   properties:
@@ -2613,13 +2621,13 @@ apiUpdateAgentAPIKeyInputPublic:
 apiUpdateAgentAPIKeyOutput:
   properties:
     api_key_info:
-      $ref: "#/apiAgentAPIKeyInfo"
+      $ref: '#/apiAgentAPIKeyInfo'
   type: object
 apiUpdateAgentDeploymentVisbilityOutput:
   description: UpdateAgentDeploymentVisbilityOutput description
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiUpdateAgentDeploymentVisibilityInputPublic:
   description: UpdateAgentDeploymentVisibilityInputPublic description
@@ -2629,7 +2637,7 @@ apiUpdateAgentDeploymentVisibilityInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     visibility:
-      $ref: "#/apiDeploymentVisibility"
+      $ref: '#/apiDeploymentVisibility'
   type: object
 apiUpdateAgentFunctionInputPublic:
   description: Information about updating an agent function
@@ -2659,13 +2667,11 @@ apiUpdateAgentFunctionInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     input_schema:
-      description:
-        Describe the input schema for the function so the agent may call
+      description: Describe the input schema for the function so the agent may call
         it
       type: object
     output_schema:
-      description:
-        Describe the output schema for the function so the agent handle
+      description: Describe the output schema for the function so the agent handle
         its response
       type: object
   type: object
@@ -2673,7 +2679,7 @@ apiUpdateAgentFunctionOutput:
   description: The updated agent
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiUpdateAgentInputPublic:
   description: Data to modify an existing Agent
@@ -2687,22 +2693,19 @@ apiUpdateAgentInputPublic:
       example: '"My Agent Description"'
       type: string
     instruction:
-      description:
-        Agent instruction. Instructions help your agent to perform its
+      description: Agent instruction. Instructions help your agent to perform its
         job effectively. See [Write Effective Agent Instructions](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#agent-instructions)
         for best practices.
       example: '"You are an agent who thinks deeply about the world"'
       type: string
     k:
-      description:
-        How many results should be considered from an attached knowledge
+      description: How many results should be considered from an attached knowledge
         base
       example: 5
       format: int64
       type: integer
     max_tokens:
-      description:
-        Specifies the maximum number of tokens the model can process in
+      description: Specifies the maximum number of tokens the model can process in
         a single input or output, set as a number between 1 and 512. This determines
         the length of each response.
       example: 100
@@ -2724,25 +2727,25 @@ apiUpdateAgentInputPublic:
       description: The id of the DigitalOcean project this agent will belong to
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
+    retrieval_method:
+      $ref: '#/apiRetrievalMethod'
     tags:
       description: A set of abitrary tags to organize your agent
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
       type: array
     temperature:
-      description:
-        Controls the model’s creativity, specified as a number between
+      description: Controls the model’s creativity, specified as a number between
         0 and 1. Lower values produce more predictable and conservative responses,
         while higher values encourage creativity and variation.
       example: 0.7
       format: float
       type: number
     top_p:
-      description:
-        Defines the cumulative probability threshold for word selection,
+      description: Defines the cumulative probability threshold for word selection,
         specified as a number between 0 and 1. Higher values allow for more diverse
         outputs, while lower values ensure focused and coherent responses.
       example: 0.9
@@ -2757,11 +2760,10 @@ apiUpdateAgentOutput:
   description: Information about an updated agent
   properties:
     agent:
-      $ref: "#/apiAgent"
+      $ref: '#/apiAgent'
   type: object
 apiUpdateAnthropicAPIKeyInputPublic:
-  description:
-    UpdateAnthropicAPIKeyInputPublic is used to update an existing Anthropic
+  description: UpdateAnthropicAPIKeyInputPublic is used to update an existing Anthropic
     API key for a specific agent.
   properties:
     api_key:
@@ -2778,12 +2780,11 @@ apiUpdateAnthropicAPIKeyInputPublic:
       type: string
   type: object
 apiUpdateAnthropicAPIKeyOutput:
-  description:
-    UpdateAnthropicAPIKeyOutput is used to return the updated Anthropic
+  description: UpdateAnthropicAPIKeyOutput is used to return the updated Anthropic
     API key.
   properties:
     api_key_info:
-      $ref: "#/apiAnthropicAPIKeyInfo"
+      $ref: '#/apiAnthropicAPIKeyInfo'
   type: object
 apiUpdateChatbotInputPublic:
   properties:
@@ -2805,20 +2806,19 @@ apiUpdateChatbotOutput:
   description: Info about an updated chatbot
   properties:
     chatbot:
-      $ref: "#/apiChatbot"
+      $ref: '#/apiChatbot'
   type: object
 apiUpdateGuardrailOutput:
   description: UpdateGuardrailOutput description
   properties:
     guardrail:
-      $ref: "#/apiGuardrail"
+      $ref: '#/apiGuardrail'
   type: object
 apiUpdateKnowledgeBaseInputPublic:
   description: Information about updating a knowledge base
   properties:
     database_id:
-      description:
-        The id of the DigitalOcean database this knowledge base will use,
+      description: The id of the DigitalOcean database this knowledge base will use,
         optiona.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
@@ -2831,15 +2831,14 @@ apiUpdateKnowledgeBaseInputPublic:
       example: '"My Knowledge Base"'
       type: string
     project_id:
-      description:
-        The id of the DigitalOcean project this knowledge base will belong
+      description: The id of the DigitalOcean project this knowledge base will belong
         to
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     tags:
       description: Tags to organize your knowledge base.
       example:
-        - example string
+      - example string
       items:
         example: '"example string"'
         type: string
@@ -2853,7 +2852,7 @@ apiUpdateKnowledgeBaseOutput:
   description: Information about an updated knowledge base
   properties:
     knowledge_base:
-      $ref: "#/apiKnowledgeBase"
+      $ref: '#/apiKnowledgeBase'
   type: object
 apiUpdateLinkedAgentInputPublic:
   description: Information about updating the linkage of an agent
@@ -2899,11 +2898,10 @@ apiUpdateModelMetadataOutput:
   description: Information about updated meta data for a model
   properties:
     model:
-      $ref: "#/apiModel"
+      $ref: '#/apiModel'
   type: object
 apiUpdateOpenAIAPIKeyInputPublic:
-  description:
-    UpdateOpenAIAPIKeyInputPublic is used to update an existing OpenAI
+  description: UpdateOpenAIAPIKeyInputPublic is used to update an existing OpenAI
     API key for a specific agent.
   properties:
     api_key:
@@ -2923,7 +2921,7 @@ apiUpdateOpenAIAPIKeyOutput:
   description: UpdateOpenAIAPIKeyOutput is used to return the updated OpenAI API key.
   properties:
     api_key_info:
-      $ref: "#/apiOpenAIAPIKeyInfo"
+      $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
 apiUsageMeasurement:
   description: Usage Measurement Description
@@ -2944,7 +2942,7 @@ apiWebCrawlerDataSource:
       example: '"example string"'
       type: string
     crawling_option:
-      $ref: "#/apiCrawlingOption"
+      $ref: '#/apiCrawlingOption'
     embed_media:
       description: Whether to ingest and index media (images, etc.) on web pages.
       example: true
@@ -2953,18 +2951,18 @@ apiWebCrawlerDataSource:
 dbaasClusterStatus:
   default: CREATING
   enum:
-    - CREATING
-    - ONLINE
-    - POWEROFF
-    - REBUILDING
-    - REBALANCING
-    - DECOMMISSIONED
-    - FORKING
-    - MIGRATING
-    - RESIZING
-    - RESTORING
-    - POWERING_ON
-    - UNHEALTHY
+  - CREATING
+  - ONLINE
+  - POWEROFF
+  - REBUILDING
+  - REBALANCING
+  - DECOMMISSIONED
+  - FORKING
+  - MIGRATING
+  - RESIZING
+  - RESTORING
+  - POWERING_ON
+  - UNHEALTHY
   example: CREATING
   type: string
 genaiapiRegion:
@@ -3001,6 +2999,6 @@ protobufNullValue:
 
      - NULL_VALUE: Null value.
   enum:
-    - NULL_VALUE
+  - NULL_VALUE
   example: NULL_VALUE
   type: string
