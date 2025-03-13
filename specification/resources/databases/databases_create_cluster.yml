@@ -6,7 +6,7 @@ description: >-
   To create a database cluster, send a POST request to `/v2/databases`. To see a list 
   of options for each engine, such as available regions, size slugs, and versions,
   send a GET request to the `/v2/databases/options` endpoint. The available sizes for 
-  the `storage_size_mib` field depends on the clusters size. To see a list of available
+  the `storage_size_mib` field depends on the cluster's size. To see a list of available
   sizes, see [Managed Database Pricing](https://www.digitalocean.com/pricing/managed-databases).
   
 
