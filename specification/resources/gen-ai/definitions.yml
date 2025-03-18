@@ -79,6 +79,8 @@ apiAgent:
       description: Agent name
       example: '"example name"'
       type: string
+    openai_api_key:
+      $ref: '#/apiOpenAIAPIKeyInfo'
     parent_agents:
       description: Parent agents
       items:
@@ -91,6 +93,8 @@ apiAgent:
       description: Region code
       example: '"example string"'
       type: string
+    retrieval_method:
+      $ref: '#/apiRetrievalMethod'
     route_created_at:
       description: Creation of route date / time
       example: "2023-01-01T00:00:00Z"
@@ -374,6 +378,8 @@ apiAgentPublic:
       description: Region code
       example: '"tor1"'
       type: string
+    retrieval_method:
+      $ref: '#/apiRetrievalMethod'
     route_created_at:
       description: Creation of route date / time
       example: "2021-01-01T00:00:00Z"
@@ -714,6 +720,10 @@ apiCreateAgentInputPublic:
       description: Agent name
       example: '"My Agent"'
       type: string
+    open_ai_key_uuid:
+      description: Optional OpenAI API key ID to use with OpenAI models
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
     project_id:
       description: The id of the DigitalOcean project this agent will belong to
       example: '"12345678-1234-1234-1234-123456789012"'
@@ -789,14 +799,14 @@ apiCreateGuardrailOutput:
 apiCreateKnowledgeBaseDataSourceInputPublic:
   description: Data to create a knowledge base data source
   properties:
-    file_upload_data_source:
-      $ref: '#/apiFileUploadDataSource'
     knowledge_base_uuid:
       description: Knowledge base id
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     spaces_data_source:
       $ref: '#/apiSpacesDataSource'
+    web_crawler_data_source:
+      $ref: '#/apiWebCrawlerDataSource'
   type: object
 apiCreateKnowledgeBaseDataSourceOutput:
   description: Information about a newly created knowldege base data source
@@ -862,6 +872,26 @@ apiCreateModelOutput:
   properties:
     model:
       $ref: '#/apiModel'
+  type: object
+apiCreateOpenAIAPIKeyInputPublic:
+  description: CreateOpenAIAPIKeyInputPublic is used to create a new OpenAI API key
+    for a specific agent.
+  properties:
+    api_key:
+      description: OpenAI API key
+      example: '"sk-proj--123456789098765432123456789"'
+      type: string
+    name:
+      description: Name of the key
+      example: '"Production Key"'
+      type: string
+  type: object
+apiCreateOpenAIAPIKeyOutput:
+  description: CreateOpenAIAPIKeyOutput is used to return the newly created OpenAI
+    API key.
+  properties:
+    api_key_info:
+      $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
 apiDeleteAgentAPIKeyInputPublic:
   properties:
@@ -943,6 +973,16 @@ apiDeleteKnowledgeBaseOutput:
       description: The id of the deleted knowledge base
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
+  type: object
+apiDeleteOpenAIAPIKeyInputPublic:
+  properties:
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiDeleteOpenAIAPIKeyOutput:
+  description: DeleteOpenAIAPIKeyOutput is used to return the deleted OpenAI API key.
+  properties:
+    api_key_info:
+      $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
 apiDeployment:
   description: Description of deployment
@@ -1191,6 +1231,15 @@ apiGetModelVersionsInputPublic:
   properties:
     name:
       example: '"My Model"'
+apiGetOpenAIAPIKeyInputPublic:
+  properties:
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiGetOpenAIAPIKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiOpenAIAPIKeyInfo'
+  type: object
 apiGetPreferredRegionOutput:
   description: Region code of preferred Regions
   properties:
@@ -1381,8 +1430,28 @@ apiIndexedDataSource:
       description: Uuid of the indexed data source
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
+    failed_item_count:
+      description: Total count of files that have failed
+      example: '"12345"'
+      format: uint64
+      type: string
     indexed_file_count:
       description: Total count of files that have been indexed
+      example: '"12345"'
+      format: uint64
+      type: string
+    indexed_item_count:
+      description: Total count of files that have been indexed
+      example: '"12345"'
+      format: uint64
+      type: string
+    removed_item_count:
+      description: Total count of files that have been removed
+      example: '"12345"'
+      format: uint64
+      type: string
+    skipped_item_count:
+      description: Total count of files that have been skipped
       example: '"12345"'
       format: uint64
       type: string
@@ -1782,6 +1851,26 @@ apiListAgentsByAnthropicKeyOutput:
     meta:
       $ref: '#/apiMeta'
   type: object
+apiListAgentsByOpenAIKeyInputPublic:
+  properties:
+    page:
+      example: "1"
+    per_page:
+      example: "20"
+    uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiListAgentsByOpenAIKeyOutput:
+  description: List of Agents that are linked to a specific OpenAI Key
+  properties:
+    agents:
+      items:
+        $ref: '#/apiAgent'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+  type: object
 apiListAgentsInputPublic:
   properties:
     only_deployed:
@@ -1945,6 +2034,15 @@ apiListKnowledgeBasePricesOutput:
         $ref: '#/apiKnowledgeBasePrice'
       type: array
   type: object
+apiListKnowledgeBasesByDatabaseOutput:
+  description: List of knowledge bases
+  properties:
+    knowledge_bases:
+      description: The knowledge bases
+      items:
+        $ref: '#/apiKnowledgeBase'
+      type: array
+  type: object
 apiListKnowledgeBasesInputPublic:
   properties:
     page:
@@ -2035,6 +2133,26 @@ apiListModelsOutputPublic:
         $ref: '#/apiModelPublic'
       type: array
   type: object
+apiListOpenAIAPIKeysInputPublic:
+  properties:
+    page:
+      example: "1"
+    per_page:
+      example: "20"
+apiListOpenAIAPIKeysOutput:
+  description: ListOpenAIAPIKeysOutput is used to return the list of OpenAI API keys
+    for a specific agent.
+  properties:
+    api_key_infos:
+      description: Api key infos
+      items:
+        $ref: '#/apiOpenAIAPIKeyInfo'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+  type: object
 apiListRegionsOutput:
   description: Region Codes
   properties:
@@ -2111,6 +2229,14 @@ apiModel:
       description: Download url
       example: '"example string"'
       type: string
+    usecases:
+      description: Usecases of the model
+      example:
+      - MODEL_USECASE_AGENT
+      - MODEL_USECASE_GUARDRAIL
+      items:
+        $ref: '#/apiModelUsecase'
+      type: array
     uuid:
       description: Unique id
       example: '"123e4567-e89b-12d3-a456-426614174000"'
@@ -2140,6 +2266,7 @@ apiModelProvider:
   enum:
   - MODEL_PROVIDER_DIGITALOCEAN
   - MODEL_PROVIDER_ANTHROPIC
+  - MODEL_PROVIDER_OPENAI
   example: MODEL_PROVIDER_DIGITALOCEAN
   type: string
 apiModelPublic:
@@ -2198,12 +2325,14 @@ apiModelUsecase:
      - MODEL_USECASE_FINETUNED: The model maybe used for fine tuning
      - MODEL_USECASE_KNOWLEDGEBASE: The model maybe used for knowledge bases (embedding models)
      - MODEL_USECASE_GUARDRAIL: The model maybe used for guardrails
+     - MODEL_USECASE_REASONING: The model usecase for reasoning
   enum:
   - MODEL_USECASE_UNKNOWN
   - MODEL_USECASE_AGENT
   - MODEL_USECASE_FINETUNED
   - MODEL_USECASE_KNOWLEDGEBASE
   - MODEL_USECASE_GUARDRAIL
+  - MODEL_USECASE_REASONING
   example: MODEL_USECASE_UNKNOWN
   type: string
 apiModelVersion:
@@ -2224,6 +2353,43 @@ apiModelVersion:
       example: 123
       format: int64
       type: integer
+  type: object
+apiOpenAIAPIKeyInfo:
+  description: OpenAI API Key Info
+  properties:
+    created_at:
+      description: Key creation date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by:
+      description: Created by user id from DO
+      example: '"12345"'
+      format: uint64
+      type: string
+    deleted_at:
+      description: Key deleted date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    models:
+      description: Models supported by the openAI api key
+      items:
+        $ref: '#/apiModel'
+      type: array
+    name:
+      description: Name
+      example: '"example name"'
+      type: string
+    updated_at:
+      description: Key last updated date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    uuid:
+      description: Uuid
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
   type: object
 apiPages:
   description: Information about how to reach other pages
@@ -2316,6 +2482,22 @@ apiResourceUsage:
       format: date-time
       type: string
   type: object
+apiRetrievalMethod:
+  default: RETRIEVAL_METHOD_UNKNOWN
+  description: |-
+    - RETRIEVAL_METHOD_UNKNOWN: The retrieval method is unknown
+     - RETRIEVAL_METHOD_REWRITE: The retrieval method is rewrite
+     - RETRIEVAL_METHOD_STEP_BACK: The retrieval method is step back
+     - RETRIEVAL_METHOD_SUB_QUERIES: The retrieval method is sub queries
+     - RETRIEVAL_METHOD_NONE: The retrieval method is none
+  enum:
+  - RETRIEVAL_METHOD_UNKNOWN
+  - RETRIEVAL_METHOD_REWRITE
+  - RETRIEVAL_METHOD_STEP_BACK
+  - RETRIEVAL_METHOD_SUB_QUERIES
+  - RETRIEVAL_METHOD_NONE
+  example: RETRIEVAL_METHOD_UNKNOWN
+  type: string
 apiSpacesDataSource:
   description: Spaces Bucket Data Source
   properties:
@@ -2537,10 +2719,16 @@ apiUpdateAgentInputPublic:
       description: Agent name
       example: '"My New Agent Name"'
       type: string
+    open_ai_key_uuid:
+      description: Optional openai key uuid for use with openai models
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
     project_id:
       description: The id of the DigitalOcean project this agent will belong to
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
+    retrieval_method:
+      $ref: '#/apiRetrievalMethod'
     tags:
       description: A set of abitrary tags to organize your agent
       example:
@@ -2711,6 +2899,29 @@ apiUpdateModelMetadataOutput:
   properties:
     model:
       $ref: '#/apiModel'
+  type: object
+apiUpdateOpenAIAPIKeyInputPublic:
+  description: UpdateOpenAIAPIKeyInputPublic is used to update an existing OpenAI
+    API key for a specific agent.
+  properties:
+    api_key:
+      description: OpenAI API key
+      example: '"sk-ant-12345678901234567890123456789012"'
+      type: string
+    api_key_uuid:
+      description: API key ID
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    name:
+      description: Name of the key
+      example: '"Production Key"'
+      type: string
+  type: object
+apiUpdateOpenAIAPIKeyOutput:
+  description: UpdateOpenAIAPIKeyOutput is used to return the updated OpenAI API key.
+  properties:
+    api_key_info:
+      $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
 apiUsageMeasurement:
   description: Usage Measurement Description
