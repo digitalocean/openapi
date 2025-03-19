@@ -1853,11 +1853,11 @@ paths:
 
 
   /v2/gen-ai/agents:
-    get:
-      $ref: 'resources/gen-ai/genai_list_agents.yml'
-
     post:
       $ref: 'resources/gen-ai/genai_create_agent.yml'
+
+    get:
+      $ref: 'resources/gen-ai/genai_list_agents.yml'
 
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys:
@@ -1903,14 +1903,14 @@ paths:
 
 
   /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}:
-    put:
-      $ref: 'resources/gen-ai/genai_update_attached_agent.yml'
-
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent.yml'
 
     post:
       $ref: 'resources/gen-ai/genai_attach_agent.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_attached_agent.yml'
 
 
   /v2/gen-ai/agents/{uuid}:
@@ -1943,14 +1943,14 @@ paths:
 
 
   /v2/gen-ai/anthropic/keys/{api_key_uuid}:
+    put:
+      $ref: 'resources/gen-ai/genai_update_anthropic_api_key.yml'
+
     delete:
       $ref: 'resources/gen-ai/genai_delete_anthropic_api_key.yml'
 
     get:
       $ref: 'resources/gen-ai/genai_get_anthropic_api_key.yml'
-
-    put:
-      $ref: 'resources/gen-ai/genai_update_anthropic_api_key.yml'
 
 
   /v2/gen-ai/anthropic/keys/{uuid}/agents:
@@ -2003,14 +2003,14 @@ paths:
 
 
   /v2/gen-ai/knowledge_bases/{uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
+
     get:
       $ref: 'resources/gen-ai/genai_get_knowledge_base.yml'
 
     put:
       $ref: 'resources/gen-ai/genai_update_knowledge_base.yml'
-
-    delete:
-      $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
 
 
   /v2/gen-ai/models:
@@ -2018,35 +2018,10 @@ paths:
       $ref: 'resources/gen-ai/genai_list_models.yml'
 
 
-  /v2/gen-ai/openai/keys:
-    get:
-      $ref: 'resources/gen-ai/genai_list_openai_api_keys.yml'
-
-    post:
-      $ref: 'resources/gen-ai/genai_create_openai_api_key.yml'
-
-
-  /v2/gen-ai/openai/keys/{api_key_uuid}:
-    delete:
-      $ref: 'resources/gen-ai/genai_delete_openai_api_key.yml'
-
-    get:
-      $ref: 'resources/gen-ai/genai_get_openai_api_key.yml'
-
-    put:
-      $ref: 'resources/gen-ai/genai_update_openai_api_key.yml'
-
-
-  /v2/gen-ai/openai/keys/{uuid}/agents:
-    get:
-      $ref: 'resources/gen-ai/genai_list_agents_by_openai_key.yml'
-
-
   /v2/gen-ai/regions:
     get:
       $ref: 'resources/gen-ai/genai_list_datacenter_regions.yml'
 
-    
 
 
 

@@ -720,10 +720,6 @@ apiCreateAgentInputPublic:
       description: Agent name
       example: '"My Agent"'
       type: string
-    open_ai_key_uuid:
-      description: Optional OpenAI API key ID to use with OpenAI models
-      example: '"12345678-1234-1234-1234-123456789012"'
-      type: string
     project_id:
       description: The id of the DigitalOcean project this agent will belong to
       example: '"12345678-1234-1234-1234-123456789012"'
@@ -874,18 +870,11 @@ apiCreateModelOutput:
       $ref: '#/apiModel'
   type: object
 apiCreateOpenAIAPIKeyInputPublic:
-  description: CreateOpenAIAPIKeyInputPublic is used to create a new OpenAI API key
-    for a specific agent.
   properties:
     api_key:
-      description: OpenAI API key
       example: '"sk-proj--123456789098765432123456789"'
-      type: string
     name:
-      description: Name of the key
       example: '"Production Key"'
-      type: string
-  type: object
 apiCreateOpenAIAPIKeyOutput:
   description: CreateOpenAIAPIKeyOutput is used to return the newly created OpenAI
     API key.
@@ -2719,10 +2708,6 @@ apiUpdateAgentInputPublic:
       description: Agent name
       example: '"My New Agent Name"'
       type: string
-    open_ai_key_uuid:
-      description: Optional openai key uuid for use with openai models
-      example: '"12345678-1234-1234-1234-123456789012"'
-      type: string
     project_id:
       description: The id of the DigitalOcean project this agent will belong to
       example: '"12345678-1234-1234-1234-123456789012"'
@@ -2901,22 +2886,13 @@ apiUpdateModelMetadataOutput:
       $ref: '#/apiModel'
   type: object
 apiUpdateOpenAIAPIKeyInputPublic:
-  description: UpdateOpenAIAPIKeyInputPublic is used to update an existing OpenAI
-    API key for a specific agent.
   properties:
     api_key:
-      description: OpenAI API key
       example: '"sk-ant-12345678901234567890123456789012"'
-      type: string
     api_key_uuid:
-      description: API key ID
       example: '"12345678-1234-1234-1234-123456789012"'
-      type: string
     name:
-      description: Name of the key
       example: '"Production Key"'
-      type: string
-  type: object
 apiUpdateOpenAIAPIKeyOutput:
   description: UpdateOpenAIAPIKeyOutput is used to return the updated OpenAI API key.
   properties:
