@@ -37,4 +37,5 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'kubernetes:create'
+    - 'kubernetes:update'
+    - 'registry:read'
