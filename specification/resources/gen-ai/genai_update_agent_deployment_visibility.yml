@@ -41,7 +41,7 @@ responses:
 security:
 - bearer_auth:
   - genai:update
-summary: Check Agent Status
+summary: Update Agent Status
 tags:
 - GenAI Platform (Public Preview)
 x-codeSamples:
