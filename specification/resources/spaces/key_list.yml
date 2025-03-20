@@ -1,6 +1,6 @@
 operationId: spacesKey_list
 
-summary: "[Beta] List Spaces Access Keys"
+summary: "List Spaces Access Keys"
 
 description: |
   To list Spaces Access Key, send a GET request to `/v2/spaces/keys`. Sort parameter must be used with Sort Direction.

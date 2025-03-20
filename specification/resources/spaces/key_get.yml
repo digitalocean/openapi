@@ -1,6 +1,6 @@
-operationId: spacesKey_delete
+operationId: spacesKey_get
 
-summary: "[Beta] Get a Spaces Access Key"
+summary: "Get a Spaces Access Key"
 
 description: |
   To get a Spaces Access Key, send a GET request to `/v2/spaces/keys/$ACCESS_KEY`.
