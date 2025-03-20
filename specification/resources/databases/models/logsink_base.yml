@@ -12,4 +12,5 @@ properties:
       - rsyslog
       - elasticsearch
       - opensearch
+      - datadog
     example: rsyslog
