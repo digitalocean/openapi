@@ -15,7 +15,7 @@ parameters:
   - $ref: "parameters.yml#/logsink_id"
 
 responses:
-  "200":
+  "204":
     $ref: "../../shared/responses/no_content.yml"
 
   "401":
