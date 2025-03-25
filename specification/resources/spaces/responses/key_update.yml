@@ -20,7 +20,7 @@ content:
       Read Only Key:
         value:
           key:
-            name: read-only-key
+            name: new-key-name
             access_key: DOACCESSKEYEXAMPLE
             grants:
               - bucket: my-bucket

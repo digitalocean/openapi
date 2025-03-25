@@ -19,6 +19,11 @@ requestBody:
     application/json:
       schema:
         $ref: "models/key.yml"
+      
+      examples:
+        Update Key Name:
+          value:
+            name: "new-key-name"
 
 responses:
   "200":
