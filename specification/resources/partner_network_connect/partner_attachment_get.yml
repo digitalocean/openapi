@@ -1,6 +1,10 @@
-operationId: get_partner_attachment
+operationId: attachments_get
 
 summary: Retrieve an existing partner attachment
+
+description: |
+  To get the details of a partner attachment, send a `GET` request to 
+  `/v2/partner_network_connect/attachments/{pa_id}`.
 
 tags:
   - Partner Network Connect

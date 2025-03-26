@@ -1,6 +1,11 @@
-operationId: create_partner_attachment
+operationId: attachments_create
 
 summary: Create a new partner attachment
+
+description: |
+  To create a new partner attachment, send a `POST` request to 
+  `/v2/partner_network_connect/attachments` with a JSON object containing the
+  required configuration details.
 
 tags:
   - Partner Network Connect

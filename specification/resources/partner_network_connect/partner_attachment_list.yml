@@ -1,9 +1,9 @@
-operationId: list_partner_attachments
+operationId: attachments_list
 
 summary: List all partner attachments
 
 description: >-
-  To list all of the Partner Attachments on your account, send a GET request to
+  To list all of the Partner Attachments on your account, send a `GET` request to
   `/v2/partner_network_connect/attachments`.
 
 tags:

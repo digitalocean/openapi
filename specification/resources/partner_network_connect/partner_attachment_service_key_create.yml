@@ -1,9 +1,9 @@
-operationId: regenerate_partner_attachment_service_key
+operationId: attachments_create_service_key
 
 summary: Regenerate the service key for the partner attachment
 
 description: >
-  This operation regenerates the service key for the specified partner attachment
+  This operation generates a new service key for the specified partner attachment.
 
 tags:
   - Partner Network Connect

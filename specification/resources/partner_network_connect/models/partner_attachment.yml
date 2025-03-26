@@ -17,8 +17,7 @@ partner_attachment:
         alphanumeric characters, dashes, and periods.
       x-order: 2
     urn:
-      $ref: '#/components/schemas/urn'
-      x-order: 3
+      $ref: '../../../shared/attributes/urn.yml'
     state:
       type: string
       readOnly: true
@@ -27,7 +26,7 @@ partner_attachment:
       x-order: 4
     connection_bandwidth_in_mbps:
       type: integer
-      example: env.prod-partner-network-connect
+      example: 1000
       description: The bandwidth (in Mbps) of the connection.
       x-order: 5
     region:
@@ -56,12 +55,20 @@ partner_attachment:
       properties:
         local_asn:
           type: integer
+          example: 64532
+          description: ASN of the local router.
         peer_asn:
           type: integer
+          example: 64532
+          description: ASN of the peer router
         local_router_ip:
           type: string
+          example: 169.254.0.1/29
+          description: IP of the DigitalOcean router
         peer_router_ip:
           type: string
+          example: 169.254.0.1/29
+          description: IP of the peer router
       description: The BGP configuration for the partner attachment.
       x-order: 9
     created_at:

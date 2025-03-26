@@ -19,7 +19,7 @@ content:
             partner_attachments:
               type: array
               items:
-                $ref: 'models/partner_attachment.yml#/partner_attachment'
+                $ref: '../models/partner_attachment.yml#/partner_attachment'
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
       example:

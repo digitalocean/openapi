@@ -19,7 +19,7 @@ content:
             bgp_auth_key:
               type: object
               items:
-                $ref: 'models/service_key.yml#/partner_attachment_service_key'
+                $ref: '../models/service_key.yml#/partner_attachment_service_key'
       example:
         bgp_auth_key:
           value: secret

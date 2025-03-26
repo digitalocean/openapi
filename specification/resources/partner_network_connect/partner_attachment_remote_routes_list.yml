@@ -1,6 +1,10 @@
-operationId: list_partner_attachment_remote_routes
+operationId: attachments_list_remote_routes
 
 summary: List remote routes for a partner attachment
+
+description: |
+  To list all remote routes associated with a partner attachment, send a `GET` request to 
+  `/v2/partner_network_connect/attachments/{pa_id}/remote_routes`.
 
 tags:
   - Partner Network Connect

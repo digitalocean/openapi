@@ -19,7 +19,7 @@ content:
             remote_routes:
               type: array
               items:
-                $ref: 'models/remote_route.yml#/partner_attachment_remote_route'
+                $ref: '../models/remote_route.yml#/partner_attachment_remote_route'
         - $ref: '../../../shared/pages.yml#/pagination'
         - $ref: '../../../shared/meta.yml'
       example:

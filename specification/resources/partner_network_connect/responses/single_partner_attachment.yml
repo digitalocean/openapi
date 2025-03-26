@@ -17,7 +17,7 @@ content:
         - type: object
           properties:
             partner_attachment:
-              $ref: 'models/partner_attachment.yml#/partner_attachment'
+              $ref: '../models/partner_attachment.yml#/partner_attachment'
       example:
         partner_attachment:
           name: env.prod-partner-network-connect

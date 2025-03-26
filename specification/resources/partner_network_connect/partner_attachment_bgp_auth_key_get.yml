@@ -1,6 +1,10 @@
-operationId: get_partner_attachment_bgp_auth_key
+operationId: attachments_get_bgp_auth_key
 
 summary: Get current BGP auth key for the partner attachment
+
+description: |
+  To get the current BGP auth key for a partner attachment, send a `GET` request to 
+  `/v2/partner_network_connect/attachments/{pa_id}/bgp_auth_key`.
 
 tags:
   - Partner Network Connect
