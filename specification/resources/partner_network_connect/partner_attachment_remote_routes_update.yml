@@ -1,0 +1,48 @@
+operationId: set_partner_attachment_remote_routes
+
+summary: Set remote routes for a partner attachment
+
+tags:
+  - Partner Network Connect
+
+parameters:
+  - $ref: 'paramters.yml#/pa_id'
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          remote_routes:
+            type: array
+            items:
+              $ref: 'models/remote_route.yml#/partner_attachment_remote_route_writable'
+      example:
+        remote_routes:
+          - cidr: 10.10.10.0/24
+          - cidr: 10.10.10.10/24
+  required: true
+
+responses:
+  '200':
+    $ref: 'responses/all_partner_attachment_remote_routes.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+security:
+  - bearer_auth:
+      - partner_network_connect:read

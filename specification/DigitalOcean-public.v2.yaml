@@ -395,6 +395,12 @@ tags:
       `already_assigned` | The resource was already assigned.
       `service_down`     | There was a problem retrieving or assigning a resource. Please try again.
 
+  - name: Partner Network Connect
+    description: |-
+      Partner Network Connect lets you establish high-bandwidth, low-latency 
+      network connections directly between DigitalOcean VPC networks and other 
+      public cloud providers or on-premises datacenters.
+
   - name: Projects
     description: |-
       Projects allow you to organize your resources into groups that fit the way
@@ -1522,6 +1528,36 @@ paths:
       $ref: "resources/monitoring/monitoring_get_sink.yml"
     delete:
       $ref: "resources/monitoring/monitoring_delete_sink.yml"
+
+  /v2/partner_network_connect/attachments:
+    get:
+      $ref: "resources/partner_network_connect/partner_attachment_list.yml"
+    post:
+      $ref: "resources/partner_network_connect/partner_attachment_create.yml"
+
+  /v2/partner_network_connect/attachments/{pa_id}:
+    get:
+      $ref: "resources/partner_network_connect/partner_attachment_get.yml"
+    patch:
+      $ref: "resources/partner_network_connect/partner_attachment_update.yml"
+    delete:
+      $ref: "resources/partner_network_connect/partner_attachment_delete.yml"
+
+  /v2/partner_network_connect/attachments/{pa_id}/bgp_auth_key:
+    get:
+      $ref: "resources/partner_network_connect/partner_attachment_bgp_auth_key_get.yml"
+
+  /v2/partner_network_connect/attachments/{pa_id}/remote_routes:
+    get:
+      $ref: "resources/partner_network_connect/partner_attachment_remote_routes_list.yml"
+    put:
+      $ref: "resources/partner_network_connect/partner_attachment_remote_routes_update.yml"
+
+  /v2/partner_network_connect/attachments/{pa_id}/service_key:
+    get:
+      $ref: "resources/partner_network_connect/partner_attachment_service_key_get.yml"
+    post:
+      $ref: "resources/partner_network_connect/partner_attachment_service_key_create.yml"
 
   /v2/projects:
     get:
