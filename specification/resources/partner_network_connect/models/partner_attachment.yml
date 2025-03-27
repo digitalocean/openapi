@@ -16,13 +16,11 @@ partner_attachment:
         The name of the partner attachment. Must be unique and may only contain
         alphanumeric characters, dashes, and periods.
       x-order: 2
-    urn:
-      $ref: '../../../shared/attributes/urn.yml'
     state:
       type: string
       readOnly: true
       example: active
-      description: A unique ID that can be used to identify and reference the partner attachment.
+      description: The current operational state of the attachment.
       x-order: 4
     connection_bandwidth_in_mbps:
       type: integer
@@ -211,7 +209,7 @@ partner_attachment_updatable:
             peer_router_ip:
               type: string
               example: 169.254.0.6/29
-              description: IP of the Naas Provider router
+              description: IP of the NaaS provider router
             peer_router_asn:
               type: integer
               example: 64532

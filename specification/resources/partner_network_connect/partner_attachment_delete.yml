@@ -14,7 +14,7 @@ parameters:
 
 responses:
   '202':
-    $ref: 'responses/single_partner_attachment.yml'
+    $ref: 'responses/single_partner_attachment_deleting.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

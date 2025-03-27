@@ -1,6 +1,6 @@
 description:  |-
-  The response will be a JSON object with details about the partner attachment
-  including attached VPC network IDs and BGP configuration information
+  The response will be a JSON object with details about the partner attachment 
+  and `"state": "DELETING"` to indicate that the partner attachment is being deleted.
 
 headers:
   ratelimit-limit:
@@ -22,7 +22,7 @@ content:
         partner_attachment:
           id: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
           name: env.prod-partner-network-connect
-          state: CREATED
+          state: DELETING
           created_at: '2025-03-27T13:03:53Z'
           connection_bandwidth_in_mbps: 1000
           region: NYC
