@@ -1257,6 +1257,10 @@ paths:
     delete:
       $ref: "resources/kubernetes/kubernetes_remove_registry.yml"
 
+  /v2/kubernetes/clusters/{cluster_id}/status_messages:
+    get:
+      $ref: "resources/kubernetes/kubernetes_get_status_messages.yml"
+
   /v2/load_balancers:
     post:
       $ref: "resources/load_balancers/loadBalancers_create.yml"
