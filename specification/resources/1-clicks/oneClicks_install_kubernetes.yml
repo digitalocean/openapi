@@ -40,4 +40,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'addon:create'
+    - 'kubernetes:update'
