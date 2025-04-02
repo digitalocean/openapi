@@ -1,25 +1,19 @@
-description: Check whether an agent is public or private. To update the agent status,
-  send a PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
-operationId: genai_update_agent_deployment_visibility
+description: To retrieve details of an OpenAI API key, send a GET request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+operationId: genai_get_openai_api_key
 parameters:
-- description: Unique id
+- description: API key ID
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
-  name: uuid
+  name: api_key_uuid
   required: true
   schema:
     type: string
-requestBody:
-  content:
-    application/json:
-      schema:
-        $ref: ./definitions.yml#/apiUpdateAgentDeploymentVisibilityInputPublic
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiUpdateAgentDeploymentVisbilityOutput
+          $ref: ./definitions.yml#/apiGetOpenAIAPIKeyOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -40,9 +34,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:update
-summary: Update Agent Status
+  - genai:read
+summary: Get OpenAI API Key
 tags:
 - GenAI Platform (Public Preview)
 x-codeSamples:
-- $ref: examples/curl/genai_update_agent_deployment_visibility.yml
+- $ref: examples/curl/genai_get_openai_api_key.yml
