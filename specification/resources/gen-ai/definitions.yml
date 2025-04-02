@@ -2714,14 +2714,9 @@ apiRetrievalMethod:
 apiRollbackToAgentVersionInputPublic:
   properties:
     uuid:
-      description: Agent unique identifier
       example: '"12345678-1234-1234-1234-123456789012"'
-      type: string
     version_hash:
-      description: Unique identifier
       example: c3658d8b5c05494cd03ce042926ef08157889ed54b1b74b5ee0b3d66dcee4b73
-      type: string
-  type: object
 apiRollbackToAgentVersionOutput:
   properties:
     audit_header:
