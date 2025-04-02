@@ -13,4 +13,8 @@ headers:
 content:
   application/json:
     schema:
-      $ref: '../models/status_messages.yml'
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: "../models/status_messages.yml"
