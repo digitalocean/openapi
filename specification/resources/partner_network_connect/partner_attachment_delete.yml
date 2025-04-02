@@ -1,9 +1,9 @@
-operationId: attachments_delete
+operationId: partnerAttachments_delete
 
 summary: Delete an existing partner attachment
 
 description: |
-  To delete an existing partner attachment, send a `DELETE` request to 
+  To delete an existing partner attachment, send a `DELETE` request to
   `/v2/partner_network_connect/attachments/{pa_id}`.
 
 tags:

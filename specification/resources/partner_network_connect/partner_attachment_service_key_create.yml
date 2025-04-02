@@ -1,4 +1,4 @@
-operationId: attachments_create_service_key
+operationId: partnerAttachments_create_service_key
 
 summary: Regenerate the service key for the partner attachment
 

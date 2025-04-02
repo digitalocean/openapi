@@ -1,4 +1,4 @@
-operationId: attachments_list
+operationId: partnerAttachments_list
 
 summary: List all partner attachments
 
