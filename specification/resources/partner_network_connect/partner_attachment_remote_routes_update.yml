@@ -1,9 +1,9 @@
-operationId: attachments_update_remote_routes
+operationId: partnerAttachments_update_remote_routes
 
 summary: Set remote routes for a partner attachment
 
 description: |
-  To set remote routes for a partner attachment, send a `PUT` request to 
+  To set remote routes for a partner attachment, send a `PUT` request to
   `/v2/partner_network_connect/attachments/{pa_id}/remote_routes` with a JSON object
   containing the remote routes to be set.
 

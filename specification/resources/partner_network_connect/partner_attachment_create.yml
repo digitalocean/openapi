@@ -1,9 +1,9 @@
-operationId: attachments_create
+operationId: partnerAttachments_create
 
 summary: Create a new partner attachment
 
 description: |
-  To create a new partner attachment, send a `POST` request to 
+  To create a new partner attachment, send a `POST` request to
   `/v2/partner_network_connect/attachments` with a JSON object containing the
   required configuration details.
 
@@ -25,7 +25,7 @@ responses:
 
   '404':
     $ref: '../../shared/responses/not_found.yml'
-  
+
   '422':
     $ref: '../../shared/responses/unprocessable_entity.yml'
 
