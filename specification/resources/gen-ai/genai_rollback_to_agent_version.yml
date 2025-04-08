@@ -1,8 +1,7 @@
-description: Check whether an agent is public or private. To update the agent status,
-  send a PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
-operationId: genai_update_agent_deployment_visibility
+description: To update to a specific agent version, send a PUT request to `/v2/gen-ai/agents/{uuid}/versions`.
+operationId: genai_rollback_to_agent_version
 parameters:
-- description: Unique id
+- description: Agent unique identifier
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: uuid
@@ -13,13 +12,13 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: ./definitions.yml#/apiUpdateAgentDeploymentVisibilityInputPublic
+        $ref: ./definitions.yml#/apiRollbackToAgentVersionInputPublic
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiUpdateAgentDeploymentVisbilityOutput
+          $ref: ./definitions.yml#/apiRollbackToAgentVersionOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -41,8 +40,8 @@ responses:
 security:
 - bearer_auth:
   - genai:update
-summary: Update Agent Status
+summary: Rollback to Agent Version
 tags:
 - GenAI Platform (Public Preview)
 x-codeSamples:
-- $ref: examples/curl/genai_update_agent_deployment_visibility.yml
+- $ref: examples/curl/genai_rollback_to_agent_version.yml
