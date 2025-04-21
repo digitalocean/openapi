@@ -35,7 +35,7 @@ properties:
     readOnly: true
     example: '2604:a880:800:14::85f5:c000'
     description: An attribute containing the public-facing IPv6 address of the
-      load balancer. Note that this feature is currently in private preview.
+      load balancer. This feature is currently in public preview.
 
   size_unit:
     type: integer
@@ -185,7 +185,7 @@ properties:
     default: IPV4
     description: A string indicating whether the load balancer will support IPv4 
       or both IPv4 and IPv6 networking. This property cannot be updated after
-      creating the load balancer. Note that this feature is in private preview.
+      creating the load balancer. This feature is in public preview.
 
   type:
     type: string
