@@ -1,7 +1,10 @@
 type: object
+oneOf:
+  - required: [prefix]
+  - required: [exact]
 properties:
   path:
-    $ref: app_ingress_spec_rule_string_match.yml
+    $ref: app_ingress_spec_rule_string_match_prefix.yml
+  authority:
+    $ref: app_ingress_spec_rule_string_match_exact.yml
 description: The match configuration for the rule.
-required:
-  - path
