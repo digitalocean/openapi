@@ -1,7 +1,4 @@
 type: object
-oneOf:
-  - required: [prefix]
-  - required: [exact]
 properties:
   path:
     $ref: app_ingress_spec_rule_string_match_prefix.yml
