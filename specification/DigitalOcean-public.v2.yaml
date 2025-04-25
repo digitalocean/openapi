@@ -675,6 +675,10 @@ paths:
     post:
       $ref: "resources/apps/apps_list_metrics_bandwidth_usage.yml"
 
+  /v2/apps/{app_id}/health:
+    get:
+      $ref: "resources/apps/apps_get_health.yml"
+
   /v2/cdn/endpoints:
     get:
       $ref: "resources/cdn/cdn_list_endpoints.yml"
