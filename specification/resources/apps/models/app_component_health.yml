@@ -1,0 +1,23 @@
+type: object
+properties:
+  name:
+    type: string
+  cpu_usage_percent:
+    type: number
+    format: double
+  memory_usage_percent:
+    type: number
+    format: double
+  replicas_desired:
+    type: integer
+    format: int64
+  replicas_ready:
+    type: integer
+    format: int64
+  state:
+    type: string
+    enum:
+      - UNKNOWN
+      - HEALTHY
+      - UNHEALTHY
+    default: UNKNOWN

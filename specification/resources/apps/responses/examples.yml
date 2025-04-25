@@ -912,3 +912,13 @@ app_bandwidth_usage_multiple:
       - app_id: c2a93513-8d9b-4223-9d61-5e7272c81cf5
         bandwidth_bytes: '254847'
     date: 2023-01-17T00:00:00Z
+
+app_health:
+  value:
+    components:
+      - name: sample-expressjs
+        cpu_usage_percent: 5.555
+        memory_usage_percent: 20.32
+        replicas_desired: 1
+        replicas_ready: 2
+        state: HEALTHY

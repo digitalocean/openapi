@@ -1,0 +1,16 @@
+type: object
+properties:
+  name:
+    type: string
+  functions_component_health_metrics:
+    type: array
+    items:
+      type: object
+      properties:
+        metric_label:
+          type: string
+        metric_value:
+          type: number
+          format: double
+        time_window:
+          type: string
