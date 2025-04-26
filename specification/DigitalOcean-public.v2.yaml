@@ -1615,16 +1615,6 @@ paths:
     get:
       $ref: "resources/regions/regions_list.yml"
 
-  /v2/registry:
-    get:
-      $ref: "resources/registry/registry_get.yml"
-
-    post:
-      $ref: "resources/registry/registry_create.yml"
-
-    delete:
-      $ref: "resources/registry/registry_delete.yml"
-
   /v2/registries:
     get:
       $ref: 'resources/registry/multiregistry_get_all.yml'
@@ -1643,6 +1633,31 @@ paths:
     get:
       $ref: 'resources/registry/multiregistry_get_dockerCredentials.yml'
 
+  /v2/registries/subscription:
+    get:
+      $ref: "resources/registry/multiregistry_get_subscription.yml"
+
+    post:
+      $ref: "resources/registry/multiregistry_update_subscription.yml"
+
+  /v2/registries/options:
+    get:
+      $ref: "resources/registry/multiregistry_get_options.yml"
+  
+  /v2/registries/{registry_name}/garbage-collection/{garbage_collection_uuid}:
+    put:
+      $ref: "resources/registry/multiregistry_update_garbageCollection.yml"
+
+  /v2/registry:
+    get:
+      $ref: "resources/registry/registry_get.yml"
+
+    post:
+      $ref: "resources/registry/registry_create.yml"
+
+    delete:
+      $ref: "resources/registry/registry_delete.yml"
+  
   /v2/registry/subscription:
     get:
       $ref: "resources/registry/registry_get_subscription.yml"
