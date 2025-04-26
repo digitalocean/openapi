@@ -1644,6 +1644,17 @@ paths:
     get:
       $ref: "resources/registry/multiregistry_get_options.yml"
   
+  /v2/registries/{registry_name}/garbage-collection:
+    post:
+      $ref: "resources/registry/multiregistry_run_garbageCollection.yml"
+
+    get:
+      $ref: "resources/registry/multiregistry_get_garbageCollection.yml"
+  
+  /v2/registries/{registry_name}/garbage-collections:
+    get:
+      $ref: "resources/registry/multiregistry_list_garbageCollections.yml"
+
   /v2/registries/{registry_name}/garbage-collection/{garbage_collection_uuid}:
     put:
       $ref: "resources/registry/multiregistry_update_garbageCollection.yml"
@@ -1675,6 +1686,10 @@ paths:
   /v2/registries/{registry_name}/repositories/{repository_name}/digests/{manifest_digest}:
     delete:
       $ref: "resources/registry/multiregistry_delete_repositoryManifest.yml"
+
+  /v2/registries/validate-name:
+    post:
+      $ref: "resources/registry/multiregistry_validate_name.yml"
 
   /v2/registry:
     get:
