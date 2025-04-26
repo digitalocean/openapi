@@ -2,7 +2,24 @@ type: object
 
 properties:
   redis_maxmemory_policy:
-    $ref: "../eviction_policy_model.yml"
+    type: string
+    enum:
+      - noeviction
+      - allkeys-lru
+      - allkeys-random
+      - volatile-lru
+      - volatile-random
+      - volatile-ttl
+    description: |2-
+      A string specifying the desired eviction policy for the Redis cluster.
+
+      - `noeviction`: Don't evict any data, returns error when memory limit is reached.
+      - `allkeys-lru:` Evict any key, least recently used (LRU) first.
+      - `allkeys-random`: Evict keys in a random order.
+      - `volatile-lru`: Evict keys with expiration only, least recently used (LRU) first.
+      - `volatile-random`: Evict keys with expiration only in a random order.
+      - `volatile-ttl`: Evict keys with expiration only, shortest time-to-live (TTL) first.
+    example: allkeys-lru
   redis_pubsub_client_output_buffer_limit:
     description: >-
       Set output buffer limit for pub / sub clients in MB. The value is the hard
@@ -86,11 +103,12 @@ properties:
       - "off"
       - rdb
     description: >-
-      When persistence is 'rdb', Redis does RDB dumps each 10 minutes if any key
-      is changed. Also RDB dumps are done according to backup schedule for
-      backup purposes. When persistence is 'off', no RDB dumps and backups are
-      done, so data can be lost at any moment if service is restarted for any
-      reason, or if service is powered off. Also service can't be forked.
+      Creates an RDB dump of the database every 10 minutes that can be used 
+      to recover data after a node crash. The database does not create the 
+      dump if no keys have changed since the last dump. When set to `off`, 
+      the database cannot fork services, and data can be lost if a service 
+      is restarted or powered off. DigitalOcean Managed Caching databases 
+      do not support the Append Only File (AOF) persistence method.
     example: rdb
   redis_acl_channels_default:
     type: string
