@@ -1647,6 +1647,18 @@ paths:
   /v2/registries/{registry_name}/garbage-collection/{garbage_collection_uuid}:
     put:
       $ref: "resources/registry/multiregistry_update_garbageCollection.yml"
+  
+  /v2/registries/{registry_name}/repositories:
+    get:
+      $ref: "resources/registry/multiregistry_list_repositories.yml"
+
+  /v2/registries/{registry_name}/repositoriesV2:
+    get:
+      $ref: "resources/registry/multiregistry_list_repositoriesV2.yml"
+
+  /v2/registries/{registry_name}/repositories/{repository_name}:
+    delete:
+      $ref: "resources/registry/multiregistry_delete_repository.yml"
 
   /v2/registry:
     get:
