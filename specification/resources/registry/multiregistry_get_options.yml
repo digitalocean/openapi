@@ -36,8 +36,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/registry_get_options.yml'
-  - $ref: 'examples/python/registry_get_options.yml'
+  - $ref: 'examples/curl/multiregistry_get_options.yml'
+  - $ref: 'examples/python/multiregistry_get_options.yml'
 
 security:
   - bearer_auth:

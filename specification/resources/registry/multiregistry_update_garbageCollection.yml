@@ -41,8 +41,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/registry_update_garbageCollection.yml'
-  - $ref: 'examples/python/registry_update_garbageCollection.yml'
+  - $ref: 'examples/curl/multiregistry_update_garbageCollection.yml'
+  - $ref: 'examples/python/multiregistry_update_garbageCollection.yml'
 
 security:
   - bearer_auth:
