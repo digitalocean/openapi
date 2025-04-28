@@ -224,11 +224,10 @@ properties:
     example: STRONG
     enum:
       - DEFAULT
-      - WEAK
       - STRONG
     default: DEFAULT
     description: A string indicating the policy for the TLS cipher suites used by the load balancer.
-      The possible values are `DEFAULT`, `WEAK`, or `STRONG`. The default value is `DEFAULT`.
+      The possible values are `DEFAULT` or `STRONG`. The default value is `DEFAULT`.
 
 required:
   - forwarding_rules
