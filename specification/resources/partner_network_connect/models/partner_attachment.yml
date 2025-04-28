@@ -93,6 +93,13 @@ partner_attachment:
         - ee1ad867-7026-44a5-bfcc-2587b52e1291
       description: An array of associated partner attachment UUIDs.
       x-order: 12
+    redundancy_zone:
+      type: string
+      format: string
+      readOnly: true
+      example: UNSPECIFIED
+      description: Redundancy zone for unique ID
+      x-order: 13
 
 partner_attachment_writable:
   type: object

@@ -13,5 +13,5 @@ source: |-
       client := godo.NewFromToken(token)
       ctx := context.TODO()
 
-      partnerAttachments, _, err := client.PartnerAttachment.Get(ctx, "f6912795-edb3-4163-b9e3-0770a1e61c43")
+      partnerAttachments, _, err := client.PartnerAttachment.Get(ctx, "5a4981aa-9653-4bd1-bef5-d6bff52042e4")
   }
