@@ -70,7 +70,7 @@ jobs:
       if: steps.is-digitalocean-member.outputs.result == 'true'
       run: make bundle
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       if: steps.is-digitalocean-member.outputs.result == 'true'
       with:
         name: openapi-bundled
