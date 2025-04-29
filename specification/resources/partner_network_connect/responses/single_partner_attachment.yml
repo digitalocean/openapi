@@ -33,3 +33,4 @@ content:
             local_router_ip: "2.2.2.2/29"
             peer_asn: 65001
             peer_router_ip: "3.3.3.3/29"
+          redundancy_zone: "UNSPECIFIED"
