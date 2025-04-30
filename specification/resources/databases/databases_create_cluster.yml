@@ -25,7 +25,8 @@ description: >-
   database cluster and the timestamp of the backup to be restored. Creating a database
   from a backup is the same as forking a database in the control panel.
 
-  Note: Backups are not supported for Redis or Valkey clusters.
+  Note: Redis cluster creates are no longer supported as of 2025-04-30T00:00:00Z. 
+  Backups are also not supported for Redis or Valkey clusters.
 
 tags:
   - Databases
