@@ -6,7 +6,7 @@ description: |
   To add a new database user, send a POST request to `/v2/databases/$DATABASE_ID/users`
   with the desired username.
 
-  Note: User management is not supported for Redis clusters.
+  Note: User management is not supported for Redis or Valkey clusters.
 
   When adding a user to a MySQL cluster, additional options can be configured in the
   `mysql_settings` object.

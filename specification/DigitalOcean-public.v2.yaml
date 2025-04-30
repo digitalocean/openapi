@@ -146,7 +146,8 @@ tags:
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://docs.digitalocean.com/products/databases/postgresql/),
       [Redis](https://docs.digitalocean.com/products/databases/redis/),
-      [MySQL](https://docs.digitalocean.com/products/databases/mysql/),
+      [Valkey](https://docs.digitalocean.com/products/databases/valkey/),
+      [MySQL](https://docs.digitalocean.com/products/databases/mysql/), 
       [MongoDB](https://docs.digitalocean.com/products/databases/mongodb/), and
       [OpenSearch](https://docs.digitalocean.com/products/databases/opensearch/).
 

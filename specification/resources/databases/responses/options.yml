@@ -468,7 +468,66 @@ content:
                 - m-16vcpu-128gb
                 - m-24vcpu-192gb
                 - m-32vcpu-256gb
-          default_version: "7"
+        valkey:
+          regions:
+            - ams3
+            - blr1
+            - fra1
+            - lon1
+            - nyc1
+            - nyc3
+            - sfo2
+            - sfo3
+            - sgp1
+            - syd1
+            - tor1
+          versions:
+            - "8"
+          layouts:
+            - num_nodes: 1
+              sizes:
+                - db-s-1vcpu-1gb
+                - db-s-1vcpu-2gb
+                - db-s-2vcpu-4gb
+                - db-s-4vcpu-8gb
+                - db-s-6vcpu-16gb
+                - db-s-8vcpu-32gb
+                - db-s-16vcpu-64gb
+                - m-2vcpu-16gb
+                - m-4vcpu-32gb
+                - m-8vcpu-64gb
+                - m-16vcpu-128gb
+                - m-24vcpu-192gb
+                - m-32vcpu-256gb
+            - num_nodes: 2
+              sizes:
+                - db-s-1vcpu-2gb
+                - db-s-2vcpu-4gb
+                - db-s-4vcpu-8gb
+                - db-s-6vcpu-16gb
+                - db-s-8vcpu-32gb
+                - db-s-16vcpu-64gb
+                - m-2vcpu-16gb
+                - m-4vcpu-32gb
+                - m-8vcpu-64gb
+                - m-16vcpu-128gb
+                - m-24vcpu-192gb
+                - m-32vcpu-256gb
+            - num_nodes: 3
+              sizes:
+                - db-s-1vcpu-2gb
+                - db-s-2vcpu-4gb
+                - db-s-4vcpu-8gb
+                - db-s-6vcpu-16gb
+                - db-s-8vcpu-32gb
+                - db-s-16vcpu-64gb
+                - m-2vcpu-16gb
+                - m-4vcpu-32gb
+                - m-8vcpu-64gb
+                - m-16vcpu-128gb
+                - m-24vcpu-192gb
+                - m-32vcpu-256gb
+          default_version: "8"
       version_availability:
         kafka:
           - end_of_life: null
@@ -520,7 +579,12 @@ content:
             version: "17"
             default: true
         redis:
+          - end_of_life: "2025-06-30T00:00:00Z"
+            end_of_availability: "2025-04-30T00:00:00Z"
+            version: "7"
+            default: true
+        valkey:
           - end_of_life: null
             end_of_availability: null
-            version: "7"
+            version: "8"
             default: true
