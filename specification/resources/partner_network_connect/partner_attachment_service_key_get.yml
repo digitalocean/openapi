@@ -32,12 +32,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - lang: cURL
-    source: |-
-      curl -X GET \
-        -H "Content-Type: application/json" \
-        -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-        "https://api.digitalocean.com/v2/partner_network_connect/attachments/1cf0aad8-292b-40f8-9d32-1fbde6e04991/service_key"
+  -  $ref: 'examples/curl/partner_attachment_service_key_get.yml'
+  -  $ref: 'examples/go/partner_attachment_service_key_get.yml'
+  -  $ref: 'examples/python/partner_attachment_service_key_get.yml'
 
 security:
   - bearer_auth:
