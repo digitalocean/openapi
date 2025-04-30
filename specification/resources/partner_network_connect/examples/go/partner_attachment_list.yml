@@ -8,12 +8,12 @@ source: |-
   )
 
   func main() {
-        token := os.Getenv("DIGITALOCEAN_TOKEN")
+        token := os.Getenv("$DIGITALOCEAN_TOKEN")
         client := godo.NewFromToken(token)
         ctx := context.TODO()
 
         ListOptions := &godo.ListOptions{ Page: 1, PerPage: 20, WithProjects: true}
         
-        partnerAttachments, _, err := client.PartnerAttachment.List(ctx, ListOptions)}
+        response, _, err := client.PartnerAttachment.List(ctx, ListOptions)}
   }
 
