@@ -1955,6 +1955,11 @@ paths:
       $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
 
 
+  /v2/gen-ai/agents/{agent_uuid}/knowledge_bases:
+    post:
+      $ref: 'resources/gen-ai/genai_attach_knowledge_bases.yml'
+
+
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}:
     post:
       $ref: 'resources/gen-ai/genai_attach_knowledge_base.yml'
@@ -1993,6 +1998,14 @@ paths:
   /v2/gen-ai/agents/{uuid}/deployment_visibility:
     put:
       $ref: 'resources/gen-ai/genai_update_agent_deployment_visibility.yml'
+
+
+  /v2/gen-ai/agents/{uuid}/versions:
+    get:
+      $ref: 'resources/gen-ai/genai_list_agent_versions.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_rollback_to_agent_version.yml'
 
 
   /v2/gen-ai/anthropic/keys:
