@@ -1,0 +1,8 @@
+lang: Python
+source: |-
+  import os
+  from pydo import Client
+
+  client = Client(token=os.getenv("$DIGITALOCEAN_TOKEN"))
+
+  response = client.partner_attachments.get_bgp_auth_key("1cf0aad8-292b-40f8-9d32-1fbde6e04991")

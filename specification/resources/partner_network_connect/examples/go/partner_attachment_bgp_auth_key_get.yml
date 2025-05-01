@@ -1,0 +1,17 @@
+lang: Go
+source: |-
+  import (
+      "context"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+  
+  func main() {
+      token := os.Getenv("DIGITALOCEAN_TOKEN")
+
+      client := godo.NewFromToken(token)
+      ctx := context.TODO()
+
+      response, _, err := client.PartnerAttachment.GetBGPAuthKey(ctx,"1cf0aad8-292b-40f8-9d32-1fbde6e04991")
+  }
