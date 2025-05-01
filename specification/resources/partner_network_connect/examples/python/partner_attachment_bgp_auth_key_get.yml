@@ -5,4 +5,4 @@ source: |-
 
   client = Client(token=os.getenv("$DIGITALOCEAN_TOKEN"))
 
-  response = client.partner_attachments.get_bgp_auth_key("1cf0aad8-292b-40f8-9d32-1fbde6e04991")
+  response = client.partner_attachments.get_bgp_auth_key("5a4981aa-9653-4bd1-bef5-d6bff52042e4")
