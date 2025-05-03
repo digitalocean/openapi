@@ -1,4 +1,4 @@
-operationId: registries_delete
+operationId: multiregistries_delete
 
 summary: "[Beta] Delete Container Registry By Name"
 

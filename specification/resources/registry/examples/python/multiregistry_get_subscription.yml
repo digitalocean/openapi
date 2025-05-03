@@ -5,4 +5,4 @@ source: |-
 
   client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
 
-  resp = client.registries.delete(registry_name="example")
+  resp = client.registries.get_subscription()

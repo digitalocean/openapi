@@ -1,4 +1,4 @@
-operationId: registries_list
+operationId: multiregistries_list
 
 summary: "[Beta] List All Container Registries"
 
@@ -26,7 +26,7 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/multiregistry_get_all.yml'
-  # - $ref: 'examples/python/registry_get.yml'
+  - $ref: 'examples/python/multiregistry_get_all.yml'
 
 security:
   - bearer_auth:

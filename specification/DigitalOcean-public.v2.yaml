@@ -1619,12 +1619,12 @@ paths:
     get:
       $ref: 'resources/registry/multiregistry_get_all.yml'
 
+    post:
+      $ref: 'resources/registry/multiregistry_create.yml'
+
   /v2/registries/{registry_name}:
     get:
       $ref: 'resources/registry/multiregistry_get.yml'
-
-    post:
-      $ref: 'resources/registry/multiregistry_create.yml'
 
     delete:
       $ref: 'resources/registry/multiregistry_delete.yml'

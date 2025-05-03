@@ -1,4 +1,4 @@
-operationId: registries_get
+operationId: multiregistries_get
 
 summary: "[Beta] Get a Container Registry By Name"
 
@@ -32,7 +32,7 @@ responses:
 
 x-codeSamples:
   - $ref: 'examples/curl/multiregistry_get.yml'
-  # - $ref: 'examples/python/registry_get.yml'
+  - $ref: 'examples/python/multiregistry_get.yml'
 
 security:
   - bearer_auth:
