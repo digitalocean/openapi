@@ -20,7 +20,7 @@ requestBody:
         $ref: 'models/partner_attachment.yml#/partner_attachment_updatable'
 
 responses:
-  '200':
+  '202':
     $ref: 'responses/single_partner_attachment.yml'
 
   '401':
