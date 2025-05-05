@@ -14,6 +14,6 @@ source: |-
 
         ListOptions := &godo.ListOptions{ Page: 1, PerPage: 20, WithProjects: true}
         
-        response, _, err := client.PartnerAttachment.List(ctx, ListOptions)}
+        response, _, err := client.PartnerAttachment.List(ctx, ListOptions)
   }
 
