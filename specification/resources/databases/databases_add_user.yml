@@ -14,6 +14,9 @@ description: |
   When adding a user to a Kafka cluster, additional options can be configured in
   the `settings` object.
 
+   When adding a user to a MongoDB cluster, additional options can be configured in
+  the `settings.mongo_user_settings` object.
+
   The response will be a JSON object with a key called `user`. The value of this will be an
   object that contains the standard attributes associated with a database user including
   its randomly generated password.
@@ -37,8 +40,10 @@ requestBody:
               type: boolean
               example: true
               description: |
+                (To be deprecated: use settings.mongo_user_settings.role instead for access controls to MongoDB databases). 
                 For MongoDB clusters, set to `true` to create a read-only user.
-                This option is not currently supported for other database engines.             
+                This option is not currently supported for other database engines.
+                           
 
       examples:
         Add New User:

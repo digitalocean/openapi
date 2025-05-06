@@ -13,6 +13,8 @@ description: |
 
   For MySQL clusters, additional options will be contained in the mysql_settings object.
 
+  For MongoDB clusters, additional information will be contained in the mongo_user_settings object
+
 tags:
   - Databases
 
