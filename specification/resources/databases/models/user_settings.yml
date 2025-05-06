@@ -76,6 +76,7 @@ properties:
         items:
           type: string
           example: my-db
+        example: [my-db, my-db-2]
         description: >-
           A list of databases to which the user should have access. When the database is set to `admin`,
           the user will have access to all databases based on the user's role i.e. a user with the role `readOnly`
