@@ -23,7 +23,7 @@ source: |-
               PeerRouterIP:"169.254.11.2/29",
               PeerASN:133938,
               AuthKey:"0zzyTNuRZa00vqkzIToPG3q",
-          }
+          },
       }
 
       response, _, err := client.PartnerAttachment.Create(ctx, createReq)
