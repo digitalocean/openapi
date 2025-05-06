@@ -60,6 +60,16 @@ requestBody:
           value:
             name: my-readonly
             readonly: true
+
+        Add New User that is restricted to a database (MongoDB Only):
+          value:
+            name: my-readWrite
+            settings:
+              mongo_user_settings:
+                databases:
+                  - my-db
+                  - my-db-2
+                role: readWrite
         
         Add New User for Postgres with replication rights:
           value:
