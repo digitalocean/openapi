@@ -1,4 +1,4 @@
-operationId: multiregistries_create
+operationId: registries_create
 
 summary: "[Beta] Create Container Registry"
 
@@ -43,8 +43,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/multiregistry_create.yml'
-  - $ref: 'examples/python/multiregistry_create.yml'
+  - $ref: 'examples/curl/registries_create.yml'
+  - $ref: 'examples/python/registries_create.yml'
 
 security:
   - bearer_auth:

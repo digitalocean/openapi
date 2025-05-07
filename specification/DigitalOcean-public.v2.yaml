@@ -1617,39 +1617,40 @@ paths:
 
   /v2/registries:
     get:
-      $ref: 'resources/registry/multiregistry_get_all.yml'
+      $ref: 'resources/registry/registries_get_all.yml'
 
     post:
-      $ref: 'resources/registry/multiregistry_create.yml'
+      $ref: 'resources/registry/registries_create.yml'
 
   /v2/registries/{registry_name}:
     get:
-      $ref: 'resources/registry/multiregistry_get.yml'
+      $ref: 'resources/registry/registries_get.yml'
 
     delete:
-      $ref: 'resources/registry/multiregistry_delete.yml'
+      $ref: 'resources/registry/registries_delete.yml'
 
   /v2/registries/{registry_name}/docker-credentials:
     get:
-      $ref: 'resources/registry/multiregistry_get_dockerCredentials.yml'
+      $ref: 'resources/registry/registries_get_dockerCredentials.yml'
 
   /v2/registries/subscription:
     get:
-      $ref: "resources/registry/multiregistry_get_subscription.yml"
+      $ref: "resources/registry/registries_get_subscription.yml"
 
     post:
-      $ref: "resources/registry/multiregistry_update_subscription.yml"
+      $ref: "resources/registry/registries_update_subscription.yml"
 
   /v2/registries/options:
     get:
       $ref: "resources/registry/multiregistry_get_options.yml"
   
   /v2/registries/{registry_name}/garbage-collection:
+    get:
+      $ref: "resources/registry/multiregistry_get_garbageCollection.yml"
+
     post:
       $ref: "resources/registry/multiregistry_run_garbageCollection.yml"
 
-    get:
-      $ref: "resources/registry/multiregistry_get_garbageCollection.yml"
   
   /v2/registries/{registry_name}/garbage-collections:
     get:
