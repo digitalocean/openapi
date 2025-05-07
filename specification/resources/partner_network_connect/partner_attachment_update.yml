@@ -38,6 +38,11 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 
+x-codeSamples:
+  - $ref: 'examples/curl/partner_attachment_update.yml'
+  - $ref: 'examples/go/partner_attachment_update.yml'
+  - $ref: 'examples/python/partner_attachment_update.yml'
+
 security:
   - bearer_auth:
       - partner_network_connect:read
