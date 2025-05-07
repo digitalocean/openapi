@@ -1,4 +1,4 @@
-operationId: multiregistry_list_repositoriesV2
+operationId: registries_list_repositoriesV2
 
 summary: "[Beta] List All Container Registry Repositories (V2)"
 
@@ -37,9 +37,9 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/multiregistry_list_repositoriesV2.yml'
-  - $ref: 'examples/curl/multiregistry_list_repositoriesV2_next_page.yml'
-  - $ref: 'examples/python/multiregistry_list_repositoriesV2.yml'
+  - $ref: 'examples/curl/registries_list_repositoriesV2.yml'
+  - $ref: 'examples/curl/registries_list_repositoriesV2_next_page.yml'
+  - $ref: 'examples/python/registries_list_repositoriesV2.yml'
 
 security:
   - bearer_auth:

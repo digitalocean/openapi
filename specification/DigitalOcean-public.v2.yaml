@@ -1651,7 +1651,6 @@ paths:
     post:
       $ref: "resources/registry/registries_run_garbageCollection.yml"
 
-  
   /v2/registries/{registry_name}/garbage-collections:
     get:
       $ref: "resources/registry/registries_list_garbageCollections.yml"
@@ -1662,31 +1661,31 @@ paths:
   
   /v2/registries/{registry_name}/repositoriesV2:
     get:
-      $ref: "resources/registry/multiregistry_list_repositoriesV2.yml"
+      $ref: "resources/registry/registries_list_repositoriesV2.yml"
 
   /v2/registries/{registry_name}/repositories/{repository_name}:
     delete:
-      $ref: "resources/registry/multiregistry_delete_repository.yml"
+      $ref: "resources/registry/registries_delete_repository.yml"
   
   /v2/registries/{registry_name}/repositories/{repository_name}/tags:
     get:
-      $ref: "resources/registry/multiregistry_list_repositoryTags.yml"
+      $ref: "resources/registry/registries_list_repositoryTags.yml"
 
   /v2/registries/{registry_name}/repositories/{repository_name}/tags/{repository_tag}:
     delete:
-      $ref: "resources/registry/multiregistry_delete_repositoryTag.yml"
+      $ref: "resources/registry/registries_delete_repositoryTag.yml"
 
   /v2/registries/{registry_name}/repositories/{repository_name}/digests:
     get:
-      $ref: "resources/registry/multiregistry_list_repositoryManifests.yml"
+      $ref: "resources/registry/registries_list_repositoryManifests.yml"
 
   /v2/registries/{registry_name}/repositories/{repository_name}/digests/{manifest_digest}:
     delete:
-      $ref: "resources/registry/multiregistry_delete_repositoryManifest.yml"
+      $ref: "resources/registry/registries_delete_repositoryManifest.yml"
 
   /v2/registries/validate-name:
     post:
-      $ref: "resources/registry/multiregistry_validate_name.yml"
+      $ref: "resources/registry/registries_validate_name.yml"
 
   /v2/registry:
     get:

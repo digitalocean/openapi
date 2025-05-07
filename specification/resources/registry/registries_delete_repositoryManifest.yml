@@ -1,4 +1,4 @@
-operationId: multiregistry_delete_repositoryManifest
+operationId: registries_delete_repositoryManifest
 
 summary: "[Beta] Delete Container Registry Repository Manifest"
 
@@ -44,8 +44,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/multiregistry_delete_repositoryManifest.yml'
-  - $ref: 'examples/python/multiregistry_delete_repositoryManifest.yml'
+  - $ref: 'examples/curl/registries_delete_repositoryManifest.yml'
+  - $ref: 'examples/python/registries_delete_repositoryManifest.yml'
 
 security:
   - bearer_auth:

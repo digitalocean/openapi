@@ -1,18 +1,17 @@
-operationId: multiregistry_list_repositoryTags
+operationId: registries_list_repositoryManifests
 
-summary: "[Beta] List All Container Registry Repository Tags"
+summary: "[Beta] List All Container Registry Repository Manifests"
 
 description: |
-  To list all tags in one of your container registry's repository, send a GET
-  request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags`.
+  To list all manifests in your container registry repository, send a GET
+  request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests`.
 
   Note that if your repository name contains `/` characters, it must be
-  URL-encoded in the request URL. For example, to list tags for
+  URL-encoded in the request URL. For example, to list manifests for
   `registry.digitalocean.com/example/my/repo`, the path would be
-  `/v2/registry/example/repositories/my%2Frepo/tags`. 
+  `/v2/registry/example/repositories/my%2Frepo/digests`.
 
-  It is similar to GET `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags` and exists for backward compatibility.
-
+  It is similar to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests` and exists for backward compatibility.
 tags:
   - Container Registry
 
@@ -24,7 +23,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/repository_tags.yml'
+    $ref: 'responses/repository_manifests.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
@@ -42,8 +41,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/multiregistry_list_repositoryTags.yml'
-  - $ref: 'examples/python/multiregistry_list_repositoryTags.yml'
+  - $ref: 'examples/curl/registries_list_repositoryManifests.yml'
+  - $ref: 'examples/python/registries_list_repositoryManifests.yml'
 
 security:
   - bearer_auth:

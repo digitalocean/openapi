@@ -1,4 +1,4 @@
-operationId: multiregistry_delete_repositoryTag
+operationId: registries_delete_repositoryTag
 
 summary: "[Beta] Delete Container Registry Repository Tag"
 
@@ -42,8 +42,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/multiregistry_delete_repositoryTag.yml'
-  - $ref: 'examples/python/multiregistry_delete_repositoryTag.yml'
+  - $ref: 'examples/curl/registries_delete_repositoryTag.yml'
+  - $ref: 'examples/python/registries_delete_repositoryTag.yml'
 
 security:
   - bearer_auth:

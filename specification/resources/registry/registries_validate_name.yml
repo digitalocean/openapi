@@ -1,4 +1,4 @@
-operationId: multiregistry_validate_name
+operationId: registries_validate_name
 
 summary: "[Beta] Validate a Container Registry Name"
 
@@ -43,8 +43,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/multiregistry_validate_name.yml'
-  - $ref: 'examples/python/multiregistry_validate_name.yml'
+  - $ref: 'examples/curl/registries_validate_name.yml'
+  - $ref: 'examples/python/registries_validate_name.yml'
 
 security:
   - bearer_auth:
