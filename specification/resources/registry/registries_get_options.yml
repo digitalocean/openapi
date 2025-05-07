@@ -1,4 +1,4 @@
-operationId: multiregistry_get_options
+operationId: registries_get_options
 
 summary: "[Beta] List Registry Options (Subscription Tiers and Available Regions)"
 
@@ -36,8 +36,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/multiregistry_get_options.yml'
-  - $ref: 'examples/python/multiregistry_get_options.yml'
+  - $ref: 'examples/curl/registries_get_options.yml'
+  - $ref: 'examples/python/registries_get_options.yml'
 
 security:
   - bearer_auth:

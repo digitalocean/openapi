@@ -1642,23 +1642,23 @@ paths:
 
   /v2/registries/options:
     get:
-      $ref: "resources/registry/multiregistry_get_options.yml"
+      $ref: "resources/registry/registries_get_options.yml"
   
   /v2/registries/{registry_name}/garbage-collection:
     get:
-      $ref: "resources/registry/multiregistry_get_garbageCollection.yml"
+      $ref: "resources/registry/registries_get_garbageCollection.yml"
 
     post:
-      $ref: "resources/registry/multiregistry_run_garbageCollection.yml"
+      $ref: "resources/registry/registries_run_garbageCollection.yml"
 
   
   /v2/registries/{registry_name}/garbage-collections:
     get:
-      $ref: "resources/registry/multiregistry_list_garbageCollections.yml"
+      $ref: "resources/registry/registries_list_garbageCollections.yml"
 
   /v2/registries/{registry_name}/garbage-collection/{garbage_collection_uuid}:
     put:
-      $ref: "resources/registry/multiregistry_update_garbageCollection.yml"
+      $ref: "resources/registry/registries_update_garbageCollection.yml"
   
   /v2/registries/{registry_name}/repositories:
     get:

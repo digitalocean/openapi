@@ -1,4 +1,4 @@
-operationId: multiregistry_list_garbageCollections
+operationId: registries_list_garbageCollections
 
 summary: "[Beta] List Garbage Collections"
 
@@ -33,8 +33,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/multiregistry_list_garbageCollections.yml'
-  - $ref: 'examples/python/multiregistry_list_garbageCollections.yml'
+  - $ref: 'examples/curl/registries_list_garbageCollections.yml'
+  - $ref: 'examples/python/registries_list_garbageCollections.yml'
 
 security:
   - bearer_auth:
