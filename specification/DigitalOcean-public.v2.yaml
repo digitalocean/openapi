@@ -1660,10 +1660,6 @@ paths:
     put:
       $ref: "resources/registry/registries_update_garbageCollection.yml"
   
-  /v2/registries/{registry_name}/repositories:
-    get:
-      $ref: "resources/registry/multiregistry_list_repositories.yml"
-
   /v2/registries/{registry_name}/repositoriesV2:
     get:
       $ref: "resources/registry/multiregistry_list_repositoriesV2.yml"
