@@ -144,7 +144,7 @@ alert_id:
 
 instance_name:
   description: The name of the actively running ephemeral compute instance
-  in: path
+  in: query
   name: instance_name
   required: false
   schema:
