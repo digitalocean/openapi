@@ -41,6 +41,7 @@ properties:
     type: integer
     format: int32
     description: The number of successful health checks before considered healthy.
+    example: 1
     minimum: 1
     maximum: 1
 
