@@ -14,7 +14,7 @@ allOf:
       $ref: app_service_spec_health_check.yml
 
     liveness_health_check:
-      $ref: app_service_spec_health_check.yml
+      $ref: app_health_check_spec.yml
 
     protocol:
       type: string
