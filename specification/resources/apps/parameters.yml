@@ -6,8 +6,8 @@ accept:
   schema:
     type: string
     enum:
-    - application/json
-    - application/yaml
+      - application/json
+      - application/yaml
   example: application/json
 
 content-type:
@@ -18,8 +18,8 @@ content-type:
   schema:
     type: string
     enum:
-    - application/json
-    - application/yaml
+      - application/json
+      - application/yaml
   example: application/json
 
 app_id:
@@ -67,7 +67,8 @@ slug_size:
   example: apps-s-1vcpu-0.5gb
 
 component:
-  description: An optional component name. If set, logs will be limited to this component
+  description:
+    An optional component name. If set, logs will be limited to this component
     only.
   in: path
   name: component_name
@@ -105,17 +106,18 @@ log_type:
   schema:
     default: UNSPECIFIED
     enum:
-    - UNSPECIFIED
-    - BUILD
-    - DEPLOY
-    - RUN
-    - RUN_RESTARTED
+      - UNSPECIFIED
+      - BUILD
+      - DEPLOY
+      - RUN
+      - RUN_RESTARTED
     type: string
   example: BUILD
 
 time_wait:
-  description: 'An optional time duration to wait if the underlying component instance
-    is not immediately available. Default: `3m`.'
+  description:
+    "An optional time duration to wait if the underlying component instance
+    is not immediately available. Default: `3m`."
   in: query
   name: pod_connection_timeout
   schema:
@@ -139,3 +141,12 @@ alert_id:
   schema:
     type: string
   example: 5a624ab5-dd58-4b39-b7dd-8b7c36e8a91d
+
+instance_name:
+  description: The name of the actively running ephemeral compute instance
+  in: path
+  name: instance_name
+  required: false
+  schema:
+    type: string
+  example: go-app-d768568df-zz77d
