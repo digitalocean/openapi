@@ -4,7 +4,6 @@ properties:
     type: integer
     format: int32
     description: The number of failed health checks before considered unhealthy.
-    default: 18
     minimum: 1
     maximum: 50
     example: 18
@@ -26,7 +25,6 @@ properties:
     type: integer
     format: int32
     description: The number of seconds to wait before beginning health checks.
-    default: 5
     minimum: 0
     maximum: 3600
     example: 30
@@ -35,7 +33,6 @@ properties:
     type: integer
     format: int32
     description: The number of seconds to wait between health checks.
-    default: 10
     minimum: 1
     maximum: 300
     example: 10
@@ -44,7 +41,6 @@ properties:
     type: integer
     format: int32
     description: The number of successful health checks before considered healthy.
-    default: 1
     minimum: 1
     maximum: 1
 
@@ -52,7 +48,6 @@ properties:
     type: integer
     format: int32
     description: The number of seconds after which the check times out.
-    default: 1
     minimum: 1
     maximum: 120
     example: 1
