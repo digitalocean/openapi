@@ -1,0 +1,22 @@
+type: object
+properties:
+  datadog_api_key:
+    type: string
+    example: iehihrihihr4ur74724274874
+    description: >-
+      Datadog API key
+  extra_tags_prefix:
+    type: string
+    example: myapp
+    description: >-
+      Extra tags prefix
+  site:
+    type: string
+    example: datadog.us3.com
+    description: >-
+      Datadog site
+
+required:
+  - datadog_api_key
+  - extra_tags_prefix
+  - site
