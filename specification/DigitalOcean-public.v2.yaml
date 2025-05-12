@@ -1914,6 +1914,8 @@ paths:
     delete:
       $ref: "resources/uptime/delete_alert.yml"
 
+
+
   /v2/gen-ai/agents:
     get:
       $ref: 'resources/gen-ai/genai_list_agents.yml'
@@ -2091,6 +2093,27 @@ paths:
   /v2/gen-ai/models:
     get:
       $ref: 'resources/gen-ai/genai_list_models.yml'
+
+
+  /v2/gen-ai/models/api_keys:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_api_keys.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_model_api_key.yml'
+
+
+  /v2/gen-ai/models/api_keys/{api_key_uuid}:
+    put:
+      $ref: 'resources/gen-ai/genai_update_model_api_key.yml'
+
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_model_api_key.yml'
+
+
+  /v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate:
+    put:
+      $ref: 'resources/gen-ai/genai_regenerate_model_api_key.yml'
 
 
   /v2/gen-ai/openai/keys:
