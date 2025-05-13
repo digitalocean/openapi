@@ -1075,6 +1075,14 @@ apiCreateDataSourceFileUploadPresignedUrlsOutput:
         $ref: '#/apiFilePresignedUrlResponse'
       type: array
   type: object
+apiCreateEvaluationDatasetOutput:
+  description: Output for creating an agent evaluation dataset
+  properties:
+    evaluation_dataset_uuid:
+      description: Evaluation dataset uuid.
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
+  type: object
 apiCreateGuardrailOutput:
   description: CreateGuardrailOutput description
   properties:
