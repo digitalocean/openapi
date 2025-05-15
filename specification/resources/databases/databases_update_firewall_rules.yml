@@ -9,12 +9,10 @@ description: >-
   able to open connections to the database. You may limit connections to
   specific Droplets, Kubernetes clusters, or IP addresses. When a tag is
   provided, any Droplet or Kubernetes node with that tag applied to it will
-  have access. The firewall is limited to 100 rules (or trusted sources). When
-  possible, we recommend
-  [placing your databases into a VPC network](https://docs.digitalocean.com/products/networking/vpc/)
-  to limit access to them instead of using a firewall.
-
-  A successful
+  have access. The firewall is limited to 2000 IPs or CIDR addresses. Each rule can resolve to multiple IP addresses (type k8s, for example).
+  When possible, we recommend [placing your databases into a VPC network](https://docs.digitalocean.com/products/networking/vpc/)
+  to limit access to them instead of using a firewall. In addition, we recommend using CIDR addresses when possible instead of individual IPs,
+  as both types contribute the same amount to the 2000 limit.
 
 tags:
   - Databases
@@ -35,6 +33,7 @@ requestBody:
         rules:
         - type: ip_addr
           value: '192.168.1.1'
+          description: 'my home IP address'
         - type: k8s
           value: ff2a6c52-5a44-4b63-b99c-0e98e7a63d61
         - type: droplet
