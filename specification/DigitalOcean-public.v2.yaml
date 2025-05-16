@@ -147,7 +147,7 @@ tags:
       offers support for [PostgreSQL](http://docs.digitalocean.com/products/databases/postgresql/),
       [Redis](https://docs.digitalocean.com/products/databases/redis/),
       [Valkey](https://docs.digitalocean.com/products/databases/valkey/),
-      [MySQL](https://docs.digitalocean.com/products/databases/mysql/), 
+      [MySQL](https://docs.digitalocean.com/products/databases/mysql/),
       [MongoDB](https://docs.digitalocean.com/products/databases/mongodb/), and
       [OpenSearch](https://docs.digitalocean.com/products/databases/opensearch/).
 
@@ -398,8 +398,8 @@ tags:
 
   - name: Partner Network Connect
     description: |-
-      Partner Network Connect lets you establish high-bandwidth, low-latency 
-      network connections directly between DigitalOcean VPC networks and other 
+      Partner Network Connect lets you establish high-bandwidth, low-latency
+      network connections directly between DigitalOcean VPC networks and other
       public cloud providers or on-premises datacenters.
 
   - name: Projects
@@ -597,6 +597,10 @@ paths:
   /v2/apps/{app_id}/components/{component_name}/exec:
     get:
       $ref: "resources/apps/apps_get_exec_active_deployment.yml"
+
+  /v2/apps/{app_id}/instances:
+    get:
+      $ref: "resources/apps/apps_get_instances.yml"
 
   /v2/apps/{app_id}/deployments:
     get:
@@ -1916,210 +1920,182 @@ paths:
 
   /v2/gen-ai/agents:
     get:
-      $ref: 'resources/gen-ai/genai_list_agents.yml'
+      $ref: "resources/gen-ai/genai_list_agents.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_agent.yml'
-
+      $ref: "resources/gen-ai/genai_create_agent.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys:
     get:
-      $ref: 'resources/gen-ai/genai_list_agent_api_keys.yml'
+      $ref: "resources/gen-ai/genai_list_agent_api_keys.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_agent_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_create_agent_api_key.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}:
     put:
-      $ref: 'resources/gen-ai/genai_update_agent_api_key.yml'
+      $ref: "resources/gen-ai/genai_update_agent_api_key.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_agent_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_delete_agent_api_key.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate:
     put:
-      $ref: 'resources/gen-ai/genai_regenerate_agent_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_regenerate_agent_api_key.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/functions:
     post:
-      $ref: 'resources/gen-ai/genai_attach_agent_function.yml'
-
+      $ref: "resources/gen-ai/genai_attach_agent_function.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}:
     put:
-      $ref: 'resources/gen-ai/genai_update_agent_function.yml'
+      $ref: "resources/gen-ai/genai_update_agent_function.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
-
+      $ref: "resources/gen-ai/genai_detach_agent_function.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases:
     post:
-      $ref: 'resources/gen-ai/genai_attach_knowledge_bases.yml'
-
+      $ref: "resources/gen-ai/genai_attach_knowledge_bases.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}:
     post:
-      $ref: 'resources/gen-ai/genai_attach_knowledge_base.yml'
+      $ref: "resources/gen-ai/genai_attach_knowledge_base.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_detach_knowledge_base.yml'
-
+      $ref: "resources/gen-ai/genai_detach_knowledge_base.yml"
 
   /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}:
     post:
-      $ref: 'resources/gen-ai/genai_attach_agent.yml'
+      $ref: "resources/gen-ai/genai_attach_agent.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_attached_agent.yml'
+      $ref: "resources/gen-ai/genai_update_attached_agent.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_detach_agent.yml'
-
+      $ref: "resources/gen-ai/genai_detach_agent.yml"
 
   /v2/gen-ai/agents/{uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_agent.yml'
+      $ref: "resources/gen-ai/genai_get_agent.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_agent.yml'
+      $ref: "resources/gen-ai/genai_update_agent.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_agent.yml'
-
+      $ref: "resources/gen-ai/genai_delete_agent.yml"
 
   /v2/gen-ai/agents/{uuid}/child_agents:
     get:
-      $ref: 'resources/gen-ai/genai_get_agent_children.yml'
-
+      $ref: "resources/gen-ai/genai_get_agent_children.yml"
 
   /v2/gen-ai/agents/{uuid}/deployment_visibility:
     put:
-      $ref: 'resources/gen-ai/genai_update_agent_deployment_visibility.yml'
-
+      $ref: "resources/gen-ai/genai_update_agent_deployment_visibility.yml"
 
   /v2/gen-ai/agents/{uuid}/versions:
     get:
-      $ref: 'resources/gen-ai/genai_list_agent_versions.yml'
+      $ref: "resources/gen-ai/genai_list_agent_versions.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_rollback_to_agent_version.yml'
-
+      $ref: "resources/gen-ai/genai_rollback_to_agent_version.yml"
 
   /v2/gen-ai/anthropic/keys:
     get:
-      $ref: 'resources/gen-ai/genai_list_anthropic_api_keys.yml'
+      $ref: "resources/gen-ai/genai_list_anthropic_api_keys.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_anthropic_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_create_anthropic_api_key.yml"
 
   /v2/gen-ai/anthropic/keys/{api_key_uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_anthropic_api_key.yml'
+      $ref: "resources/gen-ai/genai_get_anthropic_api_key.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_anthropic_api_key.yml'
+      $ref: "resources/gen-ai/genai_update_anthropic_api_key.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_anthropic_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_delete_anthropic_api_key.yml"
 
   /v2/gen-ai/anthropic/keys/{uuid}/agents:
     get:
-      $ref: 'resources/gen-ai/genai_list_agents_by_anthropic_key.yml'
-
+      $ref: "resources/gen-ai/genai_list_agents_by_anthropic_key.yml"
 
   /v2/gen-ai/indexing_jobs:
     get:
-      $ref: 'resources/gen-ai/genai_list_indexing_jobs.yml'
+      $ref: "resources/gen-ai/genai_list_indexing_jobs.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_indexing_job.yml'
-
+      $ref: "resources/gen-ai/genai_create_indexing_job.yml"
 
   /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources:
     get:
-      $ref: 'resources/gen-ai/genai_list_indexing_job_data_sources.yml'
-
+      $ref: "resources/gen-ai/genai_list_indexing_job_data_sources.yml"
 
   /v2/gen-ai/indexing_jobs/{uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_indexing_job.yml'
-
+      $ref: "resources/gen-ai/genai_get_indexing_job.yml"
 
   /v2/gen-ai/indexing_jobs/{uuid}/cancel:
     put:
-      $ref: 'resources/gen-ai/genai_cancel_indexing_job.yml'
-
+      $ref: "resources/gen-ai/genai_cancel_indexing_job.yml"
 
   /v2/gen-ai/knowledge_bases:
     get:
-      $ref: 'resources/gen-ai/genai_list_knowledge_bases.yml'
+      $ref: "resources/gen-ai/genai_list_knowledge_bases.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_knowledge_base.yml'
-
+      $ref: "resources/gen-ai/genai_create_knowledge_base.yml"
 
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources:
     get:
-      $ref: 'resources/gen-ai/genai_list_knowledge_base_data_sources.yml'
+      $ref: "resources/gen-ai/genai_list_knowledge_base_data_sources.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_knowledge_base_data_source.yml'
-
+      $ref: "resources/gen-ai/genai_create_knowledge_base_data_source.yml"
 
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
     delete:
-      $ref: 'resources/gen-ai/genai_delete_knowledge_base_data_source.yml'
-
+      $ref: "resources/gen-ai/genai_delete_knowledge_base_data_source.yml"
 
   /v2/gen-ai/knowledge_bases/{uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_knowledge_base.yml'
+      $ref: "resources/gen-ai/genai_get_knowledge_base.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_knowledge_base.yml'
+      $ref: "resources/gen-ai/genai_update_knowledge_base.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
-
+      $ref: "resources/gen-ai/genai_delete_knowledge_base.yml"
 
   /v2/gen-ai/models:
     get:
-      $ref: 'resources/gen-ai/genai_list_models.yml'
-
+      $ref: "resources/gen-ai/genai_list_models.yml"
 
   /v2/gen-ai/openai/keys:
     get:
-      $ref: 'resources/gen-ai/genai_list_openai_api_keys.yml'
+      $ref: "resources/gen-ai/genai_list_openai_api_keys.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_openai_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_create_openai_api_key.yml"
 
   /v2/gen-ai/openai/keys/{api_key_uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_openai_api_key.yml'
+      $ref: "resources/gen-ai/genai_get_openai_api_key.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_openai_api_key.yml'
+      $ref: "resources/gen-ai/genai_update_openai_api_key.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_openai_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_delete_openai_api_key.yml"
 
   /v2/gen-ai/openai/keys/{uuid}/agents:
     get:
-      $ref: 'resources/gen-ai/genai_list_agents_by_openai_key.yml'
-
+      $ref: "resources/gen-ai/genai_list_agents_by_openai_key.yml"
 
   /v2/gen-ai/regions:
     get:
-      $ref: 'resources/gen-ai/genai_list_datacenter_regions.yml'
+      $ref: "resources/gen-ai/genai_list_datacenter_regions.yml"
 
 components:
   securitySchemes:
