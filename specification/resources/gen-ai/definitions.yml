@@ -578,7 +578,7 @@ apiAgentTemplate:
       format: date-time
       type: string
     description:
-      description: Deprecated, moved to summary
+      description: Deprecated - Use summary instead
       example: '"example string"'
       type: string
     guardrails:
@@ -602,7 +602,12 @@ apiAgentTemplate:
       type: array
     long_description:
       description: The long description of the agent template
-      example: '"example string"'
+      example: '"Enhance your customer service with an AI agent designed to provide
+        consistent, helpful, and accurate support across multiple channels. This template
+        creates an agent that can answer product questions, troubleshoot common issues,
+        process simple requests, and maintain a friendly, on-brand voice throughout
+        customer interactions. Reduce response times, handle routine inquiries efficiently,
+        and ensure your customers feel heard and helped."'
       type: string
     max_tokens:
       description: The max_tokens setting for the agent template
@@ -617,7 +622,10 @@ apiAgentTemplate:
       type: string
     short_description:
       description: The short description of the agent template
-      example: '"example string"'
+      example: '"This template has been designed with question-answer and conversational
+        use cases in mind. It comes with validated agent instructions, fine-tuned
+        model settings, and preconfigured guardrails defined for customer support-related
+        use cases."'
       type: string
     summary:
       description: The summary of the agent template

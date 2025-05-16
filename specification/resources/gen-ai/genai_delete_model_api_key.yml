@@ -35,7 +35,7 @@ responses:
 security:
 - bearer_auth:
   - genai:delete
-summary: 'Delete API Key for a Model '
+summary: Delete API Key for a Model
 tags:
 - GenAI Platform (Public Preview)
 x-codeSamples:
