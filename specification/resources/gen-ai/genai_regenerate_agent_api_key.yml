@@ -8,7 +8,7 @@ parameters:
   required: true
   schema:
     type: string
-- description: Api key id
+- description: API key ID
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: api_key_uuid

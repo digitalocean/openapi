@@ -1,13 +1,6 @@
-description: To update an agent API key, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.
-operationId: genai_update_agent_api_key
+description: To regenerate a model API key, send a PUT request to `/v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate`.
+operationId: genai_regenerate_model_api_key
 parameters:
-- description: Agent id
-  example: '"123e4567-e89b-12d3-a456-426614174000"'
-  in: path
-  name: agent_uuid
-  required: true
-  schema:
-    type: string
 - description: API key ID
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
@@ -15,17 +8,12 @@ parameters:
   required: true
   schema:
     type: string
-requestBody:
-  content:
-    application/json:
-      schema:
-        $ref: ./definitions.yml#/apiUpdateAgentAPIKeyInputPublic
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiUpdateAgentAPIKeyOutput
+          $ref: ./definitions.yml#/apiRegenerateModelAPIKeyOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -47,8 +35,8 @@ responses:
 security:
 - bearer_auth:
   - genai:update
-summary: Update API Key for an Agent
+summary: Regenerate API Key for a Model
 tags:
 - GenAI Platform (Public Preview)
 x-codeSamples:
-- $ref: examples/curl/genai_update_agent_api_key.yml
+- $ref: examples/curl/genai_regenerate_model_api_key.yml
