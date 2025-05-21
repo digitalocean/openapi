@@ -912,3 +912,28 @@ app_bandwidth_usage_multiple:
       - app_id: c2a93513-8d9b-4223-9d61-5e7272c81cf5
         bandwidth_bytes: '254847'
     date: 2023-01-17T00:00:00Z
+
+app_health:
+  value:
+    components:
+      - name: sample-expressjs
+        cpu_usage_percent: 5.555
+        memory_usage_percent: 20.32
+        replicas_desired: 1
+        replicas_ready: 2
+        state: HEALTHY
+app_instances:
+  value:
+    instances:
+      - component_name: sample-golang
+        instance_name: sample-golang-76b84c7fb8-6p8kq
+        component_type: SERVICE
+      - component_name: sample-golang
+        instance_name: sample-golang-76b84c7fb8-ngvpc
+        component_type: SERVICE
+      - component_name: sample-php
+        instance_name: sample-php-767c6b49c4-dkgpt
+        component_type: SERVICE
+      - component_name: sample-php
+        instance_name: sample-php-767c6b49c4-z8dll
+        component_type: SERVICE

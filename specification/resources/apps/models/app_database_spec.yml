@@ -29,6 +29,7 @@ properties:
       - MONGODB
       - KAFKA
       - OPENSEARCH
+      - VALKEY
     description: |-
       - MYSQL: MySQL
       - PG: PostgreSQL
@@ -36,6 +37,7 @@ properties:
       - MONGODB: MongoDB
       - KAFKA: Kafka
       - OPENSEARCH: OpenSearch
+      - VALKEY: ValKey
     example: PG
 
   name:
