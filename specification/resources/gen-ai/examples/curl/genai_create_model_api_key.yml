@@ -3,8 +3,7 @@ source: |-
   curl -X POST \
     -H "Content-Type: application/json"  \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    "https://api.digitalocean.com/v2/gen-ai/anthropic/keys" \
+    "https://api.digitalocean.com/v2/gen-ai/models/api_keys" \
     -d '{
-      "api_key": "sk-ant-12345678901234567890123456789012",
       "name": "test-key"
     }'

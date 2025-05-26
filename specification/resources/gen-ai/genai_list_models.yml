@@ -10,6 +10,7 @@ parameters:
      - MODEL_USECASE_KNOWLEDGEBASE: The model maybe used for knowledge bases (embedding models)
      - MODEL_USECASE_GUARDRAIL: The model maybe used for guardrails
      - MODEL_USECASE_REASONING: The model usecase for reasoning
+     - MODEL_USECASE_SERVERLESS: The model usecase for serverless inference
   example:
   - MODEL_USECASE_UNKNOWN
   in: query
@@ -23,6 +24,7 @@ parameters:
       - MODEL_USECASE_KNOWLEDGEBASE
       - MODEL_USECASE_GUARDRAIL
       - MODEL_USECASE_REASONING
+      - MODEL_USECASE_SERVERLESS
       type: string
     type: array
 - description: Only include models that are publicly available.

@@ -2,7 +2,7 @@ lang: cURL
 source: |-
   curl -X POST \
    -H "Content-Type: application/json" \
-   -H "Authorization: Bearer $PREVIEW_API_TOKEN" \
+   -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
    "https://api.digitalocean.com/v2/gen-ai/agents/1b418231-b7d6-11ef-bf8f-4e013e2ddde4/knowledge_bases" \
    -d '{
      "agent_uuid": "1b418231-b7d6-11ef-bf8f-4e013e2ddde4",
@@ -12,5 +12,3 @@ source: |-
        "4887a78b-74af-46b3-98f4-451a48f9cc5e"
      ]
    }'
-
-   
