@@ -50,6 +50,16 @@ requestBody:
               port: 514
               tls: false
               format: rfc5424
+        Create a datadog logsink:
+          value:
+            sink:
+              sink_id: "dfcc9f57d86bf58e321c2c6c31c7a971be244ac7"
+              sink_name: logs-sink
+              sink_type: rsyslog
+              config:
+                datadog_api_key: d54f5fa52829375f56214e37547009b6
+                site: http-intake.logs.datadoghq.com
+
 
 responses:
   "201":
