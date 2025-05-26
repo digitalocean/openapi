@@ -55,7 +55,7 @@ requestBody:
             sink_name: "logs-sink"
             sink_type: "datadog"
             config:
-              datadog_api_key: d54f5fa52829375f56214e37547009b6
+              datadog_api_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
               site: http-intake.logs.datadoghq.com
 
 

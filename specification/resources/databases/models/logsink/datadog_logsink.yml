@@ -8,7 +8,7 @@ properties:
     description: Datadog connection URL
   datadog_api_key:
     type: string
-    example: d54f5fa52829375f56214e37547009b6
+    example: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     description: Datadog API key
 
 required:
