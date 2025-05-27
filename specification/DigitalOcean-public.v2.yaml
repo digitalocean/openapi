@@ -146,7 +146,8 @@ tags:
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://docs.digitalocean.com/products/databases/postgresql/),
       [Redis](https://docs.digitalocean.com/products/databases/redis/),
-      [MySQL](https://docs.digitalocean.com/products/databases/mysql/),
+      [Valkey](https://docs.digitalocean.com/products/databases/valkey/),
+      [MySQL](https://docs.digitalocean.com/products/databases/mysql/), 
       [MongoDB](https://docs.digitalocean.com/products/databases/mongodb/), and
       [OpenSearch](https://docs.digitalocean.com/products/databases/opensearch/).
 
@@ -2027,6 +2028,11 @@ paths:
       $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
 
 
+  /v2/gen-ai/agents/{agent_uuid}/knowledge_bases:
+    post:
+      $ref: 'resources/gen-ai/genai_attach_knowledge_bases.yml'
+
+
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}:
     post:
       $ref: 'resources/gen-ai/genai_attach_knowledge_base.yml'
@@ -2065,6 +2071,14 @@ paths:
   /v2/gen-ai/agents/{uuid}/deployment_visibility:
     put:
       $ref: 'resources/gen-ai/genai_update_agent_deployment_visibility.yml'
+
+
+  /v2/gen-ai/agents/{uuid}/versions:
+    get:
+      $ref: 'resources/gen-ai/genai_list_agent_versions.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_rollback_to_agent_version.yml'
 
 
   /v2/gen-ai/anthropic/keys:
