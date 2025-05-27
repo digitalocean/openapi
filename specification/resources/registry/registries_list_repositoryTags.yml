@@ -1,6 +1,6 @@
 operationId: registries_list_repositoryTags
 
-summary: "[Beta] List All Container Registry Repository Tags"
+summary: "[GA] List All Container Registry Repository Tags"
 
 description: |
   To list all tags in one of your container registry's repository, send a GET

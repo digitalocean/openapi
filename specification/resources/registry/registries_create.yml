@@ -1,6 +1,6 @@
 operationId: registries_create
 
-summary: "[Beta] Create Container Registry"
+summary: "[GA] Create Container Registry"
 
 description: |
   To create your container registry, send a POST request to `/v2/registries`.

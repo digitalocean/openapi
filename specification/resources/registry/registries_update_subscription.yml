@@ -1,6 +1,6 @@
 operationId: registries_update_subscription
 
-summary: "[Beta] Update Subscription Tier"
+summary: "[GA] Update Subscription Tier"
 
 description: After creating your registry, you can switch to a different
   subscription tier to better suit your needs. To do this, send a POST request

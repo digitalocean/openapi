@@ -1,6 +1,6 @@
 operationId: registries_get_subscription
 
-summary: "[Beta] Get Subscription Information"
+summary: "[GA] Get Subscription Information"
 
 description: A subscription is automatically created when you configure your
   container registry. To get information about your subscription, send a GET

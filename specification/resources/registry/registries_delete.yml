@@ -1,6 +1,6 @@
 operationId: registries_delete
 
-summary: "[Beta] Delete Container Registry By Name"
+summary: "[GA] Delete Container Registry By Name"
 
 description: To delete your container registry, destroying all container image
   data stored in it, send a DELETE request to `/v2/registries/{registry_name}`.

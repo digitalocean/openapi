@@ -1,6 +1,6 @@
 operationId: registries_delete_repositoryTag
 
-summary: "[Beta] Delete Container Registry Repository Tag"
+summary: "[GA] Delete Container Registry Repository Tag"
 
 description: |
   To delete a container repository tag in on of our container registries, send a DELETE request to

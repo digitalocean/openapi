@@ -1,6 +1,6 @@
 operationId: registries_get_garbageCollection
 
-summary: "[Beta] Get Active Garbage Collection"
+summary: "[GA] Get Active Garbage Collection"
 
 description: To get information about the currently-active garbage collection
   for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collection`.

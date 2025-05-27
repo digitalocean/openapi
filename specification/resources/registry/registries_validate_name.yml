@@ -1,6 +1,6 @@
 operationId: registries_validate_name
 
-summary: "[Beta] Validate a Container Registry Name"
+summary: "[GA] Validate a Container Registry Name"
 
 description: |
   To validate that a container registry name is available for use, send a POST

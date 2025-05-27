@@ -1,6 +1,6 @@
 operationId: registries_get
 
-summary: "[Beta] Get a Container Registry By Name"
+summary: "[GA] Get a Container Registry By Name"
 
 description: To get information about any container registry in your account, send a GET
   request to `/v2/registries/{registry_name}`.

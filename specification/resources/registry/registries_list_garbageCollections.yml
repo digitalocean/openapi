@@ -1,6 +1,6 @@
 operationId: registries_list_garbageCollections
 
-summary: "[Beta] List Garbage Collections"
+summary: "[GA] List Garbage Collections"
 
 description: To get information about past garbage collections for a registry,
   send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collections`.
