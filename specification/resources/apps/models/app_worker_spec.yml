@@ -5,6 +5,8 @@ allOf:
   properties:
     termination:
       $ref: app_worker_spec_termination.yml
+    liveness_health_check:
+      $ref: app_health_check_spec.yml
 required:
   - name
 
