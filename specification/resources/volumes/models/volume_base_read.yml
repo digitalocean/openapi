@@ -49,4 +49,4 @@ properties:
     readOnly: true
 
   tags:
-    $ref: '../../../shared/attributes/tags_array.yml'
+    $ref: '../../../shared/attributes/tags_array_read.yml'
