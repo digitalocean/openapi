@@ -36,7 +36,8 @@ properties:
     - 3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45
     default: []
     description: An array containing the IDs or fingerprints of the SSH keys
-      that you wish to embed in the Droplet's root account upon creation.
+      that you wish to embed in the Droplet's root account upon creation. You must add 
+      the keys to your team before they can be embedded on a Droplet.
 
   backups:
     type: boolean
