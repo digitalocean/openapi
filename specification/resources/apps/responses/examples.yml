@@ -922,3 +922,22 @@ app_health:
         replicas_desired: 1
         replicas_ready: 2
         state: HEALTHY
+app_instances:
+  value:
+    instances:
+      - component_name: sample-golang
+        instance_name: sample-golang-76b84c7fb8-6p8kq
+        instance_alias: sample-golang-0
+        component_type: SERVICE
+      - component_name: sample-golang
+        instance_name: sample-golang-76b84c7fb8-ngvpc
+        instance_alias: sample-golang-1
+        component_type: SERVICE
+      - component_name: sample-php
+        instance_name: sample-php-767c6b49c4-dkgpt
+        instance_alias: sample-php-0
+        component_type: SERVICE
+      - component_name: sample-php
+        instance_name: sample-php-767c6b49c4-z8dll
+        instance_alias: sample-php-1
+        component_type: SERVICE
