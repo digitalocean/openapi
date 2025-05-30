@@ -62,6 +62,8 @@ properties:
     example: 88b72d1a-b78a-4d9f-9090-b53c4399073f
     title: The ID of the project the app is assigned to. This will be empty if there is a lookup failure.
     description: Requires `project:read` scope.
+    required_scopes:
+      - project:read
   region:
     $ref: apps_region.yml
   spec:

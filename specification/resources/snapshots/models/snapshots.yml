@@ -36,6 +36,8 @@ allOf:
         example:
         - web
         - env:prod
+        required_scopes:
+          - tag:read
 
     required:
     - resource_id
