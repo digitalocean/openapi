@@ -85,8 +85,8 @@ properties:
      - production
     nullable: true
     description: >-
-      An array of tags (as strings) to apply to the database cluster.
-      <br><br>Requires `tag:create` scope.
+      An array of tags that have been applied to the database cluster.
+      <br><br>Requires `tag:read` scope.
     required_scopes:
       - tag:read
   db_names:

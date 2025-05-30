@@ -25,14 +25,18 @@ properties:
     readOnly: true
   user:
     type: string
-    description: The default user for the database.
+    description: The default user for the database.<br><br>Requires `database:view_credentials` scope.
     example: doadmin
     readOnly: true
+    required_scopes:
+      - database:view_credentials
   password:
     type: string
-    description: The randomly generated password for the default user.
+    description: The randomly generated password for the default user.<br><br>Requires `database:view_credentials` scope.
     example: wv78n3zpz42xezdk
     readOnly: true
+    required_scopes:
+      - database:view_credentials
   ssl:
     type: boolean
     description: A boolean value indicating if the connection should be made over SSL.

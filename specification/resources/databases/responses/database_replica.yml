@@ -14,7 +14,7 @@ content:
       type: object
       properties:
         replica:
-          $ref: '../models/database_replica.yml'
+          $ref: '../models/database_replica_read.yml'
     example:
       replica:
         name: read-nyc3-01
