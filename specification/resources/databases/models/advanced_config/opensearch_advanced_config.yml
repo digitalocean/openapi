@@ -288,3 +288,17 @@ properties:
     type: boolean
     example: false
     default: false
+  knn_memory_circuit_breaker_enabled:
+    description: >-
+      Enable or disable KNN memory circuit breaker.
+    type: boolean
+    example: true
+    default: true
+  knn_memory_circuit_breaker_limit:
+    description: >-
+      Maximum amount of memory that can be used for KNN index, as a percentage of the JVM heap size.
+    type: integer
+    example: 60
+    minimum: 3
+    maximum: 100
+    default: 50

@@ -1,0 +1,9 @@
+type: object
+properties:
+  exact:
+    type: string
+    maxLength: 256
+    example: "example.com"
+description: The authority to match on.
+required:
+  - exact
