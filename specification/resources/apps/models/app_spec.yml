@@ -26,6 +26,27 @@ properties:
     - syd
     example: nyc
 
+  disable_edge_cache:
+    description: |-
+      If set to `true`, the app will not be cached at the edge (CDN). This is useful if you want to bring your own CDN configuration,
+      whether through external CDN provider or in app caching, and for
+      apps that require real-time data or have dynamic content, using SSE (server-sent events) with GET methods or hosting your MCP (Model Context Protocol) Server. Note: This feature is not available for static sites.
+    type: boolean
+    default: false
+
+  disable_email_obfuscation:
+    description: |-
+      If set to `true`, email addresses in the app will not be obfuscated. This is
+      useful for apps that require email addresses to be visible (in the HTML markup).
+    type: boolean
+    default: false
+
+  enhanced_threat_control_enabled:
+    description: |-
+      If set to `true`, suspicious requests will go through additional security checks to help mitigate layer 7 DDoS attacks.
+    type: boolean
+    default: false
+
   domains:
     description: A set of hostnames where the application will be available.
     type: array
