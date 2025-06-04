@@ -24,6 +24,7 @@ properties:
     - tor
     - lon
     - syd
+    - atl
     example: nyc
 
   domains:
