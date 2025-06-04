@@ -15,14 +15,15 @@ properties:
       available`'
     type: string
     enum:
-    - ams
+    - atl
     - nyc
-    - fra
     - sfo
-    - sgp
-    - blr
     - tor
+    - ams
+    - fra
     - lon
+    - blr
+    - sgp
     - syd
     example: nyc
 
