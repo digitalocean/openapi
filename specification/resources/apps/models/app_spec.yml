@@ -15,16 +15,16 @@ properties:
       available`'
     type: string
     enum:
-    - ams
-    - nyc
-    - fra
-    - sfo
-    - sgp
-    - blr
-    - tor
-    - lon
-    - syd
     - atl
+    - nyc
+    - sfo
+    - tor
+    - ams
+    - fra
+    - lon
+    - blr
+    - sgp
+    - syd
     example: nyc
 
   domains:
