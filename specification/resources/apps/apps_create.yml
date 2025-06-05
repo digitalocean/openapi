@@ -22,6 +22,9 @@ requestBody:
         spec:
           name: web-app
           region: nyc
+          disable_edge_cache: true
+          disable_email_obfuscation: false
+          enhanced_threat_control_enabled: true
           services:
             - name: api
               github:
