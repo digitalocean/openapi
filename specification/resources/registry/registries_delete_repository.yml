@@ -1,6 +1,6 @@
 operationId: registries_delete_repository
 
-summary: "[GA] Delete Container Registry Repository"
+summary: "[Public Preview] Delete Container Registry Repository"
 
 description: |
   To delete a container repository including all of its tags, send a DELETE request to
@@ -10,7 +10,7 @@ description: |
   This indicates that the request was processed successfully.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

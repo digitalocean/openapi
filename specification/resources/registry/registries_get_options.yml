@@ -1,6 +1,6 @@
 operationId: registries_get_options
 
-summary: "[GA] List Registry Options (Subscription Tiers and Available Regions)"
+summary: "[Public Preview] List Registry Options (Subscription Tiers and Available Regions)"
 
 description: >-
   This endpoint serves to provide additional information as to which option values
@@ -17,7 +17,7 @@ description: >-
   `/v2/registries/options`. This is similar to GET `/v2/registry/options` and exists for backward compatibility.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 responses:
   '200':

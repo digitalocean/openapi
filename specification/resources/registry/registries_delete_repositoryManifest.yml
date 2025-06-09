@@ -1,6 +1,6 @@
 operationId: registries_delete_repositoryManifest
 
-summary: "[GA] Delete Container Registry Repository Manifest"
+summary: "[Public Preview] Delete Container Registry Repository Manifest"
 
 description: |
   To delete a container repository manifest by digest in one of your registries, send a DELETE request to
@@ -17,7 +17,7 @@ description: |
   It is similar to DELETE `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST` and exists for backward compatibility.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

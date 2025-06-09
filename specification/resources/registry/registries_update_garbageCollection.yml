@@ -1,13 +1,13 @@
 operationId: registries_update_garbageCollection
 
-summary: "[GA] Update Garbage Collection"
+summary: "[Public Preview] Update Garbage Collection"
 
 description: To cancel the currently-active garbage collection for a registry,
   send a PUT request to `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID`
   and specify one or more of the attributes below. It is similar to PUT `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID` and exists for backward compatibility.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

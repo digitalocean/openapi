@@ -1,6 +1,6 @@
 operationId: registries_run_garbageCollection
 
-summary: "[GA] Start Garbage Collection"
+summary: "[Public Preview] Start Garbage Collection"
 
 description: |
   Garbage collection enables users to clear out unreferenced blobs (layer &
@@ -26,7 +26,7 @@ description: |
     JWTs will once again be issued to registry clients.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

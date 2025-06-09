@@ -1,12 +1,12 @@
 operationId: registries_delete
 
-summary: "[GA] Delete Container Registry By Name"
+summary: "[Public Preview] Delete Container Registry By Name"
 
 description: To delete your container registry, destroying all container image
   data stored in it, send a DELETE request to `/v2/registries/{registry_name}`.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

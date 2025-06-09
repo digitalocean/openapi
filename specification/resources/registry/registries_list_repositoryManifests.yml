@@ -1,6 +1,6 @@
 operationId: registries_list_repositoryManifests
 
-summary: "[GA] List All Container Registry Repository Manifests"
+summary: "[Public Preview] List All Container Registry Repository Manifests"
 
 description: |
   To list all manifests in your container registry repository, send a GET
@@ -13,7 +13,7 @@ description: |
 
   It is similar to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests` and exists for backward compatibility.
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'

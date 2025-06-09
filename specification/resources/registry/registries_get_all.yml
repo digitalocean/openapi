@@ -1,12 +1,12 @@
 operationId: registries_list
 
-summary: "[GA] List All Container Registries"
+summary: "[Public Preview] List All Container Registries"
 
 description: To get information about any container registry in your account, send a GET
   request to `/v2/registries/`.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 responses:
   '200':

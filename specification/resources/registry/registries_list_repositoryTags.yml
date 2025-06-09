@@ -1,6 +1,6 @@
 operationId: registries_list_repositoryTags
 
-summary: "[GA] List All Container Registry Repository Tags"
+summary: "[Public Preview] List All Container Registry Repository Tags"
 
 description: |
   To list all tags in one of your container registry's repository, send a GET
@@ -14,7 +14,7 @@ description: |
   It is similar to GET `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags` and exists for backward compatibility.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'

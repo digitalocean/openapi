@@ -1,6 +1,6 @@
 operationId: registries_validate_name
 
-summary: "[GA] Validate a Container Registry Name"
+summary: "[Public Preview] Validate a Container Registry Name"
 
 description: |
   To validate that a container registry name is available for use, send a POST
@@ -13,7 +13,7 @@ description: |
   It is similar to `/v2/registry/validate-name` and exists for backward compatibility.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 requestBody:
   required: true

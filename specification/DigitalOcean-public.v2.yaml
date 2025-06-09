@@ -140,6 +140,14 @@ tags:
       You can only create one registry per DigitalOcean account, but you can use
       that registry to create as many repositories as you wish.
 
+  - name: "[Public Preview] Container Registry"
+    description: |-
+      DigitalOcean now supports upto nine additional registries (for a total maximum of 10) per team 
+      if your container registry uses the Professional subscription plan. The storage is shared among 
+      the registries. This set of new APIs are backward compatible with `/v2/registry`. However, if you 
+      create more than one registry in a Professional plan, some of the `/v2/registry` API would not work. 
+      Hence, it is recommended to use `/v2/registries` for more than one registries.
+
   - name: Databases
     description: |-
       DigitalOcean's [managed database service](https://docs.digitalocean.com/products/databases)

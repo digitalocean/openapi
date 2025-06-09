@@ -1,6 +1,6 @@
 operationId: registries_create
 
-summary: "[GA] Create Container Registry"
+summary: "[Public Preview] Create Container Registry"
 
 description: |
   To create your container registry, send a POST request to `/v2/registries`.
@@ -10,10 +10,7 @@ description: |
   URL `registry.digitalocean.com/example/image:tag`.
 
 tags:
-  - Container Registry
-
-# parameters:
-#   - $ref: 'parameters.yml#/registry_name'
+  - "[Public Preview] Container Registry"
 
 requestBody:
   required: true

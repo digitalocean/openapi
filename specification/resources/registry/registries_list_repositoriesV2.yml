@@ -1,12 +1,12 @@
 operationId: registries_list_repositoriesV2
 
-summary: "[GA] List All Container Registry Repositories (V2)"
+summary: "[Public Preview] List All Container Registry Repositories (V2)"
 
 description: To list all repositories in your container registry, send a GET
   request to `/v2/registries/$REGISTRY_NAME/repositoriesV2`. It is similar to GET `/v2/registry/$REGISTRY_NAME/repositoriesV2` and exists for backward compatibility.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'

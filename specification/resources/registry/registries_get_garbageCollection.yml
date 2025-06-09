@@ -1,12 +1,12 @@
 operationId: registries_get_garbageCollection
 
-summary: "[GA] Get Active Garbage Collection"
+summary: "[Public Preview] Get Active Garbage Collection"
 
 description: To get information about the currently-active garbage collection
   for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collection`.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

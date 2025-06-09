@@ -1,12 +1,12 @@
 operationId: registries_list_garbageCollections
 
-summary: "[GA] List Garbage Collections"
+summary: "[Public Preview] List Garbage Collections"
 
 description: To get information about past garbage collections for a registry,
   send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collections`.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

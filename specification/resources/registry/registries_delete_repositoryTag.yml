@@ -1,6 +1,6 @@
 operationId: registries_delete_repositoryTag
 
-summary: "[GA] Delete Container Registry Repository Tag"
+summary: "[Public Preview] Delete Container Registry Repository Tag"
 
 description: |
   To delete a container repository tag in on of our container registries, send a DELETE request to
@@ -15,7 +15,7 @@ description: |
   This indicates that the request was processed successfully. It is similar to DELETE `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG` and exists for backward compatibility.
 
 tags:
-  - Container Registry
+  - "[Public Preview] Container Registry"
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'
