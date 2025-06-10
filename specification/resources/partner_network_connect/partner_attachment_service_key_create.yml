@@ -4,6 +4,8 @@ summary: Regenerate the service key for the partner attachment
 
 description: >
   This operation generates a new service key for the specified partner attachment.
+  The operation is asynchronous, and the response is an empty JSON object returned with a 202 status code.
+  To poll for the new service key, send a `GET` request to `/v2/partner_network_connect/attachments/{pa_id}/service_key`.
 
 tags:
   - Partner Network Connect
@@ -13,7 +15,7 @@ parameters:
 
 responses:
   '202':
-    $ref: 'responses/single_partner_attachment_service_key.yml'
+    $ref: 'responses/empty_json_object.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

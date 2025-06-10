@@ -28,6 +28,14 @@ description: |
 tags:
   - Container Registry
 
+requestBody:
+  required: false
+
+  content:
+    application/json:
+      schema:
+        $ref: 'models/registry_run_gc.yml'
+
 parameters:
   - $ref: 'parameters.yml#/registry_name'
 
@@ -56,4 +64,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'registry:create'
+    - 'registry:update'
