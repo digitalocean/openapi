@@ -13,7 +13,7 @@ description: |
 
   It is similar to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests` and exists for backward compatibility.
 tags:
-  - "[Public Preview] Container Registry"
+  - Container Registries
 
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'

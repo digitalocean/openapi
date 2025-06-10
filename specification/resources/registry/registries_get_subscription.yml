@@ -7,7 +7,7 @@ description: A subscription is automatically created when you configure your
   request to `/v2/registries/subscription`. It is similar to GET `/v2/registry/subscription` and exists for backward compatibility.
 
 tags:
-  - "[Public Preview] Container Registry"
+  - Container Registries
 
 responses:
   '200':

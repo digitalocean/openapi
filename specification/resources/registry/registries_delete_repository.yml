@@ -10,7 +10,7 @@ description: |
   This indicates that the request was processed successfully.
 
 tags:
-  - "[Public Preview] Container Registry"
+  - Container Registries
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

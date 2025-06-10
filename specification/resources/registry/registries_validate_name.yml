@@ -13,7 +13,7 @@ description: |
   It is similar to `/v2/registry/validate-name` and exists for backward compatibility.
 
 tags:
-  - "[Public Preview] Container Registry"
+  - Container Registries
 
 requestBody:
   required: true

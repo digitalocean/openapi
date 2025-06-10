@@ -7,7 +7,7 @@ description: To cancel the currently-active garbage collection for a registry,
   and specify one or more of the attributes below. It is similar to PUT `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID` and exists for backward compatibility.
 
 tags:
-  - "[Public Preview] Container Registry"
+  - Container Registries
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

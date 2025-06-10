@@ -6,7 +6,7 @@ description: To get information about any container registry in your account, se
   request to `/v2/registries/{registry_name}`.
 
 tags:
-  - "[Public Preview] Container Registry"
+  - Container Registries
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

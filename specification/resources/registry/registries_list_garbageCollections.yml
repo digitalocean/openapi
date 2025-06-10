@@ -6,7 +6,7 @@ description: To get information about past garbage collections for a registry,
   send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collections`.
 
 tags:
-  - "[Public Preview] Container Registry"
+  - Container Registries
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

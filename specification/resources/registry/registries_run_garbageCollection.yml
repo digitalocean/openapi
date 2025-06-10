@@ -26,7 +26,7 @@ description: |
     JWTs will once again be issued to registry clients.
 
 tags:
-  - "[Public Preview] Container Registry"
+  - Container Registries
 
 parameters:
   - $ref: 'parameters.yml#/registry_name'

@@ -17,7 +17,7 @@ description: >-
   `/v2/registries/options`. This is similar to GET `/v2/registry/options` and exists for backward compatibility.
 
 tags:
-  - "[Public Preview] Container Registry"
+  - Container Registries
 
 responses:
   '200':

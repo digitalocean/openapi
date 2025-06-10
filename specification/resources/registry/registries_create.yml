@@ -10,7 +10,7 @@ description: |
   URL `registry.digitalocean.com/example/image:tag`.
 
 tags:
-  - "[Public Preview] Container Registry"
+  - Container Registries
 
 requestBody:
   required: true
