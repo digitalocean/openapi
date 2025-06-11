@@ -1,13 +1,13 @@
-operationId: registry_update_subscription
+operationId: registries_update_subscription
 
-summary: Update Subscription Tier
+summary: "[Public Preview] Update Subscription Tier"
 
 description: After creating your registry, you can switch to a different
   subscription tier to better suit your needs. To do this, send a POST request
-  to `/v2/registry/subscription`.
+  to `/v2/registries/subscription`. It is similar to POST `/v2/registry/subscription` and exists for backward compatibility.
 
 tags:
-  - Container Registry
+  - Container Registries
 
 requestBody:
   content:
@@ -30,9 +30,6 @@ responses:
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
-  
-  '412':
-    $ref: './responses/registries_over_limit.yml'
 
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'
@@ -44,8 +41,8 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 
 x-codeSamples:
-  - $ref: 'examples/curl/registry_update_subscription.yml'
-  - $ref: 'examples/python/registry_update_subscription.yml'
+  - $ref: 'examples/curl/registries_update_subscription.yml'
+  - $ref: 'examples/python/registries_update_subscription.yml'
 
 security:
   - bearer_auth:

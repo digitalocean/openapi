@@ -140,6 +140,14 @@ tags:
       You can only create one registry per DigitalOcean account, but you can use
       that registry to create as many repositories as you wish.
 
+  - name: Container Registries
+    description: |-
+      DigitalOcean now supports up to nine additional registries (for a total maximum of 10) per team 
+      if your container registry uses the Professional subscription plan. The storage is shared among 
+      the registries. This set of new APIs is backward compatible with `/v2/registry`. However, if you 
+      create more than one registry under a Professional plan, some of the `/v2/registry` APIs would not work. 
+      Hence, it is recommended to use `/v2/registries` for multiple registries. Currently, these APIs are in Public Preview.
+
   - name: Databases
     description: |-
       DigitalOcean's [managed database service](https://docs.digitalocean.com/products/databases)
@@ -1620,6 +1628,78 @@ paths:
     get:
       $ref: "resources/regions/regions_list.yml"
 
+  /v2/registries:
+    get:
+      $ref: 'resources/registry/registries_get_all.yml'
+
+    post:
+      $ref: 'resources/registry/registries_create.yml'
+
+  /v2/registries/{registry_name}:
+    get:
+      $ref: 'resources/registry/registries_get.yml'
+
+    delete:
+      $ref: 'resources/registry/registries_delete.yml'
+
+  /v2/registries/{registry_name}/docker-credentials:
+    get:
+      $ref: 'resources/registry/registries_get_dockerCredentials.yml'
+
+  /v2/registries/subscription:
+    get:
+      $ref: "resources/registry/registries_get_subscription.yml"
+
+    post:
+      $ref: "resources/registry/registries_update_subscription.yml"
+
+  /v2/registries/options:
+    get:
+      $ref: "resources/registry/registries_get_options.yml"
+  
+  /v2/registries/{registry_name}/garbage-collection:
+    get:
+      $ref: "resources/registry/registries_get_garbageCollection.yml"
+
+    post:
+      $ref: "resources/registry/registries_run_garbageCollection.yml"
+
+  /v2/registries/{registry_name}/garbage-collections:
+    get:
+      $ref: "resources/registry/registries_list_garbageCollections.yml"
+
+  /v2/registries/{registry_name}/garbage-collection/{garbage_collection_uuid}:
+    put:
+      $ref: "resources/registry/registries_update_garbageCollection.yml"
+  
+  /v2/registries/{registry_name}/repositoriesV2:
+    get:
+      $ref: "resources/registry/registries_list_repositoriesV2.yml"
+
+  /v2/registries/{registry_name}/repositories/{repository_name}:
+    delete:
+      $ref: "resources/registry/registries_delete_repository.yml"
+  
+  /v2/registries/{registry_name}/repositories/{repository_name}/tags:
+    get:
+      $ref: "resources/registry/registries_list_repositoryTags.yml"
+
+  /v2/registries/{registry_name}/repositories/{repository_name}/tags/{repository_tag}:
+    delete:
+      $ref: "resources/registry/registries_delete_repositoryTag.yml"
+
+  /v2/registries/{registry_name}/repositories/{repository_name}/digests:
+    get:
+      $ref: "resources/registry/registries_list_repositoryManifests.yml"
+
+  /v2/registries/{registry_name}/repositories/{repository_name}/digests/{manifest_digest}:
+    delete:
+      $ref: "resources/registry/registries_delete_repositoryManifest.yml"
+
+  /v2/registries/validate-name:
+    post:
+      $ref: "resources/registry/registries_validate_name.yml"
+
   /v2/registry:
     get:
       $ref: "resources/registry/registry_get.yml"
@@ -1629,7 +1709,7 @@ paths:
 
     delete:
       $ref: "resources/registry/registry_delete.yml"
-
+  
   /v2/registry/subscription:
     get:
       $ref: "resources/registry/registry_get_subscription.yml"
