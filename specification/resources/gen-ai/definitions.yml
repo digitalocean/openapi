@@ -2093,7 +2093,7 @@ apiLinkAgentFunctionInputPublic:
       example: '"my-function"'
       type: string
     faas_namespace:
-      description: The namespace of the function in the DigitalOcean functions platform
+      description: The function uuid of the function in the DigitalOcean functions platform
       example: '"default"'
       type: string
     function_name:
@@ -2104,6 +2104,7 @@ apiLinkAgentFunctionInputPublic:
       description: Describe the input schema for the function so the agent may call
         it
       type: object
+      $ref: '#/inputSchema'
     output_schema:
       description: Describe the output schema for the function so the agent handle
         its response
@@ -3542,3 +3543,59 @@ protobufNullValue:
   - NULL_VALUE
   example: NULL_VALUE
   type: string
+inputSchema:
+  description: Input schema for a function
+  minItems: 1
+  items:
+    $ref: '#/inputSchemaParameters'
+  type: array
+inputSchemaParameters:
+  description: Input schema for a function parameters
+  type: object
+  properties:
+    name:
+      description: Name of the parameter
+      example: '"example parameter"'
+      type: string
+    in:
+      description: Location of the parameter
+      example: '"query"'
+      type: string
+    schema:
+      description: Schema of the parameter
+      $ref: '#/nestedSchema'
+    description:
+      description: Description of the parameter
+      example: '"This is an example parameter"'
+      type: string
+    required:
+      description: Whether the parameter is required
+      example: true
+      type: boolean
+nestedSchema:
+  description: Nested schema for a function input or output
+  type: object
+  properties:
+    type:
+      description: Type of the schema
+      example: '"string"'
+      type: string
+    items:
+      description: Items in the schema if it is an array
+      $ref: '#/nestedSchema'
+    properties:
+      type: object
+      description: Properties if it is an object
+      additionalProperties:
+        $ref: '#/nestedSchema'
+      example: '{"property1": {"type": "string"}, "property2": {"type": "integer"}}'     
+    enum:
+      description: Enum values if applicable
+      example: "['value1', 'value2']"
+      items:
+        type: string
+      type: array
+    description:
+      description: Description of the schema
+      example: '"This is an example nested schema"'
+      type: string
