@@ -136,7 +136,7 @@ properties:
     type: string
     format: uuid
     example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
-    description: The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project.<br><br>Requires `project:read` scope.
+    description: The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project.<br><br>Requires `project:update` scope.
     required_scopes:
       - project:read
   rules:
