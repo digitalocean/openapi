@@ -357,6 +357,12 @@ tags:
       policies based on these metrics. The Monitoring API can help you gain insight into how your apps are performing
       and consuming resources.
 
+  - name: Partner Network Connect
+    description: |-
+      Partner Network Connect lets you establish high-bandwidth, low-latency
+      network connections directly between DigitalOcean VPC networks and other
+      public cloud providers or on-premises datacenters.
+
   - name: Project Resources
     description: |-
       Project Resources are resources that can be grouped into your projects.
@@ -395,12 +401,6 @@ tags:
       `assigned`         | The resource was successfully assigned.
       `already_assigned` | The resource was already assigned.
       `service_down`     | There was a problem retrieving or assigning a resource. Please try again.
-
-  - name: Partner Network Connect
-    description: |-
-      Partner Network Connect lets you establish high-bandwidth, low-latency
-      network connections directly between DigitalOcean VPC networks and other
-      public cloud providers or on-premises datacenters.
 
   - name: Projects
     description: |-
