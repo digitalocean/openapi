@@ -922,6 +922,24 @@ app_health:
         replicas_desired: 1
         replicas_ready: 2
         state: HEALTHY
+app_templates:
+  value:
+    sample_repos:
+      - name: Flask with Valkey support
+        description: Build a REST API for session management and real-time data using your own Valkey database.
+        environment_slug: python
+        repo_url: https://github.com/digitalocean/template-flask-app.git
+        branch: main
+        repo_owner: digitalocean
+        repo_name: template-flask-app
+        language: Python
+        frameworks:
+          - "Flask"
+        component_types:
+          - service
+          - static_site
+          - worker
+          - job
 app_instances:
   value:
     instances:
