@@ -27,6 +27,7 @@ content:
         cluster_uuid: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
         type: ip_addr
         value: 192.168.1.1
+        description: 'my home IP address'
         created_at: '2019-11-14T20:30:28Z'
       - uuid: b9b42276-8295-4313-b40f-74173a7f46e6
         cluster_uuid: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
