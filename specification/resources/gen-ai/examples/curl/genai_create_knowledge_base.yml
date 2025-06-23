@@ -14,11 +14,13 @@ source: |-
       "database_id": "abf1055a-745d-4c24-a1db-1959ea819264",
       "datasources": [
         {
-          "bucket_name": "test-public-gen-ai",
-          "bucket_region": "tor1"
+          "spaces_data_source": {
+            "bucket_name": "test-public-gen-ai",
+            "item_path": "\"example string\"",
+            "bucket_region": "tor1"
+          }
         }
       ],
       "region": "tor1",
       "vpc_uuid": "f7176e0b-8c5e-4e32-948e-79327e56225a"
     }'
-
