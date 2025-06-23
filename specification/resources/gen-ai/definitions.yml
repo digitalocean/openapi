@@ -2103,8 +2103,23 @@ apiLinkAgentFunctionInputPublic:
     input_schema:
       description: Describe the input schema for the function so the agent may call
         it
-      type: object
       $ref: '#/inputSchema'
+      example:
+        {
+          "type": "object",
+          "properties": {
+            "param1": {
+              "type": "string",
+              "description": "A string parameter"
+            },
+            "param2": {
+              "type": "integer",
+              "description": "An integer parameter"
+            }
+          },
+          "required": ["param1"]
+        }
+  
     output_schema:
       description: Describe the output schema for the function so the agent handle
         its response
@@ -3545,10 +3560,14 @@ protobufNullValue:
   type: string
 inputSchema:
   description: Input schema for a function
-  minItems: 1
-  items:
-    $ref: '#/inputSchemaParameters'
-  type: array
+  type: object
+  properties:
+    parameters:
+      description: Parameters for the function
+      type: array
+      minItems: 1
+      items:
+        $ref: '#/inputSchemaParameters'
 inputSchemaParameters:
   description: Input schema for a function parameters
   type: object
@@ -3572,6 +3591,13 @@ inputSchemaParameters:
       description: Whether the parameter is required
       example: true
       type: boolean
+  example:
+    name: "user_id"
+    in: "query"
+    schema:
+      type: "string"
+    description: "The ID of the user"
+    required: true
 nestedSchema:
   description: Nested schema for a function input or output
   type: object
