@@ -2101,25 +2101,7 @@ apiLinkAgentFunctionInputPublic:
       example: '"My Function"'
       type: string
     input_schema:
-      description: Describe the input schema for the function so the agent may call
-        it
       $ref: '#/inputSchema'
-      example:
-        {
-          "type": "object",
-          "properties": {
-            "param1": {
-              "type": "string",
-              "description": "A string parameter"
-            },
-            "param2": {
-              "type": "integer",
-              "description": "An integer parameter"
-            }
-          },
-          "required": ["param1"]
-        }
-  
     output_schema:
       description: Describe the output schema for the function so the agent handle
         its response
@@ -3565,7 +3547,6 @@ inputSchema:
     parameters:
       description: Parameters for the function
       type: array
-      minItems: 1
       items:
         $ref: '#/inputSchemaParameters'
 inputSchemaParameters:
@@ -3581,7 +3562,6 @@ inputSchemaParameters:
       example: '"query"'
       type: string
     schema:
-      description: Schema of the parameter
       $ref: '#/nestedSchema'
     description:
       description: Description of the parameter
@@ -3607,17 +3587,19 @@ nestedSchema:
       example: '"string"'
       type: string
     items:
-      description: Items in the schema if it is an array
       $ref: '#/nestedSchema'
     properties:
       type: object
       description: Properties if it is an object
       additionalProperties:
         $ref: '#/nestedSchema'
-      example: '{"property1": {"type": "string"}, "property2": {"type": "integer"}}'     
+      example:
+        property1: 
+          type: "string" 
     enum:
       description: Enum values if applicable
-      example: "['value1', 'value2']"
+      example: 
+        - "value1"
       items:
         type: string
       type: array
