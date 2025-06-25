@@ -11,6 +11,8 @@ byoip_prefix_create:
 
   content:
     application/json:
+      example:
+        $ref: 'examples.yml#/byoip_prefix_create'
       schema:
         type: object
         properties:
@@ -26,10 +28,3 @@ byoip_prefix_create:
             type: string
             description: The status of the BYOIP prefix
             example: "in_progress"
-      examples:
-        in_progress:
-          value:
-            byoip_prefix:
-              uuid: f47ac10b-58cc-4372-a567-0e02b2c3d479
-              status: in_progress
-              region: nyc3

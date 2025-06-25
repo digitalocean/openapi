@@ -30,16 +30,15 @@ byoip_prefix:
           name:
             type: string
             description: Name of the validation
+            example: "SIGNATURE HASH"
           status:
             type: string
             description: Status of the validation
+            example: "FAILED"
           note:
             type: string
             description: Additional notes or details about the validation
-      example:
-        - name: "validation_name"
-          status: "pending"
-          note: "Validation in progress"
+            example: ""
     failure_reason:
       type: string
       description: Reason for failure, if applicable

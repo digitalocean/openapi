@@ -23,7 +23,3 @@ byoip_prefix_resource:
       format: date-time
       description: Time when the allocation was assigned
       example: 2025-06-25T12:00:00Z
-  required:
-    - ips
-    - links
-    - meta
