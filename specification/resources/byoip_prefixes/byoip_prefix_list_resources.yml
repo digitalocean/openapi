@@ -1,4 +1,4 @@
-operationId: byoipPrefixes_resources_list
+operationId: byoipPrefixes_list_resources
 
 summary: "List BYOIP Prefix Resources"
 
@@ -15,9 +15,11 @@ parameters:
 
 responses:
   "200":
-    $ref: "responses/byoip_prefix_resources_list.yml#/byoip_prefix_resources_list"
+    $ref: "responses/byoip_prefix_list_resources.yml#/byoip_prefix_list_resources"
   "401":
     $ref: "../../shared/responses/unauthorized.yml"
+  "404":
+    $ref: "../../shared/responses/not_found.yml"
   "429":
     $ref: "../../shared/responses/too_many_requests.yml"
   "500":
@@ -25,9 +27,9 @@ responses:
   default:
     $ref: "../../shared/responses/unexpected_error.yml"
 x-codeSamples:
-  - $ref: "examples/curl/list_byoip_prefix_resources.yml"
-  - $ref: "examples/go/list_byoip_prefix_resources.yml"
-  - $ref: "examples/python/list_byoip_prefix_resources.yml"
+  - $ref: "examples/curl/byoip_prefix_list_resources.yml"
+  - $ref: "examples/go/byoip_prefix_list_resources.yml"
+  - $ref: "examples/python/byoip_prefix_list_resources.yml"
 security:
   - bearer_auth:
       - "byoip_prefix:read"

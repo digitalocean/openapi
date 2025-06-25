@@ -6,6 +6,7 @@ description: |
 
 tags:
   - "[Public Preview] BYOIP Prefixes"
+
 responses:
   "200":
     $ref: "responses/byoip_prefix_list.yml#/byoip_prefix_list"
@@ -17,10 +18,12 @@ responses:
     $ref: "../../shared/responses/server_error.yml"
   default:
     $ref: "../../shared/responses/unexpected_error.yml"
+
 x-codeSamples:
   - $ref: "examples/curl/list_byoip_prefixes.yml"
   - $ref: "examples/go/list_byoip_prefixes.yml"
   - $ref: "examples/python/list_byoip_prefixes.yml"
+
 security:
   - bearer_auth:
       - "byoip_prefix:read"

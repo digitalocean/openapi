@@ -1841,7 +1841,7 @@ paths:
   
   /v2/byoip_prefixes/{byoip_prefix_uuid}/ips:
     get:
-      $ref: "resources/byoip_prefixes/byoip_prefix_resources_list.yml"
+      $ref: "resources/byoip_prefixes/byoip_prefix_list_resources.yml"
 
   /v2/sizes:
     get:
