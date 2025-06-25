@@ -1,0 +1,24 @@
+byoip_prefix_resource:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+      description: Unique identifier for the allocation
+    byoip:
+      type: string
+      description: The BYOIP prefix UUID
+    region:
+      type: string
+      description: Region where the allocation is made
+    resource:
+      type: string
+      description: The resource associated with the allocation
+    assigned_at:
+      type: string
+      format: date-time
+      description: Time when the allocation was assigned
+  required:
+    - ips
+    - links
+    - meta

@@ -1,0 +1,36 @@
+byoip_prefix:
+  type: object
+  properties:
+    uuid:
+      type: string
+      description: Unique identifier for the BYOIP prefix
+    name:
+      type: string
+      description: Name of the BYOIP prefix
+    prefix:
+      type: string
+      description: The IP prefix in CIDR notation
+    status:
+      type: string
+      description: Status of the BYOIP prefix
+    region:
+      type: string
+      description: Region where the BYOIP prefix is located
+    validations:
+      type: array
+      description: List of validation statuses for the BYOIP prefix
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the validation
+          status:
+            type: string
+            description: Status of the validation
+          note:
+            type: string
+            description: Additional notes or details about the validation
+    failure_reason:
+      type: string
+      description: Reason for failure, if applicable

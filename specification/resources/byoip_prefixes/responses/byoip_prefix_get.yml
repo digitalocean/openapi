@@ -1,0 +1,11 @@
+byoip_prefix_get:
+  description: Details of the requested BYOIP prefix 
+  content:
+    application/json:
+      example:
+        $ref: 'examples.yml#/byoip_prefix_get'
+      schema:
+        type: object
+        properties:
+          byoip_prefix:
+            $ref: '../models/byoip_prefix.yml#/byoip_prefix'

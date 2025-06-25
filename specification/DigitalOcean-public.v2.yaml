@@ -478,6 +478,18 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
+  - name: BYOIP Prefixes
+    description: |-
+      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
+      to your account, then assign those IPs to your DigitalOcean resources. 
+      BYOIP supports the following features:
+      * IPv4 addresses
+      * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
+      * Same API and management interface as our existing reserved IPs feature
+      * Assignable to Droplets only
+
+      BYOIP is currently in Public Preview.
+
   - name: Sizes
     description: |-
       The sizes objects represent different packages of hardware resources that
@@ -1814,6 +1826,22 @@ paths:
   /v2/reserved_ipv6/{reserved_ipv6}/actions:
     post:
       $ref: "resources/reserved_ipv6/reservedIPv6Actions_post.yml"
+
+  /v2/byoip_prefixes:
+    post:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_create.yml"
+    get:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_list.yml"
+  
+  /v2/byoip_prefixes/{byoip_prefix_uuid}:
+    get:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_get.yml"
+    delete:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_delete.yml"
+  
+  /v2/byoip_prefixes/{byoip_prefix_uuid}/ips:
+    get:
+      $ref: "resources/byoip_prefixes/byoip_prefix_resources_list.yml"
 
   /v2/sizes:
     get:

@@ -1,0 +1,16 @@
+byoip_prefix_list:
+  description: List of BYOIP prefixes as an array of BYOIP prefix JSON objects
+  content:
+    application/json:
+      example:
+        $ref: 'examples.yml#/byoip_prefix_list'
+      schema:
+        allOf:
+        - type: object
+          properties:
+            byoip_prefixes:
+              type: array
+              items:
+                $ref: '../models/byoip_prefix.yml#/byoip_prefix'
+        - $ref: '../../../shared/pages.yml#/pagination'
+        - $ref: '../../../shared/meta.yml'

@@ -1,0 +1,2 @@
+byoip_prefix_delete:
+  description: BYOIP prefix deletion request accepted
