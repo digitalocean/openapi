@@ -6,7 +6,7 @@ description: |
   A successful request will initiate the process of bringing your BYOIP Prefix into your account.
   The response will include the details of the created prefix, including its UUID and status.
 tags:
-  - "BYOIP Prefixes"
+  - "[Public Preview] BYOIP Prefixes"
 requestBody:
   required: true
   content:

@@ -10,7 +10,7 @@ description: |
   This indicates that the request was accepted and the prefix is being deleted.
 
 tags:
-  - "BYOIP Prefixes"
+  - "[Public Preview] BYOIP Prefixes"
 
 parameters:
   - $ref: "parameters.yml#/byoip_prefix"

@@ -478,7 +478,7 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
-  - name: BYOIP Prefixes
+  - name: "[Public Preview] BYOIP Prefixes"
     description: |-
       Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
       to your account, then assign those IPs to your DigitalOcean resources. 

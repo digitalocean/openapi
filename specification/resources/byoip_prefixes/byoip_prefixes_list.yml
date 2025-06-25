@@ -5,7 +5,7 @@ description: |
   A successful response will return a list of all BYOIP prefixes associated with the account.
 
 tags:
-  - "BYOIP Prefixes"
+  - "[Public Preview] BYOIP Prefixes"
 responses:
   "200":
     $ref: "responses/byoip_prefix_list.yml#/byoip_prefix_list"
