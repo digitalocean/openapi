@@ -925,6 +925,22 @@ paths:
     delete:
       $ref: "resources/databases/databases_delete_logsink.yml"
 
+  /v2/databases/{database_cluster_uuid}/schema-registry:
+    get:
+      $ref: "resources/databases/databases_list_kafka_schemas.yml"
+    post:
+      $ref: "resources/databases/databases_create_kafka_schema.yml"
+  
+  /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema.yml"
+    delete:
+      $ref: "resources/databases/databases_delete_kafka_schema.yml"
+
+  /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}/versions/{version}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema_version.yml"
+
   /v2/databases/metrics/credentials:
     get:
       $ref: "resources/databases/databases_get_cluster_metrics_credentials.yml"
