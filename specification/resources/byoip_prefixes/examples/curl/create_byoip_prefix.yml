@@ -3,5 +3,5 @@ source: |-
   curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{"prefix": "203.0.113.0/24", "region": "nyc3", "signature": "xCGmwgvkAToAuCxNp0s65ZYqWU51KHZgUsmEpr7wQRpl-MrHgEWewPZ~k-zN8u0QDGhrWLDV6zaCDqd9PtebFR71RxPyxSrbSUtJ1EnYpu528Pn3Fh78Bf4Sop5lUkLCMOA0PXUPKLCPMF6xxu~aE7disxKLr79YVwrN6zfsBlJPm43E-~eHnM4sLYpwGBqbaMpNKSz2~g0ZA5b-1ReQt2zOQJnkw31rvIoWkAPqjildR7ySQppn~ulNeeqRHOgNH8LW6AjnXLiX~t--IRbgqowjoBBmDnkIdE7K7lhAec2en2vbqz58-N5ifw0HpQocJ81soo-VX3dU~NkqoEKqhvHjtDDBlI859uX~-ApWnOFfihIz1~V8Jbqoc6PnEzrgxELNsP6rl0Dg7KSL~lKIvflLIB37zmP4F9Q2k9iS0-h3HoUNyGVCupvVwMvgSy0BUvkUndxerkI0v~jHi0MpTJEZxCGUZoZYf4czIVpWFEthqgEFDRontHAuK2jE~m6atSdPADc5~mffQUQI9oEcXX0Pjdyy6XGz~0V1g6~xPE2gi9wz72-drCU59yIGN7Cm-ELfmA~2c5lI6icAOIihMsM3ftzYfGFsaVzFHbHtezOmPt0rvcJKlaFjt2uPnpktajZs78uHhHVyDGo78SP5f8JIPvuuDruecnsB7eK00Jc_"}' \
+    -d '{"prefix": "203.0.113.0/24", "region": "nyc3", "signature": "$SIGNATURE"}' \
     "https://api.digitalocean.com/v2/byoip_prefixes"
