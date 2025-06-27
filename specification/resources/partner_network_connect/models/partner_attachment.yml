@@ -116,6 +116,8 @@ partner_attachment_writable:
       enum: [ 1000, 2000, 5000, 10000 ]
       example: 1000
     region:
+      description: The region to create the partner attachment.
+      enum: [nyc, sfo, fra, ams, sgp]
       type: string
       example: nyc
     naas_provider:
