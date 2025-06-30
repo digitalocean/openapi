@@ -75,7 +75,7 @@ properties:
       - web-team
     description: An array of tags to apply to the Kubernetes cluster. All
       clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`.
-      <br><br>Requires `tag:read` and `tag:create` scope.
+      <br><br>Requires `tag:read` and `tag:create` scope, as well as `tag:delete` if existing tags are getting removed.
     required_scopes:
       - tag:read
 
