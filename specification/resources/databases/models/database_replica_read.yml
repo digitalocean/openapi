@@ -63,7 +63,7 @@ properties:
       account's default VPC for the region.
       <br><br>Requires `vpc:read` scope.
     required_scopes:
-      - database:view_credentials
+      - vpc:read
   connection:
     allOf:
     - readOnly: true

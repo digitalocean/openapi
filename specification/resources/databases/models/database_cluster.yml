@@ -88,7 +88,7 @@ properties:
       An array of tags (as strings) to apply to the database cluster.
       <br><br>Requires `tag:create` scope.
     required_scopes:
-      - tag:read
+      - tag:create
   db_names:
     type: array
     items:
@@ -138,7 +138,7 @@ properties:
     example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
     description: The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project.<br><br>Requires `project:update` scope.
     required_scopes:
-      - project:read
+      - project:update
   rules:
     type: array
     items:
