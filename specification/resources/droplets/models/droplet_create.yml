@@ -38,8 +38,6 @@ properties:
     description: An array containing the IDs or fingerprints of the SSH keys
       that you wish to embed in the Droplet's root account upon creation. You must add 
       the keys to your team before they can be embedded on a Droplet.<br>Requires `ssh_key:read` scope.
-    required_scopes:
-      - ssh_key:read
 
   backups:
     type: boolean
