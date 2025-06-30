@@ -43,9 +43,7 @@ properties:
     example:
       - production
     description: >-
-      A flat array of tag names as strings to apply to the read-only replica
-      after it is created. Tag names can either be existing or new tags.
-      <br><br>Requires `tag:create` scope.
+      A flat array of tag names as strings applied to the read-only replica.<br><br>Requires `tag:read` scope.
   created_at:
     type: string
     format: date-time

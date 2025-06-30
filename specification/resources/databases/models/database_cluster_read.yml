@@ -83,8 +83,8 @@ properties:
      - production
     nullable: true
     description: >-
-      An array of tags (as strings) to apply to the database cluster.
-      <br><br>Requires `tag:create` scope.
+      An array of tags that have been applied to the database cluster.
+      <br><br>Requires `tag:read` scope.
   db_names:
     type: array
     items:
@@ -132,7 +132,7 @@ properties:
     type: string
     format: uuid
     example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
-    description: The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project.<br><br>Requires `project:update` scope.
+    description: The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project.<br><br>Requires `project:read` scope.
   rules:
     type: array
     items:
