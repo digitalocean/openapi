@@ -76,8 +76,6 @@ allOf:
           type: integer
         example:
           - 8043964
-        required_scopes:
-          - droplet:read
 
       tags:
         allOf:

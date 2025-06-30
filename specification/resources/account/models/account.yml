@@ -7,8 +7,6 @@ properties:
       <br><br>Requires `droplet:read` scope.
     type: integer
     example: 25
-    required_scopes:
-      - droplet:read
 
   floating_ip_limit:
     description: |
@@ -16,8 +14,6 @@ properties:
       <br><br>Requires `reserved_ip:read` scope.
     type: integer
     example: 5
-    required_scopes:
-      - reserved_ip:read
 
   email:
     description: The email address used by the current user to register for DigitalOcean.

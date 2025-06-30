@@ -75,8 +75,6 @@ properties:
       assigned. If excluded, the cluster when creating a new database cluster, it will
       be assigned to your account's default VPC for the region.
       <br><br>Requires `vpc:read` scope.
-    required_scopes:
-      - vpc:read
   tags:
     type: array
     items:
@@ -87,8 +85,6 @@ properties:
     description: >-
       An array of tags that have been applied to the database cluster.
       <br><br>Requires `tag:read` scope.
-    required_scopes:
-      - tag:read
   db_names:
     type: array
     items:
@@ -137,8 +133,6 @@ properties:
     format: uuid
     example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
     description: The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project.<br><br>Requires `project:read` scope.
-    required_scopes:
-      - project:read
   rules:
     type: array
     items:

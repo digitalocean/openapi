@@ -46,8 +46,6 @@ properties:
       A flat array of tag names as strings to apply to the read-only replica
       after it is created. Tag names can either be existing or new tags.
       <br><br>Requires `tag:create` scope.
-    required_scopes:
-      - tag:create
   created_at:
     type: string
     format: date-time
@@ -64,8 +62,6 @@ properties:
       will be assigned. If excluded, the replica will be assigned to your
       account's default VPC for the region.
       <br><br>Requires `vpc:read` scope.
-    required_scopes:
-      - vpc:read
   connection:
     allOf:
     - readOnly: true

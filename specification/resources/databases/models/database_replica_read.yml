@@ -44,8 +44,6 @@ properties:
       - production
     description: >-
       A flat array of tag names as strings applied to the read-only replica.<br><br>Requires `tag:read` scope.
-    required_scopes:
-      - tag:read
   created_at:
     type: string
     format: date-time
@@ -62,8 +60,6 @@ properties:
       will be assigned. If excluded, the replica will be assigned to your
       account's default VPC for the region.
       <br><br>Requires `vpc:read` scope.
-    required_scopes:
-      - vpc:read
   connection:
     allOf:
     - readOnly: true

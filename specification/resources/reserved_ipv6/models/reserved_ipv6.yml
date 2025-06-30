@@ -28,7 +28,5 @@ properties:
       description: If the reserved IP is not assigned to a Droplet, the value will be null.<br><br>Requires `droplet:read` scope.
     - $ref: '../../droplets/models/droplet.yml'
     example: null
-    required_scopes:
-      - droplet:read
 
     

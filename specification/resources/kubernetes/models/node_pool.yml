@@ -62,8 +62,6 @@ kubernetes_node_pool_base:
         node pools are automatically tagged `k8s`, `k8s-worker`, and
         `k8s:$K8S_CLUSTER_ID`.
         <br><br>Requires `tag:read` scope.
-      required_scopes:
-        - tag:read
 
     labels:
       type: object

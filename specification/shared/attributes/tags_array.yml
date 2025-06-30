@@ -9,5 +9,3 @@ description: >-
 example:
   - base-image
   - prod
-required_scopes:
-  - tag:create
