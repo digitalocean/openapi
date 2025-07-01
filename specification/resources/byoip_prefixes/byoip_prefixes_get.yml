@@ -35,4 +35,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-      - "byoip_prefix:update"
+      - "byoip_prefix:read"
