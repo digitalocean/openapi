@@ -14,7 +14,7 @@ content:
       type: object
       properties:
         database:
-          $ref: '../models/database_cluster.yml'
+          $ref: '../models/database_cluster_read.yml'
       required:
         - database
     example:
