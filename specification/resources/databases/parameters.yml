@@ -38,7 +38,7 @@ username:
 tag_name:
   in: query
   name: tag_name
-  description: Limits the results to database clusters with a specific tag.
+  description: Limits the results to database clusters with a specific tag.<br><br>Requires `tag:read` scope.
   required: false
   example: production
   schema:
