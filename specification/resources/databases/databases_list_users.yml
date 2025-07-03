@@ -10,6 +10,7 @@ description: |
 
   The result will be a JSON object with a `users` key. This will be set to an array
   of database user objects, each of which will contain the standard database user attributes.
+  User passwords will not show without the `database:view_credentials` scope.
 
   For MySQL clusters, additional options will be contained in the mysql_settings object.
 

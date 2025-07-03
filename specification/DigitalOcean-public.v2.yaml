@@ -365,6 +365,12 @@ tags:
       policies based on these metrics. The Monitoring API can help you gain insight into how your apps are performing
       and consuming resources.
 
+  - name: Partner Network Connect
+    description: |-
+      Partner Network Connect lets you establish high-bandwidth, low-latency
+      network connections directly between DigitalOcean VPC networks and other
+      public cloud providers or on-premises datacenters.
+
   - name: Project Resources
     description: |-
       Project Resources are resources that can be grouped into your projects.
@@ -403,12 +409,6 @@ tags:
       `assigned`         | The resource was successfully assigned.
       `already_assigned` | The resource was already assigned.
       `service_down`     | There was a problem retrieving or assigning a resource. Please try again.
-
-  - name: Partner Network Connect
-    description: |-
-      Partner Network Connect lets you establish high-bandwidth, low-latency
-      network connections directly between DigitalOcean VPC networks and other
-      public cloud providers or on-premises datacenters.
 
   - name: Projects
     description: |-
@@ -477,6 +477,18 @@ tags:
 
       An action object is returned. These objects hold the current status of the
       requested action.
+
+  - name: "[Public Preview] BYOIP Prefixes"
+    description: |-
+      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
+      to your account, then assign those IPs to your DigitalOcean resources. 
+      BYOIP supports the following features:
+      * IPv4 addresses
+      * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
+      * Same API and management interface as our existing reserved IPs feature
+      * Assignable to Droplets only
+
+      BYOIP is currently in Public Preview.
 
   - name: Sizes
     description: |-
@@ -924,6 +936,22 @@ paths:
       $ref: "resources/databases/databases_update_logsink.yml"
     delete:
       $ref: "resources/databases/databases_delete_logsink.yml"
+
+  /v2/databases/{database_cluster_uuid}/schema-registry:
+    get:
+      $ref: "resources/databases/databases_list_kafka_schemas.yml"
+    post:
+      $ref: "resources/databases/databases_create_kafka_schema.yml"
+  
+  /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema.yml"
+    delete:
+      $ref: "resources/databases/databases_delete_kafka_schema.yml"
+
+  /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}/versions/{version}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema_version.yml"
 
   /v2/databases/metrics/credentials:
     get:
@@ -1814,6 +1842,22 @@ paths:
   /v2/reserved_ipv6/{reserved_ipv6}/actions:
     post:
       $ref: "resources/reserved_ipv6/reservedIPv6Actions_post.yml"
+
+  /v2/byoip_prefixes:
+    post:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_create.yml"
+    get:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_list.yml"
+  
+  /v2/byoip_prefixes/{byoip_prefix_uuid}:
+    get:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_get.yml"
+    delete:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_delete.yml"
+  
+  /v2/byoip_prefixes/{byoip_prefix_uuid}/ips:
+    get:
+      $ref: "resources/byoip_prefixes/byoip_prefix_list_resources.yml"
 
   /v2/sizes:
     get:
