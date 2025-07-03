@@ -126,6 +126,7 @@ apiAgent:
       type: array
     project_id:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
+      description: The project for this agent.<br>Requires `project:read` scope.
       type: string
     provide_citations:
       description: Whether the agent should provide in-response citations
@@ -154,7 +155,7 @@ apiAgent:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
     tags:
-      description: Agent tag to organize related resources
+      description: Agent tag to organize related resources.<br>Requires `tag:read` scope.
       example:
       - example string
       items:
@@ -535,11 +536,11 @@ apiAgentPublic:
       example: My Agent
       type: string
     project_id:
-      description: The DigitalOcean project ID associated with the agent
+      description: The DigitalOcean project ID associated with the agent.<br>Requires `project:read` scope.
       example: 12345678-1234-1234-1234-123456789012
       type: string
     provide_citations:
-      description: Whether the agent should provide in-response citations
+      description: Whether the agent should provide in-response citations.
       example: true
       type: boolean
     region:
@@ -567,7 +568,7 @@ apiAgentPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     tags:
-      description: A set of abitrary tags to organize your agent
+      description: A set of abitrary tags to organize your agent.<br>Requires `tag:read` scope.
       example:
       - example string
       items:
@@ -805,7 +806,7 @@ apiAgentVersion:
     retrieval_method:
       $ref: '#/apiRetrievalMethod'
     tags:
-      description: Tags associated with the agent
+      description: Tags associated with the agent.<br>Requires `tag:read` scope.
       example:
       - example string
       items:
@@ -1058,7 +1059,7 @@ apiCreateAgentInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     project_id:
-      description: The id of the DigitalOcean project this agent will belong to
+      description: The id of the DigitalOcean project this agent will belong to.<br>Requires `project:update` scope.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     region:
@@ -1066,7 +1067,7 @@ apiCreateAgentInputPublic:
       example: '"tor1"'
       type: string
     tags:
-      description: Agent tag to organize related resources
+      description: Agent tag to organize related resources.<br>Requires `tag:create` scope.
       example:
       - example string
       items:
@@ -1239,7 +1240,7 @@ apiCreateKnowledgeBaseInputPublic:
       type: string
     project_id:
       description: Identifier of the DigitalOcean project this knowledge base will
-        belong to.
+        belong to.<br>Requires `tag:create` scope.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     region:
@@ -1247,7 +1248,7 @@ apiCreateKnowledgeBaseInputPublic:
       example: '"tor1"'
       type: string
     tags:
-      description: Tags to organize your knowledge base.
+      description: Tags to organize your knowledge base..<br>Requires `tag:update` scope.
       example:
       - example string
       items:
@@ -1255,7 +1256,7 @@ apiCreateKnowledgeBaseInputPublic:
         type: string
       type: array
     vpc_uuid:
-      description: The VPC to deploy the knowledge base database in
+      description: The VPC to deploy the knowledge base database in..<br>Requires `vpc:update` scope.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
   type: object
@@ -2340,7 +2341,7 @@ apiKnowledgeBase:
       example: '"example string"'
       type: string
     tags:
-      description: Tags to organize related resources
+      description: Tags to organize related resources.<br>Requires `tag:read` scope.
       example:
       - example string
       items:
@@ -3754,7 +3755,7 @@ apiUpdateAgentInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     project_id:
-      description: The id of the DigitalOcean project this agent will belong to
+      description: The id of the DigitalOcean project this agent will belong to.<br>Requires `project:update` scope.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     provide_citations:
@@ -3763,7 +3764,7 @@ apiUpdateAgentInputPublic:
     retrieval_method:
       $ref: '#/apiRetrievalMethod'
     tags:
-      description: A set of abitrary tags to organize your agent
+      description: A set of abitrary tags to organize your agent.<br>Requires `tag:create` scope.
       example:
       - example string
       items:
@@ -3899,11 +3900,11 @@ apiUpdateKnowledgeBaseInputPublic:
       type: string
     project_id:
       description: The id of the DigitalOcean project this knowledge base will belong
-        to
+        to.<br>Requires `project:update` scope.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     tags:
-      description: Tags to organize your knowledge base.
+      description: Tags to organize your knowledge base..<br>Requires `tag:create` scope.
       example:
       - example string
       items:

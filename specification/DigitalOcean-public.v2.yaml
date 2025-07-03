@@ -365,6 +365,12 @@ tags:
       policies based on these metrics. The Monitoring API can help you gain insight into how your apps are performing
       and consuming resources.
 
+  - name: Partner Network Connect
+    description: |-
+      Partner Network Connect lets you establish high-bandwidth, low-latency
+      network connections directly between DigitalOcean VPC networks and other
+      public cloud providers or on-premises datacenters.
+
   - name: Project Resources
     description: |-
       Project Resources are resources that can be grouped into your projects.
@@ -403,12 +409,6 @@ tags:
       `assigned`         | The resource was successfully assigned.
       `already_assigned` | The resource was already assigned.
       `service_down`     | There was a problem retrieving or assigning a resource. Please try again.
-
-  - name: Partner Network Connect
-    description: |-
-      Partner Network Connect lets you establish high-bandwidth, low-latency
-      network connections directly between DigitalOcean VPC networks and other
-      public cloud providers or on-premises datacenters.
 
   - name: Projects
     description: |-
@@ -936,6 +936,22 @@ paths:
       $ref: "resources/databases/databases_update_logsink.yml"
     delete:
       $ref: "resources/databases/databases_delete_logsink.yml"
+
+  /v2/databases/{database_cluster_uuid}/schema-registry:
+    get:
+      $ref: "resources/databases/databases_list_kafka_schemas.yml"
+    post:
+      $ref: "resources/databases/databases_create_kafka_schema.yml"
+  
+  /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema.yml"
+    delete:
+      $ref: "resources/databases/databases_delete_kafka_schema.yml"
+
+  /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}/versions/{version}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema_version.yml"
 
   /v2/databases/metrics/credentials:
     get:
