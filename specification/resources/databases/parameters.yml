@@ -88,3 +88,21 @@ logsink_id:
   example: 50484ec3-19d6-4cd3-b56f-3b0381c289a6
   schema:
     type: string
+
+kafka_schema_subject_name:
+  in: path
+  name: subject_name
+  description: The name of the Kafka schema subject.
+  required: true
+  example: customer-schema
+  schema:
+    type: string
+
+kafka_schema_version:
+  in: path
+  name: version
+  description: The version of the Kafka schema subject.
+  required: true
+  example: "1"
+  schema:
+    type: string
