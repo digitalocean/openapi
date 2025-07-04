@@ -3,6 +3,7 @@ functions:
   - ensureAllArraysHaveItemTypes
   - ensureSnakeCaseWithDigits
   - validateOpIDNaming
+  - ensureSchemaHasType
 
 rules:
   ratelimit-headers:
@@ -175,6 +176,14 @@ rules:
     then:
       function: ensureSnakeCaseWithDigits
   
+  schema-properties-must-have-type:
+    description: Schema properties must have a type defined
+    given: '$..properties.*'
+    severity: error
+    message: '{{error}}'
+    then:
+      function: ensureSchemaHasType
+      
   oas3-operation-security-defined:
     description: Check operation security is defined
     severity: "error"
