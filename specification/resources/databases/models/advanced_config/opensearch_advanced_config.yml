@@ -302,3 +302,11 @@ properties:
     minimum: 3
     maximum: 100
     default: 50
+  keep_index_refresh_interval:
+    description: >-
+      DigitalOcean automatically resets the `index.refresh_interval` to the default value (once per second) to 
+      ensure that new documents are quickly available for search queries. If you are setting your own refresh intervals, 
+      you can disable this by setting this field to true.
+    example: true
+    type: boolean
+    default: false
