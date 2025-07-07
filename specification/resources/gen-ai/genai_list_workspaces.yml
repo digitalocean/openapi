@@ -1,24 +1,11 @@
-description: To update an OpenAI API key, send a PUT request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
-operationId: genai_update_openai_api_key
-parameters:
-- description: API key ID
-  example: '"123e4567-e89b-12d3-a456-426614174000"'
-  in: path
-  name: api_key_uuid
-  required: true
-  schema:
-    type: string
-requestBody:
-  content:
-    application/json:
-      schema:
-        $ref: ./definitions.yml#/apiUpdateOpenAIAPIKeyInputPublic
+description: To list all workspaces, send a GET request to `/v2/gen-ai/workspaces`.
+operationId: genai_list_workspaces
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiUpdateOpenAIAPIKeyOutput
+          $ref: ./definitions.yml#/apiListWorkspacesOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -39,9 +26,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:update
-summary: Update OpenAI API Key
+  - genai:read
+summary: List Workspaces
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_update_openai_api_key.yml
+- $ref: examples/curl/genai_list_workspaces.yml
