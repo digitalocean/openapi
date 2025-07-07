@@ -14,6 +14,7 @@ properties:
     example: nyc3
 
   features:
+    type: array
     items:
       type: string
     description: This attribute is set to an array which contains features available
@@ -34,6 +35,7 @@ properties:
     example: true
 
   sizes:
+    type: array
     items:
       type: string
     description: This attribute is set to an array which contains the identifying
