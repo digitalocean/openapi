@@ -1,31 +1,20 @@
-description: To retrieve results of an evaluation run, send a GET request to `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results`.
-operationId: genai_get_evaluation_run_results
+description: To retrieve details of a workspace, GET request to `/v2/gen-ai/workspaces/{workspace_uuid}`.
+  The response body is a JSON object containing the workspace.
+operationId: genai_get_workspace
 parameters:
-- description: Evaluation run UUID.
+- description: Workspace UUID.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
-  name: evaluation_run_uuid
+  name: workspace_uuid
   required: true
   schema:
     type: string
-- description: Page number.
-  example: 1
-  in: query
-  name: page
-  schema:
-    type: integer
-- description: Items per page.
-  example: 1
-  in: query
-  name: per_page
-  schema:
-    type: integer
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiGetEvaluationRunResultsOutput
+          $ref: ./definitions.yml#/apiGetWorkspaceOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -47,8 +36,8 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: Retrieve Results of an Evaluation Run
+summary: Retrieve an Existing Workspace
 tags:
 - GenAI Platform (Public Preview)
 x-codeSamples:
-- $ref: examples/curl/genai_get_evaluation_run_results.yml
+- $ref: examples/curl/genai_get_workspace.yml
