@@ -44,6 +44,6 @@ security:
   - genai:read
 summary: Retrieve Information About an Existing Evaluation Test Case
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_get_evaluation_test_case.yml

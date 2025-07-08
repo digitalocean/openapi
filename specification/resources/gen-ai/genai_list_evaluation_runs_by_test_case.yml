@@ -43,6 +43,6 @@ security:
   - genai:read
 summary: List Evaluation Runs by Test Case
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_list_evaluation_runs_by_test_case.yml

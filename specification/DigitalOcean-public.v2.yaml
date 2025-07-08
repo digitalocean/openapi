@@ -300,10 +300,8 @@ tags:
 
       The Serverless Functions API currently only supports creating and managing namespaces.
 
-  - name: GenAI Platform (Public Preview)
+  - name: GradientAI Platform
     description: |-
-      **The GenAI Platform API is in [public preview](https://docs.digitalocean.com/platform/product-lifecycle/#public-preview) for select customers.**
-
       The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
 
   - name: Image Actions

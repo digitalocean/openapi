@@ -8,6 +8,18 @@ parameters:
   required: true
   schema:
     type: string
+- description: Page number.
+  example: 1
+  in: query
+  name: page
+  schema:
+    type: integer
+- description: Items per page.
+  example: 1
+  in: query
+  name: per_page
+  schema:
+    type: integer
 responses:
   "200":
     content:
@@ -37,6 +49,6 @@ security:
   - genai:read
 summary: Retrieve Results of an Evaluation Run
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_get_evaluation_run_results.yml
