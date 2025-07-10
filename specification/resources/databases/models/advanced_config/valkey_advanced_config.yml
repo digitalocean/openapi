@@ -100,3 +100,22 @@ properties:
       backward compatibility. This option doesn't affect Valkey configuration
       acl-pubsub-default.
     example: allchannels
+  frequent_snapshots:
+    type: boolean
+    default: true
+    description: >
+      Frequent RDB snapshots
+
+      When enabled, Valkey will create frequent local RDB snapshots. When disabled, Valkey will only take RDB snapshots when a backup is created, based on the backup schedule. This setting is ignored when valkey_persistence is set to off.
+    example: true
+
+  valkey_active_expire_effort:
+    type: integer
+    minimum: 1
+    maximum: 10
+    default: 1
+    description: >
+      Active expire effort
+
+      Valkey reclaims expired keys both when accessed and in the background. The background process scans for expired keys to free memory. Increasing the active-expire-effort setting (default 1, max 10) uses more CPU to reclaim expired keys faster, reducing memory usage but potentially increasing latency.
+    example: 1
