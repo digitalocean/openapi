@@ -2042,8 +2042,7 @@ paths:
 
 
 
-
-   /v2/gen-ai/agents:
+  /v2/gen-ai/agents:
     get:
       $ref: 'resources/gen-ai/genai_list_agents.yml'
 
