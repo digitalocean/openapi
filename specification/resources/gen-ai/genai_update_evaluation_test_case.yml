@@ -1,4 +1,4 @@
-description: To update an evaluation test-case send a POST request to `/v2/gen-ai/evaluation_test_cases/{test_case_uuid}`.
+description: To update an evaluation test-case send a PUT request to `/v2/gen-ai/evaluation_test_cases/{test_case_uuid}`.
 operationId: genai_update_evaluation_test_case
 parameters:
 - description: Test-case UUID to update
@@ -39,7 +39,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:create
+  - genai:update
 summary: Update an Evaluation Test Case.
 tags:
 - GradientAI Platform
