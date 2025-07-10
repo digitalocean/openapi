@@ -34,6 +34,6 @@ security:
   - genai:create
 summary: Run an Evaluation Test Case
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_run_evaluation_test_case.yml

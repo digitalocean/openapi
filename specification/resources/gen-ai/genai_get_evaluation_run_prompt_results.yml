@@ -1,4 +1,4 @@
-description: To retrieve results of an evaluation run, send a GET request to `/v2/genai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}`.
+description: To retrieve results of an evaluation run, send a GET request to `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}`.
 operationId: genai_get_evaluation_run_prompt_results
 parameters:
 - description: Evaluation run UUID.
@@ -44,6 +44,6 @@ security:
   - genai:read
 summary: Retrieve Results of an Evaluation Run Prompt
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_get_evaluation_run_prompt_results.yml

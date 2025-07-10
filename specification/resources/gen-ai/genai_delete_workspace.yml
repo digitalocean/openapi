@@ -1,17 +1,10 @@
-description: To attach a knowledge base to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`
-operationId: genai_attach_knowledge_base
+description: To delete a workspace, send a DELETE request to `/v2/gen-ai/workspace/{workspace_uuid}`.
+operationId: genai_delete_workspace
 parameters:
-- description: A unique identifier for an agent.
+- description: Workspace UUID.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
-  name: agent_uuid
-  required: true
-  schema:
-    type: string
-- description: A unique identifier for a knowledge base.
-  example: '"123e4567-e89b-12d3-a456-426614174000"'
-  in: path
-  name: knowledge_base_uuid
+  name: workspace_uuid
   required: true
   schema:
     type: string
@@ -20,7 +13,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiLinkKnowledgeBaseOutput
+          $ref: ./definitions.yml#/apiDeleteWorkspaceOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -41,9 +34,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:create
-summary: Attach Knowledge Base to an Agent
+  - genai:delete
+summary: Delete a Workspace
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_attach_knowledge_base.yml
+- $ref: examples/curl/genai_delete_workspace.yml

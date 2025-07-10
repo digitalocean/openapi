@@ -42,6 +42,6 @@ security:
   - genai:update
 summary: Update API Key for a Model
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_update_model_api_key.yml
