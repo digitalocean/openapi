@@ -199,6 +199,10 @@ apps:
           - ip: 192.168.1.2
             id: 4768fb15-2837-4dda-9be5-3951df4bc3d0
             status: ASSIGNED
+        vpc:
+          - id: c22d8f48-4bc4-49f5-8ca0-58e7164427ac
+            egress_ips:
+            - ip: 11.118.0.2
     links:
       pages: {}
     meta:
@@ -428,6 +432,10 @@ app:
         - ip: 192.168.1.2
           id: 4768fb15-2837-4dda-9be5-3951df4bc3d0
           status: ASSIGNED
+      vpc:
+        - id: c22d8f48-4bc4-49f5-8ca0-58e7164427ac
+          egress_ips:
+          - ip: 11.118.0.2
 
 
 deployments:

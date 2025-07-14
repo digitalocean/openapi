@@ -1,0 +1,9 @@
+type: object
+readOnly: true
+properties:
+  id:
+    title: The ID of the VPC droplet. 
+    type: string
+    example: c22d8f48-4bc4-49f5-8ca0-58e7164427ac
+  egress_ips:
+    $ref: apps_vpc_egress_ip.yml

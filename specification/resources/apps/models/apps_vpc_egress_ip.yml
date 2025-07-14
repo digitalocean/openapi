@@ -1,0 +1,4 @@
+title: The VPC egress ip associated with the droplet.
+type: string
+readOnly: true
+example: 11.118.0.2
