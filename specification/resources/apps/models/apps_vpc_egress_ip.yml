@@ -4,4 +4,4 @@ properties:
   ip:
     title: The VPC egress ip associated with the droplet.
     type: string
-    example: 11.118.0.2
+    example: 10.0.0.1
