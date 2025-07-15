@@ -88,11 +88,7 @@ properties:
     items:
       $ref: apps_dedicated_egress_ip.yml
   vpc:
-    readOnly: true
-    title: The VPC ID and egress ip associated with the app.
-    type: array
-    items:
-      $ref: apps_vpc.yml
+    $ref: apps_vpc.yml
 required:
 - spec
 type: object
