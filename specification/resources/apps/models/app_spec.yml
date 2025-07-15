@@ -29,8 +29,8 @@ properties:
   disable_edge_cache:
     description: |-
       If set to `true`, the app will not be cached at the edge (CDN). This is useful if you want to bring your own CDN configuration,
-      whether through external CDN provider or in app caching, and for
-      apps that require real-time data or have dynamic content, using SSE (server-sent events) with GET methods or hosting your MCP (Model Context Protocol) Server. Note: This feature is not available for static sites.
+      whether through external CDN provider or caching and serving static content with in your app, and for
+      apps that require real-time data or have dynamic content, using SSE (server-sent events) with GET methods or hosting your MCP (Model Context Protocol) Server that uses SSE. Note: This feature is not available for static site components. Refer to the [Disable CDN Cache](https://docs.digitalocean.com/products/app-platform/how-to/cache-content/#disable-cdn-cache) for more information.
     type: boolean
     default: false
 
