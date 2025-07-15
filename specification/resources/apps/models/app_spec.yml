@@ -80,6 +80,9 @@ properties:
 
   maintenance:
     $ref: app_maintenance_spec.yml
+  
+  vpc:
+    $ref: apps_vpc.yml
 
 required:
 - name
