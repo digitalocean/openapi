@@ -43,6 +43,6 @@ security:
   - genai:update
 summary: Update Agent Status
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_update_agent_deployment_visibility.yml
