@@ -29,6 +29,6 @@ security:
   - genai:read
 summary: List Evaluation Test Cases
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_list_evaluation_test_cases.yml

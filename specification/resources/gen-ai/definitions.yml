@@ -69,6 +69,10 @@ apiAgent:
       items:
         $ref: '#/apiAgent'
       type: array
+    conversation_logs_enabled:
+      description: Whether conversation logs are enabled for the agent
+      example: true
+      type: boolean
     created_at:
       description: Creation date / time
       example: "2023-01-01T00:00:00Z"
@@ -107,6 +111,8 @@ apiAgent:
       items:
         $ref: '#/apiKnowledgeBase'
       type: array
+    logging_config:
+      $ref: '#/apiAgentLoggingConfig'
     max_tokens:
       example: 123
       format: int64
@@ -188,6 +194,10 @@ apiAgent:
     uuid:
       description: Unique agent id
       example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
+    version_hash:
+      description: The latest version of the agent
+      example: '"example string"'
       type: string
     workspace:
       $ref: '#/apiWorkspace'
@@ -446,6 +456,25 @@ apiAgentKnowledgeBaseVersion:
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
   type: object
+apiAgentLoggingConfig:
+  properties:
+    galileo_project_id:
+      description: Galileo project identifier
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
+    galileo_project_name:
+      description: Name of the Galileo project
+      example: '"example name"'
+      type: string
+    log_stream_id:
+      description: Identifier for the log stream
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
+    log_stream_name:
+      description: Name of the log stream
+      example: '"example name"'
+      type: string
+  type: object
 apiAgentModelUsage:
   properties:
     agent_name:
@@ -607,6 +636,10 @@ apiAgentPublic:
     uuid:
       description: Unique agent id
       example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    version_hash:
+      description: The latest version of the agent
+      example: '"example string"'
       type: string
   type: object
 apiAgentTemplate:
@@ -1007,6 +1040,10 @@ apiCreateAgentAPIKeyOutput:
     api_key_info:
       $ref: '#/apiAgentAPIKeyInfo'
   type: object
+apiCreateAgentFromTemplateInput:
+  properties:
+    conversation_logs_enabled:
+      example: "false"
 apiCreateAgentFromTemplateInputPublic:
   properties:
     project_id:
@@ -1020,6 +1057,10 @@ apiCreateAgentFromTemplateOutput:
     agent:
       $ref: '#/apiAgent'
   type: object
+apiCreateAgentInput:
+  properties:
+    conversation_logs_enabled:
+      example: "false"
 apiCreateAgentInputPublic:
   description: Parameters for Agent Creation
   properties:
@@ -1303,6 +1344,26 @@ apiCreateOpenAIAPIKeyOutput:
     api_key_info:
       $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
+apiCreateWorkspaceInputPublic:
+  description: Parameters for Workspace Creation
+  properties:
+    agent_uuids:
+      description: Ids of the agents(s) to attach to the workspace
+      example:
+      - example string
+      items:
+        example: '"example string"'
+        type: string
+      type: array
+    description:
+      description: Description of the workspace
+      example: '"example string"'
+      type: string
+    name:
+      description: Name of the workspace
+      example: '"example name"'
+      type: string
+  type: object
 apiCreateWorkspaceOutput:
   properties:
     workspace:
@@ -1497,11 +1558,46 @@ apiDeploymentVisibility:
   - VISIBILITY_PRIVATE
   example: VISIBILITY_UNKNOWN
   type: string
+apiEvaluationDataset:
+  properties:
+    created_at:
+      description: Time created at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    dataset_name:
+      description: Name of the dataset.
+      example: '"example name"'
+      type: string
+    dataset_uuid:
+      description: UUID of the dataset.
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
+    file_size:
+      description: The size of the dataset uploaded file in bytes.
+      example: '"12345"'
+      format: uint64
+      type: string
+    has_ground_truth:
+      description: Does the dataset have a ground truth column?
+      example: true
+      type: boolean
+    row_count:
+      description: Number of rows in the dataset.
+      example: 123
+      format: int64
+      type: integer
+  type: object
 apiEvaluationMetric:
   properties:
     description:
       example: '"example string"'
       type: string
+    inverted:
+      description: If true, the metric is inverted, meaning that a lower value is
+        better.
+      example: true
+      type: boolean
     metric_name:
       example: '"example name"'
       type: string
@@ -1512,18 +1608,38 @@ apiEvaluationMetric:
       type: string
     metric_value_type:
       $ref: '#/apiEvaluationMetricValueType'
+    range_max:
+      description: The maximum value for the metric.
+      example: 123
+      format: float
+      type: number
+    range_min:
+      description: The minimum value for the metric.
+      example: 123
+      format: float
+      type: number
   type: object
 apiEvaluationMetricResult:
   properties:
+    error_description:
+      description: Error description if the metric could not be calculated.
+      example: '"example string"'
+      type: string
     metric_name:
       description: Metric name
       example: '"example name"'
       type: string
+    metric_value_type:
+      $ref: '#/apiEvaluationMetricValueType'
     number_value:
       description: The value of the metric as a number.
       example: 123
       format: double
       type: number
+    reasoning:
+      description: Reasoning of the metric result.
+      example: '"example string"'
+      type: string
     string_value:
       description: The value of the metric as a string.
       example: '"example string"'
@@ -1543,10 +1659,15 @@ apiEvaluationMetricValueType:
   - METRIC_VALUE_TYPE_UNSPECIFIED
   - METRIC_VALUE_TYPE_NUMBER
   - METRIC_VALUE_TYPE_STRING
+  - METRIC_VALUE_TYPE_PERCENTAGE
   example: METRIC_VALUE_TYPE_UNSPECIFIED
   type: string
 apiEvaluationRun:
   properties:
+    agent_deleted:
+      description: Whether agent is deleted
+      example: true
+      type: boolean
     agent_name:
       description: Agent name
       example: '"example name"'
@@ -1559,8 +1680,27 @@ apiEvaluationRun:
       description: Version hash
       example: '"example string"'
       type: string
+    agent_workspace_uuid:
+      description: Agent workspace uuid
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
+    created_by_user_email:
+      example: example@example.com
+      type: string
+    created_by_user_id:
+      example: '"12345"'
+      format: uint64
+      type: string
+    error_description:
+      description: The error description
+      example: '"example string"'
+      type: string
     evaluation_run_uuid:
       description: Evaluation run UUID.
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
+    evaluation_test_case_workspace_uuid:
+      description: Evaluation test case workspace uuid
       example: '"123e4567-e89b-12d3-a456-426614174000"'
       type: string
     finished_at:
@@ -1572,6 +1712,11 @@ apiEvaluationRun:
       description: The pass status of the evaluation run based on the star metric.
       example: true
       type: boolean
+    queued_at:
+      description: Run queued time.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
     run_level_metric_results:
       items:
         $ref: '#/apiEvaluationMetricResult'
@@ -1589,6 +1734,14 @@ apiEvaluationRun:
       type: string
     status:
       $ref: '#/apiEvaluationRunStatus'
+    test_case_description:
+      description: Test case description.
+      example: '"example string"'
+      type: string
+    test_case_name:
+      description: Test case name.
+      example: '"example name"'
+      type: string
     test_case_uuid:
       description: Test-case UUID.
       example: '"123e4567-e89b-12d3-a456-426614174000"'
@@ -1631,6 +1784,8 @@ apiEvaluationTestCase:
       example: '"12345"'
       format: uint64
       type: string
+    dataset:
+      $ref: '#/apiEvaluationDataset'
     dataset_name:
       example: '"example name"'
       type: string
@@ -1686,6 +1841,38 @@ apiEvaluationTestCaseMetricList:
         type: string
       type: array
   type: object
+apiEvaluationUsage:
+  properties:
+    agent_measurements:
+      items:
+        $ref: '#/apiEvaluationUsageMeasurement'
+      type: array
+    guardrail_measurements:
+      items:
+        $ref: '#/apiEvaluationUsageMeasurement'
+      type: array
+    start:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    stop:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+  type: object
+apiEvaluationUsageMeasurement:
+  properties:
+    measurements:
+      items:
+        $ref: '#/apiUsageMeasurement'
+      type: array
+    resource_name:
+      example: '"example name"'
+      type: string
+    resource_uuid:
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
+  type: object
 apiFilePresignedUrlResponse:
   description: Detailed info about each presigned URL returned to the client.
   properties:
@@ -1722,6 +1909,21 @@ apiFileUploadDataSource:
       type: string
     stored_object_key:
       description: The object key the file was stored as
+      example: '"example string"'
+      type: string
+  type: object
+apiGalileoJWTOutput:
+  properties:
+    access_token:
+      description: Access token for the clickout to Galileo
+      example: '"example string"'
+      type: string
+    base_url:
+      description: Base URL for the Galileo instance
+      example: '"example string"'
+      type: string
+    expires_at:
+      description: Expiry time of the access token
       example: '"example string"'
       type: string
   type: object
@@ -1816,16 +2018,30 @@ apiGetEvaluationRunResultsOutput:
   properties:
     evaluation_run:
       $ref: '#/apiEvaluationRun'
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
     prompts:
       description: The prompt level results.
       items:
         $ref: '#/apiPrompt'
       type: array
   type: object
+apiGetEvaluationRunUsageOutput:
+  properties:
+    usage:
+      $ref: '#/apiEvaluationUsage'
+  type: object
 apiGetEvaluationTestCaseOutput:
   properties:
     evaluation_test_case:
       $ref: '#/apiEvaluationTestCase'
+  type: object
+apiGetEvaluationTestCaseUsageOutput:
+  properties:
+    usage:
+      $ref: '#/apiEvaluationUsage'
   type: object
 apiGetGuardrailOutput:
   properties:
@@ -2118,6 +2334,18 @@ apiGuardrailType:
   - GUARDRAIL_TYPE_CONTENT_MODERATION
   example: GUARDRAIL_TYPE_UNKNOWN
   type: string
+apiIndexJobStatus:
+  default: INDEX_JOB_STATUS_UNKNOWN
+  enum:
+  - INDEX_JOB_STATUS_UNKNOWN
+  - INDEX_JOB_STATUS_PARTIAL
+  - INDEX_JOB_STATUS_IN_PROGRESS
+  - INDEX_JOB_STATUS_COMPLETED
+  - INDEX_JOB_STATUS_FAILED
+  - INDEX_JOB_STATUS_NO_CHANGES
+  - INDEX_JOB_STATUS_PENDING
+  example: INDEX_JOB_STATUS_UNKNOWN
+  type: string
 apiIndexedDataSource:
   properties:
     completed_at:
@@ -2231,6 +2459,8 @@ apiIndexingJob:
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
+    status:
+      $ref: '#/apiIndexJobStatus'
     tokens:
       description: Number of tokens
       example: 123
@@ -2382,6 +2612,8 @@ apiKnowledgeBaseDataSource:
       description: Path of folder or object in bucket - Deprecated, moved to data_source_details
       example: '"example string"'
       type: string
+    last_datasource_indexing_job:
+      $ref: '#/apiIndexedDataSource'
     last_indexing_job:
       $ref: '#/apiIndexingJob'
     region:
@@ -2689,6 +2921,24 @@ apiListEvaluationMetricsOutput:
     metrics:
       items:
         $ref: '#/apiEvaluationMetric'
+      type: array
+  type: object
+apiListEvaluationPricesOutput:
+  properties:
+    evaluation_agent_prices:
+      items:
+        $ref: '#/apiAgentPrice'
+      type: array
+    evaluation_guardrail_prices:
+      items:
+        $ref: '#/apiGuardrailPrice'
+      type: array
+  type: object
+apiListEvaluationRunsByAgentOutput:
+  properties:
+    evaluation_runs:
+      items:
+        $ref: '#/apiEvaluationRun'
       type: array
   type: object
 apiListEvaluationRunsByTestCaseOutput:
@@ -3232,6 +3482,22 @@ apiModelVersion:
       format: int64
       type: integer
   type: object
+apiMoveAgentsToWorkspaceInputPublic:
+  description: Parameters for Moving agents to a Workspace
+  properties:
+    agent_uuids:
+      description: Agent uuids
+      example:
+      - example string
+      items:
+        example: '"example string"'
+        type: string
+      type: array
+    workspace_uuid:
+      description: Workspace uuid to move agents to
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
+  type: object
 apiMoveAgentsToWorkspaceOutput:
   properties:
     workspace:
@@ -3316,8 +3582,18 @@ apiPrompt:
     input:
       example: '"example string"'
       type: string
+    input_tokens:
+      description: The number of input tokens used in the prompt.
+      example: '"12345"'
+      format: uint64
+      type: string
     output:
       example: '"example string"'
+      type: string
+    output_tokens:
+      description: The number of output tokens used in the prompt.
+      example: '"12345"'
+      format: uint64
       type: string
     prompt_chunks:
       description: The list of prompt chunks.
@@ -3533,6 +3809,13 @@ apiStarMetric:
     name:
       example: '"example name"'
       type: string
+    success_threshold:
+      description: |-
+        The success threshold for the star metric.
+        This is a value that the metric must reach to be considered successful.
+      example: 123
+      format: float
+      type: number
     success_threshold_pct:
       description: |-
         The success threshold for the star metric.
@@ -3709,6 +3992,10 @@ apiUpdateAgentFunctionOutput:
     agent:
       $ref: '#/apiAgent'
   type: object
+apiUpdateAgentInput:
+  properties:
+    conversation_logs_enabled:
+      example: "false"
 apiUpdateAgentInputPublic:
   description: Data to modify an existing Agent
   properties:
@@ -3716,6 +4003,10 @@ apiUpdateAgentInputPublic:
       description: Optional anthropic key uuid for use with anthropic models
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
+    conversation_logs_enabled:
+      description: Optional update of conversation logs enabled
+      example: true
+      type: boolean
     description:
       description: Agent description
       example: '"My Agent Description"'
@@ -4006,6 +4297,22 @@ apiUpdateOpenAIAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiOpenAIAPIKeyInfo'
+  type: object
+apiUpdateWorkspaceInputPublic:
+  description: Parameters for Update Workspace
+  properties:
+    description:
+      description: The new description of the workspace
+      example: '"example string"'
+      type: string
+    name:
+      description: The new name of the workspace
+      example: '"example name"'
+      type: string
+    workspace_uuid:
+      description: Workspace UUID.
+      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      type: string
   type: object
 apiUpdateWorkspaceOutput:
   properties:

@@ -300,10 +300,8 @@ tags:
 
       The Serverless Functions API currently only supports creating and managing namespaces.
 
-  - name: GenAI Platform (Public Preview)
+  - name: GradientAI Platform
     description: |-
-      **The GenAI Platform API is in [public preview](https://docs.digitalocean.com/platform/product-lifecycle/#public-preview) for select customers.**
-
       The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
 
   - name: Image Actions
@@ -365,6 +363,12 @@ tags:
       policies based on these metrics. The Monitoring API can help you gain insight into how your apps are performing
       and consuming resources.
 
+  - name: Partner Network Connect
+    description: |-
+      Partner Network Connect lets you establish high-bandwidth, low-latency
+      network connections directly between DigitalOcean VPC networks and other
+      public cloud providers or on-premises datacenters.
+
   - name: Project Resources
     description: |-
       Project Resources are resources that can be grouped into your projects.
@@ -403,12 +407,6 @@ tags:
       `assigned`         | The resource was successfully assigned.
       `already_assigned` | The resource was already assigned.
       `service_down`     | There was a problem retrieving or assigning a resource. Please try again.
-
-  - name: Partner Network Connect
-    description: |-
-      Partner Network Connect lets you establish high-bandwidth, low-latency
-      network connections directly between DigitalOcean VPC networks and other
-      public cloud providers or on-premises datacenters.
 
   - name: Projects
     description: |-
@@ -477,6 +475,18 @@ tags:
 
       An action object is returned. These objects hold the current status of the
       requested action.
+
+  - name: "[Public Preview] BYOIP Prefixes"
+    description: |-
+      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
+      to your account, then assign those IPs to your DigitalOcean resources. 
+      BYOIP supports the following features:
+      * IPv4 addresses
+      * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
+      * Same API and management interface as our existing reserved IPs feature
+      * Assignable to Droplets only
+
+      BYOIP is currently in Public Preview.
 
   - name: Sizes
     description: |-
@@ -924,6 +934,22 @@ paths:
       $ref: "resources/databases/databases_update_logsink.yml"
     delete:
       $ref: "resources/databases/databases_delete_logsink.yml"
+
+  /v2/databases/{database_cluster_uuid}/schema-registry:
+    get:
+      $ref: "resources/databases/databases_list_kafka_schemas.yml"
+    post:
+      $ref: "resources/databases/databases_create_kafka_schema.yml"
+  
+  /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema.yml"
+    delete:
+      $ref: "resources/databases/databases_delete_kafka_schema.yml"
+
+  /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}/versions/{version}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema_version.yml"
 
   /v2/databases/metrics/credentials:
     get:
@@ -1815,6 +1841,22 @@ paths:
     post:
       $ref: "resources/reserved_ipv6/reservedIPv6Actions_post.yml"
 
+  /v2/byoip_prefixes:
+    post:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_create.yml"
+    get:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_list.yml"
+  
+  /v2/byoip_prefixes/{byoip_prefix_uuid}:
+    get:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_get.yml"
+    delete:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_delete.yml"
+  
+  /v2/byoip_prefixes/{byoip_prefix_uuid}/ips:
+    get:
+      $ref: "resources/byoip_prefixes/byoip_prefix_list_resources.yml"
+
   /v2/sizes:
     get:
       $ref: "resources/sizes/sizes_list.yml"
@@ -2000,7 +2042,6 @@ paths:
 
 
 
-
   /v2/gen-ai/agents:
     get:
       $ref: 'resources/gen-ai/genai_list_agents.yml'
@@ -2120,6 +2161,60 @@ paths:
       $ref: 'resources/gen-ai/genai_list_agents_by_anthropic_key.yml'
 
 
+  /v2/gen-ai/evaluation_datasets:
+    post:
+      $ref: 'resources/gen-ai/genai_create_evaluation_dataset.yml'
+
+
+  /v2/gen-ai/evaluation_datasets/file_upload_presigned_urls:
+    post:
+      $ref: 'resources/gen-ai/genai_create_evaluation_dataset_file_upload_presigned_urls.yml'
+
+
+  /v2/gen-ai/evaluation_metrics:
+    get:
+      $ref: 'resources/gen-ai/genai_list_evaluation_metrics.yml'
+
+
+  /v2/gen-ai/evaluation_runs:
+    post:
+      $ref: 'resources/gen-ai/genai_run_evaluation_test_case.yml'
+
+
+  /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_evaluation_run.yml'
+
+
+  /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results:
+    get:
+      $ref: 'resources/gen-ai/genai_get_evaluation_run_results.yml'
+
+
+  /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_evaluation_run_prompt_results.yml'
+
+
+  /v2/gen-ai/evaluation_test_cases:
+    get:
+      $ref: 'resources/gen-ai/genai_list_evaluation_test_cases.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_evaluation_test_case.yml'
+
+
+  /v2/gen-ai/evaluation_test_cases/{evaluation_test_case_uuid}/evaluation_runs:
+    get:
+      $ref: 'resources/gen-ai/genai_list_evaluation_runs_by_test_case.yml'
+
+
+  /v2/gen-ai/evaluation_test_cases/{test_case_uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_evaluation_test_case.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_evaluation_test_case.yml'
 
 
   /v2/gen-ai/indexing_jobs:
@@ -2230,6 +2325,38 @@ paths:
   /v2/gen-ai/regions:
     get:
       $ref: 'resources/gen-ai/genai_list_datacenter_regions.yml'
+
+
+  /v2/gen-ai/workspaces:
+    get:
+      $ref: 'resources/gen-ai/genai_list_workspaces.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_workspace.yml'
+
+
+  /v2/gen-ai/workspaces/{workspace_uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_workspace.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_workspace.yml'
+
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_workspace.yml'
+
+
+  /v2/gen-ai/workspaces/{workspace_uuid}/agents:
+    get:
+      $ref: 'resources/gen-ai/genai_list_agents_by_workspace.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_agents_workspace.yml'
+
+
+  /v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases:
+    get:
+      $ref: 'resources/gen-ai/genai_list_evaluation_test_cases_by_workspace.yml'
 
 
 components:
