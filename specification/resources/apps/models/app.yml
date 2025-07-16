@@ -87,6 +87,8 @@ properties:
     type: array
     items:
       $ref: apps_dedicated_egress_ip.yml
+  vpc:
+    $ref: apps_vpc.yml
 required:
 - spec
 type: object
