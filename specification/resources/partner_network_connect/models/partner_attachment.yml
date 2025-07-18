@@ -165,7 +165,7 @@ partner_attachment_writable:
     redundancy_zone:
       type: string
       description: Optional redundancy zone for the partner attachment.
-      enum: [ UNSPECIFIED, MEGAPORT_BLUE, MEGAPORT_RED ]
+      enum: [ MEGAPORT_BLUE, MEGAPORT_RED ]
       example: MEGAPORT_BLUE
 
 partner_attachment_updatable:
