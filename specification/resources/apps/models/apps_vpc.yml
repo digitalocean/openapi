@@ -7,8 +7,8 @@ properties:
     example: c22d8f48-4bc4-49f5-8ca0-58e7164427ac
   egress_ips:
     title: The egress ips associated with the VPC.
-    type: object
-    properties:
+    type: array
+    items:
       ip:
         type: string
         example: 10.0.0.1
