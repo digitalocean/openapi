@@ -9,6 +9,4 @@ properties:
     title: The egress ips associated with the VPC.
     type: array
     items:
-      ip:
-        type: string
-        example: 10.0.0.1
+      $ref: apps_vpc_egress_ip.yml
