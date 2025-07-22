@@ -228,6 +228,8 @@ app:
       owner_uuid: a4e16f25-cdd1-4483-b246-d77f283c9209
       spec:
         name: sample-golang
+        disable_edge_cache: true
+        enhanced_threat_control_enabled: true
         services:
         - name: web
           github:
@@ -468,6 +470,9 @@ deployments:
       - id: b6bdf840-2854-4f87-a36c-5f231c617c84
         spec:
           name: sample-golang
+          disable_edge_cache: true
+          disable_email_obfuscation: true
+          enhanced_threat_control_enabled: true
           services:
             - name: web
               github:
@@ -539,6 +544,9 @@ deployment:
       id: b6bdf840-2854-4f87-a36c-5f231c617c84
       spec:
         name: sample-golang
+        disable_edge_cache: true
+        disable_email_obfuscation: true
+        enhanced_threat_control_enabled: true
         services:
           - name: web
             github:
