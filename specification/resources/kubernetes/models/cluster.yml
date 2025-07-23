@@ -165,6 +165,12 @@ properties:
   routing_agent:
     $ref: "routing_agent.yml"
 
+  amd_gpu_device:
+    $ref: "amd_gpu_device.yml"
+
+  amd_gpu_device_metrics_exporter:
+    $ref: "amd_gpu_device_metrics_exporter.yml"
+
 required:
   - name
   - region
