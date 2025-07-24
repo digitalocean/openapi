@@ -1597,8 +1597,6 @@ paths:
   /v2/partner_network_connect/attachments/{pa_id}/remote_routes:
     get:
       $ref: "resources/partner_network_connect/partner_attachment_remote_routes_list.yml"
-    put:
-      $ref: "resources/partner_network_connect/partner_attachment_remote_routes_update.yml"
 
   /v2/partner_network_connect/attachments/{pa_id}/service_key:
     get:

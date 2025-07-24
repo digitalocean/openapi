@@ -6,11 +6,3 @@ partner_attachment_remote_route:
       readOnly: true
       example: 10.10.10.0/24
       description: A CIDR block representing a remote route.
-
-partner_attachment_remote_route_writable:
-  type: object
-  properties:
-    cidr:
-      type: string
-      example: 10.10.10.0/24
-      description: A CIDR block representing a remote route.
