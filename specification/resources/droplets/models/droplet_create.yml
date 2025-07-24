@@ -114,6 +114,12 @@ properties:
       will be assigned. If excluded, the Droplet will be assigned to your
       account's default VPC for the region.<br>Requires `vpc:read` scope.
 
+  project_id:
+    type: string
+    example: 88b72d1a-b78a-4d9f-9090-b53c4399073f
+    description: The unique identifier of the project to associate the Droplet 
+      with. The Droplet will be created within this project.
+
   with_droplet_agent:
     type: boolean
     example: true
@@ -127,3 +133,4 @@ properties:
 required:
 - size
 - image
+- project_id
