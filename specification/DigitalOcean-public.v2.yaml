@@ -153,7 +153,7 @@ tags:
       DigitalOcean's [managed database service](https://docs.digitalocean.com/products/databases)
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://docs.digitalocean.com/products/databases/postgresql/),
-      [Redis](https://docs.digitalocean.com/products/databases/redis/),
+      [Caching](https://docs.digitalocean.com/products/databases/redis/),
       [Valkey](https://docs.digitalocean.com/products/databases/valkey/),
       [MySQL](https://docs.digitalocean.com/products/databases/mysql/),
       [MongoDB](https://docs.digitalocean.com/products/databases/mongodb/), and
