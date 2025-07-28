@@ -956,6 +956,12 @@ paths:
       $ref: "resources/databases/databases_get_kafka_schema_config.yml"
     put:
       $ref: "resources/databases/databases_update_kafka_schema_config.yml"
+  
+  /v2/databases/{database_cluster_uuid}/schema-registry/config/{subject_name}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema_subject_config.yml"
+    put:
+      $ref: "resources/databases/databases_update_kafka_schema_subject_config.yml"
 
   /v2/databases/metrics/credentials:
     get:

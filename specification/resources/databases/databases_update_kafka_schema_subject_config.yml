@@ -1,10 +1,10 @@
-operationId: databases_update_kafka_schema_config
+operationId: databases_update_kafka_schema_subject_config
 
-summary: Update Schema Registry Configuration for a kafka Cluster
+summary: Update Schema Registry Configuration for a Subject of kafka Cluster
 
 description: |
-  To update the Schema Registry configuration for a Kafka cluster, send a PUT request to
-  `/v2/databases/$DATABASE_ID/schema-registry/config`.
+  To update the Schema Registry configuration for a Subject of a Kafka cluster, send a PUT request to
+  `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`.
   The response is a JSON object with a `compatibility_level` key, which is set to an object
   containing any database configuration parameters.
 tags:
@@ -12,6 +12,7 @@ tags:
 
 parameters:
   - $ref: "parameters.yml#/database_cluster_uuid"
+  - $ref: "parameters.yml#/kafka_schema_subject_name"
 
 requestBody:
   content:
@@ -37,7 +38,7 @@ requestBody:
 
 responses:
   "200":
-    $ref: "responses/database_schema_registry_config.yml"
+    $ref: "responses/database_schema_registry_subject_config.yml"
 
   "401":
     $ref: "../../shared/responses/unauthorized.yml"
