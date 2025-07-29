@@ -1,6 +1,7 @@
 lang: cURL
 source: |-
-  curl -X DELETE \
+  curl -X POST \
     -H "Content-Type: application/json"  \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    "https://api.digitalocean.com/v2/gen-ai/knowledge_bases/9a6e3975-b0c6-11ef-bf8f-4e013e2ddde4/data_sources/bd2a2db5-b8b0-11ef-bf8f-4e013e2ddde4"
+    "https://api.digitalocean.com/v2/gen-ai/knowledge_bases/9a6e3975-b0c6-11ef-bf8f-4e013e2ddde4/data_sources" \
+    -d '{"aws_data_source":{"bucket_name":"bucket-name","region":"us-east-1","key_id":"AWS-key-id","secret_key":"AWS-secret-key"}}'
