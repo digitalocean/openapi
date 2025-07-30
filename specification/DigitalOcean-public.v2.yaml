@@ -2373,6 +2373,9 @@ paths:
     get:
       $ref: 'resources/gen-ai/genai_list_agents_by_workspace.yml'
 
+    put:
+      $ref: 'resources/gen-ai/genai_update_agents_workspace.yml'
+
 
   /v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases:
     get:
