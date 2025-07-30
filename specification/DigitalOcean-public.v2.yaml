@@ -2313,7 +2313,7 @@ paths:
 
   /v2/gen-ai/oauth2/dropbox/tokens:
     post:
-      $ref: 'resources/gen-ai/genai_get_oauth2_dropbox_tokens.yml'
+      $ref: 'resources/gen-ai/genai_create_oauth2_dropbox_tokens.yml'
 
 
   /v2/gen-ai/oauth2/url:
