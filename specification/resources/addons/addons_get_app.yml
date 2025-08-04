@@ -1,6 +1,6 @@
 operationId: addons_get_app
 
-summary: Get details on an Add-On Application
+summary: List Available Add-On Applications
 
 description: | 
   To fetch details of all available Add-On Applications, send a GET request to `/v2/add-ons/apps`.
