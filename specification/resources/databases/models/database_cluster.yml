@@ -102,6 +102,12 @@ properties:
     - readOnly: true
     description: >-
      The connection details for OpenSearch dashboard. 
+  schema_registry_connection:
+    allOf:
+    - $ref: './schema_registry_connection.yml'
+    - readOnly: true
+    description: >-
+     The connection details for Schema Registry.
   connection:
     allOf:
     - $ref: './database_connection.yml'
