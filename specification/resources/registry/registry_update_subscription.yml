@@ -30,6 +30,9 @@ responses:
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
+  
+  '412':
+    $ref: './responses/registries_over_limit.yml'
 
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'

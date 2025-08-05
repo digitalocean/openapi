@@ -49,6 +49,6 @@ security:
   - genai:read
 summary: List Agent Versions
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_list_agent_versions.yml

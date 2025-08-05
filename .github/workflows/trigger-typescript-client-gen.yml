@@ -1,0 +1,24 @@
+name: Trigger TypeScript Client Generation
+on:
+  workflow_run:
+    workflows: [Spec Main]
+    types:
+      - completed
+
+jobs:
+  build:
+    name: Trigger digitalocean-client-typescript Workflow
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set outputs
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
+      - name: trigger-workflow
+        run: gh workflow run --repo digitalocean/dots typescript-client-gen.yml --ref prep-0-1-0 -f openapi_short_sha=${{ steps.vars.outputs.sha_short }} 
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
