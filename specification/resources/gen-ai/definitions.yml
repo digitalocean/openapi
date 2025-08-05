@@ -1,3 +1,41 @@
+apiAWSDataSource:
+  description: AWS S3 Data Source
+  properties:
+    bucket_name:
+      description: Spaces bucket name
+      example: example name
+      type: string
+    item_path:
+      example: example string
+      type: string
+    key_id:
+      description: The AWS Key ID
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    region:
+      description: Region of bucket
+      example: example string
+      type: string
+    secret_key:
+      description: The AWS Secret Key
+      example: example string
+      type: string
+  type: object
+apiAWSDataSourceDisplay:
+  description: AWS S3 Data Source for Display
+  properties:
+    bucket_name:
+      description: Spaces bucket name
+      example: example name
+      type: string
+    item_path:
+      example: example string
+      type: string
+    region:
+      description: Region of bucket
+      example: example string
+      type: string
+  type: object
 apiAcceptAgreementOutput:
   description: AcceptAgreementOutput Description
   properties:
@@ -31,6 +69,10 @@ apiAgent:
       items:
         $ref: '#/apiAgent'
       type: array
+    conversation_logs_enabled:
+      description: Whether conversation logs are enabled for the agent
+      example: true
+      type: boolean
     created_at:
       description: Creation date / time
       example: "2023-01-01T00:00:00Z"
@@ -40,7 +82,7 @@ apiAgent:
       $ref: '#/apiDeployment'
     description:
       description: Description of agent
-      example: '"example string"'
+      example: example string
       type: string
     functions:
       items:
@@ -52,13 +94,13 @@ apiAgent:
         $ref: '#/apiAgentGuardrail'
       type: array
     if_case:
-      example: '"example string"'
+      example: example string
       type: string
     instruction:
       description: Agent instruction. Instructions help your agent to perform its
         job effectively. See [Write Effective Agent Instructions](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#agent-instructions)
         for best practices.
-      example: '"example string"'
+      example: example string
       type: string
     k:
       example: 123
@@ -69,6 +111,8 @@ apiAgent:
       items:
         $ref: '#/apiKnowledgeBase'
       type: array
+    logging_config:
+      $ref: '#/apiAgentLoggingConfig'
     max_tokens:
       example: 123
       format: int64
@@ -77,7 +121,7 @@ apiAgent:
       $ref: '#/apiModel'
     name:
       description: Agent name
-      example: '"example name"'
+      example: example name
       type: string
     openai_api_key:
       $ref: '#/apiOpenAIAPIKeyInfo'
@@ -87,11 +131,15 @@ apiAgent:
         $ref: '#/apiAgent'
       type: array
     project_id:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+    provide_citations:
+      description: Whether the agent should provide in-response citations
+      example: true
+      type: boolean
     region:
       description: Region code
-      example: '"example string"'
+      example: example string
       type: string
     retrieval_method:
       $ref: '#/apiRetrievalMethod'
@@ -101,22 +149,22 @@ apiAgent:
       format: date-time
       type: string
     route_created_by:
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     route_name:
       description: Route name
-      example: '"example name"'
+      example: example name
       type: string
     route_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     tags:
       description: Agent tag to organize related resources
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
     temperature:
@@ -136,24 +184,30 @@ apiAgent:
       type: string
     url:
       description: Access your agent under this url
-      example: '"example string"'
+      example: example string
       type: string
     user_id:
       description: Id of user that created the agent
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     uuid:
       description: Unique agent id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+    version_hash:
+      description: The latest version of the agent
+      example: example string
+      type: string
+    workspace:
+      $ref: '#/apiWorkspace'
   type: object
 apiAgentAPIKey:
   description: Agent API Key
   properties:
     api_key:
       description: Api key
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiAgentAPIKeyInfo:
@@ -166,7 +220,7 @@ apiAgentAPIKeyInfo:
       type: string
     created_by:
       description: Created by
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     deleted_at:
@@ -176,14 +230,14 @@ apiAgentAPIKeyInfo:
       type: string
     name:
       description: Name
-      example: '"example name"'
+      example: example name
       type: string
     secret_key:
-      example: '"example string"'
+      example: example string
       type: string
     uuid:
       description: Uuid
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiAgentChatbotIdentifier:
@@ -191,7 +245,50 @@ apiAgentChatbotIdentifier:
   properties:
     agent_chatbot_identifier:
       description: Agent chatbot identifier
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiAgentChildRelationshipVerion:
+  properties:
+    agent_name:
+      description: Name of the child agent
+      example: example name
+      type: string
+    child_agent_uuid:
+      description: Child agent unique identifier
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    if_case:
+      description: If case
+      example: example string
+      type: string
+    is_deleted:
+      description: Child agent is deleted
+      example: true
+      type: boolean
+    route_name:
+      description: Route name
+      example: example name
+      type: string
+  type: object
+apiAgentConversationLogConfig:
+  description: Response for getting or creating an agent conversation log location
+  properties:
+    agent_uuid:
+      description: Agent UUID
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    created_at:
+      description: Creation date / time
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    spaces_data_source:
+      $ref: '#/apiSpacesDataSource'
+    updated_at:
+      description: Last modified
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
       type: string
   type: object
 apiAgentChildRelationshipVerion:
@@ -222,28 +319,33 @@ apiAgentFunction:
   properties:
     api_key:
       description: Api key
-      example: '"example string"'
+      example: example string
       type: string
     created_at:
       description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
+    created_by:
+      description: Created by user id from DO
+      example: "12345"
+      format: uint64
+      type: string
     description:
       description: Agent description
-      example: '"example string"'
+      example: example string
       type: string
     faas_name:
-      example: '"example name"'
+      example: example name
       type: string
     faas_namespace:
-      example: '"example name"'
+      example: example name
       type: string
     input_schema:
       type: object
     name:
       description: Name
-      example: '"example name"'
+      example: example name
       type: string
     output_schema:
       type: object
@@ -254,11 +356,35 @@ apiAgentFunction:
       type: string
     url:
       description: Download your agent here
-      example: '"example string"'
+      example: example string
       type: string
     uuid:
       description: Unique id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiAgentFunctionVersion:
+  description: Function represents a function configuration for an agent
+  properties:
+    description:
+      description: Description of the function
+      example: example string
+      type: string
+    faas_name:
+      description: FaaS name of the function
+      example: example name
+      type: string
+    faas_namespace:
+      description: FaaS namespace of the function
+      example: example name
+      type: string
+    is_deleted:
+      description: Whether the function is deleted
+      example: true
+      type: boolean
+    name:
+      description: Name of the function
+      example: example name
       type: string
   type: object
 apiAgentFunctionVersion:
@@ -289,20 +415,20 @@ apiAgentGuardrail:
   description: A Agent Guardrail
   properties:
     agent_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     created_at:
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
     default_response:
-      example: '"example string"'
+      example: example string
       type: string
     description:
-      example: '"example string"'
+      example: example string
       type: string
     guardrail_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     is_attached:
       example: true
@@ -313,7 +439,7 @@ apiAgentGuardrail:
     metadata:
       type: object
     name:
-      example: '"example name"'
+      example: example name
       type: string
     priority:
       example: 123
@@ -326,7 +452,97 @@ apiAgentGuardrail:
       format: date-time
       type: string
     uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiAgentGuardrailInput:
+  properties:
+    guardrail_uuid:
+      description: Guardrail uuid
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    priority:
+      description: Priority of the guardrail
+      example: 123
+      format: int64
+      type: integer
+  type: object
+apiAgentGuardrailVersion:
+  description: Agent Guardrail version
+  properties:
+    is_deleted:
+      description: Whether the guardrail is deleted
+      example: true
+      type: boolean
+    name:
+      description: Guardrail Name
+      example: example name
+      type: string
+    priority:
+      description: Guardrail Priority
+      example: 123
+      format: int64
+      type: integer
+    uuid:
+      description: Guardrail UUID
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiAgentKnowledgeBaseVersion:
+  properties:
+    is_deleted:
+      description: Deletet at date / time
+      example: true
+      type: boolean
+    name:
+      description: Name of the knowledge base
+      example: example name
+      type: string
+    uuid:
+      description: Unique id of the knowledge base
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiAgentLogInsightsPrice:
+  properties:
+    attributes:
+      items:
+        $ref: '#/apiBillingAttribute'
+      type: array
+    display_name:
+      example: example name
+      type: string
+    prices:
+      items:
+        $ref: '#/apiBillingPrice'
+      type: array
+  type: object
+apiAgentLoggingConfig:
+  properties:
+    galileo_project_id:
+      description: Galileo project identifier
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    galileo_project_name:
+      description: Name of the Galileo project
+      example: example name
+      type: string
+    insights_enabled:
+      description: Whether insights are enabled
+      example: true
+      type: boolean
+    insights_enabled_at:
+      description: Timestamp when insights were enabled
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    log_stream_id:
+      description: Identifier for the log stream
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    log_stream_name:
+      description: Name of the log stream
+      example: example name
       type: string
   type: object
 apiAgentGuardrailVersion:
@@ -369,20 +585,20 @@ apiAgentModelUsage:
   properties:
     agent_name:
       description: Agent name
-      example: '"example name"'
+      example: example name
       type: string
     agent_uuid:
       description: Agent id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     requests_used:
       description: Requests used
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     tokens_used:
       description: Tokens  used
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
   type: object
@@ -393,10 +609,10 @@ apiAgentPrice:
         $ref: '#/apiBillingAttribute'
       type: array
     display_name:
-      example: '"example name"'
+      example: example name
       type: string
     model_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     prices:
       items:
@@ -457,6 +673,10 @@ apiAgentPublic:
       description: The DigitalOcean project ID associated with the agent
       example: 12345678-1234-1234-1234-123456789012
       type: string
+    provide_citations:
+      description: Whether the agent should provide in-response citations
+      example: true
+      type: boolean
     region:
       description: Region code
       example: '"tor1"'
@@ -486,7 +706,7 @@ apiAgentPublic:
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
     temperature:
@@ -523,6 +743,10 @@ apiAgentPublic:
       description: Unique agent id
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
+    version_hash:
+      description: The latest version of the agent
+      example: example string
+      type: string
   type: object
 apiAgentTemplate:
   description: Represents an AgentTemplate entity
@@ -533,12 +757,17 @@ apiAgentTemplate:
       format: date-time
       type: string
     description:
-      description: Description of the agent template
-      example: '"example string"'
+      description: Deprecated - Use summary instead
+      example: example string
       type: string
+    guardrails:
+      description: List of guardrails associated with the agent template
+      items:
+        $ref: '#/apiAgentTemplateGuardrail'
+      type: array
     instruction:
       description: Instructions for the agent template
-      example: '"example string"'
+      example: example string
       type: string
     k:
       description: The 'k' value for the agent template
@@ -550,6 +779,15 @@ apiAgentTemplate:
       items:
         $ref: '#/apiKnowledgeBase'
       type: array
+    long_description:
+      description: The long description of the agent template
+      example: '"Enhance your customer service with an AI agent designed to provide
+        consistent, helpful, and accurate support across multiple channels. This template
+        creates an agent that can answer product questions, troubleshoot common issues,
+        process simple requests, and maintain a friendly, on-brand voice throughout
+        customer interactions. Reduce response times, handle routine inquiries efficiently,
+        and ensure your customers feel heard and helped."'
+      type: string
     max_tokens:
       description: The max_tokens setting for the agent template
       example: 123
@@ -559,13 +797,34 @@ apiAgentTemplate:
       $ref: '#/apiModel'
     name:
       description: Name of the agent template
-      example: '"example name"'
+      example: example name
       type: string
+    short_description:
+      description: The short description of the agent template
+      example: '"This template has been designed with question-answer and conversational
+        use cases in mind. It comes with validated agent instructions, fine-tuned
+        model settings, and preconfigured guardrails defined for customer support-related
+        use cases."'
+      type: string
+    summary:
+      description: The summary of the agent template
+      example: example string
+      type: string
+    tags:
+      description: List of tags associated with the agent template
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
     temperature:
       description: The temperature setting for the agent template
       example: 123
       format: float
       type: number
+    template_type:
+      $ref: '#/apiAgentTemplateType'
     top_p:
       description: The top_p setting for the agent template
       example: 123
@@ -578,7 +837,137 @@ apiAgentTemplate:
       type: string
     uuid:
       description: Unique id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiAgentTemplateGuardrail:
+  properties:
+    priority:
+      description: Priority of the guardrail
+      example: 123
+      format: int32
+      type: integer
+    uuid:
+      description: Uuid of the guardrail
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiAgentTemplateType:
+  default: AGENT_TEMPLATE_TYPE_STANDARD
+  description: |-
+    - AGENT_TEMPLATE_TYPE_STANDARD: The standard agent template
+     - AGENT_TEMPLATE_TYPE_ONE_CLICK: The one click agent template
+  enum:
+  - AGENT_TEMPLATE_TYPE_STANDARD
+  - AGENT_TEMPLATE_TYPE_ONE_CLICK
+  example: AGENT_TEMPLATE_TYPE_STANDARD
+  type: string
+apiAgentVersion:
+  description: Represents an AgentVersion entity
+  properties:
+    agent_uuid:
+      description: Uuid of the agent this version belongs to
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    attached_child_agents:
+      description: List of child agent relationships
+      items:
+        $ref: '#/apiAgentChildRelationshipVerion'
+      type: array
+    attached_functions:
+      description: List of function versions
+      items:
+        $ref: '#/apiAgentFunctionVersion'
+      type: array
+    attached_guardrails:
+      description: List of guardrail version
+      items:
+        $ref: '#/apiAgentGuardrailVersion'
+      type: array
+    attached_knowledgebases:
+      description: List of knowledge base agent versions
+      items:
+        $ref: '#/apiAgentKnowledgeBaseVersion'
+      type: array
+    can_rollback:
+      description: Whether the version is able to be rolled back to
+      example: true
+      type: boolean
+    created_at:
+      description: Creation date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by_email:
+      description: User who created this version
+      example: example@example.com
+      type: string
+    currently_applied:
+      description: Whether this is the currently applied configuration
+      example: true
+      type: boolean
+    description:
+      description: Description of the agent
+      example: example string
+      type: string
+    id:
+      description: Unique identifier
+      example: "12345"
+      format: uint64
+      type: string
+    instruction:
+      description: Instruction for the agent
+      example: example string
+      type: string
+    k:
+      description: K value for the agent's configuration
+      example: 123
+      format: int64
+      type: integer
+    max_tokens:
+      description: Max tokens setting for the agent
+      example: 123
+      format: int64
+      type: integer
+    model_name:
+      description: Name of model associated to the agent version
+      example: example name
+      type: string
+    name:
+      description: Name of the agent
+      example: example name
+      type: string
+    provide_citations:
+      description: Whether the agent should provide in-response citations
+      example: true
+      type: boolean
+    retrieval_method:
+      $ref: '#/apiRetrievalMethod'
+    tags:
+      description: Tags associated with the agent
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    temperature:
+      description: Temperature setting for the agent
+      example: 123
+      format: float
+      type: number
+    top_p:
+      description: Top_p setting for the agent
+      example: 123
+      format: float
+      type: number
+    trigger_action:
+      description: Action triggering the configuration update
+      example: example string
+      type: string
+    version_hash:
+      description: Version hash
+      example: example string
       type: string
   type: object
 apiAgentVersion:
@@ -685,16 +1074,16 @@ apiAgreement:
   description: Agreement Description
   properties:
     description:
-      example: '"example string"'
+      example: example string
       type: string
     name:
-      example: '"example name"'
+      example: example name
       type: string
     url:
-      example: '"example string"'
+      example: example string
       type: string
     uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiAnthropicAPIKeyInfo:
@@ -707,7 +1096,7 @@ apiAnthropicAPIKeyInfo:
       type: string
     created_by:
       description: Created by user id from DO
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     deleted_at:
@@ -717,7 +1106,7 @@ apiAnthropicAPIKeyInfo:
       type: string
     name:
       description: Name
-      example: '"example name"'
+      example: example name
       type: string
     updated_at:
       description: Key last updated date
@@ -726,34 +1115,34 @@ apiAnthropicAPIKeyInfo:
       type: string
     uuid:
       description: Uuid
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiAuditHeader:
   description: An alternative way to provide auth information. for internal use only.
   properties:
     actor_id:
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     actor_ip:
-      example: '"example string"'
+      example: example string
       type: string
     actor_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     context_urn:
-      example: '"example string"'
+      example: example string
       type: string
     origin_application:
-      example: '"example string"'
+      example: example string
       type: string
     user_id:
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     user_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiBatchJobPhase:
@@ -771,19 +1160,19 @@ apiBatchJobPhase:
 apiBillingAttribute:
   properties:
     name:
-      example: '"example name"'
+      example: example name
       type: string
     value:
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiBillingPrice:
   properties:
     rate:
-      example: '"example string"'
+      example: example string
       type: string
     region:
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiCancelKnowledgeBaseIndexingJobInputPublic:
@@ -804,23 +1193,23 @@ apiChatbot:
   description: A Chatbot
   properties:
     button_background_color:
-      example: '"example string"'
+      example: example string
       type: string
     logo:
-      example: '"example string"'
+      example: example string
       type: string
     name:
       description: Name of chatbot
-      example: '"example name"'
+      example: example name
       type: string
     primary_color:
-      example: '"example string"'
+      example: example string
       type: string
     secondary_color:
-      example: '"example string"'
+      example: example string
       type: string
     starting_message:
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiCrawlingOption:
@@ -857,6 +1246,10 @@ apiCreateAgentAPIKeyOutput:
     api_key_info:
       $ref: '#/apiAgentAPIKeyInfo'
   type: object
+apiCreateAgentFromTemplateInput:
+  properties:
+    conversation_logs_enabled:
+      example: "false"
 apiCreateAgentFromTemplateInputPublic:
   properties:
     project_id:
@@ -870,6 +1263,10 @@ apiCreateAgentFromTemplateOutput:
     agent:
       $ref: '#/apiAgent'
   type: object
+apiCreateAgentInput:
+  properties:
+    conversation_logs_enabled:
+      example: "false"
 apiCreateAgentInputPublic:
   description: Parameters for Agent Creation
   properties:
@@ -892,7 +1289,7 @@ apiCreateAgentInputPublic:
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
     model_uuid:
@@ -902,6 +1299,10 @@ apiCreateAgentInputPublic:
     name:
       description: Agent name
       example: '"My Agent"'
+      type: string
+    open_ai_key_uuid:
+      description: Optional OpenAI API key ID to use with OpenAI models
+      example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     project_id:
       description: The id of the DigitalOcean project this agent will belong to
@@ -916,7 +1317,7 @@ apiCreateAgentInputPublic:
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
   type: object
@@ -956,18 +1357,81 @@ apiCreateChatbotOutput:
     chatbot:
       $ref: '#/apiChatbot'
   type: object
+apiCreateDataSourceFileUploadPresignedUrlsInputPublic:
+  description: Request for pre-signed URL's to upload files for KB Data Sources
+  properties:
+    files:
+      description: A list of files to generate presigned URLs for.
+      items:
+        $ref: '#/apiPresignedUrlFile'
+      type: array
+  type: object
 apiCreateDataSourceFileUploadPresignedUrlsOutput:
   description: Response with pre-signed urls to upload files.
   properties:
     request_id:
       description: The ID generated for the request for Presigned URLs.
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     uploads:
       description: A list of generated presigned URLs and object keys, one per file.
       items:
         $ref: '#/apiFilePresignedUrlResponse'
       type: array
+  type: object
+apiCreateEvaluationDatasetInputPublic:
+  description: Creates an evaluation dataset for an agent
+  properties:
+    file_upload_dataset:
+      $ref: '#/apiFileUploadDataSource'
+    name:
+      description: The name of the agent evaluation dataset.
+      example: example name
+      type: string
+  type: object
+apiCreateEvaluationDatasetOutput:
+  description: Output for creating an agent evaluation dataset
+  properties:
+    evaluation_dataset_uuid:
+      description: Evaluation dataset uuid.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiCreateEvaluationTestCaseInputPublic:
+  properties:
+    dataset_uuid:
+      description: Dataset against which the test‑case is executed.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    description:
+      description: Description of the test case.
+      example: example string
+      type: string
+    metrics:
+      description: Full metric list to use for evaluation test case.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    name:
+      description: Name of the test case.
+      example: example name
+      type: string
+    star_metric:
+      $ref: '#/apiStarMetric'
+    workspace_uuid:
+      description: The workspace uuid.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiCreateEvaluationTestCaseOutput:
+  properties:
+    test_case_uuid:
+      description: Test‑case UUID.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 apiCreateGuardrailOutput:
   description: CreateGuardrailOutput description
@@ -978,6 +1442,8 @@ apiCreateGuardrailOutput:
 apiCreateKnowledgeBaseDataSourceInputPublic:
   description: Data to create a knowledge base data source
   properties:
+    aws_data_source:
+      $ref: '#/apiAWSDataSource'
     knowledge_base_uuid:
       description: Knowledge base id
       example: '"12345678-1234-1234-1234-123456789012"'
@@ -1032,7 +1498,7 @@ apiCreateKnowledgeBaseInputPublic:
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
     vpc_uuid:
@@ -1046,6 +1512,18 @@ apiCreateKnowledgeBaseOutput:
     knowledge_base:
       $ref: '#/apiKnowledgeBase'
   type: object
+apiCreateModelAPIKeyInputPublic:
+  properties:
+    name:
+      description: A human friendly name to identify the key
+      example: Production Key
+      type: string
+  type: object
+apiCreateModelAPIKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiModelAPIKeyInfo'
+  type: object
 apiCreateModelOutput:
   description: Information about a newly created model
   properties:
@@ -1053,17 +1531,63 @@ apiCreateModelOutput:
       $ref: '#/apiModel'
   type: object
 apiCreateOpenAIAPIKeyInputPublic:
+  description: CreateOpenAIAPIKeyInputPublic is used to create a new OpenAI API key
+    for a specific agent.
   properties:
     api_key:
+      description: OpenAI API key
       example: '"sk-proj--123456789098765432123456789"'
+      type: string
     name:
+      description: Name of the key
       example: '"Production Key"'
+      type: string
+  type: object
 apiCreateOpenAIAPIKeyOutput:
   description: CreateOpenAIAPIKeyOutput is used to return the newly created OpenAI
     API key.
   properties:
     api_key_info:
       $ref: '#/apiOpenAIAPIKeyInfo'
+  type: object
+apiCreateWorkspaceInputPublic:
+  description: Parameters for Workspace Creation
+  properties:
+    agent_uuids:
+      description: Ids of the agents(s) to attach to the workspace
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    description:
+      description: Description of the workspace
+      example: example string
+      type: string
+    name:
+      description: Name of the workspace
+      example: example name
+      type: string
+  type: object
+apiCreateWorkspaceOutput:
+  properties:
+    workspace:
+      $ref: '#/apiWorkspace'
+  type: object
+apiDataPoint:
+  description: DataPoint message to represent a single data point
+  properties:
+    timestamp:
+      description: The timestamp of the data point
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    value:
+      description: The value of the data point
+      example: 123
+      format: double
+      type: number
   type: object
 apiDeleteAgentAPIKeyInputPublic:
   properties:
@@ -1075,6 +1599,14 @@ apiDeleteAgentAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiAgentAPIKeyInfo'
+  type: object
+apiDeleteAgentConversationLogConfigOutput:
+  description: Output for deleting agent conversation log config
+  properties:
+    agent_uuid:
+      description: Agent UUID
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 apiDeleteAgentInputPublic:
   properties:
@@ -1106,14 +1638,14 @@ apiDeleteChatbotOutput:
   properties:
     agent_uuid:
       description: Agent id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiDeleteGuardrailOutput:
   description: DeleteGuardrailOutput description
   properties:
     uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiDeleteKnowledgeBaseDataSourceInputPublic:
@@ -1127,11 +1659,11 @@ apiDeleteKnowledgeBaseDataSourceOutput:
   properties:
     data_source_uuid:
       description: Data source id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     knowledge_base_uuid:
       description: Knowledge base id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiDeleteKnowledgeBaseInputPublic:
@@ -1143,7 +1675,33 @@ apiDeleteKnowledgeBaseOutput:
   properties:
     uuid:
       description: The id of the deleted knowledge base
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiDeleteModelAPIKeyInputPublic:
+  properties:
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiDeleteModelAPIKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiModelAPIKeyInfo'
+  type: object
+apiDeleteOpenAIAPIKeyInputPublic:
+  properties:
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiDeleteOpenAIAPIKeyOutput:
+  description: DeleteOpenAIAPIKeyOutput is used to return the deleted OpenAI API key.
+  properties:
+    api_key_info:
+      $ref: '#/apiOpenAIAPIKeyInfo'
+  type: object
+apiDeleteWorkspaceOutput:
+  properties:
+    workspace_uuid:
+      description: Workspace
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiDeleteOpenAIAPIKeyInputPublic:
@@ -1166,7 +1724,7 @@ apiDeployment:
       type: string
     name:
       description: Name
-      example: '"example name"'
+      example: example name
       type: string
     status:
       $ref: '#/apiDeploymentStatus'
@@ -1177,11 +1735,11 @@ apiDeployment:
       type: string
     url:
       description: Access your deployed agent here
-      example: '"example string"'
+      example: example string
       type: string
     uuid:
       description: Unique id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     visibility:
       $ref: '#/apiDeploymentVisibility'
@@ -1216,6 +1774,364 @@ apiDeploymentVisibility:
   - VISIBILITY_PRIVATE
   example: VISIBILITY_UNKNOWN
   type: string
+apiDropboxDataSource:
+  description: Dropbox Data Source
+  properties:
+    folder:
+      example: example string
+      type: string
+    refresh_token:
+      description: Refresh token. you can obrain a refresh token by following the
+        oauth2 flow. see /v2/gen-ai/oauth2/dropbox/tokens for reference.
+      example: example string
+      type: string
+  type: object
+apiDropboxDataSourceDisplay:
+  description: Dropbox Data Source for Display
+  properties:
+    folder:
+      example: example string
+      type: string
+  type: object
+apiDropboxOauth2GetTokensInput:
+  description: The oauth2 code from google
+  properties:
+    code:
+      description: The oauth2 code from google
+      example: example string
+      type: string
+    redirect_url:
+      description: Redirect url
+      example: example string
+      type: string
+  type: object
+apiDropboxOauth2GetTokensOutput:
+  description: The dropbox oauth2 token and refresh token
+  properties:
+    refresh_token:
+      description: The refresh token
+      example: example string
+      type: string
+    token:
+      description: The access token
+      example: example string
+      type: string
+  type: object
+apiEvaluationDataset:
+  properties:
+    created_at:
+      description: Time created at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    dataset_name:
+      description: Name of the dataset.
+      example: example name
+      type: string
+    dataset_uuid:
+      description: UUID of the dataset.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    file_size:
+      description: The size of the dataset uploaded file in bytes.
+      example: "12345"
+      format: uint64
+      type: string
+    has_ground_truth:
+      description: Does the dataset have a ground truth column?
+      example: true
+      type: boolean
+    row_count:
+      description: Number of rows in the dataset.
+      example: 123
+      format: int64
+      type: integer
+  type: object
+apiEvaluationMetric:
+  properties:
+    description:
+      example: example string
+      type: string
+    inverted:
+      description: If true, the metric is inverted, meaning that a lower value is
+        better.
+      example: true
+      type: boolean
+    metric_name:
+      example: example name
+      type: string
+    metric_type:
+      $ref: '#/apiEvaluationMetricType'
+    metric_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    metric_value_type:
+      $ref: '#/apiEvaluationMetricValueType'
+    range_max:
+      description: The maximum value for the metric.
+      example: 123
+      format: float
+      type: number
+    range_min:
+      description: The minimum value for the metric.
+      example: 123
+      format: float
+      type: number
+  type: object
+apiEvaluationMetricResult:
+  properties:
+    error_description:
+      description: Error description if the metric could not be calculated.
+      example: example string
+      type: string
+    metric_name:
+      description: Metric name
+      example: example name
+      type: string
+    metric_value_type:
+      $ref: '#/apiEvaluationMetricValueType'
+    number_value:
+      description: The value of the metric as a number.
+      example: 123
+      format: double
+      type: number
+    reasoning:
+      description: Reasoning of the metric result.
+      example: example string
+      type: string
+    string_value:
+      description: The value of the metric as a string.
+      example: example string
+      type: string
+  type: object
+apiEvaluationMetricType:
+  default: METRIC_TYPE_UNSPECIFIED
+  enum:
+  - METRIC_TYPE_UNSPECIFIED
+  - METRIC_TYPE_GENERAL_QUALITY
+  - METRIC_TYPE_RAG_AND_TOOL
+  example: METRIC_TYPE_UNSPECIFIED
+  type: string
+apiEvaluationMetricValueType:
+  default: METRIC_VALUE_TYPE_UNSPECIFIED
+  enum:
+  - METRIC_VALUE_TYPE_UNSPECIFIED
+  - METRIC_VALUE_TYPE_NUMBER
+  - METRIC_VALUE_TYPE_STRING
+  - METRIC_VALUE_TYPE_PERCENTAGE
+  example: METRIC_VALUE_TYPE_UNSPECIFIED
+  type: string
+apiEvaluationRun:
+  properties:
+    agent_deleted:
+      description: Whether agent is deleted
+      example: true
+      type: boolean
+    agent_name:
+      description: Agent name
+      example: example name
+      type: string
+    agent_uuid:
+      description: Agent UUID.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    agent_version_hash:
+      description: Version hash
+      example: example string
+      type: string
+    agent_workspace_uuid:
+      description: Agent workspace uuid
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    created_by_user_email:
+      example: example@example.com
+      type: string
+    created_by_user_id:
+      example: "12345"
+      format: uint64
+      type: string
+    error_description:
+      description: The error description
+      example: example string
+      type: string
+    evaluation_run_uuid:
+      description: Evaluation run UUID.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    evaluation_test_case_workspace_uuid:
+      description: Evaluation test case workspace uuid
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    finished_at:
+      description: Run end time.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    pass_status:
+      description: The pass status of the evaluation run based on the star metric.
+      example: true
+      type: boolean
+    queued_at:
+      description: Run queued time.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    run_level_metric_results:
+      items:
+        $ref: '#/apiEvaluationMetricResult'
+      type: array
+    run_name:
+      description: Run name.
+      example: example name
+      type: string
+    star_metric_result:
+      $ref: '#/apiEvaluationMetricResult'
+    started_at:
+      description: Run start time.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    status:
+      $ref: '#/apiEvaluationRunStatus'
+    test_case_description:
+      description: Test case description.
+      example: example string
+      type: string
+    test_case_name:
+      description: Test case name.
+      example: example name
+      type: string
+    test_case_uuid:
+      description: Test-case UUID.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    test_case_version:
+      description: Test-case-version.
+      example: 123
+      format: int64
+      type: integer
+  type: object
+apiEvaluationRunStatus:
+  default: EVALUATION_RUN_STATUS_UNSPECIFIED
+  description: Evaluation Run Statuses
+  enum:
+  - EVALUATION_RUN_STATUS_UNSPECIFIED
+  - EVALUATION_RUN_QUEUED
+  - EVALUATION_RUN_RUNNING_DATASET
+  - EVALUATION_RUN_EVALUATING_RESULTS
+  - EVALUATION_RUN_CANCELLING
+  - EVALUATION_RUN_CANCELLED
+  - EVALUATION_RUN_SUCCESSFUL
+  - EVALUATION_RUN_PARTIALLY_SUCCESSFUL
+  - EVALUATION_RUN_FAILED
+  example: EVALUATION_RUN_STATUS_UNSPECIFIED
+  type: string
+apiEvaluationTestCase:
+  properties:
+    archived_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by_user_email:
+      example: example@example.com
+      type: string
+    created_by_user_id:
+      example: "12345"
+      format: uint64
+      type: string
+    dataset:
+      $ref: '#/apiEvaluationDataset'
+    dataset_name:
+      example: example name
+      type: string
+    dataset_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    description:
+      example: example string
+      type: string
+    latest_version_number_of_runs:
+      example: 123
+      format: int32
+      type: integer
+    metrics:
+      items:
+        $ref: '#/apiEvaluationMetric'
+      type: array
+    name:
+      example: example name
+      type: string
+    star_metric:
+      $ref: '#/apiStarMetric'
+    test_case_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    total_runs:
+      example: 123
+      format: int32
+      type: integer
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    updated_by_user_email:
+      example: example@example.com
+      type: string
+    updated_by_user_id:
+      example: "12345"
+      format: uint64
+      type: string
+    version:
+      example: 123
+      format: int64
+      type: integer
+  type: object
+apiEvaluationTestCaseMetricList:
+  properties:
+    metric_uuids:
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+  type: object
+apiEvaluationUsage:
+  properties:
+    agent_measurements:
+      items:
+        $ref: '#/apiEvaluationUsageMeasurement'
+      type: array
+    guardrail_measurements:
+      items:
+        $ref: '#/apiEvaluationUsageMeasurement'
+      type: array
+    start:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    stop:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+  type: object
+apiEvaluationUsageMeasurement:
+  properties:
+    measurements:
+      items:
+        $ref: '#/apiUsageMeasurement'
+      type: array
+    resource_name:
+      example: example name
+      type: string
+    resource_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
 apiFilePresignedUrlResponse:
   description: Detailed info about each presigned URL returned to the client.
   properties:
@@ -1226,16 +2142,16 @@ apiFilePresignedUrlResponse:
       type: string
     object_key:
       description: The unique object key to store the file as.
-      example: '"example string"'
+      example: example string
       type: string
     original_file_name:
       description: The original file name.
-      example: '"example name"'
+      example: example name
       type: string
     presigned_url:
       description: The actual presigned URL the client can use to upload the file
         directly.
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiFileUploadDataSource:
@@ -1243,27 +2159,71 @@ apiFileUploadDataSource:
   properties:
     original_file_name:
       description: The original file name
-      example: '"example name"'
+      example: example name
       type: string
     size_in_bytes:
       description: The size of the file in bytes
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     stored_object_key:
       description: The object key the file was stored as
-      example: '"example string"'
+      example: example string
+      type: string
+  type: object
+apiGalileoJWTOutput:
+  properties:
+    access_token:
+      description: Access token for the clickout to Galileo
+      example: example string
+      type: string
+    base_url:
+      description: Base URL for the Galileo instance
+      example: example string
+      type: string
+    expires_at:
+      description: Expiry time of the access token
+      example: example string
+      type: string
+  type: object
+apiGenerateOauth2URLOutput:
+  description: The url for the oauth2 flow
+  properties:
+    url:
+      description: The oauth2 url
+      example: example string
       type: string
   type: object
 apiGetAgentInputPublic:
   properties:
     uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
+apiGetAgentInsightsMetricsResponse:
+  properties:
+    metrics:
+      $ref: '#/apiMetricResponse'
+  type: object
 apiGetAgentOutput:
   description: One Agent
   properties:
     agent:
       $ref: '#/apiAgent'
+  type: object
+apiGetAgentRuntimeLogsRequestPublic:
+  properties:
+    follow:
+      example: "true"
+    tail_lines:
+      example: "10"
+    uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiGetAgentRuntimeLogsResponse:
+  description: Agent runtime logs response
+  properties:
+    live_url:
+      description: URL for live logs
+      example: example string
+      type: string
   type: object
 apiGetAgentTemplateInputPublic:
   properties:
@@ -1285,6 +2245,8 @@ apiGetAgentUsageInputPublic:
 apiGetAgentUsageOutput:
   description: Agent usage
   properties:
+    log_insights_usage:
+      $ref: '#/apiResourceUsage'
     usage:
       $ref: '#/apiResourceUsage'
   type: object
@@ -1309,6 +2271,46 @@ apiGetChildrenOutput:
       items:
         $ref: '#/apiAgent'
       type: array
+  type: object
+apiGetEvaluationRunOutput:
+  properties:
+    evaluation_run:
+      $ref: '#/apiEvaluationRun'
+  type: object
+apiGetEvaluationRunPromptResultsOutput:
+  properties:
+    prompt:
+      $ref: '#/apiPrompt'
+  type: object
+apiGetEvaluationRunResultsOutput:
+  description: Gets the full results of an evaluation run with all prompts.
+  properties:
+    evaluation_run:
+      $ref: '#/apiEvaluationRun'
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+    prompts:
+      description: The prompt level results.
+      items:
+        $ref: '#/apiPrompt'
+      type: array
+  type: object
+apiGetEvaluationRunUsageOutput:
+  properties:
+    usage:
+      $ref: '#/apiEvaluationUsage'
+  type: object
+apiGetEvaluationTestCaseOutput:
+  properties:
+    evaluation_test_case:
+      $ref: '#/apiEvaluationTestCase'
+  type: object
+apiGetEvaluationTestCaseUsageOutput:
+  properties:
+    usage:
+      $ref: '#/apiEvaluationUsage'
   type: object
 apiGetGuardrailOutput:
   properties:
@@ -1376,7 +2378,7 @@ apiGetModelPlaygroundTokensOutput:
   properties:
     token_limit_per_day:
       description: Daily token limit
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     tokens_remaining:
@@ -1491,6 +2493,56 @@ apiGetTeamAgreementOutput:
     team_agreement:
       $ref: '#/apiTeamAgreement'
   type: object
+apiGetWorkspaceOutput:
+  properties:
+    workspace:
+      $ref: '#/apiWorkspace'
+  type: object
+apiGoogleDriveDataSource:
+  description: Google Drive Data Source
+  properties:
+    folder_id:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    refresh_token:
+      description: Refresh token. you can obrain a refresh token by following the
+        oauth2 flow. see /v2/gen-ai/oauth2/google/tokens for reference.
+      example: example string
+      type: string
+  type: object
+apiGoogleDriveFolder:
+  description: A folder in google drive
+  properties:
+    id:
+      description: Id of the folder
+      example: example string
+      type: string
+    name:
+      description: Name of the folder
+      example: example name
+      type: string
+    parent_id:
+      description: Id of the parent folder - if empty it is a root folder
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiGoogleOauth2GetTokensOutput:
+  description: The google oauth2 token and refresh token
+  properties:
+    folders:
+      description: The folders
+      items:
+        $ref: '#/apiGoogleDriveFolder'
+      type: array
+    refresh_token:
+      description: The refresh token
+      example: example string
+      type: string
+    token:
+      description: The access token
+      example: example string
+      type: string
+  type: object
 apiGuardrail:
   description: Guardrail description
   properties:
@@ -1499,7 +2551,7 @@ apiGuardrail:
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
     created_at:
@@ -1507,11 +2559,16 @@ apiGuardrail:
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
+    created_by:
+      description: Created by user id from DO
+      example: "12345"
+      format: uint64
+      type: string
     default_response:
-      example: '"example string"'
+      example: example string
       type: string
     description:
-      example: '"example string"'
+      example: example string
       type: string
     is_default:
       example: true
@@ -1519,10 +2576,10 @@ apiGuardrail:
     metadata:
       type: object
     name:
-      example: '"example name"'
+      example: example name
       type: string
     template_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     type:
       $ref: '#/apiGuardrailType'
@@ -1532,7 +2589,7 @@ apiGuardrail:
       format: date-time
       type: string
     uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiGuardrailPrice:
@@ -1542,10 +2599,10 @@ apiGuardrailPrice:
         $ref: '#/apiBillingAttribute'
       type: array
     display_name:
-      example: '"example name"'
+      example: example name
       type: string
     guardrail_template_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     prices:
       items:
@@ -1561,15 +2618,15 @@ apiGuardrailTemplate:
       format: date-time
       type: string
     default_response:
-      example: '"example string"'
+      example: example string
       type: string
     description:
-      example: '"example string"'
+      example: example string
       type: string
     metadata:
       type: object
     name:
-      example: '"example name"'
+      example: example name
       type: string
     type:
       $ref: '#/apiGuardrailType'
@@ -1579,7 +2636,7 @@ apiGuardrailTemplate:
       format: date-time
       type: string
     uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiGuardrailType:
@@ -1591,6 +2648,18 @@ apiGuardrailType:
   - GUARDRAIL_TYPE_CONTENT_MODERATION
   example: GUARDRAIL_TYPE_UNKNOWN
   type: string
+apiIndexJobStatus:
+  default: INDEX_JOB_STATUS_UNKNOWN
+  enum:
+  - INDEX_JOB_STATUS_UNKNOWN
+  - INDEX_JOB_STATUS_PARTIAL
+  - INDEX_JOB_STATUS_IN_PROGRESS
+  - INDEX_JOB_STATUS_COMPLETED
+  - INDEX_JOB_STATUS_FAILED
+  - INDEX_JOB_STATUS_NO_CHANGES
+  - INDEX_JOB_STATUS_PENDING
+  example: INDEX_JOB_STATUS_UNKNOWN
+  type: string
 apiIndexedDataSource:
   properties:
     completed_at:
@@ -1600,7 +2669,21 @@ apiIndexedDataSource:
       type: string
     data_source_uuid:
       description: Uuid of the indexed data source
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    error_details:
+      description: A detailed error description
+      example: example string
+      type: string
+    error_msg:
+      description: A string code provinding a hint which part of the system experienced
+        an error
+      example: example string
+      type: string
+    failed_item_count:
+      description: Total count of files that have failed
+      example: "12345"
+      format: uint64
       type: string
     failed_item_count:
       description: Total count of files that have failed
@@ -1609,7 +2692,22 @@ apiIndexedDataSource:
       type: string
     indexed_file_count:
       description: Total count of files that have been indexed
-      example: '"12345"'
+      example: "12345"
+      format: uint64
+      type: string
+    indexed_item_count:
+      description: Total count of files that have been indexed
+      example: "12345"
+      format: uint64
+      type: string
+    removed_item_count:
+      description: Total count of files that have been removed
+      example: "12345"
+      format: uint64
+      type: string
+    skipped_item_count:
+      description: Total count of files that have been skipped
+      example: "12345"
       format: uint64
       type: string
     indexed_item_count:
@@ -1636,17 +2734,17 @@ apiIndexedDataSource:
       $ref: '#/apiIndexedDataSourceStatus'
     total_bytes:
       description: Total size of files in data source in bytes
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     total_bytes_indexed:
       description: Total size of files in data source in bytes that have been indexed
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     total_file_count:
       description: Total file count in the data source
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
   type: object
@@ -1678,7 +2776,7 @@ apiIndexingJob:
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
     finished_at:
@@ -1687,7 +2785,7 @@ apiIndexingJob:
       type: string
     knowledge_base_uuid:
       description: Knowledge base id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     phase:
       $ref: '#/apiBatchJobPhase'
@@ -1695,6 +2793,8 @@ apiIndexingJob:
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
+    status:
+      $ref: '#/apiIndexJobStatus'
     tokens:
       description: Number of tokens
       example: 123
@@ -1705,6 +2805,21 @@ apiIndexingJob:
       example: 123
       format: int64
       type: integer
+    total_items_failed:
+      description: Total Items Failed
+      example: "12345"
+      format: uint64
+      type: string
+    total_items_indexed:
+      description: Total Items Indexed
+      example: "12345"
+      format: uint64
+      type: string
+    total_items_skipped:
+      description: Total Items Skipped
+      example: "12345"
+      format: uint64
+      type: string
     updated_at:
       description: Last modified
       example: "2023-01-01T00:00:00Z"
@@ -1712,7 +2827,7 @@ apiIndexingJob:
       type: string
     uuid:
       description: Unique id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiIssueAgentTokenInputPublic:
@@ -1728,37 +2843,41 @@ apiIssueAgentTokenOutput:
   properties:
     access_token:
       description: The token
-      example: '"example string"'
+      example: example string
       type: string
     refresh_token:
       description: The token used to refresh
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiIssueModelPlaygroundTokenOutput:
   description: IssueModelPlaygroundTokenOutput description
   properties:
     access_token:
-      example: '"example string"'
+      example: example string
       type: string
     refresh_token:
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiKBDataSource:
   properties:
+    aws_data_source:
+      $ref: '#/apiAWSDataSource'
     bucket_name:
       description: Deprecated, moved to data_source_details
-      example: '"example name"'
+      example: example name
       type: string
     bucket_region:
       description: Deprecated, moved to data_source_details
-      example: '"example string"'
+      example: example string
       type: string
+    dropbox_data_source:
+      $ref: '#/apiDropboxDataSource'
     file_upload_data_source:
       $ref: '#/apiFileUploadDataSource'
     item_path:
-      example: '"example string"'
+      example: example string
       type: string
     spaces_data_source:
       $ref: '#/apiSpacesDataSource'
@@ -1779,10 +2898,10 @@ apiKnowledgeBase:
       format: date-time
       type: string
     database_id:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     embedding_model_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     is_public:
       description: Whether the knowledge base is public or not
@@ -1792,21 +2911,21 @@ apiKnowledgeBase:
       $ref: '#/apiIndexingJob'
     name:
       description: Name of knowledge base
-      example: '"example name"'
+      example: example name
       type: string
     project_id:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     region:
       description: Region code
-      example: '"example string"'
+      example: example string
       type: string
     tags:
       description: Tags to organize related resources
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
     updated_at:
@@ -1816,37 +2935,43 @@ apiKnowledgeBase:
       type: string
     user_id:
       description: Id of user that created the knowledge base
-      example: '"12345"'
+      example: "12345"
       format: int64
       type: string
     uuid:
       description: Unique id for knowledge base
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiKnowledgeBaseDataSource:
   description: Data Source configuration for Knowledge Bases
   properties:
+    aws_data_source:
+      $ref: '#/apiAWSDataSourceDisplay'
     bucket_name:
       description: Name of storage bucket - Deprecated, moved to data_source_details
-      example: '"example name"'
+      example: example name
       type: string
     created_at:
       description: Creation date / time
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
+    dropbox_data_source:
+      $ref: '#/apiDropboxDataSourceDisplay'
     file_upload_data_source:
       $ref: '#/apiFileUploadDataSource'
     item_path:
       description: Path of folder or object in bucket - Deprecated, moved to data_source_details
-      example: '"example string"'
+      example: example string
       type: string
+    last_datasource_indexing_job:
+      $ref: '#/apiIndexedDataSource'
     last_indexing_job:
       $ref: '#/apiIndexingJob'
     region:
       description: Region code - Deprecated, moved to data_source_details
-      example: '"example string"'
+      example: example string
       type: string
     spaces_data_source:
       $ref: '#/apiSpacesDataSource'
@@ -1857,7 +2982,7 @@ apiKnowledgeBaseDataSource:
       type: string
     uuid:
       description: Unique id of knowledge base
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     web_crawler_data_source:
       $ref: '#/apiWebCrawlerDataSource'
@@ -1869,10 +2994,10 @@ apiKnowledgeBasePrice:
         $ref: '#/apiBillingAttribute'
       type: array
     display_name:
-      example: '"example name"'
+      example: example name
       type: string
     model_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     prices:
       items:
@@ -1947,11 +3072,11 @@ apiLinkAgentOutput:
   properties:
     child_agent_uuid:
       description: Routed agent id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     parent_agent_uuid:
       description: A unique identifier for the parent agent.
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiLinkKnowledgeBaseInputPublic:
@@ -1966,6 +3091,12 @@ apiLinkKnowledgeBaseOutput:
     agent:
       $ref: '#/apiAgent'
   type: object
+apiLinkKnowledgeBasesInputPublic:
+  properties:
+    agent_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+    knowledge_base_uuids:
+      example: '["12345678-1234-1234-1234-123456789012", "12345678-1234-1234-1234-123456789012"]'
 apiLinks:
   description: Links to other pages
   properties:
@@ -1998,6 +3129,10 @@ apiListAgentPricesOutput:
       items:
         $ref: '#/apiAgentPrice'
       type: array
+    log_insights_prices:
+      items:
+        $ref: '#/apiAgentLogInsightsPrice'
+      type: array
   type: object
 apiListAgentTemplatesInputPublic:
   properties:
@@ -2005,6 +3140,8 @@ apiListAgentTemplatesInputPublic:
       example: "1"
     per_page:
       example: "20"
+    template_type:
+      example: one-click
 apiListAgentTemplatesOutput:
   properties:
     links:
@@ -2073,6 +3210,17 @@ apiListAgentsByOpenAIKeyOutput:
     meta:
       $ref: '#/apiMeta'
   type: object
+apiListAgentsByWorkspaceOutput:
+  properties:
+    agents:
+      items:
+        $ref: '#/apiAgent'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+  type: object
 apiListAgentsInputPublic:
   properties:
     only_deployed:
@@ -2126,6 +3274,55 @@ apiListAnthropicAPIKeysOutput:
       $ref: '#/apiLinks'
     meta:
       $ref: '#/apiMeta'
+  type: object
+apiListEvaluationMetricsOutput:
+  properties:
+    metrics:
+      items:
+        $ref: '#/apiEvaluationMetric'
+      type: array
+  type: object
+apiListEvaluationPricesOutput:
+  properties:
+    evaluation_agent_prices:
+      items:
+        $ref: '#/apiAgentPrice'
+      type: array
+    evaluation_guardrail_prices:
+      items:
+        $ref: '#/apiGuardrailPrice'
+      type: array
+  type: object
+apiListEvaluationRunsByAgentOutput:
+  properties:
+    evaluation_runs:
+      items:
+        $ref: '#/apiEvaluationRun'
+      type: array
+  type: object
+apiListEvaluationRunsByTestCaseOutput:
+  properties:
+    evaluation_runs:
+      description: List of evaluation runs.
+      items:
+        $ref: '#/apiEvaluationRun'
+      type: array
+  type: object
+apiListEvaluationTestCasesByWorkspaceOutput:
+  properties:
+    evaluation_test_cases:
+      items:
+        $ref: '#/apiEvaluationTestCase'
+      type: array
+  type: object
+apiListEvaluationTestCasesOutput:
+  properties:
+    evaluation_test_cases:
+      description: Alternative way of authentication for internal usage only - should
+        not be exposed to public api
+      items:
+        $ref: '#/apiEvaluationTestCase'
+      type: array
   type: object
 apiListGuardrailAgentsOutput:
   properties:
@@ -2264,6 +3461,24 @@ apiListKnowledgeBasesOutput:
     meta:
       $ref: '#/apiMeta'
   type: object
+apiListModelAPIKeysInputPublic:
+  properties:
+    page:
+      example: "1"
+    per_page:
+      example: "20"
+apiListModelAPIKeysOutput:
+  properties:
+    api_key_infos:
+      description: Api key infos
+      items:
+        $ref: '#/apiModelAPIKeyInfo'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+  type: object
 apiListModelPricesOutput:
   properties:
     model_prices:
@@ -2280,17 +3495,17 @@ apiListModelUsagesByAgentOutput:
       $ref: '#/apiMeta'
     request_limit_per_minute:
       description: Total request limit per minute
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     token_limit_per_day:
       description: Total token limit per day
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     token_limit_per_minute:
       description: Total token limit per minute
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     usages:
@@ -2364,6 +3579,21 @@ apiListRegionsOutput:
         $ref: '#/genaiapiRegion'
       type: array
   type: object
+apiListServerlessInferencePricesOutput:
+  properties:
+    serverless_inference_prices:
+      items:
+        $ref: '#/apiServerlessInferencePrice'
+      type: array
+  type: object
+apiListWorkspacesOutput:
+  properties:
+    workspaces:
+      description: Workspaces
+      items:
+        $ref: '#/apiWorkspace'
+      type: array
+  type: object
 apiMeta:
   description: Meta information about the data set
   properties:
@@ -2383,6 +3613,29 @@ apiMeta:
       format: int64
       type: integer
   type: object
+apiMetricResponse:
+  properties:
+    results:
+      description: A list of metric results
+      items:
+        $ref: '#/apiMetricResult'
+      type: array
+  type: object
+apiMetricResult:
+  description: MetricResult message to represent individual metric data
+  properties:
+    labels:
+      additionalProperties:
+        example: example string
+        type: string
+      description: Labels for the metric (e.g., metadata like agent_uuid, usage_type)
+      type: object
+    values:
+      description: Data points for the metric
+      items:
+        $ref: '#/apiDataPoint'
+      type: array
+  type: object
 apiModel:
   description: Description of a Model
   properties:
@@ -2395,11 +3648,11 @@ apiModel:
       type: string
     inference_name:
       description: Internally used name
-      example: '"example name"'
+      example: example name
       type: string
     inference_version:
       description: Internally used version
-      example: '"example string"'
+      example: example string
       type: string
     is_foundational:
       description: True if it is a foundational model provided by do
@@ -2410,11 +3663,11 @@ apiModel:
       type: object
     name:
       description: Name of the model
-      example: '"example name"'
+      example: example name
       type: string
     parent_uuid:
       description: Unique id of the model, this model is based on
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     provider:
       $ref: '#/apiModelProvider'
@@ -2429,7 +3682,7 @@ apiModel:
       type: boolean
     url:
       description: Download url
-      example: '"example string"'
+      example: example string
       type: string
     usecases:
       description: Usecases of the model
@@ -2441,10 +3694,48 @@ apiModel:
       type: array
     uuid:
       description: Unique id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     version:
       $ref: '#/apiModelVersion'
+  type: object
+apiModelAPIKeyInfo:
+  description: Model API Key Info
+  properties:
+    created_at:
+      description: Creation date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by:
+      description: Created by
+      example: "12345"
+      format: uint64
+      type: string
+    deleted_at:
+      description: Deleted date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    name:
+      description: Name
+      example: example name
+      type: string
+    secret_key:
+      example: example string
+      type: string
+    usecases:
+      description: Usecases of the model
+      example:
+      - MODEL_USECASE_AGENT
+      - MODEL_USECASE_GUARDRAIL
+      items:
+        $ref: '#/apiModelUsecase'
+      type: array
+    uuid:
+      description: Uuid
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 apiModelPrice:
   properties:
@@ -2453,10 +3744,10 @@ apiModelPrice:
         $ref: '#/apiBillingAttribute'
       type: array
     display_name:
-      example: '"example name"'
+      example: example name
       type: string
     model_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     prices:
       items:
@@ -2481,13 +3772,17 @@ apiModelPublic:
       example: "2021-01-01T00:00:00Z"
       format: date-time
       type: string
+    id:
+      description: Human-readable model identifier
+      example: llama3.3-70b-instruct
+      type: string
     is_foundational:
       description: True if it is a foundational model provided by do
       example: true
       type: boolean
     name:
-      description: Name of the model
-      example: Llama 3.3 (70b)
+      description: Display name of the model
+      example: Llama 3.3 Instruct (70B)
       type: string
     parent_uuid:
       description: Unique id of the model, this model is based on
@@ -2528,6 +3823,7 @@ apiModelUsecase:
      - MODEL_USECASE_KNOWLEDGEBASE: The model maybe used for knowledge bases (embedding models)
      - MODEL_USECASE_GUARDRAIL: The model maybe used for guardrails
      - MODEL_USECASE_REASONING: The model usecase for reasoning
+     - MODEL_USECASE_SERVERLESS: The model usecase for serverless inference
   enum:
   - MODEL_USECASE_UNKNOWN
   - MODEL_USECASE_AGENT
@@ -2535,6 +3831,7 @@ apiModelUsecase:
   - MODEL_USECASE_KNOWLEDGEBASE
   - MODEL_USECASE_GUARDRAIL
   - MODEL_USECASE_REASONING
+  - MODEL_USECASE_SERVERLESS
   example: MODEL_USECASE_UNKNOWN
   type: string
 apiModelVersion:
@@ -2556,6 +3853,27 @@ apiModelVersion:
       format: int64
       type: integer
   type: object
+apiMoveAgentsToWorkspaceInputPublic:
+  description: Parameters for Moving agents to a Workspace
+  properties:
+    agent_uuids:
+      description: Agent uuids
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    workspace_uuid:
+      description: Workspace uuid to move agents to
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiMoveAgentsToWorkspaceOutput:
+  properties:
+    workspace:
+      $ref: '#/apiWorkspace'
+  type: object
 apiOpenAIAPIKeyInfo:
   description: OpenAI API Key Info
   properties:
@@ -2566,7 +3884,7 @@ apiOpenAIAPIKeyInfo:
       type: string
     created_by:
       description: Created by user id from DO
-      example: '"12345"'
+      example: "12345"
       format: uint64
       type: string
     deleted_at:
@@ -2581,7 +3899,7 @@ apiOpenAIAPIKeyInfo:
       type: array
     name:
       description: Name
-      example: '"example name"'
+      example: example name
       type: string
     updated_at:
       description: Key last updated date
@@ -2590,7 +3908,7 @@ apiOpenAIAPIKeyInfo:
       type: string
     uuid:
       description: Uuid
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiPages:
@@ -2598,19 +3916,19 @@ apiPages:
   properties:
     first:
       description: First page
-      example: '"example string"'
+      example: example string
       type: string
     last:
       description: Last page
-      example: '"example string"'
+      example: example string
       type: string
     next:
       description: Next page
-      example: '"example string"'
+      example: example string
       type: string
     previous:
       description: Previous page
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiPresignedUrlFile:
@@ -2618,12 +3936,75 @@ apiPresignedUrlFile:
   properties:
     file_name:
       description: Local filename
-      example: '"example name"'
+      example: example name
       type: string
     file_size:
       description: The size of the file in bytes.
-      example: '"12345"'
+      example: "12345"
       format: int64
+      type: string
+  type: object
+apiPrompt:
+  properties:
+    ground_truth:
+      description: The ground truth for the prompt.
+      example: example string
+      type: string
+    input:
+      example: example string
+      type: string
+    input_tokens:
+      description: The number of input tokens used in the prompt.
+      example: "12345"
+      format: uint64
+      type: string
+    output:
+      example: example string
+      type: string
+    output_tokens:
+      description: The number of output tokens used in the prompt.
+      example: "12345"
+      format: uint64
+      type: string
+    prompt_chunks:
+      description: The list of prompt chunks.
+      items:
+        $ref: '#/apiPromptChunk'
+      type: array
+    prompt_id:
+      description: Prompt ID
+      example: 123
+      format: int64
+      type: integer
+    prompt_level_metric_results:
+      description: The metric results for the prompt.
+      items:
+        $ref: '#/apiEvaluationMetricResult'
+      type: array
+  type: object
+apiPromptChunk:
+  properties:
+    chunk_usage_pct:
+      description: The usage percentage of the chunk.
+      example: 123
+      format: double
+      type: number
+    chunk_used:
+      description: Indicates if the chunk was used in the prompt.
+      example: true
+      type: boolean
+    index_uuid:
+      description: The index uuid (Knowledge Base) of the chunk.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    source_name:
+      description: The source name for the chunk, e.g., the file name or document
+        title.
+      example: example name
+      type: string
+    text:
+      description: Text content of the chunk.
+      example: example string
       type: string
   type: object
 apiRefreshAgentTokenInputPublic:
@@ -2637,21 +4018,21 @@ apiRefreshAgentTokenOutput:
   properties:
     access_token:
       description: The token
-      example: '"example string"'
+      example: example string
       type: string
     refresh_token:
       description: Rhe refreshed token
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiRefreshModelPlaygroundTokenOutput:
   description: RefreshModelPlaygroundTokenOutput description
   properties:
     access_token:
-      example: '"example string"'
+      example: example string
       type: string
     refresh_token:
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiRegenerateAgentAPIKeyInputPublic:
@@ -2665,6 +4046,15 @@ apiRegenerateAgentAPIKeyOutput:
     api_key_info:
       $ref: '#/apiAgentAPIKeyInfo'
   type: object
+apiRegenerateModelAPIKeyInputPublic:
+  properties:
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiRegenerateModelAPIKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiModelAPIKeyInfo'
+  type: object
 apiResourceUsage:
   description: Resource Usage Description
   properties:
@@ -2673,7 +4063,7 @@ apiResourceUsage:
         $ref: '#/apiUsageMeasurement'
       type: array
     resource_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     start:
       example: "2023-01-01T00:00:00Z"
@@ -2717,23 +4107,93 @@ apiRollbackToAgentVersionOutput:
       $ref: '#/apiAuditHeader'
     version_hash:
       description: Unique identifier
-      example: '"example string"'
+      example: example string
       type: string
+  type: object
+apiRunEvaluationTestCaseInputPublic:
+  description: Run an evaluation test case.
+  properties:
+    agent_uuids:
+      description: Agent UUIDs to run the test case against.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    run_name:
+      description: The name of the run.
+      example: Evaluation Run Name
+      type: string
+    test_case_uuid:
+      description: Test-case UUID to run
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+  type: object
+apiRunEvaluationTestCaseOutput:
+  properties:
+    evaluation_run_uuids:
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+  type: object
+apiServerlessInferencePrice:
+  properties:
+    attributes:
+      items:
+        $ref: '#/apiBillingAttribute'
+      type: array
+    display_name:
+      example: example name
+      type: string
+    model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    prices:
+      items:
+        $ref: '#/apiBillingPrice'
+      type: array
   type: object
 apiSpacesDataSource:
   description: Spaces Bucket Data Source
   properties:
     bucket_name:
       description: Spaces bucket name
-      example: '"example name"'
+      example: example name
       type: string
     item_path:
-      example: '"example string"'
+      example: example string
       type: string
     region:
       description: Region of bucket
-      example: '"example string"'
+      example: example string
       type: string
+  type: object
+apiStarMetric:
+  properties:
+    metric_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    name:
+      example: example name
+      type: string
+    success_threshold:
+      description: |-
+        The success threshold for the star metric.
+        This is a value that the metric must reach to be considered successful.
+      example: 123
+      format: float
+      type: number
+    success_threshold_pct:
+      description: |-
+        The success threshold for the star metric.
+        This is a percentage value between 0 and 100.
+      example: 123
+      format: int32
+      type: integer
   type: object
 apiStartKnowledgeBaseIndexingJobInputPublic:
   description: StartKnowledgeBaseIndexingJobInputPublic description
@@ -2744,7 +4204,7 @@ apiStartKnowledgeBaseIndexingJobInputPublic:
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
     knowledge_base_uuid:
@@ -2766,7 +4226,7 @@ apiTeamAgreement:
       format: date-time
       type: string
     agreement_uuid:
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiTeamModelURLOutput:
@@ -2774,7 +4234,7 @@ apiTeamModelURLOutput:
   properties:
     url:
       description: The signed url that can be used to upload one file
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 apiUnlinkAgentFunctionInputPublic:
@@ -2806,11 +4266,11 @@ apiUnlinkAgentOutput:
   properties:
     child_agent_uuid:
       description: Routed agent id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     parent_agent_uuid:
       description: Pagent agent id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiUnlinkKnowledgeBaseInputPublic:
@@ -2832,7 +4292,7 @@ apiUpdateAgentAPIKeyInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     api_key_uuid:
-      description: Api key id
+      description: API key ID
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     name:
@@ -2903,13 +4363,26 @@ apiUpdateAgentFunctionOutput:
     agent:
       $ref: '#/apiAgent'
   type: object
+apiUpdateAgentInput:
+  properties:
+    agent_log_insights_enabled:
+      example: "false"
+    conversation_logs_enabled:
+      example: "false"
 apiUpdateAgentInputPublic:
   description: Data to modify an existing Agent
   properties:
+    agent_log_insights_enabled:
+      example: true
+      type: boolean
     anthropic_key_uuid:
       description: Optional anthropic key uuid for use with anthropic models
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
+    conversation_logs_enabled:
+      description: Optional update of conversation logs enabled
+      example: true
+      type: boolean
     description:
       description: Agent description
       example: '"My Agent Description"'
@@ -2941,10 +4414,17 @@ apiUpdateAgentInputPublic:
       description: Agent name
       example: '"My New Agent Name"'
       type: string
+    open_ai_key_uuid:
+      description: Optional OpenAI key uuid for use with OpenAI models
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
     project_id:
       description: The id of the DigitalOcean project this agent will belong to
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
+    provide_citations:
+      example: true
+      type: boolean
     retrieval_method:
       $ref: '#/apiRetrievalMethod'
     tags:
@@ -2952,7 +4432,7 @@ apiUpdateAgentInputPublic:
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
     temperature:
@@ -3026,6 +4506,40 @@ apiUpdateChatbotOutput:
     chatbot:
       $ref: '#/apiChatbot'
   type: object
+apiUpdateEvaluationTestCaseInputPublic:
+  properties:
+    dataset_uuid:
+      description: Dataset against which the test‑case is executed.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    description:
+      description: Description of the test case.
+      example: example string
+      type: string
+    metrics:
+      $ref: '#/apiEvaluationTestCaseMetricList'
+    name:
+      description: Name of the test case.
+      example: example name
+      type: string
+    star_metric:
+      $ref: '#/apiStarMetric'
+    test_case_uuid:
+      description: Test-case UUID to update
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiUpdateEvaluationTestCaseOutput:
+  properties:
+    test_case_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    version:
+      description: The new verson of the test case.
+      example: 123
+      format: int32
+      type: integer
+  type: object
 apiUpdateGuardrailOutput:
   description: UpdateGuardrailOutput description
   properties:
@@ -3058,7 +4572,7 @@ apiUpdateKnowledgeBaseInputPublic:
       example:
       - example string
       items:
-        example: '"example string"'
+        example: example string
         type: string
       type: array
     uuid:
@@ -3101,19 +4615,37 @@ apiUpdateLinkedAgentOutput:
   properties:
     child_agent_uuid:
       description: Routed agent id
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     parent_agent_uuid:
       description: A unique identifier for the parent agent.
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     rollback:
       example: true
       type: boolean
     uuid:
       description: Unique id of linkage
-      example: '"123e4567-e89b-12d3-a456-426614174000"'
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+  type: object
+apiUpdateLogInsightSettingsOutput:
+  type: object
+apiUpdateModelAPIKeyInputPublic:
+  properties:
+    api_key_uuid:
+      description: API key ID
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    name:
+      description: Name
+      example: '"Production Key"'
+      type: string
+  type: object
+apiUpdateModelAPIKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiModelAPIKeyInfo'
   type: object
 apiUpdateModelMetadataOutput:
   description: Information about updated meta data for a model
@@ -3122,18 +4654,48 @@ apiUpdateModelMetadataOutput:
       $ref: '#/apiModel'
   type: object
 apiUpdateOpenAIAPIKeyInputPublic:
+  description: UpdateOpenAIAPIKeyInputPublic is used to update an existing OpenAI
+    API key for a specific agent.
   properties:
     api_key:
+      description: OpenAI API key
       example: '"sk-ant-12345678901234567890123456789012"'
+      type: string
     api_key_uuid:
+      description: API key ID
       example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
     name:
+      description: Name of the key
       example: '"Production Key"'
+      type: string
+  type: object
 apiUpdateOpenAIAPIKeyOutput:
   description: UpdateOpenAIAPIKeyOutput is used to return the updated OpenAI API key.
   properties:
     api_key_info:
       $ref: '#/apiOpenAIAPIKeyInfo'
+  type: object
+apiUpdateWorkspaceInputPublic:
+  description: Parameters for Update Workspace
+  properties:
+    description:
+      description: The new description of the workspace
+      example: example string
+      type: string
+    name:
+      description: The new name of the workspace
+      example: example name
+      type: string
+    workspace_uuid:
+      description: Workspace UUID.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiUpdateWorkspaceOutput:
+  properties:
+    workspace:
+      $ref: '#/apiWorkspace'
   type: object
 apiUsageMeasurement:
   description: Usage Measurement Description
@@ -3143,15 +4705,23 @@ apiUsageMeasurement:
       format: int64
       type: integer
     usage_type:
-      example: '"example string"'
+      example: example string
       type: string
   type: object
+apiUsageType:
+  default: USAGE_TYPE_UNSPECIFIED
+  enum:
+  - USAGE_TYPE_UNSPECIFIED
+  - INPUT
+  - OUTPUT
+  example: USAGE_TYPE_UNSPECIFIED
+  type: string
 apiWebCrawlerDataSource:
   description: WebCrawlerDataSource
   properties:
     base_url:
       description: The base url to crawl.
-      example: '"example string"'
+      example: example string
       type: string
     crawling_option:
       $ref: '#/apiCrawlingOption'
@@ -3159,6 +4729,55 @@ apiWebCrawlerDataSource:
       description: Whether to ingest and index media (images, etc.) on web pages.
       example: true
       type: boolean
+  type: object
+apiWorkspace:
+  properties:
+    agents:
+      description: Agents
+      items:
+        $ref: '#/apiAgent'
+      type: array
+    created_at:
+      description: Creation date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by:
+      description: The id of user who created this workspace
+      example: "12345"
+      format: uint64
+      type: string
+    created_by_email:
+      description: The email of the user who created this workspace
+      example: example@example.com
+      type: string
+    deleted_at:
+      description: Deleted date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    description:
+      description: Description of the workspace
+      example: example string
+      type: string
+    evaluation_test_cases:
+      description: Evaluations
+      items:
+        $ref: '#/apiEvaluationTestCase'
+      type: array
+    name:
+      description: Name of the workspace
+      example: example name
+      type: string
+    updated_at:
+      description: Update date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    uuid:
+      description: Unique id
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 dbaasClusterStatus:
   default: CREATING
@@ -3182,11 +4801,11 @@ genaiapiRegion:
   properties:
     inference_url:
       description: Url for inference server
-      example: '"example string"'
+      example: example string
       type: string
     region:
       description: Region code
-      example: '"example string"'
+      example: example string
       type: string
     serves_batch:
       description: This datacenter is capable of running batch jobs
@@ -3198,7 +4817,7 @@ genaiapiRegion:
       type: boolean
     stream_inference_url:
       description: The url for the inference streaming server
-      example: '"example string"'
+      example: example string
       type: string
   type: object
 protobufNullValue:

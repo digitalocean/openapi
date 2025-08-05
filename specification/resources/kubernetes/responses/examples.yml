@@ -106,6 +106,9 @@ kubernetes_clusters_all:
       cluster_autoscaler_configuration:
         scale_down_utilization_threshold: 0.65
         scale_down_unneeded_time: "1m"
+        expanders:
+        - priority
+        - random
     meta:
       total: 1
 
@@ -216,6 +219,9 @@ kubernetes_single:
       cluster_autoscaler_configuration:
         scale_down_utilization_threshold: 0.65
         scale_down_unneeded_time: "1m"
+        expanders:
+        - priority
+        - random
 
 kubernetes_updated:
   value:
@@ -324,6 +330,9 @@ kubernetes_updated:
       cluster_autoscaler_configuration:
         scale_down_utilization_threshold: 0.65
         scale_down_unneeded_time: "1m"
+        expanders:
+        - priority
+        - random
 
 kubernetes_clusters_create_basic_response:
   value:
@@ -397,6 +406,9 @@ kubernetes_clusters_create_basic_response:
       cluster_autoscaler_configuration:
         scale_down_utilization_threshold: 0.65
         scale_down_unneeded_time: "1m"
+        expanders:
+        - priority
+        - random
 
 kubernetes_clusters_multi_pool_response:
   value:
@@ -507,6 +519,9 @@ kubernetes_clusters_multi_pool_response:
       cluster_autoscaler_configuration:
         scale_down_utilization_threshold: 0.65
         scale_down_unneeded_time: "1m"
+        expanders:
+        - priority
+        - random
 
 kubernetes_options:
   value:

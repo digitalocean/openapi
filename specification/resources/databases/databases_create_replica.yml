@@ -9,7 +9,7 @@ description: >-
   where it will be located.
 
 
-  **Note**: Read-only replicas are not supported for Redis clusters.
+  **Note**: Read-only replicas are not supported for Caching or Valkey clusters.
 
 
   The response will be a JSON object with a key called `replica`. The value of
