@@ -133,4 +133,3 @@ properties:
 required:
 - size
 - image
-- project_id
