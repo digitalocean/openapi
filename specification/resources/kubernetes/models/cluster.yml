@@ -48,7 +48,7 @@ properties:
     format: uuid
     example: c33931f2-a26a-4e61-b85c-4e95a2ec431b
     description: A string specifying the UUID of the VPC to which the
-      Kubernetes cluster is assigned.
+      Kubernetes cluster is assigned.<br><br>Requires `vpc:read` scope.
 
   ipv4:
     type: string
@@ -71,8 +71,9 @@ properties:
       - k8s:bd5f5959-5e1e-4205-a714-a914373942af
       - production
       - web-team
-    description: An array of tags applied to the Kubernetes cluster. All
+    description: An array of tags to apply to the Kubernetes cluster. All
       clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`.
+      <br><br>Requires `tag:read` and `tag:create` scope, as well as `tag:delete` if existing tags are getting removed.
 
   node_pools:
     type: array
@@ -163,6 +164,12 @@ properties:
 
   routing_agent:
     $ref: "routing_agent.yml"
+
+  amd_gpu_device_plugin:
+    $ref: "amd_gpu_device_plugin.yml"
+
+  amd_gpu_device_metrics_exporter_plugin:
+    $ref: "amd_gpu_device_metrics_exporter_plugin.yml"
 
 required:
   - name

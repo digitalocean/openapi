@@ -74,6 +74,6 @@ security:
   - genai:read
 summary: List Available Models
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_list_models.yml

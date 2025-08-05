@@ -42,6 +42,6 @@ security:
   - genai:update
 summary: Update OpenAI API Key
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_update_openai_api_key.yml

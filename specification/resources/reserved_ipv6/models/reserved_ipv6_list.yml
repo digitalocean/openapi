@@ -20,11 +20,11 @@ properties:
           format: date-time
           example: '2020-01-01T00:00:00Z'  
         droplet:
+          description: Requires `droplet:read` scope.
           anyOf:
             - title: 'null'
               type: object
               nullable: true
-              description: If the reserved IP is not assigned to a Droplet, the
-                value will be null.
+              description: If the reserved IP is not assigned to a Droplet, the value will be null.<br><br>Requires `droplet:read` scope.
             - $ref: '../../droplets/models/droplet.yml'
           example: null

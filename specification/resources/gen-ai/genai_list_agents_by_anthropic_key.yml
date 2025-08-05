@@ -49,6 +49,6 @@ security:
   - genai:read
 summary: List agents by Anthropic key
 tags:
-- GenAI Platform (Public Preview)
+- GradientAI Platform
 x-codeSamples:
 - $ref: examples/curl/genai_list_agents_by_anthropic_key.yml
