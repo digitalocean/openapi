@@ -153,7 +153,7 @@ tags:
       DigitalOcean's [managed database service](https://docs.digitalocean.com/products/databases)
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://docs.digitalocean.com/products/databases/postgresql/),
-      [Redis](https://docs.digitalocean.com/products/databases/redis/),
+      [Caching](https://docs.digitalocean.com/products/databases/redis/),
       [Valkey](https://docs.digitalocean.com/products/databases/valkey/),
       [MySQL](https://docs.digitalocean.com/products/databases/mysql/),
       [MongoDB](https://docs.digitalocean.com/products/databases/mongodb/), and
@@ -940,7 +940,7 @@ paths:
       $ref: "resources/databases/databases_list_kafka_schemas.yml"
     post:
       $ref: "resources/databases/databases_create_kafka_schema.yml"
-  
+
   /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}:
     get:
       $ref: "resources/databases/databases_get_kafka_schema.yml"
@@ -950,6 +950,18 @@ paths:
   /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}/versions/{version}:
     get:
       $ref: "resources/databases/databases_get_kafka_schema_version.yml"
+
+  /v2/databases/{database_cluster_uuid}/schema-registry/config:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema_config.yml"
+    put:
+      $ref: "resources/databases/databases_update_kafka_schema_config.yml"
+  
+  /v2/databases/{database_cluster_uuid}/schema-registry/config/{subject_name}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema_subject_config.yml"
+    put:
+      $ref: "resources/databases/databases_update_kafka_schema_subject_config.yml"
 
   /v2/databases/metrics/credentials:
     get:
@@ -1654,21 +1666,21 @@ paths:
 
   /v2/registries:
     get:
-      $ref: 'resources/registry/registries_get_all.yml'
+      $ref: "resources/registry/registries_get_all.yml"
 
     post:
-      $ref: 'resources/registry/registries_create.yml'
+      $ref: "resources/registry/registries_create.yml"
 
   /v2/registries/{registry_name}:
     get:
-      $ref: 'resources/registry/registries_get.yml'
+      $ref: "resources/registry/registries_get.yml"
 
     delete:
-      $ref: 'resources/registry/registries_delete.yml'
+      $ref: "resources/registry/registries_delete.yml"
 
   /v2/registries/{registry_name}/docker-credentials:
     get:
-      $ref: 'resources/registry/registries_get_dockerCredentials.yml'
+      $ref: "resources/registry/registries_get_dockerCredentials.yml"
 
   /v2/registries/subscription:
     get:
@@ -1680,7 +1692,7 @@ paths:
   /v2/registries/options:
     get:
       $ref: "resources/registry/registries_get_options.yml"
-  
+
   /v2/registries/{registry_name}/garbage-collection:
     get:
       $ref: "resources/registry/registries_get_garbageCollection.yml"
@@ -1695,7 +1707,7 @@ paths:
   /v2/registries/{registry_name}/garbage-collection/{garbage_collection_uuid}:
     put:
       $ref: "resources/registry/registries_update_garbageCollection.yml"
-  
+
   /v2/registries/{registry_name}/repositoriesV2:
     get:
       $ref: "resources/registry/registries_list_repositoriesV2.yml"
@@ -1703,7 +1715,7 @@ paths:
   /v2/registries/{registry_name}/repositories/{repository_name}:
     delete:
       $ref: "resources/registry/registries_delete_repository.yml"
-  
+
   /v2/registries/{registry_name}/repositories/{repository_name}/tags:
     get:
       $ref: "resources/registry/registries_list_repositoryTags.yml"
@@ -1733,7 +1745,7 @@ paths:
 
     delete:
       $ref: "resources/registry/registry_delete.yml"
-  
+
   /v2/registry/subscription:
     get:
       $ref: "resources/registry/registry_get_subscription.yml"
@@ -1844,13 +1856,13 @@ paths:
       $ref: "resources/byoip_prefixes/byoip_prefixes_create.yml"
     get:
       $ref: "resources/byoip_prefixes/byoip_prefixes_list.yml"
-  
+
   /v2/byoip_prefixes/{byoip_prefix_uuid}:
     get:
       $ref: "resources/byoip_prefixes/byoip_prefixes_get.yml"
     delete:
       $ref: "resources/byoip_prefixes/byoip_prefixes_delete.yml"
-  
+
   /v2/byoip_prefixes/{byoip_prefix_uuid}/ips:
     get:
       $ref: "resources/byoip_prefixes/byoip_prefix_list_resources.yml"
@@ -2038,8 +2050,6 @@ paths:
     delete:
       $ref: "resources/uptime/delete_alert.yml"
 
-
-
   /v2/gen-ai/agents:
     get:
       $ref: 'resources/gen-ai/genai_list_agents.yml'
@@ -2125,6 +2135,11 @@ paths:
   /v2/gen-ai/agents/{uuid}/deployment_visibility:
     put:
       $ref: 'resources/gen-ai/genai_update_agent_deployment_visibility.yml'
+
+
+  /v2/gen-ai/agents/{uuid}/usage:
+    get:
+      $ref: 'resources/gen-ai/genai_get_agent_usage.yml'
 
 
   /v2/gen-ai/agents/{uuid}/versions:
@@ -2296,6 +2311,16 @@ paths:
       $ref: 'resources/gen-ai/genai_regenerate_model_api_key.yml'
 
 
+  /v2/gen-ai/oauth2/dropbox/tokens:
+    post:
+      $ref: 'resources/gen-ai/genai_create_oauth2_dropbox_tokens.yml'
+
+
+  /v2/gen-ai/oauth2/url:
+    get:
+      $ref: 'resources/gen-ai/genai_get_oauth2_url.yml'
+
+
   /v2/gen-ai/openai/keys:
     get:
       $ref: 'resources/gen-ai/genai_list_openai_api_keys.yml'
@@ -2355,7 +2380,6 @@ paths:
   /v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases:
     get:
       $ref: 'resources/gen-ai/genai_list_evaluation_test_cases_by_workspace.yml'
-
 
 components:
   securitySchemes:
