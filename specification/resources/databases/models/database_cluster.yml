@@ -171,6 +171,12 @@ properties:
       Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the cluster's primary node and
       a second entry for the cluster's standby node(s).
     readOnly: true
+  autoscale:
+    allOf:
+    - $ref: './database_autoscale_params.yml'
+    description: >-
+      Autoscaling configuration for the database cluster. Currently only supports storage autoscaling. If null, autoscaling is
+      not configured for the cluster.
 
 
 
