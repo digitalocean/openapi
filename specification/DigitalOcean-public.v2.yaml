@@ -552,6 +552,16 @@ tags:
       list, and delete custom VPCs as well as retrieve information about the
       resources assigned to them.
 
+  - name: VPC NAT Gateways
+    description: |-
+      [VPC NAT Gateways](https://docs.digitalocean.com/products/networking/vpc/how-to/create-nat-gateway/)
+      allow resources in a private VPC to access the public internet without
+      exposing them to incoming traffic.
+
+      By sending requests to the `/v2/vpc_nat_gateways` endpoint, you can create,
+      configure, list, and delete VPC NAT Gateways as well as retrieve information
+      about the resources assigned to them.
+
 paths:
   /v2/1-clicks:
     get:
@@ -2017,6 +2027,23 @@ paths:
 
     delete:
       $ref: "resources/vpc_peerings/vpc_peerings_delete.yml"
+
+  /v2/vpc_nat_gateways:
+    get:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_list.yml"
+
+    post:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_create.yml"
+
+  /v2/vpc_nat_gateways/{vpc_nat_gateway_id}:
+    get:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_get.yml"
+
+    put:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_update.yml"
+
+    delete:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_delete.yml"
 
   /v2/uptime/checks:
     get:
