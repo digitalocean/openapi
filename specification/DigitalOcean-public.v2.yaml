@@ -907,6 +907,12 @@ paths:
     put:
       $ref: "resources/databases/databases_upgrade_major_version.yml"
 
+  /v2/databases/{database_cluster_uuid}/autoscale:
+    get:
+      $ref: "resources/databases/databases_get_autoscale.yml"
+    put:
+      $ref: "resources/databases/databases_update_autoscale.yml"
+
   /v2/databases/{database_cluster_uuid}/topics:
     get:
       $ref: "resources/databases/databases_list_kafka_topics.yml"
