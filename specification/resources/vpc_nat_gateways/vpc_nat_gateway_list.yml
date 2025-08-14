@@ -3,12 +3,12 @@ operationId: vpcnatgateways_list
 summary: List All VPC NAT Gateways
 
 description: |
-  To list all VPC NAT gateways in your team, send a GET request to `/v2/vpc_nat_gateways  `.
+  To list all VPC NAT gateways in your team, send a GET request to `/v2/vpc_nat_gateways`.
   The response body will be a JSON object with a key of `vpc_nat_gateways` containing an array of VPC NAT gateway objects.
   These each contain the standard VPC NAT gateway attributes.
 
 tags:
-  - VPC NAT Gateways
+  - "[Public Preview] VPC NAT Gateways"
 
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'

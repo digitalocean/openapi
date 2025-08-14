@@ -21,14 +21,14 @@ properties:
   state:
     type: string
     enum:
-      - new
-      - provisioning
-      - active
-      - deleting
-      - error
-      - invalid
+      - NEW
+      - PROVISIONING
+      - ACTIVE
+      - DELETING
+      - ERROR
+      - INVALID
     description: The current state of the VPC NAT gateway.
-    example: active
+    example: ACTIVE
 
   region:
     type: string
@@ -49,7 +49,7 @@ properties:
       - syd1
       - atl1
     example: tor1
-    description: The region in which the VPC NAT gateway is located.
+    description: The region in which the VPC NAT gateway is created.
 
   size:
     type: integer
@@ -83,6 +83,7 @@ properties:
             ipv4:
               type: string
               example: 174.138.113.197
+              description: IPv4 address of the public gateway.
     description: An object containing egress information for the VPC NAT gateway.
 
   udp_timeout_seconds:

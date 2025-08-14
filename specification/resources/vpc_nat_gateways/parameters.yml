@@ -8,7 +8,7 @@ vpc_nat_gateway_id:
   example: 70e1b58d-cdec-4e95-b3ee-2d4d95feff51
 
 vpc_nat_gateway_state:
-  in: path
+  in: query
   name: state
   description: The current state of the VPC NAT gateway.
   schema:
@@ -23,7 +23,7 @@ vpc_nat_gateway_state:
   example: active
 
 vpc_nat_gateway_region:
-  in: path
+  in: query
   name: region
   description: The region where the VPC NAT gateway is located.
   schema:
@@ -47,7 +47,7 @@ vpc_nat_gateway_region:
   example: tor1
 
 vpc_nat_gateway_type:
-  in: path
+  in: query
   name: type
   description: The type of the VPC NAT gateway.
   schema:
@@ -57,7 +57,7 @@ vpc_nat_gateway_type:
   example: public
 
 vpc_nat_gateway_name:
-  in: path
+  in: query
   name: name
   description: The name of the VPC NAT gateway.
   schema:

@@ -8,7 +8,7 @@ description: |
   of the VPC NAT Gateway including existing attributes. 
 
 tags:
-  - VPC NAT Gateways
+  - "[Public Preview] VPC NAT Gateways"
 
 parameters:
   - $ref: 'parameters.yml#/vpc_nat_gateway_id'
@@ -17,7 +17,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/vpc_nat_gateway.yml'
+        $ref: 'models/vpc_nat_gateway_update.yml'
       examples:
         VPC NAT Gateway Update Request:
           $ref: 'examples.yml#/vpc_nat_gateway_update_request'

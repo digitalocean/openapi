@@ -535,6 +535,16 @@ tags:
 
       To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
 
+  - name: "[Public Preview] VPC NAT Gateways"
+    description: |-
+      [VPC NAT Gateways](https://docs.digitalocean.com/products/networking/vpc/how-to/create-nat-gateway/)
+      allow resources in a private VPC to access the public internet without
+      exposing them to incoming traffic.
+
+      By sending requests to the `/v2/vpc_nat_gateways` endpoint, you can create,
+      configure, list, and delete VPC NAT Gateways as well as retrieve information
+      about the resources assigned to them.
+
   - name: VPC Peerings
     description: |-
       [VPC Peerings](https://docs.digitalocean.com/products/networking/vpc/how-to/create-peering/)
@@ -551,16 +561,6 @@ tags:
       By sending requests to the `/v2/vpcs` endpoint, you can create, configure,
       list, and delete custom VPCs as well as retrieve information about the
       resources assigned to them.
-
-  - name: VPC NAT Gateways
-    description: |-
-      [VPC NAT Gateways](https://docs.digitalocean.com/products/networking/vpc/how-to/create-nat-gateway/)
-      allow resources in a private VPC to access the public internet without
-      exposing them to incoming traffic.
-
-      By sending requests to the `/v2/vpc_nat_gateways` endpoint, you can create,
-      configure, list, and delete VPC NAT Gateways as well as retrieve information
-      about the resources assigned to them.
 
 paths:
   /v2/1-clicks:
@@ -2035,7 +2035,7 @@ paths:
     post:
       $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_create.yml"
 
-  /v2/vpc_nat_gateways/{vpc_nat_gateway_id}:
+  /v2/vpc_nat_gateways/{id}:
     get:
       $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_get.yml"
 

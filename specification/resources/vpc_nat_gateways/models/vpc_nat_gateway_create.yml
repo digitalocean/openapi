@@ -32,7 +32,7 @@ properties:
       - syd1
       - atl1
     example: tor1
-    description: The region in which the VPC NAT gateway is located.
+    description: The region in which the VPC NAT gateway is created.
 
   size:
     type: integer
