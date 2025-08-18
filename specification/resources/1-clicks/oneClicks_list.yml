@@ -20,9 +20,6 @@ responses:
   '200':
     $ref: 'responses/oneClicks_all.yml'
 
-  '429':
-    $ref: '../../shared/responses/too_many_requests.yml'
-
   '500':
     $ref: '../../shared/responses/server_error.yml'
 
