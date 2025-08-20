@@ -43,11 +43,11 @@ byoip_prefix:
       type: string
       description: Reason for failure, if applicable
       example: ""
-    is_locked:
+    locked:
       type: boolean
       description: Whether the BYOIP prefix is locked
       example: false
-    is_advertised:
+    advertised:
       type: boolean
       description: Whether the BYOIP prefix is being advertised
       example: true

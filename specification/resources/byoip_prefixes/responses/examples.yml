@@ -12,8 +12,8 @@ byoip_prefix_get:
     prefix: "203.0.113.0/24"
     validations: []
     failure_reason: ""
-    is_advertised: true
-    is_locked: false
+    advertised: true
+    locked: false
     project_id: "12345678-1234-1234-1234-123456789012"
 
 byoip_prefix_update:
@@ -24,8 +24,8 @@ byoip_prefix_update:
     prefix: "203.0.113.0/24"
     validations: []
     failure_reason: ""
-    is_advertised: true
-    is_locked: false
+    advertised: true
+    locked: false
     project_id: "12345678-1234-1234-1234-123456789012"
 
 byoip_prefix_list:
@@ -36,8 +36,8 @@ byoip_prefix_list:
       prefix: "203.0.113.0/24"
       validations: []
       failure_reason: ""
-      is_advertised: true
-      is_locked: false
+      advertised: true
+      locked: false
       project_id: "12345678-1234-1234-1234-123456789012"
 
     - uuid: 123e4567-e89b-12d3-a456-426614174001
@@ -46,8 +46,8 @@ byoip_prefix_list:
       prefix: "203.1.113.0/24"
       validations: []
       failure_reason: ""
-      is_advertised: false
-      is_locked: false
+      advertised: false
+      locked: false
       project_id: "12345678-1234-1234-1234-123456789012"
   links: {}
   meta:

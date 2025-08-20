@@ -1,7 +1,7 @@
 byoip_prefix_update:
   type: object
   properties:
-    is_advertised:
+    advertise:
       type: boolean
       description: Whether the BYOIP prefix should be advertised
       example: true

@@ -4,7 +4,7 @@ summary: "Delete a BYOIP Prefix"
 
 description: |
   To delete a BYOIP prefix and remove it from your account, send a DELETE request
-  to `/v2/byoip_prefixes/{uuid}`.
+  to `/v2/byoip_prefixes/$byoip_prefix_uuid`.
 
   A successful request will receive a 202 status code with no body in response.
   This indicates that the request was accepted and the prefix is being deleted.

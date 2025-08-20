@@ -13,9 +13,9 @@ source: |-
         ctx := context.TODO()
         byoipPrefixUUID := "f47ac10b-58cc-4372-a567-0e02b2c3d479"
         
-        isAdvertised := true
+        advertise := true
         updateRequest := &godo.BYOIPPrefixUpdateReq{
-            IsAdvertised: &isAdvertised,
+            Advertise: &advertise,
         }
 
         byoipPrefix, _, err := client.BYOIPPrefixes.Update(ctx, byoipPrefixUUID, updateRequest)
