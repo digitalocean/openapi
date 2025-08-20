@@ -461,14 +461,14 @@ tags:
 
       Reserved IPs are bound to a specific region.
 
-  - name: "[Public Preview] Reserved IPv6"
+  - name: "Reserved IPv6"
     description: |-
       DigitalOcean Reserved IPv6s are publicly-accessible static IP addresses that can be
       mapped to one of your Droplets. They can be used to create highly available
       setups or other configurations requiring movable addresses.
 
       Reserved IPv6s are bound to a specific region.
-  - name: "[Public Preview] Reserved IPv6 Actions"
+  - name: "Reserved IPv6 Actions"
     description: |-
       Reserved IPv6 actions requests are made on the actions endpoint of a specific
       reserved IPv6.
@@ -476,7 +476,7 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
-  - name: "[Public Preview] BYOIP Prefixes"
+  - name: "BYOIP Prefixes"
     description: |-
       Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
       to your account, then assign those IPs to your DigitalOcean resources. 
@@ -485,8 +485,6 @@ tags:
       * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
       * Same API and management interface as our existing reserved IPs feature
       * Assignable to Droplets only
-
-      BYOIP is currently in Public Preview.
 
   - name: Sizes
     description: |-
@@ -1878,6 +1876,8 @@ paths:
       $ref: "resources/byoip_prefixes/byoip_prefixes_get.yml"
     delete:
       $ref: "resources/byoip_prefixes/byoip_prefixes_delete.yml"
+    patch:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_update.yml"
 
   /v2/byoip_prefixes/{byoip_prefix_uuid}/ips:
     get:

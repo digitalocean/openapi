@@ -9,7 +9,7 @@ description: |
   The response will include the details of the created prefix, including its UUID and status.
 
 tags:
-  - "[Public Preview] BYOIP Prefixes"
+  - "BYOIP Prefixes"
 
 requestBody:
   required: true

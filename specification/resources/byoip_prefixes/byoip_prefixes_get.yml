@@ -7,7 +7,7 @@ description: |
   
   A successful response will return the details of the specified BYOIP prefix.
 tags:
-  - "[Public Preview] BYOIP Prefixes"
+  - "BYOIP Prefixes"
 
 parameters:
   - $ref: "parameters.yml#/byoip_prefix"
