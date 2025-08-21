@@ -8,7 +8,7 @@ description: |
   A successful response will return a list of resources associated with the specified BYOIP prefix.
 
 tags:
-  - "[Public Preview] BYOIP Prefixes"
+  - "BYOIP Prefixes"
 
 parameters:
   - $ref: "parameters.yml#/byoip_prefix"

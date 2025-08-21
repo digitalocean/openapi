@@ -3,11 +3,11 @@ operationId: byoipPrefixes_get
 summary: "Get a BYOIP Prefix"
 
 description: |
-  To get a BYOIP prefix, send a GET request to `/v2/byoip_prefixes/{byoip_prefix_uuid}`. 
+  To get a BYOIP prefix, send a GET request to `/v2/byoip_prefixes/$byoip_prefix_uuid`. 
   
   A successful response will return the details of the specified BYOIP prefix.
 tags:
-  - "[Public Preview] BYOIP Prefixes"
+  - "BYOIP Prefixes"
 
 parameters:
   - $ref: "parameters.yml#/byoip_prefix"
