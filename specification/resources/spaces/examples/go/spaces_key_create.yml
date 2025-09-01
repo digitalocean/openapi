@@ -1,0 +1,27 @@
+lang: Go
+source: |-
+  import (
+      "context"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      token := os.Getenv("DIGITALOCEAN_TOKEN")
+
+      client := godo.NewFromToken(token)
+      ctx := context.TODO()
+
+      createReq := &godo.SpacesKeyCreateRequest{
+          Name: "read-only-key",
+          Grants: []*godo.Grant{
+              {
+                  Bucket: "my-bucket",
+                  Permission: godo.SpacesKeyRead,
+              },
+          },
+      }
+
+      client.SpacesKeys.Create(ctx, createReq)
+  }
