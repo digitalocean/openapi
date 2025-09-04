@@ -47,4 +47,3 @@ x-codeSamples:
 security:
   - bearer_auth:
       - 'nat_gateway:update'
-      - 'nat_gateway:read'
