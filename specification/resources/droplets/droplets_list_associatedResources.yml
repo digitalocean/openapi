@@ -45,4 +45,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'droplet:delete'
+    - 'droplet:read'
