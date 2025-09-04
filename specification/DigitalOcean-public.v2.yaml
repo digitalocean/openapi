@@ -153,7 +153,7 @@ tags:
       DigitalOcean's [managed database service](https://docs.digitalocean.com/products/databases)
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://docs.digitalocean.com/products/databases/postgresql/),
-      [Redis](https://docs.digitalocean.com/products/databases/redis/),
+      [Caching](https://docs.digitalocean.com/products/databases/redis/),
       [Valkey](https://docs.digitalocean.com/products/databases/valkey/),
       [MySQL](https://docs.digitalocean.com/products/databases/mysql/),
       [MongoDB](https://docs.digitalocean.com/products/databases/mongodb/), and
@@ -461,14 +461,14 @@ tags:
 
       Reserved IPs are bound to a specific region.
 
-  - name: "[Public Preview] Reserved IPv6"
+  - name: "Reserved IPv6"
     description: |-
       DigitalOcean Reserved IPv6s are publicly-accessible static IP addresses that can be
       mapped to one of your Droplets. They can be used to create highly available
       setups or other configurations requiring movable addresses.
 
       Reserved IPv6s are bound to a specific region.
-  - name: "[Public Preview] Reserved IPv6 Actions"
+  - name: "Reserved IPv6 Actions"
     description: |-
       Reserved IPv6 actions requests are made on the actions endpoint of a specific
       reserved IPv6.
@@ -476,7 +476,7 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
-  - name: "[Public Preview] BYOIP Prefixes"
+  - name: "BYOIP Prefixes"
     description: |-
       Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
       to your account, then assign those IPs to your DigitalOcean resources. 
@@ -485,8 +485,6 @@ tags:
       * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
       * Same API and management interface as our existing reserved IPs feature
       * Assignable to Droplets only
-
-      BYOIP is currently in Public Preview.
 
   - name: Sizes
     description: |-
@@ -534,6 +532,16 @@ tags:
       [DigitalOcean Uptime Checks](https://docs.digitalocean.com/products/uptime/) provide the ability to monitor your endpoints from around the world, and alert you when they're slow, unavailable, or SSL certificates are expiring.
 
       To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
+
+  - name: "[Public Preview] VPC NAT Gateways"
+    description: |-
+      [VPC NAT Gateways](https://docs.digitalocean.com/products/networking/vpc/how-to/create-nat-gateway/)
+      allow resources in a private VPC to access the public internet without
+      exposing them to incoming traffic.
+
+      By sending requests to the `/v2/vpc_nat_gateways` endpoint, you can create,
+      configure, list, and delete VPC NAT Gateways as well as retrieve information
+      about the resources assigned to them.
 
   - name: VPC Peerings
     description: |-
@@ -907,6 +915,12 @@ paths:
     put:
       $ref: "resources/databases/databases_upgrade_major_version.yml"
 
+  /v2/databases/{database_cluster_uuid}/autoscale:
+    get:
+      $ref: "resources/databases/databases_get_autoscale.yml"
+    put:
+      $ref: "resources/databases/databases_update_autoscale.yml"
+
   /v2/databases/{database_cluster_uuid}/topics:
     get:
       $ref: "resources/databases/databases_list_kafka_topics.yml"
@@ -956,7 +970,7 @@ paths:
       $ref: "resources/databases/databases_get_kafka_schema_config.yml"
     put:
       $ref: "resources/databases/databases_update_kafka_schema_config.yml"
-  
+
   /v2/databases/{database_cluster_uuid}/schema-registry/config/{subject_name}:
     get:
       $ref: "resources/databases/databases_get_kafka_schema_subject_config.yml"
@@ -1862,6 +1876,8 @@ paths:
       $ref: "resources/byoip_prefixes/byoip_prefixes_get.yml"
     delete:
       $ref: "resources/byoip_prefixes/byoip_prefixes_delete.yml"
+    patch:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_update.yml"
 
   /v2/byoip_prefixes/{byoip_prefix_uuid}/ips:
     get:
@@ -2012,6 +2028,23 @@ paths:
     delete:
       $ref: "resources/vpc_peerings/vpc_peerings_delete.yml"
 
+  /v2/vpc_nat_gateways:
+    get:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_list.yml"
+
+    post:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_create.yml"
+
+  /v2/vpc_nat_gateways/{id}:
+    get:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_get.yml"
+
+    put:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_update.yml"
+
+    delete:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_delete.yml"
+
   /v2/uptime/checks:
     get:
       $ref: "resources/uptime/list_checks.yml"
@@ -2142,6 +2175,10 @@ paths:
       $ref: 'resources/gen-ai/genai_get_agent_usage.yml'
 
 
+  /v2/gen-ai/agents/{uuid}/usage:
+    get:
+      $ref: "resources/gen-ai/genai_get_agent_usage.yml"
+
   /v2/gen-ai/agents/{uuid}/versions:
     get:
       $ref: 'resources/gen-ai/genai_list_agent_versions.yml'
@@ -2261,6 +2298,10 @@ paths:
       $ref: 'resources/gen-ai/genai_create_knowledge_base.yml'
 
 
+  /v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls:
+    post:
+      $ref: "resources/gen-ai/genai_create_data_source_file_upload_presigned_urls.yml"
+
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources:
     get:
       $ref: 'resources/gen-ai/genai_list_knowledge_base_data_sources.yml'
@@ -2320,6 +2361,14 @@ paths:
     get:
       $ref: 'resources/gen-ai/genai_get_oauth2_url.yml'
 
+
+  /v2/gen-ai/oauth2/dropbox/tokens:
+    post:
+      $ref: "resources/gen-ai/genai_create_oauth2_dropbox_tokens.yml"
+
+  /v2/gen-ai/oauth2/url:
+    get:
+      $ref: "resources/gen-ai/genai_get_oauth2_url.yml"
 
   /v2/gen-ai/openai/keys:
     get:

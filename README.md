@@ -1,7 +1,7 @@
 # DigitalOcean OpenAPI Specification
 ![Spec Main](https://github.com/digitalocean/apiv2-openapi/workflows/Spec%20Main/badge.svg) ![Status](https://img.shields.io/badge/Status-Early%20Availability-blue)
 
-The OpenAPI v3 specification for [DigitalOcean's public API v2](https://developers.digitalocean.com/documentation/v2/).
+The OpenAPI v3 specification for [DigitalOcean's public API v2](https://docs.digitalocean.com/reference/api/digitalocean/).
 
 ## What is OpenAPI?
 
