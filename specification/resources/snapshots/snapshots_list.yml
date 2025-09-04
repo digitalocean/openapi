@@ -56,4 +56,5 @@ x-codeSamples:
 
 security:
   - bearer_auth:
+    - 'block_storage_snapshot:read'
     - 'snapshot:read'

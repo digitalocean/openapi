@@ -56,4 +56,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'registry:create'
+    - 'registry:update'
