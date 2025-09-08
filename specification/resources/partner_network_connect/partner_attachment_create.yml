@@ -45,4 +45,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-      - partner_network_connect:read
+      - partner_network_connect:create
