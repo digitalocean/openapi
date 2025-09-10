@@ -59,7 +59,8 @@ properties:
     deprecated: true
     default: lb-small
     example: lb-small
-    description: This field has been replaced by the `size_unit` field for all
+    description: |
+      This field has been replaced by the `size_unit` field for all
       regions except in AMS2, NYC2, and SFO1. Each available load balancer size
       now equates to the load balancer having a set number of nodes.
 
