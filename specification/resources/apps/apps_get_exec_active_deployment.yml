@@ -40,4 +40,3 @@ x-codeSamples:
 security:
   - bearer_auth:
       - "app:access_console"
-      - "app:update"
