@@ -1,12 +1,12 @@
 operationId: reservedIPv6_get
 
-summary: "[Public Preview] Retrieve an Existing Reserved IPv6"
+summary: "Retrieve an Existing Reserved IPv6"
 
 description: To show information about a reserved IPv6, send a GET request to
   `/v2/reserved_ipv6/$RESERVED_IPV6`.
 
 tags:
-  - "[Public Preview] Reserved IPv6"
+  - "Reserved IPv6"
 
 parameters:
   - $ref: 'parameters.yml#/reserved_ipv6'
