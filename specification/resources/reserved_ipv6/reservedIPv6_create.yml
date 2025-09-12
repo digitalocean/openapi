@@ -1,6 +1,6 @@
 operationId: reservedIPv6_create
 
-summary: "[Public Preview] Create a New Reserved IPv6"
+summary: "Create a New Reserved IPv6"
 
 description: >-
   On creation, a reserved IPv6 must be reserved to a region.
@@ -10,7 +10,7 @@ description: >-
 
 
 tags:
-  - "[Public Preview] Reserved IPv6"
+  - "Reserved IPv6"
 
 requestBody:
   required: true

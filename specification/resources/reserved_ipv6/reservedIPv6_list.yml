@@ -1,12 +1,12 @@
 operationId: reservedIPv6_list
 
-summary: "[Public Preview] List All Reserved IPv6s"
+summary: "List All Reserved IPv6s"
 
 description: To list all of the reserved IPv6s available on your account, send a
   GET request to `/v2/reserved_ipv6`.
 
 tags:
-  - "[Public Preview] Reserved IPv6"
+  - "Reserved IPv6"
 
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'
