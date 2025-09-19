@@ -1332,6 +1332,13 @@ paths:
     delete:
       $ref: "resources/kubernetes/kubernetes_remove_registry.yml"
 
+  /v2/kubernetes/registries:
+    post:
+      $ref: "resources/kubernetes/kubernetes_add_registries.yml"
+
+    delete:
+      $ref: "resources/kubernetes/kubernetes_remove_registries.yml"
+
   /v2/kubernetes/clusters/{cluster_id}/status_messages:
     get:
       $ref: "resources/kubernetes/kubernetes_get_status_messages.yml"
