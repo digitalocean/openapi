@@ -40,8 +40,8 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 
 x-codeSamples:
-  - $ref: 'examples/curl/apps_get_job_invocations.yml'
-  - $ref: 'examples/python/apps_get_job_invocations.yml'
+  - $ref: 'examples/curl/apps_list_job_invocations.yml'
+  - $ref: 'examples/python/apps_list_job_invocations.yml'
 
 security:
   - bearer_auth:

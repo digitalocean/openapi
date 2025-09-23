@@ -3,4 +3,4 @@ source: |-
   curl -X GET \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    "https://api.digitalocean.com/v2/apps/4f6c71e2/deployments/7f6c71e2/jobs/example-job/invocations"
+    "https://api.digitalocean.com/v2/apps/{app_id}/job-invocations/{job_invocation_id}"
