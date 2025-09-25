@@ -31,6 +31,11 @@ properties:
       The ID of the specific resource, the name of a tag applied to a group of
       resources, or the IP address that the firewall rule allows to access the
       database cluster.
+  description:
+    type: string
+    example: my home address IP
+    description: >-
+      A label to describe the firewall rule.
   created_at:
     type: string
     format: date-time
