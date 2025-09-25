@@ -119,6 +119,8 @@ apiAgent:
       type: integer
     model:
       $ref: '#/apiModel'
+    model_provider_key:
+      $ref: '#/apiModelProviderKeyInfo'
     name:
       description: Agent name
       example: example name
@@ -198,6 +200,17 @@ apiAgent:
     version_hash:
       description: The latest version of the agent
       example: example string
+      type: string
+    vpc_egress_ips:
+      description: VPC Egress IPs
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    vpc_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     workspace:
       $ref: '#/apiWorkspace'
@@ -289,6 +302,44 @@ apiAgentConversationLogConfig:
       description: Last modified
       example: "2023-01-01T00:00:00Z"
       format: date-time
+      type: string
+  type: object
+apiAgentDeploymentRelease:
+  description: An Agent Deployment Release
+  properties:
+    created_at:
+      description: Creation date / time
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by_user_email:
+      description: Email of user that created the agent deployment release
+      example: example@example.com
+      type: string
+    created_by_user_id:
+      description: Id of user that created the agent deployment release
+      example: "12345"
+      format: uint64
+      type: string
+    error_msg:
+      description: A error message provinding a hint which part of the system experienced
+        an error
+      example: example string
+      type: string
+    status:
+      $ref: '#/apiReleaseStatus'
+    updated_at:
+      description: Last modified
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    url:
+      description: The url to access the agent workspace deployment
+      example: example string
+      type: string
+    uuid:
+      description: Unique release id
+      example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
 apiAgentFunction:
@@ -887,6 +938,82 @@ apiAgentVersion:
       example: example string
       type: string
   type: object
+apiAgentWorkspace:
+  description: An Agent Workspace
+  properties:
+    created_at:
+      description: Creation date / time
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by_user_email:
+      description: Email of user that created the agent workspace
+      example: example@example.com
+      type: string
+    created_by_user_id:
+      description: Id of user that created the agent workspace
+      example: "12345"
+      format: uint64
+      type: string
+    deployments:
+      description: The deployments the agent workspace has
+      items:
+        $ref: '#/apiAgentWorkspaceDeployment'
+      type: array
+    name:
+      description: Agent name
+      example: example name
+      type: string
+    team_id:
+      description: Team id the agent workspace belongs to
+      example: "12345"
+      format: uint64
+      type: string
+    updated_at:
+      description: Last modified
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    uuid:
+      description: Unique agent id
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiAgentWorkspaceDeployment:
+  description: An Agent Workspace Deployment
+  properties:
+    created_at:
+      description: Creation date / time
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by_user_email:
+      description: Email of user that created the agent workspace
+      example: example@example.com
+      type: string
+    created_by_user_id:
+      description: Id of user that created the agent workspace
+      example: "12345"
+      format: uint64
+      type: string
+    latest_release:
+      $ref: '#/apiAgentDeploymentRelease'
+    logging_config:
+      $ref: '#/apiAgentLoggingConfig'
+    name:
+      description: Agent name
+      example: example name
+      type: string
+    updated_at:
+      description: Last modified
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    uuid:
+      description: Unique agent id
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
 apiAgreement:
   description: Agreement Description
   properties:
@@ -1009,6 +1136,13 @@ apiCancelKnowledgeBaseIndexingJobOutput:
 apiChatbot:
   description: A Chatbot
   properties:
+    allowed_domains:
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
     button_background_color:
       example: example string
       type: string
@@ -1075,6 +1209,8 @@ apiCreateAgentFromTemplateInputPublic:
       example: '"tor1"'
     template_uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
+    workspace_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
 apiCreateAgentFromTemplateOutput:
   properties:
     agent:
@@ -1084,6 +1220,8 @@ apiCreateAgentInput:
   properties:
     conversation_logs_enabled:
       example: "false"
+    vpc_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
 apiCreateAgentInputPublic:
   description: Parameters for Agent Creation
   properties:
@@ -1109,6 +1247,9 @@ apiCreateAgentInputPublic:
         example: example string
         type: string
       type: array
+    model_provider_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
     model_uuid:
       description: Identifier for the foundation model.
       example: '"12345678-1234-1234-1234-123456789012"'
@@ -1137,6 +1278,10 @@ apiCreateAgentInputPublic:
         example: example string
         type: string
       type: array
+    workspace_uuid:
+      description: Identifier for the workspace
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 apiCreateAgentOutput:
   description: Information about a newly created Agent
@@ -1347,6 +1492,19 @@ apiCreateModelOutput:
     model:
       $ref: '#/apiModel'
   type: object
+apiCreateModelProviderKeyInputPublic:
+  properties:
+    api_key:
+      example: sk-ant-12345678901234567890123456789012
+    name:
+      example: Production Key
+    provider:
+      example: OPENAI
+apiCreateModelProviderKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiModelProviderKeyInfo'
+  type: object
 apiCreateOpenAIAPIKeyInputPublic:
   description: CreateOpenAIAPIKeyInputPublic is used to create a new OpenAI API key
     for a specific agent.
@@ -1366,6 +1524,42 @@ apiCreateOpenAIAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiOpenAIAPIKeyInfo'
+  type: object
+apiCreateScheduledIndexingOutput:
+  properties:
+    indexing_info:
+      $ref: '#/apiScheduledIndexingInfo'
+  type: object
+apiCreateTracesInputPublic:
+  properties:
+    agent_deployment_name:
+      description: Agent deployment name
+      example: example name
+      type: string
+    agent_workspace_uuid:
+      description: Agent Workspace UUID to create trace for
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    session_id:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    traces:
+      description: List of traces to create
+      items:
+        $ref: '#/apiTrace'
+      type: array
+  type: object
+apiCreateTracesOutput:
+  description: Output for creating traces
+  properties:
+    trace_uuids:
+      description: Trace UUIDs created
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
   type: object
 apiCreateWorkspaceInputPublic:
   description: Parameters for Workspace Creation
@@ -1504,6 +1698,15 @@ apiDeleteModelAPIKeyOutput:
     api_key_info:
       $ref: '#/apiModelAPIKeyInfo'
   type: object
+apiDeleteModelProviderKeyInputPublic:
+  properties:
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiDeleteModelProviderKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiModelProviderKeyInfo'
+  type: object
 apiDeleteOpenAIAPIKeyInputPublic:
   properties:
     api_key_uuid:
@@ -1513,6 +1716,11 @@ apiDeleteOpenAIAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiOpenAIAPIKeyInfo'
+  type: object
+apiDeleteScheduledIndexingOutput:
+  properties:
+    indexing_info:
+      $ref: '#/apiScheduledIndexingInfo'
   type: object
 apiDeleteWorkspaceOutput:
   properties:
@@ -2057,6 +2265,18 @@ apiGetAgentUsageOutput:
     usage:
       $ref: '#/apiResourceUsage'
   type: object
+apiGetAgentWorkspaceDeploymentOutput:
+  description: One Agent
+  properties:
+    agent_workspace_deployment:
+      $ref: '#/apiAgentWorkspaceDeployment'
+  type: object
+apiGetAgentWorkspaceOutput:
+  description: One Agent
+  properties:
+    agent_workspace:
+      $ref: '#/apiAgentWorkspace'
+  type: object
 apiGetAnthropicAPIKeyInputPublic:
   properties:
     api_key_uuid:
@@ -2130,6 +2350,17 @@ apiGetGuardrailUsageOutput:
     usage:
       $ref: '#/apiResourceUsage'
   type: object
+apiGetIndexingJobDetailsSignedURLInputPublic:
+  properties:
+    indexing_job_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiGetIndexingJobDetailsSignedURLOutput:
+  properties:
+    signed_url:
+      description: The signed url for downloading the indexing job details
+      example: example string
+      type: string
+  type: object
 apiGetKnowledgeBaseIndexingJobInputPublic:
   properties:
     uuid:
@@ -2193,6 +2424,15 @@ apiGetModelPlaygroundTokensOutput:
       example: 123
       format: int64
       type: integer
+  type: object
+apiGetModelProviderKeyInputPublic:
+  properties:
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiGetModelProviderKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiModelProviderKeyInfo'
   type: object
 apiGetModelUsageInputPublic:
   properties:
@@ -2294,6 +2534,25 @@ apiGetResourceUsageOutput:
       format: int64
       type: integer
   type: object
+apiGetScheduledIndexingOutput:
+  properties:
+    indexing_info:
+      $ref: '#/apiScheduledIndexingInfo'
+  type: object
+apiGetServerlessInferenceUsageInputPublic:
+  properties:
+    start:
+      example: '"2021-01-01T00:00:00Z"'
+    stop:
+      example: '"2021-01-02T00:00:00Z"'
+    uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiGetServerlessInferenceUsageOutput:
+  description: Serverless inference usage output
+  properties:
+    usage:
+      $ref: '#/apiResourceUsage'
+  type: object
 apiGetTeamAgreementOutput:
   description: GetTeamAgreementOutput Output
   properties:
@@ -2317,6 +2576,17 @@ apiGoogleDriveDataSource:
       example: example string
       type: string
   type: object
+apiGoogleDriveDataSourceDisplay:
+  description: Google Drive Data Source for Display
+  properties:
+    folder_id:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    folder_name:
+      description: Name of the selected folder if available
+      example: example name
+      type: string
+  type: object
 apiGoogleDriveFolder:
   description: A folder in google drive
   properties:
@@ -2331,6 +2601,22 @@ apiGoogleDriveFolder:
     parent_id:
       description: Id of the parent folder - if empty it is a root folder
       example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiGoogleOauth2GetTokensInput:
+  description: The oauth2 code from google
+  properties:
+    code:
+      description: The oauth2 code from google
+      example: example string
+      type: string
+    list_folders:
+      description: Request folders in return
+      example: true
+      type: boolean
+    redirect_url:
+      description: 'Optional: redirect url'
+      example: example string
       type: string
   type: object
 apiGoogleOauth2GetTokensOutput:
@@ -2544,6 +2830,7 @@ apiIndexedDataSourceStatus:
   - DATA_SOURCE_STATUS_PARTIALLY_UPDATED
   - DATA_SOURCE_STATUS_NOT_UPDATED
   - DATA_SOURCE_STATUS_FAILED
+  - DATA_SOURCE_STATUS_CANCELLED
   example: DATA_SOURCE_STATUS_UNKNOWN
   type: string
 apiIndexingJob:
@@ -2559,6 +2846,11 @@ apiIndexingJob:
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
+    data_source_jobs:
+      description: Details on Data Sources included in the Indexing Job
+      items:
+        $ref: '#/apiIndexedDataSource'
+      type: array
     data_source_uuids:
       example:
       - example string
@@ -2570,6 +2862,10 @@ apiIndexingJob:
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
+    is_report_available:
+      description: Boolean value to determine if the indexing job details are available
+      example: true
+      type: boolean
     knowledge_base_uuid:
       description: Knowledge base id
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -2583,7 +2879,7 @@ apiIndexingJob:
     status:
       $ref: '#/apiIndexJobStatus'
     tokens:
-      description: Number of tokens
+      description: Number of tokens [This field is deprecated]
       example: 123
       format: int64
       type: integer
@@ -2602,8 +2898,18 @@ apiIndexingJob:
       example: "12345"
       format: uint64
       type: string
+    total_items_removed:
+      description: Total Items Removed
+      example: "12345"
+      format: uint64
+      type: string
     total_items_skipped:
       description: Total Items Skipped
+      example: "12345"
+      format: uint64
+      type: string
+    total_tokens:
+      description: Total Tokens Consumed By the Indexing Job
       example: "12345"
       format: uint64
       type: string
@@ -2615,14 +2921,6 @@ apiIndexingJob:
     uuid:
       description: Unique id
       example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-  type: object
-apiIssueAgentTokenInputPublic:
-  description: Input for issuing a token for an agent
-  properties:
-    agent_uuid:
-      description: Agent ID
-      example: '"12345678-1234-1234-1234-123456789012"'
       type: string
   type: object
 apiIssueAgentTokenOutput:
@@ -2663,6 +2961,8 @@ apiKBDataSource:
       $ref: '#/apiDropboxDataSource'
     file_upload_data_source:
       $ref: '#/apiFileUploadDataSource'
+    google_drive_data_source:
+      $ref: '#/apiGoogleDriveDataSource'
     item_path:
       example: example string
       type: string
@@ -2748,6 +3048,8 @@ apiKnowledgeBaseDataSource:
       $ref: '#/apiDropboxDataSourceDisplay'
     file_upload_data_source:
       $ref: '#/apiFileUploadDataSource'
+    google_drive_data_source:
+      $ref: '#/apiGoogleDriveDataSourceDisplay'
     item_path:
       description: Path of folder or object in bucket - Deprecated, moved to data_source_details
       example: example string
@@ -2957,6 +3259,15 @@ apiListAgentVersionsOutput:
     meta:
       $ref: '#/apiMeta'
   type: object
+apiListAgentWorkspacesOutput:
+  description: List of Agent Workspaces
+  properties:
+    agent_workspaces:
+      description: Agent Workspaces
+      items:
+        $ref: '#/apiAgentWorkspace'
+      type: array
+  type: object
 apiListAgentsByAnthropicKeyInputPublic:
   properties:
     page:
@@ -2969,6 +3280,26 @@ apiListAgentsByAnthropicKeyOutput:
   description: List of Agents that linked to a specific Anthropic Key
   properties:
     agents:
+      items:
+        $ref: '#/apiAgent'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+  type: object
+apiListAgentsByModelProviderKeyInputPublic:
+  properties:
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+    page:
+      example: "1"
+    per_page:
+      example: "20"
+apiListAgentsByModelProviderKeyOutput:
+  properties:
+    agents:
+      description: Api key infos
       items:
         $ref: '#/apiAgent'
       type: array
@@ -3160,6 +3491,10 @@ apiListIndexingJobDataSourcesOutput:
         $ref: '#/apiIndexedDataSource'
       type: array
   type: object
+apiListIndexingJobsByKnowledgeBaseUUIDInputPublic:
+  properties:
+    knowledge_base_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
 apiListKnowledgeBaseAgentsInputPublic:
   properties:
     knowledge_base_uuid:
@@ -3272,6 +3607,24 @@ apiListModelPricesOutput:
       items:
         $ref: '#/apiModelPrice'
       type: array
+  type: object
+apiListModelProviderKeysInputPublic:
+  properties:
+    page:
+      example: "1"
+    per_page:
+      example: "20"
+apiListModelProviderKeysOutput:
+  properties:
+    api_key_infos:
+      description: Api key infos
+      items:
+        $ref: '#/apiModelProviderKeyInfo'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
   type: object
 apiListModelUsagesByAgentOutput:
   description: ListModelUsagesByAgentOutput description
@@ -3541,6 +3894,44 @@ apiModelProvider:
   - MODEL_PROVIDER_OPENAI
   example: MODEL_PROVIDER_DIGITALOCEAN
   type: string
+apiModelProviderKeyInfo:
+  properties:
+    api_key_uuid:
+      description: API key ID
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    created_at:
+      description: Key creation date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by:
+      description: Created by user id from DO
+      example: "12345"
+      format: uint64
+      type: string
+    deleted_at:
+      description: Key deleted date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    models:
+      description: Models supported by the openAI api key
+      items:
+        $ref: '#/apiModel'
+      type: array
+    name:
+      description: Name of the key
+      example: example name
+      type: string
+    provider:
+      $ref: '#/apiModelProvider'
+    updated_at:
+      description: Key last updated date
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+  type: object
 apiModelPublic:
   description: A machine learning model stored on the GenAI platform
   properties:
@@ -3786,12 +4177,6 @@ apiPromptChunk:
       example: example string
       type: string
   type: object
-apiRefreshAgentTokenInputPublic:
-  properties:
-    agent_uuid:
-      example: '"12345678-1234-1234-1234-123456789012"'
-    refresh_token:
-      example: '"12345678-1234-1234-1234-123456789012"'
 apiRefreshAgentTokenOutput:
   description: Information about a refreshed token
   properties:
@@ -3834,6 +4219,30 @@ apiRegenerateModelAPIKeyOutput:
     api_key_info:
       $ref: '#/apiModelAPIKeyInfo'
   type: object
+apiReleaseStatus:
+  default: RELEASE_STATUS_UNKNOWN
+  description: |-
+    - RELEASE_STATUS_UNKNOWN: the status of the release is unknown or not set
+     - RELEASE_STATUS_WAITING_FOR_DEPLOYMENT: the release is queued and waiting to be deployed
+     - RELEASE_STATUS_DEPLOYING: the release is currently being deployed
+     - RELEASE_STATUS_RUNNING: the release is successfully deployed and running
+     - RELEASE_STATUS_FAILED: the release deployment failed
+     - RELEASE_STATUS_WAITING_FOR_UNDEPLOYMENT: the release is waiting to be undeployed/removed
+     - RELEASE_STATUS_UNDEPLOYING: the release is currently being undeployed
+     - RELEASE_STATUS_UNDEPLOYMENT_FAILED: the release undeployment failed
+     - RELEASE_STATUS_DELETED: the release has been deleted
+  enum:
+  - RELEASE_STATUS_UNKNOWN
+  - RELEASE_STATUS_WAITING_FOR_DEPLOYMENT
+  - RELEASE_STATUS_DEPLOYING
+  - RELEASE_STATUS_RUNNING
+  - RELEASE_STATUS_FAILED
+  - RELEASE_STATUS_WAITING_FOR_UNDEPLOYMENT
+  - RELEASE_STATUS_UNDEPLOYING
+  - RELEASE_STATUS_UNDEPLOYMENT_FAILED
+  - RELEASE_STATUS_DELETED
+  example: RELEASE_STATUS_UNKNOWN
+  type: string
 apiResourceUsage:
   description: Resource Usage Description
   properties:
@@ -3918,6 +4327,59 @@ apiRunEvaluationTestCaseOutput:
         example: example string
         type: string
       type: array
+  type: object
+apiScheduledIndexingInfo:
+  description: Metadata for scheduled indexing entries
+  properties:
+    created_at:
+      description: Created at timestamp
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    days:
+      description: Days for execution (day is represented same as in a cron expression,
+        e.g. Monday begins with 1 )
+      items:
+        example: 123
+        format: int32
+        type: integer
+      type: array
+    deleted_at:
+      description: Deleted at timestamp (if soft deleted)
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    is_active:
+      description: Whether the schedule is currently active
+      example: true
+      type: boolean
+    knowledge_base_uuid:
+      description: Knowledge base uuid associated with this schedule
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    last_ran_at:
+      description: Last time the schedule was executed
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    next_run_at:
+      description: Next scheduled run
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    time:
+      description: Scheduled time of execution (HH:MM:SS format)
+      example: example string
+      type: string
+    updated_at:
+      description: Updated at timestamp
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    uuid:
+      description: Unique identifier for the scheduled indexing entry
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 apiServerlessInferencePrice:
   properties:
@@ -4013,6 +4475,78 @@ apiTeamModelURLOutput:
   properties:
     url:
       description: The signed url that can be used to upload one file
+      example: example string
+      type: string
+  type: object
+apiTrace:
+  description: Represents a complete trace
+  properties:
+    created_at:
+      description: When the trace was created
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    input:
+      description: Input data for the trace
+      type: object
+    name:
+      description: Name/identifier for the trace
+      example: example name
+      type: string
+    output:
+      description: Output data from the trace
+      type: object
+    spans:
+      description: List of spans that make up this trace
+      items:
+        $ref: '#/apiTraceSpan'
+      type: array
+  type: object
+apiTraceSpan:
+  description: Represents a span within a trace (e.g., LLM call, function call, etc.)
+  properties:
+    created_at:
+      description: When the span was created
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    input:
+      description: Input data for the span (flexible structure - can be messages array,
+        string, etc.)
+      type: object
+    name:
+      description: Name/identifier for the span
+      example: example name
+      type: string
+    output:
+      description: Output data from the span (flexible structure - can be message,
+        string, etc.)
+      type: object
+    type:
+      $ref: '#/apiTraceSpanType'
+  type: object
+apiTraceSpanType:
+  default: TRACE_SPAN_TYPE_UNKNOWN
+  description: Types of spans in a trace
+  enum:
+  - TRACE_SPAN_TYPE_UNKNOWN
+  - TRACE_SPAN_TYPE_LLM
+  - TRACE_SPAN_TYPE_RETRIEVER
+  - TRACE_SPAN_TYPE_TOOL
+  example: TRACE_SPAN_TYPE_UNKNOWN
+  type: string
+apiTracingServiceJWTOutput:
+  properties:
+    access_token:
+      description: Access token for the clickout to the tracing service
+      example: example string
+      type: string
+    base_url:
+      description: Base URL for the tracing service instance
+      example: example string
+      type: string
+    expires_at:
+      description: Expiry time of the access token
       example: example string
       type: string
   type: object
@@ -4148,12 +4682,23 @@ apiUpdateAgentInput:
       example: "false"
     conversation_logs_enabled:
       example: "false"
+    vpc_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
 apiUpdateAgentInputPublic:
   description: Data to modify an existing Agent
   properties:
     agent_log_insights_enabled:
       example: true
       type: boolean
+    allowed_domains:
+      description: Optional list of allowed domains for the chatbot - Must use fully
+        qualified domain name (FQDN) such as https://example.com
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
     anthropic_key_uuid:
       description: Optional anthropic key uuid for use with anthropic models
       example: '"12345678-1234-1234-1234-123456789012"'
@@ -4185,6 +4730,10 @@ apiUpdateAgentInputPublic:
       example: 100
       format: int64
       type: integer
+    model_provider_key_uuid:
+      description: Optional Model Provider uuid for use with provider models
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
     model_uuid:
       description: Identifier for the foundation model.
       example: '"12345678-1234-1234-1234-123456789012"'
@@ -4267,6 +4816,8 @@ apiUpdateChatbotInputPublic:
   properties:
     agent_uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
+    allowed_domains:
+      example: '["https://example.com"]'
     button_background_color:
       example: '"#0000FF"'
     logo:
@@ -4408,8 +4959,6 @@ apiUpdateLinkedAgentOutput:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
-apiUpdateLogInsightSettingsOutput:
-  type: object
 apiUpdateModelAPIKeyInputPublic:
   properties:
     api_key_uuid:
@@ -4431,6 +4980,19 @@ apiUpdateModelMetadataOutput:
   properties:
     model:
       $ref: '#/apiModel'
+  type: object
+apiUpdateModelProviderKeyInputPublic:
+  properties:
+    api_key:
+      example: sk-ant-12345678901234567890123456789012
+    api_key_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+    name:
+      example: Production Key
+apiUpdateModelProviderKeyOutput:
+  properties:
+    api_key_info:
+      $ref: '#/apiModelProviderKeyInfo'
   type: object
 apiUpdateOpenAIAPIKeyInputPublic:
   description: UpdateOpenAIAPIKeyInputPublic is used to update an existing OpenAI
@@ -4454,6 +5016,11 @@ apiUpdateOpenAIAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiOpenAIAPIKeyInfo'
+  type: object
+apiUpdateScheduledIndexingOutput:
+  properties:
+    indexing_info:
+      $ref: '#/apiScheduledIndexingInfo'
   type: object
 apiUpdateWorkspaceInputPublic:
   description: Parameters for Update Workspace
@@ -4508,6 +5075,14 @@ apiWebCrawlerDataSource:
       description: Whether to ingest and index media (images, etc.) on web pages.
       example: true
       type: boolean
+    exclude_tags:
+      description: Declaring which tags to exclude in web pages while webcrawling
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
   type: object
 apiWorkspace:
   properties:
