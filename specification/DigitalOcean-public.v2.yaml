@@ -660,7 +660,7 @@ paths:
 
   /v2/apps/{app_id}/job-invocations:
     get:
-      $ref: "resources/apps/apps_list_job_invocations.yml"  
+      $ref: "resources/apps/apps_list_job_invocations.yml"
 
   /v2/apps/{app_id}/job-invocations/{job_invocation_id}:
     get:
@@ -2259,6 +2259,10 @@ paths:
     get:
       $ref: "resources/gen-ai/genai_list_indexing_job_data_sources.yml"
 
+  /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/details_signed_url:
+    get:
+      $ref: "resources/gen-ai/genai_get_indexing_job_details_signed_url.yml"
+
   /v2/gen-ai/indexing_jobs/{uuid}:
     get:
       $ref: "resources/gen-ai/genai_get_indexing_job.yml"
@@ -2288,6 +2292,10 @@ paths:
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
     delete:
       $ref: "resources/gen-ai/genai_delete_knowledge_base_data_source.yml"
+
+  /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/indexing_jobs:
+    get:
+      $ref: "resources/gen-ai/genai_list_indexing_jobs_by_knowledge_base.yml"
 
   /v2/gen-ai/knowledge_bases/{uuid}:
     get:
@@ -2321,9 +2329,17 @@ paths:
     put:
       $ref: "resources/gen-ai/genai_regenerate_model_api_key.yml"
 
+  /v2/gen-ai/models/api_keys/{uuid}/usage:
+    get:
+      $ref: "resources/gen-ai/genai_get_serverless_inference_usage.yml"
+
   /v2/gen-ai/oauth2/dropbox/tokens:
     post:
       $ref: "resources/gen-ai/genai_create_oauth2_dropbox_tokens.yml"
+
+  /v2/gen-ai/oauth2/google/tokens:
+    post:
+      $ref: "resources/gen-ai/genai_create_oauth2_google_tokens.yml"
 
   /v2/gen-ai/oauth2/url:
     get:
