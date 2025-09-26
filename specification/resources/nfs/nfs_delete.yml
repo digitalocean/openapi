@@ -11,7 +11,7 @@ tags:
   - NFS
 
 parameters:
-  - $ref: "parameters.yml#/id"
+  - $ref: "parameters.yml#/nfs_id"
 
 responses:
   "204":

@@ -19,9 +19,9 @@ requestBody:
       examples:
         Basic NFS Share:
           value:
-            name: 'sammy-share-drive'
-            size_gib: 1024,
-            region: 'atl1'
+            name: "sammy-share-drive"
+            size_gib: 1024
+            region: "atl1"
             vpc_ids: ["vpc-example-1", "vpc-example-2"]
             user_id: 123
 

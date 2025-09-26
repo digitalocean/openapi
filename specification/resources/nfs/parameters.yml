@@ -1,6 +1,6 @@
-id:
+nfs_id:
   in: path
-  name: id
+  name: nfs_id
   description: The unique ID of the NFS share
   required: true
   schema:
