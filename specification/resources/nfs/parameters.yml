@@ -1,0 +1,53 @@
+id:
+  in: path
+  name: id
+  description: The unique ID of the NFS share
+  required: true
+  schema:
+    type: string
+  example: 0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+
+name:
+  in: query
+  name: name
+  required: true
+  description: The human-readable name of the share.
+  schema:
+    type: string
+  example: my-nfs-share
+
+size_gib:
+  in: query
+  name: size_gib
+  required: true
+  description: The desired/provisioned size of the share in GiB (Gibibytes). Must be > 0.
+  schema:
+    type: integer
+  example: 50
+
+region:
+  in: query
+  name: region
+  required: true
+  description: The DigitalOcean region slug (e.g., nyc3, sfo2, atl1) where the NFS share resides.
+  schema:
+    type: string
+  example: atl1
+
+vpc_ids:
+  in: query
+  name: vpc_ids
+  required: false
+  description: List of VPC IDs that should be able to access the share.
+  schema:
+    type: string
+  example: active
+
+user_id:
+  in: query
+  name: user_id
+  required: true
+  description: The user ID associated with the share.
+  schema:
+    type: integer
+  example: 123

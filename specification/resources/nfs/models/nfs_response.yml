@@ -1,0 +1,50 @@
+---
+type: object
+properties:
+  id:
+    type: string
+    description: The unique identifier of the NFS share.
+    readOnly: true
+    example: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
+  name:
+    type: string
+    description: The human-readable name of the share.
+    example: "sammy-share-drive"
+  size_gib:
+    type: integer
+    description: The desired/provisioned size of the share in GiB (Gibibytes). Must be > 0.
+    example: 1024
+  region:
+    type: string
+    description: The DigitalOcean region slug (e.g., nyc3, sfo2, atl1) where the NFS share resides.
+    example: "atl1"
+  status:
+    type: string
+    enum: [provisioning, active, error, deleting]
+    description: The current status of the share.
+    readOnly: true
+    example: "active"
+  created_at:
+    type: string
+    format: date-time
+    description: Timestamp for when the NFS share was created.
+    readOnly: true
+    example: "2023-01-01T00:00:00Z"
+  vpc_ids:
+    type: array
+    items:
+      type: string
+    description: List of VPC IDs that should be able to access the share.
+    example: ["vpc-example-1"]
+  user_id:
+    type: integer
+    description: The user ID associated with the share.
+    example: 123
+required:
+  - id
+  - name
+  - size_gib
+  - region
+  - status
+  - created_at
+  - user_id
