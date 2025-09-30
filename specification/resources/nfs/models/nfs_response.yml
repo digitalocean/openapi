@@ -12,7 +12,7 @@ properties:
     example: "sammy-share-drive"
   size_gib:
     type: integer
-    description: The desired/provisioned size of the share in GiB (Gibibytes). Must be > 50.
+    description: The desired/provisioned size of the share in GiB (Gibibytes). Must be >= 50.
     example: 1024
   region:
     type: string

@@ -7,7 +7,7 @@ properties:
     example: "my-nfs-share"
   size_gib:
     type: integer
-    description: The desired/provisioned size of the share in GiB (Gibibytes). Must be > 50.
+    description: The desired/provisioned size of the share in GiB (Gibibytes). Must be >= 50.
     example: 50
   region:
     type: string

@@ -20,7 +20,7 @@ size_gib:
   in: query
   name: size_gib
   required: true
-  description: The desired/provisioned size of the share in GiB (Gibibytes). Must be > 50.
+  description: The desired/provisioned size of the share in GiB (Gibibytes). Must be >= 50.
   schema:
     type: integer
   example: 50
