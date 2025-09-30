@@ -981,3 +981,48 @@ app_instances:
         instance_name: sample-php-767c6b49c4-z8dll
         instance_alias: sample-php-1
         component_type: SERVICE
+
+job_invocations:
+  value:
+    job_invocations:
+      - id: ba32b134-569c-4c0c-ba02-8ffdb0492ece
+        job_name: good-job
+        deployment_id: c020763f-ddb7-4112-a0df-7f01c69fc00b
+        phase: SUCCEEDED
+        created_at: "2025-09-11T11:04:05Z"
+        started_at: "2025-09-11T11:04:10Z"
+        completed_at: "2025-09-11T11:04:40Z"
+        trigger:
+          type: SCHEDULE
+          properties:
+              type:
+                type: string
+              scheduled:
+                type: object
+                properties:
+                  schedule:
+                    type: object
+                    properties:
+                      cron:
+                        type: string
+                        example: "*/2 * * * *"
+                      time_zone:
+                        type: string
+                        example: "UTC"
+
+job_invocation:
+  value:
+    job_invocation:
+      - id: ba32b134-569c-4c0c-ba02-8ffdb0492ece
+        job_name: good-job
+        deployment_id: c020763f-ddb7-4112-a0df-7f01c69fc00b
+        phase: SUCCEEDED
+        created_at: "2025-09-11T11:04:05Z"
+        started_at: "2025-09-11T11:04:10Z"
+        completed_at: "2025-09-11T11:04:40Z"
+        trigger:
+          - type: SCHEDULED
+            scheduled:
+              - schedule:
+                  cron: "*/2 * * * *"
+                  time_zone: UTC
