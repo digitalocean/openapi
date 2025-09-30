@@ -3,4 +3,4 @@ source: |-
   curl -X DELETE \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    "https://api.digitalocean.com/v2/nfs/DONFSEXAMPLE"
+    "https://api.digitalocean.com/v2/nfs/{share_id}"
