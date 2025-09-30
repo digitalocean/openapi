@@ -658,6 +658,18 @@ paths:
     get:
       $ref: "resources/apps/apps_get_logs_active_deployment_aggregate.yml"
 
+  /v2/apps/{app_id}/job-invocations:
+    get:
+      $ref: "resources/apps/apps_list_job_invocations.yml"  
+
+  /v2/apps/{app_id}/job-invocations/{job_invocation_id}:
+    get:
+      $ref: "resources/apps/apps_get_job_invocation.yml"
+
+  /v2/apps/{app_id}/jobs/{job_name}/invocations/{job_invocation_id}/logs:
+    get:
+      $ref: "resources/apps/apps_get_job_invocation_logs.yml"
+
   /v2/apps/tiers/instance_sizes:
     get:
       $ref: "resources/apps/apps_list_instanceSizes.yml"
