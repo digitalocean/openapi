@@ -20,7 +20,7 @@ size_gib:
   in: query
   name: size_gib
   required: true
-  description: The desired/provisioned size of the share in GiB (Gibibytes). Must be > 0.
+  description: The desired/provisioned size of the share in GiB (Gibibytes). Must be > 50.
   schema:
     type: integer
   example: 50
@@ -41,7 +41,7 @@ vpc_ids:
   description: List of VPC IDs that should be able to access the share.
   schema:
     type: string
-  example: active
+  example: ["vpc-example-1"]
 
 user_id:
   in: query

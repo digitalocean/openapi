@@ -3,5 +3,5 @@ source: |-
   curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{"name": "sammy-share-drive", "size_gib": 1024, "region": "atl1", "user_id": 123, "vpc_ids": ["vpc-example-1", "vpc-example-2"]}' \
+    -d '{"name": "sammy-share-drive", "size_gib": 1024, "region": "atl1", "user_id": 123, "vpc_ids": ["vpc-example-1"]}' \
     "https://api.digitalocean.com/v2/nfs"

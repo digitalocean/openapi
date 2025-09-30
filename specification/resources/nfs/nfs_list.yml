@@ -3,7 +3,7 @@ operationId: nfs_list
 summary: List NFS shares
 
 description: |
-  To list NFS shares, send a GET request to `/v2/nfs/`.
+  To list NFS shares, send a GET request to `/v2/nfs`.
 
   A successful request will return all NFS shares belonging to the authenticated user.
 
