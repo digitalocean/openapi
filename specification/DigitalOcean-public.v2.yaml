@@ -141,8 +141,8 @@ tags:
       that registry to create as many repositories as you wish.
 
   - name: Container Registries
-    description: |- 
-      DigitalOcean now supports up to nine additional registries (for a total maximum of 10) per team
+    description: |-
+      DigitalOcean now supports up to nine additional registries (for a total maximum of 10) per team 
       if your container registry uses the Professional subscription plan. The storage is shared among 
       the registries. This set of new APIs is backward compatible with `/v2/registry`. However, if you 
       create more than one registry under a Professional plan, some of the `/v2/registry` APIs would not work. 
@@ -473,7 +473,6 @@ tags:
       setups or other configurations requiring movable addresses.
 
       Reserved IPv6s are bound to a specific region.
-
   - name: "Reserved IPv6 Actions"
     description: |-
       Reserved IPv6 actions requests are made on the actions endpoint of a specific
@@ -484,7 +483,7 @@ tags:
 
   - name: "BYOIP Prefixes"
     description: |-
-      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes 
+      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
       to your account, then assign those IPs to your DigitalOcean resources. 
       BYOIP supports the following features:
       * IPv4 addresses
@@ -587,7 +586,6 @@ paths:
       $ref: "resources/ssh_keys/sshKeys_create.yml"
 
   /v2/account/keys/{ssh_key_identifier}:
-
     get:
       $ref: "resources/ssh_keys/sshKeys_get.yml"
 
@@ -608,17 +606,14 @@ paths:
   /v2/apps:
     get:
       $ref: "resources/apps/apps_list.yml"
-
     post:
       $ref: "resources/apps/apps_create.yml"
 
   /v2/apps/{id}:
     delete:
       $ref: "resources/apps/apps_delete.yml"
-
     get:
       $ref: "resources/apps/apps_get.yml"
-
     put:
       $ref: "resources/apps/apps_update.yml"
 
@@ -803,21 +798,18 @@ paths:
   /v2/databases:
     get:
       $ref: "resources/databases/databases_list_clusters.yml"
-
     post:
       $ref: "resources/databases/databases_create_cluster.yml"
 
   /v2/databases/{database_cluster_uuid}:
     get:
       $ref: "resources/databases/databases_get_cluster.yml"
-
     delete:
       $ref: "resources/databases/databases_destroy_cluster.yml"
 
   /v2/databases/{database_cluster_uuid}/config:
     get:
       $ref: "resources/databases/databases_get_config.yml"
-
     patch:
       $ref: "resources/databases/databases_patch_config.yml"
 
@@ -828,7 +820,6 @@ paths:
   /v2/databases/{database_cluster_uuid}/online-migration:
     get:
       $ref: "resources/databases/databases_get_migrationStatus.yml"
-
     put:
       $ref: "resources/databases/databases_update_onlineMigration.yml"
 
@@ -847,7 +838,6 @@ paths:
   /v2/databases/{database_cluster_uuid}/firewall:
     get:
       $ref: "resources/databases/databases_list_firewall_rules.yml"
-
     put:
       $ref: "resources/databases/databases_update_firewall_rules.yml"
 
@@ -866,7 +856,6 @@ paths:
   /v2/databases/{database_cluster_uuid}/replicas:
     get:
       $ref: "resources/databases/databases_list_replicas.yml"
-
     post:
       $ref: "resources/databases/databases_create_replica.yml"
 
@@ -877,7 +866,6 @@ paths:
   /v2/databases/{database_cluster_uuid}/replicas/{replica_name}:
     get:
       $ref: "resources/databases/databases_get_replica.yml"
-
     delete:
       $ref: "resources/databases/databases_destroy_replica.yml"
 
@@ -888,17 +876,14 @@ paths:
   /v2/databases/{database_cluster_uuid}/users:
     get:
       $ref: "resources/databases/databases_list_users.yml"
-
     post:
       $ref: "resources/databases/databases_add_user.yml"
 
   /v2/databases/{database_cluster_uuid}/users/{username}:
     get:
       $ref: "resources/databases/databases_get_user.yml"
-
     delete:
       $ref: "resources/databases/databases_delete_user.yml"
-
     put:
       $ref: "resources/databases/databases_update_user.yml"
 
@@ -909,45 +894,38 @@ paths:
   /v2/databases/{database_cluster_uuid}/dbs:
     get:
       $ref: "resources/databases/databases_list.yml"
-
     post:
       $ref: "resources/databases/databases_add.yml"
 
   /v2/databases/{database_cluster_uuid}/dbs/{database_name}:
     get:
       $ref: "resources/databases/databases_get.yml"
-
     delete:
       $ref: "resources/databases/databases_delete.yml"
 
   /v2/databases/{database_cluster_uuid}/pools:
     get:
       $ref: "resources/databases/databases_list_connectionPools.yml"
-
     post:
       $ref: "resources/databases/databases_add_connectionPool.yml"
 
   /v2/databases/{database_cluster_uuid}/pools/{pool_name}:
     get:
       $ref: "resources/databases/databases_get_connectionPool.yml"
-
     put:
       $ref: "resources/databases/databases_update_connectionPool.yml"
-
     delete:
       $ref: "resources/databases/databases_delete_connectionPool.yml"
 
   /v2/databases/{database_cluster_uuid}/eviction_policy:
     get:
       $ref: "resources/databases/databases_get_evictionPolicy.yml"
-
     put:
       $ref: "resources/databases/databases_update_evictionPolicy.yml"
 
   /v2/databases/{database_cluster_uuid}/sql_mode:
     get:
       $ref: "resources/databases/databases_get_sql_mode.yml"
-
     put:
       $ref: "resources/databases/databases_update_sql_mode.yml"
 
@@ -958,55 +936,46 @@ paths:
   /v2/databases/{database_cluster_uuid}/autoscale:
     get:
       $ref: "resources/databases/databases_get_autoscale.yml"
-
     put:
       $ref: "resources/databases/databases_update_autoscale.yml"
 
   /v2/databases/{database_cluster_uuid}/topics:
     get:
       $ref: "resources/databases/databases_list_kafka_topics.yml"
-
     post:
       $ref: "resources/databases/databases_create_kafka_topic.yml"
 
   /v2/databases/{database_cluster_uuid}/topics/{topic_name}:
     get:
       $ref: "resources/databases/databases_get_kafka_topic.yml"
-
     put:
       $ref: "resources/databases/databases_update_kafka_topic.yml"
-
     delete:
       $ref: "resources/databases/databases_delete_kafka_topic.yml"
 
   /v2/databases/{database_cluster_uuid}/logsink:
     get:
       $ref: "resources/databases/databases_list_logsink.yml"
-
     post:
       $ref: "resources/databases/databases_create_logsink.yml"
 
   /v2/databases/{database_cluster_uuid}/logsink/{logsink_id}:
     get:
       $ref: "resources/databases/databases_get_logsink.yml"
-
     put:
       $ref: "resources/databases/databases_update_logsink.yml"
-
     delete:
       $ref: "resources/databases/databases_delete_logsink.yml"
 
   /v2/databases/{database_cluster_uuid}/schema-registry:
     get:
       $ref: "resources/databases/databases_list_kafka_schemas.yml"
-
     post:
       $ref: "resources/databases/databases_create_kafka_schema.yml"
 
   /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}:
     get:
       $ref: "resources/databases/databases_get_kafka_schema.yml"
-
     delete:
       $ref: "resources/databases/databases_delete_kafka_schema.yml"
 
@@ -1017,21 +986,18 @@ paths:
   /v2/databases/{database_cluster_uuid}/schema-registry/config:
     get:
       $ref: "resources/databases/databases_get_kafka_schema_config.yml"
-
     put:
       $ref: "resources/databases/databases_update_kafka_schema_config.yml"
 
   /v2/databases/{database_cluster_uuid}/schema-registry/config/{subject_name}:
     get:
       $ref: "resources/databases/databases_get_kafka_schema_subject_config.yml"
-
     put:
       $ref: "resources/databases/databases_update_kafka_schema_subject_config.yml"
 
   /v2/databases/metrics/credentials:
     get:
       $ref: "resources/databases/databases_get_cluster_metrics_credentials.yml"
-
     put:
       $ref: "resources/databases/databases_update_cluster_metrics_credentials.yml"
 
@@ -1046,34 +1012,28 @@ paths:
   /v2/domains:
     get:
       $ref: "resources/domains/domains_list.yml"
-
     post:
       $ref: "resources/domains/domains_create.yml"
 
   /v2/domains/{domain_name}:
     get:
       $ref: "resources/domains/domains_get.yml"
-
     delete:
       $ref: "resources/domains/domains_delete.yml"
 
   /v2/domains/{domain_name}/records:
     get:
       $ref: "resources/domains/domains_list_records.yml"
-
     post:
       $ref: "resources/domains/domains_create_record.yml"
 
   /v2/domains/{domain_name}/records/{domain_record_id}:
     get:
       $ref: "resources/domains/domains_get_record.yml"
-
     patch:
       $ref: "resources/domains/domains_patch_record.yml"
-
     put:
       $ref: "resources/domains/domains_update_record.yml"
-
     delete:
       $ref: "resources/domains/domains_delete_record.yml"
 
@@ -1117,7 +1077,6 @@ paths:
   /v2/droplets/{droplet_id}/actions:
     get:
       $ref: "resources/droplets/dropletActions_list.yml"
-
     post:
       $ref: "resources/droplets/dropletActions_post.yml"
 
@@ -1164,17 +1123,14 @@ paths:
   /v2/droplets/autoscale:
     get:
       $ref: "resources/autoscale_pools/autoscale_pool_list.yml"
-
     post:
       $ref: "resources/autoscale_pools/autoscale_pool_create.yml"
 
   /v2/droplets/autoscale/{autoscale_pool_id}:
     get:
       $ref: "resources/autoscale_pools/autoscale_pool_get.yml"
-
     put:
       $ref: "resources/autoscale_pools/autoscale_pool_update.yml"
-
     delete:
       $ref: "resources/autoscale_pools/autoscale_pool_delete.yml"
 
@@ -1193,38 +1149,32 @@ paths:
   /v2/firewalls:
     get:
       $ref: "resources/firewalls/firewalls_list.yml"
-
     post:
       $ref: "resources/firewalls/firewalls_create.yml"
 
   /v2/firewalls/{firewall_id}:
     get:
       $ref: "resources/firewalls/firewalls_get.yml"
-
     put:
       $ref: "resources/firewalls/firewalls_update.yml"
-
     delete:
       $ref: "resources/firewalls/firewalls_delete.yml"
 
   /v2/firewalls/{firewall_id}/droplets:
     post:
       $ref: "resources/firewalls/firewalls_assign_droplets.yml"
-
     delete:
       $ref: "resources/firewalls/firewalls_delete_droplets.yml"
 
   /v2/firewalls/{firewall_id}/tags:
     post:
       $ref: "resources/firewalls/firewalls_add_tags.yml"
-
     delete:
       $ref: "resources/firewalls/firewalls_delete_tags.yml"
 
   /v2/firewalls/{firewall_id}/rules:
     post:
       $ref: "resources/firewalls/firewalls_add_rules.yml"
-
     delete:
       $ref: "resources/firewalls/firewalls_delete_rules.yml"
 
@@ -1287,24 +1237,20 @@ paths:
   /v2/images:
     get:
       $ref: "resources/images/images_list.yml"
-
     post:
       $ref: "resources/images/images_create_custom.yml"
 
   /v2/images/{image_id}:
     get:
       $ref: "resources/images/images_get.yml"
-
     put:
       $ref: "resources/images/images_update.yml"
-
     delete:
       $ref: "resources/images/images_delete.yml"
 
   /v2/images/{image_id}/actions:
     get:
       $ref: "resources/images/imageActions_list.yml"
-
     post:
       $ref: "resources/images/imageActions_post.yml"
 
@@ -1651,31 +1597,26 @@ paths:
   /v2/monitoring/sinks/destinations:
     post:
       $ref: "resources/monitoring/monitoring_create_destination.yml"
-
     get:
       $ref: "resources/monitoring/monitoring_list_destinations.yml"
 
   /v2/monitoring/sinks/destinations/{destination_uuid}:
     get:
       $ref: "resources/monitoring/monitoring_get_destination.yml"
-
     post:
       $ref: "resources/monitoring/monitoring_update_destination.yml"
-
     delete:
       $ref: "resources/monitoring/monitoring_delete_destination.yml"
 
   /v2/monitoring/sinks:
     post:
       $ref: "resources/monitoring/monitoring_create_sink.yml"
-
     get:
       $ref: "resources/monitoring/monitoring_list_sinks.yml"
 
   /v2/monitoring/sinks/{sink_uuid}:
     get:
       $ref: "resources/monitoring/monitoring_get_sink.yml"
-
     delete:
       $ref: "resources/monitoring/monitoring_delete_sink.yml"
 
@@ -1696,17 +1637,14 @@ paths:
   /v2/partner_network_connect/attachments:
     get:
       $ref: "resources/partner_network_connect/partner_attachment_list.yml"
-
     post:
       $ref: "resources/partner_network_connect/partner_attachment_create.yml"
 
   /v2/partner_network_connect/attachments/{pa_id}:
     get:
       $ref: "resources/partner_network_connect/partner_attachment_get.yml"
-
     patch:
       $ref: "resources/partner_network_connect/partner_attachment_update.yml"
-
     delete:
       $ref: "resources/partner_network_connect/partner_attachment_delete.yml"
 
@@ -1721,7 +1659,6 @@ paths:
   /v2/partner_network_connect/attachments/{pa_id}/service_key:
     get:
       $ref: "resources/partner_network_connect/partner_attachment_service_key_get.yml"
-
     post:
       $ref: "resources/partner_network_connect/partner_attachment_service_key_create.yml"
 
@@ -1952,6 +1889,7 @@ paths:
   /v2/reserved_ipv6/{reserved_ipv6}:
     get:
       $ref: "resources/reserved_ipv6/reservedIPv6_get.yml"
+
     delete:
       $ref: "resources/reserved_ipv6/reservedIPv6_delete.yml"
 
@@ -1962,17 +1900,14 @@ paths:
   /v2/byoip_prefixes:
     post:
       $ref: "resources/byoip_prefixes/byoip_prefixes_create.yml"
-
     get:
       $ref: "resources/byoip_prefixes/byoip_prefixes_list.yml"
 
   /v2/byoip_prefixes/{byoip_prefix_uuid}:
     get:
       $ref: "resources/byoip_prefixes/byoip_prefixes_get.yml"
-
     delete:
       $ref: "resources/byoip_prefixes/byoip_prefixes_delete.yml"
-
     patch:
       $ref: "resources/byoip_prefixes/byoip_prefixes_update.yml"
 
@@ -2018,31 +1953,26 @@ paths:
   /v2/tags:
     get:
       $ref: "resources/tags/tags_list.yml"
-
     post:
       $ref: "resources/tags/tags_create.yml"
 
   /v2/tags/{tag_id}:
     get:
       $ref: "resources/tags/tags_get.yml"
-
     delete:
       $ref: "resources/tags/tags_delete.yml"
 
   /v2/tags/{tag_id}/resources:
     post:
       $ref: "resources/tags/tags_assign_resources.yml"
-
     delete:
       $ref: "resources/tags/tags_unassign_resources.yml"
 
   /v2/volumes:
     get:
       $ref: "resources/volumes/volumes_list.yml"
-
     post:
       $ref: "resources/volumes/volumes_create.yml"
-
     delete:
       $ref: "resources/volumes/volumes_delete_byName.yml"
 
@@ -2053,21 +1983,18 @@ paths:
   /v2/volumes/snapshots/{snapshot_id}:
     get:
       $ref: "resources/volumes/volumeSnapshots_get_byId.yml"
-
     delete:
       $ref: "resources/volumes/volumeSnapshots_delete_byId.yml"
 
   /v2/volumes/{volume_id}:
     get:
       $ref: "resources/volumes/volumes_get.yml"
-
     delete:
       $ref: "resources/volumes/volumes_delete.yml"
 
   /v2/volumes/{volume_id}/actions:
     get:
       $ref: "resources/volumes/volumeActions_list.yml"
-
     post:
       $ref: "resources/volumes/volumeActions_post_byId.yml"
 
@@ -2077,8 +2004,7 @@ paths:
 
   /v2/volumes/{volume_id}/snapshots:
     get:
-      $ref: "resources/volumes/volumeSnapshots_list.yml"
-
+      $ref: "resources/volumes/volumeSnapshots_list.yml"g
     post:
       $ref: "resources/volumes/volumeSnapshots_create.yml"
 
