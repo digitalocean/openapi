@@ -636,7 +636,6 @@ paths:
   /v2/apps/{app_id}/deployments:
     get:
       $ref: "resources/apps/apps_list_deployments.yml"
-
     post:
       $ref: "resources/apps/apps_create_deployment.yml"
 
@@ -2004,7 +2003,7 @@ paths:
 
   /v2/volumes/{volume_id}/snapshots:
     get:
-      $ref: "resources/volumes/volumeSnapshots_list.yml"g
+      $ref: "resources/volumes/volumeSnapshots_list.yml"
     post:
       $ref: "resources/volumes/volumeSnapshots_create.yml"
 
