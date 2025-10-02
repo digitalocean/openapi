@@ -97,6 +97,9 @@ kubernetes_clusters_all:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
+      registries:
+        - registry-a
+        - registry-b
       ha: false
       control_plane_firewall:
         enabled: true
@@ -218,6 +221,9 @@ kubernetes_single:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
+      registries:
+        - registry-a
+        - registry-b
       ha: false
       control_plane_firewall:
         enabled: true
@@ -337,6 +343,9 @@ kubernetes_updated:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: true
       registry_enabled: false
+      registries:
+        - registry-a
+        - registry-b
       ha: false
       control_plane_firewall:
         enabled: true
@@ -421,6 +430,9 @@ kubernetes_clusters_create_basic_response:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
+      registries:
+        - registry-a
+        - registry-b
       ha: false
       control_plane_firewall:
         enabled: true
@@ -542,6 +554,9 @@ kubernetes_clusters_multi_pool_response:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
+      registries:
+        - registry-a
+        - registry-b
       ha: false
       control_plane_firewall:
         enabled: true
