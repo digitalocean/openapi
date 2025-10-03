@@ -363,6 +363,11 @@ tags:
       policies based on these metrics. The Monitoring API can help you gain insight into how your apps are performing
       and consuming resources.
 
+  - name: NFS
+    description: |-
+      NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure, 
+      high-performance shared storage right inside your VPC. This enables seamless data sharing across Droplets in a VPC.
+
   - name: Partner Network Connect
     description: |-
       Partner Network Connect lets you establish high-bandwidth, low-latency
@@ -1613,6 +1618,20 @@ paths:
       $ref: "resources/monitoring/monitoring_get_sink.yml"
     delete:
       $ref: "resources/monitoring/monitoring_delete_sink.yml"
+
+  /v2/nfs:
+    post:
+      $ref: "resources/nfs/nfs_create.yml"
+
+    get:
+      $ref: "resources/nfs/nfs_list.yml"
+
+  /v2/nfs/{nfs_id}:
+    get:
+      $ref: "resources/nfs/nfs_get.yml"
+
+    delete:
+      $ref: "resources/nfs/nfs_delete.yml"
 
   /v2/partner_network_connect/attachments:
     get:
