@@ -28,3 +28,4 @@ required:
   - size_gib
   - region
   - user_id
+  - vpc_ids

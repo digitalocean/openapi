@@ -366,7 +366,7 @@ tags:
   - name: NFS
     description: |-
       NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure, 
-      high-performance \nshared storage right inside your VPC. This enables seamless data sharing across Droplets in a VPC.
+      high-performance shared storage right inside your VPC. This enables seamless data sharing across Droplets in a VPC.
 
   - name: Partner Network Connect
     description: |-

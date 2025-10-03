@@ -37,7 +37,7 @@ region:
 vpc_ids:
   in: query
   name: vpc_ids
-  required: false
+  required: true
   description: List of VPC IDs that should be able to access the share.
   schema:
     type: string
