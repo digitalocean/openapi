@@ -1,0 +1,36 @@
+operationId: databases_cancel_scheduled_cluster_deletion
+
+summary: Cancel Scheduled Database Cluster Deletion
+description: >-
+  To cancel a scheduled deletion for a database cluster, send a POST request to
+  `/v2/databases/$DATABASE_ID/cancel_deletion`. This will cancel any pending
+  deletion that was scheduled as part of the delete cooldown feature.
+
+tags:
+  - Databases
+
+parameters:
+  - $ref: 'parameters.yml#/database_cluster_uuid'
+
+responses:
+  "204":
+    $ref: '../../shared/responses/no_content.yml'
+
+  "401":
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  "404":
+    $ref: '../../shared/responses/not_found.yml'
+
+  "429":
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  "500":
+    $ref: '../../shared/responses/server_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/databases_cancel_scheduled_cluster_deletion.yml'
+
+security:
+  - bearer_auth:
+    - 'database:delete'

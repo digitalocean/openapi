@@ -171,6 +171,23 @@ properties:
       Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the cluster's primary node and
       a second entry for the cluster's standby node(s).
     readOnly: true
+  cooldown_duration:
+    type: integer
+    example: 96
+    description: >-
+      The number of hours before a database cluster is scheduled for deletion with delete cooldown feature is enabled.
+      This field is only present when the delete cooldown feature is enabled for the cluster.
+    readOnly: true
+    nullable: true
+  deletion_scheduled_at:
+    type: string
+    format: date-time
+    example: '2025-10-11T20:19:45Z'
+    description: >-
+      A timestamp in UTC Time referring to when the database cluster is scheduled for deletion. This field is only present when the
+      delete cooldown feature is enabled and a deletion has been scheduled.
+    readOnly: true
+    nullable: true
 
 
 

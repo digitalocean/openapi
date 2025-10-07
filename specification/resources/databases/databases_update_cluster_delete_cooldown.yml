@@ -1,0 +1,68 @@
+operationId: databases_update_cluster_delete_cooldown
+
+summary: Update Delete Cooldown Settings for a Database Cluster
+
+description: >-
+  The delete cooldown feature prevents accidental deletion of database clusters by 
+  introducing a pending period before deletion occurs.
+
+  To update the delete cooldown settings for an existing database cluster, send a PUT
+  request to `/v2/databases/$DATABASE_ID/cooldown`. 
+
+  A successful request will receive a 204 No Content status code with no body
+  in response. Update will be reflected in subsequent GET requests for the database cluster.
+
+tags:
+  - Databases
+
+parameters:
+  - $ref: 'parameters.yml#/database_cluster_uuid'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/database_cluster_delete_cooldown_update.yml'
+      examples:
+        enable_cooldown:
+          summary: Enable cooldown with 7 days duration
+          value:
+            cooldown_enabled: true
+            cooldown_duration: 168
+        disable_cooldown:
+          summary: Disable cooldown
+          value:
+            cooldown_enabled: false
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '422':
+    $ref: '../../shared/responses/unprocessable_entity.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/databases_update_cluster_delete_cooldown.yml'
+
+security:
+  - bearer_auth:
+    - 'database:delete'
