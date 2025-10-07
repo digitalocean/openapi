@@ -62,3 +62,5 @@ content:
         version_end_of_life: '2023-11-09T00:00:00Z'
         version_end_of_availability: '2023-05-09T00:00:00Z'
         storage_size_mib: 61440
+        cooldown_duration: 96
+        deletion_scheduled_at: '2025-10-11T20:19:45Z'
