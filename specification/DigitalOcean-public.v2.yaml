@@ -933,6 +933,10 @@ paths:
     put:
       $ref: "resources/databases/databases_update_autoscale.yml"
 
+  /v2/databases/{database_cluster_uuid}/cooldown:
+    put:
+      $ref: "resources/databases/databases_update_cluster_delete_cooldown.yml"
+
   /v2/databases/{database_cluster_uuid}/topics:
     get:
       $ref: "resources/databases/databases_list_kafka_topics.yml"
