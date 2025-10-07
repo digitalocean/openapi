@@ -1,14 +1,17 @@
 operationId: nfs_list
 
-summary: List NFS shares
+summary: List NFS shares per region
 
 description: |
-  To list NFS shares, send a GET request to `/v2/nfs`.
+  To list NFS shares, send a GET request to `/v2/nfs?region=${region}`.
 
   A successful request will return all NFS shares belonging to the authenticated user.
 
 tags:
   - NFS
+
+parameters:
+  - $ref: "parameters.yml#/region"
 
 responses:
   "200":
