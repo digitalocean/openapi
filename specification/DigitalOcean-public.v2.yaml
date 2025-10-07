@@ -937,6 +937,10 @@ paths:
     put:
       $ref: "resources/databases/databases_update_cluster_delete_cooldown.yml"
 
+  /v2/databases/{database_cluster_uuid}/cancel_deletion:
+    post:
+      $ref: "resources/databases/databases_cancel_scheduled_cluster_deletion.yml"
+
   /v2/databases/{database_cluster_uuid}/topics:
     get:
       $ref: "resources/databases/databases_list_kafka_topics.yml"
