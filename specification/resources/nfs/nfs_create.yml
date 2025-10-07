@@ -23,7 +23,6 @@ requestBody:
             size_gib: 1024
             region: "atl1"
             vpc_ids: ["vpc-example-1"]
-            user_id: 123
 
 responses:
   '201':

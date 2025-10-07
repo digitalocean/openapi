@@ -36,10 +36,6 @@ properties:
       type: string
     description: List of VPC IDs that should be able to access the share.
     example: ["vpc-example-1"]
-  user_id:
-    type: integer
-    description: The user ID associated with the share.
-    example: 123
 required:
   - id
   - name
@@ -47,4 +43,3 @@ required:
   - region
   - status
   - created_at
-  - user_id

@@ -42,12 +42,3 @@ vpc_ids:
   schema:
     type: string
   example: ["vpc-example-1"]
-
-user_id:
-  in: query
-  name: user_id
-  required: true
-  description: The user ID associated with the share.
-  schema:
-    type: integer
-  example: 123
