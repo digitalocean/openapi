@@ -35,7 +35,7 @@ properties:
     items:
       type: string
     description: List of VPC IDs that should be able to access the share.
-    example: ["vpc-example-1"]
+    example: ["796c6fe3-2a1d-4da2-9f3e-38239827dc91"]
 required:
   - id
   - name

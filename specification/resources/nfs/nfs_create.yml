@@ -22,7 +22,7 @@ requestBody:
             name: "sammy-share-drive"
             size_gib: 1024
             region: "atl1"
-            vpc_ids: ["vpc-example-1"]
+            vpc_ids: ["796c6fe3-2a1d-4da2-9f3e-38239827dc91"]
 
 responses:
   '201':
