@@ -3,7 +3,7 @@ operationId: nfs_get
 summary: Get an NFS share
 
 description: |
-  To get an NFS share, send a GET request to `/v2/nfs/$ID`.
+  To get an NFS share, send a GET request to `/v2/nfs/$ID?region=${region}`.
 
   A successful request will return the NFS share.
 
@@ -12,6 +12,7 @@ tags:
 
 parameters:
   - $ref: "parameters.yml#/nfs_id"
+  - $ref: "parameters.yml#/region"
 
 responses:
   "200":

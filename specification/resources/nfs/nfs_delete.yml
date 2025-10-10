@@ -3,7 +3,7 @@ operationId: nfs_delete
 summary: "Delete an NFS share"
 
 description: |
-  To delete an NFS share, send a DELETE request to `/v2/nfs/$ID`.
+  To delete an NFS share, send a DELETE request to `/v2/nfs/$ID?region=${region}`.
 
   A successful request will return a `204 No Content` status code.
 
@@ -12,6 +12,7 @@ tags:
 
 parameters:
   - $ref: "parameters.yml#/nfs_id"
+  - $ref: "parameters.yml#/region"
 
 responses:
   "204":
