@@ -4,7 +4,7 @@ summary: Initiate an NFS action
 
 description: |
   To execute an action (such as resize) on a specified NFS share, 
-  send a POST request to `/v2/nfs/$ID/actions?region=${region}`. In the JSON body 
+  send a POST request to `/v2/nfs/$ID/actions`. In the JSON body 
   to the request, set the `type` attribute to on of the supported action types:
 
   | Action                           | Details | Additionally Required Permission |
@@ -17,7 +17,6 @@ tags:
 
 parameters:
   - $ref: "parameters.yml#/nfs_id"
-  - $ref: "parameters.yml#/region"
 
 requestBody:
   required: true

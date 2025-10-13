@@ -1,6 +1,7 @@
 nfs_action:
   required:
     - type
+    - region
   type: object
   description: Specifies the action that will be taken on the NFS share.
   properties:
@@ -11,6 +12,10 @@ nfs_action:
       - snapshot
       example: resize
       description: The type of action to initiate for the NFS share.
+    region:
+      type: string
+      description: The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS snapshot resides.
+      example: atl1
 
 nfs_action_resize:
   allOf:
