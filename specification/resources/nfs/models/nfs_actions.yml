@@ -18,7 +18,7 @@ nfs_action_resize:
   - type: object
     properties:
       size:
-        type: uint64
+        type: integer
         example: 2048
         description: The new size for the NFS share.
 

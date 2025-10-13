@@ -1,4 +1,4 @@
-operationId: nfs_snapshot_delete
+operationId: nfs_delete_snapshot
 
 summary: "Delete an NFS snapshot"
 
@@ -11,7 +11,7 @@ tags:
   - NFS
 
 parameters:
-  - $ref: "parameters.yml#/nfs_id"
+  - $ref: "parameters.yml#/nfs_snapshot_id"
   - $ref: "parameters.yml#/region"
 
 responses:

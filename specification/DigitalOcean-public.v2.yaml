@@ -1646,7 +1646,7 @@ paths:
     get:
       $ref: "resources/nfs/nfs_snapshot_list.yml"
 
-  /v2/nfs/snapshots/{snapshot_id}:
+  /v2/nfs/snapshots/{nfs_snapshot_id}:
     get: 
       $ref: "resources/nfs/nfs_snapshot_get.yml"
 

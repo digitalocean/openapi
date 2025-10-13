@@ -1,4 +1,4 @@
-operationId: nfs_snapshot_get
+operationId: nfs_get_snapshot
 
 summary: Get an NFS snapshot by ID
 

@@ -1,4 +1,4 @@
-operationId: nfs_create
+operationId: nfs_create_action
 
 summary: Initiate an NFS action
 

@@ -1,4 +1,4 @@
-operationId: nfs_snapshot_list
+operationId: nfs_list_snapshot
 
 summary: List NFS snapshots per region
 
