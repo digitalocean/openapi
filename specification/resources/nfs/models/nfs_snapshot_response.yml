@@ -18,7 +18,7 @@ properties:
   region:
     type: string
     description: The DigitalOcean region slug where the snapshot is located.
-    example: "nyc3"
+    example: "atl1"
   status:
     type: string
     description: The current status of the snapshot.
