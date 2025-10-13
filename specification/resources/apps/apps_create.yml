@@ -39,6 +39,8 @@ requestBody:
                 - path: /api
           egress:
             type: DEDICATED_IP
+          vpc:
+            id: c22d8f48-4bc4-49f5-8ca0-58e7164427ac
   required: true
 
 responses:

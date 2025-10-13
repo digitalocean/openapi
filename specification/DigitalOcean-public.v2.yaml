@@ -153,7 +153,7 @@ tags:
       DigitalOcean's [managed database service](https://docs.digitalocean.com/products/databases)
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://docs.digitalocean.com/products/databases/postgresql/),
-      [Redis](https://docs.digitalocean.com/products/databases/redis/),
+      [Caching](https://docs.digitalocean.com/products/databases/redis/),
       [Valkey](https://docs.digitalocean.com/products/databases/valkey/),
       [MySQL](https://docs.digitalocean.com/products/databases/mysql/),
       [MongoDB](https://docs.digitalocean.com/products/databases/mongodb/), and
@@ -363,6 +363,11 @@ tags:
       policies based on these metrics. The Monitoring API can help you gain insight into how your apps are performing
       and consuming resources.
 
+  - name: NFS
+    description: |-
+      NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure, 
+      high-performance shared storage right inside your VPC. This enables seamless data sharing across Droplets in a VPC.
+
   - name: Partner Network Connect
     description: |-
       Partner Network Connect lets you establish high-bandwidth, low-latency
@@ -461,14 +466,14 @@ tags:
 
       Reserved IPs are bound to a specific region.
 
-  - name: "[Public Preview] Reserved IPv6"
+  - name: "Reserved IPv6"
     description: |-
       DigitalOcean Reserved IPv6s are publicly-accessible static IP addresses that can be
       mapped to one of your Droplets. They can be used to create highly available
       setups or other configurations requiring movable addresses.
 
       Reserved IPv6s are bound to a specific region.
-  - name: "[Public Preview] Reserved IPv6 Actions"
+  - name: "Reserved IPv6 Actions"
     description: |-
       Reserved IPv6 actions requests are made on the actions endpoint of a specific
       reserved IPv6.
@@ -476,7 +481,7 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
-  - name: "[Public Preview] BYOIP Prefixes"
+  - name: "BYOIP Prefixes"
     description: |-
       Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
       to your account, then assign those IPs to your DigitalOcean resources. 
@@ -485,8 +490,6 @@ tags:
       * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
       * Same API and management interface as our existing reserved IPs feature
       * Assignable to Droplets only
-
-      BYOIP is currently in Public Preview.
 
   - name: Sizes
     description: |-
@@ -534,6 +537,16 @@ tags:
       [DigitalOcean Uptime Checks](https://docs.digitalocean.com/products/uptime/) provide the ability to monitor your endpoints from around the world, and alert you when they're slow, unavailable, or SSL certificates are expiring.
 
       To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
+
+  - name: "[Public Preview] VPC NAT Gateways"
+    description: |-
+      [VPC NAT Gateways](https://docs.digitalocean.com/products/networking/vpc/how-to/create-nat-gateway/)
+      allow resources in a private VPC to access the public internet without
+      exposing them to incoming traffic.
+
+      By sending requests to the `/v2/vpc_nat_gateways` endpoint, you can create,
+      configure, list, and delete VPC NAT Gateways as well as retrieve information
+      about the resources assigned to them.
 
   - name: VPC Peerings
     description: |-
@@ -649,6 +662,18 @@ paths:
   /v2/apps/{app_id}/logs:
     get:
       $ref: "resources/apps/apps_get_logs_active_deployment_aggregate.yml"
+
+  /v2/apps/{app_id}/job-invocations:
+    get:
+      $ref: "resources/apps/apps_list_job_invocations.yml"  
+
+  /v2/apps/{app_id}/job-invocations/{job_invocation_id}:
+    get:
+      $ref: "resources/apps/apps_get_job_invocation.yml"
+
+  /v2/apps/{app_id}/jobs/{job_name}/invocations/{job_invocation_id}/logs:
+    get:
+      $ref: "resources/apps/apps_get_job_invocation_logs.yml"
 
   /v2/apps/tiers/instance_sizes:
     get:
@@ -907,6 +932,12 @@ paths:
     put:
       $ref: "resources/databases/databases_upgrade_major_version.yml"
 
+  /v2/databases/{database_cluster_uuid}/autoscale:
+    get:
+      $ref: "resources/databases/databases_get_autoscale.yml"
+    put:
+      $ref: "resources/databases/databases_update_autoscale.yml"
+
   /v2/databases/{database_cluster_uuid}/topics:
     get:
       $ref: "resources/databases/databases_list_kafka_topics.yml"
@@ -940,7 +971,7 @@ paths:
       $ref: "resources/databases/databases_list_kafka_schemas.yml"
     post:
       $ref: "resources/databases/databases_create_kafka_schema.yml"
-  
+
   /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}:
     get:
       $ref: "resources/databases/databases_get_kafka_schema.yml"
@@ -950,6 +981,18 @@ paths:
   /v2/databases/{database_cluster_uuid}/schema-registry/{subject_name}/versions/{version}:
     get:
       $ref: "resources/databases/databases_get_kafka_schema_version.yml"
+
+  /v2/databases/{database_cluster_uuid}/schema-registry/config:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema_config.yml"
+    put:
+      $ref: "resources/databases/databases_update_kafka_schema_config.yml"
+
+  /v2/databases/{database_cluster_uuid}/schema-registry/config/{subject_name}:
+    get:
+      $ref: "resources/databases/databases_get_kafka_schema_subject_config.yml"
+    put:
+      $ref: "resources/databases/databases_update_kafka_schema_subject_config.yml"
 
   /v2/databases/metrics/credentials:
     get:
@@ -1576,6 +1619,20 @@ paths:
     delete:
       $ref: "resources/monitoring/monitoring_delete_sink.yml"
 
+  /v2/nfs:
+    post:
+      $ref: "resources/nfs/nfs_create.yml"
+
+    get:
+      $ref: "resources/nfs/nfs_list.yml"
+
+  /v2/nfs/{nfs_id}:
+    get:
+      $ref: "resources/nfs/nfs_get.yml"
+
+    delete:
+      $ref: "resources/nfs/nfs_delete.yml"
+
   /v2/partner_network_connect/attachments:
     get:
       $ref: "resources/partner_network_connect/partner_attachment_list.yml"
@@ -1597,8 +1654,6 @@ paths:
   /v2/partner_network_connect/attachments/{pa_id}/remote_routes:
     get:
       $ref: "resources/partner_network_connect/partner_attachment_remote_routes_list.yml"
-    put:
-      $ref: "resources/partner_network_connect/partner_attachment_remote_routes_update.yml"
 
   /v2/partner_network_connect/attachments/{pa_id}/service_key:
     get:
@@ -1656,21 +1711,21 @@ paths:
 
   /v2/registries:
     get:
-      $ref: 'resources/registry/registries_get_all.yml'
+      $ref: "resources/registry/registries_get_all.yml"
 
     post:
-      $ref: 'resources/registry/registries_create.yml'
+      $ref: "resources/registry/registries_create.yml"
 
   /v2/registries/{registry_name}:
     get:
-      $ref: 'resources/registry/registries_get.yml'
+      $ref: "resources/registry/registries_get.yml"
 
     delete:
-      $ref: 'resources/registry/registries_delete.yml'
+      $ref: "resources/registry/registries_delete.yml"
 
   /v2/registries/{registry_name}/docker-credentials:
     get:
-      $ref: 'resources/registry/registries_get_dockerCredentials.yml'
+      $ref: "resources/registry/registries_get_dockerCredentials.yml"
 
   /v2/registries/subscription:
     get:
@@ -1682,7 +1737,7 @@ paths:
   /v2/registries/options:
     get:
       $ref: "resources/registry/registries_get_options.yml"
-  
+
   /v2/registries/{registry_name}/garbage-collection:
     get:
       $ref: "resources/registry/registries_get_garbageCollection.yml"
@@ -1697,7 +1752,7 @@ paths:
   /v2/registries/{registry_name}/garbage-collection/{garbage_collection_uuid}:
     put:
       $ref: "resources/registry/registries_update_garbageCollection.yml"
-  
+
   /v2/registries/{registry_name}/repositoriesV2:
     get:
       $ref: "resources/registry/registries_list_repositoriesV2.yml"
@@ -1705,7 +1760,7 @@ paths:
   /v2/registries/{registry_name}/repositories/{repository_name}:
     delete:
       $ref: "resources/registry/registries_delete_repository.yml"
-  
+
   /v2/registries/{registry_name}/repositories/{repository_name}/tags:
     get:
       $ref: "resources/registry/registries_list_repositoryTags.yml"
@@ -1735,7 +1790,7 @@ paths:
 
     delete:
       $ref: "resources/registry/registry_delete.yml"
-  
+
   /v2/registry/subscription:
     get:
       $ref: "resources/registry/registry_get_subscription.yml"
@@ -1846,13 +1901,15 @@ paths:
       $ref: "resources/byoip_prefixes/byoip_prefixes_create.yml"
     get:
       $ref: "resources/byoip_prefixes/byoip_prefixes_list.yml"
-  
+
   /v2/byoip_prefixes/{byoip_prefix_uuid}:
     get:
       $ref: "resources/byoip_prefixes/byoip_prefixes_get.yml"
     delete:
       $ref: "resources/byoip_prefixes/byoip_prefixes_delete.yml"
-  
+    patch:
+      $ref: "resources/byoip_prefixes/byoip_prefixes_update.yml"
+
   /v2/byoip_prefixes/{byoip_prefix_uuid}/ips:
     get:
       $ref: "resources/byoip_prefixes/byoip_prefix_list_resources.yml"
@@ -2002,6 +2059,23 @@ paths:
     delete:
       $ref: "resources/vpc_peerings/vpc_peerings_delete.yml"
 
+  /v2/vpc_nat_gateways:
+    get:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_list.yml"
+
+    post:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_create.yml"
+
+  /v2/vpc_nat_gateways/{id}:
+    get:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_get.yml"
+
+    put:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_update.yml"
+
+    delete:
+      $ref: "resources/vpc_nat_gateways/vpc_nat_gateway_delete.yml"
+
   /v2/uptime/checks:
     get:
       $ref: "resources/uptime/list_checks.yml"
@@ -2040,324 +2114,292 @@ paths:
     delete:
       $ref: "resources/uptime/delete_alert.yml"
 
-
-
   /v2/gen-ai/agents:
     get:
-      $ref: 'resources/gen-ai/genai_list_agents.yml'
+      $ref: "resources/gen-ai/genai_list_agents.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_agent.yml'
-
+      $ref: "resources/gen-ai/genai_create_agent.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys:
     get:
-      $ref: 'resources/gen-ai/genai_list_agent_api_keys.yml'
+      $ref: "resources/gen-ai/genai_list_agent_api_keys.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_agent_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_create_agent_api_key.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}:
     put:
-      $ref: 'resources/gen-ai/genai_update_agent_api_key.yml'
+      $ref: "resources/gen-ai/genai_update_agent_api_key.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_agent_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_delete_agent_api_key.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate:
     put:
-      $ref: 'resources/gen-ai/genai_regenerate_agent_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_regenerate_agent_api_key.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/functions:
     post:
-      $ref: 'resources/gen-ai/genai_attach_agent_function.yml'
-
+      $ref: "resources/gen-ai/genai_attach_agent_function.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}:
     put:
-      $ref: 'resources/gen-ai/genai_update_agent_function.yml'
+      $ref: "resources/gen-ai/genai_update_agent_function.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
-
+      $ref: "resources/gen-ai/genai_detach_agent_function.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases:
     post:
-      $ref: 'resources/gen-ai/genai_attach_knowledge_bases.yml'
-
+      $ref: "resources/gen-ai/genai_attach_knowledge_bases.yml"
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}:
     post:
-      $ref: 'resources/gen-ai/genai_attach_knowledge_base.yml'
+      $ref: "resources/gen-ai/genai_attach_knowledge_base.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_detach_knowledge_base.yml'
-
+      $ref: "resources/gen-ai/genai_detach_knowledge_base.yml"
 
   /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}:
     post:
-      $ref: 'resources/gen-ai/genai_attach_agent.yml'
+      $ref: "resources/gen-ai/genai_attach_agent.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_attached_agent.yml'
+      $ref: "resources/gen-ai/genai_update_attached_agent.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_detach_agent.yml'
-
+      $ref: "resources/gen-ai/genai_detach_agent.yml"
 
   /v2/gen-ai/agents/{uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_agent.yml'
+      $ref: "resources/gen-ai/genai_get_agent.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_agent.yml'
+      $ref: "resources/gen-ai/genai_update_agent.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_agent.yml'
-
+      $ref: "resources/gen-ai/genai_delete_agent.yml"
 
   /v2/gen-ai/agents/{uuid}/child_agents:
     get:
-      $ref: 'resources/gen-ai/genai_get_agent_children.yml'
-
+      $ref: "resources/gen-ai/genai_get_agent_children.yml"
 
   /v2/gen-ai/agents/{uuid}/deployment_visibility:
     put:
-      $ref: 'resources/gen-ai/genai_update_agent_deployment_visibility.yml'
+      $ref: "resources/gen-ai/genai_update_agent_deployment_visibility.yml"
 
+  /v2/gen-ai/agents/{uuid}/usage:
+    get:
+      $ref: "resources/gen-ai/genai_get_agent_usage.yml"
 
   /v2/gen-ai/agents/{uuid}/versions:
     get:
-      $ref: 'resources/gen-ai/genai_list_agent_versions.yml'
+      $ref: "resources/gen-ai/genai_list_agent_versions.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_rollback_to_agent_version.yml'
-
+      $ref: "resources/gen-ai/genai_rollback_to_agent_version.yml"
 
   /v2/gen-ai/anthropic/keys:
     get:
-      $ref: 'resources/gen-ai/genai_list_anthropic_api_keys.yml'
+      $ref: "resources/gen-ai/genai_list_anthropic_api_keys.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_anthropic_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_create_anthropic_api_key.yml"
 
   /v2/gen-ai/anthropic/keys/{api_key_uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_anthropic_api_key.yml'
+      $ref: "resources/gen-ai/genai_get_anthropic_api_key.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_anthropic_api_key.yml'
+      $ref: "resources/gen-ai/genai_update_anthropic_api_key.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_anthropic_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_delete_anthropic_api_key.yml"
 
   /v2/gen-ai/anthropic/keys/{uuid}/agents:
     get:
-      $ref: 'resources/gen-ai/genai_list_agents_by_anthropic_key.yml'
-
+      $ref: "resources/gen-ai/genai_list_agents_by_anthropic_key.yml"
 
   /v2/gen-ai/evaluation_datasets:
     post:
-      $ref: 'resources/gen-ai/genai_create_evaluation_dataset.yml'
-
+      $ref: "resources/gen-ai/genai_create_evaluation_dataset.yml"
 
   /v2/gen-ai/evaluation_datasets/file_upload_presigned_urls:
     post:
-      $ref: 'resources/gen-ai/genai_create_evaluation_dataset_file_upload_presigned_urls.yml'
-
+      $ref: "resources/gen-ai/genai_create_evaluation_dataset_file_upload_presigned_urls.yml"
 
   /v2/gen-ai/evaluation_metrics:
     get:
-      $ref: 'resources/gen-ai/genai_list_evaluation_metrics.yml'
-
+      $ref: "resources/gen-ai/genai_list_evaluation_metrics.yml"
 
   /v2/gen-ai/evaluation_runs:
     post:
-      $ref: 'resources/gen-ai/genai_run_evaluation_test_case.yml'
-
+      $ref: "resources/gen-ai/genai_run_evaluation_test_case.yml"
 
   /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_evaluation_run.yml'
-
+      $ref: "resources/gen-ai/genai_get_evaluation_run.yml"
 
   /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results:
     get:
-      $ref: 'resources/gen-ai/genai_get_evaluation_run_results.yml'
-
+      $ref: "resources/gen-ai/genai_get_evaluation_run_results.yml"
 
   /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}:
     get:
-      $ref: 'resources/gen-ai/genai_get_evaluation_run_prompt_results.yml'
-
+      $ref: "resources/gen-ai/genai_get_evaluation_run_prompt_results.yml"
 
   /v2/gen-ai/evaluation_test_cases:
     get:
-      $ref: 'resources/gen-ai/genai_list_evaluation_test_cases.yml'
+      $ref: "resources/gen-ai/genai_list_evaluation_test_cases.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_evaluation_test_case.yml'
-
+      $ref: "resources/gen-ai/genai_create_evaluation_test_case.yml"
 
   /v2/gen-ai/evaluation_test_cases/{evaluation_test_case_uuid}/evaluation_runs:
     get:
-      $ref: 'resources/gen-ai/genai_list_evaluation_runs_by_test_case.yml'
-
+      $ref: "resources/gen-ai/genai_list_evaluation_runs_by_test_case.yml"
 
   /v2/gen-ai/evaluation_test_cases/{test_case_uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_evaluation_test_case.yml'
+      $ref: "resources/gen-ai/genai_get_evaluation_test_case.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_evaluation_test_case.yml'
-
+      $ref: "resources/gen-ai/genai_update_evaluation_test_case.yml"
 
   /v2/gen-ai/indexing_jobs:
     get:
-      $ref: 'resources/gen-ai/genai_list_indexing_jobs.yml'
+      $ref: "resources/gen-ai/genai_list_indexing_jobs.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_indexing_job.yml'
-
+      $ref: "resources/gen-ai/genai_create_indexing_job.yml"
 
   /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources:
     get:
-      $ref: 'resources/gen-ai/genai_list_indexing_job_data_sources.yml'
-
+      $ref: "resources/gen-ai/genai_list_indexing_job_data_sources.yml"
 
   /v2/gen-ai/indexing_jobs/{uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_indexing_job.yml'
-
+      $ref: "resources/gen-ai/genai_get_indexing_job.yml"
 
   /v2/gen-ai/indexing_jobs/{uuid}/cancel:
     put:
-      $ref: 'resources/gen-ai/genai_cancel_indexing_job.yml'
-
+      $ref: "resources/gen-ai/genai_cancel_indexing_job.yml"
 
   /v2/gen-ai/knowledge_bases:
     get:
-      $ref: 'resources/gen-ai/genai_list_knowledge_bases.yml'
+      $ref: "resources/gen-ai/genai_list_knowledge_bases.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_knowledge_base.yml'
+      $ref: "resources/gen-ai/genai_create_knowledge_base.yml"
 
+  /v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls:
+    post:
+      $ref: "resources/gen-ai/genai_create_data_source_file_upload_presigned_urls.yml"
 
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources:
     get:
-      $ref: 'resources/gen-ai/genai_list_knowledge_base_data_sources.yml'
+      $ref: "resources/gen-ai/genai_list_knowledge_base_data_sources.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_knowledge_base_data_source.yml'
-
+      $ref: "resources/gen-ai/genai_create_knowledge_base_data_source.yml"
 
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
     delete:
-      $ref: 'resources/gen-ai/genai_delete_knowledge_base_data_source.yml'
-
+      $ref: "resources/gen-ai/genai_delete_knowledge_base_data_source.yml"
 
   /v2/gen-ai/knowledge_bases/{uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_knowledge_base.yml'
+      $ref: "resources/gen-ai/genai_get_knowledge_base.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_knowledge_base.yml'
+      $ref: "resources/gen-ai/genai_update_knowledge_base.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
-
+      $ref: "resources/gen-ai/genai_delete_knowledge_base.yml"
 
   /v2/gen-ai/models:
     get:
-      $ref: 'resources/gen-ai/genai_list_models.yml'
-
+      $ref: "resources/gen-ai/genai_list_models.yml"
 
   /v2/gen-ai/models/api_keys:
     get:
-      $ref: 'resources/gen-ai/genai_list_model_api_keys.yml'
+      $ref: "resources/gen-ai/genai_list_model_api_keys.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_model_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_create_model_api_key.yml"
 
   /v2/gen-ai/models/api_keys/{api_key_uuid}:
     put:
-      $ref: 'resources/gen-ai/genai_update_model_api_key.yml'
+      $ref: "resources/gen-ai/genai_update_model_api_key.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_model_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_delete_model_api_key.yml"
 
   /v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate:
     put:
-      $ref: 'resources/gen-ai/genai_regenerate_model_api_key.yml'
+      $ref: "resources/gen-ai/genai_regenerate_model_api_key.yml"
 
+  /v2/gen-ai/oauth2/dropbox/tokens:
+    post:
+      $ref: "resources/gen-ai/genai_create_oauth2_dropbox_tokens.yml"
+
+  /v2/gen-ai/oauth2/url:
+    get:
+      $ref: "resources/gen-ai/genai_get_oauth2_url.yml"
 
   /v2/gen-ai/openai/keys:
     get:
-      $ref: 'resources/gen-ai/genai_list_openai_api_keys.yml'
+      $ref: "resources/gen-ai/genai_list_openai_api_keys.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_openai_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_create_openai_api_key.yml"
 
   /v2/gen-ai/openai/keys/{api_key_uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_openai_api_key.yml'
+      $ref: "resources/gen-ai/genai_get_openai_api_key.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_openai_api_key.yml'
+      $ref: "resources/gen-ai/genai_update_openai_api_key.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_openai_api_key.yml'
-
+      $ref: "resources/gen-ai/genai_delete_openai_api_key.yml"
 
   /v2/gen-ai/openai/keys/{uuid}/agents:
     get:
-      $ref: 'resources/gen-ai/genai_list_agents_by_openai_key.yml'
-
+      $ref: "resources/gen-ai/genai_list_agents_by_openai_key.yml"
 
   /v2/gen-ai/regions:
     get:
-      $ref: 'resources/gen-ai/genai_list_datacenter_regions.yml'
-
+      $ref: "resources/gen-ai/genai_list_datacenter_regions.yml"
 
   /v2/gen-ai/workspaces:
     get:
-      $ref: 'resources/gen-ai/genai_list_workspaces.yml'
+      $ref: "resources/gen-ai/genai_list_workspaces.yml"
 
     post:
-      $ref: 'resources/gen-ai/genai_create_workspace.yml'
-
+      $ref: "resources/gen-ai/genai_create_workspace.yml"
 
   /v2/gen-ai/workspaces/{workspace_uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_workspace.yml'
+      $ref: "resources/gen-ai/genai_get_workspace.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_workspace.yml'
+      $ref: "resources/gen-ai/genai_update_workspace.yml"
 
     delete:
-      $ref: 'resources/gen-ai/genai_delete_workspace.yml'
-
+      $ref: "resources/gen-ai/genai_delete_workspace.yml"
 
   /v2/gen-ai/workspaces/{workspace_uuid}/agents:
     get:
-      $ref: 'resources/gen-ai/genai_list_agents_by_workspace.yml'
+      $ref: "resources/gen-ai/genai_list_agents_by_workspace.yml"
 
     put:
-      $ref: 'resources/gen-ai/genai_update_agents_workspace.yml'
-
+      $ref: "resources/gen-ai/genai_update_agents_workspace.yml"
 
   /v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases:
     get:
-      $ref: 'resources/gen-ai/genai_list_evaluation_test_cases_by_workspace.yml'
-
+      $ref: "resources/gen-ai/genai_list_evaluation_test_cases_by_workspace.yml"
 
 components:
   securitySchemes:

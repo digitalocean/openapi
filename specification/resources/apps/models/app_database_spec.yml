@@ -33,7 +33,7 @@ properties:
     description: |-
       - MYSQL: MySQL
       - PG: PostgreSQL
-      - REDIS: Redis
+      - REDIS: Caching
       - MONGODB: MongoDB
       - KAFKA: Kafka
       - OPENSEARCH: OpenSearch

@@ -265,3 +265,5 @@ properties:
       - NONE
     example: INSIGHTS
     default: NONE
+  mysql_incremental_backup:
+    $ref: './helpers/mysql_incremental_backup.yml'
