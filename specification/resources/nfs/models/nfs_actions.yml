@@ -1,0 +1,33 @@
+nfs_action:
+  required:
+    - type
+  type: object
+  description: Specifies the action that will be taken on the NFS share.
+  properties:
+    type:
+      type: string
+      enum:
+      - resize
+      - snapshot
+      example: resize
+      description: The type of action to initiate for the NFS share.
+
+nfs_action_resize:
+  allOf:
+  - $ref: '#/nfs_action'
+  - type: object
+    properties:
+      size:
+        type: uint64
+        example: 2048
+        description: The new size for the NFS share.
+
+nfs_action_snapshot:
+  allOf:
+  - $ref: '#/nfs_action'
+  - type: object
+    properties:
+      name:
+        type: string
+        example: daily-backup
+        description: The name to give the new snapshot of the NFS share.

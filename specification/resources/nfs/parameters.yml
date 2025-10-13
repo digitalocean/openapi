@@ -42,3 +42,12 @@ vpc_ids:
   schema:
     type: string
   example: ["796c6fe3-2a1d-4da2-9f3e-38239827dc91"]
+
+nfs_snapshot_id:
+  in: path
+  name: nfs_snapshot_id
+  description: The unique ID of the NFS snapshot
+  required: true
+  schema:
+    type: string
+  example: 0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
