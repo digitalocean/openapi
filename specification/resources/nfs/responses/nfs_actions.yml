@@ -11,6 +11,4 @@ headers:
 content:
   application/json:
     schema:
-      properties:
-        action:
-          $ref: '../../actions/models/action.yml'
+      $ref: '../models/nfs_actions_response.yml'

@@ -1,0 +1,45 @@
+type: object
+description: Response returned after performing an action on an NFS share.
+
+properties:
+  action:
+    type: object
+    description: The action that was submitted.
+    properties:
+      region_slug:
+        type: string
+        description: The DigitalOcean region slug where the resource is located.
+        example: "atl1"
+      resource_id:
+        type: string
+        format: uuid
+        description: The unique identifier of the resource on which the action is being performed.
+        example: "b5eb9e60-6750-4f3f-90b6-8296966eaf35"
+      resource_type:
+        type: string
+        enum: ["network_file_share", "network_file_share_snapshot"]
+        description: The type of resource on which the action is being performed.
+        example: "network_file_share"
+      started_at:
+        type: string
+        format: date-time
+        description: The timestamp when the action was started.
+        example: "2025-10-14T11:55:31.615157397Z"
+      status:
+        type: string
+        enum: ["in-progress", "completed", "errored"]
+        description: The current status of the action.
+        example: "in-progress"
+      type:
+        type: string
+        description: The type of action being performed.
+        example: "resize"
+    required:
+      - region_slug
+      - resource_id
+      - resource_type
+      - started_at
+      - status
+      - type
+required:
+  - action
