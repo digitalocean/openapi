@@ -7,11 +7,14 @@ description: |
 
   A successful request will return all NFS snapshots belonging to the authenticated user in the specified region.
 
+  Optionally, you can filter snapshots by a specific NFS share by including the `share_id` query parameter.
+
 tags:
   - NFS
 
 parameters:
   - $ref: "parameters.yml#/region"
+  - $ref: "parameters.yml#/share_id"
 
 responses:
   "200":

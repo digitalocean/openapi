@@ -51,3 +51,12 @@ nfs_snapshot_id:
   schema:
     type: string
   example: 0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+
+share_id:
+  in: query
+  name: share_id
+  required: false
+  description: The unique ID of an NFS share. If provided, only snapshots of this specific share will be returned.
+  schema:
+    type: string
+  example: 0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
