@@ -60,5 +60,8 @@ properties:
   amd_gpu_device_metrics_exporter_plugin:
     $ref: "amd_gpu_device_metrics_exporter_plugin.yml"
 
+  nvidia_gpu_device_plugin:
+    $ref: "nvidia_gpu_device_plugin.yml"
+
 required:
   - name
