@@ -16,6 +16,14 @@ source: |-
         {
           "bucket_name": "test-public-gen-ai",
           "bucket_region": "tor1"
+        },
+        {
+          "web_crawler_data_source": {
+            "base_url": "https://example.com",
+            "crawling_option": "SCOPED",
+            "embed_media": false,
+            "exclude_tags":["footer", "title", "h1"]
+          }
         }
       ],
       "region": "tor1",

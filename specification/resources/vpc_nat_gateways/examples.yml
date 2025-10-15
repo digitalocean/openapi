@@ -9,6 +9,7 @@ vpc_nat_gateway_create_request:
     udp_timeout_seconds: 30
     icmp_timeout_seconds: 30
     tcp_timeout_seconds: 30
+    project_id: "9cc10173-e9ea-4176-9dbc-a4cee4c4ff30"
 
 vpc_nat_gateway_update_request:
   value:
