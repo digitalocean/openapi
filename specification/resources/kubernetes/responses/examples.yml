@@ -117,6 +117,8 @@ kubernetes_clusters_all:
         enabled: false
       nvidia_gpu_device_plugin:
         enabled: false
+      rdma_shared_dev_plugin:
+        enabled: false
     meta:
       total: 1
 
@@ -238,6 +240,8 @@ kubernetes_single:
         enabled: false
       nvidia_gpu_device_plugin:
         enabled: false
+      rdma_shared_dev_plugin:
+        enabled: false
 
 kubernetes_updated:
   value:
@@ -357,6 +361,8 @@ kubernetes_updated:
         enabled: false
       nvidia_gpu_device_plugin:
         enabled: false
+      rdma_shared_dev_plugin:
+        enabled: false
 
 kubernetes_clusters_create_basic_response:
   value:
@@ -440,6 +446,8 @@ kubernetes_clusters_create_basic_response:
       amd_gpu_device_metrics_exporter_plugin:
         enabled: false
       nvidia_gpu_device_plugin:
+        enabled: false
+      rdma_shared_dev_plugin:
         enabled: false
 
 kubernetes_clusters_multi_pool_response:
