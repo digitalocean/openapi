@@ -1,6 +1,6 @@
 lang: cURL
 source: |-
-  curl --location 'https://api.digitalocean.com/v2/gen-ai/scheduled-indexing' \
+  curl --location --request POST 'https://api.digitalocean.com/v2/gen-ai/scheduled-indexing' \
   --header 'Authorization: Bearer $DIGITALOCEAN_TOKEN"' \
   --header 'Content-Type: application/json' \
   --data '{
