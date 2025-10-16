@@ -97,6 +97,9 @@ kubernetes_clusters_all:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
+      registries:
+        - registry-a
+        - registry-b
       ha: false
       control_plane_firewall:
         enabled: true
@@ -116,6 +119,8 @@ kubernetes_clusters_all:
       amd_gpu_device_metrics_exporter_plugin:
         enabled: false
       nvidia_gpu_device_plugin:
+        enabled: false
+      rdma_shared_dev_plugin:
         enabled: false
     meta:
       total: 1
@@ -218,6 +223,9 @@ kubernetes_single:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
+      registries:
+        - registry-a
+        - registry-b
       ha: false
       control_plane_firewall:
         enabled: true
@@ -237,6 +245,8 @@ kubernetes_single:
       amd_gpu_device_metrics_exporter_plugin:
         enabled: false
       nvidia_gpu_device_plugin:
+        enabled: false
+      rdma_shared_dev_plugin:
         enabled: false
 
 kubernetes_updated:
@@ -337,6 +347,9 @@ kubernetes_updated:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: true
       registry_enabled: false
+      registries:
+        - registry-a
+        - registry-b
       ha: false
       control_plane_firewall:
         enabled: true
@@ -356,6 +369,8 @@ kubernetes_updated:
       amd_gpu_device_metrics_exporter_plugin:
         enabled: false
       nvidia_gpu_device_plugin:
+        enabled: false
+      rdma_shared_dev_plugin:
         enabled: false
 
 kubernetes_clusters_create_basic_response:
@@ -421,6 +436,9 @@ kubernetes_clusters_create_basic_response:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
+      registries:
+        - registry-a
+        - registry-b
       ha: false
       control_plane_firewall:
         enabled: true
@@ -440,6 +458,8 @@ kubernetes_clusters_create_basic_response:
       amd_gpu_device_metrics_exporter_plugin:
         enabled: false
       nvidia_gpu_device_plugin:
+        enabled: false
+      rdma_shared_dev_plugin:
         enabled: false
 
 kubernetes_clusters_multi_pool_response:
@@ -542,6 +562,9 @@ kubernetes_clusters_multi_pool_response:
       updated_at: '2018-11-15T16:00:11Z'
       surge_upgrade: false
       registry_enabled: false
+      registries:
+        - registry-a
+        - registry-b
       ha: false
       control_plane_firewall:
         enabled: true
