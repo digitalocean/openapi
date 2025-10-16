@@ -184,6 +184,9 @@ properties:
   nvidia_gpu_device_plugin:
     $ref: "nvidia_gpu_device_plugin.yml"
 
+  rdma_shared_dev_plugin:
+    $ref: "rdma_shared_dev_plugin.yml"
+
 required:
   - name
   - region
