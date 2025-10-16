@@ -21,8 +21,9 @@ properties:
     example: "atl1"
   status:
     type: string
+    enum: [UNKNOWN, CREATING, ACTIVE, FAILED, DELETED]
     description: The current status of the snapshot.
-    example: "available"
+    example: "CREATING"
   created_at:
     type: string
     format: date-time

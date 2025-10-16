@@ -3,7 +3,7 @@ operationId: nfs_list_snapshot
 summary: List NFS snapshots per region
 
 description: |
-  To list all NFS snapshots, send a GET request to `/v2/nfs/snapshots?region=${region}`.
+  To list all NFS snapshots, send a GET request to `/v2/nfs/snapshots?region=${region}&share_id={share_id}`.
 
   A successful request will return all NFS snapshots belonging to the authenticated user in the specified region.
 

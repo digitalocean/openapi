@@ -3,7 +3,7 @@ operationId: nfs_delete_snapshot
 summary: "Delete an NFS snapshot"
 
 description: |
-  To delete an NFS snapshot, send a DELETE request to `/v2/nfs/snapshots/$ID?region=${region}`.
+  To delete an NFS snapshot, send a DELETE request to `/v2/nfs/snapshots/{nfs_snapshot_id}?region=${region}`.
 
   A successful request will return a `204 No Content` status code.
 

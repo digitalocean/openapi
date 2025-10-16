@@ -1,5 +1,5 @@
 type: object
-description: Response returned after performing an action on an NFS share.
+description: Action response of an NFS share.
 
 properties:
   action:

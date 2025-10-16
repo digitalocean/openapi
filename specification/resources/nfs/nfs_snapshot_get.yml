@@ -3,7 +3,7 @@ operationId: nfs_get_snapshot
 summary: Get an NFS snapshot by ID
 
 description: |
-  To get an NFS snapshot, send a GET request to `/v2/nfs/snapshots/$ID?region=${region}`.
+  To get an NFS snapshot, send a GET request to `/v2/nfs/snapshots/{nfs_snapshot_id}?region=${region}`.
 
   A successful request will return the NFS snapshot.
 
