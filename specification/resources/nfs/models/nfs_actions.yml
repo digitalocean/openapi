@@ -26,6 +26,8 @@ nfs_action_resize:
         type: integer
         example: 2048
         description: The new size for the NFS share.
+    required:
+      - size_gib
 
 nfs_action_snapshot:
   allOf:
