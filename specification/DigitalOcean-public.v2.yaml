@@ -368,6 +368,11 @@ tags:
       NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure, 
       high-performance shared storage right inside your VPC. This enables seamless data sharing across Droplets in a VPC.
 
+  - name: NFS Actions
+    description: |-
+      NFS actions are tasks that can be executed on an NFS share. These can be
+      things like resizing, snapshotting, etc.
+
   - name: Partner Network Connect
     description: |-
       Partner Network Connect lets you establish high-bandwidth, low-latency
@@ -1639,6 +1644,21 @@ paths:
 
     delete:
       $ref: "resources/nfs/nfs_delete.yml"
+
+  /v2/nfs/{nfs_id}/actions:
+    post:
+      $ref: "resources/nfs/nfs_actions_create.yml"
+  
+  /v2/nfs/snapshots:
+    get:
+      $ref: "resources/nfs/nfs_snapshot_list.yml"
+
+  /v2/nfs/snapshots/{nfs_snapshot_id}:
+    get: 
+      $ref: "resources/nfs/nfs_snapshot_get.yml"
+
+    delete:
+      $ref: "resources/nfs/nfs_snapshot_delete.yml"
 
   /v2/partner_network_connect/attachments:
     get:

@@ -1,0 +1,48 @@
+nfs_action:
+  required:
+    - type
+    - region
+  type: object
+  description: Specifies the action that will be taken on the NFS share.
+  properties:
+    type:
+      type: string
+      enum:
+      - resize
+      - snapshot
+      example: resize
+      description: The type of action to initiate for the NFS share (such as resize or snapshot).
+    region:
+      type: string
+      description: The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
+      example: atl1
+
+nfs_action_resize:
+  allOf:
+  - $ref: '#/nfs_action'
+  - type: object
+    properties:
+      params:
+        type: object
+        properties:
+          size_gib:
+            type: integer
+            example: 2048
+            description: The new size for the NFS share.
+        required:
+          - size_gib
+
+nfs_action_snapshot:
+  allOf:
+  - $ref: '#/nfs_action'
+  - type: object
+    properties:
+      params:
+        type: object
+        properties:
+          name:
+            type: string
+            example: daily-backup
+            description: Snapshot name of the NFS share
+        required:
+          - name

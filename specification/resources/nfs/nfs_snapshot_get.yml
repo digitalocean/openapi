@@ -1,22 +1,22 @@
-operationId: nfs_get
+operationId: nfs_get_snapshot
 
-summary: Get an NFS share
+summary: Get an NFS snapshot by ID
 
 description: |
-  To get an NFS share, send a GET request to `/v2/nfs/{nfs_id}?region=${region}`.
+  To get an NFS snapshot, send a GET request to `/v2/nfs/snapshots/{nfs_snapshot_id}?region=${region}`.
 
-  A successful request will return the NFS share.
+  A successful request will return the NFS snapshot.
 
 tags:
   - NFS
 
 parameters:
-  - $ref: "parameters.yml#/nfs_id"
+  - $ref: "parameters.yml#/nfs_snapshot_id"
   - $ref: "parameters.yml#/region"
 
 responses:
   "200":
-    $ref: "responses/nfs_get.yml"
+    $ref: "responses/nfs_snapshot_get.yml"
 
   "401":
     $ref: "../../shared/responses/unauthorized.yml"
@@ -34,7 +34,7 @@ responses:
     $ref: "../../shared/responses/unexpected_error.yml"
 
 x-codeSamples:
-  - $ref: 'examples/curl/nfs_get.yml'
+  - $ref: 'examples/curl/nfs_snapshot_get.yml'
 
 security:
   - bearer_auth:
