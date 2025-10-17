@@ -16,7 +16,7 @@ content:
       $ref: '../models/nfs_get_response.yml'
 
     examples:
-      Read Only Key:
+      Active Share:
         value:
           share:
             id: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
@@ -26,3 +26,5 @@ content:
             status: "ACTIVE"
             created_at: "2023-01-01T00:00:00Z"
             vpc_ids: ["796c6fe3-2a1d-4da2-9f3e-38239827dc91"]
+            mount_path: "/123456/your-nfs-share-uuid"
+            host: "10.128.32.2"

@@ -22,7 +22,7 @@ nfs_action_resize:
   - $ref: '#/nfs_action'
   - type: object
     properties:
-      size:
+      size_gib:
         type: integer
         example: 2048
         description: The new size for the NFS share.
