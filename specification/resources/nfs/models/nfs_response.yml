@@ -36,6 +36,16 @@ properties:
       type: string
     description: List of VPC IDs that should be able to access the share.
     example: ["796c6fe3-2a1d-4da2-9f3e-38239827dc91"]
+  mount_path:
+    name: mount_path
+    type: string
+    description: Path at which the share will be available, to be mounted at a target of the user's choice within the client
+    example: "/123456/your-nfs-share-uuid"
+  host:
+    name: host
+    type: string
+    description: The host IP of the NFS server that will be accessible from the associated VPC
+    example: "10.128.32.2"
 required:
   - id
   - name
