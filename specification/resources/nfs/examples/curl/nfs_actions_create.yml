@@ -3,5 +3,5 @@ source: |-
   curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{"type": "resize", "size_gib": 2048, "region": "atl1"}' \
+    -d '{"type": "resize", params: {"size_gib": 1024}, "region": "atl1"}' \
     "https://api.digitalocean.com/v2/nfs/${nfs_id}/actions"
