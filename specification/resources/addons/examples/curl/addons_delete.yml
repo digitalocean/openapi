@@ -3,5 +3,4 @@ source: |-
   curl -X DELETE \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{"resource_uuid": "123e4567-e89b-12d3-a456-426614174000"}' \
     "https://api.digitalocean.com/v2/add-ons/saas/123e4567-e89b-12d3-a456-426614174000"
