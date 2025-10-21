@@ -45,6 +45,16 @@ tags:
 
       - `Accept: application/vnd.digitalocean.reserveip+json`
 
+  - name: Add-Ons
+    description: |-
+      Add-ons are third-party applications that can be added to your DigitalOcean account.
+      They are available through the [DigitalOcean Marketplace](https://marketplace.digitalocean.com/).
+      Add-ons can be used to enhance the functionality of your existing resources or to provide
+      additional services.
+
+      The Add-Ons API allows you to manage these resources, including creating, listing, and retrieving
+      details about specific add-on resources.
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -607,6 +617,32 @@ paths:
   /v2/actions/{action_id}:
     get:
       $ref: "resources/actions/actions_get.yml"
+
+  /v2/add-ons/apps:
+    get:
+      $ref: "resources/addons/addons_get_app.yml"
+    
+  /v2/add-ons/saas/apps/{app_slug}/metadata:
+    get:
+      $ref: "resources/addons/addons_get_app_metadata.yml"
+  
+  /v2/add-ons/saas:
+    get:
+      $ref: "resources/addons/addons_list.yml"
+    post:
+      $ref: "resources/addons/addons_create.yml"
+  
+  /v2/add-ons/saas/{resource_uuid}:
+    get:
+      $ref: "resources/addons/addons_get.yml"
+    delete:
+      $ref: "resources/addons/addons_delete.yml"
+    patch:
+      $ref: "resources/addons/addons_update.yml"
+
+  /v2/add-ons/saas/{resource_uuid}/plan:
+    patch:
+      $ref: "resources/addons/addons_update_plan.yml"
 
   /v2/apps:
     get:
