@@ -46,3 +46,33 @@ nfs_action_snapshot:
             description: Snapshot name of the NFS share
         required:
           - name
+
+nfs_action_attach:
+  allOf:
+    - $ref: '#/nfs_action'
+    - type: object
+      properties:
+        params:
+          type: object
+          properties:
+            vpc_id:
+              type: string
+              example: vpc-id-123
+              description: The ID of the VPC to which the NFS share will be attached
+          required:
+            - vpc_id
+
+nfs_action_detach:
+  allOf:
+    - $ref: '#/nfs_action'
+    - type: object
+      properties:
+        params:
+          type: object
+          properties:
+            vpc_id:
+              type: string
+              example: vpc-id-123
+              description: The ID of the VPC from which the NFS share will be detached
+          required:
+            - vpc_id
