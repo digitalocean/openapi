@@ -47,11 +47,3 @@ content:
             port: 514
             tls: false
             format: rfc5424
-      Get a datadog logsink:
-        value:
-          sink_id: "dfcc9f57d86bf58e321c2c6c31c7a971be244ac7"
-          sink_name: logs-sink
-          sink_type: datadog
-          config:
-            site: http-intake.logs.datadoghq.com
-            datadog_api_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
