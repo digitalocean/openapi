@@ -11,13 +11,7 @@ headers:
 content:
   application/json:
     schema:
-      allOf:
-        - $ref: "../models/logsink_verbose.yml"
-      required:
-        - sink_id
-        - sink_name
-        - sink_type
-        - config
+      $ref: "logsink_schema.yml"
     examples:
       Get an opensearch logsink:
         value:
