@@ -8,6 +8,7 @@ properties:
     description: The name of the metadata item to be set.
 
   value:
+    example: "example_value"
     oneOf:
       - title: string_value
         type: string

@@ -38,6 +38,7 @@ properties:
     description: Unit of measurement for the feature, if applicable. Units apply to allowance features.
 
   value:
+    example: "Unlimited"
     oneOf:
       - title: string_value
         type: string

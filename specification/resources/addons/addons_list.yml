@@ -1,4 +1,4 @@
-operation: addons_list
+operationId: addons_list
 
 summary: List all Add-On Resources
 

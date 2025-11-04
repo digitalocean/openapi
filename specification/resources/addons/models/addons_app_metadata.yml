@@ -37,6 +37,10 @@ properties:
   options:
     title: options
     type: array
+    example:
+      - "US"
+      - "UK"
+      - "CA"
     items:
       type: string
       example: "UK"
