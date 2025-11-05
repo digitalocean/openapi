@@ -622,7 +622,7 @@ paths:
     get:
       $ref: "resources/addons/addons_get_app.yml"
     
-  /v2/add-ons/saas/apps/{app_slug}/metadata:
+  /v2/add-ons/apps/{app_slug}/metadata:
     get:
       $ref: "resources/addons/addons_get_app_metadata.yml"
   
