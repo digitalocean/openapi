@@ -543,7 +543,7 @@ tags:
 
       To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
 
-  - name: "[Public Preview] VPC NAT Gateways"
+  - name: "VPC NAT Gateways"
     description: |-
       [VPC NAT Gateways](https://docs.digitalocean.com/products/networking/vpc/how-to/create-nat-gateway/)
       allow resources in a private VPC to access the public internet without
