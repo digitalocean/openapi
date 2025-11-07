@@ -11,6 +11,8 @@ description: |
   | -------------------------------- | ----------- |
   | <nobr>`resize`</nobr>            | Resizes an NFS share. Set the size_gib attribute to a desired value in GiB |
   | <nobr>`snapshot`</nobr>          | Takes a snapshot of an NFS share |
+  | <nobr>`attach`</nobr>            | Attaches an NFS share to a VPC. Set the vpc_id attribute to the desired VPC ID |
+  | <nobr>`detach`</nobr>            | Detaches an NFS share from a VPC. Set the vpc_id attribute to the desired VPC ID |
 
 tags:
   - NFS Actions
@@ -32,11 +34,15 @@ requestBody:
         anyOf:
           - $ref: 'models/nfs_actions.yml#/nfs_action_resize'
           - $ref: 'models/nfs_actions.yml#/nfs_action_snapshot'
+          - $ref: 'models/nfs_actions.yml#/nfs_action_attach'
+          - $ref: 'models/nfs_actions.yml#/nfs_action_detach'
         discriminator:
           propertyName: type
           mapping:
             resize: 'models/nfs_actions.yml#/nfs_action_resize'
             snapshot: 'models/nfs_actions.yml#/nfs_action_snapshot'
+            attach: 'models/nfs_actions.yml#/nfs_action_attach'
+            detach: 'models/nfs_actions.yml#/nfs_action_detach'
 
 responses:
   '201':
