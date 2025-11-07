@@ -6,6 +6,7 @@ vpc_nat_gateway_create_request:
     size: 1
     vpcs:
       - vpc_uuid: "0eb1752f-807b-4562-a077-8018e13ab1fb"
+        default_gateway: true
     udp_timeout_seconds: 30
     icmp_timeout_seconds: 30
     tcp_timeout_seconds: 30
@@ -17,6 +18,9 @@ vpc_nat_gateway_update_request:
     type: "PUBLIC"
     region: "tor1"
     size: 2
+    vpcs:
+      - vpc_uuid: "0eb1752f-807b-4562-a077-8018e13ab1fb"
+        default_gateway: false
     udp_timeout_seconds: 60
     icmp_timeout_seconds: 60
     tcp_timeout_seconds: 60
