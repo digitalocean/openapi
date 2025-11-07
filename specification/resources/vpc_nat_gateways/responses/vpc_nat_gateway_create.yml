@@ -15,7 +15,7 @@ content:
     schema:
       properties:
         vpc_nat_gateway:
-          $ref: '../models/vpc_nat_gateway_update.yml'
+          $ref: '../models/vpc_nat_gateway_create.yml'
     examples:
-      VPC NAT Gateway Update Response:
-        $ref: 'examples.yml#/vpc_nat_gateway_update'
+      VPC NAT Gateway Response:
+        $ref: 'examples.yml#/vpc_nat_gateway_create'
