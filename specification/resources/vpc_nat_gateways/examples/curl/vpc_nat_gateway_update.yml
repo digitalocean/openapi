@@ -5,8 +5,6 @@ source: |-
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -d '{
       "name": "test-vpc-nat-gateways",
-      "type": "PUBLIC",
-      "region": "tor1",
       "size": 2,
       "vpcs": [
         {

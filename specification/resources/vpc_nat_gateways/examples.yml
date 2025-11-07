@@ -15,8 +15,6 @@ vpc_nat_gateway_create_request:
 vpc_nat_gateway_update_request:
   value:
     name: "test-vpc-nat-gateways-updated"
-    type: "PUBLIC"
-    region: "tor1"
     size: 2
     vpcs:
       - vpc_uuid: "0eb1752f-807b-4562-a077-8018e13ab1fb"
