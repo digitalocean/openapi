@@ -8,7 +8,7 @@ description: |
   These each contain the standard VPC NAT gateway attributes.
 
 tags:
-  - "[Public Preview] VPC NAT Gateways"
+  - "VPC NAT Gateways"
 
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'

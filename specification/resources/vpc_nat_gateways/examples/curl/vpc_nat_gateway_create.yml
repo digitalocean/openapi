@@ -10,7 +10,8 @@ source: |-
       "size": 1,
       "vpcs": [
         {
-          "vpc_uuid": "0eb1752f-807b-4562-a077-8018e13ab1fb"
+          "vpc_uuid": "0eb1752f-807b-4562-a077-8018e13ab1fb",
+          "default_gateway": true
         }
       ],
       "udp_timeout_seconds": 30,

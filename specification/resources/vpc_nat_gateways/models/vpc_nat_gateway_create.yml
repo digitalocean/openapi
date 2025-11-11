@@ -48,6 +48,12 @@ properties:
           type: string
           example: 0d3db13e-a604-4944-9827-7ec2642d32ac
           description: The unique identifier of the VPC to which the NAT gateway is attached.
+        default_gateway:
+          type: boolean
+          example: true
+          description: The classification of the NAT gateway as the default egress route for the VPC traffic.
+      required:
+        - vpc_uuid
     description: An array of VPCs associated with the VPC NAT gateway.
 
   udp_timeout_seconds:
