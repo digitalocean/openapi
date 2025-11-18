@@ -7,9 +7,9 @@ source: |-
     -d '{
   "knowledge_base_uuid": "20cd8434-6ea1-11f0-bf8f-4e013e2ddde4",
   "web_crawler_data_source": {
-    "base_url": "https://example.com",
+    "base_url": "https://faas-blr1-8177d592.doserverless.co/api/v1/web/fn-a8217bc8-d09f-4751-8686-76c0974bf8cc/default/html-tester",
     "crawling_option": "SCOPED",
     "embed_media": false,
-    "exclude_tags": ["h1", "section"]
+    "exclude_tags": ["nav","footer","header","aside","script","style","form","iframe", "noscript"]
   }
   }'

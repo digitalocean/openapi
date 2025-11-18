@@ -350,10 +350,6 @@ apiAgentDeploymentRelease:
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
-    url:
-      description: The url to access the agent workspace deployment
-      example: example string
-      type: string
     uuid:
       description: Unique release id
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -1194,12 +1190,14 @@ apiCrawlingOption:
      - PATH: Crawl the base URL and linked pages within the URL path.
      - DOMAIN: Crawl the base URL and linked pages within the same domain.
      - SUBDOMAINS: Crawl the base URL and linked pages for any subdomain.
+     - SITEMAP: Crawl URLs discovered in the sitemap.
   enum:
   - UNKNOWN
   - SCOPED
   - PATH
   - DOMAIN
   - SUBDOMAINS
+  - SITEMAP
   example: UNKNOWN
   type: string
 apiCreateAgentAPIKeyInputPublic:
@@ -1218,6 +1216,12 @@ apiCreateAgentAPIKeyOutput:
     api_key_info:
       $ref: '#/apiAgentAPIKeyInfo'
   type: object
+apiCreateAgentDeploymentFileUploadPresignedURLInputPublic:
+  description: Request for pre-signed URL's to upload file for Agent Workspace
+  properties:
+    file:
+      $ref: '#/apiPresignedUrlFile'
+  type: object
 apiCreateAgentDeploymentFileUploadPresignedURLOutput:
   description: Response with pre-signed url to upload file
   properties:
@@ -1227,6 +1231,19 @@ apiCreateAgentDeploymentFileUploadPresignedURLOutput:
       type: string
     upload:
       $ref: '#/apiFilePresignedUrlResponse'
+  type: object
+apiCreateAgentDeploymentReleaseInputPublic:
+  properties:
+    agent_deployment_code_artifact:
+      $ref: '#/apiAgentDeploymentCodeArtifact'
+    agent_deployment_name:
+      description: The deployment name
+      example: example name
+      type: string
+    agent_workspace_name:
+      description: The name of agent workspace
+      example: example name
+      type: string
   type: object
 apiCreateAgentDeploymentReleaseOutput:
   description: One Agent Deployment Release
@@ -1326,11 +1343,41 @@ apiCreateAgentOutput:
     agent:
       $ref: '#/apiAgent'
   type: object
+apiCreateAgentWorkspaceDeploymentInputPublic:
+  properties:
+    agent_deployment_code_artifact:
+      $ref: '#/apiAgentDeploymentCodeArtifact'
+    agent_deployment_name:
+      description: The deployment name
+      example: example name
+      type: string
+    agent_workspace_name:
+      description: The name of agent workspace
+      example: example name
+      type: string
+  type: object
 apiCreateAgentWorkspaceDeploymentOutput:
   description: One Agent Workspace Deployment
   properties:
     agent_workspace_deployment:
       $ref: '#/apiAgentWorkspaceDeployment'
+  type: object
+apiCreateAgentWorkspaceInputPublic:
+  properties:
+    agent_deployment_code_artifact:
+      $ref: '#/apiAgentDeploymentCodeArtifact'
+    agent_deployment_name:
+      description: The deployment name
+      example: example name
+      type: string
+    agent_workspace_name:
+      description: The name of agent workspace
+      example: example name
+      type: string
+    project_id:
+      description: The project id
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 apiCreateAgentWorkspaceOutput:
   properties:
@@ -1624,6 +1671,10 @@ apiCreateTracesInputPublic:
 apiCreateTracesOutput:
   description: Output for creating traces
   properties:
+    session_id:
+      description: Session ID
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
     trace_uuids:
       description: Trace UUIDs created
       example:
@@ -1700,6 +1751,20 @@ apiDeleteAgentOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
+  type: object
+apiDeleteAgentWorkspaceDeploymentOutput:
+  properties:
+    agent_workspace_deployment_uuid:
+      description: The agent workspace deployment id
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiDeleteAgentWorkspaceOutput:
+  properties:
+    agent_workspace_name:
+      description: The agent workspace name
+      example: example name
+      type: string
   type: object
 apiDeleteAnthropicAPIKeyInputPublic:
   properties:
@@ -1937,6 +2002,8 @@ apiEvaluationDataset:
   type: object
 apiEvaluationMetric:
   properties:
+    category:
+      $ref: '#/apiEvaluationMetricCategory'
     description:
       example: example string
       type: string
@@ -1945,9 +2012,16 @@ apiEvaluationMetric:
         better.
       example: true
       type: boolean
+    is_metric_goal:
+      example: true
+      type: boolean
     metric_name:
       example: example name
       type: string
+    metric_rank:
+      example: 123
+      format: int64
+      type: integer
     metric_type:
       $ref: '#/apiEvaluationMetricType'
     metric_uuid:
@@ -1966,6 +2040,17 @@ apiEvaluationMetric:
       format: float
       type: number
   type: object
+apiEvaluationMetricCategory:
+  default: METRIC_CATEGORY_UNSPECIFIED
+  enum:
+  - METRIC_CATEGORY_UNSPECIFIED
+  - METRIC_CATEGORY_CORRECTNESS
+  - METRIC_CATEGORY_USER_OUTCOMES
+  - METRIC_CATEGORY_SAFETY_AND_SECURITY
+  - METRIC_CATEGORY_CONTEXT_QUALITY
+  - METRIC_CATEGORY_MODEL_FIT
+  example: METRIC_CATEGORY_UNSPECIFIED
+  type: string
 apiEvaluationMetricResult:
   properties:
     error_description:
@@ -2349,6 +2434,13 @@ apiGetAgentWorkspaceDeploymentOutput:
   properties:
     agent_workspace_deployment:
       $ref: '#/apiAgentWorkspaceDeployment'
+  type: object
+apiGetAgentWorkspaceDeploymentRuntimeLogsOutput:
+  properties:
+    live_url:
+      description: URL for live logs
+      example: example string
+      type: string
   type: object
 apiGetAgentWorkspaceOutput:
   description: One Agent Workspace
@@ -2830,6 +2922,7 @@ apiIndexJobStatus:
   - INDEX_JOB_STATUS_FAILED
   - INDEX_JOB_STATUS_NO_CHANGES
   - INDEX_JOB_STATUS_PENDING
+  - INDEX_JOB_STATUS_CANCELLED
   example: INDEX_JOB_STATUS_UNKNOWN
   type: string
 apiIndexedDataSource:
@@ -2967,26 +3060,6 @@ apiIndexingJob:
       example: 123
       format: int64
       type: integer
-    total_items_failed:
-      description: Total Items Failed
-      example: "12345"
-      format: uint64
-      type: string
-    total_items_indexed:
-      description: Total Items Indexed
-      example: "12345"
-      format: uint64
-      type: string
-    total_items_removed:
-      description: Total Items Removed
-      example: "12345"
-      format: uint64
-      type: string
-    total_items_skipped:
-      description: Total Items Skipped
-      example: "12345"
-      format: uint64
-      type: string
     total_tokens:
       description: Total Tokens Consumed By the Indexing Job
       example: "12345"
@@ -3135,8 +3208,6 @@ apiKnowledgeBaseDataSource:
       type: string
     last_datasource_indexing_job:
       $ref: '#/apiIndexedDataSource'
-    last_indexing_job:
-      $ref: '#/apiIndexingJob'
     region:
       description: Region code - Deprecated, moved to data_source_details
       example: example string
@@ -4327,6 +4398,7 @@ apiReleaseStatus:
      - RELEASE_STATUS_UNDEPLOYING: the release is currently being undeployed
      - RELEASE_STATUS_UNDEPLOYMENT_FAILED: the release undeployment failed
      - RELEASE_STATUS_DELETED: the release has been deleted
+     - RELEASE_STATUS_BUILDING: the release is building
   enum:
   - RELEASE_STATUS_UNKNOWN
   - RELEASE_STATUS_WAITING_FOR_DEPLOYMENT
@@ -4337,6 +4409,7 @@ apiReleaseStatus:
   - RELEASE_STATUS_UNDEPLOYING
   - RELEASE_STATUS_UNDEPLOYMENT_FAILED
   - RELEASE_STATUS_DELETED
+  - RELEASE_STATUS_BUILDING
   example: RELEASE_STATUS_UNKNOWN
   type: string
 apiResourceUsage:
@@ -4883,6 +4956,26 @@ apiUpdateAgentOutput:
   properties:
     agent:
       $ref: '#/apiAgent'
+  type: object
+apiUpdateAgentWorkspaceDeploymentInputPublic:
+  properties:
+    agent_deployment_name:
+      description: The name of the deployment
+      example: example name
+      type: string
+    agent_workspace_name:
+      description: Unique agent workspace name
+      example: example name
+      type: string
+    log_insights_enabled:
+      example: true
+      type: boolean
+  type: object
+apiUpdateAgentWorkspaceDeploymentOutput:
+  description: One Agent Workspace Deployment
+  properties:
+    agent_workspace_deployment:
+      $ref: '#/apiAgentWorkspaceDeployment'
   type: object
 apiUpdateAnthropicAPIKeyInputPublic:
   description: UpdateAnthropicAPIKeyInputPublic is used to update an existing Anthropic
