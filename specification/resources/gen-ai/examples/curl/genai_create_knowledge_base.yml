@@ -21,7 +21,7 @@ source: |-
         },
         {
           "web_crawler_data_source": {
-            "base_url": "https://faas-blr1-8177d592.doserverless.co/api/v1/web/fn-a8217bc8-d09f-4751-8686-76c0974bf8cc/default/html-tester",
+            "base_url": "https://example.com",
             "crawling_option": "SCOPED",
             "embed_media": false,
             "exclude_tags": ["nav","footer","header","aside","script","style","form","iframe", "noscript"]
