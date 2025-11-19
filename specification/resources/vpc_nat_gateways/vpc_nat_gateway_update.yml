@@ -8,7 +8,7 @@ description: |
   of the VPC NAT Gateway including existing attributes. 
 
 tags:
-  - "[Public Preview] VPC NAT Gateways"
+  - "VPC NAT Gateways"
 
 parameters:
   - $ref: 'parameters.yml#/vpc_nat_gateway_id'
@@ -24,7 +24,7 @@ requestBody:
 
 responses:
   '200':
-    $ref: 'responses/vpc_nat_gateway.yml'
+    $ref: 'responses/vpc_nat_gateway_update.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

@@ -8,7 +8,7 @@ description: |
   The response body will contain a JSON object with a key called `vpc_nat_gateway` containing the standard attributes for the new VPC NAT gateway.
 
 tags:
-  - "[Public Preview] VPC NAT Gateways"
+  - "VPC NAT Gateways"
 
 requestBody:
   content:
@@ -21,7 +21,7 @@ requestBody:
 
 responses:
   '202':
-    $ref: 'responses/vpc_nat_gateway.yml'
+    $ref: 'responses/vpc_nat_gateway_create.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
