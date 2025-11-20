@@ -1,0 +1,30 @@
+description: >-
+  The response will be a JSON object with a key called `share`. The value will
+  be an object containing the standard attributes associated with an NFS share.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/nfs_get_response.yml'
+
+    examples:
+      Active Share:
+        value:
+          share:
+            id: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
+            name: "sammy-share-drive"
+            size_gib: 1024
+            region: "atl1"
+            status: "ACTIVE"
+            created_at: "2023-01-01T00:00:00Z"
+            vpc_ids: ["796c6fe3-2a1d-4da2-9f3e-38239827dc91"]
+            mount_path: "/123456/your-nfs-share-uuid"
+            host: "10.128.32.2"

@@ -165,6 +165,18 @@ properties:
   routing_agent:
     $ref: "routing_agent.yml"
 
+  amd_gpu_device_plugin:
+    $ref: "amd_gpu_device_plugin.yml"
+
+  amd_gpu_device_metrics_exporter_plugin:
+    $ref: "amd_gpu_device_metrics_exporter_plugin.yml"
+
+  nvidia_gpu_device_plugin:
+    $ref: "nvidia_gpu_device_plugin.yml"
+
+  rdma_shared_dev_plugin:
+    $ref: "rdma_shared_dev_plugin.yml"
+
 required:
   - name
   - region

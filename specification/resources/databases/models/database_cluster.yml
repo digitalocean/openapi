@@ -24,7 +24,7 @@ properties:
       - opensearch
     description: >-
       A slug representing the database engine used for the cluster. The possible values
-      are: "pg" for PostgreSQL, "mysql" for MySQL, "redis" for Redis, "mongodb" for MongoDB,
+      are: "pg" for PostgreSQL, "mysql" for MySQL, "redis" for Caching, "mongodb" for MongoDB,
       "kafka" for Kafka, "opensearch" for OpenSearch, and "valkey" for Valkey.
   version:
     type: string
@@ -102,6 +102,12 @@ properties:
     - readOnly: true
     description: >-
      The connection details for OpenSearch dashboard. 
+  schema_registry_connection:
+    allOf:
+    - $ref: './schema_registry_connection.yml'
+    - readOnly: true
+    description: >-
+     The connection details for Schema Registry.
   connection:
     allOf:
     - $ref: './database_connection.yml'
@@ -165,6 +171,12 @@ properties:
       Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the cluster's primary node and
       a second entry for the cluster's standby node(s).
     readOnly: true
+  autoscale:
+    allOf:
+    - $ref: './database_autoscale_params.yml'
+    description: >-
+      Autoscaling configuration for the database cluster. Currently only supports storage autoscaling. If null, autoscaling is
+      not configured for the cluster.
 
 
 

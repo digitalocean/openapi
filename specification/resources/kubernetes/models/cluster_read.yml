@@ -156,6 +156,16 @@ properties:
     description: A read-only boolean value indicating if a container registry is
       integrated with the cluster.
 
+  registries:
+    type: array
+    nullable: true
+    items:
+      type: string
+    example:
+      - registry-a
+      - registry-b
+    description: An array of integrated DOCR registries.
+
   control_plane_firewall:
     $ref: "control_plane_firewall.yml"
 
@@ -164,6 +174,18 @@ properties:
 
   routing_agent:
     $ref: "routing_agent.yml"
+
+  amd_gpu_device_plugin:
+    $ref: "amd_gpu_device_plugin.yml"
+
+  amd_gpu_device_metrics_exporter_plugin:
+    $ref: "amd_gpu_device_metrics_exporter_plugin.yml"
+
+  nvidia_gpu_device_plugin:
+    $ref: "nvidia_gpu_device_plugin.yml"
+
+  rdma_shared_dev_plugin:
+    $ref: "rdma_shared_dev_plugin.yml"
 
 required:
   - name

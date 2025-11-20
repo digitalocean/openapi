@@ -13,13 +13,7 @@ content:
     schema:
       properties:
         sink:
-          allOf:
-            - $ref: "../models/logsink_verbose.yml"
-          required:
-            - sink_id
-            - sink_name
-            - sink_type
-            - config
+          $ref: "logsink_schema.yml"
     examples:
       Create an opensearch logsink:
         value:
