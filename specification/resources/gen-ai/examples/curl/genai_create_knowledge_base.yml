@@ -17,6 +17,11 @@ source: |-
             "spaces_data_source": {
                 "bucket_name": "test-public-gen-ai",
                 "region": "tor1"
+              },
+              "chunking_algorithm": "CHUNKING_ALGORITHM_HIERARCHICAL",
+              "chunking_options": {
+                "parent_chunk_size": 1000,
+                "child_chunk_size": 350
               }
         },
         {
@@ -25,8 +30,23 @@ source: |-
             "crawling_option": "SCOPED",
             "embed_media": false,
             "exclude_tags": ["nav","footer","header","aside","script","style","form","iframe", "noscript"]
+          },
+          "chunking_algorithm": "CHUNKING_ALGORITHM_SEMANTIC",
+          "chunking_options": {
+            "max_chunk_size": 500,
+            "semantic_threshold": 0.6
           }
-        }
+        },
+        {
+          "spaces_data_source": {
+              "bucket_name": "test-public-gen-ai-2",
+              "region": "tor1"
+            },
+            "chunking_algorithm": "CHUNKING_ALGORITHM_FIXED_LENGTH",
+            "chunking_options": {
+              "max_chunk_size": 400
+            }
+        },
       ],
       "region": "tor1",
       "vpc_uuid": "f7176e0b-8c5e-4e32-948e-79327e56225a"

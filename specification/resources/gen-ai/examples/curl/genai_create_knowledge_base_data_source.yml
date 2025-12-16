@@ -11,5 +11,9 @@ source: |-
     "crawling_option": "SCOPED",
     "embed_media": false,
     "exclude_tags": ["nav","footer","header","aside","script","style","form","iframe", "noscript"]
+  },
+  "chunking_algorithm": "CHUNKING_ALGORITHM_SECTION_BASED",
+  "chunking_options": {
+    "max_chunk_size": 500
   }
   }'
