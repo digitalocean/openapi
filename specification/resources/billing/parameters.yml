@@ -19,7 +19,7 @@ account_urn:
 start_date:
   name: start_date
   description: Start date for billing insights in YYYY-MM-DD format
-  in: query
+  in: path
   schema:
     type: string
     format: date
@@ -29,7 +29,7 @@ start_date:
 end_date:
   name: end_date
   description: End date for billing insights in YYYY-MM-DD format. Must be within 31 days of start_date
-  in: query
+  in: path
   schema:
     type: string
     format: date
