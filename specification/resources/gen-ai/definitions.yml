@@ -1184,6 +1184,10 @@ apiChatbot:
   type: object
 apiChunkingAlgorithm:
   default: CHUNKING_ALGORITHM_SECTION_BASED
+  description: |-
+    The chunking algorithm to use for processing data sources.
+    
+    **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
   enum:
   - CHUNKING_ALGORITHM_UNKNOWN
   - CHUNKING_ALGORITHM_SECTION_BASED
@@ -1193,6 +1197,10 @@ apiChunkingAlgorithm:
   example: CHUNKING_ALGORITHM_SECTION_BASED
   type: string
 apiChunkingOptions:
+  description: |-
+    Configuration options for the chunking algorithm.
+    
+    **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
   properties:
     child_chunk_size: 
       description: Hierarchical options
@@ -1200,7 +1208,7 @@ apiChunkingOptions:
       format: int64
       type: integer
     max_chunk_size:
-      description: Common options
+      description: Section_Based and Fixed_Length options
       example: 750
       format: int64
       type: integer
@@ -1542,19 +1550,9 @@ apiCreateKnowledgeBaseDataSourceInputPublic:
     aws_data_source:
       $ref: '#/apiAWSDataSource'
     chunking_algorithm:
-      allOf:
-      - $ref: '#/apiChunkingAlgorithm'
-      description: |-
-        The chunking algorithm to use for processing data sources.
-        
-        **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
+      $ref: '#/apiChunkingAlgorithm'
     chunking_options:
-      allOf:
-      - $ref: '#/apiChunkingOptions'
-      description: |-
-        Configuration options for the chunking algorithm.
-        
-        **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
+      $ref: '#/apiChunkingOptions'
     knowledge_base_uuid:
       description: Knowledge base id
       example: '"12345678-1234-1234-1234-123456789012"'
@@ -3216,19 +3214,9 @@ apiKBDataSource:
       example: example string
       type: string
     chunking_algorithm:
-      allOf:
-      - $ref: '#/apiChunkingAlgorithm'
-      description: |-
-        The chunking algorithm to use for processing data sources.
-        
-        **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
+      $ref: '#/apiChunkingAlgorithm'
     chunking_options:
-      allOf:
-      - $ref: '#/apiChunkingOptions'
-      description: |-
-        Configuration options for the chunking algorithm.
-        
-        **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
+      $ref: '#/apiChunkingOptions'
     dropbox_data_source:
       $ref: '#/apiDropboxDataSource'
     file_upload_data_source:
@@ -3312,19 +3300,9 @@ apiKnowledgeBaseDataSource:
       example: example name
       type: string
     chunking_algorithm:
-      allOf:
-      - $ref: '#/apiChunkingAlgorithm'
-      description: |-
-        The chunking algorithm to use for processing data sources.
-        
-        **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
+      $ref: '#/apiChunkingAlgorithm'
     chunking_options:
-      allOf:
-      - $ref: '#/apiChunkingOptions'
-      description: |-
-        Configuration options for the chunking algorithm.
-        
-        **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
+      $ref: '#/apiChunkingOptions'
     created_at:
       description: Creation date / time
       example: "2023-01-01T00:00:00Z"
