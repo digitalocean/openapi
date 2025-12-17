@@ -1194,7 +1194,8 @@ apiChunkingAlgorithm:
   type: string
 apiChunkingOptions:
   properties:
-    child_chunk_size:
+    child_chunk_size: 
+      description: Hierarchical options
       example: 350
       format: int64
       type: integer
