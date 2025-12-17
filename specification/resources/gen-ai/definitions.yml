@@ -999,6 +999,8 @@ apiAgentWorkspace:
 apiAgentWorkspaceDeployment:
   description: An Agent Workspace Deployment
   properties:
+    active_release:
+      $ref: '#/apiAgentDeploymentRelease'
     created_at:
       description: Creation date / time
       example: "2023-01-01T00:00:00Z"
@@ -1179,6 +1181,38 @@ apiChatbot:
     starting_message:
       example: example string
       type: string
+  type: object
+apiChunkingAlgorithm:
+  default: CHUNKING_ALGORITHM_UNKNOWN
+  enum:
+  - CHUNKING_ALGORITHM_UNKNOWN
+  - CHUNKING_ALGORITHM_SECTION_BASED
+  - CHUNKING_ALGORITHM_HIERARCHICAL
+  - CHUNKING_ALGORITHM_SEMANTIC
+  - CHUNKING_ALGORITHM_FIXED_LENGTH
+  example: CHUNKING_ALGORITHM_SECTION_BASED
+  type: string
+apiChunkingOptions:
+  properties:
+    child_chunk_size:
+      example: 350
+      format: int64
+      type: integer
+    max_chunk_size:
+      description: Common options
+      example: 750
+      format: int64
+      type: integer
+    parent_chunk_size:
+      description: Hierarchical options
+      example: 1000
+      format: int64
+      type: integer
+    semantic_threshold:
+      description: Semantic options
+      example: 0.5
+      format: float
+      type: number
   type: object
 apiCrawlingOption:
   default: UNKNOWN
@@ -1439,6 +1473,8 @@ apiCreateDataSourceFileUploadPresignedUrlsOutput:
 apiCreateEvaluationDatasetInputPublic:
   description: Creates an evaluation dataset for an agent
   properties:
+    dataset_type:
+      $ref: '#/apiEvaluationDatasetType'
     file_upload_dataset:
       $ref: '#/apiFileUploadDataSource'
     name:
@@ -1456,6 +1492,9 @@ apiCreateEvaluationDatasetOutput:
   type: object
 apiCreateEvaluationTestCaseInputPublic:
   properties:
+    agent_workspace_name:
+      example: example name
+      type: string
     dataset_uuid:
       description: Dataset against which the test‑case is executed.
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -1501,6 +1540,10 @@ apiCreateKnowledgeBaseDataSourceInputPublic:
   properties:
     aws_data_source:
       $ref: '#/apiAWSDataSource'
+    chunking_algorithm:
+      $ref: '#/apiChunkingAlgorithm'
+    chunking_options:
+      $ref: '#/apiChunkingOptions'
     knowledge_base_uuid:
       description: Knowledge base id
       example: '"12345678-1234-1234-1234-123456789012"'
@@ -2000,6 +2043,14 @@ apiEvaluationDataset:
       format: int64
       type: integer
   type: object
+apiEvaluationDatasetType:
+  default: EVALUATION_DATASET_TYPE_UNKNOWN
+  enum:
+  - EVALUATION_DATASET_TYPE_UNKNOWN
+  - EVALUATION_DATASET_TYPE_ADK
+  - EVALUATION_DATASET_TYPE_NON_ADK
+  example: EVALUATION_DATASET_TYPE_UNKNOWN
+  type: string
 apiEvaluationMetric:
   properties:
     category:
@@ -2100,6 +2151,10 @@ apiEvaluationRun:
       description: Whether agent is deleted
       example: true
       type: boolean
+    agent_deployment_name:
+      description: The agent deployment name
+      example: example name
+      type: string
     agent_name:
       description: Agent name
       example: example name
@@ -2273,6 +2328,40 @@ apiEvaluationTestCaseMetricList:
         type: string
       type: array
   type: object
+apiEvaluationTraceSpan:
+  description: Represents a span within an evaluatioin trace (e.g., LLM call, tool
+    call, etc.)
+  properties:
+    created_at:
+      description: When the span was created
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    input:
+      description: Input data for the span (flexible structure - can be messages array,
+        string, etc.)
+      type: object
+    name:
+      description: Name/identifier for the span
+      example: example name
+      type: string
+    output:
+      description: Output data from the span (flexible structure - can be message,
+        string, etc.)
+      type: object
+    retriever_chunks:
+      description: Any retriever span chunks that were included as part of the span.
+      items:
+        $ref: '#/apiPromptChunk'
+      type: array
+    span_level_metric_results:
+      description: The span-level metric results.
+      items:
+        $ref: '#/apiEvaluationMetricResult'
+      type: array
+    type:
+      $ref: '#/apiTraceSpanType'
+  type: object
 apiEvaluationUsage:
   properties:
     agent_measurements:
@@ -2372,6 +2461,12 @@ apiGetAgentDeploymentReleaseOutput:
   properties:
     agent_deployment_release:
       $ref: '#/apiAgentDeploymentRelease'
+  type: object
+apiGetAgentDeploymentUsageOutput:
+  description: Agent deployment usage
+  properties:
+    log_insights_usage:
+      $ref: '#/apiResourceUsage'
   type: object
 apiGetAgentInputPublic:
   properties:
@@ -3109,6 +3204,10 @@ apiKBDataSource:
       description: Deprecated, moved to data_source_details
       example: example string
       type: string
+    chunking_algorithm:
+      $ref: '#/apiChunkingAlgorithm'
+    chunking_options:
+      $ref: '#/apiChunkingOptions'
     dropbox_data_source:
       $ref: '#/apiDropboxDataSource'
     file_upload_data_source:
@@ -3191,6 +3290,10 @@ apiKnowledgeBaseDataSource:
       description: Name of storage bucket - Deprecated, moved to data_source_details
       example: example name
       type: string
+    chunking_algorithm:
+      $ref: '#/apiChunkingAlgorithm'
+    chunking_options:
+      $ref: '#/apiChunkingOptions'
     created_at:
       description: Creation date / time
       example: "2023-01-01T00:00:00Z"
@@ -3576,6 +3679,13 @@ apiListEvaluationPricesOutput:
     evaluation_guardrail_prices:
       items:
         $ref: '#/apiGuardrailPrice'
+      type: array
+  type: object
+apiListEvaluationRunsByAgentDeploymentOutput:
+  properties:
+    evaluation_runs:
+      items:
+        $ref: '#/apiEvaluationRun'
       type: array
   type: object
 apiListEvaluationRunsByAgentOutput:
@@ -3965,6 +4075,22 @@ apiModel:
       description: True if it is a foundational model provided by do
       example: true
       type: boolean
+    kb_default_chunk_size:
+      description: Default chunking size limit to show in UI
+      example: 123
+      format: int64
+      type: integer
+    kb_max_chunk_size:
+      description: Maximum chunk size limit of model
+      example: 123
+      format: int64
+      type: integer
+    kb_min_chunk_size:
+      description: Minimum chunking size token limits if model supports KNOWLEDGEBASE
+        usecase
+      example: 123
+      format: int64
+      type: integer
     metadata:
       description: Additional meta data
       type: object
@@ -4117,6 +4243,22 @@ apiModelPublic:
       description: True if it is a foundational model provided by do
       example: true
       type: boolean
+    kb_default_chunk_size:
+      description: Default chunking size limit to show in UI
+      example: 123
+      format: int64
+      type: integer
+    kb_max_chunk_size:
+      description: Maximum chunk size limit of model
+      example: 123
+      format: int64
+      type: integer
+    kb_min_chunk_size:
+      description: Minimum chunking size token limits if model supports KNOWLEDGEBASE
+        usecase
+      example: 123
+      format: int64
+      type: integer
     name:
       description: Display name of the model
       example: Llama 3.3 Instruct (70B)
@@ -4283,6 +4425,11 @@ apiPresignedUrlFile:
   type: object
 apiPrompt:
   properties:
+    evaluation_trace_spans:
+      description: The evaluated trace spans.
+      items:
+        $ref: '#/apiEvaluationTraceSpan'
+      type: array
     ground_truth:
       description: The ground truth for the prompt.
       example: example string
@@ -4318,6 +4465,10 @@ apiPrompt:
       items:
         $ref: '#/apiEvaluationMetricResult'
       type: array
+    trace_id:
+      description: The trace id for the prompt.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 apiPromptChunk:
   properties:
@@ -4470,8 +4621,17 @@ apiRollbackToAgentVersionOutput:
 apiRunEvaluationTestCaseInputPublic:
   description: Run an evaluation test case.
   properties:
+    agent_deployment_names:
+      description: Agent deployment names to run the test case against (ADK agent
+        workspaces).
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
     agent_uuids:
-      description: Agent UUIDs to run the test case against.
+      description: Agent UUIDs to run the test case against (legacy agents).
       example:
       - example string
       items:
