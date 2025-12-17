@@ -1544,14 +1544,16 @@ apiCreateKnowledgeBaseDataSourceInputPublic:
     chunking_algorithm:
       allOf:
       - $ref: '#/apiChunkingAlgorithm'
-      description: >-
+      description: |-
         The chunking algorithm to use for processing data sources.
+        
         **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
     chunking_options:
       allOf:
       - $ref: '#/apiChunkingOptions'
-      description: >-
+      description: |-
         Configuration options for the chunking algorithm.
+        
         **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
     knowledge_base_uuid:
       description: Knowledge base id
@@ -3216,14 +3218,16 @@ apiKBDataSource:
     chunking_algorithm:
       allOf:
       - $ref: '#/apiChunkingAlgorithm'
-      description: >-
+      description: |-
         The chunking algorithm to use for processing data sources.
+        
         **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
     chunking_options:
       allOf:
       - $ref: '#/apiChunkingOptions'
-      description: >-
+      description: |-
         Configuration options for the chunking algorithm.
+        
         **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
     dropbox_data_source:
       $ref: '#/apiDropboxDataSource'
@@ -3310,14 +3314,16 @@ apiKnowledgeBaseDataSource:
     chunking_algorithm:
       allOf:
       - $ref: '#/apiChunkingAlgorithm'
-      description: >-
+      description: |-
         The chunking algorithm to use for processing data sources.
+        
         **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
     chunking_options:
       allOf:
       - $ref: '#/apiChunkingOptions'
-      description: >-
+      description: |-
         Configuration options for the chunking algorithm.
+        
         **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
     created_at:
       description: Creation date / time
