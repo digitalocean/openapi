@@ -4,7 +4,7 @@ summary: List Billing Insights
 
 description: >-
 
-  This endpoint returns day-over-day changes in billing resource usage based on nightly invoice items, including total amount, region, SKU, and description for a specified date range. It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for a given month as nightly invoice items do not necessarily encompass all invoicing factors for the entire month.
+  This endpoint returns day-over-day changes in billing resource usage based on nightly invoice items, including total amount, region, SKU, and description for a specified date range. It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for a given month as nightly invoice item estimates do not necessarily encompass all invoicing factors for the entire month.
 
 tags:
   - Billing
@@ -22,9 +22,6 @@ responses:
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
-
-  '403':
-    $ref: '../../shared/responses/forbidden.yml'
 
   '404':
     $ref: '../../shared/responses/not_found.yml'
