@@ -1183,7 +1183,11 @@ apiChatbot:
       type: string
   type: object
 apiChunkingAlgorithm:
-  default: CHUNKING_ALGORITHM_UNKNOWN
+  default: CHUNKING_ALGORITHM_SECTION_BASED
+  description: |-
+    The chunking algorithm to use for processing data sources.
+    
+    **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
   enum:
   - CHUNKING_ALGORITHM_UNKNOWN
   - CHUNKING_ALGORITHM_SECTION_BASED
@@ -1193,13 +1197,18 @@ apiChunkingAlgorithm:
   example: CHUNKING_ALGORITHM_SECTION_BASED
   type: string
 apiChunkingOptions:
+  description: |-
+    Configuration options for the chunking algorithm.
+    
+    **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
   properties:
-    child_chunk_size:
+    child_chunk_size: 
+      description: Hierarchical options
       example: 350
       format: int64
       type: integer
     max_chunk_size:
-      description: Common options
+      description: Section_Based and Fixed_Length options
       example: 750
       format: int64
       type: integer
