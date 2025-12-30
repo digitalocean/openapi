@@ -1,6 +1,6 @@
 operationId: registries_get_options
 
-summary: "[Public Preview] List Registry Options (Subscription Tiers and Available Regions)"
+summary: "List Registry Options (Subscription Tiers and Available Regions)"
 
 description: >-
   This endpoint serves to provide additional information as to which option values

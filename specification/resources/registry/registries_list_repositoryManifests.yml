@@ -1,6 +1,6 @@
 operationId: registries_list_repositoryManifests
 
-summary: "[Public Preview] List All Container Registry Repository Manifests"
+summary: "List All Container Registry Repository Manifests"
 
 description: |
   To list all manifests in your container registry repository, send a GET

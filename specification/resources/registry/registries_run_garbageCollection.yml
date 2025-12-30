@@ -1,6 +1,6 @@
 operationId: registries_run_garbageCollection
 
-summary: "[Public Preview] Start Garbage Collection"
+summary: "Start Garbage Collection"
 
 description: |
   Garbage collection enables users to clear out unreferenced blobs (layer &

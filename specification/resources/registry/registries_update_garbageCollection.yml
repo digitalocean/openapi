@@ -1,6 +1,6 @@
 operationId: registries_update_garbageCollection
 
-summary: "[Public Preview] Update Garbage Collection"
+summary: "Update Garbage Collection"
 
 description: To cancel the currently-active garbage collection for a registry,
   send a PUT request to `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID`
