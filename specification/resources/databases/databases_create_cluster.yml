@@ -80,6 +80,7 @@ requestBody:
                 value: "163973392"
               - type: tag
                 value: test
+                description: "a test tag"
 
         Restore from a Database Cluster Backup:
           value:
