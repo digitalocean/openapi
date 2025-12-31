@@ -164,7 +164,7 @@ tags:
       if your container registry uses the Professional subscription plan. The storage is shared among 
       the registries. This set of new APIs is backward compatible with `/v2/registry`. However, if you 
       create more than one registry under a Professional plan, some of the `/v2/registry` APIs would not work. 
-      Hence, it is recommended to use `/v2/registries` for multiple registries. Currently, these APIs are in Public Preview.
+      Hence, it is recommended to use `/v2/registries` for multiple registries.
 
   - name: Databases
     description: |-

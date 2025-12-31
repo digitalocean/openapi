@@ -1,10 +1,10 @@
 operationId: registries_get_subscription
 
-summary: "[Public Preview] Get Subscription Information"
+summary: "Get Subscription Information"
 
 description: A subscription is automatically created when you configure your
   container registry. To get information about your subscription, send a GET
-  request to `/v2/registries/subscription`. It is similar to GET `/v2/registry/subscription` and exists for backward compatibility.
+  request to `/v2/registries/subscription`. It is similar to GET `/v2/registry/subscription`.
 
 tags:
   - Container Registries
