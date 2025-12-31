@@ -11,7 +11,7 @@ description: |
   `registry.digitalocean.com/example/my/repo`, the path would be
   `/v2/registry/example/repositories/my%2Frepo/tags`. 
 
-  It is similar to GET `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags` and exists for backward compatibility.
+  It is similar to GET `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags`.
 
 tags:
   - Container Registries
