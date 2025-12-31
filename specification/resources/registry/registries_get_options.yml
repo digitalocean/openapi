@@ -14,7 +14,7 @@ description: >-
   where your data is stored.
 
   To list the available options, send a GET request to
-  `/v2/registries/options`. This is similar to GET `/v2/registry/options` and exists for backward compatibility.
+  `/v2/registries/options`. This is similar to GET `/v2/registry/options`.
 
 tags:
   - Container Registries

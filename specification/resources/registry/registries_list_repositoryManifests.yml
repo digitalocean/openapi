@@ -11,7 +11,7 @@ description: |
   `registry.digitalocean.com/example/my/repo`, the path would be
   `/v2/registry/example/repositories/my%2Frepo/digests`.
 
-  It is similar to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests` and exists for backward compatibility.
+  It is similar to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests`.
 tags:
   - Container Registries
 
