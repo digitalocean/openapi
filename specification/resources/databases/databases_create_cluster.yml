@@ -74,6 +74,7 @@ requestBody:
             rules:
               - type: ip_addr
                 value: "192.168.1.1"
+                description: "my home IP address"
               - type: k8s
                 value: ff2a6c52-5a44-4b63-b99c-0e98e7a63d61
               - type: droplet
