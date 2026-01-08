@@ -33,11 +33,3 @@ properties:
     description: The date and time the key was last updated.
     example: "2025-12-19T10:30:00Z"
     readOnly: true
-
-  last_used_at:
-    type: string
-    format: date-time
-    nullable: true
-    description: When the key was last used (null if never used).
-    example: null
-    readOnly: true
