@@ -1,18 +1,18 @@
-description: To list all evaluation test cases by a workspace, send a GET request
-  to `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
-operationId: genai_list_evaluation_test_cases_by_workspace
+description: To get a JWT token for the tracing service, send a GET request to `/v2/gen-ai/tracing_tokens/{agent_workspace_uuid}/{agent_deployment_name}`.
+operationId: genai_get_tracing_service_jwt_token
 parameters:
-- description: Workspace UUID.
+- description: Agent workspace uuid
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
-  name: workspace_uuid
+  name: agent_workspace_uuid
   required: true
   schema:
     type: string
-- description: Workspace name.
+- description: Agent deployment name
   example: '"example string"'
-  in: query
-  name: agent_workspace_name
+  in: path
+  name: agent_deployment_name
+  required: true
   schema:
     type: string
 responses:
@@ -20,7 +20,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListEvaluationTestCasesByWorkspaceOutput
+          $ref: ./definitions.yml#/apiTracingServiceJWTOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -42,8 +42,8 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: List Evaluation Test Cases by Workspace
+summary: Get Tracing Service JWT Token
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_evaluation_test_cases_by_workspace.yml
+- $ref: examples/curl/genai_get_tracing_service_jwt_token.yml

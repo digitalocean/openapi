@@ -1,26 +1,26 @@
-description: To list all evaluation test cases by a workspace, send a GET request
-  to `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
-operationId: genai_list_evaluation_test_cases_by_workspace
+description: To create a new agent workspace deployment, send a POST request to `/v2/gen-ai/agent-workspaces/{agent_workspace_name}/agent-deployments`.
+  The response body contains a JSON object with the newly created agent workspace
+  deployment object.
+operationId: genai_create_agent_workspace_deployment
 parameters:
-- description: Workspace UUID.
-  example: '"123e4567-e89b-12d3-a456-426614174000"'
+- description: The name of agent workspace
+  example: '"example string"'
   in: path
-  name: workspace_uuid
+  name: agent_workspace_name
   required: true
   schema:
     type: string
-- description: Workspace name.
-  example: '"example string"'
-  in: query
-  name: agent_workspace_name
-  schema:
-    type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiCreateAgentWorkspaceDeploymentInputPublic
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListEvaluationTestCasesByWorkspaceOutput
+          $ref: ./definitions.yml#/apiCreateAgentWorkspaceDeploymentOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -41,9 +41,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:read
-summary: List Evaluation Test Cases by Workspace
+  - genai:create
+summary: Create a Agent Workspace Deployment
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_evaluation_test_cases_by_workspace.yml
+- $ref: examples/curl/genai_create_agent_workspace_deployment.yml

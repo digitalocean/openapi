@@ -284,26 +284,6 @@ apiAgentChildRelationshipVerion:
       example: example name
       type: string
   type: object
-apiAgentConversationLogConfig:
-  description: Response for getting or creating an agent conversation log location
-  properties:
-    agent_uuid:
-      description: Agent UUID
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    created_at:
-      description: Creation date / time
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    spaces_data_source:
-      $ref: '#/apiSpacesDataSource'
-    updated_at:
-      description: Last modified
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-  type: object
 apiAgentDeploymentCodeArtifact:
   description: File to upload
   properties:
@@ -341,6 +321,10 @@ apiAgentDeploymentRelease:
     error_msg:
       description: A error message provinding a hint which part of the system experienced
         an error
+      example: example string
+      type: string
+    library_version:
+      description: The library version of the gradient package used in the release
       example: example string
       type: string
     status:
@@ -729,6 +713,19 @@ apiAgentPublic:
       example: example string
       type: string
   type: object
+apiAgentSpan:
+  properties:
+    agent_type:
+      $ref: '#/apiAgentType'
+    common:
+      $ref: '#/apiSpanCommon'
+    redacted_input:
+      example: example string
+      type: string
+    redacted_output:
+      example: example string
+      type: string
+  type: object
 apiAgentTemplate:
   description: Represents an AgentTemplate entity
   properties:
@@ -842,6 +839,21 @@ apiAgentTemplateType:
   - AGENT_TEMPLATE_TYPE_STANDARD
   - AGENT_TEMPLATE_TYPE_ONE_CLICK
   example: AGENT_TEMPLATE_TYPE_STANDARD
+  type: string
+apiAgentType:
+  default: AGENT_TYPE_UNSPECIFIED
+  description: Agent span
+  enum:
+  - AGENT_TYPE_UNSPECIFIED
+  - AGENT_TYPE_DEFAULT
+  - AGENT_TYPE_PLANNER
+  - AGENT_TYPE_REACT
+  - AGENT_TYPE_REFLECTION
+  - AGENT_TYPE_ROUTER
+  - AGENT_TYPE_CLASSIFIER
+  - AGENT_TYPE_SUPERVISOR
+  - AGENT_TYPE_JUDGE
+  example: AGENT_TYPE_UNSPECIFIED
   type: string
 apiAgentVersion:
   description: Represents an AgentVersion entity
@@ -1015,6 +1027,10 @@ apiAgentWorkspaceDeployment:
       example: "12345"
       format: uint64
       type: string
+    description:
+      description: Description of the agent deployment
+      example: example string
+      type: string
     latest_release:
       $ref: '#/apiAgentDeploymentRelease'
     logging_config:
@@ -1023,6 +1039,8 @@ apiAgentWorkspaceDeployment:
       description: Agent name
       example: example name
       type: string
+    region:
+      $ref: '#/apiAgentWorkspaceDeploymentRegion'
     updated_at:
       description: Last modified
       example: "2023-01-01T00:00:00Z"
@@ -1033,6 +1051,22 @@ apiAgentWorkspaceDeployment:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
+apiAgentWorkspaceDeploymentRegion:
+  default: AGENT_WORKSPACE_DEPLOYMENT_REGION_UNKNOWN
+  description: Regions where an Agent Workspace Deployment can be created
+  enum:
+  - AGENT_WORKSPACE_DEPLOYMENT_REGION_UNKNOWN
+  - AGENT_WORKSPACE_DEPLOYMENT_REGION_NYC3
+  - AGENT_WORKSPACE_DEPLOYMENT_REGION_AMS3
+  - AGENT_WORKSPACE_DEPLOYMENT_REGION_SFO3
+  - AGENT_WORKSPACE_DEPLOYMENT_REGION_SGP1
+  - AGENT_WORKSPACE_DEPLOYMENT_REGION_LON1
+  - AGENT_WORKSPACE_DEPLOYMENT_REGION_FRA1
+  - AGENT_WORKSPACE_DEPLOYMENT_REGION_TOR1
+  - AGENT_WORKSPACE_DEPLOYMENT_REGION_BLR1
+  - AGENT_WORKSPACE_DEPLOYMENT_REGION_SYD1
+  example: AGENT_WORKSPACE_DEPLOYMENT_REGION_UNKNOWN
+  type: string
 apiAgreement:
   description: Agreement Description
   properties:
@@ -1183,32 +1217,23 @@ apiChatbot:
       type: string
   type: object
 apiChunkingAlgorithm:
-  default: CHUNKING_ALGORITHM_SECTION_BASED
-  description: |-
-    The chunking algorithm to use for processing data sources.
-    
-    **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
+  default: CHUNKING_ALGORITHM_UNKNOWN
   enum:
   - CHUNKING_ALGORITHM_UNKNOWN
   - CHUNKING_ALGORITHM_SECTION_BASED
   - CHUNKING_ALGORITHM_HIERARCHICAL
   - CHUNKING_ALGORITHM_SEMANTIC
   - CHUNKING_ALGORITHM_FIXED_LENGTH
-  example: CHUNKING_ALGORITHM_SECTION_BASED
+  example: CHUNKING_ALGORITHM_UNKNOWN
   type: string
 apiChunkingOptions:
-  description: |-
-    Configuration options for the chunking algorithm.
-    
-    **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
   properties:
-    child_chunk_size: 
-      description: Hierarchical options
+    child_chunk_size:
       example: 350
       format: int64
       type: integer
     max_chunk_size:
-      description: Section_Based and Fixed_Length options
+      description: Common options
       example: 750
       format: int64
       type: integer
@@ -1286,6 +1311,10 @@ apiCreateAgentDeploymentReleaseInputPublic:
     agent_workspace_name:
       description: The name of agent workspace
       example: example name
+      type: string
+    library_version:
+      description: The library version of the gradient package used in the release
+      example: example string
       type: string
   type: object
 apiCreateAgentDeploymentReleaseOutput:
@@ -1398,6 +1427,14 @@ apiCreateAgentWorkspaceDeploymentInputPublic:
       description: The name of agent workspace
       example: example name
       type: string
+    description:
+      description: The description of the agent deployment
+      example: example string
+      type: string
+    library_version:
+      description: The library version of the gradient package used in the release
+      example: example string
+      type: string
   type: object
 apiCreateAgentWorkspaceDeploymentOutput:
   description: One Agent Workspace Deployment
@@ -1416,6 +1453,14 @@ apiCreateAgentWorkspaceInputPublic:
     agent_workspace_name:
       description: The name of agent workspace
       example: example name
+      type: string
+    description:
+      description: The description of the agent deployment
+      example: example string
+      type: string
+    library_version:
+      description: The library version of the gradient package used in the release
+      example: example string
       type: string
     project_id:
       description: The project id
@@ -1785,14 +1830,6 @@ apiDeleteAgentAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiAgentAPIKeyInfo'
-  type: object
-apiDeleteAgentConversationLogConfigOutput:
-  description: Output for deleting agent conversation log config
-  properties:
-    agent_uuid:
-      description: Agent UUID
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
   type: object
 apiDeleteAgentInputPublic:
   properties:
@@ -3355,6 +3392,40 @@ apiKnowledgeBasePrice:
         $ref: '#/apiBillingPrice'
       type: array
   type: object
+apiLLMSpan:
+  description: LLM span
+  properties:
+    common:
+      $ref: '#/apiSpanCommon'
+    model:
+      example: example string
+      type: string
+    num_input_tokens:
+      example: 123
+      format: int32
+      type: integer
+    num_output_tokens:
+      example: 123
+      format: int32
+      type: integer
+    temperature:
+      example: 123
+      format: float
+      type: number
+    time_to_first_token_ns:
+      example: "12345"
+      format: int64
+      type: string
+    tools:
+      description: Tool definitions passed to the model
+      items:
+        type: object
+      type: array
+    total_tokens:
+      example: 123
+      format: int32
+      type: integer
+  type: object
 apiLinkAgentFunctionInputPublic:
   description: Information for a agent function link
   properties:
@@ -4607,6 +4678,12 @@ apiRetrievalMethod:
   - RETRIEVAL_METHOD_NONE
   example: RETRIEVAL_METHOD_UNKNOWN
   type: string
+apiRetrieverSpan:
+  description: Retriever span
+  properties:
+    common:
+      $ref: '#/apiSpanCommon'
+  type: object
 apiRollbackToAgentVersionInputPublic:
   properties:
     uuid:
@@ -4751,6 +4828,36 @@ apiSpacesDataSource:
       example: example string
       type: string
   type: object
+apiSpanCommon:
+  description: Common optional fields shared by all span types
+  properties:
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    duration_ns:
+      example: "12345"
+      format: int64
+      type: string
+    metadata:
+      additionalProperties:
+        example: example string
+        type: string
+      description: Arbitrary structured metadata
+      type: object
+    status_code:
+      example: 123
+      format: int32
+      type: integer
+    tags:
+      description: Free-form tags for filtering/grouping
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+  type: object
 apiStarMetric:
   properties:
     metric_uuid:
@@ -4816,6 +4923,15 @@ apiTeamModelURLOutput:
       example: example string
       type: string
   type: object
+apiToolSpan:
+  description: Tool span
+  properties:
+    common:
+      $ref: '#/apiSpanCommon'
+    tool_call_id:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
 apiTrace:
   description: Represents a complete trace
   properties:
@@ -4841,8 +4957,10 @@ apiTrace:
       type: array
   type: object
 apiTraceSpan:
-  description: Represents a span within a trace (e.g., LLM call, function call, etc.)
+  description: Represents a span within a trace (e.g., LLM call, tool call, etc.)
   properties:
+    agent:
+      $ref: '#/apiAgentSpan'
     created_at:
       description: When the span was created
       example: "2023-01-01T00:00:00Z"
@@ -4852,6 +4970,8 @@ apiTraceSpan:
       description: Input data for the span (flexible structure - can be messages array,
         string, etc.)
       type: object
+    llm:
+      $ref: '#/apiLLMSpan'
     name:
       description: Name/identifier for the span
       example: example name
@@ -4860,8 +4980,14 @@ apiTraceSpan:
       description: Output data from the span (flexible structure - can be message,
         string, etc.)
       type: object
+    retriever:
+      $ref: '#/apiRetrieverSpan'
+    tool:
+      $ref: '#/apiToolSpan'
     type:
       $ref: '#/apiTraceSpanType'
+    workflow:
+      $ref: '#/apiWorkflowSpan'
   type: object
 apiTraceSpanType:
   default: TRACE_SPAN_TYPE_UNKNOWN
@@ -4871,6 +4997,8 @@ apiTraceSpanType:
   - TRACE_SPAN_TYPE_LLM
   - TRACE_SPAN_TYPE_RETRIEVER
   - TRACE_SPAN_TYPE_TOOL
+  - TRACE_SPAN_TYPE_AGENT
+  - TRACE_SPAN_TYPE_WORKFLOW
   example: TRACE_SPAN_TYPE_UNKNOWN
   type: string
 apiTracingServiceJWTOutput:
@@ -5234,16 +5362,34 @@ apiUpdateGuardrailOutput:
     guardrail:
       $ref: '#/apiGuardrail'
   type: object
+apiUpdateKnowledgeBaseDataSourceInputPublic:
+  description: Update a data source of a knowledge base with change in chunking algorithm/options
+  properties:
+    chunking_algorithm:
+      $ref: '#/apiChunkingAlgorithm'
+    chunking_options:
+      $ref: '#/apiChunkingOptions'
+    data_source_uuid:
+      description: Data Source ID (Path Parameter)
+      example: '"98765432-1234-1234-1234-123456789012"'
+      type: string
+    knowledge_base_uuid:
+      description: Knowledge Base ID (Path Parameter)
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+  type: object
+apiUpdateKnowledgeBaseDataSourceOutput:
+  description: Update a data source of a knowledge base with change in chunking algorithm/options
+  properties:
+    knowledge_base_data_source:
+      $ref: '#/apiKnowledgeBaseDataSource'
+  type: object
 apiUpdateKnowledgeBaseInputPublic:
   description: Information about updating a knowledge base
   properties:
     database_id:
       description: The id of the DigitalOcean database this knowledge base will use,
-        optiona.
-      example: '"12345678-1234-1234-1234-123456789012"'
-      type: string
-    embedding_model_uuid:
-      description: Identifier for the foundation model.
+        optional.
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
     name:
@@ -5442,6 +5588,19 @@ apiWebCrawlerDataSource:
         type: string
       type: array
   type: object
+apiWorkflowSpan:
+  description: Workflow span - can contain child spans (agent, llm, tool, retriever)
+  properties:
+    common:
+      $ref: '#/apiSpanCommon'
+    spans:
+      description: |-
+        Child spans - must contain between 1 and 999 spans
+        Allowed types: agent, llm, tool, retriever (not workflow)
+      items:
+        $ref: '#/apiTraceSpan'
+      type: array
+  type: object
 apiWorkspace:
   properties:
     agents:
@@ -5538,7 +5697,7 @@ protobufNullValue:
     `NullValue` is a singleton enumeration to represent the null value for the
     `Value` type union.
 
-     The JSON representation for `NullValue` is JSON `null`.
+    The JSON representation for `NullValue` is JSON `null`.
 
      - NULL_VALUE: Null value.
   enum:

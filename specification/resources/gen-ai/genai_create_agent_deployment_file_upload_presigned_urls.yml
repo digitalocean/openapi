@@ -1,26 +1,17 @@
-description: To list all evaluation test cases by a workspace, send a GET request
-  to `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
-operationId: genai_list_evaluation_test_cases_by_workspace
-parameters:
-- description: Workspace UUID.
-  example: '"123e4567-e89b-12d3-a456-426614174000"'
-  in: path
-  name: workspace_uuid
-  required: true
-  schema:
-    type: string
-- description: Workspace name.
-  example: '"example string"'
-  in: query
-  name: agent_workspace_name
-  schema:
-    type: string
+description: To create presigned URLs for agent deployment file upload, send a POST
+  request to `/v2/gen-ai/agent-workspace-deployments/file_upload_presigned_url`.
+operationId: genai_create_agent_deployment_file_upload_presigned_urls
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiCreateAgentDeploymentFileUploadPresignedURLInputPublic
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListEvaluationTestCasesByWorkspaceOutput
+          $ref: ./definitions.yml#/apiCreateAgentDeploymentFileUploadPresignedURLOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -41,9 +32,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:read
-summary: List Evaluation Test Cases by Workspace
+  - genai:create
+summary: Create Presigned URL for Agent Deployment File Upload
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_evaluation_test_cases_by_workspace.yml
+- $ref: examples/curl/genai_create_agent_deployment_file_upload_presigned_urls.yml
