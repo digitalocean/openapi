@@ -7,7 +7,8 @@ source: |-
 
   req = {
     "name": "example",
-    "region": "fra1"
+    "region": "fra1",
+    "subscription_tier_slug": "basic"
   }
 
   resp = client.registries.create(body=req)
