@@ -1,6 +1,6 @@
 operationId: registries_validate_name
 
-summary: "[Public Preview] Validate a Container Registry Name"
+summary: "Validate a Container Registry Name"
 
 description: |
   To validate that a container registry name is available for use, send a POST
@@ -10,7 +10,7 @@ description: |
   be 204 and contain no body. If the name is already in use, the response will
   be a 409 Conflict. 
 
-  It is similar to `/v2/registry/validate-name` and exists for backward compatibility.
+  It is similar to `/v2/registry/validate-name`.
 
 tags:
   - Container Registries
