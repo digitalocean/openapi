@@ -1,0 +1,16 @@
+lang: cURL
+source: |-
+  curl -X POST \
+      -H "Content-Type: application/json"  \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      "https://api.digitalocean.com/v2/gen-ai/agent-workspaces" \
+      -d '{
+        "agent_workspace_name": "adk",
+        "agent_deployment_name": "main",
+        "project_id": "37455431-84bd-4fa2-94cf-e8486f8f8c5e",
+        "agent_deployment_code_artifact": {
+          "agent_code_file_path": "config.csv",
+          "stored_object_key": "123abc",
+          "size_in_bytes": 255
+        }
+      }'

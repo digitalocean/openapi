@@ -1,26 +1,32 @@
-description: To list all evaluation test cases by a workspace, send a GET request
-  to `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
-operationId: genai_list_evaluation_test_cases_by_workspace
+description: To update a data source (e.g. chunking options), send a PUT request to
+  `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
+operationId: genai_update_knowledge_base_data_source
 parameters:
-- description: Workspace UUID.
+- description: Knowledge Base ID (Path Parameter)
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
-  name: workspace_uuid
+  name: knowledge_base_uuid
   required: true
   schema:
     type: string
-- description: Workspace name.
-  example: '"example string"'
-  in: query
-  name: agent_workspace_name
+- description: Data Source ID (Path Parameter)
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
+  in: path
+  name: data_source_uuid
+  required: true
   schema:
     type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiUpdateKnowledgeBaseDataSourceInputPublic
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListEvaluationTestCasesByWorkspaceOutput
+          $ref: ./definitions.yml#/apiUpdateKnowledgeBaseDataSourceOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -41,9 +47,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:read
-summary: List Evaluation Test Cases by Workspace
+  - genai:update
+summary: Update Data Source options
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_evaluation_test_cases_by_workspace.yml
+- $ref: examples/curl/genai_update_knowledge_base_data_source.yml

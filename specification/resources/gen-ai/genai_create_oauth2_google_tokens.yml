@@ -1,26 +1,18 @@
-description: To list all evaluation test cases by a workspace, send a GET request
-  to `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
-operationId: genai_list_evaluation_test_cases_by_workspace
-parameters:
-- description: Workspace UUID.
-  example: '"123e4567-e89b-12d3-a456-426614174000"'
-  in: path
-  name: workspace_uuid
-  required: true
-  schema:
-    type: string
-- description: Workspace name.
-  example: '"example string"'
-  in: query
-  name: agent_workspace_name
-  schema:
-    type: string
+description: To obtain the refresh token, needed for creation of data sources, send
+  a GET request to `/v2/gen-ai/oauth2/google/tokens`. Pass the code you obtrained
+  from the oauth flow in the field 'code'
+operationId: genai_create_oauth2_google_tokens
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiGoogleOauth2GetTokensInput
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListEvaluationTestCasesByWorkspaceOutput
+          $ref: ./definitions.yml#/apiGoogleOauth2GetTokensOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -41,9 +33,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:read
-summary: List Evaluation Test Cases by Workspace
+  - genai:create
+summary: Get Oauth2 Google Tokens
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_evaluation_test_cases_by_workspace.yml
+- $ref: examples/curl/genai_create_oauth2_google_tokens.yml

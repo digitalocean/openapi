@@ -1,18 +1,26 @@
-description: To list all evaluation test cases by a workspace, send a GET request
-  to `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
-operationId: genai_list_evaluation_test_cases_by_workspace
+description: To get serverless inference usage, send a GET request to `/v2/genai/models/api_keys/{uuid}/usage`.
+  Returns usage metrics for the specified serverless inference key within the provided
+  time range.
+operationId: genai_get_serverless_inference_usage
 parameters:
-- description: Workspace UUID.
+- description: Serverless inference key id
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
-  name: workspace_uuid
+  name: uuid
   required: true
   schema:
     type: string
-- description: Workspace name.
+- description: Return all usage data from this date (defaults to 24 hours ago if omitted).
   example: '"example string"'
   in: query
-  name: agent_workspace_name
+  name: start
+  schema:
+    type: string
+- description: Return all usage data up to this date, if omitted, will return up to
+    the current date.
+  example: '"example string"'
+  in: query
+  name: stop
   schema:
     type: string
 responses:
@@ -20,7 +28,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListEvaluationTestCasesByWorkspaceOutput
+          $ref: ./definitions.yml#/apiGetServerlessInferenceUsageOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -42,8 +50,8 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: List Evaluation Test Cases by Workspace
+summary: Get Serverless Inference Usage
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_evaluation_test_cases_by_workspace.yml
+- $ref: examples/curl/genai_get_serverless_inference_usage.yml

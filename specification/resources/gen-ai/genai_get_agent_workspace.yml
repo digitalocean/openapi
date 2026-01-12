@@ -1,18 +1,12 @@
-description: To list all evaluation test cases by a workspace, send a GET request
-  to `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
-operationId: genai_list_evaluation_test_cases_by_workspace
+description: To retrieve details of an agent workspace, GET request to `/v2/gen-ai/agent-workspaces/{agent_workspace_name}`.
+  The response body is a JSON object containing the agent workspace.
+operationId: genai_get_agent_workspace
 parameters:
-- description: Workspace UUID.
-  example: '"123e4567-e89b-12d3-a456-426614174000"'
-  in: path
-  name: workspace_uuid
-  required: true
-  schema:
-    type: string
-- description: Workspace name.
+- description: Unique agent workspace name
   example: '"example string"'
-  in: query
+  in: path
   name: agent_workspace_name
+  required: true
   schema:
     type: string
 responses:
@@ -20,7 +14,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListEvaluationTestCasesByWorkspaceOutput
+          $ref: ./definitions.yml#/apiGetAgentWorkspaceOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -42,8 +36,8 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: List Evaluation Test Cases by Workspace
+summary: Retrieve an Existing Agent Workspace
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_evaluation_test_cases_by_workspace.yml
+- $ref: examples/curl/genai_get_agent_workspace.yml
