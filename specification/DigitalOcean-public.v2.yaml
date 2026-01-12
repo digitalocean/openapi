@@ -720,6 +720,10 @@ paths:
     get:
       $ref: "resources/apps/apps_get_job_invocation.yml"
 
+  /v2/apps/{app_id}/job-invocations/{job_invocation_id}/cancel:
+    post:
+      $ref: "resources/apps/apps_cancel_job_invocation.yml"
+
   /v2/apps/{app_id}/jobs/{job_name}/invocations/{job_invocation_id}/logs:
     get:
       $ref: "resources/apps/apps_get_job_invocation_logs.yml"
