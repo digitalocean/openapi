@@ -34,6 +34,8 @@ responses:
 
 x-codeSamples:
   - $ref: "examples/curl/spaces_key_delete.yml"
+  - $ref: "examples/go/spaces_key_delete.yml"
+  - $ref: "examples/python/spaces_key_delete.yml"
 
 security:
   - bearer_auth:
