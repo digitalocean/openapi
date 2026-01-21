@@ -1,4 +1,5 @@
-description: The response will be a JSON object with a key called `reserved_ip`.
+description: |
+  The response will be a JSON object with a key called `reserved_ip`.
   The value of this will be an object that contains the standard attributes
   associated with a reserved IP.
 
