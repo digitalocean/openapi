@@ -2423,6 +2423,9 @@ paths:
 
 
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
+    put:
+      $ref: 'resources/gen-ai/genai_update_knowledge_base_data_source.yml'
+      
     delete:
       $ref: 'resources/gen-ai/genai_delete_knowledge_base_data_source.yml'
 

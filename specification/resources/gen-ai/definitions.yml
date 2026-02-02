@@ -5234,6 +5234,28 @@ apiUpdateGuardrailOutput:
     guardrail:
       $ref: '#/apiGuardrail'
   type: object
+apiUpdateKnowledgeBaseDataSourceInputPublic:
+  description: Update a data source of a knowledge base with change in chunking algorithm/options
+  properties:
+    chunking_algorithm:
+      $ref: '#/apiChunkingAlgorithm'
+    chunking_options:
+      $ref: '#/apiChunkingOptions'
+    data_source_uuid:
+      description: Data Source ID (Path Parameter)
+      example: 98765432-1234-1234-1234-123456789012
+      type: string
+    knowledge_base_uuid:
+      description: Knowledge Base ID (Path Parameter)
+      example: 12345678-1234-1234-1234-123456789012
+      type: string
+  type: object
+apiUpdateKnowledgeBaseDataSourceOutput:
+  description: Update a data source of a knowledge base with change in chunking algorithm/options
+  properties:
+    knowledge_base_data_source:
+      $ref: '#/apiKnowledgeBaseDataSource'
+  type: object
 apiUpdateKnowledgeBaseInputPublic:
   description: Information about updating a knowledge base
   properties:
