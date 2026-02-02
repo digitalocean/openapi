@@ -3,14 +3,14 @@ description: To update a data source (e.g. chunking options), send a PUT request
 operationId: genai_update_knowledge_base_data_source
 parameters:
 - description: Knowledge Base ID (Path Parameter)
-  example: '"123e4567-e89b-12d3-a456-426614174000"'
+  example: 123e4567-e89b-12d3-a456-426614174000
   in: path
   name: knowledge_base_uuid
   required: true
   schema:
     type: string
 - description: Data Source ID (Path Parameter)
-  example: '"123e4567-e89b-12d3-a456-426614174000"'
+  example: 123e4567-e89b-12d3-a456-426614174000
   in: path
   name: data_source_uuid
   required: true
