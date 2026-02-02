@@ -3367,12 +3367,17 @@ apiLinkAgentFunctionInputPublic:
       example: '"My Function Description"'
       type: string
     faas_name:
-      description: The name of the function in the DigitalOcean functions platform
-      example: '"my-function"'
+      description: The name of the function in the DigitalOcean functions platform.
+        Must include the package name as a prefix in the format package_name/function_name.
+        If the function is not created under a specific package, use "default" as
+        the package name (e.g. default/my-function).
+      example: '"package_name/function_name"'
       type: string
     faas_namespace:
-      description: The namespace of the function in the DigitalOcean functions platform
-      example: '"default"'
+      description: The UUID of the namespace in the DigitalOcean functions platform.
+        This is the unique identifier displayed below the namespace name in the control
+        panel, not the namespace name itself.
+      example: '"fn-abc01234-1234-1234-1234-123456789012"'
       type: string
     function_name:
       description: Function name
