@@ -19,6 +19,10 @@ properties:
       type: string
     description: List of VPC IDs that should be able to access the share.
     example: ["796c6fe3-2a1d-4da2-9f3e-38239827dc91"]
+  performance_tier:
+    type: string
+    description: The performance tier of the share.
+    example: "standard"
 required:
   - name
   - size_gib

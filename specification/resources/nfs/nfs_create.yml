@@ -23,6 +23,7 @@ requestBody:
             size_gib: 1024
             region: "atl1"
             vpc_ids: ["796c6fe3-2a1d-4da2-9f3e-38239827dc91"]
+            performance_tier: "standard"
 
 responses:
   '201':
