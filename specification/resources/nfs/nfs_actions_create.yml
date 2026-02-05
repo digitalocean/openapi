@@ -13,6 +13,7 @@ description: |
   | <nobr>`snapshot`</nobr>          | Takes a snapshot of an NFS share |
   | <nobr>`attach`</nobr>            | Attaches an NFS share to a VPC. Set the vpc_id attribute to the desired VPC ID |
   | <nobr>`detach`</nobr>            | Detaches an NFS share from a VPC. Set the vpc_id attribute to the desired VPC ID |
+  | <nobr>`switch_performance_tier`</nobr> | Switches the performance tier of an NFS share. Set the performance_tier attribute to the desired tier (e.g., standard, high) |
 
 tags:
   - NFS Actions
@@ -36,6 +37,7 @@ requestBody:
           - $ref: 'models/nfs_actions.yml#/nfs_action_snapshot'
           - $ref: 'models/nfs_actions.yml#/nfs_action_attach'
           - $ref: 'models/nfs_actions.yml#/nfs_action_detach'
+          - $ref: 'models/nfs_actions.yml#/nfs_action_switch_performance_tier'
         discriminator:
           propertyName: type
           mapping:
@@ -43,6 +45,7 @@ requestBody:
             snapshot: 'models/nfs_actions.yml#/nfs_action_snapshot'
             attach: 'models/nfs_actions.yml#/nfs_action_attach'
             detach: 'models/nfs_actions.yml#/nfs_action_detach'
+            switch_performance_tier: 'models/nfs_actions.yml#/nfs_action_switch_performance_tier'
 
 responses:
   '201':

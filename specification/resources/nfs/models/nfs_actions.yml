@@ -1,7 +1,6 @@
 nfs_action:
   required:
     - type
-    - region
   type: object
   description: Specifies the action that will be taken on the NFS share.
   properties:
@@ -76,3 +75,17 @@ nfs_action_detach:
               description: The ID of the VPC from which the NFS share will be detached
           required:
             - vpc_id
+nfs_action_switch_performance_tier:
+  allOf:
+    - $ref: '#/nfs_action'
+    - type: object
+      properties:
+        params:
+          type: object
+          properties:
+            performance_tier:
+              type: string
+              example: standard
+              description: The performance tier to which the NFS share will be switched (e.g., standard, high).
+          required:
+            - performance_tier
