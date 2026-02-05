@@ -74,6 +74,11 @@ properties:
     description: >-
       Additional storage added to the cluster, in MiB. If null, no additional storage is added to the cluster, beyond
       what is provided as a base amount from the 'size' and any previously added additional storage.
+  do_settings:
+    allOf:
+    - $ref: './do_settings.yml'
+    - description: >-
+        DigitalOcean-specific settings for the read-only replica, including custom service CNAMEs.
 
 required:
   - name
