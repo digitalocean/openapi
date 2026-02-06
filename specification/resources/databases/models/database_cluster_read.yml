@@ -171,6 +171,11 @@ properties:
       Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the cluster's primary node and
       a second entry for the cluster's standby node(s).
     readOnly: true
+  do_settings:
+    allOf:
+    - $ref: './do_settings.yml'
+    - description: >-
+        DigitalOcean-specific settings for the database cluster, including custom service CNAMEs.
 
 
 

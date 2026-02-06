@@ -177,6 +177,11 @@ properties:
     description: >-
       Autoscaling configuration for the database cluster. Currently only supports storage autoscaling. If null, autoscaling is
       not configured for the cluster.
+  do_settings:
+    allOf:
+    - $ref: './do_settings.yml'
+    - description: >-
+        DigitalOcean-specific settings for the database cluster, including custom service CNAMEs.
 
 
 
