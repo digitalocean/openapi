@@ -1,0 +1,45 @@
+type: object
+properties:
+  name:
+    type: string
+    example: Flask with Valkey support
+  repo_url:
+    type: string
+    example: https://github.com/digitalocean/template-flask-app.git
+  branch:
+    type: string
+    example: main
+  repo_owner:
+    type: string
+    example: digitalocean
+  repo_name:
+    type: string
+    example: template-flask-app
+  environment_slug:
+    type: string
+    example: python
+  component_types:
+    type: array
+    items:
+      type: string
+    example:
+    - service
+    - worker
+    - static_site
+    - job
+  product_docs_page:
+    type: string
+    example: https://www.digitalocean.com/docs/app-platform/how-to/create-apps/#create-a-new-app
+  description:
+    type: string
+    example: A Flask app with Valkey support
+  language:
+    type: string
+    example: Python
+  frameworks:
+    type: array
+    items:
+      type: string
+    example:
+    - Flask
+

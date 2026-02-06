@@ -736,6 +736,10 @@ paths:
     get:
       $ref: "resources/apps/apps_get_instanceSize.yml"
 
+  /v2/apps/templates:
+    get:
+      $ref: "resources/apps/apps_list_templates.yml"
+
   /v2/apps/regions:
     get:
       $ref: "resources/apps/apps_list_regions.yml"
