@@ -2234,6 +2234,13 @@ paths:
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
 
+  /v2/gen-ai/agents/{agent_uuid}/guardrails:
+    post:
+      $ref: 'resources/gen-ai/genai_attach_agent_guardrails.yml'
+
+  /v2/gen-ai/agents/{agent_uuid}/guardrails/{guardrail_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_detach_agent_guardrail.yml'
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases:
     post:

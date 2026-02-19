@@ -3399,6 +3399,19 @@ apiLinkAgentGuardrailOutput:
     agent:
       $ref: '#/apiAgent'
   type: object
+apiLinkAgentGuardrailsInputPublic:
+  description: Information about linking an agent to a guardrail
+  properties:
+    agent_uuid:
+      description: The UUID of the agent.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    guardrails:
+      description: The list of guardrails to attach.
+      items:
+        $ref: '#/apiAgentGuardrailInput'
+      type: array
+  type: object
 apiLinkAgentInputPublic:
   description: Information for linking an agent
   properties:
@@ -4900,6 +4913,12 @@ apiUnlinkAgentFunctionOutput:
     agent:
       $ref: '#/apiAgent'
   type: object
+apiUnlinkAgentGuardrailInputPublic:
+  properties:
+    agent_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+    guardrail_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
 apiUnlinkAgentGuardrailOutput:
   description: UnlinkAgentGuardrailOutput description
   properties:
