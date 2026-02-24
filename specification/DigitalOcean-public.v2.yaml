@@ -1657,6 +1657,50 @@ paths:
     get:
       $ref: "resources/monitoring/monitoring_get_droplet_autoscale_target_memory_utilization.yml"
 
+  /v2/monitoring/metrics/database/mysql/cpu_usage:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_cpu_usage.yml"
+
+  /v2/monitoring/metrics/database/mysql/load:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_load.yml"
+
+  /v2/monitoring/metrics/database/mysql/memory_usage:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_memory_usage.yml"
+
+  /v2/monitoring/metrics/database/mysql/disk_usage:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_disk_usage.yml"
+
+  /v2/monitoring/metrics/database/mysql/threads_connected:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_threads_connected.yml"
+
+  /v2/monitoring/metrics/database/mysql/threads_created_rate:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_threads_created_rate.yml"
+
+  /v2/monitoring/metrics/database/mysql/threads_active:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_threads_active.yml"
+
+  /v2/monitoring/metrics/database/mysql/index_vs_sequential_reads:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_index_vs_sequential_reads.yml"
+
+  /v2/monitoring/metrics/database/mysql/op_rates:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_op_rates.yml"
+
+  /v2/monitoring/metrics/database/mysql/schema_throughput:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_schema_throughput.yml"
+
+  /v2/monitoring/metrics/database/mysql/schema_latency:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_schema_latency.yml"
+
   /v2/monitoring/sinks/destinations:
     post:
       $ref: "resources/monitoring/monitoring_create_destination.yml"
