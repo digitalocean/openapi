@@ -1,0 +1,103 @@
+# Response model for Dedicated Inference
+dedicated_inference:
+  type: object
+  description: A Dedicated Inference instance.
+  properties:
+    id:
+      type: string
+      format: uuid
+      readOnly: true
+      example: 6b5c619c-359c-44ca-87e2-47e98170c01d
+      description: Unique ID of the Dedicated Inference.
+    status:
+      type: string
+      enum: [active, new, provisioning, updating, deleting, error]
+      readOnly: true
+      example: active
+      description: Current state of the Dedicated Inference.
+    region:
+      type: string
+      readOnly: true
+      example: atl1
+      description: DigitalOcean region where the Dedicated Inference is hosted.
+    vpc_uuid:
+      type: string
+      format: uuid
+      readOnly: true
+      description: VPC UUID of the Dedicated Inference.
+    spec:
+      $ref: 'dedicated_inference_spec.yml#/dedicated_inference_spec'
+    pending_deployment:
+      $ref: '#/pending_deployment'
+    endpoints:
+      type: object
+      readOnly: true
+      properties:
+        public_endpoint_fqdn:
+          type: string
+          format: uri
+          description: Public FQDN of the Dedicated Inference instance.
+        private_endpoint_fqdn:
+          type: string
+          format: uri
+          description: Private VPC FQDN of the Dedicated Inference instance.
+    created_at:
+      type: string
+      format: date-time
+      readOnly: true
+      example: "2024-01-09T20:44:32Z"
+      description: When the Dedicated Inference was created.
+    updated_at:
+      type: string
+      format: date-time
+      readOnly: true
+      example: "2024-01-09T20:44:32Z"
+      description: When the Dedicated Inference was last updated.
+
+pending_deployment:
+  type: object
+  description: Pending deployment when status is provisioning or updating.
+  properties:
+    id:
+      type: string
+      format: uuid
+      description: Deployment UUID.
+    spec:
+      type: object
+      description: Spec for the pending deployment.
+    status:
+      type: string
+      enum: [provisioning, updating]
+    created_at:
+      type: string
+      format: date-time
+    updated_at:
+      type: string
+      format: date-time
+
+dedicated_inference_create_request:
+  type: object
+  required: [spec]
+  properties:
+    spec:
+      $ref: 'dedicated_inference_spec.yml#/dedicated_inference_spec'
+    access_tokens:
+      type: object
+      additionalProperties:
+        type: string
+      example: { "hugging_face_token": "$HF_TOKEN" }
+      description: Key-value pairs for provider tokens (e.g. Hugging Face).
+
+dedicated_inference_update_request:
+  type: object
+  properties:
+    spec:
+      $ref: 'dedicated_inference_spec.yml#/dedicated_inference_spec'
+    access_tokens:
+      type: object
+      description: Provider tokens for model access (e.g. gated Hugging Face models).
+      properties:
+        hugging_face_token:
+          type: string
+          description: Hugging Face token required for gated models.
+      additionalProperties: false
