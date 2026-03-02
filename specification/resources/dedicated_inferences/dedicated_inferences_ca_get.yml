@@ -1,4 +1,4 @@
-operationId: dedicatedInferences_ca_get
+operationId: dedicatedInferences_get_ca
 
 summary: Get Dedicated Inference CA Certificate
 

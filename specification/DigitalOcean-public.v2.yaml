@@ -121,6 +121,16 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
+  - name: "BYOIP Prefixes"
+    description: |-
+      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
+      to your account, then assign those IPs to your DigitalOcean resources. 
+      BYOIP supports the following features:
+      * IPv4 addresses
+      * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
+      * Same API and management interface as our existing reserved IPs feature
+      * Assignable to Droplets only
+
   - name: CDN Endpoints
     description: |-
       Content hosted in DigitalOcean's object storage solution,
@@ -510,16 +520,6 @@ tags:
 
       An action object is returned. These objects hold the current status of the
       requested action.
-
-  - name: "BYOIP Prefixes"
-    description: |-
-      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
-      to your account, then assign those IPs to your DigitalOcean resources. 
-      BYOIP supports the following features:
-      * IPv4 addresses
-      * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
-      * Same API and management interface as our existing reserved IPs feature
-      * Assignable to Droplets only
 
   - name: Sizes
     description: |-

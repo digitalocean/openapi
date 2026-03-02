@@ -1,4 +1,4 @@
-operationId: dedicatedInferences_tokens_list
+operationId: dedicatedInferences_list_tokens
 
 summary: List Dedicated Inference Tokens
 

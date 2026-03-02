@@ -1,4 +1,4 @@
-operationId: dedicatedInferences_tokens_delete
+operationId: dedicatedInferences_delete_tokens
 
 summary: Revoke a Dedicated Inference Token
 
@@ -16,6 +16,13 @@ parameters:
 responses:
   '204':
     description: Token revoked.
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
   '404':

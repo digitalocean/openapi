@@ -50,6 +50,7 @@ model_deployment_spec:
   properties:
     model_id:
       type: string
+      example: ""
       description: Used to identify an existing deployment when updating; empty means create new.
     model_slug:
       type: string
@@ -58,6 +59,7 @@ model_deployment_spec:
     model_provider:
       type: string
       enum: [hugging_face]
+      example: hugging_face
       description: Model provider.
     workload_config:
       type: object
@@ -75,6 +77,7 @@ accelerator_config_spec:
     scale:
       type: integer
       minimum: 1
+      example: 1
       description: Number of accelerator instances.
     type:
       type: string

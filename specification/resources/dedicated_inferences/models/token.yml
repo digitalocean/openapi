@@ -16,6 +16,7 @@ dedicated_inference_access_token:
     value:
       type: string
       readOnly: true
+      example: "di_xxxxxxxxxxxxxxxxxxxxxxxx"
       description: Token value; only returned once on create. Store securely.
     created_at:
       type: string

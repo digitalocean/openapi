@@ -1,4 +1,4 @@
-operationId: dedicatedInferences_accelerators_list
+operationId: dedicatedInferences_list_accelerators
 
 summary: List Dedicated Inference Accelerators
 
@@ -11,16 +11,40 @@ tags:
   - Dedicated Inference
 
 parameters:
-  - $ref: 'parameters.yml#/dedicated_inference_id'
-  - $ref: '../../shared/parameters.yml#/per_page'
-  - $ref: '../../shared/parameters.yml#/page'
+  - name: dedicated_inference_id
+    in: path
+    required: true
+    description: A unique identifier for a Dedicated Inference instance.
+    schema:
+      type: string
+      format: uuid
+    example: 6b5c619c-359c-44ca-87e2-47e98170c01d
+  - name: per_page
+    in: query
+    required: false
+    description: Number of items returned per page
+    schema:
+      type: integer
+      minimum: 1
+      default: 20
+      maximum: 200
+    example: 20
+  - name: page
+    in: query
+    required: false
+    description: Which 'page' of paginated results to return.
+    schema:
+      type: integer
+      minimum: 1
+      default: 1
+    example: 1
   - name: slug
     in: query
     required: false
     description: Filter accelerators by GPU slug.
     schema:
       type: string
-      example: gpu-mi300x1-192gb
+    example: gpu-mi300x1-192gb
 
 responses:
   '200':

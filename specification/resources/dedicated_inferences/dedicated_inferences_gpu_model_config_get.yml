@@ -1,4 +1,4 @@
-operationId: dedicatedInferences_gpu_model_config_get
+operationId: dedicatedInferences_get_gpu_model_config
 
 summary: Get Dedicated Inference GPU Model Config
 
@@ -15,11 +15,11 @@ responses:
     description: GPU model configs (gpu_slugs, model_slug, model_name, is_gated_model).
     headers:
       ratelimit-limit:
-        $ref: '../../../shared/headers.yml#/ratelimit-limit'
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
       ratelimit-remaining:
-        $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
       ratelimit-reset:
-        $ref: '../../../shared/headers.yml#/ratelimit-reset'
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
     content:
       application/json:
         schema:

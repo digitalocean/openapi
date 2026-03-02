@@ -1,4 +1,4 @@
-operationId: dedicatedInferences_tokens_create
+operationId: dedicatedInferences_create_tokens
 
 summary: Create a Dedicated Inference Token
 

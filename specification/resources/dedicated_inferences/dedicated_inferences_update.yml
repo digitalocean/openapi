@@ -1,4 +1,4 @@
-operationId: dedicatedInferences_update
+operationId: dedicatedInferences_patch
 
 summary: Update a Dedicated Inference
 

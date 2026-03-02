@@ -24,6 +24,7 @@ dedicated_inference:
       type: string
       format: uuid
       readOnly: true
+      example: "997615ce-132d-4bae-9270-9ee21b395e5d"
       description: VPC UUID of the Dedicated Inference.
     spec:
       $ref: 'dedicated_inference_spec.yml#/dedicated_inference_spec'
@@ -36,10 +37,12 @@ dedicated_inference:
         public_endpoint_fqdn:
           type: string
           format: uri
+          example: "https://b4bfug4jc41kts2ro54if91eo-public-dedicated-inference.do-infra.ai"
           description: Public FQDN of the Dedicated Inference instance.
         private_endpoint_fqdn:
           type: string
           format: uri
+          example: "https://b4bfug4jc41kts2ro54if91eo-private-dedicated-inference.do-infra.ai"
           description: Private VPC FQDN of the Dedicated Inference instance.
     created_at:
       type: string
@@ -61,6 +64,7 @@ pending_deployment:
     id:
       type: string
       format: uuid
+      example: "7c6d729d-360d-44db-88e3-58e98281d12e"
       description: Deployment UUID.
     spec:
       type: object
@@ -68,12 +72,15 @@ pending_deployment:
     status:
       type: string
       enum: [provisioning, updating]
+      example: provisioning
     created_at:
       type: string
       format: date-time
+      example: "2024-01-09T20:44:32Z"
     updated_at:
       type: string
       format: date-time
+      example: "2024-01-09T20:44:32Z"
 
 dedicated_inference_create_request:
   type: object
@@ -99,5 +106,6 @@ dedicated_inference_update_request:
       properties:
         hugging_face_token:
           type: string
+          example: "$HF_TOKEN"
           description: Hugging Face token required for gated models.
       additionalProperties: false
