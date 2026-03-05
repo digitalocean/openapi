@@ -40,6 +40,15 @@ deployment_id:
     type: string
   example: 3aa4d20e-5527-4c00-b496-601fbd22520a
 
+event_id:
+  description: The event ID
+  in: path
+  name: event_id
+  required: true
+  schema:
+    type: string
+  example: 4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf
+
 app_name:
   description: The name of the app to retrieve.
   in: query
@@ -100,6 +109,7 @@ log_type:
     - DEPLOY: Deploy-time logs
     - RUN: Live run-time logs
     - RUN_RESTARTED: Logs of crashed/restarted instances during runtime
+    - AUTOSCALE_EVENT: Logs of an autoscaling event (requires event_id)
   in: query
   name: type
   required: true
@@ -111,6 +121,7 @@ log_type:
       - DEPLOY
       - RUN
       - RUN_RESTARTED
+      - AUTOSCALE_EVENT
     type: string
   example: BUILD
 
