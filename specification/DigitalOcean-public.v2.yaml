@@ -732,6 +732,10 @@ paths:
     get:
       $ref: "resources/apps/apps_list_events.yml"
 
+  /v2/apps/{app_id}/events/{event_id}:
+    get:
+      $ref: "resources/apps/apps_get_event.yml"
+
   /v2/apps/{app_id}/events/{event_id}/cancel:
     post:
       $ref: "resources/apps/apps_cancel_event.yml"
