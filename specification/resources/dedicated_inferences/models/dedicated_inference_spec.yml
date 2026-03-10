@@ -87,3 +87,9 @@ accelerator_config_spec:
       type: string
       example: gpu-mi300x1-192gb
       description: DigitalOcean GPU slug.
+    status:
+      type: string
+      enum: [new, provisioning, active]
+      readOnly: true
+      example: active
+      description: Current state of the Accelerator.
