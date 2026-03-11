@@ -1,4 +1,4 @@
-operationId: security_scan_finding_list_affected_resources
+operationId: security_list_scan_finding_affected_resources
 
 summary: List Finding Affected Resources
 

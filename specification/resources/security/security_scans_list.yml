@@ -1,4 +1,4 @@
-operationId: security_scans_list
+operationId: security_list_scans
 
 summary: List Scans
 

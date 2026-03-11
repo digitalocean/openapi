@@ -1,4 +1,4 @@
-operationId: security_suppression_delete
+operationId: security_delete_suppression
 
 summary: Delete Suppression
 

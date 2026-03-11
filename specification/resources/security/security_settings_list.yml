@@ -1,4 +1,4 @@
-operationId: security_settings_list
+operationId: security_list_settings
 
 summary: List Settings
 

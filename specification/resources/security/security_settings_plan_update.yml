@@ -1,4 +1,4 @@
-operationId: security_settings_plan_update
+operationId: security_update_settings_plan
 
 summary: Update Plan
 
@@ -26,12 +26,16 @@ requestBody:
                     type: string
                   description: The URNs of resources to scan for the tier.
                   default: []
+                  example:
+                    - do:droplet:fe3a2fd7-903d-46e6-ada3-3e4f285fb89d
                 tags:
                   type: array
                   items:
                     type: string
                   description: Resource tags to scan for the tier.
                   default: []
+                  example:
+                    - production
             example:
               basic:
                 resources:

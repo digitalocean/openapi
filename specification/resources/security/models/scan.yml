@@ -86,12 +86,15 @@ scan:
                 step:
                   title: step
                   type: integer
+                  example: 1
                 title:
                   title: title
                   type: string
+                  example: Enable backups
                 description:
                   title: description
                   type: string
+                  example: Turn on automated backups for this Droplet.
             description: The mitigation steps to resolve the finding.
           affected_resources_count:
             title: affected_resources_count
@@ -159,10 +162,13 @@ suppressed_resource_root:
       properties:
         page:
           type: integer
+          example: 1
         pages:
           type: integer
+          example: 3
         total:
           type: integer
+          example: 25
     links:
       type: object
       properties:
@@ -171,12 +177,16 @@ suppressed_resource_root:
           properties:
             first:
               type: string
+              example: https://api.digitalocean.com/v2/security/settings/suppressions?page=1
             prev:
               type: string
+              example: https://api.digitalocean.com/v2/security/settings/suppressions?page=1
             next:
               type: string
+              example: https://api.digitalocean.com/v2/security/settings/suppressions?page=2
             last:
               type: string
+              example: https://api.digitalocean.com/v2/security/settings/suppressions?page=3
 
 plan_downgrades:
   type: object
@@ -187,10 +197,13 @@ plan_downgrades:
       items:
         type: string
       description: URNs of resources that will be downgraded.
+      example:
+        - do:droplet:fe3a2fd7-903d-46e6-ada3-3e4f285fb89d
     effective_at:
       type: string
       format: date-time
       description: When the coverage downgrade takes effect.
+      example: "2025-12-01T00:00:00Z"
 
 settings:
   type: object

@@ -1,4 +1,4 @@
-operationId: security_scans_get
+operationId: security_get_scan
 
 summary: Get Scan
 

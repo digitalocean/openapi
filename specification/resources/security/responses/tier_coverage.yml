@@ -22,7 +22,11 @@ content:
                 type: array
                 items:
                   type: string
+                example:
+                  - do:droplet:fe3a2fd7-903d-46e6-ada3-3e4f285fb89d
               tags:
                 type: array
                 items:
                   type: string
+                example:
+                  - production

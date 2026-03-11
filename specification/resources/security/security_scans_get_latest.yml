@@ -1,4 +1,4 @@
-operationId: security_scans_get_latest
+operationId: security_get_latest_scan
 
 summary: Get Latest Scan
 

@@ -1,4 +1,4 @@
-operationId: security_scans_create
+operationId: security_create_scan
 
 summary: Create Scan
 
