@@ -121,6 +121,16 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
+  - name: "BYOIP Prefixes"
+    description: |-
+      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
+      to your account, then assign those IPs to your DigitalOcean resources. 
+      BYOIP supports the following features:
+      * IPv4 addresses
+      * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
+      * Same API and management interface as our existing reserved IPs feature
+      * Assignable to Droplets only
+
   - name: CDN Endpoints
     description: |-
       Content hosted in DigitalOcean's object storage solution,
@@ -191,6 +201,13 @@ tags:
 
       For a list of currently available database slugs and options, use the `/v2/databases/options` endpoint or use the
       `doctl databases options` [command](https://docs.digitalocean.com/reference/doctl/reference/databases/options).
+
+  - name: Dedicated Inference
+    description: |-
+      [Dedicated Inference](https://docs.digitalocean.com/products/agent-platform/dedicated-inference/)
+      delivers scalable production-grade LLM hosting on DigitalOcean. Create, list, get, update,
+      and delete Dedicated Inference instances; manage accelerators, CA certificate, sizes,
+      GPU model config, and access tokens.
 
   - name: Domain Records
     description: |-
@@ -503,16 +520,6 @@ tags:
 
       An action object is returned. These objects hold the current status of the
       requested action.
-
-  - name: "BYOIP Prefixes"
-    description: |-
-      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
-      to your account, then assign those IPs to your DigitalOcean resources. 
-      BYOIP supports the following features:
-      * IPv4 addresses
-      * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
-      * Same API and management interface as our existing reserved IPs feature
-      * Assignable to Droplets only
 
   - name: Sizes
     description: |-
@@ -1064,6 +1071,50 @@ paths:
   /v2/databases/{database_cluster_uuid}/indexes/{index_name}:
     delete:
       $ref: "resources/databases/databases_delete_opensearch_index.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_get.yml"
+    patch:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_update.yml"
+    delete:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_delete.yml"
+
+  /v2/dedicated-inferences:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_list.yml"
+    post:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_create.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}/accelerators:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_accelerators_list.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}/accelerators/{accelerator_id}:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_accelerators_get.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}/ca:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_ca_get.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}/tokens:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_tokens_list.yml"
+    post:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_tokens_create.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}/tokens/{token_id}:
+    delete:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_tokens_delete.yml"
+
+  /v2/dedicated-inferences/sizes:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_sizes_list.yml"
+
+  /v2/dedicated-inferences/gpu-model-config:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_gpu_model_config_get.yml"
 
   /v2/domains:
     get:
