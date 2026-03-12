@@ -9,6 +9,12 @@ scan:
     status:
       title: status
       type: string
+      enum:
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+        - CSPM_NOT_ENABLED
+        - SCAN_NOT_RUN
       example: COMPLETED
       description: The status of the scan.
     created_at:
