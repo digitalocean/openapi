@@ -9,22 +9,9 @@ tags:
 
 parameters:
   - $ref: 'parameters.yml#/scan_id'
+  - $ref: 'parameters.yml#/severity'
   - $ref: '../../shared/parameters.yml#/per_page'
   - $ref: '../../shared/parameters.yml#/page'
-  - in: query
-    name: severity
-    required: false
-    description: The finding severity level to include.
-    schema:
-      type: string
-      enum:
-        - undefined
-        - info
-        - low
-        - medium
-        - high
-        - critical
-    example: critical
   - in: query
     name: type
     required: false

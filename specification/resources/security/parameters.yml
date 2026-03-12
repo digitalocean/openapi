@@ -1,3 +1,17 @@
+severity:
+  in: query
+  name: severity
+  required: false
+  description: The finding severity level to include.
+  schema:
+    type: string
+    enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+  example: CRITICAL
+
 scan_id:
   in: path
   name: scan_id

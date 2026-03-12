@@ -56,7 +56,7 @@ scan:
               - HIGH
               - MEDIUM
               - LOW
-            example: critical
+            example: CRITICAL
             description: The severity of the finding.
           business_impact:
             title: business_impact
