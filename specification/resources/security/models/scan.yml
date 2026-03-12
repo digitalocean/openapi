@@ -52,10 +52,10 @@ scan:
             title: severity
             type: string
             enum:
-              - critical
-              - high
-              - medium
-              - low
+              - CRITICAL
+              - HIGH
+              - MEDIUM
+              - LOW
             example: critical
             description: The severity of the finding.
           business_impact:
