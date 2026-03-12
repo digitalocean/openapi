@@ -70,7 +70,7 @@ tags:
 
   - name: Billing
     description: |-
-      The billing endpoints allow you to retrieve your account balance, invoices, 
+      The billing endpoints allow you to retrieve your account balance, invoices,
       billing history, and insights.
 
       **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
@@ -88,13 +88,13 @@ tags:
       issued, or credits granted. To interact with invoices, you
       will generally send requests to the invoices endpoint at
       `/v2/customers/my/billing_history`.
-      
-      **Billing Insights:** Day-over-day changes in billing resource usage based on nightly invoice items, 
-      including total amount, region, SKU, and description for a specified date range. 
-      It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for 
+
+      **Billing Insights:** Day-over-day changes in billing resource usage based on nightly invoice items,
+      including total amount, region, SKU, and description for a specified date range.
+      It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for
       a given month as nightly invoice items do not necessarily encompass all invoicing factors for the entire month.
-        `v2/billing/{account_urn}/insights/{start_date}/{end_date}` where account_urn is the URN of the customer 
-      account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid). The date range specified by 
+        `v2/billing/{account_urn}/insights/{start_date}/{end_date}` where account_urn is the URN of the customer
+      account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid). The date range specified by
       start_date and end_date must be in YYYY-MM-DD format.
 
   - name: Block Storage
@@ -124,7 +124,7 @@ tags:
   - name: "BYOIP Prefixes"
     description: |-
       Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
-      to your account, then assign those IPs to your DigitalOcean resources. 
+      to your account, then assign those IPs to your DigitalOcean resources.
       BYOIP supports the following features:
       * IPv4 addresses
       * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
@@ -170,10 +170,10 @@ tags:
 
   - name: Container Registries
     description: |-
-      DigitalOcean now supports up to nine additional registries (for a total maximum of 10) per team 
-      if your container registry uses the Professional subscription plan. The storage is shared among 
-      the registries. This set of new APIs is backward compatible with `/v2/registry`. However, if you 
-      create more than one registry under a Professional plan, some of the `/v2/registry` APIs would not work. 
+      DigitalOcean now supports up to nine additional registries (for a total maximum of 10) per team
+      if your container registry uses the Professional subscription plan. The storage is shared among
+      the registries. This set of new APIs is backward compatible with `/v2/registry`. However, if you
+      create more than one registry under a Professional plan, some of the `/v2/registry` APIs would not work.
       Hence, it is recommended to use `/v2/registries` for multiple registries.
 
   - name: Databases
@@ -400,7 +400,7 @@ tags:
 
   - name: NFS
     description: |-
-      NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure, 
+      NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure,
       high-performance shared storage right inside your VPC. This enables seamless data sharing across Droplets in a VPC.
 
   - name: NFS Actions
@@ -521,6 +521,10 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
+  - name: Security
+    description: |-
+      Security CSPM endpoints for scans, scan findings, and settings.
+
   - name: Sizes
     description: |-
       The sizes objects represent different packages of hardware resources that
@@ -636,17 +640,17 @@ paths:
   /v2/add-ons/apps:
     get:
       $ref: "resources/addons/addons_get_app.yml"
-    
+
   /v2/add-ons/apps/{app_slug}/metadata:
     get:
       $ref: "resources/addons/addons_get_app_metadata.yml"
-  
+
   /v2/add-ons/saas:
     get:
       $ref: "resources/addons/addons_list.yml"
     post:
       $ref: "resources/addons/addons_create.yml"
-  
+
   /v2/add-ons/saas/{resource_uuid}:
     get:
       $ref: "resources/addons/addons_get.yml"
@@ -721,7 +725,7 @@ paths:
 
   /v2/apps/{app_id}/job-invocations:
     get:
-      $ref: "resources/apps/apps_list_job_invocations.yml"  
+      $ref: "resources/apps/apps_list_job_invocations.yml"
 
   /v2/apps/{app_id}/job-invocations/{job_invocation_id}:
     get:
@@ -1795,13 +1799,13 @@ paths:
   /v2/nfs/{nfs_id}/actions:
     post:
       $ref: "resources/nfs/nfs_actions_create.yml"
-  
+
   /v2/nfs/snapshots:
     get:
       $ref: "resources/nfs/nfs_snapshot_list.yml"
 
   /v2/nfs/snapshots/{nfs_snapshot_id}:
-    get: 
+    get:
       $ref: "resources/nfs/nfs_snapshot_get.yml"
 
     delete:
@@ -2087,6 +2091,45 @@ paths:
   /v2/byoip_prefixes/{byoip_prefix_uuid}/ips:
     get:
       $ref: "resources/byoip_prefixes/byoip_prefix_list_resources.yml"
+
+  /v2/security/scans:
+    get:
+      $ref: "resources/security/security_scans_list.yml"
+
+    post:
+      $ref: "resources/security/security_scans_create.yml"
+
+  /v2/security/scans/{scan_id}:
+    get:
+      $ref: "resources/security/security_scans_get.yml"
+
+  /v2/security/scans/latest:
+    get:
+      $ref: "resources/security/security_scans_get_latest.yml"
+
+  /v2/security/scans/rules:
+    post:
+      $ref: "resources/security/security_scan_rule_create.yml"
+
+  /v2/security/scans/{scan_id}/findings/{finding_uuid}/affected_resources:
+    get:
+      $ref: "resources/security/security_scan_finding_list_affected_resources.yml"
+
+  /v2/security/settings:
+    get:
+      $ref: "resources/security/security_settings_list.yml"
+
+  /v2/security/settings/plan:
+    put:
+      $ref: "resources/security/security_settings_plan_update.yml"
+
+  /v2/security/settings/suppressions:
+    post:
+      $ref: "resources/security/security_suppression_create.yml"
+
+  /v2/security/settings/suppressions/{suppression_uuid}:
+    delete:
+      $ref: "resources/security/security_suppression_delete.yml"
 
   /v2/sizes:
     get:
@@ -2527,7 +2570,7 @@ paths:
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
     put:
       $ref: 'resources/gen-ai/genai_update_knowledge_base_data_source.yml'
-      
+
     delete:
       $ref: 'resources/gen-ai/genai_delete_knowledge_base_data_source.yml'
 
