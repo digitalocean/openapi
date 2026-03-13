@@ -739,6 +739,22 @@ paths:
     get:
       $ref: "resources/apps/apps_get_job_invocation_logs.yml"
 
+  /v2/apps/{app_id}/events:
+    get:
+      $ref: "resources/apps/apps_list_events.yml"
+
+  /v2/apps/{app_id}/events/{event_id}:
+    get:
+      $ref: "resources/apps/apps_get_event.yml"
+
+  /v2/apps/{app_id}/events/{event_id}/cancel:
+    post:
+      $ref: "resources/apps/apps_cancel_event.yml"
+
+  /v2/apps/{app_id}/events/{event_id}/logs:
+    get:
+      $ref: "resources/apps/apps_get_event_logs.yml"
+
   /v2/apps/tiers/instance_sizes:
     get:
       $ref: "resources/apps/apps_list_instanceSizes.yml"
