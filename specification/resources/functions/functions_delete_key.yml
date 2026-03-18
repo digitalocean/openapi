@@ -6,8 +6,6 @@ description: |
   Deletes an access key for a serverless functions namespace.
   
   To delete an access key, send a DELETE request to `/v2/functions/namespaces/{namespace_id}/keys/{key_id}`.
-  
-  A successful request will return a `204 No Content` status code.
 
 tags:
   - Functions

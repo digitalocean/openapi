@@ -3,5 +3,5 @@ source: |-
   curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{"name": "my-function-access-key"}' \
+    -d '{"name": "my-function-access-key", "expires_in": "1h"}' \
     "https://api.digitalocean.com/v2/functions/namespaces/fn-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/keys"

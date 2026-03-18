@@ -47,6 +47,9 @@ responses:
   "404":
     $ref: "responses/namespace_not_found.yml"
 
+  "409":
+    $ref: "../../shared/responses/conflict.yml"
+
   "429":
     $ref: "../../shared/responses/too_many_requests.yml"
 

@@ -22,5 +22,5 @@ key_id:
   in: path
   schema:
     type: string
-  example: ak-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  example: dof-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   required: true

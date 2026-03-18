@@ -24,9 +24,13 @@ requestBody:
         $ref: "models/access_key_create_request.yml"
       
       examples:
-        Create Access Key:
+        Create Non-Expiring Key:
           value:
             name: "my-function-access-key"
+        Create Expiring Key:
+          value:
+            name: "my-expiring-access-key"
+            expires_in: "7d"
 
 responses:
   "201":
@@ -40,6 +44,9 @@ responses:
 
   "404":
     $ref: "responses/namespace_not_found.yml"
+
+  "409":
+    $ref: "../../shared/responses/conflict.yml"
 
   "429":
     $ref: "../../shared/responses/too_many_requests.yml"
