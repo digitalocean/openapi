@@ -2736,11 +2736,11 @@ paths:
       $ref: 'resources/gen-ai/genai_list_evaluation_test_cases_by_workspace.yml'
 
 
-  /v1/inference/chat/completions:
+  /v1/chat/completions:
     post:
       $ref: 'resources/inference/inference_create_chat_completion.yml'
 
-  /v1/chat/completions:
+  /api/v1/chat/completions:
     post:
       $ref: 'resources/inference/agent_inference_create_chat_completion.yml'
 

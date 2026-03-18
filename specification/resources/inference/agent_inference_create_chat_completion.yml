@@ -6,8 +6,8 @@ description: |-
 tags:
   - Agent Inference
 servers:
-  - url: "https://{agent_url}/api"
-    description: "https://{agent_url}/api"
+  - url: "https://{agent_url}"
+    description: "https://{agent_url}"
     variables:
       agent_url:
         default: "{your-agent-url}"
