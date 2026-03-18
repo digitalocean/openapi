@@ -5,7 +5,7 @@ tags:
   - Serverless Inference
 servers:
   - url: "https://inference.do-ai.run"
-    description: Inference API
+    description: production
 x-inference-base-url: "https://inference.do-ai.run"
 requestBody:
   required: true

@@ -7,7 +7,7 @@ tags:
   - Agent Inference
 servers:
   - url: "https://{agent_url}"
-    description: "https://{agent_url}"
+    description: production
     variables:
       agent_url:
         default: "{your-agent-url}"
