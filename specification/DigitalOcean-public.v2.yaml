@@ -70,7 +70,7 @@ tags:
 
   - name: Billing
     description: |-
-      The billing endpoints allow you to retrieve your account balance, invoices, 
+      The billing endpoints allow you to retrieve your account balance, invoices,
       billing history, and insights.
 
       **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
@@ -88,13 +88,13 @@ tags:
       issued, or credits granted. To interact with invoices, you
       will generally send requests to the invoices endpoint at
       `/v2/customers/my/billing_history`.
-      
-      **Billing Insights:** Day-over-day changes in billing resource usage based on nightly invoice items, 
-      including total amount, region, SKU, and description for a specified date range. 
-      It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for 
+
+      **Billing Insights:** Day-over-day changes in billing resource usage based on nightly invoice items,
+      including total amount, region, SKU, and description for a specified date range.
+      It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for
       a given month as nightly invoice items do not necessarily encompass all invoicing factors for the entire month.
-        `v2/billing/{account_urn}/insights/{start_date}/{end_date}` where account_urn is the URN of the customer 
-      account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid). The date range specified by 
+        `v2/billing/{account_urn}/insights/{start_date}/{end_date}` where account_urn is the URN of the customer
+      account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid). The date range specified by
       start_date and end_date must be in YYYY-MM-DD format.
 
   - name: Block Storage
@@ -120,6 +120,16 @@ tags:
 
       An action object is returned. These objects hold the current status of the
       requested action.
+
+  - name: "BYOIP Prefixes"
+    description: |-
+      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
+      to your account, then assign those IPs to your DigitalOcean resources.
+      BYOIP supports the following features:
+      * IPv4 addresses
+      * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
+      * Same API and management interface as our existing reserved IPs feature
+      * Assignable to Droplets only
 
   - name: CDN Endpoints
     description: |-
@@ -160,11 +170,11 @@ tags:
 
   - name: Container Registries
     description: |-
-      DigitalOcean now supports up to nine additional registries (for a total maximum of 10) per team 
-      if your container registry uses the Professional subscription plan. The storage is shared among 
-      the registries. This set of new APIs is backward compatible with `/v2/registry`. However, if you 
-      create more than one registry under a Professional plan, some of the `/v2/registry` APIs would not work. 
-      Hence, it is recommended to use `/v2/registries` for multiple registries. Currently, these APIs are in Public Preview.
+      DigitalOcean now supports up to nine additional registries (for a total maximum of 10) per team
+      if your container registry uses the Professional subscription plan. The storage is shared among
+      the registries. This set of new APIs is backward compatible with `/v2/registry`. However, if you
+      create more than one registry under a Professional plan, some of the `/v2/registry` APIs would not work.
+      Hence, it is recommended to use `/v2/registries` for multiple registries.
 
   - name: Databases
     description: |-
@@ -191,6 +201,13 @@ tags:
 
       For a list of currently available database slugs and options, use the `/v2/databases/options` endpoint or use the
       `doctl databases options` [command](https://docs.digitalocean.com/reference/doctl/reference/databases/options).
+
+  - name: Dedicated Inference
+    description: |-
+      [Dedicated Inference](https://docs.digitalocean.com/products/agent-platform/dedicated-inference/)
+      delivers scalable production-grade LLM hosting on DigitalOcean. Create, list, get, update,
+      and delete Dedicated Inference instances; manage accelerators, CA certificate, sizes,
+      GPU model config, and access tokens.
 
   - name: Domain Records
     description: |-
@@ -383,7 +400,7 @@ tags:
 
   - name: NFS
     description: |-
-      NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure, 
+      NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure,
       high-performance shared storage right inside your VPC. This enables seamless data sharing across Droplets in a VPC.
 
   - name: NFS Actions
@@ -504,15 +521,9 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
-  - name: "BYOIP Prefixes"
+  - name: Security
     description: |-
-      Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
-      to your account, then assign those IPs to your DigitalOcean resources. 
-      BYOIP supports the following features:
-      * IPv4 addresses
-      * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
-      * Same API and management interface as our existing reserved IPs feature
-      * Assignable to Droplets only
+      Security CSPM endpoints for scans, scan findings, and settings.
 
   - name: Sizes
     description: |-
@@ -629,17 +640,17 @@ paths:
   /v2/add-ons/apps:
     get:
       $ref: "resources/addons/addons_get_app.yml"
-    
+
   /v2/add-ons/apps/{app_slug}/metadata:
     get:
       $ref: "resources/addons/addons_get_app_metadata.yml"
-  
+
   /v2/add-ons/saas:
     get:
       $ref: "resources/addons/addons_list.yml"
     post:
       $ref: "resources/addons/addons_create.yml"
-  
+
   /v2/add-ons/saas/{resource_uuid}:
     get:
       $ref: "resources/addons/addons_get.yml"
@@ -714,15 +725,35 @@ paths:
 
   /v2/apps/{app_id}/job-invocations:
     get:
-      $ref: "resources/apps/apps_list_job_invocations.yml"  
+      $ref: "resources/apps/apps_list_job_invocations.yml"
 
   /v2/apps/{app_id}/job-invocations/{job_invocation_id}:
     get:
       $ref: "resources/apps/apps_get_job_invocation.yml"
 
+  /v2/apps/{app_id}/job-invocations/{job_invocation_id}/cancel:
+    post:
+      $ref: "resources/apps/apps_cancel_job_invocation.yml"
+
   /v2/apps/{app_id}/jobs/{job_name}/invocations/{job_invocation_id}/logs:
     get:
       $ref: "resources/apps/apps_get_job_invocation_logs.yml"
+
+  /v2/apps/{app_id}/events:
+    get:
+      $ref: "resources/apps/apps_list_events.yml"
+
+  /v2/apps/{app_id}/events/{event_id}:
+    get:
+      $ref: "resources/apps/apps_get_event.yml"
+
+  /v2/apps/{app_id}/events/{event_id}/cancel:
+    post:
+      $ref: "resources/apps/apps_cancel_event.yml"
+
+  /v2/apps/{app_id}/events/{event_id}/logs:
+    get:
+      $ref: "resources/apps/apps_get_event_logs.yml"
 
   /v2/apps/tiers/instance_sizes:
     get:
@@ -1060,6 +1091,50 @@ paths:
   /v2/databases/{database_cluster_uuid}/indexes/{index_name}:
     delete:
       $ref: "resources/databases/databases_delete_opensearch_index.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_get.yml"
+    patch:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_update.yml"
+    delete:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_delete.yml"
+
+  /v2/dedicated-inferences:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_list.yml"
+    post:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_create.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}/accelerators:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_accelerators_list.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}/accelerators/{accelerator_id}:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_accelerators_get.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}/ca:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_ca_get.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}/tokens:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_tokens_list.yml"
+    post:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_tokens_create.yml"
+
+  /v2/dedicated-inferences/{dedicated_inference_id}/tokens/{token_id}:
+    delete:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_tokens_delete.yml"
+
+  /v2/dedicated-inferences/sizes:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_sizes_list.yml"
+
+  /v2/dedicated-inferences/gpu-model-config:
+    get:
+      $ref: "resources/dedicated_inferences/dedicated_inferences_gpu_model_config_get.yml"
 
   /v2/domains:
     get:
@@ -1666,6 +1741,50 @@ paths:
     get:
       $ref: "resources/monitoring/monitoring_get_droplet_autoscale_target_memory_utilization.yml"
 
+  /v2/monitoring/metrics/database/mysql/cpu_usage:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_cpu_usage.yml"
+
+  /v2/monitoring/metrics/database/mysql/load:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_load.yml"
+
+  /v2/monitoring/metrics/database/mysql/memory_usage:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_memory_usage.yml"
+
+  /v2/monitoring/metrics/database/mysql/disk_usage:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_disk_usage.yml"
+
+  /v2/monitoring/metrics/database/mysql/threads_connected:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_threads_connected.yml"
+
+  /v2/monitoring/metrics/database/mysql/threads_created_rate:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_threads_created_rate.yml"
+
+  /v2/monitoring/metrics/database/mysql/threads_active:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_threads_active.yml"
+
+  /v2/monitoring/metrics/database/mysql/index_vs_sequential_reads:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_index_vs_sequential_reads.yml"
+
+  /v2/monitoring/metrics/database/mysql/op_rates:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_op_rates.yml"
+
+  /v2/monitoring/metrics/database/mysql/schema_throughput:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_schema_throughput.yml"
+
+  /v2/monitoring/metrics/database/mysql/schema_latency:
+    get:
+      $ref: "resources/monitoring/monitoring_get_database_mysql_schema_latency.yml"
+
   /v2/monitoring/sinks/destinations:
     post:
       $ref: "resources/monitoring/monitoring_create_destination.yml"
@@ -1709,13 +1828,13 @@ paths:
   /v2/nfs/{nfs_id}/actions:
     post:
       $ref: "resources/nfs/nfs_actions_create.yml"
-  
+
   /v2/nfs/snapshots:
     get:
       $ref: "resources/nfs/nfs_snapshot_list.yml"
 
   /v2/nfs/snapshots/{nfs_snapshot_id}:
-    get: 
+    get:
       $ref: "resources/nfs/nfs_snapshot_get.yml"
 
     delete:
@@ -2002,6 +2121,45 @@ paths:
     get:
       $ref: "resources/byoip_prefixes/byoip_prefix_list_resources.yml"
 
+  /v2/security/scans:
+    get:
+      $ref: "resources/security/security_scans_list.yml"
+
+    post:
+      $ref: "resources/security/security_scans_create.yml"
+
+  /v2/security/scans/{scan_id}:
+    get:
+      $ref: "resources/security/security_scans_get.yml"
+
+  /v2/security/scans/latest:
+    get:
+      $ref: "resources/security/security_scans_get_latest.yml"
+
+  /v2/security/scans/rules:
+    post:
+      $ref: "resources/security/security_scan_rule_create.yml"
+
+  /v2/security/scans/{scan_id}/findings/{finding_uuid}/affected_resources:
+    get:
+      $ref: "resources/security/security_scan_finding_list_affected_resources.yml"
+
+  /v2/security/settings:
+    get:
+      $ref: "resources/security/security_settings_list.yml"
+
+  /v2/security/settings/plan:
+    put:
+      $ref: "resources/security/security_settings_plan_update.yml"
+
+  /v2/security/settings/suppressions:
+    post:
+      $ref: "resources/security/security_suppression_create.yml"
+
+  /v2/security/settings/suppressions/{suppression_uuid}:
+    delete:
+      $ref: "resources/security/security_suppression_delete.yml"
+
   /v2/sizes:
     get:
       $ref: "resources/sizes/sizes_list.yml"
@@ -2243,6 +2401,13 @@ paths:
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
 
+  /v2/gen-ai/agents/{agent_uuid}/guardrails:
+    post:
+      $ref: 'resources/gen-ai/genai_attach_agent_guardrails.yml'
+
+  /v2/gen-ai/agents/{agent_uuid}/guardrails/{guardrail_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_detach_agent_guardrail.yml'
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases:
     post:
@@ -2432,6 +2597,9 @@ paths:
 
 
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
+    put:
+      $ref: 'resources/gen-ai/genai_update_knowledge_base_data_source.yml'
+
     delete:
       $ref: 'resources/gen-ai/genai_delete_knowledge_base_data_source.yml'
 
