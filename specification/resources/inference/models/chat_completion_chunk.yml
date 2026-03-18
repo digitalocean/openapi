@@ -77,10 +77,11 @@ properties:
       - chat.completion.chunk
     example: chat.completion.chunk
   usage:
-    $ref: completion_usage.yml
     nullable: true
     description: >
       An optional field that will only be present when you set
       stream_options include_usage to true in your request. When present, it
       contains a null value except for the last chunk which contains the
       token usage statistics for the entire request.
+    allOf:
+      - $ref: completion_usage.yml
