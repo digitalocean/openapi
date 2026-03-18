@@ -1,0 +1,18 @@
+lang: cURL
+source: |-
+  curl -i -X PATCH "https://api.digitalocean.com/v2/dedicated-inferences/6b5c619c-359c-44ca-87e2-47e98170c01d" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DO_TOKEN" \
+    -d '{
+      "spec": {
+        "name": "renamed-dedicated-inference",
+        "region": "atl1",
+        "vpc": { "uuid": "997615ce-132d-4bae-9270-9ee21b395e5d" },
+        "model_deployments": [{
+          "model_slug": "mistral/mistral-7b-instruct-v3",
+          "accelerator_slug": "gpu-mi300x1-192gb",
+          "node_count": 3
+        }]
+      },
+      "access_tokens": { "hugging_face_token": "$HF_TOKEN" }
+    }'
