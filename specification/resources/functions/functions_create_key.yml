@@ -29,7 +29,7 @@ requestBody:
             name: "my-function-access-key"
         Create Expiring Key:
           value:
-            name: "my-expiring-access-key"
+            name: "my-function-access-key"
             expires_in: "7d"
 
 responses:
