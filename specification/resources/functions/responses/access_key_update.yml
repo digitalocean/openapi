@@ -21,7 +21,7 @@ content:
         value:
           access_key:
             id: "dof_v1-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-            name: "my-function-access-key"
+            name: "updated-key-name"
             expires_at: "2026-12-19T10:30:00Z"
             created_at: "2025-12-19T10:30:00Z"
             updated_at: "2025-12-19T16:00:00Z"
