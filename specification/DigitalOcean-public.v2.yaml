@@ -2744,6 +2744,21 @@ paths:
     post:
       $ref: 'resources/inference/agent_inference_create_chat_completion.yml'
 
+  /v1/images/generations:
+    post:
+      $ref: 'resources/inference/inference_create_image.yml'
+
+  /v1/models:
+    get:
+      $ref: 'resources/inference/inference_list_models.yml'
+
+  /v1/responses:
+    post:
+      $ref: 'resources/inference/inference_create_response.yml'
+
+  /v1/async-invoke:
+    post:
+      $ref: 'resources/inference/inference_async_invoke.yml'
 
 components:
   securitySchemes:

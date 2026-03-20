@@ -1,21 +1,20 @@
-operationId: inference_create_chat_completion
-summary: Create a model response for the given chat conversation
-description: Creates a model response for the given chat conversation.
+operationId: inference_create_image
+summary: Generate images from text prompts
+description: Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image generation model with automatic prompt optimization and enhanced visual capabilities.
 tags:
   - Serverless Inference
 servers:
   - url: "https://inference.do-ai.run"
     description: production
-x-inference-base-url: "https://inference.do-ai.run"
 requestBody:
   required: true
   content:
     application/json:
       schema:
-        $ref: "models/chat_completion_request.yml"
+        $ref: "models/create_image_request.yml"
 responses:
   "200":
-    description: Successful chat completion. When stream is true, response is sent as Server-Sent Events (text/event-stream); otherwise a single JSON object (application/json) is returned.
+    description: Successful image generation. When stream is true, response is sent as Server-Sent Events (text/event-stream); otherwise a single JSON object (application/json) is returned.
     headers:
       ratelimit-limit:
         $ref: '../../shared/headers.yml#/ratelimit-limit'
@@ -26,10 +25,10 @@ responses:
     content:
       application/json:
         schema:
-          $ref: "models/chat_completion_response.yml"
+          $ref: "models/images_response.yml"
       text/event-stream:
         schema:
-          $ref: "models/chat_completion_chunk.yml"
+          $ref: "models/image_gen_partial_image_event.yml"
   "401":
     $ref: '../../shared/responses/unauthorized.yml'
   "429":
@@ -39,6 +38,6 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 x-codeSamples:
-  - $ref: 'examples/curl/inference_create_chat_completion.yml'
+  - $ref: 'examples/curl/inference_create_image.yml'
 security:
   - bearer_auth: []

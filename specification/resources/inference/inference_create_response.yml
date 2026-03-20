@@ -1,21 +1,22 @@
-operationId: inference_create_chat_completion
-summary: Create a model response for the given chat conversation
-description: Creates a model response for the given chat conversation.
+operationId: inference_create_response
+summary: Send Prompt to a Model Using the Responses API
+description: >
+  Generate text responses from text prompts. This endpoint supports both
+  streaming and non-streaming responses for supported text models.
 tags:
   - Serverless Inference
 servers:
   - url: "https://inference.do-ai.run"
     description: production
-x-inference-base-url: "https://inference.do-ai.run"
 requestBody:
   required: true
   content:
     application/json:
       schema:
-        $ref: "models/chat_completion_request.yml"
+        $ref: "models/create_response_request.yml"
 responses:
   "200":
-    description: Successful chat completion. When stream is true, response is sent as Server-Sent Events (text/event-stream); otherwise a single JSON object (application/json) is returned.
+    description: Successful response. When stream is true, response is sent as Server-Sent Events (text/event-stream); otherwise a single JSON object (application/json) is returned.
     headers:
       ratelimit-limit:
         $ref: '../../shared/headers.yml#/ratelimit-limit'
@@ -26,10 +27,10 @@ responses:
     content:
       application/json:
         schema:
-          $ref: "models/chat_completion_response.yml"
+          $ref: "models/create_response_response.yml"
       text/event-stream:
         schema:
-          $ref: "models/chat_completion_chunk.yml"
+          $ref: "models/create_response_stream_response.yml"
   "401":
     $ref: '../../shared/responses/unauthorized.yml'
   "429":
@@ -39,6 +40,6 @@ responses:
   default:
     $ref: '../../shared/responses/unexpected_error.yml'
 x-codeSamples:
-  - $ref: 'examples/curl/inference_create_chat_completion.yml'
+  - $ref: 'examples/curl/inference_create_response.yml'
 security:
   - bearer_auth: []

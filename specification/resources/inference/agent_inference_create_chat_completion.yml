@@ -1,5 +1,5 @@
 operationId: agentInference_create_chat_completion
-summary: Creates a model response for the given chat conversation
+summary: Create a model response for the given chat conversation
 description: |-
   Creates a model response for the given chat conversation via a customer-provisioned
   agent endpoint.
