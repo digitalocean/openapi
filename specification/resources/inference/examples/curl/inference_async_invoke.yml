@@ -1,0 +1,12 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Authorization: Bearer $MODEL_ACCESS_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "model_id": "fal-ai/flux/schnell",
+      "input": {
+        "prompt": "A futuristic city at sunset"
+      }
+    }' \
+    "https://inference.do-ai.run/v1/async-invoke"
