@@ -55,6 +55,15 @@ tags:
       The Add-Ons API allows you to manage these resources, including creating, listing, and retrieving
       details about specific add-on resources.
 
+  - name: Agent Inference
+    description: |-
+      DigitalOcean Gradient™ AI Agentic Cloud allows you to create multi-agent workflows
+      to power your AI applications. This allows developers to integrate agents into your
+      AI applications.
+
+      **Note:** The Agent Inference API uses a customer-specific base URL (the agent endpoint)
+      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -524,6 +533,14 @@ tags:
   - name: Security
     description: |-
       Security CSPM endpoints for scans, scan findings, and settings.
+
+  - name: Serverless Inference
+    description: |-
+      DigitalOcean Gradient™ AI Agentic Cloud allows access to serverless inference models.
+      You can access models by providing an inference key.
+
+      **Note:** The Serverless Inference API uses a separate base URL (`https://inference.do-ai.run`)
+      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
 
   - name: Sizes
     description: |-
@@ -2730,6 +2747,31 @@ paths:
   /v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases:
     get:
       $ref: 'resources/gen-ai/genai_list_evaluation_test_cases_by_workspace.yml'
+
+
+  /v1/chat/completions:
+    post:
+      $ref: 'resources/inference/inference_create_chat_completion.yml'
+
+  /api/v1/chat/completions:
+    post:
+      $ref: 'resources/inference/agent_inference_create_chat_completion.yml'
+
+  /v1/images/generations:
+    post:
+      $ref: 'resources/inference/inference_create_image.yml'
+
+  /v1/models:
+    get:
+      $ref: 'resources/inference/inference_list_models.yml'
+
+  /v1/responses:
+    post:
+      $ref: 'resources/inference/inference_create_response.yml'
+
+  /v1/async-invoke:
+    post:
+      $ref: 'resources/inference/inference_async_invoke.yml'
 
 components:
   securitySchemes:

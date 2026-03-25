@@ -1,0 +1,6 @@
+lang: cURL
+source: |-
+  curl -X GET \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $MODEL_ACCESS_KEY" \
+    "https://inference.do-ai.run/v1/models"
