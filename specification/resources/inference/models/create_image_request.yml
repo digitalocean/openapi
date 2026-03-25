@@ -60,13 +60,12 @@ properties:
   size:
     type: string
     description: >
-      The desired dimensions of the generated image. Supported values:
-      256x256, 512x512, 1024x1024.
+      The size of the generated images. GPT-IMAGE-1 supports: auto (automatically select best size), 1536x1024 (landscape), 1024x1536 (portrait).
     enum:
-      - 256x256
-      - 512x512
-      - 1024x1024
-    example: "1024x1024"
+      - auto
+      - 1536x1024
+      - 1024x1536
+    example: "auto"
   stream:
     type: boolean
     default: false
