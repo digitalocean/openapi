@@ -39,7 +39,7 @@ requestBody:
               - key: "type"
                 value: "test"
 responses:
-  "200":
+  "202":
     description: The async invocation request was accepted.
     headers:
       ratelimit-limit:

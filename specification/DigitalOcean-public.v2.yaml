@@ -55,6 +55,15 @@ tags:
       The Add-Ons API allows you to manage these resources, including creating, listing, and retrieving
       details about specific add-on resources.
 
+  - name: Agent Inference
+    description: |-
+      DigitalOcean Gradient™ AI Agentic Cloud allows you to create multi-agent workflows
+      to power your AI applications. This allows developers to integrate agents into your
+      AI applications.
+
+      **Note:** The Agent Inference API uses a customer-specific base URL (the agent endpoint)
+      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -525,6 +534,14 @@ tags:
     description: |-
       Security CSPM endpoints for scans, scan findings, and settings.
 
+  - name: Serverless Inference
+    description: |-
+      DigitalOcean Gradient™ AI Agentic Cloud allows access to serverless inference models.
+      You can access models by providing an inference key.
+
+      **Note:** The Serverless Inference API uses a separate base URL (`https://inference.do-ai.run`)
+      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
+
   - name: Sizes
     description: |-
       The sizes objects represent different packages of hardware resources that
@@ -598,23 +615,6 @@ tags:
       By sending requests to the `/v2/vpcs` endpoint, you can create, configure,
       list, and delete custom VPCs as well as retrieve information about the
       resources assigned to them.
-
-  - name: Serverless Inference
-    description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows access to serverless inference models.
-      You can access models by providing an inference key.
-
-      **Note:** The Serverless Inference API uses a separate base URL (`https://inference.do-ai.run`)
-      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
-
-  - name: Agent Inference
-    description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows you to create multi-agent workflows
-      to power your AI applications. This allows developers to integrate agents into your
-      AI applications.
-
-      **Note:** The Agent Inference API uses a customer-specific base URL (the agent endpoint)
-      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
 
 paths:
   /v2/1-clicks:

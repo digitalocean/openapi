@@ -4,7 +4,6 @@ required:
   - prompt
   - model
   - "n"
-  - size
 properties:
   prompt:
     type: string
