@@ -55,4 +55,4 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/agentInference_create_chat_completion.yml'
 security:
-  - bearer_auth: []
+  - inference_bearer_auth: []
