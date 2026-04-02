@@ -122,6 +122,8 @@ kubernetes_clusters_all:
         enabled: false
       rdma_shared_dev_plugin:
         enabled: false
+      coredns_autoscaler:
+        enabled: false
     meta:
       total: 1
 
@@ -248,6 +250,8 @@ kubernetes_single:
         enabled: false
       rdma_shared_dev_plugin:
         enabled: false
+      coredns_autoscaler:
+        enabled: false
 
 kubernetes_updated:
   value:
@@ -372,6 +376,8 @@ kubernetes_updated:
         enabled: false
       rdma_shared_dev_plugin:
         enabled: false
+      coredns_autoscaler:
+        enabled: false
 
 kubernetes_clusters_create_basic_response:
   value:
@@ -460,6 +466,8 @@ kubernetes_clusters_create_basic_response:
       nvidia_gpu_device_plugin:
         enabled: false
       rdma_shared_dev_plugin:
+        enabled: false
+      coredns_autoscaler:
         enabled: false
 
 kubernetes_clusters_multi_pool_response:
