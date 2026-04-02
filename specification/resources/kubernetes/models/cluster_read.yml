@@ -187,6 +187,9 @@ properties:
   rdma_shared_dev_plugin:
     $ref: "rdma_shared_dev_plugin.yml"
 
+  coredns_autoscaler:
+    $ref: "coredns_autoscaler.yml"
+
 required:
   - name
   - region
