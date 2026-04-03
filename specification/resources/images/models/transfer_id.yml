@@ -1,0 +1,4 @@
+type: integer
+description: |
+  A unique number that can be used to identify and reference an image
+  account transfer.

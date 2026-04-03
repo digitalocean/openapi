@@ -1405,6 +1405,10 @@ paths:
     delete:
       $ref: "resources/images/images_delete.yml"
 
+  /v2/images/{image_id}/account_transfer:
+    post:
+      $ref: "resources/images/images_account_transfer_create.yml"
+
   /v2/images/{image_id}/actions:
     get:
       $ref: "resources/images/imageActions_list.yml"
