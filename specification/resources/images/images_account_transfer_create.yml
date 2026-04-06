@@ -4,13 +4,13 @@ summary: Initiate an Image Account Transfer
 
 description: |
   To initiate an account transfer for an image, send a POST request to
-  /v2/images/$IMAGE_ID/account_transfer.
-  
+  `/v2/images/$IMAGE_ID/account_transfer`.
+
   Only snapshot images may be transferred by this endpoint to another account.
   
   An image account transfer always has exactly one recipient, specified in the request body.
   The recipient can be one of the following:
-  
+
   * A DigitalOcean account, denoted by `recipient_email` in the request body.
   The recipient will receive an email with instructions to accept the transfer.
   Once the recipient accepts the transfer, the image will be moved to their
