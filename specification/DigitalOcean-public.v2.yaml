@@ -1413,6 +1413,10 @@ paths:
     post:
       $ref: "resources/images/images_post_account_transfer_decline.yml"
 
+  /v2/images/{image_id}/account_transfer/cancel:
+    post:
+      $ref: "resources/images/images_post_account_transfer_cancel.yml"
+
   /v2/images/{image_id}/actions:
     get:
       $ref: "resources/images/imageActions_list.yml"
