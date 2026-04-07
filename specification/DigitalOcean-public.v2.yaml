@@ -1407,11 +1407,11 @@ paths:
 
   /v2/images/{image_id}/account_transfer:
     post:
-      $ref: "resources/images/images_account_transfer_create.yml"
+      $ref: "resources/images/images_post_account_transfer_create.yml"
 
   /v2/images/{image_id}/account_transfer/decline:
     post:
-      $ref: "resources/images/images_account_transfer_decline.yml"
+      $ref: "resources/images/images_post_account_transfer_decline.yml"
 
   /v2/images/{image_id}/actions:
     get:
