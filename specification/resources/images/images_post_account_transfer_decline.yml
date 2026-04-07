@@ -5,6 +5,10 @@ summary: Decline an Image Account Transfer
 description: |
   To decline an account transfer for an image, send a POST request to
   `/v2/images/$IMAGE_ID/account_transfer/decline`.
+  
+  Only the recipient of an image account transfer can decline the transfer.
+  If the transfer is declined, the image will remain in the sender's account
+  and will not be transferred to the recipient.
 
 tags:
   - Images

@@ -5,6 +5,10 @@ summary: Cancel an Image Account Transfer
 description: |
   To cancel an account transfer for an image, send a POST request to
   `/v2/images/$IMAGE_ID/account_transfer/cancel`.
+  
+  Only the sender of an image account transfer can cancel the transfer.
+  If the transfer is canceled, the image will remain in the sender's account
+  and will not be transferred to the recipient.
 
 tags:
   - Images
