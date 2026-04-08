@@ -51,4 +51,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'image:create'
+    - 'image:update'
