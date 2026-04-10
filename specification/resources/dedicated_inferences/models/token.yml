@@ -23,6 +23,13 @@ dedicated_inference_access_token:
       format: date-time
       readOnly: true
       example: "2024-01-09T20:44:32Z"
+    is_managed:
+      type: boolean
+      readOnly: true
+      example: false
+      description: >-
+        When true, the token is managed by DigitalOcean (for example, system-provisioned).
+        When false, the token was created by the user.
 
 dedicated_inference_token_create_request:
   type: object

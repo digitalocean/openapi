@@ -1,6 +1,6 @@
 description: >-
   The response will be a JSON object with a key called `tokens`. This will be
-  set to an array of objects (id, name, created_at only; value is not returned).
+  set to an array of objects (id, name, created_at, is_managed; value is not returned).
   Pagination uses the same `links` and `meta` structure as other list endpoints (e.g. VPC peerings).
 
 headers:
