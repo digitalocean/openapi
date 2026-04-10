@@ -3,8 +3,7 @@ openapi: "3.0.0"
 info:
   title: DigitalOcean API
   version: "2.0"
-  description:
-    $ref: "description.yml#/introduction"
+  description: ""
 
   license:
     name: Apache 2.0
@@ -19,6 +18,12 @@ servers:
     description: production
 
 tags:
+  - name: Public APIs Introduction
+    x-displayName: Introduction
+    x-traitTag: true
+    description:
+      $ref: "description.yml#/introduction"
+
   - name: 1-Click Applications
     description: |-
       1-Click applications are pre-built Droplet images or Kubernetes apps with software,
@@ -54,15 +59,6 @@ tags:
 
       The Add-Ons API allows you to manage these resources, including creating, listing, and retrieving
       details about specific add-on resources.
-
-  - name: Agent Inference
-    description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows you to create multi-agent workflows
-      to power your AI applications. This allows developers to integrate agents into your
-      AI applications.
-
-      **Note:** The Agent Inference API uses a customer-specific base URL (the agent endpoint)
-      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
 
   - name: Apps
     description: |-
@@ -534,14 +530,6 @@ tags:
     description: |-
       Security CSPM endpoints for scans, scan findings, and settings.
 
-  - name: Serverless Inference
-    description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows access to serverless inference models.
-      You can access models by providing an inference key.
-
-      **Note:** The Serverless Inference API uses a separate base URL (`https://inference.do-ai.run`)
-      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
-
   - name: Sizes
     description: |-
       The sizes objects represent different packages of hardware resources that
@@ -615,6 +603,90 @@ tags:
       By sending requests to the `/v2/vpcs` endpoint, you can create, configure,
       list, and delete custom VPCs as well as retrieve information about the
       resources assigned to them.
+
+  - name: Inference Introduction
+    x-displayName: Introduction
+    x-traitTag: true
+    description:
+      $ref: "inference_description.yml#/introduction"
+
+
+  - name: Serverless Inference
+    description: |-
+      DigitalOcean Gradient™ AI Agentic Cloud allows access to serverless inference models.
+      You can access models by providing an inference key.
+
+      **Note:** The Serverless Inference API uses a separate base URL (`https://inference.do-ai.run`)
+      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
+
+  - name: Agent Inference
+    description: |-
+      DigitalOcean Gradient™ AI Agentic Cloud allows you to create multi-agent workflows
+      to power your AI applications. This allows developers to integrate agents into your
+      AI applications.
+
+      **Note:** The Agent Inference API uses a customer-specific base URL (the agent endpoint)
+      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
+
+x-tagGroups:
+  - name: Public APIs
+    tags:
+      - Public APIs Introduction
+      - 1-Click Applications
+      - Account
+      - Actions
+      - Add-Ons
+      - Apps
+      - Billing
+      - Block Storage
+      - Block Storage Actions
+      - BYOIP Prefixes
+      - CDN Endpoints
+      - Certificates
+      - Container Registry
+      - Container Registries
+      - Databases
+      - Dedicated Inference
+      - Domain Records
+      - Domains
+      - Droplet Actions
+      - Droplets
+      - Droplet Autoscale Pools
+      - Firewalls
+      - Floating IP Actions
+      - Floating IPs
+      - Functions
+      - GradientAI Platform
+      - Image Actions
+      - Images
+      - Kubernetes
+      - Load Balancers
+      - Monitoring
+      - NFS
+      - NFS Actions
+      - Partner Network Connect
+      - Project Resources
+      - Projects
+      - Regions
+      - Reserved IP Actions
+      - Reserved IPs
+      - Reserved IPv6
+      - Reserved IPv6 Actions
+      - Security
+      - Sizes
+      - Snapshots
+      - Spaces Keys
+      - SSH Keys
+      - Tags
+      - Uptime
+      - VPC NAT Gateways
+      - VPC Peerings
+      - VPCs
+  - name: Inference APIs
+    tags:
+      - Inference Introduction
+      - Agent Inference
+      - Serverless Inference
 
 paths:
   /v2/1-clicks:
@@ -2858,6 +2930,43 @@ components:
         ```
         curl -X $HTTP_METHOD -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/$OBJECT"
         ```
+
+    inference_bearer_auth:
+      type: http
+      scheme: bearer
+      description: |
+        ## Inference API Authentication
+
+        The Inference APIs use API access keys for authentication, which are
+        separate from the DigitalOcean OAuth tokens used by the control-plane API.
+
+        Include the key as a Bearer token in the `Authorization` header of each
+        request. All requests must be made over HTTPS.
+
+        ### Key Types
+
+        | API | Key Type | Key Pattern | How to Obtain |
+        |-----|----------|-------------|---------------|
+        | Serverless Inference | Model access key | `sk-do-*` (e.g., `sk-do-v1-abcd1234...`) | Generate in the [AI/ML section](https://cloud.digitalocean.com/gen-ai/inference/keys) of the DigitalOcean control panel |
+        | Agent Inference | Endpoint access key | Alphanumeric string (e.g., `Abc1Def2Ghi3Jkl4...`) | Provided when provisioning an agent endpoint |
+
+        ### Authenticate with a Bearer Authorization Header
+
+        **Serverless Inference:**
+
+        ```
+        curl -X POST -H "Authorization: Bearer $MODEL_ACCESS_KEY" "https://inference.do-ai.run/v1/chat/completions"
+        ```
+
+        **Agent Inference:**
+
+        ```
+        curl -X POST -H "Authorization: Bearer $AGENT_ACCESS_KEY" "https://{your-agent-url}.agents.do-ai.run/v1/chat/completions?agent=true"
+        ```
+
+        **Note:** These keys are not interchangeable with DigitalOcean OAuth
+        tokens (`dop_v1_*`, `doo_v1_*`, `dor_v1_*`). OAuth tokens are used
+        exclusively with the control-plane API at `https://api.digitalocean.com`.
 
 security:
   - bearer_auth: []
