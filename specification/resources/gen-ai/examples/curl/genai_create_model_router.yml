@@ -1,0 +1,21 @@
+lang: cURL
+source: |-
+  curl -X POST \
+      -H "Content-Type: application/json"  \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      "https://api.digitalocean.com/v2/gen-ai/models/routers" \
+      -d '{
+        "name": "My Model Router",
+        "description": "Routes chat traffic across multiple models",
+        "regions": ["tor1"],
+        "fallback_models": ["gemma3:latest", "gemma3:270m"],
+        "policies": [
+          {
+            "task_slug": "summarization",
+            "models": ["gemma3:latest", "gemma3:270m"],
+            "selection_policy": {
+              "prefer": "cheapest"
+            }
+          }
+        ]
+      }'
