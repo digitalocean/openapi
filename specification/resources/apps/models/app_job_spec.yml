@@ -4,9 +4,6 @@ allOf:
 
 - type: object
   properties:
-    autoscaling:
-      $ref: app_autoscaling_spec.yml
-
     kind:
       type: string
       enum:

@@ -1,4 +1,4 @@
-# Autoscaling for workers and jobs (CPU only). Services use app_autoscaling_spec_service.yml instead.
+# CPU-only autoscaling for worker components. Services use app_autoscaling_spec_service.yml.
 description: Configuration for automatically scaling this component based on metrics.
 type: object
 properties:
