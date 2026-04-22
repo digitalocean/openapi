@@ -8,11 +8,11 @@ source: |-
         "name": "My Model Router",
         "description": "Updated router description",
         "regions": ["tor1"],
-        "fallback_models": ["gemma3:latest", "gemma3:270m"],
+        "fallback_models": ["openai-gpt-5.4", "kimi-k2.5"],
         "policies": [
           {
             "task_slug": "summarization",
-            "models": ["gemma3:latest"],
+            "models": ["openai-gpt-5.4"],
             "selection_policy": {
               "prefer": "cheapest"
             }

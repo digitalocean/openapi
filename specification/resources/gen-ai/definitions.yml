@@ -1662,8 +1662,8 @@ apiCreateModelRouterInputPublic:
     fallback_models:
       description: Fallback models
       example:
-      - '"gemma3:latest"'
-      - '"gemma3:270m"'
+      - '"openai-gpt-5.4"'
+      - '"kimi-k2.5"'
       items:
         example: example string
         type: string
@@ -2761,6 +2761,16 @@ apiGetModelProviderKeyOutput:
     api_key_info:
       $ref: '#/apiModelProviderKeyInfo'
   type: object
+apiGetModelRouterInputPublic:
+  properties:
+    uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiGetModelRouterOutput:
+  description: The model router
+  properties:
+    model_router:
+      $ref: '#/apiModelRouter'
+  type: object
 apiGetModelUsageInputPublic:
   properties:
     start:
@@ -2774,16 +2784,6 @@ apiGetModelUsageOutput:
   properties:
     usage:
       $ref: '#/apiResourceUsage'
-  type: object
-apiGetModelRouterInputPublic:
-  properties:
-    uuid:
-      example: '"12345678-1234-1234-1234-123456789012"'
-apiGetModelRouterOutput:
-  description: The model router
-  properties:
-    model_router:
-      $ref: '#/apiModelRouter'
   type: object
 apiGetModelVersionsInputPublic:
   properties:
