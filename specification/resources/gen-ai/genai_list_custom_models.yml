@@ -1,0 +1,59 @@
+operationId: genai_list_custom_models
+parameters:
+- description: Page number for pagination.
+  example: 1
+  in: query
+  name: page
+  schema:
+    type: integer
+- description: Number of items per page.
+  example: 1
+  in: query
+  name: per_page
+  schema:
+    type: integer
+- default: STATUS_UNSPECIFIED
+  description: Filter by model status.
+  example: '"example string"'
+  in: query
+  name: status
+  schema:
+    enum:
+    - STATUS_UNSPECIFIED
+    - STATUS_IMPORTING
+    - STATUS_READY
+    - STATUS_FAILED
+    - STATUS_DELETED
+    type: string
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListCustomModelsOutputPublic
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "404":
+    $ref: ../../shared/responses/not_found.yml
+  "429":
+    $ref: ../../shared/responses/too_many_requests.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+security:
+- bearer_auth:
+  - genai:read
+summary: List Custom Models
+tags:
+- GradientAI Platform
+x-codeSamples:
+- $ref: examples/curl/genai_list_custom_models.yml
