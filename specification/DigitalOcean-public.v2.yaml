@@ -281,6 +281,12 @@ tags:
     description: |-
       Droplet autoscale pools manage automatic horizontal scaling for your applications based on resource usage (CPU, memory, or both) or a static configuration.
 
+  - name: Embeddings
+    description: |-
+      Text embedding vectors via `POST /v1/embeddings` on the
+      [Serverless Inference](https://docs.digitalocean.com/reference/api/api-reference/#tag/Serverless-Inference) base URL
+      `https://inference.do-ai.run` (bearer model access key).
+
   - name: Firewalls
     description: |-
       [DigitalOcean Cloud Firewalls](https://docs.digitalocean.com/products/networking/firewalls/)
@@ -2841,6 +2847,14 @@ paths:
     post:
       $ref: 'resources/inference/inference_create_chat_completion.yml'
 
+  /v1/messages:
+    post:
+      $ref: 'resources/inference/inference_create_messages.yml'
+
+  /v1/embeddings:
+    post:
+      $ref: 'resources/inference/inference_create_embeddings.yml'
+
   /api/v1/chat/completions:
     post:
       $ref: 'resources/inference/agent_inference_create_chat_completion.yml'
@@ -2956,6 +2970,14 @@ components:
 
         ```
         curl -X POST -H "Authorization: Bearer $MODEL_ACCESS_KEY" "https://inference.do-ai.run/v1/chat/completions"
+        ```
+
+        ```
+        curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $MODEL_ACCESS_KEY" -d '{"model":"claude-opus-4-6","max_tokens":1024,"messages":[{"role":"user","content":"Hello"}]}' "https://inference.do-ai.run/v1/messages"
+        ```
+
+        ```
+        curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $MODEL_ACCESS_KEY" -d '{"model":"qwen3-embedding-0.6b","input":["hello world","goodbye world"],"encoding_format":"float","user":"user-1234"}' "https://inference.do-ai.run/v1/embeddings"
         ```
 
         **Agent Inference:**
