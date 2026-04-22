@@ -1,12 +1,14 @@
 description: To list model evaluation runs, send a GET request to `/v2/genai/model_evaluation_runs`.
 operationId: genai_list_model_evaluation_runs
 parameters:
-- example: '"123e4567-e89b-12d3-a456-426614174000"'
+- description: UUID of the evaluation preset to filter by.
+  example: 123e4567-e89b-12d3-a456-426614174000
   in: query
   name: eval_preset_uuid
   schema:
     type: string
-- example: '"example string"'
+- description: Filter by evaluation run status.
+  example: MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED
   in: query
   name: status
   schema:

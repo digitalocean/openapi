@@ -1,3 +1,4 @@
+description: To import a custom model, send a POST request to `/v2/gen-ai/custom_models/import`.
 operationId: genai_import_custom_model
 requestBody:
   content:

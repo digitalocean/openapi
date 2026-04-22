@@ -1,3 +1,4 @@
+description: To list custom models, send a GET request to `/v2/gen-ai/custom_models`.
 operationId: genai_list_custom_models
 parameters:
 - description: Page number for pagination.
@@ -13,7 +14,7 @@ parameters:
   schema:
     type: integer
 - description: Filter by model status.
-  example: '"example string"'
+  example: STATUS_UNSPECIFIED
   in: query
   name: status
   schema:

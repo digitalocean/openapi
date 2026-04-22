@@ -1,3 +1,4 @@
+description: To update custom model metadata, send a PATCH request to `/v2/gen-ai/custom_models/{uuid}/metadata`.
 operationId: genai_update_custom_model_metadata
 parameters:
 - description: UUID of the custom model to update
