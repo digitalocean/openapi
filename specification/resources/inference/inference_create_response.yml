@@ -42,4 +42,4 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/inference_create_response.yml'
 security:
-  - bearer_auth: []
+  - inference_bearer_auth: []

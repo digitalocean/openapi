@@ -39,6 +39,19 @@ requestBody:
               - key: "type"
                 value: "test"
 responses:
+  "200":
+    description: The async invocation completed synchronously.
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+    content:
+      application/json:
+        schema:
+          $ref: "models/async_invoke_response.yml"
   "202":
     description: The async invocation request was accepted.
     headers:
@@ -63,4 +76,4 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/inference_async_invoke.yml'
 security:
-  - bearer_auth: []
+  - inference_bearer_auth: []

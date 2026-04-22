@@ -193,9 +193,13 @@ rules:
       function: truthy
 
   oas3-operation-security-scopes-defined:
-    description: Check operation security's bearer_auth is defined
+    description: Check operation security uses a defined security scheme
     severity: "error"
     given: "$.paths[*][*]..security.*"
     then:
-      field: 'bearer_auth'
-      function: truthy
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: [bearer_auth]
+            - required: [inference_bearer_auth]
