@@ -1936,10 +1936,6 @@ apiDeleteModelProviderKeyOutput:
     api_key_info:
       $ref: '#/apiModelProviderKeyInfo'
   type: object
-apiDeleteModelRouterInputPublic:
-  properties:
-    uuid:
-      example: '"12345678-1234-1234-1234-123456789012"'
 apiDeleteModelRouterOutput:
   description: Information about a deleted model router
   properties:
@@ -2761,10 +2757,6 @@ apiGetModelProviderKeyOutput:
     api_key_info:
       $ref: '#/apiModelProviderKeyInfo'
   type: object
-apiGetModelRouterInputPublic:
-  properties:
-    uuid:
-      example: '"12345678-1234-1234-1234-123456789012"'
 apiGetModelRouterOutput:
   description: The model router
   properties:
