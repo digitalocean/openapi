@@ -6,11 +6,11 @@ parameters:
   name: eval_preset_uuid
   schema:
     type: string
-- default: MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED
-  example: '"example string"'
+- example: '"example string"'
   in: query
   name: status
   schema:
+    default: MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED
     enum:
     - MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED
     - MODEL_EVALUATION_RUN_QUEUED

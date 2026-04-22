@@ -12,12 +12,12 @@ parameters:
   name: per_page
   schema:
     type: integer
-- default: STATUS_UNSPECIFIED
-  description: Filter by model status.
+- description: Filter by model status.
   example: '"example string"'
   in: query
   name: status
   schema:
+    default: STATUS_UNSPECIFIED
     enum:
     - STATUS_UNSPECIFIED
     - STATUS_IMPORTING
