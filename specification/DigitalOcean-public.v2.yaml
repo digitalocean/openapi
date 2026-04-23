@@ -692,6 +692,7 @@ x-tagGroups:
     tags:
       - Inference Introduction
       - Agent Inference
+      - Embeddings
       - Serverless Inference
 
 paths:
