@@ -58,5 +58,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 x-codeSamples:
   - $ref: 'examples/curl/inference_create_messages.yml'
+  - $ref: 'examples/python/inference_create_messages.yml'
+  - $ref: 'examples/dots/inference_create_messages.yml'
 security:
   - inference_bearer_auth: []

@@ -75,5 +75,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 x-codeSamples:
   - $ref: 'examples/curl/inference_async_invoke.yml'
+  - $ref: 'examples/python/inference_async_invoke.yml'
+  - $ref: 'examples/dots/inference_async_invoke.yml'
 security:
   - inference_bearer_auth: []
