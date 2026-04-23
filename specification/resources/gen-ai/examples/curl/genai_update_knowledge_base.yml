@@ -6,5 +6,9 @@ source: |-
     "https://api.digitalocean.com/v2/gen-ai/knowledge_bases/e51dba65-cf7a-11ef-bf8f-4e013e2ddde4" \
     -d '{
       "uuid": "e51dba65-cf7a-11ef-bf8f-4e013e2ddde4",
-      "name": "kb-api-rename"
+      "name": "kb-api-rename",
+      "reranking_config": {
+        "enabled": true,
+        "model": "bge-reranker-v2-m3"
+      }
     }'
