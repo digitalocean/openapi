@@ -1,7 +1,9 @@
-description: >- 
+description: >-
   The response will be a PDF file.
 
 headers:
+  content-type:
+    $ref: '../../../shared/headers.yml#/content-type'
   content-disposition:
     $ref: '../../../shared/headers.yml#/content-disposition'
   ratelimit-limit:
@@ -12,7 +14,7 @@ headers:
     $ref: '../../../shared/headers.yml#/ratelimit-reset'
 
 content:
-  application/pdf: 
+  application/pdf:
     schema:
       type: string
       format: binary
