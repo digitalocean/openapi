@@ -39,5 +39,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 x-codeSamples:
   - $ref: 'examples/curl/inference_create_image.yml'
+  - $ref: 'examples/python/inference_create_image.yml'
+  - $ref: 'examples/dots/inference_create_image.yml'
 security:
   - inference_bearer_auth: []

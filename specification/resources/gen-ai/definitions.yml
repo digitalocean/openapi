@@ -1602,6 +1602,8 @@ apiCreateKnowledgeBaseInputPublic:
       description: The datacenter region to deploy the knowledge base in.
       example: '"tor1"'
       type: string
+    reranking_config:
+      $ref: '#/apiRerankingConfiguration'
     tags:
       description: Tags to organize your knowledge base.
       example:
@@ -3321,6 +3323,8 @@ apiKnowledgeBase:
       description: Region code
       example: example string
       type: string
+    reranking_config:
+      $ref: '#/apiRerankingConfiguration'
     tags:
       description: Tags to organize related resources
       example:
@@ -4848,6 +4852,18 @@ apiReleaseStatus:
   - RELEASE_STATUS_BUILDING
   example: RELEASE_STATUS_UNKNOWN
   type: string
+apiRerankingConfiguration:
+  description: Configuration for cross-encoder reranking during retrieval.
+  properties:
+    enabled:
+      description: Whether reranking is enabled for retrieval
+      example: true
+      type: boolean
+    model:
+      description: Reranker model internal name
+      example: '"bge-reranker-v2-m3"'
+      type: string
+  type: object
 apiResourceUsage:
   description: Resource Usage Description
   properties:
@@ -5559,6 +5575,8 @@ apiUpdateKnowledgeBaseInputPublic:
         to
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
+    reranking_config:
+      $ref: '#/apiRerankingConfiguration'
     tags:
       description: Tags to organize your knowledge base.
       example:

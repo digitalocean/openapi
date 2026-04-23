@@ -692,6 +692,7 @@ x-tagGroups:
     tags:
       - Inference Introduction
       - Agent Inference
+      - Embeddings
       - Serverless Inference
 
 paths:
@@ -3000,14 +3001,6 @@ components:
 
         ```
         curl -X POST -H "Authorization: Bearer $MODEL_ACCESS_KEY" "https://inference.do-ai.run/v1/chat/completions"
-        ```
-
-        ```
-        curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $MODEL_ACCESS_KEY" -d '{"model":"claude-opus-4-6","max_tokens":1024,"messages":[{"role":"user","content":"Hello"}]}' "https://inference.do-ai.run/v1/messages"
-        ```
-
-        ```
-        curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $MODEL_ACCESS_KEY" -d '{"model":"qwen3-embedding-0.6b","input":["hello world","goodbye world"],"encoding_format":"float","user":"user-1234"}' "https://inference.do-ai.run/v1/embeddings"
         ```
 
         **Agent Inference:**
