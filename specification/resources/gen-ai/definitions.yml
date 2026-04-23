@@ -3862,6 +3862,8 @@ apiGetModelCatalogCardInput:
   properties:
     id:
       example: '"506a3371-88d0-4047-9212-e2079497ac68"'
+    model_id:
+      example: '"llama3.1-70b-instruct"'
 apiGetModelCatalogCardOutput:
   properties:
     data:
@@ -5947,11 +5949,8 @@ apiModelCatalogCard:
         example: example string
         type: string
       type: array
-    benchmarks:
-      additionalProperties:
-        example: 123
-        format: double
-        type: number
+    benchmark_score:
+      description: Benchmark scores for this model, stored as arbitrary JSON
       type: object
     capabilities:
       example:
@@ -6352,6 +6351,35 @@ apiModelPricing:
       example: 0.9
       format: double
       type: number
+    price_per_audio:
+      example: 0.002
+      format: double
+      type: number
+    price_per_image:
+      description: |-
+        Unit-based pricing for non-token models (e.g., Fal AI image/video/audio
+        generation, speech models). At most one of these is typically populated
+        per model. Token-based models (chat, embeddings) leave all of these at 0
+        and populate input_price_per_million / output_price_per_million instead.
+      example: 0.003
+      format: double
+      type: number
+    price_per_megapixel:
+      example: 3e-05
+      format: double
+      type: number
+    price_per_second:
+      example: 0.0001
+      format: double
+      type: number
+    price_per_thousand_characters:
+      example: 0.015
+      format: double
+      type: number
+    price_per_video:
+      example: 0.05
+      format: double
+      type: number
   type: object
 apiModelPricingEntry:
   description: Pricing entry for a specific model.
@@ -6484,6 +6512,10 @@ apiModelPublic:
       type: string
     modalities:
       $ref: '#/apiModelModalities'
+    model_availability:
+      description: Model availability (serverless, dedicated, etc.)
+      example: example string
+      type: string
     name:
       description: Display name of the model
       example: Llama 3.3 Instruct (70B)
