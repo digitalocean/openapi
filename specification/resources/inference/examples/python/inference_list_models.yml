@@ -1,0 +1,11 @@
+lang: Python
+source: |-
+  import os
+  from pydo import Client
+
+  client = Client(token=os.environ.get("MODEL_ACCESS_KEY"))
+
+  resp = client.models.list()
+
+  for model in resp.data:
+      print(model.id)
