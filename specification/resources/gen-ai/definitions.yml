@@ -4503,6 +4503,10 @@ apiModelRouterSelectionPolicy:
   properties:
     prefer:
       description: 'One of: none, cheapest, fastest'
+      enum:
+      - none
+      - cheapest
+      - fastest
       example: '"cheapest"'
       type: string
   type: object
