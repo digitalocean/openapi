@@ -4507,7 +4507,7 @@ apiModelRouterSelectionPolicy:
       - none
       - cheapest
       - fastest
-      example: '"cheapest"'
+      example: cheapest
       type: string
   type: object
 apiModelRouterTaskDetails:
