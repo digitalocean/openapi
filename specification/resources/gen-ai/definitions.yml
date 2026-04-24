@@ -2292,8 +2292,6 @@ apiCreateKnowledgeBaseInputPublic:
       type: string
     reranking_config:
       $ref: '#/apiRerankingConfiguration'
-    size:
-      $ref: '#/apiOpenSearchPlanSize'
     tags:
       description: Tags to organize your knowledge base.
       example:
