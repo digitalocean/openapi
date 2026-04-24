@@ -5682,8 +5682,13 @@ apiUpdateModelRouterInputPublic:
       example: '"My Model Router Description"'
       type: string
     fallback_models:
+      description: Fallback models
+      example:
+      - '"openai-gpt-5.4"'
+      - '"kimi-k2.5"'
       items:
-        type: object
+        example: example string
+        type: string
       type: array
     name:
       description: Model router name
