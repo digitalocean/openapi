@@ -4,6 +4,9 @@ allOf:
 
 - type: object
   properties:
+    autoscaling:
+      $ref: app_autoscaling_spec_service.yml
+
     cors:
       allOf:
         - $ref: apps_cors_policy.yml
