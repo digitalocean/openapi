@@ -1654,6 +1654,46 @@ apiCreateModelProviderKeyOutput:
     api_key_info:
       $ref: '#/apiModelProviderKeyInfo'
   type: object
+apiCreateModelRouterInputPublic:
+  description: Create a model router
+  properties:
+    description:
+      description: Model router description
+      example: '"My Model Router Description"'
+      type: string
+    fallback_models:
+      description: Fallback models
+      example:
+      - '"openai-gpt-5.4"'
+      - '"kimi-k2.5"'
+      items:
+        example: example string
+        type: string
+      type: array
+    name:
+      description: Model router name
+      example: '"My Model Router"'
+      type: string
+    policies:
+      description: Router policies
+      items:
+        $ref: '#/apiModelRouterTaskPolicy'
+      type: array
+    regions:
+      description: Target regions for the router
+      example:
+      - '"tor1"'
+      items:
+        example: example string
+        type: string
+      type: array
+  type: object
+apiCreateModelRouterOutput:
+  description: Information about a newly created model router
+  properties:
+    model_router:
+      $ref: '#/apiModelRouter'
+  type: object
 apiCreateOpenAIAPIKeyInputPublic:
   description: CreateOpenAIAPIKeyInputPublic is used to create a new OpenAI API key
     for a specific agent.
@@ -1897,6 +1937,14 @@ apiDeleteModelProviderKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiModelProviderKeyInfo'
+  type: object
+apiDeleteModelRouterOutput:
+  description: Information about a deleted model router
+  properties:
+    uuid:
+      description: The id of the deleted model router
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 apiDeleteOpenAIAPIKeyInputPublic:
   properties:
@@ -2710,6 +2758,12 @@ apiGetModelProviderKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiModelProviderKeyInfo'
+  type: object
+apiGetModelRouterOutput:
+  description: The model router
+  properties:
+    model_router:
+      $ref: '#/apiModelRouter'
   type: object
 apiGetModelUsageInputPublic:
   properties:
@@ -3929,6 +3983,63 @@ apiListModelProviderKeysOutput:
     meta:
       $ref: '#/apiMeta'
   type: object
+apiListModelRouterPresetsInputPublic:
+  properties:
+    page:
+      example: "1"
+    per_page:
+      example: "20"
+apiListModelRouterPresetsOutput:
+  description: List of model router presets
+  properties:
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+    presets:
+      description: The model router presets
+      items:
+        $ref: '#/apiModelRouterPreset'
+      type: array
+  type: object
+apiListModelRouterTaskPresetsInputPublic:
+  properties:
+    page:
+      example: "1"
+    per_page:
+      example: "20"
+apiListModelRouterTaskPresetsOutput:
+  description: List of model router task presets
+  properties:
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+    tasks:
+      description: The task presets
+      items:
+        $ref: '#/apiModelRouterTaskPreset'
+      type: array
+  type: object
+apiListModelRoutersInputPublic:
+  properties:
+    page:
+      example: "1"
+    per_page:
+      example: "20"
+apiListModelRoutersOutput:
+  description: List of model routers
+  properties:
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+    model_routers:
+      description: The model routers
+      items:
+        $ref: '#/apiModelRouter'
+      type: array
+  type: object
 apiListModelUsagesByAgentOutput:
   description: ListModelUsagesByAgentOutput description
   properties:
@@ -4312,6 +4423,162 @@ apiModelPublic:
       type: string
     version:
       $ref: '#/apiModelVersion'
+  type: object
+apiModelRouter:
+  description: Model router
+  properties:
+    config:
+      $ref: '#/apiModelRouterConfig'
+    created_at:
+      description: Creation date / time
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    description:
+      description: Description
+      example: example string
+      type: string
+    name:
+      description: Name of the model router
+      example: example name
+      type: string
+    regions:
+      description: Target regions for the router
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    updated_at:
+      description: Last modified
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    uuid:
+      description: Unique id
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiModelRouterConfig:
+  properties:
+    fallback_models:
+      description: Router-level fallback models
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    policies:
+      description: Task routing policies
+      items:
+        $ref: '#/apiModelRouterTaskPolicy'
+      type: array
+  type: object
+apiModelRouterPreset:
+  description: Model router preset used to prefill new router configurations.
+  properties:
+    config:
+      $ref: '#/apiModelRouterConfig'
+    display_name:
+      description: Display name for UI surfaces
+      example: example name
+      type: string
+    long_description:
+      description: Long description for details views
+      example: example string
+      type: string
+    short_description:
+      description: Short description for list views
+      example: example string
+      type: string
+    slug:
+      description: Stable slug for routing usage
+      example: example string
+      type: string
+  type: object
+apiModelRouterSelectionPolicy:
+  description: Selection policy preference for choosing among assigned models.
+  properties:
+    prefer:
+      description: 'One of: none, cheapest, fastest'
+      enum:
+      - none
+      - cheapest
+      - fastest
+      example: cheapest
+      type: string
+  type: object
+apiModelRouterTaskDetails:
+  description: Task definition embedded in a model router config.
+  properties:
+    description:
+      description: Short task description
+      example: '"Summarize long-form text"'
+      type: string
+    name:
+      description: Task name
+      example: '"Custom Summarization"'
+      type: string
+  type: object
+apiModelRouterTaskPolicy:
+  description: Model router policy
+  properties:
+    custom_task:
+      $ref: '#/apiModelRouterTaskDetails'
+    models:
+      description: Models assigned to the task
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    selection_policy:
+      $ref: '#/apiModelRouterSelectionPolicy'
+    task_slug:
+      description: Task slug
+      example: '"summarization"'
+      type: string
+  type: object
+apiModelRouterTaskPreset:
+  description: Task preset that can be referenced by slug in model router policies.
+  properties:
+    category:
+      description: Higher-level grouping used by the UI
+      example: example string
+      type: string
+    description:
+      description: Task description
+      example: example string
+      type: string
+    models:
+      description: Default models assigned to this task
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    name:
+      description: Display name
+      example: example name
+      type: string
+    selection_policy:
+      $ref: '#/apiModelRouterSelectionPolicy'
+    tags:
+      description: Lightweight labels for filtering
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    task_slug:
+      description: Task slug
+      example: example string
+      type: string
   type: object
 apiModelUploadCompleteOutput:
   description: Information about an updated model
@@ -5410,6 +5677,50 @@ apiUpdateModelProviderKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiModelProviderKeyInfo'
+  type: object
+apiUpdateModelRouterInputPublic:
+  description: Information about updating a model router
+  properties:
+    description:
+      description: Model router description
+      example: '"My Model Router Description"'
+      type: string
+    fallback_models:
+      description: Fallback models
+      example:
+      - '"openai-gpt-5.4"'
+      - '"kimi-k2.5"'
+      items:
+        example: example string
+        type: string
+      type: array
+    name:
+      description: Model router name
+      example: '"My Model Router"'
+      type: string
+    policies:
+      description: Router policies
+      items:
+        $ref: '#/apiModelRouterTaskPolicy'
+      type: array
+    regions:
+      description: Target regions for the router
+      example:
+      - '"tor1"'
+      items:
+        example: example string
+        type: string
+      type: array
+    uuid:
+      description: Model router id
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+  type: object
+apiUpdateModelRouterOutput:
+  description: Information about an updated model router
+  properties:
+    model_router:
+      $ref: '#/apiModelRouter'
   type: object
 apiUpdateOpenAIAPIKeyInputPublic:
   description: UpdateOpenAIAPIKeyInputPublic is used to update an existing OpenAI
