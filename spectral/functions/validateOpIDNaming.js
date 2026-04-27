@@ -11,7 +11,7 @@ const PATCH = ["patch"];
 const POST = ["create", "post", "add", "tag", "install", "reset", "upgrade",
   "recycle", "run", "retry", "validate", "assign", "unassign", "cancel", "list",
   "destroy", "delete", "update", "attach", "revert", "commit", "restart"];
-const PUT = ["update", "promote", "install", "regenerate", "cancel", "rollback"];
+const PUT = ["update", "promote", "install", "regenerate", "cancel", "rollback", "upload"];
 
 const articles = ["_a_", "_an_", "_the_"]
 
