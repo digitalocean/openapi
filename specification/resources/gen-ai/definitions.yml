@@ -2292,6 +2292,8 @@ apiCreateKnowledgeBaseInputPublic:
       type: string
     reranking_config:
       $ref: '#/apiRerankingConfiguration'
+    size:
+      $ref: '#/apiOpenSearchPlanSize'
     tags:
       description: Tags to organize your knowledge base.
       example:
@@ -6788,6 +6790,7 @@ apiModelUsecase:
      - MODEL_USECASE_CODING: The model usecase for coding-optimized models
      - MODEL_USECASE_AUDIO: The model usecase for audio models
      - MODEL_USECASE_RERANKING: The model usecase for knowledge base reranking (cross-encoder) models
+     - MODEL_USECASE_TEXT: The model usecase for text modality (non image, non audio, non embedding, non reranking) serverless chat models
   enum:
   - MODEL_USECASE_UNKNOWN
   - MODEL_USECASE_AGENT
@@ -6800,6 +6803,7 @@ apiModelUsecase:
   - MODEL_USECASE_CODING
   - MODEL_USECASE_AUDIO
   - MODEL_USECASE_RERANKING
+  - MODEL_USECASE_TEXT
   example: MODEL_USECASE_UNKNOWN
   type: string
 apiModelVersion:
@@ -6845,7 +6849,7 @@ apiMoveAgentsToWorkspaceOutput:
 apiNumericRange:
   description: Numeric range with min, max, and default values for model tuning parameters.
   properties:
-    default_value:
+    default:
       example: 123
       format: double
       type: number

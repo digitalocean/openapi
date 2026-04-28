@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  # UPLOAD_URL is the exact upload_url returned by POST /v1/batches/files.
+  # Use it verbatim; do not modify the host, path, or query string.
+  curl -X PUT "$UPLOAD_URL" \
+    -H "Content-Type: application/jsonl" \
+    --data-binary "@eval_prompts_v1.jsonl"

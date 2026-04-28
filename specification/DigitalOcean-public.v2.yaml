@@ -634,6 +634,19 @@ tags:
       **Note:** The Agent Inference API uses a customer-specific base URL (the agent endpoint)
       and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
 
+  - name: Batch Inference
+    description: |-
+      Batch Inference is an asynchronous processing capability designed to help
+      you scale high-volume AI projects more efficiently. Ideal for heavy-duty
+      workloads like large-scale data classification, evaluations, and content
+      enrichment, you can submit thousands or even millions of requests in a
+      single job with a guaranteed results window of 24 hours. By utilizing
+      off-peak GPU capacity, Batch Inference provides high-performance LLM
+      access at a significantly reduced price point compared to standard
+      synchronous APIs, making it a cost-effective choice for non-interactive
+      workloads.
+
+
 x-tagGroups:
   - name: Public APIs
     tags:
@@ -692,6 +705,7 @@ x-tagGroups:
     tags:
       - Inference Introduction
       - Agent Inference
+      - Batch Inference
       - Embeddings
       - Serverless Inference
 
@@ -2827,6 +2841,34 @@ paths:
   /v2/gen-ai/models/catalog/{id}:
     get:
       $ref: 'resources/gen-ai/genai_get_model_catalog_card.yml'
+  /v2/gen-ai/models/routers:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_routers.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_model_router.yml'
+
+
+  /v2/gen-ai/models/routers/presets:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_router_presets.yml'
+
+
+  /v2/gen-ai/models/routers/tasks/presets:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_router_task_presets.yml'
+
+
+  /v2/gen-ai/models/routers/{uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_router.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_model_router.yml'
+
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_model_router.yml'
+
 
   /v2/gen-ai/oauth2/dropbox/tokens:
     post:
@@ -2944,6 +2986,32 @@ paths:
   /v1/async-invoke:
     post:
       $ref: 'resources/inference/inference_async_invoke.yml'
+
+  /v1/batches/files:
+    post:
+      $ref: 'resources/inference/inference_create_batch_file.yml'
+
+  /<upload_url>:
+    put:
+      $ref: 'resources/inference/inference_upload_batch_file.yml'
+
+  /v1/batches:
+    get:
+      $ref: 'resources/inference/inference_list_batches.yml'
+    post:
+      $ref: 'resources/inference/inference_create_batch.yml'
+
+  /v1/batches/{batch_id}:
+    get:
+      $ref: 'resources/inference/inference_get_batch.yml'
+
+  /v1/batches/{batch_id}/cancel:
+    post:
+      $ref: 'resources/inference/inference_cancel_batch.yml'
+
+  /v1/batches/{batch_id}/results:
+    get:
+      $ref: 'resources/inference/inference_get_batch_results.yml'
 
 components:
   securitySchemes:
