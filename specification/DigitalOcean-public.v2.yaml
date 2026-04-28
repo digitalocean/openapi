@@ -2486,6 +2486,7 @@ paths:
     delete:
       $ref: "resources/uptime/delete_alert.yml"
 
+ 
   /v2/gen-ai/agents:
     get:
       $ref: 'resources/gen-ai/genai_list_agents.yml'
@@ -2527,13 +2528,16 @@ paths:
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
 
+
   /v2/gen-ai/agents/{agent_uuid}/guardrails:
     post:
       $ref: 'resources/gen-ai/genai_attach_agent_guardrails.yml'
 
+
   /v2/gen-ai/agents/{agent_uuid}/guardrails/{guardrail_uuid}:
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent_guardrail.yml'
+
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases:
     post:
@@ -2616,8 +2620,29 @@ paths:
     get:
       $ref: 'resources/gen-ai/genai_list_agents_by_anthropic_key.yml'
 
+  /v2/gen-ai/custom_models:
+    get:
+      $ref: 'resources/gen-ai/genai_list_custom_models.yml'
+
+
+  /v2/gen-ai/custom_models/import:
+    post:
+      $ref: 'resources/gen-ai/genai_import_custom_model.yml'
+
+
+  /v2/gen-ai/custom_models/{uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_custom_model.yml'
+
+
+  /v2/gen-ai/custom_models/{uuid}/metadata:
+    patch:
+      $ref: 'resources/gen-ai/genai_update_custom_model_metadata.yml'
+
+
 
   /v2/gen-ai/evaluation_datasets:
+
     post:
       $ref: 'resources/gen-ai/genai_create_evaluation_dataset.yml'
 
@@ -2625,6 +2650,12 @@ paths:
   /v2/gen-ai/evaluation_datasets/file_upload_presigned_urls:
     post:
       $ref: 'resources/gen-ai/genai_create_evaluation_dataset_file_upload_presigned_urls.yml'
+
+
+  /v2/gen-ai/evaluation_datasets/{dataset_uuid}/download_url:
+    get:
+      $ref: 'resources/gen-ai/genai_get_evaluation_dataset_download_url.yml'
+
 
 
   /v2/gen-ai/evaluation_metrics:
@@ -2746,6 +2777,36 @@ paths:
       $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
 
 
+  /v2/gen-ai/model_evaluation/datasets/file_upload_presigned_urls:
+    post:
+      $ref: 'resources/gen-ai/genai_create_model_eval_dataset_upload_presigned_urls.yml'
+
+
+  /v2/gen-ai/model_evaluation_metrics:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_evaluation_metrics.yml'
+
+
+
+
+  /v2/gen-ai/model_evaluation_runs:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_evaluation_runs.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_model_evaluation_run.yml'
+
+
+  /v2/gen-ai/model_evaluation_runs/{eval_run_uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_evaluation_run.yml'
+
+
+  /v2/gen-ai/model_evaluation_runs/{eval_run_uuid}/results/download_url:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_evaluation_run_results_download_url.yml'
+
+
   /v2/gen-ai/models:
     get:
       $ref: 'resources/gen-ai/genai_list_models.yml'
@@ -2772,6 +2833,14 @@ paths:
       $ref: 'resources/gen-ai/genai_regenerate_model_api_key.yml'
 
 
+  /v2/gen-ai/models/catalog:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_catalog.yml'
+
+
+  /v2/gen-ai/models/catalog/{id}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_catalog_card.yml'
   /v2/gen-ai/models/routers:
     get:
       $ref: 'resources/gen-ai/genai_list_model_routers.yml'
@@ -2804,7 +2873,6 @@ paths:
   /v2/gen-ai/oauth2/dropbox/tokens:
     post:
       $ref: 'resources/gen-ai/genai_create_oauth2_dropbox_tokens.yml'
-
 
   /v2/gen-ai/oauth2/url:
     get:
@@ -2853,7 +2921,6 @@ paths:
   /v2/gen-ai/scheduled-indexing/{uuid}:
     delete:
       $ref: 'resources/gen-ai/genai_delete_scheduled_indexing.yml'
-
 
 
   /v2/gen-ai/workspaces:
