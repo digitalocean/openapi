@@ -2,7 +2,7 @@ lang: cURL
 source: |-
   # OpenAI provider - Chat Completions
   curl -sS -X POST "https://inference.do-ai.run/v1/batches" \
-    -H "Authorization: Bearer $MODEL_ACCESS_KEY" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
       "file_id": "a1b2c3d4-e5f6-4789-90ab-cdef12345678",
@@ -14,7 +14,7 @@ source: |-
 
   # Anthropic provider - Messages
   curl -sS -X POST "https://inference.do-ai.run/v1/batches" \
-    -H "Authorization: Bearer $MODEL_ACCESS_KEY" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
       "file_id": "a1b2c3d4-e5f6-4789-90ab-cdef12345678",

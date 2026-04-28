@@ -2,7 +2,7 @@ lang: cURL
 source: |-
   # Image Generation
   curl -X POST \
-    -H "Authorization: Bearer $MODEL_ACCESS_KEY" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
       "model_id": "fal-ai/flux/schnell",
@@ -14,7 +14,7 @@ source: |-
 
   # Audio Generation
   curl -X POST \
-    -H "Authorization: Bearer $MODEL_ACCESS_KEY" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
       "model_id": "fal-ai/stable-audio-25/text-to-audio",
@@ -30,7 +30,7 @@ source: |-
 
   # Text-to-Speech
   curl -X POST \
-    -H "Authorization: Bearer $MODEL_ACCESS_KEY" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
       "model_id": "fal-ai/elevenlabs/tts/multilingual-v2",

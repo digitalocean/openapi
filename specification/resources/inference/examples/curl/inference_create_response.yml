@@ -1,7 +1,7 @@
 lang: cURL
 source: |-
   curl -sS -X POST \
-    -H "Authorization: Bearer $MODEL_ACCESS_KEY" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
       "model": "openai-gpt-oss-20b",

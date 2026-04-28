@@ -3,7 +3,7 @@ source: |-
   import os
   from pydo import Client
 
-  client = Client(token=os.environ.get("MODEL_ACCESS_KEY"))
+  client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
 
   resp = client.responses.create(
       model="openai-gpt-oss-20b",

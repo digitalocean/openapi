@@ -3,7 +3,7 @@ source: |-
   import { InferenceClient } from "@digitalocean/dots";
 
   const client = new InferenceClient({
-      apiKey: process.env.MODEL_ACCESS_KEY,
+      apiKey: process.env.DIGITALOCEAN_TOKEN,
   });
 
   const resp = await client.responses.create({
