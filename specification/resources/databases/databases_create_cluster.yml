@@ -101,29 +101,6 @@ requestBody:
             size: db-s-2vcpu-4gb
             num_nodes: 2
 
-        Create a New PostgreSQL Advanced Edition Cluster:
-          value:
-            name: backend-advanced
-            engine: advanced_pg
-            version: "18"
-            region: nyc3
-            size: db-s-2vcpu-4gb
-            num_nodes: 3
-            storage_size_mib: 61440
-            tags:
-              - production
-
-        Create a New MySQL Advanced Edition Cluster:
-          value:
-            name: backend-advanced
-            engine: advanced_mysql
-            version: "8"
-            region: nyc3
-            size: db-s-2vcpu-4gb
-            num_nodes: 3
-            storage_size_mib: 61440
-            tags:
-              - production
         Create a New Database Cluster with service CNAMEs:
           value:
             name: backend
