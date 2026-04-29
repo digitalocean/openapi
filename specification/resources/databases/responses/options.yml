@@ -29,6 +29,7 @@ content:
             - syd1
             - tor1
             - ric1
+            - atl1
           versions:
             - "3.8"
           layouts:
@@ -66,6 +67,7 @@ content:
             - syd1
             - tor1
             - ric1
+            - atl1
           versions:
             - "6.0"
             - "7.0"
@@ -128,6 +130,7 @@ content:
             - syd1
             - tor1
             - ric1
+            - atl1
           versions:
             - "8"
           layouts:
@@ -246,6 +249,7 @@ content:
             - syd1
             - tor1
             - ric1
+            - atl1
           versions:
             - "8"
           layouts:
@@ -323,6 +327,7 @@ content:
             - syd1
             - tor1
             - ric1
+            - atl1
           versions:
             - "1"
             - "2"
@@ -383,6 +388,7 @@ content:
             - syd1
             - tor1
             - ric1
+            - atl1
           versions:
             - "13"
             - "14"
@@ -505,6 +511,7 @@ content:
             - syd1
             - tor1
             - ric1
+            - atl1
           versions:
             - "16"
             - "17"
@@ -613,6 +620,7 @@ content:
             - syd1
             - tor1
             - ric1
+            - atl1
           versions:
             - "7"
           layouts:
@@ -673,6 +681,7 @@ content:
             - syd1
             - tor1
             - ric1
+            - atl1
           versions:
             - "8"
           layouts:
