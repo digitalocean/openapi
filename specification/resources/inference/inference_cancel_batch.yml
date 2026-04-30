@@ -54,5 +54,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 x-codeSamples:
   - $ref: 'examples/curl/inference_cancel_batch.yml'
+  - $ref: 'examples/python/inference_cancel_batch.yml'
+  - $ref: 'examples/dots/inference_cancel_batch.yml'
 security:
   - inference_bearer_auth: []

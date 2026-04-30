@@ -62,4 +62,6 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 x-codeSamples:
   - $ref: 'examples/curl/inference_upload_batch_file.yml'
+  - $ref: 'examples/python/inference_upload_batch_file.yml'
+  - $ref: 'examples/dots/inference_upload_batch_file.yml'
 security: []

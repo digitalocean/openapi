@@ -1,0 +1,32 @@
+lang: JavaScript
+source: |-
+  // Step 1: reserve a file_id + presigned upload_url.
+  // Step 2 (shown here): PUT the raw JSONL bytes to upload_url.
+  // The URL is short-lived and per-request — use it verbatim, no Authorization header.
+  import { InferenceClient } from "@digitalocean/dots";
+
+  const client = new InferenceClient({
+      apiKey: process.env.DIGITALOCEAN_TOKEN,
+  });
+
+  const jsonl = [
+      { custom_id: "q-1", method: "POST", url: "/v1/chat/completions",
+        body: { model: "llama3.3-70b-instruct",
+                messages: [{ role: "user", content: "One fun fact about octopuses." }] } },
+      { custom_id: "q-2", method: "POST", url: "/v1/chat/completions",
+        body: { model: "llama3.3-70b-instruct",
+                messages: [{ role: "user", content: "One fun fact about sharks." }] } },
+  ].map((r) => JSON.stringify(r)).join("\n") + "\n";
+
+  const intent = await client.files.create({ file_name: "batch_requests.jsonl" });
+
+  const res = await fetch(intent.upload_url, {
+      method: "PUT",
+      headers: { "Content-Type": "application/jsonl" },
+      body: jsonl,
+  });
+  if (!res.ok) {
+      throw new Error(`Upload failed: HTTP ${res.status} ${res.statusText}`);
+  }
+
+  console.log("uploaded file_id:", intent.file_id);

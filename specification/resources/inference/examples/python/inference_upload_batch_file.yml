@@ -1,0 +1,30 @@
+lang: Python
+source: |-
+  # The pydo client.files.create() helper performs both steps for you:
+  # POST /v1/batches/files (to obtain the presigned upload_url) and the
+  # subsequent PUT of the JSONL bytes. Prefer it over driving the upload
+  # by hand. The example below shows the manual PUT for completeness.
+  import os
+  from pathlib import Path
+
+  import requests
+  from pydo import Client
+
+  client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
+
+  input_path = Path("batch_requests.jsonl")
+
+  intent = client.batches.files.create(file_name=input_path.name)
+  upload_url = intent["upload_url"]
+  file_id = intent["file_id"]
+
+  with input_path.open("rb") as fh:
+      put = requests.put(
+          upload_url,
+          data=fh,
+          headers={"Content-Type": "application/jsonl"},
+          timeout=60,
+      )
+  put.raise_for_status()
+
+  print("uploaded file_id:", file_id)

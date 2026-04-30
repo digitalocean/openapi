@@ -1,0 +1,16 @@
+lang: Python
+source: |-
+  import os
+
+  from pydo import Client
+
+  client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
+
+  batch = client.batches.create(
+      input_file_id=os.environ["BATCH_INPUT_FILE_ID"],
+      endpoint="/v1/chat/completions",
+      completion_window="24h",
+  )
+
+  print("batch_id:", batch.get("id"))
+  print("status:  ", batch.get("status"))
