@@ -33,11 +33,8 @@ description: >-
 
   PostgreSQL and MySQL Advanced Edition clusters can be provisioned by setting `engine` to
   `advanced_pg` or `advanced_mysql`. Advanced Edition clusters are currently in public
-  preview and target highly available workloads: they run a consensus-based HA topology
-  fronted by a managed connection pooler (PostgreSQL) or proxy (MySQL), so failover does
-  not require a DNS cutover and the connection endpoint stays stable while the backing
-  primary node changes. `advanced_pg` supports 1-, 2-, and 3-node deployments;
-  `advanced_mysql` only supports 1- and 3-node deployments. See the
+  preview and target highly available workloads. `advanced_pg` supports 1-, 2-, and
+  3-node deployments; `advanced_mysql` only supports 1- and 3-node deployments. See the
   [PostgreSQL Advanced Edition](https://docs.digitalocean.com/products/databases/postgresql/how-to/use-advanced-edition-clusters/)
   and
   [MySQL Advanced Edition](https://docs.digitalocean.com/products/databases/mysql/how-to/use-advanced-edition-clusters/)
