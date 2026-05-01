@@ -9,7 +9,7 @@ source: |-
   resp = client.batches.list(limit=20)
 
   for b in resp.get("data") or []:
-      print(f"{b.get('id'):40}  {b.get('status'):12}  {b.get('created_at')}")
+      print(f"{b.get('batch_id'):40}  {b.get('status'):12}  {b.get('created_at')}")
 
   print("has_more:", resp.get("has_more"))
   print("last_id: ", resp.get("last_id"))

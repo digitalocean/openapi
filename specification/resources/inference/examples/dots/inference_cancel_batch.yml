@@ -8,6 +8,6 @@ source: |-
 
   const result = await client.batches.cancel(process.env.BATCH_ID);
 
-  console.log("batch_id:           ", result.id);
-  console.log("status:             ", result.status);
-  console.log("cancel_requested_at:", result.cancel_requested_at);
+  console.log("batch_id:    ", result.batch_id);
+  console.log("status:      ", result.status);
+  console.log("cancelled_at:", result.cancelled_at);

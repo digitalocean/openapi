@@ -15,6 +15,13 @@ description: >
 
   `POST /v1/batches` performs a `HEAD` check on the uploaded object and
   will reject the batch if this upload has not completed.
+
+
+  Send the raw JSONL bytes verbatim. Presigned PUT URLs are
+  signature-sensitive to request headers — prefer `application/octet-stream`
+  or omit `Content-Type` entirely. A custom value (for example
+  `application/jsonl`) can cause signature mismatches unless the URL was
+  signed for that exact header.
 tags:
   - Batch Inference
 servers:

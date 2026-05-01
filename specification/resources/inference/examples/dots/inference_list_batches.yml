@@ -8,9 +8,8 @@ source: |-
 
   const page = await client.batches.list({ limit: 20 });
 
-  const items = (page.edges ?? []).map((e) => e.node);
-  for (const b of items) {
-      console.log(`${b.id}\t${b.status}\t${b.created_at}`);
+  for (const b of page.data ?? []) {
+      console.log(`${b.batch_id}\t${b.status}\t${b.created_at}`);
   }
 
   console.log("has_more:", page.has_more);

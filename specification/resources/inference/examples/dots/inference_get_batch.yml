@@ -8,7 +8,7 @@ source: |-
 
   const batch = await client.batches.retrieve(process.env.BATCH_ID);
 
-  console.log("batch_id:      ", batch.id);
+  console.log("batch_id:      ", batch.batch_id);
   console.log("status:        ", batch.status);
   console.log("request_counts:", batch.request_counts);
   console.log("output_file_id:", batch.output_file_id);

@@ -15,5 +15,5 @@ source: |-
       request_id: randomUUID(),
   });
 
-  console.log("batch_id:", batch.batch_id ?? batch.id);
+  console.log("batch_id:", batch.batch_id);
   console.log("status:  ", batch.status);

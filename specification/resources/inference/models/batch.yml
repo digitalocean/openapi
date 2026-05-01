@@ -4,7 +4,6 @@ required:
   - batch_id
   - status
   - provider
-  - endpoint
   - completion_window
   - input_file_id
   - created_at

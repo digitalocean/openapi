@@ -3,6 +3,7 @@ source: |-
   import os
   from pathlib import Path
 
+  import requests
   from pydo import Client
 
   client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
@@ -15,11 +16,12 @@ source: |-
       print("results not ready yet; poll batch status and retry")
       raise SystemExit(0)
 
-  content = client.files.content(links["output_file_id"])
+  resp = requests.get(links["output_file_url"], timeout=60)
+  resp.raise_for_status()
 
   out = Path("batch_output.jsonl")
-  out.write_bytes(content.read())
+  out.write_bytes(resp.content)
 
   print("wrote:", out)
   print("----- preview -----")
-  print(content.text[:500])
+  print(resp.text[:500])

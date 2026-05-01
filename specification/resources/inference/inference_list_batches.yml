@@ -31,6 +31,24 @@ parameters:
       maximum: 100
       default: 20
     example: 20
+  - in: query
+    name: status
+    description: >
+      Optional filter restricting results to batches in the given
+      lifecycle state.
+    required: false
+    schema:
+      type: string
+      enum:
+        - validating
+        - in_progress
+        - finalizing
+        - completed
+        - failed
+        - expired
+        - cancelling
+        - cancelled
+    example: "in_progress"
 responses:
   "200":
     description: Page of batch jobs.

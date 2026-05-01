@@ -4,7 +4,10 @@ description: >
   Requests cancellation of a batch job. The job transitions to `cancelling`
   and, once in-flight requests drain, to `cancelled`. Jobs already in a
   terminal state (`completed`, `failed`, `expired`, `cancelled`) cannot be
-  cancelled and return `409 Conflict`.
+  cancelled and return `409 Conflict`. Cancellation is also rejected with
+  `409 Conflict` while the job has not yet been submitted to the upstream
+  provider — there is nothing to cancel until the provider batch id is
+  assigned.
 
 
   Partial results produced before cancellation remain available via

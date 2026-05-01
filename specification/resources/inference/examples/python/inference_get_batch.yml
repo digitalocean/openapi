@@ -8,7 +8,7 @@ source: |-
 
   batch = client.batches.retrieve(os.environ["BATCH_ID"])
 
-  print("batch_id:      ", batch.get("id"))
+  print("batch_id:      ", batch.get("batch_id"))
   print("status:        ", batch.get("status"))
   print("request_counts:", batch.get("request_counts"))
   print("output_file_id:", batch.get("output_file_id"))

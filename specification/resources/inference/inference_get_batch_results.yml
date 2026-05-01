@@ -5,6 +5,11 @@ description: >
   error sidecar) of a completed batch job. If results are not yet ready,
   the response sets `result_available: false` or returns `412 Precondition
   Failed`; in both cases, keep polling batch status and retry.
+
+
+  Download the artifacts soon after fetching — the URLs are short-lived.
+  Result files themselves are retained for up to 30 days after the job
+  completes, after which they are deleted.
 tags:
   - Batch Inference
 servers:
