@@ -251,7 +251,7 @@ content:
             - ric1
             - atl1
           versions:
-            - "8"
+            - "8.4.8"
           layouts:
             - num_nodes: 1
               sizes:
@@ -311,7 +311,7 @@ content:
                 - gd-48vcpu-192gb-intel
                 - so1_5-48vcpu-256gb
                 - c-96-intel
-          default_version: "8"
+          default_version: "8.4.8"
         opensearch:
           regions:
             - ams3
@@ -805,5 +805,5 @@ content:
         advanced_mysql:
           - end_of_life: null
             end_of_availability: null
-            version: "8"
+            version: "8.4.8"
             default: true
