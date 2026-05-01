@@ -22,10 +22,14 @@ properties:
       - mongodb
       - kafka
       - opensearch
+      - advanced_pg
+      - advanced_mysql
     description: >-
       A slug representing the database engine used for the cluster. The possible values
       are: "pg" for PostgreSQL, "mysql" for MySQL, "redis" for Caching, "mongodb" for MongoDB,
-      "kafka" for Kafka, "opensearch" for OpenSearch, and "valkey" for Valkey.
+      "kafka" for Kafka, "opensearch" for OpenSearch, "valkey" for Valkey, "advanced_pg" for
+      PostgreSQL Advanced Edition, and "advanced_mysql" for MySQL Advanced Edition. Advanced
+      Edition engines are currently in public preview.
   version:
     type: string
     example: '8'
