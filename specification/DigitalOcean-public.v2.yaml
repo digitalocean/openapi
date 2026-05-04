@@ -281,6 +281,12 @@ tags:
     description: |-
       Droplet autoscale pools manage automatic horizontal scaling for your applications based on resource usage (CPU, memory, or both) or a static configuration.
 
+  - name: Embeddings
+    description: |-
+      Text embedding vectors via `POST /v1/embeddings` on the
+      [Serverless Inference](https://docs.digitalocean.com/reference/api/api-reference/#tag/Serverless-Inference) base URL
+      `https://inference.do-ai.run` (bearer model access key).
+
   - name: Firewalls
     description: |-
       [DigitalOcean Cloud Firewalls](https://docs.digitalocean.com/products/networking/firewalls/)
@@ -628,6 +634,19 @@ tags:
       **Note:** The Agent Inference API uses a customer-specific base URL (the agent endpoint)
       and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
 
+  - name: Batch Inference
+    description: |-
+      Batch Inference is an asynchronous processing capability designed to help
+      you scale high-volume AI projects more efficiently. Ideal for heavy-duty
+      workloads like large-scale data classification, evaluations, and content
+      enrichment, you can submit thousands or even millions of requests in a
+      single job with a guaranteed results window of 24 hours. By utilizing
+      off-peak GPU capacity, Batch Inference provides high-performance LLM
+      access at a significantly reduced price point compared to standard
+      synchronous APIs, making it a cost-effective choice for non-interactive
+      workloads.
+
+
 x-tagGroups:
   - name: Public APIs
     tags:
@@ -686,6 +705,8 @@ x-tagGroups:
     tags:
       - Inference Introduction
       - Agent Inference
+      - Batch Inference
+      - Embeddings
       - Serverless Inference
 
 paths:
@@ -2465,6 +2486,7 @@ paths:
     delete:
       $ref: "resources/uptime/delete_alert.yml"
 
+ 
   /v2/gen-ai/agents:
     get:
       $ref: 'resources/gen-ai/genai_list_agents.yml'
@@ -2506,13 +2528,16 @@ paths:
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
 
+
   /v2/gen-ai/agents/{agent_uuid}/guardrails:
     post:
       $ref: 'resources/gen-ai/genai_attach_agent_guardrails.yml'
 
+
   /v2/gen-ai/agents/{agent_uuid}/guardrails/{guardrail_uuid}:
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent_guardrail.yml'
+
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases:
     post:
@@ -2595,8 +2620,29 @@ paths:
     get:
       $ref: 'resources/gen-ai/genai_list_agents_by_anthropic_key.yml'
 
+  /v2/gen-ai/custom_models:
+    get:
+      $ref: 'resources/gen-ai/genai_list_custom_models.yml'
+
+
+  /v2/gen-ai/custom_models/import:
+    post:
+      $ref: 'resources/gen-ai/genai_import_custom_model.yml'
+
+
+  /v2/gen-ai/custom_models/{uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_custom_model.yml'
+
+
+  /v2/gen-ai/custom_models/{uuid}/metadata:
+    patch:
+      $ref: 'resources/gen-ai/genai_update_custom_model_metadata.yml'
+
+
 
   /v2/gen-ai/evaluation_datasets:
+
     post:
       $ref: 'resources/gen-ai/genai_create_evaluation_dataset.yml'
 
@@ -2604,6 +2650,12 @@ paths:
   /v2/gen-ai/evaluation_datasets/file_upload_presigned_urls:
     post:
       $ref: 'resources/gen-ai/genai_create_evaluation_dataset_file_upload_presigned_urls.yml'
+
+
+  /v2/gen-ai/evaluation_datasets/{dataset_uuid}/download_url:
+    get:
+      $ref: 'resources/gen-ai/genai_get_evaluation_dataset_download_url.yml'
+
 
 
   /v2/gen-ai/evaluation_metrics:
@@ -2725,6 +2777,36 @@ paths:
       $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
 
 
+  /v2/gen-ai/model_evaluation/datasets/file_upload_presigned_urls:
+    post:
+      $ref: 'resources/gen-ai/genai_create_model_eval_dataset_upload_presigned_urls.yml'
+
+
+  /v2/gen-ai/model_evaluation_metrics:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_evaluation_metrics.yml'
+
+
+
+
+  /v2/gen-ai/model_evaluation_runs:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_evaluation_runs.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_model_evaluation_run.yml'
+
+
+  /v2/gen-ai/model_evaluation_runs/{eval_run_uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_evaluation_run.yml'
+
+
+  /v2/gen-ai/model_evaluation_runs/{eval_run_uuid}/results/download_url:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_evaluation_run_results_download_url.yml'
+
+
   /v2/gen-ai/models:
     get:
       $ref: 'resources/gen-ai/genai_list_models.yml'
@@ -2750,10 +2832,47 @@ paths:
     put:
       $ref: 'resources/gen-ai/genai_regenerate_model_api_key.yml'
 
+
+  /v2/gen-ai/models/catalog:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_catalog.yml'
+
+
+  /v2/gen-ai/models/catalog/{id}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_catalog_card.yml'
+  /v2/gen-ai/models/routers:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_routers.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_model_router.yml'
+
+
+  /v2/gen-ai/models/routers/presets:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_router_presets.yml'
+
+
+  /v2/gen-ai/models/routers/tasks/presets:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_router_task_presets.yml'
+
+
+  /v2/gen-ai/models/routers/{uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_router.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_model_router.yml'
+
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_model_router.yml'
+
+
   /v2/gen-ai/oauth2/dropbox/tokens:
     post:
       $ref: 'resources/gen-ai/genai_create_oauth2_dropbox_tokens.yml'
-
 
   /v2/gen-ai/oauth2/url:
     get:
@@ -2804,7 +2923,6 @@ paths:
       $ref: 'resources/gen-ai/genai_delete_scheduled_indexing.yml'
 
 
-
   /v2/gen-ai/workspaces:
     get:
       $ref: 'resources/gen-ai/genai_list_workspaces.yml'
@@ -2841,6 +2959,14 @@ paths:
     post:
       $ref: 'resources/inference/inference_create_chat_completion.yml'
 
+  /v1/messages:
+    post:
+      $ref: 'resources/inference/inference_create_messages.yml'
+
+  /v1/embeddings:
+    post:
+      $ref: 'resources/inference/inference_create_embeddings.yml'
+
   /api/v1/chat/completions:
     post:
       $ref: 'resources/inference/agent_inference_create_chat_completion.yml'
@@ -2860,6 +2986,32 @@ paths:
   /v1/async-invoke:
     post:
       $ref: 'resources/inference/inference_async_invoke.yml'
+
+  /v1/batches/files:
+    post:
+      $ref: 'resources/inference/inference_create_batch_file.yml'
+
+  /<upload_url>:
+    put:
+      $ref: 'resources/inference/inference_upload_batch_file.yml'
+
+  /v1/batches:
+    get:
+      $ref: 'resources/inference/inference_list_batches.yml'
+    post:
+      $ref: 'resources/inference/inference_create_batch.yml'
+
+  /v1/batches/{batch_id}:
+    get:
+      $ref: 'resources/inference/inference_get_batch.yml'
+
+  /v1/batches/{batch_id}/cancel:
+    post:
+      $ref: 'resources/inference/inference_cancel_batch.yml'
+
+  /v1/batches/{batch_id}/results:
+    get:
+      $ref: 'resources/inference/inference_get_batch_results.yml'
 
 components:
   securitySchemes:
@@ -2935,27 +3087,39 @@ components:
       type: http
       scheme: bearer
       description: |
-        ## Inference API Authentication
+        ## OAuth Authentication
 
-        The Inference APIs use API access keys for authentication, which are
-        separate from the DigitalOcean OAuth tokens used by the control-plane API.
+        In order to interact with the DigitalOcean API, you or your application must
+        authenticate.
 
-        Include the key as a Bearer token in the `Authorization` header of each
-        request. All requests must be made over HTTPS.
+        The DigitalOcean API handles this through OAuth, an open standard for
+        authorization. OAuth allows you to delegate access to your account.
+        Scopes can be used to grant full access, read-only access, or access to
+        a specific set of endpoints.
 
-        ### Key Types
+        You can generate an OAuth token by visiting the [Apps & API](https://cloud.digitalocean.com/account/api/tokens)
+        section of the DigitalOcean control panel for your account.
 
-        | API | Key Type | Key Pattern | How to Obtain |
-        |-----|----------|-------------|---------------|
-        | Serverless Inference | Model access key | `sk-do-*` (e.g., `sk-do-v1-abcd1234...`) | Generate in the [AI/ML section](https://cloud.digitalocean.com/gen-ai/inference/keys) of the DigitalOcean control panel |
-        | Agent Inference | Endpoint access key | Alphanumeric string (e.g., `Abc1Def2Ghi3Jkl4...`) | Provided when provisioning an agent endpoint |
+        An OAuth token functions as a complete authentication request. In effect, it
+        acts as a substitute for a username and password pair.
+
+        Because of this, it is absolutely **essential** that you keep your OAuth
+        tokens secure. In fact, upon generation, the web interface will only display
+        each token a single time in order to prevent the token from being compromised.
+
+        DigitalOcean access tokens begin with an identifiable prefix in order to
+        distinguish them from other similar tokens.
+
+        - `dop_v1_` for personal access tokens generated in the control panel
+        - `doo_v1_` for tokens generated by applications using [the OAuth flow](https://docs.digitalocean.com/reference/api/oauth-api/)
+        - `dor_v1_` for OAuth refresh tokens
 
         ### Authenticate with a Bearer Authorization Header
 
         **Serverless Inference:**
 
         ```
-        curl -X POST -H "Authorization: Bearer $MODEL_ACCESS_KEY" "https://inference.do-ai.run/v1/chat/completions"
+        curl -X POST -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://inference.do-ai.run/v1/chat/completions"
         ```
 
         **Agent Inference:**
@@ -2964,9 +3128,12 @@ components:
         curl -X POST -H "Authorization: Bearer $AGENT_ACCESS_KEY" "https://{your-agent-url}.agents.do-ai.run/v1/chat/completions?agent=true"
         ```
 
-        **Note:** These keys are not interchangeable with DigitalOcean OAuth
-        tokens (`dop_v1_*`, `doo_v1_*`, `dor_v1_*`). OAuth tokens are used
-        exclusively with the control-plane API at `https://api.digitalocean.com`.
+        **Note:** Agent Inference APIs use an `agent_access_key` (endpoint access
+        key) instead of a DigitalOcean OAuth token. The `agent_access_key` is
+        provided when you provision an agent endpoint and is scoped to that
+        specific agent. It is not interchangeable with DigitalOcean OAuth tokens
+        (`dop_v1_*`, `doo_v1_*`, `dor_v1_*`), which are used with Serverless
+        Inference and the control-plane API at `https://api.digitalocean.com`.
 
 security:
   - bearer_auth: []

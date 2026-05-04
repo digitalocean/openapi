@@ -62,7 +62,7 @@ rules:
     message: '{{description}}; {{property}} incorrect'
     severity: error
     resolved: false
-    given: '$.paths[*]~'
+    given: "$.paths[?(@property!='/<upload_url>')]~"
     then:
       function: pattern
       functionOptions:

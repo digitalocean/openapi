@@ -54,5 +54,7 @@ responses:
     $ref: '../../shared/responses/unexpected_error.yml'
 x-codeSamples:
   - $ref: 'examples/curl/agentInference_create_chat_completion.yml'
+  - $ref: 'examples/python/agentInference_create_chat_completion.yml'
+  - $ref: 'examples/dots/agentInference_create_chat_completion.yml'
 security:
   - inference_bearer_auth: []

@@ -1,0 +1,12 @@
+lang: cURL
+source: |-
+  curl -X PATCH \
+    -H "Content-Type: application/json"  \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v2/gen-ai/custom_models/11f13d93-a879-c342-b542-ca68c578b04b/metadata" \
+    -d '{
+      "description": "finetuned model with olympiad math data",
+      "tags": {
+        "tags": ["finetuned", "new"]
+      }
+    }'

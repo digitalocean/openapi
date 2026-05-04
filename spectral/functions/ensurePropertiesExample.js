@@ -21,6 +21,7 @@
 
 export default (input, _, context) => {
   if (
+    typeof input !== 'object' || input === null ||
     context.path.join('.').includes('properties.properties') ||
     // skip if this is an example
     context.path.includes('example') ||

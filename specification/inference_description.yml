@@ -9,17 +9,6 @@ introduction: |
 
   These APIs are independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
 
-  ## Authentication
-
-  In order to make requests to the Inference APIs, you must authenticate using a Bearer token.
-
-  | API | Authentication | Key Pattern |
-  |-----|----------------|-------------|
-  | Serverless Inference | Model access key | `sk-do-*` (e.g., `sk-do-v1-abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx1234yzab5678cdef`) |
-  | Agent Inference | Endpoint access key | Alphanumeric string (e.g., `Abc1Def2Ghi3Jkl4Mno5Pqr6Stu7Vwx8`) |
-
-  **Note:** The Control Plane API (`https://api.digitalocean.com`) uses OAuth tokens for authentication, which is different from the inference API keys.
-
   ## Base URLs
 
   | API | Base URL |
