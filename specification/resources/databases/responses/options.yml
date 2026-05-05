@@ -28,6 +28,8 @@ content:
             - sgp1
             - syd1
             - tor1
+            - ric1
+            - atl1
           versions:
             - "3.8"
           layouts:
@@ -64,6 +66,8 @@ content:
             - sgp1
             - syd1
             - tor1
+            - ric1
+            - atl1
           versions:
             - "6.0"
             - "7.0"
@@ -125,6 +129,8 @@ content:
             - sgp1
             - syd1
             - tor1
+            - ric1
+            - atl1
           versions:
             - "8"
           layouts:
@@ -228,6 +234,84 @@ content:
                 - db-amd-16vcpu-64gb
                 - db-intel-16vcpu-64gb
           default_version: "8"
+        advanced_mysql:
+          regions:
+            - ams3
+            - blr1
+            - fra1
+            - lon1
+            - nyc1
+            - nyc2
+            - nyc3
+            - sfo2
+            - sfo3
+            - sgp1
+            - syd1
+            - tor1
+            - ric1
+            - atl1
+          versions:
+            - "8.4.8"
+          layouts:
+            - num_nodes: 1
+              sizes:
+                - gd-2vcpu-8gb-intel
+                - so1_5-2vcpu-16gb-intel
+                - so1_5-2vcpu-16gb
+                - gd-2vcpu-8gb
+                - gd-4vcpu-16gb-intel
+                - so1_5-4vcpu-32gb-intel
+                - so1_5-4vcpu-32gb
+                - gd-4vcpu-16gb
+                - gd-8vcpu-32gb
+                - so1_5-8vcpu-64gb
+                - gd-8vcpu-32gb-intel
+                - so1_5-8vcpu-64gb-intel
+                - gd-16vcpu-64gb
+                - so1_5-16vcpu-128gb
+                - gd-16vcpu-64gb-intel
+                - so1_5-16vcpu-128gb-intel
+                - so1_5-24vcpu-192gb
+                - so1_5-24vcpu-192gb-intel
+                - so1_5-32vcpu-256gb-intel
+                - gd-32vcpu-128gb
+                - gd-32vcpu-128gb-intel
+                - so1_5-32vcpu-256gb
+                - gd-40vcpu-160gb
+                - so1_5-48vcpu-384gb-intel
+                - gd-48vcpu-192gb-intel
+                - so1_5-48vcpu-256gb
+                - c-96-intel
+            - num_nodes: 3
+              sizes:
+                - gd-2vcpu-8gb-intel
+                - so1_5-2vcpu-16gb-intel
+                - so1_5-2vcpu-16gb
+                - gd-2vcpu-8gb
+                - gd-4vcpu-16gb-intel
+                - so1_5-4vcpu-32gb-intel
+                - so1_5-4vcpu-32gb
+                - gd-4vcpu-16gb
+                - gd-8vcpu-32gb
+                - so1_5-8vcpu-64gb
+                - gd-8vcpu-32gb-intel
+                - so1_5-8vcpu-64gb-intel
+                - gd-16vcpu-64gb
+                - so1_5-16vcpu-128gb
+                - gd-16vcpu-64gb-intel
+                - so1_5-16vcpu-128gb-intel
+                - so1_5-24vcpu-192gb
+                - so1_5-24vcpu-192gb-intel
+                - so1_5-32vcpu-256gb-intel
+                - gd-32vcpu-128gb
+                - gd-32vcpu-128gb-intel
+                - so1_5-32vcpu-256gb
+                - gd-40vcpu-160gb
+                - so1_5-48vcpu-384gb-intel
+                - gd-48vcpu-192gb-intel
+                - so1_5-48vcpu-256gb
+                - c-96-intel
+          default_version: "8.4.8"
         opensearch:
           regions:
             - ams3
@@ -242,6 +326,8 @@ content:
             - sgp1
             - syd1
             - tor1
+            - ric1
+            - atl1
           versions:
             - "1"
             - "2"
@@ -301,6 +387,8 @@ content:
             - sgp1
             - syd1
             - tor1
+            - ric1
+            - atl1
           versions:
             - "13"
             - "14"
@@ -408,6 +496,115 @@ content:
                 - db-amd-16vcpu-64gb
                 - db-intel-16vcpu-64gb
           default_version: "17"
+        advanced_pg:
+          regions:
+            - ams3
+            - blr1
+            - fra1
+            - lon1
+            - nyc1
+            - nyc2
+            - nyc3
+            - sfo2
+            - sfo3
+            - sgp1
+            - syd1
+            - tor1
+            - ric1
+            - atl1
+          versions:
+            - "16"
+            - "17"
+            - "18"
+          layouts:
+            - num_nodes: 1
+              sizes:
+                - gd-2vcpu-8gb-intel
+                - so1_5-2vcpu-16gb-intel
+                - so1_5-2vcpu-16gb
+                - gd-2vcpu-8gb
+                - gd-4vcpu-16gb-intel
+                - so1_5-4vcpu-32gb-intel
+                - so1_5-4vcpu-32gb
+                - gd-4vcpu-16gb
+                - gd-8vcpu-32gb
+                - so1_5-8vcpu-64gb
+                - gd-8vcpu-32gb-intel
+                - so1_5-8vcpu-64gb-intel
+                - gd-16vcpu-64gb
+                - so1_5-16vcpu-128gb
+                - gd-16vcpu-64gb-intel
+                - so1_5-16vcpu-128gb-intel
+                - so1_5-24vcpu-192gb
+                - so1_5-24vcpu-192gb-intel
+                - so1_5-32vcpu-256gb-intel
+                - gd-32vcpu-128gb
+                - gd-32vcpu-128gb-intel
+                - so1_5-32vcpu-256gb
+                - gd-40vcpu-160gb
+                - so1_5-48vcpu-384gb-intel
+                - gd-48vcpu-192gb-intel
+                - so1_5-48vcpu-256gb
+                - c-96-intel
+            - num_nodes: 2
+              sizes:
+                - gd-2vcpu-8gb-intel
+                - so1_5-2vcpu-16gb-intel
+                - so1_5-2vcpu-16gb
+                - gd-2vcpu-8gb
+                - gd-4vcpu-16gb-intel
+                - so1_5-4vcpu-32gb-intel
+                - so1_5-4vcpu-32gb
+                - gd-4vcpu-16gb
+                - gd-8vcpu-32gb
+                - so1_5-8vcpu-64gb
+                - gd-8vcpu-32gb-intel
+                - so1_5-8vcpu-64gb-intel
+                - gd-16vcpu-64gb
+                - so1_5-16vcpu-128gb
+                - gd-16vcpu-64gb-intel
+                - so1_5-16vcpu-128gb-intel
+                - so1_5-24vcpu-192gb
+                - so1_5-24vcpu-192gb-intel
+                - so1_5-32vcpu-256gb-intel
+                - gd-32vcpu-128gb
+                - gd-32vcpu-128gb-intel
+                - so1_5-32vcpu-256gb
+                - gd-40vcpu-160gb
+                - so1_5-48vcpu-384gb-intel
+                - gd-48vcpu-192gb-intel
+                - so1_5-48vcpu-256gb
+                - c-96-intel
+            - num_nodes: 3
+              sizes:
+                - gd-2vcpu-8gb-intel
+                - so1_5-2vcpu-16gb-intel
+                - so1_5-2vcpu-16gb
+                - gd-2vcpu-8gb
+                - gd-4vcpu-16gb-intel
+                - so1_5-4vcpu-32gb-intel
+                - so1_5-4vcpu-32gb
+                - gd-4vcpu-16gb
+                - gd-8vcpu-32gb
+                - so1_5-8vcpu-64gb
+                - gd-8vcpu-32gb-intel
+                - so1_5-8vcpu-64gb-intel
+                - gd-16vcpu-64gb
+                - so1_5-16vcpu-128gb
+                - gd-16vcpu-64gb-intel
+                - so1_5-16vcpu-128gb-intel
+                - so1_5-24vcpu-192gb
+                - so1_5-24vcpu-192gb-intel
+                - so1_5-32vcpu-256gb-intel
+                - gd-32vcpu-128gb
+                - gd-32vcpu-128gb-intel
+                - so1_5-32vcpu-256gb
+                - gd-40vcpu-160gb
+                - so1_5-48vcpu-384gb-intel
+                - gd-48vcpu-192gb-intel
+                - so1_5-48vcpu-256gb
+                - c-96-intel
+          default_version: "18"
         redis:
           regions:
             - ams3
@@ -422,6 +619,8 @@ content:
             - sgp1
             - syd1
             - tor1
+            - ric1
+            - atl1
           versions:
             - "7"
           layouts:
@@ -481,6 +680,8 @@ content:
             - sgp1
             - syd1
             - tor1
+            - ric1
+            - atl1
           versions:
             - "8"
           layouts:
@@ -587,4 +788,22 @@ content:
           - end_of_life: null
             end_of_availability: null
             version: "8"
+            default: true
+        advanced_pg:
+          - end_of_life: "2028-11-09T00:00:00Z"
+            end_of_availability: "2028-05-09T00:00:00Z"
+            version: "16"
+            default: false
+          - end_of_life: "2029-11-08T00:00:00Z"
+            end_of_availability: "2029-05-08T00:00:00Z"
+            version: "17"
+            default: false
+          - end_of_life: "2030-11-13T00:00:00Z"
+            end_of_availability: "2030-05-13T00:00:00Z"
+            version: "18"
+            default: true
+        advanced_mysql:
+          - end_of_life: null
+            end_of_availability: null
+            version: "8.4.8"
             default: true

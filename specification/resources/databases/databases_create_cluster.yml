@@ -30,6 +30,17 @@ description: >-
   database cluster and the timestamp of the backup to be restored. Creating a database
   from a backup is the same as forking a database in the control panel.
 
+
+  PostgreSQL and MySQL Advanced Edition clusters can be provisioned by setting `engine` to
+  `advanced_pg` or `advanced_mysql`. Advanced Edition clusters are currently in public
+  preview and target highly available workloads. `advanced_pg` supports 1-, 2-, and
+  3-node deployments; `advanced_mysql` only supports 1- and 3-node deployments. See the
+  [PostgreSQL Advanced Edition](https://docs.digitalocean.com/products/databases/postgresql/how-to/use-advanced-edition-clusters/)
+  and
+  [MySQL Advanced Edition](https://docs.digitalocean.com/products/databases/mysql/how-to/use-advanced-edition-clusters/)
+  documentation for the feature differences vs. Standard Edition and current preview limitations.
+
+
   Note: Caching cluster creates are no longer supported as of 2025-04-30T00:00:00Z.
   Backups are also not supported for Caching or Valkey clusters.
 
@@ -109,6 +120,42 @@ requestBody:
               service_cnames:
                 - "db.example.com"
                 - "database.myapp.io"
+
+        Create a New PostgreSQL Advanced Edition Cluster:
+          value:
+            name: backend-advanced
+            engine: advanced_pg
+            version: "18"
+            region: nyc3
+            size: db-s-2vcpu-4gb
+            num_nodes: 3
+            storage_size_mib: 61440
+            tags:
+              - production
+
+        Create a New MySQL Advanced Edition Cluster:
+          value:
+            name: backend-advanced
+            engine: advanced_mysql
+            version: "8.4.8"
+            region: nyc3
+            size: db-s-2vcpu-4gb
+            num_nodes: 3
+            storage_size_mib: 61440
+            tags:
+              - production
+
+        Create a Single-Node MySQL Advanced Edition Cluster:
+          value:
+            name: backend-advanced-single
+            engine: advanced_mysql
+            version: "8.4.8"
+            region: nyc3
+            size: db-s-2vcpu-4gb
+            num_nodes: 1
+            storage_size_mib: 61440
+            tags:
+              - production
 
 responses:
   "201":
