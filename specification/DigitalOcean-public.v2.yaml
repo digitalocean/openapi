@@ -2996,22 +2996,22 @@ paths:
       $ref: 'resources/inference/inference_upload_batch_file.yml'
 
   /v1/batches:
-    get:
-      $ref: 'resources/inference/inference_list_batches.yml'
     post:
       $ref: 'resources/inference/inference_create_batch.yml'
+    get:
+      $ref: 'resources/inference/inference_list_batches.yml'
 
   /v1/batches/{batch_id}:
     get:
       $ref: 'resources/inference/inference_get_batch.yml'
 
-  /v1/batches/{batch_id}/cancel:
-    post:
-      $ref: 'resources/inference/inference_cancel_batch.yml'
-
   /v1/batches/{batch_id}/results:
     get:
       $ref: 'resources/inference/inference_get_batch_results.yml'
+
+  /v1/batches/{batch_id}/cancel:
+    post:
+      $ref: 'resources/inference/inference_cancel_batch.yml'
 
 components:
   securitySchemes:
