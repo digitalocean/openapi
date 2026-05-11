@@ -646,6 +646,12 @@ tags:
       synchronous APIs, making it a cost-effective choice for non-interactive
       workloads.
 
+  - name: Additional Batch Inference Helper APIs
+    description: |-
+      Helper operations for managing Batch Inference jobs — list all
+      submitted jobs and cancel a job that has not yet reached a terminal
+      state.
+
 
 x-tagGroups:
   - name: Public APIs
@@ -706,6 +712,7 @@ x-tagGroups:
       - Inference Introduction
       - Agent Inference
       - Batch Inference
+      - Additional Batch Inference Helper APIs
       - Embeddings
       - Serverless Inference
 

@@ -5,7 +5,7 @@ description: >
   `limit` to control page size and `after` to page forward using the
   `last_id` from the previous response.
 tags:
-  - Batch Inference
+  - Additional Batch Inference Helper APIs
 servers:
   - url: "https://inference.do-ai.run"
     description: production
