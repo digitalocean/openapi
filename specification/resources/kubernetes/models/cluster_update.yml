@@ -39,7 +39,7 @@ properties:
 
   ha:
     type: boolean
-    default: true
+    default: false
     example: true
     description: A boolean value indicating whether the control plane
       is run in a highly available configuration in the cluster. Highly available
