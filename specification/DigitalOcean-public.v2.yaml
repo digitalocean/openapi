@@ -3,8 +3,7 @@ openapi: "3.0.0"
 info:
   title: DigitalOcean API
   version: "2.0"
-  description:
-    $ref: "description.yml#/introduction"
+  description: ""
 
   license:
     name: Apache 2.0
@@ -19,6 +18,12 @@ servers:
     description: production
 
 tags:
+  - name: Public APIs Introduction
+    x-displayName: Introduction
+    x-traitTag: true
+    description:
+      $ref: "description.yml#/introduction"
+
   - name: 1-Click Applications
     description: |-
       1-Click applications are pre-built Droplet images or Kubernetes apps with software,
@@ -70,7 +75,7 @@ tags:
 
   - name: Billing
     description: |-
-      The billing endpoints allow you to retrieve your account balance, invoices, 
+      The billing endpoints allow you to retrieve your account balance, invoices,
       billing history, and insights.
 
       **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
@@ -88,13 +93,13 @@ tags:
       issued, or credits granted. To interact with invoices, you
       will generally send requests to the invoices endpoint at
       `/v2/customers/my/billing_history`.
-      
-      **Billing Insights:** Day-over-day changes in billing resource usage based on nightly invoice items, 
-      including total amount, region, SKU, and description for a specified date range. 
-      It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for 
+
+      **Billing Insights:** Day-over-day changes in billing resource usage based on nightly invoice items,
+      including total amount, region, SKU, and description for a specified date range.
+      It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for
       a given month as nightly invoice items do not necessarily encompass all invoicing factors for the entire month.
-        `v2/billing/{account_urn}/insights/{start_date}/{end_date}` where account_urn is the URN of the customer 
-      account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid). The date range specified by 
+        `v2/billing/{account_urn}/insights/{start_date}/{end_date}` where account_urn is the URN of the customer
+      account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid). The date range specified by
       start_date and end_date must be in YYYY-MM-DD format.
 
   - name: Block Storage
@@ -124,7 +129,7 @@ tags:
   - name: "BYOIP Prefixes"
     description: |-
       Bring your own IP (BYOIP) lets you provision your own IPv4 network prefixes
-      to your account, then assign those IPs to your DigitalOcean resources. 
+      to your account, then assign those IPs to your DigitalOcean resources.
       BYOIP supports the following features:
       * IPv4 addresses
       * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
@@ -170,10 +175,10 @@ tags:
 
   - name: Container Registries
     description: |-
-      DigitalOcean now supports up to nine additional registries (for a total maximum of 10) per team 
-      if your container registry uses the Professional subscription plan. The storage is shared among 
-      the registries. This set of new APIs is backward compatible with `/v2/registry`. However, if you 
-      create more than one registry under a Professional plan, some of the `/v2/registry` APIs would not work. 
+      DigitalOcean now supports up to nine additional registries (for a total maximum of 10) per team
+      if your container registry uses the Professional subscription plan. The storage is shared among
+      the registries. This set of new APIs is backward compatible with `/v2/registry`. However, if you
+      create more than one registry under a Professional plan, some of the `/v2/registry` APIs would not work.
       Hence, it is recommended to use `/v2/registries` for multiple registries.
 
   - name: Databases
@@ -275,6 +280,12 @@ tags:
   - name: Droplet Autoscale Pools
     description: |-
       Droplet autoscale pools manage automatic horizontal scaling for your applications based on resource usage (CPU, memory, or both) or a static configuration.
+
+  - name: Embeddings
+    description: |-
+      Text embedding vectors via `POST /v1/embeddings` on the
+      [Serverless Inference](https://docs.digitalocean.com/reference/api/api-reference/#tag/Serverless-Inference) base URL
+      `https://inference.do-ai.run` (bearer model access key).
 
   - name: Firewalls
     description: |-
@@ -400,7 +411,7 @@ tags:
 
   - name: NFS
     description: |-
-      NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure, 
+      NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure,
       high-performance shared storage right inside your VPC. This enables seamless data sharing across Droplets in a VPC.
 
   - name: NFS Actions
@@ -521,6 +532,10 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
+  - name: Security
+    description: |-
+      Security CSPM endpoints for scans, scan findings, and settings.
+
   - name: Sizes
     description: |-
       The sizes objects represent different packages of hardware resources that
@@ -595,6 +610,112 @@ tags:
       list, and delete custom VPCs as well as retrieve information about the
       resources assigned to them.
 
+  - name: Inference Introduction
+    x-displayName: Introduction
+    x-traitTag: true
+    description:
+      $ref: "inference_description.yml#/introduction"
+
+
+  - name: Serverless Inference
+    description: |-
+      DigitalOcean Gradient™ AI Agentic Cloud allows access to serverless inference models.
+      You can access models by providing an inference key.
+
+      **Note:** The Serverless Inference API uses a separate base URL (`https://inference.do-ai.run`)
+      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
+
+  - name: Agent Inference
+    description: |-
+      DigitalOcean Gradient™ AI Agentic Cloud allows you to create multi-agent workflows
+      to power your AI applications. This allows developers to integrate agents into your
+      AI applications.
+
+      **Note:** The Agent Inference API uses a customer-specific base URL (the agent endpoint)
+      and is independent of the main DigitalOcean control-plane API (`https://api.digitalocean.com`).
+
+  - name: Batch Inference
+    description: |-
+      Batch Inference is an asynchronous processing capability designed to help
+      you scale high-volume AI projects more efficiently. Ideal for heavy-duty
+      workloads like large-scale data classification, evaluations, and content
+      enrichment, you can submit thousands or even millions of requests in a
+      single job with a guaranteed results window of 24 hours. By utilizing
+      off-peak GPU capacity, Batch Inference provides high-performance LLM
+      access at a significantly reduced price point compared to standard
+      synchronous APIs, making it a cost-effective choice for non-interactive
+      workloads.
+
+  - name: Additional Batch Inference Helper APIs
+    description: |-
+      Helper operations for managing Batch Inference jobs — list all
+      submitted jobs and cancel a job that has not yet reached a terminal
+      state.
+
+
+x-tagGroups:
+  - name: Public APIs
+    tags:
+      - Public APIs Introduction
+      - 1-Click Applications
+      - Account
+      - Actions
+      - Add-Ons
+      - Apps
+      - Billing
+      - Block Storage
+      - Block Storage Actions
+      - BYOIP Prefixes
+      - CDN Endpoints
+      - Certificates
+      - Container Registry
+      - Container Registries
+      - Databases
+      - Dedicated Inference
+      - Domain Records
+      - Domains
+      - Droplet Actions
+      - Droplets
+      - Droplet Autoscale Pools
+      - Firewalls
+      - Floating IP Actions
+      - Floating IPs
+      - Functions
+      - GradientAI Platform
+      - Image Actions
+      - Images
+      - Kubernetes
+      - Load Balancers
+      - Monitoring
+      - NFS
+      - NFS Actions
+      - Partner Network Connect
+      - Project Resources
+      - Projects
+      - Regions
+      - Reserved IP Actions
+      - Reserved IPs
+      - Reserved IPv6
+      - Reserved IPv6 Actions
+      - Security
+      - Sizes
+      - Snapshots
+      - Spaces Keys
+      - SSH Keys
+      - Tags
+      - Uptime
+      - VPC NAT Gateways
+      - VPC Peerings
+      - VPCs
+  - name: Inference APIs
+    tags:
+      - Inference Introduction
+      - Agent Inference
+      - Batch Inference
+      - Additional Batch Inference Helper APIs
+      - Embeddings
+      - Serverless Inference
+
 paths:
   /v2/1-clicks:
     get:
@@ -636,17 +757,17 @@ paths:
   /v2/add-ons/apps:
     get:
       $ref: "resources/addons/addons_get_app.yml"
-    
+
   /v2/add-ons/apps/{app_slug}/metadata:
     get:
       $ref: "resources/addons/addons_get_app_metadata.yml"
-  
+
   /v2/add-ons/saas:
     get:
       $ref: "resources/addons/addons_list.yml"
     post:
       $ref: "resources/addons/addons_create.yml"
-  
+
   /v2/add-ons/saas/{resource_uuid}:
     get:
       $ref: "resources/addons/addons_get.yml"
@@ -721,7 +842,7 @@ paths:
 
   /v2/apps/{app_id}/job-invocations:
     get:
-      $ref: "resources/apps/apps_list_job_invocations.yml"  
+      $ref: "resources/apps/apps_list_job_invocations.yml"
 
   /v2/apps/{app_id}/job-invocations/{job_invocation_id}:
     get:
@@ -734,6 +855,22 @@ paths:
   /v2/apps/{app_id}/jobs/{job_name}/invocations/{job_invocation_id}/logs:
     get:
       $ref: "resources/apps/apps_get_job_invocation_logs.yml"
+
+  /v2/apps/{app_id}/events:
+    get:
+      $ref: "resources/apps/apps_list_events.yml"
+
+  /v2/apps/{app_id}/events/{event_id}:
+    get:
+      $ref: "resources/apps/apps_get_event.yml"
+
+  /v2/apps/{app_id}/events/{event_id}/cancel:
+    post:
+      $ref: "resources/apps/apps_cancel_event.yml"
+
+  /v2/apps/{app_id}/events/{event_id}/logs:
+    get:
+      $ref: "resources/apps/apps_get_event_logs.yml"
 
   /v2/apps/tiers/instance_sizes:
     get:
@@ -1341,6 +1478,19 @@ paths:
     delete:
       $ref: "resources/functions/functions_delete_trigger.yml"
 
+  /v2/functions/namespaces/{namespace_id}/keys:
+    get:
+      $ref: "resources/functions/functions_list_keys.yml"
+
+    post:
+      $ref: "resources/functions/functions_create_key.yml"
+
+  /v2/functions/namespaces/{namespace_id}/keys/{key_id}:
+    put:
+      $ref: "resources/functions/functions_update_key.yml"
+    delete:
+      $ref: "resources/functions/functions_delete_key.yml"
+
   /v2/images:
     get:
       $ref: "resources/images/images_list.yml"
@@ -1354,6 +1504,22 @@ paths:
       $ref: "resources/images/images_update.yml"
     delete:
       $ref: "resources/images/images_delete.yml"
+
+  /v2/images/{image_id}/account_transfer:
+    post:
+      $ref: "resources/images/images_post_account_transfer_create.yml"
+
+  /v2/images/{image_id}/account_transfer/accept:
+    post:
+      $ref: "resources/images/images_post_account_transfer_accept.yml"
+
+  /v2/images/{image_id}/account_transfer/cancel:
+    post:
+      $ref: "resources/images/images_post_account_transfer_cancel.yml"
+
+  /v2/images/{image_id}/account_transfer/decline:
+    post:
+      $ref: "resources/images/images_post_account_transfer_decline.yml"
 
   /v2/images/{image_id}/actions:
     get:
@@ -1795,13 +1961,13 @@ paths:
   /v2/nfs/{nfs_id}/actions:
     post:
       $ref: "resources/nfs/nfs_actions_create.yml"
-  
+
   /v2/nfs/snapshots:
     get:
       $ref: "resources/nfs/nfs_snapshot_list.yml"
 
   /v2/nfs/snapshots/{nfs_snapshot_id}:
-    get: 
+    get:
       $ref: "resources/nfs/nfs_snapshot_get.yml"
 
     delete:
@@ -2088,6 +2254,45 @@ paths:
     get:
       $ref: "resources/byoip_prefixes/byoip_prefix_list_resources.yml"
 
+  /v2/security/scans:
+    get:
+      $ref: "resources/security/security_scans_list.yml"
+
+    post:
+      $ref: "resources/security/security_scans_create.yml"
+
+  /v2/security/scans/{scan_id}:
+    get:
+      $ref: "resources/security/security_scans_get.yml"
+
+  /v2/security/scans/latest:
+    get:
+      $ref: "resources/security/security_scans_get_latest.yml"
+
+  /v2/security/scans/rules:
+    post:
+      $ref: "resources/security/security_scan_rule_create.yml"
+
+  /v2/security/scans/{scan_id}/findings/{finding_uuid}/affected_resources:
+    get:
+      $ref: "resources/security/security_scan_finding_list_affected_resources.yml"
+
+  /v2/security/settings:
+    get:
+      $ref: "resources/security/security_settings_list.yml"
+
+  /v2/security/settings/plan:
+    put:
+      $ref: "resources/security/security_settings_plan_update.yml"
+
+  /v2/security/settings/suppressions:
+    post:
+      $ref: "resources/security/security_suppression_create.yml"
+
+  /v2/security/settings/suppressions/{suppression_uuid}:
+    delete:
+      $ref: "resources/security/security_suppression_delete.yml"
+
   /v2/sizes:
     get:
       $ref: "resources/sizes/sizes_list.yml"
@@ -2288,6 +2493,7 @@ paths:
     delete:
       $ref: "resources/uptime/delete_alert.yml"
 
+ 
   /v2/gen-ai/agents:
     get:
       $ref: 'resources/gen-ai/genai_list_agents.yml'
@@ -2329,13 +2535,16 @@ paths:
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent_function.yml'
 
+
   /v2/gen-ai/agents/{agent_uuid}/guardrails:
     post:
       $ref: 'resources/gen-ai/genai_attach_agent_guardrails.yml'
 
+
   /v2/gen-ai/agents/{agent_uuid}/guardrails/{guardrail_uuid}:
     delete:
       $ref: 'resources/gen-ai/genai_detach_agent_guardrail.yml'
+
 
   /v2/gen-ai/agents/{agent_uuid}/knowledge_bases:
     post:
@@ -2418,8 +2627,29 @@ paths:
     get:
       $ref: 'resources/gen-ai/genai_list_agents_by_anthropic_key.yml'
 
+  /v2/gen-ai/custom_models:
+    get:
+      $ref: 'resources/gen-ai/genai_list_custom_models.yml'
+
+
+  /v2/gen-ai/custom_models/import:
+    post:
+      $ref: 'resources/gen-ai/genai_import_custom_model.yml'
+
+
+  /v2/gen-ai/custom_models/{uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_custom_model.yml'
+
+
+  /v2/gen-ai/custom_models/{uuid}/metadata:
+    patch:
+      $ref: 'resources/gen-ai/genai_update_custom_model_metadata.yml'
+
+
 
   /v2/gen-ai/evaluation_datasets:
+
     post:
       $ref: 'resources/gen-ai/genai_create_evaluation_dataset.yml'
 
@@ -2427,6 +2657,12 @@ paths:
   /v2/gen-ai/evaluation_datasets/file_upload_presigned_urls:
     post:
       $ref: 'resources/gen-ai/genai_create_evaluation_dataset_file_upload_presigned_urls.yml'
+
+
+  /v2/gen-ai/evaluation_datasets/{dataset_uuid}/download_url:
+    get:
+      $ref: 'resources/gen-ai/genai_get_evaluation_dataset_download_url.yml'
+
 
 
   /v2/gen-ai/evaluation_metrics:
@@ -2527,7 +2763,7 @@ paths:
   /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
     put:
       $ref: 'resources/gen-ai/genai_update_knowledge_base_data_source.yml'
-      
+
     delete:
       $ref: 'resources/gen-ai/genai_delete_knowledge_base_data_source.yml'
 
@@ -2546,6 +2782,36 @@ paths:
 
     delete:
       $ref: 'resources/gen-ai/genai_delete_knowledge_base.yml'
+
+
+  /v2/gen-ai/model_evaluation/datasets/file_upload_presigned_urls:
+    post:
+      $ref: 'resources/gen-ai/genai_create_model_eval_dataset_upload_presigned_urls.yml'
+
+
+  /v2/gen-ai/model_evaluation_metrics:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_evaluation_metrics.yml'
+
+
+
+
+  /v2/gen-ai/model_evaluation_runs:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_evaluation_runs.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_model_evaluation_run.yml'
+
+
+  /v2/gen-ai/model_evaluation_runs/{eval_run_uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_evaluation_run.yml'
+
+
+  /v2/gen-ai/model_evaluation_runs/{eval_run_uuid}/results/download_url:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_evaluation_run_results_download_url.yml'
 
 
   /v2/gen-ai/models:
@@ -2573,10 +2839,47 @@ paths:
     put:
       $ref: 'resources/gen-ai/genai_regenerate_model_api_key.yml'
 
+
+  /v2/gen-ai/models/catalog:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_catalog.yml'
+
+
+  /v2/gen-ai/models/catalog/{id}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_catalog_card.yml'
+  /v2/gen-ai/models/routers:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_routers.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_model_router.yml'
+
+
+  /v2/gen-ai/models/routers/presets:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_router_presets.yml'
+
+
+  /v2/gen-ai/models/routers/tasks/presets:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_router_task_presets.yml'
+
+
+  /v2/gen-ai/models/routers/{uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_router.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_model_router.yml'
+
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_model_router.yml'
+
+
   /v2/gen-ai/oauth2/dropbox/tokens:
     post:
       $ref: 'resources/gen-ai/genai_create_oauth2_dropbox_tokens.yml'
-
 
   /v2/gen-ai/oauth2/url:
     get:
@@ -2627,7 +2930,6 @@ paths:
       $ref: 'resources/gen-ai/genai_delete_scheduled_indexing.yml'
 
 
-
   /v2/gen-ai/workspaces:
     get:
       $ref: 'resources/gen-ai/genai_list_workspaces.yml'
@@ -2658,6 +2960,65 @@ paths:
   /v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases:
     get:
       $ref: 'resources/gen-ai/genai_list_evaluation_test_cases_by_workspace.yml'
+
+
+  /v1/chat/completions:
+    post:
+      $ref: 'resources/inference/inference_create_chat_completion.yml'
+
+  /v1/messages:
+    post:
+      $ref: 'resources/inference/inference_create_messages.yml'
+
+  /v1/embeddings:
+    post:
+      $ref: 'resources/inference/inference_create_embeddings.yml'
+
+  /api/v1/chat/completions:
+    post:
+      $ref: 'resources/inference/agent_inference_create_chat_completion.yml'
+
+  /v1/images/generations:
+    post:
+      $ref: 'resources/inference/inference_create_image.yml'
+
+  /v1/models:
+    get:
+      $ref: 'resources/inference/inference_list_models.yml'
+
+  /v1/responses:
+    post:
+      $ref: 'resources/inference/inference_create_response.yml'
+
+  /v1/async-invoke:
+    post:
+      $ref: 'resources/inference/inference_async_invoke.yml'
+
+  /v1/batches/files:
+    post:
+      $ref: 'resources/inference/inference_create_batch_file.yml'
+
+  /<upload_url>:
+    put:
+      $ref: 'resources/inference/inference_upload_batch_file.yml'
+
+  /v1/batches:
+    post:
+      $ref: 'resources/inference/inference_create_batch.yml'
+    get:
+      $ref: 'resources/inference/inference_list_batches.yml'
+
+  /v1/batches/{batch_id}:
+    get:
+      $ref: 'resources/inference/inference_get_batch.yml'
+
+  /v1/batches/{batch_id}/results:
+    get:
+      $ref: 'resources/inference/inference_get_batch_results.yml'
+
+  /v1/batches/{batch_id}/cancel:
+    post:
+      $ref: 'resources/inference/inference_cancel_batch.yml'
 
 components:
   securitySchemes:
@@ -2728,6 +3089,58 @@ components:
         ```
         curl -X $HTTP_METHOD -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/$OBJECT"
         ```
+
+    inference_bearer_auth:
+      type: http
+      scheme: bearer
+      description: |
+        ## OAuth Authentication
+
+        In order to interact with the DigitalOcean API, you or your application must
+        authenticate.
+
+        The DigitalOcean API handles this through OAuth, an open standard for
+        authorization. OAuth allows you to delegate access to your account.
+        Scopes can be used to grant full access, read-only access, or access to
+        a specific set of endpoints.
+
+        You can generate an OAuth token by visiting the [Apps & API](https://cloud.digitalocean.com/account/api/tokens)
+        section of the DigitalOcean control panel for your account.
+
+        An OAuth token functions as a complete authentication request. In effect, it
+        acts as a substitute for a username and password pair.
+
+        Because of this, it is absolutely **essential** that you keep your OAuth
+        tokens secure. In fact, upon generation, the web interface will only display
+        each token a single time in order to prevent the token from being compromised.
+
+        DigitalOcean access tokens begin with an identifiable prefix in order to
+        distinguish them from other similar tokens.
+
+        - `dop_v1_` for personal access tokens generated in the control panel
+        - `doo_v1_` for tokens generated by applications using [the OAuth flow](https://docs.digitalocean.com/reference/api/oauth-api/)
+        - `dor_v1_` for OAuth refresh tokens
+
+        ### Authenticate with a Bearer Authorization Header
+
+        **Serverless Inference:**
+
+        ```
+        curl -X POST -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://inference.do-ai.run/v1/chat/completions"
+        ```
+
+        **Agent Inference:**
+
+        ```
+        curl -X POST -H "Authorization: Bearer $AGENT_ACCESS_KEY" "https://{your-agent-url}.agents.do-ai.run/v1/chat/completions?agent=true"
+        ```
+
+        **Note:** Agent Inference APIs use an `agent_access_key` (endpoint access
+        key) instead of a DigitalOcean OAuth token. The `agent_access_key` is
+        provided when you provision an agent endpoint and is scoped to that
+        specific agent. It is not interchangeable with DigitalOcean OAuth tokens
+        (`dop_v1_*`, `doo_v1_*`, `dor_v1_*`), which are used with Serverless
+        Inference and the control-plane API at `https://api.digitalocean.com`.
 
 security:
   - bearer_auth: []

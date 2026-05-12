@@ -90,6 +90,19 @@ properties:
     description: A string containing user data that cloud-init consumes to configure a Droplet on first boot.
       User data is often a cloud-config file or Bash script. It must be plain text and may not exceed 64 KiB in size.
 
+  public_networking:
+    type: boolean
+    example: true
+    default: true
+    description: An optional boolean indicating whether the Droplets should be created with
+      public networking or not.
+      By default, all Droplets are created with public networking available.
+      If explicitly set to `false`, only private networking will be enabled,
+      and public networking will be disabled; currently this means that it will
+      not have any public static or Reserved IPv4 or IPv6 address, nor can one
+      be assigned later.
+      If explicitly set to `false`, `ipv6` must also be `false`.
+
 required:
   - region
   - image

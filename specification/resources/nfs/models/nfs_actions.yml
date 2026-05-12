@@ -9,6 +9,10 @@ nfs_action:
       enum:
       - resize
       - snapshot
+      - attach
+      - detach
+      - reassign
+      - switch_performance_tier
       example: resize
       description: The type of action to initiate for the NFS share (such as resize or snapshot).
     region:
@@ -75,6 +79,27 @@ nfs_action_detach:
               description: The ID of the VPC from which the NFS share will be detached
           required:
             - vpc_id
+
+nfs_action_reassign:
+  allOf:
+    - $ref: '#/nfs_action'
+    - type: object
+      properties:
+        params:
+          type: object
+          properties:
+            old_vpc_id:
+              type: string
+              example: vpc-id-123
+              description: The ID of the VPC from which the NFS share will be reassigned
+            new_vpc_id:
+              type: string
+              example: vpc-id-456
+              description: The ID of the VPC to which the NFS share will be reassigned
+          required:
+            - old_vpc_id
+            - new_vpc_id
+
 nfs_action_switch_performance_tier:
   allOf:
     - $ref: '#/nfs_action'

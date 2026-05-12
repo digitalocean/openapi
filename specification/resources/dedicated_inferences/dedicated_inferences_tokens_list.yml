@@ -4,7 +4,7 @@ summary: List Dedicated Inference Tokens
 
 description: |
   List all access tokens for a Dedicated Inference instance. Token values are
-  not returned; only id, name, and created_at. Send a GET request to
+  not returned; only id, name, created_at, and is_managed. Send a GET request to
   `/v2/dedicated-inferences/{dedicated_inference_id}/tokens`.
 
 tags:
