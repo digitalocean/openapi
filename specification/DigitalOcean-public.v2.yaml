@@ -2631,6 +2631,8 @@ paths:
 
 
   /v2/gen-ai/custom_models/{uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_custom_model.yml'
     delete:
       $ref: 'resources/gen-ai/genai_delete_custom_model.yml'
 
