@@ -13,7 +13,7 @@ description: >
   Partial results produced before cancellation remain available via
   `GET /v1/batches/{batch_id}/results`.
 tags:
-  - Additional Batch Inference Helper APIs
+  - Batch Inference
 servers:
   - url: "https://inference.do-ai.run"
     description: production
