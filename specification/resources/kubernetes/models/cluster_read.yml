@@ -50,6 +50,14 @@ properties:
     description: A string specifying the UUID of the VPC to which the
       Kubernetes cluster is assigned.<br><br>Requires `vpc:read` scope.
 
+  worker_subnet_uuid:
+    type: string
+    format: uuid
+    example: cbd79771-23eb-49be-b5ea-59cc56222622
+    description: |
+      The UUID of the VPC subnet worker nodes are attached to. When unset, the
+      default subnet for the VPC is used.
+
   ipv4:
     type: string
     readOnly: true
