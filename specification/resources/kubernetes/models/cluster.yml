@@ -56,8 +56,11 @@ properties:
     example: cbd79771-23eb-49be-b5ea-59cc56222622
     description: |
       The UUID of the VPC subnet to attach worker nodes to. When omitted on
-      create, the default subnet for the VPC is used. Requires `vpc_uuid` to be
-      set.
+      create, the default subnet for the VPC is used. This value cannot be changed
+      after the cluster is created.
+
+      `vpc_uuid` must also be set.
+      <br><br>Requires `vpc:read` scope.
 
   ipv4:
     type: string

@@ -56,7 +56,7 @@ properties:
     example: cbd79771-23eb-49be-b5ea-59cc56222622
     description: |
       The UUID of the VPC subnet worker nodes are attached to. When unset, the
-      default subnet for the VPC is used.
+      default subnet for the VPC is used.<br><br>Requires `vpc:read` scope.
 
   ipv4:
     type: string
