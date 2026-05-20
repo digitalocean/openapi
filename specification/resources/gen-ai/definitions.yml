@@ -3694,6 +3694,12 @@ apiGetCustomModelOutput:
     model:
       $ref: '#/apiCustomModel'
   type: object
+apiGetCustomModelOutputPublic:
+  description: Response containing a single custom model (public)
+  properties:
+    model:
+      $ref: '#/apiCustomModel'
+  type: object
 apiGetCustomModelStorageOutput:
   description: Response containing custom model storage details
   properties:

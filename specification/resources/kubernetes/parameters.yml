@@ -44,6 +44,20 @@ kubernetes_expiry_seconds:
     default: 0
   example: 300
 
+kubernetes_credentials_type:
+  in: query
+  name: type
+  required: false
+  description: |
+    The type of credentials to return in the kubeconfig. When omitted, the
+    default credential type for the cluster is used: `sso` for clusters with SSO enabled, `token` for clusters without SSO enabled.
+  schema:
+    type: string
+    enum:
+      - token
+      - sso
+  example: sso
+
 clusterlint_run_id:
   in: query
   name: run_id

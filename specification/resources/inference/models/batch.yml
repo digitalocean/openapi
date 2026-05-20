@@ -4,7 +4,6 @@ required:
   - batch_id
   - status
   - provider
-  - endpoint
   - completion_window
   - input_file_id
   - created_at
@@ -111,17 +110,17 @@ properties:
     type: string
     format: date-time
     nullable: true
-    example: null
+    example: "2026-04-24T19:20:05Z"
   finalizing_at:
     type: string
     format: date-time
     nullable: true
-    example: null
+    example: "2026-04-24T20:10:42Z"
   completed_at:
     type: string
     format: date-time
     nullable: true
-    example: null
+    example: "2026-04-24T20:15:30Z"
   expires_at:
     type: string
     format: date-time
@@ -132,9 +131,9 @@ properties:
     type: string
     format: date-time
     nullable: true
-    example: null
+    example: "2026-04-24T19:45:11Z"
   failed_at:
     type: string
     format: date-time
     nullable: true
-    example: null
+    example: "2026-04-24T19:50:00Z"
