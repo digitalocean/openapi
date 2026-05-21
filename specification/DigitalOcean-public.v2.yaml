@@ -2803,6 +2803,9 @@ paths:
     get:
       $ref: 'resources/gen-ai/genai_get_model_evaluation_run.yml'
 
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_model_evaluation_run.yml'
+
 
   /v2/gen-ai/model_evaluation_runs/{eval_run_uuid}/results/download_url:
     get:
