@@ -140,6 +140,7 @@ kubernetes_single:
       cluster_subnet: 10.244.0.0/16
       service_subnet: 10.245.0.0/16
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
+      worker_subnet_uuid: cbd79771-23eb-49be-b5ea-59cc56222622
       ipv4: 68.183.121.157
       endpoint: https://bd5f5959-5e1e-4205-a714-a914373942af.k8s.ondigitalocean.com
       tags:
@@ -492,6 +493,7 @@ kubernetes_clusters_multi_pool_response:
       cluster_subnet: 10.244.0.0/16
       service_subnet: 10.245.0.0/16
       vpc_uuid: c33931f2-a26a-4e61-b85c-4e95a2ec431b
+      worker_subnet_uuid: cbd79771-23eb-49be-b5ea-59cc56222622
       ipv4: ''
       endpoint: ''
       tags:
