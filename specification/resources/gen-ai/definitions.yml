@@ -2900,6 +2900,37 @@ apiDeleteModelAPIKeyOutput:
     api_key_info:
       $ref: '#/apiModelAPIKeyInfo'
   type: object
+apiDeleteModelEvaluationRunInputPublic:
+  properties:
+    eval_run_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiDeleteModelEvaluationRunOutput:
+  properties:
+    error:
+      description: Error message if deletion failed
+      example: example string
+      type: string
+    status:
+      $ref: '#/apiDeleteModelEvaluationRunStatus'
+  type: object
+apiDeleteModelEvaluationRunOutputPublic:
+  properties:
+    error:
+      description: Error message if deletion failed
+      example: example string
+      type: string
+    status:
+      $ref: '#/apiDeleteModelEvaluationRunStatus'
+  type: object
+apiDeleteModelEvaluationRunStatus:
+  default: DELETE_MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED
+  description: Status of delete operation
+  enum:
+  - DELETE_MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED
+  - DELETE_MODEL_EVALUATION_RUN_STATUS_SUCCESS
+  - DELETE_MODEL_EVALUATION_RUN_STATUS_FAIL
+  example: DELETE_MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED
+  type: string
 apiDeleteModelProviderKeyInputPublic:
   properties:
     api_key_uuid:
