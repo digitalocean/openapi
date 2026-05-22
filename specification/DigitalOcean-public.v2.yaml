@@ -2789,6 +2789,14 @@ paths:
       $ref: 'resources/gen-ai/genai_list_model_evaluation_metrics.yml'
 
 
+  /v2/gen-ai/model_evaluation_presets:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_evaluation_presets.yml'
+
+
+  /v2/gen-ai/model_evaluation_presets/{eval_preset_uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_evaluation_preset.yml'
 
 
   /v2/gen-ai/model_evaluation_runs:
