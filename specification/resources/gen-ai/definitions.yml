@@ -1662,6 +1662,22 @@ apiCancelKnowledgeBaseIndexingJobOutput:
     job:
       $ref: '#/apiIndexingJob'
   type: object
+apiCancelModelEvaluationRunInputPublic:
+  properties:
+    eval_run_uuid:
+      description: |-
+        UUID of the model evaluation run to cancel. Returned by `CreateModelEvaluationRun`
+        and listed via `ListModelEvaluationRuns`. The run must be in a non-terminal status
+        (queued, running_dataset, or evaluating_results); already-terminal runs return an
+        error.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+  type: object
+apiCancelModelEvaluationRunOutput:
+  properties:
+    run:
+      $ref: '#/apiModelEvaluationRunSummary'
+  type: object
 apiCandidateInferenceConfig:
   description: Inference configuration for the candidate model during evaluation.
   properties:
@@ -2899,6 +2915,8 @@ apiDeleteModelAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiModelAPIKeyInfo'
+  type: object
+apiDeleteModelEvaluationPresetOutput:
   type: object
 apiDeleteModelEvaluationRunInputPublic:
   properties:
