@@ -1,4 +1,4 @@
-description: To delete a model evaluation run, send a DELETE request to `/v2/gen-ai/model_evaluation_runs/{eval_run_uuid}`.
+description: To delete a model evaluation run, send a DELETE request to `/v2/genai/model_evaluation_runs/{eval_run_uuid}`.
   The run must be in a terminal status (`successful`, `partially_successful`, `failed`,
   or `cancelled`). For runs still in progress, either wait for the run to finish or
   cancel it, then retry the delete once the run reaches a terminal status.

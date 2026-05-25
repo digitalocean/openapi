@@ -1,12 +1,17 @@
-description: To list built-in and account custom LLM-as-judge metrics for model evaluation,
-  send a GET request to `/v2/genai/model_evaluation_metrics`.
-operationId: genai_list_model_evaluation_metrics
+description: To create a custom LLM-as-judge metric for model evaluation, send a POST
+  request to `/v2/genai/custom_evaluation_metrics`.
+operationId: genai_create_custom_evaluation_metric
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiCreateCustomEvaluationMetricInputPublic
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListModelEvaluationMetricsOutput
+          $ref: ./definitions.yml#/apiCreateCustomEvaluationMetricOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -27,9 +32,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:read
-summary: List Model Evaluation Metrics
+  - genai:create
+summary: Create Custom Evaluation Metric
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_model_evaluation_metrics.yml
+- $ref: examples/curl/genai_create_custom_evaluation_metric.yml

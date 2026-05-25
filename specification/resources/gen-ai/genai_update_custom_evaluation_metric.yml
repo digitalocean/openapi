@@ -1,12 +1,24 @@
-description: To list built-in and account custom LLM-as-judge metrics for model evaluation,
-  send a GET request to `/v2/genai/model_evaluation_metrics`.
-operationId: genai_list_model_evaluation_metrics
+description: To update a custom metric (issuing a new metric UUID), send a PUT request
+  to `/v2/genai/custom_evaluation_metrics/{metric_uuid}`.
+operationId: genai_update_custom_evaluation_metric
+parameters:
+- example: '"123e4567-e89b-12d3-a456-426614174000"'
+  in: path
+  name: metric_uuid
+  required: true
+  schema:
+    type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiUpdateCustomEvaluationMetricInputPublic
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListModelEvaluationMetricsOutput
+          $ref: ./definitions.yml#/apiUpdateCustomEvaluationMetricOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -27,9 +39,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:read
-summary: List Model Evaluation Metrics
+  - genai:update
+summary: Update Custom Evaluation Metric
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_model_evaluation_metrics.yml
+- $ref: examples/curl/genai_update_custom_evaluation_metric.yml

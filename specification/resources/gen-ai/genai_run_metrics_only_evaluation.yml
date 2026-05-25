@@ -1,12 +1,17 @@
-description: To list built-in and account custom LLM-as-judge metrics for model evaluation,
-  send a GET request to `/v2/genai/model_evaluation_metrics`.
-operationId: genai_list_model_evaluation_metrics
+description: Run metric evaluation on pre-collected agent inputs and outputs without
+  invoking an agent. Send a POST request to `/v2/genai/evaluation_metric_runs`.
+operationId: genai_run_metrics_only_evaluation
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiRunMetricsOnlyEvaluationInputPublic
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListModelEvaluationMetricsOutput
+          $ref: ./definitions.yml#/apiRunEvaluationTestCaseOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -27,9 +32,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:read
-summary: List Model Evaluation Metrics
+  - genai:create
+summary: Run Metrics-Only Evaluation
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_model_evaluation_metrics.yml
+- $ref: examples/curl/genai_run_metrics_only_evaluation.yml

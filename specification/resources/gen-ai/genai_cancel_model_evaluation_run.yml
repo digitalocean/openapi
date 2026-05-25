@@ -1,26 +1,29 @@
-description: To list all evaluation test cases by a workspace, send a GET request
-  to `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
-operationId: genai_list_evaluation_test_cases_by_workspace
+description: To cancel an in-progress model evaluation run, send a PUT request to
+  `/v2/genai/model_evaluation_runs/{eval_run_uuid}/cancel`.
+operationId: genai_cancel_model_evaluation_run
 parameters:
-- description: Workspace UUID.
+- description: |-
+    UUID of the model evaluation run to cancel. Returned by `CreateModelEvaluationRun`
+    and listed via `ListModelEvaluationRuns`. The run must be in a non-terminal status
+    (queued, running_dataset, or evaluating_results); already-terminal runs return an
+    error.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
-  name: workspace_uuid
+  name: eval_run_uuid
   required: true
   schema:
     type: string
-- description: Workspace name.
-  example: '"example string"'
-  in: query
-  name: agent_workspace_name
-  schema:
-    type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ./definitions.yml#/apiCancelModelEvaluationRunInputPublic
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListEvaluationTestCasesByWorkspaceOutput
+          $ref: ./definitions.yml#/apiCancelModelEvaluationRunOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -41,9 +44,9 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:read
-summary: List Evaluation Test Cases by Workspace
+  - genai:update
+summary: Cancel Model Evaluation Run
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_evaluation_test_cases_by_workspace.yml
+- $ref: examples/curl/genai_cancel_model_evaluation_run.yml

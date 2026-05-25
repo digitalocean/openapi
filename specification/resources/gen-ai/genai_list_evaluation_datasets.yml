@@ -1,12 +1,23 @@
-description: To list built-in and account custom LLM-as-judge metrics for model evaluation,
-  send a GET request to `/v2/genai/model_evaluation_metrics`.
-operationId: genai_list_model_evaluation_metrics
+description: To list evaluation datasets, send a GET request to `/v2/genai/evaluation_datasets`.
+operationId: genai_list_evaluation_datasets
+parameters:
+- default: EVALUATION_DATASET_TYPE_UNKNOWN
+  example: '"example string"'
+  in: query
+  name: dataset_type
+  schema:
+    enum:
+    - EVALUATION_DATASET_TYPE_UNKNOWN
+    - EVALUATION_DATASET_TYPE_ADK
+    - EVALUATION_DATASET_TYPE_NON_ADK
+    - EVALUATION_DATASET_TYPE_MODEL
+    type: string
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListModelEvaluationMetricsOutput
+          $ref: ./definitions.yml#/apiListEvaluationDatasetsOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -28,8 +39,8 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: List Model Evaluation Metrics
+summary: List Evaluation Datasets
 tags:
 - GradientAI Platform
 x-codeSamples:
-- $ref: examples/curl/genai_list_model_evaluation_metrics.yml
+- $ref: examples/curl/genai_list_evaluation_datasets.yml
