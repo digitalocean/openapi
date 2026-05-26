@@ -1,0 +1,26 @@
+type: object
+
+properties:
+  backup_id:
+    type: string
+    example: vectordb-9cc10173-e9ea-4176-9dbc-a4cee4c4ff30-20240101-120000
+    description: The backup ID being restored.
+  status:
+    type: string
+    enum:
+      - STARTED
+      - TRANSFERRING
+      - TRANSFERRED
+      - FINALIZING
+      - SUCCESS
+      - FAILED
+      - CANCELLING
+      - CANCELED
+    example: STARTED
+    description: >-
+      Current status: STARTED, TRANSFERRING, TRANSFERRED, FINALIZING, SUCCESS,
+      FAILED, CANCELLING, CANCELED.
+  error:
+    type: string
+    example: ''
+    description: Error message if the restore failed.

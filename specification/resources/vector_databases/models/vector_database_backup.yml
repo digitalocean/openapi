@@ -1,0 +1,24 @@
+type: object
+
+description: Backup represents a single backup of a vector database.
+
+properties:
+  backup_id:
+    type: string
+    example: vectordb-9cc10173-e9ea-4176-9dbc-a4cee4c4ff30-20240101-120000
+    description: >-
+      Unique identifier for the backup (e.g., "vectordb-{uuid}-20240101-120000").
+  status:
+    type: string
+    example: SUCCESS
+    description: 'Status of the backup: SUCCESS.'
+  started_at:
+    type: string
+    format: date-time
+    example: '2024-01-01T12:00:00Z'
+    description: Timestamp when the backup process started.
+  completed_at:
+    type: string
+    format: date-time
+    example: '2024-01-01T12:05:00Z'
+    description: Timestamp when the backup process completed.
