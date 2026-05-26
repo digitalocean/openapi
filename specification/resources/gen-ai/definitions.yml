@@ -5538,6 +5538,20 @@ apiListModelEvaluationPresetsOutput:
   type: object
 apiListModelEvaluationRunsOutput:
   properties:
+    available_candidate_types:
+      description: |-
+        Full set of candidate model source types the FE can offer in the
+        candidate-type filter UI.
+      items:
+        $ref: '#/apiCandidateModelSource'
+      type: array
+    available_statuses:
+      description: |-
+        Full set of statuses the FE can offer in the status filter UI. Returned
+        on every list call so clients never need to hardcode the enum values.
+      items:
+        $ref: '#/apiModelEvaluationRunStatus'
+      type: array
     links:
       $ref: '#/apiLinks'
     meta:
