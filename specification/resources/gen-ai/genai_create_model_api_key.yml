@@ -31,7 +31,7 @@ responses:
           id: gone
           message: >-
             resource retired: Creating model API keys through this endpoint is retired.
-            Go to https://cloud.digitalocean.com/model-studio/manage-keys to create a model access key.
+            Go to manage page in the control panel to create a model access key.
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "429":
