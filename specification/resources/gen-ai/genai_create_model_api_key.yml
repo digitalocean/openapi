@@ -2,7 +2,7 @@ deprecated: true
 
 summary: Create a Model API Key
 description: |
-  **Note: This endpoint is deprecated and has been retired. All requests return a `410` response.**
+  **Note: This endpoint is deprecated and has been retired. All requests return a `410 gone` response.**
 
   Creating model API keys through this endpoint is no longer supported. To create a model access key, visit the manage page in the control panel.
 
