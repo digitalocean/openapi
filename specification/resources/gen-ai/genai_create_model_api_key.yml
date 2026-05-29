@@ -2,9 +2,9 @@ deprecated: true
 
 summary: Create a Model API Key
 description: |
-  **Note: This endpoint is deprecated and has been retired. All requests return a `410 Gone` response.**
+  **Note: This endpoint is deprecated and has been retired. All requests return a `410` response.**
 
-  Creating model API keys through this endpoint is no longer supported. To create a model access key, visit the [Model Access Keys](https://cloud.digitalocean.com/model-studio/manage-keys) page in the control panel.
+  Creating model API keys through this endpoint is no longer supported. To create a model access key, visit the manage page in the control panel.
 
   Previously, you could create a model API key by sending a POST request to `/v2/gen-ai/models/api_keys`.
 operationId: genai_create_model_api_key
