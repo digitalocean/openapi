@@ -1,0 +1,77 @@
+type: object
+
+description: VectorDB represents a provisioned vector database instance.
+
+properties:
+  id:
+    type: string
+    example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
+    description: A unique ID that can be used to identify and reference a vector database.
+    readOnly: true
+  name:
+    type: string
+    example: my-vector-db
+    description: A unique, human-readable name referring to a vector database.
+  region:
+    type: string
+    example: nyc3
+    description: The slug identifier for the region where the vector database is located.
+  owner_uuid:
+    type: string
+    example: 8b3b4c5d-6e7f-8901-a234-567890bcdef0
+    description: The UUID of the account that owns the vector database.
+    readOnly: true
+  status:
+    type: string
+    enum:
+      - pending
+      - creating
+      - active
+      - errored
+      - deleting
+    example: active
+    description: 'Lifecycle state: pending, creating, active, errored, or deleting.'
+    readOnly: true
+  config:
+    allOf:
+      - $ref: './vector_database_config.yml'
+    description: Advanced configuration.
+  created_at:
+    type: string
+    format: date-time
+    example: '2024-01-11T18:37:36Z'
+    description: >-
+      A time value given in ISO8601 combined date and time format that represents
+      when the vector database was created.
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    example: '2024-01-11T18:37:36Z'
+    description: >-
+      A time value given in ISO8601 combined date and time format that represents
+      when the vector database was last updated.
+    readOnly: true
+  endpoints:
+    allOf:
+      - $ref: './vector_database_endpoints.yml'
+    description: Connection endpoints for the database instance.
+    readOnly: true
+  size:
+    type: string
+    enum:
+      - small
+      - medium
+      - large
+    example: medium
+    description: 'Resource tier: small, medium, or large.'
+  tags:
+    type: array
+    items:
+      type: string
+    example:
+      - production
+    nullable: true
+    description: >-
+      An array of tags (as strings) to organize your vector database.
+      <br><br>Requires `tag:create` scope.

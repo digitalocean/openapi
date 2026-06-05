@@ -1,0 +1,29 @@
+description: A JSON object with the initial status of a restore operation.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        backup_id:
+          type: string
+          example: vectordb-9cc10173-e9ea-4176-9dbc-a4cee4c4ff30-20240101-120000
+          description: The backup ID being restored.
+        status:
+          type: string
+          example: STARTED
+          description: Initial status of the restore operation (e.g., "STARTED").
+      required:
+        - backup_id
+        - status
+    example:
+      backup_id: vectordb-9cc10173-e9ea-4176-9dbc-a4cee4c4ff30-20240101-120000
+      status: STARTED

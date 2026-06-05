@@ -583,6 +583,13 @@ tags:
 
       To interact with Uptime, you will generally send requests to the Uptime endpoint at `/v2/uptime/`.
 
+  - name: Vector Databases
+    description: |-
+      Vector DB provides APIs for provisioning and managing vector database instances
+      on DigitalOcean. By sending requests to the `/v2/vector-databases` endpoint,
+      you can list, create, update, resize, and delete vector database instances,
+      manage tags, retrieve admin credentials, and work with backups and restores.
+
   - name: "VPC NAT Gateways"
     description: |-
       [VPC NAT Gateways](https://docs.digitalocean.com/products/networking/vpc/how-to/create-nat-gateway/)
@@ -698,6 +705,7 @@ x-tagGroups:
       - SSH Keys
       - Tags
       - Uptime
+      - Vector Databases
       - VPC NAT Gateways
       - VPC Peerings
       - VPCs
@@ -2338,6 +2346,42 @@ paths:
       $ref: "resources/tags/tags_assign_resources.yml"
     delete:
       $ref: "resources/tags/tags_unassign_resources.yml"
+
+  /v2/vector-databases:
+    get:
+      $ref: "resources/vector_databases/vector_databases_list.yml"
+    post:
+      $ref: "resources/vector_databases/vector_databases_create.yml"
+
+  /v2/vector-databases/{id}:
+    get:
+      $ref: "resources/vector_databases/vector_databases_get.yml"
+    put:
+      $ref: "resources/vector_databases/vector_databases_update.yml"
+    delete:
+      $ref: "resources/vector_databases/vector_databases_delete.yml"
+
+  /v2/vector-databases/{id}/backups:
+    get:
+      $ref: "resources/vector_databases/vector_databases_list_backups.yml"
+
+  /v2/vector-databases/{id}/backups/{backup_id}/restore:
+    get:
+      $ref: "resources/vector_databases/vector_databases_get_restore_status.yml"
+    post:
+      $ref: "resources/vector_databases/vector_databases_restore_backup.yml"
+
+  /v2/vector-databases/{id}/credentials:
+    get:
+      $ref: "resources/vector_databases/vector_databases_get_credentials.yml"
+
+  /v2/vector-databases/{id}/resize:
+    post:
+      $ref: "resources/vector_databases/vector_databases_resize.yml"
+
+  /v2/vector-databases/{id}/tags:
+    put:
+      $ref: "resources/vector_databases/vector_databases_update_tags.yml"
 
   /v2/volumes:
     get:
