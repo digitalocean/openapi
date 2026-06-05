@@ -8013,8 +8013,33 @@ apiUpdateCustomModelMetadataInputPublic:
     description:
       example: example string
       type: string
+    input_modalities:
+      description: Input modalities supported (e.g., text, image)
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    license:
+      description: License under which the model is distributed
+      example: example string
+      type: string
     name:
       example: example name
+      type: string
+    output_modalities:
+      description: Output modalities supported (e.g., text, image)
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    parameters:
+      description: Number of parameters in the model
+      example: "12345"
+      format: uint64
       type: string
     tags:
       $ref: '#/CustomModelTags'
