@@ -46,5 +46,6 @@ required:
   - created_at
   - updated_at
   - health_status
+  - unhealthy_reason
   - status
   - current_utilization
