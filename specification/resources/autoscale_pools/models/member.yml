@@ -24,10 +24,9 @@ properties:
     description: The health status of the Droplet.
   unhealthy_reason:
     type: string
-    nullable: true
     description: |
-      A human-readable description of why the Droplet is unhealthy. Returns
-      `null` when `health_status` is `healthy`.
+      A human-readable description of why the Droplet is unhealthy. Only
+      present when `health_status` is `unhealthy`.
     example: 'Droplet failed health check'
   status:
     type: string
@@ -46,6 +45,5 @@ required:
   - created_at
   - updated_at
   - health_status
-  - unhealthy_reason
   - status
   - current_utilization

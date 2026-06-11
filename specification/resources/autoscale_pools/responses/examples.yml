@@ -73,7 +73,6 @@ members_all:
         created_at: 2020-11-19T20:27:18Z
         updated_at: 2020-12-01T00:42:16Z
         health_status: "healthy"
-        unhealthy_reason: null
         status: "active"
         current_utilization:
           memory: 0.3588531587713522
