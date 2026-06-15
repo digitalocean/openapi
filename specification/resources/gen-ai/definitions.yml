@@ -2870,6 +2870,9 @@ apiDeleteCustomModelStatus:
   - DELETE_CUSTOM_MODEL_STATUS_FAIL
   example: DELETE_CUSTOM_MODEL_STATUS_UNSPECIFIED
   type: string
+apiDeleteEvaluationDatasetOutput:
+  description: Response for a delete evaluation dataset request.
+  type: object
 apiDeleteGuardrailOutput:
   description: DeleteGuardrailOutput description
   properties:
