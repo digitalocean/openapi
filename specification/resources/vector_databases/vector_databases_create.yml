@@ -1,8 +1,7 @@
 description: To create a vector database, send a POST request to `/v2/vector-databases`.
   The response body contains a JSON object with a `vector_db` key holding the newly
   created database. Its initial `status` is `creating` and changes to `active` once
-  the database is ready to receive traffic. The embedded `endpoints` object contains
-  the connection information needed to access the database.
+  the database is ready to receive traffic.
 operationId: vectorDatabases_create
 requestBody:
   content:
