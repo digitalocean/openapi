@@ -1662,6 +1662,22 @@ apiCancelKnowledgeBaseIndexingJobOutput:
     job:
       $ref: '#/apiIndexingJob'
   type: object
+apiCancelModelEvaluationRunInputPublic:
+  properties:
+    eval_run_uuid:
+      description: |-
+        UUID of the model evaluation run to cancel. Returned by `CreateModelEvaluationRun`
+        and listed via `ListModelEvaluationRuns`. The run must be in a non-terminal status
+        (queued, running_dataset, or evaluating_results); already-terminal runs return an
+        error.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+  type: object
+apiCancelModelEvaluationRunOutput:
+  properties:
+    run:
+      $ref: '#/apiModelEvaluationRunSummary'
+  type: object
 apiCandidateInferenceConfig:
   description: Inference configuration for the candidate model during evaluation.
   properties:
@@ -2854,6 +2870,9 @@ apiDeleteCustomModelStatus:
   - DELETE_CUSTOM_MODEL_STATUS_FAIL
   example: DELETE_CUSTOM_MODEL_STATUS_UNSPECIFIED
   type: string
+apiDeleteEvaluationDatasetOutput:
+  description: Response for a delete evaluation dataset request.
+  type: object
 apiDeleteGuardrailOutput:
   description: DeleteGuardrailOutput description
   properties:
@@ -2899,6 +2918,8 @@ apiDeleteModelAPIKeyOutput:
   properties:
     api_key_info:
       $ref: '#/apiModelAPIKeyInfo'
+  type: object
+apiDeleteModelEvaluationPresetOutput:
   type: object
 apiDeleteModelEvaluationRunInputPublic:
   properties:
@@ -5520,6 +5541,20 @@ apiListModelEvaluationPresetsOutput:
   type: object
 apiListModelEvaluationRunsOutput:
   properties:
+    available_candidate_types:
+      description: |-
+        Full set of candidate model source types the FE can offer in the
+        candidate-type filter UI.
+      items:
+        $ref: '#/apiCandidateModelSource'
+      type: array
+    available_statuses:
+      description: |-
+        Full set of statuses the FE can offer in the status filter UI. Returned
+        on every list call so clients never need to hardcode the enum values.
+      items:
+        $ref: '#/apiModelEvaluationRunStatus'
+      type: array
     links:
       $ref: '#/apiLinks'
     meta:
@@ -7981,8 +8016,33 @@ apiUpdateCustomModelMetadataInputPublic:
     description:
       example: example string
       type: string
+    input_modalities:
+      description: Input modalities supported (e.g., text, image)
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    license:
+      description: License under which the model is distributed
+      example: example string
+      type: string
     name:
       example: example name
+      type: string
+    output_modalities:
+      description: Output modalities supported (e.g., text, image)
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    parameters:
+      description: Number of parameters in the model
+      example: "12345"
+      format: uint64
       type: string
     tags:
       $ref: '#/CustomModelTags'
