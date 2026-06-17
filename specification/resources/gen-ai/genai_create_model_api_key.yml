@@ -1,4 +1,12 @@
-description: To create a model API key, send a POST request to `/v2/gen-ai/models/api_keys`.
+deprecated: true
+
+summary: Create a Model API Key
+description: |
+  **Note: This endpoint is deprecated and has been retired. All requests return a `410 gone` response.**
+
+  Creating model API keys through this endpoint is no longer supported. To create a model access key, visit the manage page in the control panel.
+
+  Previously, you could create a model API key by sending a POST request to `/v2/gen-ai/models/api_keys`.
 operationId: genai_create_model_api_key
 requestBody:
   content:
@@ -6,12 +14,8 @@ requestBody:
       schema:
         $ref: ./definitions.yml#/apiCreateModelAPIKeyInputPublic
 responses:
-  "200":
-    content:
-      application/json:
-        schema:
-          $ref: ./definitions.yml#/apiCreateModelAPIKeyOutput
-    description: A successful response.
+  "410":
+    description: The endpoint has been retired.
     headers:
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
@@ -19,10 +23,17 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: ../../shared/models/error.yml
+        example:
+          id: gone
+          message: >-
+            resource retired: Creating model API keys through this endpoint is retired.
+            Go to manage page in the control panel to create a model access key.
   "401":
     $ref: ../../shared/responses/unauthorized.yml
-  "404":
-    $ref: ../../shared/responses/not_found.yml
   "429":
     $ref: ../../shared/responses/too_many_requests.yml
   "500":
@@ -32,8 +43,5 @@ responses:
 security:
 - bearer_auth:
   - genai:create
-summary: Create a Model API Key
 tags:
 - GradientAI Platform
-x-codeSamples:
-- $ref: examples/curl/genai_create_model_api_key.yml
