@@ -1,89 +1,43 @@
+description: To create a vector database, send a POST request to `/v2/vector-databases`.
+  The response body contains a JSON object with a `vector_db` key holding the newly
+  created database. Its initial `status` is `creating` and changes to `active` once
+  the database is ready to receive traffic. The embedded `endpoints` object contains
+  the connection information needed to access the database.
 operationId: vectorDatabases_create
-
-summary: Create a New Vector Database
-
-description: >-
-  To create a vector database, send a POST request to `/v2/vector-databases`.
-
-
-  The create response returns a JSON object with a key called `vector_db`. The value
-  of this is an object that contains the standard attributes associated with a vector
-  database. The initial value of the vector database's `status` attribute is
-  `creating`. When the database is ready to receive traffic, this changes to
-  `active`.
-
-
-  The embedded `endpoints` object contains the connection information needed to access
-  the vector database.
-
-tags:
-  - Vector Databases
-
 requestBody:
-  required: true
   content:
     application/json:
       schema:
-        type: object
-        required:
-          - name
-          - region
-          - size
-        properties:
-          name:
-            type: string
-            example: my-vector-db
-            description: Required. Human-readable name for the database.
-          region:
-            type: string
-            example: nyc3
-            description: Required. Region slug where the database will be provisioned.
-          size:
-            type: string
-            enum:
-              - small
-              - medium
-              - large
-            example: medium
-            description: 'Required. Resource tier: small, medium, or large.'
-          tags:
-            type: array
-            items:
-              type: string
-            example:
-              - production
-            description: A set of arbitrary tags to organize your vector database.
-      examples:
-        Create a New Vector Database:
-          value:
-            name: my-vector-db
-            region: nyc3
-            size: medium
-            tags:
-              - production
-
+        $ref: ./definitions.yml#/vectordbCreateVectorDBRequest
 responses:
-  '201':
-    $ref: 'responses/vector_database.yml'
-
-  '401':
-    $ref: '../../shared/responses/unauthorized.yml'
-
-  '404':
-    $ref: '../../shared/responses/not_found.yml'
-
-  '429':
-    $ref: '../../shared/responses/too_many_requests.yml'
-
-  '500':
-    $ref: '../../shared/responses/server_error.yml'
-
+  "201":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/vectordbCreateVectorDBResponse
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "404":
+    $ref: ../../shared/responses/not_found.yml
+  "429":
+    $ref: ../../shared/responses/too_many_requests.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
   default:
-    $ref: '../../shared/responses/unexpected_error.yml'
-
-x-codeSamples:
-  - $ref: 'examples/curl/vector_databases_create.yml'
-
+    $ref: ../../shared/responses/unexpected_error.yml
 security:
-  - bearer_auth:
-    - 'database:create'
+- bearer_auth:
+  - database:create
+summary: Create a New Vector Database
+tags:
+- Vector Databases
+x-codeSamples:
+- $ref: examples/curl/vector_databases_create.yml
