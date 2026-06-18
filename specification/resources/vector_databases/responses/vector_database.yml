@@ -1,0 +1,38 @@
+description: A JSON object with a key of `vector_db`.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        vector_db:
+          $ref: '../models/vector_database.yml'
+      required:
+        - vector_db
+    example:
+      vector_db:
+        id: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
+        name: my-vector-db
+        region: nyc3
+        owner_uuid: 8b3b4c5d-6e7f-8901-a234-567890bcdef0
+        status: active
+        config:
+          default_quantization: rq
+          enable_auto_schema: true
+          weaviate_version: '1.24.0'
+        created_at: '2024-01-11T18:37:36Z'
+        updated_at: '2024-01-11T18:37:36Z'
+        endpoints:
+          http: https://my-db-abc123.vectordb.digitalocean.com
+          grpc: my-db-abc123.vectordb.digitalocean.com:443
+        size: medium
+        tags:
+          - production
