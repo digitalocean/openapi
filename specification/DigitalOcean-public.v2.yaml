@@ -2656,6 +2656,11 @@ paths:
       $ref: 'resources/gen-ai/genai_create_evaluation_dataset_file_upload_presigned_urls.yml'
 
 
+  /v2/gen-ai/evaluation_datasets/{dataset_uuid}:
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_evaluation_dataset.yml'
+
+
   /v2/gen-ai/evaluation_datasets/{dataset_uuid}/download_url:
     get:
       $ref: 'resources/gen-ai/genai_get_evaluation_dataset_download_url.yml'
