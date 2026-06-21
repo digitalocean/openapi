@@ -6271,6 +6271,8 @@ apiModelEvaluationRunDetail:
       description: Name of the evaluation run.
       example: example name
       type: string
+    progress:
+      $ref: '#/apiModelEvaluationRunProgress'
     result_summary:
       $ref: '#/apiModelEvaluationRunResultSummary'
     star_metric:
@@ -6281,6 +6283,32 @@ apiModelEvaluationRunDetail:
       type: string
     status:
       $ref: '#/apiModelEvaluationRunStatus'
+  type: object
+apiModelEvaluationRunProgress:
+  description: |-
+    Per-phase progress for a model evaluation run. The candidate phase invokes the
+    candidate model once per dataset row; the judge phase scores each
+    candidate-success row with the configured metrics. Counts grow as the run
+    advances; compare against total_rows to render a progress bar.
+  properties:
+    candidate_rows_evaluated:
+      description: Dataset rows whose candidate model call has completed (success
+        or failure).
+      example: 100
+      format: int64
+      type: integer
+    judge_rows_evaluated:
+      description: |-
+        Candidate-success rows the judge has finished (scored or skipped). Caps at
+        the number of candidate successes, which may be below total_rows.
+      example: 95
+      format: int64
+      type: integer
+    total_rows:
+      description: Total dataset rows for the run, sourced from the evaluation dataset.
+      example: 100
+      format: int64
+      type: integer
   type: object
 apiModelEvaluationRunResultSummary:
   description: Aggregated result summary for a completed model evaluation run.
@@ -6374,6 +6402,8 @@ apiModelEvaluationRunSummary:
       description: Name of the evaluation run.
       example: example name
       type: string
+    progress:
+      $ref: '#/apiModelEvaluationRunProgress'
     status:
       $ref: '#/apiModelEvaluationRunStatus'
   type: object
