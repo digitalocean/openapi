@@ -7,7 +7,8 @@ description: |
   `/v2/nfs/shares/{share_id}/access_points`. You may use query parameters to filter
   by status.
 
-  A successful request will return a list of NFS access points.
+  A successful request will return a list of NFS access points ordered with the default
+  access point first, then by `created_at` ascending.
 
 tags:
   - NFS
@@ -57,4 +58,3 @@ responses:
 security:
   - bearer_auth:
       - "nfs:read"
-

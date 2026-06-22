@@ -13,21 +13,16 @@ headers:
 content:
   application/json:
     schema:
-      type: object
-      properties:
-        access_point:
-          $ref: '../models/access_point_response.yml'
-      required:
-        - access_point
+      $ref: '../models/access_point_get_response.yml'
 
     examples:
       Active Access Point:
         value:
           access_point:
             id: "a1b2c3d4-e5f6-4a5b-9c8d-1e2f3a4b5c6d"
-            name: "my-access-point"
+            name: "team-a"
             share_id: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
-            path: "/exports/data"
+            path: "/team-a"
             status: "ACCESS_POINT_ACTIVE"
             is_default: false
             created_at: "2023-01-01T00:00:00Z"
@@ -37,5 +32,4 @@ content:
               anongid: 65534
               protocols: ["NFS4"]
               squash_config: "ROOT_SQUASH"
-              identity_enforcement_enabled: true
-
+              identity_enforcement_enabled: false

@@ -11,7 +11,7 @@ properties:
   name:
     type: string
     description: The human-readable name of the access point. Must be unique per share.
-    example: "my-access-point"
+    example: "team-a"
   share_id:
     type: string
     format: uuid
@@ -20,8 +20,8 @@ properties:
     example: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
   path:
     type: string
-    description: The export sub-path for this access point. Must start with "/" and cannot be "/".
-    example: "/exports/data"
+    description: The export sub-path for this access point (always starts with `/`).
+    example: "/team-a"
   status:
     type: string
     enum: ["ACCESS_POINT_CREATING", "ACCESS_POINT_ACTIVE", "ACCESS_POINT_FAILED", "ACCESS_POINT_DELETED"]
@@ -68,4 +68,3 @@ required:
   - created_at
   - updated_at
   - is_default
-

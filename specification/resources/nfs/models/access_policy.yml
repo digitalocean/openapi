@@ -1,6 +1,9 @@
 ---
 type: object
-description: Provider-agnostic NFS access policy for an access point.
+description: |
+  Provider-agnostic NFS access policy for an access point. Network CIDRs are
+  managed by attach, detach, and managed-access workflows and are not part of
+  this policy.
 properties:
   anonuid:
     type: integer
@@ -14,9 +17,9 @@ properties:
     type: array
     items:
       type: string
-      enum: ["NFS", "NFS4"]
+      enum: ["NFS4", "NFS"]
     description: Allowed NFS protocols for this export.
-    example: ["NFS4"]
+    example: ["NFS4", "NFS"]
   squash_config:
     type: string
     enum: ["NO_SQUASH", "ROOT_SQUASH", "ALL_SQUASH"]
@@ -25,11 +28,10 @@ properties:
   identity_enforcement_enabled:
     type: boolean
     description: Whether identity enforcement is enabled for this export.
-    example: true
+    example: false
 required:
   - anonuid
   - anongid
   - protocols
   - squash_config
   - identity_enforcement_enabled
-

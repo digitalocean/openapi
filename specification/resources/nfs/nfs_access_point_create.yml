@@ -8,6 +8,10 @@ description: |
 
   A successful request will return the newly created access point and an action object.
 
+  The parent share must be in `ACTIVE` or `INACTIVE` status. Validation failures and
+  precondition errors (such as an ineligible share state) return `400 Bad Request`.
+  Duplicate name or path conflicts return `409 Conflict`.
+
 tags:
   - NFS
 
@@ -30,8 +34,8 @@ requestBody:
       examples:
         Basic Access Point:
           value:
-            name: "my-access-point"
-            path: "/exports/data"
+            name: "team-a"
+            path: "/team-a"
             access_policy:
               anonuid: 65534
               anongid: 65534
@@ -52,6 +56,9 @@ responses:
   '404':
     $ref: '../../shared/responses/not_found.yml'
 
+  '409':
+    $ref: '../../shared/responses/conflict.yml'
+
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'
 
@@ -64,4 +71,3 @@ responses:
 security:
   - bearer_auth:
       - "nfs:create"
-

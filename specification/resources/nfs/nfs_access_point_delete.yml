@@ -9,6 +9,9 @@ description: |
   A successful request will soft-delete the access point and return the deleted access point
   with status `ACCESS_POINT_DELETED` and an action object indicating the delete operation.
 
+  The default access point (`is_default: true`) cannot be deleted. Access points already
+  in `ACCESS_POINT_DELETED` or `ACCESS_POINT_FAILED` status return `400 Bad Request`.
+
 tags:
   - NFS
 
@@ -25,6 +28,9 @@ parameters:
 responses:
   "200":
     $ref: "responses/access_point_delete.yml"
+
+  "400":
+    $ref: "responses/bad_request.yml"
 
   "401":
     $ref: "../../shared/responses/unauthorized.yml"
@@ -44,4 +50,3 @@ responses:
 security:
   - bearer_auth:
       - "nfs:delete"
-
