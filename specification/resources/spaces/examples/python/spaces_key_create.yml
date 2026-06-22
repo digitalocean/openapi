@@ -1,0 +1,18 @@
+lang: Python
+source: |-
+  import os
+  from pydo import Client
+
+  client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
+
+  req = {
+    "name": "read-only-key",
+    "grants": [
+      {
+        "bucket": "my-bucket",
+        "permission": "read"
+      }
+    ]
+  }
+
+  resp = client.spaces_key.create(body=req)
