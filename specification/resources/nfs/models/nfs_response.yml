@@ -20,8 +20,10 @@ properties:
     example: "atl1"
   status:
     type: string
-    enum: [CREATING, ACTIVE, FAILED, DELETED]
-    description: The current status of the share.
+    enum: [CREATING, ACTIVE, INACTIVE, FAILED, DELETED]
+    description: |
+      The current status of the share. `INACTIVE` means the share exists but is
+      not attached to any VPC.
     readOnly: true
     example: "ACTIVE"
   created_at:
@@ -36,6 +38,10 @@ properties:
       type: string
     description: List of VPC IDs that should be able to access the share.
     example: ["796c6fe3-2a1d-4da2-9f3e-38239827dc91"]
+  performance_tier:
+    type: string
+    description: The performance tier of the share.
+    example: "PERFORMANCE_TIER_HIGH"
   mount_path:
     type: string
     description: Path at which the share will be available, to be mounted at a target of the user's choice within the client
