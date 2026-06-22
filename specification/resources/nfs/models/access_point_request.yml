@@ -1,0 +1,27 @@
+---
+type: object
+description: Payload for creating a new access point on a share.
+properties:
+  name:
+    type: string
+    description: The name for the access point. Must be unique per share.
+    example: "my-access-point"
+  path:
+    type: string
+    description: The export sub-path. Must start with "/" and cannot be "/".
+    example: "/exports/data"
+  access_policy:
+    $ref: "access_policy.yml"
+  vpc_id:
+    type: string
+    description: |
+      Optional VPC to mount this access point from. When unset (or set to a VPC the share
+      is already attached to), the access point inherits the share's VPC and storage gateway.
+      When set to a different VPC, a storage gateway is provisioned or reused in that VPC.
+    nullable: true
+    example: "796c6fe3-2a1d-4da2-9f3e-38239827dc91"
+required:
+  - name
+  - path
+  - access_policy
+

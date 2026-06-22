@@ -1,0 +1,43 @@
+description: >-
+  The response will be a JSON object containing the created access point and an action object.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/access_point_action_response.yml'
+
+    examples:
+      Creating Access Point:
+        value:
+          access_point:
+            id: "a1b2c3d4-e5f6-4a5b-9c8d-1e2f3a4b5c6d"
+            name: "my-access-point"
+            share_id: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
+            path: "/exports/data"
+            status: "ACCESS_POINT_CREATING"
+            is_default: false
+            created_at: "2023-01-01T00:00:00Z"
+            updated_at: "2023-01-01T00:00:00Z"
+            access_policy:
+              anonuid: 65534
+              anongid: 65534
+              protocols: ["NFS4"]
+              squash_config: "ROOT_SQUASH"
+              identity_enforcement_enabled: true
+          action:
+            id: "1"
+            region_slug: "atl1"
+            resource_id: "a1b2c3d4-e5f6-4a5b-9c8d-1e2f3a4b5c6d"
+            resource_type: "network_file_share"
+            type: "CREATE_ACCESS_POINT"
+            status: "in-progress"
+            started_at: "2023-01-01T00:00:00Z"
+

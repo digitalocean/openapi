@@ -1,0 +1,71 @@
+---
+type: object
+description: Represents an NFS access point resource.
+properties:
+  id:
+    type: string
+    format: uuid
+    description: The unique identifier of the access point.
+    readOnly: true
+    example: "a1b2c3d4-e5f6-4a5b-9c8d-1e2f3a4b5c6d"
+  name:
+    type: string
+    description: The human-readable name of the access point. Must be unique per share.
+    example: "my-access-point"
+  share_id:
+    type: string
+    format: uuid
+    description: The unique identifier of the share this access point belongs to.
+    readOnly: true
+    example: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
+  path:
+    type: string
+    description: The export sub-path for this access point. Must start with "/" and cannot be "/".
+    example: "/exports/data"
+  status:
+    type: string
+    enum: ["ACCESS_POINT_CREATING", "ACCESS_POINT_ACTIVE", "ACCESS_POINT_FAILED", "ACCESS_POINT_DELETED"]
+    description: |
+      The current lifecycle status of an access point. There is no ACCESS_POINT_DELETING state:
+      DELETE soft-deletes the access point synchronously (mirroring share deletion);
+      the response of a delete request returns the access point already in ACCESS_POINT_DELETED.
+    readOnly: true
+    example: "ACCESS_POINT_ACTIVE"
+  access_policy:
+    $ref: "access_policy.yml"
+  created_at:
+    type: string
+    format: date-time
+    description: The timestamp when the access point was created.
+    readOnly: true
+    example: "2023-01-01T00:00:00Z"
+  updated_at:
+    type: string
+    format: date-time
+    description: The timestamp when the access point was last updated.
+    readOnly: true
+    example: "2023-01-01T01:00:00Z"
+  is_default:
+    type: boolean
+    description: Whether this is the share's default access point.
+    readOnly: true
+    example: false
+  vpc_id:
+    type: string
+    description: |
+      The VPC this access point is pinned to. When unset, the access point inherits
+      the parent share's VPC(s). When set, the access point is mountable from this
+      specific VPC with its own storage gateway.
+    nullable: true
+    example: "796c6fe3-2a1d-4da2-9f3e-38239827dc91"
+required:
+  - id
+  - name
+  - share_id
+  - path
+  - status
+  - access_policy
+  - created_at
+  - updated_at
+  - is_default
+
