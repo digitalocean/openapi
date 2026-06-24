@@ -23,6 +23,7 @@ content:
             name: "team-a"
             share_id: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
             path: "/team-a"
+            vpc_id: "796c6fe3-2a1d-4da2-9f3e-38239827dc91"
             status: "ACCESS_POINT_ACTIVE"
             is_default: false
             created_at: "2023-01-01T00:00:00Z"

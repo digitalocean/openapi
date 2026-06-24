@@ -23,12 +23,12 @@ properties:
   vpc_id:
     type: string
     description: |
-      Optional VPC to mount this access point from. When unset (or set to a VPC the share
-      is already attached to), the access point inherits the share's VPC and storage gateway.
-      When set to a different VPC, a storage gateway is provisioned or reused in that VPC.
-    nullable: true
+      Required. The VPC this access point will be pinned to. A storage gateway is
+      provisioned (or reused) in this VPC, and the access point becomes mountable from
+      this VPC regardless of whether the parent share is currently attached to it.
     example: "796c6fe3-2a1d-4da2-9f3e-38239827dc91"
 required:
   - name
   - path
   - access_policy
+  - vpc_id

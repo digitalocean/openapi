@@ -53,10 +53,10 @@ properties:
   vpc_id:
     type: string
     description: |
-      The VPC this access point is pinned to. When unset, the access point inherits
-      the parent share's VPC(s). When set, the access point is mountable from this
-      specific VPC with its own storage gateway.
-    nullable: true
+      The VPC this access point is pinned to. Every non-default access point owns its
+      own storage gateway in this VPC and is independent of the parent share's VPC
+      lifecycle: it remains mountable from this VPC regardless of whether the share is
+      currently attached to it.
     example: "796c6fe3-2a1d-4da2-9f3e-38239827dc91"
 required:
   - id
