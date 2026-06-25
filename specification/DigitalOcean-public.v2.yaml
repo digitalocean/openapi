@@ -534,7 +534,7 @@ tags:
 
   - name: Security
     description: |-
-      Security CSPM endpoints for scans, scan findings, and settings.
+      Security endpoints for CSPM scans, scan findings, settings, and Secrets Manager.
 
   - name: Sizes
     description: |-
@@ -2307,6 +2307,31 @@ paths:
   /v2/security/settings/suppressions/{suppression_uuid}:
     delete:
       $ref: "resources/security/security_suppression_delete.yml"
+
+  /v2/security/secrets:
+    get:
+      $ref: "resources/security/security_secrets_list.yml"
+
+    post:
+      $ref: "resources/security/security_secret_create.yml"
+
+  /v2/security/secrets/{secret}:
+    get:
+      $ref: "resources/security/security_secret_get.yml"
+
+    put:
+      $ref: "resources/security/security_secret_update.yml"
+
+    delete:
+      $ref: "resources/security/security_secret_delete.yml"
+
+  /v2/security/secrets/{secret}/versions:
+    get:
+      $ref: "resources/security/security_secret_list_versions.yml"
+
+  /v2/security/secrets/{secret}/restore:
+    post:
+      $ref: "resources/security/security_secret_restore.yml"
 
   /v2/sizes:
     get:
