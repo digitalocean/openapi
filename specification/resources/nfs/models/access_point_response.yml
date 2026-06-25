@@ -11,7 +11,7 @@ properties:
   name:
     type: string
     description: The human-readable name of the access point. Must be unique per share.
-    example: "team-a"
+    example: "other-vpc"
   share_id:
     type: string
     format: uuid
@@ -21,7 +21,7 @@ properties:
   path:
     type: string
     description: The export sub-path for this access point (always starts with `/`).
-    example: "/team-a"
+    example: "/other-vpc"
   status:
     type: string
     enum: ["ACCESS_POINT_CREATING", "ACCESS_POINT_ACTIVE", "ACCESS_POINT_FAILED", "ACCESS_POINT_DELETED"]
@@ -41,10 +41,11 @@ properties:
     example: "2023-01-01T00:00:00Z"
   updated_at:
     type: string
-    format: date-time
-    description: The timestamp when the access point was last updated.
+    description: |
+      The timestamp when the access point was last updated. May be empty while the
+      access point is still being created.
     readOnly: true
-    example: "2023-01-01T01:00:00Z"
+    example: "2026-06-25T08:11:16Z"
   is_default:
     type: boolean
     description: Whether this is the share's default access point.
@@ -53,11 +54,10 @@ properties:
   vpc_id:
     type: string
     description: |
-      The VPC this access point is pinned to. Every non-default access point owns its
-      own storage gateway in this VPC and is independent of the parent share's VPC
-      lifecycle: it remains mountable from this VPC regardless of whether the share is
-      currently attached to it.
-    example: "796c6fe3-2a1d-4da2-9f3e-38239827dc91"
+      The VPC this access point is pinned to. Omitted on the default access point.
+      Every non-default access point owns its own storage gateway in this VPC and
+      is independent of the parent share's VPC lifecycle.
+    example: "3f34cdb2-1e4f-4100-b5c7-f55f2762085f"
 required:
   - id
   - name

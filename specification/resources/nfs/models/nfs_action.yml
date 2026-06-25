@@ -5,36 +5,39 @@ properties:
   id:
     type: string
     description: The unique identifier of the action.
-    example: "1"
+    example: "084c3b9c-2382-441b-92d4-10b095bb5d7c"
   region_slug:
     type: string
     description: The DigitalOcean region slug where the resource is located.
-    example: "atl1"
+    example: "s2r1"
   resource_id:
     type: string
     format: uuid
     description: The unique identifier of the resource on which the action is being performed.
-    example: "a1b2c3d4-e5f6-4a5b-9c8d-1e2f3a4b5c6d"
+    example: "7659ce91-354d-4f61-9cda-ae2c7feb61d9"
   resource_type:
     type: string
-    enum: ["network_file_share", "network_file_share_snapshot"]
-    description: The type of resource on which the action is being performed.
-    example: "network_file_share"
+    enum: ["SHARE", "SNAPSHOT"]
+    description: |
+      The type of resource on which the action is being performed. Access point
+      mutations return `SHARE` with `resource_id` set to the access point UUID.
+    example: "SHARE"
   started_at:
     type: string
     format: date-time
     description: The timestamp when the action was started.
-    example: "2025-10-14T11:55:31.615157397Z"
+    example: "2026-06-25T08:11:12Z"
   status:
     type: string
-    enum: ["in-progress", "completed", "errored"]
+    enum: ["IN_PROGRESS", "COMPLETED", "ACTION_FAILED"]
     description: The current status of the action.
-    example: "in-progress"
+    example: "IN_PROGRESS"
   type:
     type: string
     description: |
-      The type of action being performed. Share actions use values such as resize
-      and snapshot. Access point mutations use CREATE_ACCESS_POINT and DELETE_ACCESS_POINT.
+      The type of action being performed. Share actions use values such as
+      `RESIZE_SHARE` and `CREATE_SHARE`. Access point mutations use
+      `CREATE_ACCESS_POINT` and `DELETE_ACCESS_POINT`.
     example: "CREATE_ACCESS_POINT"
 required:
   - region_slug

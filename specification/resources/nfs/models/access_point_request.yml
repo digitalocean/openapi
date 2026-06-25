@@ -9,7 +9,7 @@ properties:
       characters and match `^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$`.
       The name `default` is reserved (case-insensitive) for the implicit default
       access point created with each share.
-    example: "team-a"
+    example: "other-vpc"
   path:
     type: string
     description: |
@@ -17,7 +17,7 @@ properties:
       for the default access point), must be at most 1024 characters, may contain
       only alphanumerics, `-`, `_`, `.`, and `/`, and must not contain `..` path
       segments.
-    example: "/team-a"
+    example: "/other-vpc"
   access_policy:
     $ref: "access_policy.yml"
   vpc_id:
@@ -26,7 +26,7 @@ properties:
       Required. The VPC this access point will be pinned to. A storage gateway is
       provisioned (or reused) in this VPC, and the access point becomes mountable from
       this VPC regardless of whether the parent share is currently attached to it.
-    example: "796c6fe3-2a1d-4da2-9f3e-38239827dc91"
+    example: "3f34cdb2-1e4f-4100-b5c7-f55f2762085f"
 required:
   - name
   - path

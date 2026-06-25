@@ -21,7 +21,7 @@ parameters:
       type: string
       format: uuid
     description: The unique identifier of the NFS share.
-    example: "0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"
+    example: "baf4827c-6fa9-456f-9dbd-9ddfcacd0720"
 
   - name: status
     in: query
@@ -54,6 +54,9 @@ responses:
 
   default:
     $ref: "../../shared/responses/unexpected_error.yml"
+
+x-codeSamples:
+  - $ref: "examples/curl/nfs_access_point_list.yml"
 
 security:
   - bearer_auth:
