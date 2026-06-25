@@ -14,14 +14,7 @@ tags:
   - NFS
 
 parameters:
-  - name: share_id
-    in: path
-    required: true
-    schema:
-      type: string
-      format: uuid
-    description: The unique identifier of the NFS share.
-    example: "baf4827c-6fa9-456f-9dbd-9ddfcacd0720"
+  - $ref: "parameters.yml#/share_id_path"
 
   - name: status
     in: query
@@ -39,6 +32,9 @@ parameters:
 responses:
   "200":
     $ref: "responses/access_point_list.yml"
+
+  "400":
+    $ref: "responses/access_point_bad_request.yml"
 
   "401":
     $ref: "../../shared/responses/unauthorized.yml"
@@ -60,4 +56,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-      - "nfs:read"
+      - "nfs:list"

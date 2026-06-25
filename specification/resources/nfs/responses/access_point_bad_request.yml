@@ -23,3 +23,7 @@ content:
         value:
           code: InvalidArgument
           message: the default access point cannot be deleted
+      Invalid status filter:
+        value:
+          code: INVALID_ACCESS_POINT_STATUS
+          message: invalid access point status

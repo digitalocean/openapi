@@ -11,14 +11,7 @@ tags:
   - NFS
 
 parameters:
-  - name: access_point_id
-    in: path
-    required: true
-    schema:
-      type: string
-      format: uuid
-    description: The unique identifier of the NFS access point.
-    example: "becd9f04-8afa-4ccd-b03e-9676447df603"
+  - $ref: "parameters.yml#/access_point_id"
 
 responses:
   "200":

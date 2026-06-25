@@ -16,14 +16,7 @@ tags:
   - NFS
 
 parameters:
-  - name: share_id
-    in: path
-    required: true
-    schema:
-      type: string
-      format: uuid
-    description: The unique identifier of the NFS share.
-    example: "baf4827c-6fa9-456f-9dbd-9ddfcacd0720"
+  - $ref: "parameters.yml#/share_id_path"
 
 requestBody:
   required: true
@@ -58,7 +51,7 @@ responses:
     $ref: '../../shared/responses/not_found.yml'
 
   '409':
-    $ref: '../../shared/responses/conflict.yml'
+    $ref: 'responses/access_point_conflict.yml'
 
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'
