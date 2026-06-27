@@ -1,0 +1,17 @@
+lang: Python
+source: |-
+  import os
+  from pydo import Client
+
+  client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
+
+  req = {
+      "do_settings": {
+          "service_cnames": ["db.example.com", "db-replica.example.com"]
+      }
+  }
+
+  resp = client.databases.update_do_settings(
+      database_cluster_uuid="9cc10173-e9ea-4176-9dbc-a4cee4c4ff30",
+      body=req
+  )
