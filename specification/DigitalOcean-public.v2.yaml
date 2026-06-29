@@ -1042,6 +1042,12 @@ paths:
     put:
       $ref: "resources/databases/databases_update_firewall_rules.yml"
 
+  /v2/databases/{database_cluster_uuid}/do_settings:
+    get:
+      $ref: "resources/databases/databases_get_do_settings.yml"
+    put:
+      $ref: "resources/databases/databases_update_do_settings.yml"
+
   /v2/databases/{database_cluster_uuid}/maintenance:
     put:
       $ref: "resources/databases/databases_update_maintenanceWindow.yml"

@@ -1,0 +1,24 @@
+description: A JSON object with a key of `do_settings`.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        do_settings:
+          $ref: '../models/do_settings.yml'
+      required:
+        - do_settings
+    example:
+      do_settings:
+        service_cnames:
+          - "db.example.com"
+          - "api.myapp.io"
