@@ -1273,6 +1273,22 @@ apiAnthropicAPIKeyInfo:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
+apiAssociatedModelEvaluationPreset:
+  description: |-
+    AssociatedModelEvaluationPreset identifies a saved model evaluation preset
+    that references a metric. Returned alongside custom metrics so the dashboard
+    can warn that deleting the metric will also delete these presets.
+  properties:
+    eval_preset_uuid:
+      description: Unique identifier of the saved model evaluation preset that references
+        the metric.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    name:
+      description: Display name of the saved model evaluation preset.
+      example: '"My evaluation preset"'
+      type: string
+  type: object
 apiAuditHeader:
   description: An alternative way to provide auth information. for internal use only.
   properties:
@@ -2159,6 +2175,22 @@ apiCreateChatbotOutput:
     chatbot:
       $ref: '#/apiChatbot'
   type: object
+apiCreateCustomEvaluationMetricInputPublic:
+  properties:
+    config:
+      $ref: '#/apiCustomEvaluationMetricConfig'
+    description:
+      example: '"Scores adherence to our support macros"'
+      type: string
+    metric_name:
+      example: '"My domain tone metric"'
+      type: string
+  type: object
+apiCreateCustomEvaluationMetricOutput:
+  properties:
+    metric:
+      $ref: '#/apiEvaluationMetric'
+  type: object
 apiCreateDataSourceFileUploadPresignedUrlsInputPublic:
   description: Request for pre-signed URL's to upload files for KB Data Sources
   properties:
@@ -2734,6 +2766,42 @@ apiCustomModelImportJob:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
+apiCustomEvaluationMetricConfig:
+  description: |-
+    Configuration for a custom model-evaluation metric scored by an LLM judge.
+    Prompt and model response are always included in the judge context.
+  properties:
+    add_to_library:
+      description: |-
+        When true, persist in the account metric library for reuse (Figma "Always show this metric").
+        When false, use for the current evaluation flow only. Set on create/update via config.
+      example: true
+      type: boolean
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    deleted_at:
+      description: When set, the custom metric is soft-deleted and must not appear
+        in pickers.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    requires_ground_truth:
+      description: |-
+        When true, each row must provide ground truth and it is included in the judge context.
+        When false, ground truth is not required and is not sent to the judge.
+      example: true
+      type: boolean
+    scoring_prompt:
+      description: Instructions for the judge model (multi-line).
+      example: example string
+      type: string
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+  type: object
 apiCustomModelStatus:
   default: STATUS_UNSPECIFIED
   description: Import and deployment status of the custom model
@@ -2841,6 +2909,12 @@ apiDeleteCustomModelInputPublic:
   properties:
     uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
+apiDeleteCustomEvaluationMetricInputPublic:
+  properties:
+    metric_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiDeleteCustomEvaluationMetricOutput:
+  type: object
 apiDeleteCustomModelOutput:
   description: Response containing delete operation status (internal)
   properties:
@@ -3173,8 +3247,18 @@ apiEvaluationDatasetType:
   type: string
 apiEvaluationMetric:
   properties:
+    associated_presets:
+      description: |-
+        Saved model evaluation presets that reference this metric. Populated for
+        custom metrics when listing metrics so the dashboard can warn that deleting
+        the metric will also delete these presets. Empty for built-in metrics.
+      items:
+        $ref: '#/apiAssociatedModelEvaluationPreset'
+      type: array
     category:
       $ref: '#/apiEvaluationMetricCategory'
+    custom_eval_config:
+      $ref: '#/apiCustomEvaluationMetricConfig'
     description:
       example: example string
       type: string
@@ -3212,6 +3296,8 @@ apiEvaluationMetric:
       example: 123
       format: float
       type: number
+    source:
+      $ref: '#/apiEvaluationMetricSource'
   type: object
 apiEvaluationMetricCategory:
   default: METRIC_CATEGORY_UNSPECIFIED
@@ -3250,6 +3336,16 @@ apiEvaluationMetricResult:
       example: example string
       type: string
   type: object
+apiEvaluationMetricSource:
+  default: EVALUATION_METRIC_SOURCE_UNSPECIFIED
+  description: Distinguishes platform catalog metrics from user-defined LLM-as-judge
+    metrics.
+  enum:
+  - EVALUATION_METRIC_SOURCE_UNSPECIFIED
+  - EVALUATION_METRIC_SOURCE_BUILTIN
+  - EVALUATION_METRIC_SOURCE_CUSTOM
+  example: EVALUATION_METRIC_SOURCE_UNSPECIFIED
+  type: string
 apiEvaluationMetricType:
   default: METRIC_TYPE_UNSPECIFIED
   enum:
@@ -8039,6 +8135,25 @@ apiUpdateChatbotOutput:
   properties:
     chatbot:
       $ref: '#/apiChatbot'
+  type: object
+apiUpdateCustomEvaluationMetricInputPublic:
+  properties:
+    config:
+      $ref: '#/apiCustomEvaluationMetricConfig'
+    description:
+      example: example string
+      type: string
+    metric_name:
+      example: '"My domain tone metric"'
+      type: string
+    metric_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+  type: object
+apiUpdateCustomEvaluationMetricOutput:
+  properties:
+    metric:
+      $ref: '#/apiEvaluationMetric'
   type: object
 apiUpdateCustomModelMetadataInputPublic:
   description: Request to update custom model metadata (public)

@@ -1,0 +1,15 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json"  \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v2/gen-ai/custom_evaluation_metrics" \
+    -d '{
+      "metric_name": "My domain tone metric",
+      "description": "Scores adherence to our support macros",
+      "config": {
+        "add_to_library": true,
+        "requires_ground_truth": true,
+        "scoring_prompt": "Grade for brand tone and factuality."
+      }
+    }'
