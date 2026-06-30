@@ -2778,14 +2778,18 @@ apiCustomEvaluationMetricConfig:
       example: true
       type: boolean
     created_at:
+      description: Timestamp when the custom metric was created. Server-assigned;
+        ignored on create/update requests.
       example: "2023-01-01T00:00:00Z"
       format: date-time
+      readOnly: true
       type: string
     deleted_at:
       description: When set, the custom metric is soft-deleted and must not appear
-        in pickers.
+        in pickers. Server-assigned; ignored on create/update requests.
       example: "2023-01-01T00:00:00Z"
       format: date-time
+      readOnly: true
       type: string
     requires_ground_truth:
       description: |-
@@ -2798,8 +2802,11 @@ apiCustomEvaluationMetricConfig:
       example: example string
       type: string
     updated_at:
+      description: Timestamp when the custom metric was last updated. Server-assigned;
+        ignored on create/update requests.
       example: "2023-01-01T00:00:00Z"
       format: date-time
+      readOnly: true
       type: string
   type: object
 apiCustomModelStatus:
