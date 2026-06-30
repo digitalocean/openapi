@@ -1042,6 +1042,12 @@ paths:
     put:
       $ref: "resources/databases/databases_update_firewall_rules.yml"
 
+  /v2/databases/{database_cluster_uuid}/do_settings:
+    get:
+      $ref: "resources/databases/databases_get_do_settings.yml"
+    put:
+      $ref: "resources/databases/databases_update_do_settings.yml"
+
   /v2/databases/{database_cluster_uuid}/maintenance:
     put:
       $ref: "resources/databases/databases_update_maintenanceWindow.yml"
@@ -1973,6 +1979,20 @@ paths:
 
     delete:
       $ref: "resources/nfs/nfs_snapshot_delete.yml"
+
+  /v2/nfs/shares/{share_id}/access_points:
+    post:
+      $ref: "resources/nfs/nfs_access_point_create.yml"
+
+    get:
+      $ref: "resources/nfs/nfs_access_point_list.yml"
+
+  /v2/nfs/access_points/{access_point_id}:
+    get:
+      $ref: "resources/nfs/nfs_access_point_get.yml"
+
+    delete:
+      $ref: "resources/nfs/nfs_access_point_delete.yml"
 
   /v2/partner_network_connect/attachments:
     get:

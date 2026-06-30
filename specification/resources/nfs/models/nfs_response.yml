@@ -50,6 +50,11 @@ properties:
     type: string
     description: The host IP of the NFS server that will be accessible from the associated VPC
     example: "10.128.32.2"
+  access_points:
+    type: array
+    items:
+      $ref: 'access_point_response.yml'
+    description: Access points configured on this share. The default access point is returned first.
 required:
   - id
   - name
