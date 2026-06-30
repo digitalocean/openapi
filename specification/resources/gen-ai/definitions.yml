@@ -1275,9 +1275,9 @@ apiAnthropicAPIKeyInfo:
   type: object
 apiAssociatedModelEvaluationPreset:
   description: |-
-    AssociatedModelEvaluationPreset identifies a saved model evaluation preset
-    that references a metric. Returned alongside custom metrics so the dashboard
-    can warn that deleting the metric will also delete these presets.
+    A saved model evaluation preset that references a metric. Returned alongside
+    custom metrics so you can see which presets depend on the metric; deleting the
+    metric will also delete these presets.
   properties:
     eval_preset_uuid:
       description: Unique identifier of the saved model evaluation preset that references
@@ -2773,8 +2773,8 @@ apiCustomEvaluationMetricConfig:
   properties:
     add_to_library:
       description: |-
-        When true, persist in the account metric library for reuse (Figma "Always show this metric").
-        When false, use for the current evaluation flow only. Set on create/update via config.
+        When true, the metric is saved to your account's metric library so it can be reused across evaluation runs.
+        When false, the metric is used only for the current evaluation flow.
       example: true
       type: boolean
     created_at:
@@ -2785,8 +2785,9 @@ apiCustomEvaluationMetricConfig:
       readOnly: true
       type: string
     deleted_at:
-      description: When set, the custom metric is soft-deleted and must not appear
-        in pickers. Server-assigned; ignored on create/update requests.
+      description: When set, the custom metric has been deleted and is no longer
+        available for use in evaluations. Server-assigned; ignored on create/update
+        requests.
       example: "2023-01-01T00:00:00Z"
       format: date-time
       readOnly: true
@@ -3257,7 +3258,7 @@ apiEvaluationMetric:
     associated_presets:
       description: |-
         Saved model evaluation presets that reference this metric. Populated for
-        custom metrics when listing metrics so the dashboard can warn that deleting
+        custom metrics so you can see which presets depend on the metric; deleting
         the metric will also delete these presets. Empty for built-in metrics.
       items:
         $ref: '#/apiAssociatedModelEvaluationPreset'
