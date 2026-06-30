@@ -41,3 +41,12 @@ suppression_uuid:
     type: string
     format: uuid
   example: 5b3b2b2d-5c9c-4a61-9e2f-4d8f80f30a12
+
+secret:
+  in: path
+  name: secret
+  description: The name of the secret.
+  required: true
+  schema:
+    type: string
+  example: my-database-password
