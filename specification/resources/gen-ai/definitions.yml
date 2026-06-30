@@ -2771,12 +2771,6 @@ apiCustomEvaluationMetricConfig:
     Configuration for a custom model-evaluation metric scored by an LLM judge.
     Prompt and model response are always included in the judge context.
   properties:
-    add_to_library:
-      description: |-
-        When true, the metric is saved to your account's metric library so it can be reused across evaluation runs.
-        When false, the metric is used only for the current evaluation flow.
-      example: true
-      type: boolean
     created_at:
       description: Timestamp when the custom metric was created. Server-assigned;
         ignored on create/update requests.
