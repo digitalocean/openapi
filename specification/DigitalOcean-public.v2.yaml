@@ -2761,6 +2761,17 @@ paths:
       $ref: 'resources/gen-ai/genai_list_evaluation_metrics.yml'
 
 
+  /v2/gen-ai/custom_evaluation_metrics:
+    post:
+      $ref: 'resources/gen-ai/genai_create_custom_evaluation_metric.yml'
+
+  /v2/gen-ai/custom_evaluation_metrics/{metric_uuid}:
+    put:
+      $ref: 'resources/gen-ai/genai_update_custom_evaluation_metric.yml'
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_custom_evaluation_metric.yml'
+
+
   /v2/gen-ai/evaluation_runs:
     post:
       $ref: 'resources/gen-ai/genai_run_evaluation_test_case.yml'
