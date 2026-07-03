@@ -2640,6 +2640,10 @@ apiCustomModel:
       description: Description of the custom model
       example: example string
       type: string
+    error_message:
+      description: Error message if the custom model import or processing failed
+      example: Repository not found or access denied
+      type: string
     file_count:
       description: Number of files in the model
       example: 123
