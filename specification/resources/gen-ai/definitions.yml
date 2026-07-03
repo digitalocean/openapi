@@ -2425,11 +2425,6 @@ apiCreateModelEvaluationRunInputPublic:
     preset_name:
       example: example name
       type: string
-    save_as_preset:
-      description: "If true, saves the inline config as a reusable preset  \nIgnored
-        when eval_preset_uuid is provided."
-      example: true
-      type: boolean
     source:
       description: Source of the run creation (api, sdk, cli).
       example: example string
