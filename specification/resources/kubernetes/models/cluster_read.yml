@@ -204,6 +204,9 @@ properties:
   coredns_autoscaler:
     $ref: "coredns_autoscaler.yml"
 
+  p2p_oci_registry_plugin:
+    $ref: "p2p_oci_registry_plugin.yml"
+
 required:
   - name
   - region
