@@ -1,0 +1,106 @@
+organization_team:
+  type: object
+  description: A team that belongs to an organization.
+  properties:
+    id:
+      type: integer
+      format: uint64
+      readOnly: true
+      example: 4126873
+      description: A unique identifier for the team.
+
+    uuid:
+      type: string
+      format: uuid
+      readOnly: true
+      example: 4e1bfbc3-dc3e-41f2-a18f-1b4d7ba71679
+      description: A unique universal identifier for the team.
+
+    name:
+      type: string
+      example: production
+      description: The human-readable name for the team.
+
+    email:
+      type: string
+      format: email
+      example: sammy@example.com
+      description: The email address associated with the team.
+
+    member_count:
+      type: integer
+      format: uint64
+      readOnly: true
+      example: 3
+      description: The number of members on the team.
+
+    status:
+      type: string
+      example: joined
+      description: The team's membership status within the organization.
+
+    joined_organization_at:
+      type: string
+      format: date-time
+      readOnly: true
+      example: "2024-06-12T15:04:05Z"
+      description: >
+        A time value given in ISO8601 combined date and time format that
+        represents when the team joined the organization.
+
+    company:
+      type: string
+      example: DigitalOcean
+      description: The company name associated with the team, if set.
+
+create_team:
+  type: object
+  description: The team resource returned when a team is created in an organization.
+  required:
+    - uuid
+    - name
+  properties:
+    uuid:
+      type: string
+      format: uuid
+      readOnly: true
+      example: 4e1bfbc3-dc3e-41f2-a18f-1b4d7ba71679
+      description: A unique universal identifier for the newly created team.
+
+    name:
+      type: string
+      example: production
+      description: The human-readable name for the newly created team.
+
+team_invitation:
+  type: object
+  description: An invitation to join a newly created team.
+  required:
+    - email
+    - role
+  properties:
+    email:
+      type: string
+      format: email
+      example: member@example.com
+      description: The email address of the user to invite.
+
+    role:
+      type: string
+      example: member
+      description: >
+        The role to assign to the invited user. Common values include
+        `member` and `biller`. The `owner` role cannot be assigned via
+        invitation.
+
+team_invitation_status:
+  type: object
+  description: The result of attempting to send a team invitation.
+  properties:
+    status:
+      type: string
+      enum:
+        - ok
+        - daily_invite_limit_reached
+      example: ok
+      description: The invitation delivery status for the email address.

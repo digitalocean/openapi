@@ -1,0 +1,42 @@
+description: >
+  The response will be a JSON object with a `team` key containing the created
+  team and an optional `invitations` key mapping invitee email addresses to
+  invitation status objects.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - team
+      properties:
+        team:
+          $ref: '../models/organization_team.yml#/create_team'
+        invitations:
+          type: object
+          additionalProperties:
+            $ref: '../models/organization_team.yml#/team_invitation_status'
+          description: >
+            A map of invitee email addresses to invitation status results.
+          example:
+            member@example.com:
+              status: ok
+            biller@example.com:
+              status: ok
+    example:
+      team:
+        uuid: 4e1bfbc3-dc3e-41f2-a18f-1b4d7ba71679
+        name: production
+      invitations:
+        member@example.com:
+          status: ok
+        biller@example.com:
+          status: ok
