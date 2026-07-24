@@ -5,7 +5,7 @@ summary: Assign Resources to a Project
 description: |
   To assign resources to a project, send a POST request to `/v2/projects/$PROJECT_ID/resources`.
 
-  You must have both `project:update` and `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to a project, include both the `project:update` and `droplet:read` scopes.
+  You must have both `project:assign_resource` and `<resource>:read` scopes to assign new resources. For example, to assign a Droplet to a project, include both the `project:assign_resource` and `droplet:read` scopes. The `project:update` scope also grants `project:assign_resource`.
 
 tags:
   - Project Resources
@@ -55,4 +55,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'project:update'
+    - 'project:assign_resource'
