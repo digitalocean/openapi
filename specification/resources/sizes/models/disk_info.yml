@@ -5,8 +5,9 @@ properties:
     type: string
     enum:
       - local
+      - remote
       - scratch
-    description: The type of disk. All Droplets contain a `local` disk. Additionally,
+    description: The type of disk. All Droplets contain a `local` or `remote` disk. Additionally,
       GPU Droplets can also have a `scratch` disk for non-persistent data.
     example: local
   size:
