@@ -11,8 +11,7 @@ description: >-
   provided, any Droplet or Kubernetes node with that tag applied to it will
   have access. The firewall is limited to 100 rules (or trusted sources). You
   cannot add IPv6 addresses as trusted sources. For additional limits, see your
-  database engine's limits page, for example
-  [PostgreSQL Limits](https://docs.digitalocean.com/products/databases/postgresql/details/limits/).
+  database engine's limits page.
   When possible, we recommend
   [placing your databases into a VPC network](https://docs.digitalocean.com/products/networking/vpc/)
   to limit access to them instead of using a firewall.
