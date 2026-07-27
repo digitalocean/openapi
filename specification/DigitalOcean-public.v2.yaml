@@ -60,6 +60,15 @@ tags:
       The Add-Ons API allows you to manage these resources, including creating, listing, and retrieving
       details about specific add-on resources.
 
+  - name: Agents
+    description: |-
+      Hosted Agents sessions API (`/v2/agents/sessions`). Sessions represent a
+      managed agent + sandbox pair. Product provenance is exposed via
+      `session.origin` (`direct` | `simulation` | `evaluation`). ListSessions
+      omits simulation and evaluation sessions server-side so customer surfaces
+      stay free of product-owned internal runs; GetSession by session_id still
+      returns those sessions for the owning product workflow.
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -780,6 +789,62 @@ paths:
   /v2/add-ons/saas/{resource_uuid}/plan:
     patch:
       $ref: "resources/addons/addons_update_plan.yml"
+
+  /v2/agents/sessions:
+    get:
+      $ref: "resources/agents/agents_list_sessions.yml"
+    post:
+      $ref: "resources/agents/agents_create_session.yml"
+  /v2/agents/sessions/policy/validate:
+    post:
+      $ref: "resources/agents/agents_validate_session_policy.yml"
+  /v2/agents/sessions/sandbox/sizes:
+    get:
+      $ref: "resources/agents/agents_list_session_sandbox_sizes.yml"
+  /v2/agents/sessions/{session_id}:
+    delete:
+      $ref: "resources/agents/agents_delete_session.yml"
+    get:
+      $ref: "resources/agents/agents_get_session.yml"
+  /v2/agents/sessions/{session_id}/hitl/{request_id}:
+    post:
+      $ref: "resources/agents/agents_post_session_hitl.yml"
+  /v2/agents/sessions/{session_id}/input:
+    post:
+      $ref: "resources/agents/agents_create_session_input.yml"
+  /v2/agents/sessions/{session_id}/pause:
+    post:
+      $ref: "resources/agents/agents_post_session_pause.yml"
+  /v2/agents/sessions/{session_id}/resume:
+    post:
+      $ref: "resources/agents/agents_post_session_resume.yml"
+  /v2/agents/sessions/{session_id}/sandbox/exec:
+    post:
+      $ref: "resources/agents/agents_post_session_sandbox_exec.yml"
+  /v2/agents/sessions/{session_id}/stream:
+    get:
+      $ref: "resources/agents/agents_get_session_stream.yml"
+  /v2/agents/sessions/{session_id}/workspace/download:
+    get:
+      $ref: "resources/agents/agents_get_session_workspace_download.yml"
+  /v2/agents/sessions/{session_id}/workspace/transfers:
+    post:
+      $ref: "resources/agents/agents_create_session_workspace_transfer.yml"
+  /v2/agents/sessions/{session_id}/workspace/transfers/{transfer_id}:
+    get:
+      $ref: "resources/agents/agents_get_session_workspace_transfer.yml"
+  /v2/agents/sessions/{session_id}/workspace/transfers/{transfer_id}/cancel:
+    post:
+      $ref: "resources/agents/agents_cancel_session_workspace_transfer.yml"
+  /v2/agents/sessions/{session_id}/workspace/transfers/{transfer_id}/commit:
+    post:
+      $ref: "resources/agents/agents_commit_session_workspace_transfer.yml"
+  /v2/agents/sessions/{session_id}/workspace/transfers/{transfer_id}/part-upload-urls:
+    post:
+      $ref: "resources/agents/agents_create_session_workspace_part_upload_urls.yml"
+  /v2/agents/sessions/{session_id}/workspace/upload:
+    post:
+      $ref: "resources/agents/agents_create_session_workspace_upload.yml"
 
   /v2/apps:
     get:
