@@ -36,6 +36,9 @@ organization_team:
 
     status:
       type: string
+      enum:
+        - joined
+        - pending
       example: joined
       description: The team's membership status within the organization.
 
@@ -87,11 +90,16 @@ team_invitation:
 
     role:
       type: string
+      enum:
+        - member
+        - biller
+        - billing viewer
+        - resource viewer
+        - modifier
       example: member
       description: >
-        The role to assign to the invited user. Common values include
-        `member` and `biller`. The `owner` role cannot be assigned via
-        invitation.
+        The role to assign to the invited user. The `owner` role cannot be
+        assigned via invitation.
 
 team_invitation_status:
   type: object
