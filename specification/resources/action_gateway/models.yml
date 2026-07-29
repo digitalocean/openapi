@@ -753,10 +753,7 @@ session_policy_spec:
   type: object
   properties:
     defaultAction:
-      allOf:
-        - $ref: "#/session_policy_action"
-      description: Empty means ask; otherwise this must be allow, ask, or deny.
-      x-client-name: defaultAction
+      $ref: "#/session_policy_action"
     rules:
       type: array
       items:
