@@ -41,3 +41,5 @@ responses:
 security:
   - bearer_auth:
       - genai:delete
+x-codeSamples:
+  - $ref: examples/curl/toolbelts_delete_tools.yml

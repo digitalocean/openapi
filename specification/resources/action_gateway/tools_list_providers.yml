@@ -26,3 +26,5 @@ responses:
 security:
   - bearer_auth:
       - genai:read
+x-codeSamples:
+  - $ref: examples/curl/tools_list_providers.yml

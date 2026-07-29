@@ -36,3 +36,5 @@ responses:
 security:
   - bearer_auth:
       - genai:delete
+x-codeSamples:
+  - $ref: examples/curl/sessions_delete.yml

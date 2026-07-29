@@ -36,3 +36,5 @@ responses:
 security:
   - bearer_auth:
       - genai:read
+x-codeSamples:
+  - $ref: examples/curl/connections_get.yml

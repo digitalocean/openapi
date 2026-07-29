@@ -35,3 +35,5 @@ responses:
 security:
   - bearer_auth:
       - genai:read
+x-codeSamples:
+  - $ref: examples/curl/sessions_list.yml
