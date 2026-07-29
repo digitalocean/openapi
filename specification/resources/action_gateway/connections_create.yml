@@ -1,0 +1,36 @@
+operationId: connections_create
+summary: Create a Connection
+description: Creates or begins authorization for an OAuth connection to an
+  Action Gateway provider.
+tags:
+  - Action Gateway
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models.yml#/create_connection_request
+responses:
+  "200":
+    description: The connection was created or authorization was started.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models.yml#/create_connection_response
+  "400":
+    $ref: ../../shared/responses/bad_request.yml
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "409":
+    $ref: ../../shared/responses/conflict.yml
+  "429":
+    $ref: ../../shared/responses/too_many_requests.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+security:
+  - bearer_auth:
+      - genai:create

@@ -1,0 +1,25 @@
+operationId: tools_list_providers
+summary: List Tool Providers
+description: Lists Action Gateway providers and their connection requirements.
+tags:
+  - Action Gateway
+responses:
+  "200":
+    description: Tool providers were retrieved successfully.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models.yml#/list_providers_response
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "429":
+    $ref: ../../shared/responses/too_many_requests.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+security:
+  - bearer_auth:
+      - genai:read
