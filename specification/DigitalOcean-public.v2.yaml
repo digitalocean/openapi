@@ -724,49 +724,49 @@ x-tagGroups:
       - Serverless Inference
 
 paths:
-  /v2/tools:
+  /v2/action-gateway/tools:
     get:
       $ref: "resources/action_gateway/tools_list.yml"
 
-  /v2/tools/toolkits:
+  /v2/action-gateway/tools/toolkits:
     get:
       $ref: "resources/action_gateway/tools_list_toolkits.yml"
 
-  /v2/tools/providers:
+  /v2/action-gateway/tools/providers:
     get:
       $ref: "resources/action_gateway/tools_list_providers.yml"
 
-  /v2/tools/{name}/definition:
+  /v2/action-gateway/tools/{name}/definition:
     get:
       $ref: "resources/action_gateway/tools_get_definition.yml"
 
-  /v2/toolbelts:
+  /v2/action-gateway/toolbelts:
     get:
       $ref: "resources/action_gateway/toolbelts_list.yml"
     post:
       $ref: "resources/action_gateway/toolbelts_create.yml"
 
-  /v2/toolbelts/{name}:
+  /v2/action-gateway/toolbelts/{name}:
     get:
       $ref: "resources/action_gateway/toolbelts_get.yml"
     delete:
       $ref: "resources/action_gateway/toolbelts_delete.yml"
 
-  /v2/toolbelts/{name}/tools/add:
+  /v2/action-gateway/toolbelts/{name}/tools/add:
     post:
       $ref: "resources/action_gateway/toolbelts_add_tools.yml"
 
-  /v2/toolbelts/{name}/tools/remove:
+  /v2/action-gateway/toolbelts/{name}/tools/remove:
     post:
       $ref: "resources/action_gateway/toolbelts_remove_tools.yml"
 
-  /v2/connections:
+  /v2/action-gateway/connections:
     get:
       $ref: "resources/action_gateway/connections_list.yml"
     post:
       $ref: "resources/action_gateway/connections_create.yml"
 
-  /v2/connections/{id}:
+  /v2/action-gateway/connections/{id}:
     get:
       $ref: "resources/action_gateway/connections_get.yml"
     patch:
@@ -774,21 +774,21 @@ paths:
     delete:
       $ref: "resources/action_gateway/connections_delete.yml"
 
-  /v2/users:
+  /v2/action-gateway/users:
     get:
       $ref: "resources/action_gateway/users_list.yml"
 
-  /v2/users/{user_id}:
+  /v2/action-gateway/users/{user_id}:
     get:
       $ref: "resources/action_gateway/users_get.yml"
 
-  /v2/sessions:
+  /v2/action-gateway/sessions:
     get:
       $ref: "resources/action_gateway/sessions_list.yml"
     post:
       $ref: "resources/action_gateway/sessions_create.yml"
 
-  /v2/sessions/{session_urn}:
+  /v2/action-gateway/sessions/{session_urn}:
     delete:
       $ref: "resources/action_gateway/sessions_delete.yml"
 
