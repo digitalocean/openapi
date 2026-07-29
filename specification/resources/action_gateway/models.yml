@@ -1,0 +1,193 @@
+toolbelt:
+  type: object
+  required:
+    - name
+    - version
+    - tools
+    - status
+    - reference
+    - reference_latest
+    - tool_count
+    - created_at
+    - updated_at
+  properties:
+    name:
+      type: string
+      example: search-toolbelt
+    version:
+      type: string
+      pattern: '^[0-9]+$'
+      example: '1'
+    display_name:
+      type: string
+      maxLength: 128
+      example: Search Tools
+    description:
+      type: string
+      maxLength: 255
+      example: Tools for searching and fetching public web pages.
+    tools:
+      type: array
+      maxItems: 500
+      items:
+        type: string
+      example:
+        - exa_web_search
+        - exa_web_fetch
+    status:
+      type: string
+      enum:
+        - active
+        - deprecated
+      example: active
+    reference:
+      type: string
+      description: A reference pinned to this immutable toolbelt version.
+      example: search-toolbelt@1
+    reference_latest:
+      type: string
+      description: An unversioned reference to the latest active version.
+      example: search-toolbelt
+    tool_count:
+      type: integer
+      format: int32
+      example: 2
+    created_at:
+      type: string
+      format: date-time
+      example: '2026-06-11T12:00:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      example: '2026-06-11T12:00:00Z'
+
+toolbelt_summary:
+  type: object
+  required:
+    - name
+    - latest_version
+    - version_count
+    - tool_count
+    - status
+    - reference_latest
+    - updated_at
+  properties:
+    name:
+      type: string
+      example: search-toolbelt
+    display_name:
+      type: string
+      example: Search Tools
+    description:
+      type: string
+      example: Tools for searching and fetching public web pages.
+    latest_version:
+      type: string
+      example: '1'
+    version_count:
+      type: integer
+      format: int32
+      example: 1
+    tool_count:
+      type: integer
+      format: int32
+      example: 2
+    status:
+      type: string
+      enum:
+        - active
+        - deprecated
+      example: active
+    reference_latest:
+      type: string
+      example: search-toolbelt
+    updated_at:
+      type: string
+      format: date-time
+      example: '2026-06-11T12:00:00Z'
+
+toolbelt_create:
+  type: object
+  required:
+    - name
+    - tools
+  properties:
+    name:
+      type: string
+      pattern: '^[a-z][a-z0-9_-]{0,63}$'
+      example: search-toolbelt
+    version:
+      type: string
+      pattern: '^[0-9]+$'
+      default: '1'
+    display_name:
+      type: string
+      maxLength: 128
+      example: Search Tools
+    description:
+      type: string
+      maxLength: 255
+      example: Tools for searching and fetching public web pages.
+    tools:
+      type: array
+      maxItems: 500
+      items:
+        type: string
+      example:
+        - exa_web_search
+        - exa_web_fetch
+
+toolbelt_tools:
+  type: object
+  required:
+    - tools
+  properties:
+    tools:
+      type: array
+      minItems: 1
+      maxItems: 500
+      items:
+        type: string
+      example:
+        - exa_web_search
+
+toolbelt_response:
+  type: object
+  required:
+    - toolbelt
+  properties:
+    toolbelt:
+      $ref: '#/toolbelt'
+
+toolbelts_response:
+  type: object
+  required:
+    - toolbelts
+    - pagination
+  properties:
+    toolbelts:
+      type: array
+      items:
+        $ref: '#/toolbelt_summary'
+    pagination:
+      $ref: '#/pagination'
+
+pagination:
+  type: object
+  required:
+    - page
+    - per_page
+    - total
+  properties:
+    page:
+      type: integer
+      format: int32
+      example: 1
+    per_page:
+      type: integer
+      format: int32
+      example: 20
+    total:
+      type: integer
+      format: int32
+      example: 1

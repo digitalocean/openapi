@@ -1,0 +1,28 @@
+operationId: toolbelts_delete
+summary: Delete a Toolbelt
+description: Deprecates the latest active version of a toolbelt.
+tags:
+  - Action Gateway
+parameters:
+  - $ref: 'parameters.yml#/toolbelt_name'
+responses:
+  '200':
+    description: The toolbelt was deprecated successfully.
+    headers:
+      $ref: 'response_headers.yml'
+    content:
+      application/json:
+        schema:
+          $ref: 'models.yml#/toolbelt_response'
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+security:
+  - bearer_auth: []
