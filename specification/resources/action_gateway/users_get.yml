@@ -21,6 +21,9 @@ responses:
       application/json:
         schema:
           $ref: models.yml#/get_user_response
+        examples:
+          users_get_response:
+            $ref: examples.yml#/users_get_response
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "404":

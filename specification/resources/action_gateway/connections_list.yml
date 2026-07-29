@@ -45,6 +45,9 @@ responses:
       application/json:
         schema:
           $ref: models.yml#/list_connections_response
+        examples:
+          connections_list_response:
+            $ref: examples.yml#/connections_list_response
   "401":
     $ref: ../../shared/responses/unauthorized.yml
   "429":

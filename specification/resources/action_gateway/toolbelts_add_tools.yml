@@ -11,6 +11,9 @@ requestBody:
     application/json:
       schema:
         $ref: 'models.yml#/toolbelt_tools'
+      examples:
+        toolbelts_add_tools_request:
+          $ref: 'examples.yml#/toolbelts_add_tools_request'
 responses:
   '200':
     description: The resulting toolbelt version.
@@ -20,6 +23,9 @@ responses:
       application/json:
         schema:
           $ref: 'models.yml#/toolbelt_response'
+        examples:
+          toolbelt_response:
+            $ref: 'examples.yml#/toolbelt_response'
   '400':
     $ref: '../../shared/responses/bad_request.yml'
   '401':

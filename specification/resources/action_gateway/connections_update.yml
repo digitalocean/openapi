@@ -17,6 +17,9 @@ requestBody:
     application/json:
       schema:
         $ref: models.yml#/update_connection_parameters_request
+      examples:
+        connections_update_request:
+          $ref: examples.yml#/connections_update_request
 responses:
   "200":
     description: The connection parameters were updated successfully.
@@ -26,6 +29,9 @@ responses:
       application/json:
         schema:
           $ref: models.yml#/update_connection_parameters_response
+        examples:
+          connections_update_response:
+            $ref: examples.yml#/connections_update_response
   "400":
     $ref: ../../shared/responses/bad_request.yml
   "401":

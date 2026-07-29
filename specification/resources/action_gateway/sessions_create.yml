@@ -10,6 +10,9 @@ requestBody:
     application/json:
       schema:
         $ref: models.yml#/create_session_request
+      examples:
+        sessions_create_request:
+          $ref: examples.yml#/sessions_create_request
 responses:
   "200":
     description: The session was created successfully.
@@ -19,6 +22,9 @@ responses:
       application/json:
         schema:
           $ref: models.yml#/create_session_response
+        examples:
+          sessions_create_response:
+            $ref: examples.yml#/sessions_create_response
   "400":
     $ref: ../../shared/responses/bad_request.yml
   "401":

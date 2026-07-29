@@ -10,6 +10,9 @@ requestBody:
     application/json:
       schema:
         $ref: models.yml#/create_connection_request
+      examples:
+        connections_create_request:
+          $ref: examples.yml#/connections_create_request
 responses:
   "200":
     description: The connection was created or authorization was started.
@@ -19,6 +22,9 @@ responses:
       application/json:
         schema:
           $ref: models.yml#/create_connection_response
+        examples:
+          connections_create_response:
+            $ref: examples.yml#/connections_create_response
   "400":
     $ref: ../../shared/responses/bad_request.yml
   "401":
