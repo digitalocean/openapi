@@ -419,6 +419,14 @@ tags:
       NFS actions are tasks that can be executed on an NFS share. These can be
       things like resizing, snapshotting, etc.
 
+  - name: Organizations
+    description: |-
+      Organizations group multiple teams under a shared administrative boundary.
+      The Organizations API lets you create teams within an organization and
+      list the teams that belong to it.
+
+      These endpoints must be called in an organization context.
+
   - name: Partner Network Connect
     description: |-
       Partner Network Connect lets you establish high-bandwidth, low-latency
@@ -690,6 +698,7 @@ x-tagGroups:
       - Monitoring
       - NFS
       - NFS Actions
+      - Organizations
       - Partner Network Connect
       - Project Resources
       - Projects
@@ -1993,6 +2002,14 @@ paths:
 
     delete:
       $ref: "resources/nfs/nfs_access_point_delete.yml"
+
+  /v2/organizations/team:
+    post:
+      $ref: "resources/organizations/organizations_create_team.yml"
+
+  /v2/organizations/teams:
+    get:
+      $ref: "resources/organizations/organizations_list_teams.yml"
 
   /v2/partner_network_connect/attachments:
     get:
