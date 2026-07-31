@@ -540,9 +540,10 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
+  # Secrets Manager omitted from this tag description until GA; paths commented out below.
   - name: Security
     description: |-
-      Security endpoints for CSPM scans, scan findings, settings, and Secrets Manager.
+      Security CSPM endpoints for scans, scan findings, and settings.
 
   - name: Sizes
     description: |-
@@ -2331,30 +2332,34 @@ paths:
     delete:
       $ref: "resources/security/security_suppression_delete.yml"
 
-  /v2/security/secrets:
-    get:
-      $ref: "resources/security/security_secrets_list.yml"
-
-    post:
-      $ref: "resources/security/security_secret_create.yml"
-
-  /v2/security/secrets/{secret}:
-    get:
-      $ref: "resources/security/security_secret_get.yml"
-
-    put:
-      $ref: "resources/security/security_secret_update.yml"
-
-    delete:
-      $ref: "resources/security/security_secret_delete.yml"
-
-  /v2/security/secrets/{secret}/versions:
-    get:
-      $ref: "resources/security/security_secret_list_versions.yml"
-
-  /v2/security/secrets/{secret}/restore:
-    post:
-      $ref: "resources/security/security_secret_restore.yml"
+  # Secrets Manager endpoints are temporarily commented out so they are not
+  # published in the public API docs until the product is generally available.
+  # The operation/model files remain under resources/security/ for easy restore.
+  #
+  # /v2/security/secrets:
+  #   get:
+  #     $ref: "resources/security/security_secrets_list.yml"
+  #
+  #   post:
+  #     $ref: "resources/security/security_secret_create.yml"
+  #
+  # /v2/security/secrets/{secret}:
+  #   get:
+  #     $ref: "resources/security/security_secret_get.yml"
+  #
+  #   put:
+  #     $ref: "resources/security/security_secret_update.yml"
+  #
+  #   delete:
+  #     $ref: "resources/security/security_secret_delete.yml"
+  #
+  # /v2/security/secrets/{secret}/versions:
+  #   get:
+  #     $ref: "resources/security/security_secret_list_versions.yml"
+  #
+  # /v2/security/secrets/{secret}/restore:
+  #   post:
+  #     $ref: "resources/security/security_secret_restore.yml"
 
   /v2/sizes:
     get:
