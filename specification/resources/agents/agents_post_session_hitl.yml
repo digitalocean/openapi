@@ -1,0 +1,84 @@
+operationId: agents_post_session_hitl
+summary: ResolveHITL records the user's decision on a pending HITL request.
+description: harness-api forwards the decision into the owning microVM via the inbound runtime.v1.OHR.ResolveHITL
+  RPC (dialed through the guest-fronting proxy), which unblocks the gated agent action. The resolution
+  is also echoed to all attached clients as a HITLResolved event on StreamSession. Returns 204 No Content
+  on success.
+tags:
+- Agents
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: path
+  name: request_id
+  required: true
+  description: The HITL request identifier.
+  schema:
+    type: string
+    example: hitl_example
+  example: hitl_example
+- in: header
+  name: X-Device-UUID
+  required: false
+  description: Optional hardware device id forwarded by doctl. Recorded on the resulting HITL decision.
+  schema:
+    type: string
+    example: device-uuid-example
+  example: device-uuid-example
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/resolve_hitl_request
+responses:
+  '204':
+    description: Decision recorded; no response body.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  '400':
+    description: Malformed JSON or missing outcome.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: Session belongs to another team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_post_session_hitl.yml
+security:
+- bearer_auth:
+  - agents:create

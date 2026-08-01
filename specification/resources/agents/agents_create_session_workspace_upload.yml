@@ -1,0 +1,131 @@
+operationId: agents_create_session_workspace_upload
+summary: Upload a file or tar archive into the session's sandbox workspace.
+description: Streams the raw request body to a path inside the sandbox workspace. Concurrent transfers
+  (upload + download) are capped server-side; over the cap the request blocks and may return 503. The
+  optional `X-Content-Sha256` request header carries a hex digest the guest verifies after the full payload
+  is written.
+tags:
+- Agents
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: query
+  name: path
+  required: true
+  description: Destination path inside the sandbox workspace. Relative paths resolve under the workspace
+    root; paths that escape the workspace are rejected. Required.
+  schema:
+    type: string
+    example: example
+  example: example
+- in: query
+  name: is_archive
+  required: false
+  description: If true, the body is a tar stream that the guest extracts under `path`. Defaults to false
+    (single file).
+  schema:
+    type: boolean
+    example: true
+  example: true
+- in: header
+  name: X-Content-Sha256
+  required: false
+  description: Optional hex SHA-256 of the full payload. The guest verifies it after writing; a mismatch
+    returns 400.
+  schema:
+    type: string
+    example: example
+  example: example
+requestBody:
+  required: true
+  content:
+    application/octet-stream:
+      schema:
+        type: string
+        format: binary
+        example: example
+  description: Raw file bytes (or tar stream when is_archive=true). Capped at 500 MiB.
+responses:
+  '200':
+    description: Upload committed.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/workspace_upload_response
+  '400':
+    description: Missing path, invalid query parameter, invalid path, or SHA-256 mismatch.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: Path resolves outside the workspace, or the session belongs to another team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: Session has no sandbox, or the sandbox is not ready.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '413':
+    description: Payload exceeds the maximum allowed size.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '501':
+    description: Workspace file transfer is not supported by the active sandbox driver.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '502':
+    description: Upstream sandbox transfer failed.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '503':
+    description: Workspace transfer capacity exhausted; retry later.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_create_session_workspace_upload.yml
+security:
+- bearer_auth:
+  - agents:create

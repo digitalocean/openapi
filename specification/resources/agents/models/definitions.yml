@@ -1,0 +1,1076 @@
+agent_kind:
+  type: string
+  enum:
+  - AGENT_KIND_UNSPECIFIED
+  - AGENT_KIND_CLAUDE_CODE
+  - AGENT_KIND_OPENCODE
+  - AGENT_KIND_CODEX_CLI
+  - AGENT_KIND_CURSOR_CLI
+  - AGENT_KIND_NONE
+  - AGENT_KIND_CUSTOM
+  default: AGENT_KIND_UNSPECIFIED
+  description: AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE,
+    OPENCODE, and CODEX_CLI (the supported set is overridable via HARNESS_SUPPORTED_AGENT_KINDS); other
+    values are rejected with 400.
+  example: AGENT_KIND_UNSPECIFIED
+agent_manifest:
+  type: object
+  description: 'Customer-authored agents.yaml Agent manifest (see internal/agentspec and contracts/agent.v1alpha1.schema.json
+    — the authoritative published schema), sent as the CreateSession request body with a YAML Content-Type.
+    Untrusted input: every value is a request that is validated and clamped server-side. Decoding is strict:
+    unknown or misspelled fields are rejected with HTTP 400.'
+  required:
+  - apiVersion
+  - kind
+  - spec
+  properties:
+    apiVersion:
+      type: string
+      description: Must be "agents.digitalocean.com/v1alpha1".
+      enum:
+      - agents.digitalocean.com/v1alpha1
+      example: agents.digitalocean.com/v1alpha1
+    kind:
+      type: string
+      description: Must be "Agent".
+      enum:
+      - Agent
+      example: Agent
+    metadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Optional team-unique session name: 1-64 chars of letters, digits, ''-'', ''.'',
+            ''_'', starting and ending alphanumeric; case-insensitive; must not be UUID-shaped. Omit to
+            have the control plane generate one ("session-<agent-type>-<date-time>"). Unique among the
+            team''s ACTIVE (non-terminal) sessions; destroying a session frees its name for reuse.'
+          example: example
+        description:
+          type: string
+          description: Free-form description (max 1024 chars), stored and echoed back for Console / catalog
+            surfaces.
+          example: example
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          properties: {}
+    spec:
+      type: object
+      required:
+      - runtime
+      properties:
+        permissions:
+          $ref: '#/permissions'
+        mode:
+          type: string
+          description: Explicit lifecycle discriminator. Defaults to "interactive" (spec.serving forbidden);
+            "served" requires spec.serving.
+          enum:
+          - interactive
+          - served
+          example: interactive
+        runtime:
+          type: object
+          description: 'Canonical adapter ids: claude-code | opencode | codex | cursor | custom. codex-cli
+            and cursor-cli are deprecated aliases (accepted with a create-time warning). The framework
+            adapters (openai-agents, claude-agent-sdk, crewai, langgraph) are declared but not yet supported;
+            CreateSession rejects them. adapter: custom requires the custom block.'
+          required:
+          - adapter
+          properties:
+            adapter:
+              type: string
+              enum:
+              - claude-code
+              - opencode
+              - codex
+              - cursor
+              - custom
+              - codex-cli
+              - cursor-cli
+              - openai-agents
+              - claude-agent-sdk
+              - crewai
+              - langgraph
+              example: claude-code
+            custom:
+              type: object
+              description: 'BYO container; requires adapter: custom. image is required and should be digest-pinned.'
+              required:
+              - image
+              properties:
+                image:
+                  type: string
+                  example: example
+                entrypoint:
+                  type: array
+                  items:
+                    type: string
+                    example: example
+                  example:
+                  - example
+        workspace:
+          type: object
+          description: Repositories the session works against.
+          properties:
+            repos:
+              type: array
+              description: GitHub OWNER/REPO entries, unique. The first entry becomes the session's repo_hint;
+                the full list is the forward shape for multi-repo sessions.
+              items:
+                type: string
+                example: example
+              example:
+              - example
+        sandbox:
+          type: object
+          properties:
+            template:
+              type: string
+              description: 'Optional sandbox template. Empty (or the legacy placeholder "coding") means
+                "no preference": the template derives from the adapter.'
+              example: example
+            persistentWorkspace:
+              type: boolean
+              example: true
+            idleTimeoutSeconds:
+              type: integer
+              format: int64
+              description: Inactivity suspend timeout. 0 means tenant policy default.
+              example: 1
+            maxLifetimeSeconds:
+              type: integer
+              format: int64
+              description: Hard wall-clock ceiling for the whole session, independent of activity. Accepted,
+                not yet enforced (returns a warning).
+              example: 1
+            sizeSlug:
+              type: string
+              description: 'Requested sandbox size (catalog: GET /v2/agents/sessions/sandbox/sizes). Empty
+                means the service default.'
+              example: example
+            egress:
+              type: object
+              description: 'Requested egress allowlist. A request only: the server intersects it with
+                tenant + platform policy and can only narrow it.'
+              properties:
+                allow:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - host
+                    properties:
+                      host:
+                        type: string
+                        example: example
+        model:
+          type: object
+          description: Accepted, not yet enforced (returns a warning). Model routing (Plano); catalog-validated
+            when enforcement lands.
+          properties:
+            default:
+              type: string
+              example: example
+            routing:
+              type: string
+              example: example
+            profile:
+              type: string
+              example: example
+        tools:
+          type: object
+          description: Accepted, not yet enforced (returns a warning). Exactly one of mcpServers or bundle.
+          properties:
+            mcpServers:
+              type: array
+              items:
+                type: object
+                required:
+                - ref
+                properties:
+                  ref:
+                    type: string
+                    example: example
+            bundle:
+              type: string
+              example: example
+        env:
+          type: object
+          description: Non-secret guest env (debug-readable — never put secrets here; use spec.secrets).
+            Reserved platform keys (TEAM_ID, SESSION_ID, SANDBOX_ID, CONTROL_PLANE_CALLBACK_URL, SANDBOX_TEMPLATE,
+            SANDBOX_AGENT_WORKDIR, SIZE_SLUG, SANDBOX_IMAGE_ID, SANDBOX_OCI_REF, PLANO_PERMISSION_*) are
+            rejected. Credential-looking values (dop_v1_..., sk-..., ghp_...) trigger a create-time warning.
+          additionalProperties:
+            type: string
+          properties: {}
+        memory:
+          type: object
+          description: Accepted, not yet enforced (returns a warning).
+          required:
+          - backend
+          properties:
+            backend:
+              type: string
+              example: example
+            scope:
+              type: string
+              enum:
+              - tenant
+              - user
+              - agent
+              - session
+              example: tenant
+        secrets:
+          type: array
+          description: Accepted, not yet enforced (returns a warning). Brokered (non-plaintext) credential
+            requests resolved by the IAM / OAuth broker / credential vault; never carried inline in the
+            manifest. source oauth requires provider; source tenantSecret requires ref.
+          items:
+            type: object
+            required:
+            - name
+            - source
+            properties:
+              name:
+                type: string
+                example: example
+              source:
+                type: string
+                enum:
+                - oauth
+                - tenantSecret
+                example: oauth
+              provider:
+                type: string
+                example: example
+              ref:
+                type: string
+                example: example
+        defaults:
+          type: object
+          properties:
+            budget:
+              type: object
+              description: Accepted, not yet enforced (returns a warning). Advisory per-run ceilings,
+                clamped server-side to tenant policy.
+              properties:
+                maxCostUSD:
+                  type: number
+                  example: 1.0
+                maxSteps:
+                  type: integer
+                  example: 1
+                maxWallClockSeconds:
+                  type: integer
+                  format: int64
+                  example: 1
+                onBreach:
+                  type: string
+                  enum:
+                  - pause
+                  - humanInput
+                  - fail
+                  example: pause
+        serving:
+          type: object
+          description: Present only when spec.mode is "served" (autoscaled fleet).
+          properties:
+            minReplicas:
+              type: integer
+              example: 1
+            maxReplicas:
+              type: integer
+              example: 1
+            targetConcurrency:
+              type: integer
+              example: 1
+            scaleToZero:
+              type: object
+              properties:
+                idleSeconds:
+                  type: integer
+                  format: int64
+                  example: 1
+create_session_definition_request:
+  type: object
+  additionalProperties: false
+  required:
+  - name
+  - definition_id
+  properties:
+    name:
+      type: string
+      minLength: 1
+      maxLength: 64
+      description: Session name, independent of the definition name. Must satisfy the existing agents.yaml
+        metadata.name rules and must not be UUID-shaped.
+      example: demo-agent
+    definition_id:
+      type: string
+      format: uuid
+      example: 11111111-2222-3333-4444-555555555555
+    revision_id:
+      type: string
+      format: uuid
+      description: Public immutable revision UUID. Omit to pin the definition's current revision.
+      example: 11111111-2222-3333-4444-555555555555
+    credential_binding_set_id:
+      type: string
+      format: uuid
+      description: Required exactly when the selected revision declares logical credential slots.
+      example: 11111111-2222-3333-4444-555555555555
+    origin:
+      $ref: '#/session_origin_request'
+  description: Strict application/json CreateSession form. The HTTP body is capped at 16 KiB and cannot
+    carry team identity, inline manifests, or credential values.
+create_session_response:
+  type: object
+  properties:
+    session:
+      $ref: '#/session'
+error:
+  type: object
+  description: Standard JSON error envelope written by the API on non-2xx responses.
+  properties:
+    error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Echoes the HTTP status code.
+          example: 1
+        message:
+          type: string
+          description: Client-safe error message.
+          example: example
+get_session_response:
+  type: object
+  properties:
+    session:
+      $ref: '#/session'
+hitl_outcome:
+  type: string
+  enum:
+  - HITL_OUTCOME_UNSPECIFIED
+  - HITL_OUTCOME_APPROVE
+  - HITL_OUTCOME_REJECT
+  - HITL_OUTCOME_DEFER
+  default: HITL_OUTCOME_UNSPECIFIED
+  description: HITLOutcome is the user's decision on a HITL request. DEFER backs off this attempt without
+    treating it as a rejection.
+  example: HITL_OUTCOME_UNSPECIFIED
+list_sessions_response:
+  type: object
+  properties:
+    sessions:
+      type: array
+      items:
+        $ref: '#/session'
+    next_page_token:
+      type: string
+      description: Opaque cursor for the next page. Empty when there are no further pages.
+      example: example
+permission_filesystem:
+  type: object
+  description: Filesystem boundary, enforced by the microVM (read-only root + bind-mounted writable roots)
+    for every agent.
+  properties:
+    mode:
+      type: string
+      enum:
+      - read-only
+      - workspace-write
+      example: read-only
+    allowWrite:
+      type: array
+      description: Additional writable paths beyond the workspace. Values must not contain shell-style
+        ${VAR}/$VAR expansions.
+      items:
+        type: string
+        example: example
+      example:
+      - example
+permission_network:
+  type: object
+  description: Network boundary. Narrows (subtract-only) spec.sandbox.egress; link-local/internal addresses
+    stay blocked by the broader egress policy.
+  properties:
+    default:
+      type: string
+      enum:
+      - allow
+      - deny
+      example: allow
+    allow:
+      type: array
+      items:
+        type: string
+        example: example
+      example:
+      - example
+permission_rule:
+  type: object
+  required:
+  - tool
+  - action
+  properties:
+    tool:
+      type: string
+      description: Tool taxonomy this rule matches (e.g. bash, file.read, file.write, web.fetch, git.*,
+        mcp).
+      example: example
+    match:
+      type: object
+      description: 'Optional keys narrowing the rule (e.g. {"command": "npm run deploy"} for bash). Values
+        are globs and must not contain shell-style ${VAR}/$VAR expansions.'
+      additionalProperties:
+        type: string
+      properties: {}
+    action:
+      type: string
+      enum:
+      - allow
+      - ask
+      - deny
+      example: allow
+    enforcement:
+      type: string
+      description: What happens when the agent cannot enforce the rule exactly. "strict" rejects the session;
+        "best-effort" degrades to the closest more-restrictive form and warns (never widens). Defaults
+        to strict for deny rules, best-effort otherwise.
+      enum:
+      - strict
+      - best-effort
+      example: strict
+permissions:
+  type: object
+  description: 'Customer-declared tool-execution permission policy (spec.permissions). REQUEST only: the
+    policy engine resolves it (∩ tenant ∩ platform) into the canonical policy and validates it against
+    the (agent, version) capability descriptor. Absent or empty means the agent keeps its built-in default
+    gating — no policy is shipped to the sandbox.'
+  properties:
+    defaultAction:
+      type: string
+      description: Disposition for tool calls that match no rule. Defaults to "ask" when omitted.
+      enum:
+      - allow
+      - ask
+      - deny
+      example: allow
+    rules:
+      type: array
+      description: 'Ordered match→action rules. Declared order is authoritative: the LAST matching rule
+        wins (author-order last-match).'
+      items:
+        $ref: '#/permission_rule'
+    filesystem:
+      $ref: '#/permission_filesystem'
+    network:
+      $ref: '#/permission_network'
+resolution_source:
+  type: string
+  enum:
+  - RESOLUTION_SOURCE_UNSPECIFIED
+  - RESOLUTION_SOURCE_INLINE_KEYSTROKE
+  - RESOLUTION_SOURCE_OUT_OF_BAND
+  default: RESOLUTION_SOURCE_UNSPECIFIED
+  description: How a HITL resolution was triggered. Defaults to RESOLUTION_SOURCE_OUT_OF_BAND when omitted.
+  example: RESOLUTION_SOURCE_UNSPECIFIED
+resolve_hitl_request:
+  type: object
+  properties:
+    outcome:
+      $ref: '#/hitl_outcome'
+    reason:
+      type: string
+      description: Optional free-text reason. Captured in the audit trail; not interpreted.
+      example: example
+    source:
+      $ref: '#/resolution_source'
+  required:
+  - outcome
+resolved_rule:
+  type: object
+  description: A rule after resolution (∩ tenant ∩ platform), carrying a stable id for audit correlation.
+  properties:
+    id:
+      type: string
+      description: Stable rule id assigned during resolution; correlates with the PolicyDenied event's
+        matched rule.
+      example: example
+    tool:
+      type: string
+      example: example
+    match:
+      type: object
+      additionalProperties:
+        type: string
+      properties: {}
+    action:
+      type: string
+      enum:
+      - allow
+      - ask
+      - deny
+      example: allow
+    enforcement:
+      type: string
+      enum:
+      - strict
+      - best-effort
+      example: strict
+rule_verdict:
+  type: object
+  description: Validation outcome for one resolved rule.
+  properties:
+    rule:
+      $ref: '#/resolved_rule'
+    verdict:
+      type: string
+      description: exact — enforced precisely as written; degraded — renderable only in a more-restrictive
+        form (deny→ask), warned; unsupported — cannot be enforced (strict ⇒ session reject); unverified
+        — no descriptor available, rendered conservatively but unproven.
+      enum:
+      - exact
+      - degraded
+      - unsupported
+      - unverified
+      example: exact
+    rendered:
+      type: string
+      description: 'The disposition the agent will actually enforce: the requested action when exact/unverified,
+        the more-restrictive target when degraded, omitted when unsupported (cannot render).'
+      enum:
+      - allow
+      - ask
+      - deny
+      example: allow
+    reason:
+      type: string
+      description: Human-readable explanation of the verdict.
+      example: example
+    suggestion:
+      type: string
+      description: 'Optional actionable hint (e.g. "set enforcement: best-effort, or target a capable
+        agent").'
+      example: example
+sandbox_size:
+  type: object
+  description: A customer-selectable sandbox (microVM) size.
+  properties:
+    slug:
+      type: string
+      description: DO size slug; submit as spec.sandbox.sizeSlug on CreateSession. e.g. "mv-2vcpu-4gb".
+      example: example
+    vcpus:
+      type: integer
+      format: int64
+      description: vCPU count (for display).
+      example: 1
+    memory_mb:
+      type: integer
+      format: int64
+      description: Memory in MB (for display).
+      example: 1
+sandbox_sizes_response:
+  type: object
+  description: Response for ListSandboxSizes.
+  properties:
+    sizes:
+      type: array
+      description: Selectable sizes, ordered smallest-to-largest.
+      items:
+        $ref: '#/sandbox_size'
+send_input_request:
+  type: object
+  properties:
+    text:
+      type: string
+      description: The user message to deliver into the session. Required and non-empty.
+      example: example
+  required:
+  - text
+send_input_response:
+  type: object
+  properties:
+    run_id:
+      type: string
+      description: The run id the input was attributed to. Clients can correlate against the run.started
+        event on the stream. May be empty if OHR returned no run id.
+      example: example
+session:
+  type: object
+  description: Session is the user-facing record of a managed agent + sandbox pair.
+  properties:
+    session_id:
+      type: string
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    name:
+      type: string
+      description: User-assignable display name, unique per team among non-terminal sessions. Usable in
+        place of session_id by clients (doctl / Console resolve it to the id via the ListSessions ?name=
+        filter; the {session_id} path stays UUID-only). Supplied via the agents.yaml metadata.name, or
+        auto-generated ("session-<agent-type>-<date-time>") when omitted.
+      example: demo-agent
+    team_id:
+      type: integer
+      format: int64
+      description: DO Team ID (unsigned 64-bit; serialized as a JSON number).
+      example: 123456
+    agent_kind:
+      $ref: '#/agent_kind'
+    status:
+      $ref: '#/session_status'
+    sandbox_id:
+      type: string
+      description: Sandbox identity for support / debugging. Informational; omitted until a sandbox is
+        allocated.
+      example: sbx_abc123
+    created_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+    last_event_at:
+      type: string
+      format: date-time
+      description: Timestamp of the most recent event in this session's canonical stream. Drives the inactivity
+        policy that destroys idle sessions.
+      example: '2026-07-27T12:00:00Z'
+    repo_hint:
+      type: string
+      description: Optional repository hint supplied at session creation (first spec.workspace.repos entry
+        of the manifest). Not authoritative; the agent may change repos in-session.
+      example: github.com/digitalocean/example
+    warnings:
+      type: array
+      items:
+        type: string
+        example: example
+      description: 'Non-fatal advisories computed from the manifest at create time: one entry per populated
+        accepted-but-not-yet-enforced section (spec.secrets, spec.model, spec.tools, spec.memory, spec.defaults.budget,
+        spec.sandbox.maxLifetimeSeconds), a deprecation entry when an adapter alias (codex-cli, cursor-cli)
+        is used, and a heuristic entry per credential-looking spec.env value. Populated on the CreateSession
+        response only.'
+      example:
+      - example
+    definition_id:
+      type: string
+      format: uuid
+      description: Durable Agent Definition UUID. Absent for inline-manifest sessions.
+      example: 11111111-2222-3333-4444-555555555555
+    revision_id:
+      type: string
+      format: uuid
+      description: Immutable revision UUID selected for this execution.
+      example: 11111111-2222-3333-4444-555555555555
+    credential_binding_set_id:
+      type: string
+      format: uuid
+      description: Binding-set UUID used for this execution. Secret-manager metadata and OAuth assignment
+        UUIDs are never returned.
+      example: 11111111-2222-3333-4444-555555555555
+    origin:
+      $ref: '#/session_origin'
+session_origin:
+  type: object
+  additionalProperties: false
+  description: Server-returned product workflow provenance.
+  required:
+  - product
+  properties:
+    product:
+      type: string
+      enum:
+      - direct
+      - simulation
+      - evaluation
+      example: direct
+    resource_id:
+      type: string
+      minLength: 1
+      maxLength: 255
+      pattern: ^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$
+      description: Opaque product-owned correlation identifier (external_id).
+      example: sim-run-123
+    verified:
+      type: boolean
+      readOnly: true
+      description: True only when OHS established this claim through a trusted product adapter.
+      example: true
+session_origin_request:
+  type: object
+  additionalProperties: false
+  description: Product workflow provenance. Omission creates a verified direct session. Simulation and
+    evaluation require resource_id; direct forbids it.
+  required:
+  - product
+  properties:
+    product:
+      type: string
+      enum:
+      - direct
+      - simulation
+      - evaluation
+      description: Workflow that created the session.
+      example: direct
+    resource_id:
+      type: string
+      minLength: 1
+      maxLength: 255
+      pattern: ^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$
+      description: Opaque product-owned correlation identifier (external_id). Required for simulation/evaluation
+        and forbidden for direct.
+      example: sim-run-123
+session_status:
+  type: string
+  enum:
+  - SESSION_STATUS_UNSPECIFIED
+  - SESSION_STATUS_PROVISIONING
+  - SESSION_STATUS_READY
+  - SESSION_STATUS_DETACHED
+  - SESSION_STATUS_DESTROYING
+  - SESSION_STATUS_DESTROYED
+  - SESSION_STATUS_FAILED
+  - SESSION_STATUS_PAUSED
+  default: SESSION_STATUS_UNSPECIFIED
+  description: SessionStatus is the lifecycle state of the sandbox + agent pair.
+  example: SESSION_STATUS_UNSPECIFIED
+stream_event:
+  type: object
+  description: The JSON payload carried in each SSE event's `data:` field (canonical SPI event envelope).
+    The SSE `event:` field repeats `type`, and the `id:` field repeats `event_id`.
+  properties:
+    event_id:
+      type: string
+      example: example
+    run_id:
+      type: string
+      example: example
+    tenant_id:
+      type: string
+      description: DO Team ID rendered as a decimal string.
+      example: example
+    session_id:
+      type: string
+      example: example
+    trace_parent:
+      type: string
+      example: example
+    timestamp:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+    seq:
+      type: integer
+      format: int64
+      description: Producer-supplied sequence number; nonzero values increase monotonically within an
+        ingress stream.
+      example: 1
+    source_event_id:
+      type: string
+      example: example
+    source_event_type:
+      type: string
+      example: example
+    source_tenant_id:
+      type: string
+      description: Optional runtime-native tenant identifier; distinct from authoritative tenant_id.
+      example: example
+    producer:
+      type: string
+      description: Server-assigned component that submitted the event.
+      enum:
+      - agent
+      - ohr
+      - ohp
+      - ohs
+      example: agent
+    definition_id:
+      type: string
+      example: example
+    revision_id:
+      type: string
+      example: example
+    credential_binding_set_id:
+      type: string
+      example: example
+    type:
+      type: string
+      description: Canonical SPI event type. The SSE `event:` field carries the same value.
+      enum:
+      - run.started
+      - run.token_delta
+      - run.tool_call_started
+      - run.tool_call_completed
+      - run.human_input_requested
+      - run.human_input_received
+      - run.completed
+      - run.failed
+      - run.paused
+      - run.resumed
+      - session.updated
+      - run.state_checkpointed
+      - run.handoff
+      - run.usage_recorded
+      - run.sandbox_allocated
+      - run.sandbox_released
+      - run.cost_accrued
+      - run.log
+      - policy.denied
+      example: run.started
+    data:
+      type: object
+      description: 'Type-specific payload, discriminated by `type` (canonical SPI shapes; numeric fields
+        are JSON numbers):
+
+        - run.started: {agent}
+
+        - run.token_delta: {text}
+
+        - run.tool_call_started: {tool_call_id, name, input}
+
+        - run.tool_call_completed: {tool_call_id, ok, duration_ms, summary}
+
+        - run.human_input_requested: {hitl_id, payload}
+
+        - run.human_input_received: {hitl_id, outcome, actor, reason}
+
+        - run.completed: {total_tokens_in, total_tokens_out, run_cost_micros}
+
+        - run.failed: {code, message}
+
+        - run.paused: {reason}
+
+        - run.resumed: {}
+
+        - session.updated: {}
+
+        - run.state_checkpointed: {checkpoint_id, digest}
+
+        - run.handoff: {from, to, description}
+
+        - run.usage_recorded: {step_id, model_id, usage: {input_tokens, output_tokens, cached_input_tokens,
+        reasoning_tokens, tool_seconds}}
+
+        - run.sandbox_allocated: {sandbox_id, kind, template}
+
+        - run.sandbox_released: {sandbox_id, exit_code, duration_ms}
+
+        - run.cost_accrued: {running_total_micros, delta_micros}
+
+        - run.log: {level, message, fields}'
+      properties: {}
+validation_result:
+  type: object
+  description: 'Response of POST /v2/agents/sessions/policy/validate: per-rule verdicts for the (agent,
+    version). The same shape is persisted per session in session_policies.verdicts.'
+  properties:
+    agent:
+      type: string
+      example: example
+    version:
+      type: string
+      example: example
+    ok:
+      type: boolean
+      description: False when any strict rule is unsupported or unverified — i.e. CreateSession would
+        reject this policy for this (agent, version).
+      example: true
+    defaultAction:
+      type: string
+      description: Catch-all disposition AS SHIPPED (after unverified allow→ask downgrade). When defaultActionVerdict
+        is degraded, this remains the shipped value; see defaultActionRendered for what the agent will
+        actually enforce.
+      enum:
+      - allow
+      - ask
+      - deny
+      example: allow
+    defaultActionVerdict:
+      type: string
+      description: exact — agent can enforce the catch-all as written; degraded — agent cannot enforce
+        the requested defaultAction (warn-only; shipped value unchanged); omitted when no descriptor was
+        available to classify against.
+      enum:
+      - exact
+      - degraded
+      - unsupported
+      - unverified
+      example: exact
+    defaultActionRendered:
+      type: string
+      description: 'Disposition the agent will actually enforce as the catch-all: equals defaultAction
+        when exact; the more-restrictive degrade target (usually ask) when degraded.'
+      enum:
+      - allow
+      - ask
+      - deny
+      example: allow
+    defaultActionReason:
+      type: string
+      description: Human-readable explanation when defaultActionVerdict is degraded.
+      example: example
+    verdicts:
+      type: array
+      items:
+        $ref: '#/rule_verdict'
+workspace_part_upload_url:
+  type: object
+  properties:
+    part_number:
+      type: integer
+      format: int32
+      example: 1
+    upload_url:
+      type: string
+      description: Presigned PUT URL for this part. PUT the part bytes here directly.
+      example: example
+workspace_transfer_cancelled:
+  type: object
+  properties:
+    transfer_id:
+      type: string
+      example: example
+    aborted:
+      type: boolean
+      description: True if this call transitioned an active transfer to terminal; false if it was already
+        terminal.
+      example: true
+    status:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - completed
+      - failed
+      example: pending
+workspace_transfer_created:
+  type: object
+  description: Response to CreateWorkspaceTransfer. Upload responses carry `upload_id`, `part_size`, and
+    `expires_at`; download responses carry only `transfer_id`, `direction`, and `status`.
+  properties:
+    transfer_id:
+      type: string
+      description: Opaque id used on all subsequent calls.
+      example: example
+    direction:
+      type: string
+      enum:
+      - upload
+      - download
+      example: upload
+    status:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - completed
+      - failed
+      example: pending
+    upload_id:
+      type: string
+      description: Upload only. Multipart upload id (informational).
+      example: example
+    part_size:
+      type: integer
+      format: int64
+      description: Upload only. Split the payload into parts of this size; the last part may be smaller.
+      example: 1
+    expires_at:
+      type: string
+      format: date-time
+      description: Transfer credential window.
+      example: '2026-07-27T12:00:00Z'
+workspace_transfer_status:
+  type: object
+  properties:
+    transfer_id:
+      type: string
+      example: example
+    direction:
+      type: string
+      enum:
+      - upload
+      - download
+      example: upload
+    status:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - completed
+      - failed
+      example: pending
+    bytes_written:
+      type: integer
+      format: int64
+      example: 1
+    sha256:
+      type: string
+      description: Lowercase hex SHA-256 of the payload, when known. Verify the downloaded object against
+        this.
+      example: example
+    download_url:
+      type: string
+      description: Download + completed only. Presigned GET URL; fetch the object directly.
+      example: example
+    expires_at:
+      type: string
+      format: date-time
+      description: Expiry of download_url when present.
+      example: '2026-07-27T12:00:00Z'
+    error_message:
+      type: string
+      description: Populated when status is failed.
+      example: example
+workspace_upload_committed:
+  type: object
+  properties:
+    transfer_id:
+      type: string
+      example: example
+    status:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - completed
+      - failed
+      example: pending
+    size_bytes:
+      type: integer
+      format: int64
+      description: Size of the completed staging object, when known.
+      example: 1
+workspace_upload_response:
+  type: object
+  properties:
+    path:
+      type: string
+      description: Absolute guest path the payload was written to.
+      example: example
+    bytes_written:
+      type: integer
+      format: int64
+      description: Number of bytes committed to the workspace.
+      example: 1
+workspace_part_upload_urls:
+  type: object
+  properties:
+    transfer_id:
+      type: string
+      example: example
+    part_urls:
+      type: array
+      items:
+        $ref: '#/workspace_part_upload_url'
+      description: One presigned PUT URL per requested part number, in request order.
+    expires_at:
+      type: string
+      format: date-time
+      description: Shared expiry for all URLs in this batch.
+      example: '2026-07-27T12:00:00Z'

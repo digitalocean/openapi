@@ -1,0 +1,128 @@
+operationId: agents_get_session_workspace_download
+summary: Download a file or tar archive from the session's sandbox workspace.
+description: 'Streams the workspace payload back as `application/octet-stream` using chunked transfer
+  encoding, followed by a fixed integrity footer.
+
+
+  Response body layout: `<payload>` + `<footer>`, where the footer is exactly 73 bytes: `DOWSSHA1` (8
+  bytes) + 64-char lowercase SHA-256 hex + `\n`. The client MUST strip the trailing 73 bytes before saving,
+  verify SHA-256(payload) equals the footer digest, and treat a tail that does not match this shape (magic
+  + 64 hex + newline) as a failed (truncated/corrupt) transfer.
+
+
+  Other metadata:
+
+  - `X-Workspace-Is-Archive: true` when the payload is a tar archive.
+
+  - `X-Workspace-Size-Bytes` is a progress hint (not Content-Length) and excludes the footer.
+
+  - The `X-Content-Sha256` trailer also carries the digest but is best-effort: edge proxies may strip
+  HTTP trailers, so the body footer is authoritative.
+
+
+  Concurrent transfers (upload + download) are capped server-side; over the cap the request blocks and
+  may return 503.'
+tags:
+- Agents
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: query
+  name: path
+  required: true
+  description: Source path inside the sandbox workspace. Relative paths resolve under the workspace root;
+    paths that escape the workspace are rejected. Required.
+  schema:
+    type: string
+    example: example
+  example: example
+- in: query
+  name: as_archive
+  required: false
+  description: If true, the guest returns a tar stream of `path` (e.g. for a directory). Defaults to false
+    (single file).
+  schema:
+    type: boolean
+    example: true
+  example: true
+responses:
+  '200':
+    description: Streaming workspace payload (octet-stream) followed by a fixed 73-byte integrity footer
+      (`DOWSSHA1` + 64-char sha256 hex + newline). The digest is also delivered best-effort in the X-Content-Sha256
+      trailer.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          type: string
+          format: binary
+          example: example
+  '400':
+    description: Missing path, invalid query parameter, or invalid path.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: Path resolves outside the workspace, or the session belongs to another team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: Session has no sandbox, or the sandbox is not ready.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '501':
+    description: Workspace file transfer is not supported by the active sandbox driver.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '502':
+    description: Upstream sandbox transfer failed.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '503':
+    description: Workspace transfer capacity exhausted; retry later.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_get_session_workspace_download.yml
+security:
+- bearer_auth:
+  - agents:read
