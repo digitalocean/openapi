@@ -100,6 +100,15 @@ properties:
     description: A boolean value indicating whether the cluster will be
       automatically upgraded to new patch releases during its maintenance window.
 
+  isolated_workers:
+    type: boolean
+    default: false
+    example: false
+    description: A boolean value indicating whether worker nodes in the cluster
+      are not assigned public IP addresses. When omitted on create, the default
+      value is false. When enabled, a NAT gateway must exist in the VPC where
+      the cluster is created.
+
   status:
     type: object
     readOnly: true

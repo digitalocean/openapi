@@ -8,6 +8,7 @@ source: |-
     name: 'prod-cluster-01',
     region: 'nyc1',
     version: '1.14.1-do.4',
+    isolated_workers: false,
     tags: ['production', 'web-team'],
     node_pools: [
       {
