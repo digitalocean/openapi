@@ -1,0 +1,16 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{
+      "name": "research-session",
+      "actor_id": "end-user-123",
+      "policy": {
+        "defaultAction": "ask",
+        "rules": [{"tool": "exa_web_search", "action": "allow"}]
+      },
+      "tools": ["exa_web_search@v1"],
+      "config": {"preloadTools": ["exa_web_search@v1"]}
+    }' \
+    "https://api.digitalocean.com/v2/action-gateway/sessions"

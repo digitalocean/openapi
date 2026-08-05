@@ -1,0 +1,41 @@
+operationId: users_get
+summary: Retrieve an Action Gateway User
+description: Retrieves a derived end-user view containing its sessions and OAuth
+  connections.
+tags:
+  - Action Gateway
+parameters:
+  - name: user_id
+    in: path
+    required: true
+    description: The end-user identifier.
+    schema:
+      type: string
+    example: end-user-123
+responses:
+  "200":
+    description: The user was retrieved successfully.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models.yml#/get_user_response
+        examples:
+          users_get_response:
+            $ref: examples.yml#/users_get_response
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "404":
+    $ref: ../../shared/responses/not_found.yml
+  "429":
+    $ref: ../../shared/responses/too_many_requests.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+security:
+  - bearer_auth:
+      - genai:read
+x-codeSamples:
+  - $ref: examples/curl/users_get.yml
