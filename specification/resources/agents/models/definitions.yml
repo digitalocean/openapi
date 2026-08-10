@@ -1074,3 +1074,175 @@ workspace_part_upload_urls:
       format: date-time
       description: Shared expiry for all URLs in this batch.
       example: '2026-07-27T12:00:00Z'
+agent_config_summary:
+  type: object
+  description: Lightweight list representation; the manifest is available from config reads, not list
+    responses.
+  required:
+  - id
+  - name
+  - agentspec_schema_version
+  - content_hash
+  - created_by
+  - created_at
+  - updated_at
+  properties:
+    id:
+      type: string
+      format: uuid
+      example: 019fb39c-14d9-7080-933e-b9b90e25acda
+    name:
+      type: string
+      example: support-agent
+    agentspec_schema_version:
+      type: string
+      description: Validated agentspec apiVersion, currently agents.digitalocean.com/v1alpha1.
+      example: agents.digitalocean.com/v1alpha1
+    content_hash:
+      type: string
+      pattern: ^[0-9a-f]{64}$
+      description: Lowercase SHA-256 hex digest of the canonical sanitized manifest JSON.
+      example: 75803fef24dc731824ecd4a1853c76153c7d8503534092b94da3ca3f31a882f4
+    created_by:
+      type: string
+      description: Authenticated user identity that created the config.
+      example: user-1
+    created_at:
+      type: string
+      format: date-time
+      example: '2026-08-01T12:00:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      example: '2026-08-01T12:00:00Z'
+agent_config_credential_slot:
+  type: object
+  required:
+  - name
+  - configured
+  properties:
+    name:
+      type: string
+      example: OPENAI_API_KEY
+    source:
+      type: string
+      enum:
+      - tenantSecret
+      - oauth
+      example: tenantSecret
+    provider:
+      type: string
+      example: openai
+    configured:
+      type: boolean
+      example: true
+agent_config:
+  type: object
+  description: Immutable team-scoped Agent Config: one sanitized manifest per config. There is no update;
+    clone to a new config to change content.
+  required:
+  - id
+  - name
+  - agentspec_schema_version
+  - manifest
+  - content_hash
+  - created_by
+  - created_at
+  - updated_at
+  properties:
+    id:
+      type: string
+      format: uuid
+      example: 019fb39c-14d9-7080-933e-b9b90e25acda
+    name:
+      type: string
+      example: support-agent
+    agentspec_schema_version:
+      type: string
+      description: Validated agentspec apiVersion, currently agents.digitalocean.com/v1alpha1.
+      example: agents.digitalocean.com/v1alpha1
+    manifest:
+      type: object
+      additionalProperties: true
+      description: Canonical runnable Agent manifest JSON, immutable after create.
+    content_hash:
+      type: string
+      pattern: ^[0-9a-f]{64}$
+      description: Lowercase SHA-256 hex digest of the canonical sanitized manifest JSON.
+      example: 75803fef24dc731824ecd4a1853c76153c7d8503534092b94da3ca3f31a882f4
+    created_by:
+      type: string
+      description: Authenticated user identity that created the config.
+      example: user-1
+    created_at:
+      type: string
+      format: date-time
+      example: '2026-08-01T12:00:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      example: '2026-08-01T12:00:00Z'
+    credentials:
+      type: array
+      description: Redacted credential slot metadata (name/source/configured). Secret values are never
+        included.
+      items:
+        $ref: '#/agent_config_credential_slot'
+agent_config_response:
+  type: object
+  properties:
+    config:
+      $ref: '#/agent_config'
+list_agent_configs_response:
+  type: object
+  properties:
+    configs:
+      type: array
+      items:
+        $ref: '#/agent_config_summary'
+    next_page_token:
+      type: string
+      example: ''
+agent_config_create_request:
+  type: object
+  additionalProperties: false
+  description: Unified Agent Config create body. secrets/oauth_assignments are write-only and never returned.
+  required:
+  - name
+  - manifest_yaml
+  properties:
+    name:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[A-Za-z0-9]([A-Za-z0-9._-]{0,62}[A-Za-z0-9])?$
+      description: Config name, case-insensitively unique among the team's active configs.
+      example: support-agent
+    manifest_yaml:
+      type: string
+      maxLength: 524288
+      description: Customer agents.yaml text. The HTTP JSON body is capped at 1 MiB and this field is capped
+        at 512 KiB.
+      example: |
+        apiVersion: agents.digitalocean.com/v1alpha1
+        kind: Agent
+        spec:
+          runtime:
+            adapter: opencode
+    secrets:
+      type: object
+      maxProperties: 32
+      description: Write-only map from tenantSecret logical slot to plaintext. Stored in Secrets Manager;
+        never returned.
+      additionalProperties:
+        type: string
+        minLength: 1
+        maxLength: 32768
+    oauth_assignments:
+      type: object
+      maxProperties: 32
+      description: Write-only map from oauth logical slot to an OAuth assignment UUID. Never returned.
+      additionalProperties:
+        type: string
+        format: uuid
+

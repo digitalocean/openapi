@@ -62,12 +62,16 @@ tags:
 
   - name: Agents
     description: |-
-      Hosted Agents sessions API (`/v2/agents/sessions`). Sessions represent a
-      managed agent + sandbox pair. Product provenance is exposed via
-      `session.origin` (`direct` | `simulation` | `evaluation`). ListSessions
+      Hosted Agents API under `/v2/agents`. Sessions (`/v2/agents/sessions`)
+      represent a managed agent + sandbox pair. Product provenance is exposed
+      via `session.origin` (`direct` | `simulation` | `evaluation`). ListSessions
       omits simulation and evaluation sessions server-side so customer surfaces
       stay free of product-owned internal runs; GetSession by session_id still
       returns those sessions for the owning product workflow.
+
+      Agent Configs (`/v2/agents/configs`) are immutable team-scoped manifests
+      that sessions can be created from. Soft-delete releases the active name
+      while keeping `config_id` resolvable for existing sessions.
 
   - name: Apps
     description: |-
@@ -800,6 +804,19 @@ paths:
     patch:
       $ref: "resources/addons/addons_update_plan.yml"
 
+  /v2/agents/configs:
+    get:
+      $ref: "resources/agents/agents_list_configs.yml"
+    post:
+      $ref: "resources/agents/agents_create_config.yml"
+  /v2/agents/configs/{config_id}:
+    get:
+      $ref: "resources/agents/agents_get_config.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_config.yml"
+  /v2/agents/configs/{config_id}/sessions:
+    get:
+      $ref: "resources/agents/agents_list_config_sessions.yml"
   /v2/agents/sessions:
     get:
       $ref: "resources/agents/agents_list_sessions.yml"
