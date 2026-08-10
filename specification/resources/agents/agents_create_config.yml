@@ -1,7 +1,7 @@
 operationId: agents_create_config
 summary: Create an Agent Config (manifest + secrets in one request).
 description: Accepts name, agents.yaml text, and optional write-only secret values in one request. Responses
-  never echo secret values; GET/create may include credential slot metadata with configured:true. Configs
+  never echo secret values; GET/create may include credential slot metadata (name/source/provider only). Configs
   are immutable after create.
 tags:
 - Agents
