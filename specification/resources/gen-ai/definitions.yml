@@ -5545,12 +5545,66 @@ apiListModelAPIKeysOutput:
   type: object
 apiListModelCatalogInput:
   properties:
-    limit:
-      example: "100"
+    availability:
+      example: '["serverless", "dedicated"]'
+    badges:
+      example: '["featured"]'
+    model_type:
+      example: '["chat", "embedding"]'
     page:
       example: "1"
+    per_page:
+      example: "10"
+    provider:
+      example: '["Meta", "Google", "DeepSeek"]'
+    search:
+      example: llama
 apiListModelCatalogOutput:
   properties:
+    available_availability:
+      description: All deployment availability values the client can offer in the
+        availability filter UI.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    available_badges:
+      description: All badge values the client can offer in the badges filter UI.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    available_model_types:
+      description: All model type values the client can offer in the type filter UI.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    available_providers:
+      description: All provider values the client can offer in the provider filter
+        UI.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    available_sort_by:
+      description: All sort-by field values the client can offer in the sort UI.
+      items:
+        $ref: '#/apiModelCatalogSortBy'
+      type: array
+    available_sort_directions:
+      description: All sort-direction values the client can offer in the sort UI.
+      items:
+        $ref: '#/apiSortDirection'
+      type: array
     data:
       items:
         $ref: '#/apiModelCatalogEntry'
@@ -6255,6 +6309,17 @@ apiModelCatalogEntry:
       example: '"text-to-text"'
       type: string
   type: object
+apiModelCatalogSortBy:
+  default: MODEL_CATALOG_SORT_BY_CREATED_AT
+  description: |-
+    Field on which to sort model catalog results.
+apiModelCatalogUseCase:
+  default: MODEL_CATALOG_USE_CASE_UNSPECIFIED
+  description: |-
+    Pre-defined use-case filter for the model catalog. When set, only models
+    that match the selected use case are returned. The server maps each value
+    to a combination of `model_type`, `usecases`, and `output_modalities` checks
+    so the client does not need to construct those filters manually.
 apiModelEndpoint:
   description: An available endpoint for a model and its capabilities
   properties:
