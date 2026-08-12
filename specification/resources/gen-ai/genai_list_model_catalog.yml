@@ -14,7 +14,7 @@ parameters:
   schema:
     type: integer
 - description: Partial, case-insensitive match on the model's display name.
-  example: '"example string"'
+  example: llama
   in: query
   name: search
   schema:
@@ -55,17 +55,17 @@ parameters:
     items:
       type: string
     type: array
-- default: MODEL_CATALOG_SORT_BY_CREATED_AT
-  description: |-
+- description: |-
     Field to sort results by. Default is `MODEL_CATALOG_SORT_BY_CREATED_AT`.
 
      - MODEL_CATALOG_SORT_BY_CREATED_AT: Default: sort by creation date.
      - MODEL_CATALOG_SORT_BY_NAME: Sort by the model's display name (case-insensitive).
      - MODEL_CATALOG_SORT_BY_PRICE: Sort by input token price.
-  example: '"example string"'
+  example: MODEL_CATALOG_SORT_BY_NAME
   in: query
   name: sort_by
   schema:
+    default: MODEL_CATALOG_SORT_BY_CREATED_AT
     enum:
     - MODEL_CATALOG_SORT_BY_CREATED_AT
     - MODEL_CATALOG_SORT_BY_NAME
@@ -77,19 +77,18 @@ parameters:
   name: per_page
   schema:
     type: integer
-- default: SORT_DIRECTION_UNSPECIFIED
-  description: Sort direction. Defaults to descending when unspecified.
-  example: '"example string"'
+- description: Sort direction. Defaults to descending when unspecified.
+  example: SORT_DIRECTION_ASC
   in: query
   name: sort_direction
   schema:
+    default: SORT_DIRECTION_UNSPECIFIED
     enum:
     - SORT_DIRECTION_UNSPECIFIED
     - SORT_DIRECTION_ASC
     - SORT_DIRECTION_DESC
     type: string
-- default: MODEL_CATALOG_USE_CASE_UNSPECIFIED
-  description: |-
+- description: |-
     Filter by pre-defined use case. When unspecified, no use-case filter is applied.
     Accepted values: `MODEL_CATALOG_USE_CASE_CODING`, `MODEL_CATALOG_USE_CASE_AGENTS`,
     `MODEL_CATALOG_USE_CASE_AUDIO`, `MODEL_CATALOG_USE_CASE_IMAGE`,
@@ -108,10 +107,11 @@ parameters:
     output modalities include video.
      - MODEL_CATALOG_USE_CASE_EMBEDDING: Embedding and reranking models: model_type is embedding or reranking, or
     usecases include vectorization or reranking.
-  example: '"example string"'
+  example: MODEL_CATALOG_USE_CASE_CODING
   in: query
   name: use_case
   schema:
+    default: MODEL_CATALOG_USE_CASE_UNSPECIFIED
     enum:
     - MODEL_CATALOG_USE_CASE_UNSPECIFIED
     - MODEL_CATALOG_USE_CASE_CODING
