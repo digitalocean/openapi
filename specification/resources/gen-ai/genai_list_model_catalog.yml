@@ -22,6 +22,8 @@ parameters:
 - description: |-
     Filter by model type. Multiple values use OR semantics.
     Accepted values: `chat`, `embedding`, `image`, `reasoning`, `coding`, `audio`, `reranking`.
+  example:
+  - chat
   in: query
   name: model_type
   schema:
@@ -31,6 +33,8 @@ parameters:
 - description: |-
     Filter by model creator/developer. Multiple values use OR semantics.
     Values are data-driven; use `available_providers` from the response to discover valid options.
+  example:
+  - Meta
   in: query
   name: provider
   schema:
@@ -40,6 +44,8 @@ parameters:
 - description: |-
     Filter by deployment availability. Multiple values use OR semantics.
     Accepted values: `serverless`, `dedicated`.
+  example:
+  - serverless
   in: query
   name: availability
   schema:
@@ -49,6 +55,8 @@ parameters:
 - description: |-
     Filter by badge. Multiple values use OR semantics.
     Accepted values: `featured`, `new`, `preview`.
+  example:
+  - featured
   in: query
   name: badges
   schema:
