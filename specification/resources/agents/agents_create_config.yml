@@ -1,0 +1,69 @@
+operationId: agents_create_config
+summary: Create an Agent Config (manifest + secrets in one request).
+description: Accepts name, agents.yaml text, and optional write-only secret values in one request. Responses
+  never echo secret values; GET/create may include credential slot metadata (name/source/provider only). Configs
+  are immutable after create.
+tags:
+- Agents
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/agent_config_create_request
+  description: Unified Agent Config create body. secrets/oauth_assignments are write-only and never returned.
+responses:
+  '201':
+    description: Config created.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/agent_config_response
+  '400':
+    description: Invalid name, JSON wrapper, or agents.yaml manifest.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '409':
+    description: An active config with this name already exists for the team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '413':
+    description: Request body exceeds 1 MiB.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '415':
+    description: Content-Type is not application/json.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_create_config.yml
+security:
+- bearer_auth:
+  - agents:create
