@@ -1,0 +1,342 @@
+tools_list_response:
+  value:
+    version: v1
+    tools:
+      - name: exa_web_search
+        toolkitId: exa
+        title: Search the Web
+        description: Search public web pages.
+        inputSchema:
+          type: object
+          properties:
+            query:
+              type: string
+        annotations:
+          title: Search the Web
+          readOnlyHint: true
+          idempotentHint: true
+          openWorldHint: true
+          destructiveHint: false
+        version: v1
+        parallelizable: true
+        streamingSafe: false
+        outputSchema:
+          type: object
+        toolSlug: exa_web_search
+    definitions: []
+    pagination:
+      page: 1
+      per_page: 20
+      total: 1
+
+tools_list_toolkits_response:
+  value:
+    version: v1
+    toolkits:
+      - id: 123e4567-e89b-12d3-a456-426614174000
+        name: exa
+        description: Web search and content retrieval tools.
+
+tools_list_providers_response:
+  value:
+    providers:
+      - name: github
+        display_name: GitHub
+        description: Connect Action Gateway to GitHub.
+        auth_type: oauth2
+        scopes:
+          - repo
+        connection_parameters: []
+
+tools_get_definition_response:
+  value:
+    toolId: tool-123
+    name: exa_web_search
+    toolkitId: exa
+    title: Search the Web
+    description: Search public web pages.
+    inputSchema:
+      type: object
+      properties:
+        query:
+          type: string
+      required:
+        - query
+    outputSchema:
+      type: object
+    annotations:
+      title: Search the Web
+      readOnlyHint: true
+      idempotentHint: true
+      openWorldHint: true
+      destructiveHint: false
+    version: v1
+    schemaVersion: "1"
+    status: active
+    parallelizable: true
+    streamingSafe: false
+    tags:
+      - search
+    toolSlug: exa_web_search
+
+toolbelts_create_request:
+  value:
+    name: search-toolbelt
+    display_name: Search Tools
+    description: Tools for searching and fetching public web pages.
+    tools:
+      - exa_web_search
+      - exa_web_fetch
+
+toolbelt_response:
+  value:
+    toolbelt:
+      name: search-toolbelt
+      version: "1"
+      display_name: Search Tools
+      description: Tools for searching and fetching public web pages.
+      tools:
+        - exa_web_search
+        - exa_web_fetch
+      status: active
+      reference: search-toolbelt@1
+      reference_latest: search-toolbelt
+      tool_count: 2
+      created_at: 2026-06-11T12:00:00Z
+      updated_at: 2026-06-11T12:00:00Z
+
+toolbelts_delete_response:
+  value:
+    toolbelt:
+      name: search-toolbelt
+      version: "1"
+      display_name: Search Tools
+      description: Tools for searching and fetching public web pages.
+      tools:
+        - exa_web_search
+        - exa_web_fetch
+      status: deprecated
+      reference: search-toolbelt@1
+      reference_latest: search-toolbelt
+      tool_count: 2
+      created_at: 2026-06-11T12:00:00Z
+      updated_at: 2026-06-11T13:00:00Z
+
+toolbelts_list_response:
+  value:
+    toolbelts:
+      - name: search-toolbelt
+        display_name: Search Tools
+        description: Tools for searching and fetching public web pages.
+        latest_version: "1"
+        version_count: 1
+        tool_count: 2
+        status: active
+        reference_latest: search-toolbelt
+        updated_at: 2026-06-11T12:00:00Z
+    pagination:
+      page: 1
+      per_page: 20
+      total: 1
+
+toolbelts_add_tools_request:
+  value:
+    tools:
+      - exa_web_fetch
+
+toolbelts_remove_tools_request:
+  value:
+    tools:
+      - exa_web_fetch
+
+connections_create_request:
+  value:
+    provider: github
+    user_id: end-user-123
+    scopes:
+      - repo
+    connection_parameters: {}
+
+connections_create_response:
+  value:
+    connection:
+      id: 123e4567-e89b-12d3-a456-426614174000
+      provider: github
+      user_id: end-user-123
+      scopes:
+        - repo
+      status: pending
+      created_at: 2026-06-11T12:00:00Z
+      provider_display_name: GitHub
+      connection_parameters: {}
+    authorization:
+      status: pending
+      connect_url: https://cloud.digitalocean.com/action-gateway/connections/connect
+      verification_code: ABCD-EFGH
+      expires_at: 2026-06-11T12:15:00Z
+
+connections_list_response:
+  value:
+    connections:
+      - id: 123e4567-e89b-12d3-a456-426614174000
+        provider: github
+        user_id: end-user-123
+        scopes:
+          - repo
+        status: active
+        created_at: 2026-06-11T12:00:00Z
+        granted_at: 2026-06-11T12:01:00Z
+        provider_display_name: GitHub
+        connection_parameters: {}
+    pagination:
+      page: 1
+      per_page: 20
+      total: 1
+
+connections_get_response:
+  value:
+    connection:
+      id: 123e4567-e89b-12d3-a456-426614174000
+      provider: github
+      user_id: end-user-123
+      scopes:
+        - repo
+      status: active
+      created_at: 2026-06-11T12:00:00Z
+      granted_at: 2026-06-11T12:01:00Z
+      provider_display_name: GitHub
+      connection_parameters: {}
+
+connections_update_request:
+  value:
+    connection_parameters:
+      site_url: https://github.com
+
+connections_update_response:
+  value:
+    connection:
+      id: 123e4567-e89b-12d3-a456-426614174000
+      provider: github
+      user_id: end-user-123
+      scopes:
+        - repo
+      status: active
+      created_at: 2026-06-11T12:00:00Z
+      granted_at: 2026-06-11T12:01:00Z
+      provider_display_name: GitHub
+      connection_parameters:
+        site_url: https://github.com
+
+connections_delete_response:
+  value:
+    connection:
+      id: 123e4567-e89b-12d3-a456-426614174000
+      provider: github
+      user_id: end-user-123
+      scopes:
+        - repo
+      status: revoked
+      created_at: 2026-06-11T12:00:00Z
+      granted_at: 2026-06-11T12:01:00Z
+      revoked_at: 2026-06-11T13:00:00Z
+      provider_display_name: GitHub
+      connection_parameters: {}
+
+users_list_response:
+  value:
+    user_ids:
+      - end-user-123
+    pagination:
+      page: 1
+      per_page: 20
+      total: 1
+
+users_get_response:
+  value:
+    user:
+      user_id: end-user-123
+      sessions:
+        - session_urn: do:managed_agents_session:123e4567-e89b-12d3-a456-426614174000
+          name: research-session
+          created_at: 2026-06-11T12:00:00Z
+          updated_at: 2026-06-11T12:00:00Z
+      connections:
+        - id: 123e4567-e89b-12d3-a456-426614174000
+          provider: github
+          user_id: end-user-123
+          scopes:
+            - repo
+          status: active
+          created_at: 2026-06-11T12:00:00Z
+          granted_at: 2026-06-11T12:01:00Z
+          provider_display_name: GitHub
+          connection_parameters: {}
+
+sessions_create_request:
+  value:
+    name: research-session
+    actor_id: end-user-123
+    policy:
+      defaultAction: ask
+      rules:
+        - tool: exa_web_search
+          action: allow
+    tools:
+      - exa_web_search@v1
+    config:
+      preloadTools:
+        - exa_web_search@v1
+
+sessions_create_response:
+  value:
+    session:
+      sessionUrn: do:managed_agents_session:123e4567-e89b-12d3-a456-426614174000
+      policy:
+        defaultAction: ask
+        rules:
+          - tool: exa_web_search
+            action: allow
+      createdAt: 2026-06-11T12:00:00Z
+      updatedAt: 2026-06-11T12:00:00Z
+      name: research-session
+      actorId: end-user-123
+      tools:
+        references:
+          - kind: SESSION_TOOL_REFERENCE_KIND_TOOL
+            name: exa_web_search
+            version: v1
+      config:
+        preloadTools:
+          - exa_web_search@v1
+    mcpUrl: https://actions.do-ai.run/mcp/session/123e4567-e89b-12d3-a456-426614174000
+    tools:
+      - exa_web_search@v1
+
+sessions_list_response:
+  value:
+    sessions:
+      - sessionUrn: do:managed_agents_session:123e4567-e89b-12d3-a456-426614174000
+        policy:
+          defaultAction: ask
+          rules:
+            - tool: exa_web_search
+              action: allow
+        createdAt: 2026-06-11T12:00:00Z
+        updatedAt: 2026-06-11T12:00:00Z
+        name: research-session
+        actorId: end-user-123
+        tools:
+          references:
+            - kind: SESSION_TOOL_REFERENCE_KIND_TOOL
+              name: exa_web_search
+              version: v1
+        config:
+          preloadTools:
+            - exa_web_search@v1
+    pagination:
+      page: 1
+      per_page: 20
+      total: 1
+
+sessions_delete_response:
+  value: {}
