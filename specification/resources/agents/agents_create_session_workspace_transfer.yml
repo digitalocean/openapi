@@ -1,0 +1,147 @@
+operationId: agents_create_session_workspace_transfer
+summary: Start a staged (large-file) workspace transfer.
+description: 'Creates an asynchronous, object-storage-backed transfer for payloads larger than the streaming
+  path supports (> ~50 MiB). Bulk bytes never traverse harness-api: the client PUTs/GETs presigned DO
+  Spaces URLs directly.
+
+
+  Set `direction` to `upload` or `download`.
+
+  - `upload`: responds 201 with `transfer_id` + `part_size`; the client then requests per-part presigned
+  PUT URLs, uploads them to Spaces, and calls `commit`.
+
+  - `download`: responds 202 with `transfer_id`; the client polls GET until `completed` and then fetches
+  `download_url` from Spaces.
+
+
+  Upload and cancel currently return 501 until the sandbox backend RPCs ship; download is live.'
+tags:
+- Agents
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+        - direction
+        - path
+        properties:
+          direction:
+            type: string
+            enum:
+            - upload
+            - download
+            description: Transfer direction.
+            example: upload
+          path:
+            type: string
+            description: Workspace-relative path. Destination for upload, source for download. Paths that
+              escape the workspace root are rejected.
+            example: example
+          is_archive:
+            type: boolean
+            description: Upload only. When true, the payload is a tar the guest extracts at `path`.
+            example: true
+          as_archive:
+            type: boolean
+            description: Download only. When true, `path` is exported as a tar stream.
+            example: true
+          size_bytes:
+            type: string
+            format: int64
+            description: Optional total payload size. Validated against the maximum staged object size
+              (50 GiB); a larger value returns 413.
+            example: example
+          sha256:
+            type: string
+            description: Optional lowercase hex SHA-256 of the full payload. If set on an upload, it must
+              match on commit.
+            example: example
+responses:
+  '201':
+    description: Upload transfer created; proceed to request part upload URLs.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/workspace_transfer_created
+  '202':
+    description: Download transfer accepted; poll the transfer until completed.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/workspace_transfer_created
+  '400':
+    description: Missing/invalid direction or path, or invalid JSON.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: Path resolves outside the workspace, or the session belongs to another team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: Session has no sandbox, or the sandbox is not ready.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '413':
+    description: Declared size exceeds the maximum staged object size.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '501':
+    description: Staged transfer (or this direction) is not supported by the active sandbox driver.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '502':
+    description: Upstream sandbox transfer coordination failed.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_create_session_workspace_transfer.yml
+security:
+- bearer_auth:
+  - agents:create
