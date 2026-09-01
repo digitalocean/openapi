@@ -10,6 +10,10 @@ oneOf:
         region:
           $ref: '../../../shared/attributes/region_slug.yml'
 
+    - type: object
+      properties:
+        $ref: 'attributes.yml#/load_balancer_ip'
+
     - $ref: 'load_balancer_base.yml'
 
     required:
@@ -26,6 +30,10 @@ oneOf:
       properties:
         region:
           $ref: '../../../shared/attributes/region_slug.yml'
+
+    - type: object
+      properties:
+        $ref: 'attributes.yml#/load_balancer_ip'
 
     - $ref: 'load_balancer_base.yml'
 

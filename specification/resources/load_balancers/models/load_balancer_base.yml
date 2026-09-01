@@ -22,14 +22,6 @@ properties:
       default project. If an invalid project ID is provided, the load balancer will 
       not be created.
 
-  ip:
-    type: string
-    pattern: '^$|^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-    readOnly: true
-    example: '104.131.186.241'
-    description: An attribute containing the public-facing IP address of the
-      load balancer.
-  
   ipv6:
     type: string
     readOnly: true

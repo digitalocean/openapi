@@ -71,6 +71,31 @@ properties:
     example: 30
     description: The TCP timeout in seconds for the VPC NAT gateway.
 
+  egresses:
+    type: object
+    description: >-
+      An optional object specifying the public egress IP address to assign to
+      the VPC NAT gateway. Provide this only to use a specific address. If
+      omitted, DigitalOcean allocates a public IP address automatically.
+    properties:
+      public_gateways:
+        type: array
+        description: >-
+          An array containing a single public gateway object that sets the
+          gateway's public egress IP address.
+        items:
+          type: object
+          properties:
+            ip:
+              type: string
+              example: 203.0.113.42
+              description: >-
+                The public egress IP address to assign to the VPC NAT gateway.
+                Provide an unassigned Bring Your Own IP (BYOIP) address on your
+                account in the same region to use your own IP address. This
+                field is only applied when creating the gateway and cannot be
+                changed afterward.
+
 required:
   - name
   - type
