@@ -22,7 +22,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/load_balancer_create.yml'
+        $ref: 'models/load_balancer_update.yml'
 
       examples:
         load_balancer_update_request:

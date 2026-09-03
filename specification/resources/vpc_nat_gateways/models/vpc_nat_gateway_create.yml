@@ -85,16 +85,31 @@ properties:
           gateway's public egress IP address.
         items:
           type: object
+          description: >-
+            Specify the address using either `ip` or `ipv4`. Both fields accept
+            the same value and `ip` takes precedence if both are provided. The
+            assigned address is returned in the `ipv4` field of GET and list
+            responses.
           properties:
             ip:
               type: string
               example: 203.0.113.42
               description: >-
-                The public egress IP address to assign to the VPC NAT gateway.
-                Provide an unassigned Bring Your Own IP (BYOIP) address on your
-                account in the same region to use your own IP address. This
-                field is only applied when creating the gateway and cannot be
-                changed afterward.
+                The public egress IP address to assign to the VPC NAT gateway,
+                and the preferred field for setting it. Provide an unassigned
+                Bring Your Own IP (BYOIP) address on your account in the same
+                region to use your own IP address. This field is only applied
+                when creating the gateway and cannot be changed afterward. The
+                assigned address is returned as `ipv4` in GET and list
+                responses.
+            ipv4:
+              type: string
+              example: 203.0.113.42
+              description: >-
+                An alternative to `ip` for setting the public egress IP address
+                on create. Accepts the same value as `ip`, which takes
+                precedence if both are provided. This field is only applied when
+                creating the gateway and cannot be changed afterward.
 
 required:
   - name
