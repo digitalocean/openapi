@@ -1,0 +1,40 @@
+description: >
+  The response will be a JSON object with a `teams` key. This will be set to
+  an array of team objects belonging to the organization.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - teams
+      properties:
+        teams:
+          type: array
+          items:
+            $ref: '../models/organization_team.yml#/organization_team'
+    example:
+      teams:
+        - id: 4126873
+          uuid: 4e1bfbc3-dc3e-41f2-a18f-1b4d7ba71679
+          name: production
+          email: sammy@example.com
+          member_count: 3
+          status: joined
+          joined_organization_at: "2024-06-12T15:04:05Z"
+          company: DigitalOcean
+        - id: 4126874
+          uuid: addb4547-6bab-419a-8542-76263a033cf6
+          name: staging
+          email: staging@example.com
+          member_count: 2
+          status: joined
+          joined_organization_at: "2024-07-01T10:00:00Z"

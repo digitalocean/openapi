@@ -1,0 +1,75 @@
+operationId: databases_update_do_settings
+
+summary: Update DO Settings for a Database Cluster
+
+description: >-
+  To update the DigitalOcean-specific settings for a database cluster, send a
+  PUT request to `/v2/databases/$DATABASE_ID/do_settings`.
+
+  Currently, the only supported setting is `service_cnames`, which allows you
+  to specify custom DNS names (CNAMEs) to be included in the TLS certificate
+  Subject Alternative Names (SANs) for the database cluster nodes. This
+  enables TLS verification when connecting via a custom hostname.
+
+  After updating, the database nodes will be replaced to apply the new
+  certificate. This process is performed as a rolling replacement and does not
+  cause downtime.
+
+  To clear all custom CNAMEs, send an empty array or omit the field.
+
+tags:
+  - Databases
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - do_settings
+        properties:
+          do_settings:
+            $ref: 'models/do_settings.yml'
+      example:
+        do_settings:
+          service_cnames:
+            - "db.example.com"
+            - "db-replica.example.com"
+
+parameters:
+  - $ref: 'parameters.yml#/database_cluster_uuid'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '422':
+    $ref: '../../shared/responses/unprocessable_entity.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/databases_update_do_settings.yml'
+  - $ref: 'examples/go/databases_update_do_settings.yml'
+  - $ref: 'examples/python/databases_update_do_settings.yml'
+
+security:
+  - bearer_auth:
+    - 'database:update'

@@ -21,6 +21,11 @@ content:
         - name: app-01
           role: normal
           password: jge5lfxtzhx42iff
+        - name: app-02
+          role: normal
+          password: z421iffftjge5lxh
+          settings:
+            pg_allow_replication: true
         - name: doadmin
           role: primary
           password: wv78n3zpz42xezd

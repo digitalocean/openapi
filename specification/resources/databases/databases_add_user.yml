@@ -11,10 +11,14 @@ description: |
   When adding a user to a MySQL cluster, additional options can be configured in the
   `mysql_settings` object.
 
+  When adding a user to a PostgreSQL cluster, additional options can be configured in
+  the `settings` object (for example, `pg_allow_replication`). When
+  `pg_allow_replication` is omitted, it defaults to `false`.
+
   When adding a user to a Kafka cluster, additional options can be configured in
   the `settings` object.
 
-   When adding a user to a MongoDB cluster, additional options can be configured in
+  When adding a user to a MongoDB cluster, additional options can be configured in
   the `settings.mongo_user_settings` object.
 
   The response will be a JSON object with a key called `user`. The value of this will be an

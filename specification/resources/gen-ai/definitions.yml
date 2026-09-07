@@ -340,6 +340,14 @@ apiAgent:
     vpc_uuid:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
+    web_fetch_enabled:
+      description: Whether this agent can use the built-in web_fetch tool.
+      example: true
+      type: boolean
+    web_search_enabled:
+      description: Whether this agent can use the built-in web_search tool.
+      example: true
+      type: boolean
     workspace:
       $ref: '#/apiWorkspace'
   type: object
@@ -857,6 +865,16 @@ apiAgentPublic:
       description: The latest version of the agent
       example: example string
       type: string
+    web_fetch_enabled:
+      description: Whether this agent can use the built-in web_fetch tool to retrieve
+        content from public web pages.
+      example: true
+      type: boolean
+    web_search_enabled:
+      description: Whether this agent can use the built-in web_search tool to search
+        the public web for current information.
+      example: true
+      type: boolean
   type: object
 apiAgentSpan:
   properties:
@@ -1273,6 +1291,22 @@ apiAnthropicAPIKeyInfo:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
+apiAssociatedModelEvaluationPreset:
+  description: |-
+    AssociatedModelEvaluationPreset identifies a saved model evaluation preset
+    that references a metric. Returned alongside custom metrics so the dashboard
+    can warn that deleting the metric will also delete these presets.
+  properties:
+    eval_preset_uuid:
+      description: Unique identifier of the saved model evaluation preset that references
+        the metric.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    name:
+      description: Display name of the saved model evaluation preset.
+      example: '"My evaluation preset"'
+      type: string
+  type: object
 apiAuditHeader:
   description: An alternative way to provide auth information. for internal use only.
   properties:
@@ -1405,216 +1439,6 @@ apiAvailableModelMetadata:
     type:
       description: Model type (e.g. "chat", "embedding", "image", "audio", "reasoning",
         "coding").
-      example: example string
-      type: string
-  type: object
-apiBatchInferenceInlineInput:
-  properties:
-    requests:
-      description: The list of inline inference requests (Anthropic flow)
-      items:
-        $ref: '#/apiBatchInferenceRequest'
-      type: array
-  type: object
-apiBatchInferenceJob:
-  description: Core domain model for a batch inference job
-  properties:
-    batch_id:
-      description: Unique identifier for the batch job (UUID string)
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    cancel_requested_at:
-      description: When cancellation was requested; unset until a cancel is requested.
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    completion_window:
-      description: The completion window (e.g. "24h")
-      example: example string
-      type: string
-    created_at:
-      description: Timestamp when the batch job was created
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    error_message:
-      description: Error message if the batch job failed
-      example: example string
-      type: string
-    expires_at:
-      description: Timestamp when the batch job expires
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    file_id:
-      description: The file ID referencing the uploaded input dataset (OpenAI flow)
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    model:
-      description: The model used for inference
-      example: example string
-      type: string
-    provider:
-      description: 'Inference provider: openai, anthropic, unknown'
-      example: example string
-      type: string
-    request_counts:
-      $ref: '#/apiBatchInferenceRequestCounts'
-    request_id:
-      description: Client-supplied idempotency key
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    result_available:
-      description: |-
-        On GET .../batches/{id} (status), true when the job reached a terminal state
-        (completed, failed, expired, cancelled). Use GET .../batches/{id}/results for download when ready.
-      example: true
-      type: boolean
-    status:
-      description: 'Current status of the batch job (snake_case: awaiting_processing,
-        queued, in_progress, ...)'
-      example: example string
-      type: string
-    updated_at:
-      description: Timestamp when the batch job was last updated
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-  type: object
-apiBatchInferenceJobEdge:
-  description: A single edge in the batch inference job connection (Relay-style).
-  properties:
-    cursor:
-      description: Opaque cursor for this edge; pass as "after" to paginate from this
-        position
-      example: example string
-      type: string
-    node:
-      $ref: '#/apiCreateBatchInferenceJobOutput'
-  type: object
-apiBatchInferenceJobPoll:
-  description: 'Returned from GET .../batches/{id}: current status and metadata (no
-    model; consistent with list/create summary).'
-  properties:
-    batch_id:
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    cancel_requested_at:
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    completion_window:
-      example: example string
-      type: string
-    created_at:
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    error_message:
-      example: example string
-      type: string
-    expires_at:
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    file_id:
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    provider:
-      example: example string
-      type: string
-    request_counts:
-      $ref: '#/apiBatchInferenceRequestCounts'
-    request_id:
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    result_available:
-      example: true
-      type: boolean
-    status:
-      example: example string
-      type: string
-    updated_at:
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-  type: object
-apiBatchInferenceMessage:
-  properties:
-    content:
-      description: The content of the message
-      example: example string
-      type: string
-    role:
-      description: The role of the message sender (e.g. "user", "assistant")
-      example: example string
-      type: string
-  type: object
-apiBatchInferencePageInfo:
-  description: Forward-only page info for batch inference job listing.
-  properties:
-    end_cursor:
-      description: Cursor of the last edge in the current page; pass as "after" for
-        the next page
-      example: example string
-      type: string
-    has_next_page:
-      description: True when more results are available after end_cursor
-      example: true
-      type: boolean
-  type: object
-apiBatchInferenceRequest:
-  properties:
-    custom_id:
-      description: A unique identifier for this request within the batch
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    params:
-      $ref: '#/apiBatchInferenceRequestParams'
-  type: object
-apiBatchInferenceRequestCounts:
-  description: 'Per-request counts (OpenAI batch API shape: nested request_counts
-    object).'
-  properties:
-    completed:
-      example: "12345"
-      format: uint64
-      type: string
-    failed:
-      example: "12345"
-      format: uint64
-      type: string
-    total:
-      example: "12345"
-      format: uint64
-      type: string
-  type: object
-apiBatchInferenceRequestParams:
-  properties:
-    max_tokens:
-      description: Maximum number of tokens to generate
-      example: "12345"
-      format: int64
-      type: string
-    messages:
-      description: The messages for the chat completion request
-      items:
-        $ref: '#/apiBatchInferenceMessage'
-      type: array
-    temperature:
-      description: Sampling temperature
-      example: 123
-      format: double
-      type: number
-  type: object
-apiBatchInferenceWebhook:
-  properties:
-    secret:
-      description: A secret used to sign webhook payloads
-      example: example string
-      type: string
-    url:
-      description: The URL to send webhook notifications to
       example: example string
       type: string
   type: object
@@ -1776,6 +1600,154 @@ apiChunkingOptions:
       format: float
       type: number
   type: object
+apiClusterHealth:
+  description: |-
+    ClusterHealth is the merged DBaaS facts + OpenSearch health document the
+    "Cluster Health" tab consumes. The UI is expected to render the signals
+    list as-is and use `shards` for any numeric gauges.
+  properties:
+    cluster_name:
+      description: |-
+        Aiven service name. Surfaced for support
+        hand-off; never used as an identifier.
+      example: example name
+      type: string
+    cluster_status:
+      description: |-
+        Raw OpenSearch "green" / "yellow" / "red". Surfaced separately so the
+        UI can show cluster status as reported by OpenSearch alongside our
+        derived overall_status.
+      example: example string
+      type: string
+    num_nodes:
+      example: 123
+      format: int32
+      type: integer
+    overall_status:
+      $ref: '#/apiClusterHealthOverallStatus'
+    region:
+      example: example string
+      type: string
+    shards:
+      $ref: '#/apiClusterHealthShards'
+    signals:
+      items:
+        $ref: '#/apiClusterHealthSignal'
+      type: array
+    size:
+      description: DBaaS plan slug
+      example: example string
+      type: string
+  type: object
+apiClusterHealthMaxShardsSource:
+  default: CLUSTER_HEALTH_MAX_SHARDS_SOURCE_UNSPECIFIED
+  description: |-
+    ClusterHealthMaxShardsSource lets the UI distinguish "you're at 90% of the
+    platform default" from "you're at 90% of your own customer-lowered cap" —
+    the recommended remediation is different in each case.
+
+     - CLUSTER_HEALTH_MAX_SHARDS_SOURCE_PLATFORM_DEFAULT: Customer has not set cluster.max_shards_per_node; the platform default
+    (1000 for OpenSearch 2.x) is in effect.
+     - CLUSTER_HEALTH_MAX_SHARDS_SOURCE_CUSTOMER_OVERRIDE: Customer has explicitly set cluster.max_shards_per_node via the DBaaS
+    advanced config API.
+  enum:
+  - CLUSTER_HEALTH_MAX_SHARDS_SOURCE_UNSPECIFIED
+  - CLUSTER_HEALTH_MAX_SHARDS_SOURCE_PLATFORM_DEFAULT
+  - CLUSTER_HEALTH_MAX_SHARDS_SOURCE_CUSTOMER_OVERRIDE
+  example: CLUSTER_HEALTH_MAX_SHARDS_SOURCE_UNSPECIFIED
+  type: string
+apiClusterHealthOverallStatus:
+  default: CLUSTER_HEALTH_OVERALL_STATUS_UNSPECIFIED
+  description: |-
+    ClusterHealthOverallStatus is the coarse-grained rollup the UI drives the
+    banner colour from. UNKNOWN is returned when we could not reach the
+    cluster; the UI should render a neutral state in that case rather than
+    implying everything is fine.
+  enum:
+  - CLUSTER_HEALTH_OVERALL_STATUS_UNSPECIFIED
+  - CLUSTER_HEALTH_OVERALL_STATUS_UNKNOWN
+  - CLUSTER_HEALTH_OVERALL_STATUS_GREEN
+  - CLUSTER_HEALTH_OVERALL_STATUS_YELLOW
+  - CLUSTER_HEALTH_OVERALL_STATUS_RED
+  example: CLUSTER_HEALTH_OVERALL_STATUS_UNSPECIFIED
+  type: string
+apiClusterHealthShards:
+  description: |-
+    ClusterHealthShards captures the shard-utilisation subview. All counts
+    come from OpenSearch's _cluster/health; the cap fields come from DBaaS.
+  properties:
+    active:
+      example: 123
+      format: int32
+      type: integer
+    initializing:
+      example: 123
+      format: int32
+      type: integer
+    max_per_node:
+      description: |-
+        Effective per-node cap, with the DBaaS "0 means default" sentinel
+        already resolved.
+      example: "12345"
+      format: uint64
+      type: string
+    max_per_node_source:
+      $ref: '#/apiClusterHealthMaxShardsSource'
+    max_total:
+      description: 'Total cluster-wide shard cap: max_per_node * num_nodes.'
+      example: "12345"
+      format: uint64
+      type: string
+    relocating:
+      example: 123
+      format: int32
+      type: integer
+    unassigned:
+      example: 123
+      format: int32
+      type: integer
+    utilization_ratio:
+      description: |-
+        Fraction of max_total currently consumed by active + unassigned +
+        initializing + relocating shards. 0.0 - 1.0, capped at 1.0.
+      example: 123
+      format: double
+      type: number
+  type: object
+apiClusterHealthSignal:
+  description: ClusterHealthSignal is one human-readable issue to surface in the UI.
+  properties:
+    id:
+      description: |-
+        Stable string identifier (e.g. "shard_utilization_high"). UIs may use
+        this to swap in custom copy; new IDs are additive.
+      example: example string
+      type: string
+    recommendation:
+      description: |-
+        Plain-English recommendation, optional. May be empty when the signal
+        is informational only.
+      example: example string
+      type: string
+    severity:
+      $ref: '#/apiClusterHealthSignalSeverity'
+    summary:
+      description: Plain-English summary of the issue, suitable for direct UI rendering.
+      example: example string
+      type: string
+  type: object
+apiClusterHealthSignalSeverity:
+  default: CLUSTER_HEALTH_SIGNAL_SEVERITY_UNSPECIFIED
+  description: |-
+    ClusterHealthSignalSeverity maps 1:1 to the same enum on the server side.
+    Keep these in sync; the handler converts between them.
+  enum:
+  - CLUSTER_HEALTH_SIGNAL_SEVERITY_UNSPECIFIED
+  - CLUSTER_HEALTH_SIGNAL_SEVERITY_INFO
+  - CLUSTER_HEALTH_SIGNAL_SEVERITY_WARNING
+  - CLUSTER_HEALTH_SIGNAL_SEVERITY_ERROR
+  example: CLUSTER_HEALTH_SIGNAL_SEVERITY_UNSPECIFIED
+  type: string
 apiCodeSnippets:
   description: Code examples for using the model
   properties:
@@ -1954,6 +1926,16 @@ apiCreateAgentInputPublic:
       example: 123
       format: int64
       type: integer
+    web_fetch_enabled:
+      description: Whether the agent can use the built-in web_fetch tool to retrieve
+        content from public web pages.
+      example: true
+      type: boolean
+    web_search_enabled:
+      description: Whether the agent can use the built-in web_search tool to search
+        the public web for current information.
+      example: true
+      type: boolean
     workspace_uuid:
       description: Identifier for the workspace
       example: 123e4567-e89b-12d3-a456-426614174000
@@ -2046,109 +2028,6 @@ apiCreateAnthropicAPIKeyOutput:
     api_key_info:
       $ref: '#/apiAnthropicAPIKeyInfo'
   type: object
-apiCreateBatchInferenceFileUploadPresignedURLInputPublic:
-  description: Public request to create a presigned URL for batch file upload
-  properties:
-    file_name:
-      description: Local filename for the batch JSONL file (must end in .jsonl)
-      example: example name
-      type: string
-  type: object
-apiCreateBatchInferenceFileUploadPresignedURLOutput:
-  description: Response with a presigned URL for batch file upload
-  properties:
-    expires_at:
-      description: When the presigned URL expires
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    file_id:
-      description: The generated file identifier (UUID string)
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    upload_url:
-      description: Presigned PUT URL for uploading the .jsonl file to Spaces
-      example: example string
-      type: string
-  type: object
-apiCreateBatchInferenceJobInputPublic:
-  description: Public request to create a batch inference job
-  properties:
-    completion_window:
-      description: The completion window (e.g. "24h")
-      example: example string
-      type: string
-    endpoint:
-      description: |-
-        OpenAI Batch API target path. Required when provider is openai; not persisted in DB.
-        Allowed values only: /v1/responses (Responses API), /v1/chat/completions (Chat Completions API),
-        /v1/embeddings (Embeddings API), /v1/completions (Completions API), /v1/moderations (Moderations API).
-      example: example string
-      type: string
-    file_id:
-      description: 'OpenAI: reference to a previously uploaded .jsonl file'
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    inline_requests:
-      $ref: '#/apiBatchInferenceInlineInput'
-    provider:
-      description: 'Batch provider: openai or anthropic'
-      example: example string
-      type: string
-    request_id:
-      description: Client-supplied idempotency key
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    webhook:
-      $ref: '#/apiBatchInferenceWebhook'
-  type: object
-apiCreateBatchInferenceJobOutput:
-  description: Response from CreateBatchInferenceJob / POST .../batches. Same fields
-    as BatchInferenceJob except model.
-  properties:
-    batch_id:
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    cancel_requested_at:
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    completion_window:
-      example: example string
-      type: string
-    created_at:
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    error_message:
-      example: example string
-      type: string
-    expires_at:
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-    file_id:
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    provider:
-      example: example string
-      type: string
-    request_counts:
-      $ref: '#/apiBatchInferenceRequestCounts'
-    request_id:
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-    result_available:
-      example: true
-      type: boolean
-    status:
-      example: example string
-      type: string
-    updated_at:
-      example: "2023-01-01T00:00:00Z"
-      format: date-time
-      type: string
-  type: object
 apiCreateChatbotInputPublic:
   properties:
     agent_uuid:
@@ -2158,6 +2037,22 @@ apiCreateChatbotOutput:
   properties:
     chatbot:
       $ref: '#/apiChatbot'
+  type: object
+apiCreateCustomEvaluationMetricInputPublic:
+  properties:
+    config:
+      $ref: '#/apiCustomEvaluationMetricConfig'
+    description:
+      example: '"Scores adherence to our support macros"'
+      type: string
+    metric_name:
+      example: '"My domain tone metric"'
+      type: string
+  type: object
+apiCreateCustomEvaluationMetricOutput:
+  properties:
+    metric:
+      $ref: '#/apiEvaluationMetric'
   type: object
 apiCreateDataSourceFileUploadPresignedUrlsInputPublic:
   description: Request for pre-signed URL's to upload files for KB Data Sources
@@ -2393,9 +2288,27 @@ apiCreateModelEvaluationRunInputPublic:
     preset_name:
       example: example name
       type: string
+    preset_save_sections:
+      description: |-
+        Which sections of this run's resolved configuration to persist as a
+        reusable preset. Each selected section saves only its own fields; the
+        remaining sections stay empty on the preset and must be supplied inline
+        on future runs that reference it. Empty means do not save a preset
+        (unless the deprecated `save_as_preset` boolean is true, in which case
+        all sections are saved). Ignored when `eval_preset_uuid` is set. Use
+        `preset_name` to label the saved preset.
+      example:
+      - PRESET_SAVE_SECTION_CANDIDATE
+      - PRESET_SAVE_SECTION_METRICS
+      items:
+        $ref: '#/apiPresetSaveSection'
+      type: array
     save_as_preset:
-      description: "If true, saves the inline config as a reusable preset  \nIgnored
-        when eval_preset_uuid is provided."
+      description: |-
+        Deprecated: use `preset_save_sections`. When `true` and
+        `preset_save_sections` is empty, all five sections of the resolved
+        configuration are saved as a reusable preset (legacy behavior). Ignored
+        when `eval_preset_uuid` is set.
       example: true
       type: boolean
     source:
@@ -2439,7 +2352,8 @@ apiCreateModelRouterInputPublic:
       example: '"My Model Router Description"'
       type: string
     fallback_models:
-      description: Fallback models
+      description: At least one fallback model is required; order defines failover
+        priority
       example:
       - example string
       items:
@@ -2447,8 +2361,9 @@ apiCreateModelRouterInputPublic:
         type: string
       type: array
     name:
-      description: Model router name
-      example: '"My Model Router"'
+      description: 'Model router name: lowercase, at most 255 characters, only a-z,
+        0-9, and hyphens'
+      example: '"my-model-router"'
       type: string
     policies:
       description: Router policies
@@ -2456,7 +2371,9 @@ apiCreateModelRouterInputPublic:
         $ref: '#/apiModelRouterTaskPolicy'
       type: array
     regions:
-      description: Target regions for the router
+      description: |-
+        DEPRECATED: this field does not affect deployment and model routers are always
+        deployed to all regions. Must be omitted or set to ["all"].
       example:
       - example string
       items:
@@ -2579,6 +2496,36 @@ apiCreateWorkspaceOutput:
     workspace:
       $ref: '#/apiWorkspace'
   type: object
+apiCustomEvaluationMetricConfig:
+  description: |-
+    Configuration for a custom model-evaluation metric scored by an LLM judge.
+    Prompt and model response are always included in the judge context.
+  properties:
+    created_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    deleted_at:
+      description: When set, the custom metric is soft-deleted and must not appear
+        in pickers.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    requires_ground_truth:
+      description: |-
+        When true, each row must provide ground truth and it is included in the judge context.
+        When false, ground truth is not required and is not sent to the judge.
+      example: true
+      type: boolean
+    scoring_prompt:
+      description: Instructions for the judge model (multi-line).
+      example: example string
+      type: string
+    updated_at:
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+  type: object
 apiCustomModel:
   description: Custom model - user-imported model from HuggingFace, Spaces, etc.
   properties:
@@ -2611,6 +2558,10 @@ apiCustomModel:
       type: string
     description:
       description: Description of the custom model
+      example: example string
+      type: string
+    error_message:
+      description: User-facing reason the most recent import failed; empty otherwise.
       example: example string
       type: string
     file_count:
@@ -2837,6 +2788,12 @@ apiDeleteChatbotOutput:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
+apiDeleteCustomEvaluationMetricInputPublic:
+  properties:
+    metric_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiDeleteCustomEvaluationMetricOutput:
+  type: object
 apiDeleteCustomModelInputPublic:
   properties:
     uuid:
@@ -2870,6 +2827,13 @@ apiDeleteCustomModelStatus:
   - DELETE_CUSTOM_MODEL_STATUS_FAIL
   example: DELETE_CUSTOM_MODEL_STATUS_UNSPECIFIED
   type: string
+apiDeleteEvaluationDatasetInputPublic:
+  properties:
+    dataset_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiDeleteEvaluationDatasetOutput:
+  description: Response for a delete evaluation dataset request.
+  type: object
 apiDeleteGuardrailOutput:
   description: DeleteGuardrailOutput description
   properties:
@@ -2916,6 +2880,10 @@ apiDeleteModelAPIKeyOutput:
     api_key_info:
       $ref: '#/apiModelAPIKeyInfo'
   type: object
+apiDeleteModelEvaluationPresetInputPublic:
+  properties:
+    eval_preset_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
 apiDeleteModelEvaluationPresetOutput:
   type: object
 apiDeleteModelEvaluationRunInputPublic:
@@ -3170,8 +3138,18 @@ apiEvaluationDatasetType:
   type: string
 apiEvaluationMetric:
   properties:
+    associated_presets:
+      description: |-
+        Saved model evaluation presets that reference this metric. Populated for
+        custom metrics when listing metrics so the dashboard can warn that deleting
+        the metric will also delete these presets. Empty for built-in metrics.
+      items:
+        $ref: '#/apiAssociatedModelEvaluationPreset'
+      type: array
     category:
       $ref: '#/apiEvaluationMetricCategory'
+    custom_eval_config:
+      $ref: '#/apiCustomEvaluationMetricConfig'
     description:
       example: example string
       type: string
@@ -3209,6 +3187,8 @@ apiEvaluationMetric:
       example: 123
       format: float
       type: number
+    source:
+      $ref: '#/apiEvaluationMetricSource'
   type: object
 apiEvaluationMetricCategory:
   default: METRIC_CATEGORY_UNSPECIFIED
@@ -3231,6 +3211,11 @@ apiEvaluationMetricResult:
       description: Metric name
       example: example name
       type: string
+    metric_uuid:
+      description: Metric UUID (built-in or custom); stable key for results UI and
+        aggregation.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
     metric_value_type:
       $ref: '#/apiEvaluationMetricValueType'
     number_value:
@@ -3242,11 +3227,33 @@ apiEvaluationMetricResult:
       description: Reasoning of the metric result.
       example: example string
       type: string
+    status:
+      $ref: '#/apiEvaluationMetricResultStatus'
     string_value:
       description: The value of the metric as a string.
       example: example string
       type: string
   type: object
+apiEvaluationMetricResultStatus:
+  default: EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED
+  description: Outcome of scoring a single metric for one prompt or span.
+  enum:
+  - EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED
+  - EVALUATION_METRIC_RESULT_STATUS_COMPLETED
+  - EVALUATION_METRIC_RESULT_STATUS_FAILED
+  - EVALUATION_METRIC_RESULT_STATUS_SKIPPED
+  example: EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED
+  type: string
+apiEvaluationMetricSource:
+  default: EVALUATION_METRIC_SOURCE_UNSPECIFIED
+  description: Distinguishes platform catalog metrics from user-defined LLM-as-judge
+    metrics.
+  enum:
+  - EVALUATION_METRIC_SOURCE_UNSPECIFIED
+  - EVALUATION_METRIC_SOURCE_BUILTIN
+  - EVALUATION_METRIC_SOURCE_CUSTOM
+  example: EVALUATION_METRIC_SOURCE_UNSPECIFIED
+  type: string
 apiEvaluationMetricType:
   default: METRIC_TYPE_UNSPECIFIED
   enum:
@@ -3711,19 +3718,6 @@ apiGetAnthropicAPIKeyOutput:
     api_key_info:
       $ref: '#/apiAnthropicAPIKeyInfo'
   type: object
-apiGetBatchInferenceJobResultsOutput:
-  description: |-
-    Response for GET .../batches/{id}/results: presigned download URL when output is ready (FilePresignedUrlResponse, same family as batch file upload presigned URL).
-    If output is not ready, the RPC fails with FAILED_PRECONDITION instead of returning this message.
-  properties:
-    download:
-      $ref: '#/apiFilePresignedUrlResponse'
-    output_file_id:
-      description: Provider output file id when known (e.g. OpenAI file id); mirrors
-        output_file_id on OpenAI batch objects.
-      example: 123e4567-e89b-12d3-a456-426614174000
-      type: string
-  type: object
 apiGetChildrenInputPublic:
   properties:
     uuid:
@@ -3737,6 +3731,10 @@ apiGetChildrenOutput:
         $ref: '#/apiAgent'
       type: array
   type: object
+apiGetCustomModelInputPublic:
+  properties:
+    uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
 apiGetCustomModelOutput:
   description: Response containing a single custom model (internal)
   properties:
@@ -3876,6 +3874,15 @@ apiGetIndexingJobDetailsSignedURLOutput:
       description: The signed url for downloading the indexing job details
       example: example string
       type: string
+  type: object
+apiGetKnowledgeBaseClusterHealthInputPublic:
+  properties:
+    uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+apiGetKnowledgeBaseClusterHealthOutput:
+  properties:
+    cluster_health:
+      $ref: '#/apiClusterHealth'
   type: object
 apiGetKnowledgeBaseIndexingJobInputPublic:
   properties:
@@ -4365,6 +4372,11 @@ apiGuardrailType:
 apiImportCustomModelInputPublic:
   description: Request to import a custom model (public)
   properties:
+    accept_hf_token_storage:
+      description: Whether the caller accepts storage of their HuggingFace token for
+        gated model access
+      example: true
+      type: boolean
     accept_terms_and_conditions:
       description: Whether the caller accepts the terms and conditions for importing
         this model
@@ -4669,6 +4681,33 @@ apiKBDataSource:
     web_crawler_data_source:
       $ref: '#/apiWebCrawlerDataSource'
   type: object
+apiKBaaSServiceClusterInfo:
+  description: |-
+    KBaaSServiceClusterInfo is the representation of a row in the
+    kbaas_service_clusters catalog. Returned by ListKBaaSServiceClustersInternal
+    for DBaaS to materialize as K8S firewall rules.
+  properties:
+    doks_cluster_uuid:
+      description: |-
+        The gen-ai-owned DOKS cluster UUID. Becomes the `value` on the
+        materialized K8S firewall rule on the customer's OpenSearch cluster.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    owner_team_uuid:
+      description: |-
+        The team UUID owning the DOKS cluster. Passed by the DBaaS resolver as
+        Ownership.OwnerId on the cross-team k8saas.GetCluster lookup.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    region:
+      description: The DOKS cluster's own region, e.g., "tor1".
+      example: example string
+      type: string
+    service_name:
+      description: Gen-ai service name, e.g., "platform-gateway" or "kb-indexer".
+      example: example name
+      type: string
+  type: object
 apiKnowledgeBase:
   description: Knowledgebase Description
   properties:
@@ -4964,11 +5003,21 @@ apiLinkKnowledgeBaseOutput:
       $ref: '#/apiAgent'
   type: object
 apiLinkKnowledgeBasesInputPublic:
+  description: Information about linking knowledgebases to an agent
   properties:
     agent_uuid:
+      description: A unique identifier for an agent.
       example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
     knowledge_base_uuids:
-      example: '["12345678-1234-1234-1234-123456789012", "12345678-1234-1234-1234-123456789012"]'
+      description: A unique identifier for a knowledge base.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+  type: object
 apiLinks:
   description: Links to other pages
   properties:
@@ -5205,17 +5254,6 @@ apiListAvailableModelsOutput:
       items:
         $ref: '#/apiAvailableModel'
       type: array
-  type: object
-apiListBatchInferenceJobsOutput:
-  description: Response for listing batch inference jobs
-  properties:
-    edges:
-      description: Relay-style edges with per-row cursors
-      items:
-        $ref: '#/apiBatchInferenceJobEdge'
-      type: array
-    page_info:
-      $ref: '#/apiBatchInferencePageInfo'
   type: object
 apiListCustomModelsInputPublic:
   properties:
@@ -5507,12 +5545,66 @@ apiListModelAPIKeysOutput:
   type: object
 apiListModelCatalogInput:
   properties:
-    limit:
-      example: "100"
+    availability:
+      example: '["serverless", "dedicated"]'
+    badges:
+      example: '["featured"]'
+    model_type:
+      example: '["chat", "embedding"]'
     page:
       example: "1"
+    per_page:
+      example: "10"
+    provider:
+      example: '["Meta", "Google", "DeepSeek"]'
+    search:
+      example: llama
 apiListModelCatalogOutput:
   properties:
+    available_availability:
+      description: All deployment availability values the client can offer in the
+        availability filter UI.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    available_badges:
+      description: All badge values the client can offer in the badges filter UI.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    available_model_types:
+      description: All model type values the client can offer in the type filter UI.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    available_providers:
+      description: All provider values the client can offer in the provider filter
+        UI.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    available_sort_by:
+      description: All sort-by field values the client can offer in the sort UI.
+      items:
+        $ref: '#/apiModelCatalogSortBy'
+      type: array
+    available_sort_directions:
+      description: All sort-direction values the client can offer in the sort UI.
+      items:
+        $ref: '#/apiSortDirection'
+      type: array
     data:
       items:
         $ref: '#/apiModelCatalogEntry'
@@ -5830,6 +5922,11 @@ apiMetricResultSummary:
     description:
       example: example string
       type: string
+    fail_count:
+      description: Rows where the metric failed to score or completed below the threshold.
+      example: 123
+      format: int64
+      type: integer
     fail_percent:
       example: 123
       format: double
@@ -5840,10 +5937,28 @@ apiMetricResultSummary:
     metric_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+    pass_count:
+      description: Rows where the metric completed and passed the configured threshold.
+      example: 123
+      format: int64
+      type: integer
     pass_percent:
       example: 123
       format: double
       type: number
+    skip_percent:
+      description: |-
+        Percentage of rows that were skipped for this metric, computed as
+        skipped_count divided by the total rows the metric saw
+        (pass_count + fail_count + skipped_count).
+      example: 123
+      format: double
+      type: number
+    skipped_count:
+      description: Rows where the metric was not evaluated for this prompt.
+      example: 123
+      format: int64
+      type: integer
   type: object
 apiModel:
   description: Description of a Model
@@ -6008,10 +6123,31 @@ apiModelAPIKeyInfo:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
   type: object
+apiModelBillingMode:
+  default: MODEL_BILLING_MODE_UNSPECIFIED
+  description: |-
+    Whether rates apply to real-time or batch requests.
+
+     - MODEL_BILLING_MODE_INTERACTIVE: Real-time request pricing.
+     - MODEL_BILLING_MODE_BATCH: Discounted pricing for asynchronous batch requests.
+  enum:
+  - MODEL_BILLING_MODE_UNSPECIFIED
+  - MODEL_BILLING_MODE_INTERACTIVE
+  - MODEL_BILLING_MODE_BATCH
+  example: MODEL_BILLING_MODE_UNSPECIFIED
+  type: string
 apiModelCatalogCard:
   description: Detail view for GetModelCatalogCard
   properties:
     availability:
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    badges:
+      description: Badges for models
       example:
       - example string
       items:
@@ -6043,9 +6179,22 @@ apiModelCatalogCard:
       description: Card-specific
       example: '"Claude Sonnet 4 is Anthropic''s most capable model..."'
       type: string
+    hugging_face_id:
+      description: |-
+        The Hugging Face repository ID (e.g. "meta-llama/Llama-3.3-70B-Instruct")
+        the model is based on, when applicable. Omitted for models not sourced from Hugging Face.
+      example: '"meta-llama/Llama-3.3-70B-Instruct"'
+      type: string
     id:
       description: Identity (same as Entry)
       example: '"506a3371-88d0-4047-9212-e2079497ac68"'
+      type: string
+    max_output_tokens:
+      description: |-
+        The maximum number of output tokens the model can generate in a single
+        response.
+      example: "65536"
+      format: int64
       type: string
     modalities:
       $ref: '#/apiModelModalities'
@@ -6062,6 +6211,8 @@ apiModelCatalogCard:
       type: number
     pricing:
       $ref: '#/apiModelPricing'
+    pricing_detail:
+      $ref: '#/apiModelPricingDetail'
     provider:
       $ref: '#/apiModelProvider'
     short_description:
@@ -6075,6 +6226,14 @@ apiModelCatalogEntry:
   description: List item for ListModelCatalog
   properties:
     availability:
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    badges:
+      description: Badges for models
       example:
       - example string
       items:
@@ -6096,13 +6255,31 @@ apiModelCatalogEntry:
       example: "128000"
       format: int64
       type: string
+    created_at:
+      description: RFC 3339 timestamp indicating when the model was added to the catalog.
+      example: "2021-01-01T00:00:00Z"
+      format: date-time
+      type: string
     creator:
       description: Model creator/developer (e.g., "Meta", "Anthropic", "OpenAI")
       example: '"Meta"'
       type: string
+    hugging_face_id:
+      description: |-
+        The Hugging Face repository ID (e.g. "meta-llama/Llama-3.3-70B-Instruct")
+        the model is based on, when applicable. Omitted for models not sourced from Hugging Face.
+      example: '"meta-llama/Llama-3.3-70B-Instruct"'
+      type: string
     id:
       description: Identity
       example: '"506a3371-88d0-4047-9212-e2079497ac68"'
+      type: string
+    max_output_tokens:
+      description: |-
+        The maximum number of output tokens the model can generate in a single
+        response.
+      example: "65536"
+      format: int64
       type: string
     model_id:
       description: Model identifier used for API calls (e.g., "llama3.1-70b-instruct")
@@ -6119,6 +6296,12 @@ apiModelCatalogEntry:
       $ref: '#/apiModelPricing'
     provider:
       $ref: '#/apiModelProvider'
+    scaled_pricing_enabled:
+      description: |-
+        True when this model's pricing varies over time. Retrieve the model's
+        details for the full pricing schedule. False for models with fixed pricing.
+      example: true
+      type: boolean
     short_description:
       example: '"Fast, efficient model for general tasks"'
       type: string
@@ -6126,6 +6309,51 @@ apiModelCatalogEntry:
       example: '"text-to-text"'
       type: string
   type: object
+apiModelCatalogSortBy:
+  default: MODEL_CATALOG_SORT_BY_CREATED_AT
+  description: |-
+    Field on which to sort model catalog results.
+
+     - MODEL_CATALOG_SORT_BY_CREATED_AT: Default: sort by creation date.
+     - MODEL_CATALOG_SORT_BY_NAME: Sort by the model's display name (case-insensitive).
+     - MODEL_CATALOG_SORT_BY_PRICE: Sort by input token price.
+  enum:
+  - MODEL_CATALOG_SORT_BY_CREATED_AT
+  - MODEL_CATALOG_SORT_BY_NAME
+  - MODEL_CATALOG_SORT_BY_PRICE
+  example: MODEL_CATALOG_SORT_BY_CREATED_AT
+  type: string
+apiModelCatalogUseCase:
+  default: MODEL_CATALOG_USE_CASE_UNSPECIFIED
+  description: |-
+    Pre-defined use-case filter for the model catalog. When set, only models
+    that match the selected use case are returned. The server maps each value
+    to a combination of `model_type`, `usecases`, and `output_modalities` checks
+    so the client does not need to construct those filters manually.
+
+     - MODEL_CATALOG_USE_CASE_UNSPECIFIED: No use-case filter applied; return all models.
+     - MODEL_CATALOG_USE_CASE_CODING: Coding-optimized models: model_type = coding, or usecases include coding,
+    agentic_coding, or code_generation.
+     - MODEL_CATALOG_USE_CASE_AGENTS: Agent-building models: usecases include tool_calling, agentic,
+    agent_platform, agentic_workflows, or agentic_coding.
+     - MODEL_CATALOG_USE_CASE_AUDIO: Audio models: model_type is audio, or usecases include audio,
+    text_to_speech, or voice_cloning, or output modalities include audio.
+     - MODEL_CATALOG_USE_CASE_IMAGE: Image models: model_type is image, or usecases include image_generation,
+    text_to_image, or ideogram, or output modalities include image.
+     - MODEL_CATALOG_USE_CASE_VIDEO: Video models: usecases include video_generation or text_to_video, or
+    output modalities include video.
+     - MODEL_CATALOG_USE_CASE_EMBEDDING: Embedding and reranking models: model_type is embedding or reranking, or
+    usecases include vectorization or reranking.
+  enum:
+  - MODEL_CATALOG_USE_CASE_UNSPECIFIED
+  - MODEL_CATALOG_USE_CASE_CODING
+  - MODEL_CATALOG_USE_CASE_AGENTS
+  - MODEL_CATALOG_USE_CASE_AUDIO
+  - MODEL_CATALOG_USE_CASE_IMAGE
+  - MODEL_CATALOG_USE_CASE_VIDEO
+  - MODEL_CATALOG_USE_CASE_EMBEDDING
+  example: MODEL_CATALOG_USE_CASE_UNSPECIFIED
+  type: string
 apiModelEndpoint:
   description: An available endpoint for a model and its capabilities
   properties:
@@ -6144,19 +6372,52 @@ apiModelEndpoint:
       type: string
   type: object
 apiModelEvaluationPreset:
-  description: Model Evaluation Preset - a saved, reusable configuration for model
-    evaluation runs.
+  description: |-
+    Model Evaluation Preset - a saved, reusable configuration for model
+    evaluation runs. Each section (dataset, judge, metrics, candidate, system
+    prompt) is independent and may be empty; sections the preset omits must be
+    supplied inline on the run that references it. Use `saved_sections` to tell
+    "section saved with empty value" apart from "section not saved at all" —
+    each section's scalar fields are left empty when the section was not saved.
   properties:
+    candidate_inference_config:
+      $ref: '#/apiCandidateInferenceConfig'
+    candidate_model_name:
+      description: |-
+        Model slug used to call the candidate model API. Empty when the CANDIDATE
+        section was not saved.
+      example: example name
+      type: string
+    candidate_model_source:
+      $ref: '#/apiCandidateModelSource'
+    candidate_model_uuid:
+      description: |-
+        UUID of the candidate model stored on this preset. Empty when the
+        CANDIDATE section was not saved. For DEDICATED candidates this is the
+        dedicated inference deployment UUID.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    candidate_system_prompt:
+      description: |-
+        System prompt / instructions to send to the candidate model. Empty when
+        the SYSTEM_PROMPT section was not saved (check `saved_sections`).
+      example: "2023-01-01"
+      type: string
     created_at:
       description: Timestamp when the preset was created.
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
     dataset_name:
+      description: |-
+        Display name of the dataset stored on this preset. Empty when the DATASET
+        section was not saved or the dataset no longer exists.
       example: example name
       type: string
     dataset_uuid:
-      description: Dataset used for evaluation.
+      description: |-
+        UUID of the dataset stored on this preset. Empty when the DATASET section
+        was not saved (check `saved_sections`).
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     eval_preset_uuid:
@@ -6164,14 +6425,21 @@ apiModelEvaluationPreset:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     judge_model_name:
+      description: |-
+        Display name of the judge model stored on this preset. Empty when the
+        JUDGE section was not saved or the model no longer exists.
       example: example name
       type: string
     judge_model_uuid:
-      description: Judge model used to score responses.
+      description: |-
+        UUID of the judge model stored on this preset. Empty when the JUDGE
+        section was not saved (check `saved_sections`).
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     metrics:
-      description: Metrics selected for this preset.
+      description: |-
+        Metrics selected for this preset. Empty when the METRICS section was not
+        saved.
       items:
         $ref: '#/apiEvaluationMetric'
       type: array
@@ -6179,6 +6447,19 @@ apiModelEvaluationPreset:
       description: Name of the evaluation preset.
       example: example name
       type: string
+    saved_sections:
+      description: |-
+        Sections of the inline evaluation config that were persisted when this
+        preset was created. Use this to tell "section was saved with an empty
+        value" apart from "section was not saved" — scalar fields like
+        `dataset_uuid` or `candidate_system_prompt` are always emitted as the
+        empty string when the section was not saved.
+      example:
+      - PRESET_SAVE_SECTION_CANDIDATE
+      - PRESET_SAVE_SECTION_METRICS
+      items:
+        $ref: '#/apiPresetSaveSection'
+      type: array
     star_metric:
       $ref: '#/apiStarMetric'
   type: object
@@ -6190,6 +6471,9 @@ apiModelEvaluationResult:
       type: string
     candidate_model_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    candidate_routed_task:
+      example: Coding & brainstorming
       type: string
     ground_truth:
       example: example string
@@ -6268,6 +6552,8 @@ apiModelEvaluationRunDetail:
       description: Name of the evaluation run.
       example: example name
       type: string
+    progress:
+      $ref: '#/apiModelEvaluationRunProgress'
     result_summary:
       $ref: '#/apiModelEvaluationRunResultSummary'
     star_metric:
@@ -6278,6 +6564,32 @@ apiModelEvaluationRunDetail:
       type: string
     status:
       $ref: '#/apiModelEvaluationRunStatus'
+  type: object
+apiModelEvaluationRunProgress:
+  description: |-
+    Per-phase progress for a model evaluation run. The candidate phase invokes the
+    candidate model once per dataset row; the judge phase scores each
+    candidate-success row with the configured metrics. Counts grow as the run
+    advances; compare against total_rows to render a progress bar.
+  properties:
+    candidate_rows_evaluated:
+      description: Dataset rows whose candidate model call has completed (success
+        or failure).
+      example: 100
+      format: int64
+      type: integer
+    judge_rows_evaluated:
+      description: |-
+        Candidate-success rows the judge has finished (scored or skipped). Caps at
+        the number of candidate successes, which may be below total_rows.
+      example: 95
+      format: int64
+      type: integer
+    total_rows:
+      description: Total dataset rows for the run, sourced from the evaluation dataset.
+      example: 100
+      format: int64
+      type: integer
   type: object
 apiModelEvaluationRunResultSummary:
   description: Aggregated result summary for a completed model evaluation run.
@@ -6297,6 +6609,8 @@ apiModelEvaluationRunResultSummary:
       type: number
     per_model_summaries:
       $ref: '#/apiPerModelResultSummaries'
+    per_task_summaries:
+      $ref: '#/apiPerTaskResultSummaries'
     performance_metrics:
       $ref: '#/apiPerformanceMetrics'
     pricing:
@@ -6314,6 +6628,15 @@ apiModelEvaluationRunResultSummary:
       format: int64
       type: integer
   type: object
+apiModelEvaluationRunSortField:
+  default: MODEL_EVALUATION_RUN_SORT_FIELD_UNSPECIFIED
+  description: Sortable fields for ListModelEvaluationRuns.
+  enum:
+  - MODEL_EVALUATION_RUN_SORT_FIELD_UNSPECIFIED
+  - MODEL_EVALUATION_RUN_SORT_FIELD_CREATED_AT
+  - MODEL_EVALUATION_RUN_SORT_FIELD_STATUS
+  example: MODEL_EVALUATION_RUN_SORT_FIELD_UNSPECIFIED
+  type: string
 apiModelEvaluationRunStatus:
   default: MODEL_EVALUATION_RUN_STATUS_UNSPECIFIED
   description: Model Evaluation Run Statuses
@@ -6371,6 +6694,8 @@ apiModelEvaluationRunSummary:
       description: Name of the evaluation run.
       example: example name
       type: string
+    progress:
+      $ref: '#/apiModelEvaluationRunProgress'
     status:
       $ref: '#/apiModelEvaluationRunStatus'
   type: object
@@ -6412,6 +6737,44 @@ apiModelPrice:
 apiModelPricing:
   description: Pricing per million tokens (aligns with existing ModelPrice pattern)
   properties:
+    cache_read_input_price_per_million:
+      description: |-
+        Per-million cache read rate for standard chat models (token_type "cache read input").
+        Multimodal models use text_cache_read_input_price_per_million / image_cache_read_input_price_per_million instead.
+      example: 0.15
+      format: double
+      type: number
+    cache_write_1h_input_price_per_million:
+      description: Price per million tokens written to the prompt cache with a 1-hour
+        lifetime.
+      example: 10
+      format: double
+      type: number
+    cache_write_5m_input_price_per_million:
+      description: Price per million tokens written to the prompt cache with a 5-minute
+        lifetime.
+      example: 6.25
+      format: double
+      type: number
+    image_cache_read_input_price_per_million:
+      example: 0.08
+      format: double
+      type: number
+    image_input_price_per_million:
+      example: 0.3
+      format: double
+      type: number
+    image_output_price_per_million:
+      example: 0.4
+      format: double
+      type: number
+    input_cache_read:
+      description: |-
+        Cache read input price per single token. Equivalent to
+        cache_read_input_price_per_million.
+      example: 0.15
+      format: double
+      type: number
     input_price_per_million:
       example: 0.6
       format: double
@@ -6449,6 +6812,39 @@ apiModelPricing:
       example: 0.05
       format: double
       type: number
+    reasoning_price_per_million:
+      description: |-
+        Price per million reasoning tokens. 0 if the model does not charge
+        separately for reasoning tokens.
+      example: 0
+      format: double
+      type: number
+    text_cache_read_input_price_per_million:
+      example: 0.05
+      format: double
+      type: number
+    text_input_price_per_million:
+      description: |-
+        Per-million token rates for models that bill text vs image tokens separately
+        (e.g. OpenAI gpt-image-2). Standard chat models leave these at 0 and use
+        input_price_per_million / output_price_per_million instead. Values align
+        with usage token_type / internal/usage.Type string values for each meter.
+      example: 0.1
+      format: double
+      type: number
+    text_output_price_per_million:
+      example: 0.2
+      format: double
+      type: number
+  type: object
+apiModelPricingDetail:
+  description: The complete set of prices for a model, covering every available variant.
+  properties:
+    variants:
+      description: Each available pricing variant for the model.
+      items:
+        $ref: '#/apiModelPricingVariant'
+      type: array
   type: object
 apiModelPricingEntry:
   description: Pricing entry for a specific model.
@@ -6468,6 +6864,65 @@ apiModelPricingEntry:
       example: 123
       format: int64
       type: integer
+  type: object
+apiModelPricingInterval:
+  description: |-
+    A time window during which the model's rates stay the same. Together these
+    intervals show how pricing changes over the course of a day.
+  properties:
+    end_time:
+      description: End of the interval, exclusive. Always on the hour.
+      example: "2021-01-01T15:00:00Z"
+      format: date-time
+      type: string
+    prices:
+      $ref: '#/apiModelPricing'
+    start_time:
+      description: Start of the interval, inclusive. Always on the hour.
+      example: "2021-01-01T13:00:00Z"
+      format: date-time
+      type: string
+  type: object
+apiModelPricingTier:
+  default: MODEL_PRICING_TIER_UNSPECIFIED
+  description: |-
+    A pricing variant of a model, such as a faster serving option or a larger
+    context window.
+
+     - MODEL_PRICING_TIER_STANDARD: Default pricing.
+     - MODEL_PRICING_TIER_FAST_MODE: Faster, higher-priority serving at a premium price.
+     - MODEL_PRICING_TIER_EXTENDED_1M: Pricing for the 1M-token context window.
+     - MODEL_PRICING_TIER_EXTENDED_272K: Pricing for the 272K-token context window.
+     - MODEL_PRICING_TIER_BYOK: Pricing when using your own model API key.
+  enum:
+  - MODEL_PRICING_TIER_UNSPECIFIED
+  - MODEL_PRICING_TIER_STANDARD
+  - MODEL_PRICING_TIER_FAST_MODE
+  - MODEL_PRICING_TIER_EXTENDED_1M
+  - MODEL_PRICING_TIER_EXTENDED_272K
+  - MODEL_PRICING_TIER_BYOK
+  example: MODEL_PRICING_TIER_UNSPECIFIED
+  type: string
+apiModelPricingVariant:
+  description: 'Pricing for one variant of a model: a specific tier and billing mode.'
+  properties:
+    currency:
+      description: Currency code for this variant's rates (e.g. `USD`).
+      example: USD
+      type: string
+    label:
+      description: Display name for the variant (e.g. `Standard`, `Fast Mode`, `1M
+        Context`).
+      example: Standard
+      type: string
+    mode:
+      $ref: '#/apiModelBillingMode'
+    prices:
+      $ref: '#/apiModelPricing'
+    scaled_pricing:
+      $ref: '#/apiModelScaledPricing'
+    tier:
+      $ref: '#/apiModelPricingTier'
   type: object
 apiModelProvider:
   default: MODEL_PROVIDER_DIGITALOCEAN
@@ -6795,6 +7250,24 @@ apiModelRouterTaskPreset:
       example: example string
       type: string
   type: object
+apiModelScaledPricing:
+  description: |-
+    Pricing that varies over time. When present, the rates move between the low
+    and high bounds below across the intervals in the schedule.
+  properties:
+    intervals:
+      description: |-
+        The pricing schedule as a series of consecutive time intervals, ordered by
+        start time. Neighboring hours with the same rates are combined, so each
+        interval represents a distinct price.
+      items:
+        $ref: '#/apiModelPricingInterval'
+      type: array
+    max_prices:
+      $ref: '#/apiModelPricing'
+    min_prices:
+      $ref: '#/apiModelPricing'
+  type: object
 apiModelSetting:
   description: A configurable setting for a model in the playground
   properties:
@@ -6999,32 +7472,86 @@ apiPages:
       type: string
   type: object
 apiPerModelResultSummaries:
-  description: Wrapper for per-model summaries, used inside a oneof on ModelEvaluationRunResultSummary.
+  description: |-
+    Per-model breakdown of an evaluation run. Set on router evaluations to
+    show how each underlying model performed across the prompts that were
+    routed to it.
   properties:
     summaries:
+      description: |-
+        One entry per underlying model that received at least one prompt
+        during the evaluation run.
       items:
         $ref: '#/apiPerModelResultSummary'
       type: array
   type: object
 apiPerModelResultSummary:
-  description: Per-model breakdown of evaluation results for router evaluations.
+  description: |-
+    Aggregated evaluation results for a single underlying model in a router
+    evaluation run.
   properties:
     metric_summaries:
-      description: Per-metric pass/fail for only this model's prompts.
+      description: |-
+        Pass/fail rate for each metric, computed over only the prompts
+        routed to this model.
       items:
         $ref: '#/apiMetricResultSummary'
       type: array
     model_name:
-      description: Name/slug of the model (matches routed_model from results).
+      description: |-
+        The underlying model these results are for, such as
+        `Llama 3.3 Instruct (70B)`.
       example: example name
       type: string
     performance_metrics:
       $ref: '#/apiPerformanceMetrics'
     prompt_count:
-      description: Number of prompts routed to this model.
+      description: Number of prompts in the run that were routed to this model.
       example: 123
       format: int64
       type: integer
+  type: object
+apiPerTaskResultSummaries:
+  description: |-
+    Per-task breakdown of an evaluation run. Set on router evaluations to
+    show how each routing task category performed across the prompts that
+    were classified into it.
+  properties:
+    summaries:
+      description: |-
+        One entry per routing task category that received at least one
+        prompt during the evaluation run.
+      items:
+        $ref: '#/apiPerTaskResultSummary'
+      type: array
+  type: object
+apiPerTaskResultSummary:
+  description: |-
+    Aggregated evaluation results for a single routing task category in a
+    router evaluation run.
+  properties:
+    metric_summaries:
+      description: |-
+        Pass/fail rate for each metric, computed over only the prompts in
+        this task category.
+      items:
+        $ref: '#/apiMetricResultSummary'
+      type: array
+    performance_metrics:
+      $ref: '#/apiPerformanceMetrics'
+    prompt_count:
+      description: |-
+        Number of prompts in the run that were classified into this task
+        category.
+      example: 123
+      format: int64
+      type: integer
+    task_name:
+      description: |-
+        The routing task category these results are for, such as
+        `Coding & brainstorming` or `Summarization`.
+      example: example name
+      type: string
   type: object
 apiPerformanceMetrics:
   description: All performance metrics are for the candidate model unless noted otherwise.
@@ -7034,6 +7561,31 @@ apiPerformanceMetrics:
     token_usage:
       $ref: '#/apiTokenUsage'
   type: object
+apiPresetSaveSection:
+  default: PRESET_SAVE_SECTION_UNSPECIFIED
+  description: |-
+    Sections of an inline evaluation config that can be persisted as a reusable
+    preset. Each value names a self-contained group of fields; selecting a
+    section saves exactly the fields it owns and leaves the rest of the preset
+    empty so it can be merged with inline values on a future run.
+
+     - PRESET_SAVE_SECTION_CANDIDATE: Candidate model identity (`candidate_model_uuid`, `candidate_model_source`,
+    `candidate_model_name`) and the non-prompt inference params
+    (`max_tokens`, `temperature`, `stop_token`).
+     - PRESET_SAVE_SECTION_METRICS: The selected `metric_uuids` and the optional `star_metric`.
+     - PRESET_SAVE_SECTION_JUDGE: The `judge_model_uuid`.
+     - PRESET_SAVE_SECTION_DATASET: The `dataset_uuid`.
+     - PRESET_SAVE_SECTION_SYSTEM_PROMPT: The candidate's `system_prompt` only. Independent of CANDIDATE so the
+    model + params and the prompt can be saved/replayed separately.
+  enum:
+  - PRESET_SAVE_SECTION_UNSPECIFIED
+  - PRESET_SAVE_SECTION_CANDIDATE
+  - PRESET_SAVE_SECTION_METRICS
+  - PRESET_SAVE_SECTION_JUDGE
+  - PRESET_SAVE_SECTION_DATASET
+  - PRESET_SAVE_SECTION_SYSTEM_PROMPT
+  example: PRESET_SAVE_SECTION_UNSPECIFIED
+  type: string
 apiPresignedUrlFile:
   description: A single file’s metadata in the request.
   properties:
@@ -7260,6 +7812,20 @@ apiRollbackToAgentVersionOutput:
       example: example string
       type: string
   type: object
+apiRunAPIScriptOutput:
+  description: RunAPIScriptOutput is the response for the internal RunAPIScript RPC.
+  properties:
+    job_id:
+      description: |-
+        The go-workers2 job id assigned to the enqueued run. Use this to
+        correlate with worker log lines in gen-ai-api.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    script:
+      description: The script name, echoed back for convenience.
+      example: example string
+      type: string
+  type: object
 apiRunEvaluationTestCaseInputPublic:
   description: Run an evaluation test case.
   properties:
@@ -7409,6 +7975,15 @@ apiServerlessInferencePrice:
         $ref: '#/apiBillingPrice'
       type: array
   type: object
+apiSortDirection:
+  default: SORT_DIRECTION_UNSPECIFIED
+  description: Sort direction shared by list endpoints that support sorting.
+  enum:
+  - SORT_DIRECTION_UNSPECIFIED
+  - SORT_DIRECTION_ASC
+  - SORT_DIRECTION_DESC
+  example: SORT_DIRECTION_UNSPECIFIED
+  type: string
 apiSpacesDataSource:
   description: Spaces Bucket Data Source
   properties:
@@ -7932,6 +8507,17 @@ apiUpdateAgentInputPublic:
       description: Unique agent id
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
+    web_fetch_enabled:
+      description: Optional. Set to true to let the agent use the built-in web_fetch
+        tool to retrieve content from public web pages, or false to disable it.
+      example: true
+      type: boolean
+    web_search_enabled:
+      description: Optional. Set to true to let the agent use the built-in web_search
+        tool to search the public web for current information, or false to disable
+        it.
+      example: true
+      type: boolean
   type: object
 apiUpdateAgentOutput:
   description: Information about an updated agent
@@ -8007,6 +8593,25 @@ apiUpdateChatbotOutput:
     chatbot:
       $ref: '#/apiChatbot'
   type: object
+apiUpdateCustomEvaluationMetricInputPublic:
+  properties:
+    config:
+      $ref: '#/apiCustomEvaluationMetricConfig'
+    description:
+      example: example string
+      type: string
+    metric_name:
+      example: '"My domain tone metric"'
+      type: string
+    metric_uuid:
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+  type: object
+apiUpdateCustomEvaluationMetricOutput:
+  properties:
+    metric:
+      $ref: '#/apiEvaluationMetric'
+  type: object
 apiUpdateCustomModelMetadataInputPublic:
   description: Request to update custom model metadata (public)
   properties:
@@ -8014,7 +8619,9 @@ apiUpdateCustomModelMetadataInputPublic:
       example: example string
       type: string
     input_modalities:
-      description: Input modalities supported (e.g., text, image)
+      description: |-
+        Optional new input modalities for the model (replaces existing list when non-empty).
+        Spaces-imported models only.
       example:
       - example string
       items:
@@ -8022,14 +8629,15 @@ apiUpdateCustomModelMetadataInputPublic:
         type: string
       type: array
     license:
-      description: License under which the model is distributed
       example: example string
       type: string
     name:
       example: example name
       type: string
     output_modalities:
-      description: Output modalities supported (e.g., text, image)
+      description: |-
+        Optional new output modalities for the model (replaces existing list when non-empty).
+        Spaces-imported models only.
       example:
       - example string
       items:
@@ -8037,7 +8645,6 @@ apiUpdateCustomModelMetadataInputPublic:
         type: string
       type: array
     parameters:
-      description: Number of parameters in the model
       example: "12345"
       format: uint64
       type: string
@@ -8219,6 +8826,24 @@ apiUpdateModelAPIKeyOutput:
     api_key_info:
       $ref: '#/apiModelAPIKeyInfo'
   type: object
+apiUpdateModelEvaluationRunInputPublic:
+  properties:
+    eval_run_uuid:
+      description: |-
+        UUID of the model evaluation run to update. Returned by `CreateModelEvaluationRun`
+        and listed via `ListModelEvaluationRuns`.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    name:
+      description: Optional new display name for the evaluation run (max 255 characters).
+      example: My evaluation run
+      type: string
+  type: object
+apiUpdateModelEvaluationRunOutput:
+  properties:
+    run:
+      $ref: '#/apiModelEvaluationRunSummary'
+  type: object
 apiUpdateModelMetadataOutput:
   description: Information about updated meta data for a model
   properties:
@@ -8250,8 +8875,9 @@ apiUpdateModelRouterInputPublic:
         type: object
       type: array
     name:
-      description: Model router name
-      example: '"My Model Router"'
+      description: 'Model router name: lowercase, at most 255 characters, only a-z,
+        0-9, and hyphens'
+      example: '"my-model-router"'
       type: string
     policies:
       description: Router policies
@@ -8259,7 +8885,9 @@ apiUpdateModelRouterInputPublic:
         $ref: '#/apiModelRouterTaskPolicy'
       type: array
     regions:
-      description: Target regions for the router
+      description: |-
+        DEPRECATED: this field does not affect deployment and model routers are always
+        deployed to all regions. Must be omitted or set to ["all"].
       example:
       - example string
       items:

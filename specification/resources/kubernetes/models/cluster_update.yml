@@ -59,6 +59,9 @@ properties:
   routing_agent:
     $ref: 'routing_agent.yml'
 
+  p2p_oci_registry_plugin:
+    $ref: "p2p_oci_registry_plugin.yml"
+
   amd_gpu_device_plugin:
     $ref: "amd_gpu_device_plugin.yml"
 
@@ -67,6 +70,12 @@ properties:
 
   nvidia_gpu_device_plugin:
     $ref: "nvidia_gpu_device_plugin.yml"
+
+  nvidia_gpu_dra_driver:
+    $ref: "nvidia_gpu_dra_driver.yml"
+
+  amd_gpu_dra_driver:
+    $ref: "amd_gpu_dra_driver.yml"
 
   rdma_shared_dev_plugin:
     $ref: "rdma_shared_dev_plugin.yml"

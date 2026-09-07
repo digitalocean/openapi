@@ -1,0 +1,41 @@
+operationId: organizations_list_teams
+
+summary: List Teams in an Organization
+
+description: |
+  To list all teams in an organization, send a GET request to
+  `/v2/organizations/teams`.
+
+  This endpoint must be called in an organization context.
+
+tags:
+  - Organizations
+
+responses:
+  '200':
+    $ref: 'responses/list_teams.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: '../../shared/responses/forbidden.yml'
+
+  '412':
+    $ref: 'responses/precondition_failed.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/organizations_list_teams.yml'
+
+security:
+  - bearer_auth:
+    - 'organization:read'

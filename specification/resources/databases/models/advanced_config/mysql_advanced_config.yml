@@ -17,6 +17,13 @@ properties:
     maximum: 59
     type: integer
     example: 30
+  automatic_sp_privileges:
+    description: >-
+      When enabled, grants `EXECUTE` and `ALTER ROUTINE` privileges to the
+      creator of a stored routine. When disabled, these privileges are not
+      granted automatically.
+    type: boolean
+    example: true
   sql_mode:
     description: >-
       Global SQL mode. If empty, uses MySQL server defaults.
@@ -41,6 +48,28 @@ properties:
     example: '+03:00'
     minLength: 2
     maxLength: 100
+  div_precision_increment:
+    description: >-
+      The number of digits by which to increase the scale of the result of
+      division operations performed with the `/` operator.
+    type: integer
+    minimum: 0
+    maximum: 30
+    example: 4
+  end_markers_in_json:
+    description: >-
+      When enabled, the JSON output of `EXPLAIN FORMAT=JSON` includes end
+      markers for nested structures.
+    type: boolean
+    example: false
+  eq_range_index_dive_limit:
+    description: >-
+      The number of equality ranges in an equality comparison condition when
+      the optimizer should switch from using index dives to index statistics.
+    type: integer
+    minimum: 0
+    maximum: 4294967295
+    example: 200
   group_concat_max_len:
     description: >-
       The maximum permitted result length, in bytes, for the GROUP_CONCAT()
@@ -55,17 +84,56 @@ properties:
     minimum: 900
     maximum: 31536000
     example: 86400
+  innodb_ft_enable_stopword:
+    description: >-
+      When enabled, the InnoDB FULLTEXT index stopword list is used. Disabled
+      by default when a custom stopword table is configured.
+    type: boolean
+    example: true
+  innodb_ft_max_token_size:
+    description: >-
+      The maximum length of words that an InnoDB FULLTEXT index stores.
+      Changing this parameter will lead to a restart of the MySQL service.
+    type: integer
+    minimum: 10
+    maximum: 84
+    example: 20
   innodb_ft_min_token_size:
     description: The minimum length of words that an InnoDB FULLTEXT index stores.
     type: integer
     minimum: 0
     maximum: 16
     example: 3
+  innodb_ft_num_word_optimize:
+    description: >-
+      The number of words to process during each OPTIMIZE TABLE operation on an
+      InnoDB FULLTEXT index.
+    type: integer
+    minimum: 1000
+    maximum: 10000
+    example: 2000
+  innodb_ft_result_cache_limit:
+    description: >-
+      The InnoDB FULLTEXT index query result cache size limit, in bytes.
+    type: integer
+    minimum: 1000000
+    maximum: 4294967295
+    example: 2000000000
   innodb_ft_server_stopword_table:
     description: >-
       The InnoDB FULLTEXT index stopword
       list for all InnoDB tables.
     type: string
+    pattern: ^.+/.+$
+    example: db_name/table_name
+    maxLength: 1024
+  innodb_ft_user_stopword_table:
+    description: >-
+      The InnoDB FULLTEXT index stopword list for user-created FULLTEXT
+      indexes. Must be in the form `db_name/table_name`. Set to `null` to
+      clear a previously configured value.
+    type: string
+    nullable: true
     pattern: ^.+/.+$
     example: db_name/table_name
     maxLength: 1024
@@ -93,6 +161,12 @@ properties:
     minimum: 65536
     maximum: 1099511627776
     example: 134217728
+  innodb_optimize_fulltext_only:
+    description: >-
+      When enabled, OPTIMIZE TABLE rebuilds only the InnoDB FULLTEXT index,
+      not the table itself.
+    type: boolean
+    example: false
   innodb_print_all_deadlocks:
     description: >-
       When enabled, records information about all deadlocks in InnoDB user transactions 
@@ -152,6 +226,12 @@ properties:
     minimum: 1
     maximum: 2147483
     example: 28800
+  windowing_use_high_precision:
+    description: >-
+      When enabled, window functions use a higher precision for internal
+      calculations, which can be more accurate but slower.
+    type: boolean
+    example: true
   max_allowed_packet:
     description: >-
       The size of the largest message, in bytes, that can be received by the server.
@@ -160,6 +240,14 @@ properties:
     minimum: 102400
     maximum: 1073741824
     example: 67108864
+  max_execution_time:
+    description: >-
+      The execution timeout for `SELECT` statements, in milliseconds.
+      A value of `0` disables the timeout (no limit).
+    type: integer
+    minimum: 0
+    maximum: 4294967295
+    example: 0
   max_heap_table_size:
     description: >-
       The maximum size, in bytes, of internal in-memory tables. Also set tmp_table_size.
@@ -168,6 +256,41 @@ properties:
     minimum: 1048576
     maximum: 1073741824
     example: 16777216
+  max_seeks_for_key:
+    description: >-
+      Limits the assumed maximum number of seeks when looking up rows based on
+      a key. Lower values cause the query optimizer to prefer indexes over
+      table scans for non-covering indexes.
+    type: integer
+    minimum: 1
+    maximum: 18446744073709551615
+    example: 1000
+  optimizer_prune_level:
+    description: >-
+      Controls the heuristics applied during query optimization to prune less
+      promising partial plans from the optimizer search space. `0` disables
+      pruning and `1` enables it.
+    type: integer
+    minimum: 0
+    maximum: 1
+    example: 1
+  optimizer_search_depth:
+    description: >-
+      The maximum depth of search performed by the query optimizer. Smaller
+      values can reduce compilation time for large joins; a value of `0`
+      lets the server automatically pick a reasonable value.
+    type: integer
+    minimum: 0
+    maximum: 62
+    example: 62
+  optimizer_switch:
+    description: >-
+      Controls query optimizer behavior as a comma-separated list of
+      `option=value` pairs, or `default` to restore server defaults. Each
+      value must be `on`, `off`, or `default`.
+    type: string
+    pattern: ^(default|[a-z_]+=(on|off|default)(,[a-z_]+=(on|off|default))*)$
+    example: batched_key_access=on,hash_join=off
   sort_buffer_size:
     description: >-
       The sort buffer size, in bytes, for ORDER BY optimization. Default is 262144.

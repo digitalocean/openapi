@@ -1,0 +1,8 @@
+type: object
+nullable: true
+description: An object specifying whether the AMD GPU DRA Driver should be enabled in the Kubernetes cluster. Mutually exclusive with `amd_gpu_device_plugin`.
+properties:
+  enabled:
+    type: boolean
+    description: Indicates whether the AMD GPU DRA Driver is enabled.
+    example: true

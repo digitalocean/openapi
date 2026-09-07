@@ -83,7 +83,10 @@ properties:
             ipv4:
               type: string
               example: 174.138.113.197
-              description: IPv4 address of the public gateway.
+              description: >-
+                The public egress IPv4 address of the VPC NAT gateway. This is
+                the address assigned to the gateway, which you can optionally
+                set when creating the gateway using the `ip` or `ipv4` field.
     description: An object containing egress information for the VPC NAT gateway.
 
   udp_timeout_seconds:

@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"name":"production","invitations":[{"email":"member@example.com","role":"member"},{"email":"biller@example.com","role":"biller"}]}' \
+    "https://api.digitalocean.com/v2/organizations/team"

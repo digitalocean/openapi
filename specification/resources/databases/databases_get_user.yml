@@ -15,6 +15,9 @@ description: |
   For MySQL clusters, additional options will be contained in the `mysql_settings`
   object.
 
+  For PostgreSQL clusters, additional options will be contained in the `settings`
+  object (for example, `pg_allow_replication`).
+
   For Kafka clusters, additional options will be contained in the `settings` object.
 
   For MongoDB clusters, additional information will be contained in the mongo_user_settings object

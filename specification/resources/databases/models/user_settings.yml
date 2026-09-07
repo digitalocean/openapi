@@ -5,8 +5,10 @@ properties:
     type: boolean
     example: true
     description: |
-      For Postgres clusters, set to `true` for a user with replication rights.
-      This option is not currently supported for other database engines.
+      For PostgreSQL clusters, set to `true` to grant the user replication
+      privileges. When omitted on create or update, the value defaults to
+      `false` and replication privileges are not granted. This option is not
+      currently supported for other database engines.
   opensearch_acl:
     type: array
     items:
