@@ -13,7 +13,7 @@ description: |
   - `power_on`
   - `power_off`
   - `shutdown`
-  - `enable_ipv6`
+  - `enable_ipv6` (**Warning:** The Droplet must be powered off before enabling IPv6 on an existing Droplet.)
   - `enable_backups`
   - `disable_backups`
   - `snapshot` (also requires `image:create` permission)
