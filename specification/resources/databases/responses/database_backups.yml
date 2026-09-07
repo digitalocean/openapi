@@ -1,4 +1,4 @@
-description: A JSON object with a key of `database_backups`.
+description: A JSON object with a key of `backups`.
 
 headers:
   ratelimit-limit:
