@@ -39,4 +39,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-      - partner_network_connect:write
+      - partner_network_connect:update

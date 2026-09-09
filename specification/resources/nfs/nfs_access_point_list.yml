@@ -56,4 +56,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-      - "nfs:list"
+      - "nfs:read"
