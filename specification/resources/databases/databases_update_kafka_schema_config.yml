@@ -56,4 +56,4 @@ responses:
 
 security:
   - bearer_auth:
-      - "database:write"
+      - "database:update"

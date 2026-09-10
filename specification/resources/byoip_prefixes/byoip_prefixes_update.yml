@@ -51,4 +51,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-      - "byoip_prefix:write"
+      - "byoip_prefix:update"
