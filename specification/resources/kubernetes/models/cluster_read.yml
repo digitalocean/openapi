@@ -222,6 +222,9 @@ properties:
   p2p_oci_registry_plugin:
     $ref: "p2p_oci_registry_plugin.yml"
 
+  nfs_csi_plugin:
+    $ref: "nfs_csi_plugin.yml"
+
 required:
   - name
   - region
