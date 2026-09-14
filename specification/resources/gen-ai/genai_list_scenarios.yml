@@ -1,0 +1,90 @@
+description: To list the scenarios in a scenario set, send a GET request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/scenarios`.
+operationId: genai_list_scenarios
+parameters:
+- description: UUID of the scenario set to read.
+  example: 123e4567-e89b-12d3-a456-426614174000
+  in: path
+  name: scenario_set_uuid
+  required: true
+  schema:
+    type: string
+- description: Page number.
+  example: 1
+  in: query
+  name: page
+  schema:
+    type: integer
+- description: Items per page.
+  example: 1
+  in: query
+  name: per_page
+  schema:
+    type: integer
+- description: |-
+    Free-text search across name, description, and user_persona
+    (case-insensitive substring match). Empty means no search.
+  example: example string
+  in: query
+  name: search
+  schema:
+    type: string
+- description: |-
+    Field to sort by. Defaults to JSONL file order when unspecified.
+
+     - SCENARIO_SORT_FIELD_FILE_ORDER: Preserve JSONL file order. Default.
+     - SCENARIO_SORT_FIELD_NAME: Sort by scenario name (case-insensitive). Empty names sort last.
+     - SCENARIO_SORT_FIELD_DESCRIPTION: Sort by scenario description (case-insensitive).
+  example: SCENARIO_SORT_FIELD_UNSPECIFIED
+  in: query
+  name: sort_by
+  schema:
+    default: SCENARIO_SORT_FIELD_UNSPECIFIED
+    enum:
+    - SCENARIO_SORT_FIELD_UNSPECIFIED
+    - SCENARIO_SORT_FIELD_FILE_ORDER
+    - SCENARIO_SORT_FIELD_NAME
+    - SCENARIO_SORT_FIELD_DESCRIPTION
+    type: string
+- description: Sort direction. Defaults to ascending when unspecified.
+  example: SORT_DIRECTION_UNSPECIFIED
+  in: query
+  name: sort_direction
+  schema:
+    default: SORT_DIRECTION_UNSPECIFIED
+    enum:
+    - SORT_DIRECTION_UNSPECIFIED
+    - SORT_DIRECTION_ASC
+    - SORT_DIRECTION_DESC
+    type: string
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListScenariosOutput
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "404":
+    $ref: ../../shared/responses/not_found.yml
+  "429":
+    $ref: ../../shared/responses/too_many_requests.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+security:
+- bearer_auth:
+  - genai:read
+summary: List Scenarios
+tags:
+- GradientAI Platform
+x-codeSamples:
+- $ref: examples/curl/genai_list_scenarios.yml

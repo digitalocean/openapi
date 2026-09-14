@@ -1,0 +1,140 @@
+description: To list the journeys within a simulation run, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/journeys`.
+operationId: genai_list_simulation_journeys
+parameters:
+- description: UUID of the run whose journeys to list.
+  example: 123e4567-e89b-12d3-a456-426614174000
+  in: path
+  name: run_uuid
+  required: true
+  schema:
+    type: string
+- description: Optional filter by scenario.
+  example: 123e4567-e89b-12d3-a456-426614174000
+  in: query
+  name: scenario_uuid
+  schema:
+    type: string
+- description: Page number.
+  example: 1
+  in: query
+  name: page
+  schema:
+    type: integer
+- description: Items per page.
+  example: 1
+  in: query
+  name: per_page
+  schema:
+    type: integer
+- description: |-
+    Filter by one or more statuses. Empty means no status filter.
+
+     - SIMULATION_JOURNEY_STATUS_RUNNING: The simulation loop is executing and the trajectory object exists in Spaces
+    (set on journey.ready after the first trajectory PUT).
+     - SIMULATION_JOURNEY_STATUS_FINISHED: The journey reached a stop condition and produced a verdict.
+     - SIMULATION_JOURNEY_STATUS_FAILED: The journey failed (in-flight abort on cancel/timeout, or error).
+     - SIMULATION_JOURNEY_STATUS_PREPARING: Journey allocated (journey.started) but the trajectory Spaces object is not
+    available yet. UI should show preparing and must not call GetTrajectory.
+  example:
+  - SIMULATION_JOURNEY_STATUS_UNSPECIFIED
+  in: query
+  name: statuses
+  schema:
+    items:
+      enum:
+      - SIMULATION_JOURNEY_STATUS_UNSPECIFIED
+      - SIMULATION_JOURNEY_STATUS_RUNNING
+      - SIMULATION_JOURNEY_STATUS_FINISHED
+      - SIMULATION_JOURNEY_STATUS_FAILED
+      - SIMULATION_JOURNEY_STATUS_PREPARING
+      type: string
+    type: array
+- description: |-
+    Filter by one or more verdicts. Empty means no verdict filter.
+
+     - SIMULATION_JOURNEY_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria.
+     - SIMULATION_JOURNEY_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria.
+     - SIMULATION_JOURNEY_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
+  example:
+  - SIMULATION_JOURNEY_VERDICT_UNSPECIFIED
+  in: query
+  name: verdicts
+  schema:
+    items:
+      enum:
+      - SIMULATION_JOURNEY_VERDICT_UNSPECIFIED
+      - SIMULATION_JOURNEY_VERDICT_SUCCESS
+      - SIMULATION_JOURNEY_VERDICT_FAILURE
+      - SIMULATION_JOURNEY_VERDICT_INCONCLUSIVE
+      type: string
+    type: array
+- description: |-
+    Free-text search across scenario_uuid and session_id
+    (case-insensitive substring match). Empty means no search.
+  example: example string
+  in: query
+  name: search
+  schema:
+    type: string
+- description: |-
+    Field to sort by. Defaults to scenario ordering when unspecified.
+
+     - SIMULATION_JOURNEY_SORT_FIELD_SCENARIO: Sort by scenario_uuid then journey_index. Default.
+     - SIMULATION_JOURNEY_SORT_FIELD_CREATED_AT: Sort by creation date.
+     - SIMULATION_JOURNEY_SORT_FIELD_STATUS: Sort by journey status using lifecycle order.
+     - SIMULATION_JOURNEY_SORT_FIELD_VERDICT: Sort by verdict (nulls last).
+  example: SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
+  in: query
+  name: sort_by
+  schema:
+    default: SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
+    enum:
+    - SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
+    - SIMULATION_JOURNEY_SORT_FIELD_SCENARIO
+    - SIMULATION_JOURNEY_SORT_FIELD_CREATED_AT
+    - SIMULATION_JOURNEY_SORT_FIELD_STATUS
+    - SIMULATION_JOURNEY_SORT_FIELD_VERDICT
+    type: string
+- description: Sort direction. Defaults to ascending when unspecified.
+  example: SORT_DIRECTION_UNSPECIFIED
+  in: query
+  name: sort_direction
+  schema:
+    default: SORT_DIRECTION_UNSPECIFIED
+    enum:
+    - SORT_DIRECTION_UNSPECIFIED
+    - SORT_DIRECTION_ASC
+    - SORT_DIRECTION_DESC
+    type: string
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListSimulationJourneysOutput
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "404":
+    $ref: ../../shared/responses/not_found.yml
+  "429":
+    $ref: ../../shared/responses/too_many_requests.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+security:
+- bearer_auth:
+  - genai:read
+summary: List Simulation Journeys
+tags:
+- GradientAI Platform
+x-codeSamples:
+- $ref: examples/curl/genai_list_simulation_journeys.yml

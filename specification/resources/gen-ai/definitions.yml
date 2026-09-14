@@ -1502,6 +1502,41 @@ apiCancelModelEvaluationRunOutput:
     run:
       $ref: '#/apiModelEvaluationRunSummary'
   type: object
+apiCancelSimulationRunInputPublic:
+  description: Public parameters for cancelling a simulation run.
+  properties:
+    run_uuid:
+      description: UUID of the run to cancel.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+  type: object
+apiCancelSimulationRunOutput:
+  description: Output for cancelling a simulation run.
+  properties:
+    simulation_run:
+      $ref: '#/apiSimulationRun'
+  type: object
+apiCandidateAgentConfig:
+  description: |-
+    Configuration of the candidate agent under test for a simulation run. The
+    candidate is the customer's deployed agent exercised in a MARS sandbox via
+    harness-api. Persisted as JSON; carries the details required to create a
+    MARS session.
+  properties:
+    agent_deployment_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    agent_uuid:
+      description: UUID of the customer's agent to exercise as the candidate.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    name:
+      description: |-
+        Display name of the candidate agent. Supplied by the client at create
+        (e.g. from MARS List Agent Configs) and persisted with the run.
+      example: example name
+      type: string
+  type: object
 apiCandidateInferenceConfig:
   description: Inference configuration for the candidate model during evaluation.
   properties:
@@ -2407,6 +2442,57 @@ apiCreateOpenAIAPIKeyOutput:
     api_key_info:
       $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
+apiCreateScenarioSetFromLibraryInputPublic:
+  description: Public parameters for materializing a Common Scenario & Goal Library
+    entry.
+  properties:
+    library_scenario_uuid:
+      description: UUID of the library entry to materialize.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    name:
+      description: |-
+        Optional name for the new scenario set. Defaults to the library entry's
+        name when unset.
+      example: example name
+      type: string
+  type: object
+apiCreateScenarioSetFromLibraryOutput:
+  description: Output for materializing a Common Scenario & Goal Library entry.
+  properties:
+    scenario_set:
+      $ref: '#/apiScenarioSet'
+  type: object
+apiCreateScenarioSetInputPublic:
+  description: Public parameters for creating a scenario set.
+  properties:
+    file_upload_scenario_set:
+      $ref: '#/apiFileUploadDataSource'
+    name:
+      description: The name of the scenario set.
+      example: '"support-agent-scenarios"'
+      type: string
+    scenarios:
+      description: Inline scenarios (one JSON object per line). Provide this or file_upload_scenario_set.
+      items:
+        $ref: '#/apiScenario'
+      type: array
+  type: object
+apiCreateScenarioSetOutput:
+  description: Output for creating a scenario set.
+  properties:
+    scenario_set:
+      $ref: '#/apiScenarioSet'
+  type: object
+apiCreateScenarioSetUploadPresignedUrlsInputPublic:
+  description: Public parameters for requesting scenario set upload presigned URLs.
+  properties:
+    files:
+      description: A list of files to generate presigned URLs for.
+      items:
+        $ref: '#/apiPresignedUrlFile'
+      type: array
+  type: object
 apiCreateScheduledIndexingInputPublic:
   properties:
     days:
@@ -2430,6 +2516,46 @@ apiCreateScheduledIndexingOutput:
   properties:
     indexing_info:
       $ref: '#/apiScheduledIndexingInfo'
+  type: object
+apiCreateSimulationRunInputPublic:
+  description: Public parameters for creating a simulation run.
+  properties:
+    agent_config:
+      $ref: '#/apiCandidateAgentConfig'
+    evaluation_config:
+      $ref: '#/apiSimulationEvaluationConfig'
+    exploration_budget:
+      example: 123
+      format: int64
+      type: integer
+    judge_model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    max_turns:
+      example: 123
+      format: int64
+      type: integer
+    name:
+      description: Optional customer-supplied run name.
+      example: example name
+      type: string
+    scenario_set_uuid:
+      description: UUID of the existing scenario set to execute.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    user_simulator_config:
+      description: Optional user simulator model tunables (temperature, max_tokens,
+        etc.).
+      type: object
+    user_simulator_model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiCreateSimulationRunOutput:
+  description: Output for creating a simulation run.
+  properties:
+    simulation_run:
+      $ref: '#/apiSimulationRun'
   type: object
 apiCreateTracesInputPublic:
   properties:
@@ -2948,10 +3074,26 @@ apiDeleteOpenAIAPIKeyOutput:
     api_key_info:
       $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
+apiDeleteScenarioSetOutput:
+  description: Output for deleting a scenario set.
+  properties:
+    scenario_set_uuid:
+      description: UUID of the deleted scenario set.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
 apiDeleteScheduledIndexingOutput:
   properties:
     indexing_info:
       $ref: '#/apiScheduledIndexingInfo'
+  type: object
+apiDeleteSimulationRunOutput:
+  description: Output for deleting a simulation run.
+  properties:
+    run_uuid:
+      description: UUID of the deleted run.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 apiDeleteWorkspaceOutput:
   properties:
@@ -3063,6 +3205,20 @@ apiDropboxOauth2GetTokensOutput:
       description: The access token
       example: example string
       type: string
+  type: object
+apiDuplicateScenarioSetInputPublic:
+  description: Public parameters for duplicating a scenario set.
+  properties:
+    scenario_set_uuid:
+      description: UUID of the scenario set to duplicate.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+  type: object
+apiDuplicateScenarioSetOutput:
+  description: Output for duplicating a scenario set.
+  properties:
+    scenario_set:
+      $ref: '#/apiScenarioSet'
   type: object
 apiEvaluationDataset:
   properties:
@@ -3622,6 +3778,31 @@ apiGenerateOauth2URLOutput:
       example: example string
       type: string
   type: object
+apiGenerateScenarioSetInputPublic:
+  description: Public parameters for dispatching goal-driven scenario generation.
+  properties:
+    generator_model_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    goal_description:
+      description: The goal that drives scenario generation.
+      example: '"Test how the agent handles refund requests"'
+      type: string
+    name:
+      description: The name of the scenario set to create.
+      example: '"billing-support-generated"'
+      type: string
+    num_scenarios:
+      example: 123
+      format: int64
+      type: integer
+  type: object
+apiGenerateScenarioSetOutput:
+  description: Output for dispatching goal-driven scenario generation.
+  properties:
+    scenario_set:
+      $ref: '#/apiScenarioSet'
+  type: object
 apiGetAgentDeploymentReleaseOutput:
   description: One Agent Deployment Release
   properties:
@@ -4162,6 +4343,25 @@ apiGetResourceUsageOutput:
       format: int64
       type: integer
   type: object
+apiGetScenarioSetDownloadURLOutput:
+  description: Output containing a presigned download URL for a scenario set.
+  properties:
+    download_url:
+      description: The presigned URL to download the canonical JSONL file.
+      example: example string
+      type: string
+    expires_at:
+      description: The time the URL expires at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+  type: object
+apiGetScenarioSetOutput:
+  description: Output for getting a scenario set.
+  properties:
+    scenario_set:
+      $ref: '#/apiScenarioSet'
+  type: object
 apiGetScheduledIndexingOutput:
   properties:
     indexing_info:
@@ -4180,6 +4380,44 @@ apiGetServerlessInferenceUsageOutput:
   properties:
     usage:
       $ref: '#/apiResourceUsage'
+  type: object
+apiGetSimulationJourneyOutput:
+  description: Output for getting a single journey.
+  properties:
+    journey:
+      $ref: '#/apiSimulationJourney'
+  type: object
+apiGetSimulationJourneyTrajectoryOutput:
+  description: Output containing the parsed trajectory JSON.
+  properties:
+    trajectory:
+      $ref: '#/apiSimulationTrajectory'
+  type: object
+apiGetSimulationJourneyTrajectoryURLOutput:
+  description: Output containing a presigned download URL for a journey's trajectory
+    JSON.
+  properties:
+    download_url:
+      description: The presigned URL to download the trajectory JSON file.
+      example: example string
+      type: string
+    expires_at:
+      description: The time the URL expires at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+  type: object
+apiGetSimulationRunOutput:
+  description: Output for getting a simulation run.
+  properties:
+    scenario_results:
+      description: Per-scenario breakdown of journey outcomes, aggregated from journey
+        rows.
+      items:
+        $ref: '#/apiSimulationScenarioResult'
+      type: array
+    simulation_run:
+      $ref: '#/apiSimulationRun'
   type: object
 apiGetTeamAgreementOutput:
   description: GetTeamAgreementOutput Output
@@ -5829,11 +6067,161 @@ apiListRegionsOutput:
         $ref: '#/genaiapiRegion'
       type: array
   type: object
+apiListScenarioLibraryOutput:
+  description: Output for listing the Common Scenario & Goal Library.
+  properties:
+    available_categories:
+      description: Full set of categories currently in use, for the FE's category
+        filter UI.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    available_sort_by:
+      description: Sort-by field values the FE can offer in the sort UI.
+      items:
+        $ref: '#/apiScenarioLibrarySortField'
+      type: array
+    available_sort_directions:
+      description: Sort-direction values the FE can offer in the sort UI.
+      items:
+        $ref: '#/apiSortDirection'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+    scenarios:
+      description: The library entries for the current page.
+      items:
+        $ref: '#/apiScenarioLibraryEntry'
+      type: array
+  type: object
+apiListScenarioSetsOutput:
+  description: Output for listing scenario sets.
+  properties:
+    available_sort_by:
+      description: Sort-by field values the FE can offer in the sort UI.
+      items:
+        $ref: '#/apiScenarioSetSortField'
+      type: array
+    available_sort_directions:
+      description: Sort-direction values the FE can offer in the sort UI.
+      items:
+        $ref: '#/apiSortDirection'
+      type: array
+    available_source_kinds:
+      description: Full set of source kinds the FE can offer in the source-kind filter
+        UI.
+      items:
+        $ref: '#/apiScenarioSetSourceKind'
+      type: array
+    available_statuses:
+      description: Full set of statuses the FE can offer in the status filter UI.
+      items:
+        $ref: '#/apiScenarioSetStatus'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+    scenario_sets:
+      description: The scenario sets for the current page.
+      items:
+        $ref: '#/apiScenarioSet'
+      type: array
+  type: object
+apiListScenariosOutput:
+  description: Output for listing the scenarios in a scenario set.
+  properties:
+    available_sort_by:
+      description: Sort-by field values the FE can offer in the sort UI.
+      items:
+        $ref: '#/apiScenarioSortField'
+      type: array
+    available_sort_directions:
+      description: Sort-direction values the FE can offer in the sort UI.
+      items:
+        $ref: '#/apiSortDirection'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+    scenarios:
+      description: The scenarios for the current page.
+      items:
+        $ref: '#/apiScenario'
+      type: array
+  type: object
 apiListServerlessInferencePricesOutput:
   properties:
     serverless_inference_prices:
       items:
         $ref: '#/apiServerlessInferencePrice'
+      type: array
+  type: object
+apiListSimulationJourneysOutput:
+  description: Output for listing the journeys within a simulation run.
+  properties:
+    available_sort_by:
+      description: Sort-by field values the FE can offer in the sort UI.
+      items:
+        $ref: '#/apiSimulationJourneySortField'
+      type: array
+    available_sort_directions:
+      description: Sort-direction values the FE can offer in the sort UI.
+      items:
+        $ref: '#/apiSortDirection'
+      type: array
+    available_statuses:
+      description: Full set of statuses the FE can offer in the status filter UI.
+      items:
+        $ref: '#/apiSimulationJourneyStatus'
+      type: array
+    available_verdicts:
+      description: Full set of verdicts the FE can offer in the verdict filter UI.
+      items:
+        $ref: '#/apiSimulationJourneyVerdict'
+      type: array
+    journeys:
+      description: The journeys for the current page.
+      items:
+        $ref: '#/apiSimulationJourney'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+  type: object
+apiListSimulationRunsOutput:
+  description: Output for listing simulation runs.
+  properties:
+    available_sort_by:
+      description: Sort-by field values the FE can offer in the sort UI.
+      items:
+        $ref: '#/apiSimulationRunSortField'
+      type: array
+    available_sort_directions:
+      description: Sort-direction values the FE can offer in the sort UI.
+      items:
+        $ref: '#/apiSortDirection'
+      type: array
+    available_statuses:
+      description: Full set of statuses the FE can offer in the status filter UI.
+      items:
+        $ref: '#/apiSimulationRunStatus'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+    simulation_runs:
+      description: The simulation runs for the current page.
+      items:
+        $ref: '#/apiSimulationRun'
       type: array
   type: object
 apiListWorkspacesOutput:
@@ -7905,6 +8293,277 @@ apiRunMetricsOnlyEvaluationInputPublic:
       example: '"12345678-1234-1234-1234-123456789012"'
       type: string
   type: object
+apiScenario:
+  description: |-
+    A scenario is a single unit of what to test: one JSON object inside a
+    scenario set's JSONL file.
+  properties:
+    description:
+      description: What the user tries to accomplish. Required.
+      example: example string
+      type: string
+    exploration_budget:
+      example: 123
+      format: int64
+      type: integer
+    max_turns:
+      example: 123
+      format: int64
+      type: integer
+    name:
+      description: Human-readable name for the scenario. Optional.
+      example: example name
+      type: string
+    scenario_uuid:
+      description: |-
+        Unique id for the scenario. Always generated by the API; any
+        customer-supplied value is ignored and overwritten.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    stopping_criteria:
+      description: Judge stopping criteria. Required; must contain at least one entry.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    user_persona:
+      description: How the user communicates (tone, role). Optional.
+      example: example string
+      type: string
+  type: object
+apiScenarioLibraryEntry:
+  description: A platform-curated, ready-to-run scenario set that any team can pick
+    from.
+  properties:
+    category:
+      description: |-
+        Optional grouping for catalog browsing (e.g. "Billing", "Onboarding").
+        Empty when uncategorized.
+      example: example string
+      type: string
+    created_at:
+      description: Time created at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    description:
+      description: Curated description.
+      example: example string
+      type: string
+    goal_description:
+      description: |-
+        The goal this scenario set demonstrates, shown as context alongside
+        goal-driven generation.
+      example: example string
+      type: string
+    library_scenario_uuid:
+      description: UUID of the library entry.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    name:
+      description: Curated display name.
+      example: example name
+      type: string
+    scenario_count:
+      description: Number of scenarios in the canonical JSONL.
+      example: 123
+      format: int64
+      type: integer
+    status:
+      $ref: '#/apiScenarioLibraryEntryStatus'
+    updated_at:
+      description: Time last updated at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+  type: object
+apiScenarioLibraryEntryStatus:
+  default: SCENARIO_LIBRARY_ENTRY_STATUS_UNSPECIFIED
+  description: |-
+    Lifecycle status of a Common Scenario & Goal Library entry.
+
+     - SCENARIO_LIBRARY_ENTRY_STATUS_ACTIVE: Visible in ListScenarioLibrary and selectable via CreateScenarioSetFromLibrary.
+     - SCENARIO_LIBRARY_ENTRY_STATUS_ARCHIVED: Curated out of the catalog; hidden from ListScenarioLibrary but retained
+    for provenance on scenario sets already materialized from it.
+  enum:
+  - SCENARIO_LIBRARY_ENTRY_STATUS_UNSPECIFIED
+  - SCENARIO_LIBRARY_ENTRY_STATUS_ACTIVE
+  - SCENARIO_LIBRARY_ENTRY_STATUS_ARCHIVED
+  example: SCENARIO_LIBRARY_ENTRY_STATUS_UNSPECIFIED
+  type: string
+apiScenarioLibrarySortField:
+  default: SCENARIO_LIBRARY_SORT_FIELD_UNSPECIFIED
+  description: |-
+    Sortable fields for ListScenarioLibrary.
+
+     - SCENARIO_LIBRARY_SORT_FIELD_NAME: Sort by customer-facing name (case-insensitive). Default.
+     - SCENARIO_LIBRARY_SORT_FIELD_CREATED_AT: Sort by creation date.
+  enum:
+  - SCENARIO_LIBRARY_SORT_FIELD_UNSPECIFIED
+  - SCENARIO_LIBRARY_SORT_FIELD_NAME
+  - SCENARIO_LIBRARY_SORT_FIELD_CREATED_AT
+  example: SCENARIO_LIBRARY_SORT_FIELD_UNSPECIFIED
+  type: string
+apiScenarioSet:
+  description: A team-owned pool of scenarios backed by a canonical JSONL file in
+    Spaces.
+  properties:
+    bucket_name:
+      description: Spaces bucket holding the canonical JSONL. Unset while status=GENERATING.
+      example: example name
+      type: string
+    bucket_region:
+      description: Spaces bucket region. Unset while status=GENERATING.
+      example: example string
+      type: string
+    created_at:
+      description: Time created at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    deleted_at:
+      description: Time soft-deleted at. Unset unless the scenario set has been deleted.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    description:
+      description: Customer-supplied description.
+      example: example string
+      type: string
+    failure_reason:
+      description: Human-readable explanation of a terminal FAILED status. Empty otherwise.
+      example: example string
+      type: string
+    generator_model_uuid:
+      description: Model that produced the JSONL. Only set for goal_generated scenario
+        sets.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    library_scenario_uuid:
+      description: |-
+        UUID of the source Common Scenario & Goal Library entry. Only set for
+        library scenario sets (source_kind=SCENARIO_SET_SOURCE_KIND_LIBRARY).
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    name:
+      description: Customer-supplied name.
+      example: example name
+      type: string
+    scenario_count:
+      description: Number of scenarios in the canonical JSONL. Unset while status=GENERATING.
+      example: 123
+      format: int64
+      type: integer
+    scenario_set_uuid:
+      description: UUID of the scenario set.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    source_export_id:
+      description: |-
+        Signals export UUID that produced this set. Only set for signal_generated
+        scenario sets (source_kind=SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED).
+        Also the per-team idempotency key for GenerateScenarioSetFromSignals.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    source_goal_description:
+      description: The goal that drove generation. Only set for goal_generated scenario
+        sets.
+      example: example string
+      type: string
+    source_kind:
+      $ref: '#/apiScenarioSetSourceKind'
+    spaces_key:
+      description: Spaces object key for the canonical JSONL. Unset while status=GENERATING.
+      example: example string
+      type: string
+    status:
+      $ref: '#/apiScenarioSetStatus'
+    updated_at:
+      description: Time last updated at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    workflow_uuid:
+      description: Argo workflow reference. Only set for goal_generated scenario sets.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiScenarioSetSortField:
+  default: SCENARIO_SET_SORT_FIELD_UNSPECIFIED
+  description: |-
+    Sortable fields for ListScenarioSets.
+
+     - SCENARIO_SET_SORT_FIELD_CREATED_AT: Sort by creation date. Default.
+     - SCENARIO_SET_SORT_FIELD_NAME: Sort by customer-supplied name (case-insensitive).
+     - SCENARIO_SET_SORT_FIELD_STATUS: Sort by status using lifecycle order (generating → ready → terminal).
+     - SCENARIO_SET_SORT_FIELD_SCENARIO_COUNT: Sort by scenario_count.
+     - SCENARIO_SET_SORT_FIELD_UPDATED_AT: Sort by last update date.
+  enum:
+  - SCENARIO_SET_SORT_FIELD_UNSPECIFIED
+  - SCENARIO_SET_SORT_FIELD_CREATED_AT
+  - SCENARIO_SET_SORT_FIELD_NAME
+  - SCENARIO_SET_SORT_FIELD_STATUS
+  - SCENARIO_SET_SORT_FIELD_SCENARIO_COUNT
+  - SCENARIO_SET_SORT_FIELD_UPDATED_AT
+  example: SCENARIO_SET_SORT_FIELD_UNSPECIFIED
+  type: string
+apiScenarioSetSourceKind:
+  default: SCENARIO_SET_SOURCE_KIND_UNSPECIFIED
+  description: |-
+    How a scenario set was created.
+
+     - SCENARIO_SET_SOURCE_KIND_USER_UPLOAD: Customer uploaded scenarios that the API validated and canonicalized.
+     - SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED: Produced by goal-driven generation via the runner.
+     - SCENARIO_SET_SOURCE_KIND_LIBRARY: Materialized from a platform-curated Common Scenario & Goal Library entry
+    via CreateScenarioSetFromLibrary. library_scenario_uuid on ScenarioSet
+    identifies the source library entry.
+     - SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED: Produced by signals-driven generation from a completed Signals export
+    (one export = one signal type = one scenario set).
+  enum:
+  - SCENARIO_SET_SOURCE_KIND_UNSPECIFIED
+  - SCENARIO_SET_SOURCE_KIND_USER_UPLOAD
+  - SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED
+  - SCENARIO_SET_SOURCE_KIND_LIBRARY
+  - SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED
+  example: SCENARIO_SET_SOURCE_KIND_UNSPECIFIED
+  type: string
+apiScenarioSetStatus:
+  default: SCENARIO_SET_STATUS_UNSPECIFIED
+  description: |-
+    Lifecycle status of a scenario set. user_upload sets are created directly in
+    READY. goal_generated sets transition through GENERATING and then to a
+    terminal READY, FAILED, or CANCELLED state as the runner emits progress and
+    the collector observes the terminal event.
+
+     - SCENARIO_SET_STATUS_GENERATING: Goal-driven generation is in progress; the canonical JSONL is not ready yet.
+     - SCENARIO_SET_STATUS_READY: The canonical JSONL has been written to Spaces and is ready to read.
+     - SCENARIO_SET_STATUS_FAILED: Generation failed; the scenario set has no readable canonical JSONL.
+     - SCENARIO_SET_STATUS_CANCELLED: Generation was cancelled before completion.
+  enum:
+  - SCENARIO_SET_STATUS_UNSPECIFIED
+  - SCENARIO_SET_STATUS_GENERATING
+  - SCENARIO_SET_STATUS_READY
+  - SCENARIO_SET_STATUS_FAILED
+  - SCENARIO_SET_STATUS_CANCELLED
+  example: SCENARIO_SET_STATUS_UNSPECIFIED
+  type: string
+apiScenarioSortField:
+  default: SCENARIO_SORT_FIELD_UNSPECIFIED
+  description: |-
+    Sortable fields for ListScenarios.
+
+     - SCENARIO_SORT_FIELD_FILE_ORDER: Preserve JSONL file order. Default.
+     - SCENARIO_SORT_FIELD_NAME: Sort by scenario name (case-insensitive). Empty names sort last.
+     - SCENARIO_SORT_FIELD_DESCRIPTION: Sort by scenario description (case-insensitive).
+  enum:
+  - SCENARIO_SORT_FIELD_UNSPECIFIED
+  - SCENARIO_SORT_FIELD_FILE_ORDER
+  - SCENARIO_SORT_FIELD_NAME
+  - SCENARIO_SORT_FIELD_DESCRIPTION
+  example: SCENARIO_SORT_FIELD_UNSPECIFIED
+  type: string
 apiScheduledIndexingInfo:
   description: Metadata for scheduled indexing entries
   properties:
@@ -7974,6 +8633,574 @@ apiServerlessInferencePrice:
       items:
         $ref: '#/apiBillingPrice'
       type: array
+  type: object
+apiSimulationEvaluationConfig:
+  description: |-
+    Optional configuration that opts a simulation run into an evaluation. When
+    included on the create-run request, the platform reserves a
+    model_evaluation_run linked to this simulation run and dispatches the
+    evaluation automatically after the simulation finishes. The evaluation
+    reuses the simulation run's judge_model_uuid.
+  properties:
+    metric_uuids:
+      description: |-
+        Evaluation metric UUIDs (from the evaluation metrics catalog). Must be
+        simulation-eligible (multi-turn) metrics; the create request is rejected
+        if any UUID is unknown or ineligible.
+      example:
+      - example string
+      items:
+        example: example string
+        type: string
+      type: array
+    star_metric:
+      $ref: '#/apiStarMetric'
+  type: object
+apiSimulationJourney:
+  description: |-
+    A journey is one independent execution within a run: one MARS session, one
+    trajectory JSON in Spaces, and one verdict.
+  properties:
+    created_at:
+      description: Time created at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    duration_sec:
+      description: Wall-clock time taken for the journey to complete, in seconds.
+      example: "12345"
+      format: uint64
+      type: string
+    failure_reason:
+      description: Human-readable explanation of a terminal FAILED status. Empty otherwise.
+      example: example string
+      type: string
+    journey_index:
+      description: Zero-based index of this journey within its scenario's exploration
+        budget.
+      example: 123
+      format: int64
+      type: integer
+    journey_uuid:
+      description: UUID of the journey.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    judge_reasoning:
+      description: Optional judge reasoning for the verdict.
+      example: example string
+      type: string
+    run_uuid:
+      description: UUID of the run this journey belongs to.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    scenario_uuid:
+      description: Opaque scenario id copied from the scenario set JSONL.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    session_id:
+      description: |-
+        Id of the MARS session the runner opened for this journey. Also the key for
+        fetching turn-by-turn messages from the Signals dialogues table.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    status:
+      $ref: '#/apiSimulationJourneyStatus'
+    token_usage:
+      $ref: '#/apiSimulationTokenUsage'
+    trajectory_bucket_name:
+      description: Spaces bucket holding the trajectory JSON. Set on finish.
+      example: example name
+      type: string
+    trajectory_bucket_region:
+      description: Spaces bucket region for the trajectory JSON. Set on finish.
+      example: example string
+      type: string
+    trajectory_spaces_key:
+      description: Spaces object key for the trajectory JSON. Set on finish.
+      example: example string
+      type: string
+    updated_at:
+      description: Time last updated at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    verdict:
+      $ref: '#/apiSimulationJourneyVerdict'
+  type: object
+apiSimulationJourneyCounts:
+  description: |-
+    Breakdown of journey outcomes by judge verdict. Reused wherever a
+    success / failure / inconclusive tally is reported (run row, result summary,
+    per-scenario rollup).
+  properties:
+    failure_count:
+      description: Number of journeys with a FAILURE verdict.
+      example: 123
+      format: int64
+      type: integer
+    inconclusive_count:
+      description: Number of journeys with an INCONCLUSIVE verdict.
+      example: 123
+      format: int64
+      type: integer
+    success_count:
+      description: Number of journeys with a SUCCESS verdict.
+      example: 123
+      format: int64
+      type: integer
+  type: object
+apiSimulationJourneySortField:
+  default: SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
+  description: |-
+    Sortable fields for ListSimulationJourneys.
+
+     - SIMULATION_JOURNEY_SORT_FIELD_SCENARIO: Sort by scenario_uuid then journey_index. Default.
+     - SIMULATION_JOURNEY_SORT_FIELD_CREATED_AT: Sort by creation date.
+     - SIMULATION_JOURNEY_SORT_FIELD_STATUS: Sort by journey status using lifecycle order.
+     - SIMULATION_JOURNEY_SORT_FIELD_VERDICT: Sort by verdict (nulls last).
+  enum:
+  - SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
+  - SIMULATION_JOURNEY_SORT_FIELD_SCENARIO
+  - SIMULATION_JOURNEY_SORT_FIELD_CREATED_AT
+  - SIMULATION_JOURNEY_SORT_FIELD_STATUS
+  - SIMULATION_JOURNEY_SORT_FIELD_VERDICT
+  example: SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
+  type: string
+apiSimulationJourneyStatus:
+  default: SIMULATION_JOURNEY_STATUS_UNSPECIFIED
+  description: |-
+    Lifecycle status of a single journey.
+
+     - SIMULATION_JOURNEY_STATUS_RUNNING: The simulation loop is executing and the trajectory object exists in Spaces
+    (set on journey.ready after the first trajectory PUT).
+     - SIMULATION_JOURNEY_STATUS_FINISHED: The journey reached a stop condition and produced a verdict.
+     - SIMULATION_JOURNEY_STATUS_FAILED: The journey failed (in-flight abort on cancel/timeout, or error).
+     - SIMULATION_JOURNEY_STATUS_PREPARING: Journey allocated (journey.started) but the trajectory Spaces object is not
+    available yet. UI should show preparing and must not call GetTrajectory.
+  enum:
+  - SIMULATION_JOURNEY_STATUS_UNSPECIFIED
+  - SIMULATION_JOURNEY_STATUS_RUNNING
+  - SIMULATION_JOURNEY_STATUS_FINISHED
+  - SIMULATION_JOURNEY_STATUS_FAILED
+  - SIMULATION_JOURNEY_STATUS_PREPARING
+  example: SIMULATION_JOURNEY_STATUS_UNSPECIFIED
+  type: string
+apiSimulationJourneyVerdict:
+  default: SIMULATION_JOURNEY_VERDICT_UNSPECIFIED
+  description: |-
+    The judge's verdict for a journey.
+
+     - SIMULATION_JOURNEY_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria.
+     - SIMULATION_JOURNEY_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria.
+     - SIMULATION_JOURNEY_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
+  enum:
+  - SIMULATION_JOURNEY_VERDICT_UNSPECIFIED
+  - SIMULATION_JOURNEY_VERDICT_SUCCESS
+  - SIMULATION_JOURNEY_VERDICT_FAILURE
+  - SIMULATION_JOURNEY_VERDICT_INCONCLUSIVE
+  example: SIMULATION_JOURNEY_VERDICT_UNSPECIFIED
+  type: string
+apiSimulationRun:
+  description: |-
+    A simulation run is one execution of a scenario set against a candidate
+    agent. Every run references an existing scenario set; the runner never receives a
+    goal_description directly.
+  properties:
+    agent_config:
+      $ref: '#/apiCandidateAgentConfig'
+    created_at:
+      description: Time created at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    created_by_user_email:
+      description: Email of the user who triggered this run.
+      example: example@example.com
+      type: string
+    created_by_user_id:
+      description: User id of the actor who triggered this run.
+      example: "12345"
+      format: uint64
+      type: string
+    deleted_at:
+      description: Time soft-deleted at. Unset unless the run has been deleted.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    evaluation_run_uuid:
+      description: |-
+        UUID of the evaluation run reserved for this simulation, when the create
+        request included evaluation_config. Empty when no evaluation is attached.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    exploration_budget:
+      example: 123
+      format: int64
+      type: integer
+    failure_reason:
+      description: Human-readable explanation of a terminal FAILED status. Empty otherwise.
+      example: example string
+      type: string
+    journeys_finished:
+      description: Number of journeys that have finished (successfully or not).
+      example: 123
+      format: int64
+      type: integer
+    judge_model_name:
+      description: Display name of the judge model (from the model catalog).
+      example: example name
+      type: string
+    judge_model_uuid:
+      description: Model driving the judge / stopping_controller (always SI).
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    max_turns:
+      example: 123
+      format: int64
+      type: integer
+    name:
+      description: Optional customer-supplied run name.
+      example: example name
+      type: string
+    result_summary:
+      $ref: '#/apiSimulationRunResultSummary'
+    run_uuid:
+      description: UUID of the run.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    scenario_count:
+      description: Number of scenarios in the scenario set for this run.
+      example: 123
+      format: int64
+      type: integer
+    scenario_set_uuid:
+      description: UUID of the scenario set being executed (must exist at run create).
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    status:
+      $ref: '#/apiSimulationRunStatus'
+    total_journeys:
+      description: Total number of journeys (sum of exploration budgets).
+      example: 123
+      format: int64
+      type: integer
+    updated_at:
+      description: Time last updated at.
+      example: "2023-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    user_simulator_config:
+      description: Optional user simulator model tunables (temperature, max_tokens,
+        etc.).
+      type: object
+    user_simulator_model_name:
+      description: Display name of the user simulator model (from the model catalog).
+      example: example name
+      type: string
+    user_simulator_model_uuid:
+      description: Model driving the user simulator (always SI).
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    workflow_uuid:
+      description: Argo workflow reference.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+  type: object
+apiSimulationRunResultSummary:
+  description: |-
+    Aggregated final result of a simulation run: verdict counts plus token and
+    duration totals.
+  properties:
+    token_usage:
+      $ref: '#/apiSimulationTokenUsage'
+    total_duration_sec:
+      description: Total wall-clock duration across the run, in seconds.
+      example: "12345"
+      format: uint64
+      type: string
+    verdict_counts:
+      $ref: '#/apiSimulationJourneyCounts'
+  type: object
+apiSimulationRunSortField:
+  default: SIMULATION_RUN_SORT_FIELD_UNSPECIFIED
+  description: |-
+    Sortable fields for ListSimulationRuns.
+
+     - SIMULATION_RUN_SORT_FIELD_CREATED_AT: Sort by creation date. Default.
+     - SIMULATION_RUN_SORT_FIELD_NAME: Sort by customer-supplied run name (case-insensitive).
+     - SIMULATION_RUN_SORT_FIELD_STATUS: Sort by status using lifecycle order (pending → running → terminal).
+     - SIMULATION_RUN_SORT_FIELD_UPDATED_AT: Sort by last update date.
+  enum:
+  - SIMULATION_RUN_SORT_FIELD_UNSPECIFIED
+  - SIMULATION_RUN_SORT_FIELD_CREATED_AT
+  - SIMULATION_RUN_SORT_FIELD_NAME
+  - SIMULATION_RUN_SORT_FIELD_STATUS
+  - SIMULATION_RUN_SORT_FIELD_UPDATED_AT
+  example: SIMULATION_RUN_SORT_FIELD_UNSPECIFIED
+  type: string
+apiSimulationRunStatus:
+  default: SIMULATION_RUN_STATUS_UNSPECIFIED
+  description: |-
+    Lifecycle status of a simulation run.
+
+     - SIMULATION_RUN_STATUS_PENDING: Accepted and queued, not yet executing.
+     - SIMULATION_RUN_STATUS_RUNNING: Journeys are executing.
+     - SIMULATION_RUN_STATUS_SUCCEEDED: All journeys finished successfully.
+     - SIMULATION_RUN_STATUS_FAILED: The run failed (e.g. Argo ActiveDeadlineSeconds / workflow timeout).
+     - SIMULATION_RUN_STATUS_CANCELLED: The run was cancelled by the customer.
+     - SIMULATION_RUN_STATUS_EVALUATING: Sim journeys finished; a reserved evaluation is running. Only reachable
+    when the create request included evaluation_config. When the evaluation
+    reaches a terminal status, its outcome is reflected in the simulation run
+    status.
+     - SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL: The simulation or its attached evaluation completed with a mixture of
+    successful and failed results.
+  enum:
+  - SIMULATION_RUN_STATUS_UNSPECIFIED
+  - SIMULATION_RUN_STATUS_PENDING
+  - SIMULATION_RUN_STATUS_RUNNING
+  - SIMULATION_RUN_STATUS_SUCCEEDED
+  - SIMULATION_RUN_STATUS_FAILED
+  - SIMULATION_RUN_STATUS_CANCELLED
+  - SIMULATION_RUN_STATUS_EVALUATING
+  - SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL
+  example: SIMULATION_RUN_STATUS_UNSPECIFIED
+  type: string
+apiSimulationScenarioResult:
+  description: |-
+    Per-scenario rollup of journey outcomes within a run, aggregated from the
+    run's journey rows.
+  properties:
+    journeys_finished:
+      description: Journeys that have finished (successfully or not).
+      example: 123
+      format: int64
+      type: integer
+    scenario_uuid:
+      description: UUID of the scenario.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    total_journeys:
+      description: Total journeys for this scenario (its exploration budget).
+      example: 123
+      format: int64
+      type: integer
+    verdict_counts:
+      $ref: '#/apiSimulationJourneyCounts'
+  type: object
+apiSimulationTokenUsage:
+  description: Per-actor token accounting for a run or journey.
+  properties:
+    candidate_agent_tokens:
+      description: Tokens consumed by the candidate agent.
+      example: "12345"
+      format: uint64
+      type: string
+    generator_tokens:
+      description: Tokens consumed by the scenario generator (SI) calls.
+      example: "12345"
+      format: uint64
+      type: string
+    judge_tokens:
+      description: Tokens consumed by the judge (SI) calls.
+      example: "12345"
+      format: uint64
+      type: string
+    simulator_tokens:
+      description: Tokens consumed by the user simulator (SI) calls.
+      example: "12345"
+      format: uint64
+      type: string
+    total_tokens:
+      description: Total tokens across all actors.
+      example: "12345"
+      format: uint64
+      type: string
+  type: object
+apiSimulationTrajectory:
+  description: |-
+    Canonical trajectory JSON for one journey. The runner atomically overwrites
+    the Spaces object after each exchange so clients can poll for live progress.
+  properties:
+    agent_id:
+      description: |-
+        Identifier of the candidate agent under test for this journey. For the
+        MARS candidate agent this is the durable Agent Config UUID (CreateSession
+        config_id); the field is kept adapter-agnostic so other agent backends
+        can populate it with whatever identifier makes sense for them. Stored
+        alongside the trajectory so analytics can join back to the exact agent
+        under test without another run row lookup.
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    completed_at:
+      example: example string
+      type: string
+    duration_sec:
+      example: "12345"
+      format: uint64
+      type: string
+    evaluation_metrics:
+      description: |-
+        Per-metric scores and judge reasoning for this trajectory. Empty when the
+        simulation run has no associated evaluation.
+      items:
+        $ref: '#/apiEvaluationMetricResult'
+      type: array
+    failure_reason:
+      example: example string
+      type: string
+    journey_index:
+      example: 123
+      format: int64
+      type: integer
+    journey_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    judge:
+      $ref: '#/apiSimulationTrajectoryJudgeResult'
+    max_turns:
+      description: |-
+        Turn budget configured for this journey (per-scenario max_turns, after
+        any run-level override). Compare with turn_count to see how many of the
+        budgeted turns actually ran.
+      example: 123
+      format: int64
+      type: integer
+    messages:
+      items:
+        $ref: '#/apiSimulationTrajectoryMessage'
+      type: array
+    run_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    scenario_uuid:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    session_id:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
+    started_at:
+      example: example string
+      type: string
+    status:
+      $ref: '#/apiSimulationTrajectoryStatus'
+    token_usage:
+      $ref: '#/apiSimulationTokenUsage'
+    turn_count:
+      example: 123
+      format: int64
+      type: integer
+    verdict:
+      $ref: '#/apiSimulationJourneyVerdict'
+  type: object
+apiSimulationTrajectoryJudgeCriterion:
+  description: Per-criterion judge evaluation recorded in the trajectory JSON.
+  properties:
+    criterion:
+      example: example string
+      type: string
+    passed:
+      example: true
+      type: boolean
+    reasoning:
+      example: example string
+      type: string
+  type: object
+apiSimulationTrajectoryJudgeResult:
+  description: Judge output embedded in the trajectory JSON.
+  properties:
+    criteria_pass_fail:
+      items:
+        $ref: '#/apiSimulationTrajectoryJudgeCriterion'
+      type: array
+    reasoning:
+      example: example string
+      type: string
+    verdict:
+      $ref: '#/apiSimulationJourneyVerdict'
+  type: object
+apiSimulationTrajectoryMessage:
+  description: One user or assistant message in the turn-by-turn conversation view.
+  properties:
+    completed_at:
+      description: ISO-8601 timestamp when the message completed.
+      example: example string
+      type: string
+    content:
+      description: Message body text.
+      example: example string
+      type: string
+    role:
+      description: 'Message role: "user" or "assistant".'
+      example: example string
+      type: string
+    started_at:
+      description: ISO-8601 timestamp when the message started.
+      example: example string
+      type: string
+    tokens:
+      $ref: '#/apiSimulationTrajectoryMessageTokens'
+    tool_calls:
+      description: Tool calls on assistant turns.
+      items:
+        $ref: '#/apiSimulationTrajectoryToolCall'
+      type: array
+    turn_index:
+      description: Zero-based turn index shared by the user and assistant messages
+        in one exchange.
+      example: 123
+      format: int64
+      type: integer
+  type: object
+apiSimulationTrajectoryMessageTokens:
+  description: Token usage for a single assistant message in the trajectory JSON.
+  properties:
+    input:
+      example: 123
+      format: int64
+      type: integer
+    output:
+      example: 123
+      format: int64
+      type: integer
+  type: object
+apiSimulationTrajectoryStatus:
+  default: SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED
+  description: |-
+    Lifecycle status of the trajectory JSON written by the simulation runner.
+    Distinct from SimulationJourneyStatus: the trajectory file is updated on
+    every turn while the journey is executing.
+
+     - SIMULATION_TRAJECTORY_STATUS_RUNNING: The journey loop is in progress; messages may grow on each poll.
+     - SIMULATION_TRAJECTORY_STATUS_COMPLETED: The journey reached a stop condition and the trajectory is complete.
+     - SIMULATION_TRAJECTORY_STATUS_FAILED: The journey failed before or during execution.
+     - SIMULATION_TRAJECTORY_STATUS_CANCELLED: The journey was cancelled.
+  enum:
+  - SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED
+  - SIMULATION_TRAJECTORY_STATUS_RUNNING
+  - SIMULATION_TRAJECTORY_STATUS_COMPLETED
+  - SIMULATION_TRAJECTORY_STATUS_FAILED
+  - SIMULATION_TRAJECTORY_STATUS_CANCELLED
+  example: SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED
+  type: string
+apiSimulationTrajectoryToolCall:
+  description: A tool call recorded on an assistant turn in the trajectory JSON.
+  properties:
+    description:
+      example: example string
+      type: string
+    input_parameters:
+      type: object
+    name:
+      example: example name
+      type: string
+    ok:
+      example: true
+      type: boolean
+    output:
+      type: object
+    tool_call_id:
+      example: 123e4567-e89b-12d3-a456-426614174000
+      type: string
   type: object
 apiSortDirection:
   default: SORT_DIRECTION_UNSPECIFIED
@@ -8928,10 +10155,54 @@ apiUpdateOpenAIAPIKeyOutput:
     api_key_info:
       $ref: '#/apiOpenAIAPIKeyInfo'
   type: object
+apiUpdateScenarioSetInputPublic:
+  description: Public parameters for updating a scenario set.
+  properties:
+    name:
+      description: Optional new name. When set, must be non-empty and at most 255
+        characters.
+      example: example name
+      type: string
+    scenario_set_uuid:
+      description: UUID of the scenario set to update.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+    scenarios:
+      description: |-
+        Optional inline scenarios to replace the canonical JSONL. At least one of
+        name or scenarios is required.
+      items:
+        $ref: '#/apiScenario'
+      type: array
+  type: object
+apiUpdateScenarioSetOutput:
+  description: Output for updating a scenario set.
+  properties:
+    scenario_set:
+      $ref: '#/apiScenarioSet'
+  type: object
 apiUpdateScheduledIndexingOutput:
   properties:
     indexing_info:
       $ref: '#/apiScheduledIndexingInfo'
+  type: object
+apiUpdateSimulationRunInputPublic:
+  description: Public parameters for updating a simulation run.
+  properties:
+    name:
+      description: The new name of the run.
+      example: example name
+      type: string
+    run_uuid:
+      description: UUID of the run to update.
+      example: '"12345678-1234-1234-1234-123456789012"'
+      type: string
+  type: object
+apiUpdateSimulationRunOutput:
+  description: Output for updating a simulation run.
+  properties:
+    simulation_run:
+      $ref: '#/apiSimulationRun'
   type: object
 apiUpdateWorkspaceInputPublic:
   description: Parameters for Update Workspace
