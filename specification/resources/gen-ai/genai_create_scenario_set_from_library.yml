@@ -1,10 +1,10 @@
 description: To create a scenario set from a Common Scenario & Goal Library entry,
   send a POST request to `/v2/gen-ai/scenario_library/{library_scenario_uuid}/create_scenario_set`.
-  The library scenarios are copied into a new scenario set owned by the calling team,
-  ready to be passed to Create Simulation Run.
+  The library scenarios are copied into a new scenario set owned by the calling
+  team. The new set is ready to use when creating a simulation run.
 operationId: genai_create_scenario_set_from_library
 parameters:
-- description: UUID of the library entry to materialize.
+- description: UUID of the library entry to copy.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: library_scenario_uuid

@@ -1,4 +1,7 @@
 description: To create a simulation run, send a POST request to `/v2/gen-ai/simulation_runs`.
+  The scenario set must be ready. Judge and user simulator models are optional
+  and use platform defaults when omitted. The run is returned in the pending
+  state.
 operationId: genai_create_simulation_run
 requestBody:
   content:

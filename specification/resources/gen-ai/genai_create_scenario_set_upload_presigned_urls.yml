@@ -1,5 +1,6 @@
-description: To create presigned URLs for scenario set file upload, send a POST request
-  to `/v2/gen-ai/scenario_sets/file_upload_presigned_urls`.
+description: To create presigned URLs for uploading a scenario set file, send a POST
+  request to `/v2/gen-ai/scenario_sets/file_upload_presigned_urls`. After uploading,
+  pass the stored object in Create Scenario Set as `file_upload_scenario_set`.
 operationId: genai_create_scenario_set_upload_presigned_urls
 requestBody:
   content:

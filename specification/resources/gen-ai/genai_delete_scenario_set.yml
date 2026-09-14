@@ -1,5 +1,5 @@
 description: To delete a scenario set, send a DELETE request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`.
-  A scenario set that is still referenced by a simulation run cannot be deleted.
+  A scenario set that is referenced by a simulation run cannot be deleted.
 operationId: genai_delete_scenario_set
 parameters:
 - description: |-

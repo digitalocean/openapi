@@ -1,6 +1,6 @@
-description: To fetch a journey's live trajectory JSON for the conversation view,
-  send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory`.
-  Poll while status is RUNNING to stream turn-by-turn progress.
+description: To retrieve a journey's live trajectory, send a GET request to
+  `/v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory`.
+  Poll while the journey is running to watch turn-by-turn progress.
 operationId: genai_get_simulation_journey_trajectory
 parameters:
 - description: UUID of the run the journey belongs to.
@@ -44,7 +44,7 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: Get Journey Trajectory
+summary: Retrieve Journey Trajectory
 tags:
 - GradientAI Platform
 x-codeSamples:

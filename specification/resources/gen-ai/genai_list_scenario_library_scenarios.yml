@@ -1,9 +1,10 @@
-description: To list the scenarios inside a Common Scenario & Goal Library entry (preview
-  without materializing a team-owned scenario set), send a GET request to `/v2/gen-ai/scenario_library/{library_scenario_uuid}/scenarios`.
+description: To list the scenarios inside a Common Scenario & Goal Library entry
+  without creating a team-owned scenario set, send a GET request to
+  `/v2/gen-ai/scenario_library/{library_scenario_uuid}/scenarios`.
 operationId: genai_list_scenario_library_scenarios
 parameters:
 - description: UUID of the library entry to read.
-  example: 123e4567-e89b-12d3-a456-426614174000
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: library_scenario_uuid
   required: true
@@ -30,9 +31,9 @@ parameters:
   schema:
     type: string
 - description: |-
-    Field to sort by. Defaults to JSONL file order when unspecified.
+    Field to sort by. Defaults to original file order when unspecified.
 
-     - SCENARIO_SORT_FIELD_FILE_ORDER: Preserve JSONL file order. Default.
+     - SCENARIO_SORT_FIELD_FILE_ORDER: Preserve original file order. Default.
      - SCENARIO_SORT_FIELD_NAME: Sort by scenario name (case-insensitive). Empty names sort last.
      - SCENARIO_SORT_FIELD_DESCRIPTION: Sort by scenario description (case-insensitive).
   example: SCENARIO_SORT_FIELD_UNSPECIFIED

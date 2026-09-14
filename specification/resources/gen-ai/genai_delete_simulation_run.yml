@@ -1,12 +1,14 @@
 description: To delete a simulation run, send a DELETE request to `/v2/gen-ai/simulation_runs/{run_uuid}`.
-  For runs still in progress, cancel the run first, then retry the delete once
-  the run reaches a terminal status.
+  The run must be in a terminal status (`SIMULATION_RUN_STATUS_SUCCEEDED`,
+  `SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL`, `SIMULATION_RUN_STATUS_FAILED`,
+  or `SIMULATION_RUN_STATUS_CANCELLED`). For runs still in progress, cancel the
+  run first, then retry the delete.
 operationId: genai_delete_simulation_run
 parameters:
 - description: |-
-    UUID of the simulation run to delete. For runs still in progress, cancel
-    the run first, then retry the delete once the run reaches a terminal
-    status.
+    UUID of the simulation run to delete. The run must be in a terminal
+    status. For runs still in progress, cancel the run first, then retry
+    the delete.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: run_uuid

@@ -1,5 +1,5 @@
-description: To get a presigned download URL for a scenario set's canonical JSONL,
-  send a GET request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/download_url`.
+description: To retrieve a presigned download URL for a scenario set file, send
+  a GET request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/download_url`.
 operationId: genai_get_scenario_set_download_url
 parameters:
 - description: UUID of the scenario set.
@@ -36,7 +36,7 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: Get Download URL for Scenario Set
+summary: Retrieve Scenario Set Download URL
 tags:
 - GradientAI Platform
 x-codeSamples:

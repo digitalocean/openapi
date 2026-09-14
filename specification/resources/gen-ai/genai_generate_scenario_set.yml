@@ -1,5 +1,7 @@
 description: To dispatch goal-driven scenario generation, send a POST request to `/v2/gen-ai/scenario_sets/generate`.
-  The scenario set is returned in the generating state.
+  The scenario set is returned in the generating state. Poll the retrieve
+  scenario set endpoint until the set reaches a ready, failed, or cancelled
+  status.
 operationId: genai_create_generated_scenario_set
 requestBody:
   content:

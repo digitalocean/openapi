@@ -1,7 +1,8 @@
 description: To update a scenario set in place, send a PUT request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}`.
-  Rename and/or replace contents via inline `scenarios`. Content replace keeps the
-  same scenario_set_uuid, overwrites the Spaces JSONL, and is rejected when any simulation
-  run references the set.
+  Provide a new `name` and/or replacement `scenarios`. At least one is required.
+  Replacing contents keeps the same scenario set UUID, remints scenario UUIDs,
+  and is rejected unless the set is ready and no simulation run references it.
+  There is no file-upload path on update.
 operationId: genai_update_scenario_set
 parameters:
 - description: |-

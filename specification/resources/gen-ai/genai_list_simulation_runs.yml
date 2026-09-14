@@ -25,16 +25,16 @@ parameters:
      - SIMULATION_RUN_STATUS_PENDING: Accepted and queued, not yet executing.
      - SIMULATION_RUN_STATUS_RUNNING: Journeys are executing.
      - SIMULATION_RUN_STATUS_SUCCEEDED: All journeys finished successfully.
-     - SIMULATION_RUN_STATUS_FAILED: The run failed (e.g. Argo ActiveDeadlineSeconds / workflow timeout).
-     - SIMULATION_RUN_STATUS_CANCELLED: The run was cancelled by the customer.
-     - SIMULATION_RUN_STATUS_EVALUATING: Sim journeys finished; a reserved evaluation is running. Only reachable
+     - SIMULATION_RUN_STATUS_FAILED: The run failed, for example because of a timeout or workflow error.
+     - SIMULATION_RUN_STATUS_CANCELLED: The run was cancelled.
+     - SIMULATION_RUN_STATUS_EVALUATING: Journeys finished and an attached evaluation is running. Only reachable
     when the create request included evaluation_config. When the evaluation
     reaches a terminal status, its outcome is reflected in the simulation run
     status.
      - SIMULATION_RUN_STATUS_PARTIALLY_SUCCESSFUL: The simulation or its attached evaluation completed with a mixture of
     successful and failed results.
   example:
-  - SIMULATION_RUN_STATUS_UNSPECIFIED
+  - SIMULATION_RUN_STATUS_RUNNING
   in: query
   name: statuses
   schema:

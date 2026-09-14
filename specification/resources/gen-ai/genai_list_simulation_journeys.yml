@@ -2,7 +2,7 @@ description: To list the journeys within a simulation run, send a GET request to
 operationId: genai_list_simulation_journeys
 parameters:
 - description: UUID of the run whose journeys to list.
-  example: 123e4567-e89b-12d3-a456-426614174000
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: run_uuid
   required: true
@@ -29,14 +29,12 @@ parameters:
 - description: |-
     Filter by one or more statuses. Empty means no status filter.
 
-     - SIMULATION_JOURNEY_STATUS_RUNNING: The simulation loop is executing and the trajectory object exists in Spaces
-    (set on journey.ready after the first trajectory PUT).
+     - SIMULATION_JOURNEY_STATUS_RUNNING: The journey is executing and a trajectory is available to retrieve.
      - SIMULATION_JOURNEY_STATUS_FINISHED: The journey reached a stop condition and produced a verdict.
-     - SIMULATION_JOURNEY_STATUS_FAILED: The journey failed (in-flight abort on cancel/timeout, or error).
-     - SIMULATION_JOURNEY_STATUS_PREPARING: Journey allocated (journey.started) but the trajectory Spaces object is not
-    available yet. UI should show preparing and must not call GetTrajectory.
+     - SIMULATION_JOURNEY_STATUS_FAILED: The journey failed because of a cancel, timeout, or error.
+     - SIMULATION_JOURNEY_STATUS_PREPARING: The journey is allocated but its trajectory is not available yet.
   example:
-  - SIMULATION_JOURNEY_STATUS_UNSPECIFIED
+  - SIMULATION_JOURNEY_STATUS_FINISHED
   in: query
   name: statuses
   schema:
@@ -56,7 +54,7 @@ parameters:
      - SIMULATION_JOURNEY_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria.
      - SIMULATION_JOURNEY_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
   example:
-  - SIMULATION_JOURNEY_VERDICT_UNSPECIFIED
+  - SIMULATION_JOURNEY_VERDICT_SUCCESS
   in: query
   name: verdicts
   schema:

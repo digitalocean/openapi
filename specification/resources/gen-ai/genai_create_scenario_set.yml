@@ -1,4 +1,6 @@
 description: To create a scenario set, send a POST request to `/v2/gen-ai/scenario_sets`.
+  Provide exactly one of `scenarios` or `file_upload_scenario_set`. The set is
+  created in the ready state.
 operationId: genai_create_scenario_set
 requestBody:
   content:

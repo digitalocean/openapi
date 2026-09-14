@@ -1,6 +1,6 @@
 description: To duplicate a scenario set, send a POST request to `/v2/gen-ai/scenario_sets/{scenario_set_uuid}/duplicate`.
-  The new set is named `{original name} duplicate` and contains a copy of the source
-  scenarios.
+  The source set must be ready. The new set is named `{original name} duplicate`
+  and contains a copy of the source scenarios.
 operationId: genai_create_duplicate_scenario_set
 parameters:
 - description: UUID of the scenario set to duplicate.

@@ -1,5 +1,5 @@
-description: To get a presigned download URL for a journey's trajectory JSON, send
-  a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory_url`.
+description: To retrieve a presigned download URL for a journey's trajectory,
+  send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory_url`.
 operationId: genai_get_simulation_journey_trajectory_url
 parameters:
 - description: UUID of the run the journey belongs to.
@@ -43,7 +43,7 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: Get Journey Trajectory Download URL
+summary: Retrieve Journey Trajectory Download URL
 tags:
 - GradientAI Platform
 x-codeSamples:

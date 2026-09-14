@@ -2,7 +2,7 @@ description: To list the scenarios in a scenario set, send a GET request to `/v2
 operationId: genai_list_scenarios
 parameters:
 - description: UUID of the scenario set to read.
-  example: 123e4567-e89b-12d3-a456-426614174000
+  example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: scenario_set_uuid
   required: true
@@ -29,9 +29,9 @@ parameters:
   schema:
     type: string
 - description: |-
-    Field to sort by. Defaults to JSONL file order when unspecified.
+    Field to sort by. Defaults to original file order when unspecified.
 
-     - SCENARIO_SORT_FIELD_FILE_ORDER: Preserve JSONL file order. Default.
+     - SCENARIO_SORT_FIELD_FILE_ORDER: Preserve original file order. Default.
      - SCENARIO_SORT_FIELD_NAME: Sort by scenario name (case-insensitive). Empty names sort last.
      - SCENARIO_SORT_FIELD_DESCRIPTION: Sort by scenario description (case-insensitive).
   example: SCENARIO_SORT_FIELD_UNSPECIFIED

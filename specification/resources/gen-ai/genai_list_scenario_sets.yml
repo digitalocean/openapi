@@ -16,12 +16,12 @@ parameters:
 - description: |-
     Filter by one or more statuses. Empty means no status filter.
 
-     - SCENARIO_SET_STATUS_GENERATING: Goal-driven generation is in progress; the canonical JSONL is not ready yet.
-     - SCENARIO_SET_STATUS_READY: The canonical JSONL has been written to Spaces and is ready to read.
-     - SCENARIO_SET_STATUS_FAILED: Generation failed; the scenario set has no readable canonical JSONL.
+     - SCENARIO_SET_STATUS_GENERATING: Generation is in progress. The scenarios are not ready yet.
+     - SCENARIO_SET_STATUS_READY: The scenario set is ready to use.
+     - SCENARIO_SET_STATUS_FAILED: Generation failed. The scenario set has no readable scenarios.
      - SCENARIO_SET_STATUS_CANCELLED: Generation was cancelled before completion.
   example:
-  - SCENARIO_SET_STATUS_UNSPECIFIED
+  - SCENARIO_SET_STATUS_READY
   in: query
   name: statuses
   schema:
@@ -37,15 +37,12 @@ parameters:
 - description: |-
     Filter by one or more source kinds. Empty means no source-kind filter.
 
-     - SCENARIO_SET_SOURCE_KIND_USER_UPLOAD: Customer uploaded scenarios that the API validated and canonicalized.
-     - SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED: Produced by goal-driven generation via the runner.
-     - SCENARIO_SET_SOURCE_KIND_LIBRARY: Materialized from a platform-curated Common Scenario & Goal Library entry
-    via CreateScenarioSetFromLibrary. library_scenario_uuid on ScenarioSet
-    identifies the source library entry.
-     - SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED: Produced by signals-driven generation from a completed Signals export
-    (one export = one signal type = one scenario set).
+     - SCENARIO_SET_SOURCE_KIND_USER_UPLOAD: Created from uploaded or inline scenarios.
+     - SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED: Produced by goal-driven generation.
+     - SCENARIO_SET_SOURCE_KIND_LIBRARY: Copied from a platform-curated library entry.
+     - SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED: Produced from a completed Signals export.
   example:
-  - SCENARIO_SET_SOURCE_KIND_UNSPECIFIED
+  - SCENARIO_SET_SOURCE_KIND_USER_UPLOAD
   in: query
   name: source_kinds
   schema:
