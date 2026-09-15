@@ -60,6 +60,11 @@ tags:
       The Add-Ons API allows you to manage these resources, including creating, listing, and retrieving
       details about specific add-on resources.
 
+  - name: Action Gateway
+    description: |-
+      Discover Action Gateway tools and providers, manage versioned toolbelts and
+      OAuth connections, and create policy-bound sessions for end users.
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -671,6 +676,7 @@ x-tagGroups:
       - Account
       - Actions
       - Add-Ons
+      - Action Gateway
       - Apps
       - Billing
       - Block Storage
@@ -728,6 +734,74 @@ x-tagGroups:
       - Serverless Inference
 
 paths:
+  /v2/action-gateway/tools:
+    get:
+      $ref: "resources/action_gateway/tools_list.yml"
+
+  /v2/action-gateway/tools/toolkits:
+    get:
+      $ref: "resources/action_gateway/tools_list_toolkits.yml"
+
+  /v2/action-gateway/tools/providers:
+    get:
+      $ref: "resources/action_gateway/tools_list_providers.yml"
+
+  /v2/action-gateway/tools/{name}/definition:
+    get:
+      $ref: "resources/action_gateway/tools_get_definition.yml"
+
+  /v2/action-gateway/toolbelts:
+    get:
+      $ref: "resources/action_gateway/toolbelts_list.yml"
+    post:
+      $ref: "resources/action_gateway/toolbelts_create.yml"
+
+  /v2/action-gateway/toolbelts/{name}:
+    get:
+      $ref: "resources/action_gateway/toolbelts_get.yml"
+    delete:
+      $ref: "resources/action_gateway/toolbelts_delete.yml"
+
+  /v2/action-gateway/toolbelts/{name}/tools/add:
+    post:
+      $ref: "resources/action_gateway/toolbelts_add_tools.yml"
+
+  /v2/action-gateway/toolbelts/{name}/tools/remove:
+    post:
+      $ref: "resources/action_gateway/toolbelts_remove_tools.yml"
+
+  /v2/action-gateway/connections:
+    get:
+      $ref: "resources/action_gateway/connections_list.yml"
+    post:
+      $ref: "resources/action_gateway/connections_create.yml"
+
+  /v2/action-gateway/connections/{id}:
+    get:
+      $ref: "resources/action_gateway/connections_get.yml"
+    patch:
+      $ref: "resources/action_gateway/connections_update.yml"
+    delete:
+      $ref: "resources/action_gateway/connections_delete.yml"
+
+  /v2/action-gateway/users:
+    get:
+      $ref: "resources/action_gateway/users_list.yml"
+
+  /v2/action-gateway/users/{user_id}:
+    get:
+      $ref: "resources/action_gateway/users_get.yml"
+
+  /v2/action-gateway/sessions:
+    get:
+      $ref: "resources/action_gateway/sessions_list.yml"
+    post:
+      $ref: "resources/action_gateway/sessions_create.yml"
+
+  /v2/action-gateway/sessions/{session_urn}:
+    delete:
+      $ref: "resources/action_gateway/sessions_delete.yml"
+
   /v2/1-clicks:
     get:
       $ref: "resources/1-clicks/oneClicks_list.yml"
