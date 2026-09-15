@@ -1,0 +1,7 @@
+type: object
+
+properties:
+  config:
+    $ref: 'prepayment_config.yml'
+  status:
+    $ref: 'prepayment_status.yml'

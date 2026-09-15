@@ -1,0 +1,26 @@
+type: object
+
+properties:
+  balance:
+    type: string
+    description: >-
+      Current prepayment balance. Decimal dollars, e.g. `"25.00"`.
+    example: '25.00'
+  is_auto_prepay_enabled:
+    type: boolean
+    description: Whether automatic prepayment top-up is enabled.
+    example: true
+  blocked:
+    type: boolean
+    description: Whether the prepayment gate is currently blocking usage.
+    example: true
+  eligible:
+    type: boolean
+    description: Whether the account is eligible for the prepayment gate experience.
+    example: true
+  month_to_date_balance:
+    type: string
+    description: >-
+      Current account balance including month-to-date usage.
+      Decimal dollars, e.g. `"75.00"`.
+    example: '75.00'
