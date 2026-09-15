@@ -1,0 +1,11 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json"  \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v2/gen-ai/scenario_sets/generate" \
+    -d '{
+      "name": "billing-support-generated",
+      "goal_description": "Test how the agent handles refund requests",
+      "num_scenarios": 4
+    }'
