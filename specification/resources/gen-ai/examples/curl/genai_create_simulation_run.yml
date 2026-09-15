@@ -1,0 +1,25 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json"  \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v2/gen-ai/simulation_runs" \
+    -d '{
+      "name": "my-simulation-run",
+      "scenario_set_uuid": "12345678-1234-1234-1234-123456789012",
+      "agent_config": {
+        "agent_uuid": "223e4567-e89b-12d3-a456-426614174001",
+        "name": "support-agent"
+      },
+      "judge_model_uuid": "323e4567-e89b-12d3-a456-426614174002",
+      "user_simulator_model_uuid": "423e4567-e89b-12d3-a456-426614174003",
+      "evaluation_config": {
+        "metric_uuids": [
+          "523e4567-e89b-12d3-a456-426614174004"
+        ],
+        "star_metric": {
+          "metric_uuid": "523e4567-e89b-12d3-a456-426614174004",
+          "success_threshold": 80
+        }
+      }
+    }'
