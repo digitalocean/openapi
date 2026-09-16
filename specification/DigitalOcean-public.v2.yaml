@@ -76,10 +76,14 @@ tags:
   - name: Billing
     description: |-
       The billing endpoints allow you to retrieve your account balance, invoices,
-      billing history, and insights.
+      billing history, insights, and prepayment information.
 
       **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
       retrieve the balance information for the requested customer account.
+
+      **Prepayment:** By sending requests to the `/v2/customers/my/prepayment_config`
+      and `/v2/customers/my/prepayment_status` endpoints, you can retrieve prepayment
+      gate configuration and status for the requested customer account.
 
       **Invoices:** [Invoices](https://docs.digitalocean.com/platform/billing/invoices/)
       are generated on the first of each month for every DigitalOcean
@@ -979,6 +983,14 @@ paths:
   /v2/customers/my/balance:
     get:
       $ref: "resources/billing/balance_get.yml"
+
+  /v2/customers/my/prepayment_config:
+    get:
+      $ref: "resources/billing/prepaymentConfig_get.yml"
+
+  /v2/customers/my/prepayment_status:
+    get:
+      $ref: "resources/billing/prepaymentStatus_get.yml"
 
   /v2/customers/my/billing_history:
     get:
