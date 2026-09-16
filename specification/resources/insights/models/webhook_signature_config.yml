@@ -1,0 +1,12 @@
+type: object
+description: |
+  Optional HMAC signature configuration. When set, DigitalOcean signs outbound
+  webhook payloads with this secret.
+required:
+  - secret
+properties:
+  secret:
+    type: string
+    format: password
+    description: Shared secret used to sign webhook payloads.
+    example: whsec_example_secret

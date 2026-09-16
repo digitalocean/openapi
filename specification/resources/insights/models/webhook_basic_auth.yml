@@ -1,0 +1,15 @@
+type: object
+description: HTTP basic authentication credentials for a webhook.
+required:
+  - username
+  - password
+properties:
+  username:
+    type: string
+    description: Basic auth username.
+    example: webhook-user
+  password:
+    type: string
+    format: password
+    description: Basic auth password.
+    example: secret-password

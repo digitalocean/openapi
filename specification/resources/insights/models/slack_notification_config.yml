@@ -1,0 +1,15 @@
+type: object
+description: Slack notification channel configuration.
+required:
+  - webhook_url
+  - channel
+properties:
+  webhook_url:
+    type: string
+    format: uri
+    description: The Slack incoming webhook URL.
+    example: https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ
+  channel:
+    type: string
+    description: The Slack channel name to notify.
+    example: '#alerts'

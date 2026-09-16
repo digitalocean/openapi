@@ -1,0 +1,13 @@
+type: object
+description: |
+  Email notification channel configuration. Recipients must be verified team
+  member email addresses.
+required:
+  - to
+properties:
+  to:
+    type: string
+    description: |
+      One or more recipient email addresses, separated by commas, semicolons,
+      or spaces.
+    example: alerts@example.com,oncall@example.com

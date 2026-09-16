@@ -1,0 +1,19 @@
+type: object
+description: |
+  Create or update body for a notification channel. Provide a `name` and
+  exactly one of `email`, `slack`, `webhook`, or `pagerduty`.
+required:
+  - name
+properties:
+  name:
+    type: string
+    description: A human-readable name for the notification channel.
+    example: Production Slack alerts
+  email:
+    $ref: 'email_notification_config.yml'
+  slack:
+    $ref: 'slack_notification_config.yml'
+  webhook:
+    $ref: 'webhook_notification_config.yml'
+  pagerduty:
+    $ref: 'pagerduty_notification_config.yml'

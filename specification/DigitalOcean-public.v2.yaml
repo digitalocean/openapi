@@ -386,6 +386,13 @@ tags:
       To interact with images, you will generally send requests to the images
       endpoint at /v2/images.
 
+  - name: Insights
+    description: |-
+      The DigitalOcean Insights API lets you manage observability resources such
+      as reusable notification channels for alerts. Notification channels can
+      deliver alert events to email, Slack, HTTPS webhooks, and related
+      destinations.
+
   - name: Kubernetes
     description: |-
       [DigitalOcean Kubernetes](https://docs.digitalocean.com/products/kubernetes/)
@@ -1547,6 +1554,23 @@ paths:
   /v2/images/{image_id}/actions/{action_id}:
     get:
       $ref: "resources/images/imageActions_get.yml"
+
+  /v2/insights/notification-channels:
+    get:
+      $ref: "resources/insights/insights_list_notificationChannels.yml"
+
+    post:
+      $ref: "resources/insights/insights_create_notificationChannel.yml"
+
+  /v2/insights/notification-channels/{id}:
+    get:
+      $ref: "resources/insights/insights_get_notificationChannel.yml"
+
+    put:
+      $ref: "resources/insights/insights_update_notificationChannel.yml"
+
+    delete:
+      $ref: "resources/insights/insights_delete_notificationChannel.yml"
 
   /v2/kubernetes/clusters:
     get:

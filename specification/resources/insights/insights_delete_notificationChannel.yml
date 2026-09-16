@@ -1,0 +1,45 @@
+operationId: insights_delete_notificationChannel
+
+summary: Delete a Notification Channel
+
+description: |
+  To delete a notification channel, send a DELETE request to
+  `/v2/insights/notification-channels/{id}`.
+
+  Deleting a channel that is still referenced by one or more alert rules
+  returns `409 Conflict`.
+
+tags:
+  - Insights
+
+parameters:
+  - $ref: 'parameters.yml#/notification_channel_id'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '409':
+    $ref: '../../shared/responses/conflict.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/insights_delete_notificationChannel.yml'
+
+security:
+  - bearer_auth:
+      - 'insights:delete'

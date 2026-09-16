@@ -1,0 +1,45 @@
+description: A list of notification channels.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      allOf:
+        - $ref: '../models/list_notification_channels.yml'
+        - $ref: '../../../shared/pages.yml#/pagination'
+        - $ref: '../../../shared/meta.yml'
+    example:
+      notification_channels:
+        - id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
+          name: Production Slack alerts
+          channel_type: CHANNEL_TYPE_SLACK
+          slack:
+            webhook_url: https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ
+            channel: '#alerts'
+          usage:
+            rule_count: 1
+            warning_thresholds: 1
+            critical_thresholds: 1
+          created_at: '2026-03-15T12:00:00Z'
+          updated_at: '2026-03-15T12:00:00Z'
+        - id: 78b3da62-27e5-49ba-ac70-5db0b5935c64
+          name: On-call email
+          channel_type: CHANNEL_TYPE_EMAIL
+          email:
+            to: oncall@example.com
+          usage:
+            rule_count: 0
+            warning_thresholds: 0
+            critical_thresholds: 0
+          created_at: '2026-03-14T09:00:00Z'
+          updated_at: '2026-03-14T09:00:00Z'
+      links: {}
+      meta:
+        total: 2

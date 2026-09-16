@@ -1,0 +1,33 @@
+description: A single notification channel.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - notification_channel
+      properties:
+        notification_channel:
+          $ref: '../models/notification_channel.yml'
+    example:
+      notification_channel:
+        id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
+        name: Production Slack alerts
+        channel_type: CHANNEL_TYPE_SLACK
+        slack:
+          webhook_url: https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ
+          channel: '#alerts'
+        usage:
+          rule_count: 1
+          warning_thresholds: 1
+          critical_thresholds: 1
+        created_at: '2026-03-15T12:00:00Z'
+        updated_at: '2026-03-15T12:00:00Z'
