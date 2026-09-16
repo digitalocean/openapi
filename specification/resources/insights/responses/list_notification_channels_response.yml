@@ -17,29 +17,18 @@ content:
         - $ref: '../../../shared/meta.yml'
     example:
       notification_channels:
-        - id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
-          name: Production Slack alerts
-          channel_type: CHANNEL_TYPE_SLACK
-          slack:
-            webhook_url: https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ
-            channel: '#alerts'
-          usage:
-            rule_count: 1
-            warning_thresholds: 1
-            critical_thresholds: 1
-          created_at: '2026-03-15T12:00:00Z'
-          updated_at: '2026-03-15T12:00:00Z'
-        - id: 78b3da62-27e5-49ba-ac70-5db0b5935c64
+        - id: 550e8400-e29b-41d4-a716-446655440000
           name: On-call email
-          channel_type: CHANNEL_TYPE_EMAIL
+          channel_type: email
           email:
-            to: oncall@example.com
+            to: alerts@example.com
           usage:
-            rule_count: 0
+            rule_count: 2
             warning_thresholds: 0
-            critical_thresholds: 0
-          created_at: '2026-03-14T09:00:00Z'
-          updated_at: '2026-03-14T09:00:00Z'
-      links: {}
+            critical_thresholds: 2
+          created_at: '2026-09-03T10:15:00Z'
+          updated_at: '2026-09-03T10:15:00Z'
+      links:
+        pages: {}
       meta:
-        total: 2
+        total: 1

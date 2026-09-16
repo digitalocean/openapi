@@ -17,17 +17,56 @@ content:
       properties:
         notification_channel:
           $ref: '../models/notification_channel.yml'
-    example:
-      notification_channel:
-        id: 4de7ac8b-495b-4884-9a69-1050c6793cd6
-        name: Production Slack alerts
-        channel_type: CHANNEL_TYPE_SLACK
-        slack:
-          webhook_url: https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ
-          channel: '#alerts'
-        usage:
-          rule_count: 1
-          warning_thresholds: 1
-          critical_thresholds: 1
-        created_at: '2026-03-15T12:00:00Z'
-        updated_at: '2026-03-15T12:00:00Z'
+    examples:
+      email:
+        summary: Email channel
+        value:
+          notification_channel:
+            id: 550e8400-e29b-41d4-a716-446655440000
+            name: On-call email
+            channel_type: email
+            email:
+              to: alerts@example.com, backup@example.com
+            usage:
+              rule_count: 0
+              warning_thresholds: 0
+              critical_thresholds: 0
+            created_at: '2026-09-03T10:15:00Z'
+            updated_at: '2026-09-03T10:15:00Z'
+      slack:
+        summary: Slack channel with masked webhook
+        value:
+          notification_channel:
+            id: 660e8400-e29b-41d4-a716-446655440001
+            name: Platform alerts
+            channel_type: slack
+            slack:
+              webhook_url: '********'
+              channel: '#platform-alerts'
+            usage:
+              rule_count: 0
+              warning_thresholds: 0
+              critical_thresholds: 0
+            created_at: '2026-09-03T10:16:00Z'
+            updated_at: '2026-09-03T10:16:00Z'
+      webhook:
+        summary: Webhook channel with masked credentials
+        value:
+          notification_channel:
+            id: 770e8400-e29b-41d4-a716-446655440002
+            name: Incident webhook
+            channel_type: webhook
+            webhook:
+              url: https://example.com/hook
+              bearer_token:
+                token: '********'
+              headers:
+                X-Custom: '1'
+              signature:
+                secret: '********'
+            usage:
+              rule_count: 0
+              warning_thresholds: 0
+              critical_thresholds: 0
+            created_at: '2026-09-03T10:17:00Z'
+            updated_at: '2026-09-03T10:17:00Z'

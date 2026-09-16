@@ -1,10 +1,13 @@
 type: object
-description: Bearer token authentication for a webhook.
-required:
-  - token
+description: |
+  Bearer token authentication for a webhook. `token` is write-only: full value
+  on create/update; masked (`********`) on read. Omit on update to keep the
+  existing token.
 properties:
   token:
     type: string
     format: password
-    description: Bearer token value sent in the Authorization header.
+    description: |
+      Bearer token value sent in the Authorization header. Write-only secret —
+      full value on create/update; masked as `********` on read.
     example: secret-token

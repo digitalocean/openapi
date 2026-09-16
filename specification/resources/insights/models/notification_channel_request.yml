@@ -2,13 +2,16 @@ type: object
 description: |
   Create or update body for a notification channel. Provide a `name` and
   exactly one of `email`, `slack`, or `webhook`.
+
+  Secret fields are write-only: send the full value to set or rotate; omit the
+  field on update to keep the existing secret.
 required:
   - name
 properties:
   name:
     type: string
     description: A human-readable name for the notification channel.
-    example: Production Slack alerts
+    example: Platform alerts
   email:
     $ref: 'email_notification_config.yml'
   slack:

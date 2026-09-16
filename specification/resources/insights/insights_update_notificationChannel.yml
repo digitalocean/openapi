@@ -7,6 +7,9 @@ description: |
   `/v2/insights/notification-channels/{id}` with a `name` and exactly one of
   `email`, `slack`, or `webhook`.
 
+  Sending a secret field rotates it; omitting the secret field keeps the
+  existing value.
+
 tags:
   - Insights
 
@@ -23,10 +26,10 @@ requestBody:
         slack:
           summary: Slack channel
           value:
-            name: Production Slack alerts
+            name: Platform alerts (updated)
             slack:
-              webhook_url: https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ
-              channel: '#alerts'
+              webhook_url: https://hooks.slack.com/services/T000/B000/NEWTOKEN
+              channel: '#platform-alerts-prod'
 
 responses:
   '200':

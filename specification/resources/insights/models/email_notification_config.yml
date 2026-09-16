@@ -10,4 +10,4 @@ properties:
     description: |
       One or more recipient email addresses, separated by commas, semicolons,
       or spaces.
-    example: alerts@example.com,oncall@example.com
+    example: alerts@example.com, backup@example.com

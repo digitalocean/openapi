@@ -3,5 +3,5 @@ source: |-
   curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{"name":"Production Slack alerts","slack":{"webhook_url":"https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ","channel":"#alerts"}}' \
+    -d '{"name":"Platform alerts","slack":{"webhook_url":"https://hooks.slack.com/services/T000/B000/XXXXXXXX","channel":"#platform-alerts"}}' \
     "https://api.digitalocean.com/v2/insights/notification-channels"

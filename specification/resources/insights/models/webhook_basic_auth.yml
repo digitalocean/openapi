@@ -1,8 +1,10 @@
 type: object
-description: HTTP basic authentication credentials for a webhook.
+description: |
+  HTTP basic authentication credentials for a webhook. `password` is
+  write-only: full value on create/update; masked (`********`) on read. Omit on
+  update to keep the existing password.
 required:
   - username
-  - password
 properties:
   username:
     type: string
@@ -11,5 +13,7 @@ properties:
   password:
     type: string
     format: password
-    description: Basic auth password.
+    description: |
+      Basic auth password. Write-only secret — full value on create/update;
+      masked as `********` on read.
     example: secret-password

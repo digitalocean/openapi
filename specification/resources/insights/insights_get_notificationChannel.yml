@@ -4,7 +4,8 @@ summary: Retrieve a Notification Channel
 
 description: |
   To retrieve a notification channel, send a GET request to
-  `/v2/insights/notification-channels/{id}`.
+  `/v2/insights/notification-channels/{id}`. Secret fields are returned masked
+  as `********`.
 
 tags:
   - Insights

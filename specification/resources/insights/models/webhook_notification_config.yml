@@ -4,14 +4,19 @@ description: |
   HTTPS and must not include userinfo. Optionally configure either
   `basic_auth` or `bearer_token` (not both), custom headers, and a signing
   secret.
+
+  `url` is not a secret and is returned in full on read. Credential fields
+  (`basic_auth.password`, `bearer_token.token`, `signature.secret`) are
+  write-only: full value on create/update; masked as `********` on read. Omit
+  a secret field on update to keep the existing value.
 required:
   - url
 properties:
   url:
     type: string
     format: uri
-    description: HTTPS URL that receives webhook deliveries.
-    example: https://example.com/hooks/alerts
+    description: HTTPS URL that receives webhook deliveries. Returned in full on read.
+    example: https://example.com/hook
   basic_auth:
     $ref: 'webhook_basic_auth.yml'
   bearer_token:
@@ -20,12 +25,12 @@ properties:
     type: object
     additionalProperties:
       type: string
-      example: value
+      example: '1'
     description: |
       Optional custom HTTP headers to include on webhook deliveries. At most
       20 headers are allowed. Reserved header names such as `host`,
       `content-type`, and `proxy-*` are rejected.
     example:
-      X-Custom-Header: value
+      X-Custom: '1'
   signature:
     $ref: 'webhook_signature_config.yml'

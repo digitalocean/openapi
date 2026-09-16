@@ -4,10 +4,15 @@ summary: List Notification Channels
 
 description: |
   To list all notification channels for your account, send a GET request to
-  `/v2/insights/notification-channels`.
+  `/v2/insights/notification-channels`. Results are paginated with `page` and
+  `per_page` (default `20`, maximum `200`).
 
 tags:
   - Insights
+
+parameters:
+  - $ref: 'parameters.yml#/page'
+  - $ref: 'parameters.yml#/per_page'
 
 responses:
   '200':

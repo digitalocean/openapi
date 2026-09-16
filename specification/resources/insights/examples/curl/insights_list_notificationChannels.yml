@@ -3,4 +3,4 @@ source: |-
   curl -X GET \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    "https://api.digitalocean.com/v2/insights/notification-channels"
+    "https://api.digitalocean.com/v2/insights/notification-channels?page=1&per_page=20"

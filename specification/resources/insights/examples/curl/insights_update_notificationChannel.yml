@@ -3,5 +3,5 @@ source: |-
   curl -X PUT \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{"name":"Production Slack alerts","slack":{"webhook_url":"https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ","channel":"#alerts"}}' \
-    "https://api.digitalocean.com/v2/insights/notification-channels/4de7ac8b-495b-4884-9a69-1050c6793cd6"
+    -d '{"name":"Platform alerts (updated)","slack":{"webhook_url":"https://hooks.slack.com/services/T000/B000/NEWTOKEN","channel":"#platform-alerts-prod"}}' \
+    "https://api.digitalocean.com/v2/insights/notification-channels/660e8400-e29b-41d4-a716-446655440001"

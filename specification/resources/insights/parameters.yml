@@ -6,4 +6,27 @@ notification_channel_id:
   schema:
     type: string
     format: uuid
-  example: 4de7ac8b-495b-4884-9a69-1050c6793cd6
+  example: 550e8400-e29b-41d4-a716-446655440000
+
+page:
+  in: query
+  name: page
+  required: false
+  description: Which page of results to return.
+  schema:
+    type: integer
+    minimum: 1
+    default: 1
+  example: 1
+
+per_page:
+  in: query
+  name: per_page
+  required: false
+  description: Number of items returned per page.
+  schema:
+    type: integer
+    minimum: 1
+    default: 20
+    maximum: 200
+  example: 20

@@ -11,20 +11,19 @@ properties:
     type: string
     format: uuid
     description: A unique identifier for the notification channel.
-    example: 4de7ac8b-495b-4884-9a69-1050c6793cd6
+    example: 550e8400-e29b-41d4-a716-446655440000
   name:
     type: string
     description: A human-readable name for the notification channel.
-    example: Production Slack alerts
+    example: On-call email
   channel_type:
     type: string
     description: The configured channel type.
     enum:
-      - CHANNEL_TYPE_UNSPECIFIED
-      - CHANNEL_TYPE_EMAIL
-      - CHANNEL_TYPE_SLACK
-      - CHANNEL_TYPE_WEBHOOK
-    example: CHANNEL_TYPE_SLACK
+      - email
+      - slack
+      - webhook
+    example: email
   email:
     $ref: 'email_notification_config.yml'
   slack:
@@ -37,9 +36,9 @@ properties:
     type: string
     format: date-time
     description: Time the notification channel was created.
-    example: '2026-03-15T12:00:00Z'
+    example: '2026-09-03T10:15:00Z'
   updated_at:
     type: string
     format: date-time
     description: Time the notification channel was last updated.
-    example: '2026-03-15T12:30:00Z'
+    example: '2026-09-03T10:15:00Z'
