@@ -5,7 +5,7 @@ summary: Create a Notification Channel
 description: |
   To create a notification channel, send a POST request to
   `/v2/insights/notification-channels` with a `name` and exactly one of
-  `email`, `slack`, `webhook`, or `pagerduty`.
+  `email`, `slack`, or `webhook`.
 
   Email recipients must be verified team member addresses. Webhook URLs must
   use HTTPS.

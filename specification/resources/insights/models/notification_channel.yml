@@ -24,7 +24,6 @@ properties:
       - CHANNEL_TYPE_EMAIL
       - CHANNEL_TYPE_SLACK
       - CHANNEL_TYPE_WEBHOOK
-      - CHANNEL_TYPE_PAGERDUTY
     example: CHANNEL_TYPE_SLACK
   email:
     $ref: 'email_notification_config.yml'
@@ -32,8 +31,6 @@ properties:
     $ref: 'slack_notification_config.yml'
   webhook:
     $ref: 'webhook_notification_config.yml'
-  pagerduty:
-    $ref: 'pagerduty_notification_config.yml'
   usage:
     $ref: 'notification_channel_usage.yml'
   created_at:

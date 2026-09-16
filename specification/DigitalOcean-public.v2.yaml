@@ -390,8 +390,7 @@ tags:
     description: |-
       The DigitalOcean Insights API lets you manage observability resources such
       as reusable notification channels for alerts. Notification channels can
-      deliver alert events to email, Slack, HTTPS webhooks, and related
-      destinations.
+      deliver alert events to email, Slack, and HTTPS webhooks.
 
   - name: Kubernetes
     description: |-

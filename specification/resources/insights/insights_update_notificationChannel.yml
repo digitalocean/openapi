@@ -5,7 +5,7 @@ summary: Update a Notification Channel
 description: |
   To update a notification channel, send a PUT request to
   `/v2/insights/notification-channels/{id}` with a `name` and exactly one of
-  `email`, `slack`, `webhook`, or `pagerduty`.
+  `email`, `slack`, or `webhook`.
 
 tags:
   - Insights
