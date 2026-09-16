@@ -1,3 +1,27 @@
+alert_instance_id:
+  in: path
+  name: id
+  description: A unique identifier for an alert instance.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+
+alert_instance_status:
+  in: query
+  name: status
+  required: false
+  description: |
+    Optional filter. When set, only alert instances with this status are
+    returned.
+  schema:
+    type: string
+    enum:
+      - active
+      - resolved
+  example: active
+
 alert_rule_id:
   in: path
   name: id
@@ -18,12 +42,24 @@ notification_channel_id:
     format: uuid
   example: 550e8400-e29b-41d4-a716-446655440000
 
+rule_id:
+  in: query
+  name: rule_id
+  required: false
+  description: |
+    Optional filter. When set, only alert instances fired by the alert rule
+    with this ID are returned.
+  schema:
+    type: string
+    format: uuid
+  example: 8f3a2b1c-4d5e-6f7a-8b9c-0d1e2f3a4b5c
+
 resource_urn:
   in: query
   name: resource_urn
   required: false
   description: |
-    Optional filter. When set, only alert rules that target this resource URN
+    Optional filter. When set, only resources associated with this resource URN
     are returned.
   schema:
     type: string
