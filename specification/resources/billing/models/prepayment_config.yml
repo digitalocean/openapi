@@ -1,0 +1,33 @@
+type: object
+
+properties:
+  spend_limit:
+    type: string
+    description: >-
+      Maximum spend allowed before the prepayment gate blocks usage.
+      Decimal dollars, e.g. `"100.00"`.
+    example: '100.00'
+  is_auto_prepay_enabled:
+    type: boolean
+    description: Whether automatic prepayment top-up is enabled.
+    example: true
+  prepay_amount:
+    type: string
+    description: >-
+      Amount to charge when auto top-up triggers. Decimal dollars, e.g. `"50.00"`.
+    example: '50.00'
+  prepay_threshold:
+    type: string
+    description: >-
+      Balance threshold that triggers auto top-up. Decimal dollars, e.g. `"10.00"`.
+    example: '10.00'
+  created_at:
+    type: string
+    format: date-time
+    description: Time at which the prepayment configuration was created.
+    example: '2026-06-22T19:31:51Z'
+  updated_at:
+    type: string
+    format: date-time
+    description: Time at which the prepayment configuration was last updated.
+    example: '2026-06-25T18:40:07Z'
