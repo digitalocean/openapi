@@ -4,7 +4,6 @@ required:
   - page
   - pages
   - per_page
-  - total
 properties:
   page:
     type: integer
@@ -20,5 +19,7 @@ properties:
     example: 25
   total:
     type: integer
-    description: Total number of items across all pages.
+    description: |
+      Total number of items across all pages. May be omitted when zero
+      (`omitempty` on the live API).
     example: 2
