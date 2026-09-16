@@ -1,0 +1,19 @@
+type: object
+description: |
+  Slack notification channel configuration. `webhook_url` is write-only: send
+  the full value on create/update; reads return a masked value (`********`).
+  Omit `webhook_url` on update to keep the existing secret.
+required:
+  - channel
+properties:
+  webhook_url:
+    type: string
+    description: |
+      Slack incoming webhook URL. Write-only secret — full value on
+      create/update; masked as `********` on read. Omit on update to retain the
+      existing value.
+    example: https://hooks.slack.com/services/T000/B000/XXXXXXXX
+  channel:
+    type: string
+    description: The Slack channel name to notify.
+    example: '#platform-alerts'
