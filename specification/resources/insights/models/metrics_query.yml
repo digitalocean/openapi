@@ -1,0 +1,36 @@
+type: object
+description: |
+  Metrics query that the alert rule evaluates. `metric` must be a dotted
+  OpenTelemetry name (for example `do.droplets.cpu_utilization`). Underscored
+  Prometheus-style names are rejected. When `resource_urns` is omitted or empty,
+  the rule is not scoped to specific resources.
+required:
+  - metric
+properties:
+  metric:
+    type: string
+    description: |
+      Dotted OpenTelemetry metric name to evaluate
+      (for example `do.droplets.cpu_utilization`).
+    example: do.droplets.cpu_utilization
+  filters:
+    type: array
+    description: Optional label filters applied to the metric series.
+    items:
+      $ref: 'query_filter.yml'
+  resource_urns:
+    type: array
+    description: |
+      Optional list of DigitalOcean resource URNs the rule applies to. Empty or
+      omitted means the rule is not scoped to specific resources.
+    items:
+      type: string
+    example:
+      - do:droplet:12345
+  tags:
+    type: array
+    description: Optional resource tags used to select matching resources.
+    items:
+      type: string
+    example:
+      - env:prod

@@ -1,0 +1,17 @@
+type: object
+description: |
+  Create or update body for an alert rule. `spec` is required. `status` is
+  optional; create defaults to `active`, and update keeps the existing status
+  when omitted.
+required:
+  - spec
+properties:
+  spec:
+    $ref: 'alert_rule_spec.yml'
+  status:
+    type: string
+    description: Desired alert rule status.
+    enum:
+      - active
+      - paused
+    example: active

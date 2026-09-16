@@ -1,0 +1,22 @@
+type: object
+description: |
+  Binding from an alert rule to a notification channel. When `notify_on` is
+  omitted or empty, the channel is notified for all severities.
+required:
+  - notification_channel_id
+properties:
+  notification_channel_id:
+    type: string
+    format: uuid
+    description: ID of an existing notification channel owned by the account.
+    example: 550e8400-e29b-41d4-a716-446655440000
+  notify_on:
+    type: array
+    description: Severities that trigger this channel.
+    items:
+      type: string
+      enum:
+        - warning
+        - critical
+    example:
+      - critical

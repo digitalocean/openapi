@@ -1,0 +1,26 @@
+type: object
+description: A filter applied to the metrics query.
+required:
+  - field
+  - operator
+  - value
+properties:
+  field:
+    type: string
+    description: The metric label or field to filter on.
+    example: host_id
+  operator:
+    type: string
+    description: Comparison operator for the filter.
+    enum:
+      - equal
+      - not_equal
+      - less_than
+      - less_than_or_equal
+      - greater_than
+      - greater_than_or_equal
+    example: equal
+  value:
+    type: string
+    description: Value compared against the field.
+    example: '12345678'
