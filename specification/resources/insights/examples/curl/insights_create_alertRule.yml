@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"spec":{"name":"CPU high","query":{"metric":"cpu","resource_urns":["do:droplet:12345678"],"tags":["production"]},"condition":{"window":"EVALUATION_WINDOW_5M"},"thresholds":{"warning":80,"critical":95,"operator":"THRESHOLD_OPERATOR_GREATER_THAN"},"notification_channels":[{"notification_channel_id":"78b3da62-27e5-49ba-ac70-5db0b5935c64","notify_on":["SEVERITY_CRITICAL"]}],"re_alert_duration":"RE_ALERT_DURATION_4H"},"status":"ALERT_RULE_STATUS_ACTIVE"}' \
+    "https://api.digitalocean.com/v2/insights/alert-rules"

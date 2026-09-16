@@ -1,0 +1,32 @@
+type: object
+description: |
+  Metrics query that the alert rule evaluates. When `resource_urns` is omitted
+  or empty, the rule is not scoped to specific resources.
+required:
+  - metric
+properties:
+  metric:
+    type: string
+    description: Metric name to evaluate.
+    example: cpu
+  filters:
+    type: array
+    description: Optional label filters applied to the metric series.
+    items:
+      $ref: 'query_filter.yml'
+  resource_urns:
+    type: array
+    description: |
+      Optional list of DigitalOcean resource URNs the rule applies to. Empty or
+      omitted means the rule is not scoped to specific resources.
+    items:
+      type: string
+    example:
+      - do:droplet:12345678
+  tags:
+    type: array
+    description: Optional resource tags used to select matching resources.
+    items:
+      type: string
+    example:
+      - production

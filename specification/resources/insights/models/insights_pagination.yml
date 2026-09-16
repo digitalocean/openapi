@@ -1,0 +1,24 @@
+type: object
+description: Pagination metadata for Insights list responses.
+required:
+  - page
+  - pages
+  - per_page
+  - total
+properties:
+  page:
+    type: integer
+    description: Current page number.
+    example: 1
+  pages:
+    type: integer
+    description: Total number of pages.
+    example: 1
+  per_page:
+    type: integer
+    description: Number of items requested per page.
+    example: 25
+  total:
+    type: integer
+    description: Total number of items across all pages.
+    example: 2

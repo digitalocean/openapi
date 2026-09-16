@@ -1,0 +1,15 @@
+type: object
+description: Evaluation condition for the alert rule.
+properties:
+  window:
+    type: string
+    description: Time window over which the metric is evaluated.
+    enum:
+      - EVALUATION_WINDOW_UNSPECIFIED
+      - EVALUATION_WINDOW_1M
+      - EVALUATION_WINDOW_5M
+      - EVALUATION_WINDOW_10M
+      - EVALUATION_WINDOW_15M
+      - EVALUATION_WINDOW_30M
+      - EVALUATION_WINDOW_1H
+    example: EVALUATION_WINDOW_5M

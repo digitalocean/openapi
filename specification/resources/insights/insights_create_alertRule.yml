@@ -1,0 +1,67 @@
+operationId: insights_create_alertRule
+
+summary: Create an Alert Rule
+
+description: |
+  To create an alert rule, send a POST request to `/v2/insights/alert-rules`
+  with a `spec` containing `name`, `query`, `thresholds`, and at least one
+  `notification_channels` binding. `status` defaults to
+  `ALERT_RULE_STATUS_ACTIVE` when omitted. `re_alert_duration` defaults to
+  `RE_ALERT_DURATION_4H` when omitted.
+
+tags:
+  - Insights
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/alert_rule_request.yml'
+      example:
+        spec:
+          name: CPU high
+          query:
+            metric: cpu
+            resource_urns:
+              - do:droplet:12345678
+            tags:
+              - production
+          condition:
+            window: EVALUATION_WINDOW_5M
+          thresholds:
+            warning: 80
+            critical: 95
+            operator: THRESHOLD_OPERATOR_GREATER_THAN
+          notification_channels:
+            - notification_channel_id: 78b3da62-27e5-49ba-ac70-5db0b5935c64
+              notify_on:
+                - SEVERITY_CRITICAL
+          re_alert_duration: RE_ALERT_DURATION_4H
+        status: ALERT_RULE_STATUS_ACTIVE
+
+responses:
+  '201':
+    $ref: 'responses/alert_rule_response.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/insights_create_alertRule.yml'
+
+security:
+  - bearer_auth:
+      - 'insights:create'
