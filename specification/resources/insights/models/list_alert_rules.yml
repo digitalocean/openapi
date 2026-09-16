@@ -1,11 +1,8 @@
 type: object
 required:
   - alert_rules
-  - pagination
 properties:
   alert_rules:
     type: array
     items:
       $ref: 'alert_rule.yml'
-  pagination:
-    $ref: 'insights_pagination.yml'

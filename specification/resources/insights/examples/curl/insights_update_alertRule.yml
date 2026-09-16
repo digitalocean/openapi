@@ -3,5 +3,5 @@ source: |-
   curl -X PUT \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{"spec":{"name":"CPU high","query":{"metric":"cpu","resource_urns":["do:droplet:12345678"]},"condition":{"window":"EVALUATION_WINDOW_5M"},"thresholds":{"warning":85,"critical":95,"operator":"THRESHOLD_OPERATOR_GREATER_THAN"},"notification_channels":[{"notification_channel_id":"78b3da62-27e5-49ba-ac70-5db0b5935c64","notify_on":["SEVERITY_WARNING","SEVERITY_CRITICAL"]}],"re_alert_duration":"RE_ALERT_DURATION_1H"},"status":"ALERT_RULE_STATUS_ACTIVE"}' \
-    "https://api.digitalocean.com/v2/insights/alert-rules/4de7ac8b-495b-4884-9a69-1050c6793cd6"
+    -d '{"spec":{"name":"High CPU (renamed)","query":{"metric":"do.droplets.cpu_utilization","resource_urns":["do:droplet:12345","do:droplet:67890"]},"condition":{"window":"15m"},"thresholds":{"critical":90,"operator":"greater_than_or_equal"},"notification_channels":[{"notification_channel_id":"550e8400-e29b-41d4-a716-446655440000"}]},"status":"paused"}' \
+    "https://api.digitalocean.com/v2/insights/alert-rules/a1b2c3d4-e5f6-7890-abcd-ef1234567890"

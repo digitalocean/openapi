@@ -9,14 +9,14 @@ properties:
     type: string
     format: uuid
     description: ID of an existing notification channel owned by the account.
-    example: 78b3da62-27e5-49ba-ac70-5db0b5935c64
+    example: 550e8400-e29b-41d4-a716-446655440000
   notify_on:
     type: array
     description: Severities that trigger this channel.
     items:
       type: string
       enum:
-        - SEVERITY_WARNING
-        - SEVERITY_CRITICAL
+        - warning
+        - critical
     example:
-      - SEVERITY_CRITICAL
+      - critical

@@ -5,9 +5,12 @@ summary: Create an Alert Rule
 description: |
   To create an alert rule, send a POST request to `/v2/insights/alert-rules`
   with a `spec` containing `name`, `query`, `thresholds`, and at least one
-  `notification_channels` binding. `status` defaults to
-  `ALERT_RULE_STATUS_ACTIVE` when omitted. `re_alert_duration` defaults to
-  `RE_ALERT_DURATION_4H` when omitted.
+  `notification_channels` binding. `status` defaults to `active` when omitted.
+  `re_alert_duration` defaults to `4h` when omitted.
+
+  `query.metric` must be a dotted OpenTelemetry name such as
+  `do.droplets.cpu_utilization`. Underscored Prometheus-style names are
+  rejected with `422 Unprocessable Entity`.
 
 tags:
   - Insights
@@ -20,25 +23,24 @@ requestBody:
         $ref: 'models/alert_rule_request.yml'
       example:
         spec:
-          name: CPU high
+          name: High CPU
           query:
-            metric: cpu
+            metric: do.droplets.cpu_utilization
             resource_urns:
-              - do:droplet:12345678
+              - do:droplet:12345
             tags:
-              - production
+              - env:prod
           condition:
-            window: EVALUATION_WINDOW_5M
+            window: 5m
           thresholds:
             warning: 80
             critical: 95
-            operator: THRESHOLD_OPERATOR_GREATER_THAN
+            operator: greater_than
           notification_channels:
-            - notification_channel_id: 78b3da62-27e5-49ba-ac70-5db0b5935c64
+            - notification_channel_id: 550e8400-e29b-41d4-a716-446655440000
               notify_on:
-                - SEVERITY_CRITICAL
-          re_alert_duration: RE_ALERT_DURATION_4H
-        status: ALERT_RULE_STATUS_ACTIVE
+                - critical
+          re_alert_duration: 4h
 
 responses:
   '201':
@@ -49,6 +51,9 @@ responses:
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
+
+  '422':
+    $ref: '../../shared/responses/unprocessable_entity.yml'
 
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'

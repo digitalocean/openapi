@@ -22,24 +22,20 @@ requestBody:
         $ref: 'models/alert_rule_request.yml'
       example:
         spec:
-          name: CPU high
+          name: High CPU (renamed)
           query:
-            metric: cpu
+            metric: do.droplets.cpu_utilization
             resource_urns:
-              - do:droplet:12345678
+              - do:droplet:12345
+              - do:droplet:67890
           condition:
-            window: EVALUATION_WINDOW_5M
+            window: 15m
           thresholds:
-            warning: 85
-            critical: 95
-            operator: THRESHOLD_OPERATOR_GREATER_THAN
+            critical: 90
+            operator: greater_than_or_equal
           notification_channels:
-            - notification_channel_id: 78b3da62-27e5-49ba-ac70-5db0b5935c64
-              notify_on:
-                - SEVERITY_WARNING
-                - SEVERITY_CRITICAL
-          re_alert_duration: RE_ALERT_DURATION_1H
-        status: ALERT_RULE_STATUS_ACTIVE
+            - notification_channel_id: 550e8400-e29b-41d4-a716-446655440000
+        status: paused
 
 responses:
   '200':
@@ -53,6 +49,9 @@ responses:
 
   '404':
     $ref: '../../shared/responses/not_found.yml'
+
+  '422':
+    $ref: '../../shared/responses/unprocessable_entity.yml'
 
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'

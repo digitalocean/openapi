@@ -1,14 +1,18 @@
 type: object
 description: |
-  Metrics query that the alert rule evaluates. When `resource_urns` is omitted
-  or empty, the rule is not scoped to specific resources.
+  Metrics query that the alert rule evaluates. `metric` must be a dotted
+  OpenTelemetry name (for example `do.droplets.cpu_utilization`). Underscored
+  Prometheus-style names are rejected. When `resource_urns` is omitted or empty,
+  the rule is not scoped to specific resources.
 required:
   - metric
 properties:
   metric:
     type: string
-    description: Metric name to evaluate.
-    example: cpu
+    description: |
+      Dotted OpenTelemetry metric name to evaluate
+      (for example `do.droplets.cpu_utilization`).
+    example: do.droplets.cpu_utilization
   filters:
     type: array
     description: Optional label filters applied to the metric series.
@@ -22,11 +26,11 @@ properties:
     items:
       type: string
     example:
-      - do:droplet:12345678
+      - do:droplet:12345
   tags:
     type: array
     description: Optional resource tags used to select matching resources.
     items:
       type: string
     example:
-      - production
+      - env:prod

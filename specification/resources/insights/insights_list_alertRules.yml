@@ -4,8 +4,8 @@ summary: List Alert Rules
 
 description: |
   To list alert rules for your account, send a GET request to
-  `/v2/insights/alert-rules`. Results are paginated. Optionally filter by
-  `resource_urn`.
+  `/v2/insights/alert-rules`. Results are paginated with `page` and `per_page`
+  (default `20`, maximum `200`). Optionally filter by `resource_urn`.
 
 tags:
   - Insights

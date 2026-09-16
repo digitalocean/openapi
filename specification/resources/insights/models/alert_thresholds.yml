@@ -1,7 +1,7 @@
 type: object
 description: |
   Threshold configuration for the alert rule. At least one of `warning` or
-  `critical` must be set, and `operator` must not be unspecified.
+  `critical` must be set.
 required:
   - operator
 properties:
@@ -19,11 +19,10 @@ properties:
     type: string
     description: Comparison operator applied to the aggregated metric value.
     enum:
-      - THRESHOLD_OPERATOR_UNSPECIFIED
-      - THRESHOLD_OPERATOR_EQUAL
-      - THRESHOLD_OPERATOR_LESS_THAN_OR_EQUAL
-      - THRESHOLD_OPERATOR_LESS_THAN
-      - THRESHOLD_OPERATOR_GREATER_THAN
-      - THRESHOLD_OPERATOR_GREATER_THAN_OR_EQUAL
-      - THRESHOLD_OPERATOR_NOT_EQUAL
-    example: THRESHOLD_OPERATOR_GREATER_THAN
+      - equal
+      - less_than_or_equal
+      - less_than
+      - greater_than
+      - greater_than_or_equal
+      - not_equal
+    example: greater_than
