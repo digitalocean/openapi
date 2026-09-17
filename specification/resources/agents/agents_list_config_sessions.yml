@@ -1,0 +1,93 @@
+operationId: agents_list_config_sessions
+summary: List the sessions created from one Agent Config.
+description: Enumerates the caller's team sessions whose session was created from this durable Agent Config.
+  Keyset-paginated on an opaque cursor, newest first, same shape and status semantics as GET /v2/agents/sessions.
+tags:
+- Agents
+parameters:
+- in: path
+  name: config_id
+  required: true
+  description: The Agent Config UUID.
+  schema:
+    type: string
+    format: uuid
+    example: 019fb39c-14d9-7080-933e-b9b90e25acda
+  example: 019fb39c-14d9-7080-933e-b9b90e25acda
+- in: query
+  name: page_size
+  required: false
+  description: Page size. Defaults to 50 when omitted or non-positive; values above 200 are clamped to
+    200.
+  schema:
+    type: integer
+    format: int32
+    minimum: 1
+    maximum: 200
+    default: 50
+    example: 50
+  example: 50
+- in: query
+  name: page_token
+  required: false
+  description: Opaque keyset cursor returned by the previous page. Empty starts from the beginning.
+  schema:
+    type: string
+    example: ''
+  example: ''
+- in: query
+  name: status
+  required: false
+  description: Optional filter on session status. Empty / SESSION_STATUS_UNSPECIFIED still hides destroyed
+    and failed sessions by default; SESSION_STATUS_ALL opts out and returns every session regardless of
+    status.
+  schema:
+    type: string
+    enum:
+    - SESSION_STATUS_UNSPECIFIED
+    - SESSION_STATUS_PROVISIONING
+    - SESSION_STATUS_READY
+    - SESSION_STATUS_DETACHED
+    - SESSION_STATUS_DESTROYING
+    - SESSION_STATUS_DESTROYED
+    - SESSION_STATUS_FAILED
+    - SESSION_STATUS_PAUSED
+    - SESSION_STATUS_ALL
+    example: SESSION_STATUS_READY
+  example: SESSION_STATUS_READY
+responses:
+  '200':
+    description: A page of sessions created from the config.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/list_sessions_response
+  '400':
+    description: Invalid pagination input or config_id.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_list_config_sessions.yml
+security:
+- bearer_auth:
+  - agents:read
