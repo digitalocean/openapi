@@ -126,6 +126,7 @@ droplets_all:
       - web
       - env:prod
       vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
+      subnet_uuid: 9c7a0d63-3c4e-4d3d-9f56-3b0fb0e5e4a1
     - id: 3164459
       name: assets.example.com
       memory: 1024
@@ -244,6 +245,7 @@ droplets_all:
       - storage
       - env:prod
       vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
+      subnet_uuid: 9c7a0d63-3c4e-4d3d-9f56-3b0fb0e5e4a1
     - id: 3164412
       name: stage.example.com
       memory: 1024
@@ -361,6 +363,7 @@ droplets_all:
       tags:
       - env:stage
       vpc_uuid: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+      subnet_uuid: 0f1a2b3c-4d5e-6f70-8192-a3b4c5d6e7f8
     links:
       pages: {}
     meta:
@@ -495,6 +498,7 @@ droplets_tagged:
       - web
       - env:prod
       vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
+      subnet_uuid: 9c7a0d63-3c4e-4d3d-9f56-3b0fb0e5e4a1
     - id: 3164459
       name: assets.example.com
       memory: 1024
@@ -613,6 +617,7 @@ droplets_tagged:
       - storage
       - env:prod
       vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
+      subnet_uuid: 9c7a0d63-3c4e-4d3d-9f56-3b0fb0e5e4a1
     links:
       pages: {}
     meta:
@@ -746,6 +751,7 @@ gpu_droplets:
         - gpu-h100x8-640gb
       tags: []
       vpc_uuid: e2fdd15c-6ae6-4c11-8c5d-72dae2ba1ad1
+      subnet_uuid: b7c8d9e0-1f2a-3b4c-5d6e-7f8091a2b3c4
       gpu_info:
         count: 1
         vram:
@@ -884,6 +890,7 @@ droplet_single:
       - web
       - env:prod
       vpc_uuid: 760e09ef-dc84-11e8-981e-3cfdfeaae000
+      subnet_uuid: 9c7a0d63-3c4e-4d3d-9f56-3b0fb0e5e4a1
 
 droplet_create_response:
   value:
