@@ -1,0 +1,38 @@
+operationId: routes_delete_subnet
+
+summary: Delete a VPC Subnet Route
+
+description: |
+  To delete a user-defined VPC subnet route, send a DELETE request to
+  `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes/$ROUTE_UUID`. Managed routes
+  cannot be deleted. A successful request returns a 204 status code with no
+  response body.
+
+tags:
+  - Routes
+
+parameters:
+  - $ref: 'parameters.yml#/vpc_uuid'
+  - $ref: 'parameters.yml#/subnet_uuid'
+  - $ref: 'parameters.yml#/route_uuid'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl.yml#/delete'
+
+security:
+  - bearer_auth:
+      - 'route:delete'
