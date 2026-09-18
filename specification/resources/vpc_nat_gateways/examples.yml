@@ -6,6 +6,7 @@ vpc_nat_gateway_create_request:
     size: 1
     vpcs:
       - vpc_uuid: "0eb1752f-807b-4562-a077-8018e13ab1fb"
+        subnet_uuid: "cbd79771-23eb-49be-b5ea-59cc56222622"
         default_gateway: true
     udp_timeout_seconds: 30
     icmp_timeout_seconds: 30
