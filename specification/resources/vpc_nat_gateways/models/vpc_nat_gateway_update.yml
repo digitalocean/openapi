@@ -18,6 +18,7 @@ properties:
       properties:
         vpc_uuid:
           type: string
+          format: uuid
           example: 0d3db13e-a604-4944-9827-7ec2642d32ac
           description: The unique identifier of the VPC to which the NAT gateway is attached.
         subnet_uuid:
