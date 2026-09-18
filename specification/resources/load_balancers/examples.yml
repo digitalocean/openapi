@@ -3,6 +3,7 @@ load_balancer_basic_create_request:
   value:
     name: example-lb-01
     region: nyc3
+    subnet_uuid: cbd79771-23eb-49be-b5ea-59cc56222622
     forwarding_rules:
     - entry_protocol: http
       entry_port: 80
