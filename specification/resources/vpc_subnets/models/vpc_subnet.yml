@@ -1,0 +1,112 @@
+vpc_subnet:
+  type: object
+  required:
+    - id
+    - urn
+    - name
+    - ip_range
+    - default
+    - type
+    - region
+    - created_at
+  properties:
+    id:
+      type: string
+      format: uuid
+      readOnly: true
+      example: 4de7ac8b-495b-4884-9a69-1050c6793cd6
+      description: The unique identifier of the VPC subnet.
+    urn:
+      type: string
+      readOnly: true
+      example: do:vpc_subnet:4de7ac8b-495b-4884-9a69-1050c6793cd6
+      description: The uniform resource name of the VPC subnet.
+    name:
+      type: string
+      readOnly: true
+      example: new-subnet
+      description: The human-readable name of the VPC subnet.
+    ip_range:
+      type: string
+      readOnly: true
+      example: 10.20.0.0/16
+      description: The IPv4 range assigned to the subnet in CIDR notation.
+    default:
+      type: boolean
+      readOnly: true
+      example: true
+      description: Whether this is the default subnet for the VPC.
+    type:
+      type: string
+      readOnly: true
+      example: REGULAR
+      description: The type of the VPC subnet.
+    region:
+      type: string
+      readOnly: true
+      example: nyc3
+      description: The slug of the region containing the VPC subnet.
+    created_at:
+      type: string
+      format: date-time
+      readOnly: true
+      example: "2024-01-01T12:00:00Z"
+      description: The time when the VPC subnet was created.
+    meta:
+      $ref: "#/vpc_subnet_meta"
+
+vpc_subnet_meta:
+  type: object
+  description: Additional information about the VPC subnet.
+  properties:
+    stats:
+      $ref: "#/vpc_subnet_statistics"
+
+vpc_subnet_statistics:
+  type: object
+  description: Member statistics, excluding resources the caller is not permitted to read.
+  properties:
+    members:
+      type: integer
+      format: int32
+      minimum: 0
+      example: 3
+      description: The number of members in the VPC subnet.
+    resources:
+      type: object
+      additionalProperties:
+        type: integer
+        format: int32
+        minimum: 0
+      example:
+        droplet: 2
+        loadbalancer: 1
+      description: The number of members grouped by resource type.
+
+vpc_subnet_create:
+  type: object
+  required:
+    - name
+  properties:
+    name:
+      type: string
+      maxLength: 255
+      pattern: '^[a-zA-Z0-9_-]+$'
+      example: new-subnet
+      description: The human-readable name of the VPC subnet.
+    ip_range:
+      type: string
+      example: 10.20.0.0/16
+      description: An RFC1918 CIDR range between /16 and /24 that does not overlap another team or VPC network.
+
+vpc_subnet_update:
+  type: object
+  required:
+    - name
+  properties:
+    name:
+      type: string
+      maxLength: 255
+      pattern: '^[a-zA-Z0-9_-]+$'
+      example: renamed-subnet
+      description: The new human-readable name of the VPC subnet.

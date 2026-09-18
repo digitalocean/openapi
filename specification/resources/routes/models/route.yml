@@ -1,0 +1,75 @@
+route:
+  type: object
+  required:
+    - id
+    - type
+    - destination_cidr
+    - target_urns
+  properties:
+    id:
+      type: string
+      format: uuid
+      readOnly: true
+      example: f0e1d2c3-b4a5-6789-0fed-cba987654321
+      description: The unique identifier of the route.
+    type:
+      type: string
+      readOnly: true
+      enum:
+        - STATIC
+        - DYNAMIC
+      example: STATIC
+      description: The route type inferred from how the route is sourced.
+    destination_cidr:
+      type: string
+      example: 0.0.0.0/0
+      description: The destination IPv4 network for the route in CIDR notation.
+    target_urns:
+      type: array
+      items:
+        type: string
+      example:
+        - do:droplet:14aa1d1b-e6ab-4ccb-bb10-dade56fcb8ec
+      description: The URNs of resources that act as next hops for the route.
+    modifiable:
+      type: boolean
+      readOnly: true
+      example: true
+      description: Whether the caller can update or delete the route.
+    created_at:
+      type: string
+      format: date-time
+      readOnly: true
+      example: "2026-01-14T10:05:00Z"
+      description: The time when the route was created.
+
+route_create:
+  type: object
+  required:
+    - destination_cidr
+    - target_urns
+  properties:
+    destination_cidr:
+      type: string
+      example: 0.0.0.0/0
+      description: A valid IPv4 CIDR accepted by the VPC routing product.
+    target_urns:
+      type: array
+      items:
+        type: string
+      example:
+        - do:droplet:14aa1d1b-e6ab-4ccb-bb10-dade56fcb8ec
+      description: The URNs of supported next-hop resources.
+
+route_update:
+  type: object
+  required:
+    - target_urns
+  properties:
+    target_urns:
+      type: array
+      items:
+        type: string
+      example:
+        - do:droplet:14aa1d1b-e6ab-4ccb-bb10-dade56fcb8ec
+      description: The URNs of supported next-hop resources.

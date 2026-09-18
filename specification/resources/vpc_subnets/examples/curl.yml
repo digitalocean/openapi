@@ -1,0 +1,41 @@
+list:
+  lang: cURL
+  source: |-
+    curl -X GET \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets"
+
+create:
+  lang: cURL
+  source: |-
+    curl -X POST \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      -d '{"name":"new-subnet","ip_range":"10.20.0.0/16"}' \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets"
+
+get:
+  lang: cURL
+  source: |-
+    curl -X GET \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets/4de7ac8b-495b-4884-9a69-1050c6793cd6"
+
+update:
+  lang: cURL
+  source: |-
+    curl -X PATCH \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      -d '{"name":"renamed-subnet"}' \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets/4de7ac8b-495b-4884-9a69-1050c6793cd6"
+
+delete:
+  lang: cURL
+  source: |-
+    curl -X DELETE \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets/4de7ac8b-495b-4884-9a69-1050c6793cd6"
