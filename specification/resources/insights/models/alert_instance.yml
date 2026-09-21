@@ -1,0 +1,68 @@
+type: object
+description: |
+  A read-only record of an alert rule firing against a resource.
+required:
+  - id
+  - rule_id
+  - severity
+  - status
+  - resource_urn
+  - value
+  - triggered_at
+  - last_triggered_at
+properties:
+  id:
+    type: string
+    format: uuid
+    description: A unique identifier for the alert instance.
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  rule_id:
+    type: string
+    format: uuid
+    description: ID of the alert rule that fired this alert instance.
+    example: 8f3a2b1c-4d5e-6f7a-8b9c-0d1e2f3a4b5c
+  severity:
+    type: string
+    description: Severity of the breached threshold.
+    enum:
+      - warning
+      - critical
+    example: warning
+  status:
+    type: string
+    description: Current status of the alert instance.
+    enum:
+      - active
+      - resolved
+    example: active
+  resource_urn:
+    type: string
+    description: URN of the DigitalOcean resource the alert fired for.
+    example: do:droplet:12345
+  value:
+    type: number
+    format: double
+    description: The observed metric value that breached the threshold.
+    example: 87.5
+  triggered_at:
+    type: string
+    format: date-time
+    description: Time the alert instance first fired.
+    example: '2026-09-03T10:15:00Z'
+  last_triggered_at:
+    type: string
+    format: date-time
+    description: Time the alert instance most recently fired.
+    example: '2026-09-03T10:45:00Z'
+  resolved_at:
+    type: string
+    format: date-time
+    description: |
+      Time the alert instance resolved. Only present when `status` is
+      `resolved`.
+    example: '2026-09-03T11:00:00Z'
+  last_notified_at:
+    type: string
+    format: date-time
+    description: Time a notification was last sent for this alert instance.
+    example: '2026-09-03T10:15:00Z'

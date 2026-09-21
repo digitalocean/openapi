@@ -390,6 +390,14 @@ tags:
       To interact with images, you will generally send requests to the images
       endpoint at /v2/images.
 
+  - name: Insights
+    description: |-
+      The DigitalOcean Insights API provides observability resources for
+      monitoring your infrastructure, including alert rules that evaluate
+      metrics, notification channels that deliver alert events, and read-only
+      alert instances that record when alert rules fire against your
+      resources.
+
   - name: Kubernetes
     description: |-
       [DigitalOcean Kubernetes](https://docs.digitalocean.com/products/kubernetes/)
@@ -1559,6 +1567,14 @@ paths:
   /v2/images/{image_id}/actions/{action_id}:
     get:
       $ref: "resources/images/imageActions_get.yml"
+
+  /v2/insights/alert-instances:
+    get:
+      $ref: "resources/insights/insights_list_alertInstances.yml"
+
+  /v2/insights/alert-instances/{id}:
+    get:
+      $ref: "resources/insights/insights_get_alertInstance.yml"
 
   /v2/kubernetes/clusters:
     get:
