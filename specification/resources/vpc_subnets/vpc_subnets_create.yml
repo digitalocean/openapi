@@ -7,7 +7,7 @@ description: |
   `/v2/vpcs/$VPC_UUID/subnets` with a name and, optionally, an IP range.
 
 tags:
-  - VPC Subnets
+  - VPC Subnets [Public Preview]
 
 parameters:
   - $ref: 'parameters.yml#/vpc_uuid'
@@ -39,4 +39,5 @@ x-codeSamples:
 security:
   - bearer_auth:
       - 'vpc:create'
+  - bearer_auth:
       - 'vpc:update'

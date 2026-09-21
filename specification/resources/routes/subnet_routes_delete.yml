@@ -1,4 +1,4 @@
-operationId: routes_delete_subnet
+operationId: vpcSubnetRoutes_delete
 
 summary: Delete a VPC Subnet Route
 
@@ -9,7 +9,7 @@ description: |
   response body.
 
 tags:
-  - Routes
+  - VPC Routes [Public Preview]
 
 parameters:
   - $ref: 'parameters.yml#/vpc_uuid'

@@ -7,7 +7,7 @@ description: |
   `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID`.
 
 tags:
-  - VPC Subnets
+  - VPC Subnets [Public Preview]
 
 parameters:
   - $ref: 'parameters.yml#/vpc_uuid'

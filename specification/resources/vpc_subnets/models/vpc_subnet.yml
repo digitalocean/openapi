@@ -5,7 +5,6 @@ vpc_subnet:
     - urn
     - name
     - ip_range
-    - default
     - type
     - region
     - created_at
@@ -39,6 +38,10 @@ vpc_subnet:
     type:
       type: string
       readOnly: true
+      enum:
+        - REGULAR
+        - MANAGED
+        - OVERLAY
       example: REGULAR
       description: The type of the VPC subnet.
     region:

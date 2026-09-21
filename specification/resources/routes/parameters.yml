@@ -16,7 +16,7 @@ subnet_uuid:
   schema:
     type: string
     format: uuid
-  example: 6b5c619c-359c-44ca-87e2-47e98170c01d
+  example: 4de7ac8b-495b-4884-9a69-1050c6793cd6
 
 route_uuid:
   in: path

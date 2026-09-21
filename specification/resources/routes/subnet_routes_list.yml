@@ -1,4 +1,4 @@
-operationId: routes_list_subnet
+operationId: vpcSubnetRoutes_list
 
 summary: List VPC Subnet Routes
 
@@ -8,7 +8,7 @@ description: |
   VPC-scoped routes propagated into the subnet and subnet-scoped routes.
 
 tags:
-  - Routes
+  - VPC Routes [Public Preview]
 
 parameters:
   - $ref: 'parameters.yml#/vpc_uuid'
@@ -18,7 +18,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/routes.yml#/all_routes'
+    $ref: 'responses/routes.yml#/all_vpc_subnet_routes'
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
   '404':

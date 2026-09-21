@@ -544,12 +544,6 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
-  - name: Routes
-    description: |-
-      Routes control how traffic from resources in VPC subnets reaches
-      destination networks. VPC-scoped routes are read-only, while
-      customer-managed static routes can be added to individual VPC subnets.
-
   # Secrets Manager omitted from this tag description until GA; paths commented out below.
   - name: Security
     description: |-
@@ -626,7 +620,13 @@ tags:
       resources in those networks to connect to each other's private IP addresses
       as if they were in the same network.
 
-  - name: VPC Subnets
+  - name: VPC Routes [Public Preview]
+    description: |-
+      Routes control how traffic from resources in VPC subnets reaches
+      destination networks. VPC-scoped routes are read-only, while
+      customer-managed static routes can be added to individual VPC subnets.
+
+  - name: VPC Subnets [Public Preview]
     description: |-
       VPC subnets divide a VPC network into isolated IP ranges. You can create,
       retrieve, rename, list, and delete subnets within a VPC.
@@ -733,6 +733,8 @@ x-tagGroups:
       - Vector Databases
       - VPC NAT Gateways
       - VPC Peerings
+      - VPC Routes [Public Preview]
+      - VPC Subnets [Public Preview]
       - VPCs
   - name: Inference APIs
     tags:
@@ -2568,6 +2570,10 @@ paths:
 
     delete:
       $ref: "resources/vpc_subnets/vpc_subnets_delete.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets/{subnet_uuid}/members:
+    get:
+      $ref: "resources/vpc_subnets/vpc_subnets_list_members.yml"
 
   /v2/vpcs/{vpc_uuid}/subnets/{subnet_uuid}/routes:
     get:

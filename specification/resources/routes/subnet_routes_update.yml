@@ -1,14 +1,18 @@
-operationId: routes_update_subnet
+operationId: vpcSubnetRoutes_update
 
 summary: Update a VPC Subnet Route
 
 description: |
   To update the next hop for a user-defined VPC subnet route, send a PATCH
   request to
-  `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes/$ROUTE_UUID`.
+  `/v2/vpcs/$VPC_UUID/subnets/$SUBNET_UUID/routes/$ROUTE_UUID`. The
+  `destination_cidr` cannot be changed.
+
+  Droplet targets must use a numeric ID. A Droplet UUID or another invalid
+  `target_urns` value returns a 422 response.
 
 tags:
-  - Routes
+  - VPC Routes [Public Preview]
 
 parameters:
   - $ref: 'parameters.yml#/vpc_uuid'
@@ -25,10 +29,14 @@ requestBody:
 responses:
   '200':
     $ref: 'responses/routes.yml#/single_route'
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
   '404':
     $ref: '../../shared/responses/not_found.yml'
+  '422':
+    $ref: '../../shared/responses/unprocessable_entity.yml'
   '429':
     $ref: '../../shared/responses/too_many_requests.yml'
   '500':

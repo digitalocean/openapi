@@ -8,7 +8,7 @@ description: |
   204 status code with no response body.
 
 tags:
-  - VPC Subnets
+  - VPC Subnets [Public Preview]
 
 parameters:
   - $ref: 'parameters.yml#/vpc_uuid'
@@ -34,4 +34,5 @@ x-codeSamples:
 security:
   - bearer_auth:
       - 'vpc:delete'
+  - bearer_auth:
       - 'vpc:update'

@@ -29,8 +29,12 @@ route:
       items:
         type: string
       example:
-        - do:droplet:14aa1d1b-e6ab-4ccb-bb10-dade56fcb8ec
-      description: The URNs of resources that act as next hops for the route.
+        - do:droplet:4126873
+      description: |
+        The URNs of resources that act as next hops for the route. Supported
+        next hops are Droplets, using a numeric ID in the format
+        `do:droplet:<id>`, and VPC NAT Gateways, using a UUID in the format
+        `do:nat_gateway:<uuid>`.
     modifiable:
       type: boolean
       readOnly: true
@@ -58,8 +62,11 @@ route_create:
       items:
         type: string
       example:
-        - do:droplet:14aa1d1b-e6ab-4ccb-bb10-dade56fcb8ec
-      description: The URNs of supported next-hop resources.
+        - do:droplet:4126873
+      description: |
+        The URNs of supported next-hop resources. Droplet targets must use a
+        numeric ID in the format `do:droplet:<id>`. VPC NAT Gateway targets use
+        a UUID in the format `do:nat_gateway:<uuid>`.
 
 route_update:
   type: object
@@ -71,5 +78,8 @@ route_update:
       items:
         type: string
       example:
-        - do:droplet:14aa1d1b-e6ab-4ccb-bb10-dade56fcb8ec
-      description: The URNs of supported next-hop resources.
+        - do:droplet:4126873
+      description: |
+        The URNs of supported next-hop resources. Droplet targets must use a
+        numeric ID in the format `do:droplet:<id>`. VPC NAT Gateway targets use
+        a UUID in the format `do:nat_gateway:<uuid>`.

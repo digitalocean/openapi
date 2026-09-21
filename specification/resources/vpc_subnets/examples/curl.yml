@@ -23,6 +23,14 @@ get:
       -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
       "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets/4de7ac8b-495b-4884-9a69-1050c6793cd6"
 
+list_members:
+  lang: cURL
+  source: |-
+    curl -X GET \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets/4de7ac8b-495b-4884-9a69-1050c6793cd6/members"
+
 update:
   lang: cURL
   source: |-

@@ -19,6 +19,9 @@ all_vpc_subnets:
                   $ref: '../models/vpc_subnet.yml#/vpc_subnet'
           - $ref: '../../../shared/pages.yml#/pagination'
           - $ref: '../../../shared/meta.yml'
+      examples:
+        VPC Subnets Response:
+          $ref: 'examples.yml#/all_vpc_subnets'
 
 single_vpc_subnet:
   description: A VPC subnet.
@@ -36,3 +39,6 @@ single_vpc_subnet:
         properties:
           vpc_subnet:
             $ref: '../models/vpc_subnet.yml#/vpc_subnet'
+      examples:
+        VPC Subnet Response:
+          $ref: 'examples.yml#/single_vpc_subnet'
