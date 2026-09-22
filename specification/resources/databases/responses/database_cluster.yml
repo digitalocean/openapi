@@ -25,41 +25,41 @@ content:
         version: '14'
         semantic_version: '14.5'
         connection:
-          uri: postgres://doadmin:wv78n3zpz42xezdk@backend-do-user-19081923-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require
+          uri: postgres://doadmin:example_password@db.example.com:25060/defaultdb?sslmode=require
           database: ''
-          host: backend-do-user-19081923-0.db.ondigitalocean.com
+          host: db.example.com
           port: 25060
           user: doadmin
-          password: wv78n3zpz42xezdk
+          password: example_password
           ssl: true
         private_connection:
-          uri: postgres://doadmin:wv78n3zpz42xezdk@private-backend-do-user-19081923-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require
+          uri: postgres://doadmin:example_password@private-db.example.com:25060/defaultdb?sslmode=require
           database: ''
-          host: private-backend-do-user-19081923-0.db.ondigitalocean.com
+          host: private-db.example.com
           port: 25060
           user: doadmin
-          password: wv78n3zpz42xezdk
+          password: example_password
           ssl: true
         standby_connection:
-          uri: postgres://doadmin:wv78n3zpz42xezdk@replica-backend-do-user-19081923-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require
+          uri: postgres://doadmin:example_password@replica-db.example.com:25060/defaultdb?sslmode=require
           database: ''
-          host: replica-backend-do-user-19081923-0.db.ondigitalocean.com
+          host: replica-db.example.com
           port: 25060
           user: doadmin
-          password: wv78n3zpz42xezdk
+          password: example_password
           ssl: true
         standby_private_connection:
-          uri: postgres://doadmin:wv78n3zpz42xezdk@private-replica-backend-do-user-19081923-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require
+          uri: postgres://doadmin:example_password@private-replica-db.example.com:25060/defaultdb?sslmode=require
           database: ''
-          host: private-replica-backend-do-user-19081923-0.db.ondigitalocean.com
+          host: private-replica-db.example.com
           port: 25060
           user: doadmin
-          password: wv78n3zpz42xezdk
+          password: example_password
           ssl: true
         users:
         - name: doadmin
           role: primary
-          password: wv78n3zpz42xezdk
+          password: example_password
         db_names:
         - defaultdb
         num_nodes: 2

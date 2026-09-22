@@ -20,12 +20,12 @@ content:
       users:
         - name: app-01
           role: normal
-          password: jge5lfxtzhx42iff
+          password: example_password
         - name: app-02
           role: normal
-          password: z421iffftjge5lxh
+          password: example_password_2
           settings:
             pg_allow_replication: true
         - name: doadmin
           role: primary
-          password: wv78n3zpz42xezd
+          password: example_password
