@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X PUT \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"name":"Platform alerts (updated)","slack":{"webhook_url":"https://hooks.slack.com/services/T000/B000/NEWTOKEN","channel":"#platform-alerts-prod"}}' \
+    "https://api.digitalocean.com/v2/insights/notification-channels/660e8400-e29b-41d4-a716-446655440001"

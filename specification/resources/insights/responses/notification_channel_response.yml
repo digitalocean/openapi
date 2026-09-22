@@ -1,0 +1,72 @@
+description: A single notification channel.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - notification_channel
+      properties:
+        notification_channel:
+          $ref: '../models/notification_channel.yml'
+    examples:
+      email:
+        summary: Email channel
+        value:
+          notification_channel:
+            id: 550e8400-e29b-41d4-a716-446655440000
+            name: On-call email
+            channel_type: CHANNEL_TYPE_EMAIL
+            email:
+              to: alerts@example.com, backup@example.com
+            usage:
+              rule_count: 0
+              warning_thresholds: 0
+              critical_thresholds: 0
+            created_at: '2026-09-03T10:15:00Z'
+            updated_at: '2026-09-03T10:15:00Z'
+      slack:
+        summary: Slack channel with masked webhook
+        value:
+          notification_channel:
+            id: 660e8400-e29b-41d4-a716-446655440001
+            name: Platform alerts
+            channel_type: CHANNEL_TYPE_SLACK
+            slack:
+              webhook_url: '********'
+              channel: '#platform-alerts'
+            usage:
+              rule_count: 0
+              warning_thresholds: 0
+              critical_thresholds: 0
+            created_at: '2026-09-03T10:16:00Z'
+            updated_at: '2026-09-03T10:16:00Z'
+      webhook:
+        summary: Webhook channel with masked credentials
+        value:
+          notification_channel:
+            id: 770e8400-e29b-41d4-a716-446655440002
+            name: Incident webhook
+            channel_type: CHANNEL_TYPE_WEBHOOK
+            webhook:
+              url: https://example.com/hook
+              bearer_token:
+                token: '********'
+              headers:
+                X-Custom: '1'
+              signature:
+                secret: '********'
+            usage:
+              rule_count: 0
+              warning_thresholds: 0
+              critical_thresholds: 0
+            created_at: '2026-09-03T10:17:00Z'
+            updated_at: '2026-09-03T10:17:00Z'

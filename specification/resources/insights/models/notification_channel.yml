@@ -1,0 +1,51 @@
+type: object
+description: A reusable Insights notification channel.
+required:
+  - id
+  - name
+  - channel_type
+  - created_at
+  - updated_at
+properties:
+  id:
+    type: string
+    format: uuid
+    description: A unique identifier for the notification channel.
+    example: 550e8400-e29b-41d4-a716-446655440000
+  name:
+    type: string
+    description: A human-readable name for the notification channel.
+    example: On-call email
+  channel_type:
+    type: string
+    description: |
+      The configured channel type. Values use the API's protobuf enum names.
+
+      - `CHANNEL_TYPE_UNSPECIFIED` = unspecified
+      - `CHANNEL_TYPE_EMAIL` = email
+      - `CHANNEL_TYPE_SLACK` = slack
+      - `CHANNEL_TYPE_WEBHOOK` = webhook
+    enum:
+      - CHANNEL_TYPE_UNSPECIFIED
+      - CHANNEL_TYPE_EMAIL
+      - CHANNEL_TYPE_SLACK
+      - CHANNEL_TYPE_WEBHOOK
+    example: CHANNEL_TYPE_EMAIL
+  email:
+    $ref: 'email_notification_config.yml'
+  slack:
+    $ref: 'slack_notification_config.yml'
+  webhook:
+    $ref: 'webhook_notification_config.yml'
+  usage:
+    $ref: 'notification_channel_usage.yml'
+  created_at:
+    type: string
+    format: date-time
+    description: Time the notification channel was created.
+    example: '2026-09-03T10:15:00Z'
+  updated_at:
+    type: string
+    format: date-time
+    description: Time the notification channel was last updated.
+    example: '2026-09-03T10:15:00Z'
