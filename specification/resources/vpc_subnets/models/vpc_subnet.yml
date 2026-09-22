@@ -22,7 +22,6 @@ vpc_subnet:
       description: The uniform resource name of the VPC subnet.
     name:
       type: string
-      readOnly: true
       example: new-subnet
       description: The human-readable name of the VPC subnet.
     ip_range:
