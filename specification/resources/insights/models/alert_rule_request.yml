@@ -12,6 +12,10 @@ properties:
     type: string
     description: |
       Desired alert rule status. Values use the API's protobuf enum names.
+
+      - `ALERT_RULE_STATUS_UNSPECIFIED` = unspecified
+      - `ALERT_RULE_STATUS_ACTIVE` = active
+      - `ALERT_RULE_STATUS_PAUSED` = paused
     enum:
       - ALERT_RULE_STATUS_UNSPECIFIED
       - ALERT_RULE_STATUS_ACTIVE

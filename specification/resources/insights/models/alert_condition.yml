@@ -6,6 +6,14 @@ properties:
     description: |
       Time window over which the metric is evaluated. Values use the API's
       protobuf enum names.
+
+      - `EVALUATION_WINDOW_UNSPECIFIED` = unspecified
+      - `EVALUATION_WINDOW_1M` = `1m`
+      - `EVALUATION_WINDOW_5M` = `5m`
+      - `EVALUATION_WINDOW_10M` = `10m`
+      - `EVALUATION_WINDOW_15M` = `15m`
+      - `EVALUATION_WINDOW_30M` = `30m`
+      - `EVALUATION_WINDOW_1H` = `1h`
     enum:
       - EVALUATION_WINDOW_UNSPECIFIED
       - EVALUATION_WINDOW_1M

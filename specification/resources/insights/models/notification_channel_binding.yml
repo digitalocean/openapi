@@ -15,6 +15,10 @@ properties:
     description: |
       Severities that trigger this channel. Values use the API's protobuf enum
       names.
+
+      - `SEVERITY_UNSPECIFIED` = unspecified
+      - `SEVERITY_WARNING` = warning
+      - `SEVERITY_CRITICAL` = critical
     items:
       type: string
       enum:

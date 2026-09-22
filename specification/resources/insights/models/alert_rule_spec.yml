@@ -31,6 +31,12 @@ properties:
       Minimum wait before re-notifying a still-firing alert. Values use the
       API's protobuf enum names. Defaults to `RE_ALERT_DURATION_4H` on create
       when omitted.
+
+      - `RE_ALERT_DURATION_UNSPECIFIED` = unspecified
+      - `RE_ALERT_DURATION_30M` = `30m`
+      - `RE_ALERT_DURATION_1H` = `1h`
+      - `RE_ALERT_DURATION_4H` = `4h`
+      - `RE_ALERT_DURATION_NEVER` = never
     enum:
       - RE_ALERT_DURATION_UNSPECIFIED
       - RE_ALERT_DURATION_30M
