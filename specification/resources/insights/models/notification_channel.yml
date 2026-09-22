@@ -18,12 +18,14 @@ properties:
     example: On-call email
   channel_type:
     type: string
-    description: The configured channel type.
+    description: |
+      The configured channel type. Values use the API's protobuf enum names.
     enum:
-      - email
-      - slack
-      - webhook
-    example: email
+      - CHANNEL_TYPE_UNSPECIFIED
+      - CHANNEL_TYPE_EMAIL
+      - CHANNEL_TYPE_SLACK
+      - CHANNEL_TYPE_WEBHOOK
+    example: CHANNEL_TYPE_EMAIL
   email:
     $ref: 'email_notification_config.yml'
   slack:

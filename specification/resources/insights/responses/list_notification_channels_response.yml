@@ -19,7 +19,7 @@ content:
       notification_channels:
         - id: 550e8400-e29b-41d4-a716-446655440000
           name: On-call email
-          channel_type: email
+          channel_type: CHANNEL_TYPE_EMAIL
           email:
             to: alerts@example.com
           usage:
