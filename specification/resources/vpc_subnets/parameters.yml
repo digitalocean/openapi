@@ -1,0 +1,33 @@
+vpc_uuid:
+  in: path
+  name: vpc_uuid
+  description: The unique identifier of the VPC to which the subnet belongs.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 997615ce-132d-4bae-9270-9ee21b395e5d
+
+subnet_uuid:
+  in: path
+  name: subnet_uuid
+  description: The unique identifier of a VPC subnet.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 4de7ac8b-495b-4884-9a69-1050c6793cd6
+
+resource_type:
+  in: query
+  name: resource_type
+  description: Used to filter VPC subnet members by resource type.
+  required: false
+  schema:
+    type: string
+    enum:
+      - droplet
+      - loadbalancer
+      - dbaas
+      - kubernetes
+  example: droplet
