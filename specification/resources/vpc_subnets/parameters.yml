@@ -28,6 +28,9 @@ resource_type:
     enum:
       - droplet
       - loadbalancer
-      - dbaas
       - kubernetes
+      - dbaas
+      - nat_gateway
+      - app
+      - nfs_share
   example: droplet
