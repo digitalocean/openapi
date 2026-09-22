@@ -20,6 +20,11 @@ properties:
     type: string
     description: |
       The configured channel type. Values use the API's protobuf enum names.
+
+      - `CHANNEL_TYPE_UNSPECIFIED` = unspecified
+      - `CHANNEL_TYPE_EMAIL` = email
+      - `CHANNEL_TYPE_SLACK` = slack
+      - `CHANNEL_TYPE_WEBHOOK` = webhook
     enum:
       - CHANNEL_TYPE_UNSPECIFIED
       - CHANNEL_TYPE_EMAIL
