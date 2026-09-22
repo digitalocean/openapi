@@ -3,5 +3,5 @@ source: |-
   curl -X PUT \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{"spec":{"name":"High CPU (renamed)","query":{"metric":"do.droplets.cpu_utilization","resource_urns":["do:droplet:12345","do:droplet:67890"]},"condition":{"window":"15m"},"thresholds":{"critical":90,"operator":"greater_than_or_equal"},"notification_channels":[{"notification_channel_id":"550e8400-e29b-41d4-a716-446655440000"}]},"status":"paused"}' \
+    -d '{"spec":{"name":"High CPU (renamed)","query":{"metric":"do.droplets.cpu_utilization","resource_urns":["do:droplet:12345","do:droplet:67890"]},"condition":{"window":"EVALUATION_WINDOW_15M"},"thresholds":{"critical":90,"operator":"THRESHOLD_OPERATOR_GREATER_THAN_OR_EQUAL"},"notification_channels":[{"notification_channel_id":"550e8400-e29b-41d4-a716-446655440000"}]},"status":"ALERT_RULE_STATUS_PAUSED"}' \
     "https://api.digitalocean.com/v2/insights/alert-rules/a1b2c3d4-e5f6-7890-abcd-ef1234567890"

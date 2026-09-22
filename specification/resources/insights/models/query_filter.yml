@@ -11,15 +11,18 @@ properties:
     example: host_id
   operator:
     type: string
-    description: Comparison operator for the filter.
+    description: |
+      Comparison operator for the filter. Values use the API's protobuf enum
+      names.
     enum:
-      - equal
-      - not_equal
-      - less_than
-      - less_than_or_equal
-      - greater_than
-      - greater_than_or_equal
-    example: equal
+      - FILTER_OPERATOR_UNSPECIFIED
+      - FILTER_OPERATOR_EQUAL
+      - FILTER_OPERATOR_NOT_EQUAL
+      - FILTER_OPERATOR_LESS_THAN
+      - FILTER_OPERATOR_LESS_THAN_OR_EQUAL
+      - FILTER_OPERATOR_GREATER_THAN
+      - FILTER_OPERATOR_GREATER_THAN_OR_EQUAL
+    example: FILTER_OPERATOR_EQUAL
   value:
     type: string
     description: Value compared against the field.

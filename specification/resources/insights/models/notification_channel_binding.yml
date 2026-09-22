@@ -12,11 +12,14 @@ properties:
     example: 550e8400-e29b-41d4-a716-446655440000
   notify_on:
     type: array
-    description: Severities that trigger this channel.
+    description: |
+      Severities that trigger this channel. Values use the API's protobuf enum
+      names.
     items:
       type: string
       enum:
-        - warning
-        - critical
+        - SEVERITY_UNSPECIFIED
+        - SEVERITY_WARNING
+        - SEVERITY_CRITICAL
     example:
-      - critical
+      - SEVERITY_CRITICAL

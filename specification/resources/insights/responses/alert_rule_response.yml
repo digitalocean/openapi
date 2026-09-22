@@ -29,16 +29,16 @@ content:
             tags:
               - env:prod
           condition:
-            window: 5m
+            window: EVALUATION_WINDOW_5M
           thresholds:
             warning: 80
             critical: 95
-            operator: greater_than
+            operator: THRESHOLD_OPERATOR_GREATER_THAN
           notification_channels:
             - notification_channel_id: 550e8400-e29b-41d4-a716-446655440000
               notify_on:
-                - critical
-          re_alert_duration: 4h
-        status: active
+                - SEVERITY_CRITICAL
+          re_alert_duration: RE_ALERT_DURATION_4H
+        status: ALERT_RULE_STATUS_ACTIVE
         created_at: '2026-09-03T10:00:00Z'
         updated_at: '2026-09-03T10:00:00Z'

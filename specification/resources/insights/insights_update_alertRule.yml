@@ -29,13 +29,13 @@ requestBody:
               - do:droplet:12345
               - do:droplet:67890
           condition:
-            window: 15m
+            window: EVALUATION_WINDOW_15M
           thresholds:
             critical: 90
-            operator: greater_than_or_equal
+            operator: THRESHOLD_OPERATOR_GREATER_THAN_OR_EQUAL
           notification_channels:
             - notification_channel_id: 550e8400-e29b-41d4-a716-446655440000
-        status: paused
+        status: ALERT_RULE_STATUS_PAUSED
 
 responses:
   '200':

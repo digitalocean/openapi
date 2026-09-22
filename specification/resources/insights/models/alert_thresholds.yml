@@ -17,12 +17,15 @@ properties:
     example: 95
   operator:
     type: string
-    description: Comparison operator applied to the aggregated metric value.
+    description: |
+      Comparison operator applied to the aggregated metric value. Values use
+      the API's protobuf enum names.
     enum:
-      - equal
-      - less_than_or_equal
-      - less_than
-      - greater_than
-      - greater_than_or_equal
-      - not_equal
-    example: greater_than
+      - THRESHOLD_OPERATOR_UNSPECIFIED
+      - THRESHOLD_OPERATOR_EQUAL
+      - THRESHOLD_OPERATOR_LESS_THAN_OR_EQUAL
+      - THRESHOLD_OPERATOR_LESS_THAN
+      - THRESHOLD_OPERATOR_GREATER_THAN
+      - THRESHOLD_OPERATOR_GREATER_THAN_OR_EQUAL
+      - THRESHOLD_OPERATOR_NOT_EQUAL
+    example: THRESHOLD_OPERATOR_GREATER_THAN

@@ -28,11 +28,13 @@ properties:
   re_alert_duration:
     type: string
     description: |
-      Minimum wait before re-notifying a still-firing alert, as a duration
-      string. Defaults to `4h` on create when omitted.
+      Minimum wait before re-notifying a still-firing alert. Values use the
+      API's protobuf enum names. Defaults to `RE_ALERT_DURATION_4H` on create
+      when omitted.
     enum:
-      - 30m
-      - 1h
-      - 4h
-      - never
-    example: 4h
+      - RE_ALERT_DURATION_UNSPECIFIED
+      - RE_ALERT_DURATION_30M
+      - RE_ALERT_DURATION_1H
+      - RE_ALERT_DURATION_4H
+      - RE_ALERT_DURATION_NEVER
+    example: RE_ALERT_DURATION_4H

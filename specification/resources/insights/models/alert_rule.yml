@@ -16,11 +16,13 @@ properties:
     $ref: 'alert_rule_spec.yml'
   status:
     type: string
-    description: Current alert rule status.
+    description: |
+      Current alert rule status. Values use the API's protobuf enum names.
     enum:
-      - active
-      - paused
-    example: active
+      - ALERT_RULE_STATUS_UNSPECIFIED
+      - ALERT_RULE_STATUS_ACTIVE
+      - ALERT_RULE_STATUS_PAUSED
+    example: ALERT_RULE_STATUS_ACTIVE
   created_at:
     type: string
     format: date-time

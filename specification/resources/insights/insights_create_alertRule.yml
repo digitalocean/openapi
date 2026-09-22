@@ -5,8 +5,9 @@ summary: Create an Alert Rule
 description: |
   To create an alert rule, send a POST request to `/v2/insights/alert-rules`
   with a `spec` containing `name`, `query`, `thresholds`, and at least one
-  `notification_channels` binding. `status` defaults to `active` when omitted.
-  `re_alert_duration` defaults to `4h` when omitted.
+  `notification_channels` binding. `status` defaults to
+  `ALERT_RULE_STATUS_ACTIVE` when omitted. `re_alert_duration` defaults to
+  `RE_ALERT_DURATION_4H` when omitted.
 
   `query.metric` must be a dotted OpenTelemetry name such as
   `do.droplets.cpu_utilization`. Underscored Prometheus-style names are
@@ -31,16 +32,16 @@ requestBody:
             tags:
               - env:prod
           condition:
-            window: 5m
+            window: EVALUATION_WINDOW_5M
           thresholds:
             warning: 80
             critical: 95
-            operator: greater_than
+            operator: THRESHOLD_OPERATOR_GREATER_THAN
           notification_channels:
             - notification_channel_id: 550e8400-e29b-41d4-a716-446655440000
               notify_on:
-                - critical
-          re_alert_duration: 4h
+                - SEVERITY_CRITICAL
+          re_alert_duration: RE_ALERT_DURATION_4H
 
 responses:
   '201':
