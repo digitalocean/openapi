@@ -5,12 +5,12 @@ properties:
     type: string
     description: >-
      This is provided as a convenience and should be able to be constructed by the other attributes.
-    example: https://doadmin:wv78n3zpz42xezdk@backend-do-user-19081923-0.db.ondigitalocean.com:25060
+    example: https://doadmin:example_password@db.example.com:25060
     readOnly: true
   host:
     type: string
     description: The FQDN pointing to the schema registry connection uri.
-    example: backend-do-user-19081923-0.db.ondigitalocean.com
+    example: db.example.com
     readOnly: true
   port:
     type: integer
@@ -25,7 +25,7 @@ properties:
   password:
     type: string
     description: The randomly generated password for the schema registry.<br><br>Requires `database:view_credentials` scope.
-    example: wv78n3zpz42xezdk
+    example: example_password
     readOnly: true
   ssl:
     type: boolean
