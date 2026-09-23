@@ -1,0 +1,39 @@
+type: object
+description: An Insights alert rule.
+required:
+  - id
+  - spec
+  - status
+  - created_at
+  - updated_at
+properties:
+  id:
+    type: string
+    format: uuid
+    description: A unique identifier for the alert rule.
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  spec:
+    $ref: 'alert_rule_spec.yml'
+  status:
+    type: string
+    description: |
+      Current alert rule status. Values use the API's protobuf enum names.
+
+      - `ALERT_RULE_STATUS_UNSPECIFIED` = unspecified
+      - `ALERT_RULE_STATUS_ACTIVE` = active
+      - `ALERT_RULE_STATUS_PAUSED` = paused
+    enum:
+      - ALERT_RULE_STATUS_UNSPECIFIED
+      - ALERT_RULE_STATUS_ACTIVE
+      - ALERT_RULE_STATUS_PAUSED
+    example: ALERT_RULE_STATUS_ACTIVE
+  created_at:
+    type: string
+    format: date-time
+    description: Time the alert rule was created.
+    example: '2026-09-03T10:00:00Z'
+  updated_at:
+    type: string
+    format: date-time
+    description: Time the alert rule was last updated.
+    example: '2026-09-03T10:00:00Z'

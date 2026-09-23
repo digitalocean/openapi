@@ -1,0 +1,46 @@
+type: object
+description: |
+  Spec for an Insights alert rule. On create, `name`, `query`, `thresholds`,
+  and at least one `notification_channels` binding are required. On update,
+  omit `notification_channels` to keep existing bindings; an explicit empty
+  list is rejected.
+required:
+  - name
+  - query
+  - thresholds
+properties:
+  name:
+    type: string
+    description: A human-readable name for the alert rule.
+    example: High CPU
+  query:
+    $ref: 'metrics_query.yml'
+  condition:
+    $ref: 'alert_condition.yml'
+  thresholds:
+    $ref: 'alert_thresholds.yml'
+  notification_channels:
+    type: array
+    description: Notification channels to notify when the rule fires.
+    minItems: 1
+    items:
+      $ref: 'notification_channel_binding.yml'
+  re_alert_duration:
+    type: string
+    description: |
+      Minimum wait before re-notifying a still-firing alert. Values use the
+      API's protobuf enum names. Defaults to `RE_ALERT_DURATION_4H` on create
+      when omitted.
+
+      - `RE_ALERT_DURATION_UNSPECIFIED` = unspecified
+      - `RE_ALERT_DURATION_30M` = `30m`
+      - `RE_ALERT_DURATION_1H` = `1h`
+      - `RE_ALERT_DURATION_4H` = `4h`
+      - `RE_ALERT_DURATION_NEVER` = never
+    enum:
+      - RE_ALERT_DURATION_UNSPECIFIED
+      - RE_ALERT_DURATION_30M
+      - RE_ALERT_DURATION_1H
+      - RE_ALERT_DURATION_4H
+      - RE_ALERT_DURATION_NEVER
+    example: RE_ALERT_DURATION_4H

@@ -1,0 +1,39 @@
+type: object
+description: |
+  Threshold configuration for the alert rule. At least one of `warning` or
+  `critical` must be set.
+required:
+  - operator
+properties:
+  warning:
+    type: number
+    format: double
+    description: Warning threshold value.
+    example: 80
+  critical:
+    type: number
+    format: double
+    description: Critical threshold value.
+    example: 95
+  operator:
+    type: string
+    description: |
+      Comparison operator applied to the aggregated metric value. Values use
+      the API's protobuf enum names.
+
+      - `THRESHOLD_OPERATOR_UNSPECIFIED` = unspecified
+      - `THRESHOLD_OPERATOR_EQUAL` = equal
+      - `THRESHOLD_OPERATOR_LESS_THAN_OR_EQUAL` = `less_than_or_equal`
+      - `THRESHOLD_OPERATOR_LESS_THAN` = `less_than`
+      - `THRESHOLD_OPERATOR_GREATER_THAN` = `greater_than`
+      - `THRESHOLD_OPERATOR_GREATER_THAN_OR_EQUAL` = `greater_than_or_equal`
+      - `THRESHOLD_OPERATOR_NOT_EQUAL` = `not_equal`
+    enum:
+      - THRESHOLD_OPERATOR_UNSPECIFIED
+      - THRESHOLD_OPERATOR_EQUAL
+      - THRESHOLD_OPERATOR_LESS_THAN_OR_EQUAL
+      - THRESHOLD_OPERATOR_LESS_THAN
+      - THRESHOLD_OPERATOR_GREATER_THAN
+      - THRESHOLD_OPERATOR_GREATER_THAN_OR_EQUAL
+      - THRESHOLD_OPERATOR_NOT_EQUAL
+    example: THRESHOLD_OPERATOR_GREATER_THAN

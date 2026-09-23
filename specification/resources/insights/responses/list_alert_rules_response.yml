@@ -1,0 +1,44 @@
+description: A list of alert rules.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      allOf:
+        - $ref: '../models/list_alert_rules.yml'
+        - $ref: '../../../shared/pages.yml#/pagination'
+        - $ref: '../../../shared/meta.yml'
+    example:
+      alert_rules:
+        - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          spec:
+            name: High CPU
+            query:
+              metric: do.droplets.cpu_utilization
+              resource_urns:
+                - do:droplet:12345
+            condition:
+              window: EVALUATION_WINDOW_5M
+            thresholds:
+              warning: 80
+              critical: 95
+              operator: THRESHOLD_OPERATOR_GREATER_THAN
+            notification_channels:
+              - notification_channel_id: 550e8400-e29b-41d4-a716-446655440000
+                notify_on:
+                  - SEVERITY_CRITICAL
+            re_alert_duration: RE_ALERT_DURATION_4H
+          status: ALERT_RULE_STATUS_PAUSED
+          created_at: '2026-09-03T10:00:00Z'
+          updated_at: '2026-09-03T10:30:00Z'
+      links:
+        pages: {}
+      meta:
+        total: 1

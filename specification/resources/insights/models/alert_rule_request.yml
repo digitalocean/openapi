@@ -1,0 +1,23 @@
+type: object
+description: |
+  Create or update body for an alert rule. `spec` is required. `status` is
+  optional; create defaults to `ALERT_RULE_STATUS_ACTIVE`, and update keeps the
+  existing status when omitted.
+required:
+  - spec
+properties:
+  spec:
+    $ref: 'alert_rule_spec.yml'
+  status:
+    type: string
+    description: |
+      Desired alert rule status. Values use the API's protobuf enum names.
+
+      - `ALERT_RULE_STATUS_UNSPECIFIED` = unspecified
+      - `ALERT_RULE_STATUS_ACTIVE` = active
+      - `ALERT_RULE_STATUS_PAUSED` = paused
+    enum:
+      - ALERT_RULE_STATUS_UNSPECIFIED
+      - ALERT_RULE_STATUS_ACTIVE
+      - ALERT_RULE_STATUS_PAUSED
+    example: ALERT_RULE_STATUS_ACTIVE
