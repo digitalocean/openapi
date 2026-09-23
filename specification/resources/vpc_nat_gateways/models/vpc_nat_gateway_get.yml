@@ -63,8 +63,14 @@ properties:
       properties:
         vpc_uuid:
           type: string
+          format: uuid
           example: 0d3db13e-a604-4944-9827-7ec2642d32ac
           description: The unique identifier of the VPC to which the NAT gateway is attached.
+        subnet_uuid:
+          type: string
+          format: uuid
+          example: cbd79771-23eb-49be-b5ea-59cc56222622
+          description: The unique identifier of the VPC subnet to which the NAT gateway is attached.
         gateway_ip:
           type: string
           example: 10.118.0.35
@@ -83,7 +89,10 @@ properties:
             ipv4:
               type: string
               example: 174.138.113.197
-              description: IPv4 address of the public gateway.
+              description: >-
+                The public egress IPv4 address of the VPC NAT gateway. This is
+                the address assigned to the gateway, which you can optionally
+                set when creating the gateway using the `ip` or `ipv4` field.
     description: An object containing egress information for the VPC NAT gateway.
 
   udp_timeout_seconds:

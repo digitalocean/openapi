@@ -23,7 +23,7 @@ description: |
     | <nobr>`rebuild`</nobr>                   | Rebuilds a Droplet from a new base image. Set the `image` attribute to an image ID or slug. | <nobr>`droplet:update`</nobr><br><nobr>`droplet:admin`</nobr> |
     | <nobr>`rename`</nobr>                    | Renames a Droplet. | <nobr>`droplet:update`</nobr> |
     | <nobr>`change_kernel`</nobr>             | Changes a Droplet's kernel. Only applies to Droplets with externally managed kernels. All Droplets created after March 2017 use internal kernels by default. | <nobr>`droplet:update`</nobr> |
-    | <nobr>`enable_ipv6`</nobr>               | Enables IPv6 for a Droplet. Once enabled for a Droplet, IPv6 can not be disabled. When enabling IPv6 on an existing Droplet, [additional OS-level configuration](https://docs.digitalocean.com/products/networking/ipv6/how-to/enable/#on-existing-droplets) is required. | <nobr>`droplet:update`</nobr> |
+    | <nobr>`enable_ipv6`</nobr>               | Enables IPv6 for a Droplet. Once enabled for a Droplet, IPv6 can not be disabled. **Warning:** The Droplet must be powered off before enabling IPv6 on an existing Droplet. When enabling IPv6 on an existing Droplet, [additional OS-level configuration](https://docs.digitalocean.com/products/networking/ipv6/how-to/enable/#on-existing-droplets) is required. | <nobr>`droplet:update`</nobr> |
     | <nobr>`snapshot`</nobr>                  | Takes a snapshot of a Droplet. | <nobr>`droplet:update`</nobr><br><nobr>`image:create`</nobr> |
 
 tags:

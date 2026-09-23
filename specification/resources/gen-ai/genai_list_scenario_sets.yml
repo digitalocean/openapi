@@ -1,0 +1,129 @@
+description: To list scenario sets, send a GET request to `/v2/gen-ai/scenario_sets`.
+operationId: genai_list_scenario_sets
+parameters:
+- description: Page number.
+  example: 1
+  in: query
+  name: page
+  schema:
+    type: integer
+- description: Items per page.
+  example: 1
+  in: query
+  name: per_page
+  schema:
+    type: integer
+- description: |-
+    Filter by one or more statuses. Empty means no status filter.
+
+     - SCENARIO_SET_STATUS_GENERATING: Generation is in progress. The scenarios are not ready yet.
+     - SCENARIO_SET_STATUS_READY: The scenario set is ready to use.
+     - SCENARIO_SET_STATUS_FAILED: Generation failed. The scenario set has no readable scenarios.
+     - SCENARIO_SET_STATUS_CANCELLED: Generation was cancelled before completion.
+  example:
+  - SCENARIO_SET_STATUS_READY
+  in: query
+  name: statuses
+  schema:
+    items:
+      enum:
+      - SCENARIO_SET_STATUS_UNSPECIFIED
+      - SCENARIO_SET_STATUS_GENERATING
+      - SCENARIO_SET_STATUS_READY
+      - SCENARIO_SET_STATUS_FAILED
+      - SCENARIO_SET_STATUS_CANCELLED
+      type: string
+    type: array
+- description: |-
+    Filter by one or more source kinds. Empty means no source-kind filter.
+
+     - SCENARIO_SET_SOURCE_KIND_USER_UPLOAD: Created from uploaded or inline scenarios.
+     - SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED: Produced by goal-driven generation.
+     - SCENARIO_SET_SOURCE_KIND_LIBRARY: Copied from a platform-curated library entry.
+     - SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED: Produced from a completed Signals export.
+  example:
+  - SCENARIO_SET_SOURCE_KIND_USER_UPLOAD
+  in: query
+  name: source_kinds
+  schema:
+    items:
+      enum:
+      - SCENARIO_SET_SOURCE_KIND_UNSPECIFIED
+      - SCENARIO_SET_SOURCE_KIND_USER_UPLOAD
+      - SCENARIO_SET_SOURCE_KIND_GOAL_GENERATED
+      - SCENARIO_SET_SOURCE_KIND_LIBRARY
+      - SCENARIO_SET_SOURCE_KIND_SIGNAL_GENERATED
+      type: string
+    type: array
+- description: |-
+    Free-text search across name and description
+    (case-insensitive substring match). Empty means no search.
+  example: example string
+  in: query
+  name: search
+  schema:
+    type: string
+- description: |-
+    Field to sort by. Defaults to creation date when unspecified.
+
+     - SCENARIO_SET_SORT_FIELD_CREATED_AT: Sort by creation date. Default.
+     - SCENARIO_SET_SORT_FIELD_NAME: Sort by customer-supplied name (case-insensitive).
+     - SCENARIO_SET_SORT_FIELD_STATUS: Sort by status using lifecycle order (generating → ready → terminal).
+     - SCENARIO_SET_SORT_FIELD_SCENARIO_COUNT: Sort by scenario_count.
+     - SCENARIO_SET_SORT_FIELD_UPDATED_AT: Sort by last update date.
+  example: SCENARIO_SET_SORT_FIELD_UNSPECIFIED
+  in: query
+  name: sort_by
+  schema:
+    default: SCENARIO_SET_SORT_FIELD_UNSPECIFIED
+    enum:
+    - SCENARIO_SET_SORT_FIELD_UNSPECIFIED
+    - SCENARIO_SET_SORT_FIELD_CREATED_AT
+    - SCENARIO_SET_SORT_FIELD_NAME
+    - SCENARIO_SET_SORT_FIELD_STATUS
+    - SCENARIO_SET_SORT_FIELD_SCENARIO_COUNT
+    - SCENARIO_SET_SORT_FIELD_UPDATED_AT
+    type: string
+- description: Sort direction. Defaults to descending when unspecified.
+  example: SORT_DIRECTION_UNSPECIFIED
+  in: query
+  name: sort_direction
+  schema:
+    default: SORT_DIRECTION_UNSPECIFIED
+    enum:
+    - SORT_DIRECTION_UNSPECIFIED
+    - SORT_DIRECTION_ASC
+    - SORT_DIRECTION_DESC
+    type: string
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListScenarioSetsOutput
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "404":
+    $ref: ../../shared/responses/not_found.yml
+  "429":
+    $ref: ../../shared/responses/too_many_requests.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+security:
+- bearer_auth:
+  - genai:read
+summary: List Scenario Sets
+tags:
+- GradientAI Platform
+x-codeSamples:
+- $ref: examples/curl/genai_list_scenario_sets.yml

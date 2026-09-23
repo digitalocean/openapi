@@ -81,10 +81,14 @@ tags:
   - name: Billing
     description: |-
       The billing endpoints allow you to retrieve your account balance, invoices,
-      billing history, and insights.
+      billing history, insights, and prepayment information.
 
       **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
       retrieve the balance information for the requested customer account.
+
+      **Prepayment:** By sending requests to the `/v2/customers/my/prepayment_config`
+      and `/v2/customers/my/prepayment_status` endpoints, you can retrieve prepayment
+      gate configuration and status for the requested customer account.
 
       **Invoices:** [Invoices](https://docs.digitalocean.com/platform/billing/invoices/)
       are generated on the first of each month for every DigitalOcean
@@ -424,6 +428,14 @@ tags:
       NFS actions are tasks that can be executed on an NFS share. These can be
       things like resizing, snapshotting, etc.
 
+  - name: Organizations
+    description: |-
+      Organizations group multiple teams under a shared administrative boundary.
+      The Organizations API lets you create teams within an organization and
+      list the teams that belong to it.
+
+      These endpoints must be called in an organization context.
+
   - name: Partner Network Connect
     description: |-
       Partner Network Connect lets you establish high-bandwidth, low-latency
@@ -537,9 +549,10 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
+  # Secrets Manager omitted from this tag description until GA; paths commented out below.
   - name: Security
     description: |-
-      Security endpoints for CSPM scans, scan findings, settings, and Secrets Manager.
+      Security CSPM endpoints for scans, scan findings, and settings.
 
   - name: Sizes
     description: |-
@@ -611,6 +624,17 @@ tags:
       join two VPC networks with a secure, private connection. This allows
       resources in those networks to connect to each other's private IP addresses
       as if they were in the same network.
+
+  - name: VPC Routes [Public Preview]
+    description: |-
+      Routes control how traffic from resources in VPC subnets reaches
+      destination networks. VPC-scoped routes are read-only, while
+      customer-managed static routes can be added to individual VPC subnets.
+
+  - name: VPC Subnets [Public Preview]
+    description: |-
+      VPC subnets divide a VPC network into isolated IP ranges. You can create,
+      retrieve, rename, list, and delete subnets within a VPC.
 
   - name: VPCs
     description: |-
@@ -696,6 +720,7 @@ x-tagGroups:
       - Monitoring
       - NFS
       - NFS Actions
+      - Organizations
       - Partner Network Connect
       - Project Resources
       - Projects
@@ -714,6 +739,8 @@ x-tagGroups:
       - Vector Databases
       - VPC NAT Gateways
       - VPC Peerings
+      - VPC Routes [Public Preview]
+      - VPC Subnets [Public Preview]
       - VPCs
   - name: Inference APIs
     tags:
@@ -1037,6 +1064,14 @@ paths:
   /v2/customers/my/balance:
     get:
       $ref: "resources/billing/balance_get.yml"
+
+  /v2/customers/my/prepayment_config:
+    get:
+      $ref: "resources/billing/prepaymentConfig_get.yml"
+
+  /v2/customers/my/prepayment_status:
+    get:
+      $ref: "resources/billing/prepaymentStatus_get.yml"
 
   /v2/customers/my/billing_history:
     get:
@@ -2068,6 +2103,14 @@ paths:
     delete:
       $ref: "resources/nfs/nfs_access_point_delete.yml"
 
+  /v2/organizations/team:
+    post:
+      $ref: "resources/organizations/organizations_create_team.yml"
+
+  /v2/organizations/teams:
+    get:
+      $ref: "resources/organizations/organizations_list_teams.yml"
+
   /v2/partner_network_connect/attachments:
     get:
       $ref: "resources/partner_network_connect/partner_attachment_list.yml"
@@ -2388,30 +2431,34 @@ paths:
     delete:
       $ref: "resources/security/security_suppression_delete.yml"
 
-  /v2/security/secrets:
-    get:
-      $ref: "resources/security/security_secrets_list.yml"
-
-    post:
-      $ref: "resources/security/security_secret_create.yml"
-
-  /v2/security/secrets/{secret}:
-    get:
-      $ref: "resources/security/security_secret_get.yml"
-
-    put:
-      $ref: "resources/security/security_secret_update.yml"
-
-    delete:
-      $ref: "resources/security/security_secret_delete.yml"
-
-  /v2/security/secrets/{secret}/versions:
-    get:
-      $ref: "resources/security/security_secret_list_versions.yml"
-
-  /v2/security/secrets/{secret}/restore:
-    post:
-      $ref: "resources/security/security_secret_restore.yml"
+  # Secrets Manager endpoints are temporarily commented out so they are not
+  # published in the public API docs until the product is generally available.
+  # The operation/model files remain under resources/security/ for easy restore.
+  #
+  # /v2/security/secrets:
+  #   get:
+  #     $ref: "resources/security/security_secrets_list.yml"
+  #
+  #   post:
+  #     $ref: "resources/security/security_secret_create.yml"
+  #
+  # /v2/security/secrets/{secret}:
+  #   get:
+  #     $ref: "resources/security/security_secret_get.yml"
+  #
+  #   put:
+  #     $ref: "resources/security/security_secret_update.yml"
+  #
+  #   delete:
+  #     $ref: "resources/security/security_secret_delete.yml"
+  #
+  # /v2/security/secrets/{secret}/versions:
+  #   get:
+  #     $ref: "resources/security/security_secret_list_versions.yml"
+  #
+  # /v2/security/secrets/{secret}/restore:
+  #   post:
+  #     $ref: "resources/security/security_secret_restore.yml"
 
   /v2/sizes:
     get:
@@ -2576,6 +2623,45 @@ paths:
   /v2/vpcs/{vpc_id}/peerings/{vpc_peering_id}:
     patch:
       $ref: "resources/vpcs/vpcs_update_peerings.yml"
+
+  /v2/vpcs/{vpc_uuid}/routes:
+    get:
+      $ref: "resources/routes/vpc_routes_list.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets:
+    get:
+      $ref: "resources/vpc_subnets/vpc_subnets_list.yml"
+
+    post:
+      $ref: "resources/vpc_subnets/vpc_subnets_create.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets/{subnet_uuid}:
+    get:
+      $ref: "resources/vpc_subnets/vpc_subnets_get.yml"
+
+    patch:
+      $ref: "resources/vpc_subnets/vpc_subnets_update.yml"
+
+    delete:
+      $ref: "resources/vpc_subnets/vpc_subnets_delete.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets/{subnet_uuid}/members:
+    get:
+      $ref: "resources/vpc_subnets/vpc_subnets_list_members.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets/{subnet_uuid}/routes:
+    get:
+      $ref: "resources/routes/subnet_routes_list.yml"
+
+    post:
+      $ref: "resources/routes/subnet_routes_create.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets/{subnet_uuid}/routes/{route_uuid}:
+    patch:
+      $ref: "resources/routes/subnet_routes_update.yml"
+
+    delete:
+      $ref: "resources/routes/subnet_routes_delete.yml"
 
   /v2/vpc_peerings:
     get:
@@ -3124,6 +3210,65 @@ paths:
       $ref: 'resources/gen-ai/genai_list_datacenter_regions.yml'
 
 
+  /v2/gen-ai/scenario_library:
+    get:
+      $ref: 'resources/gen-ai/genai_list_scenario_library.yml'
+
+
+  /v2/gen-ai/scenario_library/{library_scenario_uuid}/create_scenario_set:
+    post:
+      $ref: 'resources/gen-ai/genai_create_scenario_set_from_library.yml'
+
+
+  /v2/gen-ai/scenario_library/{library_scenario_uuid}/scenarios:
+    get:
+      $ref: 'resources/gen-ai/genai_list_scenario_library_scenarios.yml'
+
+
+  /v2/gen-ai/scenario_sets:
+    get:
+      $ref: 'resources/gen-ai/genai_list_scenario_sets.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_scenario_set.yml'
+
+
+  /v2/gen-ai/scenario_sets/file_upload_presigned_urls:
+    post:
+      $ref: 'resources/gen-ai/genai_create_scenario_set_upload_presigned_urls.yml'
+
+
+  /v2/gen-ai/scenario_sets/generate:
+    post:
+      $ref: 'resources/gen-ai/genai_generate_scenario_set.yml'
+
+
+  /v2/gen-ai/scenario_sets/{scenario_set_uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_scenario_set.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_scenario_set.yml'
+
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_scenario_set.yml'
+
+
+  /v2/gen-ai/scenario_sets/{scenario_set_uuid}/download_url:
+    get:
+      $ref: 'resources/gen-ai/genai_get_scenario_set_download_url.yml'
+
+
+  /v2/gen-ai/scenario_sets/{scenario_set_uuid}/duplicate:
+    post:
+      $ref: 'resources/gen-ai/genai_duplicate_scenario_set.yml'
+
+
+  /v2/gen-ai/scenario_sets/{scenario_set_uuid}/scenarios:
+    get:
+      $ref: 'resources/gen-ai/genai_list_scenarios.yml'
+
+
   /v2/gen-ai/scheduled-indexing:
     post:
       $ref: 'resources/gen-ai/genai_create_scheduled_indexing.yml'
@@ -3137,6 +3282,51 @@ paths:
   /v2/gen-ai/scheduled-indexing/{uuid}:
     delete:
       $ref: 'resources/gen-ai/genai_delete_scheduled_indexing.yml'
+
+
+  /v2/gen-ai/simulation_runs:
+    get:
+      $ref: 'resources/gen-ai/genai_list_simulation_runs.yml'
+
+    post:
+      $ref: 'resources/gen-ai/genai_create_simulation_run.yml'
+
+
+  /v2/gen-ai/simulation_runs/{run_uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_simulation_run.yml'
+
+    put:
+      $ref: 'resources/gen-ai/genai_update_simulation_run.yml'
+
+    delete:
+      $ref: 'resources/gen-ai/genai_delete_simulation_run.yml'
+
+
+  /v2/gen-ai/simulation_runs/{run_uuid}/cancel:
+    patch:
+      $ref: 'resources/gen-ai/genai_cancel_simulation_run.yml'
+
+
+  /v2/gen-ai/simulation_runs/{run_uuid}/journeys:
+    get:
+      $ref: 'resources/gen-ai/genai_list_simulation_journeys.yml'
+
+
+  /v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_simulation_journey.yml'
+
+
+  /v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory:
+    get:
+      $ref: 'resources/gen-ai/genai_get_simulation_journey_trajectory.yml'
+
+
+  /v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory_url:
+    get:
+      $ref: 'resources/gen-ai/genai_get_simulation_journey_trajectory_url.yml'
+
 
   /v2/gen-ai/workspaces:
     get:
