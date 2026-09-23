@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"tools": ["exa_web_fetch"]}' \
+    "https://api.digitalocean.com/v2/action-gateway/toolbelts/search-toolbelt/tools/add"

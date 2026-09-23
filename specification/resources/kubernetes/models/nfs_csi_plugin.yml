@@ -1,0 +1,8 @@
+type: object
+nullable: true
+description: An object specifying whether the NFS CSI plugin should be enabled for the Kubernetes cluster.
+properties:
+  enabled:
+    type: boolean
+    description: Indicates whether the NFS CSI plugin is enabled.
+    example: true

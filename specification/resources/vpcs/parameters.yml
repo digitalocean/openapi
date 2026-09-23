@@ -16,6 +16,14 @@ vpc_resource_type:
   required: false
   schema:
     type: string
+    enum:
+      - droplet
+      - loadbalancer
+      - kubernetes
+      - dbaas
+      - nat_gateway
+      - app
+      - nfs_share
   example: droplet
 
 vpc_peering_id:
