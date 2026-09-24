@@ -82,7 +82,9 @@ mcp_server:
     oauth_authorization_ttl_seconds:
       type: string
       format: uint64
-      description: How long a user's authorization is reused before they must consent again.
+      description: >-
+        How long, in seconds, a user's authorization is reused before they must
+        consent again. `0` unless `credentialRefSource` is `connection`.
       example: '0'
 
 mcp_server_create:
@@ -160,8 +162,11 @@ mcp_server_create:
       type: string
       format: uint64
       description: >-
-        How long a user's authorization may be reused before they must consent
-        again. Omit to use the default.
+        For `connection`, how long, in seconds, a user's authorization may be
+        reused before they must consent again. Nothing refreshes these
+        connections, so set it no longer than the upstream provider's token
+        lifetime. Omit or send `0` for the default of 30 days (`2592000`). At
+        most `3153600000` (100 years).
       example: '86400'
 
 mcp_server_update:

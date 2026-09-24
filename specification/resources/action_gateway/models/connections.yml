@@ -165,7 +165,10 @@ connection:
     owning_user_numeric_id:
       type: string
       format: uint64
-      description: The numeric ID of the owning DigitalOcean user, when recorded.
+      description: >-
+        The numeric ID of the owning DigitalOcean user, when recorded. Set from
+        the authenticated caller, never from the request. Legacy users without
+        a UUID are identified only by this field. Omitted when not recorded.
       example: '1234567'
 
 connection_create:
