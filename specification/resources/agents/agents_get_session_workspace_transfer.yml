@@ -4,7 +4,7 @@ description: Returns the current transfer state. For a completed download the re
   freshly minted presigned GET `download_url` (its TTL starts at poll time) and the payload `sha256` for
   client-side verification.
 tags:
-- Agents
+- Environments
 parameters:
 - in: path
   name: session_id

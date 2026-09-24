@@ -2,7 +2,7 @@ operationId: agents_list_template_builds
 summary: ListTemplateBuilds returns build history for a template.
 description: ListTemplateBuilds returns build history for a template.
 tags:
-- Agents
+- Environments
 parameters:
 - in: path
   name: template_id

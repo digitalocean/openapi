@@ -4,10 +4,10 @@ description: |-
   Returns once the session row is allocated. Sandbox boot completes asynchronously.
 
   Two mutually exclusive request forms are selected by Content-Type:
-  - YAML (`application/x-yaml` and siblings): the agents.yaml Agent manifest. Two manifest formats are
+  - YAML (`application/x-yaml` and siblings): the environment spec. Two manifest formats are
     accepted during the dual-format transition: the flat format (primary) and the legacy
     `agents.digitalocean.com/v1alpha1` envelope (deprecated). A top-level `apiVersion` key selects the
-    legacy parser; its absence selects flat. Internally persists a durable Agent Config, then creates
+    legacy parser; its absence selects flat. Internally persists a durable Environment Config, then creates
     the session.
   - JSON (`application/json`): `{name, config_id}` loads the config, resolves its credentials from Secrets
     Manager at the version pinned when the config was created, and creates the session.
@@ -16,7 +16,7 @@ description: |-
   on the session row. Query parameters `openai_session_id` and `resume_on_topoff` apply to both forms;
   when both the JSON body field and `?resume_on_topoff=` are present, the query parameter wins.
 tags:
-- Agents
+- Environments
 parameters:
 - in: header
   name: X-Device-UUID
@@ -41,7 +41,7 @@ parameters:
   name: resume_on_topoff
   required: false
   description: Opt the new session in to automatic resumption when the team's prepayment balance is restored.
-    Defaults to false. Exists as a query parameter so the agents.yaml (YAML body) form can carry it too.
+    Defaults to false. Exists as a query parameter so the environment spec (YAML body) form can carry it too.
     On the application/json form the body field is idiomatic, but this parameter wins when both are present.
     Must be exactly one of true/false/1/0; anything else is a 400.
   schema:
@@ -58,11 +58,11 @@ requestBody:
       schema:
         type: object
         additionalProperties: true
-        description: Raw agents.yaml Agent manifest (flat or legacy envelope).
+        description: Raw environment spec (flat or legacy envelope).
     application/yaml: *id001
     text/yaml: *id001
     text/x-yaml: *id001
-  description: Either a raw Agent manifest with a YAML Content-Type or CreateSessionConfigRequest with
+  description: Either a raw environment spec with a YAML Content-Type or CreateSessionConfigRequest with
     application/json. The forms are mutually exclusive by Content-Type.
 responses:
   '200':

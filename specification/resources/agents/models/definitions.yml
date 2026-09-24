@@ -27,7 +27,7 @@ agent_kind:
 
 agent_manifest:
   type: object
-  description: 'Customer-authored agents.yaml Agent manifest (see internal/agentspec and contracts/agent.v1alpha1.schema.json
+  description: 'Customer-authored environment spec (see internal/agentspec and contracts/agent.v1alpha1.schema.json
     — the authoritative published schema), sent as the CreateSession request body with a YAML Content-Type.
     Untrusted input: every value is a request that is validated and clamped server-side. Decoding is strict:
     unknown or misspelled fields are rejected with HTTP 400.'
@@ -318,7 +318,7 @@ create_session_config_request:
       minLength: 1
       maxLength: 64
       description: >-
-        Session name, independent of the config name. Must satisfy the existing agents.yaml
+        Session name, independent of the config name. Must satisfy the existing environment-spec
         metadata.name rules and must not be UUID-shaped.
       example: demo-agent
     config_id:
@@ -615,7 +615,7 @@ send_input_response:
       example: example
 session:
   type: object
-  description: Session is the user-facing record of a managed agent + sandbox pair.
+  description: Session is the user-facing record of a environment session + sandbox pair.
   properties:
     session_id:
       type: string
@@ -625,7 +625,7 @@ session:
       description: >-
         User-assignable display name, unique per team among non-terminal sessions. Usable in place
         of session_id by clients (doctl / Console resolve it to the id via the ListSessions ?name=
-        filter; the {session_id} path stays UUID-only). Supplied via the agents.yaml metadata.name,
+        filter; the {session_id} path stays UUID-only). Supplied via the environment-spec metadata.name,
         or auto-generated ("session-<agent-type>-<date-time>") when omitted.
       example: demo-agent
     parent_session_id:
@@ -684,7 +684,7 @@ session:
         via PATCH /v2/agents/sessions/{session_id} (resume_on_topoff only). Only a session paused
         with reason low_balance whose latest run did not complete is ever resumed automatically - a
         session the customer paused themselves, or one that idled out, stays paused regardless. Not
-        an agents.yaml field, and forks do not inherit it. Omitted when false.
+        an environment-spec field, and forks do not inherit it. Omitted when false.
       example: false
     pause_reason:
       type: string
@@ -723,7 +723,7 @@ session:
       type: string
       format: uuid
       description: >-
-        Durable Agent Config UUID the session was created from (inline manifests persist a config
+        Durable Environment Config UUID the session was created from (inline manifests persist a config
         too, named after the session). Persisted and returned on create/get/list; absent only for
         sessions created before config references were stored.
       example: 11111111-2222-3333-4444-555555555555
@@ -1209,7 +1209,7 @@ agent_config_credential_slot:
       example: openai
 agent_config:
   type: object
-  description: 'Immutable team-scoped Agent Config: one sanitized manifest per config. There is no update; clone to a new config to change content.'
+  description: 'Immutable team-scoped Environment Config: one sanitized manifest per config. There is no update; clone to a new config to change content.'
   required:
   - id
   - name
@@ -1234,7 +1234,7 @@ agent_config:
     manifest:
       type: object
       additionalProperties: true
-      description: Canonical runnable Agent manifest JSON, immutable after create.
+      description: Canonical runnable environment spec JSON, immutable after create.
     content_hash:
       type: string
       pattern: ^[0-9a-f]{64}$
@@ -1276,7 +1276,7 @@ list_agent_configs_response:
 agent_config_create_request:
   type: object
   additionalProperties: false
-  description: Unified Agent Config create body. secrets/oauth_assignments are write-only and never returned.
+  description: Unified Environment Config create body. secrets/oauth_assignments are write-only and never returned.
   required:
   - name
   - manifest_yaml
@@ -1291,7 +1291,7 @@ agent_config_create_request:
     manifest_yaml:
       type: string
       maxLength: 524288
-      description: Customer agents.yaml text. The HTTP JSON body is capped at 1 MiB and this field is capped
+      description: Customer environment-spec YAML text. The HTTP JSON body is capped at 1 MiB and this field is capped
         at 512 KiB.
       example: |
         apiVersion: agents.digitalocean.com/v1alpha1
@@ -1589,7 +1589,7 @@ patch_session_request:
       example: false
   description: >-
     PATCH body for /v2/agents/sessions/{session_id}: an allowlisted subset of session-scoped
-    settings (never agents.yaml / config mutation). At least one property below must be present; {}
+    settings (never environment-spec / config mutation). At least one property below must be present; {}
     is 400. Unknown top-level keys are rejected with 400. New patchable fields will be added here as
     optional properties over time.
 

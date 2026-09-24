@@ -1,7 +1,7 @@
 operationId: agents_validate_session_policy
 summary: ValidatePolicy checks a manifest's tool-permission policy against the agent's capabilities without
   creating a session.
-description: 'Stateless preflight: parses the same `agents.yaml` Agent manifest as CreateSession and runs
+description: 'Stateless preflight: parses the same environment spec as CreateSession and runs
   the identical resolve + validate pipeline against the capability descriptor stamped on the selected
   template''s image (resolved per-request via the sandbox, not a separate registry). Returns per-rule
   verdicts. Nothing is provisioned or persisted.
@@ -13,7 +13,7 @@ description: 'Stateless preflight: parses the same `agents.yaml` Agent manifest 
   returns `ok: true` with no verdicts. Because it shares the create path''s descriptor lookup, the verdicts
   match what CreateSession would compute.'
 tags:
-- Agents
+- Environments
 requestBody:
   required: true
   content:
@@ -26,7 +26,7 @@ requestBody:
       schema: *id001
     text/x-yaml:
       schema: *id001
-  description: The same customer agents.yaml Agent manifest you would submit to CreateSession; only spec.sandbox.template
+  description: The same environment spec YAML environment spec you would submit to CreateSession; only spec.sandbox.template
     / spec.runtime.adapter (to resolve the agent) and spec.permissions are used.
 responses:
   '200':

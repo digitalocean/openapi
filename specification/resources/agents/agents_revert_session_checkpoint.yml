@@ -2,7 +2,7 @@ operationId: agents_revert_session_checkpoint
 summary: RollbackToCheckpoint rewinds a session to a checkpoint.
 description: 'In-place restore: boots a fresh sandbox from the checkpoint and atomically swaps the session''s sandbox pointer to it, so the session keeps its same session_id; the old sandbox is then torn down.'
 tags:
-- Agents
+- Environments
 parameters:
 - in: path
   name: session_id

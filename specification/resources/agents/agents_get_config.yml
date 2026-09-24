@@ -1,14 +1,14 @@
 operationId: agents_get_config
-summary: Get an active Agent Config and its manifest.
-description: Returns one team-scoped Agent Config including the sanitized manifest and redacted credential
+summary: Get an active Environment Config and its manifest.
+description: Returns one team-scoped Environment Config including the sanitized manifest and redacted credential
   slot metadata. Secret values are never returned.
 tags:
-- Agents
+- Environments
 parameters:
 - in: path
   name: config_id
   required: true
-  description: The Agent Config UUID.
+  description: The Environment Config UUID.
   schema:
     type: string
     format: uuid

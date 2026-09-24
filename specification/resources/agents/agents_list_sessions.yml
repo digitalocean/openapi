@@ -5,7 +5,7 @@ description: Keyset-paginated on an opaque cursor. Results are scoped to the aut
   to list every session regardless of status, or an explicit status such as `status=SESSION_STATUS_FAILED`
   or `status=SESSION_STATUS_DESTROYED` to list only those.
 tags:
-- Agents
+- Environments
 parameters:
 - in: query
   name: page_size

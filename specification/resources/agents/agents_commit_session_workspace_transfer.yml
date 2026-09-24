@@ -4,7 +4,7 @@ description: Upload only. Call once, after all parts have been uploaded. Complet
   and starts the asynchronous import into the workspace. Responds 202; poll the transfer until `completed`
   or `failed`.
 tags:
-- Agents
+- Environments
 parameters:
 - in: path
   name: session_id

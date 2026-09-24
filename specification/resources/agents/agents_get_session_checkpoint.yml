@@ -2,7 +2,7 @@ operationId: agents_get_session_checkpoint
 summary: GetCheckpoint returns the current snapshot of a checkpoint.
 description: GetCheckpoint returns the current snapshot of a checkpoint.
 tags:
-- Agents
+- Environments
 parameters:
 - in: path
   name: session_id

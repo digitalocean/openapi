@@ -1,14 +1,14 @@
 operationId: agents_list_config_sessions
-summary: List the sessions created from one Agent Config.
-description: Enumerates the caller's team sessions whose session was created from this durable Agent Config.
+summary: List the sessions created from one Environment Config.
+description: Enumerates the caller's team sessions whose session was created from this durable Environment Config.
   Keyset-paginated on an opaque cursor, newest first, same shape and status semantics as GET /v2/agents/sessions.
 tags:
-- Agents
+- Environments
 parameters:
 - in: path
   name: config_id
   required: true
-  description: The Agent Config UUID.
+  description: The Environment Config UUID.
   schema:
     type: string
     format: uuid

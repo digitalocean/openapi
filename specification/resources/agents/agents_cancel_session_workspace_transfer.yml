@@ -3,7 +3,7 @@ summary: Cancel a staged workspace transfer.
 description: 'Aborts an in-flight transfer. Idempotent: cancelling an already-terminal transfer returns
   `aborted: false` with the current status. The request body is optional.'
 tags:
-- Agents
+- Environments
 parameters:
 - in: path
   name: session_id

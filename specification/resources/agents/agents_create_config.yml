@@ -1,17 +1,17 @@
 operationId: agents_create_config
-summary: Create an Agent Config (manifest + secrets in one request).
-description: Accepts name, agents.yaml text, and optional write-only secret values in one request. Responses
-  never echo secret values; GET/create may include credential slot metadata (name/source/provider only). Configs
-  are immutable after create.
+summary: Create an Environment Config (manifest + secrets in one request).
+description: Accepts name, environment-spec YAML text, and optional write-only secret values in one request.
+  Responses never echo secret values; GET/create may include credential slot metadata (name/source/provider
+  only). Configs are immutable after create.
 tags:
-- Agents
+- Environments
 requestBody:
   required: true
   content:
     application/json:
       schema:
         $ref: models/definitions.yml#/agent_config_create_request
-  description: Unified Agent Config create body. secrets/oauth_assignments are write-only and never returned.
+  description: Unified Environment Config create body. secrets/oauth_assignments are write-only and never returned.
 responses:
   '201':
     description: Config created.
@@ -27,7 +27,7 @@ responses:
         schema:
           $ref: models/definitions.yml#/agent_config_response
   '400':
-    description: Invalid name, JSON wrapper, or agents.yaml manifest.
+    description: Invalid name, JSON wrapper, or environment spec.
     headers: *id001
     content:
       application/json:

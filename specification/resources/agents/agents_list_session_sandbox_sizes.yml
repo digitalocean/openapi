@@ -5,7 +5,7 @@ description: Read-only catalog the UI (and other clients) render as the size pic
   fallback, so every `slug` returned here is accepted by CreateSession as spec.sandbox.sizeSlug. Sizes
   are returned smallest-to-largest. Static and safe to cache; independent of team/session; no pagination.
 tags:
-- Agents
+- Environments
 responses:
   '200':
     description: The supported sandbox sizes.

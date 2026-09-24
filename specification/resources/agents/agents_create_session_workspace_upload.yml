@@ -5,7 +5,7 @@ description: Streams the raw request body to a path inside the sandbox workspace
   optional `X-Content-Sha256` request header carries a hex digest the guest verifies after the full payload
   is written.
 tags:
-- Agents
+- Environments
 parameters:
 - in: path
   name: session_id

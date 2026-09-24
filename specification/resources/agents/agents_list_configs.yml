@@ -1,9 +1,9 @@
 operationId: agents_list_configs
-summary: List active Agent Configs for the caller's team.
+summary: List active Environment Configs for the caller's team.
 description: Returns lightweight team-scoped config metadata without loading or returning manifest JSON.
   Soft-deleted configs are excluded.
 tags:
-- Agents
+- Environments
 parameters:
 - in: query
   name: page_size
@@ -37,7 +37,7 @@ parameters:
   example: support
 responses:
   '200':
-    description: A page of active Agent Configs.
+    description: A page of active Environment Configs.
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit

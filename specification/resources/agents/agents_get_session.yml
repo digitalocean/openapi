@@ -2,7 +2,7 @@ operationId: agents_get_session
 summary: GetSession returns the current snapshot of a session.
 description: GetSession returns the current snapshot of a session.
 tags:
-- Agents
+- Environments
 parameters:
 - in: path
   name: session_id
