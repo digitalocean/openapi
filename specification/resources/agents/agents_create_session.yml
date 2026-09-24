@@ -13,8 +13,8 @@ description: |-
   - JSON (`application/json`): `{name, config_id}` loads the config, resolves its credentials from
     Secrets Manager at the version pinned when the config was created, and creates the session.
 
-  The OpenAPI `requestBody` schemas the JSON form for client generation. The YAML form is documented
-  here and under `x-content-schemas` (mirroring harness swagger); the live API still accepts both.
+  The OpenAPI `requestBody` schemas the JSON form for client generation (Autorest cannot emit a
+  multi–content-type body). The live API still accepts the YAML forms listed above.
 
   Successful responses may include `config_id` on the session. `X-Device-UUID` (if present) is
   persisted on the session row. Query parameters `openai_session_id` and `resume_on_topoff` apply to
@@ -57,23 +57,12 @@ requestBody:
   required: true
   description: |-
     CreateSessionConfigRequest with `application/json`. The live API also accepts a raw environment
-    spec under YAML Content-Types (see operation description and x-content-schemas); those forms are
-    omitted from `content` so generated clients (pydo/autorest) can emit this operation.
+    spec under YAML Content-Types (see operation description); those forms are omitted from `content`
+    so generated clients (pydo/autorest) can emit this operation.
   content:
     application/json:
       schema:
         $ref: models/definitions.yml#/create_session_config_request
-  x-content-schemas:
-    application/json:
-      $ref: models/definitions.yml#/create_session_config_request
-    application/x-yaml:
-      $ref: models/definitions.yml#/agent_manifest
-    application/yaml:
-      $ref: models/definitions.yml#/agent_manifest
-    text/yaml:
-      $ref: models/definitions.yml#/agent_manifest
-    text/x-yaml:
-      $ref: models/definitions.yml#/agent_manifest
 responses:
   '200':
     description: Session row allocated; sandbox boot continues asynchronously.
