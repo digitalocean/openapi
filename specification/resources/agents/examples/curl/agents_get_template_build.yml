@@ -1,0 +1,3 @@
+"lang": "bash"
+"source": "curl -X GET \\\n  -H \"Authorization: Bearer $DIGITALOCEAN_TOKEN\" \\\n  \"https://api.digitalocean.com/v2/agents/templates/{template_id}/builds/{build_id}\""
+"label": "cURL"

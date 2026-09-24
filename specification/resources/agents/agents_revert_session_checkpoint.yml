@@ -1,0 +1,72 @@
+operationId: agents_revert_session_checkpoint
+summary: RollbackToCheckpoint rewinds a session to a checkpoint.
+description: 'In-place restore: boots a fresh sandbox from the checkpoint and atomically swaps the session''s sandbox pointer to it, so the session keeps its same session_id; the old sandbox is then torn down.'
+tags:
+- Agents
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: path
+  name: checkpoint_id
+  required: true
+  description: The checkpoint id.
+  schema:
+    type: string
+    example: cp_9f2c1a4b
+  example: cp_9f2c1a4b
+responses:
+  '200':
+    description: 'The session after in-place rollback: same session_id, sandbox_id swapped to the restored VM.'
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/rollback_to_checkpoint_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: Session belongs to another team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: 'Checkpoint is not READY, or session cannot be rolled back in its current state.'
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '501':
+    description: Rollback is not supported for this agent/substrate.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_revert_session_checkpoint.yml
+security:
+- bearer_auth:
+  - agents:create

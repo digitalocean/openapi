@@ -1,0 +1,86 @@
+operationId: agents_commit_session_workspace_transfer
+summary: Finalize a staged upload.
+description: Upload only. Call once, after all parts have been uploaded. Completes the multipart upload
+  and starts the asynchronous import into the workspace. Responds 202; poll the transfer until `completed`
+  or `failed`.
+tags:
+- Agents
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: path
+  name: transfer_id
+  required: true
+  description: The workspace transfer identifier.
+  schema:
+    type: string
+    example: tr_example
+  example: tr_example
+requestBody:
+  required: false
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          sha256:
+            type: string
+            description: Optional lowercase hex SHA-256. Must match the value supplied at create when
+              both are set.
+            example: example
+responses:
+  '202':
+    description: Upload committed; import in progress.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/workspace_upload_committed
+  '400':
+    description: Missing transfer_id, sha256 mismatch, or invalid JSON.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: Transfer is not in a committable state.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '501':
+    description: Staged upload is not supported by the active sandbox driver.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_commit_session_workspace_transfer.yml
+security:
+- bearer_auth:
+  - agents:create
