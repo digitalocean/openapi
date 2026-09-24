@@ -1,3 +1,140 @@
+per_page:
+  name: per_page
+  in: query
+  required: false
+  description: The number of items returned per page.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 20
+  example: 20
+
+tools_per_page:
+  name: per_page
+  in: query
+  required: false
+  description: The number of tools returned per page. Values above 100 are capped at 100.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 100
+  example: 100
+
+page_size:
+  name: page_size
+  in: query
+  required: false
+  description: The maximum number of items returned.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 20
+  example: 20
+
+page_token:
+  name: page_token
+  in: query
+  required: false
+  description: >-
+    The `next_page_token` from the previous response. A token is only valid for
+    the same query and filters that produced it.
+  schema:
+    type: string
+  example: ZXhhX3dlYl9zZWFyY2hAMQ
+
+search_query:
+  name: query
+  in: query
+  required: false
+  description: >-
+    A case-insensitive substring to match. An empty value matches every item
+    visible to your team.
+  schema:
+    type: string
+  example: search
+
+toolkit_id:
+  name: toolkit_id
+  in: query
+  required: false
+  description: Restricts results to one toolkit.
+  schema:
+    type: string
+  example: exa
+
+tool_slug:
+  name: tool_slug
+  in: path
+  required: true
+  description: The provider-qualified tool slug.
+  schema:
+    type: string
+  example: exa_web_search
+
+health_window:
+  name: window
+  in: query
+  required: false
+  description: The rolling window to aggregate over. Defaults to 24 hours.
+  schema:
+    type: string
+    enum:
+      - HEALTH_WINDOW_ONE_HOUR
+      - HEALTH_WINDOW_TWENTY_FOUR_HOURS
+      - HEALTH_WINDOW_SEVEN_DAYS
+      - HEALTH_WINDOW_THIRTY_DAYS
+    default: HEALTH_WINDOW_TWENTY_FOUR_HOURS
+  example: HEALTH_WINDOW_SEVEN_DAYS
+
+health_provider:
+  name: provider
+  in: query
+  required: false
+  description: Restricts results to one provider.
+  schema:
+    type: string
+  example: exa
+
+include_history:
+  name: include_history
+  in: query
+  required: false
+  description: Also return the window split into resolution-aligned points.
+  schema:
+    type: boolean
+    default: false
+  example: true
+
+search_tools_provider:
+  name: provider
+  in: query
+  required: false
+  description: >-
+    Restricts results to these providers. Repeat the parameter to match any of
+    several providers.
+  schema:
+    type: array
+    items:
+      type: string
+  style: form
+  explode: true
+  example:
+    - exa
+
+search_tools_toolbelt:
+  name: toolbelt
+  in: query
+  required: false
+  description: >-
+    Restricts results to members of this toolbelt at its latest version. An
+    unknown toolbelt returns 404.
+  schema:
+    type: string
+  example: search-toolbelt
+
 toolbelt_name:
   name: name
   in: path
@@ -12,7 +149,7 @@ toolbelt_version:
   name: version
   in: query
   required: false
-  description: An immutable numeric toolbelt version. Omit to retrieve the latest active version.
+  description: An immutable numeric toolbelt version. Omit to use the latest active version.
   schema:
     type: string
     pattern: '^[0-9]+$'
@@ -31,3 +168,189 @@ toolbelt_status:
       - all
     default: active
   example: active
+
+toolbelt_search:
+  name: search
+  in: query
+  required: false
+  description: A case-insensitive substring filter on the returned items.
+  schema:
+    type: string
+  example: search
+
+toolbelt_provider:
+  name: provider
+  in: path
+  required: true
+  description: >-
+    A provider from the toolbelt providers endpoint, or `_legacy` for members
+    without a provider.
+  schema:
+    type: string
+  example: exa
+
+view_id:
+  name: view_id
+  in: path
+  required: true
+  description: The output view identifier.
+  schema:
+    type: string
+  example: ov_4f0c2a9d8e1b47c6a3d5f7e9b1c3a5d7
+
+output_view_tool:
+  name: tool
+  in: query
+  required: false
+  description: >-
+    Restricts results to one tool's released version. A provider-qualified
+    slug, optionally pinned as `<tool>@<version>`. Mutually exclusive with
+    `tool_id`.
+  schema:
+    type: string
+  example: exa_web_search
+
+output_view_tool_id:
+  name: tool_id
+  in: query
+  required: false
+  description: Restricts results to one tool version. Mutually exclusive with `tool`.
+  schema:
+    type: string
+  example: tul_exa_web_search
+
+server_ref:
+  name: server_ref
+  in: path
+  required: true
+  description: The team-unique reference of the MCP server.
+  schema:
+    type: string
+  example: docs
+
+connection_id:
+  name: id
+  in: path
+  required: true
+  description: The connection identifier.
+  schema:
+    type: string
+  example: 39f9f768-a7f9-4c91-9557-3328c53dd054
+
+connection_provider:
+  name: provider
+  in: query
+  required: false
+  description: Restricts results to one provider.
+  schema:
+    type: string
+  example: jira
+
+connection_user_id:
+  name: user_id
+  in: query
+  required: false
+  description: Restricts results to connections whose `user_id` contains this value.
+  schema:
+    type: string
+  example: alice
+
+connection_status:
+  name: status
+  in: query
+  required: false
+  description: Restricts results to one status. Revoked connections are never listed.
+  schema:
+    type: string
+    enum:
+      - pending
+      - active
+      - expired
+  example: active
+
+connection_sort:
+  name: sort
+  in: query
+  required: false
+  description: The field to sort by.
+  schema:
+    type: string
+    enum:
+      - created_at
+      - provider
+      - user_id
+      - status
+  example: created_at
+
+sort_direction:
+  name: sort_direction
+  in: query
+  required: false
+  description: The sort direction.
+  schema:
+    type: string
+    enum:
+      - asc
+      - desc
+  example: desc
+
+session_urn:
+  name: session_urn
+  in: path
+  required: true
+  description: The session URN, in the form `do:managed_agent_session:<uuid>`.
+  schema:
+    type: string
+  example: do:managed_agent_session:2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+
+end_user_id:
+  name: end_user_id
+  in: query
+  required: false
+  description: Restricts results to sessions bound to this `actorId`.
+  schema:
+    type: string
+  example: alice
+
+user_id:
+  name: user_id
+  in: path
+  required: true
+  description: The end-user identifier.
+  schema:
+    type: string
+  example: alice
+
+users_user_id:
+  name: user_id
+  in: query
+  required: false
+  description: Restricts results to user IDs that start with this prefix.
+  schema:
+    type: string
+  example: al
+
+users_sort:
+  name: sort
+  in: query
+  required: false
+  description: The field to sort by.
+  schema:
+    type: string
+    enum:
+      - created_at
+      - user_id
+      - session_count
+      - connection_count
+    default: created_at
+  example: session_count
+
+actor_id:
+  name: actor_id
+  in: path
+  required: true
+  description: The end-user identifier, the same value as a session's `actorId`.
+  schema:
+    type: string
+    pattern: '^[A-Za-z0-9._-]{1,64}$'
+  example: alice

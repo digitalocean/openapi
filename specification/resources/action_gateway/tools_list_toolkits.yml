@@ -1,30 +1,37 @@
 operationId: tools_list_toolkits
 summary: List Toolkits
-description: Lists the toolkits that group Action Gateway tools.
+description: Lists the toolkits in the catalog. A toolkit groups the tools of one provider.
 tags:
-  - Action Gateway
+- Action Gateway
 responses:
-  "200":
-    description: Toolkits were retrieved successfully.
+  '200':
+    description: The request was successful.
     headers:
       $ref: response_headers.yml
     content:
       application/json:
         schema:
-          $ref: models.yml#/list_toolkits_response
-        examples:
-          tools_list_toolkits_response:
-            $ref: examples.yml#/tools_list_toolkits_response
-  "401":
+          $ref: models/tools.yml#/list_toolkits_response
+        example:
+          version: v1
+          toolkits:
+          - id: exa
+            name: Exa
+            description: Web search tools backed by Exa.
+            categories:
+            - web-fetch
+            - web-search
+            created_at: '2026-06-01T00:00:00Z'
+  '401':
     $ref: ../../shared/responses/unauthorized.yml
-  "429":
+  '429':
     $ref: ../../shared/responses/too_many_requests.yml
-  "500":
+  '500':
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-security:
-  - bearer_auth:
-      - genai:read
 x-codeSamples:
-  - $ref: examples/curl/tools_list_toolkits.yml
+- $ref: examples/curl/tools_list_toolkits.yml
+security:
+- bearer_auth:
+  - action_gateway:read

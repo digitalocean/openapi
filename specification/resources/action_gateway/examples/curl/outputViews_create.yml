@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"tool":"exa_web_search","name":"titles-and-urls","description":"Keep only result titles and URLs.","fields":["results.title","results.url"]}' \
+    "https://api.digitalocean.com/v2/action-gateway/output-views"

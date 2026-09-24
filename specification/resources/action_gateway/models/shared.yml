@@ -1,0 +1,32 @@
+pagination:
+  type: object
+  description: >-
+    Offset pagination metadata. `page` and `per_page` echo the values applied
+    after defaults and clamping. `total` counts every matching item across all
+    pages.
+  properties:
+    page:
+      type: integer
+      format: int32
+      example: 1
+    per_page:
+      type: integer
+      format: int32
+      example: 20
+    total:
+      type: integer
+      format: int32
+      example: 1
+
+next_page_token:
+  type: string
+  description: >-
+    An opaque cursor for the next page of results. Pass it back verbatim as
+    `page_token`. It is empty on the last page.
+  example: ZXhhX3dlYl9zZWFyY2hAMQ
+
+empty_response:
+  type: object
+  description: An empty JSON object.
+  properties: {}
+  example: {}

@@ -1,0 +1,58 @@
+operationId: tools_list_search_providers
+summary: Search Tool Providers
+description: Searches providers. `query` matches a substring of the provider name, display name, or description,
+  case-insensitively. It does not match the tools a provider owns.
+tags:
+- Action Gateway
+parameters:
+- $ref: parameters.yml#/search_query
+- $ref: parameters.yml#/page_size
+- $ref: parameters.yml#/page_token
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/tools.yml#/search_providers_response
+        example:
+          providers:
+          - name: jira
+            display_name: Jira
+            description: Jira issue tracking tools.
+            auth_type: oauth
+            scopes:
+            - write:jira-work
+            connection_parameters:
+            - key: site_url
+              label: Jira site URL
+              description: The HTTPS origin of the Jira Cloud site to use.
+              input_kind: https_origin
+              required: true
+              normalization: https_origin
+              allowed_values: []
+              allowed_host_suffixes:
+              - atlassian.net
+              max_length: 255
+              pattern: ''
+            auth_types:
+            - oauth
+            credential_parameters: []
+          next_page_token: ''
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/tools_list_search_providers.yml
+security:
+- bearer_auth:
+  - action_gateway:read

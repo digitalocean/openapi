@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X PATCH \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"description":"Internal documentation and runbook search."}' \
+    "https://api.digitalocean.com/v2/action-gateway/mcp-servers/docs"

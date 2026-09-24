@@ -1,0 +1,875 @@
+toolkit:
+  type: object
+  description: A toolkit groups the catalog tools published by one provider.
+  properties:
+    id:
+      type: string
+      description: The toolkit identifier. This is the same value as the provider slug.
+      example: exa
+    name:
+      type: string
+      description: The display name of the toolkit.
+      example: Exa
+    description:
+      type: string
+      example: Web search tools backed by Exa.
+    categories:
+      type: array
+      description: The distinct, sorted categories of the toolkit's released tools.
+      items:
+        type: string
+      example:
+        - web-search
+    created_at:
+      type: string
+      format: date-time
+      nullable: true
+      example: '2026-06-01T00:00:00Z'
+
+list_toolkits_response:
+  type: object
+  properties:
+    version:
+      type: string
+      description: The catalog version.
+      example: v1
+    toolkits:
+      type: array
+      items:
+        $ref: '#/toolkit'
+
+tool_annotations:
+  type: object
+  nullable: true
+  description: MCP tool annotations that describe the behavior of the tool.
+  properties:
+    title:
+      type: string
+      example: Web Search
+    readOnlyHint:
+      type: boolean
+      example: true
+    idempotentHint:
+      type: boolean
+      example: true
+    openWorldHint:
+      type: boolean
+      nullable: true
+      example: true
+    destructiveHint:
+      type: boolean
+      nullable: true
+      example: false
+
+tool:
+  type: object
+  description: A released catalog tool.
+  properties:
+    name:
+      type: string
+      description: The unqualified tool name.
+      example: web_search
+    toolkitId:
+      type: string
+      description: The toolkit (provider) that owns the tool.
+      example: exa
+    toolSlug:
+      type: string
+      description: >-
+        The provider-qualified, stable tool identifier in the form
+        `<toolkit_id>_<name>`. Treat it as opaque and pass it verbatim to the
+        toolbelt, output view, and session endpoints.
+      example: exa_web_search
+    title:
+      type: string
+      example: Web Search
+    description:
+      type: string
+      example: Search the public web with Exa and return relevant results with normalized text snippets.
+    version:
+      type: string
+      description: The released version of the tool.
+      example: v1
+    inputSchema:
+      type: object
+      description: The JSON Schema of the tool input.
+      nullable: true
+      example:
+        type: object
+        properties:
+          query:
+            type: string
+            description: Search query string.
+          max_results:
+            type: integer
+            description: Maximum number of search results to return.
+        required:
+          - query
+    outputSchema:
+      type: object
+      description: The JSON Schema of the canonical tool output.
+      nullable: true
+      example:
+        type: object
+        properties:
+          query:
+            type: string
+          provider:
+            type: string
+          results:
+            type: array
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                url:
+                  type: string
+                text:
+                  type: string
+                publishedDate:
+                  type: string
+    annotations:
+      $ref: '#/tool_annotations'
+    parallelizable:
+      type: boolean
+      description: Whether the tool may be called concurrently with other tools.
+      example: true
+    streamingSafe:
+      type: boolean
+      example: true
+
+tool_definition:
+  type: object
+  description: >-
+    The full registry definition of a tool. Each entry of `definitions`
+    describes the entry at the same index of `tools`.
+  properties:
+    toolId:
+      type: string
+      description: The opaque identifier of the tool version.
+      example: tul_exa_web_search
+    name:
+      type: string
+      example: web_search
+    toolkitId:
+      type: string
+      example: exa
+    toolSlug:
+      type: string
+      example: exa_web_search
+    title:
+      type: string
+      example: Web Search
+    description:
+      type: string
+      example: Search the public web with Exa and return relevant results with normalized text snippets.
+    inputSchema:
+      type: object
+      nullable: true
+      description: The JSON Schema of the tool input.
+      example:
+        type: object
+        properties:
+          query:
+            type: string
+        required:
+          - query
+    outputSchema:
+      type: object
+      nullable: true
+      description: The JSON Schema of the canonical tool output.
+      example:
+        type: object
+        properties:
+          results:
+            type: array
+            items:
+              type: object
+    annotations:
+      $ref: '#/tool_annotations'
+    version:
+      type: string
+      example: v1
+    schemaVersion:
+      type: string
+      description: The version of the definition schema.
+      example: '2026-07-01'
+    status:
+      type: string
+      example: active
+    parallelizable:
+      type: boolean
+      example: true
+    streamingSafe:
+      type: boolean
+      example: true
+    auth:
+      type: object
+      nullable: true
+      description: How the tool authenticates to its provider.
+      properties:
+        modes:
+          type: array
+          items:
+            type: string
+          example:
+            - shared_key
+        provider:
+          type: string
+          example: exa
+        scopes:
+          type: array
+          items:
+            type: string
+          example: []
+        credentialBinding:
+          type: string
+          example: ''
+        credentialRefSource:
+          type: string
+          example: do_managed
+        doManagedCredentialRef:
+          type: string
+          example: EXA_API_KEY
+        injection:
+          type: object
+          nullable: true
+          description: Where the credential is placed on the outbound request.
+          properties:
+            location:
+              type: string
+              example: header
+            name:
+              type: string
+              example: x-api-key
+            scheme:
+              type: string
+              example: ''
+        baseUrlResolution:
+          type: object
+          nullable: true
+          description: A lookup that computes the request base URL after token exchange.
+          properties:
+            httpLookup:
+              $ref: '#/http_lookup'
+        headerResolution:
+          type: array
+          description: Lookups that compute request headers after token exchange.
+          items:
+            type: object
+            properties:
+              headerName:
+                type: string
+                example: X-Site-Id
+              httpLookup:
+                $ref: '#/http_lookup'
+        teamApiKey:
+          type: object
+          nullable: true
+          description: Instructions for using a team-supplied API key.
+          properties:
+            tokenExchange:
+              type: object
+              nullable: true
+              description: A request that exchanges the API key for a short-lived token.
+              properties:
+                method:
+                  type: string
+                  example: POST
+                urlTemplate:
+                  type: string
+                  example: https://api.example.com/v1/access_token
+                extractField:
+                  type: string
+                  example: token
+                bodyParameter:
+                  type: string
+                  example: api_key
+    execution:
+      type: object
+      nullable: true
+      description: How the tool is executed.
+      properties:
+        type:
+          type: string
+          example: http
+        adapterVersion:
+          type: string
+          example: v1
+        configRef:
+          type: string
+          example: ''
+        http:
+          type: object
+          nullable: true
+          properties:
+            baseUrl:
+              type: string
+              example: https://api.exa.ai
+            path:
+              type: string
+              example: /search
+            method:
+              type: string
+              example: POST
+            allowedHosts:
+              type: array
+              items:
+                type: string
+              example:
+                - api.exa.ai
+            requestEncoding:
+              type: string
+              example: json
+            responseFormat:
+              type: string
+              example: json
+            allowed_host_suffixes:
+              type: array
+              items:
+                type: string
+              example: []
+        mcp:
+          type: object
+          nullable: true
+          description: Set for tools fronted by a remote MCP server.
+          properties:
+            endpoint:
+              type: string
+              example: https://mcp.example.com/mcp
+            toolName:
+              type: string
+              example: search_docs
+            transport:
+              type: string
+              example: streamable_http
+            serverRef:
+              type: string
+              example: docs
+            allowedHosts:
+              type: array
+              items:
+                type: string
+              example:
+                - mcp.example.com
+            allowed_host_suffixes:
+              type: array
+              items:
+                type: string
+              example: []
+    transform:
+      type: object
+      nullable: true
+      description: The mapping between the public tool input/output and the provider request/response.
+      properties:
+        language:
+          type: string
+          example: gateway_mapping_v1
+        input:
+          type: object
+          nullable: true
+        output:
+          type: object
+          nullable: true
+    policy:
+      type: object
+      nullable: true
+      properties:
+        permission:
+          type: string
+          example: tools.exa.web_search
+    reliability:
+      type: object
+      nullable: true
+      properties:
+        timeoutMs:
+          type: integer
+          format: int32
+          example: 15000
+        maxOutputBytes:
+          type: string
+          format: int64
+          example: '2097152'
+        retry:
+          type: object
+          nullable: true
+          properties:
+            maxAttempts:
+              type: integer
+              format: int32
+              example: 2
+            backoff:
+              type: string
+              example: ''
+            retryOn:
+              type: array
+              items:
+                type: string
+              example:
+                - rate_limited
+                - timeout
+                - upstream_error
+            honorRetryAfter:
+              type: boolean
+              example: false
+            backoffPolicy:
+              type: object
+              nullable: true
+              properties:
+                initialMs:
+                  type: string
+                  format: int64
+                  example: '200'
+                multiplier:
+                  type: number
+                  format: double
+                  example: 2
+                maxMs:
+                  type: string
+                  format: int64
+                  example: '2000'
+                jitter:
+                  type: string
+                  enum:
+                    - JITTER_STRATEGY_UNSPECIFIED
+                    - JITTER_STRATEGY_FULL
+                    - JITTER_STRATEGY_NONE
+                  example: JITTER_STRATEGY_FULL
+            replay:
+              type: object
+              nullable: true
+              properties:
+                mode:
+                  type: string
+                  enum:
+                    - REPLAY_MODE_UNSPECIFIED
+                    - REPLAY_MODE_NEVER
+                    - REPLAY_MODE_READ_ONLY
+                    - REPLAY_MODE_PROVIDER_IDEMPOTENCY_KEY
+                  example: REPLAY_MODE_READ_ONLY
+            billable:
+              type: object
+              nullable: true
+              properties:
+                enabled:
+                  type: boolean
+                  example: false
+        provider_rate_limit:
+          type: object
+          nullable: true
+          description: >-
+            Provider rate limit metadata. Only the scope is returned through
+            the public API.
+          properties:
+            scope:
+              type: string
+              enum:
+                - credentialAware
+                - connection
+                - sharedApp
+              example: credentialAware
+    hooks:
+      type: object
+      nullable: true
+      properties:
+        usage:
+          type: object
+          nullable: true
+          properties:
+            billable:
+              type: boolean
+              example: true
+            meters:
+              type: array
+              items:
+                type: object
+                properties:
+                  sku:
+                    type: string
+                    example: siweb
+                  unit:
+                    type: string
+                    example: websearches
+                  quantitySource:
+                    type: string
+                    example: '1'
+    classification:
+      type: object
+      nullable: true
+      properties:
+        operation:
+          type: string
+          example: read
+        risk:
+          type: string
+          example: low
+        dataClasses:
+          type: array
+          items:
+            type: string
+          example:
+            - public_web
+    flipperName:
+      type: string
+      example: ''
+    tags:
+      type: array
+      items:
+        type: string
+      example: []
+    providerKind:
+      type: string
+      description: The registry classification of the provider, for example `managed_api` or `byo_mcp`.
+      example: managed_api
+
+http_lookup:
+  type: object
+  nullable: true
+  description: >-
+    Calls `url` with the exchanged access token, selects an entry of the JSON
+    array response, and extracts `extractField` from it.
+  properties:
+    method:
+      type: string
+      example: GET
+    url:
+      type: string
+      example: https://api.atlassian.com/oauth/token/accessible-resources
+    matchField:
+      type: string
+      example: url
+    matchValue:
+      type: string
+      example: ''
+    match_value_parameter:
+      type: string
+      description: A connection parameter whose value is matched against `matchField`.
+      example: site_url
+    caseInsensitive:
+      type: boolean
+      example: true
+    trimTrailingSlash:
+      type: boolean
+      example: true
+    extractField:
+      type: string
+      example: id
+    baseUrlTemplate:
+      type: string
+      example: https://api.atlassian.com/ex/jira/{value}
+    requiredScopes:
+      type: array
+      items:
+        type: string
+      example: []
+
+list_tools_response:
+  type: object
+  properties:
+    version:
+      type: string
+      description: The catalog version.
+      example: v1
+    tools:
+      type: array
+      items:
+        $ref: '#/tool'
+    definitions:
+      type: array
+      description: >-
+        Full definitions parallel to `tools`: `definitions[i]` describes
+        `tools[i]`.
+      items:
+        $ref: '#/tool_definition'
+    pagination:
+      $ref: 'shared.yml#/pagination'
+
+connection_parameter_spec:
+  type: object
+  description: >-
+    A non-sensitive value collected when configuring a connection or team
+    credential for a provider.
+  properties:
+    key:
+      type: string
+      example: site_url
+    label:
+      type: string
+      example: Jira site URL
+    description:
+      type: string
+      example: The HTTPS origin of the Jira Cloud site to use.
+    input_kind:
+      type: string
+      enum:
+        - string
+        - https_origin
+        - enum
+      example: https_origin
+    required:
+      type: boolean
+      example: true
+    normalization:
+      type: string
+      description: 'One of: `trim`, `lowercase`, `uppercase`, or `https_origin`. Empty when no normalization is applied.'
+      example: https_origin
+    allowed_values:
+      type: array
+      items:
+        type: string
+      example: []
+    allowed_host_suffixes:
+      type: array
+      items:
+        type: string
+      example:
+        - atlassian.net
+    max_length:
+      type: integer
+      format: int32
+      description: The maximum value length. `0` means no provider-declared limit.
+      example: 255
+    pattern:
+      type: string
+      description: An optional RE2 expression matched against the whole normalized value.
+      example: ''
+
+provider_summary:
+  type: object
+  properties:
+    name:
+      type: string
+      description: The provider slug accepted by the connection endpoints.
+      example: jira
+    display_name:
+      type: string
+      example: Jira
+    description:
+      type: string
+      example: Jira issue tracking tools.
+    auth_types:
+      type: array
+      description: >-
+        The sorted credential kinds the provider accepts: `none`, `oauth`,
+        `shared_api_key`, `unknown`, `user_oauth_app`, or `user_token`.
+      items:
+        type: string
+      example:
+        - oauth
+    auth_type:
+      type: string
+      deprecated: true
+      description: Deprecated. Use `auth_types` instead.
+      example: oauth
+    scopes:
+      type: array
+      description: The maximum OAuth scopes a connection can request. Only set for OAuth providers.
+      items:
+        type: string
+      example:
+        - write:jira-work
+    connection_parameters:
+      type: array
+      description: Values collected when creating a connection.
+      items:
+        $ref: '#/connection_parameter_spec'
+    credential_parameters:
+      type: array
+      description: Values collected when registering a team-owned provider credential.
+      items:
+        $ref: '#/connection_parameter_spec'
+
+list_providers_response:
+  type: object
+  properties:
+    providers:
+      type: array
+      items:
+        $ref: '#/provider_summary'
+
+tool_search_result:
+  type: object
+  description: >-
+    Summary metadata for one matching tool. Input and output schemas are
+    omitted.
+  properties:
+    tool_slug:
+      type: string
+      example: exa_web_search
+    name:
+      type: string
+      example: web_search
+    title:
+      type: string
+      example: Web Search
+    description:
+      type: string
+      example: Search the public web with Exa and return relevant results with normalized text snippets.
+    provider:
+      type: string
+      example: exa
+    category:
+      type: string
+      description: Best-effort catalog metadata. Often empty.
+      example: web-search
+    version:
+      type: integer
+      format: int32
+      description: The released version of the tool.
+      example: 1
+
+search_tools_response:
+  type: object
+  properties:
+    tools:
+      type: array
+      description: Results ordered by descending match quality, then by provider and name.
+      items:
+        $ref: '#/tool_search_result'
+    next_page_token:
+      $ref: 'shared.yml#/next_page_token'
+
+search_providers_response:
+  type: object
+  properties:
+    providers:
+      type: array
+      items:
+        $ref: '#/provider_summary'
+    next_page_token:
+      $ref: 'shared.yml#/next_page_token'
+
+health_snapshot:
+  type: object
+  description: When the health aggregate was measured and over which window.
+  properties:
+    measured_at:
+      type: string
+      format: date-time
+      nullable: true
+      example: '2026-09-24T12:00:00Z'
+    window:
+      type: string
+      description: The window duration, in seconds, with an `s` suffix.
+      example: 86400s
+    stale:
+      type: boolean
+      description: >-
+        When true, the rollup store could not be read and a bounded last-good
+        value was returned.
+      example: false
+
+health_metrics:
+  type: object
+  description: >-
+    A global, cross-tenant aggregate of provider behavior. Uptime and latency
+    are `null` when `data_status` is `HEALTH_DATA_STATUS_NO_DATA`.
+  properties:
+    data_status:
+      type: string
+      enum:
+        - HEALTH_DATA_STATUS_AVAILABLE
+        - HEALTH_DATA_STATUS_NO_DATA
+      description: >-
+        `HEALTH_DATA_STATUS_NO_DATA` means the window had no qualifying
+        observations. Do not render it as healthy.
+      example: HEALTH_DATA_STATUS_AVAILABLE
+    uptime_percentage:
+      type: number
+      format: double
+      nullable: true
+      description: Successful attempts divided by successful attempts plus provider failures.
+      example: 99.82
+    latency_p50_ms:
+      type: number
+      format: double
+      nullable: true
+      description: Median end-to-end latency of successful calls.
+      example: 412.5
+    latency_p95_ms:
+      type: number
+      format: double
+      nullable: true
+      example: 1180.0
+
+provider_health:
+  type: object
+  properties:
+    provider:
+      type: string
+      example: exa
+    health:
+      $ref: '#/health_metrics'
+
+tool_health:
+  type: object
+  properties:
+    tool_slug:
+      type: string
+      example: exa_web_search
+    provider:
+      type: string
+      example: exa
+    health:
+      $ref: '#/health_metrics'
+
+list_provider_health_response:
+  type: object
+  properties:
+    snapshot:
+      $ref: '#/health_snapshot'
+    providers:
+      type: array
+      items:
+        $ref: '#/provider_health'
+    pagination:
+      $ref: 'shared.yml#/pagination'
+
+list_tool_health_response:
+  type: object
+  properties:
+    snapshot:
+      $ref: '#/health_snapshot'
+    tools:
+      type: array
+      items:
+        $ref: '#/tool_health'
+    pagination:
+      $ref: 'shared.yml#/pagination'
+
+get_tool_health_response:
+  type: object
+  properties:
+    snapshot:
+      $ref: '#/health_snapshot'
+    tool:
+      $ref: '#/tool_health'
+    history:
+      type: object
+      nullable: true
+      description: >-
+        The window split into consecutive points, oldest first. Only present
+        when `include_history=true`.
+      properties:
+        resolution:
+          type: string
+          description: >-
+            The width of each point: `600s` for one hour, `3600s` for 24
+            hours, `21600s` for 7 days, and `86400s` for 30 days.
+          example: 3600s
+        stale:
+          type: boolean
+          description: Whether the history series was served from a last-good cache.
+          example: false
+        points:
+          type: array
+          items:
+            type: object
+            properties:
+              bucket_start:
+                type: string
+                format: date-time
+                example: '2026-09-24T11:00:00Z'
+              health:
+                $ref: '#/health_metrics'

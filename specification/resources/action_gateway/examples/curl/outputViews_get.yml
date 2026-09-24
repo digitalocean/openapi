@@ -1,0 +1,5 @@
+lang: cURL
+source: |-
+  curl -X GET \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v2/action-gateway/output-views/ov_4f0c2a9d8e1b47c6a3d5f7e9b1c3a5d7"

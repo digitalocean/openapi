@@ -1,0 +1,62 @@
+operationId: tools_get_health
+summary: Retrieve Tool Health
+description: 'Retrieves availability and latency for one tool. With `include_history=true`, the response
+  also splits the window into points: 10 minutes for one hour, 1 hour for 24 hours, 6 hours for 7 days,
+  and 24 hours for 30 days. Render `HEALTH_DATA_STATUS_NO_DATA` points as gaps.'
+tags:
+- Action Gateway
+parameters:
+- $ref: parameters.yml#/tool_slug
+- $ref: parameters.yml#/health_window
+- $ref: parameters.yml#/include_history
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/tools.yml#/get_tool_health_response
+        example:
+          snapshot:
+            measured_at: '2026-09-24T12:00:00Z'
+            window: 3600s
+            stale: false
+          tool:
+            tool_slug: exa_web_search
+            provider: exa
+            health: &id001
+              data_status: HEALTH_DATA_STATUS_AVAILABLE
+              uptime_percentage: 99.82
+              latency_p50_ms: 412.5
+              latency_p95_ms: 1180.0
+          history:
+            resolution: 600s
+            stale: false
+            points:
+            - bucket_start: '2026-09-24T11:10:00Z'
+              health: *id001
+            - bucket_start: '2026-09-24T11:20:00Z'
+              health:
+                data_status: HEALTH_DATA_STATUS_NO_DATA
+                uptime_percentage: null
+                latency_p50_ms: null
+                latency_p95_ms: null
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/tools_get_health.yml
+security:
+- bearer_auth:
+  - action_gateway:read

@@ -1,0 +1,229 @@
+session_policy:
+  type: object
+  nullable: true
+  description: >-
+    The tool-permission policy of a session. If omitted on create, every tool
+    call asks for approval.
+  properties:
+    defaultAction:
+      type: string
+      enum:
+        - allow
+        - ask
+        - deny
+      description: The action for tool calls that match no rule. Defaults to `ask`.
+      example: ask
+    rules:
+      type: array
+      items:
+        type: object
+        properties:
+          tool:
+            type: string
+            description: >-
+              A provider-qualified tool slug, optionally version-pinned, or a
+              version-pinned toolbelt reference `toolbelt:<name>@<version>`.
+            example: exa_web_search
+          match:
+            type: object
+            description: Optional argument values that narrow the rule to matching calls.
+            additionalProperties:
+              type: string
+            example: {}
+          action:
+            type: string
+            enum:
+              - allow
+              - ask
+              - deny
+            example: allow
+
+session_network:
+  type: object
+  description: Attaches the session to a VPC owned by your team.
+  properties:
+    vpcUuid:
+      type: string
+      format: uuid
+      example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+
+session_insights:
+  type: object
+  description: Whether the session's telemetry is sent to Insights.
+  properties:
+    metrics:
+      type: boolean
+      nullable: true
+      example: true
+    logs:
+      type: boolean
+      nullable: true
+      example: true
+    traces:
+      type: boolean
+      nullable: true
+      example: false
+
+session:
+  type: object
+  description: A session and the tool-permission policy bound to it.
+  properties:
+    sessionUrn:
+      type: string
+      example: do:managed_agent_session:2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+    name:
+      type: string
+      example: support-bot-alice
+    actorId:
+      type: string
+      description: The end user the session acts for. Empty when unbound.
+      example: alice
+    policy:
+      $ref: '#/session_policy'
+    tools:
+      type: object
+      description: >-
+        The selected tools. Omitted when every tool is enabled. Present with no
+        references when no tools are enabled.
+      properties:
+        references:
+          type: array
+          items:
+            type: object
+            properties:
+              kind:
+                type: string
+                enum:
+                  - SESSION_TOOL_REFERENCE_KIND_TOOL
+                  - SESSION_TOOL_REFERENCE_KIND_TOOLBELT
+                example: SESSION_TOOL_REFERENCE_KIND_TOOLBELT
+              name:
+                type: string
+                example: search-toolbelt
+              version:
+                type: string
+                example: '1'
+    config:
+      type: object
+      description: Opaque session options, as supplied on create. Omitted when not supplied.
+      example:
+        preloadTools:
+          - exa_web_search
+        outputViews:
+          exa_web_search: titles-and-urls
+    network:
+      $ref: '#/session_network'
+    insights:
+      $ref: '#/session_insights'
+    agentUrn:
+      type: string
+      description: Set for sessions created by a managed agent.
+      example: ''
+    agentName:
+      type: string
+      example: ''
+    createdAt:
+      type: string
+      format: date-time
+      nullable: true
+      example: '2026-09-24T12:00:00Z'
+    updatedAt:
+      type: string
+      format: date-time
+      nullable: true
+      example: '2026-09-24T12:00:00Z'
+    owning_user_id:
+      type: string
+      description: The DigitalOcean user that created the session, when recorded.
+      example: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
+    owning_user_numeric_id:
+      type: string
+      format: uint64
+      description: The numeric ID of the DigitalOcean user that created the session, when recorded.
+      example: '1234567'
+
+session_create:
+  type: object
+  required:
+    - name
+  properties:
+    name:
+      type: string
+      description: A human-readable name for the session.
+      example: support-bot-alice
+    actorId:
+      type: string
+      pattern: '^[A-Za-z0-9._-]{1,64}$'
+      description: >-
+        Binds the session to one end user. Connections are resolved by passing
+        this value as their `user_id`.
+      example: alice
+    policy:
+      $ref: '#/session_policy'
+    tools:
+      type: array
+      description: >-
+        Omit to enable every tool; send an empty array to enable none. Entries
+        are tool slugs (`<tool>` or `<tool>@<version>`) or version-pinned
+        toolbelt references (`toolbelt:<name>@<version>`).
+      items:
+        type: string
+      example:
+        - toolbelt:search-toolbelt@1
+        - jira_create_issue
+    config:
+      type: object
+      description: >-
+        Opaque session options. `preloadTools` lists tools to add to the
+        session's MCP tool list up front. `outputViews` maps a tool slug to the
+        name of an output view to apply to that tool. `customInstructions` (at
+        most 1,000 characters) is appended to the MCP server instructions.
+      example:
+        preloadTools:
+          - exa_web_search
+        outputViews:
+          exa_web_search: titles-and-urls
+        customInstructions: Prefer primary sources and cite URLs.
+    network:
+      $ref: '#/session_network'
+    insights:
+      $ref: '#/session_insights'
+
+create_session_response:
+  type: object
+  properties:
+    session:
+      $ref: '#/session'
+    mcpUrl:
+      type: string
+      description: The session's MCP endpoint. Connect your MCP client to this URL.
+      example: https://actions.do-ai.run/mcp/session/2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+    tools:
+      type: array
+      description: The canonical, version-pinned references of the selected tools.
+      items:
+        type: string
+      example:
+        - toolbelt:search-toolbelt@1
+        - jira_create_issue@1
+
+list_sessions_response:
+  type: object
+  properties:
+    sessions:
+      type: array
+      items:
+        $ref: '#/session'
+    pagination:
+      $ref: 'shared.yml#/pagination'
+
+search_sessions_response:
+  type: object
+  properties:
+    sessions:
+      type: array
+      description: Ordered by match quality (exact, then prefix, then substring).
+      items:
+        $ref: '#/session'
+    next_page_token:
+      $ref: 'shared.yml#/next_page_token'

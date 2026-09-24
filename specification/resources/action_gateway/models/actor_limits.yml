@@ -1,0 +1,80 @@
+limit_category:
+  type: string
+  enum:
+    - LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE
+    - LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE
+    - LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE
+    - LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE
+  example: LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE
+
+limit_override:
+  type: object
+  required:
+    - category
+    - requests_per_minute
+  properties:
+    category:
+      $ref: '#/limit_category'
+    requests_per_minute:
+      type: string
+      format: uint64
+      description: The per-minute limit for this end user. It cannot exceed your team's limit.
+      example: '30'
+
+tool_quotas:
+  type: object
+  description: Per-minute request limits.
+  properties:
+    web_search_requests_per_minute:
+      type: string
+      format: uint64
+      example: '30'
+    web_fetch_requests_per_minute:
+      type: string
+      format: uint64
+      example: '120'
+    native_tool_calls_requests_per_minute:
+      type: string
+      format: uint64
+      example: '600'
+    non_native_tool_calls_requests_per_minute:
+      type: string
+      format: uint64
+      example: '600'
+
+get_actor_limits_response:
+  type: object
+  properties:
+    configured_limits:
+      type: array
+      description: The overrides set for this end user.
+      items:
+        $ref: '#/limit_override'
+    effective_limits:
+      $ref: '#/tool_quotas'
+
+set_actor_limits:
+  type: object
+  required:
+    - overrides
+  properties:
+    overrides:
+      type: array
+      minItems: 1
+      description: One override per category. Categories must not repeat.
+      items:
+        $ref: '#/limit_override'
+
+clear_actor_limits:
+  type: object
+  required:
+    - categories
+  properties:
+    categories:
+      type: array
+      minItems: 1
+      description: The categories whose overrides are removed. Categories must not repeat.
+      items:
+        $ref: '#/limit_category'
+      example:
+        - LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE
