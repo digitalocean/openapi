@@ -1,10 +1,10 @@
 operationId: agents_create_config
-summary: Create an Environment Config (manifest + secrets in one request).
+summary: Create an Environment Config (environment spec + secrets in one request).
 description: Accepts name, environment-spec YAML text, and optional write-only secret values in one request.
   Responses never echo secret values; GET/create may include credential slot metadata (name/source/provider
   only). Configs are immutable after create.
 tags:
-- Environments
+- Harness Runtime
 requestBody:
   required: true
   content:

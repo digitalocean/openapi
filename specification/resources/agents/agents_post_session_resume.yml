@@ -4,7 +4,7 @@ description: Only valid for microvm-substrate sessions; dewdrop/docker sessions 
   Implicit resume also occurs when SendInput or ResolveHITL is called on a paused session. Returns synchronously
   once the sandbox is ready.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: session_id

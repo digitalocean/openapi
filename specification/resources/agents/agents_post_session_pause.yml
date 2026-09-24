@@ -4,7 +4,7 @@ description: Supported on microvm-substrate sessions only; dewdrop/docker sessio
   Paused sessions count against quota. Clients learn state via GetSession/ListSessions; no live session.updated
   event is emitted.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: session_id

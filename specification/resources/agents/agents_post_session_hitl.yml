@@ -5,7 +5,7 @@ description: harness-api forwards the decision into the owning microVM via the i
   is also echoed to all attached clients as a HITLResolved event on StreamSession. Returns 204 No Content
   on success.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: session_id

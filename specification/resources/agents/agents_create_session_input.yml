@@ -4,7 +4,7 @@ description: The agent observes it on its next turn and emits subsequent events 
   input is forwarded to the owning microVM's OHR inbound surface, which attributes it to a run and returns
   the run id.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: session_id

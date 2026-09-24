@@ -2,7 +2,7 @@ operationId: agents_delete_template
 summary: DeleteTemplate deletes a team custom template.
 description: Global templates cannot be deleted via this API.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: template_id

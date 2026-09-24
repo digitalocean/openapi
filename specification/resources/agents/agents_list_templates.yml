@@ -2,7 +2,7 @@ operationId: agents_list_templates
 summary: ListTeamTemplates returns the caller's team custom templates.
 description: team_id is stamped from the authenticated principal; never accepted from the client.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: query
   name: page_size

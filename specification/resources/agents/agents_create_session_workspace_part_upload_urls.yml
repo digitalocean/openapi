@@ -5,7 +5,7 @@ description: Upload only. Pass one or more 1-based `part_numbers`; the response 
   trip per part. PUT each part's bytes directly to its URL (bypassing harness-api). If URLs expire before
   the PUT, request them again.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: session_id

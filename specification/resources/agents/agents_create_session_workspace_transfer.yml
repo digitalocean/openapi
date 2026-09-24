@@ -16,7 +16,7 @@ description: 'Creates an asynchronous, object-storage-backed transfer for payloa
 
   Upload and cancel currently return 501 until the sandbox backend RPCs ship; download is live.'
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: session_id

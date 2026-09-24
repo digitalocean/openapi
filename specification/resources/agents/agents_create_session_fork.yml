@@ -2,7 +2,7 @@ operationId: agents_create_session_fork
 summary: ForkSession creates child sessions from a checkpoint of this session.
 description: 'Each child boots a fresh sandbox from the checkpoint''s machine-state capture and is drivable exactly like any other session (input, HITL), with parent_session_id and fork_id set for lineage. When from_checkpoint_id is omitted, an implicit checkpoint of the session "now" is captured first and the children fork from that. All-or-nothing: on failure nothing is left running.'
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: session_id

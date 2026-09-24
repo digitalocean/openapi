@@ -1,9 +1,9 @@
 operationId: agents_list_configs
 summary: List active Environment Configs for the caller's team.
-description: Returns lightweight team-scoped config metadata without loading or returning manifest JSON.
+description: Returns lightweight team-scoped config metadata without loading or returning environment-spec JSON.
   Soft-deleted configs are excluded.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: query
   name: page_size

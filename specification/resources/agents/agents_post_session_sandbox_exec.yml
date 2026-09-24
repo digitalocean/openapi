@@ -4,7 +4,7 @@ description: |-
   Runs `argv` directly in the guest (no shell). Stdout/stderr are buffered and capped at 1 MiB each;
   truncation is indicated via response headers when present. A non-zero exit code is still HTTP 200.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: session_id

@@ -2,7 +2,7 @@ operationId: agents_list_session_checkpoints
 summary: ListCheckpoints enumerates a session's checkpoints, newest first.
 description: Keyset-paginated on an opaque cursor, like ListSessions.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: session_id

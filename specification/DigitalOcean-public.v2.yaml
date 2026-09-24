@@ -65,17 +65,18 @@ tags:
       Discover Action Gateway tools and providers, manage versioned toolbelts and
       OAuth connections, and create policy-bound sessions for end users.
 
-  - name: Environments
+  - name: Harness Runtime
     description: |-
-      Harness Runtime API under `/v2/agents`. Sessions (`/v2/agents/sessions`)
-      represent an environment session + sandbox pair. Sessions can be created from a
-      YAML environment spec or from an existing Environment Config via JSON
-      `{name, config_id}`.
+      DigitalOcean Harness Runtime API under `/v2/agents`. An environment is a
+      reusable configuration that defines what an agent needs to do work; starting
+      a session from an environment provisions an isolated sandbox. Define an
+      environment with a YAML environment spec, or save it as an Environment Config
+      and create sessions from `{name, config_id}`.
 
-      Environment Configs (`/v2/agents/configs`) are immutable team-scoped manifests
-      that sessions can be created from. Soft-delete releases the active name
-      while keeping `config_id` resolvable for existing sessions; clone copies a
-      sanitized manifest under a new name (credentials are never copied).
+      Environment Configs (`/v2/agents/configs`) are immutable team-scoped
+      configurations. Soft-delete releases the active name while keeping
+      `config_id` resolvable for existing sessions; clone copies a sanitized
+      environment under a new name (credentials are never copied).
 
       Checkpoints capture live sandbox machine state for fork and in-place
       rollback. Templates (`/v2/agents/templates`) manage team custom sandbox

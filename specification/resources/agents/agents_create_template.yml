@@ -2,7 +2,7 @@ operationId: agents_create_template
 summary: CreateTemplate creates a team custom template and kicks a build.
 description: Creates a team-owned template from a customer OCI ref rebased onto a base template. team_id is stamped from the authenticated principal.
 tags:
-- Environments
+- Harness Runtime
 requestBody:
   required: true
   content:

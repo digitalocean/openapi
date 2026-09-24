@@ -1,10 +1,10 @@
 operationId: agents_create_session
-summary: CreateSession provisions a sandbox and starts the requested agent.
+summary: CreateSession provisions a sandbox and starts a Harness Runtime session.
 description: |-
   Returns once the session row is allocated. Sandbox boot completes asynchronously.
 
   Two mutually exclusive request forms are selected by Content-Type:
-  - YAML (`application/x-yaml` and siblings): the environment spec. Two manifest formats are
+  - YAML (`application/x-yaml` and siblings): the environment spec. Two environment-spec formats are
     accepted during the dual-format transition: the flat format (primary) and the legacy
     `agents.digitalocean.com/v1alpha1` envelope (deprecated). A top-level `apiVersion` key selects the
     legacy parser; its absence selects flat. Internally persists a durable Environment Config, then creates
@@ -16,7 +16,7 @@ description: |-
   on the session row. Query parameters `openai_session_id` and `resume_on_topoff` apply to both forms;
   when both the JSON body field and `?resume_on_topoff=` are present, the query parameter wins.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: header
   name: X-Device-UUID

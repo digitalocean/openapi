@@ -13,7 +13,7 @@ description: 'Stateless preflight: parses the same environment spec as CreateSes
   returns `ok: true` with no verdicts. Because it shares the create path''s descriptor lookup, the verdicts
   match what CreateSession would compute.'
 tags:
-- Environments
+- Harness Runtime
 requestBody:
   required: true
   content:

@@ -2,7 +2,7 @@ operationId: agents_update_template
 summary: UpdateTemplate updates a team template's source and kicks a new build.
 description: UpdateTemplate updates a team template's source and kicks a new build.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: template_id

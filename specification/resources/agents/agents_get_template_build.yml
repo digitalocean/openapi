@@ -2,7 +2,7 @@ operationId: agents_get_template_build
 summary: GetTemplateBuild returns a single template build.
 description: GetTemplateBuild returns a single template build.
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: template_id

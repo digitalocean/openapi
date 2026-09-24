@@ -23,7 +23,7 @@ description: 'Streams the workspace payload back as `application/octet-stream` u
   Concurrent transfers (upload + download) are capped server-side; over the cap the request blocks and
   may return 503.'
 tags:
-- Environments
+- Harness Runtime
 parameters:
 - in: path
   name: session_id
