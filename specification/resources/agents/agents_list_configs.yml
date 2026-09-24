@@ -25,6 +25,16 @@ parameters:
     type: string
     example: ''
   example: ''
+- in: query
+  name: search
+  required: false
+  description: Optional case-insensitive substring filter on config name (contains). Empty or omitted
+    returns the unfiltered page. At most 64 characters.
+  schema:
+    type: string
+    maxLength: 64
+    example: support
+  example: support
 responses:
   '200':
     description: A page of active Agent Configs.

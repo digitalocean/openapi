@@ -115,6 +115,13 @@ responses:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
+  '423':
+    description: This session is unavailable; contact support.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
   '429':
     $ref: ../../shared/responses/too_many_requests.yml
   '500':

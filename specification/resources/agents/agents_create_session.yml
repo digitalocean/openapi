@@ -1,24 +1,20 @@
 operationId: agents_create_session
 summary: CreateSession provisions a sandbox and starts the requested agent.
-description: 'Returns once the session row is allocated. The sandbox boot completes asynchronously; clients
-  observe SESSION_STATUS_PROVISIONING → READY via StreamSession.
+description: |-
+  Returns once the session row is allocated. Sandbox boot completes asynchronously.
 
+  Two mutually exclusive request forms are selected by Content-Type:
+  - YAML (`application/x-yaml` and siblings): the agents.yaml Agent manifest. Two manifest formats are
+    accepted during the dual-format transition: the flat format (primary) and the legacy
+    `agents.digitalocean.com/v1alpha1` envelope (deprecated). A top-level `apiVersion` key selects the
+    legacy parser; its absence selects flat. Internally persists a durable Agent Config, then creates
+    the session.
+  - JSON (`application/json`): `{name, config_id}` loads the config, resolves its credentials from Secrets
+    Manager at the version pinned when the config was created, and creates the session.
 
-  Two mutually exclusive request forms are selected by Content-Type. Existing YAML callers send a raw
-  customer `agents.yaml` Agent manifest with `application/x-yaml`, `application/yaml`, `text/yaml`, or
-  `text/x-yaml`; this flow is unchanged. Definition-backed callers send the strict `CreateSessionDefinitionRequest`
-  JSON object with `application/json`. Unknown JSON fields, including team identity, are rejected. An
-  omitted revision_id pins the definition''s current immutable revision.
-
-
-  Definition-backed execution requires an exactly matching credential binding set when the selected revision
-  declares logical secrets. Static values are fetched only by their persisted name/region/version and
-  are never returned or persisted. OAuth bindings currently fail closed with 501.
-
-
-  Every successful create atomically persists value-free execution provenance and an allowlisted agent-spec
-  audit snapshot. The team and user identity are taken from the authenticated principal, never the body.
-  `X-Device-UUID` (if present) is persisted on the session row.'
+  Successful responses may include `config_id` on the session. `X-Device-UUID` (if present) is persisted
+  on the session row. Query parameters `openai_session_id` and `resume_on_topoff` apply to both forms;
+  when both the JSON body field and `?resume_on_topoff=` are present, the query parameter wins.
 tags:
 - Agents
 parameters:
@@ -31,19 +27,42 @@ parameters:
     type: string
     example: device-uuid-example
   example: device-uuid-example
+- in: query
+  name: openai_session_id
+  required: false
+  description: 'OpenAI Agents API session id (sess_…) for adapter: codex-agentapi. doctl creates the OpenAI
+    session before calling DO and passes the resulting id here; harness-api persists it for correlation.
+    Empty/omitted for every other agent kind.'
+  schema:
+    type: string
+    example: sess_abc123
+  example: sess_abc123
+- in: query
+  name: resume_on_topoff
+  required: false
+  description: Opt the new session in to automatic resumption when the team's prepayment balance is restored.
+    Defaults to false. Exists as a query parameter so the agents.yaml (YAML body) form can carry it too.
+    On the application/json form the body field is idiomatic, but this parameter wins when both are present.
+    Must be exactly one of true/false/1/0; anything else is a 400.
+  schema:
+    type: boolean
+    example: false
+  example: false
 requestBody:
   required: true
   content:
     application/json:
       schema:
-        $ref: models/definitions.yml#/create_session_definition_request
+        $ref: models/definitions.yml#/create_session_config_request
     application/x-yaml: &id001
       schema:
-        $ref: models/definitions.yml#/agent_manifest
+        type: object
+        additionalProperties: true
+        description: Raw agents.yaml Agent manifest (flat or legacy envelope).
     application/yaml: *id001
     text/yaml: *id001
     text/x-yaml: *id001
-  description: Either a raw AgentManifest with a YAML Content-Type or CreateSessionDefinitionRequest with
+  description: Either a raw Agent manifest with a YAML Content-Type or CreateSessionConfigRequest with
     application/json. The forms are mutually exclusive by Content-Type.
 responses:
   '200':
@@ -60,8 +79,7 @@ responses:
         schema:
           $ref: models/definitions.yml#/create_session_response
   '400':
-    description: Invalid manifest/reference JSON, incompatible or missing binding set, env collision,
-      credential limit violation, or invalid session/origin identifier.
+    description: Invalid manifest/config JSON, incompatible credentials, or invalid query parameter.
     headers: *id002
     content:
       application/json:
@@ -76,18 +94,17 @@ responses:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
   '409':
-    description: Team is at the active-session quota, a live session name already exists, or the binding
-      set targets another revision.
+    description: Team is at the active-session quota, or a live session name already exists.
     headers: *id002
     content:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
-  '404':
-    $ref: ../../shared/responses/not_found.yml
   '413':
-    description: JSON reference body exceeds 16 KiB or YAML body exceeds 1 MiB.
+    description: JSON body exceeds 16 KiB or YAML body exceeds 1 MiB.
     headers: *id002
     content:
       application/json:
@@ -100,9 +117,10 @@ responses:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
   '501':
-    description: The selected binding set contains an OAuth assignment; execution-time OAuth brokering
-      is not available yet.
+    description: Requested capability is not available.
     headers: *id002
     content:
       application/json:
@@ -115,8 +133,6 @@ responses:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
-  '500':
-    $ref: ../../shared/responses/server_error.yml
   '429':
     $ref: ../../shared/responses/too_many_requests.yml
   default:

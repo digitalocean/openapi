@@ -1,18 +1,30 @@
 agent_kind:
   type: string
   enum:
-  - AGENT_KIND_UNSPECIFIED
-  - AGENT_KIND_CLAUDE_CODE
-  - AGENT_KIND_OPENCODE
-  - AGENT_KIND_CODEX_CLI
-  - AGENT_KIND_CURSOR_CLI
-  - AGENT_KIND_NONE
-  - AGENT_KIND_CUSTOM
+    - AGENT_KIND_UNSPECIFIED
+    - AGENT_KIND_CLAUDE_CODE
+    - AGENT_KIND_OPENCODE
+    - AGENT_KIND_CODEX_CLI
+    - AGENT_KIND_CURSOR_CLI
+    - AGENT_KIND_NONE
+    - AGENT_KIND_CUSTOM
+    - AGENT_KIND_HERMES
+    - AGENT_KIND_OPENAI_CODEX
+    - AGENT_KIND_LANGGRAPH
+    - AGENT_KIND_CREWAI
   default: AGENT_KIND_UNSPECIFIED
-  description: AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE,
-    OPENCODE, and CODEX_CLI (the supported set is overridable via HARNESS_SUPPORTED_AGENT_KINDS); other
-    values are rejected with 400.
+  description: >-
+    AgentKind identifies what runs inside the session sandbox. CreateSession accepts CLAUDE_CODE,
+    OPENCODE, CODEX_CLI, CURSOR_CLI, OPENAI_CODEX, LANGGRAPH, and CREWAI (the supported set is
+    overridable via HARNESS_SUPPORTED_AGENT_KINDS); other values are rejected with 400.
+    AGENT_KIND_OPENAI_CODEX is the OpenAI sandbox-provider kind (DO runs codex exec-server; the
+    agent loop lives at OpenAI). AGENT_KIND_LANGGRAPH is the LangGraph framework adapter.
+    AGENT_KIND_CREWAI is the CrewAI Crew framework adapter: like LANGGRAPH the template bakes no
+    agent code, so spec.env must supply FRAMEWORK_REPO and FRAMEWORK_REPO_SHA; a Crew kickoff is
+    one-shot and exposes no HITL surface. CREWAI is additionally gated per team and returns 400 for
+    teams it is not enabled for.
   example: AGENT_KIND_UNSPECIFIED
+
 agent_manifest:
   type: object
   description: 'Customer-authored agents.yaml Agent manifest (see internal/agentspec and contracts/agent.v1alpha1.schema.json
@@ -294,38 +306,37 @@ agent_manifest:
                   type: integer
                   format: int64
                   example: 1
-create_session_definition_request:
+create_session_config_request:
   type: object
   additionalProperties: false
   required:
-  - name
-  - definition_id
+    - name
+    - config_id
   properties:
     name:
       type: string
       minLength: 1
       maxLength: 64
-      description: Session name, independent of the definition name. Must satisfy the existing agents.yaml
+      description: >-
+        Session name, independent of the config name. Must satisfy the existing agents.yaml
         metadata.name rules and must not be UUID-shaped.
       example: demo-agent
-    definition_id:
+    config_id:
       type: string
       format: uuid
       example: 11111111-2222-3333-4444-555555555555
-    revision_id:
-      type: string
-      format: uuid
-      description: Public immutable revision UUID. Omit to pin the definition's current revision.
-      example: 11111111-2222-3333-4444-555555555555
-    credential_binding_set_id:
-      type: string
-      format: uuid
-      description: Required exactly when the selected revision declares logical credential slots.
-      example: 11111111-2222-3333-4444-555555555555
-    origin:
-      $ref: '#/session_origin_request'
-  description: Strict application/json CreateSession form. The HTTP body is capped at 16 KiB and cannot
-    carry team identity, inline manifests, or credential values.
+    resume_on_topoff:
+      type: boolean
+      description: >-
+        Opt the new session in to automatic resumption when the team's prepayment balance is
+        restored. Defaults to false. Session-scoped, not config-scoped: the referenced config never
+        confers this, so one shared config cannot enrol every session created from it. Omit to leave
+        the default (or to let the ?resume_on_topoff= query parameter supply it).
+      example: false
+  description: >-
+    Strict application/json CreateSession form. Loads config_id, resolves the config's single
+    internal secret binding, and creates the session. Body capped at 16 KiB; no inline secrets.
+
 create_session_response:
   type: object
   properties:
@@ -611,70 +622,127 @@ session:
       example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
     name:
       type: string
-      description: User-assignable display name, unique per team among non-terminal sessions. Usable in
-        place of session_id by clients (doctl / Console resolve it to the id via the ListSessions ?name=
-        filter; the {session_id} path stays UUID-only). Supplied via the agents.yaml metadata.name, or
-        auto-generated ("session-<agent-type>-<date-time>") when omitted.
+      description: >-
+        User-assignable display name, unique per team among non-terminal sessions. Usable in place
+        of session_id by clients (doctl / Console resolve it to the id via the ListSessions ?name=
+        filter; the {session_id} path stays UUID-only). Supplied via the agents.yaml metadata.name,
+        or auto-generated ("session-<agent-type>-<date-time>") when omitted.
       example: demo-agent
-    team_id:
-      type: integer
-      format: int64
-      description: DO Team ID (unsigned 64-bit; serialized as a JSON number).
-      example: 123456
+    parent_session_id:
+      type: string
+      description: >-
+        Lineage: id of the session this one was forked from. Omitted/empty for root (non-fork)
+        sessions.
+      example: example
+    fork_id:
+      type: string
+      format: uuid
+      description: >-
+        Lineage: branch label assigned when this session was created by ForkSession (or rollback's
+        internal fork). Omitted/empty for root sessions.
+      example: 11111111-2222-3333-4444-555555555555
+    fork_from_checkpoint_id:
+      type: string
+      description: >-
+        Lineage: harness-api checkpoint id (cp_<hex>) the child booted from at fork time. Drives OHP
+        inherited-history replay on attach. Omitted/empty for root sessions and legacy forks created
+        before this field was persisted.
+      example: example
     agent_kind:
       $ref: '#/agent_kind'
     status:
       $ref: '#/session_status'
     sandbox_id:
       type: string
-      description: Sandbox identity for support / debugging. Informational; omitted until a sandbox is
+      description: >-
+        Sandbox identity for support / debugging. Informational; omitted until a sandbox is
         allocated.
-      example: sbx_abc123
+      example: example
     created_at:
       type: string
       format: date-time
-      example: '2026-07-27T12:00:00Z'
+      example: '2026-08-01T12:00:00Z'
     last_event_at:
       type: string
       format: date-time
-      description: Timestamp of the most recent event in this session's canonical stream. Drives the inactivity
+      description: >-
+        Timestamp of the most recent event in this session's canonical stream. Drives the inactivity
         policy that destroys idle sessions.
-      example: '2026-07-27T12:00:00Z'
+      example: '2026-08-01T12:00:00Z'
+    keep_warm:
+      type: boolean
+      description: >-
+        Session is exempt from idle auto-pause (manifest keep_warm, or the agent-kind default:
+        hermes sessions keep warm). Pause requests against such a session are rejected with 409.
+        Omitted when false.
+      example: false
+    resume_on_topoff:
+      type: boolean
+      description: >-
+        Session consents to being resumed automatically when the team's prepayment balance is
+        restored after a low-balance pause. Defaults to false at create time; may be toggled later
+        via PATCH /v2/agents/sessions/{session_id} (resume_on_topoff only). Only a session paused
+        with reason low_balance whose latest run did not complete is ever resumed automatically - a
+        session the customer paused themselves, or one that idled out, stays paused regardless. Not
+        an agents.yaml field, and forks do not inherit it. Omitted when false.
+      example: false
+    pause_reason:
+      type: string
+      description: >-
+        Why this session is paused. Present only when status is SESSION_STATUS_PAUSED; omitted
+        otherwise. Known values: manual (PauseSession RPC), idle (inactivity auto-pause),
+        low_balance (prepay gate). Clients should treat an unrecognized value as an opaque reason
+        string.
+      example: example
+    idle_timeout_seconds:
+      type: integer
+      format: int64
+      description: >-
+        This session's own idle-pause timeout (manifest idle_timeout). Omitted when the session uses
+        the deployment-wide default.
+      example: 60
     repo_hint:
       type: string
-      description: Optional repository hint supplied at session creation (first spec.workspace.repos entry
-        of the manifest). Not authoritative; the agent may change repos in-session.
-      example: github.com/digitalocean/example
+      description: >-
+        Optional repository hint supplied at session creation (first spec.workspace.repos entry of
+        the manifest). Not authoritative; the agent may change repos in-session.
+      example: example
     warnings:
       type: array
       items:
         type: string
-        example: example
-      description: 'Non-fatal advisories computed from the manifest at create time: one entry per populated
-        accepted-but-not-yet-enforced section (spec.secrets, spec.model, spec.tools, spec.memory, spec.defaults.budget,
-        spec.sandbox.maxLifetimeSeconds), a deprecation entry when an adapter alias (codex-cli, cursor-cli)
-        is used, and a heuristic entry per credential-looking spec.env value. Populated on the CreateSession
-        response only.'
-      example:
-      - example
-    definition_id:
+      description: >-
+        Non-fatal advisories computed from the manifest at create time: one entry per populated
+        accepted-but-not-yet-enforced section (flat names: secrets, model, tools, memory, budget,
+        max_lifetime, mounts; legacy manifests get the corresponding spec.* paths), a deprecation
+        entry when a legacy-envelope manifest or an adapter alias (codex-cli, cursor-cli) is used,
+        and a heuristic entry per credential-looking spec.env value. Populated on the CreateSession
+        response only.
+      example: []
+    config_id:
       type: string
       format: uuid
-      description: Durable Agent Definition UUID. Absent for inline-manifest sessions.
+      description: >-
+        Durable Agent Config UUID the session was created from (inline manifests persist a config
+        too, named after the session). Persisted and returned on create/get/list; absent only for
+        sessions created before config references were stored.
       example: 11111111-2222-3333-4444-555555555555
-    revision_id:
+    openai_session_id:
       type: string
-      format: uuid
-      description: Immutable revision UUID selected for this execution.
-      example: 11111111-2222-3333-4444-555555555555
-    credential_binding_set_id:
+      description: >-
+        OpenAI Agents API session id (sess_…) this DO sandbox hosts. Populated only for
+        AGENT_KIND_OPENAI_CODEX sessions (empty otherwise). Non-secret correlation metadata; a
+        client (doctl agents attach) reads it to bridge to the OpenAI session. See
+        docs/design/openai-sandbox-provider.md.
+      example: example
+    openai_environment_id:
       type: string
-      format: uuid
-      description: Binding-set UUID used for this execution. Secret-manager metadata and OAuth assignment
-        UUIDs are never returned.
-      example: 11111111-2222-3333-4444-555555555555
-    origin:
-      $ref: '#/session_origin'
+      description: >-
+        OpenAI Agents API environment id (env_…), captured from the resolved CODEX_ENVIRONMENT_ID
+        guest env value. Populated only for AGENT_KIND_OPENAI_CODEX sessions. Non-secret correlation
+        metadata.
+      example: example
+
 session_origin:
   type: object
   additionalProperties: false
@@ -728,17 +796,24 @@ session_origin_request:
 session_status:
   type: string
   enum:
-  - SESSION_STATUS_UNSPECIFIED
-  - SESSION_STATUS_PROVISIONING
-  - SESSION_STATUS_READY
-  - SESSION_STATUS_DETACHED
-  - SESSION_STATUS_DESTROYING
-  - SESSION_STATUS_DESTROYED
-  - SESSION_STATUS_FAILED
-  - SESSION_STATUS_PAUSED
+    - SESSION_STATUS_UNSPECIFIED
+    - SESSION_STATUS_PROVISIONING
+    - SESSION_STATUS_READY
+    - SESSION_STATUS_DETACHED
+    - SESSION_STATUS_DESTROYING
+    - SESSION_STATUS_DESTROYED
+    - SESSION_STATUS_FAILED
+    - SESSION_STATUS_PAUSED
+    - SESSION_STATUS_ALL
+    - SESSION_STATUS_LOCKED
   default: SESSION_STATUS_UNSPECIFIED
-  description: SessionStatus is the lifecycle state of the sandbox + agent pair.
+  description: >-
+    SessionStatus is the lifecycle state of the sandbox + agent pair. SESSION_STATUS_ALL is a
+    ListSessions status-filter value only -- no session is ever actually in this status.
+    SESSION_STATUS_LOCKED is reserved for internal use and never appears in an end-user-facing
+    response.
   example: SESSION_STATUS_UNSPECIFIED
+
 stream_event:
   type: object
   description: The JSON payload carried in each SSE event's `data:` field (canonical SPI event envelope).
@@ -1511,11 +1586,13 @@ patch_session_request:
         When present, sets whether this session opts in to automatic resumption when the team's
         prepayment balance is restored after a low-balance pause. Session-scoped consent, not
         config-scoped. Omitted properties are not modified.
+      example: false
   description: >-
     PATCH body for /v2/agents/sessions/{session_id}: an allowlisted subset of session-scoped
     settings (never agents.yaml / config mutation). At least one property below must be present; {}
     is 400. Unknown top-level keys are rejected with 400. New patchable fields will be added here as
     optional properties over time.
+
 agent_config_clone_request:
   type: object
   additionalProperties: false
@@ -1614,3 +1691,59 @@ list_template_builds_response:
         $ref: '#/sandbox_template_build'
     next_page_token:
       type: string
+
+exec_in_sandbox_request:
+  type: object
+  properties:
+    argv:
+      type: array
+      items:
+        type: string
+      description: Program and arguments. Required and non-empty; run directly, with no shell interpretation.
+      example:
+        - uname
+        - '-a'
+    workdir:
+      type: string
+      description: >-
+        Working directory inside the sandbox. Empty uses the sandbox default (/workspace); not
+        restricted to the workspace root.
+      example: /workspace
+    stdin:
+      type: string
+      format: byte
+      description: >-
+        Optional base64 stdin payload, delivered in full and then closed so the process sees EOF.
+        One-shot only — there is no streaming stdin on this endpoint.
+      example: ''
+    timeout_seconds:
+      type: integer
+      format: int64
+      description: >-
+        Optional timeout. Clamped server-side (default 60, maximum 240) regardless of the value
+        sent.
+      example: 60
+  required:
+    - argv
+
+exec_in_sandbox_response:
+  type: object
+  properties:
+    exit_code:
+      type: integer
+      format: int32
+      description: The guest process's exit code. Non-zero is still a 200 response.
+      example: 0
+    stdout:
+      type: string
+      description: Buffered stdout, capped at 1 MiB. Check X-Exec-Stdout-Truncated for drops.
+      example: Linux
+    stderr:
+      type: string
+      description: Buffered stderr, capped at 1 MiB. Check X-Exec-Stderr-Truncated for drops.
+      example: ''
+    duration_ms:
+      type: integer
+      format: int64
+      description: Wall-clock duration the guest reported for the command.
+      example: 12
