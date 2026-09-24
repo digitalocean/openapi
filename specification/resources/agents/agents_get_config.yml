@@ -1,4 +1,4 @@
-operationId: agents_get_config
+operationId: harness_get_config
 summary: Get an active Environment Config and its environment spec.
 description: Returns one team-scoped Environment Config including the sanitized environment spec and redacted credential
   slot metadata. Secret values are never returned.

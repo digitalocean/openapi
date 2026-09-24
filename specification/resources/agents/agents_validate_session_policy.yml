@@ -1,4 +1,4 @@
-operationId: agents_validate_session_policy
+operationId: harness_validate_session_policy
 summary: ValidatePolicy checks a manifest's tool-permission policy against the agent's capabilities without
   creating a session.
 description: 'Stateless preflight: parses the same environment spec as CreateSession and runs

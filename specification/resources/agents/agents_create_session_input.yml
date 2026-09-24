@@ -1,4 +1,4 @@
-operationId: agents_create_session_input
+operationId: harness_create_session_input
 summary: SendInput delivers a user chat message into the session.
 description: The agent observes it on its next turn and emits subsequent events via StreamSession. The
   input is forwarded to the owning microVM's OHR inbound surface, which attributes it to a run and returns

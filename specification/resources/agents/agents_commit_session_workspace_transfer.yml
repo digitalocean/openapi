@@ -1,4 +1,4 @@
-operationId: agents_commit_session_workspace_transfer
+operationId: harness_commit_session_workspace_transfer
 summary: Finalize a staged upload.
 description: Upload only. Call once, after all parts have been uploaded. Completes the multipart upload
   and starts the asynchronous import into the workspace. Responds 202; poll the transfer until `completed`

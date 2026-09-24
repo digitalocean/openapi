@@ -1,4 +1,4 @@
-operationId: agents_list_sessions
+operationId: harness_list_sessions
 summary: ListSessions enumerates sessions for the caller's tenant.
 description: Keyset-paginated on an opaque cursor. Results are scoped to the authenticated team. Destroyed
   and failed sessions are omitted by default (matching the Cloud Console); pass `status=SESSION_STATUS_ALL`

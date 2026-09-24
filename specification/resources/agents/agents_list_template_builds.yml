@@ -1,4 +1,4 @@
-operationId: agents_list_template_builds
+operationId: harness_list_template_builds
 summary: ListTemplateBuilds returns build history for a template.
 description: ListTemplateBuilds returns build history for a template.
 tags:

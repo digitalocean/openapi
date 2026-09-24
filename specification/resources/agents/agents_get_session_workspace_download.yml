@@ -1,4 +1,4 @@
-operationId: agents_get_session_workspace_download
+operationId: harness_get_session_workspace_download
 summary: Download a file or tar archive from the session's sandbox workspace.
 description: 'Streams the workspace payload back as `application/octet-stream` using chunked transfer
   encoding, followed by a fixed integrity footer.
@@ -64,11 +64,11 @@ responses:
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
     content:
-      application/json:
+      application/octet-stream:
         schema:
           type: string
           format: binary
-          example: example
+          description: Workspace payload bytes followed by the 73-byte integrity footer.
   '400':
     description: Missing path, invalid query parameter, or invalid path.
     headers: *id001

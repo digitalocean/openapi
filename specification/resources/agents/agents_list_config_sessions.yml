@@ -1,4 +1,4 @@
-operationId: agents_list_config_sessions
+operationId: harness_list_config_sessions
 summary: List the sessions created from one Environment Config.
 description: Enumerates the caller's team sessions whose session was created from this durable Environment Config.
   Keyset-paginated on an opaque cursor, newest first, same shape and status semantics as GET /v2/agents/sessions.

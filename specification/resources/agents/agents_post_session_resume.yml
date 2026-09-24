@@ -1,4 +1,4 @@
-operationId: agents_post_session_resume
+operationId: harness_post_session_resume
 summary: ResumeSession explicitly thaws a PAUSED session's microVM sandbox.
 description: Only valid for microvm-substrate sessions; dewdrop/docker sessions return 501 Not Implemented.
   Implicit resume also occurs when SendInput or ResolveHITL is called on a paused session. Returns synchronously

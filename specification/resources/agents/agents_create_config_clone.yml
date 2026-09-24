@@ -1,4 +1,4 @@
-operationId: agents_create_config_clone
+operationId: harness_create_config_clone
 summary: Clone an Environment Config under a new name.
 description: 'Copies the source config''s sanitized manifest to a new UUID. Source and clone are independent (no lineage). Credential bindings are never copied: if the manifest declares secret slots, supply secrets/oauth_assignments again (write-only). content_hash matches the source when the manifest is unchanged.'
 tags:

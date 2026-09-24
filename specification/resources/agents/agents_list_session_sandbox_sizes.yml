@@ -1,4 +1,4 @@
-operationId: agents_list_session_sandbox_sizes
+operationId: harness_list_session_sandbox_sizes
 summary: ListSandboxSizes returns the customer-selectable sandbox (microVM) size catalog.
 description: Read-only catalog the UI (and other clients) render as the size picker, instead of hardcoding
   the list. The set is the single source of truth shared with create-time validation and the default-size

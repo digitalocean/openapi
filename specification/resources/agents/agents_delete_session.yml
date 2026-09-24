@@ -1,4 +1,4 @@
-operationId: agents_delete_session
+operationId: harness_delete_session
 summary: DestroySession tears down the sandbox and marks the session DESTROYED.
 description: Persistent workspace contents are retained per tenant policy. Returns 204 No Content on success.
 tags:

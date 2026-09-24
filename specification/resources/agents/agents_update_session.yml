@@ -1,4 +1,4 @@
-operationId: agents_update_session
+operationId: harness_update_session
 summary: PatchSession updates session-scoped settings on an existing session.
 description: 'Partial update of session-scoped settings (not the agent manifest / config). The body must include at least one recognized patchable property; an empty object {} is 400. Only properties listed on PatchSessionRequest are accepted — any other top-level JSON key is rejected with 400. Omitted properties are left unchanged. Today the only patchable field is resume_on_topoff; more session settings may be added over time. Terminal sessions (DESTROYED, FAILED) cannot be patched.'
 tags:

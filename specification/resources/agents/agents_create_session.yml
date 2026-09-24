@@ -1,4 +1,4 @@
-operationId: agents_create_session
+operationId: harness_create_session
 summary: CreateSession provisions a sandbox and starts a Harness Runtime session.
 description: |-
   Returns once the session row is allocated. Sandbox boot completes asynchronously.

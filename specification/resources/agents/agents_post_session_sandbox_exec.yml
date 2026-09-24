@@ -1,4 +1,4 @@
-operationId: agents_post_session_sandbox_exec
+operationId: harness_post_session_sandbox_exec
 summary: ExecInSandbox runs a one-shot command inside the session's sandbox.
 description: |-
   Runs `argv` directly in the guest (no shell). Stdout/stderr are buffered and capped at 1 MiB each;

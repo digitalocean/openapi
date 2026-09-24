@@ -1,4 +1,4 @@
-operationId: agents_create_session_workspace_part_upload_urls
+operationId: harness_create_session_workspace_part_upload_urls
 summary: Mint presigned PUT URLs for one or more multipart upload parts.
 description: Upload only. Pass one or more 1-based `part_numbers`; the response returns a presigned `upload_url`
   per part (all sharing one `expires_at`), so a client can drive parallel part uploads without a round

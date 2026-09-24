@@ -1,4 +1,4 @@
-operationId: agents_post_session_hitl
+operationId: harness_post_session_hitl
 summary: ResolveHITL records the user's decision on a pending HITL request.
 description: harness-api forwards the decision into the owning microVM via the inbound runtime.v1.OHR.ResolveHITL
   RPC (dialed through the guest-fronting proxy), which unblocks the gated agent action. The resolution

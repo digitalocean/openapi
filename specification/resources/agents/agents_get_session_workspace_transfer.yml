@@ -1,4 +1,4 @@
-operationId: agents_get_session_workspace_transfer
+operationId: harness_get_session_workspace_transfer
 summary: Get the status of a staged workspace transfer.
 description: Returns the current transfer state. For a completed download the response also carries a
   freshly minted presigned GET `download_url` (its TTL starts at poll time) and the payload `sha256` for

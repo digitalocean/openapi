@@ -1,4 +1,4 @@
-operationId: agents_create_session_workspace_transfer
+operationId: harness_create_session_workspace_transfer
 summary: Start a staged (large-file) workspace transfer.
 description: 'Creates an asynchronous, object-storage-backed transfer for payloads larger than the streaming
   path supports (> ~50 MiB). Bulk bytes never traverse harness-api: the client PUTs/GETs presigned DO

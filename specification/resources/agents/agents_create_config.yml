@@ -1,4 +1,4 @@
-operationId: agents_create_config
+operationId: harness_create_config
 summary: Create an Environment Config (environment spec + secrets in one request).
 description: Accepts name, environment-spec YAML text, and optional write-only secret values in one request.
   Responses never echo secret values; GET/create may include credential slot metadata (name/source/provider

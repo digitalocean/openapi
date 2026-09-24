@@ -1,4 +1,4 @@
-operationId: agents_get_session_checkpoint
+operationId: harness_get_session_checkpoint
 summary: GetCheckpoint returns the current snapshot of a checkpoint.
 description: GetCheckpoint returns the current snapshot of a checkpoint.
 tags:

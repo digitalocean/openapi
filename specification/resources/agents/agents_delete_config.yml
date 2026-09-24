@@ -1,4 +1,4 @@
-operationId: agents_delete_config
+operationId: harness_delete_config
 summary: Soft-delete an Environment Config.
 description: Releases the active team-scoped name; the config row is retained (soft delete), so sessions
   created from it keep a resolvable config_id.

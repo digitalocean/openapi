@@ -1,4 +1,4 @@
-operationId: agents_create_session_checkpoint
+operationId: harness_create_session_checkpoint
 summary: CreateCheckpoint captures the session's live sandbox state as a durable checkpoint.
 description: 'Synchronous: blocks until the capture reaches READY and returns the terminal Checkpoint — clients never see PENDING on this endpoint and need no poll loop. The checkpoint binds the machine-state capture to the event-log cursor at the cut, so it can later seed forks (POST .../fork) and rollback. Checkpoints are taken between turns; a session with an active turn in flight returns 409.'
 tags:

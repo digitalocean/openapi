@@ -1,4 +1,4 @@
-operationId: agents_get_template
+operationId: harness_get_template
 summary: GetTemplate returns a team custom template by public id.
 description: GetTemplate returns a team custom template by public id.
 tags:

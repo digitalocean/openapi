@@ -1,4 +1,4 @@
-operationId: agents_create_session_workspace_upload
+operationId: harness_create_session_workspace_upload
 summary: Upload a file or tar archive into the session's sandbox workspace.
 description: Streams the raw request body to a path inside the sandbox workspace. Concurrent transfers
   (upload + download) are capped server-side; over the cap the request blocks and may return 503. The

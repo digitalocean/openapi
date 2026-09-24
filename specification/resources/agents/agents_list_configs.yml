@@ -1,4 +1,4 @@
-operationId: agents_list_configs
+operationId: harness_list_configs
 summary: List active Environment Configs for the caller's team.
 description: Returns lightweight team-scoped config metadata without loading or returning environment-spec JSON.
   Soft-deleted configs are excluded.

@@ -1,4 +1,4 @@
-operationId: agents_post_session_pause
+operationId: harness_post_session_pause
 summary: PauseSession freezes the session's microVM sandbox.
 description: Supported on microvm-substrate sessions only; dewdrop/docker sessions return 501 Not Implemented.
   Paused sessions count against quota. Clients learn state via GetSession/ListSessions; no live session.updated

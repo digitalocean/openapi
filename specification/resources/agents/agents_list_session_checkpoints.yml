@@ -1,4 +1,4 @@
-operationId: agents_list_session_checkpoints
+operationId: harness_list_session_checkpoints
 summary: ListCheckpoints enumerates a session's checkpoints, newest first.
 description: Keyset-paginated on an opaque cursor, like ListSessions.
 tags:

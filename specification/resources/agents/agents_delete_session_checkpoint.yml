@@ -1,4 +1,4 @@
-operationId: agents_delete_session_checkpoint
+operationId: harness_delete_session_checkpoint
 summary: DeleteCheckpoint removes a checkpoint and its underlying machine-state capture.
 description: 'Idempotent: deleting an already-gone checkpoint still returns 200. Removes the DB row and the substrate checkpoint.'
 tags:
