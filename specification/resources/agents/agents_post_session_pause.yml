@@ -1,0 +1,76 @@
+operationId: agents_post_session_pause
+summary: PauseSession freezes the session's microVM sandbox.
+description: Supported on microvm-substrate sessions only; dewdrop/docker sessions return 501 Not Implemented.
+  Paused sessions count against quota. Clients learn state via GetSession/ListSessions; no live session.updated
+  event is emitted.
+tags:
+- Agents
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: header
+  name: X-Device-UUID
+  required: false
+  description: Optional hardware device id forwarded by doctl. Recorded for audit.
+  schema:
+    type: string
+    example: device-uuid-example
+  example: device-uuid-example
+responses:
+  '204':
+    description: Session paused.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: Session belongs to another team.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: Session is not in a pauseable state (must be READY or DETACHED).
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '501':
+    description: Pause is not supported for this session's substrate (docker/dewdrop).
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_post_session_pause.yml
+security:
+- bearer_auth:
+  - agents:create
