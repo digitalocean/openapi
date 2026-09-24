@@ -1,0 +1,283 @@
+mcp_server:
+  type: object
+  description: >-
+    A remote MCP server registered by your team. It never carries credential
+    material.
+  properties:
+    serverRef:
+      type: string
+      description: >-
+        Unique within your team. Namespaces the server's tool slugs as
+        `{serverRef}_{name}`.
+      example: docs
+    endpoint:
+      type: string
+      description: The HTTPS URL of the MCP server.
+      example: https://mcp.example.com/mcp
+    transport:
+      type: string
+      enum:
+        - streamable_http
+      example: streamable_http
+    credentialRefSource:
+      type: string
+      enum:
+        - none
+        - secret
+        - connection
+      example: secret
+    credentialRef:
+      type: string
+      description: >-
+        A Secrets Manager reference when `credentialRefSource` is `secret`, or
+        your team's OAuth credential ID when it is `connection`.
+      example: action-infra/tool-credentials/mcp/docs/3f5b2c1e-9a7d-4e8b-b6c4-2d1f0e9a8b7c
+    syncStatus:
+      type: string
+      enum:
+        - pending
+        - ok
+        - failed
+        - unsupported_protocol
+      example: ok
+    syncError:
+      type: string
+      description: A human-readable message when discovery failed.
+      example: ''
+    lastSyncedAt:
+      type: string
+      description: RFC 3339 time of the last successful discovery. Empty until the first one.
+      example: '2026-09-20T15:04:05Z'
+    protocolVersion:
+      type: string
+      description: The negotiated MCP protocol revision.
+      example: '2025-06-18'
+    toolCount:
+      type: integer
+      format: int32
+      description: The number of discovered tools.
+      example: 3
+    createdAt:
+      type: string
+      description: RFC 3339 creation time.
+      example: '2026-09-20T15:00:00Z'
+    updatedAt:
+      type: string
+      description: RFC 3339 time of the last update.
+      example: '2026-09-20T15:04:05Z'
+    description:
+      type: string
+      maxLength: 1024
+      description: Shown on the provider's catalog card.
+      example: Internal documentation search.
+    oauth_authorize_url:
+      type: string
+      description: Only set when `credentialRefSource` is `connection`.
+      example: ''
+    oauth_scopes:
+      type: array
+      items:
+        type: string
+      example: []
+    oauth_authorization_ttl_seconds:
+      type: string
+      format: uint64
+      description: >-
+        How long, in seconds, a user's authorization is reused before they must
+        consent again. `0` unless `credentialRefSource` is `connection`.
+      example: '0'
+
+mcp_server_create:
+  type: object
+  required:
+    - serverRef
+    - endpoint
+  properties:
+    serverRef:
+      type: string
+      pattern: '^[a-z][a-z0-9-]{0,63}$'
+      example: docs
+    endpoint:
+      type: string
+      description: The HTTPS URL of the MCP server.
+      example: https://mcp.example.com/mcp
+    transport:
+      type: string
+      enum:
+        - streamable_http
+      default: streamable_http
+      example: streamable_http
+    credentialRefSource:
+      type: string
+      enum:
+        - none
+        - secret
+        - connection
+      default: none
+      description: >-
+        How the server authenticates. `secret` uses one team-wide secret.
+        `connection` has each user authorize individually with your team's
+        OAuth client.
+      example: secret
+    description:
+      type: string
+      maxLength: 1024
+      example: Internal documentation search.
+    credentialRef:
+      type: string
+      description: >-
+        For `secret`, the name of a secret your team already stores in Secrets
+        Manager. Mutually exclusive with `api_key`.
+      example: ''
+    api_key:
+      type: string
+      writeOnly: true
+      description: >-
+        For `secret`, an API key that Tool Registry stores in Secrets Manager
+        on your behalf. It is never returned.
+      example: sk_live_example
+    oauth_client_id:
+      type: string
+      description: Required for `connection`. Your OAuth client ID for the upstream server.
+      example: ''
+    oauth_client_secret:
+      type: string
+      writeOnly: true
+      description: Required for `connection`.
+      example: ''
+    oauth_authorize_url:
+      type: string
+      description: Required for `connection`. Must share the endpoint's registrable domain.
+      example: ''
+    oauth_token_url:
+      type: string
+      description: Required for `connection`. Must share the endpoint's registrable domain.
+      example: ''
+    oauth_scopes:
+      type: array
+      items:
+        type: string
+      example: []
+    oauth_authorization_ttl_seconds:
+      type: string
+      format: uint64
+      description: >-
+        For `connection`, how long, in seconds, a user's authorization may be
+        reused before they must consent again. Nothing refreshes these
+        connections, so set it no longer than the upstream provider's token
+        lifetime. Omit or send `0` for the default of 30 days (`2592000`). At
+        most `3153600000` (100 years).
+      example: '86400'
+
+mcp_server_update:
+  type: object
+  properties:
+    description:
+      type: string
+      maxLength: 1024
+      description: Replaces the stored description. An empty value clears it.
+      example: Internal documentation and runbook search.
+
+mcp_server_resync:
+  type: object
+  properties:
+    user_id:
+      type: string
+      description: >-
+        Required for servers registered with `credentialRefSource` set to
+        `connection`: discovery runs as this user's connection. Ignored
+        otherwise.
+      example: alice
+
+mcp_server_tools_update:
+  type: object
+  required:
+    - enabledToolSlugs
+  properties:
+    enabledToolSlugs:
+      type: array
+      description: >-
+        The complete set of tool slugs to enable. Every other tool of the
+        server is disabled.
+      items:
+        type: string
+      example:
+        - docs_search
+        - docs_get_page
+    user_id:
+      type: string
+      description: >-
+        Required for servers registered with `credentialRefSource` set to
+        `connection` when a tool is being enabled. Ignored otherwise.
+      example: ''
+
+mcp_server_tool:
+  type: object
+  properties:
+    name:
+      type: string
+      description: The remote tool name after scrubbing.
+      example: search
+    toolSlug:
+      type: string
+      description: The identifier used by the tool enablement endpoint, `{serverRef}_{name}`.
+      example: docs_search
+    description:
+      type: string
+      example: Search the documentation index.
+    enabled:
+      type: boolean
+      description: Whether a released version of the tool exists.
+      example: true
+    quarantined:
+      type: boolean
+      description: Whether the released version is quarantined and fails at invocation.
+      example: false
+    quarantineReason:
+      type: string
+      example: ''
+    catalogSlug:
+      type: string
+      description: The internal storage identity. Display only.
+      example: t123456--docs_search
+
+mcp_server_response:
+  type: object
+  properties:
+    mcpServer:
+      $ref: '#/mcp_server'
+
+list_mcp_servers_response:
+  type: object
+  properties:
+    mcpServers:
+      type: array
+      items:
+        $ref: '#/mcp_server'
+
+list_mcp_server_tools_response:
+  type: object
+  properties:
+    tools:
+      type: array
+      items:
+        $ref: '#/mcp_server_tool'
+
+resync_mcp_server_response:
+  type: object
+  properties:
+    mcpServer:
+      $ref: '#/mcp_server'
+    tools:
+      type: array
+      description: The discovered tools. Empty when `pending` is true.
+      items:
+        $ref: '#/mcp_server_tool'
+    pending:
+      type: boolean
+      description: >-
+        Discovery is still running against a slow server. Poll the MCP server
+        until `syncStatus` changes.
+      example: false
+    authorization:
+      $ref: 'connections.yml#/connection_authorization'

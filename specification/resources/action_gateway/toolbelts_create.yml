@@ -1,43 +1,61 @@
 operationId: toolbelts_create
 summary: Create a Toolbelt
-description: Creates a versioned collection of provider-qualified Action Gateway tool names.
+description: Creates a toolbelt, a versioned set of tools that sessions and policies can reference as
+  `toolbelt:<name>@<version>`. Each tool is pinned to its current released version. Creating a toolbelt
+  whose name is already active returns 409; a deleted name can be reused.
 tags:
-  - Action Gateway
+- Action Gateway
 requestBody:
   required: true
   content:
     application/json:
       schema:
-        $ref: 'models.yml#/toolbelt_create'
-      examples:
-        toolbelts_create_request:
-          $ref: 'examples.yml#/toolbelts_create_request'
+        $ref: models/toolbelts.yml#/toolbelt_create
+      example:
+        name: search-toolbelt
+        display_name: Search Tools
+        description: Tools for searching and fetching public web pages.
+        tools:
+        - exa_web_search
+        - exa_web_fetch
 responses:
   '200':
-    description: A toolbelt was created successfully.
+    description: The toolbelt was created.
     headers:
-      $ref: 'response_headers.yml'
+      $ref: response_headers.yml
     content:
       application/json:
         schema:
-          $ref: 'models.yml#/toolbelt_response'
-        examples:
-          toolbelt_response:
-            $ref: 'examples.yml#/toolbelt_response'
+          $ref: models/toolbelts.yml#/toolbelt_response
+        example:
+          toolbelt:
+            name: search-toolbelt
+            version: '1'
+            display_name: Search Tools
+            description: Tools for searching and fetching public web pages.
+            tools:
+            - exa_web_fetch@1
+            - exa_web_search@1
+            status: active
+            reference: search-toolbelt@1
+            reference_latest: search-toolbelt
+            tool_count: 2
+            created_at: '2026-06-11T12:00:00Z'
+            updated_at: '2026-06-11T12:00:00Z'
   '400':
-    $ref: '../../shared/responses/bad_request.yml'
+    $ref: ../../shared/responses/bad_request.yml
   '401':
-    $ref: '../../shared/responses/unauthorized.yml'
+    $ref: ../../shared/responses/unauthorized.yml
   '409':
-    $ref: '../../shared/responses/conflict.yml'
+    $ref: ../../shared/responses/conflict.yml
   '429':
-    $ref: '../../shared/responses/too_many_requests.yml'
+    $ref: ../../shared/responses/too_many_requests.yml
   '500':
-    $ref: '../../shared/responses/server_error.yml'
+    $ref: ../../shared/responses/server_error.yml
   default:
-    $ref: '../../shared/responses/unexpected_error.yml'
-security:
-  - bearer_auth:
-      - genai:create
+    $ref: ../../shared/responses/unexpected_error.yml
 x-codeSamples:
-  - $ref: examples/curl/toolbelts_create.yml
+- $ref: examples/curl/toolbelts_create.yml
+security:
+- bearer_auth:
+  - action_gateway:create

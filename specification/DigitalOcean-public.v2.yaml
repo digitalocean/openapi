@@ -62,8 +62,23 @@ tags:
 
   - name: Action Gateway
     description: |-
-      Discover Action Gateway tools and providers, manage versioned toolbelts and
-      OAuth connections, and create policy-bound sessions for end users.
+      Action Gateway gives AI agents governed access to tools over the Model
+      Context Protocol (MCP). The `/v2/action-gateway` endpoints manage the
+      tool catalog and the resources that control how agents use it:
+
+      - **Tools** browse and search the catalog, its providers, and global
+        provider and tool health.
+      - **Toolbelts** are versioned, team-owned sets of tools that sessions
+        and policies reference as `toolbelt:<name>@<version>`.
+      - **Output views** reshape a tool's output before it reaches the agent.
+      - **MCP servers** register your own remote MCP servers and choose which
+        of their tools to enable.
+      - **Connections** authorize one of your end users to use a provider's
+        tools, for example through OAuth.
+      - **Sessions** bind a tool selection and permission policy to an MCP URL
+        that an agent connects to.
+      - **Users** and **end user limits** show and limit activity per end
+        user, identified by a session's `actorId`.
 
   - name: Apps
     description: |-
@@ -751,33 +766,107 @@ x-tagGroups:
       - Serverless Inference
 
 paths:
-  /v2/action-gateway/tools:
+  /v2/action-gateway/actors/{actor_id}/limits:
     get:
-      $ref: "resources/action_gateway/tools_list.yml"
+      $ref: "resources/action_gateway/actorLimits_get.yml"
 
-  /v2/action-gateway/tools/toolkits:
-    get:
-      $ref: "resources/action_gateway/tools_list_toolkits.yml"
+  /v2/action-gateway/actors/{actor_id}/limits:clear:
+    post:
+      $ref: "resources/action_gateway/actorLimits_delete.yml"
 
-  /v2/action-gateway/tools/providers:
-    get:
-      $ref: "resources/action_gateway/tools_list_providers.yml"
+  /v2/action-gateway/actors/{actor_id}/limits:set:
+    post:
+      $ref: "resources/action_gateway/actorLimits_update.yml"
 
-  /v2/action-gateway/tools/{name}/definition:
+  /v2/action-gateway/connections:
+    post:
+      $ref: "resources/action_gateway/connections_create.yml"
     get:
-      $ref: "resources/action_gateway/tools_get_definition.yml"
+      $ref: "resources/action_gateway/connections_list.yml"
+
+  /v2/action-gateway/connections/{id}:
+    get:
+      $ref: "resources/action_gateway/connections_get.yml"
+    delete:
+      $ref: "resources/action_gateway/connections_delete.yml"
+
+  /v2/action-gateway/mcp-servers:
+    post:
+      $ref: "resources/action_gateway/mcpServers_create.yml"
+    get:
+      $ref: "resources/action_gateway/mcpServers_list.yml"
+
+  /v2/action-gateway/mcp-servers/{server_ref}:
+    get:
+      $ref: "resources/action_gateway/mcpServers_get.yml"
+    patch:
+      $ref: "resources/action_gateway/mcpServers_patch.yml"
+    delete:
+      $ref: "resources/action_gateway/mcpServers_delete.yml"
+
+  /v2/action-gateway/mcp-servers/{server_ref}/resync:
+    post:
+      $ref: "resources/action_gateway/mcpServers_run_resync.yml"
+
+  /v2/action-gateway/mcp-servers/{server_ref}/tools:
+    get:
+      $ref: "resources/action_gateway/mcpServers_list_tools.yml"
+    put:
+      $ref: "resources/action_gateway/mcpServers_update_tools.yml"
+
+  /v2/action-gateway/output-views:
+    post:
+      $ref: "resources/action_gateway/outputViews_create.yml"
+    get:
+      $ref: "resources/action_gateway/outputViews_list.yml"
+
+  /v2/action-gateway/output-views/preview:
+    post:
+      $ref: "resources/action_gateway/outputViews_validate.yml"
+
+  /v2/action-gateway/output-views/{view_id}:
+    get:
+      $ref: "resources/action_gateway/outputViews_get.yml"
+    delete:
+      $ref: "resources/action_gateway/outputViews_delete.yml"
+
+  /v2/action-gateway/sessions:
+    post:
+      $ref: "resources/action_gateway/sessions_create.yml"
+    get:
+      $ref: "resources/action_gateway/sessions_list.yml"
+
+  /v2/action-gateway/sessions/search:
+    get:
+      $ref: "resources/action_gateway/sessions_list_search.yml"
+
+  /v2/action-gateway/sessions/{session_urn}:
+    delete:
+      $ref: "resources/action_gateway/sessions_delete.yml"
 
   /v2/action-gateway/toolbelts:
-    get:
-      $ref: "resources/action_gateway/toolbelts_list.yml"
     post:
       $ref: "resources/action_gateway/toolbelts_create.yml"
+    get:
+      $ref: "resources/action_gateway/toolbelts_list.yml"
+
+  /v2/action-gateway/toolbelts/search:
+    get:
+      $ref: "resources/action_gateway/toolbelts_list_search.yml"
 
   /v2/action-gateway/toolbelts/{name}:
     get:
       $ref: "resources/action_gateway/toolbelts_get.yml"
     delete:
       $ref: "resources/action_gateway/toolbelts_delete.yml"
+
+  /v2/action-gateway/toolbelts/{name}/providers:
+    get:
+      $ref: "resources/action_gateway/toolbelts_list_providers.yml"
+
+  /v2/action-gateway/toolbelts/{name}/providers/{provider}/tools:
+    get:
+      $ref: "resources/action_gateway/toolbelts_list_provider_tools.yml"
 
   /v2/action-gateway/toolbelts/{name}/tools/add:
     post:
@@ -787,19 +876,37 @@ paths:
     post:
       $ref: "resources/action_gateway/toolbelts_remove_tools.yml"
 
-  /v2/action-gateway/connections:
+  /v2/action-gateway/tools:
     get:
-      $ref: "resources/action_gateway/connections_list.yml"
-    post:
-      $ref: "resources/action_gateway/connections_create.yml"
+      $ref: "resources/action_gateway/tools_list.yml"
 
-  /v2/action-gateway/connections/{id}:
+  /v2/action-gateway/tools/health:
     get:
-      $ref: "resources/action_gateway/connections_get.yml"
-    patch:
-      $ref: "resources/action_gateway/connections_update.yml"
-    delete:
-      $ref: "resources/action_gateway/connections_delete.yml"
+      $ref: "resources/action_gateway/tools_list_health.yml"
+
+  /v2/action-gateway/tools/health/providers:
+    get:
+      $ref: "resources/action_gateway/tools_list_health_providers.yml"
+
+  /v2/action-gateway/tools/health/tools/{tool_slug}:
+    get:
+      $ref: "resources/action_gateway/tools_get_health.yml"
+
+  /v2/action-gateway/tools/providers:
+    get:
+      $ref: "resources/action_gateway/tools_list_providers.yml"
+
+  /v2/action-gateway/tools/providers/search:
+    get:
+      $ref: "resources/action_gateway/tools_list_search_providers.yml"
+
+  /v2/action-gateway/tools/search:
+    get:
+      $ref: "resources/action_gateway/tools_list_search.yml"
+
+  /v2/action-gateway/tools/toolkits:
+    get:
+      $ref: "resources/action_gateway/tools_list_toolkits.yml"
 
   /v2/action-gateway/users:
     get:
@@ -808,16 +915,6 @@ paths:
   /v2/action-gateway/users/{user_id}:
     get:
       $ref: "resources/action_gateway/users_get.yml"
-
-  /v2/action-gateway/sessions:
-    get:
-      $ref: "resources/action_gateway/sessions_list.yml"
-    post:
-      $ref: "resources/action_gateway/sessions_create.yml"
-
-  /v2/action-gateway/sessions/{session_urn}:
-    delete:
-      $ref: "resources/action_gateway/sessions_delete.yml"
 
   /v2/1-clicks:
     get:

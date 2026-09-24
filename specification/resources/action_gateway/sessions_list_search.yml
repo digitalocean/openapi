@@ -1,0 +1,69 @@
+operationId: sessions_list_search
+summary: Search Sessions
+description: Searches your team's sessions. `query` matches a substring of the name, actor ID, session
+  URN, or agent name, case-insensitively.
+tags:
+- Action Gateway
+parameters:
+- $ref: parameters.yml#/search_query
+- $ref: parameters.yml#/end_user_id
+- $ref: parameters.yml#/page_size
+- $ref: parameters.yml#/page_token
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/sessions.yml#/search_sessions_response
+        example:
+          sessions:
+          - sessionUrn: do:managed_agent_session:2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+            policy:
+              defaultAction: ask
+              rules:
+              - tool: toolbelt:search-toolbelt@1
+                match: {}
+                action: allow
+              - tool: jira_create_issue
+                match: {}
+                action: ask
+            createdAt: '2026-09-24T12:00:00Z'
+            updatedAt: '2026-09-24T12:00:00Z'
+            name: support-bot-alice
+            actorId: alice
+            tools:
+              references:
+              - kind: SESSION_TOOL_REFERENCE_KIND_TOOLBELT
+                name: search-toolbelt
+                version: '1'
+              - kind: SESSION_TOOL_REFERENCE_KIND_TOOL
+                name: jira_create_issue
+                version: '1'
+            config:
+              preloadTools:
+              - exa_web_search
+              outputViews:
+                exa_web_search: titles-and-urls
+            agentUrn: ''
+            agentName: ''
+            owning_user_id: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
+            owning_user_numeric_id: '1234567'
+          next_page_token: ''
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/sessions_list_search.yml
+security:
+- bearer_auth:
+  - action_gateway:read

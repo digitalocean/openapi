@@ -1,0 +1,126 @@
+list_users_response:
+  type: object
+  properties:
+    user_ids:
+      type: array
+      description: >-
+        End-user identifiers derived from your team's session `actorId` values
+        and connection `user_id` values.
+      items:
+        type: string
+      example:
+        - alice
+        - bob
+    pagination:
+      $ref: 'shared.yml#/pagination'
+
+user:
+  type: object
+  description: A derived view of one end user across your team's sessions and non-revoked connections.
+  properties:
+    user_id:
+      type: string
+      example: alice
+    sessions:
+      type: array
+      items:
+        type: object
+        properties:
+          session_urn:
+            type: string
+            example: do:managed_agent_session:2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+          name:
+            type: string
+            example: support-bot-alice
+          created_at:
+            type: string
+            format: date-time
+            nullable: true
+            example: '2026-09-24T12:00:00Z'
+          updated_at:
+            type: string
+            format: date-time
+            nullable: true
+            example: '2026-09-24T12:00:00Z'
+    connections:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            example: 39f9f768-a7f9-4c91-9557-3328c53dd054
+          provider:
+            type: string
+            example: jira
+          provider_display_name:
+            type: string
+            example: Jira
+          user_id:
+            type: string
+            example: alice
+          scopes:
+            type: array
+            items:
+              type: string
+            example:
+              - write:jira-work
+          status:
+            type: string
+            enum:
+              - pending
+              - active
+              - revoked
+              - expired
+            example: active
+          granted_at:
+            type: string
+            format: date-time
+            nullable: true
+            example: '2026-07-14T00:52:10Z'
+          revoked_at:
+            type: string
+            format: date-time
+            nullable: true
+            example: null
+          created_at:
+            type: string
+            format: date-time
+            nullable: true
+            example: '2026-07-14T00:50:00Z'
+          updated_at:
+            type: string
+            format: date-time
+            nullable: true
+            example: '2026-07-14T00:52:10Z'
+          connection_parameters:
+            type: object
+            nullable: true
+            example:
+              site_url: https://example.atlassian.net
+          credential_kind:
+            type: string
+            enum:
+              - digitalocean_oauth
+              - private_oauth
+              - team_api_key
+            example: digitalocean_oauth
+          credential_id:
+            type: string
+            example: ''
+          network:
+            $ref: 'connections.yml#/connection_network'
+          owning_user_id:
+            type: string
+            example: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
+          owning_user_numeric_id:
+            type: string
+            format: uint64
+            example: '1234567'
+
+get_user_response:
+  type: object
+  properties:
+    user:
+      $ref: '#/user'

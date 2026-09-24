@@ -1,0 +1,47 @@
+operationId: toolbelts_list_search
+summary: Search Toolbelts
+description: Searches your team's toolbelts. `query` matches a substring of the name, display name, or
+  description, case-insensitively.
+tags:
+- Action Gateway
+parameters:
+- $ref: parameters.yml#/search_query
+- $ref: parameters.yml#/toolbelt_status
+- $ref: parameters.yml#/page_size
+- $ref: parameters.yml#/page_token
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/toolbelts.yml#/search_toolbelts_response
+        example:
+          toolbelts:
+          - name: search-toolbelt
+            display_name: Search Tools
+            latest_version: '1'
+            version_count: 1
+            tool_count: 2
+            status: active
+            reference_latest: search-toolbelt
+            updated_at: '2026-06-11T12:00:00Z'
+            description: Tools for searching and fetching public web pages.
+          next_page_token: ''
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/toolbelts_list_search.yml
+security:
+- bearer_auth:
+  - action_gateway:read

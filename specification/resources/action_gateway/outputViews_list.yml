@@ -1,0 +1,75 @@
+operationId: outputViews_list
+summary: List Output Views
+description: Lists output views you can bind. With `tool` or `tool_id`, lists the public views and your
+  team's views on that tool version. Without either, lists every live view your team owns plus every public
+  view on a tool version your catalog exposes.
+tags:
+- Action Gateway
+parameters:
+- $ref: parameters.yml#/output_view_tool
+- $ref: parameters.yml#/output_view_tool_id
+- $ref: parameters.yml#/page_size
+- $ref: parameters.yml#/page_token
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/output_views.yml#/list_output_views_response
+        example:
+          views:
+          - view_id: ov_4f0c2a9d8e1b47c6a3d5f7e9b1c3a5d7
+            tool_id: tul_exa_web_search
+            tool: exa_web_search
+            version: v1
+            team_id: '123456'
+            name: titles-and-urls
+            description: Keep only result titles and URLs.
+            kind: OUTPUT_VIEW_KIND_PROJECTION
+            fields:
+            - results.title
+            - results.url
+            transform: null
+            output_schema:
+              type: object
+              properties:
+                results:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      url:
+                        type: string
+            audit:
+              createdAt: '2026-09-01T16:00:00Z'
+              updatedAt: '2026-09-01T16:00:00Z'
+              deletedAt: null
+              createdBy: ''
+              updatedBy: ''
+            deleted_by: ''
+          tool_id: tul_exa_web_search
+          tool: exa_web_search
+          version: v1
+          next_page_token: ''
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/outputViews_list.yml
+security:
+- bearer_auth:
+  - action_gateway:read

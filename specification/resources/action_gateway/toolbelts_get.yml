@@ -1,35 +1,71 @@
 operationId: toolbelts_get
 summary: Retrieve a Toolbelt
-description: Retrieves the latest active version or a specified immutable version of a toolbelt.
+description: Retrieves the latest active version, or a specified immutable version, of a toolbelt. `toolbelt.tools`
+  always lists every member. `tool_details` is a page of catalog metadata for those members, bounded by
+  `page_size` and optionally filtered by `search`.
 tags:
-  - Action Gateway
+- Action Gateway
 parameters:
-  - $ref: 'parameters.yml#/toolbelt_name'
-  - $ref: 'parameters.yml#/toolbelt_version'
+- $ref: parameters.yml#/toolbelt_name
+- $ref: parameters.yml#/toolbelt_version
+- $ref: parameters.yml#/page_size
+- $ref: parameters.yml#/page_token
+- $ref: parameters.yml#/toolbelt_search
 responses:
   '200':
-    description: The toolbelt was retrieved successfully.
+    description: The request was successful.
     headers:
-      $ref: 'response_headers.yml'
+      $ref: response_headers.yml
     content:
       application/json:
         schema:
-          $ref: 'models.yml#/toolbelt_response'
-        examples:
-          toolbelt_response:
-            $ref: 'examples.yml#/toolbelt_response'
+          $ref: models/toolbelts.yml#/get_toolbelt_response
+        example:
+          toolbelt:
+            name: search-toolbelt
+            version: '1'
+            display_name: Search Tools
+            description: Tools for searching and fetching public web pages.
+            tools:
+            - exa_web_fetch@1
+            - exa_web_search@1
+            status: active
+            reference: search-toolbelt@1
+            reference_latest: search-toolbelt
+            tool_count: 2
+            created_at: '2026-06-11T12:00:00Z'
+            updated_at: '2026-06-11T12:00:00Z'
+          tool_details:
+          - tool_slug: exa_web_fetch
+            name: web_fetch
+            title: Web Fetch
+            description: Fetch the contents of a public web page with Exa.
+            provider: exa
+            category: web-fetch
+            version: 1
+          - tool_slug: exa_web_search
+            name: web_search
+            title: Web Search
+            description: Search the public web with Exa and return relevant results with normalized text
+              snippets.
+            provider: exa
+            category: web-search
+            version: 1
+          next_page_token: ''
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
   '401':
-    $ref: '../../shared/responses/unauthorized.yml'
+    $ref: ../../shared/responses/unauthorized.yml
   '404':
-    $ref: '../../shared/responses/not_found.yml'
+    $ref: ../../shared/responses/not_found.yml
   '429':
-    $ref: '../../shared/responses/too_many_requests.yml'
+    $ref: ../../shared/responses/too_many_requests.yml
   '500':
-    $ref: '../../shared/responses/server_error.yml'
+    $ref: ../../shared/responses/server_error.yml
   default:
-    $ref: '../../shared/responses/unexpected_error.yml'
-security:
-  - bearer_auth:
-      - genai:read
+    $ref: ../../shared/responses/unexpected_error.yml
 x-codeSamples:
-  - $ref: examples/curl/toolbelts_get.yml
+- $ref: examples/curl/toolbelts_get.yml
+security:
+- bearer_auth:
+  - action_gateway:read

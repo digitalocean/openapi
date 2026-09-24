@@ -1,63 +1,63 @@
 operationId: connections_list
 summary: List Connections
-description: Lists OAuth connections owned by the authenticated team.
+description: Lists your team's connections. Revoked connections are omitted.
 tags:
-  - Action Gateway
+- Action Gateway
 parameters:
-  - name: provider
-    in: query
-    description: Filter by provider name.
-    schema:
-      type: string
-    example: github
-  - name: user_id
-    in: query
-    description: Filter by end-user identifier.
-    schema:
-      type: string
-    example: end-user-123
-  - name: status
-    in: query
-    description: Filter by connection status.
-    schema:
-      type: string
-    example: active
-  - name: sort
-    in: query
-    description: Field used to sort results.
-    schema:
-      type: string
-    example: created_at
-  - name: sort_direction
-    in: query
-    description: Sort direction.
-    schema:
-      type: string
-    example: desc
-  - $ref: ../../shared/parameters.yml#/page
-  - $ref: ../../shared/parameters.yml#/per_page
+- $ref: parameters.yml#/connection_provider
+- $ref: parameters.yml#/connection_user_id
+- $ref: parameters.yml#/connection_status
+- $ref: parameters.yml#/connection_sort
+- $ref: parameters.yml#/sort_direction
+- $ref: ../../shared/parameters.yml#/page
+- $ref: parameters.yml#/per_page
 responses:
-  "200":
-    description: Connections were retrieved successfully.
+  '200':
+    description: The request was successful.
     headers:
       $ref: response_headers.yml
     content:
       application/json:
         schema:
-          $ref: models.yml#/list_connections_response
-        examples:
-          connections_list_response:
-            $ref: examples.yml#/connections_list_response
-  "401":
+          $ref: models/connections.yml#/list_connections_response
+        example:
+          connections:
+          - id: 39f9f768-a7f9-4c91-9557-3328c53dd054
+            provider: jira
+            provider_display_name: Jira
+            user_id: alice
+            status: active
+            created_at: '2026-07-14T00:50:00Z'
+            updated_at: '2026-07-14T00:52:10Z'
+            revoked_at: null
+            connection_parameters:
+              site_url: https://example.atlassian.net
+            credential_kind: digitalocean_oauth
+            credential_id: ''
+            network: null
+            scopes:
+            - write:jira-work
+            granted_at: '2026-07-14T00:52:10Z'
+            oauth:
+              scopes:
+              - write:jira-work
+              granted_at: '2026-07-14T00:52:10Z'
+          pagination:
+            page: 1
+            per_page: 20
+            total: 1
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
     $ref: ../../shared/responses/unauthorized.yml
-  "429":
+  '429':
     $ref: ../../shared/responses/too_many_requests.yml
-  "500":
+  '500':
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-security:
-  - bearer_auth:
-      - genai:read
 x-codeSamples:
-  - $ref: examples/curl/connections_list.yml
+- $ref: examples/curl/connections_list.yml
+security:
+- bearer_auth:
+  - action_gateway:read

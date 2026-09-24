@@ -1,0 +1,50 @@
+operationId: tools_list_search
+summary: Search Tools
+description: Searches the tools visible to your team. `query` matches a substring of the tool slug, name,
+  title, description, provider, or category, case-insensitively. Filters combine with AND. Results are
+  ranked across the whole result set; do not re-sort a page.
+tags:
+- Action Gateway
+parameters:
+- $ref: parameters.yml#/search_query
+- $ref: parameters.yml#/search_tools_provider
+- $ref: parameters.yml#/search_tools_toolbelt
+- $ref: parameters.yml#/page_size
+- $ref: parameters.yml#/page_token
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/tools.yml#/search_tools_response
+        example:
+          tools:
+          - tool_slug: exa_web_search
+            name: web_search
+            title: Web Search
+            description: Search the public web with Exa and return relevant results with normalized text
+              snippets.
+            provider: exa
+            category: web-search
+            version: 1
+          next_page_token: ''
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/tools_list_search.yml
+security:
+- bearer_auth:
+  - action_gateway:read

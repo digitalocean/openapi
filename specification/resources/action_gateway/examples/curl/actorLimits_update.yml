@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"overrides":[{"category":"LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE","requests_per_minute":"10"}]}' \
+    "https://api.digitalocean.com/v2/action-gateway/actors/alice/limits:set"

@@ -1,30 +1,60 @@
 operationId: tools_list_providers
 summary: List Tool Providers
-description: Lists Action Gateway providers and their connection requirements.
+description: Lists providers, the credential kinds each accepts, and the parameters needed to create a
+  connection or register a team credential for it.
 tags:
-  - Action Gateway
+- Action Gateway
 responses:
-  "200":
-    description: Tool providers were retrieved successfully.
+  '200':
+    description: The request was successful.
     headers:
       $ref: response_headers.yml
     content:
       application/json:
         schema:
-          $ref: models.yml#/list_providers_response
-        examples:
-          tools_list_providers_response:
-            $ref: examples.yml#/tools_list_providers_response
-  "401":
+          $ref: models/tools.yml#/list_providers_response
+        example:
+          providers:
+          - name: exa
+            display_name: Exa
+            description: Web search tools backed by Exa.
+            auth_type: shared_api_key
+            scopes: []
+            connection_parameters: []
+            auth_types:
+            - shared_api_key
+            credential_parameters: []
+          - name: jira
+            display_name: Jira
+            description: Jira issue tracking tools.
+            auth_type: oauth
+            scopes:
+            - write:jira-work
+            connection_parameters:
+            - key: site_url
+              label: Jira site URL
+              description: The HTTPS origin of the Jira Cloud site to use.
+              input_kind: https_origin
+              required: true
+              normalization: https_origin
+              allowed_values: []
+              allowed_host_suffixes:
+              - atlassian.net
+              max_length: 255
+              pattern: ''
+            auth_types:
+            - oauth
+            credential_parameters: []
+  '401':
     $ref: ../../shared/responses/unauthorized.yml
-  "429":
+  '429':
     $ref: ../../shared/responses/too_many_requests.yml
-  "500":
+  '500':
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-security:
-  - bearer_auth:
-      - genai:read
 x-codeSamples:
-  - $ref: examples/curl/tools_list_providers.yml
+- $ref: examples/curl/tools_list_providers.yml
+security:
+- bearer_auth:
+  - action_gateway:read

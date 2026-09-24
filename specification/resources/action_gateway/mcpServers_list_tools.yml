@@ -1,0 +1,47 @@
+operationId: mcpServers_list_tools
+summary: List MCP Server Tools
+description: Lists the tools discovered on an MCP server and whether each is enabled.
+tags:
+- Action Gateway
+parameters:
+- $ref: parameters.yml#/server_ref
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/mcp_servers.yml#/list_mcp_server_tools_response
+        example:
+          tools:
+          - name: get_page
+            toolSlug: docs_get_page
+            description: Fetch one documentation page.
+            enabled: true
+            quarantined: false
+            quarantineReason: ''
+            catalogSlug: t123456--docs_get_page
+          - name: search
+            toolSlug: docs_search
+            description: Search the documentation index.
+            enabled: true
+            quarantined: false
+            quarantineReason: ''
+            catalogSlug: t123456--docs_search
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/mcpServers_list_tools.yml
+security:
+- bearer_auth:
+  - action_gateway:read

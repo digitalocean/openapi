@@ -1,0 +1,273 @@
+connection_network:
+  type: object
+  nullable: true
+  description: >-
+    Private transport for the connection. When absent, tools execute over the
+    public internet.
+  properties:
+    vpc:
+      type: object
+      properties:
+        vpc_uuid:
+          type: string
+          format: uuid
+          example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+        region:
+          type: string
+          readOnly: true
+          description: Derived from the VPC.
+          example: nyc3
+        destinations:
+          type: array
+          items:
+            type: object
+            properties:
+              host:
+                type: string
+                example: jira.internal.example.com
+              port:
+                type: integer
+                format: uint32
+                example: 443
+              allowed_ip_cidrs:
+                type: array
+                items:
+                  type: string
+                example:
+                  - 10.116.0.0/20
+
+connection_authorization:
+  type: object
+  nullable: true
+  description: >-
+    Present only while authorization is pending. Send the user to
+    `connect_url`, show them `verification_code`, and poll the connection until
+    it becomes active or expires.
+  properties:
+    status:
+      type: string
+      enum:
+        - requires_authorization
+      example: requires_authorization
+    connect_url:
+      type: string
+      description: A browser URL on a DigitalOcean Cloud origin.
+      example: https://cloud.digitalocean.com/security/connectlinks/confirm?token=eyJhbGciOi
+    verification_code:
+      type: string
+      example: 97rwxzcy
+    expires_at:
+      type: string
+      format: date-time
+      nullable: true
+      example: '2026-07-14T01:00:00Z'
+
+connection:
+  type: object
+  description: >-
+    A connection that authorizes one user of your application to use one
+    provider's tools. It is unique per provider and `user_id`.
+  properties:
+    id:
+      type: string
+      format: uuid
+      example: 39f9f768-a7f9-4c91-9557-3328c53dd054
+    provider:
+      type: string
+      example: jira
+    provider_display_name:
+      type: string
+      example: Jira
+    user_id:
+      type: string
+      description: Your identifier for the end user.
+      example: alice
+    status:
+      type: string
+      enum:
+        - pending
+        - active
+        - revoked
+        - expired
+      example: active
+    created_at:
+      type: string
+      format: date-time
+      nullable: true
+      example: '2026-07-14T00:50:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      nullable: true
+      example: '2026-07-14T00:52:10Z'
+    revoked_at:
+      type: string
+      format: date-time
+      nullable: true
+      example: null
+    connection_parameters:
+      type: object
+      nullable: true
+      description: Non-sensitive provider configuration declared by the provider's `connection_parameters`.
+      example:
+        site_url: https://example.atlassian.net
+    credential_kind:
+      type: string
+      enum:
+        - digitalocean_oauth
+        - private_oauth
+        - team_api_key
+      example: digitalocean_oauth
+    credential_id:
+      type: string
+      description: The team credential the connection uses. Empty for `digitalocean_oauth`.
+      example: ''
+    network:
+      $ref: '#/connection_network'
+    oauth:
+      type: object
+      description: Present for OAuth connections.
+      properties:
+        scopes:
+          type: array
+          items:
+            type: string
+          example:
+            - write:jira-work
+        granted_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-07-14T00:52:10Z'
+    api_key:
+      type: object
+      description: Present, and empty, for API key connections.
+      properties: {}
+    scopes:
+      type: array
+      deprecated: true
+      description: Deprecated. Use `oauth.scopes`.
+      items:
+        type: string
+      example:
+        - write:jira-work
+    granted_at:
+      type: string
+      format: date-time
+      nullable: true
+      deprecated: true
+      description: Deprecated. Use `oauth.granted_at`.
+      example: '2026-07-14T00:52:10Z'
+    owning_user_id:
+      type: string
+      description: The DigitalOcean user that owns the connection, when recorded.
+      example: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
+    owning_user_numeric_id:
+      type: string
+      format: uint64
+      description: >-
+        The numeric ID of the owning DigitalOcean user, when recorded. Set from
+        the authenticated caller, never from the request. Legacy users without
+        a UUID are identified only by this field. Omitted when not recorded.
+      example: '1234567'
+
+connection_create:
+  type: object
+  required:
+    - provider
+    - user_id
+  properties:
+    provider:
+      type: string
+      description: A provider slug from the list providers endpoint.
+      example: jira
+    user_id:
+      type: string
+      pattern: '^[A-Za-z0-9._-]{1,64}$'
+      description: Your identifier for the end user.
+      example: alice
+    scopes:
+      type: array
+      description: Defaults to the provider's maximum scopes. Must be a subset of them.
+      items:
+        type: string
+      example:
+        - write:jira-work
+    connection_parameters:
+      type: object
+      description: Values for the provider's declared `connection_parameters`.
+      example:
+        site_url: https://example.atlassian.net
+    credential:
+      type: object
+      description: >-
+        Selects the credential the connection uses. Omit to use DigitalOcean's
+        shared OAuth application. Set exactly one member; an empty object is
+        rejected.
+      properties:
+        digitalocean_oauth:
+          type: object
+          description: Use DigitalOcean's shared OAuth application.
+          properties: {}
+        team_credential:
+          type: object
+          description: Use a credential your team registered.
+          properties:
+            credential_id:
+              type: string
+              example: 8d6f2b1a-3c4e-4d5f-9a8b-7c6d5e4f3a2b
+    network:
+      type: object
+      description: >-
+        Private transport. The VPC must belong to your team; its region is
+        derived.
+      properties:
+        vpc:
+          type: object
+          properties:
+            vpc_uuid:
+              type: string
+              format: uuid
+              example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+            destinations:
+              type: array
+              items:
+                type: object
+                properties:
+                  host:
+                    type: string
+                    example: jira.internal.example.com
+                  port:
+                    type: integer
+                    format: uint32
+                    example: 443
+                  allowed_ip_cidrs:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - 10.116.0.0/20
+
+connection_response:
+  type: object
+  properties:
+    connection:
+      $ref: '#/connection'
+    authorization:
+      $ref: '#/connection_authorization'
+
+delete_connection_response:
+  type: object
+  properties:
+    connection:
+      $ref: '#/connection'
+
+list_connections_response:
+  type: object
+  properties:
+    connections:
+      type: array
+      items:
+        $ref: '#/connection'
+    pagination:
+      $ref: 'shared.yml#/pagination'

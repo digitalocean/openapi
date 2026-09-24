@@ -1,0 +1,60 @@
+operationId: mcpServers_update_tools
+summary: Set Enabled MCP Server Tools
+description: Declares the complete set of enabled tools for an MCP server. Enabling a tool releases its
+  latest discovered version after verifying it against the server; every tool not listed is disabled.
+  The request is idempotent and stops at the first tool that fails verification.
+tags:
+- Action Gateway
+parameters:
+- $ref: parameters.yml#/server_ref
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/mcp_servers.yml#/mcp_server_tools_update
+      example:
+        enabledToolSlugs:
+        - docs_get_page
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/mcp_servers.yml#/list_mcp_server_tools_response
+        example:
+          tools:
+          - name: get_page
+            toolSlug: docs_get_page
+            description: Fetch one documentation page.
+            enabled: true
+            quarantined: false
+            quarantineReason: ''
+            catalogSlug: t123456--docs_get_page
+          - name: search
+            toolSlug: docs_search
+            description: Search the documentation index.
+            enabled: false
+            quarantined: false
+            quarantineReason: ''
+            catalogSlug: t123456--docs_search
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/mcpServers_update_tools.yml
+security:
+- bearer_auth:
+  - action_gateway:update

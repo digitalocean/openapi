@@ -1,0 +1,275 @@
+toolbelt:
+  type: object
+  description: An immutable version of a team-owned toolbelt.
+  properties:
+    name:
+      type: string
+      example: search-toolbelt
+    version:
+      type: string
+      pattern: '^[0-9]+$'
+      description: The system-managed integer version of the toolbelt.
+      example: '1'
+    display_name:
+      type: string
+      maxLength: 128
+      example: Search Tools
+    description:
+      type: string
+      maxLength: 255
+      example: Tools for searching and fetching public web pages.
+    tools:
+      type: array
+      maxItems: 500
+      description: >-
+        Every member of the toolbelt as `<tool_slug>@<version>`, pinned to the
+        tool version the toolbelt stored. Sorted by name, then version.
+      items:
+        type: string
+      example:
+        - exa_web_fetch@1
+        - exa_web_search@1
+    status:
+      type: string
+      enum:
+        - active
+        - deprecated
+      example: active
+    reference:
+      type: string
+      description: A reference pinned to this immutable toolbelt version.
+      example: search-toolbelt@1
+    reference_latest:
+      type: string
+      description: An unversioned reference to the latest active version.
+      example: search-toolbelt
+    tool_count:
+      type: integer
+      format: int32
+      example: 2
+    created_at:
+      type: string
+      format: date-time
+      example: '2026-06-11T12:00:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      example: '2026-06-11T12:00:00Z'
+
+toolbelt_summary:
+  type: object
+  properties:
+    name:
+      type: string
+      example: search-toolbelt
+    display_name:
+      type: string
+      example: Search Tools
+    description:
+      type: string
+      example: Tools for searching and fetching public web pages.
+    latest_version:
+      type: string
+      example: '1'
+    version_count:
+      type: integer
+      format: int32
+      example: 1
+    tool_count:
+      type: integer
+      format: int32
+      example: 2
+    status:
+      type: string
+      enum:
+        - active
+        - deprecated
+      example: active
+    reference_latest:
+      type: string
+      example: search-toolbelt
+    updated_at:
+      type: string
+      format: date-time
+      example: '2026-06-11T12:00:00Z'
+
+toolbelt_tool_detail:
+  type: object
+  description: Catalog metadata for one toolbelt member. Input and output schemas are omitted.
+  properties:
+    tool_slug:
+      type: string
+      example: exa_web_search
+    name:
+      type: string
+      example: web_search
+    title:
+      type: string
+      example: Web Search
+    description:
+      type: string
+      example: Search the public web with Exa and return relevant results with normalized text snippets.
+    provider:
+      type: string
+      example: exa
+    category:
+      type: string
+      example: web-search
+    version:
+      type: integer
+      format: int32
+      description: The tool version the toolbelt pinned for this member.
+      example: 1
+
+toolbelt_provider_summary:
+  type: object
+  description: One provider represented in a toolbelt's membership.
+  properties:
+    provider:
+      type: string
+      description: >-
+        The toolkit identifier. Members without a provider are reported as
+        `_legacy`.
+      example: exa
+    tool_count:
+      type: integer
+      format: int32
+      description: The number of toolbelt members that belong to this provider.
+      example: 2
+    id:
+      type: string
+      description: The toolkit identifier; equal to `provider`.
+      example: exa
+    name:
+      type: string
+      description: The toolkit display name.
+      example: Exa
+    description:
+      type: string
+      example: Web search tools backed by Exa.
+    categories:
+      type: array
+      items:
+        type: string
+      example:
+        - web-search
+    created_at:
+      type: string
+      format: date-time
+      nullable: true
+      example: '2026-06-01T00:00:00Z'
+
+toolbelt_create:
+  type: object
+  required:
+    - name
+  properties:
+    name:
+      type: string
+      pattern: '^[a-z][a-z0-9_-]{0,63}$'
+      description: The natural key of the toolbelt. `search` is reserved.
+      example: search-toolbelt
+    version:
+      type: string
+      pattern: '^[0-9]+$'
+      default: '1'
+      description: The initial version.
+      example: '1'
+    display_name:
+      type: string
+      maxLength: 128
+      example: Search Tools
+    description:
+      type: string
+      maxLength: 255
+      example: Tools for searching and fetching public web pages.
+    tools:
+      type: array
+      maxItems: 500
+      description: >-
+        Provider-qualified tool slugs, optionally pinned as `<tool>@<version>`.
+        Each is resolved to its current released version. A pin must match
+        that version. Omit or send an empty list to create an empty toolbelt.
+      items:
+        type: string
+      example:
+        - exa_web_search
+        - exa_web_fetch
+
+toolbelt_tools:
+  type: object
+  required:
+    - tools
+  properties:
+    tools:
+      type: array
+      minItems: 1
+      maxItems: 500
+      description: Provider-qualified tool slugs, optionally pinned as `<tool>@<version>`.
+      items:
+        type: string
+      example:
+        - exa_web_search
+
+toolbelt_response:
+  type: object
+  properties:
+    toolbelt:
+      $ref: '#/toolbelt'
+
+get_toolbelt_response:
+  type: object
+  properties:
+    toolbelt:
+      $ref: '#/toolbelt'
+    tool_details:
+      type: array
+      description: >-
+        A page of catalog metadata for the members named in `toolbelt.tools`,
+        in the same order. Use `toolbelt.tools` for the full membership.
+      items:
+        $ref: '#/toolbelt_tool_detail'
+    next_page_token:
+      $ref: 'shared.yml#/next_page_token'
+
+toolbelts_response:
+  type: object
+  properties:
+    toolbelts:
+      type: array
+      items:
+        $ref: '#/toolbelt_summary'
+    pagination:
+      $ref: 'shared.yml#/pagination'
+
+search_toolbelts_response:
+  type: object
+  properties:
+    toolbelts:
+      type: array
+      items:
+        $ref: '#/toolbelt_summary'
+    next_page_token:
+      $ref: 'shared.yml#/next_page_token'
+
+list_toolbelt_providers_response:
+  type: object
+  properties:
+    toolbelt:
+      $ref: '#/toolbelt'
+    providers:
+      type: array
+      items:
+        $ref: '#/toolbelt_provider_summary'
+    pagination:
+      $ref: 'shared.yml#/pagination'
+
+list_toolbelt_provider_tools_response:
+  type: object
+  properties:
+    tools:
+      type: array
+      items:
+        $ref: '#/toolbelt_tool_detail'
+    pagination:
+      $ref: 'shared.yml#/pagination'

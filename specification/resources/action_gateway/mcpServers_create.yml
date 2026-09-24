@@ -1,0 +1,63 @@
+operationId: mcpServers_create
+summary: Register an MCP Server
+description: 'Registers a remote MCP server so its tools can be used through Action Gateway. Registration
+  does not contact the server: run a resync to discover its tools, then enable the tools you want. A team
+  can register at most 10 servers.'
+tags:
+- Action Gateway
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/mcp_servers.yml#/mcp_server_create
+      example:
+        serverRef: docs
+        endpoint: https://mcp.example.com/mcp
+        credentialRefSource: secret
+        api_key: sk_live_example
+        description: Internal documentation search.
+responses:
+  '200':
+    description: The MCP server was registered.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/mcp_servers.yml#/mcp_server_response
+        example:
+          mcpServer:
+            serverRef: docs
+            endpoint: https://mcp.example.com/mcp
+            transport: streamable_http
+            credentialRefSource: secret
+            credentialRef: action-infra/tool-credentials/mcp/docs/3f5b2c1e-9a7d-4e8b-b6c4-2d1f0e9a8b7c
+            syncStatus: pending
+            syncError: ''
+            lastSyncedAt: ''
+            protocolVersion: ''
+            toolCount: 0
+            createdAt: '2026-09-20T15:00:00Z'
+            updatedAt: '2026-09-20T15:00:00Z'
+            description: Internal documentation search.
+            oauth_authorize_url: ''
+            oauth_scopes: []
+            oauth_authorization_ttl_seconds: '0'
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '409':
+    $ref: ../../shared/responses/conflict.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/mcpServers_create.yml
+security:
+- bearer_auth:
+  - action_gateway:create

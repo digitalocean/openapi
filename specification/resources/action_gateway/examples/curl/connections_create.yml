@@ -3,10 +3,5 @@ source: |-
   curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{
-      "provider": "github",
-      "user_id": "end-user-123",
-      "scopes": ["repo"],
-      "connection_parameters": {}
-    }' \
+    -d '{"provider":"jira","user_id":"alice","scopes":["write:jira-work"],"connection_parameters":{"site_url":"https://example.atlassian.net"},"credential":{"digitalocean_oauth":{}}}' \
     "https://api.digitalocean.com/v2/action-gateway/connections"

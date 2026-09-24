@@ -1,44 +1,75 @@
 operationId: connections_create
 summary: Create a Connection
-description: Creates or begins authorization for an OAuth connection to an
-  Action Gateway provider.
+description: 'Creates a connection that authorizes one of your end users to use a provider''s tools. For
+  OAuth providers the connection starts as `pending` and the response includes `authorization`: send the
+  user to `connect_url`, show them `verification_code`, and poll the connection until it is `active`.'
 tags:
-  - Action Gateway
+- Action Gateway
 requestBody:
   required: true
   content:
     application/json:
       schema:
-        $ref: models.yml#/create_connection_request
-      examples:
-        connections_create_request:
-          $ref: examples.yml#/connections_create_request
+        $ref: models/connections.yml#/connection_create
+      example:
+        provider: jira
+        user_id: alice
+        scopes:
+        - write:jira-work
+        connection_parameters:
+          site_url: https://example.atlassian.net
+        credential:
+          digitalocean_oauth: {}
 responses:
-  "200":
-    description: The connection was created or authorization was started.
+  '200':
+    description: The connection was created.
     headers:
       $ref: response_headers.yml
     content:
       application/json:
         schema:
-          $ref: models.yml#/create_connection_response
-        examples:
-          connections_create_response:
-            $ref: examples.yml#/connections_create_response
-  "400":
+          $ref: models/connections.yml#/connection_response
+        example:
+          connection:
+            id: 39f9f768-a7f9-4c91-9557-3328c53dd054
+            provider: jira
+            provider_display_name: Jira
+            user_id: alice
+            status: pending
+            created_at: '2026-07-14T00:50:00Z'
+            updated_at: '2026-07-14T00:50:00Z'
+            revoked_at: null
+            connection_parameters:
+              site_url: https://example.atlassian.net
+            credential_kind: digitalocean_oauth
+            credential_id: ''
+            network: null
+            scopes:
+            - write:jira-work
+            granted_at: null
+            oauth:
+              scopes:
+              - write:jira-work
+              granted_at: null
+          authorization:
+            status: requires_authorization
+            connect_url: https://cloud.digitalocean.com/security/connectlinks/confirm?token=eyJhbGciOi
+            verification_code: 97rwxzcy
+            expires_at: '2026-07-14T01:00:00Z'
+  '400':
     $ref: ../../shared/responses/bad_request.yml
-  "401":
+  '401':
     $ref: ../../shared/responses/unauthorized.yml
-  "409":
+  '409':
     $ref: ../../shared/responses/conflict.yml
-  "429":
+  '429':
     $ref: ../../shared/responses/too_many_requests.yml
-  "500":
+  '500':
     $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
-security:
-  - bearer_auth:
-      - genai:create
 x-codeSamples:
-  - $ref: examples/curl/connections_create.yml
+- $ref: examples/curl/connections_create.yml
+security:
+- bearer_auth:
+  - action_gateway:create

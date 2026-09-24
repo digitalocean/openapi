@@ -1,0 +1,200 @@
+output_view:
+  type: object
+  description: >-
+    A named reshaping of a tool's canonical output, authored against one exact
+    tool version. Bind a view to a tool when creating a session with
+    `config.outputViews`.
+  properties:
+    view_id:
+      type: string
+      description: The opaque identifier of the view. Empty in preview responses.
+      example: ov_4f0c2a9d8e1b47c6a3d5f7e9b1c3a5d7
+    tool_id:
+      type: string
+      description: The opaque identifier of the tool version the view is bound to.
+      example: tul_exa_web_search
+    tool:
+      type: string
+      description: The provider-qualified tool slug.
+      example: exa_web_search
+    version:
+      type: string
+      description: The tool version the view is bound to, as `v<N>`.
+      example: v1
+    team_id:
+      type: string
+      description: The owning team. Empty for public views authored by DigitalOcean.
+      example: '123456'
+    name:
+      type: string
+      pattern: '^[a-z][a-z0-9_-]{0,63}$'
+      example: titles-and-urls
+    description:
+      type: string
+      example: Keep only result titles and URLs.
+    kind:
+      type: string
+      enum:
+        - OUTPUT_VIEW_KIND_PROJECTION
+        - OUTPUT_VIEW_KIND_TRANSFORM
+      description: Team views are always projections. Transforms are public views authored by DigitalOcean.
+      example: OUTPUT_VIEW_KIND_PROJECTION
+    fields:
+      type: array
+      description: >-
+        For projections, the dotted canonical-output paths to keep. Arrays are
+        traversed element-wise.
+      items:
+        type: string
+      example:
+        - results.title
+        - results.url
+    transform:
+      type: object
+      nullable: true
+      description: For transforms, a `gateway_mapping_v1` template.
+    output_schema:
+      type: object
+      nullable: true
+      description: The JSON Schema every result of this view satisfies.
+      example:
+        type: object
+        properties:
+          results:
+            type: array
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                url:
+                  type: string
+    audit:
+      type: object
+      nullable: true
+      description: Null in preview responses.
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-09-01T16:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-09-01T16:00:00Z'
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Set once the view is deleted.
+          example: null
+        createdBy:
+          type: string
+          description: The identity of the caller that created the view.
+          example: ''
+        updatedBy:
+          type: string
+          description: The identity of the caller that last wrote the view.
+          example: ''
+    deleted_by:
+      type: string
+      description: The identity of the caller that deleted the view.
+      example: ''
+
+output_view_create:
+  type: object
+  description: >-
+    Exactly one of `tool` or `tool_id` selects the tool version. Views can only
+    be authored against the released version of a tool visible to your team.
+  required:
+    - name
+    - fields
+  properties:
+    tool:
+      type: string
+      description: >-
+        The provider-qualified tool slug, optionally pinned as
+        `<tool>@<version>`. A pin must equal the released version.
+      example: exa_web_search
+    tool_id:
+      type: string
+      description: The opaque identifier of the released tool version.
+      example: ''
+    name:
+      type: string
+      pattern: '^[a-z][a-z0-9_-]{0,63}$'
+      description: Unique per tool version within your team.
+      example: titles-and-urls
+    description:
+      type: string
+      maxLength: 512
+      example: Keep only result titles and URLs.
+    fields:
+      type: array
+      minItems: 1
+      maxItems: 64
+      description: >-
+        Canonical-output paths to keep, as `seg(.seg)*`. No path may be a
+        prefix of another. The maximum depth is 8.
+      items:
+        type: string
+      example:
+        - results.title
+        - results.url
+
+output_view_preview:
+  type: object
+  description: >-
+    The same fields as a create request. `name` and `description` are optional
+    and are validated when present.
+  required:
+    - fields
+  properties:
+    tool:
+      type: string
+      example: exa_web_search
+    tool_id:
+      type: string
+      example: ''
+    name:
+      type: string
+      example: titles-and-urls
+    description:
+      type: string
+      example: Keep only result titles and URLs.
+    fields:
+      type: array
+      items:
+        type: string
+      example:
+        - results.title
+        - results.url
+
+output_view_response:
+  type: object
+  properties:
+    view:
+      $ref: '#/output_view'
+
+list_output_views_response:
+  type: object
+  properties:
+    views:
+      type: array
+      description: Ordered by tool version, then public views before your team's, then name.
+      items:
+        $ref: '#/output_view'
+    tool_id:
+      type: string
+      description: The resolved tool version. Empty when the request named no tool.
+      example: tul_exa_web_search
+    tool:
+      type: string
+      example: exa_web_search
+    version:
+      type: string
+      example: v1
+    next_page_token:
+      $ref: 'shared.yml#/next_page_token'
