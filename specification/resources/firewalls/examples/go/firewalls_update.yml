@@ -19,6 +19,7 @@ source: |-
               {
                   Protocol: 'tcp',
                   PortRange: '8080',
+                  Action:   'allow',
                   Sources: &godo.Sources{
                       LoadBalancerUIDs: []string{'4de7ac8b-495b-4884-9a69-1050c6793cd6'},
                   },
@@ -26,6 +27,7 @@ source: |-
               {
                   Protocol:  'tcp',
                   PortRange: '22',
+                  Action:    'allow',
                   Sources: &godo.Sources{
                       Addresses: []string{'18.0.0.0/8'},
                       Tags: []string{'gateway'},
@@ -36,6 +38,7 @@ source: |-
               {
                   Protocol: 'tcp',
                   PortRange: '8080',
+                  Action:   'allow',
                   Destinations: &godo.Destinations{
                       Addresses: []string{'0.0.0.0/0', '::/0'},
                   },

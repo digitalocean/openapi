@@ -18,6 +18,7 @@ source: |-
           {
               Protocol:      'tcp',
               PortRange:     '3306',
+              Action:        'allow',
               Sources: &godo.Sources{
                   DropletIDs: []int{49696269},
               },
@@ -27,6 +28,7 @@ source: |-
           {
               Protocol:      'tcp',
               PortRange:     '3306',
+              Action:        'allow',
               Destinations: &godo.Destinations{
                   DropletIDs: []int{49696269},
               },

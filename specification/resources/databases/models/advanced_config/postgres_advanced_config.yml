@@ -427,3 +427,43 @@ properties:
     minimum: -1
     maximum: 2147483647
     example: 100
+  pgaudit:
+    type: object
+    description: >-
+      System-wide settings for the pgaudit extension. When `feature_enabled` is true, the
+      pgaudit extension is automatically installed. When false, the extension is uninstalled
+      but auditing configurations (such as `log`) are preserved.
+    properties:
+      feature_enabled:
+        description: >-
+          Enable pgaudit extension. When enabled, pgaudit extension will be automatically
+          installed. Otherwise, extension will be uninstalled but auditing configurations
+          will be preserved.
+        type: boolean
+        example: false
+      log:
+        description: >-
+          Specifies which classes of statements will be logged by session audit logging.
+          Available values are `read` (SELECT and COPY when the source is a relation or
+          query), `write` (INSERT, UPDATE, DELETE, TRUNCATE, and COPY when the destination
+          is a relation), `function` (function calls and DO blocks), `role` (statements
+          related to roles and privileges: GRANT, REVOKE, CREATE/ALTER/DROP ROLE),
+          `ddl` (all DDL that is not included in the role class), `misc` (miscellaneous
+          commands, e.g. DISCARD, FETCH, CHECKPOINT, VACUUM, SET), `misc_set`
+          (miscellaneous SET commands, e.g. SET ROLE), and `all` (include all of the above).
+        type: array
+        example:
+          - read
+          - write
+          - ddl
+        items:
+          type: string
+          enum:
+            - read
+            - write
+            - function
+            - role
+            - ddl
+            - misc
+            - misc_set
+            - all

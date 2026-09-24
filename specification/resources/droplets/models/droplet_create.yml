@@ -114,6 +114,13 @@ properties:
       will be assigned. If excluded, the Droplet will be assigned to your
       account's default VPC for the region.<br>Requires `vpc:read` scope.
 
+  subnet_uuid:
+    type: string
+    example: 9c7a0d63-3c4e-4d3d-9f56-3b0fb0e5e4a1
+    description: An optional string specifying the UUID of the VPC subnet to
+      which the Droplet will be assigned. If excluded, the Droplet will be
+      assigned to a default subnet of the VPC.<br>Requires `vpc:read` scope.
+
   with_droplet_agent:
     type: boolean
     example: true

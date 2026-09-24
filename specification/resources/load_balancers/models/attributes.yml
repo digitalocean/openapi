@@ -15,3 +15,16 @@ load_balancer_droplet_tag:
     example: prod:web
     description: The name of a Droplet tag corresponding to Droplets assigned
       to the load balancer.
+
+load_balancer_ip:
+  ip:
+    type: string
+    pattern: '^$|^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+    example: '203.0.113.42'
+    description: >-
+      An optional IP address to assign to the load balancer from one of your
+      Bring Your Own IP (BYOIP) prefixes. The address must be an unassigned
+      BYOIP address on your account in the same region as the load balancer.
+      If omitted, DigitalOcean assigns a public IP address automatically. This
+      field is only applied when creating the load balancer, cannot be changed
+      afterward, and is not supported for `GLOBAL` or `INTERNAL` load balancers.

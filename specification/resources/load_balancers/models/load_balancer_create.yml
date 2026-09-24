@@ -1,34 +1,11 @@
-oneOf:
-  - title: Assign Droplets by ID
-    allOf:
-    - type: object
-      properties:
-        $ref: 'attributes.yml#/load_balancer_droplet_ids'
+description: >-
+  The request schema for creating a load balancer. This is the same as the
+  update schema with the addition of the create-only `ip` field, which assigns
+  a Bring Your Own IP (BYOIP) address to the load balancer.
 
-    - type: object
-      properties:
-        region:
-          $ref: '../../../shared/attributes/region_slug.yml'
+allOf:
+  - $ref: 'load_balancer_update.yml'
 
-    - $ref: 'load_balancer_base.yml'
-
-    required:
-    - droplet_ids
-    - region
-
-  - title: Assign Droplets by Tag
-    allOf:
-    - type: object
-      properties:
-        $ref: 'attributes.yml#/load_balancer_droplet_tag'
-
-    - type: object
-      properties:
-        region:
-          $ref: '../../../shared/attributes/region_slug.yml'
-
-    - $ref: 'load_balancer_base.yml'
-
-    required:
-    - tag
-    - region
+  - type: object
+    properties:
+      $ref: 'attributes.yml#/load_balancer_ip'

@@ -38,4 +38,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'organization:read'
+    - 'organization_membership:read_teams'
