@@ -1134,7 +1134,8 @@ agent_config_credential_slot:
       example: openai
 agent_config:
   type: object
-  description: Immutable team-scoped Agent Config: one sanitized manifest per config. There is no update;
+  description: >-
+    Immutable team-scoped Agent Config: one sanitized manifest per config. There is no update;
     clone to a new config to change content.
   required:
   - id
