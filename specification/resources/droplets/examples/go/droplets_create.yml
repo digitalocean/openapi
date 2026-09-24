@@ -30,4 +30,5 @@ source: |-
           Tags: []string{"env:prod","web"},
           UserData: "#cloud-config\nruncmd:\n  - touch /test.txt\n",
           VPCUUID: "760e09ef-dc84-11e8-981e-3cfdfeaae000",
+          SubnetUUID: "9c7a0d63-3c4e-4d3d-9f56-3b0fb0e5e4a1",
       }

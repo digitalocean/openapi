@@ -27,11 +27,13 @@ content:
         inbound_rules:
         - protocol: tcp
           ports: '80'
+          action: allow
           sources:
             load_balancer_uids:
             - 4de7ac8b-495b-4884-9a69-1050c6793cd6
         - protocol: tcp
           ports: '22'
+          action: allow
           sources:
             tags:
             - gateway
@@ -40,6 +42,7 @@ content:
         outbound_rules:
         - protocol: tcp
           ports: '80'
+          action: allow
           destinations:
             addresses:
             - 0.0.0.0/0

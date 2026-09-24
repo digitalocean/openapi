@@ -17,6 +17,7 @@ source: |-
           Name:        "prod-cluster-01",
           RegionSlug:  "nyc1",
           VersionSlug: "1.14.1-do.4",
+          IsolatedWorkers: false,
           Tags:        []string{"production", "web-team"},
           NodePools: []*godo.KubernetesNodePoolCreateRequest{
               &godo.KubernetesNodePoolCreateRequest{

@@ -39,4 +39,4 @@ x-codeSamples:
 
 security:
   - bearer_auth:
-    - 'dedicated_inference_tokens:delete'
+    - 'dedicated_inference_token:delete'

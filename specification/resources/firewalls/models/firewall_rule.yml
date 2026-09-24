@@ -22,6 +22,18 @@ firewall_rule_base:
         return "0".
       example: "8000"
 
+    action:
+      type: string
+      enum:
+        - allow
+        - deny
+      default: allow
+      description: >-
+        The action to be taken when traffic matches the rule. This may be one
+        of `allow` or `deny`. For backward compatibility, this field is
+        optional. When not set, it defaults to `allow`.
+      example: allow
+
   required:
     - protocol
     - ports

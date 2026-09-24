@@ -1,0 +1,22 @@
+type: object
+required:
+  - name
+properties:
+  name:
+    type: string
+    example: production
+    description: The human-readable name for the team to create.
+
+  invitations:
+    type: array
+    description: >
+      Optional invitations to send when creating the team. Each invitation
+      includes an email address and a role. The `owner` role cannot be
+      assigned via invitation.
+    items:
+      $ref: 'organization_team.yml#/team_invitation'
+    example:
+      - email: member@example.com
+        role: member
+      - email: biller@example.com
+        role: biller

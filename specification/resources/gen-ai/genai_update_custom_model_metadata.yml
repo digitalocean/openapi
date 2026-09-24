@@ -39,7 +39,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 security:
 - bearer_auth:
-  - genai:default
+  - genai:update
 summary: Update Custom Model Metadata
 tags:
 - GradientAI Platform

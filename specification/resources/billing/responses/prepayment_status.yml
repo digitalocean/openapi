@@ -1,0 +1,24 @@
+description: >-
+  The response will be a JSON object with the customer's prepayment gate status
+  and balances.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/prepayment_status_response.yml'
+
+    example:
+      status:
+        balance: '25.00'
+        is_auto_prepay_enabled: true
+        blocked: true
+        eligible: true
+        month_to_date_balance: '75.00'

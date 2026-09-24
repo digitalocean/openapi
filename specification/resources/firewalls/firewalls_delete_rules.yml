@@ -36,12 +36,14 @@ requestBody:
         inbound_rules:
           - protocol: tcp
             ports: '3306'
+            action: allow
             sources:
               droplet_ids:
                 - 49696269
         outbound_rules:
           - protocol: tcp
             ports: '3306'
+            action: allow
             destinations:
               droplet_ids:
                 - 49696269

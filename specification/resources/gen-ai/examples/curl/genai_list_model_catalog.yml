@@ -2,4 +2,5 @@ lang: cURL
 source: |-
   curl -X GET \
     -H "Content-Type: application/json"  \
-    "https://api.digitalocean.com/v2/gen-ai/models/catalog"
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v2/gen-ai/models/catalog?page=1&per_page=20&search=llama&model_type=chat&sort_by=MODEL_CATALOG_SORT_BY_NAME&sort_direction=SORT_DIRECTION_ASC"

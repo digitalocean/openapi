@@ -10,6 +10,7 @@ source: |-
       DropletKit::FirewallInboundRule.new(
         protocol: 'tcp',
         ports: '8080',
+        action: 'allow',
         sources: {
           load_balancer_uids: ['4de7ac8b-495b-4884-9a69-1050c6793cd6']
         }
@@ -17,6 +18,7 @@ source: |-
       DropletKit::FirewallInboundRule.new(
         protocol: 'tcp',
         ports: '22',
+        action: 'allow',
         sources: {
           tags: ['gateway'],
           addresses: ['18.0.0.0/8']
@@ -27,6 +29,7 @@ source: |-
       DropletKit::FirewallOutboundRule.new(
         protocol: 'tcp',
         ports: '8080',
+        action: 'allow',
         destinations: {
           addresses: ['0.0.0.0/0', '::/0'],
         }

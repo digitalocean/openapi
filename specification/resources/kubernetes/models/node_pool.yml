@@ -3,6 +3,7 @@ kubernetes_node_pool:
   allOf:
   - $ref: "#/kubernetes_node_pool_size"
   - $ref: "#/kubernetes_node_pool_base"
+  - $ref: "#/kubernetes_node_pool_gpu_partition"
 
   required:
   - name
@@ -26,6 +27,20 @@ kubernetes_node_pool_size:
       example: s-1vcpu-2gb
       description: The slug identifier for the type of Droplet used as workers in
         the node pool.
+
+kubernetes_node_pool_gpu_partition:
+  type: object
+  properties:
+    gpu_partition_mode:
+      type: string
+      enum:
+      - AMD_PARTITION_MODE_SPX_NPS1
+      - AMD_PARTITION_MODE_DPX_NPS2
+      example: AMD_PARTITION_MODE_SPX_NPS1
+      description: The AMD GPU partition mode for this node pool. Only applicable
+        to AMD GPU sizes that support partitioning. Immutable after the node
+        pool is created. When omitted, the GPUs in the pool are left
+        unpartitioned.
 
 kubernetes_node_pool_base:
   type: object

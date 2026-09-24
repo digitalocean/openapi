@@ -90,6 +90,7 @@ kubernetes_clusters_all:
         duration: 4h0m0s
         day: any
       auto_upgrade: false
+      isolated_workers: false
       status:
         state: provisioning
         message: provisioning
@@ -125,11 +126,17 @@ kubernetes_clusters_all:
         enabled: false
       nvidia_gpu_device_plugin:
         enabled: false
+      nvidia_gpu_dra_driver:
+        enabled: false
+      amd_gpu_dra_driver:
+        enabled: false
       rdma_shared_dev_plugin:
         enabled: false
       coredns_autoscaler:
         enabled: false
       p2p_oci_registry_plugin:
+        enabled: false
+      nfs_csi_plugin:
         enabled: false
     meta:
       total: 1
@@ -227,6 +234,7 @@ kubernetes_single:
         duration: 4h0m0s
         day: any
       auto_upgrade: false
+      isolated_workers: false
       status:
         state: running
       created_at: '2018-11-15T16:00:11Z'
@@ -261,11 +269,17 @@ kubernetes_single:
         enabled: false
       nvidia_gpu_device_plugin:
         enabled: false
+      nvidia_gpu_dra_driver:
+        enabled: false
+      amd_gpu_dra_driver:
+        enabled: false
       rdma_shared_dev_plugin:
         enabled: false
       coredns_autoscaler:
         enabled: false
       p2p_oci_registry_plugin:
+        enabled: false
+      nfs_csi_plugin:
         enabled: false
 
 kubernetes_updated:
@@ -360,6 +374,7 @@ kubernetes_updated:
         duration: 4h0m0s
         day: any
       auto_upgrade: true
+      isolated_workers: false
       status:
         state: running
       created_at: '2018-11-15T16:00:11Z'
@@ -394,11 +409,17 @@ kubernetes_updated:
         enabled: false
       nvidia_gpu_device_plugin:
         enabled: false
+      nvidia_gpu_dra_driver:
+        enabled: false
+      amd_gpu_dra_driver:
+        enabled: false
       rdma_shared_dev_plugin:
         enabled: false
       coredns_autoscaler:
         enabled: false
       p2p_oci_registry_plugin:
+        enabled: false
+      nfs_csi_plugin:
         enabled: false
 
 kubernetes_clusters_create_basic_response:
@@ -457,6 +478,7 @@ kubernetes_clusters_create_basic_response:
         duration: 4h0m0s
         day: any
       auto_upgrade: false
+      isolated_workers: false
       status:
         state: provisioning
         message: provisioning
@@ -492,11 +514,17 @@ kubernetes_clusters_create_basic_response:
         enabled: false
       nvidia_gpu_device_plugin:
         enabled: false
+      nvidia_gpu_dra_driver:
+        enabled: false
+      amd_gpu_dra_driver:
+        enabled: false
       rdma_shared_dev_plugin:
         enabled: false
       coredns_autoscaler:
         enabled: false
       p2p_oci_registry_plugin:
+        enabled: false
+      nfs_csi_plugin:
         enabled: false
 
 kubernetes_clusters_multi_pool_response:
@@ -593,6 +621,7 @@ kubernetes_clusters_multi_pool_response:
         duration: 4h0m0s
         day: any
       auto_upgrade: false
+      isolated_workers: false
       status:
         state: provisioning
         message: provisioning
