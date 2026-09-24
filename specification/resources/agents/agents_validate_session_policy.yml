@@ -16,18 +16,24 @@ tags:
 - Harness Runtime
 requestBody:
   required: true
+  description: |-
+    The same environment spec you would submit to CreateSession (YAML). Only agent/template selection
+    and the permissions block are used. The live API also accepts `application/yaml`, `text/yaml`, and
+    `text/x-yaml` (see x-content-schemas); OpenAPI `content` lists a single media type so generated
+    clients can emit this operation.
   content:
     application/x-yaml:
-      schema: &id001
+      schema:
         $ref: models/definitions.yml#/agent_manifest
+  x-content-schemas:
+    application/x-yaml:
+      $ref: models/definitions.yml#/agent_manifest
     application/yaml:
-      schema: *id001
+      $ref: models/definitions.yml#/agent_manifest
     text/yaml:
-      schema: *id001
+      $ref: models/definitions.yml#/agent_manifest
     text/x-yaml:
-      schema: *id001
-  description: The same environment spec YAML environment spec you would submit to CreateSession; only spec.sandbox.template
-    / spec.runtime.adapter (to resolve the agent) and spec.permissions are used.
+      $ref: models/definitions.yml#/agent_manifest
 responses:
   '200':
     description: 'Per-rule verdicts for the agent the manifest resolves to. A 200 with `ok: false` still

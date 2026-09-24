@@ -3,18 +3,23 @@ summary: CreateSession provisions a sandbox and starts a Harness Runtime session
 description: |-
   Returns once the session row is allocated. Sandbox boot completes asynchronously.
 
-  Two mutually exclusive request forms are selected by Content-Type:
-  - YAML (`application/x-yaml` and siblings): the environment spec. Two environment-spec formats are
-    accepted during the dual-format transition: the flat format (primary) and the legacy
-    `agents.digitalocean.com/v1alpha1` envelope (deprecated). A top-level `apiVersion` key selects the
-    legacy parser; its absence selects flat. Internally persists a durable Environment Config, then creates
-    the session.
-  - JSON (`application/json`): `{name, config_id}` loads the config, resolves its credentials from Secrets
-    Manager at the version pinned when the config was created, and creates the session.
+  Two mutually exclusive request forms are selected by Content-Type (same contract as
+  harness-api `harness.swagger.json`):
+  - YAML (`application/x-yaml`, `application/yaml`, `text/yaml`, `text/x-yaml`): the environment
+    spec. Two environment-spec formats are accepted during the dual-format transition: the flat
+    format (primary) and the legacy `agents.digitalocean.com/v1alpha1` envelope (deprecated). A
+    top-level `apiVersion` key selects the legacy parser; its absence selects flat. Internally
+    persists a durable Environment Config, then creates the session.
+  - JSON (`application/json`): `{name, config_id}` loads the config, resolves its credentials from
+    Secrets Manager at the version pinned when the config was created, and creates the session.
 
-  Successful responses may include `config_id` on the session. `X-Device-UUID` (if present) is persisted
-  on the session row. Query parameters `openai_session_id` and `resume_on_topoff` apply to both forms;
-  when both the JSON body field and `?resume_on_topoff=` are present, the query parameter wins.
+  The OpenAPI `requestBody` schemas the JSON form for client generation. The YAML form is documented
+  here and under `x-content-schemas` (mirroring harness swagger); the live API still accepts both.
+
+  Successful responses may include `config_id` on the session. `X-Device-UUID` (if present) is
+  persisted on the session row. Query parameters `openai_session_id` and `resume_on_topoff` apply to
+  both forms; when both the JSON body field and `?resume_on_topoff=` are present, the query
+  parameter wins.
 tags:
 - Harness Runtime
 parameters:
@@ -50,20 +55,25 @@ parameters:
   example: false
 requestBody:
   required: true
+  description: |-
+    CreateSessionConfigRequest with `application/json`. The live API also accepts a raw environment
+    spec under YAML Content-Types (see operation description and x-content-schemas); those forms are
+    omitted from `content` so generated clients (pydo/autorest) can emit this operation.
   content:
     application/json:
       schema:
         $ref: models/definitions.yml#/create_session_config_request
-    application/x-yaml: &id001
-      schema:
-        type: object
-        additionalProperties: true
-        description: Raw environment spec (flat or legacy envelope).
-    application/yaml: *id001
-    text/yaml: *id001
-    text/x-yaml: *id001
-  description: Either a raw environment spec with a YAML Content-Type or CreateSessionConfigRequest with
-    application/json. The forms are mutually exclusive by Content-Type.
+  x-content-schemas:
+    application/json:
+      $ref: models/definitions.yml#/create_session_config_request
+    application/x-yaml:
+      $ref: models/definitions.yml#/agent_manifest
+    application/yaml:
+      $ref: models/definitions.yml#/agent_manifest
+    text/yaml:
+      $ref: models/definitions.yml#/agent_manifest
+    text/x-yaml:
+      $ref: models/definitions.yml#/agent_manifest
 responses:
   '200':
     description: Session row allocated; sandbox boot continues asynchronously.
