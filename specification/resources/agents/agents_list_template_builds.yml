@@ -58,4 +58,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_list_template_builds.yml
 security:
 - bearer_auth:
-  - agents:read
+  - agent_harness_session:read

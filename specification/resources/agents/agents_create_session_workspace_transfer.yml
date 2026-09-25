@@ -151,4 +151,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_create_session_workspace_transfer.yml
 security:
 - bearer_auth:
-  - agents:create
+  - agent_harness_session:operate

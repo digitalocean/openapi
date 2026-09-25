@@ -1,8 +1,10 @@
 operationId: harness_create_config
-summary: Create an Environment Config (environment spec + secrets in one request).
-description: Accepts name, environment-spec YAML text, and optional write-only secret values in one request.
-  Responses never echo secret values; GET/create may include credential slot metadata (name/source/provider
-  only). Configs are immutable after create.
+summary: Create an Environment Config (environment spec + optional Insights opt-in).
+description: >-
+  Accepts name, environment-spec YAML text, and optional Insights telemetry opt-in. Tenant secrets
+  are declared inside the environment spec (write-only values), not as sibling request fields.
+  Responses never echo secret values; GET/create may include credential slot metadata
+  (name/source/provider only). Configs are immutable after create.
 tags:
 - Harness Runtime
 requestBody:
@@ -11,7 +13,7 @@ requestBody:
     application/json:
       schema:
         $ref: models/definitions.yml#/agent_config_create_request
-  description: Unified Environment Config create body. secrets/oauth_assignments are write-only and never returned.
+  description: Environment Config create body. Secret values live in the environment-spec YAML and are never returned.
 responses:
   '201':
     description: Config created.
@@ -66,4 +68,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_create_config.yml
 security:
 - bearer_auth:
-  - agents:create
+  - agent_harness_session:create

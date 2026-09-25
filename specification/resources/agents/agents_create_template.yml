@@ -43,4 +43,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_create_template.yml
 security:
 - bearer_auth:
-  - agents:create
+  - agent_harness_session:manage

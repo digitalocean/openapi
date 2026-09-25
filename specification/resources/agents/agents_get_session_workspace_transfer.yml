@@ -71,4 +71,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_get_session_workspace_transfer.yml
 security:
 - bearer_auth:
-  - agents:read
+  - agent_harness_session:read

@@ -95,4 +95,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_create_session_workspace_part_upload_urls.yml
 security:
 - bearer_auth:
-  - agents:create
+  - agent_harness_session:operate

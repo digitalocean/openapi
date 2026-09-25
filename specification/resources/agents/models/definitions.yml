@@ -1431,7 +1431,10 @@ agent_config_summary:
       example: support-agent
     agentspec_schema_version:
       type: string
-      description: Validated agentspec apiVersion, currently agents.digitalocean.com/v1alpha1.
+      description: >-
+        The manifest contract the server accepted at create time: the manifest's own apiVersion
+        for legacy envelope parses (currently agents.digitalocean.com/v1alpha1), or
+        agents.digitalocean.com/flat.v1 for flat-format parses.
       example: agents.digitalocean.com/v1alpha1
     content_hash:
       type: string
@@ -1489,7 +1492,10 @@ agent_config:
       example: support-agent
     agentspec_schema_version:
       type: string
-      description: Validated agentspec apiVersion, currently agents.digitalocean.com/v1alpha1.
+      description: >-
+        The manifest contract the server accepted at create time: the manifest's own apiVersion
+        for legacy envelope parses (currently agents.digitalocean.com/v1alpha1), or
+        agents.digitalocean.com/flat.v1 for flat-format parses.
       example: agents.digitalocean.com/v1alpha1
     manifest:
       description: >-
@@ -1504,6 +1510,14 @@ agent_config:
       pattern: ^[0-9a-f]{64}$
       description: Lowercase SHA-256 hex digest of the canonical sanitized manifest JSON.
       example: 75803fef24dc731824ecd4a1853c76153c7d8503534092b94da3ca3f31a882f4
+    insights:
+      allOf:
+      - $ref: '#/insights_opt_in'
+      - description: >-
+          The per-signal telemetry opt-in recorded at create time. Absent when the customer
+          expressed no choice. This echoes the create-time request only: a customer who later
+          re-toggles a signal from the Insights settings page changes their enablement there,
+          not here.
     created_by:
       type: string
       description: Authenticated user identity that created the config.
@@ -1540,7 +1554,10 @@ list_agent_configs_response:
 agent_config_create_request:
   type: object
   additionalProperties: false
-  description: Unified Environment Config create body. secrets/oauth_assignments are write-only and never returned.
+  description: >-
+    Environment Config create body. Credentials are not request fields: every secret is declared
+    in the environment spec under secrets (or legacy spec.secrets), with tenantSecret slots
+    carrying plaintext in a write-only value extracted into Secrets Manager and never returned.
   required:
   - name
   - manifest_yaml
@@ -1563,23 +1580,14 @@ agent_config_create_request:
         spec:
           runtime:
             adapter: opencode
-    secrets:
-      type: object
-      maxProperties: 32
-      description: Write-only map from tenantSecret logical slot to plaintext. Stored in Secrets Manager;
-        never returned.
-      additionalProperties:
-        type: string
-        minLength: 1
-        maxLength: 32768
-    oauth_assignments:
-      type: object
-      maxProperties: 32
-      description: Write-only map from oauth logical slot to an OAuth assignment UUID. Never returned.
-      additionalProperties:
-        type: string
-        format: uuid
-
+    insights:
+      allOf:
+      - $ref: '#/insights_opt_in'
+      - description: >-
+          Optional per-signal Insights telemetry opt-in. Travels beside manifest_yaml, never
+          inside it: the manifest is immutable and content-hashed, while this value can be
+          changed later from the Insights settings page. When omitted, no choice is recorded
+          and the product default applies.
 checkpoint_kind:
   type: string
   enum:
@@ -1607,17 +1615,17 @@ insights_opt_in:
   properties:
     metrics:
       type: boolean
-      x-nullable: true
+      nullable: true
       description: >-
         Accepted and stored for parity with the Insights schema, but metrics are always collected:
         unregistered metrics are dropped at ingest rather than opted out of here.
     logs:
       type: boolean
-      x-nullable: true
+      nullable: true
       description: Whether the agent's logs are sent to Insights.
     traces:
       type: boolean
-      x-nullable: true
+      nullable: true
       description: Whether the agent's traces are sent to Insights.
   description: >-
     Per-signal DigitalOcean Insights telemetry opt-in, mirroring the Insights-owned schema

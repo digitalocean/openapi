@@ -64,4 +64,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_delete_config.yml
 security:
 - bearer_auth:
-  - agents:delete
+  - agent_harness_session:manage

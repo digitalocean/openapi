@@ -76,4 +76,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_revert_session_checkpoint.yml
 security:
 - bearer_auth:
-  - agents:create
+  - agent_harness_session:operate

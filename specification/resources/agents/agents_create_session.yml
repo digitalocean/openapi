@@ -140,4 +140,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_create_session.yml
 security:
 - bearer_auth:
-  - agents:create
+  - agent_harness_session:create

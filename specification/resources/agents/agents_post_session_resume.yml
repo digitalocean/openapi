@@ -80,4 +80,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_post_session_resume.yml
 security:
 - bearer_auth:
-  - agents:create
+  - agent_harness_session:operate

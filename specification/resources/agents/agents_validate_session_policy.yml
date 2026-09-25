@@ -61,4 +61,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_validate_session_policy.yml
 security:
 - bearer_auth:
-  - agents:create
+  - agent_harness_session:read
