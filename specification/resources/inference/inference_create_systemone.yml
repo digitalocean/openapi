@@ -1,0 +1,90 @@
+operationId: inference_create_systemone
+summary: Create a System One evaluation
+description: >-
+  Evaluates a provided state against one or more typed questions using
+  TypeSafe AI's Jev model. Unlike chat completion endpoints, System One
+  returns typed answers, a choice from a fixed set, a numeric score, or a
+  boolean, each paired with a calibrated probability, instead of free-form
+  text.
+tags:
+  - Serverless Inference
+servers:
+  - url: "https://inference.do-ai.run"
+    description: production
+x-inference-base-url: "https://inference.do-ai.run"
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "models/systemone_request.yml"
+responses:
+  "200":
+    description: Successful System One evaluation.
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+    content:
+      application/json:
+        schema:
+          $ref: "models/systemone_response.yml"
+  "400":
+    $ref: '../../shared/responses/bad_request.yml'
+  "401":
+    $ref: '../../shared/responses/unauthorized.yml'
+  "403":
+    $ref: '../../shared/responses/forbidden.yml'
+  "422":
+    $ref: '../../shared/responses/unprocessable_entity.yml'
+  "429":
+    $ref: '../../shared/responses/too_many_requests.yml'
+  "424":
+    description: >-
+      The upstream provider (TypeSafe) failed to process the request. This
+      can indicate the provider is unavailable, an upstream authentication or
+      quota issue, or a provider-side server error.
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+    content:
+      application/json:
+        schema:
+          $ref: '../../shared/models/error.yml'
+        example:
+          id: failed_dependency
+          message: the upstream model provider failed to process the request
+  "500":
+    $ref: '../../shared/responses/server_error.yml'
+  "502":
+    description: >-
+      The upstream provider response could not be read or decoded.
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+    content:
+      application/json:
+        schema:
+          $ref: '../../shared/models/error.yml'
+        example:
+          id: bad_gateway
+          message: failed to read or decode the upstream provider response
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+x-codeSamples:
+  - $ref: 'examples/curl/inference_create_systemone.yml'
+  - $ref: 'examples/python/inference_create_systemone.yml'
+  - $ref: 'examples/dots/inference_create_systemone.yml'
+security:
+  - inference_bearer_auth: []
