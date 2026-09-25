@@ -1,0 +1,79 @@
+operationId: harness_create_config_clone
+summary: Clone an Environment Config under a new name.
+description: 'Copies the source config''s sanitized manifest to a new UUID. Source and clone are independent (no lineage). Credential bindings are never copied: if the manifest declares secret slots, supply secrets/oauth_assignments again (write-only). content_hash matches the source when the manifest is unchanged.'
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: config_id
+  required: true
+  description: The Environment Config UUID.
+  schema:
+    type: string
+    format: uuid
+    example: 019fb39c-14d9-7080-933e-b9b90e25acda
+  example: 019fb39c-14d9-7080-933e-b9b90e25acda
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/agent_config_clone_request
+  description: Clone body with required new name plus write-only credentials for any declared slots.
+responses:
+  '201':
+    description: Clone created.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/agent_config_response
+  '400':
+    description: 'Invalid name, missing credential slots, or source environment spec fails current durable validation.'
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '409':
+    description: An active config with this name already exists for the team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '413':
+    description: Request body exceeds 1 MiB.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '415':
+    description: Content-Type is not application/json.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_create_config_clone.yml
+security:
+- bearer_auth:
+  - agent_harness_session:create

@@ -1,0 +1,53 @@
+operationId: harness_get_template_build
+summary: GetTemplateBuild returns a single template build.
+description: GetTemplateBuild returns a single template build.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: template_id
+  required: true
+  description: The template UUID.
+  schema:
+    type: string
+    format: uuid
+    example: 11111111-2222-3333-4444-555555555555
+  example: 11111111-2222-3333-4444-555555555555
+- in: path
+  name: build_id
+  required: true
+  description: The build UUID.
+  schema:
+    type: string
+    format: uuid
+    example: 22222222-3333-4444-5555-666666666666
+  example: 22222222-3333-4444-5555-666666666666
+responses:
+  '200':
+    description: A successful response.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/get_template_build_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_get_template_build.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

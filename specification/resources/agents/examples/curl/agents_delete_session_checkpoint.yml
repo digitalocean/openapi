@@ -1,0 +1,3 @@
+"lang": "bash"
+"source": "curl -X DELETE \\\n  -H \"Authorization: Bearer $DIGITALOCEAN_TOKEN\" \\\n  \"https://api.digitalocean.com/v2/agents/sessions/{session_id}/checkpoints/{checkpoint_id}\""
+"label": "cURL"
