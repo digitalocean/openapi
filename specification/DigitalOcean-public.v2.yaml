@@ -3384,6 +3384,10 @@ paths:
     get:
       $ref: 'resources/inference/inference_list_models.yml'
 
+  /v1/systemone:
+    post:
+      $ref: 'resources/inference/inference_create_systemone.yml'
+
   /v1/responses:
     post:
       $ref: 'resources/inference/inference_create_response.yml'

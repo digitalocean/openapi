@@ -1,0 +1,27 @@
+lang: JavaScript
+source: |-
+  import { Client } from "@digitalocean/dots/inference";
+
+  const client = new Client({ apiKey: process.env.DIGITALOCEAN_TOKEN });
+
+  const result = await client.systemone.create({
+      model: "typesafe-jev-1.13.0",
+      state: "The customer said the delivery was late but the product quality was excellent.",
+      questions: {
+          sentiment: {
+              type: "choice",
+              instructions: "What is the overall sentiment of this feedback?",
+              criteria: {
+                  positive: "Customer is happy overall",
+                  negative: "Customer is unhappy overall",
+                  mixed: "Customer has both good and bad things to say",
+              },
+          },
+          needs_followup: {
+              type: "noul",
+              instructions: "Does this feedback require a follow-up from the support team?",
+          },
+      },
+  });
+
+  console.log(result.answers.sentiment);
