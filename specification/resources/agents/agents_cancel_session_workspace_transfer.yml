@@ -74,4 +74,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_cancel_session_workspace_transfer.yml
 security:
 - bearer_auth:
-  - agents:create
+  - agents:update

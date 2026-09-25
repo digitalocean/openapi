@@ -730,6 +730,7 @@ x-tagGroups:
       - Floating IPs
       - Functions
       - GradientAI Platform
+      - Harness Runtime
       - Image Actions
       - Images
       - Kubernetes

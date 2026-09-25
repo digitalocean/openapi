@@ -48,4 +48,4 @@ x-codeSamples:
 - $ref: examples/curl/agents_update_template.yml
 security:
 - bearer_auth:
-  - agents:create
+  - agents:update

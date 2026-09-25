@@ -27,122 +27,155 @@ agent_kind:
 
 agent_manifest:
   type: object
-  description: 'Customer-authored environment spec (see internal/agentspec and contracts/agent.v1alpha1.schema.json
-    — the authoritative published schema), sent as the CreateSession request body with a YAML Content-Type.
-    Untrusted input: every value is a request that is validated and clamped server-side. Decoding is strict:
-    unknown or misspelled fields are rejected with HTTP 400.'
-  required:
-  - apiVersion
-  - kind
-  - spec
+  description: >-
+    Customer-authored agents.yaml Agent manifest, sent as the CreateSession request body with a YAML
+    Content-Type. Two formats are accepted during the dual-format transition: the FLAT format
+    (primary - no envelope, snake_case, duration strings; authoritative published schema
+    contracts/agent.flat.schema.json, field reference docs/agent-manifest.md) and the legacy
+    v1alpha1 envelope documented by the properties below (DEPRECATED; schema
+    contracts/agent.v1alpha1.schema.json; parses append a deprecation notice to session.warnings). A
+    top-level apiVersion key selects the legacy parser; its absence selects flat. Untrusted input:
+    every value is a request that is validated and clamped server-side. Decoding is strict in both
+    formats: unknown or misspelled fields are rejected with HTTP 400 (with did-you-mean and
+    legacy-spelling hints on the flat path).
   properties:
     apiVersion:
       type: string
-      description: Must be "agents.digitalocean.com/v1alpha1".
+      description: >-
+        Legacy envelope only - must be "agents.digitalocean.com/v1alpha1", and its presence is what
+        routes the document to the deprecated legacy parser. Flat-format manifests carry no version
+        key (the endpoint owns the contract); required, with kind and spec, when authoring the
+        legacy format.
       enum:
-      - agents.digitalocean.com/v1alpha1
+        - agents.digitalocean.com/v1alpha1
       example: agents.digitalocean.com/v1alpha1
     kind:
       type: string
       description: Must be "Agent".
       enum:
-      - Agent
+        - Agent
       example: Agent
     metadata:
       type: object
       properties:
         name:
           type: string
-          description: 'Optional team-unique session name: 1-64 chars of letters, digits, ''-'', ''.'',
-            ''_'', starting and ending alphanumeric; case-insensitive; must not be UUID-shaped. Omit to
-            have the control plane generate one ("session-<agent-type>-<date-time>"). Unique among the
-            team''s ACTIVE (non-terminal) sessions; destroying a session frees its name for reuse.'
+          description: >-
+            Optional team-unique session name: 1-64 chars of letters, digits, '-', '.', '_',
+            starting and ending alphanumeric; case-insensitive; must not be UUID-shaped. Omit to
+            have the control plane generate one ("session-<agent-type>-<date-time>"). Unique among
+            the team's ACTIVE (non-terminal) sessions; destroying a session frees its name for
+            reuse.
           example: example
         description:
           type: string
-          description: Free-form description (max 1024 chars), stored and echoed back for Console / catalog
+          description: >-
+            Free-form description (max 1024 chars), stored and echoed back for Console / catalog
             surfaces.
-          example: example
+          example: Use when ...
         labels:
           type: object
           additionalProperties:
             type: string
-          properties: {}
+            example: example
+          example: {}
     spec:
       type: object
       required:
-      - runtime
+        - runtime
       properties:
         permissions:
           $ref: '#/permissions'
         mode:
           type: string
-          description: Explicit lifecycle discriminator. Defaults to "interactive" (spec.serving forbidden);
+          description: >-
+            Explicit lifecycle discriminator. Defaults to "interactive" (spec.serving forbidden);
             "served" requires spec.serving.
           enum:
-          - interactive
-          - served
+            - interactive
+            - served
           example: interactive
         runtime:
           type: object
-          description: 'Canonical adapter ids: claude-code | opencode | codex | cursor | custom. codex-cli
-            and cursor-cli are deprecated aliases (accepted with a create-time warning). The framework
-            adapters (openai-agents, claude-agent-sdk, crewai, langgraph) are declared but not yet supported;
-            CreateSession rejects them. adapter: custom requires the custom block.'
+          description: >-
+            Canonical adapter ids: claude-code | opencode | codex | cursor | hermes | codex-agentapi
+            | custom. codex-agentapi is the OpenAI sandbox-provider runtime (DO runs codex
+            exec-server; the agent loop lives at OpenAI) and pairs with the opaque
+            spec.runtime.config block. codex-cli and cursor-cli are deprecated aliases (accepted
+            with a create-time warning). The framework adapters (openai-agents, claude-agent-sdk,
+            crewai, langgraph) are declared but not yet supported; CreateSession rejects them.
+            adapter: custom requires the custom block.
           required:
-          - adapter
+            - adapter
           properties:
             adapter:
               type: string
               enum:
-              - claude-code
-              - opencode
-              - codex
-              - cursor
-              - custom
-              - codex-cli
-              - cursor-cli
-              - openai-agents
-              - claude-agent-sdk
-              - crewai
-              - langgraph
+                - claude-code
+                - opencode
+                - codex
+                - cursor
+                - hermes
+                - codex-agentapi
+                - custom
+                - codex-cli
+                - cursor-cli
+                - openai-agents
+                - claude-agent-sdk
+                - crewai
+                - langgraph
               example: claude-code
             custom:
               type: object
-              description: 'BYO container; requires adapter: custom. image is required and should be digest-pinned.'
+              description: >-
+                BYO container; requires adapter: custom. image is required and should be
+                digest-pinned.
               required:
-              - image
+                - image
               properties:
                 image:
                   type: string
-                  example: example
+                  example: example.registry/image@sha256:abc
                 entrypoint:
                   type: array
                   items:
                     type: string
                     example: example
                   example:
-                  - example
+                    - example
+            config:
+              type: object
+              description: >-
+                OPAQUE, provider-specific runtime config. Only for adapter: codex-agentapi today,
+                where it is the OpenAI Agents API create-session body (agent/environment/input) that
+                doctl forwards verbatim to OpenAI's POST /v1/agents/sessions; harness-api stores and
+                echoes it but never parses or validates its contents (so DO stays forward-compatible
+                as OpenAI's schema evolves). The OpenAI session_id is passed on the create call (the
+                openai_session_id query parameter), not in this block.
+              additionalProperties: true
+              example: {}
         workspace:
           type: object
           description: Repositories the session works against.
           properties:
             repos:
               type: array
-              description: GitHub OWNER/REPO entries, unique. The first entry becomes the session's repo_hint;
+              description: >-
+                GitHub OWNER/REPO entries, unique. The first entry becomes the session's repo_hint;
                 the full list is the forward shape for multi-repo sessions.
               items:
                 type: string
                 example: example
               example:
-              - example
+                - example
         sandbox:
           type: object
           properties:
             template:
               type: string
-              description: 'Optional sandbox template. Empty (or the legacy placeholder "coding") means
-                "no preference": the template derives from the adapter.'
+              description: >-
+                Optional sandbox template. Empty (or the legacy placeholder "coding") means "no
+                preference": the template derives from the adapter.
               example: example
             persistentWorkspace:
               type: boolean
@@ -155,32 +188,109 @@ agent_manifest:
             maxLifetimeSeconds:
               type: integer
               format: int64
-              description: Hard wall-clock ceiling for the whole session, independent of activity. Accepted,
+              description: >-
+                Hard wall-clock ceiling for the whole session, independent of activity. Accepted,
                 not yet enforced (returns a warning).
               example: 1
             sizeSlug:
               type: string
-              description: 'Requested sandbox size (catalog: GET /v2/agents/sessions/sandbox/sizes). Empty
-                means the service default.'
+              description: >-
+                Requested sandbox size (catalog: GET /v2/agents/sessions/sandbox/sizes). Empty means
+                the service default.
               example: example
+            mounts:
+              type: array
+              maxItems: 8
+              description: >-
+                Requested data mounts. Accepted, not yet enforced (returns a warning).
+                accessKeyRef/secretKeyRef name declared tenantSecret slots in spec.secrets,
+                validated at create; declare those slots with env: false so the keys stay
+                mount-scoped and out of the guest env.
+              items:
+                type: object
+                required:
+                  - type
+                  - path
+                  - bucket
+                  - accessKeyRef
+                  - secretKeyRef
+                properties:
+                  type:
+                    type: string
+                    enum:
+                      - s3fuse
+                    example: s3fuse
+                  path:
+                    type: string
+                    description: Absolute guest path the mount appears at.
+                    example: /mnt/data
+                  bucket:
+                    type: string
+                    example: my-bucket
+                  endpoint:
+                    type: string
+                    description: Optional storage endpoint override; https:// only.
+                    example: https://nyc3.digitaloceanspaces.com
+                  readOnly:
+                    type: boolean
+                    example: true
+                  accessKeyRef:
+                    type: string
+                    description: Names a declared tenantSecret slot in spec.secrets.
+                    example: my-secret
+                  secretKeyRef:
+                    type: string
+                    description: Names a declared tenantSecret slot in spec.secrets.
+                    example: my-secret
             egress:
               type: object
-              description: 'Requested egress allowlist. A request only: the server intersects it with
-                tenant + platform policy and can only narrow it.'
+              description: >-
+                Requested egress policy (legacy envelope). unrestricted opts out of platform-default
+                host allowlists and cannot combine with allow / allowIps / vpcUuid / subnetUuid.
+                Absent or empty means no destination ACL (same as unrestricted). Flat authors prefer
+                egress: unrestricted (scalar), a bare host list, or an object with allow_hosts /
+                allow_ips / vpc_uuid / subnet_uuid. Platform host defaults are unioned only when
+                allow names something; allowIps does not trigger that union (IP-only turns the
+                destination ACL on without domain rules). VPC attachment is create-time immutable;
+                ownership is verified at session create. Allowlists are a request only: the server
+                intersects them with tenant + platform policy and can only narrow them.
               properties:
                 allow:
                   type: array
                   items:
                     type: object
                     required:
-                    - host
+                      - host
                     properties:
                       host:
                         type: string
-                        example: example
+                        example: api.example.com
+                allowIps:
+                  type: array
+                  description: Exact IPv4/IPv6 literals (not CIDRs).
+                  items:
+                    type: string
+                    example: example
+                  example:
+                    - example
+                vpcUuid:
+                  type: string
+                  description: Customer VPC UUID. Create-time immutable.
+                  example: example
+                subnetUuid:
+                  type: string
+                  description: Optional subnet within vpcUuid.
+                  example: example
+                unrestricted:
+                  type: boolean
+                  description: >-
+                    When true, opts out of the platform-default host allowlist union. Mutually
+                    exclusive with allow / allowIps / vpcUuid / subnetUuid.
+                  example: true
         model:
           type: object
-          description: Accepted, not yet enforced (returns a warning). Model routing (Plano); catalog-validated
+          description: >-
+            Accepted, not yet enforced (returns a warning). Model routing (Plano); catalog-validated
             when enforcement lands.
           properties:
             default:
@@ -200,29 +310,165 @@ agent_manifest:
               type: array
               items:
                 type: object
-                required:
-                - ref
+                description: >-
+                  Exactly one form per entry: CATALOG (ref - do.* only, the reserved DO-owned
+                  namespace, e.g. do.actions; there is no tenant-registered catalog) or INLINE (name
+                  + https url, optional brokered auth - the path for any non-DO server). Mixing
+                  forms is a 400. tools entries are individual tool names or toolbelt:<name>[@<int>]
+                  group references (catalog refs only) - selection only, disposition stays in
+                  spec.permissions. Inline hosts are not auto-allowed for egress - list them under
+                  spec.sandbox.egress.allow.
                 properties:
                   ref:
                     type: string
+                    description: >-
+                      DO-owned catalog reference (catalog form); do.* only, e.g. do.actions.
+                      Mutually exclusive with name/url/auth.
+                    pattern: ^do\.[a-z0-9]([a-z0-9._-]{0,59}[a-z0-9])?$
+                    example: do.actions
+                  name:
+                    type: string
+                    description: >-
+                      Inline server name (required with url): 1-64 chars of lowercase letters,
+                      digits, '-', '.', '_', starting/ending alphanumeric. Unique across the list.
+                      Must not start with do. (reserved for catalog refs).
+                    pattern: ^[a-z0-9]([a-z0-9._-]{0,62}[a-z0-9])?$
                     example: example
+                  url:
+                    type: string
+                    description: Inline server endpoint; https:// only.
+                    example: https://example.com
+                  tools:
+                    type: array
+                    description: >-
+                      Optional selection allowlist; omitted means all tools the server advertises.
+                      Each entry is an individual tool name with an optional integer version pin
+                      (e.g. web_search, execute_code@3) or a toolbelt reference - a server-defined
+                      named tool group written toolbelt:<name>[@<int>] (e.g. toolbelt:read-only@1;
+                      catalog refs only). Versions are integer pins (no semver). The server owns
+                      belt expansion; a pinned tool or belt attaches exactly that version, an
+                      unpinned one resolves at session create and is frozen for the session (no
+                      floating latest). Entries non-empty, unique per server. The selection bounds
+                      the session and is never preloaded into the session MCP tools/list; see
+                      preloadTools.
+                    items:
+                      type: string
+                      example: example
+                    example:
+                      - example
+                  preloadTools:
+                    type: array
+                    description: >-
+                      Catalog form only. Individual tools (optional integer pin) advertised directly
+                      in the session MCP tools/list next to the
+                      action_search/action_invoke/action_code meta tools. Each entry must appear in
+                      tools when tools is set; toolbelt references are rejected. Every preloaded
+                      schema is in the model's context on every turn, so keep this to a handful of
+                      tools. Omitted means nothing is preloaded.
+                    items:
+                      type: string
+                      example: example
+                    example:
+                      - example
+                  auth:
+                    type: object
+                    description: >-
+                      Brokered credential for an INLINE server (invalid on the catalog form).
+                      secretRef names a declared tenantSecret slot in spec.secrets, validated at
+                      create; the slot is resolved server-side and sent as an HTTP header. Plaintext
+                      credentials are never accepted.
+                    required:
+                      - secretRef
+                    properties:
+                      header:
+                        type: string
+                        description: HTTP header the credential is sent in. Defaults to Authorization.
+                        example: Authorization
+                      secretRef:
+                        type: string
+                        description: Tenant-vault secret name.
+                        example: my-secret
             bundle:
               type: string
-              example: example
+              example: default
+        skills:
+          type: array
+          description: >-
+            Inline agent skills (SKILL.md shape): reusable markdown instructions the agent loads on
+            demand, selected by description. Accepted, not yet enforced (returns a warning). Max 32
+            entries; instructions additionally capped at 256 KiB summed across the list so a valid
+            manifest always fits the request-body limits. v0 is inline-only - remote skill sources
+            come later as an additive field.
+          maxItems: 32
+          items:
+            type: object
+            required:
+              - name
+              - description
+              - instructions
+            properties:
+              name:
+                type: string
+                description: >-
+                  Unique across the list; 1-64 chars of lowercase letters, digits, and single hyphen
+                  separators - no consecutive hyphens, per the Agent Skills spec (safe as a
+                  directory name at materialization).
+                pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+                maxLength: 64
+                example: example
+              description:
+                type: string
+                description: >-
+                  Load-bearing: the agent reads it to decide WHEN to load the skill (progressive
+                  disclosure); write it as "Use when ...". Max 1024 chars.
+                maxLength: 1024
+                example: Use when ...
+              instructions:
+                type: string
+                description: The markdown body (the content below the SKILL.md frontmatter). Max 32 KiB.
+                maxLength: 32768
+                example: Use when diagnosing errors.
+              license:
+                type: string
+                description: Optional standard passthrough (e.g. Apache-2.0).
+                example: Apache-2.0
+              metadata:
+                type: object
+                description: >-
+                  Optional string-map passthrough (e.g. author), rendered into the frontmatter
+                  verbatim.
+                additionalProperties:
+                  type: string
+                  example: example
+                example: {}
+              allowedTools:
+                type: array
+                description: >-
+                  Advisory scoping of which tools the skill expects to use (experimental in the
+                  skills standard). NOT a security boundary - spec.permissions remains the only
+                  enforcement surface.
+                items:
+                  type: string
+                  example: example
+                example:
+                  - example
         env:
           type: object
-          description: Non-secret guest env (debug-readable — never put secrets here; use spec.secrets).
-            Reserved platform keys (TEAM_ID, SESSION_ID, SANDBOX_ID, CONTROL_PLANE_CALLBACK_URL, SANDBOX_TEMPLATE,
-            SANDBOX_AGENT_WORKDIR, SIZE_SLUG, SANDBOX_IMAGE_ID, SANDBOX_OCI_REF, PLANO_PERMISSION_*) are
-            rejected. Credential-looking values (dop_v1_..., sk-..., ghp_...) trigger a create-time warning.
+          description: >-
+            Non-secret guest env (debug-readable - never put secrets here; use spec.secrets).
+            Reserved platform keys (TEAM_ID, SESSION_ID, SANDBOX_ID, CONTROL_PLANE_CALLBACK_URL,
+            SANDBOX_TEMPLATE, SANDBOX_AGENT_WORKDIR, SIZE_SLUG, SANDBOX_IMAGE_ID, SANDBOX_OCI_REF,
+            PLANO_PERMISSION_*) are rejected. Credential-looking values (dop_v1_..., sk-...,
+            ghp_...) trigger a create-time warning.
           additionalProperties:
             type: string
-          properties: {}
+            example: example
+          example: {}
         memory:
           type: object
           description: Accepted, not yet enforced (returns a warning).
           required:
-          - backend
+            - backend
           properties:
             backend:
               type: string
@@ -230,21 +476,24 @@ agent_manifest:
             scope:
               type: string
               enum:
-              - tenant
-              - user
-              - agent
-              - session
+                - tenant
+                - user
+                - agent
+                - session
               example: tenant
         secrets:
           type: array
-          description: Accepted, not yet enforced (returns a warning). Brokered (non-plaintext) credential
-            requests resolved by the IAM / OAuth broker / credential vault; never carried inline in the
-            manifest. source oauth requires provider; source tenantSecret requires ref.
+          description: >-
+            Declared credential requirements. source tenantSecret is enforced today: value is
+            write-only plaintext, extracted into Secrets Manager at create and never persisted or
+            returned. source oauth requires provider, carries no value, and is accepted but not yet
+            enforced. ref is legacy and ignored. env false keeps the resolved value out of the guest
+            environment (mount-only slots).
           items:
             type: object
             required:
-            - name
-            - source
+              - name
+              - source
             properties:
               name:
                 type: string
@@ -252,26 +501,37 @@ agent_manifest:
               source:
                 type: string
                 enum:
-                - oauth
-                - tenantSecret
+                  - oauth
+                  - tenantSecret
                 example: oauth
               provider:
                 type: string
-                example: example
+                example: openai
               ref:
                 type: string
-                example: example
+                example: do.actions
+              value:
+                type: string
+                description: Write-only tenantSecret plaintext; never persisted or returned.
+                example: sk-example
+              env:
+                type: boolean
+                description: >-
+                  Whether the resolved credential is injected into the guest env. Omitted means
+                  true; false is for mount-only slots (tenantSecret only).
+                example: true
         defaults:
           type: object
           properties:
             budget:
               type: object
-              description: Accepted, not yet enforced (returns a warning). Advisory per-run ceilings,
-                clamped server-side to tenant policy.
+              description: >-
+                Accepted, not yet enforced (returns a warning). Advisory per-run ceilings, clamped
+                server-side to tenant policy.
               properties:
                 maxCostUSD:
                   type: number
-                  example: 1.0
+                  example: 1
                 maxSteps:
                   type: integer
                   example: 1
@@ -282,9 +542,9 @@ agent_manifest:
                 onBreach:
                   type: string
                   enum:
-                  - pause
-                  - humanInput
-                  - fail
+                    - pause
+                    - humanInput
+                    - fail
                   example: pause
         serving:
           type: object
@@ -1232,9 +1492,13 @@ agent_config:
       description: Validated agentspec apiVersion, currently agents.digitalocean.com/v1alpha1.
       example: agents.digitalocean.com/v1alpha1
     manifest:
-      type: object
-      additionalProperties: true
-      description: Canonical runnable environment spec JSON, immutable after create.
+      description: >-
+        Canonical runnable environment spec JSON, immutable after create.
+        Validated non-secret spec.env and spec.permissions remain; spec.secrets
+        retains name/source/provider but omits ref and the write-only value;
+        metadata.name is cleared while safe metadata such as labels remains.
+      allOf:
+      - $ref: '#/agent_manifest'
     content_hash:
       type: string
       pattern: ^[0-9a-f]{64}$
