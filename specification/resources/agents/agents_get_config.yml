@@ -1,0 +1,52 @@
+operationId: agents_get_config
+summary: Get an active Agent Config and its manifest.
+description: Returns one team-scoped Agent Config including the sanitized manifest and redacted credential
+  slot metadata. Secret values are never returned.
+tags:
+- Agents
+parameters:
+- in: path
+  name: config_id
+  required: true
+  description: The Agent Config UUID.
+  schema:
+    type: string
+    format: uuid
+    example: 019fb39c-14d9-7080-933e-b9b90e25acda
+  example: 019fb39c-14d9-7080-933e-b9b90e25acda
+responses:
+  '200':
+    description: The team-scoped config.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/agent_config_response
+  '400':
+    description: config_id is not a UUID.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_get_config.yml
+security:
+- bearer_auth:
+  - agents:read

@@ -1,0 +1,128 @@
+operationId: agents_create_session
+summary: CreateSession provisions a sandbox and starts the requested agent.
+description: 'Returns once the session row is allocated. The sandbox boot completes asynchronously; clients
+  observe SESSION_STATUS_PROVISIONING → READY via StreamSession.
+
+
+  Two mutually exclusive request forms are selected by Content-Type. Existing YAML callers send a raw
+  customer `agents.yaml` Agent manifest with `application/x-yaml`, `application/yaml`, `text/yaml`, or
+  `text/x-yaml`; this flow is unchanged. Definition-backed callers send the strict `CreateSessionDefinitionRequest`
+  JSON object with `application/json`. Unknown JSON fields, including team identity, are rejected. An
+  omitted revision_id pins the definition''s current immutable revision.
+
+
+  Definition-backed execution requires an exactly matching credential binding set when the selected revision
+  declares logical secrets. Static values are fetched only by their persisted name/region/version and
+  are never returned or persisted. OAuth bindings currently fail closed with 501.
+
+
+  Every successful create atomically persists value-free execution provenance and an allowlisted agent-spec
+  audit snapshot. The team and user identity are taken from the authenticated principal, never the body.
+  `X-Device-UUID` (if present) is persisted on the session row.'
+tags:
+- Agents
+parameters:
+- in: header
+  name: X-Device-UUID
+  required: false
+  description: Optional hardware device id forwarded by doctl. Persisted on the session row for lifecycle
+    attribution. Values over 128 bytes are ignored.
+  schema:
+    type: string
+    example: device-uuid-example
+  example: device-uuid-example
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/create_session_definition_request
+    application/x-yaml: &id001
+      schema:
+        $ref: models/definitions.yml#/agent_manifest
+    application/yaml: *id001
+    text/yaml: *id001
+    text/x-yaml: *id001
+  description: Either a raw AgentManifest with a YAML Content-Type or CreateSessionDefinitionRequest with
+    application/json. The forms are mutually exclusive by Content-Type.
+responses:
+  '200':
+    description: Session row allocated; sandbox boot continues asynchronously.
+    headers: &id002
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/create_session_response
+  '400':
+    description: Invalid manifest/reference JSON, incompatible or missing binding set, env collision,
+      credential limit violation, or invalid session/origin identifier.
+    headers: *id002
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: Secrets Manager denied access to a pinned credential.
+    headers: *id002
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '409':
+    description: Team is at the active-session quota, a live session name already exists, or the binding
+      set targets another revision.
+    headers: *id002
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '413':
+    description: JSON reference body exceeds 16 KiB or YAML body exceeds 1 MiB.
+    headers: *id002
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '415':
+    description: Unsupported Content-Type.
+    headers: *id002
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '501':
+    description: The selected binding set contains an OAuth assignment; execution-time OAuth brokering
+      is not available yet.
+    headers: *id002
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '503':
+    description: Secrets Manager is unavailable.
+    headers: *id002
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_create_session.yml
+security:
+- bearer_auth:
+  - agents:create

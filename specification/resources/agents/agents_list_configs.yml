@@ -1,0 +1,61 @@
+operationId: agents_list_configs
+summary: List active Agent Configs for the caller's team.
+description: Returns lightweight team-scoped config metadata without loading or returning manifest JSON.
+  Soft-deleted configs are excluded.
+tags:
+- Agents
+parameters:
+- in: query
+  name: page_size
+  required: false
+  description: Page size. Defaults to 50 when omitted. Values above 200 are rejected.
+  schema:
+    type: integer
+    format: int32
+    minimum: 1
+    maximum: 200
+    default: 50
+    example: 50
+  example: 50
+- in: query
+  name: page_token
+  required: false
+  description: Opaque keyset cursor returned by the previous page.
+  schema:
+    type: string
+    example: ''
+  example: ''
+responses:
+  '200':
+    description: A page of active Agent Configs.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/list_agent_configs_response
+  '400':
+    description: Invalid pagination input.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_list_configs.yml
+security:
+- bearer_auth:
+  - agents:read
