@@ -1,0 +1,91 @@
+operationId: agents_create_session_workspace_part_upload_urls
+summary: Mint presigned PUT URLs for one or more multipart upload parts.
+description: Upload only. Pass one or more 1-based `part_numbers`; the response returns a presigned `upload_url`
+  per part (all sharing one `expires_at`), so a client can drive parallel part uploads without a round
+  trip per part. PUT each part's bytes directly to its URL (bypassing harness-api). If URLs expire before
+  the PUT, request them again.
+tags:
+- Agents
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: path
+  name: transfer_id
+  required: true
+  description: The workspace transfer identifier.
+  schema:
+    type: string
+    example: tr_example
+  example: tr_example
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+        - part_numbers
+        properties:
+          part_numbers:
+            type: array
+            items:
+              type: integer
+              format: int32
+              example: 1
+            description: 1-based part indices to presign (single or batched).
+responses:
+  '200':
+    description: Presigned PUT URLs for the requested parts.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/workspace_part_upload_urls
+  '400':
+    description: Missing transfer_id, empty part_numbers, or a part number < 1, or invalid JSON.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: Transfer is not in a state that accepts part uploads.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '501':
+    description: Staged upload is not supported by the active sandbox driver.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_create_session_workspace_part_upload_urls.yml
+security:
+- bearer_auth:
+  - agents:create

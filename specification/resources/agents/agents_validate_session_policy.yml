@@ -1,0 +1,67 @@
+operationId: agents_validate_session_policy
+summary: ValidatePolicy checks a manifest's tool-permission policy against the agent's capabilities without
+  creating a session.
+description: 'Stateless preflight: parses the same `agents.yaml` Agent manifest as CreateSession and runs
+  the identical resolve + validate pipeline against the capability descriptor stamped on the selected
+  template''s image (resolved per-request via the sandbox, not a separate registry). Returns per-rule
+  verdicts. Nothing is provisioned or persisted.
+
+
+  Each rule is validated against the descriptor for the (agent, version) the template resolves to and
+  gets a verdict: `exact`, `degraded`, `unsupported`, or `unverified`. `ok` is false when any strict rule
+  is unsupported or unverified — i.e. CreateSession would reject the policy for that agent. An empty `spec.permissions`
+  returns `ok: true` with no verdicts. Because it shares the create path''s descriptor lookup, the verdicts
+  match what CreateSession would compute.'
+tags:
+- Agents
+requestBody:
+  required: true
+  content:
+    application/x-yaml:
+      schema: &id001
+        $ref: models/definitions.yml#/agent_manifest
+    application/yaml:
+      schema: *id001
+    text/yaml:
+      schema: *id001
+    text/x-yaml:
+      schema: *id001
+  description: The same customer agents.yaml Agent manifest you would submit to CreateSession; only spec.sandbox.template
+    / spec.runtime.adapter (to resolve the agent) and spec.permissions are used.
+responses:
+  '200':
+    description: 'Per-rule verdicts for the agent the manifest resolves to. A 200 with `ok: false` still
+      means the policy would be rejected at CreateSession.'
+    headers: &id002
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/validation_result
+  '400':
+    description: Malformed manifest or invalid spec.permissions.
+    headers: *id002
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_validate_session_policy.yml
+security:
+- bearer_auth:
+  - agents:create
