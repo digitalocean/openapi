@@ -3,9 +3,9 @@ summary: Create a System One evaluation
 description: >-
   Evaluates a provided state against one or more typed questions using
   TypeSafe AI's Jev model. Unlike chat completion endpoints, System One
-  returns typed answers, a choice from a fixed set, a numeric score, or a
-  boolean, each paired with a calibrated probability, instead of free-form
-  text.
+  returns typed answers, a truth-likelihood score, a choice from a fixed
+  set, or a numeric score, each paired with a calibrated probability,
+  instead of free-form text.
 tags:
   - Serverless Inference
 servers:

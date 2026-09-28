@@ -1,8 +1,8 @@
 lang: JavaScript
 source: |-
-  import { Client } from "@digitalocean/dots/inference";
+  import { InferenceClient } from "@digitalocean/dots";
 
-  const client = new Client({ apiKey: process.env.DIGITALOCEAN_TOKEN });
+  const client = new InferenceClient({ apiKey: process.env.DIGITALOCEAN_TOKEN });
 
   const result = await client.systemone.create({
       model: "typesafe-jev-1.13.0",
