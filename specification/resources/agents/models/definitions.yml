@@ -835,18 +835,28 @@ sandbox_size:
   properties:
     slug:
       type: string
-      description: DO size slug; submit as spec.sandbox.sizeSlug on CreateSession. e.g. "mv-2vcpu-4gb".
-      example: example
+      description: DO size slug; submit as spec.sandbox.sizeSlug on CreateSession. e.g. "mars-2vcpu-4gb".
+      example: mars-2vcpu-4gb
     vcpus:
       type: integer
       format: int64
       description: vCPU count (for display).
-      example: 1
+      example: 2
     memory_mb:
       type: integer
       format: int64
       description: Memory in MB (for display).
-      example: 1
+      example: 4096
+    price_per_hour_usd:
+      type: number
+      format: double
+      description: Hourly on-demand price in USD (for display).
+      example: 0.00003
+    price_per_month_usd:
+      type: number
+      format: double
+      description: Monthly on-demand price in USD, assuming continuous usage (for display).
+      example: 93.744
 sandbox_sizes_response:
   type: object
   description: Response for ListSandboxSizes.
