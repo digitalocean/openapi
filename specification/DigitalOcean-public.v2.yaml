@@ -655,7 +655,7 @@ tags:
 
   - name: Serverless Inference
     description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows access to serverless inference models.
+      DigitalOcean Inference allows access to serverless inference models.
       You can access models by providing an inference key.
 
       **Note:** The Serverless Inference API uses a separate base URL (`https://inference.do-ai.run`)
@@ -663,7 +663,7 @@ tags:
 
   - name: Agent Inference
     description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows you to create multi-agent workflows
+      DigitalOcean Agent Platform allows you to create multi-agent workflows
       to power your AI applications. This allows developers to integrate agents into your
       AI applications.
 

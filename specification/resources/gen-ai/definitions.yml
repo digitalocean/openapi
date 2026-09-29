@@ -460,7 +460,7 @@ apiAgentDeploymentRelease:
       example: example string
       type: string
     library_version:
-      description: The library version of the gradient package used in the release
+      description: The library version of the package used in the release
       example: example string
       type: string
     status:
@@ -1867,7 +1867,7 @@ apiCreateAgentDeploymentReleaseInputPublic:
       example: example name
       type: string
     library_version:
-      description: The library version of the gradient package used in the release
+      description: The library version of the package used in the release
       example: example string
       type: string
   type: object
@@ -1995,7 +1995,7 @@ apiCreateAgentWorkspaceDeploymentInputPublic:
       example: example string
       type: string
     library_version:
-      description: The library version of the gradient package used in the release
+      description: The library version of the package used in the release
       example: example string
       type: string
     region:
@@ -2024,7 +2024,7 @@ apiCreateAgentWorkspaceInputPublic:
       example: example string
       type: string
     library_version:
-      description: The library version of the gradient package used in the release
+      description: The library version of the package used in the release
       example: example string
       type: string
     project_id:
@@ -2210,7 +2210,7 @@ apiCreateKnowledgeBaseInputPublic:
       description: Optional data sources to attach at creation. Omit or use an empty
         list to create the knowledge base without sources, then add sources (with
         chunking strategy and sizes) using [Add a Data Source to a Knowledge Base](#operation/create_knowledge_base_data_source).
-        When provided, see [Organize Data Sources](https://docs.digitalocean.com/products/gradient-ai-platform/how-to/create-manage-agent-knowledge-bases/#add-data-sources)
+        When provided, see [Organize Data Sources](https://docs.digitalocean.com/products/inference/how-to/create-manage-agent-knowledge-bases/#add-data-sources)
         for best practices.
       items:
         $ref: '#/apiKBDataSource'
