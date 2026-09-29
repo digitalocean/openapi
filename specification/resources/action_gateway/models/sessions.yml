@@ -264,6 +264,7 @@ search_sessions_response:
       items:
         $ref: '#/session'
     next_page_token:
+      type: string
       description: Token for the next page; empty on the last page.
       allOf:
         - $ref: 'shared.yml#/next_page_token'

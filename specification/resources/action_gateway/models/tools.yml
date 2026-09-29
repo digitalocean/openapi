@@ -525,6 +525,7 @@ search_tools_response:
       items:
         $ref: '#/tool_search_result'
     next_page_token:
+      type: string
       description: Token for the next page; empty on the last page.
       allOf:
         - $ref: 'shared.yml#/next_page_token'
@@ -539,6 +540,7 @@ search_providers_response:
         $ref: '#/provider_summary'
       description: Matching providers sorted by name.
     next_page_token:
+      type: string
       description: Token for the next page; empty on the last page.
       allOf:
         - $ref: 'shared.yml#/next_page_token'

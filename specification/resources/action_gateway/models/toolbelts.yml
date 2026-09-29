@@ -288,6 +288,7 @@ get_toolbelt_response:
       items:
         $ref: '#/toolbelt_tool_detail'
     next_page_token:
+      type: string
       description: Token for the next page of `tool_details`; empty on the last page.
       allOf:
         - $ref: 'shared.yml#/next_page_token'
@@ -316,6 +317,7 @@ search_toolbelts_response:
         $ref: '#/toolbelt_summary'
       description: Matching toolbelts sorted by name.
     next_page_token:
+      type: string
       description: Token for the next page; empty on the last page.
       allOf:
         - $ref: 'shared.yml#/next_page_token'

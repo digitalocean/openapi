@@ -201,6 +201,7 @@ list_output_views_response:
       example: v1
       description: Version of that tool, for example `v3`. Empty when the request named no tool.
     next_page_token:
+      type: string
       description: Empty on the last page.
       allOf:
         - $ref: 'shared.yml#/next_page_token'
