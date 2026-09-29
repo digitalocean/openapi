@@ -1,15 +1,17 @@
 operationId: toolbelts_list_provider_tools
-summary: List Toolbelt Tools for a Provider
-description: Lists the members of a toolbelt that belong to one provider.
+summary: List a Toolbelt's Tools from One Provider
+description: >-
+  Returns a page of catalog metadata for the toolbelt's members from the named provider, sorted by tool
+  slug. An unknown provider returns an empty page.
 tags:
 - Action Gateway
 parameters:
 - $ref: parameters.yml#/toolbelt_name
 - $ref: parameters.yml#/toolbelt_provider
-- $ref: parameters.yml#/toolbelt_version
-- $ref: ../../shared/parameters.yml#/page
+- $ref: parameters.yml#/toolbelt_version_toolbelts_providers
+- $ref: parameters.yml#/page_connections
 - $ref: parameters.yml#/per_page
-- $ref: parameters.yml#/toolbelt_search
+- $ref: parameters.yml#/toolbelt_search_toolbelts_providers_tools
 responses:
   '200':
     description: The request was successful.

@@ -1,7 +1,9 @@
 operationId: connections_get
-summary: Retrieve a Connection
-description: Retrieves a connection. While a connection is pending, this checks whether the user finished
-  authorizing and returns `authorization` until they do.
+summary: Get a Connection
+description: >-
+  Returns the connection and, while it is pending, the authorization the user still has to complete. Reading
+  a pending connection picks up a completed authorization, and marks the connection expired once its link
+  has lapsed. Returns 404 for an unknown connection or one you cannot see.
 tags:
 - Action Gateway
 parameters:
@@ -14,7 +16,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/connections.yml#/connection_response
+          $ref: models/connections.yml#/get_connection_response
         example:
           connection:
             id: 39f9f768-a7f9-4c91-9557-3328c53dd054

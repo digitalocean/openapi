@@ -1,11 +1,13 @@
 operationId: toolbelts_list
 summary: List Toolbelts
-description: Lists your team's toolbelts.
+description: >-
+  Returns your team's toolbelts, one entry per name describing its latest version, sorted by name. Offset-paged
+  with page and `per_page`; pagination reports the total.
 tags:
 - Action Gateway
 parameters:
 - $ref: parameters.yml#/toolbelt_status
-- $ref: ../../shared/parameters.yml#/page
+- $ref: parameters.yml#/page_connections
 - $ref: parameters.yml#/per_page
 responses:
   '200':

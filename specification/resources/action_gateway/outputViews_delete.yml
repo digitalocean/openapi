@@ -1,8 +1,9 @@
 operationId: outputViews_delete
 summary: Delete an Output View
-description: Deletes one of your team's output views and returns it with `audit.deletedAt` set. Its name
-  can be reused immediately. Sessions that bound the view by name fail calls to that tool until a view
-  with the same name is created again.
+description: >-
+  Deletes one of your team's views and returns it with audit.deleted_at set; it can no longer be used.
+  Published views cannot be deleted. Returns 404 when the view does not exist, is already deleted, or
+  is not your team's.
 tags:
 - Action Gateway
 parameters:
@@ -29,7 +30,6 @@ responses:
             fields:
             - results.title
             - results.url
-            transform: null
             output_schema:
               type: object
               properties:
@@ -46,9 +46,6 @@ responses:
               createdAt: '2026-09-01T16:00:00Z'
               updatedAt: '2026-09-10T08:00:00Z'
               deletedAt: '2026-09-10T08:00:00Z'
-              createdBy: ''
-              updatedBy: ''
-            deleted_by: ''
   '401':
     $ref: ../../shared/responses/unauthorized.yml
   '404':

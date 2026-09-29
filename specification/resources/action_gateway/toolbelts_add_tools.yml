@@ -1,11 +1,16 @@
 operationId: toolbelts_add_tools
 summary: Add Tools to a Toolbelt
-description: Adds tools to the latest version of a toolbelt. A membership change creates a new immutable
-  version; if every tool is already a member, the current version is returned unchanged.
+description: >-
+  Adds the listed tools and returns the toolbelt. When membership changes, this creates a new version
+  that keeps the display name and description. Tools already in the toolbelt are left as they are, so
+  a request that adds nothing new returns the current version unchanged. Returns 400 when a tool is not
+  an active catalog tool, when a pin differs from the tool's current released version or from the version
+  the toolbelt already holds, or when the toolbelt would exceed 500 tools. Returns 404 for an unknown
+  or deleted toolbelt.
 tags:
 - Action Gateway
 parameters:
-- $ref: parameters.yml#/toolbelt_name
+- $ref: parameters.yml#/toolbelt_name_toolbelts_tools_add
 requestBody:
   required: true
   content:
@@ -23,7 +28,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/toolbelts.yml#/toolbelt_response
+          $ref: models/toolbelts.yml#/toolbelt_update_response
         example:
           toolbelt:
             name: search-toolbelt

@@ -1,7 +1,9 @@
 operationId: tools_list_providers
-summary: List Tool Providers
-description: Lists providers, the credential kinds each accepts, and the parameters needed to create a
-  connection or register a team credential for it.
+summary: List Providers
+description: >-
+  Returns the active catalog providers with at least one released tool, sorted by display name, with the
+  credential kinds each accepts and the parameters a connection or team credential needs. Your team's
+  MCP servers are listed separately under `/v2/action-gateway/mcp-servers`.
 tags:
 - Action Gateway
 responses:
@@ -24,6 +26,8 @@ responses:
             auth_types:
             - shared_api_key
             credential_parameters: []
+            oauth_client_setup_url: https://developer.atlassian.com/console/myapps/
+            oauth_redirect_url: https://cloud.digitalocean.com/api/v1/security/connectlinks/callback
           - name: jira
             display_name: Jira
             description: Jira issue tracking tools.
@@ -45,6 +49,8 @@ responses:
             auth_types:
             - oauth
             credential_parameters: []
+            oauth_client_setup_url: https://developer.atlassian.com/console/myapps/
+            oauth_redirect_url: https://cloud.digitalocean.com/api/v1/security/connectlinks/callback
   '401':
     $ref: ../../shared/responses/unauthorized.yml
   '429':

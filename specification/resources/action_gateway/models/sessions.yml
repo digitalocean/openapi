@@ -2,8 +2,7 @@ session_policy:
   type: object
   nullable: true
   description: >-
-    The tool-permission policy of a session. If omitted on create, every tool
-    call asks for approval.
+    Tool-permission policy of a session.
   properties:
     defaultAction:
       type: string
@@ -11,7 +10,8 @@ session_policy:
         - allow
         - ask
         - deny
-      description: The action for tool calls that match no rule. Defaults to `ask`.
+      description: >-
+        Action for calls no rule matches. Empty means ask; otherwise this must be allow, ask, or deny.
       example: ask
     rules:
       type: array
@@ -21,12 +21,14 @@ session_policy:
           tool:
             type: string
             description: >-
-              A provider-qualified tool slug, optionally version-pinned, or a
-              version-pinned toolbelt reference `toolbelt:<name>@<version>`.
+              Required. A tool slug, optionally `<tool_slug>@<version>`, or a toolbelt as `toolbelt:<name>@<version>`.
+              When the session selects tools, the rule must name one of them.
             example: exa_web_search
           match:
             type: object
-            description: Optional argument values that narrow the rule to matching calls.
+            description: >-
+              Optional argument conditions, keyed by argument name; the rule applies only to calls whose arguments
+              match.
             additionalProperties:
               type: string
             example: {}
@@ -37,32 +39,38 @@ session_policy:
               - ask
               - deny
             example: allow
+            description: 'Required: allow, ask, or deny.'
+      description: Rules for specific tools or toolbelts.
 
 session_network:
   type: object
-  description: Attaches the session to a VPC owned by your team.
+  description: Attaches a session to a VPC.
   properties:
     vpcUuid:
       type: string
       format: uuid
       example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+      description: UUID of a VPC owned by your team, in a region that supports sessions.
 
 session_insights:
   type: object
-  description: Whether the session's telemetry is sent to Insights.
+  description: Records which of a session's telemetry is sent to Insights.
   properties:
     metrics:
       type: boolean
       nullable: true
       example: true
+      description: Accepted and stored for parity with the Insights schema.
     logs:
       type: boolean
       nullable: true
       example: true
+      description: Whether the session's customer logs are sent to Insights.
     traces:
       type: boolean
       nullable: true
       example: false
+      description: Whether the session's customer traces are sent to Insights.
 
 session:
   type: object
@@ -71,20 +79,24 @@ session:
     sessionUrn:
       type: string
       example: do:managed_agent_session:2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+      description: Session URN, for example `do:managed_agent_session:<uuid>`.
     name:
       type: string
       example: support-bot-alice
+      description: The required human-readable session name.
     actorId:
       type: string
-      description: The end user the session acts for. Empty when unbound.
+      description: Empty when the session is not bound to an actor.
       example: alice
     policy:
-      $ref: '#/session_policy'
+      description: The session's tool-permission policy.
+      allOf:
+        - $ref: '#/session_policy'
     tools:
       type: object
       description: >-
-        The selected tools. Omitted when every tool is enabled. Present with no
-        references when no tools are enabled.
+        Omitted when the request omitted tools (all tools). A present selection with no references represents
+        tools: [].
       properties:
         references:
           type: array
@@ -97,54 +109,59 @@ session:
                   - SESSION_TOOL_REFERENCE_KIND_TOOL
                   - SESSION_TOOL_REFERENCE_KIND_TOOLBELT
                 example: SESSION_TOOL_REFERENCE_KIND_TOOLBELT
+                description: Whether name is a tool or a toolbelt.
               name:
                 type: string
                 example: search-toolbelt
+                description: Tool slug or toolbelt name.
               version:
                 type: string
                 example: '1'
+                description: Pinned version.
+          description: The selected references. Empty means the session exposes no tools.
     config:
       type: object
-      description: Opaque session options, as supplied on create. Omitted when not supplied.
+      description: Session options as supplied at creation. Omitted when none were supplied.
       example:
         preloadTools:
           - exa_web_search
         outputViews:
           exa_web_search: titles-and-urls
     network:
-      $ref: '#/session_network'
+      description: >-
+        Omitted when the request omitted network. A present binding currently supports only VPC attachment by
+        UUID.
+      allOf:
+        - $ref: '#/session_network'
     insights:
-      $ref: '#/session_insights'
+      description: Omitted when no explicit customer Insights choice was stored.
+      allOf:
+        - $ref: '#/session_insights'
     agentUrn:
       type: string
-      description: Set for sessions created by a managed agent.
+      description: URN of the agent that started the session. Empty for sessions created through this API.
       example: ''
     agentName:
       type: string
       example: ''
+      description: Name of the agent that started the session. Empty for sessions created through this 
+        API.
     createdAt:
       type: string
       format: date-time
       nullable: true
       example: '2026-09-24T12:00:00Z'
+      description: When the session was created.
     updatedAt:
       type: string
       format: date-time
       nullable: true
       example: '2026-09-24T12:00:00Z'
+      description: When the session was last modified.
     owning_user_id:
       type: string
-      description: The DigitalOcean user that created the session, when recorded.
+      description: DigitalOcean user ID of the user who created the session, when recorded.
       example: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
-    owning_user_numeric_id:
-      type: string
-      format: uint64
-      description: >-
-        The numeric ID of the DigitalOcean user that created the session. Set
-        from the authenticated caller, never from the request. Legacy users
-        without a UUID are identified only by this field. Omitted when not
-        recorded.
-      example: '1234567'
 
 session_create:
   type: object
@@ -153,23 +170,26 @@ session_create:
   properties:
     name:
       type: string
-      description: A human-readable name for the session.
+      description: Required human-readable session name.
       example: support-bot-alice
     actorId:
       type: string
       pattern: '^[A-Za-z0-9._-]{1,64}$'
       description: >-
-        Binds the session to one end user. Connections are resolved by passing
-        this value as their `user_id`.
+        Optional actor binding: the user whose connections the session's tool calls use, matched against connection
+        `user_id`. When set it must use the same alphabet as a connection's `user_id`, `[A-Za-z0-9._-]`, at
+        most 64 characters; anything else is rejected with 400.
       example: alice
     policy:
-      $ref: '#/session_policy'
+      description: Optional tool-permission policy. Omitted asks before every call.
+      allOf:
+        - $ref: '#/session_policy'
     tools:
       type: array
       description: >-
-        Omit to enable every tool; send an empty array to enable none. Entries
-        are tool slugs (`<tool>` or `<tool>@<version>`) or version-pinned
-        toolbelt references (`toolbelt:<name>@<version>`).
+        Omitted enables every tool. An explicit empty array enables no tools. Direct tools may be `<tool>` or
+        `<tool>@<version>`, using provider-qualified tool slugs, and a pinned version must be the released one;
+        toolbelt references must be version-pinned as `toolbelt:<belt-name>@<version>`.
       items:
         type: string
       example:
@@ -178,10 +198,9 @@ session_create:
     config:
       type: object
       description: >-
-        Opaque session options. `preloadTools` lists tools to add to the
-        session's MCP tool list up front. `outputViews` maps a tool slug to the
-        name of an output view to apply to that tool. `customInstructions` (at
-        most 1,000 characters) is appended to the MCP server instructions.
+        Optional session options. config.preloadTools may contain concrete tool names (optionally version-pinned)
+        and version-pinned toolbelt references. config.customInstructions is a string of at most 1000 characters.
+        config.outputViews maps up to 100 tool slugs to the name of an output view to apply to that tool's results.
       example:
         preloadTools:
           - exa_web_search
@@ -189,27 +208,38 @@ session_create:
           exa_web_search: titles-and-urls
         customInstructions: Prefer primary sources and cite URLs.
     network:
-      $ref: '#/session_network'
+      description: >-
+        Product-level session network binding. When set, `vpc_uuid` must identify a VPC owned by the session's
+        team.
+      allOf:
+        - $ref: '#/session_network'
     insights:
-      $ref: '#/session_insights'
+      description: Omitted when the request omitted insights or explicitly sent null.
+      allOf:
+        - $ref: '#/session_insights'
+  description: Describes a session to create.
 
 create_session_response:
   type: object
   properties:
     session:
-      $ref: '#/session'
+      description: The created session.
+      allOf:
+        - $ref: '#/session'
     mcpUrl:
       type: string
-      description: The session's MCP endpoint. Connect your MCP client to this URL.
+      description: URL of the session's MCP endpoint, for the agent to connect to.
       example: https://actions.do-ai.run/mcp/session/2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
     tools:
       type: array
-      description: The canonical, version-pinned references of the selected tools.
+      description: >-
+        Canonical, version-pinned selected tool references. Empty when the session exposes every tool.
       items:
         type: string
       example:
         - toolbelt:search-toolbelt@1
         - jira_create_issue@1
+  description: Returns the created session.
 
 list_sessions_response:
   type: object
@@ -218,16 +248,23 @@ list_sessions_response:
       type: array
       items:
         $ref: '#/session'
+      description: Sessions, newest first.
     pagination:
-      $ref: 'shared.yml#/pagination'
+      description: Paging applied to this response and the total number of sessions.
+      allOf:
+        - $ref: 'shared.yml#/pagination'
+  description: One page of sessions.
 
 search_sessions_response:
   type: object
   properties:
     sessions:
       type: array
-      description: Ordered by match quality (exact, then prefix, then substring).
+      description: Matching sessions in rank order.
       items:
         $ref: '#/session'
     next_page_token:
-      $ref: 'shared.yml#/next_page_token'
+      description: Token for the next page; empty on the last page.
+      allOf:
+        - $ref: 'shared.yml#/next_page_token'
+  description: One page of matching sessions.

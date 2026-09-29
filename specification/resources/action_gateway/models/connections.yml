@@ -2,8 +2,7 @@ connection_network:
   type: object
   nullable: true
   description: >-
-    Private transport for the connection. When absent, tools execute over the
-    public internet.
+    Routes a connection's calls through a private network instead of the public internet.
   properties:
     vpc:
       type: object
@@ -12,10 +11,11 @@ connection_network:
           type: string
           format: uuid
           example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+          description: UUID of a VPC owned by your team.
         region:
           type: string
           readOnly: true
-          description: Derived from the VPC.
+          description: Region of the VPC. Set by DigitalOcean; do not send it.
           example: nyc3
         destinations:
           type: array
@@ -25,62 +25,77 @@ connection_network:
               host:
                 type: string
                 example: jira.internal.example.com
+                description: Host name or IP address. It must resolve only to private addresses.
               port:
                 type: integer
                 format: uint32
                 example: 443
+                description: Port, 1 to 65535.
               allowed_ip_cidrs:
                 type: array
                 items:
                   type: string
                 example:
                   - 10.116.0.0/20
+                description: >-
+                  Optional CIDR ranges; when set, every address the host resolves to must fall within one of them.
+          description: Private hosts the connection's calls may reach through the VPC. At least one is 
+            required.
+      description: Route through a VPC.
 
 connection_authorization:
   type: object
   nullable: true
   description: >-
-    Present only while authorization is pending. Send the user to
-    `connect_url`, show them `verification_code`, and poll the connection until
-    it becomes active or expires.
+    Present only while a connection is pending. Send the user to `connect_url`, then read the connection
+    until it becomes active or expired.
   properties:
     status:
       type: string
       enum:
         - requires_authorization
       example: requires_authorization
+      description: Currently always `requires_authorization`.
     connect_url:
       type: string
-      description: A browser URL on a DigitalOcean Cloud origin.
+      description: Browser URL, on a DigitalOcean Cloud origin, where the user authorizes the connection.
       example: https://cloud.digitalocean.com/security/connectlinks/confirm?token=eyJhbGciOi
     verification_code:
       type: string
       example: 97rwxzcy
+      description: Verification code issued with `connect_url`.
     expires_at:
       type: string
       format: date-time
       nullable: true
       example: '2026-07-14T01:00:00Z'
+      description: >-
+        When the authorization expires. The link can stop working earlier; if the connection becomes expired,
+        create it again for a new link.
 
 connection:
   type: object
   description: >-
-    A connection that authorizes one user of your application to use one
-    provider's tools. It is unique per provider and `user_id`.
+    One connection of any kind. Everything every kind has stays on the envelope, so a reader takes an ID,
+    a status or a provider without first asking what kind it is; only the members a kind alone has move
+    into details.
   properties:
     id:
       type: string
       format: uuid
       example: 39f9f768-a7f9-4c91-9557-3328c53dd054
+      description: Opaque connection ID.
     provider:
       type: string
       example: jira
+      description: Provider slug, for example `jira`.
     provider_display_name:
       type: string
       example: Jira
+      description: Human-readable provider name, for example `Jira`.
     user_id:
       type: string
-      description: Your identifier for the end user.
+      description: Your identifier for the user the connection acts for.
       example: alice
     status:
       type: string
@@ -90,25 +105,29 @@ connection:
         - revoked
         - expired
       example: active
+      description: pending, active, revoked, or expired.
     created_at:
       type: string
       format: date-time
       nullable: true
       example: '2026-07-14T00:50:00Z'
+      description: When the connection was created.
     updated_at:
       type: string
       format: date-time
       nullable: true
       example: '2026-07-14T00:52:10Z'
+      description: When the connection was last modified.
     revoked_at:
       type: string
       format: date-time
       nullable: true
       example: null
+      description: When the connection was revoked.
     connection_parameters:
       type: object
       nullable: true
-      description: Non-sensitive provider configuration declared by the provider's `connection_parameters`.
+      description: Non-sensitive provider configuration.
       example:
         site_url: https://example.atlassian.net
     credential_kind:
@@ -118,15 +137,19 @@ connection:
         - private_oauth
         - team_api_key
       example: digitalocean_oauth
+      description: '`digitalocean_oauth`, `private_oauth`, or `team_api_key`.'
     credential_id:
       type: string
-      description: The team credential the connection uses. Empty for `digitalocean_oauth`.
+      description: >-
+        Empty for `digitalocean_oauth`; otherwise the ID of the team provider credential the connection uses.
       example: ''
     network:
-      $ref: '#/connection_network'
+      description: Private network the connection's calls use, when configured.
+      allOf:
+        - $ref: '#/connection_network'
     oauth:
       type: object
-      description: Present for OAuth connections.
+      description: Set for `digitalocean_oauth` and `private_oauth` connections.
       properties:
         scopes:
           type: array
@@ -134,19 +157,23 @@ connection:
             type: string
           example:
             - write:jira-work
+          description: Provider scopes granted, or requested while pending.
         granted_at:
           type: string
           format: date-time
           nullable: true
           example: '2026-07-14T00:52:10Z'
+          description: When the user completed authorization.
     api_key:
       type: object
-      description: Present, and empty, for API key connections.
+      description: Set for `team_api_key` connections.
       properties: {}
     scopes:
       type: array
       deprecated: true
-      description: Deprecated. Use `oauth.scopes`.
+      description: >-
+        Deprecated: read details.oauth.scopes. Duplicated here so a reader of the pre-union shape keeps working;
+        empty for a kind with no OAuth grant.
       items:
         type: string
       example:
@@ -156,20 +183,12 @@ connection:
       format: date-time
       nullable: true
       deprecated: true
-      description: Deprecated. Use `oauth.granted_at`.
+      description: 'Deprecated: read details.oauth.granted_at.'
       example: '2026-07-14T00:52:10Z'
     owning_user_id:
       type: string
-      description: The DigitalOcean user that owns the connection, when recorded.
+      description: DigitalOcean user ID of the user who created the connection, when recorded.
       example: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
-    owning_user_numeric_id:
-      type: string
-      format: uint64
-      description: >-
-        The numeric ID of the owning DigitalOcean user, when recorded. Set from
-        the authenticated caller, never from the request. Legacy users without
-        a UUID are identified only by this field. Omitted when not recorded.
-      example: '1234567'
 
 connection_create:
   type: object
@@ -179,31 +198,34 @@ connection_create:
   properties:
     provider:
       type: string
-      description: A provider slug from the list providers endpoint.
+      description: Required provider slug, from the provider list.
       example: jira
     user_id:
       type: string
       pattern: '^[A-Za-z0-9._-]{1,64}$'
-      description: Your identifier for the end user.
+      description: >-
+        Required. Your identifier for the user the connection acts for: 1 to 64 characters from `[A-Za-z0-9._-]`.
+        A session whose `actor_id` equals it uses this connection.
       example: alice
     scopes:
       type: array
-      description: Defaults to the provider's maximum scopes. Must be a subset of them.
+      description: >-
+        Optional OAuth scopes to request. Defaults to every scope the provider offers; scopes outside that set
+        are rejected. Ignored for API-key credentials.
       items:
         type: string
       example:
         - write:jira-work
     connection_parameters:
       type: object
-      description: Values for the provider's declared `connection_parameters`.
+      description: Values for the provider's `connection_parameters`, validated against their 
+        specifications.
       example:
         site_url: https://example.atlassian.net
     credential:
       type: object
       description: >-
-        Selects the credential the connection uses. Omit to use DigitalOcean's
-        shared OAuth application. Set exactly one member; an empty object is
-        rejected.
+        Optional credential to connect through. Omitted uses DigitalOcean's shared OAuth application.
       properties:
         digitalocean_oauth:
           type: object
@@ -211,16 +233,17 @@ connection_create:
           properties: {}
         team_credential:
           type: object
-          description: Use a credential your team registered.
+          description: Use one of your team's provider credentials.
           properties:
             credential_id:
               type: string
               example: 8d6f2b1a-3c4e-4d5f-9a8b-7c6d5e4f3a2b
+              description: Required. ID of an active provider credential for the same provider that you can use.
     network:
       type: object
       description: >-
-        Private transport. The VPC must belong to your team; its region is
-        derived.
+        Optional private network for the connection's calls. Requires VPC networking to be enabled for your
+        account (403 otherwise).
       properties:
         vpc:
           type: object
@@ -229,6 +252,7 @@ connection_create:
               type: string
               format: uuid
               example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+              description: UUID of a VPC owned by your team.
             destinations:
               type: array
               items:
@@ -237,30 +261,46 @@ connection_create:
                   host:
                     type: string
                     example: jira.internal.example.com
+                    description: Host name or IP address. It must resolve only to private addresses.
                   port:
                     type: integer
                     format: uint32
                     example: 443
+                    description: Port, 1 to 65535.
                   allowed_ip_cidrs:
                     type: array
                     items:
                       type: string
                     example:
                       - 10.116.0.0/20
+                    description: >-
+                      Optional CIDR ranges; when set, every address the host resolves to must fall within one of them.
+              description: Private hosts the connection's calls may reach through the VPC. At least one is 
+                required.
+          description: Route through a VPC.
+  description: Describes a connection to create.
 
 connection_response:
   type: object
   properties:
     connection:
-      $ref: '#/connection'
+      description: The connection.
+      allOf:
+        - $ref: '#/connection'
     authorization:
-      $ref: '#/connection_authorization'
+      description: Present only while the connection is pending.
+      allOf:
+        - $ref: '#/connection_authorization'
+  description: Returns the connection and any authorization still needed.
 
 delete_connection_response:
   type: object
   properties:
     connection:
-      $ref: '#/connection'
+      description: The resulting revoked connection.
+      allOf:
+        - $ref: '#/connection'
+  description: Returns the revoked connection.
 
 list_connections_response:
   type: object
@@ -269,5 +309,21 @@ list_connections_response:
       type: array
       items:
         $ref: '#/connection'
+      description: Connections on this page.
     pagination:
-      $ref: 'shared.yml#/pagination'
+      description: Paging applied to this response and the total number of connections.
+      allOf:
+        - $ref: 'shared.yml#/pagination'
+  description: One page of connections.
+get_connection_response:
+  type: object
+  properties:
+    connection:
+      description: The connection.
+      allOf:
+        - $ref: '#/connection'
+    authorization:
+      description: Present only while the connection is pending and you created it.
+      allOf:
+        - $ref: '#/connection_authorization'
+  description: Returns the connection and any authorization still needed.

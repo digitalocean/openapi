@@ -1,29 +1,31 @@
 toolbelt:
   type: object
-  description: An immutable version of a team-owned toolbelt.
+  description: One version of a toolbelt.
   properties:
     name:
       type: string
       example: search-toolbelt
+      description: Toolbelt name, unique among your team's active toolbelts.
     version:
       type: string
       pattern: '^[0-9]+$'
-      description: The system-managed integer version of the toolbelt.
+      description: Version number of this toolbelt version, as a string, for example `3`.
       example: '1'
     display_name:
       type: string
       maxLength: 128
       example: Search Tools
+      description: Human-readable label.
     description:
       type: string
       maxLength: 255
       example: Tools for searching and fetching public web pages.
+      description: Team-authored description.
     tools:
       type: array
       maxItems: 500
       description: >-
-        Every member of the toolbelt as `<tool_slug>@<version>`, pinned to the
-        tool version the toolbelt stored. Sorted by name, then version.
+        Members, sorted, each as `<tool_slug>@<version>`: the tool and the version this toolbelt version pins.
       items:
         type: string
       example:
@@ -35,26 +37,31 @@ toolbelt:
         - active
         - deprecated
       example: active
+      description: active, or deprecated once the toolbelt is deleted.
     reference:
       type: string
-      description: A reference pinned to this immutable toolbelt version.
+      description: >-
+        `<name>@<version>`, identifying this exact version. Sessions reference it as `toolbelt:<name>@<version>`.
       example: search-toolbelt@1
     reference_latest:
       type: string
-      description: An unversioned reference to the latest active version.
+      description: The toolbelt name, which refers to whichever version is latest.
       example: search-toolbelt
     tool_count:
       type: integer
       format: int32
       example: 2
+      description: Number of entries in tools.
     created_at:
       type: string
       format: date-time
       example: '2026-06-11T12:00:00Z'
+      description: When this version was created, in RFC 3339 format.
     updated_at:
       type: string
       format: date-time
       example: '2026-06-11T12:00:00Z'
+      description: When this version was last modified, in RFC 3339 format.
 
 toolbelt_summary:
   type: object
@@ -62,102 +69,138 @@ toolbelt_summary:
     name:
       type: string
       example: search-toolbelt
+      description: Toolbelt name.
     display_name:
       type: string
       example: Search Tools
+      description: Human-readable label of the latest version.
     description:
       type: string
       example: Tools for searching and fetching public web pages.
+      description: Description of the latest version.
     latest_version:
       type: string
       example: '1'
+      description: Latest version number, as a string.
     version_count:
       type: integer
       format: int32
       example: 1
+      description: >-
+        Number of versions recorded under this name, including versions from before the toolbelt was deleted
+        and the name reused.
     tool_count:
       type: integer
       format: int32
       example: 2
+      description: Number of members in the latest version.
     status:
       type: string
       enum:
         - active
         - deprecated
       example: active
+      description: active, or deprecated once the toolbelt is deleted.
     reference_latest:
       type: string
       example: search-toolbelt
+      description: The toolbelt name, which refers to whichever version is latest.
     updated_at:
       type: string
       format: date-time
       example: '2026-06-11T12:00:00Z'
+      description: When the latest version was last modified, in RFC 3339 format.
+  description: Describes a toolbelt by its latest version, without the member list.
 
 toolbelt_tool_detail:
   type: object
-  description: Catalog metadata for one toolbelt member. Input and output schemas are omitted.
+  description: >-
+    Catalog metadata for one toolbelt member, so a client can render a toolbelt without also fetching the
+    tool catalog. Input and output schemas are omitted; the tool catalog (`GET /v2/action-gateway/tools`)
+    carries them.
   properties:
     tool_slug:
       type: string
       example: exa_web_search
+      description: >-
+        The provider-qualified, stable tool identifier (`<provider>_<name>`). Treat it as opaque and pass it
+        back verbatim.
     name:
       type: string
       example: web_search
+      description: The unqualified tool name, without the provider prefix.
     title:
       type: string
       example: Web Search
+      description: Human-readable tool title.
     description:
       type: string
       example: Search the public web with Exa and return relevant results with normalized text snippets.
+      description: What the tool does.
     provider:
       type: string
       example: exa
+      description: >-
+        The ID of the provider that offers the tool, broken out so a client never has to split `tool_slug`.
     category:
       type: string
       example: web-search
+      description: >-
+        Best-effort catalog metadata and is empty for a large share of the catalog. Do not rely on it being
+        present.
     version:
       type: integer
       format: int32
-      description: The tool version the toolbelt pinned for this member.
+      description: >-
+        The version this toolbelt version pins for the member, matching the `@<version>` suffix in the corresponding
+        toolbelt.tools entry.
       example: 1
 
 toolbelt_provider_summary:
   type: object
-  description: One provider represented in a toolbelt's membership.
+  description: >-
+    One provider represented in a toolbelt's membership. Its provider fields (ID, name, description, `created_at`)
+    match the toolkit entries of `GET /v2/action-gateway/tools/toolkits`, so a client can render the same
+    provider card without a second request.
   properties:
     provider:
       type: string
       description: >-
-        The toolkit identifier. Members without a provider are reported as
-        `_legacy`.
+        The provider ID. Members recorded without a provider are grouped under `_legacy`, which is also accepted
+        in the provider path.
       example: exa
     tool_count:
       type: integer
       format: int32
-      description: The number of toolbelt members that belong to this provider.
+      description: How many toolbelt members belong to this provider.
       example: 2
     id:
       type: string
-      description: The toolkit identifier; equal to `provider`.
+      description: Equals provider; present so the entry has the same shape as a toolkit.
       example: exa
     name:
       type: string
-      description: The toolkit display name.
+      description: The provider's display name. Empty for `_legacy`.
       example: Exa
     description:
       type: string
       example: Web search tools backed by Exa.
+      description: Provider description. Empty for `_legacy`.
     categories:
       type: array
       items:
         type: string
       example:
         - web-search
+      description: >-
+        The distinct tool categories among this toolbelt's members for the provider (sorted). Empty for `_legacy`
+        or when no member has a category.
     created_at:
       type: string
       format: date-time
       nullable: true
       example: '2026-06-01T00:00:00Z'
+      description: When the provider was added to the catalog. Unset for `_legacy`.
 
 toolbelt_create:
   type: object
@@ -167,34 +210,40 @@ toolbelt_create:
     name:
       type: string
       pattern: '^[a-z][a-z0-9_-]{0,63}$'
-      description: The natural key of the toolbelt. `search` is reserved.
+      description: >-
+        Toolbelt name, unique among your team's active toolbelts. Must match `^`[a-z]``[a-z0-9_-]`{0,63}$`;
+        `search` is reserved.
       example: search-toolbelt
     version:
       type: string
       pattern: '^[0-9]+$'
       default: '1'
-      description: The initial version.
+      description: Optional initial version number, a positive integer such as `1`. Defaults to 1.
       example: '1'
     display_name:
       type: string
       maxLength: 128
       example: Search Tools
+      description: Optional human-readable label, separate from name. At most 128 bytes.
     description:
       type: string
       maxLength: 255
       example: Tools for searching and fetching public web pages.
+      description: Optional description. At most 255 bytes.
     tools:
       type: array
       maxItems: 500
       description: >-
-        Provider-qualified tool slugs, optionally pinned as `<tool>@<version>`.
-        Each is resolved to its current released version. A pin must match
-        that version. Omit or send an empty list to create an empty toolbelt.
+        Optional initial members, as catalog tool slugs (`<provider>_<name>`). Each may be pinned as `<tool_slug>@<version>`;
+        a pin must equal the tool's current released version, and an unpinned tool is pinned to that version.
+        Every tool must be an active catalog tool. Duplicates are merged; at most 500 tools. Empty creates a
+        toolbelt with no tools.
       items:
         type: string
       example:
         - exa_web_search
         - exa_web_fetch
+  description: Describes a new toolbelt.
 
 toolbelt_tools:
   type: object
@@ -205,32 +254,44 @@ toolbelt_tools:
       type: array
       minItems: 1
       maxItems: 500
-      description: Provider-qualified tool slugs, optionally pinned as `<tool>@<version>`.
+      description: >-
+        Tool slugs (`<provider>_<name>`) to add or remove, each optionally pinned as `<tool_slug>@<version>`.
+        At least one is required. When adding, a pin must equal the tool's current released version.
       items:
         type: string
       example:
         - exa_web_search
+  description: Lists the tools to add to or remove from a toolbelt.
 
 toolbelt_response:
   type: object
   properties:
     toolbelt:
-      $ref: '#/toolbelt'
+      description: The first version of the new toolbelt.
+      allOf:
+        - $ref: '#/toolbelt'
+  description: Returns the created toolbelt.
 
 get_toolbelt_response:
   type: object
   properties:
     toolbelt:
-      $ref: '#/toolbelt'
+      description: The requested toolbelt version.
+      allOf:
+        - $ref: '#/toolbelt'
     tool_details:
       type: array
       description: >-
-        A page of catalog metadata for the members named in `toolbelt.tools`,
-        in the same order. Use `toolbelt.tools` for the full membership.
+        The requested page of resolved catalog metadata for the members named in toolbelt.tools. It is a page,
+        so it is not the membership of the toolbelt: read toolbelt.tools for that, and toolbelt.tool_count for
+        the total. Ordering matches toolbelt.tools.
       items:
         $ref: '#/toolbelt_tool_detail'
     next_page_token:
-      $ref: 'shared.yml#/next_page_token'
+      description: Token for the next page of `tool_details`; empty on the last page.
+      allOf:
+        - $ref: 'shared.yml#/next_page_token'
+  description: Returns one toolbelt version and a page of member details.
 
 toolbelts_response:
   type: object
@@ -239,8 +300,12 @@ toolbelts_response:
       type: array
       items:
         $ref: '#/toolbelt_summary'
+      description: Toolbelts sorted by name.
     pagination:
-      $ref: 'shared.yml#/pagination'
+      description: Paging applied to this response and the total number of toolbelts.
+      allOf:
+        - $ref: 'shared.yml#/pagination'
+  description: One page of your team's toolbelts.
 
 search_toolbelts_response:
   type: object
@@ -249,20 +314,30 @@ search_toolbelts_response:
       type: array
       items:
         $ref: '#/toolbelt_summary'
+      description: Matching toolbelts sorted by name.
     next_page_token:
-      $ref: 'shared.yml#/next_page_token'
+      description: Token for the next page; empty on the last page.
+      allOf:
+        - $ref: 'shared.yml#/next_page_token'
+  description: One page of matching toolbelts.
 
 list_toolbelt_providers_response:
   type: object
   properties:
     toolbelt:
-      $ref: '#/toolbelt'
+      description: The toolbelt version the providers were read from.
+      allOf:
+        - $ref: '#/toolbelt'
     providers:
       type: array
       items:
         $ref: '#/toolbelt_provider_summary'
+      description: Providers sorted by ID.
     pagination:
-      $ref: 'shared.yml#/pagination'
+      description: Paging applied to this response and the total number of providers.
+      allOf:
+        - $ref: 'shared.yml#/pagination'
+  description: One page of a toolbelt's providers.
 
 list_toolbelt_provider_tools_response:
   type: object
@@ -271,5 +346,19 @@ list_toolbelt_provider_tools_response:
       type: array
       items:
         $ref: '#/toolbelt_tool_detail'
+      description: Members sorted by tool slug.
     pagination:
-      $ref: 'shared.yml#/pagination'
+      description: Paging applied to this response and the total number of matching members.
+      allOf:
+        - $ref: 'shared.yml#/pagination'
+  description: One page of a toolbelt's members from one provider.
+toolbelt_update_response:
+  type: object
+  properties:
+    toolbelt:
+      description: >-
+        After adding or removing tools: the new version, or the current version when membership did not
+        change. After a delete: the latest version, with status deprecated.
+      allOf:
+        - $ref: '#/toolbelt'
+  description: Returns a toolbelt after a change.

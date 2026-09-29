@@ -1,7 +1,10 @@
 operationId: toolbelts_delete
 summary: Delete a Toolbelt
-description: Deprecates the latest active version of a toolbelt. Pinned references to its versions keep
-  resolving, and the name can be reused.
+description: >-
+  Marks the toolbelt deleted and returns its latest version with status deprecated. Its versions stay
+  readable by explicit version until the name is reused. The name is free to reuse immediately; a new
+  toolbelt with it starts a fresh version history. Returns 404 when the toolbelt does not exist or is
+  already deleted.
 tags:
 - Action Gateway
 parameters:
@@ -14,7 +17,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/toolbelts.yml#/toolbelt_response
+          $ref: models/toolbelts.yml#/toolbelt_update_response
         example:
           toolbelt:
             name: search-toolbelt

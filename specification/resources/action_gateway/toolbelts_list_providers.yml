@@ -1,15 +1,16 @@
 operationId: toolbelts_list_providers
-summary: List Toolbelt Providers
-description: Lists the providers represented in a toolbelt's membership, with the number of members from
-  each.
+summary: List the Providers in a Toolbelt
+description: >-
+  Returns the distinct providers of the toolbelt's members, each with its member count, sorted by provider
+  ID. List one provider's members with `GET .../toolbelts/{name}/providers/{provider}/tools`.
 tags:
 - Action Gateway
 parameters:
 - $ref: parameters.yml#/toolbelt_name
-- $ref: parameters.yml#/toolbelt_version
-- $ref: ../../shared/parameters.yml#/page
+- $ref: parameters.yml#/toolbelt_version_toolbelts_providers
+- $ref: parameters.yml#/page_connections
 - $ref: parameters.yml#/per_page
-- $ref: parameters.yml#/toolbelt_search
+- $ref: parameters.yml#/toolbelt_search_toolbelts_providers
 responses:
   '200':
     description: The request was successful.

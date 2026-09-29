@@ -2,7 +2,7 @@ per_page:
   name: per_page
   in: query
   required: false
-  description: The number of items returned per page.
+  description: Page size. Defaults to 20; values above 100 are capped at 100.
   schema:
     type: integer
     minimum: 1
@@ -14,7 +14,7 @@ tools_per_page:
   name: per_page
   in: query
   required: false
-  description: The number of tools returned per page. Values above 100 are capped at 100.
+  description: Page size. Defaults to 100 when omitted or 0; values above 100 are capped at 100.
   schema:
     type: integer
     minimum: 1
@@ -26,7 +26,8 @@ page_size:
   name: page_size
   in: query
   required: false
-  description: The maximum number of items returned.
+  description: Page size, 1 to 100. Defaults to 20 when omitted or 0; other values are rejected with 
+    400.
   schema:
     type: integer
     minimum: 1
@@ -39,8 +40,8 @@ page_token:
   in: query
   required: false
   description: >-
-    The `next_page_token` from the previous response. A token is only valid for
-    the same query and filters that produced it.
+    `next_page_token` from the previous response. Valid only with the same tool selection; otherwise the
+    request is rejected with 400.
   schema:
     type: string
   example: ZXhhX3dlYl9zZWFyY2hAMQ
@@ -50,8 +51,10 @@ search_query:
   in: query
   required: false
   description: >-
-    A case-insensitive substring to match. An empty value matches every item
-    visible to your team.
+    Matched case-insensitively as a substring of name, `actor_id`, `session_urn`, or `agentName`. Empty
+    matches every session you can see. Results are ordered by match quality (an exact name, `session_urn`,
+    or `actor_id` match, then a prefix, then a substring), then by name, across the whole result set, so
+    a client must not re-sort a page to rank it.
   schema:
     type: string
   example: search
@@ -60,7 +63,9 @@ toolkit_id:
   name: toolkit_id
   in: query
   required: false
-  description: Restricts results to one toolkit.
+  description: >-
+    Restricts the page to one provider. It accepts the provider ID the catalog returns, including the `serverRef`
+    of one of your team's MCP servers.
   schema:
     type: string
   example: exa
@@ -69,7 +74,7 @@ tool_slug:
   name: tool_slug
   in: path
   required: true
-  description: The provider-qualified tool slug.
+  description: Catalog tool slug, for example `exa_search`. Required.
   schema:
     type: string
   example: exa_web_search
@@ -78,7 +83,14 @@ health_window:
   name: window
   in: query
   required: false
-  description: The rolling window to aggregate over. Defaults to 24 hours.
+  description: |-
+    Window to aggregate over. Defaults to twenty-four hours.
+
+    - `HEALTH_WINDOW_UNSPECIFIED`: Twenty-four hours.
+    - `HEALTH_WINDOW_ONE_HOUR`: One hour; history points are 10 minutes.
+    - `HEALTH_WINDOW_TWENTY_FOUR_HOURS`: Twenty-four hours; history points are 1 hour.
+    - `HEALTH_WINDOW_SEVEN_DAYS`: Seven days; history points are 6 hours.
+    - `HEALTH_WINDOW_THIRTY_DAYS`: Thirty days; history points are 24 hours.
   schema:
     type: string
     enum:
@@ -93,7 +105,7 @@ health_provider:
   name: provider
   in: query
   required: false
-  description: Restricts results to one provider.
+  description: Optional provider ID, matched exactly, to return only that provider's tools.
   schema:
     type: string
   example: exa
@@ -102,7 +114,8 @@ include_history:
   name: include_history
   in: query
   required: false
-  description: Also return the window split into resolution-aligned points.
+  description: >-
+    Additionally returns the window split into resolution-aligned points (the history field below).
   schema:
     type: boolean
     default: false
@@ -113,8 +126,8 @@ search_tools_provider:
   in: query
   required: false
   description: >-
-    Restricts results to these providers. Repeat the parameter to match any of
-    several providers.
+    Restricts results to these provider IDs, OR'd together. Repeat the parameter to select several. An unknown
+    ID matches nothing.
   schema:
     type: array
     items:
@@ -129,8 +142,10 @@ search_tools_toolbelt:
   in: query
   required: false
   description: >-
-    Restricts results to members of this toolbelt at its latest version. An
-    unknown toolbelt returns 404.
+    Restricts results to the members of that toolbelt of your team at its latest version, combined with
+    query and provider as AND. Members are matched at the version the toolbelt pins, which is the same set
+    and the same versions `GET /v2/action-gateway/toolbelts/{name}` reports. An unknown or deleted toolbelt
+    returns 404 rather than an empty page.
   schema:
     type: string
   example: search-toolbelt
@@ -139,7 +154,7 @@ toolbelt_name:
   name: name
   in: path
   required: true
-  description: The natural key identifying the toolbelt.
+  description: Toolbelt name.
   schema:
     type: string
     pattern: '^[a-z][a-z0-9_-]{0,63}$'
@@ -149,7 +164,7 @@ toolbelt_version:
   name: version
   in: query
   required: false
-  description: An immutable numeric toolbelt version. Omit to use the latest active version.
+  description: Version number to read. Empty returns the latest version.
   schema:
     type: string
     pattern: '^[0-9]+$'
@@ -159,7 +174,7 @@ toolbelt_status:
   name: status
   in: query
   required: false
-  description: Filter toolbelts by status.
+  description: active (default), deprecated, or all. Case-insensitive.
   schema:
     type: string
     enum:
@@ -173,7 +188,10 @@ toolbelt_search:
   name: search
   in: query
   required: false
-  description: A case-insensitive substring filter on the returned items.
+  description: >-
+    Restricts `tool_details` to members whose tool slug, name, title, description, provider, or category
+    contains this value, case-insensitively. It does not filter toolbelt.tools. This is a substring match,
+    not a filter expression.
   schema:
     type: string
   example: search
@@ -183,8 +201,8 @@ toolbelt_provider:
   in: path
   required: true
   description: >-
-    A provider from the toolbelt providers endpoint, or `_legacy` for members
-    without a provider.
+    A provider ID from the toolbelt's provider list, or `_legacy` for members recorded without a provider.
+    Matched exactly.
   schema:
     type: string
   example: exa
@@ -193,7 +211,7 @@ view_id:
   name: view_id
   in: path
   required: true
-  description: The output view identifier.
+  description: Output view ID.
   schema:
     type: string
   example: ov_4f0c2a9d8e1b47c6a3d5f7e9b1c3a5d7
@@ -203,9 +221,9 @@ output_view_tool:
   in: query
   required: false
   description: >-
-    Restricts results to one tool's released version. A provider-qualified
-    slug, optionally pinned as `<tool>@<version>`. Mutually exclusive with
-    `tool_id`.
+    At most one of tool or `tool_id`, as on create. With one set, the list is the published views plus your
+    team's own on that tool version. With neither, it is every live view your team owns plus every published
+    view on a tool version your catalog exposes, across tools.
   schema:
     type: string
   example: exa_web_search
@@ -214,7 +232,7 @@ output_view_tool_id:
   name: tool_id
   in: query
   required: false
-  description: Restricts results to one tool version. Mutually exclusive with `tool`.
+  description: Opaque ID of the tool version; see tool.
   schema:
     type: string
   example: tul_exa_web_search
@@ -223,7 +241,7 @@ server_ref:
   name: server_ref
   in: path
   required: true
-  description: The team-unique reference of the MCP server.
+  description: Server identifier (`serverRef`) of one of your team's MCP servers.
   schema:
     type: string
   example: docs
@@ -232,7 +250,7 @@ connection_id:
   name: id
   in: path
   required: true
-  description: The connection identifier.
+  description: Connection ID.
   schema:
     type: string
   example: 39f9f768-a7f9-4c91-9557-3328c53dd054
@@ -241,7 +259,7 @@ connection_provider:
   name: provider
   in: query
   required: false
-  description: Restricts results to one provider.
+  description: Optional provider slug, matched exactly.
   schema:
     type: string
   example: jira
@@ -250,7 +268,7 @@ connection_user_id:
   name: user_id
   in: query
   required: false
-  description: Restricts results to connections whose `user_id` contains this value.
+  description: Optional substring of `user_id`. It must use the `user_id` alphabet, `[A-Za-z0-9._-]`.
   schema:
     type: string
   example: alice
@@ -259,7 +277,9 @@ connection_status:
   name: status
   in: query
   required: false
-  description: Restricts results to one status. Revoked connections are never listed.
+  description: >-
+    pending|active|revoked|expired. List results always omit revoked connections, including when this filter
+    is revoked.
   schema:
     type: string
     enum:
@@ -272,7 +292,7 @@ connection_sort:
   name: sort
   in: query
   required: false
-  description: The field to sort by.
+  description: '`created_at`, provider, `user_id`, or status. Defaults to provider, then `user_id`.'
   schema:
     type: string
     enum:
@@ -286,7 +306,7 @@ sort_direction:
   name: sort_direction
   in: query
   required: false
-  description: The sort direction.
+  description: asc (the default) or desc.
   schema:
     type: string
     enum:
@@ -298,7 +318,7 @@ session_urn:
   name: session_urn
   in: path
   required: true
-  description: The session URN, in the form `do:managed_agent_session:<uuid>`.
+  description: URN of the session, for example `do:managed_agent_session:<uuid>`.
   schema:
     type: string
   example: do:managed_agent_session:2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
@@ -307,7 +327,7 @@ end_user_id:
   name: end_user_id
   in: query
   required: false
-  description: Restricts results to sessions bound to this `actorId`.
+  description: Optional `actor_id`, matched exactly.
   schema:
     type: string
   example: alice
@@ -316,7 +336,7 @@ user_id:
   name: user_id
   in: path
   required: true
-  description: The end-user identifier.
+  description: User ID.
   schema:
     type: string
   example: alice
@@ -325,7 +345,7 @@ users_user_id:
   name: user_id
   in: query
   required: false
-  description: Restricts results to user IDs that start with this prefix.
+  description: User ID prefix to return. An empty value returns all users.
   schema:
     type: string
   example: al
@@ -334,7 +354,9 @@ users_sort:
   name: sort
   in: query
   required: false
-  description: The field to sort by.
+  description: >-
+    `user_id`|`created_at`|`session_count`|`connection_count`. `created_at` is the earliest creation time
+    among the user's sessions, connections, and limit overrides. Defaults to `created_at`.
   schema:
     type: string
     enum:
@@ -349,8 +371,191 @@ actor_id:
   name: actor_id
   in: path
   required: true
-  description: The end-user identifier, the same value as a session's `actorId`.
+  description: >-
+    Actor ID: a session `actor_id` or a connection `user_id`, 1 to 64 characters from `[A-Za-z0-9._-]`.
   schema:
     type: string
     pattern: '^[A-Za-z0-9._-]{1,64}$'
   example: alice
+page_connections:
+  in: query
+  name: page
+  required: false
+  description: 1-based page number. Values below 1 are treated as 1.
+  schema:
+    type: integer
+    minimum: 1
+    default: 1
+  example: 1
+end_user_id_sessions_search:
+  name: end_user_id
+  in: query
+  required: false
+  description: >-
+    `end_user_id`, when set, is an exact filter on `actor_id` (the same filter as on the session list)
+    and combines with query as AND.
+  schema:
+    type: string
+  example: alice
+page_token_sessions_search:
+  name: page_token
+  in: query
+  required: false
+  description: >-
+    `next_page_token` from the previous response. Valid only with the same query and `end_user_id`; otherwise
+    the request is rejected with 400.
+  schema:
+    type: string
+  example: ZXhhX3dlYl9zZWFyY2hAMQ
+search_query_toolbelts_search:
+  name: query
+  in: query
+  required: false
+  description: >-
+    Matched case-insensitively as a substring of name, `display_name`, or description. Empty matches every
+    toolbelt of your team.
+  schema:
+    type: string
+  example: search
+page_token_toolbelts_search:
+  name: page_token
+  in: query
+  required: false
+  description: >-
+    `next_page_token` from the previous response. Valid only with the same query and status; otherwise
+    the request is rejected with 400.
+  schema:
+    type: string
+  example: ZXhhX3dlYl9zZWFyY2hAMQ
+page_size_toolbelts:
+  name: page_size
+  in: query
+  required: false
+  description: >-
+    Page size for `tool_details` only; toolbelt.tools always lists every member. Defaults to 20; values
+    above 100 are capped at 100.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 20
+  example: 20
+page_token_toolbelts:
+  name: page_token
+  in: query
+  required: false
+  description: >-
+    `next_page_token` from the previous response, to continue `tool_details`. Treat it as opaque, and
+    send it only with the same toolbelt, version, and search.
+  schema:
+    type: string
+  example: ZXhhX3dlYl9zZWFyY2hAMQ
+toolbelt_version_toolbelts_providers:
+  name: version
+  in: query
+  required: false
+  description: Version number to read. Empty reads the latest version.
+  schema:
+    type: string
+    pattern: '^[0-9]+$'
+  example: '1'
+toolbelt_search_toolbelts_providers:
+  name: search
+  in: query
+  required: false
+  description: >-
+    Restricts providers whose ID, name, or description contains this value, case-insensitively.
+  schema:
+    type: string
+  example: search
+toolbelt_search_toolbelts_providers_tools:
+  name: search
+  in: query
+  required: false
+  description: >-
+    Restricts tools whose slug, name, title, description, provider, or category contains this value, case-insensitively,
+    within the provider only.
+  schema:
+    type: string
+  example: search
+toolbelt_name_toolbelts_tools_add:
+  name: name
+  in: path
+  required: true
+  description: Toolbelt name, from the path.
+  schema:
+    type: string
+    pattern: '^[a-z][a-z0-9_-]{0,63}$'
+  example: search-toolbelt
+page_tools:
+  in: query
+  name: page
+  required: false
+  description: >-
+    1-based page index; values below 1 are treated as 1. A page past the end returns an empty tools list
+    with the real total.
+  schema:
+    type: integer
+    minimum: 1
+    default: 1
+  example: 1
+health_provider_tools_health_providers:
+  name: provider
+  in: query
+  required: false
+  description: Optional provider ID, matched exactly, to return only that provider.
+  schema:
+    type: string
+  example: exa
+search_query_tools_providers_search:
+  name: query
+  in: query
+  required: false
+  description: >-
+    Matched case-insensitively as a substring of name, `display_name`, or description. It does not match
+    the titles of the tools a provider owns: "providers owning a tool that matches" is a tool search grouped
+    by the provider field of each result.
+  schema:
+    type: string
+  example: search
+page_token_tools_providers_search:
+  name: page_token
+  in: query
+  required: false
+  description: >-
+    `next_page_token` from the previous response. Valid only with the same query; otherwise the request
+    is rejected with 400.
+  schema:
+    type: string
+  example: ZXhhX3dlYl9zZWFyY2hAMQ
+search_query_tools_search:
+  name: query
+  in: query
+  required: false
+  description: >-
+    Matched case- and accent-insensitively as a substring of the tool's name, title, description, category,
+    provider ID, or tool slug. Empty matches every tool your team can use.
+  schema:
+    type: string
+  example: search
+page_token_tools_search:
+  name: page_token
+  in: query
+  required: false
+  description: >-
+    A `next_page_token` from the preceding response. It is pinned to the query and filters that produced
+    it: replaying one against a different search is rejected with 400, not a silent restart from the top.
+  schema:
+    type: string
+  example: ZXhhX3dlYl9zZWFyY2hAMQ
+sort_direction_users:
+  name: sort_direction
+  in: query
+  required: false
+  description: asc|desc. Defaults to desc.
+  schema:
+    type: string
+    enum:
+      - asc
+      - desc
+  example: desc

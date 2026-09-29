@@ -1,6 +1,7 @@
 operationId: mcpServers_get
-summary: Retrieve an MCP Server
-description: Retrieves a registered MCP server, including its discovery status.
+summary: Get an MCP Server
+description: >-
+  Returns one of your team's MCP servers, or 404 when your team has none with this `serverRef`.
 tags:
 - Action Gateway
 parameters:

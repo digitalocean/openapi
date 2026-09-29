@@ -1,22 +1,23 @@
 pagination:
   type: object
   description: >-
-    Offset pagination metadata. `page` and `per_page` echo the values applied
-    after defaults and clamping. `total` counts every matching item across all
-    pages.
+    Describes one page of an offset-paged list.
   properties:
     page:
       type: integer
       format: int32
       example: 1
+      description: 1-based page number of this response.
     per_page:
       type: integer
       format: int32
       example: 20
+      description: Page size applied to this response, after defaults and caps.
     total:
       type: integer
       format: int32
       example: 1
+      description: Number of matching items across all pages.
 
 next_page_token:
   type: string
@@ -27,6 +28,6 @@ next_page_token:
 
 empty_response:
   type: object
-  description: An empty JSON object.
+  description: Empty.
   properties: {}
   example: {}

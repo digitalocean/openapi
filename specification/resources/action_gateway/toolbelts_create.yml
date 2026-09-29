@@ -1,8 +1,10 @@
 operationId: toolbelts_create
 summary: Create a Toolbelt
-description: Creates a toolbelt, a versioned set of tools that sessions and policies can reference as
-  `toolbelt:<name>@<version>`. Each tool is pinned to its current released version. Creating a toolbelt
-  whose name is already active returns 409; a deleted name can be reused.
+description: >-
+  A toolbelt is a named set of tools, each pinned to a version, that your team can attach to sessions
+  as `toolbelt:<name>@<version>`. The first version is 1 unless version is set. Returns 409 if an active
+  toolbelt with the same name exists. The name of a deleted toolbelt can be reused; its versions start
+  again from the initial version.
 tags:
 - Action Gateway
 requestBody:

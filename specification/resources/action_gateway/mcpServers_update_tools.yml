@@ -1,8 +1,16 @@
 operationId: mcpServers_update_tools
-summary: Set Enabled MCP Server Tools
-description: Declares the complete set of enabled tools for an MCP server. Enabling a tool releases its
-  latest discovered version after verifying it against the server; every tool not listed is disabled.
-  The request is idempotent and stops at the first tool that fails verification.
+summary: Set Which of an MCP Server's Tools Are Enabled
+description: |-
+  `enabledToolSlugs` is the complete set to enable; every other tool of the server is disabled. An
+  enabled tool is added to your team's catalog at its latest discovered version, and a disabled one is
+  removed from it. Repeating the same set changes nothing.
+
+  Before changing anything, each tool being enabled, re-enabled, or moved to a newer discovered
+  version is verified against the live server: it must still be listed there, with the same input
+  schema as when it was discovered. If any check fails or the server cannot be reached, the request
+  fails with 400 and nothing changes; resync and try again. An unknown tool slug is also rejected with
+  400. A request that needs verification counts against the resync rate limit (429). Returns the
+  server's full tool list.
 tags:
 - Action Gateway
 parameters:
@@ -33,14 +41,12 @@ responses:
             enabled: true
             quarantined: false
             quarantineReason: ''
-            catalogSlug: t123456--docs_get_page
           - name: search
             toolSlug: docs_search
             description: Search the documentation index.
             enabled: false
             quarantined: false
             quarantineReason: ''
-            catalogSlug: t123456--docs_search
   '400':
     $ref: ../../shared/responses/bad_request.yml
   '401':

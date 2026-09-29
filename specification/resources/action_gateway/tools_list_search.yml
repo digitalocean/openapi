@@ -1,16 +1,18 @@
 operationId: tools_list_search
 summary: Search Tools
-description: Searches the tools visible to your team. `query` matches a substring of the tool slug, name,
-  title, description, provider, or category, case-insensitively. Filters combine with AND. Results are
-  ranked across the whole result set; do not re-sort a page.
+description: >-
+  Returns the tools your team can use that match query, optionally restricted to some providers or to
+  the members of one of your toolbelts. Results are ranked across the whole result set: exact tool name
+  matches first, then name or title prefixes, then name or title substrings, then other matches. Cursor-paged
+  with `page_size` and `page_token`; no total is reported.
 tags:
 - Action Gateway
 parameters:
-- $ref: parameters.yml#/search_query
+- $ref: parameters.yml#/search_query_tools_search
 - $ref: parameters.yml#/search_tools_provider
 - $ref: parameters.yml#/search_tools_toolbelt
 - $ref: parameters.yml#/page_size
-- $ref: parameters.yml#/page_token
+- $ref: parameters.yml#/page_token_tools_search
 responses:
   '200':
     description: The request was successful.

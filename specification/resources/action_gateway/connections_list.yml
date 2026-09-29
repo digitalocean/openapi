@@ -1,6 +1,8 @@
 operationId: connections_list
 summary: List Connections
-description: Lists your team's connections. Revoked connections are omitted.
+description: >-
+  Returns the connections you can see, excluding revoked ones. Offset-paged with page and `per_page`;
+  filter by provider, `user_id`, and status.
 tags:
 - Action Gateway
 parameters:
@@ -9,7 +11,7 @@ parameters:
 - $ref: parameters.yml#/connection_status
 - $ref: parameters.yml#/connection_sort
 - $ref: parameters.yml#/sort_direction
-- $ref: ../../shared/parameters.yml#/page
+- $ref: parameters.yml#/page_connections
 - $ref: parameters.yml#/per_page
 responses:
   '200':

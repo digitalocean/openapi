@@ -1,12 +1,16 @@
 operationId: tools_list_health
 summary: List Tool Health
-description: Lists availability and latency for each released tool across all DigitalOcean customers.
+description: >-
+  Returns availability and latency for each catalog tool over the requested window, sorted by provider
+  and then tool slug. A tool with no calls in the window is listed with `data_status` `HEALTH_DATA_STATUS_NO_DATA`.
+  Metrics are aggregated across all customers; request volumes are not reported. Tools of your team's
+  MCP servers are not included. Offset-paged with page and `per_page`.
 tags:
 - Action Gateway
 parameters:
 - $ref: parameters.yml#/health_provider
 - $ref: parameters.yml#/health_window
-- $ref: ../../shared/parameters.yml#/page
+- $ref: parameters.yml#/page_connections
 - $ref: parameters.yml#/per_page
 responses:
   '200':

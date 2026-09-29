@@ -1,8 +1,8 @@
 operationId: outputViews_list
 summary: List Output Views
-description: Lists output views you can bind. With `tool` or `tool_id`, lists the public views and your
-  team's views on that tool version. Without either, lists every live view your team owns plus every public
-  view on a tool version your catalog exposes.
+description: >-
+  Returns the output views your team can use: views DigitalOcean publishes to every team, plus your team's
+  own. Cursor-paged with `page_size` and `page_token`; no total is reported.
 tags:
 - Action Gateway
 parameters:
@@ -32,7 +32,6 @@ responses:
             fields:
             - results.title
             - results.url
-            transform: null
             output_schema:
               type: object
               properties:
@@ -49,9 +48,6 @@ responses:
               createdAt: '2026-09-01T16:00:00Z'
               updatedAt: '2026-09-01T16:00:00Z'
               deletedAt: null
-              createdBy: ''
-              updatedBy: ''
-            deleted_by: ''
           tool_id: tul_exa_web_search
           tool: exa_web_search
           version: v1

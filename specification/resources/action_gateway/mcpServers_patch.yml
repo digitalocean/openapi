@@ -1,7 +1,8 @@
 operationId: mcpServers_patch
 summary: Update an MCP Server
-description: Updates the description of a registered MCP server. The endpoint and credentials cannot be
-  changed; delete and register the server again instead.
+description: >-
+  Changes the server's description, which is shown on its catalog card immediately. The endpoint and credentials
+  cannot be changed; to change them, delete the server and register it again.
 tags:
 - Action Gateway
 parameters:

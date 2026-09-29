@@ -1,11 +1,14 @@
 operationId: toolbelts_delete_tools
 summary: Remove Tools from a Toolbelt
-description: Removes tools from the latest version of a toolbelt. A membership change creates a new immutable
-  version. Removing every tool leaves an empty, active toolbelt; use the delete endpoint to delete it.
+description: >-
+  Removes the listed tools and returns the toolbelt. When membership changes, this creates a new version
+  that keeps the display name and description. Tools that are not members are ignored, and removing every
+  tool is allowed; deleting the toolbelt itself is a separate DELETE. Returns 400 when a pin differs from
+  the version the toolbelt holds, and 404 for an unknown or deleted toolbelt.
 tags:
 - Action Gateway
 parameters:
-- $ref: parameters.yml#/toolbelt_name
+- $ref: parameters.yml#/toolbelt_name_toolbelts_tools_add
 requestBody:
   required: true
   content:
@@ -23,7 +26,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/toolbelts.yml#/toolbelt_response
+          $ref: models/toolbelts.yml#/toolbelt_update_response
         example:
           toolbelt:
             name: search-toolbelt

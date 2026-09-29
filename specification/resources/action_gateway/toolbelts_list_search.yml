@@ -1,14 +1,15 @@
 operationId: toolbelts_list_search
 summary: Search Toolbelts
-description: Searches your team's toolbelts. `query` matches a substring of the name, display name, or
-  description, case-insensitively.
+description: >-
+  Returns your team's toolbelts whose name, display name, or description contains query, case-insensitively,
+  sorted by name. Cursor-paged with `page_size` and `page_token`; no total is reported.
 tags:
 - Action Gateway
 parameters:
-- $ref: parameters.yml#/search_query
+- $ref: parameters.yml#/search_query_toolbelts_search
 - $ref: parameters.yml#/toolbelt_status
 - $ref: parameters.yml#/page_size
-- $ref: parameters.yml#/page_token
+- $ref: parameters.yml#/page_token_toolbelts_search
 responses:
   '200':
     description: The request was successful.

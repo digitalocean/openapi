@@ -1,6 +1,8 @@
 operationId: users_get
-summary: Retrieve a User
-description: Retrieves one end user's sessions and non-revoked connections.
+summary: Get a User
+description: >-
+  Returns the sessions and non-revoked connections of one user ID. Returns 404 when the user has none
+  you can see and no limit overrides.
 tags:
 - Action Gateway
 parameters:

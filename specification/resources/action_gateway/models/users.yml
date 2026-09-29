@@ -4,23 +4,26 @@ list_users_response:
     user_ids:
       type: array
       description: >-
-        End-user identifiers derived from your team's session `actorId` values
-        and connection `user_id` values.
+        User IDs on this page.
       items:
         type: string
       example:
         - alice
         - bob
     pagination:
-      $ref: 'shared.yml#/pagination'
+      description: Paging applied to this response and the total number of users.
+      allOf:
+        - $ref: 'shared.yml#/pagination'
+  description: One page of user IDs.
 
 user:
   type: object
-  description: A derived view of one end user across your team's sessions and non-revoked connections.
+  description: One of your team's users, as seen across its sessions and connections.
   properties:
     user_id:
       type: string
       example: alice
+      description: 'The user ID: a session `actor_id` or a connection `user_id`.'
     sessions:
       type: array
       items:
@@ -29,19 +32,24 @@ user:
           session_urn:
             type: string
             example: do:managed_agent_session:2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+            description: Session URN.
           name:
             type: string
             example: support-bot-alice
+            description: Session name.
           created_at:
             type: string
             format: date-time
             nullable: true
             example: '2026-09-24T12:00:00Z'
+            description: When the session was created.
           updated_at:
             type: string
             format: date-time
             nullable: true
             example: '2026-09-24T12:00:00Z'
+            description: When the session was last modified.
+      description: Sessions bound to the user, oldest first.
     connections:
       type: array
       items:
@@ -51,21 +59,26 @@ user:
             type: string
             format: uuid
             example: 39f9f768-a7f9-4c91-9557-3328c53dd054
+            description: Opaque connection ID.
           provider:
             type: string
             example: jira
+            description: Provider slug, for example `jira`.
           provider_display_name:
             type: string
             example: Jira
+            description: Human-readable provider name, for example `Jira`.
           user_id:
             type: string
             example: alice
+            description: Your identifier for the user the connection acts for.
           scopes:
             type: array
             items:
               type: string
             example:
               - write:jira-work
+            description: Provider scopes granted, or requested while pending.
           status:
             type: string
             enum:
@@ -74,31 +87,37 @@ user:
               - revoked
               - expired
             example: active
+            description: pending, active, revoked, or expired.
           granted_at:
             type: string
             format: date-time
             nullable: true
             example: '2026-07-14T00:52:10Z'
+            description: When the user completed authorization.
           revoked_at:
             type: string
             format: date-time
             nullable: true
             example: null
+            description: When the connection was revoked.
           created_at:
             type: string
             format: date-time
             nullable: true
             example: '2026-07-14T00:50:00Z'
+            description: When the connection was created.
           updated_at:
             type: string
             format: date-time
             nullable: true
             example: '2026-07-14T00:52:10Z'
+            description: When the connection was last modified.
           connection_parameters:
             type: object
             nullable: true
             example:
               site_url: https://example.atlassian.net
+            description: Non-sensitive provider configuration.
           credential_kind:
             type: string
             enum:
@@ -106,21 +125,27 @@ user:
               - private_oauth
               - team_api_key
             example: digitalocean_oauth
+            description: '`digitalocean_oauth`, `private_oauth`, or `team_api_key`.'
           credential_id:
             type: string
             example: ''
+            description: >-
+              ID of the team provider credential the connection uses; empty for DigitalOcean's shared application.
           network:
-            $ref: 'connections.yml#/connection_network'
+            description: Private network the connection's calls use, when configured.
+            allOf:
+              - $ref: 'connections.yml#/connection_network'
           owning_user_id:
             type: string
             example: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
-          owning_user_numeric_id:
-            type: string
-            format: uint64
-            example: '1234567'
+            description: DigitalOcean user ID of the user who created the connection, when recorded.
+      description: The user's connections that are not revoked, sorted by provider.
 
 get_user_response:
   type: object
   properties:
     user:
-      $ref: '#/user'
+      description: The user.
+      allOf:
+        - $ref: '#/user'
+  description: Returns one user.

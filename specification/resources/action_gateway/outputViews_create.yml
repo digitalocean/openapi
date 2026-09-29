@@ -1,8 +1,10 @@
 operationId: outputViews_create
 summary: Create an Output View
-description: 'Creates a team output view: a projection of one tool version''s canonical output that keeps
-  only the listed fields. The response includes the materialized `output_schema`. Bind the view to a tool
-  in a session with `config.outputViews`. A team can hold at most 20 live views per tool version.'
+description: >-
+  An output view is a named projection of one tool version's output: tool calls that use it return only
+  the listed fields, and its `output_schema` describes the result. The view is bound to the tool version
+  your catalog currently releases. Returns 409 when your team already has a view with this name on the
+  tool version, and 429 when your team already has the maximum of 20 views on it.
 tags:
 - Action Gateway
 requestBody:
@@ -40,7 +42,6 @@ responses:
             fields:
             - results.title
             - results.url
-            transform: null
             output_schema:
               type: object
               properties:
@@ -57,9 +58,6 @@ responses:
               createdAt: '2026-09-01T16:00:00Z'
               updatedAt: '2026-09-01T16:00:00Z'
               deletedAt: null
-              createdBy: ''
-              updatedBy: ''
-            deleted_by: ''
   '400':
     $ref: ../../shared/responses/bad_request.yml
   '401':

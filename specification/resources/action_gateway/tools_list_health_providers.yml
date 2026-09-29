@@ -1,15 +1,15 @@
 operationId: tools_list_health_providers
 summary: List Provider Health
-description: Lists availability and latency for each provider across all DigitalOcean customers. Uptime
-  counts only provider failures (upstream errors, timeouts, rate limits, and unavailability); latency
-  covers successful calls. A provider with `HEALTH_DATA_STATUS_NO_DATA` had no qualifying calls in the
-  window.
+description: >-
+  Returns availability and latency for each catalog provider over the requested window, sorted by provider
+  ID. Metrics are aggregated across all customers; request volumes are not reported. Tools of your team's
+  MCP servers are not included. Offset-paged with page and `per_page`.
 tags:
 - Action Gateway
 parameters:
-- $ref: parameters.yml#/health_provider
+- $ref: parameters.yml#/health_provider_tools_health_providers
 - $ref: parameters.yml#/health_window
-- $ref: ../../shared/parameters.yml#/page
+- $ref: parameters.yml#/page_connections
 - $ref: parameters.yml#/per_page
 responses:
   '200':

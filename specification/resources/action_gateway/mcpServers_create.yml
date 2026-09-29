@@ -1,8 +1,11 @@
 operationId: mcpServers_create
 summary: Register an MCP Server
-description: 'Registers a remote MCP server so its tools can be used through Action Gateway. Registration
-  does not contact the server: run a resync to discover its tools, then enable the tools you want. A team
-  can register at most 10 servers.'
+description: >-
+  Registers a remote MCP server for your team, using the streamable HTTP transport. The server starts
+  with `syncStatus` pending and no tools: discover its tools with `POST .../mcp-servers/{server_ref}/resync`,
+  then choose which to enable with `PUT .../mcp-servers/{server_ref}/tools`. The endpoint must be HTTPS
+  and resolve only to public IP addresses. The number of servers per team is limited (10 by default);
+  registering beyond it returns 429. Returns 409 when `serverRef` is already in use.
 tags:
 - Action Gateway
 requestBody:

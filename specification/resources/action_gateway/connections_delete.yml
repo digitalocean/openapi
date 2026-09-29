@@ -1,7 +1,9 @@
 operationId: connections_delete
 summary: Delete a Connection
-description: Revokes a connection and deletes its stored credential. Reconnecting the same user requires
-  a new authorization.
+description: >-
+  Marks the connection revoked and returns it; for an OAuth connection, its stored tokens are deleted
+  first. Creating a connection for the same provider and `user_id` later reuses the same ID. Only the
+  user who created the connection can delete it; for anyone else it is 404.
 tags:
 - Action Gateway
 parameters:

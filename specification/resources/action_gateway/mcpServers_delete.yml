@@ -1,7 +1,10 @@
 operationId: mcpServers_delete
 summary: Delete an MCP Server
-description: Deletes a registered MCP server, retracts its tools, and deletes any secret Tool Registry
-  stored for it. Secrets your team named with `credentialRef` are not deleted.
+description: >-
+  Disables all of the server's tools, removes them from your team's catalog, and deletes the server. An
+  `api_key` supplied at registration is deleted; a `credentialRef` you supplied is left untouched. For
+  a server registered with `credentialRefSource` connection, every user connection made through its OAuth
+  client is revoked. Returns the deleted server, or 404 when it does not exist.
 tags:
 - Action Gateway
 parameters:

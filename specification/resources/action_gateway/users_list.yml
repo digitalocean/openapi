@@ -1,14 +1,16 @@
 operationId: users_list
 summary: List Users
-description: Lists the end users your team has referenced, derived from session `actorId` values and connection
-  `user_id` values.
+description: >-
+  Returns the user IDs known for your team: session `actor_id` values, the `user_id` of connections that
+  are not revoked, and actors with limit overrides. Only sessions and connections you can see count. Offset-paged
+  with page and `per_page`.
 tags:
 - Action Gateway
 parameters:
 - $ref: parameters.yml#/users_user_id
 - $ref: parameters.yml#/users_sort
-- $ref: parameters.yml#/sort_direction
-- $ref: ../../shared/parameters.yml#/page
+- $ref: parameters.yml#/sort_direction_users
+- $ref: parameters.yml#/page_connections
 - $ref: parameters.yml#/per_page
 responses:
   '200':

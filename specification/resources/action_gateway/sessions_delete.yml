@@ -1,7 +1,9 @@
 operationId: sessions_delete
 summary: Delete a Session
-description: Deletes a session. Its MCP URL stops working. Deleting a session that does not exist also
-  succeeds.
+description: >-
+  Deletes the session and its policy. Succeeds without deleting anything when the session does not exist
+  or you cannot delete it, so repeating a delete also succeeds. A malformed `session_urn` is rejected
+  with 400.
 tags:
 - Action Gateway
 parameters:

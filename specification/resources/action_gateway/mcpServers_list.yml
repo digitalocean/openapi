@@ -1,6 +1,6 @@
 operationId: mcpServers_list
 summary: List MCP Servers
-description: Lists your team's registered MCP servers.
+description: Returns every MCP server your team has registered, sorted by `serverRef`.
 tags:
 - Action Gateway
 responses:

@@ -1,6 +1,8 @@
 operationId: outputViews_get
-summary: Retrieve an Output View
-description: Retrieves a live public output view or one owned by your team.
+summary: Get an Output View
+description: >-
+  Returns one of your team's views, or a published view on a tool version your catalog exposes. Returns
+  404 when the view does not exist, was deleted, or belongs to another team.
 tags:
 - Action Gateway
 parameters:
@@ -27,7 +29,6 @@ responses:
             fields:
             - results.title
             - results.url
-            transform: null
             output_schema:
               type: object
               properties:
@@ -44,9 +45,6 @@ responses:
               createdAt: '2026-09-01T16:00:00Z'
               updatedAt: '2026-09-01T16:00:00Z'
               deletedAt: null
-              createdBy: ''
-              updatedBy: ''
-            deleted_by: ''
   '401':
     $ref: ../../shared/responses/unauthorized.yml
   '404':

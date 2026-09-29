@@ -1,8 +1,9 @@
 operationId: tools_get_health
-summary: Retrieve Tool Health
-description: 'Retrieves availability and latency for one tool. With `include_history=true`, the response
-  also splits the window into points: 10 minutes for one hour, 1 hour for 24 hours, 6 hours for 7 days,
-  and 24 hours for 30 days. Render `HEALTH_DATA_STATUS_NO_DATA` points as gaps.'
+summary: Get Tool Health
+description: >-
+  Returns availability and latency for one catalog tool over the requested window, optionally with a history
+  series. Metrics are aggregated across all customers; request volumes are not reported. Returns 404 when
+  `tool_slug` is not a catalog tool.
 tags:
 - Action Gateway
 parameters:

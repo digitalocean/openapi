@@ -1,7 +1,9 @@
 operationId: actorLimits_update
-summary: Set End User Limits
-description: Sets rate-limit overrides for one end user. Categories not in the request keep their current
-  value. An override cannot exceed your team's limit.
+summary: Set an Actor's Limits
+description: >-
+  Sets per-minute limits for the listed categories and leaves the others unchanged. A limit may not exceed
+  your team's current limit for the category (400 otherwise), and 0 blocks every call in the category.
+  The actor does not need to exist yet.
 tags:
 - Action Gateway
 parameters:

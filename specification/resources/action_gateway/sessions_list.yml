@@ -1,11 +1,13 @@
 operationId: sessions_list
 summary: List Sessions
-description: Lists your team's sessions.
+description: >-
+  Returns the sessions you can see, newest first. Offset-paged with page and `per_page`; `end_user_id`
+  filters to one actor.
 tags:
 - Action Gateway
 parameters:
 - $ref: parameters.yml#/end_user_id
-- $ref: ../../shared/parameters.yml#/page
+- $ref: parameters.yml#/page_connections
 - $ref: parameters.yml#/per_page
 responses:
   '200':
@@ -48,7 +50,6 @@ responses:
             agentUrn: ''
             agentName: ''
             owning_user_id: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
-            owning_user_numeric_id: '1234567'
           pagination:
             page: 1
             per_page: 20

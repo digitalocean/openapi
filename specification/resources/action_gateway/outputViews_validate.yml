@@ -1,7 +1,9 @@
 operationId: outputViews_validate
 summary: Preview an Output View
-description: Validates an output view and materializes its `output_schema` without saving it. Use it to
-  show the resulting schema and errors while a projection is being edited.
+description: >-
+  Validates a projection exactly as create does and returns the view it would produce, including `output_schema`,
+  without storing anything. name and description are optional here; name uniqueness and the per-tool-version
+  limit are not checked.
 tags:
 - Action Gateway
 requestBody:
@@ -37,7 +39,6 @@ responses:
             fields:
             - results.title
             - results.url
-            transform: null
             output_schema:
               type: object
               properties:
@@ -51,7 +52,6 @@ responses:
                       url:
                         type: string
             audit: null
-            deleted_by: ''
   '400':
     $ref: ../../shared/responses/bad_request.yml
   '401':

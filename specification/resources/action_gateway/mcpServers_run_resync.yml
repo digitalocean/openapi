@@ -1,10 +1,18 @@
 operationId: mcpServers_run_resync
-summary: Discover MCP Server Tools
-description: 'Connects to the MCP server and ingests its tool list. Returns 200 with the discovered tools
-  when discovery finishes in time, or 202 with `pending: true` for a slow server; poll the MCP server
-  until `syncStatus` changes. Discovered tools are not usable until enabled. For servers that use per-user
-  connections, set `user_id`; if that user has not authorized the server yet, `authorization` describes
-  how to connect.'
+summary: Discover an MCP Server's Tools
+description: |-
+  Connects to the server, lists its tools, and records them. Discovered tools are not callable until
+  you enable them.
+
+  When discovery finishes in time, returns 200 with the server and its tools; a discovery failure is
+  reported in `syncStatus` and `syncError` rather than as an error. Otherwise returns 202 with pending
+  set while discovery continues: poll `GET .../mcp-servers/{server_ref}` until `lastSyncedAt` or
+  `syncError` changes (`syncStatus` is not reset while discovery runs).
+
+  For a server registered with `credentialRefSource` connection, `user_id` is required; if that user
+  has not authorized the server yet, the response carries authorization with the URL to send them to.
+  Resyncs are rate limited per team, and a team can run only a few discoveries at once; either limit
+  returns 429.
 tags:
 - Action Gateway
 parameters:
@@ -50,14 +58,12 @@ responses:
             enabled: false
             quarantined: false
             quarantineReason: ''
-            catalogSlug: t123456--docs_get_page
           - name: search
             toolSlug: docs_search
             description: Search the documentation index.
             enabled: false
             quarantined: false
             quarantineReason: ''
-            catalogSlug: t123456--docs_search
           pending: false
           authorization: null
   '202':

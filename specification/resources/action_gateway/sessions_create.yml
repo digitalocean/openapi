@@ -1,9 +1,9 @@
 operationId: sessions_create
 summary: Create a Session
-description: Creates an Action Gateway session and returns its MCP URL. The session's `tools` select which
-  tools are available, `policy` decides whether each call is allowed, needs approval, or is denied, and
-  `actorId` binds the session to one end user so their connections are used. Your team must have a valid
-  prepayment state.
+description: >-
+  Creates a session owned by your team, with a new session URN, and returns the MCP URL an agent connects
+  to. tools selects the tools and toolbelts the session exposes, and policy decides which calls run, need
+  approval, or are refused.
 tags:
 - Action Gateway
 requestBody:
@@ -65,7 +65,6 @@ responses:
             agentUrn: ''
             agentName: ''
             owning_user_id: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
-            owning_user_numeric_id: '1234567'
           mcpUrl: https://actions.do-ai.run/mcp/session/2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
           tools:
           - toolbelt:search-toolbelt@1

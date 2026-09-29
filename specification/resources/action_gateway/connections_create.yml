@@ -1,8 +1,16 @@
 operationId: connections_create
 summary: Create a Connection
-description: 'Creates a connection that authorizes one of your end users to use a provider''s tools. For
-  OAuth providers the connection starts as `pending` and the response includes `authorization`: send the
-  user to `connect_url`, show them `verification_code`, and poll the connection until it is `active`.'
+description: |-
+  Connects one of your users, identified by `user_id`, to a provider so tools can act on their
+  account. An OAuth connection starts pending, and authorization carries the URL to send the user to;
+  read the connection until it is active or expired. A connection through a team API-key credential is
+  active immediately.
+
+  There is one connection per provider and `user_id` for each DigitalOcean user who creates
+  connections. Repeating the request returns the existing connection when its scopes cover the
+  request, reusing a pending connection's link, and restarts an expired or revoked connection under
+  the same ID. Requesting scopes beyond an existing connection's, or a different credential, returns
+  400 until that connection is deleted.
 tags:
 - Action Gateway
 requestBody:

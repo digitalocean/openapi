@@ -1,15 +1,15 @@
 operationId: toolbelts_get
-summary: Retrieve a Toolbelt
-description: Retrieves the latest active version, or a specified immutable version, of a toolbelt. `toolbelt.tools`
-  always lists every member. `tool_details` is a page of catalog metadata for those members, bounded by
-  `page_size` and optionally filtered by `search`.
+summary: Get a Toolbelt
+description: >-
+  Returns the latest version of the named toolbelt, or the version requested, with catalog metadata for
+  one page of its members in `tool_details`. A deleted toolbelt returns 404 unless a version is requested.
 tags:
 - Action Gateway
 parameters:
 - $ref: parameters.yml#/toolbelt_name
 - $ref: parameters.yml#/toolbelt_version
-- $ref: parameters.yml#/page_size
-- $ref: parameters.yml#/page_token
+- $ref: parameters.yml#/page_size_toolbelts
+- $ref: parameters.yml#/page_token_toolbelts
 - $ref: parameters.yml#/toolbelt_search
 responses:
   '200':

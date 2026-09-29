@@ -1,6 +1,8 @@
 operationId: actorLimits_delete
-summary: Clear End User Limits
-description: Removes rate-limit overrides for one end user so your team's limits apply again.
+summary: Clear an Actor's Limits
+description: >-
+  Removes the actor's overrides for the listed categories, which then follow your team's limits again.
+  Clearing a category without an override succeeds.
 tags:
 - Action Gateway
 parameters:

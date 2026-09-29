@@ -1,12 +1,14 @@
 operationId: tools_list
 summary: List Tools
-description: Lists released catalog tools visible to your team, one page at a time. Each page returns
-  summary entries in `tools` and the matching full definitions, in the same order, in `definitions`.
+description: >-
+  Returns one page of the tools your team can use: released catalog tools plus the enabled tools of your
+  team's MCP servers. definitions[i] describes tools[i]. Offset-paged with page and `per_page`; an unknown
+  `toolkitId` returns an empty page.
 tags:
 - Action Gateway
 parameters:
 - $ref: parameters.yml#/toolkit_id
-- $ref: ../../shared/parameters.yml#/page
+- $ref: parameters.yml#/page_tools
 - $ref: parameters.yml#/tools_per_page
 responses:
   '200':
@@ -78,84 +80,11 @@ responses:
             outputSchema: *id002
             annotations: *id003
             version: v1
-            schemaVersion: '2026-07-01'
-            status: active
-            parallelizable: true
-            streamingSafe: true
             auth:
               modes:
               - shared_key
               provider: exa
               scopes: []
-              credentialBinding: ''
-              credentialRefSource: do_managed
-              doManagedCredentialRef: EXA_API_KEY
-              injection:
-                location: header
-                name: x-api-key
-                scheme: ''
-              baseUrlResolution: null
-              headerResolution: []
-              teamApiKey: null
-            execution:
-              type: http
-              adapterVersion: v1
-              configRef: ''
-              http:
-                baseUrl: https://api.exa.ai
-                path: /search
-                method: POST
-                allowedHosts:
-                - api.exa.ai
-                requestEncoding: json
-                responseFormat: json
-                allowed_host_suffixes: []
-              mcp: null
-            transform:
-              language: gateway_mapping_v1
-              input:
-                adapter_request:
-                  http:
-                    method: POST
-                    body:
-                      query: $.input.query
-                      numResults: $.input.max_results
-                      type: auto
-              output:
-                result:
-                  query: $.input.query
-                  provider: exa
-                  results: $.executor.output.body.results
-            policy:
-              permission: tools.exa.web_search
-            reliability:
-              timeoutMs: 15000
-              maxOutputBytes: '2097152'
-              retry:
-                maxAttempts: 2
-                backoff: ''
-                retryOn:
-                - rate_limited
-                - timeout
-                - upstream_error
-                backoffPolicy: null
-                honorRetryAfter: false
-                replay: null
-                billable: null
-            hooks:
-              usage:
-                billable: true
-                meters:
-                - sku: siweb
-                  unit: websearches
-                  quantitySource: '1'
-            classification:
-              operation: read
-              risk: low
-              dataClasses:
-              - public_web
-            flipperName: ''
-            tags: []
             toolSlug: exa_web_search
             providerKind: managed_api
           pagination:

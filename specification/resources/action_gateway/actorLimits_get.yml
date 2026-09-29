@@ -1,7 +1,8 @@
 operationId: actorLimits_get
-summary: Retrieve End User Limits
-description: 'Retrieves the rate-limit overrides set for one end user and the limits that apply to them:
-  each override, or your team''s limit where none is set.'
+summary: Get an Actor's Limits
+description: >-
+  Returns the per-minute limits set for the actor and the limits in effect, each the lower of your team's
+  limit and the actor's override. Returns 404 when the actor has no sessions, connections, or limit overrides.
 tags:
 - Action Gateway
 parameters:

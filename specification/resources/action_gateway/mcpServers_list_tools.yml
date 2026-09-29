@@ -1,6 +1,8 @@
 operationId: mcpServers_list_tools
-summary: List MCP Server Tools
-description: Lists the tools discovered on an MCP server and whether each is enabled.
+summary: List an MCP Server's Tools
+description: >-
+  Returns every tool discovered on the server, sorted by name, with whether each is enabled. Tools that
+  have since disappeared from the server stay listed.
 tags:
 - Action Gateway
 parameters:
@@ -22,14 +24,12 @@ responses:
             enabled: true
             quarantined: false
             quarantineReason: ''
-            catalogSlug: t123456--docs_get_page
           - name: search
             toolSlug: docs_search
             description: Search the documentation index.
             enabled: true
             quarantined: false
             quarantineReason: ''
-            catalogSlug: t123456--docs_search
   '401':
     $ref: ../../shared/responses/unauthorized.yml
   '404':

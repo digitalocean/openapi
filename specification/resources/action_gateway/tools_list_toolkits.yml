@@ -1,6 +1,8 @@
 operationId: tools_list_toolkits
 summary: List Toolkits
-description: Lists the toolkits in the catalog. A toolkit groups the tools of one provider.
+description: >-
+  Returns the providers (toolkits) whose tools your team can use: catalog providers with at least one
+  released tool, plus your team's registered MCP servers.
 tags:
 - Action Gateway
 responses:
@@ -22,6 +24,7 @@ responses:
             - web-fetch
             - web-search
             created_at: '2026-06-01T00:00:00Z'
+            provider_kind: managed_api
   '401':
     $ref: ../../shared/responses/unauthorized.yml
   '429':

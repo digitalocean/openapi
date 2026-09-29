@@ -1,14 +1,16 @@
 operationId: sessions_list_search
 summary: Search Sessions
-description: Searches your team's sessions. `query` matches a substring of the name, actor ID, session
-  URN, or agent name, case-insensitively.
+description: >-
+  Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName` contains query,
+  case-insensitively, ranked across the whole result set. Cursor-paged with `page_size` and `page_token`;
+  no total is reported.
 tags:
 - Action Gateway
 parameters:
 - $ref: parameters.yml#/search_query
-- $ref: parameters.yml#/end_user_id
+- $ref: parameters.yml#/end_user_id_sessions_search
 - $ref: parameters.yml#/page_size
-- $ref: parameters.yml#/page_token
+- $ref: parameters.yml#/page_token_sessions_search
 responses:
   '200':
     description: The request was successful.
@@ -50,7 +52,6 @@ responses:
             agentUrn: ''
             agentName: ''
             owning_user_id: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
-            owning_user_numeric_id: '1234567'
           next_page_token: ''
   '400':
     $ref: ../../shared/responses/bad_request.yml
