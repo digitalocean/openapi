@@ -1,0 +1,18 @@
+type: object
+description: Token usage for the request. System One billing is input-token only.
+required:
+  - input_tokens
+  - output_tokens
+properties:
+  input_tokens:
+    type: integer
+    format: int64
+    minimum: 0
+    description: Number of input tokens consumed by the request.
+    example: 42
+  output_tokens:
+    type: integer
+    format: int64
+    minimum: 0
+    description: Number of output tokens consumed by the request. Always 0 for System One.
+    example: 0

@@ -34,6 +34,6 @@ security:
   - genai:create
 summary: Import Custom Model
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_import_custom_model.yml

@@ -80,6 +80,10 @@ tags:
       - **Users** and **end user limits** show and limit activity per end
         user, identified by a session's `actorId`.
 
+  - name: Agent Platform API
+    description: |-
+      The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -369,10 +373,6 @@ tags:
       You can develop functions on your local machine and then deploy them to a namespace using `doctl`, the [official DigitalOcean CLI tool](https://docs.digitalocean.com/reference/doctl).
 
       The Serverless Functions API currently only supports creating and managing namespaces.
-
-  - name: GradientAI Platform
-    description: |-
-      The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
 
   - name: Image Actions
     description: |-
@@ -670,7 +670,7 @@ tags:
 
   - name: Serverless Inference
     description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows access to serverless inference models.
+      DigitalOcean Inference allows access to serverless inference models.
       You can access models by providing an inference key.
 
       **Note:** The Serverless Inference API uses a separate base URL (`https://inference.do-ai.run`)
@@ -678,7 +678,7 @@ tags:
 
   - name: Agent Inference
     description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows you to create multi-agent workflows
+      DigitalOcean Agent Platform allows you to create multi-agent workflows
       to power your AI applications. This allows developers to integrate agents into your
       AI applications.
 
@@ -707,6 +707,7 @@ x-tagGroups:
       - Actions
       - Add-Ons
       - Action Gateway
+      - Agent Platform API
       - Apps
       - Billing
       - Block Storage
@@ -727,7 +728,6 @@ x-tagGroups:
       - Floating IP Actions
       - Floating IPs
       - Functions
-      - GradientAI Platform
       - Image Actions
       - Images
       - Kubernetes
@@ -3480,6 +3480,10 @@ paths:
   /v1/models:
     get:
       $ref: 'resources/inference/inference_list_models.yml'
+
+  /v1/systemone:
+    post:
+      $ref: 'resources/inference/inference_create_systemone.yml'
 
   /v1/responses:
     post:

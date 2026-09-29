@@ -44,4 +44,4 @@ security:
 - bearer_auth:
   - genai:create
 tags:
-- GradientAI Platform
+- Agent Platform API

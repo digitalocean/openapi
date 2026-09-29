@@ -38,6 +38,6 @@ security:
   - genai:read
 summary: Retrieve Scenario Set Download URL
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_get_scenario_set_download_url.yml
