@@ -42,6 +42,6 @@ security:
   - genai:read
 summary: List Knowledge Bases
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_list_knowledge_bases.yml
