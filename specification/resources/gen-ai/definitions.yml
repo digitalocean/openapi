@@ -460,7 +460,7 @@ apiAgentDeploymentRelease:
       example: example string
       type: string
     library_version:
-      description: The library version of the package used in the release
+      description: The library version of the gradient package used in the release
       example: example string
       type: string
     status:
@@ -1867,7 +1867,7 @@ apiCreateAgentDeploymentReleaseInputPublic:
       example: example name
       type: string
     library_version:
-      description: The library version of the package used in the release
+      description: The library version of the gradient package used in the release
       example: example string
       type: string
   type: object
@@ -1995,7 +1995,7 @@ apiCreateAgentWorkspaceDeploymentInputPublic:
       example: example string
       type: string
     library_version:
-      description: The library version of the package used in the release
+      description: The library version of the gradient package used in the release
       example: example string
       type: string
     region:
@@ -2024,7 +2024,7 @@ apiCreateAgentWorkspaceInputPublic:
       example: example string
       type: string
     library_version:
-      description: The library version of the package used in the release
+      description: The library version of the gradient package used in the release
       example: example string
       type: string
     project_id:
