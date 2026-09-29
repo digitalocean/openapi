@@ -124,6 +124,6 @@ security:
   - genai:read
 summary: List Scenario Sets
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_list_scenario_sets.yml
