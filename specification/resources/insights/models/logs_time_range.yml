@@ -1,0 +1,10 @@
+type: object
+description: An inclusive query time window.
+required:
+  - from
+  - to
+properties:
+  from:
+    $ref: 'logs_time_instant.yml'
+  to:
+    $ref: 'logs_time_instant.yml'
