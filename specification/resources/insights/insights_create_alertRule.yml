@@ -21,7 +21,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: 'models/alert_rule_request.yml'
+        $ref: 'models/alert_rule_create_request.yml'
       example:
         spec:
           name: High CPU

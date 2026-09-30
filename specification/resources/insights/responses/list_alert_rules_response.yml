@@ -39,6 +39,8 @@ content:
           created_at: '2026-09-03T10:00:00Z'
           updated_at: '2026-09-03T10:30:00Z'
       links:
-        pages: {}
+        pages:
+          first: https://api.digitalocean.com/v2/insights/alert-rules?page=1
+          last: https://api.digitalocean.com/v2/insights/alert-rules?page=1
       meta:
         total: 1

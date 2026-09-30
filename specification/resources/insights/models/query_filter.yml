@@ -12,10 +12,8 @@ properties:
   operator:
     type: string
     description: |
-      Comparison operator for the filter. Values use the API's protobuf enum
-      names.
+      Comparison operator for the filter. Allowed values:
 
-      - `FILTER_OPERATOR_UNSPECIFIED` = unspecified
       - `FILTER_OPERATOR_EQUAL` = equal
       - `FILTER_OPERATOR_NOT_EQUAL` = `not_equal`
       - `FILTER_OPERATOR_LESS_THAN` = `less_than`
@@ -23,7 +21,6 @@ properties:
       - `FILTER_OPERATOR_GREATER_THAN` = `greater_than`
       - `FILTER_OPERATOR_GREATER_THAN_OR_EQUAL` = `greater_than_or_equal`
     enum:
-      - FILTER_OPERATOR_UNSPECIFIED
       - FILTER_OPERATOR_EQUAL
       - FILTER_OPERATOR_NOT_EQUAL
       - FILTER_OPERATOR_LESS_THAN

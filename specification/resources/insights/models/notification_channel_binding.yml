@@ -13,16 +13,13 @@ properties:
   notify_on:
     type: array
     description: |
-      Severities that trigger this channel. Values use the API's protobuf enum
-      names.
+      Severities that trigger this channel. Allowed values:
 
-      - `SEVERITY_UNSPECIFIED` = unspecified
       - `SEVERITY_WARNING` = warning
       - `SEVERITY_CRITICAL` = critical
     items:
       type: string
       enum:
-        - SEVERITY_UNSPECIFIED
         - SEVERITY_WARNING
         - SEVERITY_CRITICAL
     example:

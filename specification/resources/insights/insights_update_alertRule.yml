@@ -3,8 +3,8 @@ operationId: insights_update_alertRule
 summary: Update an Alert Rule
 
 description: |
-  To update an alert rule, send a PUT request to
-  `/v2/insights/alert-rules/{id}` with a full `spec`. Omit
+  This PUT endpoint uses merge semantics. To update an alert rule, send a
+  request to `/v2/insights/alert-rules/{id}` with a full `spec`. Omit
   `notification_channels` to keep existing bindings. Omit `status` or
   `re_alert_duration` to keep those existing values.
 
