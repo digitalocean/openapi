@@ -395,6 +395,11 @@ tags:
       To interact with images, you will generally send requests to the images
       endpoint at /v2/images.
 
+  - name: Insights
+    description: |-
+      The Insights API provides programmatic access to DigitalOcean observability
+      data and related query interfaces.
+
   - name: Kubernetes
     description: |-
       [DigitalOcean Kubernetes](https://docs.digitalocean.com/products/kubernetes/)
@@ -715,6 +720,7 @@ x-tagGroups:
       - Functions
       - Image Actions
       - Images
+      - Insights
       - Kubernetes
       - Load Balancers
       - Monitoring
@@ -1646,6 +1652,34 @@ paths:
   /v2/images/{image_id}/actions/{action_id}:
     get:
       $ref: "resources/images/imageActions_get.yml"
+
+  /v2/insights/query/{region}/prom/api/v1/query:
+    get:
+      $ref: "resources/insights/insights_get_promQuery.yml"
+    post:
+      $ref: "resources/insights/insights_post_promQuery.yml"
+
+  /v2/insights/query/{region}/prom/api/v1/query_range:
+    get:
+      $ref: "resources/insights/insights_get_promQueryRange.yml"
+    post:
+      $ref: "resources/insights/insights_post_promQueryRange.yml"
+
+  /v2/insights/query/{region}/prom/api/v1/labels:
+    get:
+      $ref: "resources/insights/insights_get_promLabels.yml"
+    post:
+      $ref: "resources/insights/insights_post_promLabels.yml"
+
+  /v2/insights/query/{region}/prom/api/v1/label/{name}/values:
+    get:
+      $ref: "resources/insights/insights_get_promLabelValues.yml"
+
+  /v2/insights/query/{region}/prom/api/v1/series:
+    get:
+      $ref: "resources/insights/insights_get_promSeries.yml"
+    post:
+      $ref: "resources/insights/insights_post_promSeries.yml"
 
   /v2/kubernetes/clusters:
     get:
