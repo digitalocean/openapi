@@ -1,0 +1,327 @@
+mcp_server:
+  type: object
+  description: >-
+    MCP server registered by your team. It never contains secret material.
+  properties:
+    serverRef:
+      type: string
+      description: >-
+        Server identifier, unique within your team. The server's tool slugs are `<server_ref>_<name>`.
+      example: docs
+    endpoint:
+      type: string
+      description: HTTPS URL of the server's MCP endpoint.
+      example: https://mcp.example.com/mcp
+    transport:
+      type: string
+      enum:
+        - streamable_http
+      example: streamable_http
+      description: Always `streamable_http`.
+    credentialRefSource:
+      type: string
+      enum:
+        - none
+        - secret
+        - connection
+      example: secret
+      description: >-
+        How requests to the server authenticate: none, secret (a key or token sent in the Authorization header),
+        or connection (each user's own OAuth authorization).
+    credentialRef:
+      type: string
+      description: >-
+        The secret reference supplied at registration when source=secret, or the team's OAuth credential ID
+        when source=connection. Empty when the server was registered with an `api_key`, whose storage DigitalOcean
+        manages.
+      example: action-infra/tool-credentials/mcp/docs/3f5b2c1e-9a7d-4e8b-b6c4-2d1f0e9a8b7c
+    syncStatus:
+      type: string
+      enum:
+        - pending
+        - ok
+        - failed
+        - unsupported_protocol
+      example: ok
+      description: >-
+        Outcome of the latest discovery: pending (no discovery has finished yet), ok, failed, or `unsupported_protocol`.
+        It is not reset while a resync runs.
+    syncError:
+      type: string
+      description: Why the latest discovery failed; empty after a successful one.
+      example: ''
+    lastSyncedAt:
+      type: string
+      description: When discovery last succeeded, in RFC 3339 format; empty until the first success.
+      example: '2026-09-20T15:04:05Z'
+    protocolVersion:
+      type: string
+      description: MCP protocol revision negotiated with the server.
+      example: '2025-06-18'
+    toolCount:
+      type: integer
+      format: int32
+      description: Number of tools discovered on the server, whether enabled or not.
+      example: 3
+    createdAt:
+      type: string
+      description: When the server was registered, in RFC 3339 format.
+      example: '2026-09-20T15:00:00Z'
+    updatedAt:
+      type: string
+      description: When the server was last modified, in RFC 3339 format.
+      example: '2026-09-20T15:04:05Z'
+    description:
+      type: string
+      maxLength: 1024
+      description: >-
+        Team-authored description, shown on the server's catalog card. A resync does not replace it.
+      example: Internal documentation search.
+    oauth_authorize_url:
+      type: string
+      description: >-
+        OAuth authorization endpoint. Set only when `credentialRefSource` is connection; the client secret is
+        never returned.
+      example: ''
+    oauth_scopes:
+      type: array
+      items:
+        type: string
+      example: []
+      description: OAuth scopes requested from each user. Set only when `credentialRefSource` is 
+        connection.
+    oauth_authorization_ttl_seconds:
+      type: string
+      format: uint64
+      description: >-
+        How long a user's authorization is reused before re-consent. Echoed so a team can read the window without
+        re-registering to discover it.
+      example: '0'
+
+mcp_server_create:
+  type: object
+  required:
+    - serverRef
+    - endpoint
+  properties:
+    serverRef:
+      type: string
+      pattern: '^[a-z][a-z0-9-]{0,63}$'
+      example: docs
+      description: >-
+        Identifier for the server, unique within your team. Must match `^`[a-z]``[a-z0-9-]`{0,63}$`.
+    endpoint:
+      type: string
+      description: >-
+        HTTPS URL of the server's MCP endpoint. Its host must resolve only to public IP addresses. Required.
+      example: https://mcp.example.com/mcp
+    transport:
+      type: string
+      enum:
+        - streamable_http
+      default: streamable_http
+      example: streamable_http
+      description: Optional. `streamable_http`, the default and only accepted value.
+    credentialRefSource:
+      type: string
+      enum:
+        - none
+        - secret
+        - connection
+      default: none
+      description: >-
+        How requests to the server authenticate: none (the default), secret, or connection. With secret, the
+        value from `credentialRef` or `api_key` is sent in the Authorization header, prefixed with "Bearer "
+        unless it already contains a space.
+      example: secret
+    description:
+      type: string
+      maxLength: 1024
+      example: Internal documentation search.
+      description: Optional description shown on the server's catalog card. At most 1024 characters.
+    credentialRef:
+      type: string
+      description: >-
+        For `credentialRefSource` secret: a reference to a secret your team stores with DigitalOcean. Must match
+        `^`[A-Za-z0-9]``[A-Za-z0-9:/_.-]`{0,254}$`. Set exactly one of `credentialRef` and `api_key`.
+      example: ''
+    api_key:
+      type: string
+      writeOnly: true
+      description: >-
+        For `credentialRefSource` secret: the key or token itself. DigitalOcean stores it; it is write-only
+        and no response returns it. Set exactly one of `credentialRef` and `api_key`.
+      example: sk_live_example
+    oauth_client_id:
+      type: string
+      description: >-
+        Required for `credentialRefSource` connection: the client ID of your team's OAuth client for the server.
+        Each user of the server then authorizes individually.
+      example: ''
+    oauth_client_secret:
+      type: string
+      writeOnly: true
+      description: Required for `credentialRefSource` connection. Write-only; no response returns it.
+      example: ''
+    oauth_authorize_url:
+      type: string
+      description: >-
+        Required for `credentialRefSource` connection: the OAuth authorization endpoint. It must use the endpoint's
+        scheme and port, on the endpoint's host or another host under the same registrable domain.
+      example: ''
+    oauth_token_url:
+      type: string
+      description: >-
+        Required for `credentialRefSource` connection: the OAuth token endpoint, under the same rules as `oauth_authorize_url`.
+      example: ''
+    oauth_scopes:
+      type: array
+      items:
+        type: string
+      example: []
+      description: >-
+        Required for `credentialRefSource` connection: the scopes to request from each user, 1 to 64 of them.
+    oauth_authorization_ttl_seconds:
+      type: string
+      format: uint64
+      description: |-
+        How long, in seconds, a user's authorization may be reused before they must consent again. Optional;
+        0 means 30 days, and the maximum is 100 years.
+
+        Authorizations are not refreshed automatically, so this window, not the provider's token lifetime,
+        decides how often a user is sent back through consent. Set it no longer than the provider's own
+        token lifetime, so the prompt arrives before a tool call fails against an expired token.
+      example: '86400'
+  description: Describes an MCP server to register.
+
+mcp_server_update:
+  type: object
+  properties:
+    description:
+      type: string
+      maxLength: 1024
+      description: Replaces the stored description; empty clears it. At most 1024 characters.
+      example: Internal documentation and runbook search.
+  description: Carries the editable fields of a registered server.
+
+mcp_server_resync:
+  type: object
+  properties:
+    user_id:
+      type: string
+      description: >-
+        Required for a server registered with `credentialRefSource` connection: discovery reaches the server
+        as this user, through their connection, because such a server has no team-wide credential. Ignored otherwise.
+      example: alice
+  description: Selects the server to discover.
+
+mcp_server_tools_update:
+  type: object
+  required:
+    - enabledToolSlugs
+  properties:
+    enabledToolSlugs:
+      type: array
+      description: >-
+        The complete set of tool slugs (`<server_ref>_<name>`) to enable; every other tool of the server is
+        disabled. Empty disables every tool.
+      items:
+        type: string
+      example:
+        - docs_search
+        - docs_get_page
+    user_id:
+      type: string
+      description: >-
+        Required for a server registered with `credentialRefSource` connection when a tool needs verification
+        against the live server, which can only be reached as a user who has authorized it. Ignored otherwise.
+      example: ''
+  description: Complete set of a server's tools to enable.
+
+mcp_server_tool:
+  type: object
+  properties:
+    name:
+      type: string
+      description: Tool name as the server reports it, normalized to the catalog's naming rules.
+      example: search
+    toolSlug:
+      type: string
+      description: >-
+        `<server_ref>_<name>`: the tool's catalog slug, and the value to list in `enabledToolSlugs`.
+      example: docs_search
+    description:
+      type: string
+      example: Search the documentation index.
+      description: Tool description as the server reports it.
+    enabled:
+      type: boolean
+      description: Whether the tool is enabled in your team's catalog.
+      example: true
+    quarantined:
+      type: boolean
+      description: >-
+        True when the enabled tool was suspended because it disappeared from the server or its input schema
+        changed incompatibly. Calls to it fail until it is enabled again.
+      example: false
+    quarantineReason:
+      type: string
+      example: ''
+      description: Why the tool was quarantined; empty otherwise.
+  description: One tool discovered on an MCP server.
+
+mcp_server_response:
+  type: object
+  properties:
+    mcpServer:
+      description: The MCP server.
+      allOf:
+        - $ref: '#/mcp_server'
+  description: Returns one MCP server.
+
+list_mcp_servers_response:
+  type: object
+  properties:
+    mcpServers:
+      type: array
+      items:
+        $ref: '#/mcp_server'
+      description: Servers sorted by `serverRef`.
+  description: Lists your team's MCP servers.
+
+list_mcp_server_tools_response:
+  type: object
+  properties:
+    tools:
+      type: array
+      items:
+        $ref: '#/mcp_server_tool'
+      description: Tools sorted by name.
+  description: Lists an MCP server's discovered tools.
+
+resync_mcp_server_response:
+  type: object
+  properties:
+    mcpServer:
+      description: The server, including `syncStatus` and `syncError`.
+      allOf:
+        - $ref: '#/mcp_server'
+    tools:
+      type: array
+      description: >-
+        Every tool discovered on the server when discovery finished in time; empty when pending is true.
+      items:
+        $ref: '#/mcp_server_tool'
+    pending:
+      type: boolean
+      description: >-
+        True when discovery is still running (HTTP 202). Poll the server to see the outcome.
+      example: false
+    authorization:
+      description: >-
+        Set when discovery could not run because `user_id` has no authorized connection to this server yet.
+        It carries the remedy — send the user to `connect_url` — so the caller acts on this response rather
+        than parsing the server's `syncError`.
+      allOf:
+        - $ref: 'connections.yml#/connection_authorization'
+  description: Reports the result of a discovery.

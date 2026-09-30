@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"serverRef":"docs","endpoint":"https://mcp.example.com/mcp","credentialRefSource":"secret","api_key":"sk_live_example","description":"Internal documentation search."}' \
+    "https://api.digitalocean.com/v2/action-gateway/mcp-servers"
