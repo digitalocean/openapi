@@ -6,7 +6,6 @@ required:
   - rule_id
   - severity
   - status
-  - resource_urn
   - value
   - triggered_at
   - last_triggered_at
@@ -37,7 +36,10 @@ properties:
     example: active
   resource_urn:
     type: string
-    description: URN of the DigitalOcean resource the alert fired for.
+    description: |
+      URN of the DigitalOcean resource the alert fired for. May be an empty
+      string for alerts fired on non-resource-bound signals (for example,
+      cluster/pod/namespace-scoped Kubernetes alerts).
     example: do:droplet:12345
   value:
     type: number
