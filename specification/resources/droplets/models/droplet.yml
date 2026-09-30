@@ -156,6 +156,12 @@ properties:
     description: A string specifying the UUID of the VPC to which the Droplet
       is assigned.<br>Requires `vpc:read` scope.
 
+  subnet_uuid:
+    type: string
+    example: '9c7a0d63-3c4e-4d3d-9f56-3b0fb0e5e4a1'
+    description: A string specifying the UUID of the VPC subnet to which the
+      Droplet is assigned.<br>Requires `vpc:read` scope.
+
   gpu_info:
     $ref: '../../sizes/models/gpu_info.yml'
 

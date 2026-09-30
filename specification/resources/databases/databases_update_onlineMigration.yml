@@ -32,11 +32,11 @@ requestBody:
 
       example:
         source:
-          host: source-do-user-6607903-0.b.db.ondigitalocean.com
+          host: source-db.example.com
           dbname: defaultdb
           port: 25060
           username: doadmin
-          password: paakjnfe10rsrsmf
+          password: example_password
         disable_ssl: false
         ignore_dbs: ["db0","db1"]
 

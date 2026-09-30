@@ -21,18 +21,18 @@ content:
         connection:
           uri: ''
           database: defaultdb
-          host: read-nyc3-01-do-user-19081923-0.db.ondigitalocean.com
+          host: read-db.example.com
           port: 25060
           user: doadmin
-          password: wv78n3zpz42xezdk
+          password: example_password
           ssl: true
         private_connection:
-          uri: postgres://doadmin:wv78n3zpz42xezdk@private-read-nyc3-01-do-user-19081923-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require
+          uri: postgres://doadmin:example_password@private-read-db.example.com:25060/defaultdb?sslmode=require
           database: ''
-          host: private-read-nyc3-01-do-user-19081923-0.db.ondigitalocean.com
+          host: private-read-db.example.com
           port: 25060
           user: doadmin
-          password: wv78n3zpz42xezdk
+          password: example_password
           ssl: true
         region: nyc3
         status: online

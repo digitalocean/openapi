@@ -25,10 +25,10 @@ content:
         db: defaultdb
         mode: transaction
         connection:
-          uri: postgres://doadmin:wv78n3zpz42xezdk@backend-do-user-19081923-0.db.ondigitalocean.com:25061/backend-pool?sslmode=require
+          uri: postgres://doadmin:example_password@db.example.com:25061/backend-pool?sslmode=require
           database: backend-pool
-          host: backend-do-user-19081923-0.db.ondigitalocean.com
+          host: db.example.com
           port: 25061
           user: doadmin
-          password: wv78n3zpz42xezdk
+          password: example_password
           ssl: true

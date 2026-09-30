@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X PATCH \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"connection_parameters": {"site_url": "https://github.com"}}' \
+    "https://api.digitalocean.com/v2/action-gateway/connections/123e4567-e89b-12d3-a456-426614174000"

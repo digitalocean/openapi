@@ -9,6 +9,7 @@ vpc_nat_gateways:
       size: 1
       vpcs:
         - vpc_uuid: "0eb1752f-807b-4562-a077-8018e13ab1fb"
+          subnet_uuid: "cbd79771-23eb-49be-b5ea-59cc56222622"
           gateway_ip: "10.118.0.35"
       egresses:
         public_gateways:
@@ -34,6 +35,7 @@ vpc_nat_gateway:
       size: 1
       vpcs:
         - vpc_uuid: "0eb1752f-807b-4562-a077-8018e13ab1fb"
+          subnet_uuid: "cbd79771-23eb-49be-b5ea-59cc56222622"
           gateway_ip: "10.118.0.35"
           default_gateway: true
       egresses:
@@ -56,6 +58,7 @@ vpc_nat_gateway_create:
       size: 1
       vpcs:
         - vpc_uuid: "0eb1752f-807b-4562-a077-8018e13ab1fb"
+          subnet_uuid: "cbd79771-23eb-49be-b5ea-59cc56222622"
           default_gateway: true
       egresses: {}
       udp_timeout_seconds: 30
@@ -75,6 +78,7 @@ vpc_nat_gateway_update:
       size: 2
       vpcs:
         - vpc_uuid: "0eb1752f-807b-4562-a077-8018e13ab1fb"
+          subnet_uuid: "cbd79771-23eb-49be-b5ea-59cc56222622"
           gateway_ip: "10.118.0.35"
       egresses:
         public_gateways:

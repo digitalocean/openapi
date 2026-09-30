@@ -1,0 +1,1151 @@
+toolbelt:
+  type: object
+  required:
+    - name
+    - version
+    - tools
+    - status
+    - reference
+    - reference_latest
+    - tool_count
+    - created_at
+    - updated_at
+  properties:
+    name:
+      type: string
+      example: search-toolbelt
+    version:
+      type: string
+      pattern: ^[0-9]+$
+      example: "1"
+    display_name:
+      type: string
+      maxLength: 128
+      example: Search Tools
+    description:
+      type: string
+      maxLength: 255
+      example: Tools for searching and fetching public web pages.
+    tools:
+      type: array
+      maxItems: 500
+      items:
+        type: string
+      example:
+        - exa_web_search
+        - exa_web_fetch
+    status:
+      type: string
+      enum:
+        - active
+        - deprecated
+      example: active
+    reference:
+      type: string
+      description: A reference pinned to this immutable toolbelt version.
+      example: search-toolbelt@1
+    reference_latest:
+      type: string
+      description: An unversioned reference to the latest active version.
+      example: search-toolbelt
+    tool_count:
+      type: integer
+      format: int32
+      example: 2
+    created_at:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:00:00Z
+    updated_at:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:00:00Z
+  additionalProperties: false
+toolbelt_summary:
+  type: object
+  required:
+    - name
+    - latest_version
+    - version_count
+    - tool_count
+    - status
+    - reference_latest
+    - updated_at
+  properties:
+    name:
+      type: string
+      example: search-toolbelt
+    display_name:
+      type: string
+      example: Search Tools
+    description:
+      type: string
+      example: Tools for searching and fetching public web pages.
+    latest_version:
+      type: string
+      example: "1"
+    version_count:
+      type: integer
+      format: int32
+      example: 1
+    tool_count:
+      type: integer
+      format: int32
+      example: 2
+    status:
+      type: string
+      enum:
+        - active
+        - deprecated
+      example: active
+    reference_latest:
+      type: string
+      example: search-toolbelt
+    updated_at:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:00:00Z
+  additionalProperties: false
+toolbelt_create:
+  type: object
+  required:
+    - name
+    - tools
+  properties:
+    name:
+      type: string
+      pattern: ^[a-z][a-z0-9_-]{0,63}$
+      example: search-toolbelt
+    version:
+      type: string
+      pattern: ^[0-9]+$
+      default: "1"
+      example: "1"
+    display_name:
+      type: string
+      maxLength: 128
+      example: Search Tools
+    description:
+      type: string
+      maxLength: 255
+      example: Tools for searching and fetching public web pages.
+    tools:
+      type: array
+      maxItems: 500
+      items:
+        type: string
+      example:
+        - exa_web_search
+        - exa_web_fetch
+  additionalProperties: false
+toolbelt_tools:
+  type: object
+  required:
+    - tools
+  properties:
+    tools:
+      type: array
+      minItems: 1
+      maxItems: 500
+      items:
+        type: string
+      example:
+        - exa_web_search
+  additionalProperties: false
+toolbelt_response:
+  type: object
+  required:
+    - toolbelt
+  properties:
+    toolbelt:
+      $ref: "#/toolbelt"
+  additionalProperties: false
+toolbelts_response:
+  type: object
+  required:
+    - toolbelts
+    - pagination
+  properties:
+    toolbelts:
+      type: array
+      items:
+        $ref: "#/toolbelt_summary"
+      example: []
+    pagination:
+      $ref: "#/pagination"
+  additionalProperties: false
+pagination:
+  type: object
+  required:
+    - page
+    - per_page
+    - total
+  properties:
+    page:
+      type: integer
+      format: int32
+      example: 1
+    per_page:
+      type: integer
+      format: int32
+      example: 20
+    total:
+      type: integer
+      format: int32
+      example: 1
+  additionalProperties: false
+auth_injection:
+  type: object
+  properties:
+    location:
+      type: string
+      example: header
+    name:
+      type: string
+      example: exa_web_search
+    scheme:
+      type: string
+      example: Bearer
+  example:
+    location: header
+    name: Authorization
+    scheme: Bearer
+  additionalProperties: false
+auth_spec:
+  type: object
+  properties:
+    modes:
+      type: array
+      items:
+        type: string
+      example:
+        - oauth2
+    provider:
+      type: string
+      example: github
+    scopes:
+      type: array
+      items:
+        type: string
+      example:
+        - repo
+    credentialBinding:
+      type: string
+      example: user
+    credentialRefSource:
+      type: string
+      example: connection
+    doManagedCredentialRef:
+      type: string
+      example: do-managed
+    injection:
+      $ref: "#/auth_injection"
+    baseUrlResolution:
+      $ref: "#/base_url_resolution"
+  additionalProperties: false
+classification:
+  type: object
+  properties:
+    operation:
+      type: string
+      example: search
+    risk:
+      type: string
+      example: low
+    dataClasses:
+      type: array
+      items:
+        type: string
+      example:
+        - public
+  additionalProperties: false
+connection_authorization:
+  type: object
+  properties:
+    status:
+      type: string
+      example: active
+    connect_url:
+      type: string
+      example: https://cloud.digitalocean.com/action-gateway/connections/connect
+    verification_code:
+      type: string
+      example: ABCD-EFGH
+    expires_at:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:15:00Z
+  description: >-
+    ConnectionAuthorization is present only while a connection is pending. The
+
+    UI sends the user to connect_url and polls GetConnection until the connection
+
+    becomes active or expires. The Secrets Manager poll URL is never exposed.
+  additionalProperties: false
+connection_parameter_spec:
+  type: object
+  properties:
+    key:
+      type: string
+      example: site_url
+    label:
+      type: string
+      example: Site URL
+    description:
+      type: string
+      example: The provider site URL.
+    input_kind:
+      type: string
+      example: url
+    required:
+      type: boolean
+      example: true
+    normalization:
+      type: string
+      example: trim
+    allowed_values:
+      type: array
+      items:
+        type: string
+      example:
+        - option-a
+    allowed_host_suffixes:
+      type: array
+      items:
+        type: string
+      example:
+        - example.com
+    max_length:
+      type: integer
+      format: int32
+      example: 255
+  description: |-
+    ConnectionParameterSpec describes one non-sensitive value collected while
+    configuring a provider connection. The UI and MCP clients render these
+    specifications generically.
+  additionalProperties: false
+create_connection_request:
+  type: object
+  properties:
+    provider:
+      type: string
+      example: github
+    user_id:
+      type: string
+      example: end-user-123
+    scopes:
+      type: array
+      items:
+        type: string
+      example:
+        - repo
+    connection_parameters:
+      type: object
+      example:
+        site_url: https://example.com
+  example:
+    provider: github
+    user_id: end-user-123
+    scopes:
+      - repo
+    connection_parameters: {}
+  additionalProperties: false
+create_connection_response:
+  type: object
+  properties:
+    connection:
+      $ref: "#/oauth_connection"
+    authorization:
+      $ref: "#/connection_authorization"
+  additionalProperties: false
+create_session_request:
+  type: object
+  properties:
+    policy:
+      allOf:
+        - $ref: "#/session_policy_spec"
+      description: Invocation policy. Omit to use a default action of ask.
+    name:
+      type: string
+      example: research-session
+    tools:
+      type: array
+      items:
+        type: string
+      description: |-
+        Omitted enables every tool. An explicit empty array enables no tools.
+        Direct tools may be <tool> or <tool>@<version>; toolbelt references must
+        be version-pinned as toolbelt:<belt-name>@<version>.
+      example:
+        - exa_web_search@v1
+    config:
+      type: object
+      description: >-
+        Opaque session options. config.preloadTools may contain concrete tool
+
+        names (optionally version-pinned) and version-pinned toolbelt references.
+      example: {}
+      properties:
+        preloadTools:
+          type: array
+          items:
+            type: string
+          description: Concrete tools or pinned toolbelts to expose directly beside the
+            session meta-tools.
+          example:
+            - exa_web_search@v1
+      additionalProperties: true
+    actor_id:
+      type: string
+      example: end-user-123
+  example:
+    name: research-session
+    actor_id: end-user-123
+    policy:
+      defaultAction: ask
+      rules: []
+    tools:
+      - exa_web_search@v1
+    config:
+      preloadTools:
+        - exa_web_search@v1
+  additionalProperties: false
+  required:
+    - name
+    - actor_id
+create_session_response:
+  type: object
+  properties:
+    session:
+      $ref: "#/public_session_policy"
+    mcpUrl:
+      type: string
+      description: Public session-pinned MCP URL.
+      example: https://actions.do-ai.run/mcp/session/123e4567-e89b-12d3-a456-426614174000
+      x-client-name: mcpUrl
+    tools:
+      type: array
+      items:
+        type: string
+      description: Canonical, version-pinned selected tool references.
+      example:
+        - exa_web_search@v1
+  additionalProperties: false
+  required:
+    - session
+    - mcpUrl
+    - tools
+delete_connection_response:
+  type: object
+  properties:
+    connection:
+      $ref: "#/oauth_connection"
+  additionalProperties: false
+delete_session_response:
+  type: object
+  example: {}
+  additionalProperties: false
+execution_spec:
+  type: object
+  properties:
+    type:
+      type: string
+      example: http
+    adapterVersion:
+      type: string
+      example: v1
+    configRef:
+      type: string
+      example: exa_web_search@v1
+    http:
+      $ref: "#/http_execution"
+    mcp:
+      $ref: "#/mcp_execution"
+  additionalProperties: false
+get_connection_response:
+  type: object
+  properties:
+    connection:
+      $ref: "#/oauth_connection"
+    authorization:
+      $ref: "#/connection_authorization"
+  additionalProperties: false
+get_user_response:
+  type: object
+  properties:
+    user:
+      $ref: "#/user"
+  additionalProperties: false
+hook_spec:
+  type: object
+  properties:
+    usage:
+      $ref: "#/usage_spec"
+  additionalProperties: false
+list_connections_response:
+  type: object
+  properties:
+    connections:
+      type: array
+      items:
+        $ref: "#/oauth_connection"
+      example: []
+    pagination:
+      $ref: "#/pagination"
+  additionalProperties: false
+list_providers_response:
+  type: object
+  properties:
+    providers:
+      type: array
+      items:
+        $ref: "#/provider_summary"
+      example: []
+  additionalProperties: false
+list_sessions_response:
+  type: object
+  properties:
+    sessions:
+      type: array
+      items:
+        $ref: "#/public_session_policy"
+      example: []
+    pagination:
+      $ref: "#/pagination"
+  additionalProperties: false
+list_toolkits_response:
+  type: object
+  properties:
+    version:
+      type: string
+      example: v1
+    toolkits:
+      type: array
+      items:
+        $ref: "#/toolkit"
+      example: []
+  additionalProperties: false
+list_tools_response:
+  type: object
+  properties:
+    version:
+      type: string
+      example: v1
+    tools:
+      type: array
+      items:
+        $ref: "#/tool"
+      example:
+        - name: web_search
+    definitions:
+      type: array
+      items:
+        $ref: "#/tool_definition"
+      example: []
+    pagination:
+      $ref: "#/pagination"
+  additionalProperties: false
+list_users_response:
+  type: object
+  properties:
+    user_ids:
+      type: array
+      items:
+        type: string
+      example: []
+    pagination:
+      $ref: "#/pagination"
+  additionalProperties: false
+oauth_connection:
+  type: object
+  properties:
+    id:
+      type: string
+      example: 123e4567-e89b-12d3-a456-426614174000
+    provider:
+      type: string
+      example: github
+    user_id:
+      type: string
+      example: end-user-123
+    scopes:
+      type: array
+      items:
+        type: string
+      example:
+        - repo
+    status:
+      type: string
+      example: active
+    granted_at:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:00:00Z
+    revoked_at:
+      type: string
+      format: date-time
+      example: 2026-06-12T12:00:00Z
+    created_at:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:00:00Z
+    updated_at:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:00:00Z
+    provider_display_name:
+      type: string
+      example: GitHub
+    connection_parameters:
+      type: object
+      example:
+        site_url: https://example.com
+  description: >-
+    -----------------------------------------------------------------------------
+
+    OAuth connection resources
+
+    -----------------------------------------------------------------------------
+
+    OAuthConnection is the public, team-scoped connection metadata returned to
+
+    the UI. It deliberately excludes the team ID, Secrets Manager assignment,
+
+    actor identifiers, poll URL, and authorization handle.
+  additionalProperties: false
+policy_spec:
+  type: object
+  properties:
+    permission:
+      type: string
+      example: read
+  additionalProperties: false
+provider_summary:
+  type: object
+  properties:
+    name:
+      type: string
+      example: exa_web_search
+    display_name:
+      type: string
+      example: display_name-example
+    description:
+      type: string
+      example: The provider site URL.
+    auth_type:
+      type: string
+      example: auth_type-example
+    scopes:
+      type: array
+      items:
+        type: string
+      example:
+        - repo
+    connection_parameters:
+      type: array
+      items:
+        $ref: "#/connection_parameter_spec"
+      example: []
+  additionalProperties: false
+public_session_policy:
+  type: object
+  properties:
+    sessionUrn:
+      type: string
+      example: do:managed_agents_session:123e4567-e89b-12d3-a456-426614174000
+      x-client-name: sessionUrn
+    policy:
+      $ref: "#/session_policy_spec"
+    createdAt:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:00:00Z
+    updatedAt:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:00:00Z
+    name:
+      type: string
+      description: name is the required human-readable session name.
+      example: exa_web_search
+    actorId:
+      type: string
+      description: actor_id is empty when the session is not bound to an actor.
+      example: end-user-123
+      x-client-name: actorId
+    tools:
+      allOf:
+        - $ref: "#/session_tool_selection"
+      description: |-
+        Omitted when the request omitted tools (all tools). A present selection
+        with no references represents tools: [].
+    config:
+      type: object
+      description: |-
+        Preserved as an opaque object. Gateway currently interprets
+        config.preloadTools to add selected direct tools to the session MCP.
+      example: {}
+  description: A session and the tool-permission policy bound to it.
+  additionalProperties: false
+reliability_spec:
+  type: object
+  properties:
+    timeoutMs:
+      type: integer
+      format: int32
+      example: 30000
+    maxOutputBytes:
+      type: string
+      format: int64
+      example: "1048576"
+    retry:
+      $ref: "#/retry_spec"
+  additionalProperties: false
+retry_spec:
+  type: object
+  properties:
+    maxAttempts:
+      type: integer
+      format: int32
+      example: 3
+    backoff:
+      type: string
+      example: exponential
+    retryOn:
+      type: array
+      items:
+        type: string
+      example:
+        - timeout
+  additionalProperties: false
+session_policy_action:
+  type: string
+  enum:
+    - allow
+    - ask
+    - deny
+  default: ask
+  description: |-
+    SessionPolicyAction is the disposition applied to a tool call. Lowercase
+    values are canonical so ProtoJSON matches the public REST vocabulary; the
+    prefixed aliases preserve compatibility for existing protobuf clients.
+  example: ask
+session_policy_rule:
+  type: object
+  properties:
+    tool:
+      type: string
+      example: exa_web_search
+    match:
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        query: DigitalOcean
+    action:
+      $ref: "#/session_policy_action"
+  description: |-
+    SessionPolicyRule applies an action to a tool or version-pinned toolbelt.
+    action must be allow, ask, or deny. match optionally narrows the rule to
+    calls with matching arguments.
+  additionalProperties: false
+session_policy_spec:
+  type: object
+  properties:
+    defaultAction:
+      $ref: "#/session_policy_action"
+    rules:
+      type: array
+      items:
+        $ref: "#/session_policy_rule"
+      example: []
+  description: |-
+    SessionPolicySpec is the Gateway-relevant subset of a session's permission
+    policy. Filesystem and network policy remain enforced by the sandbox.
+  additionalProperties: false
+session_tool_reference:
+  type: object
+  properties:
+    kind:
+      $ref: "#/session_tool_reference_kind"
+    name:
+      type: string
+      example: exa_web_search
+    version:
+      type: string
+      example: v1
+  additionalProperties: false
+session_tool_reference_kind:
+  type: string
+  enum:
+    - SESSION_TOOL_REFERENCE_KIND_TOOL
+    - SESSION_TOOL_REFERENCE_KIND_TOOLBELT
+  example: SESSION_TOOL_REFERENCE_KIND_TOOL
+session_tool_selection:
+  type: object
+  properties:
+    references:
+      type: array
+      items:
+        $ref: "#/session_tool_reference"
+      example:
+        - kind: SESSION_TOOL_REFERENCE_KIND_TOOL
+          name: exa_web_search
+          version: v1
+  additionalProperties: false
+tool:
+  type: object
+  properties:
+    name:
+      type: string
+      example: exa_web_search
+    toolkitId:
+      type: string
+      example: exa
+    title:
+      type: string
+      example: Search the Web
+    description:
+      type: string
+      example: The provider site URL.
+    inputSchema:
+      type: object
+      example:
+        type: object
+    annotations:
+      $ref: "#/tool_annotations"
+    version:
+      type: string
+      example: v1
+    parallelizable:
+      type: boolean
+      example: true
+    streamingSafe:
+      type: boolean
+      example: false
+    outputSchema:
+      type: object
+      example:
+        type: object
+    toolSlug:
+      type: string
+      description: |-
+        tool_slug is the provider-qualified, stable tool identifier
+        "<toolkit_id>_<name>". Pass this value back verbatim to the toolbelt
+        add/remove endpoints; clients should treat it as opaque rather than
+        reconstructing it from toolkit_id and name.
+      example: exa_web_search
+  additionalProperties: false
+tool_annotations:
+  type: object
+  properties:
+    title:
+      type: string
+      example: Search the Web
+    readOnlyHint:
+      type: boolean
+      example: true
+    idempotentHint:
+      type: boolean
+      example: true
+    openWorldHint:
+      type: boolean
+      example: true
+    destructiveHint:
+      type: boolean
+      example: false
+  additionalProperties: false
+tool_definition:
+  type: object
+  properties:
+    toolId:
+      type: string
+      example: tool-123
+    name:
+      type: string
+      example: exa_web_search
+    toolkitId:
+      type: string
+      example: exa
+    title:
+      type: string
+      example: Search the Web
+    description:
+      type: string
+      example: The provider site URL.
+    inputSchema:
+      type: object
+      example:
+        type: object
+    outputSchema:
+      type: object
+      example:
+        type: object
+    annotations:
+      $ref: "#/tool_annotations"
+    version:
+      type: string
+      example: v1
+    schemaVersion:
+      type: string
+      example: "1"
+    status:
+      type: string
+      example: active
+    parallelizable:
+      type: boolean
+      example: true
+    streamingSafe:
+      type: boolean
+      example: false
+    auth:
+      $ref: "#/auth_spec"
+    execution:
+      $ref: "#/execution_spec"
+    transform:
+      $ref: "#/transform_spec"
+    policy:
+      $ref: "#/policy_spec"
+    reliability:
+      $ref: "#/reliability_spec"
+    hooks:
+      $ref: "#/hook_spec"
+    classification:
+      $ref: "#/classification"
+    flipperName:
+      type: string
+      example: action_gateway_search
+    tags:
+      type: array
+      items:
+        type: string
+      example:
+        - search
+    toolSlug:
+      type: string
+      description: |-
+        tool_slug is the provider-qualified, stable tool identifier
+        "<toolkit_id>_<name>". Pass this value back verbatim to the toolbelt
+        add/remove endpoints; clients should treat it as opaque.
+      example: exa_web_search
+  additionalProperties: false
+toolkit:
+  type: object
+  properties:
+    id:
+      type: string
+      example: 123e4567-e89b-12d3-a456-426614174000
+    name:
+      type: string
+      example: exa_web_search
+    description:
+      type: string
+      example: The provider site URL.
+  additionalProperties: false
+transform_spec:
+  type: object
+  properties:
+    language:
+      type: string
+      example: jq
+    input:
+      type: object
+      example: {}
+    output:
+      type: object
+      example: {}
+  additionalProperties: false
+update_connection_parameters_request:
+  type: object
+  properties:
+    id:
+      type: string
+      example: 123e4567-e89b-12d3-a456-426614174000
+    connection_parameters:
+      type: object
+      example:
+        site_url: https://example.com
+  additionalProperties: false
+update_connection_parameters_response:
+  type: object
+  properties:
+    connection:
+      $ref: "#/oauth_connection"
+  additionalProperties: false
+usage_meter:
+  type: object
+  properties:
+    sku:
+      type: string
+      example: action-gateway-invocation
+    unit:
+      type: string
+      example: request
+    quantitySource:
+      type: string
+      example: invocation_count
+  additionalProperties: false
+usage_spec:
+  type: object
+  properties:
+    billable:
+      type: boolean
+      description: |-
+        When usage metadata is present, false prevents billing. Omitting usage
+        metadata leaves consumers' legacy billing classification unchanged.
+      example: true
+    meters:
+      type: array
+      items:
+        $ref: "#/usage_meter"
+      example: []
+  additionalProperties: false
+user:
+  type: object
+  properties:
+    user_id:
+      type: string
+      example: end-user-123
+    sessions:
+      type: array
+      items:
+        $ref: "#/user_session"
+      example: []
+    connections:
+      type: array
+      items:
+        $ref: "#/oauth_connection"
+      example: []
+  description: User is a derived, team-scoped view across sessions and OAuth connections.
+  additionalProperties: false
+user_session:
+  type: object
+  properties:
+    session_urn:
+      type: string
+      example: do:managed_agents_session:123e4567-e89b-12d3-a456-426614174000
+    name:
+      type: string
+      example: exa_web_search
+    created_at:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:00:00Z
+    updated_at:
+      type: string
+      format: date-time
+      example: 2026-06-11T12:00:00Z
+  additionalProperties: false
+base_url_resolution:
+  type: object
+  properties:
+    httpLookup:
+      $ref: "#/http_lookup_spec"
+  description: |-
+    BaseURLResolution declaratively describes a post-token-exchange lookup an
+    OAuth-backed tool needs to compute its real request base_url (e.g. Jira
+    Cloud's per-site cloudId indirection). strategy is a oneof so exactly one
+    resolution kind can ever be set at a time; "http_lookup" is the only kind
+    implemented today, see action-executor/internal/credentials for the
+    generic resolver that executes this recipe.
+  additionalProperties: false
+http_execution:
+  type: object
+  properties:
+    baseUrl:
+      type: string
+      example: https://api.example.com
+    path:
+      type: string
+      example: /search
+    method:
+      type: string
+      example: POST
+    allowedHosts:
+      type: array
+      items:
+        type: string
+      example:
+        - api.example.com
+    requestEncoding:
+      type: string
+      example: json
+    responseFormat:
+      type: string
+      example: json
+  additionalProperties: false
+http_lookup_spec:
+  type: object
+  properties:
+    method:
+      type: string
+      example: POST
+    url:
+      type: string
+      example: https://api.example.com/resources
+    matchField:
+      type: string
+      example: id
+    matchValue:
+      type: string
+      example: site-123
+    caseInsensitive:
+      type: boolean
+      example: false
+    trimTrailingSlash:
+      type: boolean
+      example: true
+    extractField:
+      type: string
+      example: url
+    baseUrlTemplate:
+      type: string
+      example: https://{value}
+    requiredScopes:
+      type: array
+      items:
+        type: string
+      example:
+        - read
+    match_value_parameter:
+      type: string
+      example: site_id
+  description: |-
+    HTTPLookupSpec resolves a base_url by calling url (bearer-authenticated
+    with the just-exchanged access token), selecting an entry in the JSON array,
+    extracting extract_field from that entry, and substituting it for "{value}"
+    in base_url_template. When match_field and match_value are both set, they
+    select the entry. When both are empty, exactly one entry whose own "scopes"
+    array contains required_scopes must exist. Configuring only one match field
+    is invalid. Resolution fails fast on zero or multiple compatible entries.
+  additionalProperties: false
+mcp_execution:
+  type: object
+  properties:
+    endpoint:
+      type: string
+      example: https://mcp.example.com
+    toolName:
+      type: string
+      example: search
+    transport:
+      type: string
+      example: streamable_http
+    serverRef:
+      type: string
+      example: provider-mcp
+    allowedHosts:
+      type: array
+      items:
+        type: string
+      example:
+        - api.example.com
+  description: |-
+    MCPExecution describes how to invoke a tool that is fronted by a remote
+    MCP server (as opposed to a plain HTTP endpoint). endpoint is the remote
+    MCP server's URL, tool_name is the name the remote server expects on
+    tools/call (may differ from this tool's registry name), transport
+    selects the wire protocol ("streamable_http" is the only kind implemented
+    today), and server_ref is an opaque label identifying the remote server
+    for logging/metrics/allowlisting.
+  additionalProperties: false

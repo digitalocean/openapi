@@ -42,6 +42,6 @@ security:
   - genai:read
 summary: List Evaluation Datasets
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_list_evaluation_datasets.yml

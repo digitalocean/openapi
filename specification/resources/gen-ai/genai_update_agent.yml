@@ -43,6 +43,6 @@ security:
   - genai:update
 summary: Update an Agent
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_update_agent.yml

@@ -1,0 +1,44 @@
+all_vpc_subnets:
+  description: A list of VPC subnets.
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  content:
+    application/json:
+      schema:
+        allOf:
+          - type: object
+            properties:
+              vpc_subnet:
+                type: array
+                items:
+                  $ref: '../models/vpc_subnet.yml#/vpc_subnet'
+          - $ref: '../../../shared/pages.yml#/pagination'
+          - $ref: '../../../shared/meta.yml'
+      examples:
+        VPC Subnets Response:
+          $ref: 'examples.yml#/all_vpc_subnets'
+
+single_vpc_subnet:
+  description: A VPC subnet.
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          vpc_subnet:
+            $ref: '../models/vpc_subnet.yml#/vpc_subnet'
+      examples:
+        VPC Subnet Response:
+          $ref: 'examples.yml#/single_vpc_subnet'

@@ -1,0 +1,41 @@
+list_vpc:
+  lang: cURL
+  source: |-
+    curl -X GET \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/routes"
+
+list_subnet:
+  lang: cURL
+  source: |-
+    curl -X GET \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets/4de7ac8b-495b-4884-9a69-1050c6793cd6/routes"
+
+create:
+  lang: cURL
+  source: |-
+    curl -X POST \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      -d '{"destination_cidr":"0.0.0.0/0","target_urns":["do:droplet:4126873"]}' \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets/4de7ac8b-495b-4884-9a69-1050c6793cd6/routes"
+
+update:
+  lang: cURL
+  source: |-
+    curl -X PATCH \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      -d '{"target_urns":["do:droplet:4126873"]}' \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets/4de7ac8b-495b-4884-9a69-1050c6793cd6/routes/f0e1d2c3-b4a5-6789-0fed-cba987654321"
+
+delete:
+  lang: cURL
+  source: |-
+    curl -X DELETE \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+      "https://api.digitalocean.com/v2/vpcs/997615ce-132d-4bae-9270-9ee21b395e5d/subnets/4de7ac8b-495b-4884-9a69-1050c6793cd6/routes/f0e1d2c3-b4a5-6789-0fed-cba987654321"

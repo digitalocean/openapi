@@ -117,6 +117,6 @@ security:
   - genai:read
 summary: List Simulation Runs
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_list_simulation_runs.yml

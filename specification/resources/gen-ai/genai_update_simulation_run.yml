@@ -46,6 +46,6 @@ security:
   - genai:update
 summary: Update Simulation Run
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_update_simulation_run.yml

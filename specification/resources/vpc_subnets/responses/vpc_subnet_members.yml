@@ -1,0 +1,33 @@
+description: |
+  A list of resources that are members of the VPC subnet. Only resources that
+  the caller is authorized to view are returned.
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+content:
+  application/json:
+    schema:
+      allOf:
+        - type: object
+          properties:
+            members:
+              type: array
+              items:
+                $ref: '../../vpcs/models/vpc_member.yml'
+        - $ref: '../../../shared/pages.yml#/pagination'
+        - $ref: '../../../shared/meta.yml'
+    example:
+      members:
+        - urn: do:droplet:4126873
+          name: ubuntu-s-1vcpu-1gb-nyc3-01
+          created_at: "2026-01-14T10:00:00Z"
+        - urn: do:loadbalancer:fb294d78-d193-4cb2-8737-ea620993591b
+          name: nyc3-load-balancer-01
+          created_at: "2026-01-14T10:05:00Z"
+      links: {}
+      meta:
+        total: 2

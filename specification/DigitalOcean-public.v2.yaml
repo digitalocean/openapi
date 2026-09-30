@@ -60,6 +60,15 @@ tags:
       The Add-Ons API allows you to manage these resources, including creating, listing, and retrieving
       details about specific add-on resources.
 
+  - name: Action Gateway
+    description: |-
+      Discover Action Gateway tools and providers, manage versioned toolbelts and
+      OAuth connections, and create policy-bound sessions for end users.
+
+  - name: Agent Platform API
+    description: |-
+      The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -350,10 +359,6 @@ tags:
 
       The Serverless Functions API currently only supports creating and managing namespaces.
 
-  - name: GradientAI Platform
-    description: |-
-      The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
-
   - name: Image Actions
     description: |-
       Image actions are commands that can be given to a DigitalOcean image. In
@@ -626,6 +631,17 @@ tags:
       resources in those networks to connect to each other's private IP addresses
       as if they were in the same network.
 
+  - name: VPC Routes [Public Preview]
+    description: |-
+      Routes control how traffic from resources in VPC subnets reaches
+      destination networks. VPC-scoped routes are read-only, while
+      customer-managed static routes can be added to individual VPC subnets.
+
+  - name: VPC Subnets [Public Preview]
+    description: |-
+      VPC subnets divide a VPC network into isolated IP ranges. You can create,
+      retrieve, rename, list, and delete subnets within a VPC.
+
   - name: VPCs
     description: |-
       [VPCs (virtual private clouds)](https://docs.digitalocean.com/products/networking/vpc/)
@@ -645,7 +661,7 @@ tags:
 
   - name: Serverless Inference
     description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows access to serverless inference models.
+      DigitalOcean Inference allows access to serverless inference models.
       You can access models by providing an inference key.
 
       **Note:** The Serverless Inference API uses a separate base URL (`https://inference.do-ai.run`)
@@ -653,7 +669,7 @@ tags:
 
   - name: Agent Inference
     description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows you to create multi-agent workflows
+      DigitalOcean Agent Platform allows you to create multi-agent workflows
       to power your AI applications. This allows developers to integrate agents into your
       AI applications.
 
@@ -681,6 +697,8 @@ x-tagGroups:
       - Account
       - Actions
       - Add-Ons
+      - Action Gateway
+      - Agent Platform API
       - Apps
       - Billing
       - Block Storage
@@ -701,7 +719,6 @@ x-tagGroups:
       - Floating IP Actions
       - Floating IPs
       - Functions
-      - GradientAI Platform
       - Image Actions
       - Images
       - Insights
@@ -729,6 +746,8 @@ x-tagGroups:
       - Vector Databases
       - VPC NAT Gateways
       - VPC Peerings
+      - VPC Routes [Public Preview]
+      - VPC Subnets [Public Preview]
       - VPCs
   - name: Inference APIs
     tags:
@@ -739,6 +758,74 @@ x-tagGroups:
       - Serverless Inference
 
 paths:
+  /v2/action-gateway/tools:
+    get:
+      $ref: "resources/action_gateway/tools_list.yml"
+
+  /v2/action-gateway/tools/toolkits:
+    get:
+      $ref: "resources/action_gateway/tools_list_toolkits.yml"
+
+  /v2/action-gateway/tools/providers:
+    get:
+      $ref: "resources/action_gateway/tools_list_providers.yml"
+
+  /v2/action-gateway/tools/{name}/definition:
+    get:
+      $ref: "resources/action_gateway/tools_get_definition.yml"
+
+  /v2/action-gateway/toolbelts:
+    get:
+      $ref: "resources/action_gateway/toolbelts_list.yml"
+    post:
+      $ref: "resources/action_gateway/toolbelts_create.yml"
+
+  /v2/action-gateway/toolbelts/{name}:
+    get:
+      $ref: "resources/action_gateway/toolbelts_get.yml"
+    delete:
+      $ref: "resources/action_gateway/toolbelts_delete.yml"
+
+  /v2/action-gateway/toolbelts/{name}/tools/add:
+    post:
+      $ref: "resources/action_gateway/toolbelts_add_tools.yml"
+
+  /v2/action-gateway/toolbelts/{name}/tools/remove:
+    post:
+      $ref: "resources/action_gateway/toolbelts_remove_tools.yml"
+
+  /v2/action-gateway/connections:
+    get:
+      $ref: "resources/action_gateway/connections_list.yml"
+    post:
+      $ref: "resources/action_gateway/connections_create.yml"
+
+  /v2/action-gateway/connections/{id}:
+    get:
+      $ref: "resources/action_gateway/connections_get.yml"
+    patch:
+      $ref: "resources/action_gateway/connections_update.yml"
+    delete:
+      $ref: "resources/action_gateway/connections_delete.yml"
+
+  /v2/action-gateway/users:
+    get:
+      $ref: "resources/action_gateway/users_list.yml"
+
+  /v2/action-gateway/users/{user_id}:
+    get:
+      $ref: "resources/action_gateway/users_get.yml"
+
+  /v2/action-gateway/sessions:
+    get:
+      $ref: "resources/action_gateway/sessions_list.yml"
+    post:
+      $ref: "resources/action_gateway/sessions_create.yml"
+
+  /v2/action-gateway/sessions/{session_urn}:
+    delete:
+      $ref: "resources/action_gateway/sessions_delete.yml"
+
   /v2/1-clicks:
     get:
       $ref: "resources/1-clicks/oneClicks_list.yml"
@@ -2561,6 +2648,45 @@ paths:
     patch:
       $ref: "resources/vpcs/vpcs_update_peerings.yml"
 
+  /v2/vpcs/{vpc_uuid}/routes:
+    get:
+      $ref: "resources/routes/vpc_routes_list.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets:
+    get:
+      $ref: "resources/vpc_subnets/vpc_subnets_list.yml"
+
+    post:
+      $ref: "resources/vpc_subnets/vpc_subnets_create.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets/{subnet_uuid}:
+    get:
+      $ref: "resources/vpc_subnets/vpc_subnets_get.yml"
+
+    patch:
+      $ref: "resources/vpc_subnets/vpc_subnets_update.yml"
+
+    delete:
+      $ref: "resources/vpc_subnets/vpc_subnets_delete.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets/{subnet_uuid}/members:
+    get:
+      $ref: "resources/vpc_subnets/vpc_subnets_list_members.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets/{subnet_uuid}/routes:
+    get:
+      $ref: "resources/routes/subnet_routes_list.yml"
+
+    post:
+      $ref: "resources/routes/subnet_routes_create.yml"
+
+  /v2/vpcs/{vpc_uuid}/subnets/{subnet_uuid}/routes/{route_uuid}:
+    patch:
+      $ref: "resources/routes/subnet_routes_update.yml"
+
+    delete:
+      $ref: "resources/routes/subnet_routes_delete.yml"
+
   /v2/vpc_peerings:
     get:
       $ref: "resources/vpc_peerings/vpc_peerings_list.yml"
@@ -3281,6 +3407,10 @@ paths:
   /v1/models:
     get:
       $ref: 'resources/inference/inference_list_models.yml'
+
+  /v1/systemone:
+    post:
+      $ref: 'resources/inference/inference_create_systemone.yml'
 
   /v1/responses:
     post:

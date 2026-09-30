@@ -16,5 +16,6 @@ source: |-
     tags: ["env:prod","web"],
     user_data: "#cloud-config\nruncmd:\n  - touch /test.txt\n",
     vpc_uuid: "760e09ef-dc84-11e8-981e-3cfdfeaae000",
+    subnet_uuid: "9c7a0d63-3c4e-4d3d-9f56-3b0fb0e5e4a1",
   )
   client.droplets.create(droplet)

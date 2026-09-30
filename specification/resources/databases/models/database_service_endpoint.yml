@@ -4,7 +4,7 @@ properties:
   host:
     type: string
     description: A FQDN pointing to the database cluster's node(s).
-    example: backend-do-user-19081923-0.db.ondigitalocean.com
+    example: db.example.com
     readOnly: true
   port:
     type: integer

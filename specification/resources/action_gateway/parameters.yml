@@ -1,0 +1,33 @@
+toolbelt_name:
+  name: name
+  in: path
+  required: true
+  description: The natural key identifying the toolbelt.
+  schema:
+    type: string
+    pattern: '^[a-z][a-z0-9_-]{0,63}$'
+  example: search-toolbelt
+
+toolbelt_version:
+  name: version
+  in: query
+  required: false
+  description: An immutable numeric toolbelt version. Omit to retrieve the latest active version.
+  schema:
+    type: string
+    pattern: '^[0-9]+$'
+  example: '1'
+
+toolbelt_status:
+  name: status
+  in: query
+  required: false
+  description: Filter toolbelts by status.
+  schema:
+    type: string
+    enum:
+      - active
+      - deprecated
+      - all
+    default: active
+  example: active
