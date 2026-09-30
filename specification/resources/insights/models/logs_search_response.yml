@@ -1,0 +1,10 @@
+type: object
+description: Response body for a logs search.
+properties:
+  data:
+    type: array
+    description: Matching log records. Omitted when no records match.
+    items:
+      $ref: 'logs_log_record.yml'
+  pagination:
+    $ref: 'logs_pagination_response.yml'

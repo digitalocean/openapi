@@ -1,0 +1,51 @@
+type: object
+description: A single log record returned by a logs search.
+required:
+  - timestamp
+properties:
+  timestamp:
+    type: string
+    format: date-time
+    description: The log record timestamp.
+    example: "2026-09-01T00:00:00Z"
+  severity_number:
+    type: integer
+    format: int32
+    description: The numeric severity level.
+    example: 17
+  severity_text:
+    type: string
+    description: The textual severity level.
+    example: "Error"
+  body:
+    type: string
+    description: The log message body. Omitted when empty.
+    example: "Connection timeout"
+  trace_id:
+    type: string
+    description: The trace ID if present.
+    example: "abc123"
+  span_id:
+    type: string
+    description: The span ID if present.
+    example: "def456"
+  service_name:
+    type: string
+    description: The service name that emitted the log.
+    example: "api-gateway"
+  resource:
+    type: object
+    description: Resource attributes associated with the log.
+    additionalProperties:
+      type: string
+    example:
+      do.component: "droplet"
+      do.droplet.id: "12345678"
+  attributes:
+    type: object
+    description: Log attributes.
+    additionalProperties:
+      type: string
+    example:
+      http.method: "GET"
+      http.status_code: "504"

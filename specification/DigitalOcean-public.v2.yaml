@@ -1681,6 +1681,10 @@ paths:
     post:
       $ref: "resources/insights/insights_post_promSeries.yml"
 
+  /v2/insights/query/{region}/logs/search:
+    post:
+      $ref: "resources/insights/insights_post_logsSearch.yml"
+
   /v2/kubernetes/clusters:
     get:
       $ref: "resources/kubernetes/kubernetes_list_clusters.yml"
