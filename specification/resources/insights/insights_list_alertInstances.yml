@@ -10,6 +10,12 @@ description: |
   Results can optionally be filtered by `status`, `rule_id`, or
   `resource_urn`.
 
+  Results are ordered by `triggered_at` descending (newest first). Because
+  the list is append-only and continuously growing, offset-based pagination
+  is best-effort: newly triggered instances may shift older rows onto
+  subsequent pages between fetches. For stable pagination, filter by
+  `rule_id` or a fixed time window on the client side.
+
 tags:
   - Insights
 
