@@ -1540,6 +1540,13 @@ apiCandidateInferenceConfig:
       example: 123
       format: int64
       type: integer
+    reasoning_effort:
+      description: |-
+        Reasoning effort for reasoning-capable models (e.g. "low", "medium",
+        "high"). Validated against the candidate model's supported values; a model
+        that advertises none rejects this field.
+      example: low
+      type: string
     stop_token:
       example: example string
       type: string
@@ -1553,12 +1560,14 @@ apiCandidateInferenceConfig:
   type: object
 apiCandidateModelSource:
   default: CANDIDATE_MODEL_SOURCE_SERVERLESS
-  description: Whether inference runs against the serverless platform, a dedicated
-    deployment, or a model router.
+  description: |-
+    Whether the candidate is a served model (serverless platform, a dedicated
+    deployment, or a model router) or an OHS-hosted agent config.
   enum:
   - CANDIDATE_MODEL_SOURCE_SERVERLESS
   - CANDIDATE_MODEL_SOURCE_DEDICATED
   - CANDIDATE_MODEL_SOURCE_ROUTER
+  - CANDIDATE_MODEL_SOURCE_AGENT
   example: CANDIDATE_MODEL_SOURCE_SERVERLESS
   type: string
 apiCatalogType:
@@ -2110,6 +2119,8 @@ apiCreateDataSourceFileUploadPresignedUrlsOutput:
 apiCreateEvaluationDatasetInputPublic:
   description: Creates an evaluation dataset for an agent
   properties:
+    dataset_paradigm:
+      $ref: '#/apiEvaluationDatasetParadigm'
     dataset_type:
       $ref: '#/apiEvaluationDatasetType'
     file_upload_dataset:
@@ -2298,6 +2309,16 @@ apiCreateModelEvaluationRunInputPublic:
       description: UUID of the dataset to use for evaluation.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+    epochs:
+      description: |-
+        Number of times to evaluate each dataset row (n-pass/epochs), so the
+        result reports avg@k/pass@k/cons@k instead of a single score. Defaults
+        to 1 when unset. Capped at 3 until throughput/sharding work lands, since
+        each extra epoch roughly multiplies wall-clock run time. Not persisted
+        on presets.
+      example: 1
+      format: int64
+      type: integer
     eval_preset_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
@@ -3228,6 +3249,67 @@ apiDuplicateScenarioSetOutput:
     scenario_set:
       $ref: '#/apiScenarioSet'
   type: object
+apiEpochResultSummary:
+  description: |-
+    Aggregation across epochs when a run repeats each dataset row k times.
+    Only populated when epochs > 1; at epochs == 1 every number here would
+    equal overall_score_percent, so it is omitted rather than duplicated.
+  properties:
+    avg_at_k_percent:
+      description: |-
+        Mean over rows of (passing epochs / scored epochs) for the star metric.
+        Equals overall_score_percent; this is the primary result for a
+        multi-epoch run ("how often does it work").
+      example: 123
+      format: double
+      type: number
+    cons_at_k_percent:
+      description: |-
+        Fraction of rows where a strict majority of scored epochs passed
+        ("what does the model typically answer"). An even-k tie counts as fail.
+      example: 123
+      format: double
+      type: number
+    epochs:
+      description: Number of passes per dataset row (k).
+      example: 123
+      format: int64
+      type: integer
+    pass_at_k_percent:
+      description: |-
+        Unbiased estimate of the probability that at least one of k epochs
+        passes ("can it work at all, given retries"). Always the most generous
+        of the three.
+      example: 123
+      format: double
+      type: number
+    per_epoch:
+      description: Each epoch's own standalone score, persisted next to the aggregate.
+      items:
+        $ref: '#/apiPerEpochResultSummary'
+      type: array
+    rows_excluded:
+      description: |-
+        Rows where every epoch failed or was skipped, so the row contributes to
+        no score. Not a random sample of difficulty — surface this explicitly.
+      example: 123
+      format: int64
+      type: integer
+    rows_scored:
+      description: |-
+        Rows with at least one scored epoch. The effective N behind every
+        percentage above; always display alongside them.
+      example: 123
+      format: int64
+      type: integer
+    score_stddev_percent:
+      description: |-
+        Population standard deviation of the k per-epoch scores below — the
+        signal for whether a difference between runs is real or noise.
+      example: 123
+      format: double
+      type: number
+  type: object
 apiEvaluationDataset:
   properties:
     created_at:
@@ -3239,6 +3321,8 @@ apiEvaluationDataset:
       description: Name of the dataset.
       example: example name
       type: string
+    dataset_paradigm:
+      $ref: '#/apiEvaluationDatasetParadigm'
     dataset_type:
       $ref: '#/apiEvaluationDatasetType'
     dataset_uuid:
@@ -3260,6 +3344,18 @@ apiEvaluationDataset:
       format: int64
       type: integer
   type: object
+apiEvaluationDatasetParadigm:
+  default: EVALUATION_DATASET_PARADIGM_SINGLE_TURN
+  description: |-
+    EvaluationDatasetParadigm is the row/content shape of a dataset, orthogonal to the
+    surface in EvaluationDatasetType (e.g. a model dataset can be single- or multi-turn).
+  enum:
+  - EVALUATION_DATASET_PARADIGM_SINGLE_TURN
+  - EVALUATION_DATASET_PARADIGM_MULTI_TURN
+  - EVALUATION_DATASET_PARADIGM_CODING
+  - EVALUATION_DATASET_PARADIGM_N_PLUS_1
+  example: EVALUATION_DATASET_PARADIGM_SINGLE_TURN
+  type: string
 apiEvaluationDatasetPreviewOutput:
   description: Response containing a paginated preview of a dataset's contents.
   properties:
@@ -3363,6 +3459,7 @@ apiEvaluationMetricCategory:
   - METRIC_CATEGORY_SAFETY_AND_SECURITY
   - METRIC_CATEGORY_CONTEXT_QUALITY
   - METRIC_CATEGORY_MODEL_FIT
+  - METRIC_CATEGORY_CONVERSATIONAL
   example: METRIC_CATEGORY_UNSPECIFIED
   type: string
 apiEvaluationMetricResult:
@@ -6315,6 +6412,20 @@ apiMetricResult:
 apiMetricResultSummary:
   description: Per-metric aggregated pass/fail statistics across all prompts.
   properties:
+    avg_at_k_percent:
+      description: |-
+        Row-level (not attempt-level) aggregation across epochs for this metric,
+        mirroring EpochResultSummary but scoped to one metric. Only set when the
+        run's epochs > 1; pass_percent/pass_count/etc. above stay attempt-level
+        (over row x epoch pairs) so they don't desynchronize from the counts
+        sitting next to them.
+      example: 123
+      format: double
+      type: number
+    cons_at_k_percent:
+      example: 123
+      format: double
+      type: number
     description:
       example: example string
       type: string
@@ -6333,6 +6444,10 @@ apiMetricResultSummary:
     metric_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+    pass_at_k_percent:
+      example: 123
+      format: double
+      type: number
     pass_count:
       description: Rows where the metric completed and passed the configured threshold.
       example: 123
@@ -6767,6 +6882,27 @@ apiModelEndpoint:
       example: /chat/responses
       type: string
   type: object
+apiModelEvaluationEpochAttempt:
+  description: |-
+    ModelEvaluationEpochAttempt is one epoch's attempt at a dataset row,
+    nested under ModelEvaluationResult.epoch_results for multi-epoch runs.
+    Carries only the fields that vary per pass — row-identifying fields
+    (input/ground_truth/row_number) and candidate_model_name/uuid live once
+    on the parent ModelEvaluationResult and aren't repeated here.
+  properties:
+    candidate_routed_task:
+      example: Coding & brainstorming
+      type: string
+    metric_results:
+      description: Per-metric scores and judge reasoning for this specific pass.
+      items:
+        $ref: '#/apiEvaluationMetricResult'
+      type: array
+    output:
+      description: The response from the candidate model for this specific pass.
+      example: example string
+      type: string
+  type: object
 apiModelEvaluationPreset:
   description: |-
     Model Evaluation Preset - a saved, reusable configuration for model
@@ -6871,6 +7007,28 @@ apiModelEvaluationResult:
     candidate_routed_task:
       example: Coding & brainstorming
       type: string
+    epoch:
+      description: |-
+        Which pass over this dataset row produced this result, 1-indexed (1 =
+        first pass). Always 0 (and omitted from JSON) when the run's epochs is 1
+        (the default) — per-attempt epoch numbering doesn't apply to
+        single-pass runs. When epochs > 1, this always reflects epoch 1 (see
+        epoch_results below).
+      example: 1
+      format: int64
+      type: integer
+    epoch_results:
+      additionalProperties:
+        $ref: '#/apiModelEvaluationEpochAttempt'
+      description: |-
+        Present only when the run's epochs > 1: every pass over this row —
+        including epoch 1, duplicated here for convenience — keyed by
+        1-indexed "epoch1"/"epoch2"/"epoch3" labels. Mirrors the shape of the
+        downloadable results file's epochResults object. The top-level fields
+        above (output, metric_results, candidate_routed_task) always reflect
+        epoch 1, so single-epoch clients reading only those fields see no
+        difference when epochs > 1.
+      type: object
     ground_truth:
       example: example string
       type: string
@@ -6887,6 +7045,13 @@ apiModelEvaluationResult:
       description: The response from the candidate model.
       example: example string
       type: string
+    row_number:
+      description: |-
+        Which dataset row this result came from. Multiple results share a
+        row_number when epochs > 1: one per pass over that row.
+      example: 1
+      format: int64
+      type: integer
   type: object
 apiModelEvaluationRunDetail:
   description: Model Evaluation Run Detail - full view returned when fetching a specific
@@ -6918,6 +7083,13 @@ apiModelEvaluationRunDetail:
       description: Dataset used for the evaluation.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+    epochs:
+      description: |-
+        Number of times each dataset row is evaluated (n-pass/epochs). 1 by
+        default. Drives the avg@k/pass@k/cons@k aggregation in result_summary.
+      example: 1
+      format: int64
+      type: integer
     error_description:
       description: Error description if the run failed or partially succeeded.
       example: example string
@@ -6994,6 +7166,15 @@ apiModelEvaluationRunResultSummary:
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
+    epoch_summary:
+      $ref: '#/apiEpochResultSummary'
+    epochs:
+      description: |-
+        Number of times each dataset row was evaluated (n-pass/epochs). Mirrors
+        ModelEvaluationRunDetail.epochs. 1 for every existing run.
+      example: 1
+      format: int64
+      type: integer
     metric_summaries:
       description: Per-metric aggregated pass/fail statistics.
       items:
@@ -7866,6 +8047,25 @@ apiPages:
       description: Previous page
       example: example string
       type: string
+  type: object
+apiPerEpochResultSummary:
+  description: |-
+    One epoch's standalone score, computed the same way overall_score_percent
+    is computed today (flat pass rate over that epoch's rows).
+  properties:
+    epoch:
+      description: 1-indexed epoch number (1 = first pass).
+      example: 1
+      format: int64
+      type: integer
+    overall_score_percent:
+      example: 123
+      format: double
+      type: number
+    rows_scored:
+      example: 123
+      format: int64
+      type: integer
   type: object
 apiPerModelResultSummaries:
   description: |-

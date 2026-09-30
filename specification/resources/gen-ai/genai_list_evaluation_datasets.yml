@@ -13,6 +13,18 @@ parameters:
     - EVALUATION_DATASET_TYPE_NON_ADK
     - EVALUATION_DATASET_TYPE_MODEL
     type: string
+- description: Filter by evaluation dataset paradigm (row/content shape).
+  example: EVALUATION_DATASET_PARADIGM_SINGLE_TURN
+  in: query
+  name: dataset_paradigm
+  schema:
+    $ref: ./definitions.yml#/apiEvaluationDatasetParadigm
+- description: Filter by whether the dataset includes ground-truth values.
+  example: true
+  in: query
+  name: has_ground_truth
+  schema:
+    type: boolean
 responses:
   "200":
     content:
