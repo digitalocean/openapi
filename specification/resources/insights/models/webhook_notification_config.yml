@@ -23,6 +23,7 @@ properties:
     $ref: 'webhook_bearer_token.yml'
   headers:
     type: object
+    maxProperties: 20
     additionalProperties:
       type: string
       example: '1'

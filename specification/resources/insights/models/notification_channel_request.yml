@@ -7,6 +7,16 @@ description: |
   field on update to keep the existing secret.
 required:
   - name
+oneOf:
+  - title: Email
+    required:
+      - email
+  - title: Slack
+    required:
+      - slack
+  - title: Webhook
+    required:
+      - webhook
 properties:
   name:
     type: string

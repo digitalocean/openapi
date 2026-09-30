@@ -7,11 +7,3 @@ properties:
     type: integer
     description: Number of alert rules that reference this channel.
     example: 2
-  warning_thresholds:
-    type: integer
-    description: Number of warning-severity bindings for this channel.
-    example: 1
-  critical_thresholds:
-    type: integer
-    description: Number of critical-severity bindings for this channel.
-    example: 2
