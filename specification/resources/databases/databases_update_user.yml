@@ -15,6 +15,10 @@ description: |
   For Kafka and OpenSearch clusters, additional options can be configured in the
   `settings` object (for example, topic or index ACLs).
 
+  Updating users is not supported for MongoDB clusters. MongoDB roles and database
+  access are set with `settings.mongo_user_settings` when creating a user and cannot
+  be changed afterward; recreate the user to apply different roles or databases.
+
   The response will be a JSON object with a key called `user`. The value of this will be an
   object that contains the name of the updated database user, along with the `settings` object that
   has been updated.
@@ -35,7 +39,7 @@ requestBody:
         - type: object
           properties:
             settings:
-              $ref: './models/user_settings.yml'
+              $ref: './models/user_settings_update.yml'
         required:
           - settings
       examples:
