@@ -1,0 +1,4 @@
+properties:
+  sample-repos:
+    "$ref": app_template.yml
+type: object
