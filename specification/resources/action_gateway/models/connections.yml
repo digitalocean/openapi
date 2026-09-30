@@ -172,7 +172,7 @@ connection:
       type: array
       deprecated: true
       description: >-
-        Deprecated: read details.oauth.scopes. Duplicated here so a reader of the pre-union shape keeps working;
+        Deprecated: read `oauth.scopes`. Duplicated here so a reader of the pre-union shape keeps working;
         empty for a kind with no OAuth grant.
       items:
         type: string
@@ -183,7 +183,7 @@ connection:
       format: date-time
       nullable: true
       deprecated: true
-      description: 'Deprecated: read details.oauth.granted_at.'
+      description: 'Deprecated: read `oauth.granted_at`.'
       example: '2026-07-14T00:52:10Z'
     owning_user_id:
       type: string
