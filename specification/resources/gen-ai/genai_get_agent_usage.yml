@@ -51,6 +51,6 @@ security:
   - genai:read
 summary: Get Agent Usage
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_get_agent_usage.yml
