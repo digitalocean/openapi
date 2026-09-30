@@ -42,6 +42,6 @@ security:
   - genai:read
 summary: List OpenAI API Keys
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_list_openai_api_keys.yml
