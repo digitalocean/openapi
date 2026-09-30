@@ -1,0 +1,12 @@
+type: object
+required:
+  - status
+  - data
+properties:
+  status:
+    type: string
+    enum:
+      - success
+    example: success
+  data:
+    $ref: 'prom_matrix_data.yml'

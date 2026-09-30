@@ -1,0 +1,5 @@
+lang: cURL
+source: |-
+  curl -X GET \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v2/insights/query/nyc3/prom/api/v1/label/__name__/values"
