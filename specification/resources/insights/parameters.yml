@@ -1,0 +1,20 @@
+alert_rule_id:
+  in: path
+  name: id
+  description: A unique identifier for an alert rule.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+
+resource_urn:
+  in: query
+  name: resource_urn
+  required: false
+  description: |
+    Optional filter. When set, only alert rules that target this resource URN
+    are returned.
+  schema:
+    type: string
+  example: do:droplet:12345
