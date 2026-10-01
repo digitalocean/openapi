@@ -1,6 +1,5 @@
 lang: cURL
 source: |-
   curl -X DELETE \
-    -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    "https://api.digitalocean.com/v2/action-gateway/sessions/do%3Amanaged_agents_session%3A123e4567-e89b-12d3-a456-426614174000"
+    "https://api.digitalocean.com/v2/action-gateway/sessions/do:managed_agent_session:2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b"

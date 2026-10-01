@@ -46,6 +46,6 @@ security:
   - genai:read
 summary: Retrieve Journey Trajectory
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_get_simulation_journey_trajectory.yml

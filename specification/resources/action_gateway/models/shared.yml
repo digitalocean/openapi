@@ -1,0 +1,33 @@
+pagination:
+  type: object
+  description: >-
+    Describes one page of an offset-paged list.
+  properties:
+    page:
+      type: integer
+      format: int32
+      example: 1
+      description: 1-based page number of this response.
+    per_page:
+      type: integer
+      format: int32
+      example: 20
+      description: Page size applied to this response, after defaults and caps.
+    total:
+      type: integer
+      format: int32
+      example: 1
+      description: Number of matching items across all pages.
+
+next_page_token:
+  type: string
+  description: >-
+    An opaque cursor for the next page of results. Pass it back verbatim as
+    `page_token`. It is empty on the last page.
+  example: ZXhhX3dlYl9zZWFyY2hAMQ
+
+empty_response:
+  type: object
+  description: Empty.
+  properties: {}
+  example: {}

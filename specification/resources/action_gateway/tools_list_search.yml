@@ -1,0 +1,52 @@
+operationId: tools_list_search
+summary: Search Tools
+description: >-
+  Returns the tools your team can use that match query, optionally restricted to some providers or to
+  the members of one of your toolbelts. Results are ranked across the whole result set: exact tool name
+  matches first, then name or title prefixes, then name or title substrings, then other matches. Cursor-paged
+  with `page_size` and `page_token`; no total is reported.
+tags:
+- Action Gateway
+parameters:
+- $ref: parameters.yml#/search_query_tools_search
+- $ref: parameters.yml#/search_tools_provider
+- $ref: parameters.yml#/search_tools_toolbelt
+- $ref: parameters.yml#/page_size
+- $ref: parameters.yml#/page_token_tools_search
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/tools.yml#/search_tools_response
+        example:
+          tools:
+          - tool_slug: exa_web_search
+            name: web_search
+            title: Web Search
+            description: Search the public web with Exa and return relevant results with normalized text
+              snippets.
+            provider: exa
+            category: web-search
+            version: 1
+          next_page_token: ''
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/tools_list_search.yml
+security:
+- bearer_auth:
+  - action_gateway:read
