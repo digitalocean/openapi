@@ -1,0 +1,74 @@
+operationId: insights_create_notificationChannel
+
+summary: Create a Notification Channel
+
+description: |
+  To create a notification channel, send a POST request to
+  `/v2/insights/notification-channels` with a `name` and exactly one of
+  `email`, `slack`, or `webhook`.
+
+  Email recipients must be verified team member addresses. Webhook URLs must
+  use HTTPS. Secret fields (`slack.webhook_url`, webhook credentials) are
+  write-only and returned masked on subsequent reads.
+
+tags:
+  - Insights
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/notification_channel_request.yml'
+      examples:
+        slack:
+          summary: Slack channel
+          value:
+            name: Platform alerts
+            slack:
+              webhook_url: https://hooks.slack.com/services/T000/B000/XXXXXXXX
+              channel: '#platform-alerts'
+        email:
+          summary: Email channel
+          value:
+            name: On-call email
+            email:
+              to: alerts@example.com, backup@example.com
+        webhook:
+          summary: HTTPS webhook with bearer token
+          value:
+            name: Incident webhook
+            webhook:
+              url: https://example.com/hook
+              bearer_token:
+                token: secret-token
+              headers:
+                X-Custom: '1'
+              signature:
+                secret: whsec
+
+responses:
+  '201':
+    $ref: 'responses/notification_channel_response.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/insights_create_notificationChannel.yml'
+
+security:
+  - bearer_auth:
+      - 'insights:create'
