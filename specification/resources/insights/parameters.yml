@@ -8,6 +8,16 @@ alert_rule_id:
     format: uuid
   example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
 
+notification_channel_id:
+  in: path
+  name: id
+  description: A unique identifier for a notification channel.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 550e8400-e29b-41d4-a716-446655440000
+
 resource_urn:
   in: query
   name: resource_urn

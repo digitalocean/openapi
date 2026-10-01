@@ -3,9 +3,5 @@ source: |-
   curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{
-      "name": "search-toolbelt",
-      "display_name": "Search Tools",
-      "tools": ["exa_web_search", "exa_web_fetch"]
-    }' \
+    -d '{"name":"search-toolbelt","display_name":"Search Tools","description":"Tools for searching and fetching public web pages.","tools":["exa_web_search","exa_web_fetch"]}' \
     "https://api.digitalocean.com/v2/action-gateway/toolbelts"

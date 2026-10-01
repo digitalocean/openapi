@@ -1,0 +1,717 @@
+toolkit:
+  type: object
+  description: Provider of tools.
+  properties:
+    id:
+      type: string
+      description: >-
+        Provider ID. For one of your team's MCP servers it is normally the server's `serverRef`; `provider_kind`
+        tells the two kinds apart.
+      example: exa
+    name:
+      type: string
+      description: Human-readable provider name.
+      example: Exa
+    description:
+      type: string
+      example: Web search tools backed by Exa.
+      description: Provider description.
+    categories:
+      type: array
+      description: Distinct categories of the provider's released tools, sorted.
+      items:
+        type: string
+      example:
+        - web-search
+    created_at:
+      type: string
+      format: date-time
+      nullable: true
+      example: '2026-06-01T00:00:00Z'
+      description: When the provider was added.
+    provider_kind:
+      type: string
+      description: >-
+        Classifies the provider, for example `managed_api` or `byo_mcp` (one of your team's MCP servers).
+        It is the same value as PublicToolDefinition.provider_kind for the provider's tools.
+      example: managed_api
+
+list_toolkits_response:
+  type: object
+  properties:
+    version:
+      type: string
+      description: Catalog version identifier, for example `v1`.
+      example: v1
+    toolkits:
+      type: array
+      items:
+        $ref: '#/toolkit'
+      description: Toolkits available to your team.
+  description: Lists the toolkits available to your team.
+
+tool_annotations:
+  type: object
+  nullable: true
+  description: >-
+    Advisory hints about a tool's behavior, with the meaning of MCP tool annotations. Do not rely on them
+    for security decisions.
+  properties:
+    title:
+      type: string
+      example: Web Search
+      description: Human-readable tool title.
+    readOnlyHint:
+      type: boolean
+      example: true
+      description: The tool does not modify anything.
+    idempotentHint:
+      type: boolean
+      example: true
+      description: Repeating a call with the same arguments has no additional effect.
+    openWorldHint:
+      type: boolean
+      nullable: true
+      example: true
+      description: The tool interacts with external systems beyond the provider's own data.
+    destructiveHint:
+      type: boolean
+      nullable: true
+      example: false
+      description: The tool may perform destructive updates.
+
+tool:
+  type: object
+  description: Summarizes a released tool.
+  properties:
+    name:
+      type: string
+      description: Tool name, without the provider prefix.
+      example: web_search
+    toolkitId:
+      type: string
+      description: >-
+        ID of the provider that offers the tool. For a tool from one of your team's MCP servers it is that server's
+        `serverRef`.
+      example: exa
+    toolSlug:
+      type: string
+      description: >-
+        The provider-qualified, stable tool identifier `<toolkit_id>_<name>`. Pass this value back verbatim
+        to the toolbelt add/remove endpoints; clients should treat it as opaque rather than reconstructing it
+        from `toolkitId` and name.
+      example: exa_web_search
+    title:
+      type: string
+      example: Web Search
+      description: Human-readable tool title.
+    description:
+      type: string
+      example: Search the public web with Exa and return relevant results with normalized text snippets.
+      description: What the tool does.
+    version:
+      type: string
+      description: Released version, for example `v3`.
+      example: v1
+    inputSchema:
+      type: object
+      description: JSON Schema the tool's arguments must satisfy.
+      nullable: true
+      example:
+        type: object
+        properties:
+          query:
+            type: string
+            description: Search query string.
+          max_results:
+            type: integer
+            description: Maximum number of search results to return.
+        required:
+          - query
+    outputSchema:
+      type: object
+      description: JSON Schema of the tool's result, when declared.
+      nullable: true
+      example:
+        type: object
+        properties:
+          query:
+            type: string
+          provider:
+            type: string
+          results:
+            type: array
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                url:
+                  type: string
+                text:
+                  type: string
+                publishedDate:
+                  type: string
+    annotations:
+      description: Advisory behavior hints for the tool.
+      allOf:
+        - $ref: '#/tool_annotations'
+    parallelizable:
+      type: boolean
+      description: Catalog hint that calls to the tool may run in parallel.
+      example: true
+    streamingSafe:
+      type: boolean
+      example: true
+      description: Catalog hint that the tool's result can be streamed.
+
+tool_definition:
+  type: object
+  description: >-
+    Describes a tool you can call.
+  properties:
+    toolId:
+      type: string
+      description: The opaque identity of this released tool version.
+      example: tul_exa_web_search
+    name:
+      type: string
+      example: web_search
+      description: The tool name without the provider prefix.
+    toolkitId:
+      type: string
+      example: exa
+      description: >-
+        The ID of the provider that offers the tool. For a tool from one of your team's MCP servers it is that
+        server's `serverRef`.
+    toolSlug:
+      type: string
+      example: exa_web_search
+      description: >-
+        The provider-qualified tool identifier `<toolkit_id>_<name>`. Treat it as opaque and pass it back verbatim.
+    title:
+      type: string
+      example: Web Search
+      description: Human-readable tool title.
+    description:
+      type: string
+      example: Search the public web with Exa and return relevant results with normalized text snippets.
+      description: What the tool does.
+    inputSchema:
+      type: object
+      nullable: true
+      description: The JSON Schema the tool's arguments must satisfy.
+      example:
+        type: object
+        properties:
+          query:
+            type: string
+        required:
+          - query
+    outputSchema:
+      type: object
+      nullable: true
+      description: The JSON Schema of the tool's result, when declared.
+      example:
+        type: object
+        properties:
+          results:
+            type: array
+            items:
+              type: object
+    annotations:
+      description: Advisory behavior hints for the tool.
+      allOf:
+        - $ref: '#/tool_annotations'
+    version:
+      type: string
+      example: v1
+      description: The released version, for example `v3`.
+    auth:
+      type: object
+      nullable: true
+      description: Names the provider account the tool acts through and the scopes it requests.
+      properties:
+        modes:
+          type: array
+          items:
+            type: string
+          example:
+            - shared_key
+          description: >-
+            Lists how the tool authenticates: oauth (a user connection), `user_token` (a key your team supplies),
+            `shared_key` (a key DigitalOcean supplies), or none.
+        provider:
+          type: string
+          example: exa
+          description: >-
+            The provider slug a connection is created for. Empty when the tool needs no provider account.
+        scopes:
+          type: array
+          items:
+            type: string
+          example: []
+          description: The provider permissions the tool requests.
+    providerKind:
+      type: string
+      description: >-
+        Classifies the provider: native, `managed_api`, `customer_mcp`, sandbox, or `byo_mcp` (one of your team's
+        MCP servers).
+      example: managed_api
+
+http_lookup:
+  type: object
+  nullable: true
+  description: >-
+    Calls `url` with the exchanged access token, selects an entry of the JSON
+    array response, and extracts `extractField` from it.
+  properties:
+    method:
+      type: string
+      example: GET
+    url:
+      type: string
+      example: https://api.atlassian.com/oauth/token/accessible-resources
+    matchField:
+      type: string
+      example: url
+    matchValue:
+      type: string
+      example: ''
+    match_value_parameter:
+      type: string
+      description: A connection parameter whose value is matched against `matchField`.
+      example: site_url
+    caseInsensitive:
+      type: boolean
+      example: true
+    trimTrailingSlash:
+      type: boolean
+      example: true
+    extractField:
+      type: string
+      example: id
+    baseUrlTemplate:
+      type: string
+      example: https://api.atlassian.com/ex/jira/{value}
+    requiredScopes:
+      type: array
+      items:
+        type: string
+      example: []
+
+list_tools_response:
+  type: object
+  properties:
+    version:
+      type: string
+      description: Catalog version identifier, for example `v1`.
+      example: v1
+    tools:
+      type: array
+      items:
+        $ref: '#/tool'
+      description: Tools on this page, grouped by provider and sorted by name within a provider.
+    definitions:
+      type: array
+      description: >-
+        definitions[i] describes tools[i].
+      items:
+        $ref: '#/tool_definition'
+    pagination:
+      description: >-
+        page and `per_page` echo the values applied; total is the number of tools matching `toolkitId` across
+        all pages.
+      allOf:
+        - $ref: 'shared.yml#/pagination'
+  description: One page of the tool catalog.
+
+connection_parameter_spec:
+  type: object
+  description: >-
+    Describes one non-sensitive value collected while configuring a provider connection. Clients can render
+    these specifications generically.
+  properties:
+    key:
+      type: string
+      example: site_url
+      description: Key of the value in `connection_parameters` or `credential_parameters`.
+    label:
+      type: string
+      example: Jira site URL
+      description: Display label.
+    description:
+      type: string
+      example: The HTTPS origin of the Jira Cloud site to use.
+      description: Help text.
+    input_kind:
+      type: string
+      enum:
+        - string
+        - https_origin
+        - enum
+      example: https_origin
+      description: 'How the value is entered: string, `https_origin`, or enum.'
+    required:
+      type: boolean
+      example: true
+      description: Whether the value must be supplied.
+    normalization:
+      type: string
+      description: >-
+        How the value is normalized before it is validated and stored: trim, lowercase, uppercase, or `https_origin`.
+      example: https_origin
+    allowed_values:
+      type: array
+      items:
+        type: string
+      example: []
+      description: For enum inputs, the accepted values.
+    allowed_host_suffixes:
+      type: array
+      items:
+        type: string
+      example:
+        - atlassian.net
+      description: For `https_origin` inputs, the host suffixes the origin's host must match.
+    max_length:
+      type: integer
+      format: int32
+      description: Maximum length of the value. 0 means the default maximum of 4096.
+      example: 255
+    pattern:
+      type: string
+      description: Optional RE2 expression matched against the whole normalized value.
+      example: ''
+
+provider_summary:
+  type: object
+  properties:
+    name:
+      type: string
+      description: Provider slug, used as provider when creating a connection or a provider credential.
+      example: jira
+    display_name:
+      type: string
+      example: Jira
+      description: Human-readable provider name.
+    description:
+      type: string
+      example: Jira issue tracking tools.
+      description: Provider description.
+    auth_types:
+      type: array
+      description: |-
+        Credential kinds the provider accepts, sorted:
+        none|oauth|`shared_api_key`|unknown|`user_oauth_app`|`user_token`.
+
+        `none` means the provider needs no credential. `oauth` means users can connect through
+        DigitalOcean's shared OAuth application. `user_oauth_app` means users can connect through an OAuth
+        client your team registers as a provider credential; without `oauth` alongside it, that is the only
+        way to connect. `shared_api_key` means DigitalOcean supplies the key. `user_token` means your team
+        or its users supply a key or token.
+
+        `unknown` means the provider declares no kind this API recognizes, including an OAuth provider whose
+        shared application is not available. It is never paired with another kind.
+      items:
+        type: string
+      example:
+        - oauth
+    auth_type:
+      type: string
+      deprecated: true
+      description: >-
+        Deprecated: read `auth_types`, since a provider may accept more than one credential kind. This is the
+        first entry of `auth_types` other than `none`, or `none` when that is the only entry.
+      example: oauth
+    scopes:
+      type: array
+      description: >-
+        The OAuth scopes a connection may request; a connection that requests none gets all of them. Set only
+        when `auth_types` contains `oauth` or `user_oauth_app`.
+      items:
+        type: string
+      example:
+        - write:jira-work
+    connection_parameters:
+      type: array
+      description: >-
+        Non-sensitive values collected when creating a connection. Set only when `auth_types` contains `oauth`
+        or `user_oauth_app`.
+      items:
+        $ref: '#/connection_parameter_spec'
+    credential_parameters:
+      type: array
+      description: >-
+        Non-secret values collected when registering an API key provider credential. They are validated against
+        the provider's declaration and used to derive the credential's `base_url`; callers cannot supply header
+        names or arbitrary destinations.
+      items:
+        $ref: '#/connection_parameter_spec'
+    oauth_redirect_url:
+      type: string
+      description: >-
+        Callback URL a team must register with the provider when it creates its own OAuth client. It is the
+        same for every provider and cannot be changed per credential. Empty unless `auth_types` contains `user_oauth_app`.
+      example: https://cloud.digitalocean.com/api/v1/security/connectlinks/callback
+    oauth_client_setup_url:
+      type: string
+      description: >-
+        HTTPS page at the provider where a team creates that OAuth client, such as its developer console or
+        setup guide. Empty unless `auth_types` contains `user_oauth_app` and the provider declares one.
+      example: https://developer.atlassian.com/console/myapps/
+  description: Describes a catalog provider and how to authenticate to it.
+
+list_providers_response:
+  type: object
+  properties:
+    providers:
+      type: array
+      items:
+        $ref: '#/provider_summary'
+      description: Providers sorted by display name.
+  description: Lists the catalog providers.
+
+tool_search_result:
+  type: object
+  description: >-
+    Summarizes one matching tool. Input and output schemas are omitted; the tool catalog (`GET /v2/action-gateway/tools`)
+    carries them.
+  properties:
+    tool_slug:
+      type: string
+      example: exa_web_search
+      description: >-
+        The provider-qualified, stable tool identifier (`<provider>_<name>`). Treat it as opaque and pass it
+        back verbatim.
+    name:
+      type: string
+      example: web_search
+      description: The unqualified tool name, without the provider prefix.
+    title:
+      type: string
+      example: Web Search
+      description: Human-readable tool title.
+    description:
+      type: string
+      example: Search the public web with Exa and return relevant results with normalized text snippets.
+      description: What the tool does.
+    provider:
+      type: string
+      example: exa
+      description: >-
+        The owning toolkit ID, broken out so a client never has to split `tool_slug`. It is what a client groups
+        results by.
+    category:
+      type: string
+      description: >-
+        Best-effort catalog metadata and is empty for a large share of the catalog. Do not rely on it being
+        present.
+      example: web-search
+    version:
+      type: integer
+      format: int32
+      description: The released version number of the tool, for example 3.
+      example: 1
+
+search_tools_response:
+  type: object
+  properties:
+    tools:
+      type: array
+      description: >-
+        Ordered by descending match quality, then by provider and name. The ordering is applied across the whole
+        result set rather than within a page, so a client must not re-sort a page to rank it.
+      items:
+        $ref: '#/tool_search_result'
+    next_page_token:
+      type: string
+      description: Token for the next page; empty on the last page.
+      allOf:
+        - $ref: 'shared.yml#/next_page_token'
+  description: One page of matching tools.
+
+search_providers_response:
+  type: object
+  properties:
+    providers:
+      type: array
+      items:
+        $ref: '#/provider_summary'
+      description: Matching providers sorted by name.
+    next_page_token:
+      type: string
+      description: Token for the next page; empty on the last page.
+      allOf:
+        - $ref: 'shared.yml#/next_page_token'
+  description: One page of matching providers.
+
+health_snapshot:
+  type: object
+  description: Describes when health metrics were computed.
+  properties:
+    measured_at:
+      type: string
+      format: date-time
+      nullable: true
+      example: '2026-09-24T12:00:00Z'
+      description: When the metrics were computed. They are recomputed at most every five minutes.
+    window:
+      type: string
+      description: Length of the window the metrics cover, ending at `measured_at`.
+      example: 86400s
+    stale:
+      type: boolean
+      description: >-
+        True when the latest recomputation failed and earlier metrics, up to 30 minutes old, are returned instead.
+      example: false
+
+health_metrics:
+  type: object
+  description: >-
+    Availability and latency of a tool or provider over a window, aggregated across all customers. Request
+    volumes are not reported.
+  properties:
+    data_status:
+      type: string
+      enum:
+        - HEALTH_DATA_STATUS_AVAILABLE
+        - HEALTH_DATA_STATUS_NO_DATA
+      description: >-
+        `HEALTH_DATA_STATUS_AVAILABLE` when the window has calls to measure; `HEALTH_DATA_STATUS_NO_DATA` when
+        it has none, in which case the metrics are null. Do not treat no data as healthy.
+      example: HEALTH_DATA_STATUS_AVAILABLE
+    uptime_percentage:
+      type: number
+      format: double
+      nullable: true
+      description: >-
+        Percentage of calls that did not fail because of the provider (an upstream error, timeout, rate limit,
+        or unavailability). Calls that failed for other reasons are not counted.
+      example: 99.82
+    latency_p50_ms:
+      type: number
+      format: double
+      nullable: true
+      description: >-
+        Median duration of successful calls, in milliseconds. Durations above 40960 ms are reported as 40960.
+      example: 412.5
+    latency_p95_ms:
+      type: number
+      format: double
+      nullable: true
+      example: 1180.0
+      description: >-
+        95th-percentile duration of successful calls, in milliseconds. Durations above 40960 ms are reported
+        as 40960.
+
+provider_health:
+  type: object
+  properties:
+    provider:
+      type: string
+      example: exa
+      description: Provider ID.
+    health:
+      description: Metrics over the window.
+      allOf:
+        - $ref: '#/health_metrics'
+  description: Health of one provider, combining its tools.
+
+tool_health:
+  type: object
+  properties:
+    tool_slug:
+      type: string
+      example: exa_web_search
+      description: Catalog tool slug.
+    provider:
+      type: string
+      example: exa
+      description: ID of the provider that offers the tool.
+    health:
+      description: Metrics over the window.
+      allOf:
+        - $ref: '#/health_metrics'
+  description: Health of one tool.
+
+list_provider_health_response:
+  type: object
+  properties:
+    snapshot:
+      description: When the metrics were computed and the window they cover.
+      allOf:
+        - $ref: '#/health_snapshot'
+    providers:
+      type: array
+      items:
+        $ref: '#/provider_health'
+      description: Providers sorted by ID.
+    pagination:
+      description: Paging applied to this response and the total number of providers.
+      allOf:
+        - $ref: 'shared.yml#/pagination'
+  description: One page of provider health.
+
+list_tool_health_response:
+  type: object
+  properties:
+    snapshot:
+      description: When the metrics were computed and the window they cover.
+      allOf:
+        - $ref: '#/health_snapshot'
+    tools:
+      type: array
+      items:
+        $ref: '#/tool_health'
+      description: Tools sorted by provider, then tool slug.
+    pagination:
+      description: Paging applied to this response and the total number of tools.
+      allOf:
+        - $ref: 'shared.yml#/pagination'
+  description: One page of tool health.
+
+get_tool_health_response:
+  type: object
+  properties:
+    snapshot:
+      description: When the metrics were computed and the window they cover.
+      allOf:
+        - $ref: '#/health_snapshot'
+    tool:
+      description: The tool's metrics over the window.
+      allOf:
+        - $ref: '#/tool_health'
+    history:
+      type: object
+      nullable: true
+      description: >-
+        Present only when the request set `include_history`.
+      properties:
+        resolution:
+          type: string
+          description: >-
+            Length of each point.
+          example: 3600s
+        stale:
+          type: boolean
+          description: >-
+            Means the same as HealthSnapshot.stale, for the history series. The series is refreshed independently,
+            so a fresh snapshot can accompany an older history and vice versa.
+          example: false
+        points:
+          type: array
+          items:
+            type: object
+            properties:
+              bucket_start:
+                type: string
+                format: date-time
+                example: '2026-09-24T11:00:00Z'
+                description: Start of the slot.
+              health:
+                description: Metrics over the slot.
+                allOf:
+                  - $ref: '#/health_metrics'
+          description: Points oldest first, ending with the slot in progress.
+  description: Health of one tool.
