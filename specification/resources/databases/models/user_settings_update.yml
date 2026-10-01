@@ -2,9 +2,10 @@ type: object
 
 description: |
   User settings that can be updated via the Update a Database User endpoint.
-  Supported for PostgreSQL, Kafka, and OpenSearch clusters. MongoDB user roles
-  and database access (`mongo_user_settings`) cannot be updated after creation;
-  recreate the user to change them.
+  Supported for PostgreSQL, Kafka, and OpenSearch clusters. For other engines,
+  the request returns a 422. MongoDB user roles and database access
+  (`mongo_user_settings`) cannot be updated after creation; recreate the user
+  to change them.
 
 properties:
   pg_allow_replication:
