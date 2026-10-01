@@ -1,0 +1,19 @@
+description: Label values.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/prom_string_list_response.yml'
+    example:
+      status: success
+      data:
+        - do_droplets_cpu_time
+        - do_droplets_memory_free

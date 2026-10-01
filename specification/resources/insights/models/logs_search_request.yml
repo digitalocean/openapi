@@ -1,0 +1,16 @@
+type: object
+description: Request body for searching logs.
+required:
+  - time_range
+properties:
+  time_range:
+    $ref: 'logs_time_range.yml'
+  filter:
+    $ref: 'logs_filter_expression.yml'
+  order_by:
+    type: array
+    description: Sort clauses applied to the result set.
+    items:
+      $ref: 'logs_order_by.yml'
+  pagination:
+    $ref: 'logs_pagination_request.yml'
