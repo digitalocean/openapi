@@ -1,0 +1,9 @@
+type: object
+description: >-
+  Metric labels as key/value pairs. By default, metric names in responses use
+  Prometheus underscored spelling (for example `do_droplets_cpu_time`), even
+  when the request used a dotted selector (for example `do.droplets.cpu_time`).
+additionalProperties:
+  type: string
+example:
+  __name__: do_droplets_cpu_time

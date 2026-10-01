@@ -1,0 +1,6 @@
+lang: cURL
+source: |-
+  curl -X GET \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    --get "https://api.digitalocean.com/v2/insights/query/nyc3/prom/api/v1/series" \
+    --data-urlencode 'match[]={__name__="do.droplets.cpu_time"}'
