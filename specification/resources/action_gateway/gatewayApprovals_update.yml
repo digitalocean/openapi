@@ -1,0 +1,66 @@
+operationId: gatewayApprovals_update
+summary: Decide an Approval
+description: >-
+  Approves or denies a tool call that the session's policy paused for approval. The `approval_id` comes
+  from the `_meta` of the paused call's result (`_meta.status` is `requires_approval`). Send the same
+  `X-Session-Id` as the paused call.
+
+
+  After approving, call the tool again with exactly the same arguments before the approval expires
+  (30 minutes after it was requested). An approval allows one call. A denial makes the next identical
+  call fail with a denial message. An agent cannot decide its own approvals: this endpoint is not
+  available as an MCP tool.
+tags:
+- Action Gateway Data Plane
+servers:
+- url: "https://actions.do-ai.run"
+  description: production
+parameters:
+- $ref: parameters.yml#/approval_id
+- $ref: parameters.yml#/session_id_header
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_approval_decision_request
+      example:
+        decision: approve
+responses:
+  '200':
+    description: The decision was recorded.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/data_plane.yml#/gateway_approval_decision_response
+        example:
+          id: 7d0c1e7a-3b2f-4c6e-9a51-2f4e8b9c0d13
+          status: approved
+          expires_at: '2026-10-05T12:30:00Z'
+  '400':
+    $ref: data_plane_responses.yml#/bad_request
+  '401':
+    $ref: data_plane_responses.yml#/unauthorized
+  '403':
+    $ref: data_plane_responses.yml#/forbidden
+  '404':
+    $ref: data_plane_responses.yml#/not_found
+  '409':
+    $ref: data_plane_responses.yml#/conflict
+  '412':
+    $ref: data_plane_responses.yml#/precondition_failed
+  '429':
+    $ref: data_plane_responses.yml#/too_many_requests
+  '500':
+    $ref: data_plane_responses.yml#/server_error
+  '503':
+    $ref: data_plane_responses.yml#/service_unavailable
+  default:
+    $ref: data_plane_responses.yml#/unexpected_error
+x-codeSamples:
+- $ref: examples/curl/gatewayApprovals_update.yml
+security:
+- bearer_auth:
+  - action_gateway:execute

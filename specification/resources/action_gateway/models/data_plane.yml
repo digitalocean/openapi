@@ -1,0 +1,527 @@
+gateway_error_envelope:
+  type: object
+  description: Why a call failed.
+  required:
+  - class
+  - message
+  - retriable
+  properties:
+    class:
+      type: string
+      enum:
+      - invalid_argument
+      - unauthorized
+      - forbidden
+      - rate_limited
+      - not_found
+      - timeout
+      - upstream_error
+      - output_too_large
+      - execution_failed
+      - unavailable
+      - canceled
+      - render_required
+      - unsupported_media_type
+      - view_materialization_failed
+      example: invalid_argument
+      description: The kind of failure.
+    message:
+      type: string
+      example: 'queries[0].use_case is required'
+      description: A human-readable explanation that is safe to show to the agent or user.
+    retriable:
+      type: boolean
+      example: false
+      description: Whether retrying the same call later can succeed.
+    recovery_hint:
+      type: string
+      enum:
+      - fix_args
+      - refresh_auth
+      - retry_later
+      - narrow_output
+      - contact_support
+      - verify_provider_state
+      example: fix_args
+      description: What the caller should do next. Omitted when there is no specific remedy.
+    upstream_ref:
+      type: string
+      example: req_01J8ZQ4W8N6Y5V2M3K7T9R1C0B
+      description: A reference to the failed request at the upstream provider, when the provider returned one.
+
+gateway_tool_result_meta:
+  type: object
+  description: >-
+    Present when a call is paused rather than failed outright. `status` tells you what is needed before
+    you retry the same call: `requires_approval` (a person must approve the call; see
+    `POST /approvals/{approval_id}`), `requires_authorization` (the end user must connect the provider,
+    for example through OAuth, at `connect_url`), or `requires_connection_configuration` (the connection
+    is missing required parameters). The other keys depend on `status`.
+  additionalProperties: true
+  properties:
+    status:
+      type: string
+      enum:
+      - requires_approval
+      - requires_authorization
+      - requires_connection_configuration
+      example: requires_approval
+      description: What is needed before the call can run.
+    approval_id:
+      type: string
+      example: 7d0c1e7a-3b2f-4c6e-9a51-2f4e8b9c0d13
+      description: For `requires_approval`, the ID to pass to `POST /approvals/{approval_id}`.
+    tool_name:
+      type: string
+      example: jira_create_issue
+      description: For `requires_approval`, the tool that needs approval.
+    expires_at:
+      type: string
+      format: date-time
+      example: '2026-10-05T12:30:00Z'
+      description: For `requires_approval`, when the pending approval expires (30 minutes after it was requested).
+    provider:
+      type: string
+      example: jira
+      description: For `requires_authorization` and `requires_connection_configuration`, the provider that needs a connection.
+    connect_url:
+      type: string
+      example: https://cloud.digitalocean.com/security/connectlinks/confirm?region=nyc3&token=3f9a2c7e
+      description: For `requires_authorization`, a URL where the end user can connect the provider, when one is available.
+    decide:
+      type: object
+      description: >-
+        For `requires_approval`, the request that records a decision. Send decisions to
+        `POST /approvals/{approval_id}` with the session's `X-Session-Id` header.
+      properties:
+        method:
+          type: string
+          example: POST
+          description: The HTTP method.
+        path:
+          type: string
+          example: /approvals/session/2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b/7d0c1e7a-3b2f-4c6e-9a51-2f4e8b9c0d13
+          description: The request path.
+        body:
+          type: string
+          example: '{"decision": "approve"}'
+          description: The JSON request body.
+
+gateway_tool_result:
+  type: object
+  description: >-
+    The result of one call. `status` is `succeeded` with `output`, or `failed` with `error`.
+  required:
+  - status
+  - call_id
+  properties:
+    status:
+      type: string
+      enum:
+      - succeeded
+      - failed
+      example: succeeded
+      description: Whether the call succeeded.
+    output:
+      type: object
+      additionalProperties: true
+      description: >-
+        The tool's output, when the call succeeded. Its shape is defined by the tool. HTTP-backed tools
+        usually nest the provider's response under `data`.
+    error:
+      $ref: '#/gateway_error_envelope'
+    call_id:
+      type: string
+      example: call_d2787206-50a7-483d-83ce-9ccabf469230
+      description: A unique ID for this call. Include it when you contact support. May be empty on some request-level errors.
+    _meta:
+      $ref: '#/gateway_tool_result_meta'
+
+gateway_error_response:
+  type: object
+  description: A failed call. Every Action Gateway data plane error uses this shape.
+  required:
+  - status
+  - error
+  - call_id
+  properties:
+    status:
+      type: string
+      enum:
+      - failed
+      example: failed
+      description: Always `failed`.
+    error:
+      $ref: '#/gateway_error_envelope'
+    call_id:
+      type: string
+      example: call_d2787206-50a7-483d-83ce-9ccabf469230
+      description: A unique ID for this request. May be empty.
+
+gateway_search_query:
+  type: object
+  description: One independent search.
+  required:
+  - use_case
+  properties:
+    use_case:
+      type: string
+      maxLength: 512
+      example: Create a Jira issue in a project
+      description: >-
+        A plain-English description of the complete task, including any apps involved, for example
+        `Create a Jira issue in a project`. Do not include personal identifiers such as names, emails, or
+        IDs; put those in `known_fields`. At most 512 bytes and 32 terms.
+    known_fields:
+      type: string
+      example: 'project_key:SUP'
+      description: >-
+        Known inputs for the task as comma-separated `key:value` pairs, for example `project_key:SUP`.
+        Used as context only; it does not affect matching.
+
+gateway_search_request:
+  type: object
+  required:
+  - queries
+  properties:
+    queries:
+      type: array
+      minItems: 1
+      maxItems: 5
+      description: >-
+        Between 1 and 5 searches to run in parallel. Split independent tasks into separate queries.
+        Results are grouped per query.
+      items:
+        $ref: '#/gateway_search_query'
+    providers:
+      type: array
+      items:
+        type: string
+      example:
+      - exa
+      description: Only return tools from these providers. Applies to every query.
+    tags:
+      type: array
+      items:
+        type: string
+      example:
+      - search
+      description: Only return tools with these tags. Applies to every query.
+    limit:
+      type: integer
+      minimum: 1
+      maximum: 50
+      default: 10
+      example: 5
+      description: The maximum number of tools to return per query. Defaults to 10 when omitted or 0; values above 50 are capped at 50.
+
+gateway_search_result:
+  type: object
+  description: A tool that matches the query, with the input schema to call it with.
+  properties:
+    name:
+      type: string
+      example: exa_web_search
+      description: The tool name to pass to `POST /tools/invoke`.
+    version:
+      type: string
+      example: v12
+      description: The tool's current version. Omitted when the tool has no version.
+    title:
+      type: string
+      example: Web Search
+      description: A human-readable name for the tool.
+    description:
+      type: string
+      example: Search the public internet for current information, news, announcements, and general web content.
+      description: What the tool does.
+    inputSchema:
+      type: object
+      additionalProperties: true
+      description: A JSON Schema for the tool's `arguments`.
+    score:
+      type: number
+      format: double
+      example: 0.75875098
+      description: How well the tool matches the query. Higher is better. Only meaningful within one query's results.
+
+gateway_search_query_result:
+  type: object
+  properties:
+    index:
+      type: integer
+      example: 1
+      description: The 1-based position of the query in the request.
+    use_case:
+      type: string
+      example: Create a Jira issue in a project
+      description: The query's `use_case`.
+    results:
+      type: array
+      items:
+        $ref: '#/gateway_search_result'
+      description: The matching tools, best match first.
+    guidance:
+      type: string
+      example: No tools matched. Try describing the task differently or removing filters.
+      description: Suggestions for rephrasing. Only present when there are no results.
+
+gateway_search_output:
+  type: object
+  properties:
+    results:
+      type: array
+      items:
+        $ref: '#/gateway_search_query_result'
+      description: One entry per query, in request order.
+
+gateway_search_response:
+  type: object
+  description: A tool result whose `output` holds the search results.
+  required:
+  - status
+  - call_id
+  properties:
+    status:
+      type: string
+      enum:
+      - succeeded
+      - failed
+      example: succeeded
+      description: Whether the search succeeded.
+    output:
+      $ref: '#/gateway_search_output'
+    error:
+      $ref: '#/gateway_error_envelope'
+    call_id:
+      type: string
+      example: call_d2787206-50a7-483d-83ce-9ccabf469230
+      description: A unique ID for this call.
+    _meta:
+      $ref: '#/gateway_tool_result_meta'
+
+gateway_tool_call:
+  type: object
+  required:
+  - tool
+  properties:
+    tool:
+      type: string
+      example: exa_web_search
+      description: The name of the tool to call, as returned by `POST /tools/search`.
+    version:
+      type: string
+      example: v12
+      description: A specific tool version to call. Defaults to the current version.
+    arguments:
+      type: object
+      additionalProperties: true
+      description: The tool's arguments, matching its `inputSchema`.
+
+gateway_invoke_request:
+  type: object
+  required:
+  - tools
+  properties:
+    rationale:
+      type: string
+      example: Find recent coverage of the product launch.
+      description: One sentence explaining why these tools are being called. Truncated to 512 characters.
+    tools:
+      type: array
+      minItems: 1
+      maxItems: 10
+      description: Between 1 and 10 tool calls. They run in parallel.
+      items:
+        $ref: '#/gateway_tool_call'
+
+gateway_invoke_item_result:
+  type: object
+  properties:
+    index:
+      type: integer
+      example: 0
+      description: The 0-based position of the call in the request.
+    tool:
+      type: string
+      example: exa_web_search
+      description: The canonical, lowercase tool name.
+    version:
+      type: string
+      example: v12
+      description: The tool version that ran.
+    result:
+      $ref: '#/gateway_tool_result'
+
+gateway_invoke_response:
+  type: object
+  properties:
+    total_count:
+      type: integer
+      example: 2
+      description: The number of calls in the request.
+    success_count:
+      type: integer
+      example: 1
+      description: The number of calls whose `result.status` is `succeeded`.
+    error_count:
+      type: integer
+      example: 1
+      description: The number of calls that failed or are waiting for approval or authorization.
+    results:
+      type: array
+      items:
+        $ref: '#/gateway_invoke_item_result'
+      description: One entry per call, in request order.
+
+gateway_code_request:
+  type: object
+  required:
+  - code
+  properties:
+    code:
+      type: string
+      example: |-
+        result = invoke_digitalocean_tool("exa_web_search", {"query": "DigitalOcean", "max_results": 3})
+        print(result["status"])
+      description: >-
+        Python source to run. `invoke_digitalocean_tool(name, arguments)` is preloaded and returns a tool
+        result as a dict.
+
+gateway_code_output:
+  type: object
+  properties:
+    stdout:
+      type: string
+      example: |
+        succeeded
+      description: Everything the program printed to standard output.
+    stderr:
+      type: string
+      example: ''
+      description: Everything the program printed to standard error. Omitted when empty.
+    exit_code:
+      type: integer
+      format: int32
+      example: 0
+      description: The program's exit code.
+
+gateway_code_response:
+  type: object
+  description: A tool result whose `output` holds the program's output.
+  required:
+  - status
+  - call_id
+  properties:
+    status:
+      type: string
+      enum:
+      - succeeded
+      - failed
+      example: succeeded
+      description: Whether the program ran.
+    output:
+      $ref: '#/gateway_code_output'
+    error:
+      $ref: '#/gateway_error_envelope'
+    call_id:
+      type: string
+      example: call_d2787206-50a7-483d-83ce-9ccabf469230
+      description: A unique ID for this call.
+    _meta:
+      $ref: '#/gateway_tool_result_meta'
+
+gateway_tool_descriptor:
+  type: object
+  description: >-
+    A tool the session can call, in the shape of an MCP `Tool` with Action Gateway extensions.
+  properties:
+    name:
+      type: string
+      example: exa_web_search
+      description: The tool name.
+    title:
+      type: string
+      example: Web Search
+      description: A human-readable name for the tool.
+    description:
+      type: string
+      example: Search the public internet for current information, news, announcements, and general web content.
+      description: What the tool does.
+    inputSchema:
+      type: object
+      additionalProperties: true
+      description: A JSON Schema for the tool's arguments.
+    outputSchema:
+      type: object
+      additionalProperties: true
+      description: A JSON Schema for the tool's output, when the tool declares one.
+    annotations:
+      type: object
+      additionalProperties: true
+      description: >-
+        Advisory MCP tool annotations such as `readOnlyHint` and `destructiveHint`. Do not rely on them for
+        security decisions.
+    version:
+      type: string
+      example: v12
+      description: The tool version.
+    parallelizable:
+      type: boolean
+      example: true
+      description: Whether the tool can safely run in parallel with other calls.
+    streamingSafe:
+      type: boolean
+      example: true
+      description: Whether the tool is marked as safe to use with streaming responses.
+
+gateway_tool_catalog:
+  type: object
+  properties:
+    version:
+      type: string
+      example: v1
+      description: The catalog version.
+    tools:
+      type: array
+      items:
+        $ref: '#/gateway_tool_descriptor'
+      description: The tools the session can call.
+
+gateway_approval_decision_request:
+  type: object
+  required:
+  - decision
+  properties:
+    decision:
+      type: string
+      enum:
+      - approve
+      - deny
+      example: approve
+      description: Whether to let the call run. Case-insensitive.
+
+gateway_approval_decision_response:
+  type: object
+  properties:
+    id:
+      type: string
+      example: 7d0c1e7a-3b2f-4c6e-9a51-2f4e8b9c0d13
+      description: The approval ID.
+    status:
+      type: string
+      enum:
+      - pending
+      - approved
+      - consumed
+      - denied
+      - cancelled
+      - expired
+      example: approved
+      description: >-
+        The approval's state after the decision. `approved` becomes `consumed` once the approved call runs.
+    expires_at:
+      type: string
+      format: date-time
+      example: '2026-10-05T12:30:00Z'
+      description: When the approval expires.

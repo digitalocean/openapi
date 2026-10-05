@@ -1,0 +1,8 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "X-Session-Id: 2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b" \
+    -d '{"rationale":"Find recent coverage of the product launch and file a follow-up issue.","tools":[{"tool":"exa_web_search","arguments":{"query":"DigitalOcean Action Gateway","max_results":1}},{"tool":"jira_create_issue","arguments":{"project_key":"SUP","summary":"Follow up on launch coverage"}}]}' \
+    "https://actions.do-ai.run/tools/invoke"

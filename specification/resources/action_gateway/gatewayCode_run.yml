@@ -1,0 +1,78 @@
+operationId: gatewayCode_run
+summary: Execute Code
+description: >-
+  Runs a Python program in a fresh, ephemeral sandbox and returns its standard output, standard error,
+  and exit code. Use it for computation and data processing, or to chain several tool calls in one
+  request. This is the REST form of the `action_code` MCP tool.
+
+
+  The sandbox preloads `invoke_digitalocean_tool(name: str, arguments: dict) -> dict`, which calls a tool
+  in the session and returns its tool result (`status`, `output`, `error`). The session's tools and
+  policy apply to these calls. Only `stdout`, `stderr`, and `exit_code` are returned, so print what you
+  need. State is not kept between requests. Each program has a 180-second limit, including its tool calls.
+
+
+  The response is a tool result: a successful run returns `status: succeeded` with the program's output
+  in `output`. If the sandbox cannot run the program, the request fails with an error status.
+tags:
+- Action Gateway Data Plane
+servers:
+- url: "https://actions.do-ai.run"
+  description: production
+parameters:
+- $ref: parameters.yml#/session_id_header
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_code_request
+      example:
+        code: |-
+          result = invoke_digitalocean_tool("exa_web_search", {"query": "DigitalOcean Action Gateway", "max_results": 3})
+          if result["status"] == "succeeded":
+              for item in result["output"]["data"]["results"]:
+                  print(item["url"])
+          else:
+              print(result["error"]["message"])
+responses:
+  '200':
+    description: The program ran. Check `status` before reading `output`.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/data_plane.yml#/gateway_code_response
+        example:
+          status: succeeded
+          output:
+            stdout: |
+              https://www.digitalocean.com/products/action-gateway
+            exit_code: 0
+          call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+  '400':
+    $ref: data_plane_responses.yml#/bad_request
+  '401':
+    $ref: data_plane_responses.yml#/unauthorized
+  '403':
+    $ref: data_plane_responses.yml#/forbidden
+  '412':
+    $ref: data_plane_responses.yml#/precondition_failed
+  '413':
+    $ref: data_plane_responses.yml#/payload_too_large
+  '429':
+    $ref: data_plane_responses.yml#/too_many_requests
+  '500':
+    $ref: data_plane_responses.yml#/server_error
+  '503':
+    $ref: data_plane_responses.yml#/service_unavailable
+  '504':
+    $ref: data_plane_responses.yml#/gateway_timeout
+  default:
+    $ref: data_plane_responses.yml#/unexpected_error
+x-codeSamples:
+- $ref: examples/curl/gatewayCode_run.yml
+security:
+- bearer_auth:
+  - action_gateway:execute

@@ -1,0 +1,98 @@
+operationId: gatewayTools_list_search
+summary: Search Session Tools
+description: >-
+  Finds the tools in the session that can do a task, described in plain English, and returns their
+  names and input schemas to pass to `POST /tools/invoke`. Send between 1 and 5 independent queries;
+  each is searched separately and its results are returned in their own group, best match first. Only
+  tools the session can call are returned. This is the REST form of the `action_search` MCP tool.
+
+
+  The response is a tool result: a successful search returns `status: succeeded` with the results in
+  `output`.
+tags:
+- Action Gateway Data Plane
+servers:
+- url: "https://actions.do-ai.run"
+  description: production
+parameters:
+- $ref: parameters.yml#/session_id_header
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_search_request
+      example:
+        queries:
+        - use_case: Search the public web for recent results
+        limit: 2
+responses:
+  '200':
+    description: The search ran. Check `status` before reading `output`.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/data_plane.yml#/gateway_search_response
+        example:
+          status: succeeded
+          output:
+            results:
+            - index: 1
+              use_case: Search the public web for recent results
+              results:
+              - name: exa_web_search
+                version: v12
+                title: Web Search
+                description: Search the public internet for current information, news, announcements,
+                  and general web content, returning relevant results with normalized text snippets.
+                inputSchema:
+                  type: object
+                  properties:
+                    query:
+                      type: string
+                      description: Search query string.
+                    max_results:
+                      type: integer
+                      description: Maximum number of search results to return.
+                  required:
+                  - query
+                score: 0.75875098
+              - name: perplexity_search
+                title: Search the web with Perplexity
+                description: Run a live web or people search and get ranked results with titles, URLs,
+                  snippets, and publication dates.
+                inputSchema:
+                  type: object
+                  properties:
+                    query:
+                      type: string
+                      description: The search query, in natural language or keywords.
+                  required:
+                  - query
+                score: 0.6576327
+          call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+  '400':
+    $ref: data_plane_responses.yml#/bad_request
+  '401':
+    $ref: data_plane_responses.yml#/unauthorized
+  '403':
+    $ref: data_plane_responses.yml#/forbidden
+  '412':
+    $ref: data_plane_responses.yml#/precondition_failed
+  '413':
+    $ref: data_plane_responses.yml#/payload_too_large
+  '429':
+    $ref: data_plane_responses.yml#/too_many_requests
+  '500':
+    $ref: data_plane_responses.yml#/server_error
+  '503':
+    $ref: data_plane_responses.yml#/service_unavailable
+  default:
+    $ref: data_plane_responses.yml#/unexpected_error
+x-codeSamples:
+- $ref: examples/curl/gatewayTools_list_search.yml
+security:
+- bearer_auth:
+  - action_gateway:execute
