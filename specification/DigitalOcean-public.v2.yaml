@@ -1798,14 +1798,20 @@ paths:
   /v2/insights/query/{region}/prom/api/v1/query:
     get:
       $ref: "resources/insights/insights_get_promQuery.yml"
+    post:
+      $ref: "resources/insights/insights_post_promQuery.yml"
 
   /v2/insights/query/{region}/prom/api/v1/query_range:
     get:
       $ref: "resources/insights/insights_get_promQueryRange.yml"
+    post:
+      $ref: "resources/insights/insights_post_promQueryRange.yml"
 
   /v2/insights/query/{region}/prom/api/v1/labels:
     get:
       $ref: "resources/insights/insights_get_promLabels.yml"
+    post:
+      $ref: "resources/insights/insights_post_promLabels.yml"
 
   /v2/insights/query/{region}/prom/api/v1/label/{name}/values:
     get:
@@ -1814,6 +1820,8 @@ paths:
   /v2/insights/query/{region}/prom/api/v1/series:
     get:
       $ref: "resources/insights/insights_get_promSeries.yml"
+    post:
+      $ref: "resources/insights/insights_post_promSeries.yml"
 
   /v2/insights/query/{region}/logs/search:
     post:
