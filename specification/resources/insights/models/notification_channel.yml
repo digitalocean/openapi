@@ -34,9 +34,9 @@ properties:
   email:
     $ref: 'email_notification_config.yml'
   slack:
-    $ref: 'slack_notification_config.yml'
+    $ref: 'slack_notification_config_response.yml'
   webhook:
-    $ref: 'webhook_notification_config.yml'
+    $ref: 'webhook_notification_config_response.yml'
   usage:
     allOf:
       - $ref: 'notification_channel_usage.yml'

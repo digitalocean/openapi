@@ -4,8 +4,10 @@ summary: Retrieve a Notification Channel
 
 description: |
   To retrieve a notification channel, send a GET request to
-  `/v2/insights/notification-channels/{id}`. Secret fields are returned masked
-  as `********`.
+  `/v2/insights/notification-channels/{id}`. Secret credentials are never
+  returned. When a secret is configured, the response includes an optional
+  `*_status` object (for example `webhook_url_status`) with
+  `configured: true`.
 
 tags:
   - Insights
