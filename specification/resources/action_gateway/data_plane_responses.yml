@@ -1,0 +1,220 @@
+bad_request:
+  description: The request body is malformed or fails validation.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: invalid_argument
+          message: Request is invalid. Fix request arguments and retry.
+          retriable: false
+          recovery_hint: fix_args
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+unauthorized:
+  description: The access token is missing or invalid.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: unauthorized
+          message: Authentication failed. Provide valid gateway credentials and required headers.
+          retriable: false
+          recovery_hint: refresh_auth
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+payment_required:
+  description: Your team must prepay before it can make more tool calls.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: forbidden
+          message: Prepayment is required before additional tool calls can be made.
+          retriable: false
+          recovery_hint: contact_support
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+forbidden:
+  description: The `X-Session-Id` header is missing or invalid, the session has no policy or belongs to another team, or the session's policy denies the call.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: forbidden
+          message: A valid session ID is required to invoke tools.
+          retriable: false
+          recovery_hint: fix_args
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+not_found:
+  description: The tool or approval does not exist, or belongs to another session.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: not_found
+          message: Requested tool was not found. Verify the tool name and retry.
+          retriable: false
+          recovery_hint: fix_args
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+conflict:
+  description: The approval was already decided or has expired.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: invalid_argument
+          message: The approval is no longer pending. Re-invoke the tool to request a new approval.
+          retriable: false
+          recovery_hint: fix_args
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+precondition_failed:
+  description: Your team is not enabled for Action Gateway, or the session's actor ID or connection cannot be used for this call.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: forbidden
+          message: Your team is not enabled for Action Gateway. Contact support to request access.
+          retriable: false
+          recovery_hint: contact_support
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+payload_too_large:
+  description: The request body is larger than 1 MiB.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: invalid_argument
+          message: Request body is too large.
+          retriable: false
+          recovery_hint: fix_args
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+too_many_requests:
+  description: Too many requests. Retry after the number of seconds in the `Retry-After` header.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: rate_limited
+          message: Rate limit exceeded. Retry after the indicated delay.
+          retriable: true
+          recovery_hint: retry_later
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+server_error:
+  description: The server failed to process the request.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: unavailable
+          message: The server failed to process the request.
+          retriable: true
+          recovery_hint: retry_later
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+service_unavailable:
+  description: Action Gateway or one of its dependencies is temporarily unavailable.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: unavailable
+          message: Gateway is temporarily unavailable. Retry later.
+          retriable: true
+          recovery_hint: retry_later
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+gateway_timeout:
+  description: The call did not finish in time.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: timeout
+          message: Tool execution timed out.
+          retriable: true
+          recovery_hint: retry_later
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230
+
+unexpected_error:
+  description: An unexpected error occurred.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/gateway_error_response
+      example:
+        status: failed
+        error:
+          class: unavailable
+          message: The server failed to process the request.
+          retriable: true
+          recovery_hint: retry_later
+        call_id: call_d2787206-50a7-483d-83ce-9ccabf469230

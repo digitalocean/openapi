@@ -559,3 +559,24 @@ sort_direction_users:
       - asc
       - desc
   example: desc
+
+session_id_header:
+  name: X-Session-Id
+  in: header
+  required: true
+  description: >-
+    The ID of the session to act in: the UUID at the end of the session's `sessionUrn` and `mcpUrl`.
+    The session must belong to your team. Its tools and policy decide what the request can do.
+  schema:
+    type: string
+    format: uuid
+  example: 2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+
+approval_id:
+  name: approval_id
+  in: path
+  required: true
+  description: The `approval_id` from the `_meta` of a call that requires approval.
+  schema:
+    type: string
+  example: 7d0c1e7a-3b2f-4c6e-9a51-2f4e8b9c0d13

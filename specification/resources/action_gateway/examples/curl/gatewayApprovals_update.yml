@@ -1,0 +1,8 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "X-Session-Id: 2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b" \
+    -d '{"decision":"approve"}' \
+    "https://actions.do-ai.run/approvals/7d0c1e7a-3b2f-4c6e-9a51-2f4e8b9c0d13"

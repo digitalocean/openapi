@@ -1,0 +1,62 @@
+operationId: gatewayTools_list
+summary: List Session Tools
+description: >-
+  Returns every tool the session can call, after applying its tool selection and policy, in the shape of
+  MCP `Tool` objects. This is the same set an MCP client sees from `tools/list` on the session's
+  `mcpUrl`. Use `POST /tools/search` to find tools for a task instead of listing them all.
+tags:
+- Action Gateway Data Plane
+servers:
+- url: "https://actions.do-ai.run"
+  description: production
+parameters:
+- $ref: parameters.yml#/session_id_header
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/data_plane.yml#/gateway_tool_catalog
+        example:
+          version: v1
+          tools:
+          - name: exa_web_search
+            title: Web Search
+            description: Search the public internet for current information, news, announcements, and
+              general web content, returning relevant results with normalized text snippets.
+            inputSchema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: Search query string.
+                max_results:
+                  type: integer
+                  description: Maximum number of search results to return.
+              required:
+              - query
+            version: v12
+            parallelizable: true
+            streamingSafe: true
+  '401':
+    $ref: data_plane_responses.yml#/unauthorized
+  '403':
+    $ref: data_plane_responses.yml#/forbidden
+  '412':
+    $ref: data_plane_responses.yml#/precondition_failed
+  '429':
+    $ref: data_plane_responses.yml#/too_many_requests
+  '500':
+    $ref: data_plane_responses.yml#/server_error
+  '503':
+    $ref: data_plane_responses.yml#/service_unavailable
+  default:
+    $ref: data_plane_responses.yml#/unexpected_error
+x-codeSamples:
+- $ref: examples/curl/gatewayTools_list.yml
+security:
+- bearer_auth:
+  - action_gateway:execute

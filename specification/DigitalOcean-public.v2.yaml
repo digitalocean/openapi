@@ -80,6 +80,45 @@ tags:
       - **Users** and **end user limits** show and limit activity per end
         user, identified by a session's `actorId`.
 
+      To find and call tools from an agent, use the
+      [Action Gateway Data Plane](#tag/Action-Gateway-Data-Plane) endpoints or
+      connect to a session's `mcpUrl`.
+
+  - name: Action Gateway Data Plane
+    description: |-
+      The Action Gateway data plane is where agents find and call tools. It
+      exposes the same capabilities as a session's MCP server as REST
+      endpoints:
+
+      - **Search** finds the tools in a session that can do a task and returns
+        their input schemas (the `action_search` MCP tool).
+      - **Invoke** calls up to 10 tools in parallel (`action_invoke`).
+      - **Execute code** runs a Python program that can call tools in a
+        sandbox (`action_code`).
+      - **Approvals** let a person approve or deny a call that the session's
+        policy paused for approval.
+
+      **Note:** The data plane uses a separate base URL,
+      `https://actions.do-ai.run`, and is independent of the control-plane API
+      at `https://api.digitalocean.com`. Regional hosts such as
+      `https://tor1.actions.do-ai.run` and `https://atl1.actions.do-ai.run`
+      are also available.
+
+      Every request acts in one session. Create a session with
+      [Create a Session](#operation/sessions_create), then send its ID, the UUID
+      at the end of its `sessionUrn` and `mcpUrl`, in the `X-Session-Id` header.
+      The session's tools and policy decide which tools a request can find and
+      call. Authenticate with a DigitalOcean access token in the
+      `Authorization: Bearer` header; the token needs the
+      `action_gateway:execute` scope, and the session must belong to the
+      token's team.
+
+      Tool calls return a tool result rather than a DigitalOcean error object:
+      `status` is `succeeded` with `output`, or `failed` with an `error` that
+      has a `class`, a `message`, whether it is `retriable`, and a
+      `recovery_hint`. Request-level errors use the same shape with a 4xx or
+      5xx status.
+
   - name: Agent Platform API
     description: |-
       The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
@@ -715,6 +754,7 @@ x-tagGroups:
       - Actions
       - Add-Ons
       - Action Gateway
+      - Action Gateway Data Plane
       - Agent Platform API
       - Apps
       - Billing
@@ -924,6 +964,26 @@ paths:
   /v2/action-gateway/users/{user_id}:
     get:
       $ref: "resources/action_gateway/users_get.yml"
+
+  /tools:
+    get:
+      $ref: "resources/action_gateway/gatewayTools_list.yml"
+
+  /tools/search:
+    post:
+      $ref: "resources/action_gateway/gatewayTools_list_search.yml"
+
+  /tools/invoke:
+    post:
+      $ref: "resources/action_gateway/gatewayTools_run.yml"
+
+  /code/execute:
+    post:
+      $ref: "resources/action_gateway/gatewayCode_run.yml"
+
+  /approvals/{approval_id}:
+    post:
+      $ref: "resources/action_gateway/gatewayApprovals_update.yml"
 
   /v2/1-clicks:
     get:

@@ -62,7 +62,8 @@ rules:
     message: '{{description}}; {{property}} incorrect'
     severity: error
     resolved: false
-    given: "$.paths[?(@property!='/<upload_url>')]~"
+    # The Action Gateway data plane is served unversioned from actions.do-ai.run.
+    given: "$.paths[?(@property!='/<upload_url>' && @property!='/tools' && @property!='/tools/search' && @property!='/tools/invoke' && @property!='/code/execute' && @property!='/approvals/{approval_id}')]~"
     then:
       function: pattern
       functionOptions:
