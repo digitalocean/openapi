@@ -8,7 +8,8 @@ description: |
   `email`, `slack`, or `webhook`.
 
   Sending a secret field rotates it; omitting the secret field keeps the
-  existing value.
+  existing value. Responses never return secret values; they include optional
+  `*_status` objects when a secret is configured.
 
 tags:
   - Insights
@@ -23,8 +24,14 @@ requestBody:
       schema:
         $ref: 'models/notification_channel_request.yml'
       examples:
-        slack:
-          summary: Slack channel
+        slack_preserve_webhook:
+          summary: Update Slack channel without rotating webhook
+          value:
+            name: Platform alerts (updated)
+            slack:
+              channel: '#platform-alerts-prod'
+        slack_rotate_webhook:
+          summary: Update Slack channel and rotate webhook
           value:
             name: Platform alerts (updated)
             slack:

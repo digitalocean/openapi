@@ -32,21 +32,22 @@ content:
             created_at: '2026-09-03T10:15:00Z'
             updated_at: '2026-09-03T10:15:00Z'
       slack:
-        summary: Slack channel with masked webhook
+        summary: Slack channel with webhook status
         value:
           notification_channel:
             id: 660e8400-e29b-41d4-a716-446655440001
             name: Platform alerts
             channel_type: CHANNEL_TYPE_SLACK
             slack:
-              webhook_url: '********'
+              webhook_url_status:
+                configured: true
               channel: '#platform-alerts'
             usage:
               rule_count: 0
             created_at: '2026-09-03T10:16:00Z'
             updated_at: '2026-09-03T10:16:00Z'
       webhook:
-        summary: Webhook channel with masked credentials
+        summary: Webhook channel with credential status
         value:
           notification_channel:
             id: 770e8400-e29b-41d4-a716-446655440002
@@ -55,11 +56,13 @@ content:
             webhook:
               url: https://example.com/hook
               bearer_token:
-                token: '********'
+                token_status:
+                  configured: true
               headers:
                 X-Custom: '1'
               signature:
-                secret: '********'
+                secret_status:
+                  configured: true
             usage:
               rule_count: 0
             created_at: '2026-09-03T10:17:00Z'

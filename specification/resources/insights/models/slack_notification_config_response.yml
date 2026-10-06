@@ -1,0 +1,18 @@
+type: object
+description: |
+  Slack notification channel configuration as returned in API responses. The
+  webhook URL is never returned; `webhook_url_status` indicates whether it is
+  configured.
+required:
+  - channel
+properties:
+  channel:
+    type: string
+    description: The Slack channel name to notify.
+    example: '#platform-alerts'
+  webhook_url_status:
+    allOf:
+      - $ref: 'secret_status.yml'
+    description: |
+      Present when a Slack webhook URL is configured. Omitted when not
+      configured.

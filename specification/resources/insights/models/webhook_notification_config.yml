@@ -1,14 +1,15 @@
 type: object
 description: |
-  Generic HTTPS webhook notification channel configuration. The URL must use
-  HTTPS and must not include userinfo. Optionally configure either
-  `basic_auth` or `bearer_token` (not both), custom headers, and a signing
-  secret.
+  Generic HTTPS webhook notification channel configuration for create and
+  update requests. The URL must use HTTPS and must not include userinfo.
+  Optionally configure either `basic_auth` or `bearer_token` (not both),
+  custom headers, and a signing secret.
 
   `url` is not a secret and is returned in full on read. Credential fields
   (`basic_auth.password`, `bearer_token.token`, `signature.secret`) are
-  write-only: full value on create/update; masked as `********` on read. Omit
-  a secret field on update to keep the existing value.
+  write-only: send the full value to set or rotate. Omit a secret field on
+  update to keep the existing value. Responses return nested `*_status`
+  objects instead of secret values.
 required:
   - url
 properties:
