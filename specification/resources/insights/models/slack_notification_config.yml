@@ -1,17 +1,18 @@
 type: object
 description: |
-  Slack notification channel configuration. `webhook_url` is write-only: send
-  the full value on create/update; reads return a masked value (`********`).
-  Omit `webhook_url` on update to keep the existing secret.
+  Slack notification channel configuration for create and update requests.
+  `webhook_url` is write-only: send the full value to set or rotate. Omit
+  `webhook_url` on update to keep the existing secret.
 required:
   - channel
 properties:
   webhook_url:
     type: string
+    writeOnly: true
     description: |
-      Slack incoming webhook URL. Write-only secret — full value on
-      create/update; masked as `********` on read. Omit on update to retain the
-      existing value.
+      Slack incoming webhook URL. Write-only secret — send the full value on
+      create or update. Omit on update to retain the existing value. Never
+      returned in responses.
     example: https://hooks.slack.com/services/T000/B000/XXXXXXXX
   channel:
     type: string

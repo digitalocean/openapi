@@ -1,13 +1,15 @@
 type: object
 description: |
-  Optional HMAC signature configuration. `secret` is write-only: full value on
-  create/update; masked (`********`) on read. Omit on update to keep the
-  existing secret.
+  Optional HMAC signature configuration for a webhook create or update
+  request. `secret` is write-only: send the full value to set or rotate. Omit
+  `secret` on update to keep the existing secret.
 properties:
   secret:
     type: string
     format: password
+    writeOnly: true
     description: |
-      Shared secret used to sign webhook payloads. Write-only secret — full
-      value on create/update; masked as `********` on read.
+      Shared secret used to sign webhook payloads. Write-only secret — send
+      the full value on create or update. Omit on update to retain the
+      existing value. Never returned in responses.
     example: whsec

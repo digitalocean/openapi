@@ -9,7 +9,8 @@ description: |
 
   Email recipients must be verified team member addresses. Webhook URLs must
   use HTTPS. Secret fields (`slack.webhook_url`, webhook credentials) are
-  write-only and returned masked on subsequent reads.
+  write-only. Subsequent reads never return secret values; they include
+  optional `*_status` objects when a secret is configured.
 
 tags:
   - Insights
