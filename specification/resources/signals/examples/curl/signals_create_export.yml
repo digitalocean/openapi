@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"agent_id":"01a0f3d5-b58d-7c99-a743-7ca0397b7f5d","signal_type":"ExecutionFailureToolNotFound"}' \
+    "https://api.digitalocean.com/v1/signals/exports"

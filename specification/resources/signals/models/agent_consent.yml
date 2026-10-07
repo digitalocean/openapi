@@ -1,0 +1,38 @@
+type: object
+description: Consent details for a specific agent, including an allowed flag.
+properties:
+  id:
+    type: integer
+    description: The unique numeric identifier for the consent record.
+    example: 13
+  team_id:
+    type: integer
+    description: The team ID that owns this consent record.
+    example: 39449946
+  agent_id:
+    type: string
+    format: uuid
+    description: The unique identifier of the GenAI agent.
+    example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
+  enabled:
+    type: boolean
+    description: Whether signals collection is enabled for this agent.
+    example: true
+  allowed:
+    type: boolean
+    description: >-
+      Whether the team is permitted to use signals for this agent. This is
+      determined by the platform and cannot be set by the user.
+    example: true
+  updated_at:
+    type: string
+    format: date-time
+    description: A time value given in ISO8601 combined date and time format.
+    example: "2026-08-10T10:09:25.738533Z"
+required:
+  - id
+  - team_id
+  - agent_id
+  - enabled
+  - allowed
+  - updated_at

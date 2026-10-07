@@ -1,0 +1,17 @@
+description: A download URL for a completed export.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/export_download.yml'
+    example:
+      url: "https://storage.example.com/exports/9f13c09c.tar.gz?sig=abc123"
+      expires_at: "2026-10-15T00:00:00Z"

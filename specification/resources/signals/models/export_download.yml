@@ -1,0 +1,15 @@
+type: object
+description: A pre-signed download URL for a completed export.
+properties:
+  url:
+    type: string
+    format: uri
+    description: A temporary pre-signed URL to download the export archive.
+    example: "https://storage.example.com/exports/9f13c09c.tar.gz?sig=abc123"
+  expires_at:
+    type: string
+    format: date-time
+    description: When the download URL expires.
+    example: "2026-10-15T00:00:00Z"
+required:
+  - url

@@ -1,0 +1,32 @@
+type: object
+description: A dialogue entry within a session, representing a single turn of conversation.
+properties:
+  id:
+    type: string
+    description: The unique identifier for the dialogue.
+    example: "01a0f3d6-1234-7abc-def0-123456789abc"
+  segment_id:
+    type: string
+    description: The segment identifier grouping related dialogues.
+    example: "01a0f3d6-5678-7abc-def0-123456789abc"
+  sequence:
+    type: integer
+    description: The sequence number of this dialogue within its segment.
+    example: 1
+  run_status:
+    type: string
+    description: The execution status of this dialogue turn.
+    example: completed
+  user_message:
+    type: string
+    description: The user's message in this dialogue turn.
+    example: "How do I create a Droplet?"
+  signals:
+    type: array
+    description: A list of signal types detected in this dialogue.
+    items:
+      type: string
+    example:
+      - SatisfactionConfirmation
+required:
+  - id

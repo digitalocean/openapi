@@ -1,0 +1,64 @@
+type: object
+description: An export job that produces a downloadable archive of signals data.
+properties:
+  export_id:
+    type: string
+    format: uuid
+    description: The unique identifier for the export job.
+    example: 9f13c09c-c877-436b-9863-dcc39c9dd737
+  agent_id:
+    type: string
+    format: uuid
+    description: The GenAI agent whose data is being exported.
+    example: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
+  status:
+    type: string
+    description: The current status of the export job.
+    enum:
+      - pending
+      - processing
+      - complete
+      - failed
+    example: complete
+  filters:
+    type: object
+    description: The filters applied to this export.
+    properties:
+      signal_type:
+        type: array
+        items:
+          type: string
+        description: Signal types included in the export.
+        example:
+          - ExecutionFailureToolNotFound
+      session_ids:
+        type: array
+        items:
+          type: string
+        description: Specific session IDs included in the export.
+        example:
+          - 01a0f3d5-d5f1-798a-9352-2cd8f8b81e78
+  created_at:
+    type: integer
+    description: Unix timestamp when the export was created.
+    example: 1791036405
+  completed_at:
+    type: integer
+    nullable: true
+    description: Unix timestamp when the export completed, or null if still in progress.
+    example: 1791036405
+  expires_at:
+    type: integer
+    nullable: true
+    description: Unix timestamp when the export download link expires.
+    example: 1791641205
+  error_message:
+    type: string
+    nullable: true
+    description: Error message if the export failed, or null on success.
+    example: null
+required:
+  - export_id
+  - agent_id
+  - status
+  - created_at

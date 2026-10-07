@@ -1,0 +1,85 @@
+agent_id:
+  in: path
+  name: agent_id
+  description: A unique identifier for a GenAI agent.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
+
+session_id:
+  in: path
+  name: session_id
+  description: A unique identifier for a signals session.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 01a0f3d5-d5f1-798a-9352-2cd8f8b81e78
+
+export_id:
+  in: path
+  name: export_id
+  description: A unique identifier for an export job.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 9f13c09c-c877-436b-9863-dcc39c9dd737
+
+limit:
+  in: query
+  name: limit
+  description: Maximum number of items to return per page.
+  required: false
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 20
+  example: 20
+
+after:
+  in: query
+  name: after
+  description: >-
+    An opaque cursor string returned from a previous page. Pass this value to
+    retrieve the next page of results.
+  required: false
+  schema:
+    type: string
+  example: eyJ0ZWFtX2lkIjozOTQ0OTk0Nn0=
+
+signal_type:
+  in: query
+  name: signal_type
+  description: >-
+    Filter results by signal type. Use the export options endpoint to list
+    available signal types.
+  required: false
+  schema:
+    type: string
+  example: DisengagementEscalation
+
+start_time:
+  in: query
+  name: start_time
+  description: >-
+    Filter results to those occurring at or after this timestamp (RFC 3339).
+  required: false
+  schema:
+    type: string
+    format: date-time
+  example: "2026-09-01T00:00:00Z"
+
+end_time:
+  in: query
+  name: end_time
+  description: >-
+    Filter results to those occurring at or before this timestamp (RFC 3339).
+  required: false
+  schema:
+    type: string
+    format: date-time
+  example: "2026-10-01T00:00:00Z"

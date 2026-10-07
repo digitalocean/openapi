@@ -1,0 +1,49 @@
+description: A paginated list of export jobs.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        edges:
+          type: array
+          items:
+            type: object
+            properties:
+              cursor:
+                type: string
+                description: An opaque cursor for pagination.
+              node:
+                $ref: '../models/export_job.yml'
+        page_info:
+          type: object
+          properties:
+            has_next_page:
+              type: boolean
+              description: Whether there are more results after this page.
+    example:
+      edges:
+        - cursor: eyJ0ZWFtX2lkIjozOTQ0OTk0Nn0=
+          node:
+            export_id: 9f13c09c-c877-436b-9863-dcc39c9dd737
+            agent_id: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
+            status: complete
+            filters:
+              signal_type:
+                - ExecutionFailureToolNotFound
+              session_ids:
+                - 01a0f3d5-d5f1-798a-9352-2cd8f8b81e78
+            created_at: 1791036405
+            completed_at: 1791036405
+            expires_at: 1791641205
+            error_message: null
+      page_info:
+        has_next_page: false
