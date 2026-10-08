@@ -5,7 +5,7 @@ properties:
     type: string
     format: uri
     description: A temporary pre-signed URL to download the export archive.
-    example: "https://example-bucket.nyc3.digitaloceanspaces.com/exports/3f2a1c4e-5b6d-4e7f-8a9b-0c1d2e3f4a5b/9f13c09c-c877-436b-9863-dcc39c9dd737.json.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=EXAMPLE"
+    example: "https://example-bucket.nyc3.digitaloceanspaces.com/exports/<agent-id>/<export-id>.json.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=EXAMPLE"
   expires_at:
     type: integer
     description: Unix timestamp when the download URL expires. The URL is valid for 15 minutes.
