@@ -21,6 +21,7 @@ content:
               cursor:
                 type: string
                 description: An opaque cursor for pagination.
+                example: eyJzZXF1ZW5jZSI6MX0=
               node:
                 $ref: '../models/session_dialogue.yml'
         page_info:

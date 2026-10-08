@@ -1849,7 +1849,7 @@ paths:
       $ref: "resources/signals/signals_get_consent.yml"
 
     put:
-      $ref: "resources/signals/signals_set_consent.yml"
+      $ref: "resources/signals/signals_update_consent.yml"
 
   /v1/signals/agents/{agent_id}/sessions:
     get:
