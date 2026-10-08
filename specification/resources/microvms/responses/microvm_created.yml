@@ -1,0 +1,52 @@
+description: >-
+  The response will be a JSON object with a key called `microvm`. A MicroVM
+  created from a container image has `state` set to `creating` and an empty
+  endpoint hostname until provisioning finishes. A MicroVM created from a
+  checkpoint is usually already `running`.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        microvm:
+          $ref: '../models/microvm.yml'
+
+    examples:
+      Creating MicroVM:
+        value:
+          microvm:
+            id: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+            name: example-microvm
+            region: mkc1
+            size:
+              cpu: 1
+              memory: 2048
+              disk: 50
+            source:
+              oci_ref: docker.io/library/nginx:latest
+            state: creating
+            networking: public
+            auto_pause:
+              enabled: true
+              idle_timeout: 5m0s
+            auto_resume: true
+            http_protocol: http
+            ports:
+              - 80
+            tags:
+              - example
+            urls:
+              - hostname: ""
+                port: 80
+                default: true
+                status: PENDING
+            created_at: "2026-09-29T21:38:29Z"

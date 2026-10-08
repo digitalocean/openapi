@@ -1,0 +1,109 @@
+type: object
+
+description: >-
+  The request body for creating a MicroVM. With `source.oci_ref`, `region`
+  and `size` are required. With `source.checkpoint_id`, the MicroVM inherits
+  the checkpoint's region, size, container image, and environment variables,
+  and a different `region` or `size`, or any `environment`, is rejected.
+
+properties:
+  name:
+    type: string
+    pattern: '^[a-z0-9-]{1,63}$'
+    description: >-
+      The name of the MicroVM. Must be unique in the region and contain 1 to 63
+      lowercase letters, digits, and hyphens.
+    example: example-microvm
+
+  source:
+    $ref: 'microvm_source.yml'
+
+  region:
+    type: string
+    description: >-
+      The slug of the region to create the MicroVM in. Required with
+      `source.oci_ref`.
+    example: mkc1
+
+  size:
+    $ref: 'microvm_size.yml'
+
+  networking:
+    type: string
+    enum:
+      - public
+      - vpc
+    default: public
+    description: >-
+      `public` sends outbound traffic through a shared NAT gateway. `vpc`
+      places the MicroVM in the VPC network set by `vpc_uuid`.
+    example: public
+
+  vpc_uuid:
+    type: string
+    format: uuid
+    description: >-
+      The ID of a VPC network in the same region that belongs to your team.
+      Required when `networking` is `vpc`.
+    example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+
+  auto_pause:
+    $ref: 'microvm_auto_pause.yml'
+
+  auto_resume:
+    type: boolean
+    default: true
+    description: >-
+      Whether an HTTP request, command, or console session resumes the
+      MicroVM when it is paused. Set to `false` to require a manual resume.
+    example: true
+
+  http_port:
+    type: integer
+    default: 80
+    description: >-
+      The guest port the workload serves HTTP on. Not returned in responses.
+      When creating from a checkpoint without `ports`, must be one of the
+      checkpoint's ports.
+    example: 80
+
+  http_protocol:
+    type: string
+    enum:
+      - http
+      - http2
+    description: The protocol the HTTP port serves.
+    example: http
+
+  ports:
+    type: array
+    maxItems: 5
+    items:
+      type: integer
+    description: >-
+      The guest ports to open, up to five. Must include `http_port`. Defaults
+      to only the HTTP port.
+    example:
+      - 80
+
+  environment:
+    type: object
+    additionalProperties:
+      type: string
+    description: >-
+      Environment variables passed into the MicroVM at boot, as key and value
+      pairs. Not returned in responses.
+    example:
+      APP_ENV: production
+
+  tags:
+    type: array
+    items:
+      type: string
+    description: Tags to apply to the MicroVM.
+    example:
+      - example
+
+required:
+  - name
+  - source

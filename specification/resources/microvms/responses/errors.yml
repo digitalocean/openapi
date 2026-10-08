@@ -1,0 +1,79 @@
+bad_request:
+  description: The request was malformed or failed validation.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: INVALID_ARGUMENT
+        message: "size must be one of the supported sizes"
+
+forbidden:
+  description: >-
+    The token does not have the required scope, the feature is not enabled for
+    your team, or your team has reached a limit.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: PERMISSION_DENIED
+        message: "permission denied"
+
+not_found:
+  description: The MicroVM or checkpoint does not exist, or it belongs to another team.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: NOT_FOUND
+        message: MicroVM not found
+
+bad_gateway:
+  description: >-
+    The command did not reach the workload, for example because the container
+    is not running.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: UNAVAILABLE
+        message: "workload unavailable"

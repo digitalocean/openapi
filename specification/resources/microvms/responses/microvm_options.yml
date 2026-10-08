@@ -1,0 +1,73 @@
+description: >-
+  The response will be a JSON object with the default region, sizes, prices,
+  account limits, and features available to your team.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/microvm_options.yml'
+
+    examples:
+      Options:
+        value:
+          default_region: mkc1
+          sizes:
+            - cpu: 1
+              memory: 2048
+              disk: 50
+              available: true
+              regions:
+                - mkc1
+              pricing:
+                price_per_hour: 0.039
+                price_per_month: 28.47
+            - cpu: 2
+              memory: 4096
+              disk: 80
+              available: true
+              regions:
+                - mkc1
+              pricing:
+                price_per_hour: 0.078
+                price_per_month: 56.94
+            - cpu: 8
+              memory: 16384
+              disk: 320
+              available: true
+              regions:
+                - mkc1
+              pricing:
+                price_per_hour: 0.312
+                price_per_month: 227.76
+            - cpu: 16
+              memory: 32768
+              disk: 400
+              available: true
+              regions:
+                - mkc1
+              pricing:
+                price_per_hour: 0.624
+                price_per_month: 455.52
+          resource_pricing:
+            price_per_vcpu_hour: 0.022
+            price_per_gib_memory_hour: 0.0085
+            price_per_gib_storage_month: 0.05
+            price_per_gib_bandwidth: 0.01
+          account_limits:
+            max_total_count: 1000
+            max_memory_bytes: 34359738368
+            max_disk_bytes: 429496729600
+            max_idle_timeout_seconds: 14400
+          features:
+            - name: microvm
+              enabled: true
+            - name: exec_pty
+              enabled: true

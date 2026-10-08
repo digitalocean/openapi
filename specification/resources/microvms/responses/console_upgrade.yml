@@ -1,0 +1,20 @@
+description: >-
+  The connection is upgraded to a WebSocket. Binary frames from the client are
+  terminal input, and text frames are resize messages such as
+  `{"resize":{"rows":40,"cols":120}}`. Binary frames from the server are
+  terminal output with `stdout` and `stderr` combined. Text frames from the
+  server are control messages: `{"status":{"state":"resuming"}}` while a
+  paused MicroVM resumes, `{"error":{"code":"...","message":"..."}}` when the
+  console fails to connect or start (with `code` set to `dial_failed`,
+  `start_failed`, or `agent_error`), and `{"exit":{"code":0}}` when the shell
+  exits. The server sends a ping every 30 seconds. A console closes after 4
+  hours, or after 30 minutes with no input and no output. A message larger
+  than 1 MiB closes the console with WebSocket code 1009.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'

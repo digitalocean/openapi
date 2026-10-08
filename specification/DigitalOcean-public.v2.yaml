@@ -435,6 +435,21 @@ tags:
       delete load balancers as well as add or remove Droplets, forwarding rules,
       and other configuration details.
 
+  - name: MicroVMs [Public Preview]
+    description: |-
+      [DigitalOcean MicroVMs](https://docs.digitalocean.com/products/microvms/)
+      are lightweight virtual machines that run a `linux/amd64` container image
+      in an isolated kernel. A MicroVM pauses automatically when it is idle and
+      resumes on the next HTTP request, command, or console session, with its
+      memory, files, and processes intact. By sending requests to the
+      `/v2/microvms` endpoints, you can create, list, pause, resume, and delete
+      MicroVMs, run commands and open a console in them, and create checkpoints
+      to start new MicroVMs from a saved state.
+
+      Each MicroVM serves its HTTP port at
+      `https://{microvm_id}.{region}.microvm.ondigitalocean.com`. Requests to
+      that endpoint require a token with the `microvm:access` scope.
+
   - name: Monitoring
     description: |-
       The DigitalOcean Monitoring API makes it possible to programmatically retrieve metrics as well as configure alert
@@ -741,6 +756,7 @@ x-tagGroups:
       - Insights
       - Kubernetes
       - Load Balancers
+      - MicroVMs [Public Preview]
       - Monitoring
       - NFS
       - NFS Actions
@@ -1964,6 +1980,55 @@ paths:
 
     delete:
       $ref: "resources/load_balancers/loadBalancers_remove_forwardingRules.yml"
+
+  /v2/microvms:
+    get:
+      $ref: "resources/microvms/microvms_list.yml"
+
+    post:
+      $ref: "resources/microvms/microvms_create.yml"
+
+  /v2/microvms/options:
+    get:
+      $ref: "resources/microvms/microvms_options.yml"
+
+  /v2/microvms/checkpoints:
+    get:
+      $ref: "resources/microvms/microvms_checkpoints_list.yml"
+
+  /v2/microvms/checkpoints/{checkpoint_id}:
+    get:
+      $ref: "resources/microvms/microvms_checkpoints_get.yml"
+
+    delete:
+      $ref: "resources/microvms/microvms_checkpoints_delete.yml"
+
+  /v2/microvms/{microvm_id}:
+    get:
+      $ref: "resources/microvms/microvms_get.yml"
+
+    delete:
+      $ref: "resources/microvms/microvms_delete.yml"
+
+  /v2/microvms/{microvm_id}/pause:
+    post:
+      $ref: "resources/microvms/microvms_pause.yml"
+
+  /v2/microvms/{microvm_id}/resume:
+    post:
+      $ref: "resources/microvms/microvms_resume.yml"
+
+  /v2/microvms/{microvm_id}/exec:
+    post:
+      $ref: "resources/microvms/microvms_exec.yml"
+
+  /v2/microvms/{microvm_id}/console:
+    get:
+      $ref: "resources/microvms/microvms_console.yml"
+
+  /v2/microvms/{microvm_id}/checkpoints:
+    post:
+      $ref: "resources/microvms/microvms_checkpoints_create.yml"
 
   /v2/monitoring/alerts:
     get:
