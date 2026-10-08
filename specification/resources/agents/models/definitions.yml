@@ -2029,3 +2029,486 @@ exec_in_sandbox_response:
       format: int64
       description: Wall-clock duration the guest reported for the command.
       example: 12
+
+trigger_kind:
+  type: string
+  enum:
+    - webhook
+    - cron
+  description: How the trigger fires - on an event (webhook) or on a schedule (cron). Immutable after create.
+  example: webhook
+
+trigger_status:
+  type: string
+  enum:
+    - active
+    - paused
+  description: Trigger lifecycle state. Soft-deleted triggers are never returned (404).
+  example: active
+
+trigger_session_mode:
+  type: string
+  enum:
+    - fresh
+    - reuse
+  description: >-
+    fresh = a new session is created from the trigger's spec on every firing and destroyed after.
+    reuse = the trigger binds an existing PAUSED session, resumed on each firing and paused after;
+    multiple triggers may bind one session.
+  example: fresh
+
+trigger_output_mode:
+  type: string
+  enum:
+    - none
+    - email
+    - slack
+  description: >-
+    none = nothing pushed; the result stays in run history for self-serve. email = the collected run
+    output is emailed to a configured address. slack = the collected run output is posted to a Slack
+    incoming webhook URL (channel fixed by the webhook at install time).
+  example: email
+
+webhook_provider_key:
+  type: string
+  enum:
+    - github
+    - gitlab
+    - custom
+  description: Signature-verification scheme applied to a delivery. Omitted on create defaults to custom.
+  example: github
+
+trigger_execution_status:
+  type: string
+  enum:
+    - pending
+    - running
+    - succeeded
+    - failed
+  description: Per-firing outcome.
+  example: succeeded
+
+webhook_signature_scheme:
+  type: string
+  enum:
+    - hmac-sha256
+    - plaintext
+    - do-signature-v1
+  description: >-
+    How the external system authenticates a delivery: hmac-sha256 over the raw body (github), a
+    plaintext token replayed verbatim (gitlab), or do-signature-v1 (`t=<unix>,v1=<hex>` over
+    `{unix}.{body}`, custom).
+  example: hmac-sha256
+
+slack_output_write:
+  type: object
+  description: >-
+    Slack destination on create/update. webhook_url is required when mode=slack; must be
+    https://hooks.slack.com/services/...; stored encrypted and never returned.
+  required:
+    - webhook_url
+  properties:
+    webhook_url:
+      type: string
+      description: Slack incoming webhook URL (https://hooks.slack.com/services/...). The channel is bound to this URL at install time.
+      example: https://hooks.slack.com/services/T0000/B0000/XXXX
+
+trigger_output_read:
+  type: object
+  description: Output-delivery configuration as seen on reads. The email address and Slack webhook URL are write-only and never returned.
+  properties:
+    mode:
+      $ref: '#/trigger_output_mode'
+    email_configured:
+      type: boolean
+      description: True when an email address is stored (mode=email).
+      example: true
+    slack_configured:
+      type: boolean
+      description: True when a Slack incoming webhook URL is stored (mode=slack).
+      example: false
+
+trigger_output_write:
+  type: object
+  description: >-
+    Output-delivery configuration on create/update. Exactly one of email / slack is required for the
+    matching mode and forbidden otherwise; destinations are stored encrypted and never returned.
+  required:
+    - mode
+  properties:
+    mode:
+      $ref: '#/trigger_output_mode'
+    email:
+      type: string
+      description: Destination address; required iff mode=email.
+      example: oncall@example.com
+    slack:
+      $ref: '#/slack_output_write'
+
+webhook_config:
+  type: object
+  description: Present iff kind=webhook. The secret is never in this object (see create_trigger_response / rotate_secret_response).
+  properties:
+    provider:
+      $ref: '#/webhook_provider_key'
+    webhook_url:
+      type: string
+      description: The Payload URL to configure in the external system.
+      example: https://api.digitalocean.com/v2/agents/triggers/b1a0.../webhook
+
+cron_config:
+  type: object
+  description: Present iff kind=cron.
+  properties:
+    cron_expr:
+      type: string
+      description: Cron expression; must parse with the scanner's cron library.
+      example: 0 9 * * 1-5
+    timezone:
+      type: string
+      description: IANA timezone (e.g. "America/New_York").
+      example: America/New_York
+    next_run_at:
+      type: string
+      format: date-time
+      description: Read-only; server-computed next fire time.
+      example: '2026-07-27T13:00:00Z'
+
+trigger:
+  type: object
+  description: >-
+    A single automation bound to exactly one agent/session (agent == session in v1). The nested block
+    present depends on `kind` (webhook xor cron) and `session_mode` (fresh => session_template; reuse
+    => bound_session_id). `agent_kind` is read-only and derived; the webhook secret, the output email
+    address / Slack webhook URL, and any env values inside session_template are write-only and never
+    returned.
+  properties:
+    trigger_id:
+      type: string
+      description: Server-allocated UUID; opaque to clients.
+      example: b1a0c6de-1f2e-4a3b-9c8d-0e1f2a3b4c5d
+    kind:
+      $ref: '#/trigger_kind'
+    name:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[A-Za-z0-9]([A-Za-z0-9._-]{0,62}[A-Za-z0-9])?$
+      description: Unique per team among non-deleted triggers. Same rules as session names; not UUID-form.
+      example: nightly-deploy-check
+    status:
+      $ref: '#/trigger_status'
+    session_mode:
+      $ref: '#/trigger_session_mode'
+    agent_kind:
+      $ref: '#/agent_kind'
+    prompt_template:
+      type: string
+      description: The prompt sent on each fire. Opaque to clients; payload-interpolation syntax is server-defined. For cron triggers it must not reference payload placeholders.
+      example: Review the latest push and summarize risks.
+    output:
+      $ref: '#/trigger_output_read'
+    session_template:
+      type: string
+      description: Present iff session_mode=fresh. The agents.yaml Agent manifest used to CREATE a session on each fire, returned with its env values REDACTED.
+      example: ''
+    bound_session_id:
+      type: string
+      format: uuid
+      description: Present iff session_mode=reuse. UUID of the existing PAUSED session this trigger resumes; may be shared by multiple triggers.
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    webhook:
+      $ref: '#/webhook_config'
+    cron:
+      $ref: '#/cron_config'
+    created_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+
+create_webhook_config:
+  type: object
+  description: webhook block on create. Omitting provider defaults to custom.
+  properties:
+    provider:
+      $ref: '#/webhook_provider_key'
+
+create_cron_config:
+  type: object
+  description: cron block on create.
+  required:
+    - cron_expr
+    - timezone
+  properties:
+    cron_expr:
+      type: string
+      example: 0 9 * * 1-5
+    timezone:
+      type: string
+      description: IANA timezone.
+      example: America/New_York
+
+create_trigger_request:
+  type: object
+  description: See the CreateTrigger operation description for the conditional-requirement matrix. team_id is NOT accepted here - it is derived from the authenticated principal.
+  required:
+    - kind
+    - name
+    - session_mode
+    - prompt_template
+    - output
+  properties:
+    kind:
+      $ref: '#/trigger_kind'
+    name:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[A-Za-z0-9]([A-Za-z0-9._-]{0,62}[A-Za-z0-9])?$
+      description: Team-unique (among non-deleted triggers) trigger name. Same rules as session names; not UUID-form.
+      example: nightly-deploy-check
+    session_mode:
+      $ref: '#/trigger_session_mode'
+    prompt_template:
+      type: string
+      description: The prompt sent on each fire. For cron it must not contain payload-interpolation placeholders.
+      example: Review the latest push and summarize risks.
+    output:
+      $ref: '#/trigger_output_write'
+    session_template:
+      type: string
+      description: fresh only. Full agents.yaml Agent manifest (YAML or JSON). Any embedded env values are split out and encrypted server-side.
+      example: ''
+    bound_session_id:
+      type: string
+      format: uuid
+      description: reuse only. UUID of an existing session owned by the team.
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    webhook:
+      $ref: '#/create_webhook_config'
+    cron:
+      $ref: '#/create_cron_config'
+
+update_trigger_request:
+  type: object
+  description: Partial update. Only the supplied fields change. kind and webhook.provider are immutable. Sending status alone is how pause/re-enable work.
+  properties:
+    name:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[A-Za-z0-9]([A-Za-z0-9._-]{0,62}[A-Za-z0-9])?$
+      description: New team-unique trigger name. Same charset/length rules as create.
+      example: nightly-deploy-check
+    status:
+      $ref: '#/trigger_status'
+    prompt_template:
+      type: string
+      example: Review the latest push and summarize risks.
+    output:
+      $ref: '#/trigger_output_write'
+    session_template:
+      type: string
+      description: fresh triggers only. A session_template PATCH is a full replacement of the stored template; you must resupply every spec.secrets slot value the new manifest declares, or the request is a 400.
+      example: ''
+    bound_session_id:
+      type: string
+      format: uuid
+      description: reuse triggers only. UUID of an existing session owned by the team.
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    cron:
+      $ref: '#/create_cron_config'
+
+create_trigger_response:
+  type: object
+  properties:
+    trigger:
+      $ref: '#/trigger'
+    webhook_secret:
+      type: string
+      description: The generated webhook secret. Present for webhook triggers only and shown EXACTLY ONCE - it is never returned again. Paste it into the external system's webhook configuration.
+      example: whsec_a1b2c3d4e5f6
+
+get_trigger_response:
+  type: object
+  properties:
+    trigger:
+      $ref: '#/trigger'
+
+list_triggers_response:
+  type: object
+  properties:
+    triggers:
+      type: array
+      items:
+        $ref: '#/trigger'
+    next_page_token:
+      type: string
+      description: Opaque cursor for the next page. Empty when there are no further pages.
+      example: ''
+
+rotate_secret_response:
+  type: object
+  properties:
+    webhook_secret:
+      type: string
+      description: The new webhook secret, shown once.
+      example: whsec_f6e5d4c3b2a1
+    previous_secret_expires_at:
+      type: string
+      format: date-time
+      description: The instant the outgoing secret stops verifying deliveries. Omitted when grace_period_seconds=0.
+      example: '2026-07-27T12:05:00Z'
+    previous_secret_revoked:
+      type: boolean
+      description: True when grace_period_seconds=0 retired the old secret on this call. Exactly one of this and previous_secret_expires_at is present.
+      example: false
+
+trigger_execution:
+  type: object
+  description: One row per firing (webhook delivery or cron tick).
+  properties:
+    execution_id:
+      type: string
+      example: 7c1f9e2a-3b4c-5d6e-7f80-91a2b3c4d5e6
+    trigger_id:
+      type: string
+      example: b1a0c6de-1f2e-4a3b-9c8d-0e1f2a3b4c5d
+    status:
+      $ref: '#/trigger_execution_status'
+    session_id:
+      type: string
+      description: The run's session. Populated once the session is created (fresh) or is known (reuse); empty before then.
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    run_id:
+      type: string
+      description: Populated once SendInput acks; correlation/audit only. May be empty.
+      example: ''
+    failure_reason:
+      type: string
+      description: Client-safe reason when status=failed; absent otherwise. One of a fixed set of messages; do not parse it or match on substrings. Quote the execution_id when contacting support.
+      example: ''
+    created_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:05Z'
+    payload:
+      type: string
+      description: The raw webhook body or cron tick metadata. Returned by GetTriggerExecution only; omitted from list items. Cleared for terminal executions after the payload retention window (default 7 days from creation).
+      example: ''
+    output_text:
+      type: string
+      description: The doctl-parity transcript rendered from the run's SPI events. Returned by GetTriggerExecution only; omitted from list items.
+      example: ''
+    output_truncated:
+      type: boolean
+      description: True when output_text is incomplete. Returned by GetTriggerExecution only; omitted from list items.
+      example: false
+
+list_trigger_executions_response:
+  type: object
+  properties:
+    executions:
+      type: array
+      items:
+        $ref: '#/trigger_execution'
+    next_page_token:
+      type: string
+      description: Opaque cursor for the next page. Empty when there are no further pages.
+      example: ''
+
+get_trigger_execution_response:
+  type: object
+  properties:
+    execution:
+      $ref: '#/trigger_execution'
+
+webhook_provider_signature:
+  type: object
+  properties:
+    header:
+      type: string
+      description: HTTP header the external system sends the signature/token in.
+      example: X-Hub-Signature-256
+    scheme:
+      $ref: '#/webhook_signature_scheme'
+
+webhook_provider:
+  type: object
+  properties:
+    key:
+      $ref: '#/webhook_provider_key'
+    display_name:
+      type: string
+      example: GitHub
+    description:
+      type: string
+      example: Verify deliveries with an HMAC-SHA256 signature over the raw body.
+    docs_url:
+      type: string
+      example: https://docs.github.com/webhooks
+    paste_hint:
+      type: string
+      description: Per-provider instruction for where the generated secret goes in the external system.
+      example: Paste into the webhook's Secret field.
+    signature:
+      $ref: '#/webhook_provider_signature'
+
+list_webhook_providers_response:
+  type: object
+  properties:
+    providers:
+      type: array
+      items:
+        $ref: '#/webhook_provider'
+
+reusable_session:
+  type: object
+  description: The hosted-agents Session shape (subset), returned verbatim from an internal ListSessions(status=PAUSED). Enum spellings match the sessions API.
+  properties:
+    session_id:
+      type: string
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    name:
+      type: string
+      example: demo-agent
+    agent_kind:
+      $ref: '#/agent_kind'
+    status:
+      $ref: '#/session_status'
+    created_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+    last_event_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+
+list_reusable_sessions_response:
+  type: object
+  properties:
+    sessions:
+      type: array
+      items:
+        $ref: '#/reusable_session'
+    next_page_token:
+      type: string
+      description: Opaque cursor for the next page. Empty when there are no further pages.
+      example: ''
+
+webhook_accepted_response:
+  type: object
+  properties:
+    execution_id:
+      type: string
+      description: The queued (or deduped-existing) execution. Absent when the trigger is paused (202 with empty body).
+      example: 7c1f9e2a-3b4c-5d6e-7f80-91a2b3c4d5e6

@@ -101,6 +101,12 @@ tags:
       rollback. Templates (`/v2/agents/templates`) manage team custom sandbox
       templates and their build history.
 
+      Triggers (`/v2/agents/triggers`) fire an agent run on a webhook delivery or
+      cron schedule, each firing recorded as an execution. The session event feed
+      (`GET /v2/agents/sessions/{session_id}/events`) is a Server-Sent Events
+      stream, and port-forward (`GET /v2/agents/sessions/{session_id}/port-forward/{port}`)
+      opens a WebSocket tunnel to a guest port.
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -1083,6 +1089,12 @@ paths:
   /v2/agents/sessions/{session_id}/workspace/upload:
     post:
       $ref: "resources/agents/agents_create_session_workspace_upload.yml"
+  /v2/agents/sessions/{session_id}/events:
+    get:
+      $ref: "resources/agents/agents_stream_session_events.yml"
+  /v2/agents/sessions/{session_id}/port-forward/{port}:
+    get:
+      $ref: "resources/agents/agents_port_forward_session.yml"
   /v2/agents/templates:
     get:
       $ref: "resources/agents/agents_list_templates.yml"
@@ -1101,6 +1113,42 @@ paths:
   /v2/agents/templates/{template_id}/builds/{build_id}:
     get:
       $ref: "resources/agents/agents_get_template_build.yml"
+  /v2/agents/triggers:
+    get:
+      $ref: "resources/agents/agents_list_triggers.yml"
+    post:
+      $ref: "resources/agents/agents_create_trigger.yml"
+  /v2/agents/triggers/by-session/{session_id}:
+    get:
+      $ref: "resources/agents/agents_get_trigger_by_session.yml"
+  /v2/agents/triggers/reusable-sessions:
+    get:
+      $ref: "resources/agents/agents_list_reusable_sessions.yml"
+  /v2/agents/triggers/{trigger_id}:
+    get:
+      $ref: "resources/agents/agents_get_trigger.yml"
+    patch:
+      $ref: "resources/agents/agents_update_trigger.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_trigger.yml"
+  /v2/agents/triggers/{trigger_id}/executions:
+    get:
+      $ref: "resources/agents/agents_list_trigger_executions.yml"
+  /v2/agents/triggers/{trigger_id}/executions/{execution_id}:
+    get:
+      $ref: "resources/agents/agents_get_trigger_execution.yml"
+  /v2/agents/triggers/{trigger_id}/executions/{execution_id}/cancel:
+    post:
+      $ref: "resources/agents/agents_cancel_trigger_execution.yml"
+  /v2/agents/triggers/{trigger_id}/rotate-secret:
+    post:
+      $ref: "resources/agents/agents_rotate_trigger_secret.yml"
+  /v2/agents/triggers/{trigger_id}/webhook:
+    post:
+      $ref: "resources/agents/agents_receive_trigger_webhook.yml"
+  /v2/agents/webhook-providers:
+    get:
+      $ref: "resources/agents/agents_list_webhook_providers.yml"
 
   /v2/apps:
     get:

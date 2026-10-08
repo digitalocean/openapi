@@ -1,0 +1,10 @@
+lang: bash
+source: |-
+  curl -i -N \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "Connection: Upgrade" \
+    -H "Upgrade: websocket" \
+    -H "Sec-WebSocket-Version: 13" \
+    -H "Sec-WebSocket-Key: $(openssl rand -base64 16)" \
+    "https://api.digitalocean.com/v2/agents/sessions/{session_id}/port-forward/8000"
+label: cURL

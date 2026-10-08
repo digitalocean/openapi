@@ -1,0 +1,34 @@
+operationId: harness_list_webhook_providers
+summary: ListWebhookProviders lists supported webhook providers for the create-trigger UI.
+description: A static, code-defined registry (not a database table), webhook-only. Cron triggers have
+  no provider and never call this. Used to populate the provider dropdown with display name, docs link,
+  paste hint, and the signature scheme.
+tags:
+- Harness Runtime
+responses:
+  '200':
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/list_webhook_providers_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_list_webhook_providers.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

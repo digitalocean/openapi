@@ -1,0 +1,72 @@
+operationId: harness_post_trigger_webhook
+summary: ReceiveTriggerWebhook accepts a signed delivery from an external system.
+description: |-
+  The one public, un-team-authenticated endpoint. There is NO DO bearer token: the caller is the
+  customer's external system. Authentication is the per-trigger HMAC secret, verified on every
+  delivery; edge rate-limiting is mandatory.
+
+  The request body is the provider's RAW body, forwarded verbatim (the HMAC is computed over the exact
+  bytes received); Content-Type is provider-defined and passed through. The signature header depends on
+  the trigger's provider:
+    - github: `X-Hub-Signature-256: sha256=<hex>` (HMAC-SHA256 of the raw body)
+    - gitlab: `X-Gitlab-Token: <token>` (plaintext token equality; GitLab does not sign)
+    - custom: `X-DigitalOcean-Signature: t=<unix>,v1=<hex>` (HMAC-SHA256 of `{unix}.{raw body}`;
+      `do-signature` is also accepted as a transitional alias)
+
+  On success (including a provider retry that dedupes to an existing firing) it returns 202 with the
+  execution_id. A delivery to a paused trigger returns 202 with no body and queues nothing (deliberately
+  not 409, so providers do not auto-disable the webhook after repeated non-2xx).
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: trigger_id
+  required: true
+  description: The trigger UUID.
+  schema:
+    type: string
+    example: b1a0c6de-1f2e-4a3b-9c8d-0e1f2a3b4c5d
+  example: b1a0c6de-1f2e-4a3b-9c8d-0e1f2a3b4c5d
+requestBody:
+  required: true
+  description: The provider's raw webhook body, forwarded verbatim. The HMAC is computed over these
+    exact bytes. Content-Type is provider-defined and passed through, so the body is treated as an
+    opaque byte stream.
+  content:
+    application/octet-stream:
+      schema:
+        type: string
+        format: binary
+responses:
+  '202':
+    description: Accepted and queued (also returned for a deduped retry, with the same execution_id).
+      A paused trigger returns 202 with an empty body and queues nothing.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/webhook_accepted_response
+  '401':
+    description: Signature/token verification failed.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_receive_trigger_webhook.yml
+security: []

@@ -1,0 +1,8 @@
+lang: bash
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"kind":"webhook","name":"nightly-deploy-check","session_mode":"fresh","prompt_template":"Review the latest push.","output":{"mode":"none"},"session_template":"...","webhook":{"provider":"github"}}' \
+    "https://api.digitalocean.com/v2/agents/triggers"
+label: cURL
