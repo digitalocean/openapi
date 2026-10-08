@@ -603,21 +603,7 @@ create_session_response:
     session:
       $ref: '#/session'
 error:
-  type: object
-  description: Standard JSON error envelope written by the API on non-2xx responses.
-  properties:
-    error:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Echoes the HTTP status code.
-          example: 1
-        message:
-          type: string
-          description: Client-safe error message.
-          example: example
+  $ref: ../../../shared/models/error.yml
 get_session_response:
   type: object
   properties:
