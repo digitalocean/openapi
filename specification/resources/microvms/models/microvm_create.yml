@@ -60,11 +60,11 @@ properties:
 
   http_port:
     type: integer
-    default: 80
+    default: 8080
     description: >-
-      The guest port the workload serves HTTP on. Not returned in responses.
-      When creating from a checkpoint without `ports`, must be one of the
-      checkpoint's ports.
+      The guest port the workload serves HTTP on. Defaults to `8080`. Not
+      returned in responses. When creating from a checkpoint without `ports`,
+      must be one of the checkpoint's ports.
     example: 80
 
   http_protocol:
