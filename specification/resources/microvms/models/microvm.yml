@@ -87,7 +87,10 @@ properties:
     enum:
       - http
       - http2
-    description: The protocol the MicroVM's HTTP port serves.
+    nullable: true
+    description: >-
+      The protocol the MicroVM's HTTP port serves. `null` if the protocol was
+      not set when the MicroVM was created.
     example: http
 
   ports:
