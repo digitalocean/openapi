@@ -1,0 +1,40 @@
+type: object
+description: A typed literal or list value for a filter condition. Exactly one kind is set per message.
+minProperties: 1
+maxProperties: 1
+properties:
+  string_value:
+    type: string
+    example: "droplet-123"
+  number_value:
+    type: number
+    example: 42
+  bool_value:
+    type: boolean
+    example: true
+  string_array_value:
+    type: object
+    required:
+      - values
+    properties:
+      values:
+        type: array
+        minItems: 1
+        items:
+          type: string
+        example:
+          - "droplet-123"
+          - "droplet-456"
+  number_array_value:
+    type: object
+    required:
+      - values
+    properties:
+      values:
+        type: array
+        minItems: 1
+        items:
+          type: number
+        example:
+          - 42
+          - 84

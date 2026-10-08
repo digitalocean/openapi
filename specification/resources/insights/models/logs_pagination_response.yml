@@ -1,0 +1,11 @@
+type: object
+description: Pagination response.
+properties:
+  has_more:
+    type: boolean
+    description: Whether more results are available.
+    example: true
+  next_cursor:
+    type: string
+    description: Opaque cursor to fetch the next page.
+    example: "eyJ0cyI6MTc1NjY4NDgwMDAwMDAwMDAwfQ"

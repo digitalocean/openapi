@@ -9,8 +9,6 @@ parameters:
     default: EVALUATION_DATASET_TYPE_UNKNOWN
     enum:
     - EVALUATION_DATASET_TYPE_UNKNOWN
-    - EVALUATION_DATASET_TYPE_ADK
-    - EVALUATION_DATASET_TYPE_NON_ADK
     - EVALUATION_DATASET_TYPE_MODEL
     type: string
 - description: Filter by evaluation dataset paradigm (row/content shape).

@@ -1,0 +1,200 @@
+alert_instance_id:
+  in: path
+  name: id
+  description: A unique identifier for an alert instance.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+
+alert_instance_status:
+  in: query
+  name: status
+  required: false
+  description: |
+    Optional filter. When set, only alert instances with this status are
+    returned.
+  schema:
+    type: string
+    enum:
+      - active
+      - resolved
+  example: active
+
+alert_rule_id:
+  in: path
+  name: id
+  description: A unique identifier for an alert rule.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+
+notification_channel_id:
+  in: path
+  name: id
+  description: A unique identifier for a notification channel.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 550e8400-e29b-41d4-a716-446655440000
+
+rule_id:
+  in: query
+  name: rule_id
+  required: false
+  description: |
+    Optional filter. When set, only alert instances fired by the alert rule
+    with this ID are returned.
+  schema:
+    type: string
+    format: uuid
+  example: 8f3a2b1c-4d5e-6f7a-8b9c-0d1e2f3a4b5c
+
+resource_urn:
+  in: query
+  name: resource_urn
+  required: false
+  description: |
+    Optional filter. When set, only resources associated with this resource URN
+    are returned.
+  schema:
+    type: string
+  example: do:droplet:12345
+
+region:
+  in: path
+  name: region
+  description: The datacenter region slug for the query.
+  required: true
+  schema:
+    type: string
+  example: nyc3
+
+label_name:
+  in: path
+  name: name
+  description: The label name whose values should be listed.
+  required: true
+  schema:
+    type: string
+  example: __name__
+
+query:
+  in: query
+  name: query
+  description: >-
+    A PromQL expression. This may be a metric selector (for example `do.droplets.cpu_time`) or a
+    fuller expression (for example `rate(do.droplets.cpu_time[5m])`).
+  required: true
+  schema:
+    type: string
+  example: do.droplets.cpu_time
+
+time:
+  in: query
+  name: time
+  description: >-
+    Evaluation timestamp for an instant query. Accepts a RFC3339 string or a
+    UNIX timestamp. Defaults to now when omitted.
+  required: false
+  schema:
+    type: string
+  example: "1620683817"
+
+start:
+  in: query
+  name: start
+  description: >-
+    Start timestamp (inclusive). Accepts a RFC3339 string or a UNIX timestamp.
+  required: true
+  schema:
+    type: string
+  example: "1620683817"
+
+end:
+  in: query
+  name: end
+  description: >-
+    End timestamp (inclusive). Accepts a RFC3339 string or a UNIX timestamp.
+  required: true
+  schema:
+    type: string
+  example: "1620705417"
+
+step:
+  in: query
+  name: step
+  description: >-
+    Query resolution step width as a Prometheus duration string (for example
+    `15s`, `1m`, `1h`).
+  required: true
+  schema:
+    type: string
+  example: 15s
+
+timeout:
+  in: query
+  name: timeout
+  description: >-
+    Optional evaluation timeout as a Prometheus duration string.
+  required: false
+  schema:
+    type: string
+  example: 30s
+
+start_optional:
+  in: query
+  name: start
+  description: >-
+    Optional start timestamp (inclusive). Accepts a RFC3339 string or a UNIX
+    timestamp.
+  required: false
+  schema:
+    type: string
+  example: "1620683817"
+
+end_optional:
+  in: query
+  name: end
+  description: >-
+    Optional end timestamp (inclusive). Accepts a RFC3339 string or a UNIX
+    timestamp.
+  required: false
+  schema:
+    type: string
+  example: "1620705417"
+
+match:
+  in: query
+  name: match[]
+  description: >-
+    One or more series selectors. Repeat the parameter for multiple matchers.
+  required: false
+  schema:
+    type: array
+    items:
+      type: string
+  style: form
+  explode: true
+  example:
+    - '{__name__=~".+"}'
+
+match_required:
+  in: query
+  name: match[]
+  description: >-
+    One or more series selectors. At least one matcher is required. Repeat the
+    parameter for multiple matchers.
+  required: true
+  schema:
+    type: array
+    items:
+      type: string
+  style: form
+  explode: true
+  example:
+    - '{__name__="do.droplets.cpu_time"}'
