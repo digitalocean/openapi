@@ -577,6 +577,18 @@ tags:
     description: |-
       Security CSPM endpoints for scans, scan findings, and settings.
 
+  - name: Signals
+    description: |-
+      The DigitalOcean Signals API provides observability for agent
+      conversations, such as Harness Runtime sessions and Serverless
+      Inference chat completions, detecting behavioral signals such as
+      user disengagement, execution failures, and satisfaction indicators.
+
+      Use the consent endpoints to manage whether signals collection is
+      enabled for each agent, the session endpoints to browse agent
+      conversations and their detected signals, and the export endpoints
+      to create downloadable archives of signals data for offline analysis.
+
   - name: Sizes
     description: |-
       The sizes objects represent different packages of hardware resources that
@@ -754,6 +766,7 @@ x-tagGroups:
       - Reserved IPv6
       - Reserved IPv6 Actions
       - Security
+      - Signals
       - Sizes
       - Snapshots
       - Spaces Keys
@@ -1826,6 +1839,44 @@ paths:
   /v2/insights/query/{region}/logs/search:
     post:
       $ref: "resources/insights/insights_post_logsSearch.yml"
+
+  /v1/consent:
+    get:
+      $ref: "resources/signals/signals_list_consents.yml"
+
+  /v1/consent/{agent_id}:
+    get:
+      $ref: "resources/signals/signals_get_consent.yml"
+
+    put:
+      $ref: "resources/signals/signals_update_consent.yml"
+
+  /v1/signals/agents/{agent_id}/sessions:
+    get:
+      $ref: "resources/signals/signals_list_sessions.yml"
+
+  /v1/signals/sessions/{session_id}/dialogues:
+    get:
+      $ref: "resources/signals/signals_list_dialogues.yml"
+
+  /v1/signals/exports:
+    get:
+      $ref: "resources/signals/signals_list_exports.yml"
+
+    post:
+      $ref: "resources/signals/signals_create_export.yml"
+
+  /v1/signals/exports/options:
+    get:
+      $ref: "resources/signals/signals_get_export_options.yml"
+
+  /v1/signals/exports/{export_id}:
+    get:
+      $ref: "resources/signals/signals_get_export.yml"
+
+  /v1/signals/exports/{export_id}/download:
+    get:
+      $ref: "resources/signals/signals_get_export_download.yml"
 
   /v2/kubernetes/clusters:
     get:
