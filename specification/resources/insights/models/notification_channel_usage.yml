@@ -1,0 +1,9 @@
+type: object
+description: |
+  Output-only usage summary derived from alert rules that reference this
+  notification channel.
+properties:
+  rule_count:
+    type: integer
+    description: Number of alert rules that reference this channel.
+    example: 2

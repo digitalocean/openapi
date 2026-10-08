@@ -1,0 +1,37 @@
+type: object
+description: A boolean filter tree for logs queries. Exactly one node is set per message.
+minProperties: 1
+maxProperties: 1
+properties:
+  condition:
+    $ref: 'logs_filter_condition.yml'
+  and:
+    type: object
+    required:
+      - expressions
+    properties:
+      expressions:
+        type: array
+        items:
+          $ref: 'logs_filter_expression.yml'
+  or:
+    type: object
+    required:
+      - expressions
+    properties:
+      expressions:
+        type: array
+        items:
+          $ref: 'logs_filter_expression.yml'
+  not:
+    $ref: 'logs_filter_expression.yml'
+  text_search:
+    type: object
+    description: A substring search across the log body, service name, and resource URN.
+    required:
+      - query
+    properties:
+      query:
+        type: string
+        description: The search string.
+        example: "error"

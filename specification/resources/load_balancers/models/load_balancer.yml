@@ -23,10 +23,6 @@ allOf:
             be returned.
         - $ref: '../../regions/models/region.yml'
 
-- type: object
-  properties:
-    $ref: 'attributes.yml#/load_balancer_droplet_ids'
+- $ref: 'attributes.yml#/load_balancer_droplet_ids'
 
-- type: object
-  properties:
-    $ref: 'attributes.yml#/load_balancer_droplet_tag'
+- $ref: 'attributes.yml#/load_balancer_droplet_tag'
