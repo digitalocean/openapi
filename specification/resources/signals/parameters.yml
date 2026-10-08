@@ -1,7 +1,7 @@
 agent_id:
   in: path
   name: agent_id
-  description: A unique identifier for a GenAI agent.
+  description: A unique identifier for an agent. For Harness Runtime, this is the Environment Config ID.
   required: true
   schema:
     type: string

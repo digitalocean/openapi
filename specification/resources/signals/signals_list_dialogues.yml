@@ -5,7 +5,7 @@ summary: List Dialogues for a Session
 description: |
   To list the dialogue turns within a specific session, send a GET request to
   `/v1/signals/sessions/{session_id}/dialogues`. Each dialogue represents a
-  single turn of conversation between a user and the GenAI agent, along with
+  single turn of conversation between a user and the agent, along with
   any signals detected. Results are paginated using cursor-based pagination.
 
 tags:

@@ -1,5 +1,5 @@
 type: object
-description: A signals session represents a conversation between a user and a GenAI agent.
+description: A signals session represents a conversation between a user and an agent.
 properties:
   session_id:
     type: string

@@ -9,7 +9,7 @@ properties:
   agent_id:
     type: string
     format: uuid
-    description: The GenAI agent whose data is being exported.
+    description: The agent whose data is being exported. For Harness Runtime, this is the Environment Config ID.
     example: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
   status:
     type: string

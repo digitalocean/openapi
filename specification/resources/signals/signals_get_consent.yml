@@ -3,7 +3,7 @@ operationId: signals_get_consent
 summary: Retrieve Consent for an Agent
 
 description: |
-  To retrieve the consent record for a specific GenAI agent, send a GET
+  To retrieve the consent record for a specific agent, send a GET
   request to `/v1/consent/{agent_id}`. The response includes an `allowed`
   field indicating whether the team is permitted to use signals for this agent.
 

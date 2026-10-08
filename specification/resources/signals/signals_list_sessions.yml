@@ -3,7 +3,7 @@ operationId: signals_list_agent_sessions
 summary: List Sessions for an Agent
 
 description: |
-  To list signals sessions for a specific GenAI agent, send a GET request to
+  To list signals sessions for a specific agent, send a GET request to
   `/v1/signals/agents/{agent_id}/sessions`. Results are paginated using cursor-based
   pagination with `limit` and `after` parameters.
 

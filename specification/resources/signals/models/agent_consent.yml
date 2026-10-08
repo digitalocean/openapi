@@ -12,7 +12,7 @@ properties:
   agent_id:
     type: string
     format: uuid
-    description: The unique identifier of the GenAI agent.
+    description: The unique identifier of the agent. For Harness Runtime, this is the Environment Config ID.
     example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
   enabled:
     type: boolean

@@ -3,7 +3,7 @@ operationId: signals_set_consent
 summary: Update Consent for an Agent
 
 description: |
-  To enable or disable signals collection for a specific GenAI agent, send a
+  To enable or disable signals collection for a specific agent, send a
   PUT request to `/v1/consent/{agent_id}` with an `enabled` boolean in the
   request body.
 

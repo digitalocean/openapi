@@ -5,7 +5,7 @@ summary: List All Consent Records
 description: |
   To list all signals consent records for your team, send a GET request to
   `/v1/consent`. Each record indicates whether signals collection is enabled
-  for a specific GenAI agent.
+  for a specific agent.
 
 tags:
   - Signals
