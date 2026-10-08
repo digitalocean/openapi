@@ -7,11 +7,14 @@ properties:
     description: The agent whose data should be exported. For Harness Runtime, this is the Environment Config ID.
     example: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
   signal_type:
-    type: string
+    type: array
+    items:
+      type: string
     description: >-
-      Filter the export to only include the specified signal type. Use the
+      Filter the export to only include the specified signal types. Use the
       export options endpoint to list available values.
-    example: ExecutionFailureToolNotFound
+    example:
+      - ExecutionFailureToolNotFound
   session_ids:
     type: array
     description: Optional list of specific session IDs to include in the export.
