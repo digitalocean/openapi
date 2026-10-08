@@ -5,13 +5,9 @@ properties:
     type: string
     description: The unique identifier for the dialogue.
     example: "01a0f3d6-1234-7abc-def0-123456789abc"
-  segment_id:
-    type: string
-    description: The segment identifier grouping related dialogues.
-    example: "01a0f3d6-5678-7abc-def0-123456789abc"
   sequence:
     type: integer
-    description: The sequence number of this dialogue within its segment.
+    description: The sequence number of this dialogue within the session.
     example: 1
   run_status:
     type: string

@@ -1,15 +1,15 @@
 type: object
 description: A pre-signed download URL for a completed export.
 properties:
-  url:
+  download_url:
     type: string
     format: uri
     description: A temporary pre-signed URL to download the export archive.
-    example: "https://storage.example.com/exports/9f13c09c.tar.gz?sig=abc123"
+    example: "https://example-bucket.nyc3.digitaloceanspaces.com/exports/3f2a1c4e-5b6d-4e7f-8a9b-0c1d2e3f4a5b/9f13c09c-c877-436b-9863-dcc39c9dd737.json.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=EXAMPLE"
   expires_at:
-    type: string
-    format: date-time
-    description: When the download URL expires.
-    example: "2026-10-15T00:00:00Z"
+    type: integer
+    description: Unix timestamp when the download URL expires. The URL is valid for 15 minutes.
+    example: 1791390640
 required:
-  - url
+  - download_url
+  - expires_at

@@ -34,7 +34,6 @@ content:
         - cursor: eyJzZXF1ZW5jZSI6MX0=
           node:
             id: "01a0f3d6-1234-7abc-def0-123456789abc"
-            segment_id: "01a0f3d6-5678-7abc-def0-123456789abc"
             sequence: 1
             run_status: completed
             user_message: "How do I create a Droplet?"

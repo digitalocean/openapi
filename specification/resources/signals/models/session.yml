@@ -1,5 +1,5 @@
 type: object
-description: A signals session represents a conversation between a user and an agent.
+description: A session represents a conversation monitored by Signals, such as a Harness Runtime agent session or a Serverless Inference chat completion.
 properties:
   session_id:
     type: string
