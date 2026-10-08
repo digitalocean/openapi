@@ -1095,6 +1095,9 @@ paths:
   /v2/agents/sessions/{session_id}/port-forward/{port}:
     get:
       $ref: "resources/agents/agents_port_forward_session.yml"
+  /v2/agents/sessions/{session_id}/ingress:
+    get:
+      $ref: "resources/agents/agents_get_session_ingress.yml"
   /v2/agents/templates:
     get:
       $ref: "resources/agents/agents_list_templates.yml"

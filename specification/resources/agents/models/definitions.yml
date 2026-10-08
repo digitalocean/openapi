@@ -1152,6 +1152,7 @@ stream_event:
       - run.cost_accrued
       - run.log
       - policy.denied
+      - stream.state
       example: run.started
     data:
       type: object
@@ -2498,3 +2499,77 @@ webhook_accepted_response:
       type: string
       description: The queued (or deduped-existing) execution. Absent when the trigger is paused (202 with empty body).
       example: 7c1f9e2a-3b4c-5d6e-7f80-91a2b3c4d5e6
+
+stream_state:
+  type: object
+  description: >-
+    Body carried in the `data` of a `stream.state` control frame. It describes the stream itself, not
+    an agent event; render it as status rather than transcript. Emitted by OHP, which opens every
+    stream with one.
+  properties:
+    state:
+      type: string
+      enum:
+        - catching_up
+        - live
+        - degraded
+        - superseded
+        - rolled_back
+      description: >-
+        catching_up (replay being written; always first), live (replay done, now following the
+        session), degraded (still delivering but a dependency is impaired), superseded (another attach
+        from the same device took over; do not auto-reconnect), rolled_back (session restored to an
+        earlier checkpoint; reconnect head-anchored after discarding the resume cursor).
+      example: live
+    cursor:
+      type: string
+      description: Position the client should resume from; empty while the position is not whole.
+      example: ''
+    truncated:
+      type: boolean
+      description: Set on catching_up when the window skipped events between the client's resume point and what was sent.
+      example: false
+
+ingress_url_state:
+  type: string
+  enum:
+    - INGRESS_URL_STATE_PENDING
+    - INGRESS_URL_STATE_READY
+  description: 'PENDING: route not yet published, URL not servable. READY: servable. There is no failed state; the substrate retries until READY.'
+  example: INGRESS_URL_STATE_READY
+
+session_ingress_url:
+  type: object
+  description: >-
+    A publicly routable HTTPS URL to one guest port of the session's sandbox. The hostname is stable
+    while the session runs; it is revoked on pause and lock, and rollback moves the session to a new
+    sandbox, so re-fetch after resume, unlock or rollback. Requests must carry the caller's DO token as
+    a Bearer header.
+  properties:
+    ingress_url_id:
+      type: string
+      example: 3f2a1b0c-9d8e-7f6a-5b4c-3d2e1f0a9b8c
+    session_id:
+      type: string
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    port:
+      type: integer
+      format: int64
+      description: Guest port the URL fronts; 8000 (OpenHands Agent Server) today.
+      example: 8000
+    url:
+      type: string
+      description: Immutable HTTPS origin, e.g. https://<id>.nyc3.sandbox.ondigitalocean.com.
+      example: https://abc123.nyc3.sandbox.ondigitalocean.com
+    state:
+      $ref: '#/ingress_url_state'
+    created_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+
+get_ingress_url_response:
+  type: object
+  properties:
+    ingress_url:
+      $ref: '#/session_ingress_url'

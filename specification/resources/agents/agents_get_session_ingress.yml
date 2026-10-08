@@ -1,8 +1,13 @@
-operationId: harness_post_session_sandbox_exec
-summary: ExecInSandbox runs a one-shot command inside the session's sandbox.
+operationId: harness_get_session_ingress
+summary: GetIngressURL returns the public HTTPS URL of the session's OpenHands Agent Server.
 description: |-
-  Runs `argv` directly in the guest (no shell). Stdout/stderr are buffered and capped at 1 MiB each;
-  truncation is indicated via response headers when present. A non-zero exit code is still HTTP 200.
+  Publishes the URL on first call and returns it. Idempotent while the session runs: the same URL is
+  returned until the session is paused, locked or rolled back, after which the next call returns a new
+  hostname (pause and lock revoke the URL; rollback moves the session to a new sandbox, so re-fetch
+  after resume, unlock or rollback). The URL fronts guest port 8000 (the OpenHands Agent Server,
+  HTTP + WebSocket) and replaces the port-forward bridge for browser clients. Requests to the URL carry
+  the caller's DO token as a Bearer header. Poll until `state` is INGRESS_URL_STATE_READY; there is no
+  failed state. Only OpenHands sessions support ingress, and it is gated per team.
 tags:
 - Harness Runtime
 parameters:
@@ -14,16 +19,9 @@ parameters:
     type: string
     example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
   example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-requestBody:
-  required: true
-  content:
-    application/json:
-      schema:
-        $ref: models/definitions.yml#/exec_in_sandbox_request
-  description: Command to run inside the sandbox.
 responses:
   '200':
-    description: Command finished (check exit_code in the body).
+    description: A successful response.
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
@@ -34,23 +32,9 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/definitions.yml#/exec_in_sandbox_response
-  '400':
-    description: Invalid argv or request body.
-    headers: *id001
-    content:
-      application/json:
-        schema:
-          $ref: models/definitions.yml#/error
+          $ref: models/definitions.yml#/get_ingress_url_response
   '401':
     $ref: ../../shared/responses/unauthorized.yml
-  '402':
-    description: The team is blocked by the prepayment gate.
-    headers: *id001
-    content:
-      application/json:
-        schema:
-          $ref: models/definitions.yml#/error
   '403':
     description: Session belongs to another team.
     headers: *id001
@@ -61,7 +45,7 @@ responses:
   '404':
     $ref: ../../shared/responses/not_found.yml
   '409':
-    description: Session is not in a state that can run exec.
+    description: Session is not running.
     headers: *id001
     content:
       application/json:
@@ -74,6 +58,13 @@ responses:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
+  '501':
+    description: Public ingress is not supported for this agent kind or sandbox substrate.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
   '500':
     $ref: ../../shared/responses/server_error.yml
   '429':
@@ -81,7 +72,7 @@ responses:
   default:
     $ref: ../../shared/responses/unexpected_error.yml
 x-codeSamples:
-- $ref: examples/curl/agents_post_session_sandbox_exec.yml
+- $ref: examples/curl/agents_get_session_ingress.yml
 security:
 - bearer_auth:
-  - agent_harness_session:operate
+  - agent_harness_session:read

@@ -3,12 +3,14 @@ summary: PortForwardSession opens a WebSocket tunnel to a guest TCP port.
 description: |-
   Upgrades the request to a WebSocket and bridges it to one TCP connection on the session sandbox's
   guest `port`. Binary frames carry the opaque byte stream in both directions; the server closes with
-  a descriptive WebSocket close code when the tunnel ends. This is the bridge browser clients (Agent
-  Canvas, OpenHands WebUI) use to reach an in-guest HTTP/WebSocket server.
+  a descriptive WebSocket close code when the tunnel ends. This is the raw TCP tunnel; browser clients
+  reaching the in-guest OpenHands Agent Server use the ingress URL
+  (`GET /v2/agents/sessions/{session_id}/ingress`), which has replaced this bridge for them.
 
   WebSocket is not expressible in OpenAPI; this documents the GET that initiates the upgrade handshake
-  (HTTP 101 Switching Protocols). Only READY/DETACHED sessions with a live sandbox are served. `port`
-  must be between 1024 and 65535.
+  (HTTP 101 Switching Protocols). The handler dials the guest before upgrading, so a PAUSED session is
+  woken and served rather than rejected. `port` must be between 1024 and 65535. A request without the
+  WebSocket upgrade headers is answered 400 by the handshake layer.
 tags:
 - Harness Runtime
 parameters:
@@ -43,6 +45,15 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-reset
   '401':
     $ref: ../../shared/responses/unauthorized.yml
+  '400':
+    description: The request is not a valid WebSocket upgrade (missing Upgrade/Connection headers).
+      Returned by the handshake layer as plain text.
+    headers: *id001
+    content:
+      text/plain:
+        schema:
+          type: string
+          example: Bad Request
   '402':
     description: The team is blocked by the prepayment gate.
     headers: *id001

@@ -48,17 +48,24 @@ responses:
           $ref: models/definitions.yml#/error
   '401':
     $ref: ../../shared/responses/unauthorized.yml
-  '403':
-    description: Trigger belongs to another team.
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: Duplicate name, or an attempt to change an immutable field (kind, provider).
     headers: *id001
     content:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
-  '404':
-    $ref: ../../shared/responses/not_found.yml
-  '409':
-    description: Duplicate name, or an attempt to change an immutable field (kind, provider).
+  '422':
+    description: The team's trigger limit has been reached.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '503':
+    description: An upstream dependency needed to validate the trigger is temporarily unavailable; retry.
     headers: *id001
     content:
       application/json:

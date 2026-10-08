@@ -45,8 +45,29 @@ responses:
           $ref: models/definitions.yml#/error
   '401':
     $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: The caller is not permitted to create the backing agent config for this trigger.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
   '409':
     description: A non-deleted trigger with this name already exists for the team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '422':
+    description: The team's trigger limit has been reached.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '503':
+    description: An upstream dependency needed to validate the trigger is temporarily unavailable; retry.
     headers: *id001
     content:
       application/json:

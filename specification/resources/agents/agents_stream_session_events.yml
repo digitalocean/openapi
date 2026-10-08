@@ -4,7 +4,8 @@ description: |-
   Opens a `text/event-stream` of the session's canonical events, served by the MARS data plane (OHP).
   Each frame is `event: <type>` plus a `data:` line holding a JSON event envelope; comment lines
   (`: keepalive`) arrive about every 15s and must be ignored. Decode every `data:` with one envelope
-  parser and dispatch on the envelope's `type`.
+  parser and dispatch on the envelope's `type`. Every stream opens with a `stream.state` control frame
+  (its `data` is a `stream_state`).
 
   Delivery is at-least-once: clients MUST de-duplicate and order by `event_id` (a ULID), never by
   `seq`. The same path serves two modes:
@@ -15,7 +16,8 @@ description: |-
       This is what `doctl agents logs` uses; paginate it with `replay_from`.
 
   OHP serves recent history only (bounded by Kafka retention and an event window); it is not an
-  archive.
+  archive. Note: OHP returns its own errors (404/429/500/503) as `text/plain`, not the DO-standard JSON
+  envelope; only the 401 from the edge is JSON. (OHP moves to the JSON envelope under MARSOHS-2065.)
 tags:
 - Harness Runtime
 parameters:
@@ -96,11 +98,6 @@ responses:
         $ref: ../../shared/headers.yml#/ratelimit-remaining
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
-      Content-Type:
-        description: Always text/event-stream.
-        schema:
-          type: string
-        example: text/event-stream
       Cache-Control:
         description: Always no-cache.
         schema:
@@ -110,8 +107,12 @@ responses:
       text/event-stream:
         schema:
           $ref: models/definitions.yml#/stream_event
-  '400':
-    description: Malformed parameter.
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    description: Unknown session, or a session belonging to another team. The two are deliberately
+      indistinguishable so a caller cannot enumerate other tenants' session ids. OHP returns this as
+      plain text.
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
@@ -120,26 +121,13 @@ responses:
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
     content:
-      application/json:
+      text/plain:
         schema:
-          $ref: models/definitions.yml#/error
-  '401':
-    $ref: ../../shared/responses/unauthorized.yml
-  '404':
-    description: Unknown session, or a session belonging to another team. The two are deliberately
-      indistinguishable so a caller cannot enumerate other tenants' session ids.
-    headers: *id001
-    content:
-      application/json:
-        schema:
-          $ref: models/definitions.yml#/error
+          type: string
+          example: 404 page not found
   '429':
-    $ref: ../../shared/responses/too_many_requests.yml
-  '500':
-    $ref: ../../shared/responses/server_error.yml
-  '503':
-    description: OHP cannot currently establish the caller's authorization or the session's location.
-      Transient; retry after the Retry-After hint.
+    description: Attach admission limit reached. Retry after the Retry-After hint. OHP returns this as
+      plain text.
     headers:
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
@@ -153,11 +141,46 @@ responses:
           type: integer
         example: 2
     content:
-      application/json:
+      text/plain:
         schema:
-          $ref: models/definitions.yml#/error
+          type: string
+          example: too many attach attempts
+  '500':
+    description: Internal error. OHP returns this as plain text.
+    headers: *id001
+    content:
+      text/plain:
+        schema:
+          type: string
+          example: internal error
+  '503':
+    description: OHP cannot currently establish the caller's authorization or the session's location.
+      Transient; retry after the Retry-After hint. OHP returns this as plain text.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+      Retry-After:
+        description: Seconds to wait before retrying.
+        schema:
+          type: integer
+        example: 2
+    content:
+      text/plain:
+        schema:
+          type: string
+          example: session authorization is unavailable
   default:
-    $ref: ../../shared/responses/unexpected_error.yml
+    description: Unexpected error from OHP, returned as plain text.
+    headers: *id001
+    content:
+      text/plain:
+        schema:
+          type: string
+          example: internal error
 x-codeSamples:
 - $ref: examples/curl/agents_stream_session_events.yml
 security:

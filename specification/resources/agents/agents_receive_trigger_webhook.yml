@@ -30,9 +30,15 @@ parameters:
 requestBody:
   required: true
   description: The provider's raw webhook body, forwarded verbatim. The HMAC is computed over these
-    exact bytes. Content-Type is provider-defined and passed through, so the body is treated as an
-    opaque byte stream.
+    exact bytes. Content-Type is provider-defined (GitHub sends application/json, some providers
+    form-encode) and passed through; the handler reads the raw bytes regardless of type.
   content:
+    application/json:
+      schema:
+        type: string
+    application/x-www-form-urlencoded:
+      schema:
+        type: string
     application/octet-stream:
       schema:
         type: string
@@ -52,6 +58,13 @@ responses:
       application/json:
         schema:
           $ref: models/definitions.yml#/webhook_accepted_response
+  '400':
+    description: The request body is too large or unreadable.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
   '401':
     description: Signature/token verification failed.
     headers: *id001
