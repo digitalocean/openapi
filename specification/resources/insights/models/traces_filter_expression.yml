@@ -1,0 +1,37 @@
+type: object
+description: A boolean filter tree for traces queries. Exactly one node is set per message.
+minProperties: 1
+maxProperties: 1
+properties:
+  condition:
+    $ref: 'traces_filter_condition.yml'
+  and:
+    type: object
+    required:
+      - expressions
+    properties:
+      expressions:
+        type: array
+        items:
+          $ref: 'traces_filter_expression.yml'
+  or:
+    type: object
+    required:
+      - expressions
+    properties:
+      expressions:
+        type: array
+        items:
+          $ref: 'traces_filter_expression.yml'
+  not:
+    $ref: 'traces_filter_expression.yml'
+  text_search:
+    type: object
+    description: A substring search across the span name, service name, and resource URN.
+    required:
+      - query
+    properties:
+      query:
+        type: string
+        description: The search string.
+        example: "checkout"

@@ -1827,6 +1827,14 @@ paths:
     post:
       $ref: "resources/insights/insights_post_logsSearch.yml"
 
+  /v2/insights/query/{region}/traces/search:
+    post:
+      $ref: "resources/insights/insights_post_tracesSearch.yml"
+
+  /v2/insights/query/{region}/traces/{trace_id}:
+    get:
+      $ref: "resources/insights/insights_get_trace.yml"
+
   /v2/kubernetes/clusters:
     get:
       $ref: "resources/kubernetes/kubernetes_list_clusters.yml"

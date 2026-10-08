@@ -1,0 +1,24 @@
+type: object
+description: A single point in time. Exactly one value form is set per message.
+minProperties: 1
+maxProperties: 1
+properties:
+  absolute:
+    type: string
+    format: date-time
+    description: >-
+      An absolute timestamp. Accepts RFC3339/RFC3339Nano strings or Unix
+      seconds/nanoseconds as decimal strings.
+    example: "2026-09-01T00:00:00Z"
+  relative:
+    type: string
+    description: >-
+      A relative time. Use `now` for the current time, a bare duration such as
+      `1h` or `7d` to look back from now, or an offset such as `now-1h` or
+      `now+30m`. Supported units are `s`, `m`, `h`, `d`, and `w`.
+    example: "1h"
+  unix_nano:
+    type: string
+    format: int64
+    description: A Unix nanosecond timestamp, encoded as a string to preserve 64-bit precision.
+    example: "1756684800000000000"

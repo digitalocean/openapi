@@ -74,6 +74,15 @@ region:
     type: string
   example: nyc3
 
+trace_id:
+  in: path
+  name: trace_id
+  description: The hex-encoded identifier of the trace to retrieve.
+  required: true
+  schema:
+    type: string
+  example: 4bf92f3577b34da6a3ce929d0e0e4736
+
 label_name:
   in: path
   name: name

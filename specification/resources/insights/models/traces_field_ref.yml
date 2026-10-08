@@ -1,0 +1,23 @@
+type: object
+description: A reference to a logical field for filters or ordering.
+required:
+  - name
+properties:
+  name:
+    type: string
+    description: >-
+      The field name. Intrinsic span columns include `trace_id`, `span_id`,
+      `parent_span_id`, `start_time`, `end_time`, `duration_ns`, `name`,
+      `kind`, `status_code`, and `status_message`. Trace-level columns include
+      `started`, `duration_ns`, `span_count`, `error_count`, and `status`. The
+      dotted shorthands `service.name`, `resource.type`, and `resource.urn` are
+      also supported. Arbitrary resource or span attributes can be accessed
+      with `ResourceAttributes['key']` or `SpanAttributes['key']`.
+    example: service.name
+  scope:
+    type: string
+    description: The attribute scope to resolve the field against. Omit to let the server apply its default mapping for the field name.
+    enum:
+      - FIELD_SCOPE_RESOURCE
+      - FIELD_SCOPE_ATTRIBUTES
+    example: FIELD_SCOPE_RESOURCE
