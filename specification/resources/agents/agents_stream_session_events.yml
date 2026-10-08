@@ -16,8 +16,8 @@ description: |-
       This is what `doctl agents logs` uses; paginate it with `replay_from`.
 
   OHP serves recent history only (bounded by Kafka retention and an event window); it is not an
-  archive. Note: OHP returns its own errors (404/429/500/503) as `text/plain`, not the DO-standard JSON
-  envelope; only the 401 from the edge is JSON. (OHP moves to the JSON envelope under MARSOHS-2065.)
+  archive. OHP's own errors (404/429/500/503) use the DO-standard JSON `{id, message, request_id}`
+  envelope (cthulhu#179797 / MARSOHS-2065); the 401 comes from the edge.
 tags:
 - Harness Runtime
 parameters:
@@ -111,8 +111,7 @@ responses:
     $ref: ../../shared/responses/unauthorized.yml
   '404':
     description: Unknown session, or a session belonging to another team. The two are deliberately
-      indistinguishable so a caller cannot enumerate other tenants' session ids. OHP returns this as
-      plain text.
+      indistinguishable so a caller cannot enumerate other tenants' session ids.
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
@@ -121,13 +120,11 @@ responses:
       ratelimit-reset:
         $ref: ../../shared/headers.yml#/ratelimit-reset
     content:
-      text/plain:
+      application/json:
         schema:
-          type: string
-          example: 404 page not found
+          $ref: models/definitions.yml#/error
   '429':
-    description: Attach admission limit reached. Retry after the Retry-After hint. OHP returns this as
-      plain text.
+    description: Attach admission limit reached. Retry after the Retry-After hint.
     headers:
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
@@ -141,21 +138,19 @@ responses:
           type: integer
         example: 2
     content:
-      text/plain:
+      application/json:
         schema:
-          type: string
-          example: too many attach attempts
+          $ref: models/definitions.yml#/error
   '500':
-    description: Internal error. OHP returns this as plain text.
+    description: Internal error.
     headers: *id001
     content:
-      text/plain:
+      application/json:
         schema:
-          type: string
-          example: internal error
+          $ref: models/definitions.yml#/error
   '503':
     description: OHP cannot currently establish the caller's authorization or the session's location.
-      Transient; retry after the Retry-After hint. OHP returns this as plain text.
+      Transient; retry after the Retry-After hint.
     headers:
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
@@ -169,18 +164,11 @@ responses:
           type: integer
         example: 2
     content:
-      text/plain:
+      application/json:
         schema:
-          type: string
-          example: session authorization is unavailable
+          $ref: models/definitions.yml#/error
   default:
-    description: Unexpected error from OHP, returned as plain text.
-    headers: *id001
-    content:
-      text/plain:
-        schema:
-          type: string
-          example: internal error
+    $ref: ../../shared/responses/unexpected_error.yml
 x-codeSamples:
 - $ref: examples/curl/agents_stream_session_events.yml
 security:
