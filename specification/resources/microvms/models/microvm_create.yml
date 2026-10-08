@@ -81,8 +81,9 @@ properties:
     items:
       type: integer
     description: >-
-      The guest ports to open, up to five. Must include `http_port`. Defaults
-      to only the HTTP port.
+      The guest ports to declare, up to five. Must include `http_port`.
+      Defaults to only the HTTP port. During the public preview, only the HTTP
+      port is reachable through the MicroVM's endpoint.
     example:
       - 80
 

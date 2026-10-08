@@ -98,7 +98,10 @@ properties:
     maxItems: 5
     items:
       type: integer
-    description: The guest ports open on the MicroVM, including the HTTP port.
+    description: >-
+      The guest ports declared on the MicroVM, including the HTTP port. During
+      the public preview, only the HTTP port is reachable through the
+      MicroVM's endpoint.
     example:
       - 80
 
