@@ -35,7 +35,8 @@ requestBody:
   content:
     application/json:
       schema:
-        type: string
+        type: object
+        additionalProperties: true
     application/x-www-form-urlencoded:
       schema:
         type: string

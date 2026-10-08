@@ -73,6 +73,13 @@ responses:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
+  '502':
+    description: The backing agent config service returned an unexpected error.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
   '500':
     $ref: ../../shared/responses/server_error.yml
   '429':
