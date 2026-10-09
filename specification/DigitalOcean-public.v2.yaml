@@ -1840,6 +1840,10 @@ paths:
     post:
       $ref: "resources/insights/insights_post_logsSearch.yml"
 
+  /v2/insights/query/{region}/spans/search:
+    post:
+      $ref: "resources/insights/insights_post_spansSearch.yml"
+
   /v1/consent:
     get:
       $ref: "resources/signals/signals_list_consents.yml"

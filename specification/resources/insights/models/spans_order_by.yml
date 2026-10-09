@@ -1,0 +1,14 @@
+type: object
+description: A sort clause for spans search results.
+required:
+  - field
+properties:
+  field:
+    $ref: 'spans_filter_field.yml'
+  direction:
+    type: string
+    description: The sort direction. Defaults to `desc` when omitted.
+    enum:
+      - asc
+      - desc
+    example: desc
