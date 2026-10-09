@@ -28,6 +28,15 @@ export_id:
     format: uuid
   example: 9f13c09c-c877-436b-9863-dcc39c9dd737
 
+deletion_id:
+  in: path
+  name: deletion_id
+  description: A unique identifier for a data deletion job.
+  required: true
+  schema:
+    type: string
+  example: 01J9ZX0N5Q7M2K3R4S5T6V7W8X
+
 limit:
   in: query
   name: limit

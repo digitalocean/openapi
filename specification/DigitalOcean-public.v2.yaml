@@ -586,8 +586,9 @@ tags:
 
       Use the consent endpoints to manage whether signals collection is
       enabled for each agent, the session endpoints to browse agent
-      conversations and their detected signals, and the export endpoints
-      to create downloadable archives of signals data for offline analysis.
+      conversations and their detected signals, the export endpoints
+      to create downloadable archives of signals data for offline analysis,
+      and the deletion endpoints to permanently delete signals data.
 
   - name: Sizes
     description: |-
@@ -1877,6 +1878,17 @@ paths:
   /v1/signals/exports/{export_id}/download:
     get:
       $ref: "resources/signals/signals_get_export_download.yml"
+
+  /v1/signals/deletions:
+    get:
+      $ref: "resources/signals/signals_list_deletions.yml"
+
+    post:
+      $ref: "resources/signals/signals_create_deletion.yml"
+
+  /v1/signals/deletions/{deletion_id}:
+    get:
+      $ref: "resources/signals/signals_get_deletion.yml"
 
   /v2/kubernetes/clusters:
     get:

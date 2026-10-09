@@ -1,0 +1,81 @@
+operationId: signals_create_deletion
+
+summary: Create a Data Deletion Job
+
+description: |
+  To permanently delete signals data, send a POST request to
+  `/v1/signals/deletions`. The request body must include a `type` and the
+  `team_id` of the authenticated team.
+
+  | Type | Scope | Required Fields |
+  |------|-------|-----------------|
+  | `managed_agent` | All signals data (dialogues, events, signal reports, sessions) for one managed agent. Also disables signals collection consent for the agent. | `type`, `team_id`, `agent_id` |
+  | `inference` | All signals data from the team's inference (non-agent) usage. | `type`, `team_id` |
+
+  **Deletion is permanent and cannot be undone.** Matching data is hidden
+  immediately and deleted in the background. Poll the get deletion endpoint
+  to check the job's status.
+
+  The endpoint is idempotent while a job is active. A new job returns
+  `202 Accepted`. If a queued or running job already exists for the same
+  target, that job is returned with `200 OK` instead of creating a duplicate.
+  A request made after the previous job has finished starts a new job.
+
+  Each team may have a limited number of active deletion jobs at once.
+  Requests beyond that limit return `429 Too Many Requests`; wait for existing
+  jobs to finish before submitting more.
+
+tags:
+  - Signals
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/create_deletion_request.yml'
+      examples:
+        Managed Agent:
+          value:
+            type: managed_agent
+            team_id: 12345678
+            agent_id: 01a10d3f-2c09-764f-99f8-458e521627f3
+        Inference:
+          value:
+            type: inference
+            team_id: 12345678
+
+responses:
+  '200':
+    $ref: 'responses/deletion_job_response.yml'
+
+  '202':
+    $ref: 'responses/deletion_job_accepted_response.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: '../../shared/responses/forbidden.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/signals_create_deletion.yml'
+
+security:
+  - bearer_auth:
+      - 'signals:delete'

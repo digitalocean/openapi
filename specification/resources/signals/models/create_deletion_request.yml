@@ -1,0 +1,30 @@
+type: object
+description: Request body to create a new signals data deletion job.
+properties:
+  type:
+    type: string
+    description: >-
+      The scope of the deletion. `managed_agent` deletes all signals data for
+      one managed agent and requires `agent_id`. `inference` deletes all
+      signals data from the team's inference (non-agent) usage and must not
+      include `agent_id`.
+    enum:
+      - managed_agent
+      - inference
+    example: managed_agent
+  team_id:
+    type: integer
+    format: int64
+    description: The team whose data should be deleted. Must match the team of the authenticated token.
+    example: 12345678
+  agent_id:
+    type: string
+    format: uuid
+    description: >-
+      The managed agent whose data should be deleted. Required when `type` is
+      `managed_agent`; must be omitted when `type` is `inference`.
+    example: 01a10d3f-2c09-764f-99f8-458e521627f3
+required:
+  - type
+  - team_id
+additionalProperties: false

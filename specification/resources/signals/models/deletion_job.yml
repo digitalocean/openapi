@@ -1,0 +1,76 @@
+type: object
+description: >-
+  A data deletion job that permanently removes signals data for a managed
+  agent or for a team's inference usage.
+properties:
+  team_id:
+    type: integer
+    format: int64
+    description: The team that owns the deletion job.
+    example: 12345678
+  deletion_id:
+    type: string
+    description: The unique identifier for the deletion job.
+    example: 01J9ZX0N5Q7M2K3R4S5T6V7W8X
+  type:
+    type: string
+    description: >-
+      The scope of the deletion. `managed_agent` deletes all signals data for
+      one managed agent. `inference` deletes all signals data from the team's
+      inference (non-agent) usage.
+    enum:
+      - managed_agent
+      - inference
+    example: managed_agent
+  agent_id:
+    type: string
+    format: uuid
+    description: >-
+      The managed agent whose data is being deleted. Only present for
+      `managed_agent` deletions.
+    example: 01a10d3f-2c09-764f-99f8-458e521627f3
+  status:
+    type: string
+    description: >-
+      The current status of the deletion job. `queued` jobs are waiting to be
+      processed, `running` jobs are actively deleting data, `complete` jobs
+      have permanently deleted all matching data, and `failed` jobs stopped
+      with an error described in `error_message`.
+    enum:
+      - queued
+      - running
+      - complete
+      - failed
+    example: running
+  error_message:
+    type: string
+    nullable: true
+    description: Error message if the deletion failed, or null otherwise.
+    example: null
+  created_at:
+    type: integer
+    format: int64
+    description: Unix timestamp when the deletion job was created.
+    example: 1791036405
+  started_at:
+    type: integer
+    format: int64
+    nullable: true
+    description: >-
+      Unix timestamp when processing of the deletion job started, or null if
+      the job is still queued.
+    example: 1791036410
+  completed_at:
+    type: integer
+    format: int64
+    nullable: true
+    description: >-
+      Unix timestamp when the deletion job finished, or null if it is still in
+      progress.
+    example: null
+required:
+  - team_id
+  - deletion_id
+  - type
+  - status
+  - created_at
