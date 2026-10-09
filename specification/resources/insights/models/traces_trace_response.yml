@@ -1,12 +1,17 @@
 type: object
 description: A single trace and all of its spans.
 properties:
-  trace_id:
+  traceId:
     type: string
     description: The trace identifier.
-    example: "4bf92f3577b34da6a3ce929d0e0e4736"
+    example: "7b0b4e56abab38362b24e5498eb9ec64"
   spans:
     type: array
     description: Every span in the trace, ordered by start time.
     items:
       $ref: 'traces_span_record.yml'
+  truncated:
+    type: boolean
+    description: >-
+      True when the trace has more spans than were returned in this response.
+    example: false

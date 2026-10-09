@@ -3,7 +3,7 @@ description: Response body for a traces search.
 properties:
   data:
     type: array
-    description: Matching traces. Omitted when no traces match.
+    description: Matching traces. Empty when no traces match.
     items:
       $ref: 'traces_trace_summary.yml'
   pagination:

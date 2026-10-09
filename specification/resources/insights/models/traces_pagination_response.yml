@@ -1,7 +1,7 @@
 type: object
 description: Pagination response.
 properties:
-  has_more:
+  hasMore:
     type: boolean
     description: Whether more results matched the query than were returned.
-    example: true
+    example: false

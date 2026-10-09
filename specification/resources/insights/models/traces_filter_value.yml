@@ -3,16 +3,16 @@ description: A typed literal or list value for a filter condition. Exactly one k
 minProperties: 1
 maxProperties: 1
 properties:
-  string_value:
+  stringValue:
     type: string
     example: "api-gateway"
-  number_value:
+  numberValue:
     type: number
     example: 42
-  bool_value:
+  boolValue:
     type: boolean
     example: true
-  string_array_value:
+  stringArrayValue:
     type: object
     required:
       - values
@@ -25,7 +25,7 @@ properties:
         example:
           - "api-gateway"
           - "auth-service"
-  number_array_value:
+  numberArrayValue:
     type: object
     required:
       - values

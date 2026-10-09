@@ -4,20 +4,10 @@ source: |-
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
-      "time_range": {
-        "from": {"absolute": "2026-09-30T00:00:00Z"},
-        "to": {"absolute": "2026-09-30T01:00:00Z"}
+      "timeRange": {
+        "from": {"relative": "15m"},
+        "to": {"relative": "now"}
       },
-      "filter": {
-        "condition": {
-          "field": {"name": "service.name"},
-          "operator": "FILTER_OPERATOR_EQ",
-          "value": {"string_value": "api-gateway"}
-        }
-      },
-      "order_by": [
-        {"field": {"name": "started"}, "direction": "SORT_DIRECTION_DESC"}
-      ],
-      "pagination": {"limit": 100}
+      "pagination": {"limit": 50}
     }' \
     "https://api.digitalocean.com/v2/insights/query/nyc3/traces/search"

@@ -1,64 +1,63 @@
 type: object
 description: A single span belonging to a trace.
 required:
-  - trace_id
-  - span_id
+  - traceId
+  - spanId
 properties:
-  trace_id:
+  traceId:
     type: string
     description: The trace this span belongs to.
-    example: "4bf92f3577b34da6a3ce929d0e0e4736"
-  span_id:
+    example: "7b0b4e56abab38362b24e5498eb9ec64"
+  spanId:
     type: string
     description: The span identifier.
-    example: "00f067aa0ba902b7"
-  parent_span_id:
+    example: "e7867486e45cda47"
+  parentSpanId:
     type: string
     description: The parent span identifier. Omitted for the root span.
     example: "a2fb4a1d1a96d312"
-  start_time:
+  startTime:
     type: string
     format: date-time
     description: The span start time.
-    example: "2026-09-30T00:14:12Z"
-  end_time:
+    example: "2026-10-09T06:44:37Z"
+  endTime:
     type: string
     format: date-time
     description: The span end time.
-    example: "2026-09-30T00:14:12.154Z"
-  duration_ns:
-    type: string
+    example: "2026-10-09T06:44:39Z"
+  durationNs:
+    type: integer
     format: int64
-    description: Span duration in nanoseconds, encoded as a string to preserve 64-bit precision.
-    example: "154000000"
+    description: Span duration in nanoseconds.
+    example: 200000000
   name:
     type: string
     description: The span name, typically the operation being performed.
-    example: "GET /v2/droplets"
+    example: "GET /smoke"
   kind:
     type: string
     description: The OpenTelemetry span kind.
-    example: "SPAN_KIND_SERVER"
-  status_code:
+    example: "Server"
+  statusCode:
     type: string
     description: The OpenTelemetry span status code.
-    example: "STATUS_CODE_ERROR"
-  status_message:
+    example: "Ok"
+  statusMessage:
     type: string
     description: The status description. Omitted when empty.
     example: "upstream timeout"
-  service_name:
+  serviceName:
     type: string
     description: The service that emitted the span.
-    example: "api-gateway"
+    example: "spans-spec-smoke"
   resource:
     type: object
     description: Resource attributes associated with the span.
     additionalProperties:
       type: string
     example:
-      do.component: "droplet"
-      do.droplet.id: "12345678"
+      service.name: "spans-spec-smoke"
   attributes:
     type: object
     description: Span attributes.
@@ -66,7 +65,6 @@ properties:
       type: string
     example:
       http.method: "GET"
-      http.status_code: "504"
   region:
     type: string
     description: The datacenter region the span was returned from.

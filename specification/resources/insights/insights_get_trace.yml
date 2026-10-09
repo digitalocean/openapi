@@ -9,6 +9,9 @@ description: >-
   Spans are returned ordered by start time. A trace is only resolvable in the
   region that ingested it; querying another region returns `404`.
 
+  JSON field names are camelCase (`traceId`, `spanId`, `startTime`, `endTime`,
+  `durationNs`, `serviceName`, `statusCode`, `parentSpanId`).
+
 tags:
   - Insights
 

@@ -8,8 +8,10 @@ description: >-
   time range, optional filter, ordering, and pagination.
 
   Each result is one trace, aggregated from its spans. The time range must not
-  exceed 7 days. `pagination.limit` defaults to 100 and is clamped to 1000.
-  Results are ordered by `started` descending unless `order_by` is set.
+  exceed 7 days (`168h`). `pagination.limit` defaults to 100 and is clamped to
+  1000. Results are ordered by `started` descending unless `orderBy` is set.
+
+  JSON field names are camelCase (`timeRange`, `hasMore`, `traceId`).
 
 tags:
   - Insights

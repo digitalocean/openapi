@@ -1,5 +1,5 @@
 type: object
-description: An inclusive query time window.
+description: An inclusive query time window. Must not exceed 7 days (168h).
 required:
   - from
   - to

@@ -1,13 +1,13 @@
 type: object
 description: Request body for searching traces.
 required:
-  - time_range
+  - timeRange
 properties:
-  time_range:
+  timeRange:
     $ref: 'traces_time_range.yml'
   filter:
     $ref: 'traces_filter_expression.yml'
-  order_by:
+  orderBy:
     type: array
     description: Sort clauses applied to the result set. Defaults to `started` descending.
     items:

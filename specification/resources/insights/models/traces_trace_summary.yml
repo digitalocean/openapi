@@ -1,41 +1,41 @@
 type: object
 description: A single trace returned by a traces search. One row per trace, aggregated from its spans.
 required:
-  - trace_id
+  - traceId
 properties:
-  trace_id:
+  traceId:
     type: string
     description: The trace identifier.
-    example: "4bf92f3577b34da6a3ce929d0e0e4736"
+    example: "7b0b4e56abab38362b24e5498eb9ec64"
   started:
     type: string
     format: date-time
     description: The start time of the earliest span in the trace.
     example: "2026-09-30T00:14:12Z"
-  service_name:
+  serviceName:
     type: string
     description: The service that emitted the root span.
     example: "api-gateway"
-  duration_ns:
-    type: string
+  durationNs:
+    type: integer
     format: int64
-    description: Wall-clock duration of the trace in nanoseconds, encoded as a string to preserve 64-bit precision.
-    example: "154000000"
-  span_count:
+    description: Wall-clock duration of the trace in nanoseconds.
+    example: 154000000
+  spanCount:
     type: integer
     format: int32
     description: The number of spans in the trace.
     example: 12
-  error_count:
+  errorCount:
     type: integer
     format: int32
     description: The number of spans in the trace with an error status.
     example: 1
   status:
     type: string
-    description: The rolled-up status of the trace. `STATUS_CODE_ERROR` when any span errored.
-    example: "STATUS_CODE_ERROR"
-  span_names:
+    description: The rolled-up status of the trace.
+    example: "Ok"
+  spanNames:
     type: array
     description: The distinct span names present in the trace.
     items:

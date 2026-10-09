@@ -25,7 +25,7 @@ properties:
           $ref: 'traces_filter_expression.yml'
   not:
     $ref: 'traces_filter_expression.yml'
-  text_search:
+  textSearch:
     type: object
     description: A substring search across the span name, service name, and resource URN.
     required:
