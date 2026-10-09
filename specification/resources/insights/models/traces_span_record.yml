@@ -1,0 +1,73 @@
+type: object
+description: A single span belonging to a trace.
+required:
+  - traceId
+  - spanId
+properties:
+  traceId:
+    type: string
+    description: The trace this span belongs to.
+    example: "7b0b4e56abab38362b24e5498eb9ec64"
+  spanId:
+    type: string
+    description: The span identifier.
+    example: "e7867486e45cda47"
+  parentSpanId:
+    type: string
+    description: The parent span identifier. Omitted for the root span.
+    example: "a2fb4a1d1a96d312"
+  startTime:
+    type: string
+    format: date-time
+    description: The span start time.
+    example: "2026-10-09T06:44:37Z"
+  endTime:
+    type: string
+    format: date-time
+    description: The span end time.
+    example: "2026-10-09T06:44:39Z"
+  durationNs:
+    type: integer
+    format: int64
+    description: Span duration in nanoseconds.
+    example: 200000000
+  name:
+    type: string
+    description: The span name, typically the operation being performed.
+    example: "GET /checkout"
+  kind:
+    type: string
+    description: >-
+      The OpenTelemetry span kind as a string, for example `Server`,
+      `Client`, or `Internal`.
+    example: "Server"
+  statusCode:
+    type: string
+    description: >-
+      The OpenTelemetry span status code as a string: `Unset`, `Ok`, or
+      `Error`.
+    example: "Error"
+  statusMessage:
+    type: string
+    description: The status description. Omitted when empty.
+    example: "upstream timeout"
+  serviceName:
+    type: string
+    description: >-
+      The service that emitted the span. Omitted when the span has no
+      service.name resource attribute.
+    example: "checkout-api"
+  resource:
+    type: object
+    description: Resource attributes associated with the span.
+    additionalProperties:
+      type: string
+    example:
+      service.name: "checkout-api"
+  attributes:
+    type: object
+    description: Span attributes. Omitted when empty.
+    additionalProperties:
+      type: string
+    example:
+      http.method: "GET"

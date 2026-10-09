@@ -1,0 +1,25 @@
+description: >-
+  The trace or region was not found. When the traces service finds no
+  matching trace, the body is the plain-text message `trace not found`. When
+  the region is unknown or does not serve traces, the API gateway returns a
+  JSON error object.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  text/plain:
+    schema:
+      type: string
+    example: trace not found
+  application/json:
+    schema:
+      $ref: '../../../shared/models/error.yml'
+    example:
+      id: not_found
+      message: Your request could not be routed.
