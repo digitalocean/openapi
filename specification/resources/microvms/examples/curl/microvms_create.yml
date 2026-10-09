@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"name": "example-microvm", "region": "mkc1", "size": {"cpu": 1, "memory": 2048}, "source": {"oci_ref": "docker.io/library/nginx:latest"}, "http_port": 80, "http_protocol": "http", "auto_pause": {"idle_timeout": "5m"}, "tags": ["example"]}' \
+    "https://api.digitalocean.com/v2/microvms"

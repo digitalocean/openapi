@@ -1,0 +1,94 @@
+microvm_id:
+  in: path
+  name: microvm_id
+  description: The unique ID of the MicroVM.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
+checkpoint_id:
+  in: path
+  name: checkpoint_id
+  description: The unique ID of the checkpoint.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 01a0ed98-0a74-75dd-a625-e4856adbc298
+
+microvm_region:
+  in: query
+  name: region
+  required: false
+  description: Only return MicroVMs in this region.
+  schema:
+    type: string
+  example: mkc1
+
+name:
+  in: query
+  name: name
+  required: false
+  description: Only return the MicroVM with this exact name.
+  schema:
+    type: string
+  example: example-microvm
+
+tag_name:
+  in: query
+  name: tag_name
+  required: false
+  description: >-
+    Only return MicroVMs with this tag. A tag that matches no MicroVMs returns
+    an empty list.
+  schema:
+    type: string
+  example: example
+
+microvm_id_filter:
+  in: query
+  name: microvm_id
+  required: false
+  description: Only return checkpoints taken from this MicroVM.
+  schema:
+    type: string
+    format: uuid
+  example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
+console_rows:
+  in: query
+  name: rows
+  required: false
+  description: The initial number of terminal rows.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 65535
+    default: 24
+  example: 24
+
+console_cols:
+  in: query
+  name: cols
+  required: false
+  description: The initial number of terminal columns.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 65535
+    default: 80
+  example: 80
+
+microvm_per_page:
+  in: query
+  name: per_page
+  required: false
+  description: Number of items returned per page.
+  schema:
+    type: integer
+    minimum: 1
+    default: 25
+    maximum: 200
+  example: 25

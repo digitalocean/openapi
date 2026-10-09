@@ -1,0 +1,19 @@
+type: object
+
+description: >-
+  Automatic pause settings. A MicroVM always pauses after it is idle for
+  `idle_timeout`. Sending `enabled` set to `false` is rejected.
+
+properties:
+  enabled:
+    type: boolean
+    description: Whether auto-pause is on. Always `true`.
+    example: true
+
+  idle_timeout:
+    type: string
+    description: >-
+      How long the MicroVM is idle before it pauses, as a duration such as
+      `30s`, `5m`, or `1h`. Defaults to `5m`. The maximum is `4h`. Responses
+      show the duration in the form `5m0s`.
+    example: 5m0s

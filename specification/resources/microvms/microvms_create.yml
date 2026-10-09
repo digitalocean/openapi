@@ -1,0 +1,94 @@
+operationId: microvms_create
+
+summary: Create a MicroVM
+
+description: |
+  To create a MicroVM, send a POST request to `/v2/microvms`.
+
+  `name` and `source` are required. Set `source.oci_ref` to create the MicroVM from a
+  `linux/amd64` container image, or `source.checkpoint_id` to create it from a checkpoint.
+  With `oci_ref`, `region` and `size` are also required.
+
+  A MicroVM created from an image is returned with `state` set to `creating`. Poll
+  `GET /v2/microvms/{microvm_id}` until `state` is `running`. A MicroVM created from a
+  checkpoint is usually returned already `running`.
+
+  All settings are fixed at creation. There is no update endpoint.
+
+tags:
+  - MicroVMs [Public Preview]
+
+requestBody:
+  required: true
+
+  content:
+    application/json:
+      schema:
+        $ref: 'models/microvm_create.yml'
+
+      examples:
+        From a Container Image:
+          value:
+            name: example-microvm
+            region: mkc1
+            size:
+              cpu: 1
+              memory: 2048
+            source:
+              oci_ref: docker.io/library/nginx:latest
+            http_port: 80
+            http_protocol: http
+            auto_pause:
+              idle_timeout: 5m
+            tags:
+              - example
+
+        From a Checkpoint:
+          value:
+            name: example-from-checkpoint
+            source:
+              checkpoint_id: 01a0ed98-0a74-75dd-a625-e4856adbc298
+
+        In a VPC Network:
+          value:
+            name: example-vpc-microvm
+            region: mkc1
+            size:
+              cpu: 2
+              memory: 4096
+            source:
+              oci_ref: docker.io/library/nginx:latest
+            http_port: 80
+            networking: vpc
+            vpc_uuid: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+            environment:
+              APP_ENV: production
+
+responses:
+  '201':
+    $ref: 'responses/microvm_created.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_create.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:create'

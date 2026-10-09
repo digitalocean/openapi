@@ -1,0 +1,91 @@
+bad_request:
+  description: >-
+    The request was malformed, failed validation, or is not allowed in the
+    resource's current state.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      examples:
+        Invalid Size:
+          value:
+            code: INVALID_SIZE
+            message: "no supported size matches the requested resources: 3 vCPU with 2048 MiB of memory (supported: 1vCPU/2048MiB, 2vCPU/4096MiB, 8vCPU/16384MiB, 16vCPU/32768MiB)"
+        Auto-Pause Disabled:
+          value:
+            code: INVALID_AUTO_PAUSE
+            message: "auto_pause.enabled cannot be false; omit it to keep the 5 minute default, or set idle_timeout up to the account maximum"
+        Checkpoint Still Capturing:
+          value:
+            code: FAILED_PRECONDITION
+            message: "checkpoint 01a11cd5-25dd-790f-a77c-3677f24bca85 is still being captured; retry delete once the capture completes"
+
+forbidden:
+  description: >-
+    The token does not have the required scope, or your team has reached a
+    limit.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: PERMISSION_DENIED
+        message: "permission denied"
+
+not_found:
+  description: The MicroVM or checkpoint does not exist, or it belongs to another team.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: NOT_FOUND
+        message: MicroVM not found
+
+bad_gateway:
+  description: >-
+    The command did not reach the workload, for example because the container
+    is not running.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: UNAVAILABLE
+        message: "workload unavailable"
