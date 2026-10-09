@@ -2,4 +2,4 @@ lang: cURL
 source: |-
   curl -X GET \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    "https://api.digitalocean.com/v2/insights/query/nyc3/traces/7b0b4e56abab38362b24e5498eb9ec64"
+    "https://api.digitalocean.com/v2/insights/query/nyc3/traces/7b0b4e56abab38362b24e5498eb9ec64?from=24h&to=now"

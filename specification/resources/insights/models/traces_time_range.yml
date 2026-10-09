@@ -1,5 +1,8 @@
 type: object
-description: An inclusive query time window. Must not exceed 7 days (168h).
+description: >-
+  An inclusive query time window. Both bounds are required, `from` must not
+  be after `to`, and the window must not exceed 7 days (`168h`).
+additionalProperties: false
 required:
   - from
   - to

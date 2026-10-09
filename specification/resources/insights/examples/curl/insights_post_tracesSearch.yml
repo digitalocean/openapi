@@ -5,9 +5,17 @@ source: |-
     -H "Content-Type: application/json" \
     -d '{
       "timeRange": {
-        "from": {"relative": "15m"},
+        "from": {"relative": "24h"},
         "to": {"relative": "now"}
       },
+      "filter": {
+        "type": "and",
+        "expressions": [
+          {"type": "condition", "field": {"name": "service.name"}, "operator": "eq", "value": "checkout-api"},
+          {"type": "text_search", "query": "timeout"}
+        ]
+      },
+      "orderBy": [{"field": {"name": "durationNs"}, "direction": "desc"}],
       "pagination": {"limit": 50}
     }' \
     "https://api.digitalocean.com/v2/insights/query/nyc3/traces/search"

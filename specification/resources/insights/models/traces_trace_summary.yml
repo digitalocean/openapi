@@ -17,8 +17,10 @@ properties:
     example: "2026-10-09T09:21:39.99Z"
   serviceName:
     type: string
-    description: The service that emitted the root span.
-    example: "sakshi-openapi-smoke"
+    description: >-
+      The service that emitted the root span. Omitted when the root span has
+      no service.name resource attribute.
+    example: "checkout-api"
   durationNs:
     type: integer
     format: int64
@@ -51,10 +53,4 @@ properties:
     items:
       type: string
     example:
-      - "sakshi-openapi-smoke-root"
-  region:
-    type: string
-    description: >-
-      The datacenter region the trace was returned from. Only set on
-      multi-region searches; omitted from single-region responses.
-    example: nyc3
+      - "checkout-api-root"

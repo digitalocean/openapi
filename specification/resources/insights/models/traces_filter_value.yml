@@ -1,40 +1,73 @@
-type: object
-description: A typed literal or list value for a filter condition. Exactly one kind is set per message.
-minProperties: 1
-maxProperties: 1
-properties:
-  stringValue:
-    type: string
-    example: "api-gateway"
-  numberValue:
-    type: number
-    example: 42
-  boolValue:
-    type: boolean
+description: >-
+  The comparison value for a filter `condition`. Pass either a bare JSON
+  literal (string, number, boolean, or array for `in`) or a typed object
+  `{"type": "...", "value": ...}`. String values are coerced to the field's
+  type: numeric fields such as `durationNs` parse the string as a number, and
+  time fields such as `startTime` accept the same absolute formats as
+  `timeRange` (RFC3339 or Unix seconds/milliseconds/microseconds/nanoseconds).
+example: checkout-api
+oneOf:
+  - type: string
+    description: A bare string literal.
+    example: checkout-api
+  - type: number
+    description: A bare number literal.
+    example: 500000000
+  - type: boolean
+    description: A bare boolean literal.
     example: true
-  stringArrayValue:
-    type: object
+  - type: array
+    description: A bare array of values, used with the `in` operator.
+    minItems: 1
+    maxItems: 100
+    items:
+      oneOf:
+        - type: string
+        - type: number
+        - type: boolean
+    example:
+      - checkout-api
+      - payments-api
+  - type: object
+    description: >-
+      A typed scalar value. `type` is case-insensitive; `int`, `integer`, and
+      `float` are accepted as aliases for `number`, and `boolean` for `bool`.
+    additionalProperties: false
     required:
-      - values
+      - type
+      - value
     properties:
-      values:
+      type:
+        type: string
+        enum:
+          - string
+          - number
+          - bool
+        example: number
+      value:
+        oneOf:
+          - type: string
+          - type: number
+          - type: boolean
+        example: 500000000
+  - type: object
+    description: A typed string list, used with the `in` operator.
+    additionalProperties: false
+    required:
+      - type
+      - value
+    properties:
+      type:
+        type: string
+        enum:
+          - string_array
+        example: string_array
+      value:
         type: array
         minItems: 1
+        maxItems: 100
         items:
           type: string
         example:
-          - "api-gateway"
-          - "auth-service"
-  numberArrayValue:
-    type: object
-    required:
-      - values
-    properties:
-      values:
-        type: array
-        minItems: 1
-        items:
-          type: number
-        example:
-          - 42
-          - 84
+          - checkout-api
+          - payments-api
