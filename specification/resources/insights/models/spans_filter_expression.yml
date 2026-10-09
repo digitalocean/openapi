@@ -1,0 +1,45 @@
+type: object
+description: >-
+  A boolean filter tree for spans search. Set `type` to select the node kind:
+  `condition` compares a single field, `and`/`or`/`not` combine child
+  expressions, and `text_search` matches a substring across the span name,
+  service name, and status message.
+required:
+  - type
+properties:
+  type:
+    type: string
+    description: The node kind.
+    enum:
+      - condition
+      - and
+      - or
+      - not
+      - text_search
+    example: condition
+  field:
+    $ref: 'spans_filter_field.yml'
+  operator:
+    type: string
+    description: The comparison operator for a `condition` node.
+    enum:
+      - eq
+      - neq
+      - gt
+      - gte
+      - lt
+      - lte
+      - in
+      - exists
+    example: eq
+  value:
+    $ref: 'spans_filter_value.yml'
+  expressions:
+    type: array
+    description: Child expressions for `and`, `or`, and `not` nodes.
+    items:
+      $ref: 'spans_filter_expression.yml'
+  query:
+    type: string
+    description: The substring to match for a `text_search` node.
+    example: "timeout"

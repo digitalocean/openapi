@@ -1,0 +1,82 @@
+type: object
+description: >-
+  A node in a traces filter tree. Every node is the same flat object; `type`
+  selects which other properties apply:
+
+  - `condition` (default when `type` is omitted): compares `field` to `value`
+  using `operator`.
+
+  - `and` / `or`: combines the nodes in `expressions` (1 to 32 children).
+
+  - `not`: negates the single node in `expressions` (exactly one child).
+
+  - `text_search`: case-insensitive substring match of `query` against the
+  span name, service name, and span status message.
+
+
+  A trace matches when at least one of its spans in the time range matches
+  the filter. Trees may be nested at most 16 levels deep and contain at most
+  256 nodes in total. Unknown properties are rejected.
+additionalProperties: false
+properties:
+  type:
+    type: string
+    description: The node type. Matching is case-insensitive.
+    enum:
+      - condition
+      - and
+      - or
+      - not
+      - text_search
+    default: condition
+    example: condition
+  expressions:
+    type: array
+    description: >-
+      Child nodes for `and`, `or`, and `not`. `and` and `or` accept 1 to 32
+      children; `not` requires exactly one.
+    minItems: 1
+    maxItems: 32
+    items:
+      $ref: 'traces_filter_expression.yml'
+  field:
+    $ref: 'traces_field_ref.yml'
+  operator:
+    type: string
+    description: >-
+      The comparison operator for a `condition` node. Matching is
+      case-insensitive, and the symbol forms `=`, `!=`, `>`, `>=`, `<`, and
+      `<=` are accepted as aliases for `eq`, `neq`, `gt`, `gte`, `lt`, and
+      `lte`. `exists` matches spans where the field is present and non-empty
+      and ignores `value`. `in` requires an array `value` with 1 to 100
+      entries. `neq` on string fields also matches spans where the field is
+      absent.
+    enum:
+      - eq
+      - neq
+      - in
+      - exists
+      - gt
+      - gte
+      - lt
+      - lte
+    example: eq
+  value:
+    $ref: 'traces_filter_value.yml'
+  query:
+    type: string
+    description: >-
+      The search string for a `text_search` node. Leading and trailing
+      whitespace is trimmed; the trimmed string must be non-empty.
+    maxLength: 256
+    example: checkout
+example:
+  type: and
+  expressions:
+    - type: condition
+      field:
+        name: service.name
+      operator: eq
+      value: checkout-api
+    - type: text_search
+      query: timeout

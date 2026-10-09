@@ -1,0 +1,38 @@
+operationId: signals_list_exports
+
+summary: List Export Jobs
+
+description: |
+  To list signals export jobs for your team, send a GET request to
+  `/v1/signals/exports`. Results are paginated using cursor-based pagination
+  with `limit` and `after` parameters.
+
+tags:
+  - Signals
+
+parameters:
+  - $ref: 'parameters.yml#/limit'
+  - $ref: 'parameters.yml#/after'
+
+responses:
+  '200':
+    $ref: 'responses/list_exports_response.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/signals_list_exports.yml'
+
+security:
+  - bearer_auth:
+      - 'signals:read'

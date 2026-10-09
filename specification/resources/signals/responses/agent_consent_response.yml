@@ -1,0 +1,21 @@
+description: A single agent consent record.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/agent_consent.yml'
+    example:
+      id: 13
+      team_id: 39449946
+      agent_id: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
+      enabled: true
+      allowed: true
+      updated_at: "2026-08-10T10:09:25.738533Z"

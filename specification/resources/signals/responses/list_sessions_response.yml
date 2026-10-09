@@ -1,0 +1,43 @@
+description: A paginated list of sessions.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        edges:
+          type: array
+          items:
+            type: object
+            properties:
+              cursor:
+                type: string
+                description: An opaque cursor for pagination.
+                example: eyJ0ZWFtX2lkIjozOTQ0OTk0Nn0=
+              node:
+                $ref: '../models/session.yml'
+        page_info:
+          type: object
+          properties:
+            has_next_page:
+              type: boolean
+              description: Whether there are more results after this page.
+    example:
+      edges:
+        - cursor: eyJ0ZWFtX2lkIjozOTQ0OTk0Nn0=
+          node:
+            session_id: 01a0f3d5-d5f1-798a-9352-2cd8f8b81e78
+            total_turns: 5
+            started_at: "2026-09-15T14:30:00Z"
+            duration_seconds: 120.5
+            signal_count: 3
+      page_info:
+        has_next_page: false

@@ -1,0 +1,13 @@
+type: object
+description: Limits the number of spans returned.
+properties:
+  limit:
+    type: integer
+    format: int32
+    description: >-
+      Maximum number of spans to return. Defaults to 100 and must be between 1
+      and 1000.
+    default: 100
+    minimum: 1
+    maximum: 1000
+    example: 100
