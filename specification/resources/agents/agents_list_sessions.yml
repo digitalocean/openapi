@@ -1,0 +1,99 @@
+operationId: harness_list_sessions
+summary: ListSessions enumerates sessions for the caller's tenant.
+description: Keyset-paginated on an opaque cursor. Results are scoped to the authenticated team. Destroyed
+  and failed sessions are omitted by default (matching the Cloud Console); pass `status=SESSION_STATUS_ALL`
+  to list every session regardless of status, or an explicit status such as `status=SESSION_STATUS_FAILED`
+  or `status=SESSION_STATUS_DESTROYED` to list only those.
+tags:
+- Harness Runtime
+parameters:
+- in: query
+  name: page_size
+  required: false
+  description: Page size. Defaults to 50 when omitted or non-positive; values above 200 are clamped to
+    200 (not rejected).
+  schema:
+    type: integer
+    format: int32
+    minimum: 1
+    maximum: 200
+    default: 50
+    example: 50
+  example: 50
+- in: query
+  name: page_token
+  required: false
+  description: Opaque keyset cursor returned by the previous page. Empty starts from the beginning.
+  schema:
+    type: string
+    example: ''
+  example: ''
+- in: query
+  name: status
+  required: false
+  description: 'Optional filter on session status. Empty / SESSION_STATUS_UNSPECIFIED means no explicit
+    filter, which still hides destroyed and failed sessions by default; SESSION_STATUS_ALL opts out and
+    returns every session regardless of status (no session is ever actually in this status; it only means
+    something as a filter value here); any other explicit status overrides the default.'
+  schema:
+    $ref: models/definitions.yml#/session_status
+  example: SESSION_STATUS_UNSPECIFIED
+- in: query
+  name: name
+  required: false
+  description: Optional exact-name filter (case-insensitive). Returns the single live (non-terminal) session
+    that currently holds this name for the caller's team, or an empty list if none does. Matches the live
+    holder only, so historical terminal rows and reused names never make it ambiguous (per-team live-name
+    uniqueness bounds it to at most one). This is how clients (doctl / Console) resolve a session name
+    to its id; the {session_id} path stays UUID-only.
+  schema:
+    type: string
+    example: demo-agent
+  example: demo-agent
+- in: query
+  name: search
+  required: false
+  description: Optional case-insensitive substring filter on session name (contains), for callers that
+    don't know the exact name (e.g. a UI search box). Unlike `name`, this may return zero, one, or many
+    sessions, including terminal ones. Independent of `name`; at most 64 characters.
+  schema:
+    type: string
+    maxLength: 64
+    example: demo
+  example: demo
+responses:
+  '200':
+    description: A successful response.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/list_sessions_response
+  '400':
+    description: Invalid page_token.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_list_sessions.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

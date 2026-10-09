@@ -1,0 +1,104 @@
+operationId: harness_get_session_port_forward
+summary: PortForwardSession opens a WebSocket tunnel to a guest TCP port.
+description: |-
+  Upgrades the request to a WebSocket and bridges it to one TCP connection on the session sandbox's
+  guest `port`. Binary frames carry the opaque byte stream in both directions; the server closes with
+  a descriptive WebSocket close code when the tunnel ends. This is the raw TCP tunnel; browser clients
+  reaching the in-guest OpenHands Agent Server use the ingress URL
+  (`GET /v2/agents/sessions/{session_id}/ingress`), which has replaced this bridge for them.
+
+  WebSocket is not expressible in OpenAPI; this documents the GET that initiates the upgrade handshake
+  (HTTP 101 Switching Protocols). The handler dials the guest before upgrading, so a PAUSED session is
+  woken and served rather than rejected. `port` must be between 1024 and 65535. A request without the
+  WebSocket upgrade headers is answered 400 by the handshake layer.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: path
+  name: port
+  required: true
+  description: The guest TCP port to connect to. Must be between 1024 and 65535.
+  schema:
+    type: integer
+    minimum: 1024
+    maximum: 65535
+    example: 8000
+  example: 8000
+responses:
+  '101':
+    description: Switching Protocols. The WebSocket handshake succeeded and the connection is now a
+      binary tunnel to the guest port.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '400':
+    description: The request is not a valid WebSocket upgrade (missing Upgrade/Connection headers).
+      Returned by the handshake layer as plain text.
+    headers: *id001
+    content:
+      text/plain:
+        schema:
+          type: string
+          example: Bad Request
+  '402':
+    description: The team is blocked by the prepayment gate.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '403':
+    description: The port is outside 1024-65535, or the session belongs to another team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: The session has no sandbox.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '423':
+    description: This session is unavailable; contact support.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '502':
+    description: Could not reach the guest port (nothing listening, or the guest dial failed).
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_port_forward_session.yml
+security:
+- bearer_auth:
+  - agent_harness_session:operate

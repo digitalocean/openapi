@@ -1,0 +1,176 @@
+operationId: harness_get_session_events
+summary: StreamSessionEvents opens the session's Server-Sent Events feed.
+description: |-
+  Opens a `text/event-stream` of the session's canonical events, served by the MARS data plane (OHP).
+  Each frame is `event: <type>` plus a `data:` line holding a JSON event envelope; comment lines
+  (`: keepalive`) arrive about every 15s and must be ignored. Decode every `data:` with one envelope
+  parser and dispatch on the envelope's `type`. Every stream opens with a `stream.state` control frame
+  (its `data` is a `stream_state`).
+
+  Delivery is at-least-once: clients MUST de-duplicate and order by `event_id` (a ULID), never by
+  `seq`. The same path serves two modes:
+    - live attach (default): recent context, then an open stream that stays live until the client
+      disconnects. Pass `Last-Event-ID` (or `cursor`) to resume strictly after the last event the
+      client already rendered, suppressing the last-N context floor.
+    - finite replay (`replay_only=true`): writes a bounded slice of the stored transcript and closes.
+      This is what `doctl agents logs` uses; paginate it with `replay_from`.
+
+  OHP serves recent history only (bounded by Kafka retention and an event window); it is not an
+  archive. OHP's own errors (404/429/500/503) use the DO-standard JSON `{id, message, request_id}`
+  envelope (cthulhu#179797 / MARSOHS-2065); the 401 comes from the edge.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: query
+  name: replay_only
+  required: false
+  description: Write the selected history and then close the stream, rather than going live. Does not
+    advance the device's delivery cursor, so it never supersedes a live attach from the same device.
+  schema:
+    type: boolean
+    default: false
+    example: false
+  example: false
+- in: query
+  name: replay_from
+  required: false
+  description: Event-id pagination cursor for the `replay_only` lane only; return events after this one.
+    There is no last-N floor, so a cursor already at the head yields nothing. Ignored on a live attach.
+  schema:
+    type: string
+    example: ''
+  example: ''
+- in: query
+  name: cursor
+  required: false
+  description: Query-param equivalent of `Last-Event-ID`, because a browser EventSource cannot set
+    request headers. Takes precedence over the header when both are present. Live-attach lane only.
+  schema:
+    type: string
+    example: ''
+  example: ''
+- in: query
+  name: device_id
+  required: false
+  description: Query-param equivalent of `X-Device-UUID`. Identifies one client install so its delivery
+    cursor and live slot are its own; a second attach from the same device supersedes the first.
+  schema:
+    type: string
+    example: ''
+  example: ''
+- in: header
+  name: Last-Event-ID
+  required: false
+  description: The last event this client rendered (not merely received). Its presence marks the request
+    a reconnect, so OHP serves strictly what follows it with no last-N floor. Persist it only after
+    rendering.
+  schema:
+    type: string
+    example: 01K9YQ0R2M4A7X
+  example: 01K9YQ0R2M4A7X
+- in: header
+  name: X-Device-UUID
+  required: false
+  description: A stable per-install device id. See `device_id`.
+  schema:
+    type: string
+    example: d1e2f3a4-b5c6-7890-abcd-ef1234567890
+  example: d1e2f3a4-b5c6-7890-abcd-ef1234567890
+responses:
+  '200':
+    description: |-
+      An SSE stream. Each frame is `event: <type>` plus a `data:` line holding a JSON event envelope
+      (see `stream_event`). The stream opens with a `stream.state` control frame, then events
+      oldest-first, then either a `stream.state: live` frame (live attach) or end-of-stream
+      (`replay_only=true`).
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+      Cache-Control:
+        description: Always no-cache.
+        schema:
+          type: string
+        example: no-cache
+    content:
+      text/event-stream:
+        schema:
+          $ref: models/definitions.yml#/stream_event
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    description: Unknown session, or a session belonging to another team. The two are deliberately
+      indistinguishable so a caller cannot enumerate other tenants' session ids.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '429':
+    description: Attach admission limit reached. Retry after the Retry-After hint.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+      Retry-After:
+        description: Seconds to wait before retrying.
+        schema:
+          type: integer
+        example: 2
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    description: Internal error.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '503':
+    description: OHP cannot currently establish the caller's authorization or the session's location.
+      Transient; retry after the Retry-After hint.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+      Retry-After:
+        description: Seconds to wait before retrying.
+        schema:
+          type: integer
+        example: 2
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_stream_session_events.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

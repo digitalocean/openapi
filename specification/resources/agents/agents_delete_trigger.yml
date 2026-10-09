@@ -1,0 +1,42 @@
+operationId: harness_delete_trigger
+summary: DeleteTrigger soft-deletes a trigger.
+description: Marks the trigger deleted, fails any pending executions, and purges the webhook secret /
+  cron schedule. A fresh trigger owns no session; a reuse trigger only UNBINDS - it never destroys the
+  customer's session. Execution history and by-session lookups continue to resolve to the deleted row.
+  Returns 204 No Content on success.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: trigger_id
+  required: true
+  description: The trigger UUID.
+  schema:
+    type: string
+    example: b1a0c6de-1f2e-4a3b-9c8d-0e1f2a3b4c5d
+  example: b1a0c6de-1f2e-4a3b-9c8d-0e1f2a3b4c5d
+responses:
+  '204':
+    description: Trigger deleted; no response body.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_delete_trigger.yml
+security:
+- bearer_auth:
+  - agent_harness_session:manage

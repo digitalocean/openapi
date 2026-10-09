@@ -1,0 +1,73 @@
+operationId: harness_list_triggers
+summary: ListTriggers enumerates the calling team's triggers.
+description: Keyset-paginated on an opaque cursor. Excludes soft-deleted triggers. Scoped to the authenticated
+  team.
+tags:
+- Harness Runtime
+parameters:
+- in: query
+  name: page_size
+  required: false
+  description: Page size. Defaults to 50 when omitted or non-positive; server-clamped.
+  schema:
+    type: integer
+    format: int32
+    minimum: 1
+    example: 50
+  example: 50
+- in: query
+  name: page_token
+  required: false
+  description: Opaque keyset cursor returned by the previous page. Empty starts from the beginning.
+  schema:
+    type: string
+    example: ''
+  example: ''
+- in: query
+  name: kind
+  required: false
+  description: Optional filter by trigger kind.
+  schema:
+    $ref: models/definitions.yml#/trigger_kind
+  example: webhook
+- in: query
+  name: status
+  required: false
+  description: Optional filter by trigger status.
+  schema:
+    $ref: models/definitions.yml#/trigger_status
+  example: active
+responses:
+  '200':
+    description: A successful response.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/list_triggers_response
+  '400':
+    description: Invalid page_token or filter value.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_list_triggers.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

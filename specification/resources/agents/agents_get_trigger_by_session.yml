@@ -1,0 +1,44 @@
+operationId: harness_get_trigger_by_session
+summary: GetTriggerBySession reverse-looks-up the trigger that produced or binds a session.
+description: Returns the trigger that produced (fresh) or binds (reuse) the given session. Resolves to
+  the row even after the trigger is soft-deleted.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+responses:
+  '200':
+    description: The trigger that produced (fresh) or binds (reuse) this session.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/get_trigger_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_get_trigger_by_session.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read
