@@ -12,3 +12,15 @@ content:
   application/json:
     schema:
       $ref: '../models/traces_search_response.yml'
+    example:
+      data:
+        - traceId: "bef35030c4024f42fb88041fea062e97"
+          started: "2026-10-09T09:21:39.99Z"
+          serviceName: "sakshi-openapi-smoke"
+          durationNs: 10000000
+          status: "Ok"
+          spanCount: 1
+          spanNames:
+            - "sakshi-openapi-smoke-root"
+      pagination:
+        hasMore: false

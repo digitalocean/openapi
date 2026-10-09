@@ -1,39 +1,49 @@
 type: object
-description: A single trace returned by a traces search. One row per trace, aggregated from its spans.
+description: >-
+  A single trace returned by a traces search. One row per trace, aggregated
+  from its spans. Every field except `traceId` is omitted when it holds its
+  zero value (for example, `errorCount` is absent when no spans errored).
 required:
   - traceId
 properties:
   traceId:
     type: string
     description: The trace identifier.
-    example: "7b0b4e56abab38362b24e5498eb9ec64"
+    example: "bef35030c4024f42fb88041fea062e97"
   started:
     type: string
     format: date-time
-    description: The start time of the earliest span in the trace.
-    example: "2026-09-30T00:14:12Z"
+    description: The start time of the earliest span in the trace, in RFC 3339 format.
+    example: "2026-10-09T09:21:39.99Z"
   serviceName:
     type: string
     description: The service that emitted the root span.
-    example: "api-gateway"
+    example: "sakshi-openapi-smoke"
   durationNs:
     type: integer
     format: int64
     description: Wall-clock duration of the trace in nanoseconds.
-    example: 154000000
+    example: 10000000
   spanCount:
     type: integer
     format: int32
     description: The number of spans in the trace.
-    example: 12
+    example: 1
   errorCount:
     type: integer
     format: int32
-    description: The number of spans in the trace with an error status.
+    description: >-
+      The number of spans in the trace with an `Error` status code. Omitted
+      when zero.
     example: 1
   status:
     type: string
-    description: The rolled-up status of the trace.
+    description: >-
+      The rolled-up status of the trace. `Error` if any span has an `Error`
+      status code, otherwise `Ok`.
+    enum:
+      - Ok
+      - Error
     example: "Ok"
   spanNames:
     type: array
@@ -41,9 +51,10 @@ properties:
     items:
       type: string
     example:
-      - "GET /v2/droplets"
-      - "db.query"
+      - "sakshi-openapi-smoke-root"
   region:
     type: string
-    description: The datacenter region the trace was returned from.
+    description: >-
+      The datacenter region the trace was returned from. Only set on
+      multi-region searches; omitted from single-region responses.
     example: nyc3

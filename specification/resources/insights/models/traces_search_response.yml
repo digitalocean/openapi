@@ -1,5 +1,8 @@
 type: object
 description: Response body for a traces search.
+required:
+  - data
+  - pagination
 properties:
   data:
     type: array

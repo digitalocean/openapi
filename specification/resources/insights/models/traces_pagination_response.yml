@@ -1,5 +1,7 @@
 type: object
 description: Pagination response.
+required:
+  - hasMore
 properties:
   hasMore:
     type: boolean
