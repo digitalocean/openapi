@@ -1,0 +1,13 @@
+type: object
+description: Response body for a traces search.
+required:
+  - data
+  - pagination
+properties:
+  data:
+    type: array
+    description: Matching traces. Empty when no traces match.
+    items:
+      $ref: 'traces_trace_summary.yml'
+  pagination:
+    $ref: 'traces_pagination_response.yml'

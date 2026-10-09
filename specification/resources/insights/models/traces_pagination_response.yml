@@ -1,0 +1,9 @@
+type: object
+description: Pagination response.
+required:
+  - hasMore
+properties:
+  hasMore:
+    type: boolean
+    description: Whether more results matched the query than were returned.
+    example: false
