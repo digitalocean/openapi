@@ -1,0 +1,27 @@
+type: object
+
+description: >-
+  The MicroVM's size. `cpu` and `memory` must be one of the pairs `1`/`2048`,
+  `2`/`4096`, `8`/`16384`, or `16`/`32768`. The size sets the disk, which is
+  returned in responses.
+
+properties:
+  cpu:
+    type: integer
+    description: The number of vCPUs.
+    example: 1
+
+  memory:
+    type: integer
+    description: The amount of memory, in MiB.
+    example: 2048
+
+  disk:
+    type: integer
+    readOnly: true
+    description: The size of the disk, in GB. Set by the size.
+    example: 50
+
+required:
+  - cpu
+  - memory

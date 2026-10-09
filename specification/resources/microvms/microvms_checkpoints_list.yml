@@ -1,0 +1,39 @@
+operationId: microvmCheckpoints_list
+
+summary: List checkpoints
+
+description: |
+  To list your team's checkpoints, newest first, send a GET request to
+  `/v2/microvms/checkpoints`. To list one MicroVM's checkpoints, add the `microvm_id` query
+  parameter.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: '../../shared/parameters.yml#/page'
+  - $ref: 'parameters.yml#/microvm_per_page'
+  - $ref: 'parameters.yml#/microvm_id_filter'
+
+responses:
+  '200':
+    $ref: 'responses/all_checkpoints.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_checkpoints_list.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:read'

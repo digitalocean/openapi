@@ -1,0 +1,59 @@
+exec_request:
+  type: object
+
+  description: >-
+    A command to run in the MicroVM's workload container. The command runs
+    directly, not through a shell. To use pipes, redirects, or environment
+    variables, run it with `sh -c`. The request body can be up to 1 MiB.
+
+  properties:
+    argv:
+      type: array
+      minItems: 1
+      items:
+        type: string
+      description: The command and its arguments.
+      example:
+        - nginx
+        - -v
+
+    cwd:
+      type: string
+      description: The working directory to run the command in.
+      example: /usr/share/nginx/html
+
+  required:
+    - argv
+
+exec_response:
+  type: object
+
+  description: >-
+    The result of a command. The command has 60 seconds to finish. Combined
+    `stdout` and `stderr` are limited to 4 MiB.
+
+  properties:
+    stdout:
+      type: string
+      description: >-
+        The command's standard output. Bytes that are not valid UTF-8 are
+        replaced.
+      example: ""
+
+    stderr:
+      type: string
+      description: >-
+        The command's standard error. Bytes that are not valid UTF-8 are
+        replaced.
+      example: "nginx version: nginx/1.29.1\n"
+
+    exit_code:
+      type: integer
+      description: The command's exit code.
+      example: 0
+
+    truncated:
+      type: boolean
+      description: >-
+        Present and `true` when the output exceeded 4 MiB and was cut off.
+      example: false

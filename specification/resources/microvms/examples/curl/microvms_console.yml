@@ -1,0 +1,5 @@
+lang: WebSocket
+source: |-
+  websocat -b \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "wss://api.digitalocean.com/v2/microvms/01a0ef1a-d873-793d-ae6a-5dd6239be62a/console?rows=24&cols=80"

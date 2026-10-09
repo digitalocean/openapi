@@ -1,0 +1,130 @@
+type: object
+
+description: >-
+  A MicroVM. All fields are set at creation. There is no update endpoint.
+
+properties:
+  id:
+    type: string
+    format: uuid
+    readOnly: true
+    description: The unique ID of the MicroVM.
+    example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
+  name:
+    type: string
+    pattern: '^[a-z0-9-]{1,63}$'
+    description: >-
+      The name of the MicroVM. Must be unique in the region and contain 1 to 63
+      lowercase letters, digits, and hyphens.
+    example: example-microvm
+
+  region:
+    type: string
+    description: The slug of the region the MicroVM is in.
+    example: mkc1
+
+  size:
+    $ref: 'microvm_size.yml'
+
+  source:
+    $ref: 'microvm_source.yml'
+
+  state:
+    type: string
+    readOnly: true
+    enum:
+      - creating
+      - running
+      - pausing
+      - paused
+      - resuming
+      - terminating
+      - terminated
+      - failed
+      - unknown
+    description: The MicroVM's current state.
+    example: running
+
+  failure_reason:
+    type: string
+    readOnly: true
+    description: Why the MicroVM failed. Present only when `state` is `failed`.
+    example: "workload container exited (code 0): exited with code 0"
+
+  networking:
+    type: string
+    enum:
+      - public
+      - vpc
+    default: public
+    description: >-
+      `public` sends outbound traffic through a shared NAT gateway. `vpc`
+      places the MicroVM in the VPC network set by `vpc_uuid`.
+    example: public
+
+  vpc_uuid:
+    type: string
+    format: uuid
+    description: >-
+      The ID of a VPC network in the same region that belongs to your team.
+      Present only when `networking` is `vpc`.
+    example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+
+  auto_pause:
+    $ref: 'microvm_auto_pause.yml'
+
+  auto_resume:
+    type: boolean
+    default: true
+    description: >-
+      Whether an HTTP request, command, or console session resumes the
+      MicroVM when it is paused.
+    example: true
+
+  http_protocol:
+    type: string
+    enum:
+      - http
+      - http2
+    nullable: true
+    description: >-
+      The protocol the MicroVM's HTTP port serves. `null` if the protocol was
+      not set when the MicroVM was created.
+    example: http
+
+  ports:
+    type: array
+    maxItems: 5
+    items:
+      type: integer
+    description: >-
+      The guest ports declared on the MicroVM, including the HTTP port. During
+      the public preview, only the HTTP port is reachable through the
+      MicroVM's endpoint.
+    example:
+      - 80
+
+  tags:
+    type: array
+    items:
+      type: string
+    description: The tags applied to the MicroVM.
+    example:
+      - example
+
+  urls:
+    type: array
+    readOnly: true
+    items:
+      $ref: 'microvm_url.yml'
+    description: >-
+      The MicroVM's HTTPS endpoints. The entry with `default` set to `true` is
+      the endpoint for the HTTP port.
+
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: When the MicroVM was created, in ISO 8601 format.
+    example: "2026-09-29T21:38:29Z"
