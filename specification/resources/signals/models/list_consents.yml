@@ -3,8 +3,20 @@ description: A wrapper for a list of consent records.
 properties:
   consents:
     type: array
-    description: A list of consent records for the team's agents.
+    description: >-
+      A list of consent records for the team. Includes per-agent records
+      (`source: agent`) and, when set, the team-level inference record
+      (`source: inference`).
     items:
       $ref: 'consent_record.yml'
+  source:
+    type: string
+    enum:
+      - agent
+      - inference
+    description: >-
+      Echoes the `source` filter when the request was filtered by source.
+      Omitted when the list was not filtered.
+    example: inference
 required:
   - consents

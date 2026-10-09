@@ -16,11 +16,19 @@ content:
       consents:
         - id: 13
           team_id: 39449946
+          source: agent
           agent_id: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
           enabled: true
           updated_at: "2026-08-10T10:09:25.738533Z"
         - id: 6
           team_id: 39449946
+          source: agent
           agent_id: 019fb6b1-aad4-7d54-a74e-c5570d768148
           enabled: true
           updated_at: "2026-08-07T10:10:16.385447Z"
+        - id: 21
+          team_id: 39449946
+          source: inference
+          agent_id: ""
+          enabled: true
+          updated_at: "2026-10-09T11:41:27.104822Z"

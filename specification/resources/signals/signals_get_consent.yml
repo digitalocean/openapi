@@ -7,6 +7,9 @@ description: |
   request to `/v1/consent/{agent_id}`. The response includes an `enabled`
   field indicating whether signals collection is on for this agent.
 
+  This endpoint only serves per-agent (`source: agent`) records. Team-level
+  inference consent is read from `GET /v1/consent?source=inference`.
+
 tags:
   - Signals
 
@@ -16,6 +19,9 @@ parameters:
 responses:
   '200':
     $ref: 'responses/agent_consent_response.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

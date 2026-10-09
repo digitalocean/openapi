@@ -28,6 +28,37 @@ export_id:
     format: uuid
   example: 9f13c09c-c877-436b-9863-dcc39c9dd737
 
+source:
+  in: query
+  name: source
+  description: >-
+    Filter consent records by source. `agent` returns per-agent records
+    (Harness Runtime); `inference` returns the team-level record for
+    Serverless Inference chat completions. When omitted, records for all
+    sources are returned.
+  required: false
+  schema:
+    type: string
+    enum:
+      - agent
+      - inference
+  example: inference
+
+source_required:
+  in: query
+  name: source
+  description: >-
+    The consent source to update. Only team-level sources are accepted on
+    this endpoint; currently `inference` (Serverless Inference chat
+    completions). Per-agent consent (`agent`) is managed with
+    `PUT /v1/consent/{agent_id}` instead.
+  required: true
+  schema:
+    type: string
+    enum:
+      - inference
+  example: inference
+
 deletion_id:
   in: path
   name: deletion_id

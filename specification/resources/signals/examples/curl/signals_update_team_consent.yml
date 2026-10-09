@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X PUT \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"enabled":true}' \
+    "https://api.digitalocean.com/v1/consent?source=inference"

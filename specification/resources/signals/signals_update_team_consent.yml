@@ -1,0 +1,61 @@
+operationId: signals_update_team_consent
+
+summary: Update Team-Level Consent
+
+description: |
+  To enable or disable signals collection for a source that is consented at
+  the team level, send a PUT request to `/v1/consent?source=inference` with
+  an `enabled` boolean in the request body. Currently the only team-level
+  source is `inference`, which covers Serverless Inference chat completions
+  made by your team.
+
+  To revoke consent, send the same request with `enabled` set to `false`.
+  The `source` query parameter is required. Per-agent consent for Harness
+  Runtime agents is managed with `PUT /v1/consent/{agent_id}` instead.
+
+tags:
+  - Signals
+
+parameters:
+  - $ref: 'parameters.yml#/source_required'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          enabled:
+            type: boolean
+            description: Whether to enable signals collection for this source.
+        required:
+          - enabled
+      example:
+        enabled: true
+
+responses:
+  '200':
+    $ref: 'responses/update_team_consent_response.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/signals_update_team_consent.yml'
+
+security:
+  - bearer_auth:
+      - 'signals:update'
