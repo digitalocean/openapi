@@ -4,10 +4,9 @@ properties:
   type:
     type: string
     description: >-
-      The scope of the deletion. `agent` deletes the signals data
-      collected for one agent and requires `agent_id`. `inference` deletes the
-      signals data collected for the team's Serverless Inference requests and
-      must not include `agent_id`.
+      The scope of the deletion. `agent` deletes data for one agent and
+      requires `agent_id`. `inference` deletes data for the team's Serverless
+      Inference requests.
     enum:
       - agent
       - inference
@@ -15,15 +14,15 @@ properties:
   team_id:
     type: integer
     format: int64
-    description: The team whose data should be deleted. Must match the team of the authenticated token.
+    description: The team whose data should be deleted. Must match the authenticated team.
     example: 12345678
   agent_id:
     type: string
     format: uuid
     description: >-
       The agent whose data should be deleted. For Harness Runtime, this is the
-      Environment Config ID. Required when `type` is `agent`; must be
-      omitted when `type` is `inference`.
+      Environment Config ID. Required when `type` is `agent`; must be omitted
+      when `type` is `inference`.
     example: 01a10d3f-2c09-764f-99f8-458e521627f3
 required:
   - type

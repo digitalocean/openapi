@@ -4,37 +4,27 @@ summary: Create a Data Deletion Job
 
 description: |
   To permanently delete signals data, send a POST request to
-  `/v1/signals/deletions`. The request body must include a `type` and the
-  `team_id` of the authenticated team.
+  `/v1/signals/deletions`.
 
-  | Type | Scope | Required Fields |
-  |------|-------|-----------------|
-  | `agent` | The sessions, dialogues, and signal reports collected for one agent. | `type`, `team_id`, `agent_id` |
-  | `inference` | The sessions, dialogues, and signal reports collected for the team's Serverless Inference requests. | `type`, `team_id` |
+  Two deletion types are supported:
 
-  **Deletion is permanent and cannot be undone.** Deletion runs in the
-  background. Poll the get deletion endpoint to check the job's status. If a
-  job fails, submit the same request again to retry.
+  - `agent` — deletes sessions, dialogues, and signal reports for one agent.
+    Requires `agent_id`. The agent's data is hidden immediately and signals
+    collection is disabled for the agent, even if the job later fails. Wait
+    until the job is complete before enabling signals for the agent again.
+  - `inference` — deletes sessions, dialogues, and signal reports for the
+    team's Serverless Inference requests made before the deletion. Signals
+    continues to analyze new requests.
 
-  For `agent` deletions, the agent's sessions and dialogues stop appearing in
-  signals results immediately, and signals collection is disabled for the
-  agent. They stay hidden and collection stays disabled even if the job
-  fails. Wait until the deletion is complete before enabling signals for the
-  agent again. For `inference` deletions, only data collected before the
-  request is deleted; signals continues to analyze new Serverless Inference
-  requests.
+  Deletion is permanent and cannot be undone. The job runs asynchronously;
+  poll the get endpoint to check status. To retry a failed job, send the same
+  request again. Export files created earlier are not deleted and remain
+  available until they expire.
 
-  Deletion does not remove export files created earlier. They remain
-  available to download until they expire.
-
-  The endpoint is idempotent while a job is active. A new job returns
-  `202 Accepted`. If a queued or running job already exists for the same
-  target, that job is returned with `200 OK` instead of creating a duplicate.
-  A request made after the previous job has finished starts a new job.
-
-  Each team may have a limited number of active deletion jobs at once.
-  Requests beyond that limit return `429 Too Many Requests`; wait for existing
-  jobs to finish before submitting more.
+  The endpoint is idempotent: if a queued or running job already exists for
+  the same target, it is returned with `200 OK`. A new job returns
+  `202 Accepted`. Each team can have a limited number of active jobs;
+  requests beyond that limit return `429 Too Many Requests`.
 
 tags:
   - Signals

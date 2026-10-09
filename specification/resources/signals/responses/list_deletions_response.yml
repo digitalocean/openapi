@@ -33,9 +33,8 @@ content:
             end_cursor:
               type: string
               description: >-
-                The cursor of the last item on this page. Pass this value as
-                `after` to retrieve the next page. Present only when there are
-                more results.
+                Cursor of the last item. Pass as `after` to fetch the next
+                page. Present only when there are more results.
               example: eyJkIjoiMDFKOVpXN0E4QjlDMEQxRTJGM0c0SDVKNksifQ==
     example:
       edges:

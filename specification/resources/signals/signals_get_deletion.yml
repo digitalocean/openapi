@@ -3,8 +3,8 @@ operationId: signals_get_deletion
 summary: Retrieve a Data Deletion Job
 
 description: |
-  To retrieve the status and details of a signals data deletion job, send a
-  GET request to `/v1/signals/deletions/{deletion_id}`.
+  To retrieve the status of a signals data deletion job, send a GET request
+  to `/v1/signals/deletions/{deletion_id}`.
 
 tags:
   - Signals

@@ -1,6 +1,5 @@
 description: >-
-  The deletion job was accepted. The job is queued and processed
-  asynchronously.
+  The deletion job was accepted and will be processed asynchronously.
 
 headers:
   ratelimit-limit:

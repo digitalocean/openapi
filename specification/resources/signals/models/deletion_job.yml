@@ -1,7 +1,5 @@
 type: object
-description: >-
-  A data deletion job that permanently removes signals data for an agent or
-  for a team's Serverless Inference usage.
+description: A deletion job that permanently removes signals data for an agent or for a team's Serverless Inference usage.
 properties:
   team_id:
     type: integer
@@ -10,14 +8,13 @@ properties:
     example: 12345678
   deletion_id:
     type: string
-    description: The unique identifier for the deletion job.
+    description: The unique identifier for the deletion job (ULID).
     example: 01J9ZX0N5Q7M2K3R4S5T6V7W8X
   type:
     type: string
     description: >-
-      The scope of the deletion. `agent` deletes the signals data
-      collected for one agent. `inference` deletes the signals data collected
-      for the team's Serverless Inference requests.
+      The scope of the deletion. `agent` deletes data for one agent.
+      `inference` deletes data for the team's Serverless Inference requests.
     enum:
       - agent
       - inference
@@ -31,11 +28,7 @@ properties:
     example: 01a10d3f-2c09-764f-99f8-458e521627f3
   status:
     type: string
-    description: >-
-      The current status of the deletion job. `queued` jobs are waiting to be
-      processed, `running` jobs are deleting data, `complete` jobs have
-      permanently deleted all matching data, and `failed` jobs stopped before
-      finishing.
+    description: The current status of the deletion job.
     enum:
       - queued
       - running
@@ -45,7 +38,7 @@ properties:
   error_message:
     type: string
     nullable: true
-    description: A description of why the deletion failed, or null if it has not failed.
+    description: Error message if the deletion failed, or null otherwise.
     example: null
   created_at:
     type: integer
@@ -56,17 +49,13 @@ properties:
     type: integer
     format: int64
     nullable: true
-    description: >-
-      Unix timestamp when processing of the deletion job started, or null if
-      the job is still queued.
+    description: Unix timestamp when processing started, or null if still queued.
     example: 1791036410
   completed_at:
     type: integer
     format: int64
     nullable: true
-    description: >-
-      Unix timestamp when the deletion job finished, or null if it is still in
-      progress.
+    description: Unix timestamp when the deletion finished, or null if still in progress.
     example: null
 required:
   - team_id
