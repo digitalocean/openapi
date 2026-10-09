@@ -1,0 +1,63 @@
+description: A paginated list of deletion jobs.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        edges:
+          type: array
+          items:
+            type: object
+            properties:
+              cursor:
+                type: string
+                description: An opaque cursor for pagination.
+                example: eyJkIjoiMDFKOVpYME41UTdNMkszUjRTNVQ2VjdXOFgifQ==
+              node:
+                $ref: '../models/deletion_job.yml'
+        page_info:
+          type: object
+          properties:
+            has_next_page:
+              type: boolean
+              description: Whether there are more results after this page.
+            end_cursor:
+              type: string
+              description: >-
+                Cursor of the last item. Pass as `after` to fetch the next
+                page. Present only when there are more results.
+              example: eyJkIjoiMDFKOVpXN0E4QjlDMEQxRTJGM0c0SDVKNksifQ==
+    example:
+      edges:
+        - cursor: eyJkIjoiMDFKOVpYME41UTdNMkszUjRTNVQ2VjdXOFgifQ==
+          node:
+            team_id: 12345678
+            deletion_id: 01J9ZX0N5Q7M2K3R4S5T6V7W8X
+            type: agent
+            agent_id: 01a10d3f-2c09-764f-99f8-458e521627f3
+            status: running
+            error_message: null
+            created_at: 1791036405
+            started_at: 1791036410
+            completed_at: null
+        - cursor: eyJkIjoiMDFKOVpXN0E4QjlDMEQxRTJGM0c0SDVKNksifQ==
+          node:
+            team_id: 12345678
+            deletion_id: 01J9ZW7A8B9C0D1E2F3G4H5J6K
+            type: inference
+            status: complete
+            error_message: null
+            created_at: 1790950005
+            started_at: 1790950010
+            completed_at: 1790950605
+      page_info:
+        has_next_page: false

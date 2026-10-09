@@ -1,0 +1,65 @@
+type: object
+description: A deletion job that permanently removes signals data for an agent or for a team's Serverless Inference usage.
+properties:
+  team_id:
+    type: integer
+    format: int64
+    description: The team that owns the deletion job.
+    example: 12345678
+  deletion_id:
+    type: string
+    description: The unique identifier for the deletion job (ULID).
+    example: 01J9ZX0N5Q7M2K3R4S5T6V7W8X
+  type:
+    type: string
+    description: >-
+      The scope of the deletion. `agent` deletes data for one agent.
+      `inference` deletes data for the team's Serverless Inference requests.
+    enum:
+      - agent
+      - inference
+    example: agent
+  agent_id:
+    type: string
+    format: uuid
+    description: >-
+      The agent whose data is being deleted. For Harness Runtime, this is the
+      Environment Config ID. Only present for `agent` deletions.
+    example: 01a10d3f-2c09-764f-99f8-458e521627f3
+  status:
+    type: string
+    description: The current status of the deletion job.
+    enum:
+      - queued
+      - running
+      - complete
+      - failed
+    example: running
+  error_message:
+    type: string
+    nullable: true
+    description: Error message if the deletion failed, or null otherwise.
+    example: null
+  created_at:
+    type: integer
+    format: int64
+    description: Unix timestamp when the deletion job was created.
+    example: 1791036405
+  started_at:
+    type: integer
+    format: int64
+    nullable: true
+    description: Unix timestamp when processing started, or null if still queued.
+    example: 1791036410
+  completed_at:
+    type: integer
+    format: int64
+    nullable: true
+    description: Unix timestamp when the deletion finished, or null if still in progress.
+    example: null
+required:
+  - team_id
+  - deletion_id
+  - type
+  - status
+  - created_at
