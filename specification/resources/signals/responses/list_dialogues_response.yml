@@ -1,0 +1,44 @@
+description: A paginated list of session dialogues.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        edges:
+          type: array
+          items:
+            type: object
+            properties:
+              cursor:
+                type: string
+                description: An opaque cursor for pagination.
+                example: eyJzZXF1ZW5jZSI6MX0=
+              node:
+                $ref: '../models/session_dialogue.yml'
+        page_info:
+          type: object
+          properties:
+            has_next_page:
+              type: boolean
+              description: Whether there are more results after this page.
+    example:
+      edges:
+        - cursor: eyJzZXF1ZW5jZSI6MX0=
+          node:
+            id: "01a0f3d6-1234-7abc-def0-123456789abc"
+            sequence: 1
+            run_status: completed
+            user_message: "How do I create a Droplet?"
+            signals:
+              - SatisfactionConfirmation
+      page_info:
+        has_next_page: false

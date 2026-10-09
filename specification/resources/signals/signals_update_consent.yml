@@ -1,0 +1,55 @@
+operationId: signals_update_consent
+
+summary: Update Consent for an Agent
+
+description: |
+  To enable or disable signals collection for a specific agent, send a
+  PUT request to `/v1/consent/{agent_id}` with an `enabled` boolean in the
+  request body.
+
+tags:
+  - Signals
+
+parameters:
+  - $ref: 'parameters.yml#/agent_id'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          enabled:
+            type: boolean
+            description: Whether to enable signals collection for this agent.
+        required:
+          - enabled
+      example:
+        enabled: true
+
+responses:
+  '200':
+    $ref: 'responses/update_consent_response.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/signals_update_consent.yml'
+
+security:
+  - bearer_auth:
+      - 'signals:update'

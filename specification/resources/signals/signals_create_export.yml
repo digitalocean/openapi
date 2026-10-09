@@ -1,0 +1,57 @@
+operationId: signals_create_export
+
+summary: Create an Export Job
+
+description: |
+  To create a new signals data export, send a POST request to
+  `/v1/signals/exports` with an `agent_id` in the request body. You may
+  optionally filter the export by `signal_type`, `session_ids`, `start_time`,
+  and `end_time`. Use the export options endpoint to discover available signal
+  types.
+
+  The export job runs asynchronously. Poll the get export endpoint to check
+  its status. When complete, use the download endpoint to retrieve a
+  pre-signed URL.
+
+tags:
+  - Signals
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/create_export_request.yml'
+      example:
+        agent_id: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
+        signal_type:
+          - ExecutionFailureToolNotFound
+
+responses:
+  '201':
+    $ref: 'responses/export_job_response.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '422':
+    $ref: '../../shared/responses/unprocessable_entity.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/signals_create_export.yml'
+
+security:
+  - bearer_auth:
+      - 'signals:read'
