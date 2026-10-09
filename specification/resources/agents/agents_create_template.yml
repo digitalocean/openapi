@@ -1,0 +1,46 @@
+operationId: harness_create_template
+summary: CreateTemplate creates a team custom template and kicks a build.
+description: Creates a team-owned template from a customer OCI ref rebased onto a base template. team_id is stamped from the authenticated principal.
+tags:
+- Harness Runtime
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/create_template_request
+  description: Template create body.
+responses:
+  '201':
+    description: Template created; build kicked.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/create_template_response
+  '400':
+    description: Invalid request.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_create_template.yml
+security:
+- bearer_auth:
+  - agent_harness_session:manage
