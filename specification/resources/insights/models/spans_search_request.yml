@@ -1,0 +1,18 @@
+type: object
+description: Request body for searching spans.
+required:
+  - timeRange
+properties:
+  timeRange:
+    $ref: 'spans_time_range.yml'
+  filter:
+    $ref: 'spans_filter_expression.yml'
+  orderBy:
+    type: array
+    description: >-
+      Sort clauses applied to the result set. Defaults to `startTime`
+      descending when omitted.
+    items:
+      $ref: 'spans_order_by.yml'
+  pagination:
+    $ref: 'spans_pagination_request.yml'

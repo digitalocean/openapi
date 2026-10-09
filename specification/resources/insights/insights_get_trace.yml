@@ -1,0 +1,77 @@
+operationId: insights_get_trace
+
+summary: Retrieve an existing trace
+
+description: >-
+  To retrieve a single trace and all of its spans, send a GET request to
+  `/v2/insights/query/{region}/traces/{trace_id}`.
+
+  Only spans that started within the lookup window are returned. The window
+  defaults to the last 7 days and can be narrowed with the `from` and `to`
+  query parameters; it must not exceed 7 days, and `from` must not be after
+  `to`. Spans are returned ordered by start time. At most 10,000 spans are
+  returned; `truncated` is `true` when the trace has more.
+
+  A trace ID with no spans in the window returns `404`, as do malformed or
+  uppercase trace IDs. A trace is only resolvable in the region that ingested
+  it; querying another region also returns `404`.
+
+  Supported regions are `ams2`, `ams3`, `atl1`, `blr1`, `fra1`, `lon1`,
+  `mem1`, `nyc1`, `nyc2`, `nyc3`, `ric1`, `sfo1`, `sfo2`, `sfo3`, `sgp1`,
+  `syd1`, and `tor1`. Requests time out after 60 seconds.
+
+  Errors produced by the traces service (`400`, and `404` when no trace is
+  found) have a `text/plain` body containing a short message. Authentication
+  and authorization errors (`401`, `403`), rate limiting (`429`), and routing
+  errors (for example, `404` for an unknown region) come from the API gateway
+  and use the standard JSON error object with `id` and `message`. `403` is
+  also returned for accounts that are in a trial or not in good standing. If
+  the regional traces backend cannot be reached, the response is `502` with a
+  `text/plain` body.
+
+  JSON field names are camelCase (`traceId`, `spanId`, `startTime`, `endTime`,
+  `durationNs`, `serviceName`, `statusCode`, `parentSpanId`).
+
+tags:
+  - Insights
+
+parameters:
+  - $ref: 'parameters.yml#/region'
+  - $ref: 'parameters.yml#/trace_id'
+  - $ref: 'parameters.yml#/trace_from'
+  - $ref: 'parameters.yml#/trace_to'
+
+responses:
+  '200':
+    $ref: 'responses/trace.yml'
+
+  '400':
+    $ref: 'responses/traces_bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: '../../shared/responses/forbidden.yml'
+
+  '404':
+    $ref: 'responses/traces_not_found.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  '502':
+    $ref: 'responses/traces_bad_gateway.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/insights_get_trace.yml'
+
+security:
+  - bearer_auth:
+    - 'insights:read'

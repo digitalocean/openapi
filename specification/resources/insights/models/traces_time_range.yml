@@ -1,0 +1,13 @@
+type: object
+description: >-
+  An inclusive query time window. Both bounds are required, `from` must not
+  be after `to`, and the window must not exceed 7 days (`168h`).
+additionalProperties: false
+required:
+  - from
+  - to
+properties:
+  from:
+    $ref: 'traces_time_instant.yml'
+  to:
+    $ref: 'traces_time_instant.yml'

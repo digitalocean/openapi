@@ -1,0 +1,23 @@
+type: object
+description: A reference to a searchable span field.
+required:
+  - name
+properties:
+  name:
+    type: string
+    description: >-
+      The field name. Well-known span fields include `traceId`, `spanId`,
+      `parentSpanId`, `startTime`, `endTime`, `durationNs`, `name`,
+      `serviceName`, `kind`, `statusCode`, and `statusMessage`. Any other value
+      is treated as a span or resource attribute key.
+    example: service.name
+  scope:
+    type: string
+    description: >-
+      Optional attribute scope. Use `resource` to match a resource attribute or
+      `attributes` to match a span attribute. Omit for well-known fields or to
+      search both attribute maps.
+    enum:
+      - resource
+      - attributes
+    example: attributes

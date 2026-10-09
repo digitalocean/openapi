@@ -1,0 +1,151 @@
+operationId: insights_post_tracesSearch
+
+summary: Search traces
+
+description: >-
+  To search traces in a region, send a POST request to
+  `/v2/insights/query/{region}/traces/search` with a JSON body describing the
+  time range, optional filter, ordering, and pagination.
+
+  Each result is one trace, aggregated from all of its spans in the time
+  range. A trace is included when at least one of its spans matches
+  `filter`. The time range must not exceed 7 days (`168h`).
+  `pagination.limit` defaults to 100 (also used when `limit` is `0`) and must
+  be between 0 and 1000. Results are ordered by `started` descending unless
+  `orderBy` is set.
+
+  JSON field names are camelCase (`timeRange`, `orderBy`, `hasMore`,
+  `traceId`). Unknown request properties, invalid filters, and out-of-range
+  values are rejected with `400`.
+
+  Each request searches a single region; there is no multi-region search.
+  Supported regions are `ams2`, `ams3`, `atl1`, `blr1`, `fra1`, `lon1`,
+  `mem1`, `nyc1`, `nyc2`, `nyc3`, `ric1`, `sfo1`, `sfo2`, `sfo3`, `sgp1`,
+  `syd1`, and `tor1`. Requests time out after 60 seconds.
+
+  Errors produced by the traces service (`400`) have a `text/plain` body
+  containing a short message. Authentication and authorization errors
+  (`401`, `403`), rate limiting (`429`), and routing errors (for example,
+  `404` for an unknown region) come from the API gateway and use the standard
+  JSON error object with `id` and `message`. `403` is also returned for
+  accounts that are in a trial or not in good standing. If the regional
+  traces backend cannot be reached, the response is `502` with a
+  `text/plain` body.
+
+tags:
+  - Insights
+
+parameters:
+  - $ref: 'parameters.yml#/region'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/traces_search_request.yml'
+      examples:
+        recent:
+          summary: Most recent traces in the last 15 minutes
+          value:
+            timeRange:
+              from:
+                relative: 15m
+              to:
+                relative: now
+            pagination:
+              limit: 50
+        filtered:
+          summary: Traces from one service whose spans mention "timeout"
+          value:
+            timeRange:
+              from:
+                relative: 24h
+              to:
+                relative: now
+            filter:
+              type: and
+              expressions:
+                - type: condition
+                  field:
+                    name: service.name
+                  operator: eq
+                  value: checkout-api
+                - type: text_search
+                  query: timeout
+            pagination:
+              limit: 100
+        attributeIn:
+          summary: Traces with error spans from either of two hosts
+          value:
+            timeRange:
+              from:
+                absolute: "2026-10-09T00:00:00Z"
+              to:
+                absolute: "2026-10-09T06:00:00Z"
+            filter:
+              type: and
+              expressions:
+                - field:
+                    name: statusCode
+                  operator: eq
+                  value: Error
+                - field:
+                    name: host.name
+                    scope: resource
+                  operator: in
+                  value:
+                    - web-01
+                    - web-02
+        ordered:
+          summary: Slowest traces first, ties broken by oldest start
+          value:
+            timeRange:
+              from:
+                relative: 1h
+              to:
+                relative: now
+            orderBy:
+              - field:
+                  name: durationNs
+                direction: desc
+              - field:
+                  name: started
+                direction: asc
+            pagination:
+              limit: 20
+
+responses:
+  '200':
+    $ref: 'responses/traces_search.yml'
+
+  '400':
+    $ref: 'responses/traces_bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: '../../shared/responses/forbidden.yml'
+
+  '404':
+    $ref: 'responses/traces_not_found.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  '502':
+    $ref: 'responses/traces_bad_gateway.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/insights_post_tracesSearch.yml'
+
+security:
+  - bearer_auth:
+    - 'insights:read'
