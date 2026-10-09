@@ -4,10 +4,10 @@ properties:
   type:
     type: string
     description: >-
-      The scope of the deletion. `managed_agent` deletes all signals data for
-      one managed agent and requires `agent_id`. `inference` deletes all
-      signals data from the team's inference (non-agent) usage and must not
-      include `agent_id`.
+      The scope of the deletion. `managed_agent` deletes the signals data
+      collected for one agent and requires `agent_id`. `inference` deletes the
+      signals data collected for the team's Serverless Inference requests and
+      must not include `agent_id`.
     enum:
       - managed_agent
       - inference
@@ -21,8 +21,9 @@ properties:
     type: string
     format: uuid
     description: >-
-      The managed agent whose data should be deleted. Required when `type` is
-      `managed_agent`; must be omitted when `type` is `inference`.
+      The agent whose data should be deleted. For Harness Runtime, this is the
+      Environment Config ID. Required when `type` is `managed_agent`; must be
+      omitted when `type` is `inference`.
     example: 01a10d3f-2c09-764f-99f8-458e521627f3
 required:
   - type

@@ -1,7 +1,7 @@
 type: object
 description: >-
-  A data deletion job that permanently removes signals data for a managed
-  agent or for a team's inference usage.
+  A data deletion job that permanently removes signals data for an agent or
+  for a team's Serverless Inference usage.
 properties:
   team_id:
     type: integer
@@ -15,9 +15,9 @@ properties:
   type:
     type: string
     description: >-
-      The scope of the deletion. `managed_agent` deletes all signals data for
-      one managed agent. `inference` deletes all signals data from the team's
-      inference (non-agent) usage.
+      The scope of the deletion. `managed_agent` deletes the signals data
+      collected for one agent. `inference` deletes the signals data collected
+      for the team's Serverless Inference requests.
     enum:
       - managed_agent
       - inference
@@ -26,16 +26,16 @@ properties:
     type: string
     format: uuid
     description: >-
-      The managed agent whose data is being deleted. Only present for
-      `managed_agent` deletions.
+      The agent whose data is being deleted. For Harness Runtime, this is the
+      Environment Config ID. Only present for `managed_agent` deletions.
     example: 01a10d3f-2c09-764f-99f8-458e521627f3
   status:
     type: string
     description: >-
       The current status of the deletion job. `queued` jobs are waiting to be
-      processed, `running` jobs are actively deleting data, `complete` jobs
-      have permanently deleted all matching data, and `failed` jobs stopped
-      with an error described in `error_message`.
+      processed, `running` jobs are deleting data, `complete` jobs have
+      permanently deleted all matching data, and `failed` jobs stopped before
+      finishing.
     enum:
       - queued
       - running
@@ -45,7 +45,7 @@ properties:
   error_message:
     type: string
     nullable: true
-    description: Error message if the deletion failed, or null otherwise.
+    description: A description of why the deletion failed, or null if it has not failed.
     example: null
   created_at:
     type: integer
