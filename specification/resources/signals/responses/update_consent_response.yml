@@ -1,0 +1,26 @@
+description: The consent record was updated successfully.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        consent:
+          $ref: '../models/consent_record.yml'
+      required:
+        - consent
+    example:
+      consent:
+        id: 13
+        team_id: 39449946
+        agent_id: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
+        enabled: true
+        updated_at: "2026-10-07T11:06:32.280572Z"

@@ -1,0 +1,27 @@
+type: object
+description: A session represents a conversation monitored by Signals, such as a Harness Runtime agent session or a Serverless Inference chat completion.
+properties:
+  session_id:
+    type: string
+    format: uuid
+    description: The unique identifier for the session.
+    example: 01a0f3d5-d5f1-798a-9352-2cd8f8b81e78
+  total_turns:
+    type: integer
+    description: The total number of conversation turns in this session.
+    example: 5
+  started_at:
+    type: string
+    format: date-time
+    description: When the session started.
+    example: "2026-09-15T14:30:00Z"
+  duration_seconds:
+    type: number
+    description: The duration of the session in seconds.
+    example: 120.5
+  signal_count:
+    type: integer
+    description: The number of signals detected in this session.
+    example: 3
+required:
+  - session_id
