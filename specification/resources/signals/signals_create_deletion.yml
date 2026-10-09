@@ -9,18 +9,20 @@ description: |
 
   | Type | Scope | Required Fields |
   |------|-------|-----------------|
-  | `managed_agent` | The sessions, dialogues, and signal reports collected for one agent. | `type`, `team_id`, `agent_id` |
+  | `agent` | The sessions, dialogues, and signal reports collected for one agent. | `type`, `team_id`, `agent_id` |
   | `inference` | The sessions, dialogues, and signal reports collected for the team's Serverless Inference requests. | `type`, `team_id` |
 
   **Deletion is permanent and cannot be undone.** Deletion runs in the
-  background. Poll the get deletion endpoint to check the job's status.
+  background. Poll the get deletion endpoint to check the job's status. If a
+  job fails, submit the same request again to retry.
 
-  For `managed_agent` deletions, the agent's sessions and dialogues stop
-  appearing in signals results immediately, and signals collection is
-  disabled for the agent. Wait until the deletion is complete before enabling
-  signals for the agent again. For `inference` deletions, only data collected
-  before the request is deleted; signals continues to analyze new Serverless
-  Inference requests.
+  For `agent` deletions, the agent's sessions and dialogues stop appearing in
+  signals results immediately, and signals collection is disabled for the
+  agent. They stay hidden and collection stays disabled even if the job
+  fails. Wait until the deletion is complete before enabling signals for the
+  agent again. For `inference` deletions, only data collected before the
+  request is deleted; signals continues to analyze new Serverless Inference
+  requests.
 
   Deletion does not remove export files created earlier. They remain
   available to download until they expire.
@@ -44,9 +46,9 @@ requestBody:
       schema:
         $ref: 'models/create_deletion_request.yml'
       examples:
-        Managed Agent:
+        Agent:
           value:
-            type: managed_agent
+            type: agent
             team_id: 12345678
             agent_id: 01a10d3f-2c09-764f-99f8-458e521627f3
         Inference:

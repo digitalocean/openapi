@@ -3,5 +3,5 @@ source: |-
   curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -d '{"type":"managed_agent","team_id":12345678,"agent_id":"01a10d3f-2c09-764f-99f8-458e521627f3"}' \
+    -d '{"type":"agent","team_id":12345678,"agent_id":"01a10d3f-2c09-764f-99f8-458e521627f3"}' \
     "https://api.digitalocean.com/v1/signals/deletions"

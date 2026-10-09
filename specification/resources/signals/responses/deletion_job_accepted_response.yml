@@ -17,7 +17,7 @@ content:
     example:
       team_id: 12345678
       deletion_id: 01J9ZX0N5Q7M2K3R4S5T6V7W8X
-      type: managed_agent
+      type: agent
       agent_id: 01a10d3f-2c09-764f-99f8-458e521627f3
       status: queued
       error_message: null
