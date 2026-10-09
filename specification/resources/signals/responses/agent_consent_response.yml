@@ -15,6 +15,7 @@ content:
     example:
       id: 13
       team_id: 39449946
+      source: agent
       agent_id: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
       enabled: true
       updated_at: "2026-08-10T10:09:25.738533Z"

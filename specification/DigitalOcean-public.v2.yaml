@@ -600,10 +600,12 @@ tags:
       user disengagement, execution failures, and satisfaction indicators.
 
       Use the consent endpoints to manage whether signals collection is
-      enabled for each agent, the session endpoints to browse agent
-      conversations and their detected signals, the export endpoints
-      to create downloadable archives of signals data for offline analysis,
-      and the deletion endpoints to permanently delete signals data.
+      enabled — per agent for Harness Runtime (`source=agent`) and per team
+      for Serverless Inference chat completions (`source=inference`) — the
+      session endpoints to browse agent conversations and their detected
+      signals, the export endpoints to create downloadable archives of
+      signals data for offline analysis, and the deletion endpoints to
+      permanently delete signals data.
 
   - name: Sizes
     description: |-
@@ -1872,6 +1874,9 @@ paths:
   /v1/consent:
     get:
       $ref: "resources/signals/signals_list_consents.yml"
+
+    put:
+      $ref: "resources/signals/signals_update_team_consent.yml"
 
   /v1/consent/{agent_id}:
     get:
