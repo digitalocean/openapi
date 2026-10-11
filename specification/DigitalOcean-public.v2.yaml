@@ -605,7 +605,8 @@ tags:
       session endpoints to browse agent conversations and their detected
       signals, the export endpoints to create downloadable archives of
       signals data for offline analysis, and the deletion endpoints to
-      permanently delete signals data.
+      permanently delete session, dialogue, and related Signals event data
+      (aggregated Insights or metrics summaries may still remain).
 
   - name: Sizes
     description: |-

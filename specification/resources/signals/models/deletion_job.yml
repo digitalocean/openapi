@@ -1,5 +1,8 @@
 type: object
-description: A deletion job that permanently removes signals data for an agent or for a team's Serverless Inference usage.
+description: >-
+  A deletion job that permanently removes Signals session, dialogue, and
+  related event data for one Harness Runtime agent or for a team's Serverless
+  Inference usage. Aggregated Insights or metrics summaries may still remain.
 properties:
   team_id:
     type: integer

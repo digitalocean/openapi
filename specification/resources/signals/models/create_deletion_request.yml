@@ -4,9 +4,9 @@ properties:
   type:
     type: string
     description: >-
-      The scope of the deletion. `agent` deletes data for one agent and
-      requires `agent_id`. `inference` deletes data for the team's Serverless
-      Inference requests.
+      The scope of the deletion. `agent` deletes data for one Harness Runtime
+      agent and requires `agent_id`. `inference` deletes data for the team's
+      Serverless Inference usage (omit `agent_id`).
     enum:
       - agent
       - inference
