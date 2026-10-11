@@ -1,5 +1,8 @@
 type: object
-description: A deletion job that permanently removes signals data for an agent or for a team's Serverless Inference usage.
+description: >-
+  A deletion job that permanently removes Signals conversations for one
+  Harness Runtime agent, or Serverless Inference Signals conversations for a
+  whole team. Aggregated Insights or metrics summaries may still remain.
 properties:
   team_id:
     type: integer
@@ -13,8 +16,9 @@ properties:
   type:
     type: string
     description: >-
-      The scope of the deletion. `agent` deletes data for one agent.
-      `inference` deletes data for the team's Serverless Inference requests.
+      The scope of the deletion. `agent` deletes Signals conversations for one
+      Harness Runtime agent. `inference` deletes Serverless Inference Signals
+      conversations for the whole team.
     enum:
       - agent
       - inference
@@ -23,8 +27,8 @@ properties:
     type: string
     format: uuid
     description: >-
-      The agent whose data is being deleted. For Harness Runtime, this is the
-      Environment Config ID. Only present for `agent` deletions.
+      The Harness Runtime Environment Config ID (agent UUID) whose
+      conversations are being deleted. Only present for `agent` deletions.
     example: 01a10d3f-2c09-764f-99f8-458e521627f3
   status:
     type: string

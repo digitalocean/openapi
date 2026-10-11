@@ -3,23 +3,33 @@ operationId: signals_create_deletion
 summary: Create a Data Deletion Job
 
 description: |
-  To permanently delete signals data, send a POST request to
-  `/v1/signals/deletions`.
+  To permanently delete Signals conversation data, send a POST request to
+  `/v1/signals/deletions`. Deletion cannot be undone.
 
   Two deletion types are supported:
 
-  - `agent` — deletes sessions, dialogues, and signal reports for one agent.
-    Requires `agent_id`. The agent's data is hidden immediately and signals
-    collection is disabled for the agent, even if the job later fails. Wait
-    until the job is complete before enabling signals for the agent again.
-  - `inference` — deletes sessions, dialogues, and signal reports for the
-    team's Serverless Inference requests made before the deletion. Signals
-    continues to analyze new requests.
+  - `agent` — deletes Signals conversations for one Harness Runtime agent and
+    turns off collection for that agent. Requires `agent_id`, which is the
+    agent's Environment Config ID (the agent UUID). On create, matching
+    conversations are hidden from Signals reads immediately. Wait until the
+    job is `complete` before enabling Signals for the agent again.
+  - `inference` — deletes Serverless Inference Signals conversations for your
+    whole team (team-wide; not limited to one endpoint or model) that were
+    collected at or before the deletion request, and turns off team inference
+    collection (`source=inference`). Do not send `agent_id`. On create,
+    matching conversations are hidden from Signals reads immediately.
 
-  Deletion is permanent and cannot be undone. The job runs asynchronously;
-  poll the get endpoint to check status. To retry a failed job, send the same
-  request again. Export files created earlier are not deleted and remain
+  The job runs asynchronously; poll the get endpoint until `status` is
+  `complete` or `failed`. DigitalOcean may retry transient processing errors
+  while a job is still active. If a job ends as `failed`, matching
+  conversations stay hidden and collection stays off; send the same create
+  request again to retry. Earlier export files are not deleted and remain
   available until they expire.
+
+  Note: Deletion removes Signals conversation data for the requested scope.
+  Aggregated Insights or metrics charts may still show historical summary
+  datapoints after deletion. Those summaries are not the same as recoverable
+  conversation content.
 
   The endpoint is idempotent: if a queued or running job already exists for
   the same target, it is returned with `200 OK`. A new job returns

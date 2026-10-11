@@ -595,17 +595,19 @@ tags:
   - name: Signals
     description: |-
       The DigitalOcean Signals API provides observability for agent
-      conversations, such as Harness Runtime sessions and Serverless
+      conversations, such as Harness Runtime conversations and Serverless
       Inference chat completions, detecting behavioral signals such as
       user disengagement, execution failures, and satisfaction indicators.
 
       Use the consent endpoints to manage whether signals collection is
       enabled — per agent for Harness Runtime (`source=agent`) and per team
       for Serverless Inference chat completions (`source=inference`) — the
-      session endpoints to browse agent conversations and their detected
-      signals, the export endpoints to create downloadable archives of
-      signals data for offline analysis, and the deletion endpoints to
-      permanently delete signals data.
+      session endpoints to browse conversations and their detected signals,
+      the export endpoints to create downloadable archives of signals data
+      for offline analysis, and the deletion endpoints to permanently delete
+      Signals conversations for an agent or Serverless Inference
+      conversations for a whole team (aggregated Insights or metrics
+      summaries may still remain).
 
   - name: Sizes
     description: |-
