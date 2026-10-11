@@ -1,17 +1,17 @@
-description: To retrieve a single journey, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}`.
-operationId: genai_get_simulation_journey
+description: To retrieve a single episode, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}`.
+operationId: genai_get_simulation_episode
 parameters:
-- description: UUID of the run the journey belongs to.
+- description: UUID of the run the episode belongs to.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: run_uuid
   required: true
   schema:
     type: string
-- description: UUID of the journey.
+- description: UUID of the episode.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
-  name: journey_uuid
+  name: episode_uuid
   required: true
   schema:
     type: string
@@ -20,7 +20,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiGetSimulationJourneyOutput
+          $ref: ./definitions.yml#/apiGetSimulationEpisodeOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -42,8 +42,8 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: Retrieve Simulation Journey
+summary: Retrieve Simulation Episode
 tags:
 - Agent Platform API
 x-codeSamples:
-- $ref: examples/curl/genai_get_simulation_journey.yml
+- $ref: examples/curl/genai_get_simulation_episode.yml

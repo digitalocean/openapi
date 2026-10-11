@@ -3633,24 +3633,24 @@ paths:
       $ref: 'resources/gen-ai/genai_cancel_simulation_run.yml'
 
 
-  /v2/gen-ai/simulation_runs/{run_uuid}/journeys:
+  /v2/gen-ai/simulation_runs/{run_uuid}/episodes:
     get:
-      $ref: 'resources/gen-ai/genai_list_simulation_journeys.yml'
+      $ref: 'resources/gen-ai/genai_list_simulation_episodes.yml'
 
 
-  /v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}:
+  /v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_simulation_journey.yml'
+      $ref: 'resources/gen-ai/genai_get_simulation_episode.yml'
 
 
-  /v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory:
+  /v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory:
     get:
-      $ref: 'resources/gen-ai/genai_get_simulation_journey_trajectory.yml'
+      $ref: 'resources/gen-ai/genai_get_simulation_episode_trajectory.yml'
 
 
-  /v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory_url:
+  /v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory_url:
     get:
-      $ref: 'resources/gen-ai/genai_get_simulation_journey_trajectory_url.yml'
+      $ref: 'resources/gen-ai/genai_get_simulation_episode_trajectory_url.yml'
 
 
   /v2/gen-ai/workspaces:
