@@ -1,8 +1,8 @@
 type: object
 description: >-
   A deletion job that permanently removes Signals conversations for one
-  Harness Runtime agent, or all Serverless Inference Signals conversations
-  for a team. Aggregated Insights or metrics summaries may still remain.
+  Harness Runtime agent, or Serverless Inference Signals conversations for a
+  whole team. Aggregated Insights or metrics summaries may still remain.
 properties:
   team_id:
     type: integer
@@ -16,9 +16,9 @@ properties:
   type:
     type: string
     description: >-
-      The scope of the deletion. `agent` deletes conversations for one Harness
-      Runtime agent. `inference` deletes all Serverless Inference Signals
-      conversations for the entire team.
+      The scope of the deletion. `agent` deletes Signals conversations for one
+      Harness Runtime agent. `inference` deletes Serverless Inference Signals
+      conversations for the whole team.
     enum:
       - agent
       - inference
