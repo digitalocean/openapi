@@ -1,7 +1,7 @@
-description: To list the journeys within a simulation run, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/journeys`.
-operationId: genai_list_simulation_journeys
+description: To list the episodes within a simulation run, send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/episodes`.
+operationId: genai_list_simulation_episodes
 parameters:
-- description: UUID of the run whose journeys to list.
+- description: UUID of the run whose episodes to list.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: run_uuid
@@ -29,41 +29,41 @@ parameters:
 - description: |-
     Filter by one or more statuses. Empty means no status filter.
 
-     - SIMULATION_JOURNEY_STATUS_RUNNING: The journey is executing and a trajectory is available to retrieve.
-     - SIMULATION_JOURNEY_STATUS_FINISHED: The journey reached a stop condition and produced a verdict.
-     - SIMULATION_JOURNEY_STATUS_FAILED: The journey failed because of a cancel, timeout, or error.
-     - SIMULATION_JOURNEY_STATUS_PREPARING: The journey is allocated but its trajectory is not available yet.
+     - SIMULATION_EPISODE_STATUS_RUNNING: The episode is executing and a trajectory is available to retrieve.
+     - SIMULATION_EPISODE_STATUS_FINISHED: The episode reached a stop condition and produced a verdict.
+     - SIMULATION_EPISODE_STATUS_FAILED: The episode failed because of a cancel, timeout, or error.
+     - SIMULATION_EPISODE_STATUS_PREPARING: The episode is allocated but its trajectory is not available yet.
   example:
-  - SIMULATION_JOURNEY_STATUS_FINISHED
+  - SIMULATION_EPISODE_STATUS_FINISHED
   in: query
   name: statuses
   schema:
     items:
       enum:
-      - SIMULATION_JOURNEY_STATUS_UNSPECIFIED
-      - SIMULATION_JOURNEY_STATUS_RUNNING
-      - SIMULATION_JOURNEY_STATUS_FINISHED
-      - SIMULATION_JOURNEY_STATUS_FAILED
-      - SIMULATION_JOURNEY_STATUS_PREPARING
+      - SIMULATION_EPISODE_STATUS_UNSPECIFIED
+      - SIMULATION_EPISODE_STATUS_RUNNING
+      - SIMULATION_EPISODE_STATUS_FINISHED
+      - SIMULATION_EPISODE_STATUS_FAILED
+      - SIMULATION_EPISODE_STATUS_PREPARING
       type: string
     type: array
 - description: |-
     Filter by one or more verdicts. Empty means no verdict filter.
 
-     - SIMULATION_JOURNEY_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria.
-     - SIMULATION_JOURNEY_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria.
-     - SIMULATION_JOURNEY_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
+     - SIMULATION_EPISODE_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria.
+     - SIMULATION_EPISODE_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria.
+     - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
   example:
-  - SIMULATION_JOURNEY_VERDICT_SUCCESS
+  - SIMULATION_EPISODE_VERDICT_SUCCESS
   in: query
   name: verdicts
   schema:
     items:
       enum:
-      - SIMULATION_JOURNEY_VERDICT_UNSPECIFIED
-      - SIMULATION_JOURNEY_VERDICT_SUCCESS
-      - SIMULATION_JOURNEY_VERDICT_FAILURE
-      - SIMULATION_JOURNEY_VERDICT_INCONCLUSIVE
+      - SIMULATION_EPISODE_VERDICT_UNSPECIFIED
+      - SIMULATION_EPISODE_VERDICT_SUCCESS
+      - SIMULATION_EPISODE_VERDICT_FAILURE
+      - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE
       type: string
     type: array
 - description: |-
@@ -77,21 +77,21 @@ parameters:
 - description: |-
     Field to sort by. Defaults to scenario ordering when unspecified.
 
-     - SIMULATION_JOURNEY_SORT_FIELD_SCENARIO: Sort by scenario_uuid then journey_index. Default.
-     - SIMULATION_JOURNEY_SORT_FIELD_CREATED_AT: Sort by creation date.
-     - SIMULATION_JOURNEY_SORT_FIELD_STATUS: Sort by journey status using lifecycle order.
-     - SIMULATION_JOURNEY_SORT_FIELD_VERDICT: Sort by verdict (nulls last).
-  example: SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
+     - SIMULATION_EPISODE_SORT_FIELD_SCENARIO: Sort by scenario_uuid then episode_index. Default.
+     - SIMULATION_EPISODE_SORT_FIELD_CREATED_AT: Sort by creation date.
+     - SIMULATION_EPISODE_SORT_FIELD_STATUS: Sort by episode status using lifecycle order.
+     - SIMULATION_EPISODE_SORT_FIELD_VERDICT: Sort by verdict (nulls last).
+  example: SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED
   in: query
   name: sort_by
   schema:
-    default: SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
+    default: SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED
     enum:
-    - SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
-    - SIMULATION_JOURNEY_SORT_FIELD_SCENARIO
-    - SIMULATION_JOURNEY_SORT_FIELD_CREATED_AT
-    - SIMULATION_JOURNEY_SORT_FIELD_STATUS
-    - SIMULATION_JOURNEY_SORT_FIELD_VERDICT
+    - SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED
+    - SIMULATION_EPISODE_SORT_FIELD_SCENARIO
+    - SIMULATION_EPISODE_SORT_FIELD_CREATED_AT
+    - SIMULATION_EPISODE_SORT_FIELD_STATUS
+    - SIMULATION_EPISODE_SORT_FIELD_VERDICT
     type: string
 - description: Sort direction. Defaults to ascending when unspecified.
   example: SORT_DIRECTION_UNSPECIFIED
@@ -109,7 +109,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiListSimulationJourneysOutput
+          $ref: ./definitions.yml#/apiListSimulationEpisodesOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -131,8 +131,8 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: List Simulation Journeys
+summary: List Simulation Episodes
 tags:
 - Agent Platform API
 x-codeSamples:
-- $ref: examples/curl/genai_list_simulation_journeys.yml
+- $ref: examples/curl/genai_list_simulation_episodes.yml
