@@ -1,4 +1,4 @@
-description: A single agent consent record.
+description: A single environment consent record.
 
 headers:
   ratelimit-limit:

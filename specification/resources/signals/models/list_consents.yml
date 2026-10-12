@@ -4,7 +4,7 @@ properties:
   consents:
     type: array
     description: >-
-      A list of consent records for the team. Includes per-agent records
+      A list of consent records for the team. Includes per-environment records
       (`source: agent`) and, when set, the team-level inference record
       (`source: inference`).
     items:

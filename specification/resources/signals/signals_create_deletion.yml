@@ -8,11 +8,11 @@ description: |
 
   Two deletion types are supported:
 
-  - `agent` — deletes Signals conversations for one Harness Runtime agent and
-    turns off collection for that agent. Requires `agent_id`, which is the
-    agent's Environment Config ID (the agent UUID). On create, matching
+  - `agent` — deletes Signals conversations for one Harness Runtime environment and
+    turns off collection for that environment. Requires `agent_id`, which is the
+    environment's Environment Config ID. On create, matching
     conversations are hidden from Signals reads immediately. Wait until the
-    job is `complete` before enabling Signals for the agent again.
+    job is `complete` before enabling Signals for the environment again.
   - `inference` — deletes Serverless Inference Signals conversations for your
     whole team (team-wide; not limited to one endpoint or model) that were
     collected at or before the deletion request, and turns off team inference
