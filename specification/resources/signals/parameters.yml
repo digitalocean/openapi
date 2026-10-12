@@ -1,7 +1,7 @@
 agent_id:
   in: path
   name: agent_id
-  description: A unique identifier for an agent. For Harness Runtime, this is the Environment Config ID.
+  description: A unique identifier for an environment. For Harness Runtime, this is the Environment Config ID.
   required: true
   schema:
     type: string
@@ -32,7 +32,7 @@ source:
   in: query
   name: source
   description: >-
-    Filter consent records by source. `agent` returns per-agent records
+    Filter consent records by source. `agent` returns per-environment records
     (Harness Runtime); `inference` returns the team-level record for
     Serverless Inference chat completions. When omitted, records for all
     sources are returned.
@@ -50,7 +50,7 @@ source_required:
   description: >-
     The consent source to update. Only team-level sources are accepted on
     this endpoint; currently `inference` (Serverless Inference chat
-    completions). Per-agent consent (`agent`) is managed with
+    completions). Per-environment consent (`agent`) is managed with
     `PUT /v1/consent/{agent_id}` instead.
   required: true
   schema:

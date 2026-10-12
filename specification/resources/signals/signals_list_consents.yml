@@ -5,7 +5,7 @@ summary: List All Consent Records
 description: |
   To list all signals consent records for your team, send a GET request to
   `/v1/consent`. Each record indicates whether signals collection is enabled
-  for a source: per-agent records (`source: agent`) for Harness Runtime, and
+  for a source: per-environment records (`source: agent`) for Harness Runtime, and
   the team-level record (`source: inference`) for Serverless Inference chat
   completions.
 

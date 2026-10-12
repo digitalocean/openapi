@@ -1,13 +1,13 @@
 operationId: signals_update_consent
 
-summary: Update Consent for an Agent
+summary: Update Consent for an Environment
 
 description: |
-  To enable or disable signals collection for a specific agent, send a
+  To enable or disable signals collection for a specific environment, send a
   PUT request to `/v1/consent/{agent_id}` with an `enabled` boolean in the
   request body.
 
-  This endpoint only manages per-agent (`source: agent`) consent. To manage
+  This endpoint only manages per-environment (`source: agent`) consent. To manage
   team-level consent for Serverless Inference, use
   `PUT /v1/consent?source=inference` instead.
 
@@ -26,7 +26,7 @@ requestBody:
         properties:
           enabled:
             type: boolean
-            description: Whether to enable signals collection for this agent.
+            description: Whether to enable signals collection for this environment.
         required:
           - enabled
       example:

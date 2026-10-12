@@ -1,13 +1,13 @@
 operationId: signals_get_consent
 
-summary: Retrieve Consent for an Agent
+summary: Retrieve Consent for an Environment
 
 description: |
-  To retrieve the consent record for a specific agent, send a GET
+  To retrieve the consent record for a specific environment, send a GET
   request to `/v1/consent/{agent_id}`. The response includes an `enabled`
-  field indicating whether signals collection is on for this agent.
+  field indicating whether signals collection is on for this environment.
 
-  This endpoint only serves per-agent (`source: agent`) records. Team-level
+  This endpoint only serves per-environment (`source: agent`) records. Team-level
   inference consent is read from `GET /v1/consent?source=inference`.
 
 tags:
