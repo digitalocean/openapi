@@ -35,6 +35,7 @@ content:
         - cursor: eyJ0ZWFtX2lkIjozOTQ0OTk0Nn0=
           node:
             export_id: 9f13c09c-c877-436b-9863-dcc39c9dd737
+            type: agent
             agent_id: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
             status: complete
             filters:
