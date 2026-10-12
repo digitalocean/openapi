@@ -1,5 +1,5 @@
 type: object
-description: Consent details for a specific agent.
+description: Consent details for a specific environment.
 properties:
   id:
     type: integer
@@ -14,17 +14,17 @@ properties:
     enum:
       - agent
     description: >-
-      The source this consent applies to. Always `agent` for per-agent
+      The source this consent applies to. Always `agent` for per-environment
       records returned by this endpoint.
     example: agent
   agent_id:
     type: string
     format: uuid
-    description: The unique identifier of the agent. For Harness Runtime, this is the Environment Config ID.
+    description: The unique identifier of the environment. For Harness Runtime, this is the Environment Config ID.
     example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
   enabled:
     type: boolean
-    description: Whether signals collection is enabled for this agent.
+    description: Whether signals collection is enabled for this environment.
     example: true
   updated_at:
     type: string

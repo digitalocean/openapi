@@ -10,8 +10,8 @@ description: |
   made by your team.
 
   To revoke consent, send the same request with `enabled` set to `false`.
-  The `source` query parameter is required. Per-agent consent for Harness
-  Runtime agents is managed with `PUT /v1/consent/{agent_id}` instead.
+  The `source` query parameter is required. Per-environment consent for Harness
+  Runtime environments is managed with `PUT /v1/consent/{agent_id}` instead.
 
 tags:
   - Signals
