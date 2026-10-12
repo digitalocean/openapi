@@ -19,6 +19,14 @@ description: |
     collection (`source=inference`). Do not send `agent_id`. On create,
     matching conversations are hidden from Signals reads immediately.
 
+  Always send `team_id` in the JSON body for both types (including
+  `inference`). Use the numeric ID of the team your API token belongs to.
+  Your bearer token authenticates which team you act as; `team_id` confirms
+  that team on the wire. Omitting `team_id` is rejected (`400`). A
+  `team_id` that does not match the authenticated team returns `403`.
+  Helpers such as `doctl signals deletion create` can resolve `team_id`
+  from your token when you omit `--team-id`.
+
   The job runs asynchronously; poll the get endpoint until `status` is
   `complete` or `failed`. DigitalOcean may retry transient processing errors
   while a job is still active. If a job ends as `failed`, matching

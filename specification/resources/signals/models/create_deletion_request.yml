@@ -15,7 +15,13 @@ properties:
   team_id:
     type: integer
     format: int64
-    description: The team whose data should be deleted. Must match the authenticated team.
+    description: >-
+      Numeric team ID for the deletion. Required for both `agent` and
+      `inference`. Must equal the team associated with your API token
+      (personal access token or OAuth token). The API does not fill this
+      field from the token when it is omitted — omitting `team_id` is a
+      `400`; a mismatched value is a `403`. Clients such as `doctl` may
+      look up this value for you when you omit `--team-id`.
     example: 12345678
   agent_id:
     type: string
