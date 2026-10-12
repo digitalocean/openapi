@@ -6,10 +6,22 @@ properties:
     format: uuid
     description: The unique identifier for the export job.
     example: 9f13c09c-c877-436b-9863-dcc39c9dd737
+  type:
+    type: string
+    description: >-
+      The scope of the export. `agent` covers one Harness Runtime environment;
+      `inference` covers the team's Serverless Inference Signals conversations.
+    enum:
+      - agent
+      - inference
+    example: agent
   agent_id:
     type: string
     format: uuid
-    description: The environment whose data is being exported. For Harness Runtime, this is the Environment Config ID.
+    description: >-
+      The environment whose data is being exported. For Harness Runtime, this
+      is the Environment Config ID. Not meaningful for `inference` exports; use
+      `type` to distinguish the export scope.
     example: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
   status:
     type: string
