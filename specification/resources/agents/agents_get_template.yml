@@ -1,0 +1,44 @@
+operationId: harness_get_template
+summary: GetTemplate returns a team custom template by public id.
+description: GetTemplate returns a team custom template by public id.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: template_id
+  required: true
+  description: The template UUID.
+  schema:
+    type: string
+    format: uuid
+    example: 11111111-2222-3333-4444-555555555555
+  example: 11111111-2222-3333-4444-555555555555
+responses:
+  '200':
+    description: A successful response.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/get_template_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_get_template.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

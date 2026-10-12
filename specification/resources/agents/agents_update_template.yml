@@ -1,0 +1,51 @@
+operationId: harness_update_template
+summary: UpdateTemplate updates a team template's source and kicks a new build.
+description: UpdateTemplate updates a team template's source and kicks a new build.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: template_id
+  required: true
+  description: The template UUID.
+  schema:
+    type: string
+    format: uuid
+    example: 11111111-2222-3333-4444-555555555555
+  example: 11111111-2222-3333-4444-555555555555
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/update_template_request
+  description: Template update body.
+responses:
+  '200':
+    description: Template updated; build kicked.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/create_template_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_update_template.yml
+security:
+- bearer_auth:
+  - agent_harness_session:manage
