@@ -11,21 +11,21 @@ description: |
   - `agent` — deletes Signals conversations for one Harness Runtime environment and
     turns off collection for that environment. Requires `agent_id`, which is the
     environment's Environment Config ID (the environment's `agent_id`). On create, matching
-    conversations are hidden from Signals reads immediately. Wait until the
-    job is `complete` before enabling Signals for the environment again.
+    conversations are hidden from Signals reads immediately. We recommend waiting
+    until the job is `complete` before enabling Signals for the environment again;
+    you can re-enable earlier if needed (new conversations after re-enable are kept).
   - `inference` — deletes Serverless Inference Signals conversations for your
     whole team (team-wide; not limited to one endpoint or model) that were
     collected at or before the deletion request, and turns off team inference
     collection (`source=inference`). Do not send `agent_id`. On create,
-    matching conversations are hidden from Signals reads immediately.
+    matching conversations are hidden from Signals reads immediately. The same
+    re-enable guidance applies to team inference collection.
 
-  Always send `team_id` in the JSON body for both types (including
-  `inference`). Use the numeric ID of the team your API token belongs to.
-  Your bearer token authenticates which team you act as; `team_id` confirms
-  that team on the wire. Omitting `team_id` is rejected (`400`). A
-  `team_id` that does not match the authenticated team returns `403`.
-  Helpers such as `doctl signals deletion create` can resolve `team_id`
-  from your token when you omit `--team-id`.
+  `team_id` is optional for both types (including `inference`). When you omit
+  it, the API uses the team from your API token (PAT or OAuth). When you send
+  it, it must match that authenticated team or the request returns `403`.
+  `doctl signals deletion create` also defaults `--team-id` from your token
+  when the flag is omitted.
 
   The job runs asynchronously; poll the get endpoint until `status` is
   `complete` or `failed`. DigitalOcean may retry transient processing errors
