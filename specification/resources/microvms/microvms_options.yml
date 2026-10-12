@@ -1,0 +1,33 @@
+operationId: microvms_get_options
+
+summary: List MicroVM options
+
+description: |
+  To list the default region, sizes, prices, account limits, and features available to
+  your team, send a GET request to `/v2/microvms/options`.
+
+tags:
+  - MicroVMs [Public Preview]
+
+responses:
+  '200':
+    $ref: 'responses/microvm_options.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_options.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:read'

@@ -1,18 +1,19 @@
-description: To retrieve a presigned download URL for a journey's trajectory,
-  send a GET request to `/v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory_url`.
-operationId: genai_get_simulation_journey_trajectory_url
+description: To retrieve an episode's live trajectory, send a GET request to
+  `/v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory`.
+  Poll while the episode is running to watch turn-by-turn progress.
+operationId: genai_get_simulation_episode_trajectory
 parameters:
-- description: UUID of the run the journey belongs to.
+- description: UUID of the run the episode belongs to.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
   name: run_uuid
   required: true
   schema:
     type: string
-- description: UUID of the journey.
+- description: UUID of the episode.
   example: '"123e4567-e89b-12d3-a456-426614174000"'
   in: path
-  name: journey_uuid
+  name: episode_uuid
   required: true
   schema:
     type: string
@@ -21,7 +22,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ./definitions.yml#/apiGetSimulationJourneyTrajectoryURLOutput
+          $ref: ./definitions.yml#/apiGetSimulationEpisodeTrajectoryOutput
     description: A successful response.
     headers:
       ratelimit-limit:
@@ -43,8 +44,8 @@ responses:
 security:
 - bearer_auth:
   - genai:read
-summary: Retrieve Journey Trajectory Download URL
+summary: Retrieve Episode Trajectory
 tags:
 - Agent Platform API
 x-codeSamples:
-- $ref: examples/curl/genai_get_simulation_journey_trajectory_url.yml
+- $ref: examples/curl/genai_get_simulation_episode_trajectory.yml

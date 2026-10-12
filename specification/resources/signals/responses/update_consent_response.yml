@@ -21,6 +21,7 @@ content:
       consent:
         id: 13
         team_id: 39449946
+        source: agent
         agent_id: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
         enabled: true
         updated_at: "2026-10-07T11:06:32.280572Z"

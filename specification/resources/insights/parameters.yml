@@ -74,6 +74,43 @@ region:
     type: string
   example: nyc3
 
+trace_id:
+  in: path
+  name: trace_id
+  description: >-
+    The OpenTelemetry trace ID to retrieve, as 32 lowercase hexadecimal
+    characters. IDs are matched exactly; an ID with no spans in the lookup
+    window returns `404`. Malformed or uppercase IDs are not rejected with
+    `400`; they also return `404`.
+  required: true
+  schema:
+    type: string
+  example: 7b0b4e56abab38362b24e5498eb9ec64
+
+trace_from:
+  in: query
+  name: from
+  required: false
+  description: >-
+    Start of the trace lookup window. Accepts a relative time (`now`, a bare
+    duration such as `24h` to look back from now, or `now-2h`) or an absolute
+    time (RFC3339, or a Unix epoch integer in seconds, milliseconds,
+    microseconds, or nanoseconds). Defaults to 7 days before now.
+  schema:
+    type: string
+  example: 24h
+
+trace_to:
+  in: query
+  name: to
+  required: false
+  description: >-
+    End of the trace lookup window, in the same formats as `from`. Defaults to
+    now.
+  schema:
+    type: string
+  example: now
+
 label_name:
   in: path
   name: name

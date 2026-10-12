@@ -1,0 +1,46 @@
+operationId: microvms_post_pause
+
+summary: Pause a MicroVM
+
+description: |
+  To pause a MicroVM, send a POST request to `/v2/microvms/{microvm_id}/pause`.
+
+  Pausing suspends the MicroVM's processes and preserves its memory, files, and processes.
+  A paused MicroVM incurs storage charges only. The request returns when the change
+  completes. Pausing a MicroVM that is already paused succeeds. The request returns HTTP 400
+  when the MicroVM is `creating`, `terminated`, or `failed`.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+
+responses:
+  '200':
+    $ref: 'responses/microvm.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_pause.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:update'

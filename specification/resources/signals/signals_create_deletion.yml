@@ -1,0 +1,92 @@
+operationId: signals_create_deletion
+
+summary: Create a Data Deletion Job
+
+description: |
+  To permanently delete Signals conversation data, send a POST request to
+  `/v1/signals/deletions`. Deletion cannot be undone.
+
+  Two deletion types are supported:
+
+  - `agent` — deletes Signals conversations for one Harness Runtime agent and
+    turns off collection for that agent. Requires `agent_id`, which is the
+    agent's Environment Config ID (the agent UUID). On create, matching
+    conversations are hidden from Signals reads immediately. Wait until the
+    job is `complete` before enabling Signals for the agent again.
+  - `inference` — deletes Serverless Inference Signals conversations for your
+    whole team (team-wide; not limited to one endpoint or model) that were
+    collected at or before the deletion request, and turns off team inference
+    collection (`source=inference`). Do not send `agent_id`. On create,
+    matching conversations are hidden from Signals reads immediately.
+
+  The job runs asynchronously; poll the get endpoint until `status` is
+  `complete` or `failed`. DigitalOcean may retry transient processing errors
+  while a job is still active. If a job ends as `failed`, matching
+  conversations stay hidden and collection stays off; send the same create
+  request again to retry. Earlier export files are not deleted and remain
+  available until they expire.
+
+  Note: Deletion removes Signals conversation data for the requested scope.
+  Aggregated Insights or metrics charts may still show historical summary
+  datapoints after deletion. Those summaries are not the same as recoverable
+  conversation content.
+
+  The endpoint is idempotent: if a queued or running job already exists for
+  the same target, it is returned with `200 OK`. A new job returns
+  `202 Accepted`. Each team can have a limited number of active jobs;
+  requests beyond that limit return `429 Too Many Requests`.
+
+tags:
+  - Signals
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/create_deletion_request.yml'
+      examples:
+        Agent:
+          value:
+            type: agent
+            team_id: 12345678
+            agent_id: 01a10d3f-2c09-764f-99f8-458e521627f3
+        Inference:
+          value:
+            type: inference
+            team_id: 12345678
+
+responses:
+  '200':
+    $ref: 'responses/deletion_job_response.yml'
+
+  '202':
+    $ref: 'responses/deletion_job_accepted_response.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: '../../shared/responses/forbidden.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/signals_create_deletion.yml'
+
+security:
+  - bearer_auth:
+      - 'signals:delete'

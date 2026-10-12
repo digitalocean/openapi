@@ -1,0 +1,65 @@
+operationId: microvmCheckpoints_create
+
+summary: Create a checkpoint of a MicroVM
+
+description: |
+  To create a checkpoint of a running or paused MicroVM, send a POST request to
+  `/v2/microvms/{microvm_id}/checkpoints`.
+
+  The capture runs in the background and does not change the MicroVM's state. Poll
+  `GET /v2/microvms/checkpoints/{checkpoint_id}` until `status` is `CHECKPOINT_AVAILABLE`.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+
+requestBody:
+  required: false
+
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: >-
+              A name for the checkpoint. If you omit it, a name such as
+              `checkpoint-20260929-143559` is generated.
+            example: example-checkpoint
+
+      examples:
+        Named Checkpoint:
+          value:
+            name: example-checkpoint
+
+responses:
+  '201':
+    $ref: 'responses/checkpoint.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_checkpoints_create.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:create'

@@ -1,0 +1,28 @@
+type: object
+description: >-
+  A sort clause for traces search results. Supported `field.name` values
+  (case-insensitive) are `started` (aliases `startTime`, `start_time`,
+  `timestamp`), `durationNs` (`duration`), `serviceName` (`service.name`,
+  `service_name`), `traceId` (`trace.id`, `trace_id`), `errorCount`
+  (`error_count`), `spanCount` (`span_count`), and `status`. Any other name
+  returns `400`.
+
+
+  Sorting by `started` is exact. For every other field, the server first
+  selects the most recent matching traces by start time (up to the requested
+  limit) and then sorts only those traces, so results are not a global top-N
+  across the whole time range.
+additionalProperties: false
+required:
+  - field
+properties:
+  field:
+    $ref: 'traces_field_ref.yml'
+  direction:
+    type: string
+    description: The sort direction (case-insensitive). Defaults to `desc`.
+    enum:
+      - asc
+      - desc
+    default: desc
+    example: desc

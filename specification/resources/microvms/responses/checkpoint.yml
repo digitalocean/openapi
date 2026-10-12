@@ -1,0 +1,38 @@
+description: >-
+  The response will be a JSON object with a key called `checkpoint`. The value
+  will be an object containing the standard attributes associated with a
+  checkpoint.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        checkpoint:
+          $ref: '../models/checkpoint.yml'
+
+    examples:
+      Available Checkpoint:
+        value:
+          checkpoint:
+            id: 01a0ed98-0a74-75dd-a625-e4856adbc298
+            name: example-checkpoint
+            microvm_id: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+            microvm_name: example-microvm
+            region: mkc1
+            size:
+              cpu: 1
+              memory: 2048
+              disk: 50
+            status: CHECKPOINT_AVAILABLE
+            memory_bytes: 2147483648
+            disk_bytes: 1073741824
+            created_at: "2026-09-29T14:35:59Z"

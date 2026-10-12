@@ -5,14 +5,25 @@ summary: List All Consent Records
 description: |
   To list all signals consent records for your team, send a GET request to
   `/v1/consent`. Each record indicates whether signals collection is enabled
-  for a specific agent.
+  for a source: per-agent records (`source: agent`) for Harness Runtime, and
+  the team-level record (`source: inference`) for Serverless Inference chat
+  completions.
+
+  Pass `?source=agent` or `?source=inference` to return only that source's
+  records. When filtered, the response also echoes the `source`.
 
 tags:
   - Signals
 
+parameters:
+  - $ref: 'parameters.yml#/source'
+
 responses:
   '200':
     $ref: 'responses/list_consents_response.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'

@@ -7,6 +7,10 @@ description: |
   PUT request to `/v1/consent/{agent_id}` with an `enabled` boolean in the
   request body.
 
+  This endpoint only manages per-agent (`source: agent`) consent. To manage
+  team-level consent for Serverless Inference, use
+  `PUT /v1/consent?source=inference` instead.
+
 tags:
   - Signals
 
@@ -31,6 +35,9 @@ requestBody:
 responses:
   '200':
     $ref: 'responses/update_consent_response.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
 
   '401':
     $ref: '../../shared/responses/unauthorized.yml'
