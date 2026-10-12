@@ -22,7 +22,7 @@ properties:
     format: uuid
     description: >-
       The Harness Runtime Environment Config ID of the environment whose
-      conversations should be deleted.
+      conversations should be deleted. This is the environment's `agent_id`.
       Required when `type` is `agent`; must be omitted when `type` is
       `inference`.
     example: 01a10d3f-2c09-764f-99f8-458e521627f3
