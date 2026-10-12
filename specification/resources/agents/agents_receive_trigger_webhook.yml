@@ -29,17 +29,12 @@ parameters:
   example: b1a0c6de-1f2e-4a3b-9c8d-0e1f2a3b4c5d
 requestBody:
   required: true
-  description: The provider's raw webhook body, forwarded verbatim. The HMAC is computed over these
-    exact bytes. Content-Type is provider-defined (GitHub sends application/json, some providers
-    form-encode) and passed through; the handler reads the raw bytes regardless of type.
+  description: |-
+    The provider's raw webhook body, forwarded verbatim. The HMAC is computed over these exact bytes.
+    Content-Type is provider-defined (GitHub sends `application/json`, some providers form-encode) and
+    passed through; the handler reads the raw bytes regardless of type. Documented as a single
+    `application/octet-stream` body so client generators can model the raw payload.
   content:
-    application/json:
-      schema:
-        type: object
-        additionalProperties: true
-    application/x-www-form-urlencoded:
-      schema:
-        type: string
     application/octet-stream:
       schema:
         type: string
