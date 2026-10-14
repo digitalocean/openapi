@@ -41,6 +41,12 @@ description: >-
   documentation for the feature differences vs. Standard Edition and current preview limitations.
 
 
+  To enable storage autoscaling when the cluster is created, include a `storage_autoscale`
+  object with `enabled`, `threshold_percent`, and `increment_gib`. Storage autoscaling can
+  also be configured after the cluster is created by sending a PUT request to
+  `/v2/databases/$DATABASE_ID/autoscale`.
+
+
   Note: Caching cluster creates are no longer supported as of 2025-04-30T00:00:00Z.
   Backups are also not supported for Caching or Valkey clusters.
 
@@ -70,6 +76,20 @@ requestBody:
             num_nodes: 2
             tags:
               - production
+
+        Create a New Database Cluster with storage autoscaling:
+          value:
+            name: backend
+            engine: pg
+            version: "14"
+            region: nyc3
+            size: db-s-2vcpu-4gb
+            num_nodes: 2
+            storage_size_mib: 61440
+            storage_autoscale:
+              enabled: true
+              threshold_percent: 80
+              increment_gib: 10
 
         Create a New Database Cluster with trusted sources:
           value:

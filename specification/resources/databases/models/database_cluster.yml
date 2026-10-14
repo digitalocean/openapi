@@ -142,7 +142,11 @@ properties:
     type: string
     format: uuid
     example: 9cc10173-e9ea-4176-9dbc-a4cee4c4ff30
-    description: The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster, it will be assigned to your default project.<br><br>Requires `project:assign_resource` scope.
+    description: >-
+      The ID of the project that the database cluster is assigned to. If excluded when creating a new database cluster,
+      it will be assigned to your default project.
+      <br><br>Requires `project:update` scope. The `project:assign_resource` scope applies to the Projects API
+      resource-assignment endpoints, such as `POST /v2/projects/{project_id}/resources`, and is not sufficient for this check.
   rules:
     type: array
     items:
@@ -175,12 +179,13 @@ properties:
       Public hostname and port of the cluster's metrics endpoint(s). Includes one record for the cluster's primary node and
       a second entry for the cluster's standby node(s).
     readOnly: true
-  autoscale:
+  storage_autoscale:
     allOf:
-    - $ref: './database_autoscale_params.yml'
+    - $ref: './database_storage_autoscale_params.yml'
     description: >-
-      Autoscaling configuration for the database cluster. Currently only supports storage autoscaling. If null, autoscaling is
-      not configured for the cluster.
+      Storage autoscaling configuration to apply when the cluster is created. If omitted, storage autoscaling is not
+      configured. Autoscaling can also be configured after the cluster is created by sending a PUT request to
+      `/v2/databases/{database_cluster_uuid}/autoscale`.
   do_settings:
     allOf:
     - $ref: './do_settings.yml'
