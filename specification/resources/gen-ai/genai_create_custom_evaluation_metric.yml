@@ -35,6 +35,6 @@ security:
   - genai:create
 summary: Create Custom Evaluation Metric
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_create_custom_evaluation_metric.yml

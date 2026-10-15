@@ -1,0 +1,50 @@
+operationId: harness_list_templates
+summary: ListTeamTemplates returns the caller's team custom templates.
+description: team_id is stamped from the authenticated principal; never accepted from the client.
+tags:
+- Harness Runtime
+parameters:
+- in: query
+  name: page_size
+  required: false
+  description: Page size. Defaults to 50 when omitted or non-positive.
+  schema:
+    type: integer
+    format: int32
+    example: 50
+  example: 50
+- in: query
+  name: page_token
+  required: false
+  description: Optional pagination cursor (opaque). Empty starts from the beginning.
+  schema:
+    type: string
+    example: ''
+  example: ''
+responses:
+  '200':
+    description: A successful response.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/list_templates_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_list_templates.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

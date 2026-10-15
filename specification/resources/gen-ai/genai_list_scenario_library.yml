@@ -83,6 +83,6 @@ security:
   - genai:read
 summary: List Common Scenario & Goal Library
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_list_scenario_library.yml

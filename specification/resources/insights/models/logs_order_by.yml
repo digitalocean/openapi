@@ -1,0 +1,14 @@
+type: object
+description: A sort clause for logs search results.
+required:
+  - field
+properties:
+  field:
+    $ref: 'logs_field_ref.yml'
+  direction:
+    type: string
+    description: The sort direction. Omit to use the server default.
+    enum:
+      - SORT_DIRECTION_ASC
+      - SORT_DIRECTION_DESC
+    example: SORT_DIRECTION_DESC

@@ -1,0 +1,17 @@
+description: A download URL for a completed export.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/export_download.yml'
+    example:
+      download_url: "https://example-bucket.nyc3.digitaloceanspaces.com/exports/3f2a1c4e-5b6d-4e7f-8a9b-0c1d2e3f4a5b/9f13c09c-c877-436b-9863-dcc39c9dd737.json.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=EXAMPLE"
+      expires_at: 1791390640

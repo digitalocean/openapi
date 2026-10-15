@@ -1,0 +1,9 @@
+type: object
+description: Pagination metadata for a spans search response.
+properties:
+  hasMore:
+    type: boolean
+    description: >-
+      Whether more spans matched than were returned in this page. Cursor-based
+      continuation is not yet supported.
+    example: true

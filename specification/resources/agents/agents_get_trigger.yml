@@ -1,0 +1,44 @@
+operationId: harness_get_trigger
+summary: GetTrigger returns a single trigger by id.
+description: GetTrigger returns a single trigger by id. Write-only fields (webhook secret, output
+  destination, session_template env values) are never included.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: trigger_id
+  required: true
+  description: The trigger UUID.
+  schema:
+    type: string
+    example: b1a0c6de-1f2e-4a3b-9c8d-0e1f2a3b4c5d
+  example: b1a0c6de-1f2e-4a3b-9c8d-0e1f2a3b4c5d
+responses:
+  '200':
+    description: A successful response.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/get_trigger_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_get_trigger.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

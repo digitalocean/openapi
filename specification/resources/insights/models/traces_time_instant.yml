@@ -1,0 +1,23 @@
+type: object
+description: >-
+  A single point in time. Set `absolute` or `relative`; if both are set,
+  `absolute` is used.
+additionalProperties: false
+minProperties: 1
+properties:
+  absolute:
+    type: string
+    description: >-
+      An absolute timestamp, either RFC3339 (with optional fractional
+      seconds) or a Unix epoch integer as a decimal string. Epoch precision
+      is inferred from magnitude: seconds, milliseconds, microseconds, or
+      nanoseconds.
+    example: "2026-10-09T00:00:00Z"
+  relative:
+    type: string
+    description: >-
+      A time relative to now. Use `now` for the current time, a bare duration
+      such as `15m` or `24h` to look back from now, or an offset such as
+      `now-2h` or `now+30m`. Supported units are `s`, `m`, `h`, `d`, and `w`;
+      decimal amounts such as `1.5h` are allowed.
+    example: "15m"

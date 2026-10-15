@@ -1,0 +1,45 @@
+operationId: microvmCheckpoints_delete
+
+summary: Delete a checkpoint
+
+description: |
+  To delete a checkpoint, send a DELETE request to `/v2/microvms/checkpoints/{checkpoint_id}`.
+  You can no longer create MicroVMs from a deleted checkpoint.
+
+  The request returns HTTP 400 while the checkpoint is still being captured. A successful
+  request returns a `204 No Content` status code.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: 'parameters.yml#/checkpoint_id'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_checkpoints_delete.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:delete'

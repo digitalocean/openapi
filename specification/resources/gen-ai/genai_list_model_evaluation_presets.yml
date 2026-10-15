@@ -29,6 +29,6 @@ security:
   - genai:read
 summary: List Model Evaluation Presets
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_list_model_evaluation_presets.yml

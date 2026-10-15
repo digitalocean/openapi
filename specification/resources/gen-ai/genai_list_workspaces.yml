@@ -29,6 +29,6 @@ security:
   - genai:read
 summary: List Workspaces
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_list_workspaces.yml

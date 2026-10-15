@@ -1,0 +1,20 @@
+type: object
+description: Response returned by a System One evaluation.
+required:
+  - model
+  - answers
+  - usage
+properties:
+  model:
+    type: string
+    description: Model ID that produced the response.
+    example: typesafe-jev-1.13.0
+  answers:
+    type: object
+    description: >-
+      A map of question name to answer, using the same keys as the request's
+      `questions` object.
+    additionalProperties:
+      $ref: systemone_answer.yml
+  usage:
+    $ref: systemone_usage.yml

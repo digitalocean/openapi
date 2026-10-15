@@ -23,10 +23,11 @@ requestBody:
   content:
     application/json:
       schema:
-        properties:
-          $ref: 'models/attributes.yml#/load_balancer_droplet_ids'
-        required:
-         - droplet_ids
+        allOf:
+          - $ref: 'models/attributes.yml#/load_balancer_droplet_ids'
+          - type: object
+            required:
+              - droplet_ids
 
 responses:
   '204':

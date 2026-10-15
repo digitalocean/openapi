@@ -1,0 +1,17 @@
+type: object
+description: |
+  HTTP basic authentication as returned in API responses. The password is
+  never returned; `password_status` indicates whether it is configured.
+required:
+  - username
+properties:
+  username:
+    type: string
+    description: Basic auth username.
+    example: webhook-user
+  password_status:
+    allOf:
+      - $ref: 'secret_status.yml'
+    description: |
+      Present when a basic auth password is configured. Omitted when not
+      configured.

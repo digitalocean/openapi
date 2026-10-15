@@ -37,6 +37,6 @@ security:
   - genai:update
 summary: Update Scheduled Indexing
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_update_scheduled_indexing.yml

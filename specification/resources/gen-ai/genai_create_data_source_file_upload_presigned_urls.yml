@@ -35,6 +35,6 @@ security:
   - genai:create
 summary: Create Presigned URLs for Data Source File Upload
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_create_data_source_file_upload_presigned_urls.yml

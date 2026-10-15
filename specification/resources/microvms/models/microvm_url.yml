@@ -1,0 +1,31 @@
+type: object
+
+description: An HTTPS endpoint for one of the MicroVM's ports.
+
+properties:
+  hostname:
+    type: string
+    description: >-
+      The endpoint's hostname. Empty until provisioning finishes. Requests to
+      the endpoint must include a DigitalOcean API token with the
+      `microvm:access` scope in the `Authorization` header.
+    example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a.mkc1.microvm.ondigitalocean.com
+
+  port:
+    type: integer
+    description: The guest port the endpoint serves.
+    example: 80
+
+  default:
+    type: boolean
+    description: Whether this is the endpoint for the MicroVM's HTTP port.
+    example: true
+
+  status:
+    type: string
+    enum:
+      - PENDING
+      - ACTIVE
+    description: >-
+      `PENDING` until provisioning finishes, then `ACTIVE`.
+    example: ACTIVE

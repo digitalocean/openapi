@@ -42,6 +42,6 @@ security:
   - genai:create
 summary: Add Function Route to an Agent
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_attach_agent_function.yml

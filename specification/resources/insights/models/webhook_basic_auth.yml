@@ -1,0 +1,21 @@
+type: object
+description: |
+  HTTP basic authentication credentials for a webhook create or update
+  request. `password` is write-only: send the full value to set or rotate.
+  Omit `password` on update to keep the existing password.
+required:
+  - username
+properties:
+  username:
+    type: string
+    description: Basic auth username.
+    example: webhook-user
+  password:
+    type: string
+    format: password
+    writeOnly: true
+    description: |
+      Basic auth password. Write-only secret — send the full value on create
+      or update. Omit on update to retain the existing value. Never returned
+      in responses.
+    example: secret-password

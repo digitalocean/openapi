@@ -96,5 +96,7 @@ properties:
           `readWrite` maps to a [readWrite](https://www.mongodb.com/docs/manual/reference/built-in-roles/#mongodb-authrole-readWrite) role.
           `dbAdmin` maps to a [dbAdmin](https://www.mongodb.com/docs/manual/reference/built-in-roles/#mongodb-authrole-dbAdmin) role.
     description: >-
-      MongoDB-specific settings for the user. This option is not currently
+      MongoDB-specific settings for the user. Configure these when creating a
+      user. Updating MongoDB roles or database access after creation is not
+      supported; recreate the user to change them. This option is not currently
       supported for other database engines.

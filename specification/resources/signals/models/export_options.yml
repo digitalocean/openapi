@@ -1,0 +1,28 @@
+type: object
+description: Available filter options for creating exports.
+properties:
+  filters:
+    type: object
+    properties:
+      signal_type:
+        type: array
+        description: The list of valid signal type values that can be used when creating an export.
+        items:
+          type: string
+        example:
+          - DisengagementEscalation
+          - DisengagementNegativeStance
+          - DisengagementQuit
+          - EnvironmentExhaustionApiError
+          - EnvironmentExhaustionContextOverflow
+          - ExecutionFailureToolNotFound
+          - ExecutionLoopsRetry
+          - MisalignmentCorrection
+          - SatisfactionConfirmation
+          - SatisfactionGratitude
+          - SatisfactionSuccess
+          - StagnationRepetition
+    required:
+      - signal_type
+required:
+  - filters
