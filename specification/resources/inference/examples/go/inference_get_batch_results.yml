@@ -1,0 +1,53 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "io"
+      "net/http"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      batchID := os.Getenv("BATCH_ID")
+
+      batch, _, err := client.BatchInference.GetJob(ctx, batchID)
+      if err != nil {
+          panic(err)
+      }
+      if !batch.ResultAvailable {
+          fmt.Println("results not ready yet; poll batch status and retry")
+          os.Exit(0)
+      }
+
+      links, _, err := client.BatchInference.GetJobResult(ctx, batchID)
+      if err != nil {
+          panic(err)
+      }
+
+      resp, err := http.Get(links.Download.PresignedURL)
+      if err != nil {
+          panic(err)
+      }
+      defer resp.Body.Close()
+
+      out, err := os.Create("batch_output.jsonl")
+      if err != nil {
+          panic(err)
+      }
+      defer out.Close()
+
+      if _, err := io.Copy(out, resp.Body); err != nil {
+          panic(err)
+      }
+
+      fmt.Println("wrote: batch_output.jsonl")
+      fmt.Println("output_file_id:", links.OutputFileID)
+  }

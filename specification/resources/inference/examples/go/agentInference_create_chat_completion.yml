@@ -1,0 +1,37 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      agent, err := godo.NewAgentInferenceClient(
+          os.Getenv("AGENT_ENDPOINT"),
+          os.Getenv("AGENT_ACCESS_KEY"),
+      )
+      if err != nil {
+          panic(err)
+      }
+
+      ctx := context.Background()
+
+      completion, _, err := agent.Chat.Completions.New(ctx, &godo.ChatCompletionNewParams{
+          Model: "llama3.3-70b-instruct",
+          Messages: []godo.ChatCompletionMessage{
+              godo.UserMessage("What is the capital of Portugal?"),
+          },
+      })
+      if err != nil {
+          panic(err)
+      }
+
+      if msg := completion.Choices[0].Message.Content; msg != nil {
+          fmt.Println(*msg)
+      }
+  }

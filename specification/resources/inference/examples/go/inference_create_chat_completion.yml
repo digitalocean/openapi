@@ -1,0 +1,30 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      completion, _, err := client.Chat.Completions.New(ctx, &godo.ChatCompletionNewParams{
+          Model: "llama3.3-70b-instruct",
+          Messages: []godo.ChatCompletionMessage{
+              godo.UserMessage("What is the capital of Portugal?"),
+          },
+      })
+      if err != nil {
+          panic(err)
+      }
+
+      if msg := completion.Choices[0].Message.Content; msg != nil {
+          fmt.Println(*msg)
+      }
+  }
