@@ -4,6 +4,7 @@ kubernetes_clusters_basic_request:
     region: nyc1
     version: 1.18.6-do.0
     isolated_workers: false
+    gpu_operator_ready: false
     node_pools:
     - size: s-1vcpu-2gb
       count: 3
@@ -19,6 +20,7 @@ kubernetes_clusters_multi_pool_request:
     region: nyc1
     version: 1.18.6-do.0
     isolated_workers: false
+    gpu_operator_ready: false
     tags:
     - production
     - web-team

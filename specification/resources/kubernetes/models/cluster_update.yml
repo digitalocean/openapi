@@ -47,6 +47,16 @@ properties:
       1.36.0 and later, the default is true; for earlier versions, the
       default is false.
 
+  gpu_operator_ready:
+    type: boolean
+    example: false
+    description: A boolean value indicating whether GPU nodes in the cluster are
+      launched with images that do not include pre-installed GPU drivers,
+      allowing GPU drivers to be managed by a GPU operator instead. Mutually
+      exclusive with other GPU-related cluster options, such as
+      `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted, the
+      current value is left unchanged.
+
   control_plane_firewall:
     $ref: 'control_plane_firewall.yml'
 
