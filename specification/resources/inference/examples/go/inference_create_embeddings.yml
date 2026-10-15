@@ -1,0 +1,39 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "encoding/json"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      resp, _, err := client.Embeddings.New(ctx, &godo.EmbeddingNewParams{
+          Model:          "qwen3-embedding-0.6b",
+          Input:          []string{"hello world", "goodbye world"},
+          EncodingFormat: "float",
+          User:           "user-1234",
+      })
+      if err != nil {
+          panic(err)
+      }
+
+      for _, item := range resp.Data {
+          var vec []float32
+          if err := json.Unmarshal(item.Embedding, &vec); err != nil {
+              panic(err)
+          }
+          head := vec
+          if len(head) > 8 {
+              head = head[:8]
+          }
+          fmt.Println(item.Index, head)
+      }
+  }

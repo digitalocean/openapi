@@ -1,0 +1,28 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      batch, _, err := client.BatchInference.GetJob(ctx, os.Getenv("BATCH_ID"))
+      if err != nil {
+          panic(err)
+      }
+
+      fmt.Println("batch_id:        ", batch.BatchID)
+      fmt.Println("status:          ", batch.Status)
+      fmt.Println("result_available:", batch.ResultAvailable)
+      if batch.RequestCounts != nil {
+          fmt.Printf("request_counts:   %+v\n", *batch.RequestCounts)
+      }
+  }

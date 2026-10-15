@@ -1,0 +1,10 @@
+lang: JavaScript
+source: |-
+  import { InferenceClient } from "@digitalocean/dots";
+
+  const client = new InferenceClient({
+      apiKey: process.env.DIGITALOCEAN_TOKEN,
+  });
+
+  const job = await client.video.generations.retrieve(process.env.VIDEO_ID);
+  console.log(job.id, job.status);

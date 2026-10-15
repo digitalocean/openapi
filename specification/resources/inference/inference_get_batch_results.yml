@@ -70,6 +70,7 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/inference_get_batch_results.yml'
   - $ref: 'examples/python/inference_get_batch_results.yml'
+  - $ref: 'examples/go/inference_get_batch_results.yml'
   - $ref: 'examples/dots/inference_get_batch_results.yml'
 security:
   - inference_bearer_auth: []

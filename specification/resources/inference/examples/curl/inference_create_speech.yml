@@ -1,0 +1,13 @@
+lang: cURL
+source: |-
+  curl -sS https://inference.do-ai.run/v1/audio/speech \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "model": "qwen3-tts-voicedesign",
+      "input": "Hello, world!",
+      "voice": "alloy",
+      "response_format": "mp3",
+      "instructions": "Speak naturally."
+    }' \
+    --output output.mp3

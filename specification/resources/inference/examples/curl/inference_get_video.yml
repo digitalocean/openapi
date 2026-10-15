@@ -1,0 +1,4 @@
+lang: cURL
+source: |-
+  curl https://inference.do-ai.run/v1/videos/$VIDEO_ID \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN"

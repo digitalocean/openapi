@@ -3392,6 +3392,23 @@ paths:
     post:
       $ref: 'resources/inference/inference_async_invoke.yml'
 
+
+  /v1/audio/speech:
+    post:
+      $ref: 'resources/inference/inference_create_speech.yml'
+
+  /v1/videos:
+    post:
+      $ref: 'resources/inference/inference_create_video.yml'
+
+  /v1/videos/{video_id}:
+    get:
+      $ref: 'resources/inference/inference_get_video.yml'
+
+  /v1/videos/{video_id}/content:
+    get:
+      $ref: 'resources/inference/inference_get_video_content.yml'
+
   /v1/batches/files:
     post:
       $ref: 'resources/inference/inference_create_batch_file.yml'

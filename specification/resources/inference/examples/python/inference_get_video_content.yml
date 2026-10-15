@@ -1,0 +1,11 @@
+lang: Python
+source: |-
+  import os
+  import requests
+
+  headers = {"Authorization": f"Bearer {os.environ['DIGITALOCEAN_TOKEN']}"}
+  url = f"https://inference.do-ai.run/v1/videos/{os.environ['VIDEO_ID']}/content"
+  resp = requests.get(url, headers=headers)
+  resp.raise_for_status()
+  with open("output.mp4", "wb") as f:
+      f.write(resp.content)

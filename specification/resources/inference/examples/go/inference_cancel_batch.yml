@@ -1,0 +1,27 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      batch, _, err := client.BatchInference.CancelJob(ctx, os.Getenv("BATCH_ID"))
+      if err != nil {
+          panic(err)
+      }
+
+      fmt.Println("batch_id:", batch.BatchID)
+      fmt.Println("status:  ", batch.Status)
+      if batch.CancelRequestedAt != nil {
+          fmt.Println("cancel_requested_at:", *batch.CancelRequestedAt)
+      }
+  }

@@ -41,6 +41,10 @@ responses:
 x-codeSamples:
   - $ref: 'examples/curl/inference_create_chat_completion.yml'
   - $ref: 'examples/python/inference_create_chat_completion.yml'
+  - $ref: 'examples/go/inference_create_chat_completion.yml'
+  - $ref: 'examples/go/inference_create_chat_completion_mcp.yml'
+  - $ref: 'examples/go/inference_create_chat_completion_vlm.yml'
+  - $ref: 'examples/go/inference_create_chat_completion_kb.yml'
   - $ref: 'examples/dots/inference_create_chat_completion.yml'
 security:
   - inference_bearer_auth: []
