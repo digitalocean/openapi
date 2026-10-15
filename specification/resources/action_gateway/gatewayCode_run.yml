@@ -1,0 +1,76 @@
+operationId: gatewayCode_run
+summary: Execute Code
+description: >-
+  Runs Python code in an ephemeral sandbox and returns its `stdout`, `stderr`,
+  and `exit_code`. This is the REST form of the `action_code` MCP tool. Use it
+  for computation, parsing, and data processing, or to chain several catalog
+  tools in one request.
+
+
+  The sandbox provides `invoke_digitalocean_tool(name, arguments)`, which calls
+  a catalog tool and returns a tool result. Those calls follow the session's
+  tool selection and policy. Each request runs in a fresh sandbox, so state is
+  not kept between requests. Execution, including tool calls, is limited to 180
+  seconds.
+
+
+  A nonzero exit code is still a `succeeded` result; check `output.exit_code`.
+  If the session policy requires approval for `action_code`, the response is a
+  failed result with `_meta.status` set to `requires_approval`.
+tags:
+- Action Gateway Data Plane
+servers:
+- url: https://actions.do-ai.run
+  description: production
+parameters:
+- $ref: parameters.yml#/session_id_header
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/execute_code_request
+      example:
+        code: print("hello from Action Gateway")
+responses:
+  '200':
+    description: >-
+      The code ran, or it is waiting for approval. Check `status` before
+      reading `output`.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/data_plane.yml#/execute_code_response
+        example:
+          status: succeeded
+          output:
+            stdout: |
+              hello from Action Gateway
+            exit_code: 0
+          call_id: call_8b7c6d5e-4f3a-4b2c-9d1e-0f9a8b7c6d5e
+  '400':
+    $ref: data_plane_responses.yml#/bad_request
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    $ref: data_plane_responses.yml#/forbidden
+  '412':
+    $ref: data_plane_responses.yml#/precondition_failed
+  '413':
+    $ref: data_plane_responses.yml#/payload_too_large
+  '429':
+    $ref: data_plane_responses.yml#/too_many_requests
+  '500':
+    $ref: data_plane_responses.yml#/server_error
+  '503':
+    $ref: data_plane_responses.yml#/service_unavailable
+  '504':
+    $ref: data_plane_responses.yml#/gateway_timeout
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/gatewayCode_run.yml
+security:
+- bearer_auth: []

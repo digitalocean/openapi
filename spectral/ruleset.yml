@@ -57,6 +57,7 @@ rules:
       field: $ref
       function: truthy
 
+  # Action Gateway data plane paths (actions.do-ai.run) are unversioned.
   path-must-include-version:
     description: Path must include the version
     message: '{{description}}; {{property}} incorrect'
@@ -66,7 +67,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^(/v[12]/.*|/api/v[12]/.*)$'
+        match: '^(/v[12]/.*|/api/v[12]/.*|/tools(/search|/invoke)?|/code/execute|/approvals/.+)$'
 
   endpoint-ref-must-be-file:
     description: Endpoint must a $ref to a file in resources/

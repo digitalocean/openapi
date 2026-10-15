@@ -1,0 +1,67 @@
+operationId: gatewaySessionApprovals_update
+summary: Decide a Pending Approval
+description: >-
+  Approves or denies a tool call that is waiting for approval. A tool result
+  returns `_meta.status` set to `requires_approval` when the session policy
+  sets `ask` for the call, and its `_meta.decide` gives this request's path.
+
+
+  Send the decision with the session owner's token. Approval is a separate
+  control request, not a tool, so an agent cannot approve its own calls. After
+  approving, repeat the original call with the same arguments before
+  `expires_at`. An approval applies only to that session, tool version, and
+  set of arguments, and is used once. To ask again after a denial or expiry,
+  repeat the tool call.
+tags:
+- Action Gateway Data Plane
+servers:
+- url: https://actions.do-ai.run
+  description: production
+parameters:
+- $ref: parameters.yml#/session_id
+- $ref: parameters.yml#/approval_id
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/approval_decision
+      example:
+        decision: approve
+responses:
+  '200':
+    description: The decision was recorded.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/data_plane.yml#/approval_decision_response
+        example:
+          id: 7d3c2b1a-9e8f-4a6b-8c5d-4e3f2a1b0c9d
+          status: approved
+          expires_at: '2026-10-09T18:30:00Z'
+  '400':
+    $ref: data_plane_responses.yml#/bad_request
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    $ref: data_plane_responses.yml#/forbidden
+  '404':
+    $ref: data_plane_responses.yml#/not_found
+  '409':
+    $ref: data_plane_responses.yml#/conflict
+  '412':
+    $ref: data_plane_responses.yml#/precondition_failed
+  '429':
+    $ref: data_plane_responses.yml#/too_many_requests
+  '500':
+    $ref: data_plane_responses.yml#/server_error
+  '503':
+    $ref: data_plane_responses.yml#/service_unavailable
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/gatewaySessionApprovals_update.yml
+security:
+- bearer_auth: []

@@ -1,0 +1,90 @@
+operationId: gatewayTools_list
+summary: List Session Tools
+description: >-
+  Lists the catalog tools that a session can call, ordered by name. The list
+  applies the session's `tools` selection and omits tools that its policy
+  always denies.
+
+
+  Each page includes an `ETag` header. Send it in `If-None-Match` to receive
+  `304 Not Modified` while the page is unchanged.
+tags:
+- Action Gateway Data Plane
+servers:
+- url: https://actions.do-ai.run
+  description: production
+parameters:
+- $ref: parameters.yml#/session_id_header
+- $ref: parameters.yml#/session_tools_page_size
+- $ref: parameters.yml#/session_tools_page_token
+- $ref: parameters.yml#/if_none_match
+responses:
+  '200':
+    description: A page of tools.
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+      ETag:
+        description: An identifier for this page's contents.
+        schema:
+          type: string
+        example: '"3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c"'
+    content:
+      application/json:
+        schema:
+          $ref: models/data_plane.yml#/list_session_tools_response
+        example:
+          version: v1
+          tools:
+          - name: exa_web_search
+            title: Web Search
+            description: Search the public web and return ranked results with titles and URLs.
+            inputSchema:
+              type: object
+              required:
+              - query
+              properties:
+                query:
+                  type: string
+                max_results:
+                  type: integer
+            annotations:
+              title: Web Search
+              readOnlyHint: true
+              openWorldHint: true
+            _meta:
+              version: '1'
+              parallelizable: true
+              streaming_safe: false
+            version: '1'
+            parallelizable: true
+            streamingSafe: false
+          next_page_token: eyJ2IjoxLCJhZnRlciI6ImV4YV93ZWJfc2VhcmNoIn0
+  '304':
+    description: The page is unchanged since the `ETag` in `If-None-Match`.
+    headers:
+      $ref: response_headers.yml
+  '400':
+    $ref: data_plane_responses.yml#/bad_request
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    $ref: data_plane_responses.yml#/forbidden
+  '412':
+    $ref: data_plane_responses.yml#/precondition_failed
+  '429':
+    $ref: data_plane_responses.yml#/too_many_requests
+  '500':
+    $ref: data_plane_responses.yml#/server_error
+  '503':
+    $ref: data_plane_responses.yml#/service_unavailable
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/gatewayTools_list.yml
+security:
+- bearer_auth: []

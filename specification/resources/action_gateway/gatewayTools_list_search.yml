@@ -1,0 +1,85 @@
+operationId: gatewayTools_list_search
+summary: Search Session Tools
+description: >-
+  Finds the catalog tools that fit one or more use cases. This is the REST form
+  of the `action_search` MCP tool. Each query is searched independently and
+  returns its own result group, so you can see which tools serve which goal.
+  Results include each tool's `inputSchema`, so you can call a tool with
+  `POST /tools/invoke` without another lookup.
+
+
+  Results include only tools that the session can call. If the session policy
+  requires approval for `action_search`, the response is a failed result with
+  `_meta.status` set to `requires_approval`.
+tags:
+- Action Gateway Data Plane
+servers:
+- url: https://actions.do-ai.run
+  description: production
+parameters:
+- $ref: parameters.yml#/session_id_header
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/search_tools_request
+      example:
+        queries:
+        - use_case: search the public web for current information
+        limit: 3
+responses:
+  '200':
+    description: >-
+      The search ran, or it is waiting for approval. Check `status` before
+      reading `output`.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/data_plane.yml#/search_tools_response
+        example:
+          status: succeeded
+          output:
+            results:
+            - index: 1
+              use_case: search the public web for current information
+              results:
+              - name: exa_web_search
+                version: '1'
+                title: Web Search
+                description: Search the public web and return ranked results with titles and URLs.
+                inputSchema:
+                  type: object
+                  required:
+                  - query
+                  properties:
+                    query:
+                      type: string
+                    max_results:
+                      type: integer
+                score: 0.92
+          call_id: call_8b7c6d5e-4f3a-4b2c-9d1e-0f9a8b7c6d5e
+  '400':
+    $ref: data_plane_responses.yml#/bad_request
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    $ref: data_plane_responses.yml#/forbidden
+  '412':
+    $ref: data_plane_responses.yml#/precondition_failed
+  '413':
+    $ref: data_plane_responses.yml#/payload_too_large
+  '429':
+    $ref: data_plane_responses.yml#/too_many_requests
+  '500':
+    $ref: data_plane_responses.yml#/server_error
+  '503':
+    $ref: data_plane_responses.yml#/service_unavailable
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/gatewayTools_list_search.yml
+security:
+- bearer_auth: []

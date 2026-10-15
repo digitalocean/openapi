@@ -1,0 +1,474 @@
+error_envelope:
+  type: object
+  description: Describes why a request or tool call failed and whether retrying can help.
+  properties:
+    class:
+      type: string
+      description: >-
+        The failure class. Branch on this value rather than on `message`, which
+        may change.
+      enum:
+        - invalid_argument
+        - unauthorized
+        - forbidden
+        - rate_limited
+        - not_found
+        - timeout
+        - upstream_error
+        - output_too_large
+        - execution_failed
+        - unavailable
+        - canceled
+        - render_required
+        - unsupported_media_type
+        - view_materialization_failed
+      example: invalid_argument
+    message:
+      type: string
+      description: A human-readable explanation that is safe to show to an agent or end user.
+      example: Request is invalid. Fix request arguments and retry.
+    retriable:
+      type: boolean
+      description: Whether retrying the same request later can succeed.
+      example: false
+    recovery_hint:
+      type: string
+      description: The suggested next step.
+      enum:
+        - fix_args
+        - refresh_auth
+        - retry_later
+        - narrow_output
+        - contact_support
+        - verify_provider_state
+      example: fix_args
+
+tool_result:
+  type: object
+  description: >-
+    The result of one tool call. Check `status` before reading `output`. A call
+    that needs approval, authorization, or connection setup fails with a
+    `_meta.status` that names the step to complete.
+  properties:
+    status:
+      type: string
+      enum:
+        - succeeded
+        - failed
+      example: succeeded
+    output:
+      type: object
+      description: >-
+        The tool's JSON output. Present when `status` is `succeeded`. Its shape
+        is the tool's output schema, or the output view bound to the tool in
+        the session.
+      additionalProperties: true
+      example:
+        provider: exa
+        results:
+          - title: DigitalOcean
+            url: https://www.digitalocean.com/
+    error:
+      $ref: '#/error_envelope'
+    call_id:
+      type: string
+      description: A unique identifier for this call. Include it when contacting support.
+      example: call_8b7c6d5e-4f3a-4b2c-9d1e-0f9a8b7c6d5e
+    _meta:
+      type: object
+      description: >-
+        Additional result metadata. Keys include:
+
+
+        - `status`: `requires_approval`, `requires_authorization`, or
+          `requires_connection_configuration` when the call stopped before
+          running.
+
+        - `approval_id`, `tool_name`, `expires_at`, and `decide`: present with
+          `requires_approval`. `decide` gives the `method`, `path`, and `body`
+          of the approval request to send. Approve the call, then repeat it
+          with the same arguments before `expires_at`.
+
+        - `retry`: `{"attempt_count": N, "exhausted": bool}` when the gateway
+          retried the call.
+
+        - `output_view`: the output view applied to the result.
+      additionalProperties: true
+      example:
+        status: requires_approval
+        approval_id: 7d3c2b1a-9e8f-4a6b-8c5d-4e3f2a1b0c9d
+        tool_name: exa_web_search
+        expires_at: '2026-10-09T18:30:00Z'
+        decide:
+          method: POST
+          path: /approvals/session/2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b/7d3c2b1a-9e8f-4a6b-8c5d-4e3f2a1b0c9d
+          body: '{"decision": "approve"}'
+  required:
+    - status
+    - call_id
+
+tool_result_error:
+  type: object
+  description: A failed request. The body has the same shape as a failed tool result.
+  properties:
+    status:
+      type: string
+      enum:
+        - failed
+      example: failed
+    error:
+      $ref: '#/error_envelope'
+    call_id:
+      type: string
+      description: A unique identifier for this request, when one was assigned.
+      example: call_8b7c6d5e-4f3a-4b2c-9d1e-0f9a8b7c6d5e
+  required:
+    - status
+    - error
+    - call_id
+
+session_tool:
+  type: object
+  description: >-
+    A catalog tool the session can call, in MCP tool format plus Action Gateway
+    fields.
+  properties:
+    name:
+      type: string
+      description: The provider-qualified tool name. Pass it as `tool` to invoke the tool.
+      example: exa_web_search
+    title:
+      type: string
+      example: Web Search
+    description:
+      type: string
+      example: Search the public web and return ranked results with titles and URLs.
+    inputSchema:
+      type: object
+      description: The JSON Schema for the tool's `arguments`.
+      additionalProperties: true
+      example:
+        type: object
+        required:
+          - query
+        properties:
+          query:
+            type: string
+          max_results:
+            type: integer
+    outputSchema:
+      type: object
+      description: >-
+        The JSON Schema for the tool's output, or for the output view bound to
+        the tool in the session.
+      additionalProperties: true
+      example:
+        type: object
+    annotations:
+      $ref: 'tools.yml#/tool_annotations'
+    _meta:
+      type: object
+      description: Additional tool metadata.
+      additionalProperties: true
+      example:
+        version: '1'
+        parallelizable: true
+        streaming_safe: false
+    version:
+      type: string
+      description: The immutable tool version.
+      example: '1'
+    parallelizable:
+      type: boolean
+      description: Whether the tool can run alongside other calls in one invoke request.
+      example: true
+    streamingSafe:
+      type: boolean
+      example: false
+
+list_session_tools_response:
+  type: object
+  properties:
+    version:
+      type: string
+      description: The catalog version.
+      example: v1
+    tools:
+      type: array
+      description: Tools ordered by name.
+      items:
+        $ref: '#/session_tool'
+    next_page_token:
+      $ref: 'shared.yml#/next_page_token'
+
+search_query:
+  type: object
+  properties:
+    use_case:
+      type: string
+      description: >-
+        A normalized English description of one complete use case: the action
+        and the intended outcome, including any app the user named. Put
+        personal identifiers in `known_fields` instead. Up to 512 bytes.
+      example: search the public web for current information
+    known_fields:
+      type: string
+      description: >-
+        Known workflow inputs as one string of comma-separated `key:value`
+        pairs, such as identifiers or settings. Used as context, not for
+        keyword matching.
+      example: 'project:checkout'
+  required:
+    - use_case
+
+search_tools_request:
+  type: object
+  properties:
+    queries:
+      type: array
+      description: >-
+        Independent search queries. Split separate actions into separate
+        queries. Each query is searched on its own and gets its own result
+        group.
+      minItems: 1
+      maxItems: 5
+      items:
+        $ref: '#/search_query'
+    providers:
+      type: array
+      description: Restricts every query to these providers.
+      items:
+        type: string
+      example:
+        - exa
+    tags:
+      type: array
+      description: Restricts every query to tools with these tags.
+      items:
+        type: string
+      example:
+        - web-search
+    limit:
+      type: integer
+      description: >-
+        The maximum number of tools returned per query. Values above 50 are
+        capped at 50.
+      minimum: 1
+      default: 10
+      example: 3
+  required:
+    - queries
+
+search_tools_result:
+  type: object
+  description: A tool that matched a query.
+  properties:
+    name:
+      type: string
+      description: The provider-qualified tool name. Pass it as `tool` to invoke the tool.
+      example: exa_web_search
+    version:
+      type: string
+      example: '1'
+    title:
+      type: string
+      example: Web Search
+    description:
+      type: string
+      example: Search the public web and return ranked results with titles and URLs.
+    inputSchema:
+      type: object
+      description: The JSON Schema for the tool's `arguments`.
+      additionalProperties: true
+      example:
+        type: object
+        required:
+          - query
+        properties:
+          query:
+            type: string
+    score:
+      type: number
+      description: The relevance score. Higher is more relevant.
+      example: 0.92
+
+search_tools_group:
+  type: object
+  description: The results for one query, in request order.
+  properties:
+    index:
+      type: integer
+      description: The 1-based position of the query in the request.
+      example: 1
+    use_case:
+      type: string
+      description: The query's `use_case`.
+      example: search the public web for current information
+    results:
+      type: array
+      items:
+        $ref: '#/search_tools_result'
+    guidance:
+      type: string
+      description: A suggested next step. Present only when no tools matched.
+      example: No catalog tools matched this query. Retry with different terms.
+
+search_tools_response:
+  allOf:
+    - $ref: '#/tool_result'
+    - type: object
+      properties:
+        output:
+          type: object
+          properties:
+            results:
+              type: array
+              description: One result group per query, in request order.
+              items:
+                $ref: '#/search_tools_group'
+
+tool_call:
+  type: object
+  properties:
+    tool:
+      type: string
+      description: >-
+        The tool name, as returned by `GET /tools` or `POST /tools/search`.
+        Names are case-insensitive.
+      example: exa_web_search
+    version:
+      type: string
+      description: An immutable tool version. Omit to use the released version.
+      example: '1'
+    arguments:
+      type: object
+      description: The tool's arguments, matching its `inputSchema`.
+      additionalProperties: true
+      example:
+        query: DigitalOcean cloud computing
+        max_results: 1
+  required:
+    - tool
+
+invoke_tools_request:
+  type: object
+  properties:
+    rationale:
+      type: string
+      description: >-
+        One sentence explaining why the tools are being called. Values longer
+        than 512 characters are truncated.
+      example: Find current information about DigitalOcean.
+    tools:
+      type: array
+      description: The tool calls to run in parallel.
+      minItems: 1
+      maxItems: 10
+      items:
+        $ref: '#/tool_call'
+  required:
+    - tools
+
+invoke_tools_item:
+  type: object
+  properties:
+    index:
+      type: integer
+      description: The 0-based position of the call in the request.
+      example: 0
+    tool:
+      type: string
+      description: The canonical tool name.
+      example: exa_web_search
+    version:
+      type: string
+      description: The tool version that ran.
+      example: '1'
+    result:
+      $ref: '#/tool_result'
+
+invoke_tools_response:
+  type: object
+  properties:
+    total_count:
+      type: integer
+      example: 1
+    success_count:
+      type: integer
+      example: 1
+    error_count:
+      type: integer
+      example: 0
+    results:
+      type: array
+      description: One result per call, in request order.
+      items:
+        $ref: '#/invoke_tools_item'
+
+execute_code_request:
+  type: object
+  properties:
+    code:
+      type: string
+      description: >-
+        Python source to run. The sandbox provides
+        `invoke_digitalocean_tool(name: str, arguments: dict) -> dict`, which
+        calls a catalog tool under the session's policy and returns a tool
+        result.
+      example: print("hello from Action Gateway")
+  required:
+    - code
+
+execute_code_response:
+  allOf:
+    - $ref: '#/tool_result'
+    - type: object
+      properties:
+        output:
+          type: object
+          properties:
+            stdout:
+              type: string
+              example: |
+                hello from Action Gateway
+            stderr:
+              type: string
+              description: Omitted when empty.
+              example: ''
+            exit_code:
+              type: integer
+              format: int32
+              description: The process exit code. A nonzero exit code is still a succeeded result.
+              example: 0
+
+approval_decision:
+  type: object
+  properties:
+    decision:
+      type: string
+      description: Whether to let the pending call run.
+      enum:
+        - approve
+        - deny
+      example: approve
+  required:
+    - decision
+
+approval_decision_response:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The approval ID.
+      example: 7d3c2b1a-9e8f-4a6b-8c5d-4e3f2a1b0c9d
+    status:
+      type: string
+      enum:
+        - approved
+        - denied
+      example: approved
+    expires_at:
+      type: string
+      format: date-time
+      description: Repeat an approved call with the same arguments before this time.
+      example: '2026-10-09T18:30:00Z'
