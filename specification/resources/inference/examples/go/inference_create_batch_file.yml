@@ -1,0 +1,26 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      intent, _, err := client.BatchInference.CreatePresignedUploadURL(ctx, &godo.CreateBatchFileRequest{
+          FileName: "batch_requests.jsonl",
+      })
+      if err != nil {
+          panic(err)
+      }
+
+      fmt.Println("file_id:   ", intent.FileID)
+      fmt.Println("upload_url:", intent.UploadURL)
+  }

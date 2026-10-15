@@ -1,0 +1,30 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      // Async invoke uses model_id + a free-form input map. Shape of input
+      // depends on the model (image, audio, TTS, and so on).
+      invocation, _, err := client.AsyncInvocations.New(ctx, &godo.AsyncInvocationNewParams{
+          ModelID: "fal-ai/flux/schnell",
+          Input: map[string]interface{}{
+              "prompt": "A futuristic city at sunset",
+          },
+      })
+      if err != nil {
+          panic(err)
+      }
+
+      fmt.Println(invocation.RequestID, invocation.Status)
+  }
