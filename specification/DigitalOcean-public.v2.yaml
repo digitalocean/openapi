@@ -103,7 +103,8 @@ tags:
       ### Authentication and Sessions
 
       Authenticate with a DigitalOcean personal access token in the
-      `Authorization: Bearer` header. Every request also acts in one session.
+      `Authorization: Bearer` header. Custom-scoped tokens need the
+      `action_gateway:execute` scope. Every request also acts in one session.
       Create the session with the
       [Create a Session](https://docs.digitalocean.com/reference/api/digitalocean/#tag/Action-Gateway/operation/sessions_create)
       endpoint, then send its UUID

@@ -10,8 +10,8 @@ description: >-
   The sandbox provides `invoke_digitalocean_tool(name, arguments)`, which calls
   a catalog tool and returns a tool result. Those calls follow the session's
   tool selection and policy. Each request runs in a fresh sandbox, so state is
-  not kept between requests. Execution, including tool calls, is limited to 180
-  seconds.
+  not kept between requests. Execution, including tool calls, is time limited.
+  Code that runs too long fails with a `timeout` error.
 
 
   A nonzero exit code is still a `succeeded` result; check `output.exit_code`.
@@ -37,8 +37,6 @@ responses:
     description: >-
       The code ran, or it is waiting for approval. Check `status` before
       reading `output`.
-    headers:
-      $ref: response_headers.yml
     content:
       application/json:
         schema:
@@ -53,7 +51,7 @@ responses:
   '400':
     $ref: data_plane_responses.yml#/bad_request
   '401':
-    $ref: ../../shared/responses/unauthorized.yml
+    $ref: data_plane_responses.yml#/unauthorized
   '403':
     $ref: data_plane_responses.yml#/forbidden
   '412':
@@ -68,9 +66,8 @@ responses:
     $ref: data_plane_responses.yml#/service_unavailable
   '504':
     $ref: data_plane_responses.yml#/gateway_timeout
-  default:
-    $ref: ../../shared/responses/unexpected_error.yml
 x-codeSamples:
 - $ref: examples/curl/gatewayCode_run.yml
 security:
-- bearer_auth: []
+- bearer_auth:
+  - action_gateway:execute

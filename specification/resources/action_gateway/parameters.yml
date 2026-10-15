@@ -617,7 +617,7 @@ session_tools_page_token:
     for the session that received it.
   schema:
     type: string
-  example: eyJ2IjoxLCJhZnRlciI6ImV4YV93ZWJfc2VhcmNoIn0
+  example: eyJ2IjoxLCJhZnRlciI6ImV4YV93ZWJfc2VhcmNoIiwiZnAiOiI5YzFlNWI3YTNkMmY0ZTYwIn0
 
 if_none_match:
   name: If-None-Match

@@ -2,8 +2,6 @@ bad_request:
   description: >-
     The request is invalid: the body is not valid JSON, a required field is
     missing, or a value is out of range.
-  headers:
-    $ref: response_headers.yml
   content:
     application/json:
       schema:
@@ -19,8 +17,6 @@ bad_request:
 
 payment_required:
   description: Your team must add prepayment before it can make more tool calls.
-  headers:
-    $ref: response_headers.yml
   content:
     application/json:
       schema:
@@ -34,17 +30,32 @@ payment_required:
           recovery_hint: contact_support
         call_id: call_8b7c6d5e-4f3a-4b2c-9d1e-0f9a8b7c6d5e
 
-forbidden:
+unauthorized:
   description: >-
-    The session cannot be used for this request. The session ID is missing or
-    invalid, the session belongs to another user or team, the session has no
-    policy, or the session policy denies the operation.
-  headers:
-    $ref: response_headers.yml
+    The token is missing, invalid, or expired. This response uses the standard
+    DigitalOcean API error format.
   content:
     application/json:
       schema:
-        $ref: models/data_plane.yml#/tool_result_error
+        $ref: ../../shared/models/error.yml
+      example:
+        id: unauthorized
+        message: Unable to authenticate you.
+
+forbidden:
+  description: >-
+    The token or session cannot be used for this request. Tokens without the
+    `action_gateway:execute` scope, and accounts that are not in good
+    standing, are rejected with the standard DigitalOcean API error format.
+    Session failures return a tool result: the session ID is missing or
+    invalid, the session belongs to another user or team, the session has no
+    policy, or the session policy denies the operation.
+  content:
+    application/json:
+      schema:
+        oneOf:
+        - $ref: models/data_plane.yml#/tool_result_error
+        - $ref: ../../shared/models/error.yml
       example:
         status: failed
         error:
@@ -58,8 +69,6 @@ not_found:
   description: >-
     The approval does not exist or belongs to another session. Approvals for
     other callers are reported as not found.
-  headers:
-    $ref: response_headers.yml
   content:
     application/json:
       schema:
@@ -77,8 +86,6 @@ conflict:
   description: >-
     The approval was already decided or has expired. Repeat the tool call to
     request a new approval.
-  headers:
-    $ref: response_headers.yml
   content:
     application/json:
       schema:
@@ -96,9 +103,8 @@ precondition_failed:
   description: >-
     Your team is not enabled for Action Gateway, or the session or its
     connection is not set up for this call. For example, the session needs an
-    `actorId` for OAuth tools, or an OAuth connection must be reconnected.
-  headers:
-    $ref: response_headers.yml
+    `actorId` for OAuth tools, an OAuth connection must be reconnected, or the
+    connection's private network does not match what the MCP server requires.
   content:
     application/json:
       schema:
@@ -114,8 +120,6 @@ precondition_failed:
 
 payload_too_large:
   description: The request body is larger than 1 MiB.
-  headers:
-    $ref: response_headers.yml
   content:
     application/json:
       schema:
@@ -134,12 +138,6 @@ too_many_requests:
     A rate limit was exceeded. Wait for the number of seconds in `Retry-After`,
     when present, before retrying.
   headers:
-    ratelimit-limit:
-      $ref: '../../shared/headers.yml#/ratelimit-limit'
-    ratelimit-remaining:
-      $ref: '../../shared/headers.yml#/ratelimit-remaining'
-    ratelimit-reset:
-      $ref: '../../shared/headers.yml#/ratelimit-reset'
     Retry-After:
       description: The number of seconds to wait before retrying.
       schema:
@@ -160,8 +158,6 @@ too_many_requests:
 
 server_error:
   description: The gateway failed to process the request. Retry later.
-  headers:
-    $ref: response_headers.yml
   content:
     application/json:
       schema:
@@ -177,8 +173,6 @@ server_error:
 
 service_unavailable:
   description: The gateway or a service it depends on is temporarily unavailable. Retry later.
-  headers:
-    $ref: response_headers.yml
   content:
     application/json:
       schema:
@@ -194,8 +188,6 @@ service_unavailable:
 
 gateway_timeout:
   description: The code did not finish within the execution time limit.
-  headers:
-    $ref: response_headers.yml
   content:
     application/json:
       schema:

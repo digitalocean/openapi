@@ -6,11 +6,12 @@ functions:
   - ensureSchemaHasType
 
 rules:
+  # Edge does not rate limit the Action Gateway data plane (actions.do-ai.run), so it sends no ratelimit-x headers.
   ratelimit-headers:
     description: Response must include ratelimit-x headers
     message: '{{description}}; missing {{property}}'
     severity: error
-    given: $..responses.*
+    given: "$.paths[?(!@property.match(/^\\/(tools|code|approvals)(\\/|$)/))]..responses.*"
     then:
       - field: headers.ratelimit-limit
         function: truthy

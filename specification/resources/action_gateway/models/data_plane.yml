@@ -209,7 +209,8 @@ search_query:
       description: >-
         A normalized English description of one complete use case: the action
         and the intended outcome, including any app the user named. Put
-        personal identifiers in `known_fields` instead. Up to 512 bytes.
+        personal identifiers in `known_fields` instead. Up to 512 bytes and 32
+        search terms, with at least one letter or digit.
       example: search the public web for current information
     known_fields:
       type: string
