@@ -1,5 +1,5 @@
 introduction: |
-  The DigitalOcean Gradient™ AI Agentic Cloud provides inference capabilities through
+  DigitalOcean Inference provides inference capabilities through
   two API variants:
 
   - **Serverless Inference**: Access serverless inference models using an inference key

@@ -1,0 +1,8 @@
+type: object
+required:
+  - notification_channels
+properties:
+  notification_channels:
+    type: array
+    items:
+      $ref: 'notification_channel.yml'

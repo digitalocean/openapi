@@ -1,0 +1,12 @@
+type: object
+description: |
+  HMAC signature configuration as returned in API responses. The signing
+  secret is never returned; `secret_status` indicates whether it is
+  configured.
+properties:
+  secret_status:
+    allOf:
+      - $ref: 'secret_status.yml'
+    description: |
+      Present when a signing secret is configured. Omitted when not
+      configured.

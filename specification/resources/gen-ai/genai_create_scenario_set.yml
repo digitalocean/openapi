@@ -36,6 +36,6 @@ security:
   - genai:create
 summary: Create Scenario Set
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_create_scenario_set.yml

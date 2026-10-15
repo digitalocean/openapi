@@ -1,0 +1,47 @@
+type: object
+description: >-
+  A consent record indicating whether signals collection is enabled for a
+  source. Records with `source: agent` apply to one environment; the record with
+  `source: inference` applies to the whole team.
+properties:
+  id:
+    type: integer
+    description: The unique numeric identifier for the consent record.
+    example: 13
+  team_id:
+    type: integer
+    description: The team ID that owns this consent record.
+    example: 39449946
+  source:
+    type: string
+    enum:
+      - agent
+      - inference
+    description: >-
+      The source this consent applies to. `agent` is per-environment consent for
+      Harness Runtime; `inference` is team-level consent for Serverless
+      Inference chat completions.
+    example: agent
+  agent_id:
+    type: string
+    description: >-
+      The unique identifier of the environment. For Harness Runtime, this is the
+      Environment Config ID. Empty for team-level records (`source:
+      inference`), which are not tied to an environment.
+    example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
+  enabled:
+    type: boolean
+    description: Whether signals collection is enabled for this source.
+    example: true
+  updated_at:
+    type: string
+    format: date-time
+    description: A time value given in ISO8601 combined date and time format.
+    example: "2026-08-10T10:09:25.738533Z"
+required:
+  - id
+  - team_id
+  - source
+  - agent_id
+  - enabled
+  - updated_at

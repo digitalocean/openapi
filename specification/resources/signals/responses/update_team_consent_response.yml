@@ -1,0 +1,27 @@
+description: The team-level consent record was updated successfully.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        consent:
+          $ref: '../models/consent_record.yml'
+      required:
+        - consent
+    example:
+      consent:
+        id: 21
+        team_id: 39449946
+        source: inference
+        agent_id: ""
+        enabled: true
+        updated_at: "2026-10-09T11:41:27.104822Z"

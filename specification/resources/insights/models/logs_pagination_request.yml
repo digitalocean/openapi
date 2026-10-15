@@ -1,0 +1,15 @@
+type: object
+description: Opaque keyset pagination request. Cursors are only valid when ordering by `timestamp` alone.
+properties:
+  limit:
+    type: integer
+    format: int32
+    description: Maximum number of results to return. Defaults to 100 and is clamped to 1000.
+    default: 100
+    minimum: 1
+    maximum: 1000
+    example: 100
+  cursor:
+    type: string
+    description: Opaque cursor from a previous response.
+    example: "eyJ0cyI6MTc1NjY4NDgwMDAwMDAwMDAwfQ"

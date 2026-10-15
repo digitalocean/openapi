@@ -38,6 +38,6 @@ security:
   - genai:read
 summary: Retrieve an Existing Workspace
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_get_workspace.yml

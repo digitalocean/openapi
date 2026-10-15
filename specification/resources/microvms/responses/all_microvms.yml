@@ -1,0 +1,63 @@
+description: >-
+  The response will be a JSON object with a key called `microvms`. The value
+  will be an array of MicroVM objects.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      allOf:
+        - type: object
+          properties:
+            microvms:
+              type: array
+              items:
+                $ref: '../models/microvm.yml'
+        - $ref: '../../../shared/pages.yml#/pagination'
+        - $ref: '../../../shared/meta.yml'
+
+    examples:
+      All MicroVMs:
+        value:
+          microvms:
+            - id: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+              name: example-microvm
+              region: mkc1
+              size:
+                cpu: 1
+                memory: 2048
+                disk: 50
+              source:
+                oci_ref: docker.io/library/nginx:latest
+              state: paused
+              networking: public
+              auto_pause:
+                enabled: true
+                idle_timeout: 5m0s
+              auto_resume: true
+              http_protocol: http
+              ports:
+                - 80
+              tags:
+                - example
+              urls:
+                - hostname: 01a0ef1a-d873-793d-ae6a-5dd6239be62a.mkc1.microvm.ondigitalocean.com
+                  port: 80
+                  default: true
+                  status: ACTIVE
+              created_at: "2026-09-29T21:38:29Z"
+          links:
+            pages:
+              last: /v2/microvms?page=4&per_page=1
+              next: /v2/microvms?page=2&per_page=1
+          meta:
+            page: 1
+            per_page: 1
+            total: 4

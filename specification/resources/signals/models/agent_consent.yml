@@ -1,0 +1,38 @@
+type: object
+description: Consent details for a specific environment.
+properties:
+  id:
+    type: integer
+    description: The unique numeric identifier for the consent record.
+    example: 13
+  team_id:
+    type: integer
+    description: The team ID that owns this consent record.
+    example: 39449946
+  source:
+    type: string
+    enum:
+      - agent
+    description: >-
+      The source this consent applies to. Always `agent` for per-environment
+      records returned by this endpoint.
+    example: agent
+  agent_id:
+    type: string
+    format: uuid
+    description: The unique identifier of the environment. For Harness Runtime, this is the Environment Config ID.
+    example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
+  enabled:
+    type: boolean
+    description: Whether signals collection is enabled for this environment.
+    example: true
+  updated_at:
+    type: string
+    format: date-time
+    description: A time value given in ISO8601 combined date and time format.
+    example: "2026-08-10T10:09:25.738533Z"
+required:
+  - team_id
+  - source
+  - agent_id
+  - enabled

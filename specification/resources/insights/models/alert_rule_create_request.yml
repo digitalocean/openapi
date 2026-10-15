@@ -1,0 +1,10 @@
+allOf:
+  - $ref: 'alert_rule_request.yml'
+  - type: object
+    properties:
+      spec:
+        allOf:
+          - $ref: 'alert_rule_spec.yml'
+          - type: object
+            required:
+              - notification_channels

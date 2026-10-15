@@ -1,0 +1,32 @@
+type: object
+required:
+  - resultType
+  - result
+properties:
+  resultType:
+    type: string
+    enum:
+      - vector
+      - matrix
+      - scalar
+      - string
+    example: vector
+  result:
+    description: >-
+      Result payload shape depends on `resultType`. `vector` and `matrix` are
+      series arrays. `scalar` and `string` both use a `[timestamp, value]`
+      sample pair.
+    example:
+      - metric:
+          __name__: do_droplets_cpu_time
+        value:
+          - 1620683817.0
+          - "1"
+    anyOf:
+      - type: array
+        items:
+          $ref: 'prom_vector_sample.yml'
+      - type: array
+        items:
+          $ref: 'prom_matrix_sample.yml'
+      - $ref: 'prom_sample.yml'

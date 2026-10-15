@@ -1,0 +1,14 @@
+type: object
+required:
+  - status
+  - data
+properties:
+  status:
+    type: string
+    enum:
+      - success
+    example: success
+  data:
+    type: array
+    items:
+      $ref: 'prom_metric_labels.yml'

@@ -1,0 +1,37 @@
+description: >-
+  A filter comparison value. Provide either a bare JSON scalar or string array,
+  or a typed wrapper of the form `{ "type": "string", "value": "..." }`.
+example:
+  type: string
+  value: "api-gateway"
+oneOf:
+  - type: string
+  - type: number
+  - type: boolean
+  - type: array
+    items:
+      type: string
+  - type: object
+    description: A typed value wrapper.
+    required:
+      - value
+    properties:
+      type:
+        type: string
+        description: The value type.
+        enum:
+          - string
+          - number
+          - bool
+          - string_array
+        example: string
+      value:
+        description: The scalar or array value, matching `type`.
+        example: "api-gateway"
+        oneOf:
+          - type: string
+          - type: number
+          - type: boolean
+          - type: array
+            items:
+              type: string

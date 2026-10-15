@@ -1,0 +1,23 @@
+type: object
+required:
+  - resultType
+  - result
+properties:
+  resultType:
+    type: string
+    enum:
+      - matrix
+    example: matrix
+  result:
+    description: >-
+      One entry per matching series, each carrying the samples evaluated at
+      every step across the requested range.
+    type: array
+    items:
+      $ref: 'prom_matrix_sample.yml'
+    example:
+      - metric:
+          __name__: do_droplets_cpu_time
+        values:
+          - [1620683817.0, "1"]
+          - [1620683832.0, "1"]

@@ -42,6 +42,6 @@ security:
   - genai:update
 summary: Update Custom Model Metadata
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_update_custom_model_metadata.yml

@@ -1,0 +1,10 @@
+type: object
+description: Response body for a spans search.
+properties:
+  data:
+    type: array
+    description: Matching spans. Empty when no spans match.
+    items:
+      $ref: 'span_record.yml'
+  pagination:
+    $ref: 'spans_pagination_response.yml'

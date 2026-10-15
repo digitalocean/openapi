@@ -1,0 +1,69 @@
+type: object
+description: >-
+  A deletion job that permanently removes Signals conversations for one
+  Harness Runtime environment, or Serverless Inference Signals conversations for a
+  whole team. Aggregated Insights or metrics summaries may still remain.
+properties:
+  team_id:
+    type: integer
+    format: int64
+    description: The team that owns the deletion job.
+    example: 12345678
+  deletion_id:
+    type: string
+    description: The unique identifier for the deletion job (ULID).
+    example: 01J9ZX0N5Q7M2K3R4S5T6V7W8X
+  type:
+    type: string
+    description: >-
+      The scope of the deletion. `agent` deletes Signals conversations for one
+      Harness Runtime environment. `inference` deletes Serverless Inference Signals
+      conversations for the whole team.
+    enum:
+      - agent
+      - inference
+    example: agent
+  agent_id:
+    type: string
+    format: uuid
+    description: >-
+      The Harness Runtime Environment Config ID (agent UUID) whose
+      conversations are being deleted. Only present for `agent` deletions.
+    example: 01a10d3f-2c09-764f-99f8-458e521627f3
+  status:
+    type: string
+    description: The current status of the deletion job.
+    enum:
+      - queued
+      - running
+      - complete
+      - failed
+    example: running
+  error_message:
+    type: string
+    nullable: true
+    description: Error message if the deletion failed, or null otherwise.
+    example: null
+  created_at:
+    type: integer
+    format: int64
+    description: Unix timestamp when the deletion job was created.
+    example: 1791036405
+  started_at:
+    type: integer
+    format: int64
+    nullable: true
+    description: Unix timestamp when processing started, or null if still queued.
+    example: 1791036410
+  completed_at:
+    type: integer
+    format: int64
+    nullable: true
+    description: Unix timestamp when the deletion finished, or null if still in progress.
+    example: null
+required:
+  - team_id
+  - deletion_id
+  - type
+  - status
+  - created_at

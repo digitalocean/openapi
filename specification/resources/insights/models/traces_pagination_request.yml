@@ -1,0 +1,18 @@
+type: object
+description: >-
+  Limits the size of a traces search result set. There is no cursor; use
+  `pagination.hasMore` in the response to tell whether more traces matched,
+  and narrow the time range or filter to see them.
+additionalProperties: false
+properties:
+  limit:
+    type: integer
+    format: int32
+    description: >-
+      Maximum number of traces to return. Omitted or `0` uses the default of
+      100. Negative values or values above 1000 return `400`; they are not
+      clamped.
+    default: 100
+    minimum: 0
+    maximum: 1000
+    example: 50

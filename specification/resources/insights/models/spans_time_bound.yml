@@ -1,0 +1,19 @@
+type: object
+description: A single time bound. Exactly one of `relative` or `absolute` is set.
+minProperties: 1
+maxProperties: 1
+properties:
+  relative:
+    type: string
+    description: >-
+      A relative time. Use `now` for the current time, a bare duration such as
+      `1h` or `7d` to look back from now, or an offset such as `now-15m` or
+      `now+30m`. Supported units are `s`, `m`, `h`, `d`, and `w`.
+    example: "1h"
+  absolute:
+    type: string
+    description: >-
+      An absolute timestamp. Accepts an RFC3339/RFC3339Nano string or a Unix
+      timestamp (seconds, milliseconds, microseconds, or nanoseconds) encoded as
+      a decimal string.
+    example: "2026-09-30T00:00:00Z"

@@ -1540,6 +1540,13 @@ apiCandidateInferenceConfig:
       example: 123
       format: int64
       type: integer
+    reasoning_effort:
+      description: |-
+        Reasoning effort for reasoning-capable models (e.g. "low", "medium",
+        "high"). Validated against the candidate model's supported values; a model
+        that advertises none rejects this field.
+      example: low
+      type: string
     stop_token:
       example: example string
       type: string
@@ -1553,12 +1560,14 @@ apiCandidateInferenceConfig:
   type: object
 apiCandidateModelSource:
   default: CANDIDATE_MODEL_SOURCE_SERVERLESS
-  description: Whether inference runs against the serverless platform, a dedicated
-    deployment, or a model router.
+  description: |-
+    Whether the candidate is a served model (serverless platform, a dedicated
+    deployment, or a model router) or an OHS-hosted agent config.
   enum:
   - CANDIDATE_MODEL_SOURCE_SERVERLESS
   - CANDIDATE_MODEL_SOURCE_DEDICATED
   - CANDIDATE_MODEL_SOURCE_ROUTER
+  - CANDIDATE_MODEL_SOURCE_AGENT
   example: CANDIDATE_MODEL_SOURCE_SERVERLESS
   type: string
 apiCatalogType:
@@ -2110,6 +2119,8 @@ apiCreateDataSourceFileUploadPresignedUrlsOutput:
 apiCreateEvaluationDatasetInputPublic:
   description: Creates an evaluation dataset for an agent
   properties:
+    dataset_paradigm:
+      $ref: '#/apiEvaluationDatasetParadigm'
     dataset_type:
       $ref: '#/apiEvaluationDatasetType'
     file_upload_dataset:
@@ -2210,7 +2221,7 @@ apiCreateKnowledgeBaseInputPublic:
       description: Optional data sources to attach at creation. Omit or use an empty
         list to create the knowledge base without sources, then add sources (with
         chunking strategy and sizes) using [Add a Data Source to a Knowledge Base](#operation/create_knowledge_base_data_source).
-        When provided, see [Organize Data Sources](https://docs.digitalocean.com/products/gradient-ai-platform/how-to/create-manage-agent-knowledge-bases/#add-data-sources)
+        When provided, see [Organize Data Sources](https://docs.digitalocean.com/products/inference/how-to/create-manage-agent-knowledge-bases/#add-data-sources)
         for best practices.
       items:
         $ref: '#/apiKBDataSource'
@@ -2298,6 +2309,16 @@ apiCreateModelEvaluationRunInputPublic:
       description: UUID of the dataset to use for evaluation.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+    epochs:
+      description: |-
+        Number of times to evaluate each dataset row (n-pass/epochs), so the
+        result reports avg@k/pass@k/cons@k instead of a single score. Defaults
+        to 1 when unset. Capped at 3 until throughput/sharding work lands, since
+        each extra epoch roughly multiplies wall-clock run time. Not persisted
+        on presets.
+      example: 1
+      format: int64
+      type: integer
     eval_preset_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
@@ -2526,7 +2547,7 @@ apiCreateSimulationRunInputPublic:
     evaluation_config:
       $ref: '#/apiSimulationEvaluationConfig'
     exploration_budget:
-      description: Optional run-level journeys-per-scenario override. When set, overrides
+      description: Optional run-level episodes-per-scenario override. When set, overrides
         each scenario's exploration_budget.
       example: 123
       format: int64
@@ -3228,6 +3249,67 @@ apiDuplicateScenarioSetOutput:
     scenario_set:
       $ref: '#/apiScenarioSet'
   type: object
+apiEpochResultSummary:
+  description: |-
+    Aggregation across epochs when a run repeats each dataset row k times.
+    Only populated when epochs > 1; at epochs == 1 every number here would
+    equal overall_score_percent, so it is omitted rather than duplicated.
+  properties:
+    avg_at_k_percent:
+      description: |-
+        Mean over rows of (passing epochs / scored epochs) for the star metric.
+        Equals overall_score_percent; this is the primary result for a
+        multi-epoch run ("how often does it work").
+      example: 123
+      format: double
+      type: number
+    cons_at_k_percent:
+      description: |-
+        Fraction of rows where a strict majority of scored epochs passed
+        ("what does the model typically answer"). An even-k tie counts as fail.
+      example: 123
+      format: double
+      type: number
+    epochs:
+      description: Number of passes per dataset row (k).
+      example: 123
+      format: int64
+      type: integer
+    pass_at_k_percent:
+      description: |-
+        Unbiased estimate of the probability that at least one of k epochs
+        passes ("can it work at all, given retries"). Always the most generous
+        of the three.
+      example: 123
+      format: double
+      type: number
+    per_epoch:
+      description: Each epoch's own standalone score, persisted next to the aggregate.
+      items:
+        $ref: '#/apiPerEpochResultSummary'
+      type: array
+    rows_excluded:
+      description: |-
+        Rows where every epoch failed or was skipped, so the row contributes to
+        no score. Not a random sample of difficulty — surface this explicitly.
+      example: 123
+      format: int64
+      type: integer
+    rows_scored:
+      description: |-
+        Rows with at least one scored epoch. The effective N behind every
+        percentage above; always display alongside them.
+      example: 123
+      format: int64
+      type: integer
+    score_stddev_percent:
+      description: |-
+        Population standard deviation of the k per-epoch scores below — the
+        signal for whether a difference between runs is real or noise.
+      example: 123
+      format: double
+      type: number
+  type: object
 apiEvaluationDataset:
   properties:
     created_at:
@@ -3239,6 +3321,8 @@ apiEvaluationDataset:
       description: Name of the dataset.
       example: example name
       type: string
+    dataset_paradigm:
+      $ref: '#/apiEvaluationDatasetParadigm'
     dataset_type:
       $ref: '#/apiEvaluationDatasetType'
     dataset_uuid:
@@ -3260,6 +3344,18 @@ apiEvaluationDataset:
       format: int64
       type: integer
   type: object
+apiEvaluationDatasetParadigm:
+  default: EVALUATION_DATASET_PARADIGM_SINGLE_TURN
+  description: |-
+    EvaluationDatasetParadigm is the row/content shape of a dataset, orthogonal to the
+    surface in EvaluationDatasetType (e.g. a model dataset can be single- or multi-turn).
+  enum:
+  - EVALUATION_DATASET_PARADIGM_SINGLE_TURN
+  - EVALUATION_DATASET_PARADIGM_MULTI_TURN
+  - EVALUATION_DATASET_PARADIGM_CODING
+  - EVALUATION_DATASET_PARADIGM_N_PLUS_1
+  example: EVALUATION_DATASET_PARADIGM_SINGLE_TURN
+  type: string
 apiEvaluationDatasetPreviewOutput:
   description: Response containing a paginated preview of a dataset's contents.
   properties:
@@ -3295,8 +3391,6 @@ apiEvaluationDatasetType:
   default: EVALUATION_DATASET_TYPE_UNKNOWN
   enum:
   - EVALUATION_DATASET_TYPE_UNKNOWN
-  - EVALUATION_DATASET_TYPE_ADK
-  - EVALUATION_DATASET_TYPE_NON_ADK
   - EVALUATION_DATASET_TYPE_MODEL
   example: EVALUATION_DATASET_TYPE_UNKNOWN
   type: string
@@ -3363,6 +3457,7 @@ apiEvaluationMetricCategory:
   - METRIC_CATEGORY_SAFETY_AND_SECURITY
   - METRIC_CATEGORY_CONTEXT_QUALITY
   - METRIC_CATEGORY_MODEL_FIT
+  - METRIC_CATEGORY_CONVERSATIONAL
   example: METRIC_CATEGORY_UNSPECIFIED
   type: string
 apiEvaluationMetricResult:
@@ -4391,20 +4486,20 @@ apiGetServerlessInferenceUsageOutput:
     usage:
       $ref: '#/apiResourceUsage'
   type: object
-apiGetSimulationJourneyOutput:
-  description: Output for getting a single journey.
+apiGetSimulationEpisodeOutput:
+  description: Output for getting a single episode.
   properties:
-    journey:
-      $ref: '#/apiSimulationJourney'
+    episode:
+      $ref: '#/apiSimulationEpisode'
   type: object
-apiGetSimulationJourneyTrajectoryOutput:
+apiGetSimulationEpisodeTrajectoryOutput:
   description: Output containing the parsed trajectory JSON.
   properties:
     trajectory:
       $ref: '#/apiSimulationTrajectory'
   type: object
-apiGetSimulationJourneyTrajectoryURLOutput:
-  description: Output containing a presigned download URL for a journey's trajectory
+apiGetSimulationEpisodeTrajectoryURLOutput:
+  description: Output containing a presigned download URL for an episode's trajectory
     JSON.
   properties:
     download_url:
@@ -4421,7 +4516,7 @@ apiGetSimulationRunOutput:
   description: Output for getting a simulation run.
   properties:
     scenario_results:
-      description: Per-scenario breakdown of journey outcomes, aggregated from journey
+      description: Per-scenario breakdown of episode outcomes, aggregated from episode
         rows.
       items:
         $ref: '#/apiSimulationScenarioResult'
@@ -6171,13 +6266,13 @@ apiListServerlessInferencePricesOutput:
         $ref: '#/apiServerlessInferencePrice'
       type: array
   type: object
-apiListSimulationJourneysOutput:
-  description: Output for listing the journeys within a simulation run.
+apiListSimulationEpisodesOutput:
+  description: Output for listing the episodes within a simulation run.
   properties:
     available_sort_by:
       description: Sort-by values available for this list request.
       items:
-        $ref: '#/apiSimulationJourneySortField'
+        $ref: '#/apiSimulationEpisodeSortField'
       type: array
     available_sort_directions:
       description: Sort-direction values available for this list request.
@@ -6187,17 +6282,17 @@ apiListSimulationJourneysOutput:
     available_statuses:
       description: Statuses available for filtering this list request.
       items:
-        $ref: '#/apiSimulationJourneyStatus'
+        $ref: '#/apiSimulationEpisodeStatus'
       type: array
     available_verdicts:
       description: Verdicts available for filtering this list request.
       items:
-        $ref: '#/apiSimulationJourneyVerdict'
+        $ref: '#/apiSimulationEpisodeVerdict'
       type: array
-    journeys:
-      description: The journeys for the current page.
+    episodes:
+      description: The episodes for the current page.
       items:
-        $ref: '#/apiSimulationJourney'
+        $ref: '#/apiSimulationEpisode'
       type: array
     links:
       $ref: '#/apiLinks'
@@ -6315,6 +6410,20 @@ apiMetricResult:
 apiMetricResultSummary:
   description: Per-metric aggregated pass/fail statistics across all prompts.
   properties:
+    avg_at_k_percent:
+      description: |-
+        Row-level (not attempt-level) aggregation across epochs for this metric,
+        mirroring EpochResultSummary but scoped to one metric. Only set when the
+        run's epochs > 1; pass_percent/pass_count/etc. above stay attempt-level
+        (over row x epoch pairs) so they don't desynchronize from the counts
+        sitting next to them.
+      example: 123
+      format: double
+      type: number
+    cons_at_k_percent:
+      example: 123
+      format: double
+      type: number
     description:
       example: example string
       type: string
@@ -6333,6 +6442,10 @@ apiMetricResultSummary:
     metric_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+    pass_at_k_percent:
+      example: 123
+      format: double
+      type: number
     pass_count:
       description: Rows where the metric completed and passed the configured threshold.
       example: 123
@@ -6767,6 +6880,27 @@ apiModelEndpoint:
       example: /chat/responses
       type: string
   type: object
+apiModelEvaluationEpochAttempt:
+  description: |-
+    ModelEvaluationEpochAttempt is one epoch's attempt at a dataset row,
+    nested under ModelEvaluationResult.epoch_results for multi-epoch runs.
+    Carries only the fields that vary per pass — row-identifying fields
+    (input/ground_truth/row_number) and candidate_model_name/uuid live once
+    on the parent ModelEvaluationResult and aren't repeated here.
+  properties:
+    candidate_routed_task:
+      example: Coding & brainstorming
+      type: string
+    metric_results:
+      description: Per-metric scores and judge reasoning for this specific pass.
+      items:
+        $ref: '#/apiEvaluationMetricResult'
+      type: array
+    output:
+      description: The response from the candidate model for this specific pass.
+      example: example string
+      type: string
+  type: object
 apiModelEvaluationPreset:
   description: |-
     Model Evaluation Preset - a saved, reusable configuration for model
@@ -6871,6 +7005,28 @@ apiModelEvaluationResult:
     candidate_routed_task:
       example: Coding & brainstorming
       type: string
+    epoch:
+      description: |-
+        Which pass over this dataset row produced this result, 1-indexed (1 =
+        first pass). Always 0 (and omitted from JSON) when the run's epochs is 1
+        (the default) — per-attempt epoch numbering doesn't apply to
+        single-pass runs. When epochs > 1, this always reflects epoch 1 (see
+        epoch_results below).
+      example: 1
+      format: int64
+      type: integer
+    epoch_results:
+      additionalProperties:
+        $ref: '#/apiModelEvaluationEpochAttempt'
+      description: |-
+        Present only when the run's epochs > 1: every pass over this row —
+        including epoch 1, duplicated here for convenience — keyed by
+        1-indexed "epoch1"/"epoch2"/"epoch3" labels. Mirrors the shape of the
+        downloadable results file's epochResults object. The top-level fields
+        above (output, metric_results, candidate_routed_task) always reflect
+        epoch 1, so single-epoch clients reading only those fields see no
+        difference when epochs > 1.
+      type: object
     ground_truth:
       example: example string
       type: string
@@ -6887,6 +7043,13 @@ apiModelEvaluationResult:
       description: The response from the candidate model.
       example: example string
       type: string
+    row_number:
+      description: |-
+        Which dataset row this result came from. Multiple results share a
+        row_number when epochs > 1: one per pass over that row.
+      example: 1
+      format: int64
+      type: integer
   type: object
 apiModelEvaluationRunDetail:
   description: Model Evaluation Run Detail - full view returned when fetching a specific
@@ -6918,6 +7081,13 @@ apiModelEvaluationRunDetail:
       description: Dataset used for the evaluation.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+    epochs:
+      description: |-
+        Number of times each dataset row is evaluated (n-pass/epochs). 1 by
+        default. Drives the avg@k/pass@k/cons@k aggregation in result_summary.
+      example: 1
+      format: int64
+      type: integer
     error_description:
       description: Error description if the run failed or partially succeeded.
       example: example string
@@ -6994,6 +7164,15 @@ apiModelEvaluationRunResultSummary:
       example: "2023-01-01T00:00:00Z"
       format: date-time
       type: string
+    epoch_summary:
+      $ref: '#/apiEpochResultSummary'
+    epochs:
+      description: |-
+        Number of times each dataset row was evaluated (n-pass/epochs). Mirrors
+        ModelEvaluationRunDetail.epochs. 1 for every existing run.
+      example: 1
+      format: int64
+      type: integer
     metric_summaries:
       description: Per-metric aggregated pass/fail statistics.
       items:
@@ -7867,6 +8046,25 @@ apiPages:
       example: example string
       type: string
   type: object
+apiPerEpochResultSummary:
+  description: |-
+    One epoch's standalone score, computed the same way overall_score_percent
+    is computed today (flat pass rate over that epoch's rows).
+  properties:
+    epoch:
+      description: 1-indexed epoch number (1 = first pass).
+      example: 1
+      format: int64
+      type: integer
+    overall_score_percent:
+      example: 123
+      format: double
+      type: number
+    rows_scored:
+      example: 123
+      format: int64
+      type: integer
+  type: object
 apiPerModelResultSummaries:
   description: |-
     Per-model breakdown of an evaluation run. Set on router evaluations to
@@ -8226,8 +8424,7 @@ apiRunEvaluationTestCaseInputPublic:
   description: Run an evaluation test case.
   properties:
     agent_deployment_names:
-      description: Agent deployment names to run the test case against (ADK agent
-        workspaces).
+      description: Agent deployment names to run the test case against.
       example:
       - example string
       items:
@@ -8309,7 +8506,7 @@ apiScenario:
       example: example string
       type: string
     exploration_budget:
-      description: Number of journeys to explore for this scenario. Defaults to 1
+      description: Number of episodes to explore for this scenario. Defaults to 1
         if unset.
       example: 123
       format: int64
@@ -8663,7 +8860,7 @@ apiSimulationEvaluationConfig:
     star_metric:
       $ref: '#/apiStarMetric'
   type: object
-apiSimulationJourney:
+apiSimulationEpisode:
   description: One independent execution within a simulation run, including its
     trajectory and verdict.
   properties:
@@ -8673,7 +8870,7 @@ apiSimulationJourney:
       format: date-time
       type: string
     duration_sec:
-      description: Wall-clock time taken for the journey to complete, in seconds.
+      description: Wall-clock time taken for the episode to complete, in seconds.
       example: "12345"
       format: uint64
       type: string
@@ -8681,14 +8878,14 @@ apiSimulationJourney:
       description: Human-readable explanation of a terminal FAILED status. Empty otherwise.
       example: example string
       type: string
-    journey_index:
-      description: Zero-based index of this journey within its scenario's exploration
+    episode_index:
+      description: Zero-based index of this episode within its scenario's exploration
         budget.
       example: 123
       format: int64
       type: integer
-    journey_uuid:
-      description: UUID of the journey.
+    episode_uuid:
+      description: UUID of the episode.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     judge_reasoning:
@@ -8696,33 +8893,33 @@ apiSimulationJourney:
       example: example string
       type: string
     run_uuid:
-      description: UUID of the run this journey belongs to.
+      description: UUID of the run this episode belongs to.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     scenario_uuid:
-      description: UUID of the scenario this journey executed.
+      description: UUID of the scenario this episode executed.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     session_id:
-      description: Session identifier for this journey.
+      description: Session identifier for this episode.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     status:
-      $ref: '#/apiSimulationJourneyStatus'
+      $ref: '#/apiSimulationEpisodeStatus'
     token_usage:
       $ref: '#/apiSimulationTokenUsage'
     trajectory_bucket_name:
       description: Object storage bucket holding the trajectory JSON. Set when the
-        journey finishes.
+        episode finishes.
       example: example name
       type: string
     trajectory_bucket_region:
       description: Object storage bucket region for the trajectory JSON. Set when
-        the journey finishes.
+        the episode finishes.
       example: example string
       type: string
     trajectory_spaces_key:
-      description: Object storage key for the trajectory JSON. Set when the journey
+      description: Object storage key for the trajectory JSON. Set when the episode
         finishes.
       example: example string
       type: string
@@ -8732,78 +8929,78 @@ apiSimulationJourney:
       format: date-time
       type: string
     verdict:
-      $ref: '#/apiSimulationJourneyVerdict'
+      $ref: '#/apiSimulationEpisodeVerdict'
   type: object
-apiSimulationJourneyCounts:
+apiSimulationEpisodeCounts:
   description: |-
-    Breakdown of journey outcomes by judge verdict. Reused wherever a
+    Breakdown of episode outcomes by judge verdict. Reused wherever a
     success / failure / inconclusive tally is reported (run row, result summary,
     per-scenario rollup).
   properties:
     failure_count:
-      description: Number of journeys with a FAILURE verdict.
+      description: Number of episodes with a FAILURE verdict.
       example: 123
       format: int64
       type: integer
     inconclusive_count:
-      description: Number of journeys with an INCONCLUSIVE verdict.
+      description: Number of episodes with an INCONCLUSIVE verdict.
       example: 123
       format: int64
       type: integer
     success_count:
-      description: Number of journeys with a SUCCESS verdict.
+      description: Number of episodes with a SUCCESS verdict.
       example: 123
       format: int64
       type: integer
   type: object
-apiSimulationJourneySortField:
-  default: SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
+apiSimulationEpisodeSortField:
+  default: SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED
   description: |-
-    Sortable fields for listing simulation journeys.
+    Sortable fields for listing simulation episodes.
 
-     - SIMULATION_JOURNEY_SORT_FIELD_SCENARIO: Sort by scenario_uuid then journey_index. Default.
-     - SIMULATION_JOURNEY_SORT_FIELD_CREATED_AT: Sort by creation date.
-     - SIMULATION_JOURNEY_SORT_FIELD_STATUS: Sort by journey status using lifecycle order.
-     - SIMULATION_JOURNEY_SORT_FIELD_VERDICT: Sort by verdict (nulls last).
+     - SIMULATION_EPISODE_SORT_FIELD_SCENARIO: Sort by scenario_uuid then episode_index. Default.
+     - SIMULATION_EPISODE_SORT_FIELD_CREATED_AT: Sort by creation date.
+     - SIMULATION_EPISODE_SORT_FIELD_STATUS: Sort by episode status using lifecycle order.
+     - SIMULATION_EPISODE_SORT_FIELD_VERDICT: Sort by verdict (nulls last).
   enum:
-  - SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
-  - SIMULATION_JOURNEY_SORT_FIELD_SCENARIO
-  - SIMULATION_JOURNEY_SORT_FIELD_CREATED_AT
-  - SIMULATION_JOURNEY_SORT_FIELD_STATUS
-  - SIMULATION_JOURNEY_SORT_FIELD_VERDICT
-  example: SIMULATION_JOURNEY_SORT_FIELD_UNSPECIFIED
+  - SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED
+  - SIMULATION_EPISODE_SORT_FIELD_SCENARIO
+  - SIMULATION_EPISODE_SORT_FIELD_CREATED_AT
+  - SIMULATION_EPISODE_SORT_FIELD_STATUS
+  - SIMULATION_EPISODE_SORT_FIELD_VERDICT
+  example: SIMULATION_EPISODE_SORT_FIELD_UNSPECIFIED
   type: string
-apiSimulationJourneyStatus:
-  default: SIMULATION_JOURNEY_STATUS_UNSPECIFIED
+apiSimulationEpisodeStatus:
+  default: SIMULATION_EPISODE_STATUS_UNSPECIFIED
   description: |-
-    Lifecycle status of a single journey.
+    Lifecycle status of a single episode.
 
-     - SIMULATION_JOURNEY_STATUS_RUNNING: The journey is executing and a trajectory is available to retrieve.
-     - SIMULATION_JOURNEY_STATUS_FINISHED: The journey reached a stop condition and produced a verdict.
-     - SIMULATION_JOURNEY_STATUS_FAILED: The journey failed because of a cancel, timeout, or error.
-     - SIMULATION_JOURNEY_STATUS_PREPARING: The journey is allocated but its trajectory is not available yet.
+     - SIMULATION_EPISODE_STATUS_RUNNING: The episode is executing and a trajectory is available to retrieve.
+     - SIMULATION_EPISODE_STATUS_FINISHED: The episode reached a stop condition and produced a verdict.
+     - SIMULATION_EPISODE_STATUS_FAILED: The episode failed because of a cancel, timeout, or error.
+     - SIMULATION_EPISODE_STATUS_PREPARING: The episode is allocated but its trajectory is not available yet.
   enum:
-  - SIMULATION_JOURNEY_STATUS_UNSPECIFIED
-  - SIMULATION_JOURNEY_STATUS_RUNNING
-  - SIMULATION_JOURNEY_STATUS_FINISHED
-  - SIMULATION_JOURNEY_STATUS_FAILED
-  - SIMULATION_JOURNEY_STATUS_PREPARING
-  example: SIMULATION_JOURNEY_STATUS_UNSPECIFIED
+  - SIMULATION_EPISODE_STATUS_UNSPECIFIED
+  - SIMULATION_EPISODE_STATUS_RUNNING
+  - SIMULATION_EPISODE_STATUS_FINISHED
+  - SIMULATION_EPISODE_STATUS_FAILED
+  - SIMULATION_EPISODE_STATUS_PREPARING
+  example: SIMULATION_EPISODE_STATUS_UNSPECIFIED
   type: string
-apiSimulationJourneyVerdict:
-  default: SIMULATION_JOURNEY_VERDICT_UNSPECIFIED
+apiSimulationEpisodeVerdict:
+  default: SIMULATION_EPISODE_VERDICT_UNSPECIFIED
   description: |-
-    The judge's verdict for a journey.
+    The judge's verdict for an episode.
 
-     - SIMULATION_JOURNEY_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria.
-     - SIMULATION_JOURNEY_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria.
-     - SIMULATION_JOURNEY_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
+     - SIMULATION_EPISODE_VERDICT_SUCCESS: The candidate agent satisfied the scenario's stopping criteria.
+     - SIMULATION_EPISODE_VERDICT_FAILURE: The candidate agent did not satisfy the stopping criteria.
+     - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE: No conclusive verdict (e.g. max_turns reached without the judge finishing).
   enum:
-  - SIMULATION_JOURNEY_VERDICT_UNSPECIFIED
-  - SIMULATION_JOURNEY_VERDICT_SUCCESS
-  - SIMULATION_JOURNEY_VERDICT_FAILURE
-  - SIMULATION_JOURNEY_VERDICT_INCONCLUSIVE
-  example: SIMULATION_JOURNEY_VERDICT_UNSPECIFIED
+  - SIMULATION_EPISODE_VERDICT_UNSPECIFIED
+  - SIMULATION_EPISODE_VERDICT_SUCCESS
+  - SIMULATION_EPISODE_VERDICT_FAILURE
+  - SIMULATION_EPISODE_VERDICT_INCONCLUSIVE
+  example: SIMULATION_EPISODE_VERDICT_UNSPECIFIED
   type: string
 apiSimulationRun:
   description: One execution of a scenario set against a candidate agent.
@@ -8836,7 +9033,7 @@ apiSimulationRun:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     exploration_budget:
-      description: Optional run-level journeys-per-scenario override. When set, overrides
+      description: Optional run-level episodes-per-scenario override. When set, overrides
         each scenario's exploration_budget.
       example: 123
       format: int64
@@ -8845,8 +9042,8 @@ apiSimulationRun:
       description: Human-readable explanation of a terminal FAILED status. Empty otherwise.
       example: example string
       type: string
-    journeys_finished:
-      description: Number of journeys that have finished (successfully or not).
+    episodes_finished:
+      description: Number of episodes that have finished (successfully or not).
       example: 123
       format: int64
       type: integer
@@ -8885,8 +9082,8 @@ apiSimulationRun:
       type: string
     status:
       $ref: '#/apiSimulationRunStatus'
-    total_journeys:
-      description: Total number of journeys (sum of exploration budgets).
+    total_episodes:
+      description: Total number of episodes (sum of exploration budgets).
       example: 123
       format: int64
       type: integer
@@ -8925,7 +9122,7 @@ apiSimulationRunResultSummary:
       format: uint64
       type: string
     verdict_counts:
-      $ref: '#/apiSimulationJourneyCounts'
+      $ref: '#/apiSimulationEpisodeCounts'
   type: object
 apiSimulationRunSortField:
   default: SIMULATION_RUN_SORT_FIELD_UNSPECIFIED
@@ -8950,11 +9147,11 @@ apiSimulationRunStatus:
     Lifecycle status of a simulation run.
 
      - SIMULATION_RUN_STATUS_PENDING: Accepted and queued, not yet executing.
-     - SIMULATION_RUN_STATUS_RUNNING: Journeys are executing.
-     - SIMULATION_RUN_STATUS_SUCCEEDED: All journeys finished successfully.
+     - SIMULATION_RUN_STATUS_RUNNING: Episodes are executing.
+     - SIMULATION_RUN_STATUS_SUCCEEDED: All episodes finished successfully.
      - SIMULATION_RUN_STATUS_FAILED: The run failed, for example because of a timeout or workflow error.
      - SIMULATION_RUN_STATUS_CANCELLED: The run was cancelled.
-     - SIMULATION_RUN_STATUS_EVALUATING: Journeys finished and an attached evaluation is running. Only reachable
+     - SIMULATION_RUN_STATUS_EVALUATING: Episodes finished and an attached evaluation is running. Only reachable
     when the create request included evaluation_config. When the evaluation
     reaches a terminal status, its outcome is reflected in the simulation run
     status.
@@ -8973,11 +9170,11 @@ apiSimulationRunStatus:
   type: string
 apiSimulationScenarioResult:
   description: |-
-    Per-scenario rollup of journey outcomes within a run, aggregated from the
-    run's journey rows.
+    Per-scenario rollup of episode outcomes within a run, aggregated from the
+    run's episode rows.
   properties:
-    journeys_finished:
-      description: Journeys that have finished (successfully or not).
+    episodes_finished:
+      description: Episodes that have finished (successfully or not).
       example: 123
       format: int64
       type: integer
@@ -8985,16 +9182,16 @@ apiSimulationScenarioResult:
       description: UUID of the scenario.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
-    total_journeys:
-      description: Total journeys for this scenario (its exploration budget).
+    total_episodes:
+      description: Total episodes for this scenario (its exploration budget).
       example: 123
       format: int64
       type: integer
     verdict_counts:
-      $ref: '#/apiSimulationJourneyCounts'
+      $ref: '#/apiSimulationEpisodeCounts'
   type: object
 apiSimulationTokenUsage:
-  description: Per-actor token accounting for a run or journey.
+  description: Per-actor token accounting for a run or episode.
   properties:
     candidate_agent_tokens:
       description: Tokens consumed by the candidate agent.
@@ -9023,11 +9220,11 @@ apiSimulationTokenUsage:
       type: string
   type: object
 apiSimulationTrajectory:
-  description: Turn-by-turn trajectory for one journey. Poll this resource while
-    the journey is running to watch live progress.
+  description: Turn-by-turn trajectory for one episode. Poll this resource while
+    the episode is running to watch live progress.
   properties:
     agent_id:
-      description: Identifier of the candidate agent under test for this journey.
+      description: Identifier of the candidate agent under test for this episode.
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     completed_at:
@@ -9047,18 +9244,18 @@ apiSimulationTrajectory:
     failure_reason:
       example: example string
       type: string
-    journey_index:
+    episode_index:
       example: 123
       format: int64
       type: integer
-    journey_uuid:
+    episode_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
     judge:
       $ref: '#/apiSimulationTrajectoryJudgeResult'
     max_turns:
       description: |-
-        Turn budget configured for this journey (per-scenario max_turns, after
+        Turn budget configured for this episode (per-scenario max_turns, after
         any run-level override). Compare with turn_count to see how many of the
         budgeted turns actually ran.
       example: 123
@@ -9089,7 +9286,7 @@ apiSimulationTrajectory:
       format: int64
       type: integer
     verdict:
-      $ref: '#/apiSimulationJourneyVerdict'
+      $ref: '#/apiSimulationEpisodeVerdict'
   type: object
 apiSimulationTrajectoryJudgeCriterion:
   description: Per-criterion judge evaluation recorded in the trajectory JSON.
@@ -9115,7 +9312,7 @@ apiSimulationTrajectoryJudgeResult:
       example: example string
       type: string
     verdict:
-      $ref: '#/apiSimulationJourneyVerdict'
+      $ref: '#/apiSimulationEpisodeVerdict'
   type: object
 apiSimulationTrajectoryMessage:
   description: One user or assistant message in the turn-by-turn conversation view.
@@ -9165,13 +9362,13 @@ apiSimulationTrajectoryMessageTokens:
 apiSimulationTrajectoryStatus:
   default: SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED
   description: |-
-    Lifecycle status of the trajectory. Distinct from journey status: the
-    trajectory is updated on every turn while the journey is executing.
+    Lifecycle status of the trajectory. Distinct from episode status: the
+    trajectory is updated on every turn while the episode is executing.
 
-     - SIMULATION_TRAJECTORY_STATUS_RUNNING: The journey loop is in progress; messages may grow on each poll.
-     - SIMULATION_TRAJECTORY_STATUS_COMPLETED: The journey reached a stop condition and the trajectory is complete.
-     - SIMULATION_TRAJECTORY_STATUS_FAILED: The journey failed before or during execution.
-     - SIMULATION_TRAJECTORY_STATUS_CANCELLED: The journey was cancelled.
+     - SIMULATION_TRAJECTORY_STATUS_RUNNING: The episode loop is in progress; messages may grow on each poll.
+     - SIMULATION_TRAJECTORY_STATUS_COMPLETED: The episode reached a stop condition and the trajectory is complete.
+     - SIMULATION_TRAJECTORY_STATUS_FAILED: The episode failed before or during execution.
+     - SIMULATION_TRAJECTORY_STATUS_CANCELLED: The episode was cancelled.
   enum:
   - SIMULATION_TRAJECTORY_STATUS_UNSPECIFIED
   - SIMULATION_TRAJECTORY_STATUS_RUNNING

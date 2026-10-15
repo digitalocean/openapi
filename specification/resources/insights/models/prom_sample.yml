@@ -1,0 +1,13 @@
+type: array
+description: >-
+  A Prometheus sample as `[timestamp_seconds, value]`. The timestamp is a
+  UNIX epoch float; the value is a string.
+minItems: 2
+maxItems: 2
+items:
+  oneOf:
+    - type: number
+    - type: string
+example:
+  - 1620683817.0
+  - "1"

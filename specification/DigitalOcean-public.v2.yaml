@@ -62,8 +62,50 @@ tags:
 
   - name: Action Gateway
     description: |-
-      Discover Action Gateway tools and providers, manage versioned toolbelts and
-      OAuth connections, and create policy-bound sessions for end users.
+      Action Gateway gives AI agents governed access to tools over the Model
+      Context Protocol (MCP). The `/v2/action-gateway` endpoints manage the
+      tool catalog and the resources that control how agents use it:
+
+      - **Tools** browse and search the catalog, its providers, and global
+        provider and tool health.
+      - **Toolbelts** are versioned, team-owned sets of tools that sessions
+        and policies reference as `toolbelt:<name>@<version>`.
+      - **Output views** reshape a tool's output before it reaches the agent.
+      - **MCP servers** register your own remote MCP servers and choose which
+        of their tools to enable.
+      - **Connections** authorize one of your end users to use a provider's
+        tools, for example through OAuth.
+      - **Sessions** bind a tool selection and permission policy to an MCP URL
+        that an agent connects to.
+      - **Users** and **end user limits** show and limit activity per end
+        user, identified by a session's `actorId`.
+
+  - name: Agent Platform API
+    description: |-
+      The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+
+  - name: Harness Runtime
+    description: |-
+      DigitalOcean Harness Runtime API under `/v2/agents`. An environment is a
+      reusable configuration that defines what an agent needs to do work; starting
+      a session from an environment provisions an isolated sandbox. Define an
+      environment with a YAML environment spec, or save it as an Environment Config
+      and create sessions from `{name, config_id}`.
+
+      Environment Configs (`/v2/agents/configs`) are immutable team-scoped
+      configurations. Soft-delete releases the active name while keeping
+      `config_id` resolvable for existing sessions; clone copies a sanitized
+      environment under a new name (credentials are never copied).
+
+      Checkpoints capture live sandbox machine state for fork and in-place
+      rollback. Templates (`/v2/agents/templates`) manage team custom sandbox
+      templates and their build history.
+
+      Triggers (`/v2/agents/triggers`) fire an agent run on a webhook delivery or
+      cron schedule, each firing recorded as an execution. The session event feed
+      (`GET /v2/agents/sessions/{session_id}/events`) is a Server-Sent Events
+      stream, and port-forward (`GET /v2/agents/sessions/{session_id}/port-forward/{port}`)
+      opens a WebSocket tunnel to a guest port.
 
   - name: Apps
     description: |-
@@ -355,10 +397,6 @@ tags:
 
       The Serverless Functions API currently only supports creating and managing namespaces.
 
-  - name: GradientAI Platform
-    description: |-
-      The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
-
   - name: Image Actions
     description: |-
       Image actions are commands that can be given to a DigitalOcean image. In
@@ -395,6 +433,14 @@ tags:
       To interact with images, you will generally send requests to the images
       endpoint at /v2/images.
 
+  - name: Insights
+    description: |-
+      The DigitalOcean Insights API provides observability resources for
+      monitoring your infrastructure, including alert rules that evaluate
+      metrics, notification channels that deliver alert events, read-only
+      alert instances that record when alert rules fire, and PromQL and logs
+      query interfaces.
+
   - name: Kubernetes
     description: |-
       [DigitalOcean Kubernetes](https://docs.digitalocean.com/products/kubernetes/)
@@ -411,6 +457,21 @@ tags:
       requests to the `/v2/load_balancers` endpoint, you can list, create, or
       delete load balancers as well as add or remove Droplets, forwarding rules,
       and other configuration details.
+
+  - name: MicroVMs [Public Preview]
+    description: |-
+      [DigitalOcean MicroVMs](https://docs.digitalocean.com/products/microvms/)
+      are lightweight virtual machines that run a `linux/amd64` container image
+      in an isolated kernel. A MicroVM pauses automatically when it is idle and
+      resumes on the next HTTP request, command, or console session, with its
+      memory, files, and processes intact. By sending requests to the
+      `/v2/microvms` endpoints, you can create, list, pause, resume, and delete
+      MicroVMs, run commands and open a console in them, and create checkpoints
+      to start new MicroVMs from a saved state.
+
+      Each MicroVM serves its HTTP port at
+      `https://{microvm_id}.{region}.microvm.ondigitalocean.com`. Requests to
+      that endpoint require a token with the `microvm:access` scope.
 
   - name: Monitoring
     description: |-
@@ -554,6 +615,23 @@ tags:
     description: |-
       Security CSPM endpoints for scans, scan findings, and settings.
 
+  - name: Signals
+    description: |-
+      The DigitalOcean Signals API provides observability for environment
+      conversations, such as Harness Runtime conversations and Serverless
+      Inference chat completions, detecting behavioral signals such as
+      user disengagement, execution failures, and satisfaction indicators.
+
+      Use the consent endpoints to manage whether signals collection is
+      enabled — per environment for Harness Runtime (`source=agent`) and per team
+      for Serverless Inference chat completions (`source=inference`) — the
+      session endpoints to browse conversations and their detected signals,
+      the export endpoints to create downloadable archives of signals data
+      for offline analysis, and the deletion endpoints to permanently delete
+      Signals conversations for an environment or Serverless Inference
+      conversations for a whole team (aggregated Insights or metrics
+      summaries may still remain).
+
   - name: Sizes
     description: |-
       The sizes objects represent different packages of hardware resources that
@@ -655,7 +733,7 @@ tags:
 
   - name: Serverless Inference
     description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows access to serverless inference models.
+      DigitalOcean Inference allows access to serverless inference models.
       You can access models by providing an inference key.
 
       **Note:** The Serverless Inference API uses a separate base URL (`https://inference.do-ai.run`)
@@ -663,7 +741,7 @@ tags:
 
   - name: Agent Inference
     description: |-
-      DigitalOcean Gradient™ AI Agentic Cloud allows you to create multi-agent workflows
+      DigitalOcean Agent Platform allows you to create multi-agent workflows
       to power your AI applications. This allows developers to integrate agents into your
       AI applications.
 
@@ -692,6 +770,7 @@ x-tagGroups:
       - Actions
       - Add-Ons
       - Action Gateway
+      - Agent Platform API
       - Apps
       - Billing
       - Block Storage
@@ -712,11 +791,13 @@ x-tagGroups:
       - Floating IP Actions
       - Floating IPs
       - Functions
-      - GradientAI Platform
+      - Harness Runtime
       - Image Actions
       - Images
+      - Insights
       - Kubernetes
       - Load Balancers
+      - MicroVMs [Public Preview]
       - Monitoring
       - NFS
       - NFS Actions
@@ -730,6 +811,7 @@ x-tagGroups:
       - Reserved IPv6
       - Reserved IPv6 Actions
       - Security
+      - Signals
       - Sizes
       - Snapshots
       - Spaces Keys
@@ -751,33 +833,107 @@ x-tagGroups:
       - Serverless Inference
 
 paths:
-  /v2/action-gateway/tools:
+  /v2/action-gateway/actors/{actor_id}/limits:
     get:
-      $ref: "resources/action_gateway/tools_list.yml"
+      $ref: "resources/action_gateway/actorLimits_get.yml"
 
-  /v2/action-gateway/tools/toolkits:
-    get:
-      $ref: "resources/action_gateway/tools_list_toolkits.yml"
+  /v2/action-gateway/actors/{actor_id}/limits:clear:
+    post:
+      $ref: "resources/action_gateway/actorLimits_delete.yml"
 
-  /v2/action-gateway/tools/providers:
-    get:
-      $ref: "resources/action_gateway/tools_list_providers.yml"
+  /v2/action-gateway/actors/{actor_id}/limits:set:
+    post:
+      $ref: "resources/action_gateway/actorLimits_update.yml"
 
-  /v2/action-gateway/tools/{name}/definition:
+  /v2/action-gateway/connections:
+    post:
+      $ref: "resources/action_gateway/connections_create.yml"
     get:
-      $ref: "resources/action_gateway/tools_get_definition.yml"
+      $ref: "resources/action_gateway/connections_list.yml"
+
+  /v2/action-gateway/connections/{id}:
+    get:
+      $ref: "resources/action_gateway/connections_get.yml"
+    delete:
+      $ref: "resources/action_gateway/connections_delete.yml"
+
+  /v2/action-gateway/mcp-servers:
+    post:
+      $ref: "resources/action_gateway/mcpServers_create.yml"
+    get:
+      $ref: "resources/action_gateway/mcpServers_list.yml"
+
+  /v2/action-gateway/mcp-servers/{server_ref}:
+    get:
+      $ref: "resources/action_gateway/mcpServers_get.yml"
+    patch:
+      $ref: "resources/action_gateway/mcpServers_patch.yml"
+    delete:
+      $ref: "resources/action_gateway/mcpServers_delete.yml"
+
+  /v2/action-gateway/mcp-servers/{server_ref}/resync:
+    post:
+      $ref: "resources/action_gateway/mcpServers_run_resync.yml"
+
+  /v2/action-gateway/mcp-servers/{server_ref}/tools:
+    get:
+      $ref: "resources/action_gateway/mcpServers_list_tools.yml"
+    put:
+      $ref: "resources/action_gateway/mcpServers_update_tools.yml"
+
+  /v2/action-gateway/output-views:
+    post:
+      $ref: "resources/action_gateway/outputViews_create.yml"
+    get:
+      $ref: "resources/action_gateway/outputViews_list.yml"
+
+  /v2/action-gateway/output-views/preview:
+    post:
+      $ref: "resources/action_gateway/outputViews_validate.yml"
+
+  /v2/action-gateway/output-views/{view_id}:
+    get:
+      $ref: "resources/action_gateway/outputViews_get.yml"
+    delete:
+      $ref: "resources/action_gateway/outputViews_delete.yml"
+
+  /v2/action-gateway/sessions:
+    post:
+      $ref: "resources/action_gateway/sessions_create.yml"
+    get:
+      $ref: "resources/action_gateway/sessions_list.yml"
+
+  /v2/action-gateway/sessions/search:
+    get:
+      $ref: "resources/action_gateway/sessions_list_search.yml"
+
+  /v2/action-gateway/sessions/{session_urn}:
+    delete:
+      $ref: "resources/action_gateway/sessions_delete.yml"
 
   /v2/action-gateway/toolbelts:
-    get:
-      $ref: "resources/action_gateway/toolbelts_list.yml"
     post:
       $ref: "resources/action_gateway/toolbelts_create.yml"
+    get:
+      $ref: "resources/action_gateway/toolbelts_list.yml"
+
+  /v2/action-gateway/toolbelts/search:
+    get:
+      $ref: "resources/action_gateway/toolbelts_list_search.yml"
 
   /v2/action-gateway/toolbelts/{name}:
     get:
       $ref: "resources/action_gateway/toolbelts_get.yml"
     delete:
       $ref: "resources/action_gateway/toolbelts_delete.yml"
+
+  /v2/action-gateway/toolbelts/{name}/providers:
+    get:
+      $ref: "resources/action_gateway/toolbelts_list_providers.yml"
+
+  /v2/action-gateway/toolbelts/{name}/providers/{provider}/tools:
+    get:
+      $ref: "resources/action_gateway/toolbelts_list_provider_tools.yml"
 
   /v2/action-gateway/toolbelts/{name}/tools/add:
     post:
@@ -787,19 +943,37 @@ paths:
     post:
       $ref: "resources/action_gateway/toolbelts_remove_tools.yml"
 
-  /v2/action-gateway/connections:
+  /v2/action-gateway/tools:
     get:
-      $ref: "resources/action_gateway/connections_list.yml"
-    post:
-      $ref: "resources/action_gateway/connections_create.yml"
+      $ref: "resources/action_gateway/tools_list.yml"
 
-  /v2/action-gateway/connections/{id}:
+  /v2/action-gateway/tools/health:
     get:
-      $ref: "resources/action_gateway/connections_get.yml"
-    patch:
-      $ref: "resources/action_gateway/connections_update.yml"
-    delete:
-      $ref: "resources/action_gateway/connections_delete.yml"
+      $ref: "resources/action_gateway/tools_list_health.yml"
+
+  /v2/action-gateway/tools/health/providers:
+    get:
+      $ref: "resources/action_gateway/tools_list_health_providers.yml"
+
+  /v2/action-gateway/tools/health/tools/{tool_slug}:
+    get:
+      $ref: "resources/action_gateway/tools_get_health.yml"
+
+  /v2/action-gateway/tools/providers:
+    get:
+      $ref: "resources/action_gateway/tools_list_providers.yml"
+
+  /v2/action-gateway/tools/providers/search:
+    get:
+      $ref: "resources/action_gateway/tools_list_search_providers.yml"
+
+  /v2/action-gateway/tools/search:
+    get:
+      $ref: "resources/action_gateway/tools_list_search.yml"
+
+  /v2/action-gateway/tools/toolkits:
+    get:
+      $ref: "resources/action_gateway/tools_list_toolkits.yml"
 
   /v2/action-gateway/users:
     get:
@@ -808,16 +982,6 @@ paths:
   /v2/action-gateway/users/{user_id}:
     get:
       $ref: "resources/action_gateway/users_get.yml"
-
-  /v2/action-gateway/sessions:
-    get:
-      $ref: "resources/action_gateway/sessions_list.yml"
-    post:
-      $ref: "resources/action_gateway/sessions_create.yml"
-
-  /v2/action-gateway/sessions/{session_urn}:
-    delete:
-      $ref: "resources/action_gateway/sessions_delete.yml"
 
   /v2/1-clicks:
     get:
@@ -881,6 +1045,156 @@ paths:
   /v2/add-ons/saas/{resource_uuid}/plan:
     patch:
       $ref: "resources/addons/addons_update_plan.yml"
+
+  /v2/agents/configs:
+    get:
+      $ref: "resources/agents/agents_list_configs.yml"
+    post:
+      $ref: "resources/agents/agents_create_config.yml"
+  /v2/agents/configs/{config_id}:
+    get:
+      $ref: "resources/agents/agents_get_config.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_config.yml"
+  /v2/agents/configs/{config_id}/clone:
+    post:
+      $ref: "resources/agents/agents_create_config_clone.yml"
+  /v2/agents/configs/{config_id}/sessions:
+    get:
+      $ref: "resources/agents/agents_list_config_sessions.yml"
+  /v2/agents/sessions:
+    get:
+      $ref: "resources/agents/agents_list_sessions.yml"
+    post:
+      $ref: "resources/agents/agents_create_session.yml"
+  /v2/agents/sessions/policy/validate:
+    post:
+      $ref: "resources/agents/agents_validate_session_policy.yml"
+  /v2/agents/sessions/sandbox/sizes:
+    get:
+      $ref: "resources/agents/agents_list_session_sandbox_sizes.yml"
+  /v2/agents/sessions/{session_id}:
+    delete:
+      $ref: "resources/agents/agents_delete_session.yml"
+    get:
+      $ref: "resources/agents/agents_get_session.yml"
+    patch:
+      $ref: "resources/agents/agents_update_session.yml"
+  /v2/agents/sessions/{session_id}/checkpoints:
+    get:
+      $ref: "resources/agents/agents_list_session_checkpoints.yml"
+    post:
+      $ref: "resources/agents/agents_create_session_checkpoint.yml"
+  /v2/agents/sessions/{session_id}/checkpoints/{checkpoint_id}:
+    get:
+      $ref: "resources/agents/agents_get_session_checkpoint.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_session_checkpoint.yml"
+  /v2/agents/sessions/{session_id}/checkpoints/{checkpoint_id}/rollback:
+    post:
+      $ref: "resources/agents/agents_revert_session_checkpoint.yml"
+  /v2/agents/sessions/{session_id}/fork:
+    post:
+      $ref: "resources/agents/agents_create_session_fork.yml"
+  /v2/agents/sessions/{session_id}/hitl/{request_id}:
+    post:
+      $ref: "resources/agents/agents_post_session_hitl.yml"
+  /v2/agents/sessions/{session_id}/input:
+    post:
+      $ref: "resources/agents/agents_create_session_input.yml"
+  /v2/agents/sessions/{session_id}/pause:
+    post:
+      $ref: "resources/agents/agents_post_session_pause.yml"
+  /v2/agents/sessions/{session_id}/resume:
+    post:
+      $ref: "resources/agents/agents_post_session_resume.yml"
+  /v2/agents/sessions/{session_id}/sandbox/exec:
+    post:
+      $ref: "resources/agents/agents_post_session_sandbox_exec.yml"
+  /v2/agents/sessions/{session_id}/workspace/download:
+    get:
+      $ref: "resources/agents/agents_get_session_workspace_download.yml"
+  /v2/agents/sessions/{session_id}/workspace/transfers:
+    post:
+      $ref: "resources/agents/agents_create_session_workspace_transfer.yml"
+  /v2/agents/sessions/{session_id}/workspace/transfers/{transfer_id}:
+    get:
+      $ref: "resources/agents/agents_get_session_workspace_transfer.yml"
+  /v2/agents/sessions/{session_id}/workspace/transfers/{transfer_id}/cancel:
+    post:
+      $ref: "resources/agents/agents_cancel_session_workspace_transfer.yml"
+  /v2/agents/sessions/{session_id}/workspace/transfers/{transfer_id}/commit:
+    post:
+      $ref: "resources/agents/agents_commit_session_workspace_transfer.yml"
+  /v2/agents/sessions/{session_id}/workspace/transfers/{transfer_id}/part-upload-urls:
+    post:
+      $ref: "resources/agents/agents_create_session_workspace_part_upload_urls.yml"
+  /v2/agents/sessions/{session_id}/workspace/upload:
+    post:
+      $ref: "resources/agents/agents_create_session_workspace_upload.yml"
+  /v2/agents/sessions/{session_id}/events:
+    get:
+      $ref: "resources/agents/agents_stream_session_events.yml"
+  /v2/agents/sessions/{session_id}/port-forward/{port}:
+    get:
+      $ref: "resources/agents/agents_port_forward_session.yml"
+  /v2/agents/sessions/{session_id}/ingress:
+    get:
+      $ref: "resources/agents/agents_get_session_ingress.yml"
+  /v2/agents/templates:
+    get:
+      $ref: "resources/agents/agents_list_templates.yml"
+    post:
+      $ref: "resources/agents/agents_create_template.yml"
+  /v2/agents/templates/{template_id}:
+    get:
+      $ref: "resources/agents/agents_get_template.yml"
+    put:
+      $ref: "resources/agents/agents_update_template.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_template.yml"
+  /v2/agents/templates/{template_id}/builds:
+    get:
+      $ref: "resources/agents/agents_list_template_builds.yml"
+  /v2/agents/templates/{template_id}/builds/{build_id}:
+    get:
+      $ref: "resources/agents/agents_get_template_build.yml"
+  /v2/agents/triggers:
+    get:
+      $ref: "resources/agents/agents_list_triggers.yml"
+    post:
+      $ref: "resources/agents/agents_create_trigger.yml"
+  /v2/agents/triggers/by-session/{session_id}:
+    get:
+      $ref: "resources/agents/agents_get_trigger_by_session.yml"
+  /v2/agents/triggers/reusable-sessions:
+    get:
+      $ref: "resources/agents/agents_list_reusable_sessions.yml"
+  /v2/agents/triggers/{trigger_id}:
+    get:
+      $ref: "resources/agents/agents_get_trigger.yml"
+    patch:
+      $ref: "resources/agents/agents_update_trigger.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_trigger.yml"
+  /v2/agents/triggers/{trigger_id}/executions:
+    get:
+      $ref: "resources/agents/agents_list_trigger_executions.yml"
+  /v2/agents/triggers/{trigger_id}/executions/{execution_id}:
+    get:
+      $ref: "resources/agents/agents_get_trigger_execution.yml"
+  /v2/agents/triggers/{trigger_id}/executions/{execution_id}/cancel:
+    post:
+      $ref: "resources/agents/agents_cancel_trigger_execution.yml"
+  /v2/agents/triggers/{trigger_id}/rotate-secret:
+    post:
+      $ref: "resources/agents/agents_rotate_trigger_secret.yml"
+  /v2/agents/triggers/{trigger_id}/webhook:
+    post:
+      $ref: "resources/agents/agents_receive_trigger_webhook.yml"
+  /v2/agents/webhook-providers:
+    get:
+      $ref: "resources/agents/agents_list_webhook_providers.yml"
 
   /v2/apps:
     get:
@@ -1647,6 +1961,144 @@ paths:
     get:
       $ref: "resources/images/imageActions_get.yml"
 
+  /v2/insights/alert-instances:
+    get:
+      $ref: "resources/insights/insights_list_alertInstances.yml"
+
+  /v2/insights/alert-instances/{id}:
+    get:
+      $ref: "resources/insights/insights_get_alertInstance.yml"
+
+  /v2/insights/alert-rules:
+    get:
+      $ref: "resources/insights/insights_list_alertRules.yml"
+
+    post:
+      $ref: "resources/insights/insights_create_alertRule.yml"
+
+  /v2/insights/alert-rules/{id}:
+    get:
+      $ref: "resources/insights/insights_get_alertRule.yml"
+
+    put:
+      $ref: "resources/insights/insights_update_alertRule.yml"
+
+    delete:
+      $ref: "resources/insights/insights_delete_alertRule.yml"
+
+  /v2/insights/notification-channels:
+    get:
+      $ref: "resources/insights/insights_list_notificationChannels.yml"
+
+    post:
+      $ref: "resources/insights/insights_create_notificationChannel.yml"
+
+  /v2/insights/notification-channels/{id}:
+    get:
+      $ref: "resources/insights/insights_get_notificationChannel.yml"
+
+    put:
+      $ref: "resources/insights/insights_update_notificationChannel.yml"
+
+    delete:
+      $ref: "resources/insights/insights_delete_notificationChannel.yml"
+
+  /v2/insights/query/{region}/prom/api/v1/query:
+    get:
+      $ref: "resources/insights/insights_get_promQuery.yml"
+    post:
+      $ref: "resources/insights/insights_post_promQuery.yml"
+
+  /v2/insights/query/{region}/prom/api/v1/query_range:
+    get:
+      $ref: "resources/insights/insights_get_promQueryRange.yml"
+    post:
+      $ref: "resources/insights/insights_post_promQueryRange.yml"
+
+  /v2/insights/query/{region}/prom/api/v1/labels:
+    get:
+      $ref: "resources/insights/insights_get_promLabels.yml"
+    post:
+      $ref: "resources/insights/insights_post_promLabels.yml"
+
+  /v2/insights/query/{region}/prom/api/v1/label/{name}/values:
+    get:
+      $ref: "resources/insights/insights_get_promLabelValues.yml"
+
+  /v2/insights/query/{region}/prom/api/v1/series:
+    get:
+      $ref: "resources/insights/insights_get_promSeries.yml"
+    post:
+      $ref: "resources/insights/insights_post_promSeries.yml"
+
+  /v2/insights/query/{region}/logs/search:
+    post:
+      $ref: "resources/insights/insights_post_logsSearch.yml"
+
+  /v2/insights/query/{region}/traces/search:
+    post:
+      $ref: "resources/insights/insights_post_tracesSearch.yml"
+
+  /v2/insights/query/{region}/traces/{trace_id}:
+    get:
+      $ref: "resources/insights/insights_get_trace.yml"
+
+  /v2/insights/query/{region}/spans/search:
+    post:
+      $ref: "resources/insights/insights_post_spansSearch.yml"
+
+  /v1/consent:
+    get:
+      $ref: "resources/signals/signals_list_consents.yml"
+
+    put:
+      $ref: "resources/signals/signals_update_team_consent.yml"
+
+  /v1/consent/{agent_id}:
+    get:
+      $ref: "resources/signals/signals_get_consent.yml"
+
+    put:
+      $ref: "resources/signals/signals_update_consent.yml"
+
+  /v1/signals/agents/{agent_id}/sessions:
+    get:
+      $ref: "resources/signals/signals_list_sessions.yml"
+
+  /v1/signals/sessions/{session_id}/dialogues:
+    get:
+      $ref: "resources/signals/signals_list_dialogues.yml"
+
+  /v1/signals/exports:
+    get:
+      $ref: "resources/signals/signals_list_exports.yml"
+
+    post:
+      $ref: "resources/signals/signals_create_export.yml"
+
+  /v1/signals/exports/options:
+    get:
+      $ref: "resources/signals/signals_get_export_options.yml"
+
+  /v1/signals/exports/{export_id}:
+    get:
+      $ref: "resources/signals/signals_get_export.yml"
+
+  /v1/signals/exports/{export_id}/download:
+    get:
+      $ref: "resources/signals/signals_get_export_download.yml"
+
+  /v1/signals/deletions:
+    get:
+      $ref: "resources/signals/signals_list_deletions.yml"
+
+    post:
+      $ref: "resources/signals/signals_create_deletion.yml"
+
+  /v1/signals/deletions/{deletion_id}:
+    get:
+      $ref: "resources/signals/signals_get_deletion.yml"
+
   /v2/kubernetes/clusters:
     get:
       $ref: "resources/kubernetes/kubernetes_list_clusters.yml"
@@ -1784,6 +2236,55 @@ paths:
 
     delete:
       $ref: "resources/load_balancers/loadBalancers_remove_forwardingRules.yml"
+
+  /v2/microvms:
+    get:
+      $ref: "resources/microvms/microvms_list.yml"
+
+    post:
+      $ref: "resources/microvms/microvms_create.yml"
+
+  /v2/microvms/options:
+    get:
+      $ref: "resources/microvms/microvms_options.yml"
+
+  /v2/microvms/checkpoints:
+    get:
+      $ref: "resources/microvms/microvms_checkpoints_list.yml"
+
+  /v2/microvms/checkpoints/{checkpoint_id}:
+    get:
+      $ref: "resources/microvms/microvms_checkpoints_get.yml"
+
+    delete:
+      $ref: "resources/microvms/microvms_checkpoints_delete.yml"
+
+  /v2/microvms/{microvm_id}:
+    get:
+      $ref: "resources/microvms/microvms_get.yml"
+
+    delete:
+      $ref: "resources/microvms/microvms_delete.yml"
+
+  /v2/microvms/{microvm_id}/pause:
+    post:
+      $ref: "resources/microvms/microvms_pause.yml"
+
+  /v2/microvms/{microvm_id}/resume:
+    post:
+      $ref: "resources/microvms/microvms_resume.yml"
+
+  /v2/microvms/{microvm_id}/exec:
+    post:
+      $ref: "resources/microvms/microvms_exec.yml"
+
+  /v2/microvms/{microvm_id}/console:
+    get:
+      $ref: "resources/microvms/microvms_console.yml"
+
+  /v2/microvms/{microvm_id}/checkpoints:
+    post:
+      $ref: "resources/microvms/microvms_checkpoints_create.yml"
 
   /v2/monitoring/alerts:
     get:
@@ -3308,24 +3809,24 @@ paths:
       $ref: 'resources/gen-ai/genai_cancel_simulation_run.yml'
 
 
-  /v2/gen-ai/simulation_runs/{run_uuid}/journeys:
+  /v2/gen-ai/simulation_runs/{run_uuid}/episodes:
     get:
-      $ref: 'resources/gen-ai/genai_list_simulation_journeys.yml'
+      $ref: 'resources/gen-ai/genai_list_simulation_episodes.yml'
 
 
-  /v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}:
+  /v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}:
     get:
-      $ref: 'resources/gen-ai/genai_get_simulation_journey.yml'
+      $ref: 'resources/gen-ai/genai_get_simulation_episode.yml'
 
 
-  /v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory:
+  /v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory:
     get:
-      $ref: 'resources/gen-ai/genai_get_simulation_journey_trajectory.yml'
+      $ref: 'resources/gen-ai/genai_get_simulation_episode_trajectory.yml'
 
 
-  /v2/gen-ai/simulation_runs/{run_uuid}/journeys/{journey_uuid}/trajectory_url:
+  /v2/gen-ai/simulation_runs/{run_uuid}/episodes/{episode_uuid}/trajectory_url:
     get:
-      $ref: 'resources/gen-ai/genai_get_simulation_journey_trajectory_url.yml'
+      $ref: 'resources/gen-ai/genai_get_simulation_episode_trajectory_url.yml'
 
 
   /v2/gen-ai/workspaces:
@@ -3383,6 +3884,10 @@ paths:
   /v1/models:
     get:
       $ref: 'resources/inference/inference_list_models.yml'
+
+  /v1/systemone:
+    post:
+      $ref: 'resources/inference/inference_create_systemone.yml'
 
   /v1/responses:
     post:

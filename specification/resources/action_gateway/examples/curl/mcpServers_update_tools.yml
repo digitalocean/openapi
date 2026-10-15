@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X PUT \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"enabledToolSlugs":["docs_get_page"]}' \
+    "https://api.digitalocean.com/v2/action-gateway/mcp-servers/docs/tools"

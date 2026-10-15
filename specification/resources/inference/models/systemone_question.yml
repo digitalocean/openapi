@@ -1,0 +1,46 @@
+type: object
+description: >-
+  A single question to evaluate against the provided state. The `type` field
+  determines how `criteria` should be shaped and how the corresponding answer
+  is returned.
+required:
+  - type
+  - instructions
+properties:
+  type:
+    type: string
+    description: >-
+      Question discriminator. Use `noul` for a boolean-like true/false check,
+      `choice` to select one option from a fixed set, and `score` to rate
+      against an ordered rubric.
+    enum:
+      - noul
+      - choice
+      - score
+    example: choice
+  instructions:
+    description: >-
+      The prompt describing what the question is asking the model to
+      evaluate.
+    type: string
+    example: What is the overall sentiment of this feedback?
+  criteria:
+    description: >-
+      Optional criteria payload. The expected shape depends on `type`:
+      for `noul`, an optional object describing the true/false semantics;
+      for `choice`, an object mapping each option name to a description of
+      that option (minimum 2 options, maximum 255 options); for `score`, an
+      ordered array of descriptive rubric levels (minimum 2, maximum 10
+      levels). Score levels must be descriptive labels, such as
+      `["poor", "average", "excellent"]`, not numeric values.
+    oneOf:
+      - type: object
+        additionalProperties:
+          type: string
+      - type: array
+        items:
+          type: string
+    example:
+      positive: Customer is happy overall
+      negative: Customer is unhappy overall
+      mixed: Customer has both good and bad things to say

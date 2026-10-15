@@ -1,0 +1,21 @@
+type: object
+description: A reference to a logical field for filters, ordering, grouping, or facets.
+required:
+  - name
+properties:
+  name:
+    type: string
+    description: >-
+      The field name. Intrinsic columns include `timestamp`, `severity_text`,
+      `severity_number`, `body`, `trace_id`, `span_id`, and `trace_flags`.
+      The dotted shorthands `service.name`, `resource.type`, and `resource.urn`
+      are also supported. Arbitrary resource or log attributes can be accessed
+      with `ResourceAttributes['key']` or `LogAttributes['key']`.
+    example: service.name
+  scope:
+    type: string
+    description: The attribute scope to resolve the field against. Omit to let the server apply its default mapping for the field name.
+    enum:
+      - FIELD_SCOPE_RESOURCE
+      - FIELD_SCOPE_ATTRIBUTES
+    example: FIELD_SCOPE_RESOURCE

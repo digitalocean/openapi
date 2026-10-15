@@ -1,0 +1,26 @@
+type: object
+required:
+  - status
+  - errorType
+  - error
+properties:
+  status:
+    type: string
+    enum:
+      - error
+    example: error
+  errorType:
+    type: string
+    description: Prometheus error category.
+    enum:
+      - bad_data
+      - internal
+      - timeout
+      - canceled
+      - execution
+      - unavailable
+    example: bad_data
+  error:
+    type: string
+    description: Human-readable error message.
+    example: missing query parameter

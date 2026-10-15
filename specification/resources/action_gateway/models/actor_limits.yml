@@ -1,0 +1,94 @@
+limit_category:
+  type: string
+  enum:
+    - LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE
+    - LIMIT_CATEGORY_WEB_FETCH_REQUESTS_PER_MINUTE
+    - LIMIT_CATEGORY_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE
+    - LIMIT_CATEGORY_NON_NATIVE_TOOL_CALLS_REQUESTS_PER_MINUTE
+  example: LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE
+
+limit_override:
+  type: object
+  required:
+    - category
+    - requests_per_minute
+  properties:
+    category:
+      type: string
+      description: The category the limit applies to.
+      allOf:
+        - $ref: '#/limit_category'
+    requests_per_minute:
+      type: string
+      format: uint64
+      description: Calls allowed per minute. 0 blocks every call in the category.
+      example: '30'
+  description: Actor's limit for one category.
+
+tool_quotas:
+  type: object
+  description: Per-minute call limits by category.
+  properties:
+    web_search_requests_per_minute:
+      type: string
+      format: uint64
+      example: '30'
+      description: Calls per minute to the `exa_web_search` tool.
+    web_fetch_requests_per_minute:
+      type: string
+      format: uint64
+      example: '120'
+      description: Calls per minute to the `exa_web_fetch` tool.
+    native_tool_calls_requests_per_minute:
+      type: string
+      format: uint64
+      example: '600'
+      description: Calls per minute to DigitalOcean tools.
+    non_native_tool_calls_requests_per_minute:
+      type: string
+      format: uint64
+      example: '600'
+      description: Calls per minute to all other tools.
+
+get_actor_limits_response:
+  type: object
+  properties:
+    configured_limits:
+      type: array
+      description: Overrides set for the actor; categories without one are omitted.
+      items:
+        $ref: '#/limit_override'
+    effective_limits:
+      description: >-
+        Limits in effect for the actor in every category: the lower of your team's limit and the actor's override.
+      allOf:
+        - $ref: '#/tool_quotas'
+  description: Reports an actor's limits.
+
+set_actor_limits:
+  type: object
+  required:
+    - overrides
+  properties:
+    overrides:
+      type: array
+      minItems: 1
+      description: Required. Limits to set, at most one per category.
+      items:
+        $ref: '#/limit_override'
+  description: Sets an actor's overrides.
+
+clear_actor_limits:
+  type: object
+  required:
+    - categories
+  properties:
+    categories:
+      type: array
+      minItems: 1
+      description: Required. Categories to clear, each at most once.
+      items:
+        $ref: '#/limit_category'
+      example:
+        - LIMIT_CATEGORY_WEB_SEARCH_REQUESTS_PER_MINUTE
+  description: Removes an actor's overrides.
