@@ -91,6 +91,7 @@ kubernetes_clusters_all:
         day: any
       auto_upgrade: false
       isolated_workers: false
+      gpu_operator_ready: false
       status:
         state: provisioning
         message: provisioning
@@ -235,6 +236,7 @@ kubernetes_single:
         day: any
       auto_upgrade: false
       isolated_workers: false
+      gpu_operator_ready: false
       status:
         state: running
       created_at: '2018-11-15T16:00:11Z'
@@ -375,6 +377,7 @@ kubernetes_updated:
         day: any
       auto_upgrade: true
       isolated_workers: false
+      gpu_operator_ready: false
       status:
         state: running
       created_at: '2018-11-15T16:00:11Z'
@@ -479,6 +482,7 @@ kubernetes_clusters_create_basic_response:
         day: any
       auto_upgrade: false
       isolated_workers: false
+      gpu_operator_ready: false
       status:
         state: provisioning
         message: provisioning
@@ -622,6 +626,7 @@ kubernetes_clusters_multi_pool_response:
         day: any
       auto_upgrade: false
       isolated_workers: false
+      gpu_operator_ready: false
       status:
         state: provisioning
         message: provisioning
