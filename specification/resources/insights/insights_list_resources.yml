@@ -1,0 +1,53 @@
+operationId: insights_list_resources
+
+summary: List Resource Signal Enablement
+
+description: |
+  To list the resources in your account that have telemetry signal enablement
+  recorded, along with the current state of their metrics, logs, and traces
+  signals, send a GET request to `/v2/insights/resources`.
+
+  Results are paginated with `pagination.page` and `pagination.per_page`
+  (default `20`, maximum `200`) and can be sorted with `pagination.sort` and
+  `pagination.sort_direction`. Optionally filter by `filter.product_types` and
+  `filter.regions`.
+
+  A signal is omitted from a resource when no explicit enablement has ever been
+  recorded for it.
+
+tags:
+  - Insights
+
+parameters:
+  - $ref: 'parameters.yml#/resources_product_types'
+  - $ref: 'parameters.yml#/resources_regions'
+  - $ref: 'parameters.yml#/resources_page'
+  - $ref: 'parameters.yml#/resources_per_page'
+  - $ref: 'parameters.yml#/resources_sort'
+  - $ref: 'parameters.yml#/resources_sort_direction'
+
+responses:
+  '200':
+    $ref: 'responses/list_resources.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/insights_list_resources.yml'
+
+security:
+  - bearer_auth:
+      - 'insights:read'

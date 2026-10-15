@@ -1,0 +1,24 @@
+type: object
+description: The current telemetry signal enablement for a single resource.
+required:
+  - resource_urn
+  - product_type
+properties:
+  resource_urn:
+    type: string
+    description: The uniform resource name (URN) of the resource.
+    example: do:droplet:12345
+  product_type:
+    type: string
+    description: The product type of the resource, for example `droplet` or `kubernetes`.
+    example: droplet
+  region:
+    type: string
+    description: The region slug for region-specific resources. Omitted when the resource has no region.
+    example: nyc3
+  metrics:
+    $ref: 'resource_signal_state.yml'
+  logs:
+    $ref: 'resource_signal_state.yml'
+  traces:
+    $ref: 'resource_signal_state.yml'

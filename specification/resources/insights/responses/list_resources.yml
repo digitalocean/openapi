@@ -1,0 +1,39 @@
+description: A paginated list of resources and their signal enablement.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/list_resources_response.yml'
+    example:
+      resources:
+        - resource_urn: do:droplet:12345
+          product_type: droplet
+          region: nyc3
+          metrics:
+            enabled: true
+            effective_at: '2026-10-01T12:00:00Z'
+          logs:
+            enabled: true
+            effective_at: '2026-10-01T12:00:00Z'
+          traces:
+            enabled: false
+            effective_at: '2026-10-03T08:30:00Z'
+        - resource_urn: do:kubernetes:8d91d5e0-1c2b-4f3a-9e7d-6a5b4c3d2e1f
+          product_type: kubernetes
+          region: sfo3
+          metrics:
+            enabled: true
+            effective_at: '2026-09-20T09:15:00Z'
+      pagination:
+        page: 1
+        pages: 1
+        per_page: 20
+        total: 2
