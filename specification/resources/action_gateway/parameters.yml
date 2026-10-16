@@ -559,3 +559,73 @@ sort_direction_users:
       - asc
       - desc
   example: desc
+
+session_id_header:
+  name: X-Session-Id
+  in: header
+  required: true
+  description: >-
+    The session to act in: the UUID at the end of the session's `sessionUrn`
+    and `mcpUrl`. The session must belong to the authenticated user and team.
+  schema:
+    type: string
+    format: uuid
+  example: 2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+
+session_id:
+  name: session_id
+  in: path
+  required: true
+  description: >-
+    The session UUID: the value at the end of the session's `sessionUrn` and
+    `mcpUrl`. The session must belong to the authenticated user and team.
+  schema:
+    type: string
+    format: uuid
+  example: 2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+
+approval_id:
+  name: approval_id
+  in: path
+  required: true
+  description: The `approval_id` from a tool result whose `_meta.status` is `requires_approval`.
+  schema:
+    type: string
+    format: uuid
+  example: 7d3c2b1a-9e8f-4a6b-8c5d-4e3f2a1b0c9d
+
+session_tools_page_size:
+  name: page_size
+  in: query
+  required: false
+  description: >-
+    The number of tools returned per page, from 1 to 100. Defaults to 20 when
+    omitted. Other values are rejected with 400.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 20
+  example: 20
+
+session_tools_page_token:
+  name: page_token
+  in: query
+  required: false
+  description: >-
+    The `next_page_token` from the previous response. A token is only valid
+    for the session that received it.
+  schema:
+    type: string
+  example: eyJ2IjoxLCJhZnRlciI6ImV4YV93ZWJfc2VhcmNoIiwiZnAiOiI5YzFlNWI3YTNkMmY0ZTYwIn0
+
+if_none_match:
+  name: If-None-Match
+  in: header
+  required: false
+  description: >-
+    The `ETag` from a previous response for the same page. If the page is
+    unchanged, the response is `304 Not Modified` with no body.
+  schema:
+    type: string
+  example: '"3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c"'
