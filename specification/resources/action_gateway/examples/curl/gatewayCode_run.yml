@@ -1,0 +1,8 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "X-Session-Id: $SESSION_ID" \
+    -d '{"code":"print(\"hello from Action Gateway\")"}' \
+    "https://actions.do-ai.run/code/execute"

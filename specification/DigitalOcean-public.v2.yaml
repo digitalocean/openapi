@@ -80,6 +80,65 @@ tags:
       - **Users** and **end user limits** show and limit activity per end
         user, identified by a session's `actorId`.
 
+      To find and call tools in a session, use the
+      [Action Gateway Data Plane](#tag/Action-Gateway-Data-Plane) endpoints or
+      connect an MCP client to the session's `mcpUrl`.
+
+  - name: Action Gateway Data Plane
+    description: |-
+      The Action Gateway data plane finds and runs tools in a session. These
+      endpoints are the REST forms of the session's MCP meta tools:
+
+      - `POST /tools/search` is `action_search`.
+      - `POST /tools/invoke` is `action_invoke`.
+      - `POST /code/execute` is `action_code`.
+
+      `GET /tools` lists the tools that a session can call, and the
+      `/approvals` endpoints approve or deny calls waiting for approval.
+
+      **Note:** The data plane uses a separate base URL,
+      `https://actions.do-ai.run`, the same host as a session's `mcpUrl`. It
+      is independent of the control-plane API at `https://api.digitalocean.com`.
+
+      ### Authentication and Sessions
+
+      Authenticate with a DigitalOcean personal access token in the
+      `Authorization: Bearer` header. Custom-scoped tokens need the
+      `action_gateway:execute` scope. Every request also acts in one session.
+      Create the session with the
+      [Create a Session](https://docs.digitalocean.com/reference/api/digitalocean/#tag/Action-Gateway/operation/sessions_create)
+      endpoint, then send its UUID
+      in the `X-Session-Id` header or in the request path. The UUID is the value
+      at the end of the session's `sessionUrn` and `mcpUrl`.
+
+      The token must belong to the user who created the session, in the
+      session's team. The session's `tools` selection limits which tools are
+      available, and its `policy` decides whether each call is allowed, needs
+      approval, or is denied. Policy is enforced the same way on these endpoints
+      and on the session's MCP URL. Tools that use connections run with the
+      connections of the session's `actorId`.
+
+      ### Results and Errors
+
+      Successful requests to `/tools/search` and `/code/execute` return a tool
+      result. Check `status` before reading `output`. `/tools/invoke` returns one
+      tool result per call, and a well-formed request returns `200` even when
+      some calls fail.
+
+      Failed requests return the same shape with `status` set to `failed` and
+      an `error` object. Branch on `error.class`, `error.retriable`, and
+      `error.recovery_hint` rather than on `error.message`. Request bodies are
+      limited to 1 MiB.
+
+      ### Approvals
+
+      When a session policy sets `ask` for a call, the call does not run.
+      Instead, its result fails with `_meta.status` set to `requires_approval`,
+      an `approval_id`, an `expires_at` time, and a `decide` object describing
+      the approval request. The session owner sends that request with their own
+      token. The caller then repeats the call with the same arguments. Over MCP,
+      clients that support elicitation can approve the call while it waits.
+
   - name: Agent Platform API
     description: |-
       The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
@@ -770,6 +829,7 @@ x-tagGroups:
       - Actions
       - Add-Ons
       - Action Gateway
+      - Action Gateway Data Plane
       - Agent Platform API
       - Apps
       - Billing
@@ -982,6 +1042,30 @@ paths:
   /v2/action-gateway/users/{user_id}:
     get:
       $ref: "resources/action_gateway/users_get.yml"
+
+  /tools:
+    get:
+      $ref: "resources/action_gateway/gatewayTools_list.yml"
+
+  /tools/search:
+    post:
+      $ref: "resources/action_gateway/gatewayTools_list_search.yml"
+
+  /tools/invoke:
+    post:
+      $ref: "resources/action_gateway/gatewayTools_run.yml"
+
+  /code/execute:
+    post:
+      $ref: "resources/action_gateway/gatewayCode_run.yml"
+
+  /approvals/session/{session_id}/{approval_id}:
+    post:
+      $ref: "resources/action_gateway/gatewaySessionApprovals_update.yml"
+
+  /approvals/{approval_id}:
+    post:
+      $ref: "resources/action_gateway/gatewayApprovals_update.yml"
 
   /v2/1-clicks:
     get:
