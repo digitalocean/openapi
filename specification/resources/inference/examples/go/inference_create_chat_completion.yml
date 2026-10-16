@@ -25,6 +25,6 @@ source: |-
       }
 
       if msg := completion.Choices[0].Message.Content; msg != nil {
-          fmt.Println(*msg)
+          fmt.Println(msg.Text())
       }
   }

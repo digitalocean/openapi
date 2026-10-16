@@ -1,0 +1,19 @@
+lang: JavaScript
+source: |-
+  import { writeFileSync } from "fs";
+  import { InferenceClient } from "@digitalocean/dots";
+
+  const client = new InferenceClient({
+      apiKey: process.env.DIGITALOCEAN_TOKEN,
+  });
+
+  const response = await client.audio.speech.create({
+      model: "qwen3-tts-voicedesign",
+      input: "Hello, world!",
+      voice: "alloy",
+      response_format: "mp3",
+      instructions: "Speak naturally.",
+  });
+
+  const audioBytes = Buffer.from(response.data[0].b64_json, "base64");
+  writeFileSync("output.mp3", audioBytes);

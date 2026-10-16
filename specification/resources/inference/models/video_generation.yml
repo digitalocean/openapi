@@ -1,0 +1,40 @@
+type: object
+description: Status of an asynchronous video generation job.
+required:
+  - id
+  - status
+properties:
+  id:
+    type: string
+    description: The video generation job identifier.
+    example: "video_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDo7dmlkZW9faWQ6ZGExYjFmYzMtYTM3NC00MmM0LTgxMWMtOWE5NmE3ZWY0OTIz"
+  object:
+    type: string
+    description: Object type returned by the API.
+    example: "video"
+  created_at:
+    type: integer
+    description: Unix timestamp (in seconds) of when the job was created.
+    example: 1777003604
+  model:
+    type: string
+    description: The model used for generation.
+    example: "wan2.2-t2v-a14b"
+  status:
+    type: string
+    description: >
+      Job status. Poll until the value is a terminal state such as `completed` or `failed`.
+    example: "processing"
+  output:
+    nullable: true
+    allOf:
+      - $ref: "video_generation_output.yml"
+  error:
+    type: object
+    nullable: true
+    description: Error details when status is `failed`.
+    additionalProperties: true
+  x_request_id:
+    type: string
+    nullable: true
+    description: Request correlation identifier when provided by the API.

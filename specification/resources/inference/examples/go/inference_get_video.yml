@@ -1,0 +1,23 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      job, _, err := client.Video.Generations.Get(ctx, os.Getenv("VIDEO_ID"))
+      if err != nil {
+          panic(err)
+      }
+
+      fmt.Println(job.ID, job.Status)
+  }
