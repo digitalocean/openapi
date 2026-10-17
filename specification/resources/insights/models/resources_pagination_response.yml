@@ -7,7 +7,7 @@ properties:
     example: 1
   pages:
     type: integer
-    description: The total number of pages.
+    description: The total number of pages. Omitted when there are no results.
     example: 3
   per_page:
     type: integer
@@ -15,5 +15,5 @@ properties:
     example: 20
   total:
     type: integer
-    description: The total number of resources across all pages.
+    description: The total number of resources across all pages. Omitted when there are no results.
     example: 42
