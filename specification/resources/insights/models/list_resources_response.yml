@@ -1,0 +1,10 @@
+type: object
+description: Response body for listing resource signal enablement.
+properties:
+  resources:
+    type: array
+    description: Resources with recorded signal enablement. Omitted when none match.
+    items:
+      $ref: 'enablement_resource.yml'
+  pagination:
+    $ref: 'resources_pagination_response.yml'

@@ -1,0 +1,19 @@
+type: object
+description: Page-based pagination metadata for a resources list.
+properties:
+  page:
+    type: integer
+    description: The current page number.
+    example: 1
+  pages:
+    type: integer
+    description: The total number of pages. Omitted when there are no results.
+    example: 3
+  per_page:
+    type: integer
+    description: The number of items per page.
+    example: 20
+  total:
+    type: integer
+    description: The total number of resources across all pages. Omitted when there are no results.
+    example: 42

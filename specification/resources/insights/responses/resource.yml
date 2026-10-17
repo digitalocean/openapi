@@ -1,0 +1,28 @@
+description: The resource's current signal enablement.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/resource_response.yml'
+    example:
+      resource:
+        resource_urn: do:droplet:12345
+        product_type: droplet
+        region: nyc3
+        metrics:
+          enabled: true
+          effective_at: '2026-10-01T12:00:00Z'
+        logs:
+          enabled: true
+          effective_at: '2026-10-01T12:00:00Z'
+        traces:
+          enabled: false
+          effective_at: '2026-10-03T08:30:00Z'
