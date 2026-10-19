@@ -1,0 +1,7 @@
+type: object
+description: Response body wrapping a single resource's signal enablement.
+required:
+  - resource
+properties:
+  resource:
+    $ref: 'enablement_resource.yml'

@@ -65,6 +65,94 @@ resource_urn:
     type: string
   example: do:droplet:12345
 
+resource_urn_path:
+  in: path
+  name: resource_urn
+  description: The uniform resource name (URN) of the resource, for example `do:droplet:12345`.
+  required: true
+  schema:
+    type: string
+  example: do:droplet:12345
+
+resources_product_types:
+  in: query
+  name: filter.product_types
+  required: false
+  description: >-
+    Optional filter. When set, only resources of these product types are
+    returned. Repeat the parameter for multiple product types.
+  schema:
+    type: array
+    items:
+      type: string
+  style: form
+  explode: true
+  example:
+    - droplet
+
+resources_regions:
+  in: query
+  name: filter.regions
+  required: false
+  description: >-
+    Optional filter. When set, only resources in these regions are returned.
+    Repeat the parameter for multiple regions.
+  schema:
+    type: array
+    items:
+      type: string
+  style: form
+  explode: true
+  example:
+    - nyc3
+
+resources_page:
+  in: query
+  name: pagination.page
+  required: false
+  description: Which 'page' of paginated results to return.
+  schema:
+    type: integer
+    minimum: 1
+    default: 1
+  example: 1
+
+resources_per_page:
+  in: query
+  name: pagination.per_page
+  required: false
+  description: Number of items returned per page.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 200
+    default: 20
+  example: 20
+
+resources_sort:
+  in: query
+  name: pagination.sort
+  required: false
+  description: Field to sort by. Defaults to `resource_urn`.
+  schema:
+    type: string
+    enum:
+      - resource_urn
+      - effective_at
+  example: effective_at
+
+resources_sort_direction:
+  in: query
+  name: pagination.sort_direction
+  required: false
+  description: Sort direction. Defaults to `asc`.
+  schema:
+    type: string
+    enum:
+      - asc
+      - desc
+  example: desc
+
 region:
   in: path
   name: region

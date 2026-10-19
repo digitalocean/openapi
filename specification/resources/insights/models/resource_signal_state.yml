@@ -1,0 +1,15 @@
+type: object
+description: >-
+  The enablement state of a single telemetry signal (metrics, logs, or traces)
+  for a resource. A signal state is omitted from a resource when no explicit
+  enablement has ever been recorded for that signal.
+properties:
+  enabled:
+    type: boolean
+    description: Whether the signal is enabled for the resource.
+    example: true
+  effective_at:
+    type: string
+    format: date-time
+    description: When this signal state last changed.
+    example: '2026-10-01T12:00:00Z'

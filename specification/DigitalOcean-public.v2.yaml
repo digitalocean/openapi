@@ -497,8 +497,9 @@ tags:
       The DigitalOcean Insights API provides observability resources for
       monitoring your infrastructure, including alert rules that evaluate
       metrics, notification channels that deliver alert events, read-only
-      alert instances that record when alert rules fire, and PromQL and logs
-      query interfaces.
+      alert instances that record when alert rules fire, PromQL, logs, spans,
+      and traces query interfaces, and per-resource enablement of the metrics,
+      logs, and traces signals.
 
   - name: Kubernetes
     description: |-
@@ -2130,6 +2131,18 @@ paths:
   /v2/insights/query/{region}/spans/search:
     post:
       $ref: "resources/insights/insights_post_spansSearch.yml"
+
+  /v2/insights/resources:
+    get:
+      $ref: "resources/insights/insights_list_resources.yml"
+
+  /v2/insights/resources/{resource_urn}:
+    get:
+      $ref: "resources/insights/insights_get_resource.yml"
+
+  /v2/insights/resources/{resource_urn}/signals:
+    put:
+      $ref: "resources/insights/insights_update_resourceSignals.yml"
 
   /v1/consent:
     get:
