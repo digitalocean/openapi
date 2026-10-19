@@ -43,10 +43,6 @@ x-codeSamples:
   - $ref: 'examples/curl/inference_create_response.yml'
   - $ref: 'examples/python/inference_create_response.yml'
   - $ref: 'examples/go/inference_create_response.yml'
-  - $ref: 'examples/go/inference_create_response_web_search.yml'
-  - $ref: 'examples/go/inference_create_response_web_fetch.yml'
-  - $ref: 'examples/go/inference_create_response_model_synthesis.yml'
-  - $ref: 'examples/go/inference_create_response_tool_search.yml'
   - $ref: 'examples/dots/inference_create_response.yml'
 security:
   - inference_bearer_auth: []
