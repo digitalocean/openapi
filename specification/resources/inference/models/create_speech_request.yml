@@ -1,0 +1,29 @@
+type: object
+description: Request body for text-to-speech generation.
+required:
+  - model
+  - input
+properties:
+  model:
+    type: string
+    description: The text-to-speech model to use.
+    example: "qwen3-tts-voicedesign"
+  input:
+    type: string
+    minLength: 1
+    description: The text to convert to speech.
+    example: "Hello, world!"
+  voice:
+    type: string
+    description: The voice to use for synthesis.
+    example: "alloy"
+  response_format:
+    type: string
+    description: >
+      The audio format to return. Supported values include `mp3` and `wav`.
+      The API may return raw audio bytes or a JSON envelope with base64-encoded audio.
+    example: "mp3"
+  instructions:
+    type: string
+    description: Optional style or delivery instructions for the synthesizer.
+    example: "Speak naturally."

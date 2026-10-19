@@ -1,0 +1,38 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      // Two-step upload flow:
+      //   1. Reserve a file_id + presigned upload_url via CreatePresignedUploadURL.
+      //   2. PUT the raw JSONL bytes with UploadInputFile.
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      intent, _, err := client.BatchInference.CreatePresignedUploadURL(ctx, &godo.CreateBatchFileRequest{
+          FileName: "batch_requests.jsonl",
+      })
+      if err != nil {
+          panic(err)
+      }
+
+      fh, err := os.Open("batch_requests.jsonl")
+      if err != nil {
+          panic(err)
+      }
+      defer fh.Close()
+
+      if _, err := client.BatchInference.UploadInputFile(ctx, intent.UploadURL, fh); err != nil {
+          panic(err)
+      }
+
+      fmt.Println("uploaded file_id:", intent.FileID)
+  }

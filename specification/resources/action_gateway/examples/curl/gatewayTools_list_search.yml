@@ -1,0 +1,8 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "X-Session-Id: $SESSION_ID" \
+    -d '{"queries":[{"use_case":"search the public web for current information"}],"limit":3}' \
+    "https://actions.do-ai.run/tools/search"

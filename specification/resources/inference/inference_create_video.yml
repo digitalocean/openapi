@@ -1,0 +1,48 @@
+operationId: inference_create_video
+summary: Start a video generation job
+description: >
+  Start an asynchronous video generation job from a text prompt. Poll
+  `GET /v1/videos/{video_id}` until the job reaches a terminal status, then
+  download the MP4 with `GET /v1/videos/{video_id}/content` or from
+  `output.url` when present.
+tags:
+  - Serverless Inference
+servers:
+  - url: "https://inference.do-ai.run"
+    description: production
+x-inference-base-url: "https://inference.do-ai.run"
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "models/create_video_request.yml"
+responses:
+  "200":
+    description: Video generation job accepted.
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+    content:
+      application/json:
+        schema:
+          $ref: "models/video_generation.yml"
+  "401":
+    $ref: '../../shared/responses/unauthorized.yml'
+  "429":
+    $ref: '../../shared/responses/too_many_requests.yml'
+  "500":
+    $ref: '../../shared/responses/server_error.yml'
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+x-codeSamples:
+  - $ref: 'examples/curl/inference_create_video.yml'
+  - $ref: 'examples/python/inference_create_video.yml'
+  - $ref: 'examples/go/inference_create_video.yml'
+  - $ref: 'examples/dots/inference_create_video.yml'
+security:
+  - inference_bearer_auth: []

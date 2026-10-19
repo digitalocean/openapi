@@ -1,0 +1,17 @@
+type: object
+description: >
+  JSON envelope for text-to-speech when the endpoint returns `application/json`.
+  The live endpoint may instead return raw audio bytes with an `audio/*` Content-Type.
+required:
+  - data
+properties:
+  created:
+    type: integer
+    description: Unix timestamp (in seconds) of when the audio was created.
+    example: 1710700000
+  data:
+    type: array
+    minItems: 1
+    description: Generated audio items.
+    items:
+      $ref: "speech_audio_item.yml"

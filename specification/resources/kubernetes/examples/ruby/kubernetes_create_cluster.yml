@@ -9,6 +9,7 @@ source: |-
     region: 'nyc1',
     version: '1.14.1-do.4',
     isolated_workers: false,
+    gpu_operator_ready: false,
     tags: ['production', 'web-team'],
     node_pools: [
       {

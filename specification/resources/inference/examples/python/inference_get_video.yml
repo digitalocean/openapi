@@ -1,0 +1,9 @@
+lang: Python
+source: |-
+  import os
+  from pydo.inference import Client
+
+  client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
+
+  job = client.video.generations.retrieve(os.environ["VIDEO_ID"])
+  print(job.id, job.status)

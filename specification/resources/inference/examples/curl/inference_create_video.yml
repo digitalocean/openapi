@@ -1,0 +1,11 @@
+lang: cURL
+source: |-
+  curl -X POST https://inference.do-ai.run/v1/videos \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "model": "wan2-2-t2v-a14b",
+      "prompt": "Two anthropomorphic cats in boxing gear fight intensely on a spotlighted stage",
+      "size": "1280x720",
+      "fps": 16
+    }'

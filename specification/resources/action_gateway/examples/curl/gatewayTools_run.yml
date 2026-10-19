@@ -1,0 +1,8 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "X-Session-Id: $SESSION_ID" \
+    -d '{"rationale":"Find current information about DigitalOcean.","tools":[{"tool":"exa_web_search","arguments":{"query":"DigitalOcean cloud computing","max_results":1}}]}' \
+    "https://actions.do-ai.run/tools/invoke"

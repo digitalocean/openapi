@@ -1,0 +1,8 @@
+type: object
+description: Download location for a completed video when a presigned URL is available.
+properties:
+  url:
+    type: string
+    format: uri
+    description: Presigned URL for the generated MP4.
+    example: "https://example.com/output.mp4"
