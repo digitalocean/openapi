@@ -1,0 +1,47 @@
+endpoint_creation_limited:
+  description: >-
+    The API rate limit or your team's endpoint limit was exceeded. A rate-limit
+    error uses too_many_requests. An endpoint-cap error uses endpoint_limit_exceeded;
+    its message includes the limit and current count. The endpoint limit depends
+    on your team's allowance, not a fixed limit for every team. It counts endpoints
+    created through the public API, excluding service-managed endpoints and legacy
+    sessions. Delete an endpoint before creating another when this cap is reached.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: ../../shared/models/error.yml
+      examples:
+        rate_limit: &rate_limit
+          summary: API rate limit exceeded
+          value:
+            id: too_many_requests
+            message: API rate limit exceeded.
+        endpoint_limit:
+          summary: Illustrative team allowance of 50 endpoints is full
+          value:
+            id: endpoint_limit_exceeded
+            message: 'Endpoint limit exceeded: limit 50, current 50. Delete an endpoint before creating another.'
+
+version_creation_limited:
+  description: >-
+    The API rate limit or the endpoint's live-version limit was exceeded. A
+    rate-limit error uses too_many_requests. A version-cap error uses
+    endpoint_version_limit_exceeded; its message includes the limit and current
+    count. Each endpoint may have at most 100 live versions. Creation and promotion
+    both consume a live-version slot. Delete an older live version before creating
+    or promoting another when this cap is reached.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: ../../shared/models/error.yml
+      examples:
+        rate_limit: *rate_limit
+        version_limit:
+          summary: The endpoint has 100 live versions
+          value:
+            id: endpoint_version_limit_exceeded
+            message: 'Live version limit exceeded: limit 100, current 100. Delete an older live version before creating or promoting another.'

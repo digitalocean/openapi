@@ -1,24 +1,24 @@
 operationId: endpoints_delete
 summary: Delete an Endpoint
 description: >-
-  Deletes an endpoint and all its versions. Deleting an already absent endpoint
-  succeeds. The owner or a team owner may delete it. Inaccessible endpoints are
-  hidden as 404 endpoint_not_found.
+  Deletes an endpoint and all its versions. The owner or a team owner may delete
+  it. Missing endpoints, endpoints outside your team, and otherwise invisible
+  endpoints all return the same empty 204 response as a successful deletion.
+  A service-managed endpoint may be deleted as a whole; its individual versions
+  cannot be deleted through the public API.
 tags:
 - Action Gateway
 parameters:
 - $ref: endpoint_parameters.yml#/endpoint_id
 responses:
   '204':
-    description: The resource was deleted.
+    description: The endpoint was deleted or no visible endpoint matched. The response is empty in either case.
     headers:
       $ref: response_headers.yml
   '400':
     $ref: ../../shared/responses/bad_request.yml
   '401':
     $ref: ../../shared/responses/unauthorized.yml
-  '404':
-    $ref: ../../shared/responses/not_found.yml
   '429':
     $ref: ../../shared/responses/too_many_requests.yml
   '500':

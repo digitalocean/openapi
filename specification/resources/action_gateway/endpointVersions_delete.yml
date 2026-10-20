@@ -5,6 +5,8 @@ description: >-
   the head makes the highest-numbered remaining live version the head. With no
   live versions, the endpoint MCP URL fails closed until another version is
   published. Inaccessible or deleted versions return 404 endpoint_version_not_found.
+  Individual versions of service-managed endpoints cannot be deleted through the
+  public API; only the endpoint itself may be deleted as a whole.
 tags:
 - Action Gateway
 parameters:

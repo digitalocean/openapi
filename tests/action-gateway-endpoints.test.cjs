@@ -51,7 +51,9 @@ test('all lifecycle operations, scopes, status codes, and examples are bundled',
     assert.ok(operation.responses[status]);
     if (status === '204') assert.equal(operation.responses[status].content, undefined);
     for (const code of ['400', '401', '429', '500']) assert.ok(operation.responses[code]);
-    if (path.includes('{')) assert.ok(operation.responses['404']);
+    if (path.includes('{') && operation.operationId !== 'endpoints_delete') {
+      assert.ok(operation.responses['404']);
+    }
     const bodies = [operation.requestBody, ...Object.values(operation.responses)].filter(Boolean);
     for (const body of bodies) {
       for (const media of Object.values(deref(body).content || {})) {
@@ -62,6 +64,69 @@ test('all lifecycle operations, scopes, status codes, and examples are bundled',
       }
     }
   }
+});
+
+test('endpoint deletion documents a uniform empty outcome for missing and hidden resources', () => {
+  const operation = spec.paths[prefix + '/endpoints/{endpoint_id}'].delete;
+  assert.ok(operation.responses['204']);
+  assert.equal(operation.responses['204'].content, undefined);
+  assert.equal(operation.responses['404'], undefined);
+  assert.match(operation.description, /Missing endpoints, endpoints outside your team, and otherwise invisible endpoints all return the same empty 204/);
+  assert.match(operation.responses['204'].description, /empty in either case/);
+});
+
+test('creation and promotion document throttling and their applicable resource caps', () => {
+  const cases = [
+    ['/endpoints', 'endpoint_limit_exceeded', 'endpoint_limit', 50],
+    ['/endpoints/{endpoint_id}/versions', 'endpoint_version_limit_exceeded', 'version_limit', 100],
+    ['/endpoints/{endpoint_id}/versions:promote', 'endpoint_version_limit_exceeded', 'version_limit', 100],
+  ];
+  for (const [path, id, exampleName, limit] of cases) {
+    const response = deref(spec.paths[prefix + path].post.responses['429']);
+    const media = response.content['application/json'];
+    assert.equal(deref(media.examples.rate_limit).value.id, 'too_many_requests');
+    const error = deref(media.examples[exampleName]).value;
+    assert.equal(error.id, id);
+    assert.match(error.message, new RegExp(`limit ${limit}, current ${limit}`));
+    assert.match(error.message, /Delete an? /);
+    assert.deepEqual(Object.keys(error).sort(), ['id', 'message']);
+    validate(media.schema, error);
+    assert.match(response.description, /message includes the limit and current count/);
+    if (id === 'endpoint_limit_exceeded') {
+      assert.match(response.description, /not a fixed limit for every team/);
+      assert.match(response.description, /excluding service-managed endpoints and legacy sessions/);
+    } else {
+      assert.match(response.description, /at most 100 live versions/);
+      assert.match(response.description, /Creation and promotion both consume/);
+    }
+  }
+});
+
+test('VPC region is returned but rejected from version creation input', () => {
+  const request = checkModel('endpoint_version_spec');
+  const input = examples.endpoint_create.value.version.network;
+  assert.ok(request({ network: input }));
+  assert.equal(Object.hasOwn(input, 'region'), false);
+  for (const region of ['nyc3', '', null]) {
+    assert.equal(request({ network: { ...input, region } }), false);
+    assert.equal(checkModel('endpoint_create')({
+      name: 'support-agent', version: { network: { ...input, region } },
+    }), false);
+  }
+  const networkSchema = deref(deref(spec.components.schemas.endpoint_version).properties.network);
+  assert.equal(networkSchema.properties.region.readOnly, true);
+  assert.equal(models.endpoint_network.properties.region, undefined);
+  const output = examples.publish.value.version.network;
+  assert.deepEqual(output, { ...input, region: 'nyc3' });
+  validate({ $ref: '#/components/schemas/endpoint_version' }, examples.publish.value.version);
+  assert.deepEqual(examples.promotion.value.version.network, output);
+});
+
+test('service-managed mutation exception applies only to endpoint deletion', () => {
+  assert.match(models.endpoint.description, /only public mutation allowed for a service-managed endpoint is deleting the endpoint itself/);
+  assert.match(models.endpoint.description, /Individual version creation, promotion, and deletion are not allowed/);
+  assert.match(spec.paths[prefix + '/endpoint-versions/{version_id}'].delete.description,
+    /Individual versions of service-managed endpoints cannot be deleted through the public API/);
 });
 
 test('endpoint and version IDs reject URNs, malformed forms, and uint32 overflow', () => {
@@ -166,7 +231,7 @@ test('list contracts use bounded keyset pagination, never offsets or totals', ()
 });
 
 test('public responses expose no internal identity keys and examples agree across fields', () => {
-  const forbidden = /(^|_)(urn|session_id|run_id|row_id|database_id)$|^sessionUrn$|^agentUrn$/;
+  const forbidden = /(^|_)(urn|session_id|run_id|row_id|database_id)$|^(sessionUrn|agentUrn|team_id|teamId|owning_user_numeric_id|owningUserNumericId|staff_audit|staff_audit_fields|audit_metadata)$/i;
   const visit = (node) => {
     if (!node || typeof node !== 'object') return;
     const value = deref(node);
@@ -202,7 +267,7 @@ test('public responses expose no internal identity keys and examples agree acros
     }
   };
   Object.values(examples).forEach((example) => inspect(example.value));
-  const fields = ['actor_id', 'policy', 'config', 'network', 'insights'];
+  const fields = ['actor_id', 'policy', 'config', 'insights'];
   for (const field of fields) {
     assert.deepEqual(examples.publish.value.version[field], examples.endpoint_create.value.version[field]);
     assert.deepEqual(examples.promotion.value.version[field], examples.publish.value.version[field]);

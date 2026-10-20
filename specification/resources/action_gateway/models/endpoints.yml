@@ -98,13 +98,32 @@ endpoint_config:
 
 endpoint_network:
   type: object
-  description: VPC binding. Omitted when no binding was supplied.
+  description: >-
+    VPC binding supplied at creation. Omitted when no binding was supplied.
+    region is output-only; requests containing it are rejected.
+  not:
+    required: [region]
   properties:
     vpc_uuid:
       type: string
       format: uuid
       description: UUID of a VPC owned by your team in a supported region.
       example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+
+endpoint_network_response:
+  type: object
+  description: VPC binding, including the VPC region recorded at creation. Omitted when no binding was supplied.
+  properties:
+    vpc_uuid:
+      $ref: '#/endpoint_network/properties/vpc_uuid'
+    region:
+      type: string
+      readOnly: true
+      description: >-
+        The VPC's region, recorded when the version was created. A tool call through
+        a connection whose VPC is in a different region is refused. This field is
+        returned in responses only and is rejected in requests.
+      example: nyc3
 
 endpoint_insights:
   type: object
@@ -177,7 +196,7 @@ endpoint_version:
     config:
       $ref: '#/endpoint_config'
     network:
-      $ref: '#/endpoint_network'
+      $ref: '#/endpoint_network_response'
     insights:
       $ref: sessions.yml#/session_insights
     created_at:
@@ -193,8 +212,9 @@ endpoint:
     A named lineage of immutable versions owned by its creating user. Only that
     user may use it, rename it, create versions, or promote versions. A team owner
     may also list and delete team endpoints, but may not use them or add versions.
-    Service-managed endpoints cannot be mutated through this API except
-    by deletion.
+    The only public mutation allowed for a service-managed endpoint is deleting
+    the endpoint itself and all its versions. Individual version creation,
+    promotion, and deletion are not allowed for service-managed endpoints.
   properties:
     id:
       $ref: '#/endpoint_id'

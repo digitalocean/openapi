@@ -16,7 +16,7 @@ endpoint_create:
         output_views:
           exa_web_search: titles-and-urls
         custom_instructions: Prefer primary sources and cite URLs.
-      network: &network
+      network:
         vpc_uuid: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
       insights: &insights
         logs: true
@@ -55,7 +55,9 @@ version:
           version: '1'
       policy: *policy
       config: *config
-      network: *network
+      network: &network_response
+        vpc_uuid: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+        region: nyc3
       insights: *insights
       created_at: '2026-10-15T14:00:00Z'
 
@@ -129,7 +131,7 @@ promotion:
             version: '1'
         policy: *policy
         config: *config
-        network: *network
+        network: *network_response
         insights: *insights
         created_at: '2026-10-16T14:00:00Z'
     version: *promoted
