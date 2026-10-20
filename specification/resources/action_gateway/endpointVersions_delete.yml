@@ -1,0 +1,33 @@
+operationId: endpointVersions_delete
+summary: Delete an Endpoint Version
+description: >-
+  Deletes a live version. Only the endpoint owner may delete versions. Deleting
+  the head makes the highest-numbered remaining live version the head. With no
+  live versions, the endpoint MCP URL fails closed until another version is
+  published. Inaccessible or deleted versions return 404 endpoint_version_not_found.
+tags:
+- Action Gateway
+parameters:
+- $ref: endpoint_parameters.yml#/version_id
+responses:
+  '204':
+    description: The resource was deleted.
+    headers:
+      $ref: response_headers.yml
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  'default':
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/endpointVersions_delete.yml
+security:
+- bearer_auth:
+  - action_gateway:delete

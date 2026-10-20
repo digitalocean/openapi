@@ -1,6 +1,9 @@
 operationId: sessions_list
+deprecated: true
 summary: List Sessions
 description: >-
+  Deprecated: use GET /v2/action-gateway/endpoints for endpoints. This route
+  continues to list legacy sessions with its existing fields and pagination.
   Returns the sessions you can see, newest first. Offset-paged with page and `per_page`; `end_user_id`
   filters to one actor.
 tags:

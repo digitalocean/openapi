@@ -1,0 +1,56 @@
+operationId: endpoints_create
+summary: Create an Endpoint
+description: >-
+  Creates a named endpoint and its first immutable version atomically. The MCP URL
+  follows the highest-numbered live version; version_mcp_url stays pinned. An
+  invalid name returns 400 invalid_endpoint_name; a duplicate team name returns
+  409 endpoint_name_taken.
+tags:
+- Action Gateway
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/endpoints.yml#/endpoint_create
+      examples:
+        request:
+          $ref: examples/endpoints.yml#/endpoint_create
+responses:
+  '201':
+    description: The new head version was created.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/endpoints.yml#/endpoint_publish_response
+        examples:
+          response:
+            $ref: examples/endpoints.yml#/publish
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  'default':
+    $ref: ../../shared/responses/unexpected_error.yml
+  '409':
+    description: An endpoint with this name already exists in the team (endpoint_name_taken).
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: ../../shared/models/error.yml
+        example:
+          id: endpoint_name_taken
+          message: An endpoint with this name already exists.
+x-codeSamples:
+- $ref: examples/curl/endpoints_create.yml
+security:
+- bearer_auth:
+  - action_gateway:create

@@ -76,6 +76,18 @@ session:
   type: object
   description: A session and the tool-permission policy bound to it.
   properties:
+    endpoint_id:
+      description: Public parent endpoint UUID. Absent for legacy sessions without a parent.
+      allOf:
+        - $ref: endpoints.yml#/endpoint_id
+    endpoint_version_id:
+      description: Public composite version ID. Absent for legacy sessions without a parent.
+      allOf:
+        - $ref: endpoints.yml#/endpoint_version_id
+    version_number:
+      description: Version number within the parent endpoint. Absent for legacy sessions without a parent.
+      allOf:
+        - $ref: endpoints.yml#/version_number
     sessionUrn:
       type: string
       example: do:managed_agent_session:2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b

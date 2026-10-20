@@ -1,0 +1,149 @@
+endpoint_create:
+  summary: Create an endpoint with a selected tool
+  value:
+    name: support-agent
+    version:
+      actor_id: alice
+      tools: [exa_web_search@1]
+      policy: &policy
+        default_action: ask
+        rules:
+        - tool: exa_web_search@1
+          match: {}
+          action: allow
+      config: &config
+        preload_tools: [exa_web_search]
+        output_views:
+          exa_web_search: titles-and-urls
+        custom_instructions: Prefer primary sources and cite URLs.
+      network: &network
+        vpc_uuid: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+      insights: &insights
+        logs: true
+        traces: false
+
+endpoint_patch:
+  summary: Rename an endpoint
+  value:
+    name: support-agent
+
+endpoint_version_spec:
+  summary: Publish a version with no tools and explicitly empty policy and config
+  value:
+    actor_id: alice
+    tools: []
+    policy: {}
+    config: {}
+
+endpoint_promotion:
+  summary: Copy a live version into a new head
+  value:
+    version_id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v1
+
+version:
+  summary: Immutable version with a selected tool
+  value:
+    version: &version
+      id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v1
+      endpoint_id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+      version_number: 1
+      actor_id: alice
+      tools:
+        references:
+        - kind: SESSION_TOOL_REFERENCE_KIND_TOOL
+          name: exa_web_search
+          version: '1'
+      policy: *policy
+      config: *config
+      network: *network
+      insights: *insights
+      created_at: '2026-10-15T14:00:00Z'
+
+endpoint:
+  summary: Endpoint with an embedded live head
+  value:
+    endpoint: &endpoint
+      id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+      name: support-agent
+      actor_id: alice
+      owning_user_id: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
+      head_version_number: 1
+      head_version: *version
+      created_at: '2026-10-15T14:00:00Z'
+      updated_at: '2026-10-15T14:00:00Z'
+
+empty_endpoint:
+  summary: Endpoint after deletion of its last live version
+  value:
+    endpoint:
+      id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+      name: support-agent
+      head_version_number: 0
+
+publish:
+  summary: New head with floating and pinned MCP URLs
+  value:
+    endpoint: *endpoint
+    version: *version
+    mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+    version_mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/9a7c2d5b-6e8f-4a13-8f3c-2a6e1b4d4e0f
+
+publish_empty:
+  summary: Publish version 2 with no tools and explicitly empty policy and config
+  value:
+    endpoint:
+      id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+      name: support-agent
+      head_version_number: 2
+      head_version: &empty_version
+        id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v2
+        endpoint_id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+        version_number: 2
+        actor_id: alice
+        tools:
+          references: []
+        policy: {}
+        config: {}
+        created_at: '2026-10-16T13:00:00Z'
+    version: *empty_version
+    mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+    version_mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+
+promotion:
+  summary: Promotion creates version 3 from version 1
+  value:
+    endpoint:
+      id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+      name: support-agent
+      head_version_number: 3
+      head_version: &promoted
+        id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v3
+        endpoint_id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+        version_number: 3
+        promoted_from_version_number: 1
+        actor_id: alice
+        tools:
+          references:
+          - kind: SESSION_TOOL_REFERENCE_KIND_TOOL
+            name: exa_web_search
+            version: '1'
+        policy: *policy
+        config: *config
+        network: *network
+        insights: *insights
+        created_at: '2026-10-16T14:00:00Z'
+    version: *promoted
+    mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+    version_mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/3b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+
+endpoints:
+  summary: Final page of endpoints
+  value:
+    endpoints: [*endpoint]
+    next_page_token: ''
+
+versions:
+  summary: Final page of live versions
+  value:
+    versions: [*version]
+    next_page_token: ''
