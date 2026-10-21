@@ -14,13 +14,13 @@ content:
       $ref: '../models/traces_search_response.yml'
     example:
       data:
-        - traceId: "bef35030c4024f42fb88041fea062e97"
+        - trace_id: "bef35030c4024f42fb88041fea062e97"
           started: "2026-10-09T09:21:39.99Z"
-          serviceName: "checkout-api"
-          durationNs: 10000000
+          service_name: "checkout-api"
+          duration_ns: 10000000
           status: "Ok"
-          spanCount: 1
-          spanNames:
+          span_count: 1
+          span_names:
             - "checkout-api-root"
       pagination:
-        hasMore: false
+        has_more: false

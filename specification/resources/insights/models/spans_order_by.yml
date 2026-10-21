@@ -7,8 +7,8 @@ properties:
     $ref: 'spans_filter_field.yml'
   direction:
     type: string
-    description: The sort direction. Defaults to `desc` when omitted.
+    description: The sort direction. Omit to use the server default.
     enum:
-      - asc
-      - desc
-    example: desc
+      - SORT_DIRECTION_ASC
+      - SORT_DIRECTION_DESC
+    example: SORT_DIRECTION_DESC

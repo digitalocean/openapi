@@ -1,10 +1,8 @@
 type: object
 description: >-
   A sort clause for traces search results. Supported `field.name` values
-  (case-insensitive) are `started` (aliases `startTime`, `start_time`,
-  `timestamp`), `durationNs` (`duration`), `serviceName` (`service.name`,
-  `service_name`), `traceId` (`trace.id`, `trace_id`), `errorCount`
-  (`error_count`), `spanCount` (`span_count`), and `status`. Any other name
+  are `started`, `duration_ns`, `service_name`, `trace_id`, `error_count`,
+  `span_count`, and `status`. Any other name
   returns `400`.
 
 
@@ -20,9 +18,8 @@ properties:
     $ref: 'traces_field_ref.yml'
   direction:
     type: string
-    description: The sort direction (case-insensitive). Defaults to `desc`.
+    description: The sort direction. Omit to use the server default.
     enum:
-      - asc
-      - desc
-    default: desc
-    example: desc
+      - SORT_DIRECTION_ASC
+      - SORT_DIRECTION_DESC
+    example: SORT_DIRECTION_DESC

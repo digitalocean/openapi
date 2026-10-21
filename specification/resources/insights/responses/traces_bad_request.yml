@@ -21,16 +21,16 @@ content:
         value: pagination.limit exceeds maximum of 1000
       search_time_range_too_long:
         summary: Search time range longer than 7 days
-        value: timeRange exceeds maximum of 168h0m0s
+        value: time_range exceeds maximum of 168h0m0s
       trace_window_too_long:
         summary: Trace lookup window longer than 7 days
         value: time range exceeds maximum of 168h0m0s
       invalid_order_direction:
-        summary: Unsupported orderBy direction
-        value: invalid orderBy direction "SORT_DIRECTION_ASC"
+        summary: Unsupported order_by direction
+        value: invalid order_by direction
       from_after_to:
         summary: Time range start after end
-        value: timeRange.from must be before or equal to timeRange.to
+        value: time_range.from must be before or equal to time_range.to
       unknown_property:
         summary: Unknown or malformed request body property
         value: invalid request body

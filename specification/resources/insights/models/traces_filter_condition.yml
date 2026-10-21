@@ -1,0 +1,21 @@
+type: object
+description: A single field comparison in a traces filter expression.
+required:
+  - field
+  - operator
+properties:
+  field:
+    $ref: 'traces_field_ref.yml'
+  operator:
+    type: string
+    description: The comparison operator.
+    enum:
+      - FILTER_OPERATOR_EQ
+      - FILTER_OPERATOR_NEQ
+      - FILTER_OPERATOR_IN
+      - FILTER_OPERATOR_EXISTS
+      - FILTER_OPERATOR_GTE
+      - FILTER_OPERATOR_LTE
+    example: FILTER_OPERATOR_EQ
+  value:
+    $ref: 'traces_filter_value.yml'
