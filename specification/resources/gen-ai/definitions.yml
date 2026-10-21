@@ -1534,12 +1534,11 @@ apiCandidateAgentConfig:
       type: string
   type: object
 apiCandidateInferenceConfig:
-  description: Inference configuration for the candidate model during evaluation.
+  description: |-
+    Inference configuration for the candidate model during evaluation.
+    The output token limit is not configurable. For serverless candidates it is
+    set from the model's max output tokens in the model catalog.
   properties:
-    max_tokens:
-      example: 123
-      format: int64
-      type: integer
     reasoning_effort:
       description: |-
         Reasoning effort for reasoning-capable models (e.g. "low", "medium",
@@ -8165,7 +8164,7 @@ apiPresetSaveSection:
 
      - PRESET_SAVE_SECTION_CANDIDATE: Candidate model identity (`candidate_model_uuid`, `candidate_model_source`,
     `candidate_model_name`) and the non-prompt inference params
-    (`max_tokens`, `temperature`, `stop_token`).
+    (`temperature`, `stop_token`, `reasoning_effort`).
      - PRESET_SAVE_SECTION_METRICS: The selected `metric_uuids` and the optional `star_metric`.
      - PRESET_SAVE_SECTION_JUDGE: The `judge_model_uuid`.
      - PRESET_SAVE_SECTION_DATASET: The `dataset_uuid`.
