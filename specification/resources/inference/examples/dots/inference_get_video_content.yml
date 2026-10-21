@@ -1,0 +1,11 @@
+lang: JavaScript
+source: |-
+  import { writeFileSync } from "fs";
+  import { InferenceClient } from "@digitalocean/dots";
+
+  const client = new InferenceClient({
+      apiKey: process.env.DIGITALOCEAN_TOKEN,
+  });
+
+  const content = await client.video.generations.content(process.env.VIDEO_ID);
+  writeFileSync("output.mp4", Buffer.from(await content.arrayBuffer()));

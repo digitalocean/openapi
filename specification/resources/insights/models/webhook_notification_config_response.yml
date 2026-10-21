@@ -1,0 +1,31 @@
+type: object
+description: |
+  Generic HTTPS webhook notification channel configuration as returned in API
+  responses. The URL and headers are returned in full. Credential secrets are
+  never returned; nested `*_status` objects indicate whether they are
+  configured.
+required:
+  - url
+properties:
+  url:
+    type: string
+    format: uri
+    description: HTTPS URL that receives webhook deliveries.
+    example: https://example.com/hook
+  basic_auth:
+    $ref: 'webhook_basic_auth_response.yml'
+  bearer_token:
+    $ref: 'webhook_bearer_token_response.yml'
+  headers:
+    type: object
+    maxProperties: 20
+    additionalProperties:
+      type: string
+      example: '1'
+    description: |
+      Optional custom HTTP headers included on webhook deliveries. At most 20
+      headers are allowed.
+    example:
+      X-Custom: '1'
+  signature:
+    $ref: 'webhook_signature_config_response.yml'

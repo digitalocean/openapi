@@ -1,0 +1,36 @@
+description: >-
+  The request was rejected by the traces service, for example because the
+  body is malformed, a field is out of range, or the time range is invalid.
+  The body is a short plain-text message.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  text/plain:
+    schema:
+      type: string
+    examples:
+      limit_above_maximum:
+        summary: Pagination limit above maximum
+        value: pagination.limit exceeds maximum of 1000
+      search_time_range_too_long:
+        summary: Search time range longer than 7 days
+        value: timeRange exceeds maximum of 168h0m0s
+      trace_window_too_long:
+        summary: Trace lookup window longer than 7 days
+        value: time range exceeds maximum of 168h0m0s
+      invalid_order_direction:
+        summary: Unsupported orderBy direction
+        value: invalid orderBy direction "SORT_DIRECTION_ASC"
+      from_after_to:
+        summary: Time range start after end
+        value: timeRange.from must be before or equal to timeRange.to
+      unknown_property:
+        summary: Unknown or malformed request body property
+        value: invalid request body

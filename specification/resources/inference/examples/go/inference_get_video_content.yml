@@ -1,0 +1,25 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      raw, _, err := client.Video.Generations.Content(ctx, os.Getenv("VIDEO_ID"))
+      if err != nil {
+          panic(err)
+      }
+      if err := os.WriteFile("output.mp4", raw, 0644); err != nil {
+          panic(err)
+      }
+      fmt.Println("Wrote output.mp4")
+  }

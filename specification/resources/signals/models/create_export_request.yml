@@ -1,0 +1,50 @@
+type: object
+description: Request body to create a new signals data export.
+properties:
+  type:
+    type: string
+    description: >-
+      The scope of the export. `agent` exports Signals conversations for one
+      Harness Runtime environment and requires `agent_id`. `inference` exports
+      Serverless Inference Signals conversations for the whole team (team-wide;
+      omit `agent_id`). Defaults to `agent` when `agent_id` is provided and to
+      `inference` when it is omitted.
+    enum:
+      - agent
+      - inference
+    example: agent
+  agent_id:
+    type: string
+    format: uuid
+    description: >-
+      The environment whose data should be exported. For Harness Runtime, this
+      is the Environment Config ID. Required when `type` is `agent`; must be
+      omitted when `type` is `inference`.
+    example: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
+  signal_type:
+    type: array
+    items:
+      type: string
+    description: >-
+      Filter the export to only include the specified signal types. Use the
+      export options endpoint to list available values.
+    example:
+      - ExecutionFailureToolNotFound
+  session_ids:
+    type: array
+    description: Optional list of specific session IDs to include in the export.
+    items:
+      type: string
+      format: uuid
+    example:
+      - 01a0f3d5-d5f1-798a-9352-2cd8f8b81e78
+  start_time:
+    type: string
+    format: date-time
+    description: Include only sessions that started at or after this timestamp.
+    example: "2026-09-01T00:00:00Z"
+  end_time:
+    type: string
+    format: date-time
+    description: Include only sessions that started at or before this timestamp.
+    example: "2026-10-01T00:00:00Z"

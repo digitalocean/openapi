@@ -1,0 +1,24 @@
+type: object
+description: Request body to start an asynchronous video generation job.
+required:
+  - model
+  - prompt
+properties:
+  model:
+    type: string
+    description: The video generation model to use.
+    example: "wan2-2-t2v-a14b"
+  prompt:
+    type: string
+    minLength: 1
+    description: A text description of the desired video.
+    example: "Two anthropomorphic cats in boxing gear fight intensely on a spotlighted stage"
+  size:
+    type: string
+    description: The output resolution, for example `1280x720`.
+    example: "1280x720"
+  fps:
+    type: integer
+    minimum: 1
+    description: Frames per second for the generated video.
+    example: 16

@@ -1,0 +1,19 @@
+lang: Python
+source: |-
+  import base64
+  import os
+  from pydo.inference import Client
+
+  client = Client(token=os.environ.get("DIGITALOCEAN_TOKEN"))
+
+  response = client.audio.speech.create(
+      model="qwen3-tts-voicedesign",
+      input="Hello, world!",
+      voice="alloy",
+      response_format="mp3",
+      instructions="Speak naturally.",
+  )
+
+  audio_bytes = base64.b64decode(response.data[0].b64_json)
+  with open("output.mp3", "wb") as f:
+      f.write(audio_bytes)

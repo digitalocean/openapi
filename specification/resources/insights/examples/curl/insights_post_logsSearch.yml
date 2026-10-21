@@ -1,0 +1,23 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "time_range": {
+        "from": {"absolute": "2026-09-30T00:00:00Z"},
+        "to": {"absolute": "2026-09-30T01:00:00Z"}
+      },
+      "filter": {
+        "condition": {
+          "field": {"name": "severity_text"},
+          "operator": "FILTER_OPERATOR_EQ",
+          "value": {"string_value": "Error"}
+        }
+      },
+      "order_by": [
+        {"field": {"name": "timestamp"}, "direction": "SORT_DIRECTION_DESC"}
+      ],
+      "pagination": {"limit": 100}
+    }' \
+    "https://api.digitalocean.com/v2/insights/query/nyc3/logs/search"

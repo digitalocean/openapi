@@ -1,0 +1,56 @@
+type: object
+description: >-
+  A single trace returned by a traces search. One row per trace, aggregated
+  from its spans. Every field except `traceId` is omitted when it holds its
+  zero value (for example, `errorCount` is absent when no spans errored).
+required:
+  - traceId
+properties:
+  traceId:
+    type: string
+    description: The trace identifier.
+    example: "bef35030c4024f42fb88041fea062e97"
+  started:
+    type: string
+    format: date-time
+    description: The start time of the earliest span in the trace, in RFC 3339 format.
+    example: "2026-10-09T09:21:39.99Z"
+  serviceName:
+    type: string
+    description: >-
+      The service that emitted the root span. Omitted when the root span has
+      no service.name resource attribute.
+    example: "checkout-api"
+  durationNs:
+    type: integer
+    format: int64
+    description: Wall-clock duration of the trace in nanoseconds.
+    example: 10000000
+  spanCount:
+    type: integer
+    format: int32
+    description: The number of spans in the trace.
+    example: 1
+  errorCount:
+    type: integer
+    format: int32
+    description: >-
+      The number of spans in the trace with an `Error` status code. Omitted
+      when zero.
+    example: 1
+  status:
+    type: string
+    description: >-
+      The rolled-up status of the trace. `Error` if any span has an `Error`
+      status code, otherwise `Ok`.
+    enum:
+      - Ok
+      - Error
+    example: "Ok"
+  spanNames:
+    type: array
+    description: The distinct span names present in the trace.
+    items:
+      type: string
+    example:
+      - "checkout-api-root"

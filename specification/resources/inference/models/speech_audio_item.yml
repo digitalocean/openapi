@@ -1,0 +1,9 @@
+type: object
+description: A single audio payload in a JSON speech response envelope.
+required:
+  - b64_json
+properties:
+  b64_json:
+    type: string
+    description: Base64-encoded audio bytes.
+    example: "//uQxAAAA..."

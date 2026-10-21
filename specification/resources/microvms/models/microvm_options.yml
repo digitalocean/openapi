@@ -1,0 +1,116 @@
+type: object
+
+description: >-
+  The default region, sizes, prices, account limits, and features available
+  to your team.
+
+properties:
+  default_region:
+    type: string
+    description: The slug of the region MicroVMs are created in by default.
+    example: mkc1
+
+  sizes:
+    type: array
+    description: The sizes available to your team.
+    items:
+      type: object
+      properties:
+        cpu:
+          type: integer
+          description: The number of vCPUs.
+          example: 1
+        memory:
+          type: integer
+          description: The amount of memory, in MiB.
+          example: 2048
+        disk:
+          type: integer
+          description: The size of the disk, in GB.
+          example: 50
+        available:
+          type: boolean
+          description: Whether the size is available on your team's plan.
+          example: true
+        regions:
+          type: array
+          items:
+            type: string
+          description: The slugs of the regions the size is available in.
+          example:
+            - mkc1
+        pricing:
+          type: object
+          description: The compute price of the size.
+          properties:
+            price_per_hour:
+              type: number
+              description: The price per hour of running time, in USD.
+              example: 0.039
+            price_per_month:
+              type: number
+              description: >-
+                The price for running continuously for a month (730 hours), in
+                USD.
+              example: 28.47
+
+  resource_pricing:
+    type: object
+    description: Per-resource rates, in USD.
+    properties:
+      price_per_vcpu_hour:
+        type: number
+        description: The price per vCPU per hour of running time.
+        example: 0.022
+      price_per_gib_memory_hour:
+        type: number
+        description: The price per GiB of memory per hour of running time.
+        example: 0.0085
+      price_per_gib_storage_month:
+        type: number
+        description: The price per GiB-month of disk and checkpoint storage.
+        example: 0.05
+      price_per_gib_bandwidth:
+        type: number
+        description: The price per GiB of outbound data transfer.
+        example: 0.01
+
+  account_limits:
+    type: object
+    description: Your team's MicroVM limits.
+    properties:
+      max_total_count:
+        type: integer
+        description: >-
+          The maximum number of MicroVMs, counting both running and paused
+          MicroVMs.
+        example: 1000
+      max_memory_bytes:
+        type: integer
+        format: int64
+        description: The maximum memory per MicroVM, in bytes.
+        example: 34359738368
+      max_disk_bytes:
+        type: integer
+        format: int64
+        description: The maximum disk per MicroVM, in bytes.
+        example: 429496729600
+      max_idle_timeout_seconds:
+        type: integer
+        description: The maximum auto-pause idle timeout, in seconds.
+        example: 14400
+
+  features:
+    type: array
+    description: Features and whether they are enabled for your team.
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the feature.
+          example: exec_pty
+        enabled:
+          type: boolean
+          description: Whether the feature is enabled.
+          example: true

@@ -1,0 +1,25 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      page, _, err := client.Models.List(ctx)
+      if err != nil {
+          panic(err)
+      }
+
+      for _, model := range page.Data {
+          fmt.Println(model.ID)
+      }
+  }

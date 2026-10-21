@@ -1,0 +1,6 @@
+lang: cURL
+source: |-
+  curl -X GET \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "X-Session-Id: $SESSION_ID" \
+    "https://actions.do-ai.run/tools?page_size=20"

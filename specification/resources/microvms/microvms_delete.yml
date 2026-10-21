@@ -1,0 +1,41 @@
+operationId: microvms_delete
+
+summary: Delete a MicroVM
+
+description: |
+  To delete a MicroVM and the data on its disk, send a DELETE request to
+  `/v2/microvms/{microvm_id}`. The MicroVM's checkpoints are not deleted.
+
+  A successful request returns a `204 No Content` status code.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_delete.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:delete'

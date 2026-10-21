@@ -1,0 +1,10 @@
+type: object
+description: |
+  Bearer token authentication as returned in API responses. The token is never
+  returned; `token_status` indicates whether it is configured.
+properties:
+  token_status:
+    allOf:
+      - $ref: 'secret_status.yml'
+    description: |
+      Present when a bearer token is configured. Omitted when not configured.

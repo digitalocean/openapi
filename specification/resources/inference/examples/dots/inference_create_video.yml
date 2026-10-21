@@ -1,0 +1,16 @@
+lang: JavaScript
+source: |-
+  import { InferenceClient } from "@digitalocean/dots";
+
+  const client = new InferenceClient({
+      apiKey: process.env.DIGITALOCEAN_TOKEN,
+  });
+
+  const job = await client.video.generations.create({
+      model: "wan2-2-t2v-a14b",
+      prompt: "Two anthropomorphic cats in boxing gear fight intensely on a spotlighted stage",
+      size: "1280x720",
+      fps: 16,
+  });
+
+  console.log(job.id, job.status);

@@ -113,6 +113,16 @@ properties:
       value is false. When enabled, a NAT gateway must exist in the VPC where
       the cluster is created.
 
+  gpu_operator_ready:
+    type: boolean
+    default: false
+    example: false
+    description: A boolean value indicating whether GPU nodes in the cluster
+      are launched with images that do not include pre-installed GPU drivers,
+      allowing GPU drivers to be managed by a GPU operator instead. Mutually exclusive with other
+      GPU-related cluster options, such as `nvidia_gpu_dra_driver` and
+      `amd_gpu_dra_driver`. When omitted on create, the default value is false.
+
   status:
     type: object
     readOnly: true
@@ -176,8 +186,12 @@ properties:
     type: boolean
     readOnly: true
     example: true
-    description: A read-only boolean value indicating if a container registry is
-      integrated with the cluster.
+    description: A boolean value indicating whether GPU nodes in the cluster are
+      launched with images that do not include pre-installed GPU drivers,
+      allowing GPU drivers to be managed by a GPU operator instead. Mutually
+      exclusive with other GPU-related cluster options, such as
+      `nvidia_gpu_dra_driver` and `amd_gpu_dra_driver`. When omitted on create,
+      the default value is false.
 
   control_plane_firewall:
     $ref: "control_plane_firewall.yml"

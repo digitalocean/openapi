@@ -1,0 +1,53 @@
+operationId: harness_list_reusable_sessions
+summary: ListReusableSessions lists the team's PAUSED sessions for the reuse picker.
+description: Returns the team's sessions in status PAUSED, for binding a session_mode=reuse trigger.
+  The item shape is the hosted-agents Session, so `agent_kind` and `status` use the AGENT_KIND_* /
+  SESSION_STATUS_* spelling; `status` is always SESSION_STATUS_PAUSED here.
+tags:
+- Harness Runtime
+parameters:
+- in: query
+  name: page_size
+  required: false
+  description: Page size. Defaults to 50 when omitted or non-positive; server-clamped.
+  schema:
+    type: integer
+    format: int32
+    minimum: 1
+    example: 50
+  example: 50
+- in: query
+  name: page_token
+  required: false
+  description: Opaque keyset cursor returned by the previous page. Empty starts from the beginning.
+  schema:
+    type: string
+    example: ''
+  example: ''
+responses:
+  '200':
+    description: A successful response.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/list_reusable_sessions_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_list_reusable_sessions.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

@@ -1,0 +1,40 @@
+description: >-
+  The response will be a JSON object with a key called `alert_instances`. This
+  will be set to an array of alert instance objects, each of which will contain
+  the standard attributes associated with an alert instance.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      allOf:
+        - type: object
+          properties:
+            alert_instances:
+              type: array
+              items:
+                $ref: '../models/alert_instance.yml'
+        - $ref: '../../../shared/pages.yml#/pagination'
+        - $ref: '../../../shared/meta.yml'
+    example:
+      alert_instances:
+        - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          rule_id: 8f3a2b1c-4d5e-6f7a-8b9c-0d1e2f3a4b5c
+          severity: warning
+          status: active
+          resource_urn: do:droplet:12345
+          value: 87.5
+          triggered_at: '2026-09-03T10:15:00Z'
+          last_triggered_at: '2026-09-03T10:45:00Z'
+          last_notified_at: '2026-09-03T10:15:00Z'
+      links:
+        pages: {}
+      meta:
+        total: 1

@@ -1,0 +1,11 @@
+type: object
+required:
+  - metric
+  - values
+properties:
+  metric:
+    $ref: 'prom_metric_labels.yml'
+  values:
+    type: array
+    items:
+      $ref: 'prom_sample.yml'

@@ -1,0 +1,22 @@
+type: object
+
+description: >-
+  What the MicroVM runs. Set exactly one of `oci_ref` or `checkpoint_id`.
+
+properties:
+  oci_ref:
+    type: string
+    description: >-
+      A reference to a `linux/amd64` container image in the form
+      `registry/repository:tag`. The image can be public, such as an image on
+      Docker Hub, or private in your team's DigitalOcean Container Registry.
+    example: docker.io/library/nginx:latest
+
+  checkpoint_id:
+    type: string
+    format: uuid
+    description: >-
+      The ID of a checkpoint to create the MicroVM from. The new MicroVM
+      inherits the checkpoint's region, size, container image, and environment
+      variables.
+    example: 01a0ed98-0a74-75dd-a625-e4856adbc298

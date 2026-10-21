@@ -1,0 +1,31 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      resp, _, err := client.BatchInference.ListJobs(ctx, &godo.ListBatchesOptions{
+          Limit: 20,
+      })
+      if err != nil {
+          panic(err)
+      }
+
+      for _, edge := range resp.Edges {
+          b := edge.Node
+          fmt.Printf("%s\t%s\t%s\n", b.BatchID, b.Status, b.CreatedAt)
+      }
+
+      fmt.Println("has_next_page:", resp.PageInfo.HasNextPage)
+      fmt.Println("end_cursor:   ", resp.PageInfo.EndCursor)
+  }

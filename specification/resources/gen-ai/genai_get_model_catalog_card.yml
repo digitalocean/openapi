@@ -44,6 +44,6 @@ security:
   - genai:read
 summary: Get Model Catalog Card
 tags:
-- GradientAI Platform
+- Agent Platform API
 x-codeSamples:
 - $ref: examples/curl/genai_get_model_catalog_card.yml

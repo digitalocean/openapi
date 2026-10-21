@@ -1,0 +1,5 @@
+lang: cURL
+source: |-
+  curl -X GET \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v1/signals/agents/019fb3d2-8a56-72cc-8bf9-9d21510b2a99/sessions?limit=20"

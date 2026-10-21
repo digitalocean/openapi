@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    --data-urlencode 'match[]={__name__="do.droplets.cpu_time"}' \
+    "https://api.digitalocean.com/v2/insights/query/nyc3/prom/api/v1/labels"

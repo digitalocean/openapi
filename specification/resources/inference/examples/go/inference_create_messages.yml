@@ -1,0 +1,39 @@
+lang: Go
+source: |-
+  package main
+
+  import (
+      "context"
+      "encoding/json"
+      "fmt"
+      "os"
+
+      "github.com/digitalocean/godo"
+  )
+
+  func main() {
+      client := godo.NewFromToken(os.Getenv("DIGITALOCEAN_TOKEN"))
+      ctx := context.Background()
+
+      content, err := json.Marshal("What is the capital of Portugal?")
+      if err != nil {
+          panic(err)
+      }
+
+      msg, _, err := client.Messages.New(ctx, &godo.MessageNewParams{
+          Model:     "claude-opus-4-6",
+          MaxTokens: 1024,
+          Messages: []godo.MessageParam{
+              {Role: "user", Content: content},
+          },
+      })
+      if err != nil {
+          panic(err)
+      }
+
+      for _, block := range msg.Content {
+          if block.Type == "text" {
+              fmt.Println(block.Text)
+          }
+      }
+  }

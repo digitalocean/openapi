@@ -1,0 +1,77 @@
+type: object
+
+description: >-
+  A checkpoint of a MicroVM's memory and disk. New MicroVMs created from a
+  checkpoint start from that state.
+
+properties:
+  id:
+    type: string
+    format: uuid
+    readOnly: true
+    description: The unique ID of the checkpoint.
+    example: 01a0ed98-0a74-75dd-a625-e4856adbc298
+
+  name:
+    type: string
+    description: >-
+      The name of the checkpoint. If you do not set one, a name such as
+      `checkpoint-20260929-143559` is generated.
+    example: checkpoint-20260929-143559
+
+  microvm_id:
+    type: string
+    format: uuid
+    readOnly: true
+    description: The ID of the MicroVM the checkpoint was taken from.
+    example: 01a0ed71-4efb-718f-9598-ca9cba942595
+
+  microvm_name:
+    type: string
+    readOnly: true
+    description: The name of the MicroVM the checkpoint was taken from.
+    example: example-microvm
+
+  region:
+    type: string
+    readOnly: true
+    description: The slug of the checkpoint's region.
+    example: mkc1
+
+  size:
+    $ref: 'microvm_size.yml'
+
+  status:
+    type: string
+    readOnly: true
+    enum:
+      - CHECKPOINT_CREATING
+      - CHECKPOINT_AVAILABLE
+      - CHECKPOINT_FAILED
+      - CHECKPOINT_DELETING
+      - CHECKPOINT_DELETED
+    description: >-
+      The checkpoint's status. You can create MicroVMs from the checkpoint
+      when it is `CHECKPOINT_AVAILABLE`.
+    example: CHECKPOINT_AVAILABLE
+
+  memory_bytes:
+    type: integer
+    format: int64
+    readOnly: true
+    description: The stored size of the checkpoint's memory, in bytes.
+    example: 2147483648
+
+  disk_bytes:
+    type: integer
+    format: int64
+    readOnly: true
+    description: The stored size of the checkpoint's disk, in bytes.
+    example: 1073741824
+
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: When the checkpoint was created, in ISO 8601 format.
+    example: "2026-09-29T14:35:59Z"

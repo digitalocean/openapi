@@ -1,0 +1,7 @@
+lang: bash
+source: |-
+  curl -N \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "Accept: text/event-stream" \
+    "https://api.digitalocean.com/v2/agents/sessions/{session_id}/events?replay_only=true"
+label: cURL

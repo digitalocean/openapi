@@ -1,0 +1,54 @@
+type: object
+description: >-
+  The evaluated answer for a single question. The fields that are populated
+  depend on the corresponding question's `type`.
+required:
+  - type
+properties:
+  type:
+    type: string
+    description: Echoes the `type` of the question this answer corresponds to.
+    enum:
+      - noul
+      - choice
+      - score
+    example: choice
+  noul:
+    type: number
+    format: double
+    description: Present when the question type is `noul`. A truth-likelihood value.
+    example: 0.74
+  choice:
+    type: string
+    description: >-
+      Present when the question type is `choice`. The selected option name
+      from the question's `criteria` map.
+    example: positive
+  score:
+    type: number
+    format: double
+    description: >-
+      Present when the question type is `score`. The numeric position along
+      the ordered rubric levels supplied in the question's `criteria`.
+    example: 2
+  legend:
+    type: object
+    additionalProperties: true
+    description: >-
+      Present when the question type is `score`. Maps rubric levels to their
+      corresponding numeric positions.
+  probabilities:
+    type: object
+    description: Calibrated probability for each possible answer value.
+    additionalProperties:
+      type: number
+      format: double
+    example:
+      positive: 0.82
+      negative: 0.05
+      mixed: 0.13
+  confidence:
+    type: number
+    format: double
+    description: Overall calibrated confidence in the returned answer.
+    example: 0.82

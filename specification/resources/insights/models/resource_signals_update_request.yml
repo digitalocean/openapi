@@ -1,0 +1,25 @@
+type: object
+description: >-
+  Request body for updating a resource's signal enablement. At least one of
+  `metrics`, `logs`, or `traces` must be set. Signals that are omitted are left
+  unchanged.
+properties:
+  region:
+    type: string
+    description: >-
+      The region slug for region-specific resources. Only used when the
+      resource has no existing enablement. On later updates, omit it or send the
+      stored value; changing the region is rejected.
+    example: nyc3
+  metrics:
+    type: boolean
+    description: Enable or disable the metrics signal. Omit to leave unchanged.
+    example: true
+  logs:
+    type: boolean
+    description: Enable or disable the logs signal. Omit to leave unchanged.
+    example: true
+  traces:
+    type: boolean
+    description: Enable or disable the traces signal. Omit to leave unchanged.
+    example: false

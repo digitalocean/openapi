@@ -1,0 +1,93 @@
+operationId: harness_create_trigger
+summary: CreateTrigger creates a webhook or cron trigger.
+description: |-
+  Validation is synchronous, so a mistake is a 400/409 at creation, not a silent miss at the first
+  fire. Exactly one of `webhook` / `cron` must be present and match `kind`. kind=cron forbids a
+  `webhook` block and requires a parseable `cron.cron_expr` and a valid IANA `cron.timezone`.
+  session_mode=fresh requires `session_template` (a well-formed agents.yaml Agent manifest) and
+  forbids `bound_session_id`; session_mode=reuse requires `bound_session_id` (an existing team-owned
+  session) and forbids `session_template`. `output.mode` selects the destination block (email/slack),
+  which is stored encrypted. `name` must be unique per team among non-deleted triggers.
+
+  For webhook triggers the response includes `webhook_secret` exactly ONCE - it is never returned
+  again. Cron triggers return no secret and carry a computed `trigger.cron.next_run_at`. The team and
+  user identity are taken from the authenticated principal, never the body.
+tags:
+- Harness Runtime
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/create_trigger_request
+  description: The trigger to create.
+responses:
+  '201':
+    description: Trigger created. `webhook_secret` present for webhook triggers only, shown once.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/create_trigger_response
+  '400':
+    description: Validation failed (bad manifest/cron/timezone, kind/block/mode mismatch, provider on
+      cron, payload placeholder in a cron prompt, invalid email, etc.).
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: The caller is not permitted to create the backing agent config for this trigger.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '409':
+    description: A non-deleted trigger with this name already exists for the team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '422':
+    description: The team's trigger limit has been reached.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '503':
+    description: An upstream dependency needed to validate the trigger is temporarily unavailable; retry.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '502':
+    description: The backing agent config service returned an unexpected error.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_create_trigger.yml
+security:
+- bearer_auth:
+  - agent_harness_session:create

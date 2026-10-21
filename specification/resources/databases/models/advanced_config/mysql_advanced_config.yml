@@ -84,6 +84,15 @@ properties:
     minimum: 900
     maximum: 31536000
     example: 86400
+  innodb_adaptive_hash_index:
+    description: >-
+      When enabled, InnoDB uses an adaptive hash index to speed up equality
+      lookups. The optimal setting is workload-dependent: it can improve
+      performance for some workloads, but under high concurrency the
+      associated latch can become a contention point, in which case
+      disabling it may improve throughput. Default is true.
+    type: boolean
+    example: true
   innodb_ft_enable_stopword:
     description: >-
       When enabled, the InnoDB FULLTEXT index stopword list is used. Disabled

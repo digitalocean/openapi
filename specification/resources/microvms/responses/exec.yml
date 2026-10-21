@@ -1,0 +1,23 @@
+description: >-
+  The command ran. HTTP 200 is returned even when the command itself fails.
+  Check `exit_code` for the command's result.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/exec.yml#/exec_response'
+
+    examples:
+      Command Output:
+        value:
+          stdout: ""
+          stderr: "nginx version: nginx/1.29.1\n"
+          exit_code: 0
