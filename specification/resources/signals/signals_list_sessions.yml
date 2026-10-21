@@ -4,14 +4,14 @@ summary: List Sessions for an Environment
 
 description: |
   To list signals sessions for a specific environment, send a GET request to
-  `/v1/signals/agents/{agent_id}/sessions`. Results are paginated using cursor-based
+  `/v1/signals/agents/{environment_id}/sessions`. Results are paginated using cursor-based
   pagination with `limit` and `after` parameters.
 
 tags:
   - Signals
 
 parameters:
-  - $ref: 'parameters.yml#/agent_id'
+  - $ref: 'parameters.yml#/environment_id'
   - $ref: 'parameters.yml#/limit'
   - $ref: 'parameters.yml#/after'
   - $ref: 'parameters.yml#/start_time'

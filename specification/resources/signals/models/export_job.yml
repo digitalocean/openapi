@@ -23,6 +23,11 @@ properties:
       is the Environment Config ID. Not meaningful for `inference` exports; use
       `type` to distinguish the export scope.
     example: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
+  environment_id:
+    type: string
+    format: uuid
+    description: Same as agent_id. Dual-emitted during the rename.
+    example: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
   status:
     type: string
     description: The current status of the export job.
@@ -72,5 +77,6 @@ properties:
 required:
   - export_id
   - agent_id
+  - environment_id
   - status
   - created_at
