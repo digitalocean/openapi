@@ -12,10 +12,10 @@ description: >-
   `filter`. The time range must not exceed 7 days (`168h`).
   `pagination.limit` defaults to 100 (also used when `limit` is `0`) and must
   be between 0 and 1000. Results are ordered by `started` descending unless
-  `orderBy` is set.
+  `order_by` is set.
 
-  JSON field names are camelCase (`timeRange`, `orderBy`, `hasMore`,
-  `traceId`). Unknown request properties, invalid filters, and out-of-range
+  JSON field names use snake_case (`time_range`, `order_by`, `has_more`,
+  `trace_id`). Unknown request properties, invalid filters, and out-of-range
   values are rejected with `400`.
 
   Each request searches a single region; there is no multi-region search.
@@ -48,7 +48,7 @@ requestBody:
         recent:
           summary: Most recent traces in the last 15 minutes
           value:
-            timeRange:
+            time_range:
               from:
                 relative: 15m
               to:
@@ -58,56 +58,62 @@ requestBody:
         filtered:
           summary: Traces from one service whose spans mention "timeout"
           value:
-            timeRange:
+            time_range:
               from:
                 relative: 24h
               to:
                 relative: now
             filter:
-              type: and
-              expressions:
-                - type: condition
-                  field:
-                    name: service.name
-                  operator: eq
-                  value: checkout-api
-                - type: text_search
-                  query: timeout
+              and:
+                expressions:
+                  - condition:
+                      field:
+                        name: service.name
+                      operator: FILTER_OPERATOR_EQ
+                      value:
+                        string_value: checkout-api
+                  - text_search:
+                      query: timeout
             pagination:
               limit: 100
         attributeIn:
           summary: Traces with error spans from either of two hosts
           value:
-            timeRange:
+            time_range:
               from:
                 absolute: "2026-10-09T00:00:00Z"
               to:
                 absolute: "2026-10-09T06:00:00Z"
             filter:
-              type: and
-              expressions:
-                - field:
-                    name: statusCode
-                  operator: eq
-                  value: Error
-                - field:
-                    name: host.name
-                    scope: resource
-                  operator: in
-                  value:
-                    - web-01
-                    - web-02
+              and:
+                expressions:
+                  - condition:
+                      field:
+                        name: status_code
+                      operator: FILTER_OPERATOR_EQ
+                      value:
+                        string_value: Error
+                  - condition:
+                      field:
+                        name: host.name
+                        scope: FIELD_SCOPE_RESOURCE
+                      operator: FILTER_OPERATOR_IN
+                      value:
+                        string_array_value:
+                          values:
+                            - web-01
+                            - web-02
         ordered:
           summary: Slowest traces first, ties broken by oldest start
           value:
-            timeRange:
+            time_range:
               from:
                 relative: 1h
               to:
                 relative: now
-            orderBy:
+            order_by:
               - field:
-                  name: durationNs
+                  name: duration_ns
                 direction: desc
               - field:
                   name: started

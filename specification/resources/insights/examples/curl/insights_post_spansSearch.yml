@@ -4,29 +4,28 @@ source: |-
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
-      "timeRange": {
+      "time_range": {
         "from": {"relative": "1h"},
         "to": {"relative": "now"}
       },
       "filter": {
-        "type": "and",
-        "expressions": [
-          {
-            "type": "condition",
-            "field": {"name": "service.name"},
-            "operator": "eq",
-            "value": {"type": "string", "value": "api-gateway"}
-          },
-          {
-            "type": "condition",
-            "field": {"name": "statusCode"},
-            "operator": "eq",
-            "value": {"type": "string", "value": "Error"}
-          }
-        ]
+        "and": {
+          "expressions": [
+            {"condition": {
+              "field": {"name": "service.name"},
+              "operator": "FILTER_OPERATOR_EQ",
+              "value": {"string_value": "api-gateway"}
+            }},
+            {"condition": {
+              "field": {"name": "status_code"},
+              "operator": "FILTER_OPERATOR_EQ",
+              "value": {"string_value": "Error"}
+            }}
+          ]
+        }
       },
-      "orderBy": [
-        {"field": {"name": "startTime"}, "direction": "desc"}
+      "order_by": [
+        {"field": {"name": "start_time"}, "direction": "desc"}
       ],
       "pagination": {"limit": 100}
     }' \

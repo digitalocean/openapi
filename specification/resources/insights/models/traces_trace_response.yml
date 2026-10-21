@@ -1,7 +1,7 @@
 type: object
 description: A single trace and all of its spans.
 properties:
-  traceId:
+  trace_id:
     type: string
     description: The trace identifier.
     example: "7b0b4e56abab38362b24e5498eb9ec64"
