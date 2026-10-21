@@ -1,7 +1,14 @@
 type: object
 description: A typed literal or list value for a traces filter condition. Exactly one kind is set per message.
-minProperties: 1
-maxProperties: 1
+oneOf:
+  - required:
+      - string_value
+  - required:
+      - number_value
+  - required:
+      - string_array_value
+  - required:
+      - number_array_value
 properties:
   string_value:
     type: string

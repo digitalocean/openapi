@@ -27,7 +27,7 @@ content:
         value: time range exceeds maximum of 168h0m0s
       invalid_order_direction:
         summary: Unsupported order_by direction
-        value: invalid order_by direction
+        value: invalid order_by direction "sideways"
       from_after_to:
         summary: Time range start after end
         value: time_range.from must be before or equal to time_range.to

@@ -21,4 +21,12 @@ properties:
       attributes; `attribute`, `attributes`, and `span.attributes` are
       accepted for span attributes. Omit for well-known fields or to search
       both attribute maps.
+    enum:
+      - FIELD_SCOPE_RESOURCE
+      - FIELD_SCOPE_ATTRIBUTES
+      - resource
+      - resource.attributes
+      - attribute
+      - attributes
+      - span.attributes
     example: FIELD_SCOPE_ATTRIBUTES

@@ -31,4 +31,12 @@ properties:
       `FIELD_SCOPE_ATTRIBUTES` reads span attributes and accepts `attribute`,
       `attributes`, or `span.attributes` as aliases. Omit to use the built-in
       column mapping described for `name`. Ignored in traces `order_by`.
+    enum:
+      - FIELD_SCOPE_RESOURCE
+      - FIELD_SCOPE_ATTRIBUTES
+      - resource
+      - resource.attributes
+      - attribute
+      - attributes
+      - span.attributes
     example: FIELD_SCOPE_RESOURCE

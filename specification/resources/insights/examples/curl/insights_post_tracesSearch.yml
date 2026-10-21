@@ -16,7 +16,7 @@ source: |-
           ]
         }
       },
-      "order_by": [{"field": {"name": "duration_ns"}, "direction": "SORT_DIRECTION_DESC"}],
+      "order_by": [{"field": {"name": "duration_ns"}, "direction": "desc"}],
       "pagination": {"limit": 50}
     }' \
     "https://api.digitalocean.com/v2/insights/query/nyc3/traces/search"

@@ -18,8 +18,10 @@ properties:
     $ref: 'traces_field_ref.yml'
   direction:
     type: string
-    description: The sort direction. Omit to use the server default.
+    description: >-
+      The sort direction, matched case-insensitively. Omit to use the server
+      default.
     enum:
-      - SORT_DIRECTION_ASC
-      - SORT_DIRECTION_DESC
-    example: SORT_DIRECTION_DESC
+      - asc
+      - desc
+    example: desc

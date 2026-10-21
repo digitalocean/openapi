@@ -25,7 +25,7 @@ source: |-
         }
       },
       "order_by": [
-        {"field": {"name": "start_time"}, "direction": "SORT_DIRECTION_DESC"}
+        {"field": {"name": "start_time"}, "direction": "desc"}
       ],
       "pagination": {"limit": 100}
     }' \

@@ -114,10 +114,10 @@ requestBody:
             order_by:
               - field:
                   name: duration_ns
-                direction: SORT_DIRECTION_DESC
+                direction: desc
               - field:
                   name: started
-                direction: SORT_DIRECTION_ASC
+                direction: asc
             pagination:
               limit: 20
 
