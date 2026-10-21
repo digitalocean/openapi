@@ -1536,8 +1536,7 @@ apiCandidateAgentConfig:
 apiCandidateInferenceConfig:
   description: |-
     Inference configuration for the candidate model during evaluation.
-    The output token limit is not configurable. For serverless candidates it is
-    set from the model's max output tokens in the model catalog.
+    The output token limit is set automatically and cannot be configured.
   properties:
     reasoning_effort:
       description: |-
