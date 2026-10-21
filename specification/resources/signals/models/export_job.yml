@@ -76,7 +76,6 @@ properties:
     example: null
 required:
   - export_id
-  - agent_id
-  - environment_id
   - status
   - created_at
+  - filters
