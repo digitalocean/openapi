@@ -1,5 +1,5 @@
 type: object
-description: A reference to a span field, used in filters and `orderBy`.
+description: A reference to a span field, used in filters and `order_by`.
 additionalProperties: false
 required:
   - name
@@ -8,34 +8,35 @@ properties:
     type: string
     description: >-
       The field name. Without `scope`, these names (case-insensitive) resolve
-      to built-in span columns: `traceId` (`trace.id`, `trace_id`), `spanId`
-      (`span.id`, `span_id`), `parentSpanId` (`parent.span.id`,
-      `parent_span_id`), `startTime` (`start_time`, `timestamp`), `endTime`
-      (`end_time`), `durationNs` (`duration`, in nanoseconds), `name`
-      (`span.name`), `kind` (`span.kind`), `statusCode` (`status.code`,
-      `status_code`), `statusMessage` (`status.message`, `status_message`),
-      and `serviceName` (`service.name`, `service_name`). Any other name is
+      to built-in span columns: `trace_id`, `span_id`, `parent_span_id`,
+      `start_time`, `end_time`, `duration_ns`, `name`
+      (`span.name`), `kind` (`span.kind`), `status_code` (`status.code`,
+      `status_code`), `status_message`,
+      and `service_name` (`service.name`). Any other name is
       looked up as a span attribute, falling back to a resource attribute.
       With `scope` set, `name` is always treated as an attribute key.
       Attribute keys may contain only letters, digits, and `.`, `_`, `-`,
       `/`, `:`, `@`.
 
 
-      In traces `orderBy`, `name` must be a trace-level sort field instead;
-      see the `orderBy` field description.
+      In traces `order_by`, `name` must be a trace-level sort field instead;
+      see the `order_by` field description.
     example: service.name
   scope:
     type: string
     description: >-
-      Restricts the lookup to one attribute map (case-insensitive).
-      `resource` (or `resource.attributes`) reads resource attributes;
-      `attribute` (or `attributes`, `span.attributes`) reads span attributes.
-      Omit to use the built-in column mapping described for `name`. Ignored
-      in traces `orderBy`.
+      Restricts the lookup to one attribute map and is matched
+      case-insensitively. `FIELD_SCOPE_RESOURCE` reads resource attributes
+      and accepts `resource` or `resource.attributes` as aliases.
+      `FIELD_SCOPE_ATTRIBUTES` reads span attributes and accepts `attribute`,
+      `attributes`, or `span.attributes` as aliases. Omit to use the built-in
+      column mapping described for `name`. Ignored in traces `order_by`.
     enum:
+      - FIELD_SCOPE_RESOURCE
+      - FIELD_SCOPE_ATTRIBUTES
       - resource
       - resource.attributes
       - attribute
       - attributes
       - span.attributes
-    example: resource
+    example: FIELD_SCOPE_RESOURCE

@@ -1,32 +1,32 @@
 type: object
 description: A single span belonging to a trace.
 required:
-  - traceId
-  - spanId
+  - trace_id
+  - span_id
 properties:
-  traceId:
+  trace_id:
     type: string
     description: The trace this span belongs to.
     example: "7b0b4e56abab38362b24e5498eb9ec64"
-  spanId:
+  span_id:
     type: string
     description: The span identifier.
     example: "e7867486e45cda47"
-  parentSpanId:
+  parent_span_id:
     type: string
     description: The parent span identifier. Omitted for the root span.
     example: "a2fb4a1d1a96d312"
-  startTime:
+  start_time:
     type: string
     format: date-time
     description: The span start time.
     example: "2026-10-09T06:44:37Z"
-  endTime:
+  end_time:
     type: string
     format: date-time
     description: The span end time.
     example: "2026-10-09T06:44:39Z"
-  durationNs:
+  duration_ns:
     type: integer
     format: int64
     description: Span duration in nanoseconds.
@@ -41,17 +41,17 @@ properties:
       The OpenTelemetry span kind as a string, for example `Server`,
       `Client`, or `Internal`.
     example: "Server"
-  statusCode:
+  status_code:
     type: string
     description: >-
       The OpenTelemetry span status code as a string: `Unset`, `Ok`, or
       `Error`.
     example: "Error"
-  statusMessage:
+  status_message:
     type: string
     description: The status description. Omitted when empty.
     example: "upstream timeout"
-  serviceName:
+  service_name:
     type: string
     description: >-
       The service that emitted the span. Omitted when the span has no
