@@ -1,29 +1,29 @@
 type: object
 description: A single span returned by a spans search.
 properties:
-  traceId:
+  trace_id:
     type: string
     description: The trace identifier the span belongs to.
     example: "4bf92f3577b34da6a3ce929d0e0e4736"
-  spanId:
+  span_id:
     type: string
     description: The span identifier.
     example: "00f067aa0ba902b7"
-  parentSpanId:
+  parent_span_id:
     type: string
     description: The parent span identifier. Omitted for root spans.
     example: "00f067aa0ba902b6"
-  startTime:
+  start_time:
     type: string
     format: date-time
     description: The span start time.
     example: "2026-09-30T00:00:00Z"
-  endTime:
+  end_time:
     type: string
     format: date-time
     description: The span end time.
     example: "2026-09-30T00:00:01Z"
-  durationNs:
+  duration_ns:
     type: integer
     format: int64
     description: The span duration in nanoseconds.
@@ -36,15 +36,15 @@ properties:
     type: string
     description: The span kind.
     example: "Server"
-  statusCode:
+  status_code:
     type: string
     description: The span status code.
     example: "Ok"
-  statusMessage:
+  status_message:
     type: string
     description: The span status message. Omitted when empty.
     example: "connection reset by peer"
-  serviceName:
+  service_name:
     type: string
     description: The name of the service that emitted the span.
     example: "api-gateway"

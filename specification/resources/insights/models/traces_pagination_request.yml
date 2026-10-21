@@ -1,7 +1,7 @@
 type: object
 description: >-
   Limits the size of a traces search result set. There is no cursor; use
-  `pagination.hasMore` in the response to tell whether more traces matched,
+  `pagination.has_more` in the response to tell whether more traces matched,
   and narrow the time range or filter to see them.
 additionalProperties: false
 properties:
