@@ -128,14 +128,26 @@ endpoint_network_response:
 endpoint_insights:
   type: object
   nullable: true
-  description: Explicit customer telemetry choices; omission or null leaves no stored choice.
+  description: >-
+    Customer telemetry choices. For logs and traces independently, the latest
+    explicit true enables and false disables. Omission preserves the existing
+    value through updates, head replacement, and new-version creation; none of
+    these operations implicitly resets either choice. Metrics defaults are unchanged.
   properties:
     metrics:
       $ref: sessions.yml#/session_insights/properties/metrics
     logs:
-      $ref: sessions.yml#/session_insights/properties/logs
+      description: >-
+        Explicit true enables customer logs and false disables them. Omission
+        preserves the existing choice without an implicit reset.
+      allOf:
+        - $ref: sessions.yml#/session_insights/properties/logs
     traces:
-      $ref: sessions.yml#/session_insights/properties/traces
+      description: >-
+        Explicit true enables customer traces and false disables them. Omission
+        preserves the existing choice without an implicit reset.
+      allOf:
+        - $ref: sessions.yml#/session_insights/properties/traces
 
 endpoint_version_spec:
   type: object
@@ -172,6 +184,8 @@ endpoint_version:
   description: >-
     An immutable, live endpoint version. Its ID must encode endpoint_id and
     version_number. Deleting it does not reuse its number or change older versions.
+    Deletion is final: retries, replays, and later writes cannot resurrect its
+    identity. Identical contents require a new version identity and number.
     Omitted tools means every tool; a present selection with empty references means
     no tools. Policy and config retain omission versus explicitly empty objects.
   properties:
@@ -215,6 +229,10 @@ endpoint:
     The only public mutation allowed for a service-managed endpoint is deleting
     the endpoint itself and all its versions. Individual version creation,
     promotion, and deletion are not allowed for service-managed endpoints.
+    Deletion is final for this identity and all cascaded version identities;
+    retries, replays, and later writes cannot resurrect them. Reusing identical
+    contents after endpoint deletion requires a new endpoint identity and a new
+    version identity and number.
   properties:
     id:
       $ref: '#/endpoint_id'

@@ -7,6 +7,23 @@ endpoint_id:
     $ref: models/endpoints.yml#/endpoint_id
   example: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
 
+endpoint_delete_force:
+  name: force
+  in: query
+  required: false
+  description: >-
+    With true, overrides version deletion locks and deletes the endpoint and all
+    its versions. Omitted or false, a locked version blocks deletion and leaves
+    the endpoint and all versions unchanged. Force never bypasses authentication,
+    team, ownership, or IAM checks. Individual-version force behavior is unchanged.
+  schema:
+    type: boolean
+  examples:
+    protect_locks:
+      value: false
+    override_locks:
+      value: true
+
 version_id:
   name: version_id
   in: path

@@ -6,10 +6,19 @@ description: >-
   endpoints all return the same empty 204 response as a successful deletion.
   A service-managed endpoint may be deleted as a whole; its individual versions
   cannot be deleted through the public API.
+  With force omitted or false, a locked version blocks deletion and leaves the
+  endpoint and all versions unchanged. Explicit force=true overrides version
+  deletion locks and deletes the endpoint and all its versions. Force never
+  bypasses authentication, team, ownership, or IAM checks; a forbidden caller
+  changes nothing even with force=true. Individual-version force behavior is unchanged.
+  Deletion is final for the endpoint identity and all cascaded version identities;
+  retries, replays, and later writes cannot resurrect them. Reusing the same
+  contents requires a new endpoint identity and a new version identity and number.
 tags:
 - Action Gateway
 parameters:
 - $ref: endpoint_parameters.yml#/endpoint_id
+- $ref: endpoint_parameters.yml#/endpoint_delete_force
 responses:
   '204':
     description: The endpoint was deleted or no visible endpoint matched. The response is empty in either case.

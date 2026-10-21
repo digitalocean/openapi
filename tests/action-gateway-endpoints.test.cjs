@@ -75,6 +75,65 @@ test('endpoint deletion documents a uniform empty outcome for missing and hidden
   assert.match(operation.responses['204'].description, /empty in either case/);
 });
 
+test('endpoint force is optional, protects locks by default, and preserves authorization', () => {
+  const operation = spec.paths[prefix + '/endpoints/{endpoint_id}'].delete;
+  const params = operation.parameters.map(deref);
+  assert.deepEqual(params.map((param) => param.name), ['endpoint_id', 'force']);
+  const force = params[1];
+  assert.equal(force.in, 'query');
+  assert.equal(force.required, false);
+  assert.equal(force.schema.type, 'boolean');
+  const valid = ajv.compile(force.schema);
+  for (const value of [true, false]) assert.ok(valid(value));
+  for (const value of [null, '', 'true', 'false', 0, 1]) assert.equal(valid(value), false);
+  assert.deepEqual(Object.values(force.examples).map((example) => example.value), [false, true]);
+  for (const text of [force.description, operation.description]) {
+    assert.match(text, /[Oo]mitted or false, a locked version blocks deletion and leaves the endpoint and all versions unchanged/);
+    assert.match(text, /overrides version deletion locks and deletes the endpoint and all its versions/);
+    assert.match(text, /[Ff]orce never bypasses authentication, team, ownership, or IAM checks/);
+    assert.match(text, /Individual-version force behavior is unchanged/);
+  }
+  assert.match(operation.description, /a forbidden caller changes nothing even with force=true/);
+  assert.deepEqual(operation.security, [{ bearer_auth: ['action_gateway:delete'] }]);
+  const versionDelete = spec.paths[prefix + '/endpoint-versions/{version_id}'].delete;
+  assert.deepEqual(versionDelete.parameters.map(deref).map((param) => param.name), ['version_id']);
+  for (const [path, method] of operations) {
+    if (path === '/endpoints/{endpoint_id}' && method === 'delete') continue;
+    assert.equal(spec.paths[prefix + path][method].parameters?.map(deref)
+      .some((param) => param.name === 'force') || false, false);
+  }
+});
+
+test('version creation maps identity mismatch to 404 with the existing error shape', () => {
+  const operation = spec.paths[prefix + '/endpoints/{endpoint_id}/versions'].post;
+  assert.match(operation.description, /identity mismatch returns 404 endpoint_identity_mismatch/);
+  const response = deref(operation.responses['404']);
+  assert.match(response.description, /owner or actor differs/);
+  const media = response.content['application/json'];
+  for (const id of ['endpoint_not_found', 'endpoint_identity_mismatch']) {
+    const example = deref(media.examples[id]).value;
+    assert.equal(example.id, id);
+    assert.deepEqual(Object.keys(example).sort(), ['id', 'message']);
+    validate(media.schema, example);
+  }
+});
+
+test('deletion contracts prohibit resurrection and require fresh identities for identical contents', () => {
+  for (const path of ['/endpoints/{endpoint_id}', '/endpoint-versions/{version_id}']) {
+    const text = spec.paths[prefix + path].delete.description;
+    assert.match(text, /Deletion is final/);
+    assert.match(text, /[Rr]etries, replays, and later writes cannot resurrect/);
+    assert.match(text, /new version identity and (?:version )?number/);
+  }
+  assert.match(models.endpoint.description, /all cascaded version identities/);
+  assert.match(models.endpoint.description, /new endpoint identity/);
+  assert.match(models.endpoint_version.description, /Identical contents require a new version identity and number/);
+  const promotion = examples.promotion.value.version;
+  assert.notEqual(promotion.id, examples.publish.value.version.id);
+  assert.ok(promotion.version_number > examples.publish.value.version.version_number);
+  assert.equal(promotion.promoted_from_version_number, examples.publish.value.version.version_number);
+});
+
 test('creation and promotion document throttling and their applicable resource caps', () => {
   const cases = [
     ['/endpoints', 'endpoint_limit_exceeded', 'endpoint_limit', 50],
@@ -206,6 +265,46 @@ test('omitted and empty nested selections remain distinct, without defaults', ()
   inspect(models.endpoint_version_spec);
   inspect(models.endpoint_config);
   inspect(models.endpoint_policy);
+});
+
+test('logs and traces document independent explicit updates without omission resets', () => {
+  const insights = deref(spec.components.schemas.endpoint_insights);
+  assert.equal(insights.nullable, true);
+  assert.equal(insights.required, undefined);
+  assert.match(insights.description, /latest explicit true enables and false disables/);
+  assert.match(insights.description, /Omission preserves the existing value through updates, head replacement, and new-version creation/);
+  assert.match(insights.description, /Metrics defaults are unchanged/);
+  assert.doesNotMatch(insights.description, /null leaves no stored choice/);
+  const legacy = load('specification/resources/action_gateway/models/sessions.yml');
+  const request = checkModel('endpoint_version_spec');
+  for (const logs of [undefined, true, false]) {
+    for (const traces of [undefined, true, false]) {
+      const value = { insights: {} };
+      if (logs !== undefined) value.insights.logs = logs;
+      if (traces !== undefined) value.insights.traces = traces;
+      const before = structuredClone(value);
+      assert.ok(request(value), JSON.stringify(request.errors));
+      assert.deepEqual(value, before);
+    }
+  }
+  for (const signal of ['logs', 'traces']) {
+    const field = insights.properties[signal];
+    assert.match(field.description, /Explicit true enables .* and false disables/);
+    assert.match(field.description, /Omission preserves the existing choice without an implicit reset/);
+    const shape = deref(field.allOf[0]);
+    assert.deepEqual(shape, legacy.session_insights.properties[signal]);
+    assert.equal(shape.nullable, true);
+    assert.equal(shape.default, undefined);
+  }
+  assert.deepEqual(deref(insights.properties.metrics), legacy.session_insights.properties.metrics);
+  assert.deepEqual(examples.logs_disabled.value.insights, { logs: false });
+  assert.deepEqual(examples.traces_enabled.value.insights, { traces: true });
+  assert.equal(Object.hasOwn(examples.endpoint_version_spec.value, 'insights'), false);
+  assert.deepEqual(examples.publish_empty.value.version.insights, examples.publish.value.version.insights);
+  for (const path of ['/endpoints/{endpoint_id}/versions', '/endpoints/{endpoint_id}/versions:promote']) {
+    assert.match(spec.paths[prefix + path].post.description, /[Hh]ead replacement/);
+    assert.match(spec.paths[prefix + path].post.description, /[Ii]dentical contents/);
+  }
 });
 
 test('list contracts use bounded keyset pagination, never offsets or totals', () => {

@@ -7,6 +7,9 @@ description: >-
   published. Inaccessible or deleted versions return 404 endpoint_version_not_found.
   Individual versions of service-managed endpoints cannot be deleted through the
   public API; only the endpoint itself may be deleted as a whole.
+  Deletion is final for the version identity. Retries, replays, and later writes
+  cannot resurrect it. Reusing identical contents requires a new version identity
+  and version number.
 tags:
 - Action Gateway
 parameters:

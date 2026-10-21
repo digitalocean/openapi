@@ -5,6 +5,10 @@ description: >-
   and sets promoted_from_version_number. Existing versions never change. Only the
   endpoint owner may promote. A deleted, inaccessible, or different endpoint's
   version returns 404 endpoint_version_not_found.
+  The new version always has a new identity and number, even for identical
+  contents; deleted identities are never resurrected. Head replacement does not
+  implicitly reset logs or traces: each signal retains its latest explicit
+  true or false choice when omitted.
 tags:
 - Action Gateway
 parameters:

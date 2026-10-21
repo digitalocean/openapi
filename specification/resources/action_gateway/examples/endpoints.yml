@@ -35,6 +35,20 @@ endpoint_version_spec:
     policy: {}
     config: {}
 
+logs_disabled:
+  summary: Disable logs while preserving the existing traces choice
+  value:
+    actor_id: alice
+    insights:
+      logs: false
+
+traces_enabled:
+  summary: Enable traces while preserving the existing logs choice
+  value:
+    actor_id: alice
+    insights:
+      traces: true
+
 endpoint_promotion:
   summary: Copy a live version into a new head
   value:
@@ -91,7 +105,7 @@ publish:
     version_mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/9a7c2d5b-6e8f-4a13-8f3c-2a6e1b4d4e0f
 
 publish_empty:
-  summary: Publish version 2 with no tools and explicitly empty policy and config
+  summary: Publish version 2 with empty selections and preserved telemetry choices
   value:
     endpoint:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
@@ -106,6 +120,7 @@ publish_empty:
           references: []
         policy: {}
         config: {}
+        insights: *insights
         created_at: '2026-10-16T13:00:00Z'
     version: *empty_version
     mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13

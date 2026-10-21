@@ -1,3 +1,23 @@
+version_creation_not_found:
+  description: >-
+    An inaccessible endpoint returns endpoint_not_found. A request whose owner
+    or actor differs from the endpoint returns endpoint_identity_mismatch.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: ../../shared/models/error.yml
+      examples:
+        endpoint_not_found:
+          value:
+            id: endpoint_not_found
+            message: The endpoint was not found.
+        endpoint_identity_mismatch:
+          value:
+            id: endpoint_identity_mismatch
+            message: The request owner or actor does not match the endpoint.
+
 endpoint_creation_limited:
   description: >-
     The API rate limit or your team's endpoint limit was exceeded. A rate-limit
