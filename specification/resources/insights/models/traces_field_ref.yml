@@ -25,12 +25,10 @@ properties:
   scope:
     type: string
     description: >-
-      Restricts the lookup to one attribute map (case-insensitive).
-      `resource` (or `resource.attributes`) reads resource attributes;
-      `attribute` (or `attributes`, `span.attributes`) reads span attributes.
-      Omit to use the built-in column mapping described for `name`. Ignored
-      in traces `order_by`.
-    enum:
-      - FIELD_SCOPE_RESOURCE
-      - FIELD_SCOPE_ATTRIBUTES
+      Restricts the lookup to one attribute map and is matched
+      case-insensitively. `FIELD_SCOPE_RESOURCE` reads resource attributes
+      and accepts `resource` or `resource.attributes` as aliases.
+      `FIELD_SCOPE_ATTRIBUTES` reads span attributes and accepts `attribute`,
+      `attributes`, or `span.attributes` as aliases. Omit to use the built-in
+      column mapping described for `name`. Ignored in traces `order_by`.
     example: FIELD_SCOPE_RESOURCE

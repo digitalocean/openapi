@@ -9,9 +9,6 @@ properties:
   number_value:
     type: number
     example: 500000000
-  bool_value:
-    type: boolean
-    example: true
   string_array_value:
     type: object
     required:
@@ -20,6 +17,7 @@ properties:
       values:
         type: array
         minItems: 1
+        maxItems: 100
         items:
           type: string
         example:
@@ -33,6 +31,7 @@ properties:
       values:
         type: array
         minItems: 1
+        maxItems: 100
         items:
           type: number
         example:

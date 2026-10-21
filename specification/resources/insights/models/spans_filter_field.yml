@@ -14,10 +14,11 @@ properties:
   scope:
     type: string
     description: >-
-      Optional attribute scope. Use `resource` to match a resource attribute or
-      `attributes` to match a span attribute. Omit for well-known fields or to
-      search both attribute maps.
-    enum:
-      - FIELD_SCOPE_RESOURCE
-      - FIELD_SCOPE_ATTRIBUTES
+      Optional attribute scope, matched case-insensitively. Use
+      `FIELD_SCOPE_RESOURCE` to match a resource attribute or
+      `FIELD_SCOPE_ATTRIBUTES` to match a span attribute. The aliases
+      `resource` and `resource.attributes` are accepted for resource
+      attributes; `attribute`, `attributes`, and `span.attributes` are
+      accepted for span attributes. Omit for well-known fields or to search
+      both attribute maps.
     example: FIELD_SCOPE_ATTRIBUTES
