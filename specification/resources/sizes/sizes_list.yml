@@ -15,6 +15,17 @@ tags:
 parameters:
   - $ref: '../../shared/parameters.yml#/per_page'
   - $ref: '../../shared/parameters.yml#/page'
+  - $ref: 'parameters.yml#/cpu_minimum'
+  - $ref: 'parameters.yml#/cpu_maximum'
+  - $ref: 'parameters.yml#/gpu_minimum'
+  - $ref: 'parameters.yml#/gpu_maximum'
+  - $ref: 'parameters.yml#/gpu_fabric'
+  - $ref: 'parameters.yml#/memory_minimum'
+  - $ref: 'parameters.yml#/memory_maximum'
+  - $ref: 'parameters.yml#/price_hourly_minimum'
+  - $ref: 'parameters.yml#/price_hourly_maximum'
+  - $ref: 'parameters.yml#/price_monthly_minimum'
+  - $ref: 'parameters.yml#/price_monthly_maximum'
 
 responses:
   '200':
