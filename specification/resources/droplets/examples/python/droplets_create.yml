@@ -9,7 +9,7 @@ source: |-
     "name": "example.com",
     "region": "nyc3",
     "size": "s-1vcpu-1gb",
-    "image": "ubuntu-20-04-x64",
+    "image": "ubuntu-26-04-x64",
     "ssh_keys": [
       289794,
       "3b:16:e4:bf:8b:00:8b:b8:59:8c:a9:d3:f0:19:fa:45"

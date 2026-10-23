@@ -18,7 +18,7 @@ source: |-
           Region: "nyc3",
           Size:   "s-1vcpu-1gb",
           Image: godo.DropletCreateImage{
-              Slug: "ubuntu-20-04-x64",
+              Slug: "ubuntu-26-04-x64",
           },
           SSHKeys: []godo.DropletCreateSSHKey{
               godo.DropletCreateSSHKey{ID: 289794},
