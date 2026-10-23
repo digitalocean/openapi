@@ -16,7 +16,7 @@ properties:
     type: string
     description: >
       The model to use for image generation.
-    example: "openai-gpt-image-1"
+    example: "openai-gpt-image-2"
   moderation:
     type: string
     nullable: true
@@ -60,7 +60,7 @@ properties:
   size:
     type: string
     description: >
-      The size of the generated images. GPT-IMAGE-1 supports: auto (automatically select best size), 1536x1024 (landscape), 1024x1536 (portrait).
+      The size of the generated images. GPT-IMAGE-2 supports: auto (automatically select best size), 1536x1024 (landscape), 1024x1536 (portrait).
     enum:
       - auto
       - 1536x1024
