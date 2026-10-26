@@ -435,7 +435,10 @@ test('endpoints and versions expose a read-only server-built mcp_url that matche
   }
   assert.equal(examples.endpoint.value.endpoint.mcp_url, examples.publish.value.mcp_url);
   assert.equal(examples.version.value.version.mcp_url, examples.publish.value.version_mcp_url);
-  assert.equal(examples.empty_endpoint.value.endpoint.mcp_url, examples.publish.value.mcp_url);
+  assert.match(
+    examples.empty_endpoint.value.endpoint.mcp_url,
+    live(examples.empty_endpoint.value.endpoint.id),
+  );
   // Read responses, lists, and nested objects accept the new field; the backing UUID has no standalone field.
   validate(spec.components.schemas.endpoint_publish_response, examples.promotion.value);
   validate(spec.components.schemas.endpoints_response, examples.endpoints.value);

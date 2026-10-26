@@ -272,10 +272,10 @@ endpoint:
       format: uri
       readOnly: true
       description: >-
-        Stable MCP URL that resolves the highest-numbered live version on every
-        request. It is the same value the create response returns as mcp_url.
-        An endpoint whose head version is VPC-bound uses the regional host.
-        Returned in responses only.
+        MCP URL that resolves the highest-numbered live version on every request.
+        Its host follows the head version's VPC region, or the default host when
+        no version is live. It is the same value the create response returns as
+        mcp_url. Returned in responses only.
       example: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
     created_at:
       type: string
@@ -342,7 +342,10 @@ endpoint_publish_response:
     mcp_url:
       type: string
       format: uri
-      description: Stable MCP URL that resolves the highest-numbered live version on every request.
+      description: >-
+        MCP URL that resolves the highest-numbered live version on every request.
+        Its host follows the head version's VPC region, or the default host when
+        no version is live.
       example: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
     version_mcp_url:
       type: string
