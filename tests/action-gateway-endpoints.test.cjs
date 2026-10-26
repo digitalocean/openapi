@@ -392,3 +392,53 @@ test('legacy paths, fields, pagination, and pinned URLs remain compatible', () =
   assert.deepEqual(listing.map((param) => param.name), ['end_user_id', 'page', 'per_page']);
   assert.ok(legacy.list_sessions_response.properties.pagination);
 });
+
+test('endpoints and versions expose a read-only server-built mcp_url that matches create-response URLs', () => {
+  const version = spec.components.schemas.endpoint_version.properties.mcp_url;
+  const endpoint = spec.components.schemas.endpoint.properties.mcp_url;
+  for (const property of [version, endpoint]) {
+    assert.equal(property.type, 'string');
+    assert.equal(property.format, 'uri');
+    assert.equal(property.readOnly, true);
+  }
+  for (const name of ['endpoint', 'endpoint_version']) {
+    assert.ok(!spec.components.schemas[name].required.includes('mcp_url'));
+  }
+  const base = /^https:\/\/[a-z0-9.-]+\/mcp\/endpoint\//;
+  const live = (id) => new RegExp(`${base.source}${id}$`);
+  const pinned = (id) => new RegExp(`${base.source}${id}/version/[0-9a-f-]{36}$`);
+  const uuid = checkModel('endpoint_id');
+  const seen = { endpoints: 0, versions: 0 };
+  const check = (value) => {
+    if (!value || typeof value !== 'object') return;
+    if (value.endpoint_id && value.version_number) {
+      assert.match(value.mcp_url, pinned(value.endpoint_id));
+      assert.ok(uuid(value.mcp_url.split('/').at(-1)));
+      assert.ok(!value.mcp_url.endsWith(value.id));
+      seen.versions += 1;
+    } else if (value.id && value.name && 'head_version_number' in value) {
+      assert.match(value.mcp_url, live(value.id));
+      seen.endpoints += 1;
+    }
+    Object.values(value).forEach(check);
+  };
+  for (const key of ['version', 'endpoint', 'empty_endpoint', 'publish', 'publish_empty', 'promotion', 'endpoints', 'versions']) {
+    check(examples[key].value);
+  }
+  assert.ok(seen.endpoints >= 6 && seen.versions >= 8, JSON.stringify(seen));
+  // Nested read objects equal the top-level create-response URLs for the same resource.
+  for (const key of ['publish', 'publish_empty', 'promotion']) {
+    const { endpoint: nested, version: pinnedVersion, mcp_url: url, version_mcp_url: versionUrl } = examples[key].value;
+    assert.equal(nested.mcp_url, url);
+    assert.equal(pinnedVersion.mcp_url, versionUrl);
+    assert.equal(nested.head_version.mcp_url, versionUrl);
+  }
+  assert.equal(examples.endpoint.value.endpoint.mcp_url, examples.publish.value.mcp_url);
+  assert.equal(examples.version.value.version.mcp_url, examples.publish.value.version_mcp_url);
+  assert.equal(examples.empty_endpoint.value.endpoint.mcp_url, examples.publish.value.mcp_url);
+  // Read responses, lists, and nested objects accept the new field; the backing UUID has no standalone field.
+  validate(spec.components.schemas.endpoint_publish_response, examples.promotion.value);
+  validate(spec.components.schemas.endpoints_response, examples.endpoints.value);
+  validate(spec.components.schemas.endpoint_versions_response, examples.versions.value);
+  assert.equal(Object.keys(spec.components.schemas.endpoint_version.properties).some((key) => /session/.test(key)), false);
+});

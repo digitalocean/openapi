@@ -73,6 +73,7 @@ version:
         vpc_uuid: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
         region: nyc3
       insights: *insights
+      mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/9a7c2d5b-6e8f-4a13-8f3c-2a6e1b4d4e0f
       created_at: '2026-10-15T14:00:00Z'
 
 endpoint:
@@ -85,6 +86,7 @@ endpoint:
       owning_user_id: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
       head_version_number: 1
       head_version: *version
+      mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       created_at: '2026-10-15T14:00:00Z'
       updated_at: '2026-10-15T14:00:00Z'
 
@@ -95,6 +97,7 @@ empty_endpoint:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
       head_version_number: 0
+      mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
 
 publish:
   summary: New head with floating and pinned MCP URLs
@@ -111,6 +114,7 @@ publish_empty:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
       head_version_number: 2
+      mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       head_version: &empty_version
         id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v2
         endpoint_id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
@@ -121,6 +125,7 @@ publish_empty:
         policy: {}
         config: {}
         insights: *insights
+        mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
         created_at: '2026-10-16T13:00:00Z'
     version: *empty_version
     mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
@@ -133,6 +138,7 @@ promotion:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
       head_version_number: 3
+      mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       head_version: &promoted
         id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v3
         endpoint_id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
@@ -148,6 +154,7 @@ promotion:
         config: *config
         network: *network_response
         insights: *insights
+        mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/3b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
         created_at: '2026-10-16T14:00:00Z'
     version: *promoted
     mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13

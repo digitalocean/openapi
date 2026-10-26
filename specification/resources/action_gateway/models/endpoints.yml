@@ -213,6 +213,16 @@ endpoint_version:
       $ref: '#/endpoint_network_response'
     insights:
       $ref: sessions.yml#/session_insights
+    mcp_url:
+      type: string
+      format: uri
+      readOnly: true
+      description: >-
+        Pinned MCP URL for this version, valid for the version's lifetime. It is
+        the same value the create response returns as version_mcp_url. Its final
+        segment is the backing session UUID, not the composite version ID.
+        VPC-bound versions may use a regional host. Returned in responses only.
+      example: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/9a7c2d5b-6e8f-4a13-8f3c-2a6e1b4d4e0f
     created_at:
       type: string
       format: date-time
@@ -257,6 +267,16 @@ endpoint:
       description: Embedded live head version. Absent when no live version remains.
       allOf:
         - $ref: '#/endpoint_version'
+    mcp_url:
+      type: string
+      format: uri
+      readOnly: true
+      description: >-
+        Stable MCP URL that resolves the highest-numbered live version on every
+        request. It is the same value the create response returns as mcp_url.
+        An endpoint whose head version is VPC-bound uses the regional host.
+        Returned in responses only.
+      example: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
     created_at:
       type: string
       format: date-time
