@@ -75,30 +75,13 @@ test('endpoint deletion documents a uniform empty outcome for missing and hidden
   assert.match(operation.responses['204'].description, /empty in either case/);
 });
 
-test('endpoint force is optional, protects locks by default, and preserves authorization', () => {
+test('endpoint deletion takes only the endpoint ID and preserves authorization', () => {
   const operation = spec.paths[prefix + '/endpoints/{endpoint_id}'].delete;
-  const params = operation.parameters.map(deref);
-  assert.deepEqual(params.map((param) => param.name), ['endpoint_id', 'force']);
-  const force = params[1];
-  assert.equal(force.in, 'query');
-  assert.equal(force.required, false);
-  assert.equal(force.schema.type, 'boolean');
-  const valid = ajv.compile(force.schema);
-  for (const value of [true, false]) assert.ok(valid(value));
-  for (const value of [null, '', 'true', 'false', 0, 1]) assert.equal(valid(value), false);
-  assert.deepEqual(Object.values(force.examples).map((example) => example.value), [false, true]);
-  for (const text of [force.description, operation.description]) {
-    assert.match(text, /[Oo]mitted or false, a locked version blocks deletion and leaves the endpoint and all versions unchanged/);
-    assert.match(text, /overrides version deletion locks and deletes the endpoint and all its versions/);
-    assert.match(text, /[Ff]orce never bypasses authentication, team, ownership, or IAM checks/);
-    assert.match(text, /Individual-version force behavior is unchanged/);
-  }
-  assert.match(operation.description, /a forbidden caller changes nothing even with force=true/);
+  assert.deepEqual(operation.parameters.map(deref).map((param) => param.name), ['endpoint_id']);
   assert.deepEqual(operation.security, [{ bearer_auth: ['action_gateway:delete'] }]);
   const versionDelete = spec.paths[prefix + '/endpoint-versions/{version_id}'].delete;
   assert.deepEqual(versionDelete.parameters.map(deref).map((param) => param.name), ['version_id']);
   for (const [path, method] of operations) {
-    if (path === '/endpoints/{endpoint_id}' && method === 'delete') continue;
     assert.equal(spec.paths[prefix + path][method].parameters?.map(deref)
       .some((param) => param.name === 'force') || false, false);
   }
