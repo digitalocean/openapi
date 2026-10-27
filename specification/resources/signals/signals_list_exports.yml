@@ -11,6 +11,8 @@ tags:
   - Signals
 
 parameters:
+  - $ref: 'parameters.yml#/environment_id_query'
+  - $ref: 'parameters.yml#/agent_id'
   - $ref: 'parameters.yml#/limit'
   - $ref: 'parameters.yml#/after'
 
