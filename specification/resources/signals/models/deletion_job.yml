@@ -30,6 +30,13 @@ properties:
       The Harness Runtime Environment Config ID (agent UUID) whose
       conversations are being deleted. Only present for `agent` deletions.
     example: 01a10d3f-2c09-764f-99f8-458e521627f3
+  environment_id:
+    type: string
+    format: uuid
+    description: >-
+      Same as agent_id when present. Dual-emitted during the rename; omitted
+      when agent_id is omitted.
+    example: 01a10d3f-2c09-764f-99f8-458e521627f3
   status:
     type: string
     description: The current status of the deletion job.

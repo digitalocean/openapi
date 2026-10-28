@@ -5,9 +5,9 @@ properties:
     type: string
     description: >-
       The scope of the deletion. `agent` deletes Signals conversations for one
-      Harness Runtime environment and requires `agent_id`. `inference` deletes
-      Serverless Inference Signals conversations for the whole team
-      (team-wide; omit `agent_id`).
+      Harness Runtime environment and requires `environment_id` (or deprecated
+      `agent_id`). `inference` deletes Serverless Inference Signals conversations
+      for the whole team (team-wide; omit `environment_id` and `agent_id`).
     enum:
       - agent
       - inference
@@ -17,14 +17,24 @@ properties:
     format: int64
     description: The team whose data should be deleted. Must match the authenticated team.
     example: 12345678
-  agent_id:
+  environment_id:
     type: string
     format: uuid
     description: >-
       The Harness Runtime Environment Config ID of the environment whose
-      conversations should be deleted. This is the environment's `agent_id`.
-      Required when `type` is `agent`; must be omitted when `type` is
-      `inference`.
+      conversations should be deleted. Required when `type` is `agent` if
+      `agent_id` is omitted; must be omitted when `type` is `inference`.
+      Prefer this over `agent_id`.
+    example: 01a10d3f-2c09-764f-99f8-458e521627f3
+  agent_id:
+    type: string
+    format: uuid
+    deprecated: true
+    description: >-
+      Deprecated alias for `environment_id`. Accepted for backward
+      compatibility; must equal `environment_id` when both are set. Both set
+      and different returns 400. Required when `type` is `agent` if
+      `environment_id` is omitted; must be omitted when `type` is `inference`.
     example: 01a10d3f-2c09-764f-99f8-458e521627f3
 required:
   - type
