@@ -2311,9 +2311,8 @@ apiCreateModelEvaluationRunInputPublic:
       description: |-
         Number of times to evaluate each dataset row (n-pass/epochs), so the
         result reports avg@k/pass@k/cons@k instead of a single score. Defaults
-        to 1 when unset. Capped at 3 until throughput/sharding work lands, since
-        each extra epoch roughly multiplies wall-clock run time. Not persisted
-        on presets.
+        to 1 when unset. Capped at 10, since each extra epoch roughly
+        multiplies wall-clock run time. Not persisted on presets.
       example: 1
       format: int64
       type: integer
