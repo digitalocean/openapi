@@ -3480,6 +3480,13 @@ apiEvaluationMetricResult:
       example: 123
       format: double
       type: number
+    passed:
+      description: |-
+        Whether the score met the metric's success threshold. Set for model
+        evaluation results only, and only when status is COMPLETED; omitted
+        for skipped or failed metrics.
+      example: true
+      type: boolean
     reasoning:
       description: Reasoning of the metric result.
       example: example string
