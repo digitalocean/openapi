@@ -1,8 +1,34 @@
-agent_id:
+environment_id:
   in: path
-  name: agent_id
-  description: A unique identifier for an environment. For Harness Runtime, this is the Environment Config ID.
+  name: environment_id
+  description: >-
+    A unique identifier for an environment. For Harness Runtime, this is the
+    Environment Config ID. Formerly named agent_id.
   required: true
+  schema:
+    type: string
+    format: uuid
+  example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
+
+environment_id_query:
+  in: query
+  name: environment_id
+  description: Optional filter by environment ID.
+  required: false
+  schema:
+    type: string
+    format: uuid
+  example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
+
+agent_id:
+  in: query
+  name: agent_id
+  deprecated: true
+  description: >-
+    Deprecated alias for environment_id. Accepted for backward compatibility;
+    must equal environment_id when both are set. Both set and different
+    returns 400.
+  required: false
   schema:
     type: string
     format: uuid
@@ -51,7 +77,7 @@ source_required:
     The consent source to update. Only team-level sources are accepted on
     this endpoint; currently `inference` (Serverless Inference chat
     completions). Per-environment consent (`agent`) is managed with
-    `PUT /v1/consent/{agent_id}` instead.
+    `PUT /v1/consent/{environment_id}` instead.
   required: true
   schema:
     type: string

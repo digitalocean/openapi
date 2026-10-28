@@ -15,7 +15,7 @@ source: |-
       ctx := context.Background()
 
       resp, _, err := client.ImageGenerations.Generate(ctx, &godo.ImageGenerateParams{
-          Model:   "openai-gpt-image-1",
+          Model:   "openai-gpt-image-2",
           Prompt:  "A cute baby sea otter floating on its back in calm blue water",
           Size:    godo.PtrTo("auto"),
           Quality: godo.PtrTo("auto"),
