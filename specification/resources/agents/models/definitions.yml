@@ -593,6 +593,15 @@ create_session_config_request:
         confers this, so one shared config cannot enrol every session created from it. Omit to leave
         the default (or to let the ?resume_on_topoff= query parameter supply it).
       example: false
+    workspace_id:
+      type: string
+      maxLength: 255
+      description: >-
+        Optional persistent workspace to attach at create; its files are mounted at `/workspace`. The
+        workspace must be `AVAILABLE`, otherwise the request returns 409. Accepted only in this JSON
+        form; an environment spec that contains workspace_id is rejected with 400. Returns 501 when
+        persistent workspaces are not enabled for the team.
+      example: 019a2f4e-8c1d-7b3a-9e5f-2d6c8a1b4e70
   description: >-
     Strict application/json CreateSession form. Loads config_id, resolves the config's single
     internal secret binding, and creates the session. Body capped at 16 KiB; no inline secrets.
@@ -998,6 +1007,12 @@ session:
         guest env value. Populated only for AGENT_KIND_OPENAI_CODEX sessions. Non-secret correlation
         metadata.
       example: example
+    workspace_id:
+      type: string
+      description: >-
+        The persistent workspace attached to the session, mounted at `/workspace`. Empty when the
+        session has none. Fork and rollback return 409 for a session that has a workspace.
+      example: 019a2f4e-8c1d-7b3a-9e5f-2d6c8a1b4e70
 
 session_origin:
   type: object
@@ -1406,6 +1421,132 @@ workspace_part_upload_urls:
       format: date-time
       description: Shared expiry for all URLs in this batch.
       example: '2026-07-27T12:00:00Z'
+workspace_state:
+  type: string
+  enum:
+  - AVAILABLE
+  - ATTACHING
+  - ATTACHED
+  - RELEASING
+  - FAILED
+  - DELETING
+  description: >-
+    Lifecycle state of a persistent workspace. `AVAILABLE`: ready to attach to a new session.
+    `ATTACHING`: a session is being created with it. `ATTACHED`: a session is using it. `RELEASING`:
+    the session was removed and the files are being saved. `FAILED`: the workspace could not be saved
+    or created; it keeps its last successful save. `DELETING`: a delete is in progress. States may be
+    added; treat an unknown value as unavailable.
+  example: AVAILABLE
+workspace:
+  type: object
+  description: >-
+    A persistent workspace: a set of files with its own ID, mounted at `/workspace` in the one session
+    it is attached to and kept when that session is removed.
+  required:
+  - workspace_id
+  - state
+  - size_limit_gib
+  - bytes_used
+  - created_at
+  - updated_at
+  - created_by
+  - updated_by
+  properties:
+    workspace_id:
+      type: string
+      description: Assigned at create and never reused. Treat it as an opaque string.
+      example: 019a2f4e-8c1d-7b3a-9e5f-2d6c8a1b4e70
+    name:
+      type: string
+      description: Optional label. Not unique, and never accepted in place of workspace_id.
+      example: notes
+    state:
+      $ref: '#/workspace_state'
+    attached_session_id:
+      type: string
+      description: The session that holds the workspace. Absent when no session does.
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    size_limit_gib:
+      type: integer
+      format: int32
+      description: >-
+        Size limit in GiB, fixed at create. It is a quota, so the filesystem total inside the session
+        is slightly lower.
+      example: 10
+    bytes_used:
+      type: integer
+      format: int64
+      description: >-
+        Estimated used space in bytes as of the last save. It can differ from the usage seen inside the
+        session.
+      example: 1073741824
+    last_saved_at:
+      type: string
+      format: date-time
+      description: Time of the newest complete save. Absent until the first save.
+      example: '2026-10-27T12:00:00Z'
+    created_at:
+      type: string
+      format: date-time
+      description: When the workspace was created.
+      example: '2026-10-27T11:00:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      description: >-
+        When a user request last changed the workspace. Equal to created_at until then. Saves made by
+        the platform do not change it.
+      example: '2026-10-27T11:00:00Z'
+    created_by:
+      type: string
+      description: UUID of the user that created the workspace.
+      example: 3c5d7e9f-1a2b-4c6d-8e0f-a1b2c3d4e5f6
+    updated_by:
+      type: string
+      description: UUID of the user whose request last changed the workspace. Equal to created_by until then.
+      example: 3c5d7e9f-1a2b-4c6d-8e0f-a1b2c3d4e5f6
+create_workspace_request:
+  type: object
+  additionalProperties: false
+  required:
+  - size_limit_gib
+  properties:
+    size_limit_gib:
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 100
+      description: >-
+        Size limit of the workspace in GiB, from 1 to 100. A team limit can lower the maximum. The size
+        cannot be changed after create.
+      example: 10
+    name:
+      type: string
+      description: Optional label. It does not need to be unique.
+      example: notes
+create_workspace_response:
+  type: object
+  properties:
+    workspace:
+      $ref: '#/workspace'
+get_workspace_response:
+  type: object
+  properties:
+    workspace:
+      $ref: '#/workspace'
+list_workspaces_response:
+  type: object
+  properties:
+    workspaces:
+      type: array
+      items:
+        $ref: '#/workspace'
+    next_page_token:
+      type: string
+      description: >-
+        Opaque cursor for the next page. Empty when there are no further pages. A page can hold fewer
+        results than page_size, so keep paging until this is empty.
+      example: ''
 agent_config_summary:
   type: object
   description: Lightweight list representation; the manifest is available from config reads, not list

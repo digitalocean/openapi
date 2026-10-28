@@ -103,7 +103,10 @@ responses:
   '404':
     $ref: ../../shared/responses/not_found.yml
   '409':
-    description: Team is at the active-session quota, or a live session name already exists.
+    description: >-
+      Team is at the active-session quota, a live session name already exists, or the requested
+      workspace_id is not AVAILABLE (attached to another session, still being saved, FAILED, or being
+      deleted).
     headers: *id002
     content:
       application/json:
