@@ -2309,10 +2309,10 @@ apiCreateModelEvaluationRunInputPublic:
       type: string
     epochs:
       description: |-
-        Number of times to evaluate each dataset row (n-pass/epochs), so the
-        result reports avg@k/pass@k/cons@k instead of a single score. Defaults
-        to 1 when unset. Capped at 10, since each extra epoch roughly
-        multiplies wall-clock run time. Not persisted on presets.
+        How many times each dataset row is evaluated. Defaults to 1, maximum 10.
+        When more than 1, the results show how consistent the model is across
+        attempts (avg@k, pass@k, cons@k). Each extra attempt makes the run take
+        longer. Not saved in presets.
       example: 1
       format: int64
       type: integer
