@@ -137,12 +137,18 @@ endpoint_insights:
     metrics:
       $ref: sessions.yml#/session_insights/properties/metrics
     logs:
+      type: boolean
+      nullable: true
+      example: true
       description: >-
         Explicit true enables customer logs and false disables them. Omission
         preserves the existing choice without an implicit reset.
       allOf:
         - $ref: sessions.yml#/session_insights/properties/logs
     traces:
+      type: boolean
+      nullable: true
+      example: false
       description: >-
         Explicit true enables customer traces and false disables them. Omission
         preserves the existing choice without an implicit reset.
