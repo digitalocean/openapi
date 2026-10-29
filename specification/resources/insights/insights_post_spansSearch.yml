@@ -8,8 +8,8 @@ description: >-
   time range, optional filter, ordering, and pagination.
 
   The time range must not exceed 7 days. `pagination.limit` defaults to 100 and
-  must be between 1 and 1000. Results are ordered by `startTime` descending by
-  default. Cursor-based pagination is not yet supported; `pagination.hasMore`
+  must be between 1 and 1000. Results are ordered by `start_time` descending by
+  default. Cursor-based pagination is not yet supported; `pagination.has_more`
   indicates whether additional spans matched beyond the returned page.
 
 tags:

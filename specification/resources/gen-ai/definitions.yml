@@ -1534,12 +1534,10 @@ apiCandidateAgentConfig:
       type: string
   type: object
 apiCandidateInferenceConfig:
-  description: Inference configuration for the candidate model during evaluation.
+  description: |-
+    Inference configuration for the candidate model during evaluation.
+    The output token limit is set automatically and cannot be configured.
   properties:
-    max_tokens:
-      example: 123
-      format: int64
-      type: integer
     reasoning_effort:
       description: |-
         Reasoning effort for reasoning-capable models (e.g. "low", "medium",
@@ -2311,11 +2309,10 @@ apiCreateModelEvaluationRunInputPublic:
       type: string
     epochs:
       description: |-
-        Number of times to evaluate each dataset row (n-pass/epochs), so the
-        result reports avg@k/pass@k/cons@k instead of a single score. Defaults
-        to 1 when unset. Capped at 3 until throughput/sharding work lands, since
-        each extra epoch roughly multiplies wall-clock run time. Not persisted
-        on presets.
+        How many times each dataset row is evaluated. Defaults to 1, maximum 10.
+        When more than 1, the results show how consistent the model is across
+        attempts (avg@k, pass@k, cons@k). Each extra attempt makes the run take
+        longer. Not saved in presets.
       example: 1
       format: int64
       type: integer
@@ -8165,7 +8162,7 @@ apiPresetSaveSection:
 
      - PRESET_SAVE_SECTION_CANDIDATE: Candidate model identity (`candidate_model_uuid`, `candidate_model_source`,
     `candidate_model_name`) and the non-prompt inference params
-    (`max_tokens`, `temperature`, `stop_token`).
+    (`temperature`, `stop_token`, `reasoning_effort`).
      - PRESET_SAVE_SECTION_METRICS: The selected `metric_uuids` and the optional `star_metric`.
      - PRESET_SAVE_SECTION_JUDGE: The `judge_model_uuid`.
      - PRESET_SAVE_SECTION_DATASET: The `dataset_uuid`.

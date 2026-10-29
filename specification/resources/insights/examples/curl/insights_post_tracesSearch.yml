@@ -4,18 +4,19 @@ source: |-
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
-      "timeRange": {
+      "time_range": {
         "from": {"relative": "24h"},
         "to": {"relative": "now"}
       },
       "filter": {
-        "type": "and",
-        "expressions": [
-          {"type": "condition", "field": {"name": "service.name"}, "operator": "eq", "value": "checkout-api"},
-          {"type": "text_search", "query": "timeout"}
-        ]
+        "and": {
+          "expressions": [
+            {"condition": {"field": {"name": "service.name"}, "operator": "FILTER_OPERATOR_EQ", "value": {"string_value": "checkout-api"}}},
+            {"text_search": {"query": "timeout"}}
+          ]
+        }
       },
-      "orderBy": [{"field": {"name": "durationNs"}, "direction": "desc"}],
+      "order_by": [{"field": {"name": "duration_ns"}, "direction": "desc"}],
       "pagination": {"limit": 50}
     }' \
     "https://api.digitalocean.com/v2/insights/query/nyc3/traces/search"

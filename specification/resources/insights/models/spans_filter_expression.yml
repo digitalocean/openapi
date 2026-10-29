@@ -1,45 +1,58 @@
 type: object
 description: >-
-  A boolean filter tree for spans search. Set `type` to select the node kind:
-  `condition` compares a single field, `and`/`or`/`not` combine child
-  expressions, and `text_search` matches a substring across the span name,
-  service name, and status message.
-required:
-  - type
-properties:
-  type:
-    type: string
-    description: The node kind.
-    enum:
+  A boolean filter tree for spans queries. Exactly one node is set per
+  message. Trees may be nested at most 16 levels deep and contain at most 256
+  nodes in total.
+oneOf:
+  - required:
       - condition
+  - required:
       - and
+  - required:
       - or
+  - required:
       - not
+  - required:
       - text_search
-    example: condition
-  field:
-    $ref: 'spans_filter_field.yml'
-  operator:
-    type: string
-    description: The comparison operator for a `condition` node.
-    enum:
-      - eq
-      - neq
-      - gt
-      - gte
-      - lt
-      - lte
-      - in
-      - exists
-    example: eq
-  value:
-    $ref: 'spans_filter_value.yml'
-  expressions:
-    type: array
-    description: Child expressions for `and`, `or`, and `not` nodes.
-    items:
-      $ref: 'spans_filter_expression.yml'
-  query:
-    type: string
-    description: The substring to match for a `text_search` node.
-    example: "timeout"
+properties:
+  condition:
+    $ref: 'spans_filter_condition.yml'
+  and:
+    type: object
+    required:
+      - expressions
+    properties:
+      expressions:
+        type: array
+        minItems: 1
+        maxItems: 32
+        items:
+          $ref: 'spans_filter_expression.yml'
+  or:
+    type: object
+    required:
+      - expressions
+    properties:
+      expressions:
+        type: array
+        minItems: 1
+        maxItems: 32
+        items:
+          $ref: 'spans_filter_expression.yml'
+  not:
+    $ref: 'spans_filter_expression.yml'
+  text_search:
+    type: object
+    description: A substring search across the span name, service name, and status message.
+    required:
+      - query
+    properties:
+      query:
+        type: string
+        minLength: 1
+        maxLength: 256
+        pattern: '\S'
+        description: >-
+          The search string. Leading and trailing whitespace is trimmed, and
+          the remaining string must not be empty.
+        example: "timeout"

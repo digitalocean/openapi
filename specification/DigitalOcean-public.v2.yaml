@@ -2181,14 +2181,14 @@ paths:
     put:
       $ref: "resources/signals/signals_update_team_consent.yml"
 
-  /v1/consent/{agent_id}:
+  /v1/consent/{environment_id}:
     get:
       $ref: "resources/signals/signals_get_consent.yml"
 
     put:
       $ref: "resources/signals/signals_update_consent.yml"
 
-  /v1/signals/agents/{agent_id}/sessions:
+  /v1/signals/agents/{environment_id}/sessions:
     get:
       $ref: "resources/signals/signals_list_sessions.yml"
 

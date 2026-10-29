@@ -29,8 +29,9 @@ description: >-
   the regional traces backend cannot be reached, the response is `502` with a
   `text/plain` body.
 
-  JSON field names are camelCase (`traceId`, `spanId`, `startTime`, `endTime`,
-  `durationNs`, `serviceName`, `statusCode`, `parentSpanId`).
+  JSON field names use snake_case (`trace_id`, `span_id`, `start_time`,
+  `end_time`, `duration_ns`, `service_name`, `status_code`,
+  `parent_span_id`).
 
 tags:
   - Insights
