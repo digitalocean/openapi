@@ -931,7 +931,7 @@ session:
       format: date-time
       description: >-
         Timestamp of the most recent event in this session's canonical stream. Drives the inactivity
-        policy that destroys idle sessions.
+        policy that pauses idle sessions.
       example: '2026-08-01T12:00:00Z'
     keep_warm:
       type: boolean
