@@ -593,6 +593,14 @@ create_session_config_request:
         confers this, so one shared config cannot enrol every session created from it. Omit to leave
         the default (or to let the ?resume_on_topoff= query parameter supply it).
       example: false
+    region:
+      type: string
+      description: >-
+        Optional placement check, not a placement choice: the session is always created in the
+        region whose API host served the request. If set, it must equal that region, or the
+        request fails with 400 and a region_mismatch message. Honored only for teams on the
+        regional routing rollout; ignored otherwise.
+      example: ric1
   description: >-
     Strict application/json CreateSession form. Loads config_id, resolves the config's single
     internal secret binding, and creates the session. Body capped at 16 KiB; no inline secrets.
@@ -929,8 +937,7 @@ session:
       type: boolean
       description: >-
         Session is exempt from idle auto-pause (manifest keep_warm, or the agent-kind default:
-        hermes sessions keep warm). Pause requests against such a session are rejected with 409.
-        Omitted when false.
+        hermes sessions keep warm). It still accepts a manual pause. Omitted when false.
       example: false
     resume_on_topoff:
       type: boolean
@@ -998,6 +1005,13 @@ session:
         guest env value. Populated only for AGENT_KIND_OPENAI_CODEX sessions. Non-secret correlation
         metadata.
       example: example
+    region:
+      type: string
+      description: >-
+        DO region slug the session lives in, e.g. ric1. Stamped once at create from the region
+        whose API host served the request, and never changed. Returned only for teams on the
+        regional routing rollout; omitted otherwise.
+      example: ric1
 
 session_origin:
   type: object
@@ -1450,6 +1464,13 @@ agent_config_summary:
       type: string
       format: date-time
       example: '2026-08-01T12:00:00Z'
+    region:
+      type: string
+      description: >-
+        DO region slug the config lives in, e.g. ric1. Stamped once at create from the region
+        whose API host served the request, and never changed. Returned only for teams on the
+        regional routing rollout; omitted otherwise.
+      example: ric1
 agent_config_credential_slot:
   type: object
   required:
@@ -1533,6 +1554,13 @@ agent_config:
         included.
       items:
         $ref: '#/agent_config_credential_slot'
+    region:
+      type: string
+      description: >-
+        DO region slug the config lives in, e.g. ric1. Stamped once at create from the region
+        whose API host served the request, and never changed. Returned only for teams on the
+        regional routing rollout; omitted otherwise.
+      example: ric1
 agent_config_response:
   type: object
   properties:
