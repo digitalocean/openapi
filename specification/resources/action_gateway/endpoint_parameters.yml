@@ -1,0 +1,62 @@
+endpoint_id:
+  name: endpoint_id
+  in: path
+  required: true
+  description: Endpoint UUID only. Malformed IDs or full URNs return 400 invalid_endpoint_id.
+  schema:
+    $ref: models/endpoints.yml#/endpoint_id
+  example: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+
+version_id:
+  name: version_id
+  in: path
+  required: true
+  description: Composite version ID only. Invalid IDs return 400 invalid_endpoint_version_id.
+  schema:
+    $ref: models/endpoints.yml#/endpoint_version_id
+  example: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v1
+
+page_size:
+  name: page_size
+  in: query
+  required: false
+  description: >-
+    Page size; defaults to 20 when omitted. Supplied values outside 1 through 100
+    return 400. Sizes are not clamped.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 20
+  example: 20
+
+page_token:
+  name: page_token
+  in: query
+  required: false
+  description: >-
+    Opaque next_page_token from the previous response. Omit for the first page.
+    Malformed tokens or replay with a different team, caller visibility, normalized
+    filters, resource kind, or parent endpoint return 400. Tokens contain no full
+    URNs or database row IDs.
+  schema:
+    type: string
+  example: ''
+
+name:
+  name: name
+  in: query
+  required: false
+  description: Filter by endpoint name.
+  schema:
+    type: string
+  example: support-agent
+
+actor_id:
+  name: actor_id
+  in: query
+  required: false
+  description: Filter by the endpoint's actor binding.
+  schema:
+    type: string
+  example: alice

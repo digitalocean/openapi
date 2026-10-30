@@ -1,6 +1,10 @@
 operationId: sessions_create
+deprecated: true
 summary: Create a Session
 description: >-
+  Deprecated: use POST /v2/action-gateway/endpoints. Once endpoints are enabled for
+  your team, this route returns 410 session_creation_disabled. Existing sessions
+  and their MCP URLs keep working.
   Creates a session owned by your team, with a new session URN, and returns the MCP URL an agent connects
   to. tools selects the tools and toolbelts the session exposes, and policy decides which calls run, need
   approval, or are refused.
@@ -37,6 +41,17 @@ requestBody:
           outputViews:
             exa_web_search: titles-and-urls
 responses:
+  '410':
+    description: New session creation is disabled for this team. Create an endpoint instead.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: ../../shared/models/error.yml
+        example:
+          id: session_creation_disabled
+          message: Sessions are read-only. Create an endpoint with POST /v2/action-gateway/endpoints.
   '200':
     description: The session was created.
     headers:

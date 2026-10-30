@@ -957,6 +957,36 @@ paths:
     delete:
       $ref: "resources/action_gateway/outputViews_delete.yml"
 
+  /v2/action-gateway/endpoints:
+    post:
+      $ref: "resources/action_gateway/endpoints_create.yml"
+    get:
+      $ref: "resources/action_gateway/endpoints_list.yml"
+
+  /v2/action-gateway/endpoints/{endpoint_id}:
+    get:
+      $ref: "resources/action_gateway/endpoints_get.yml"
+    patch:
+      $ref: "resources/action_gateway/endpoints_patch.yml"
+    delete:
+      $ref: "resources/action_gateway/endpoints_delete.yml"
+
+  /v2/action-gateway/endpoints/{endpoint_id}/versions:
+    post:
+      $ref: "resources/action_gateway/endpointVersions_create.yml"
+    get:
+      $ref: "resources/action_gateway/endpointVersions_list.yml"
+
+  /v2/action-gateway/endpoints/{endpoint_id}/versions:promote:
+    post:
+      $ref: "resources/action_gateway/endpointVersions_create_promotion.yml"
+
+  /v2/action-gateway/endpoint-versions/{version_id}:
+    get:
+      $ref: "resources/action_gateway/endpointVersions_get.yml"
+    delete:
+      $ref: "resources/action_gateway/endpointVersions_delete.yml"
+
   /v2/action-gateway/sessions:
     post:
       $ref: "resources/action_gateway/sessions_create.yml"

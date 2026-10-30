@@ -1,0 +1,57 @@
+operationId: endpointVersions_create
+summary: Create an Endpoint Version
+description: >-
+  Publishes a new immutable version as the endpoint's head. Only the endpoint
+  owner may create versions, and the actor binding must match the endpoint. An
+  identity mismatch returns 404 endpoint_identity_mismatch. Inaccessible endpoints
+  return 404 endpoint_not_found.
+  Publishing identical contents still creates a new version identity and number;
+  it never resurrects a deleted version. For logs and traces, the latest explicit
+  true or false wins independently; an omitted signal preserves its existing
+  value through new-version creation and head replacement, without an implicit reset.
+tags:
+- Action Gateway
+parameters:
+- $ref: endpoint_parameters.yml#/endpoint_id
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/endpoints.yml#/endpoint_version_spec
+      examples:
+        request:
+          $ref: examples/endpoints.yml#/endpoint_version_spec
+        logs_disabled:
+          $ref: examples/endpoints.yml#/logs_disabled
+        traces_enabled:
+          $ref: examples/endpoints.yml#/traces_enabled
+responses:
+  '201':
+    description: The new head version was created.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/endpoints.yml#/endpoint_publish_response
+        examples:
+          response:
+            $ref: examples/endpoints.yml#/publish_empty
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: endpoint_responses.yml#/version_creation_not_found
+  '429':
+    $ref: endpoint_responses.yml#/version_creation_limited
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  'default':
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/endpointVersions_create.yml
+security:
+- bearer_auth:
+  - action_gateway:create

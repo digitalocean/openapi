@@ -1,0 +1,35 @@
+operationId: endpoints_delete
+summary: Delete an Endpoint
+description: >-
+  Deletes an endpoint and all its versions. The owner or a team owner may delete
+  it. Missing endpoints, endpoints outside your team, and otherwise invisible
+  endpoints all return the same empty 204 response as a successful deletion.
+  A service-managed endpoint may be deleted as a whole; its individual versions
+  cannot be deleted through the public API.
+  Deletion is final for the endpoint identity and all cascaded version identities;
+  retries, replays, and later writes cannot resurrect them. Reusing the same
+  contents requires a new endpoint identity and a new version identity and number.
+tags:
+- Action Gateway
+parameters:
+- $ref: endpoint_parameters.yml#/endpoint_id
+responses:
+  '204':
+    description: The endpoint was deleted or no visible endpoint matched. The response is empty in either case.
+    headers:
+      $ref: response_headers.yml
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  'default':
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/endpoints_delete.yml
+security:
+- bearer_auth:
+  - action_gateway:delete

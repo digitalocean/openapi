@@ -1,6 +1,9 @@
 operationId: sessions_list_search
+deprecated: true
 summary: Search Sessions
 description: >-
+  Deprecated: use GET /v2/action-gateway/endpoints for endpoints. This route
+  continues to search legacy sessions with its existing fields and pagination.
   Returns the sessions you can see whose name, `actor_id`, `session_urn`, or `agentName` contains query,
   case-insensitively, ranked across the whole result set. Cursor-paged with `page_size` and `page_token`;
   no total is reported.

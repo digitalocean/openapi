@@ -1,0 +1,401 @@
+endpoint_id:
+  type: string
+  format: uuid
+  pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+  not:
+    pattern: '\s'
+  description: Lowercase, hyphenated endpoint UUID, without a URN prefix.
+  example: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+
+version_number:
+  type: integer
+  format: int64
+  minimum: 1
+  maximum: 4294967295
+  description: Positive unsigned 32-bit version number, never reused after deletion.
+  example: 1
+
+endpoint_version_id:
+  type: string
+  pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.v([1-9][0-9]{0,8}|[1-3][0-9]{9}|4[01][0-9]{8}|42[0-8][0-9]{7}|429[0-3][0-9]{6}|4294[0-8][0-9]{5}|42949[0-5][0-9]{4}|429496[0-6][0-9]{3}|4294967[01][0-9]{2}|42949672[0-8][0-9]|429496729[0-5])$'
+  not:
+    pattern: '\s'
+  description: >-
+    The endpoint UUID followed by .v and its version number, without a URN prefix.
+    The UUID is lowercase and hyphenated. The number is from 1 through 4294967295,
+    in decimal without signs or leading zeros. A bare UUID is not a version ID.
+  example: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v1
+
+endpoint_name:
+  type: string
+  pattern: '^[A-Za-z0-9._-]{1,64}$'
+  minLength: 1
+  maxLength: 64
+  description: Endpoint name, unique within your team.
+  example: support-agent
+
+endpoint_policy:
+  type: object
+  nullable: true
+  description: >-
+    Tool-permission policy. Omission or an empty object asks before every call.
+    Nested property names use snake_case, unlike the legacy session API.
+  properties:
+    default_action:
+      type: string
+      enum: [allow, ask, deny]
+      description: Action for calls no rule matches. Omission means ask.
+      example: ask
+    rules:
+      type: array
+      description: Rules for selected tools or toolbelts.
+      items:
+        type: object
+        required: [tool, action]
+        properties:
+          tool:
+            type: string
+            description: Selected tool slug or version-pinned toolbelt reference.
+            example: exa_web_search
+          match:
+            type: object
+            additionalProperties:
+              type: string
+            description: Argument conditions; an empty object matches every call to the tool.
+            example: {}
+          action:
+            type: string
+            enum: [allow, ask, deny]
+            description: Action when the rule matches.
+            example: allow
+      example: []
+
+endpoint_config:
+  type: object
+  description: >-
+    Version options. Omission leaves config absent; an explicit empty object is
+    preserved. Nested property names use snake_case.
+  properties:
+    preload_tools:
+      type: array
+      description: Tool names, optionally version-pinned, or version-pinned toolbelt references.
+      items:
+        type: string
+      example: [exa_web_search]
+    output_views:
+      type: object
+      maxProperties: 100
+      additionalProperties:
+        type: string
+      description: Maps up to 100 tool slugs to output-view names.
+      example:
+        exa_web_search: titles-and-urls
+    custom_instructions:
+      type: string
+      maxLength: 1000
+      description: Instructions for tools in this version.
+      example: Prefer primary sources and cite URLs.
+
+endpoint_network:
+  type: object
+  description: >-
+    VPC binding supplied at creation. Omitted when no binding was supplied.
+    region is output-only; requests containing it are rejected.
+  not:
+    required: [region]
+  properties:
+    vpc_uuid:
+      type: string
+      format: uuid
+      description: UUID of a VPC owned by your team in a supported region.
+      example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+
+endpoint_network_response:
+  type: object
+  description: VPC binding, including the VPC region recorded at creation. Omitted when no binding was supplied.
+  properties:
+    vpc_uuid:
+      $ref: '#/endpoint_network/properties/vpc_uuid'
+    region:
+      type: string
+      readOnly: true
+      description: >-
+        The VPC's region, recorded when the version was created. A tool call through
+        a connection whose VPC is in a different region is refused. This field is
+        returned in responses only and is rejected in requests.
+      example: nyc3
+
+endpoint_insights:
+  type: object
+  nullable: true
+  description: >-
+    Customer telemetry choices. For logs and traces independently, the latest
+    explicit true enables and false disables. Omission preserves the existing
+    value through updates, head replacement, and new-version creation; none of
+    these operations implicitly resets either choice. Metrics defaults are unchanged.
+  properties:
+    metrics:
+      $ref: sessions.yml#/session_insights/properties/metrics
+    logs:
+      type: boolean
+      nullable: true
+      example: true
+      description: >-
+        Explicit true enables customer logs and false disables them. Omission
+        preserves the existing choice without an implicit reset.
+      allOf:
+        - $ref: sessions.yml#/session_insights/properties/logs
+    traces:
+      type: boolean
+      nullable: true
+      example: false
+      description: >-
+        Explicit true enables customer traces and false disables them. Omission
+        preserves the existing choice without an implicit reset.
+      allOf:
+        - $ref: sessions.yml#/session_insights/properties/traces
+
+endpoint_version_spec:
+  type: object
+  description: >-
+    Immutable version configuration. The endpoint owner and actor cannot change
+    between versions. Omitted or empty actor_id means no actor binding.
+  properties:
+    actor_id:
+      type: string
+      pattern: '^([A-Za-z0-9._-]{1,64})?$'
+      description: Actor whose provider connections are used. Omitted or empty means no actor.
+      example: alice
+    policy:
+      $ref: '#/endpoint_policy'
+    tools:
+      type: array
+      description: >-
+        Omitted enables every tool; an explicit empty array enables no tools.
+        Direct tools use provider-qualified slugs, optionally pinned as tool@version.
+        Toolbelts must be pinned as toolbelt:name@version. Floating pins are rejected.
+      items:
+        type: string
+      example: [exa_web_search@1]
+    config:
+      $ref: '#/endpoint_config'
+    network:
+      $ref: '#/endpoint_network'
+    insights:
+      $ref: '#/endpoint_insights'
+
+endpoint_version:
+  type: object
+  required: [id, endpoint_id, version_number]
+  description: >-
+    An immutable, live endpoint version. Its ID must encode endpoint_id and
+    version_number. Deleting it does not reuse its number or change older versions.
+    Deletion is final: retries, replays, and later writes cannot resurrect its
+    identity. Identical contents require a new version identity and number.
+    Omitted tools means every tool; a present selection with empty references means
+    no tools. Policy and config retain omission versus explicitly empty objects.
+  properties:
+    id:
+      $ref: '#/endpoint_version_id'
+    endpoint_id:
+      $ref: '#/endpoint_id'
+    version_number:
+      $ref: '#/version_number'
+    promoted_from_version_number:
+      $ref: '#/version_number'
+    actor_id:
+      type: string
+      description: Actor binding shared by every version of the endpoint; empty means no actor.
+      example: alice
+    policy:
+      $ref: '#/endpoint_policy'
+    tools:
+      description: Canonical pinned selection; omitted means every tool, empty references means none.
+      allOf:
+        - $ref: sessions.yml#/session/properties/tools
+    config:
+      $ref: '#/endpoint_config'
+    network:
+      $ref: '#/endpoint_network_response'
+    insights:
+      $ref: sessions.yml#/session_insights
+    mcp_url:
+      type: string
+      format: uri
+      readOnly: true
+      description: >-
+        Pinned MCP URL for this version, valid for the version's lifetime. It is
+        the same value the create response returns as version_mcp_url. Its final
+        segment is the backing session UUID, not the composite version ID.
+        VPC-bound versions may use a regional host. Returned in responses only.
+      example: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/9a7c2d5b-6e8f-4a13-8f3c-2a6e1b4d4e0f
+    created_at:
+      type: string
+      format: date-time
+      description: When the version was created.
+      example: '2026-10-15T14:00:00Z'
+
+endpoint:
+  type: object
+  required: [id, name]
+  description: >-
+    A named lineage of immutable versions owned by its creating user. Only that
+    user may use it, rename it, create versions, or promote versions. A team owner
+    may also list and delete team endpoints, but may not use them or add versions.
+    The only public mutation allowed for a service-managed endpoint is deleting
+    the endpoint itself and all its versions. Individual version creation,
+    promotion, and deletion are not allowed for service-managed endpoints.
+    Deletion is final for this identity and all cascaded version identities;
+    retries, replays, and later writes cannot resurrect them. Reusing identical
+    contents after endpoint deletion requires a new endpoint identity and a new
+    version identity and number.
+  properties:
+    id:
+      $ref: '#/endpoint_id'
+    name:
+      $ref: '#/endpoint_name'
+    actor_id:
+      type: string
+      description: Immutable actor binding; empty means no actor.
+      example: alice
+    owning_user_id:
+      type: string
+      description: DigitalOcean user ID of the endpoint's owner.
+      example: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
+    head_version_number:
+      type: integer
+      format: int64
+      minimum: 0
+      maximum: 4294967295
+      description: Highest live version number, or zero when no live version remains.
+      example: 1
+    head_version:
+      description: Embedded live head version. Absent when no live version remains.
+      allOf:
+        - $ref: '#/endpoint_version'
+    mcp_url:
+      type: string
+      format: uri
+      readOnly: true
+      description: >-
+        MCP URL that resolves the highest-numbered live version on every request.
+        Its host follows the head version's VPC region, or the default host when
+        no version is live. It is the same value the create response returns as
+        mcp_url. Returned in responses only.
+      example: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+    created_at:
+      type: string
+      format: date-time
+      description: When the endpoint was created.
+      example: '2026-10-15T14:00:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      description: When the endpoint was last changed.
+      example: '2026-10-15T14:00:00Z'
+
+endpoint_create:
+  type: object
+  required: [name, version]
+  properties:
+    name:
+      $ref: '#/endpoint_name'
+    version:
+      $ref: '#/endpoint_version_spec'
+  description: Creates an endpoint and its first version atomically.
+
+endpoint_patch:
+  type: object
+  required: [name]
+  additionalProperties: false
+  properties:
+    name:
+      $ref: '#/endpoint_name'
+  description: Renames an endpoint; its identity and versions do not change.
+
+endpoint_promotion:
+  type: object
+  required: [version_id]
+  properties:
+    version_id:
+      $ref: '#/endpoint_version_id'
+  description: Live version of this endpoint whose configuration will be copied to a new head.
+
+endpoint_response:
+  type: object
+  required: [endpoint]
+  properties:
+    endpoint:
+      $ref: '#/endpoint'
+  description: Returns an endpoint, including its live head when one exists.
+
+endpoint_version_response:
+  type: object
+  required: [version]
+  properties:
+    version:
+      $ref: '#/endpoint_version'
+  description: Returns one immutable live version.
+
+endpoint_publish_response:
+  type: object
+  required: [endpoint, version, mcp_url, version_mcp_url]
+  properties:
+    endpoint:
+      $ref: '#/endpoint'
+    version:
+      $ref: '#/endpoint_version'
+    mcp_url:
+      type: string
+      format: uri
+      description: >-
+        MCP URL that resolves the highest-numbered live version on every request.
+        Its host follows the head version's VPC region, or the default host when
+        no version is live.
+      example: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+    version_mcp_url:
+      type: string
+      format: uri
+      description: >-
+        Pinned MCP URL, valid for this version's lifetime. Its final segment is
+        the backing session UUID, not the public composite version ID. VPC-bound
+        versions may use a regional host. Existing /mcp/session/ URLs keep working.
+      example: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/9a7c2d5b-6e8f-4a13-8f3c-2a6e1b4d4e0f
+  description: Returns the new head, its endpoint, and both MCP URLs.
+
+next_page_token:
+  type: string
+  description: >-
+    Opaque keyset cursor for the next page; an empty string marks the last page.
+    Bound to the team, caller visibility, normalized filters, resource kind, and
+    parent endpoint for version lists. Contains no full URNs or database row IDs.
+    Pass it unchanged as page_token with the same criteria.
+  example: ''
+
+endpoints_response:
+  type: object
+  required: [endpoints, next_page_token]
+  properties:
+    endpoints:
+      type: array
+      items:
+        $ref: '#/endpoint'
+      description: Endpoints ordered by creation time descending, then endpoint UUID descending.
+      example: []
+    next_page_token:
+      $ref: '#/next_page_token'
+  description: A keyset page without offsets or totals.
+
+endpoint_versions_response:
+  type: object
+  required: [versions, next_page_token]
+  properties:
+    versions:
+      type: array
+      items:
+        $ref: '#/endpoint_version'
+      description: Live versions ordered by version_number descending.
+      example: []
+    next_page_token:
+      $ref: '#/next_page_token'
+  description: A keyset page of live versions without offsets or totals.

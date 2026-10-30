@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"support-agent","version":{"actor_id":"alice","tools":["exa_web_search@1"],"policy":{"default_action":"ask"},"config":{"preload_tools":["exa_web_search"]}}}' \
+    "https://api.digitalocean.com/v2/action-gateway/endpoints"
