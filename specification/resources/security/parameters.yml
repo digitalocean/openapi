@@ -50,3 +50,42 @@ secret:
   schema:
     type: string
   example: my-database-password
+
+secret_region:
+  in: query
+  name: region
+  description: The region where the secret is stored.
+  required: true
+  schema:
+    type: string
+  example: nyc3
+
+secret_version:
+  in: path
+  name: version
+  description: The target version to revert to. Reverting creates a new version with the contents of this version.
+  required: true
+  schema:
+    type: integer
+    format: int32
+    minimum: 1
+  example: 1
+
+include_deleted:
+  in: query
+  name: include_deleted
+  description: Whether to include secrets that are pending deletion.
+  required: false
+  schema:
+    type: boolean
+    default: false
+  example: false
+
+secret_name_prefix:
+  in: query
+  name: name
+  description: Only return secrets whose names start with this value.
+  required: false
+  schema:
+    type: string
+  example: app
