@@ -1,0 +1,14 @@
+type: object
+nullable: true
+writeOnly: true
+description: An object specifying the Insights telemetry that the customer opts
+  in to for the Kubernetes cluster. This is only accepted when creating a
+  cluster and is not returned in responses. If the object is omitted, or if
+  `logs` is not set, no opt-in is recorded for the cluster.
+properties:
+  logs:
+    type: boolean
+    description: A boolean value indicating whether the cluster's logs are sent
+      to Insights. Setting this to `false` records an explicit opt-out. When
+      omitted, no choice is recorded.
+    example: true
