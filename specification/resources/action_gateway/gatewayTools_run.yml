@@ -17,6 +17,13 @@ description: >-
   call with the same arguments. A call that needs the end user to connect a
   provider fails with `_meta.status` set to `requires_authorization` or
   `requires_connection_configuration`.
+
+
+  Tools opted into result caching use the session's settings automatically.
+  Set cache on an individual tools entry to bypass caching or require a
+  fresher result. The result's _meta.cache reports cache hits. Hits still
+  incur the standard gateway invocation charge but no additional provider
+  charge, because the provider is not called.
 tags:
 - Action Gateway Data Plane
 servers:
@@ -64,6 +71,28 @@ responses:
                     - title: DigitalOcean | Cloud Infrastructure for Developers
                       url: https://www.digitalocean.com/
                   call_id: call_8b7c6d5e-4f3a-4b2c-9d1e-0f9a8b7c6d5e
+          cache_hit:
+            summary: A cached result from a session opted into caching
+            value:
+              total_count: 1
+              success_count: 1
+              error_count: 0
+              results:
+              - index: 0
+                tool: exa_web_search
+                version: '1'
+                result:
+                  status: succeeded
+                  output:
+                    provider: exa
+                    results:
+                    - title: DigitalOcean
+                      url: https://www.digitalocean.com/
+                  call_id: call_8b7c6d5e-4f3a-4b2c-9d1e-0f9a8b7c6d5e
+                  _meta:
+                    cache:
+                      status: HIT
+                      age_seconds: 12
           requires_approval:
             summary: A call that needs approval
             value:
