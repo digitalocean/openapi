@@ -1,0 +1,81 @@
+operationId: harness_list_workspaces
+summary: List the team's persistent workspaces.
+description: >-
+  Lists the calling team's persistent workspaces, optionally only those in one state. A page can hold
+  fewer results than page_size, so keep paging until next_page_token is empty.
+tags:
+- Harness Runtime
+parameters:
+- in: query
+  name: page_size
+  required: false
+  description: Page size. The server applies a default when omitted and clamps large values.
+  schema:
+    type: integer
+    format: int32
+    minimum: 1
+    example: 50
+  example: 50
+- in: query
+  name: page_token
+  required: false
+  description: Opaque cursor returned by the previous page. Empty starts from the beginning.
+  schema:
+    type: string
+    example: ''
+  example: ''
+- in: query
+  name: state
+  required: false
+  description: Only list workspaces in this state.
+  schema:
+    $ref: models/definitions.yml#/workspace_state
+  example: AVAILABLE
+responses:
+  '200':
+    description: A successful response.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/list_workspaces_response
+  '400':
+    description: Invalid page_token or state.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '501':
+    description: Persistent workspaces are not enabled for this team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '503':
+    description: Workspace state is temporarily unavailable. Retry.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_list_workspaces.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

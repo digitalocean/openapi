@@ -1,0 +1,107 @@
+operationId: harness_create_workspace
+summary: Create a persistent workspace.
+description: >-
+  Creates a persistent workspace with a fixed size limit. A workspace is a set of files with its own
+  ID that is mounted at `/workspace` in the session it is attached to, and is kept when that session
+  is removed. Attach it to a session by passing `workspace_id` when you create the session from an
+  Environment Config. A new workspace returns `201`. A retry with the same `Idempotency-Key` and body
+  within 24 hours returns the existing workspace with `200`. Persistent workspaces are in preview and
+  enabled per team; for a team without access this returns `501`.
+tags:
+- Harness Runtime
+parameters:
+- in: header
+  name: Idempotency-Key
+  required: false
+  description: >-
+    Optional key that makes retries safe. Within 24 hours, the same key and body return the
+    workspace the first request created, and the same key with a different body returns `422`.
+  schema:
+    type: string
+    maxLength: 255
+    example: 7f9c2ba4-e88f-4c2a-9d1e-0b6a1f3c5d21
+  example: 7f9c2ba4-e88f-4c2a-9d1e-0b6a1f3c5d21
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/create_workspace_request
+responses:
+  '201':
+    description: Workspace created.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/create_workspace_response
+  '200':
+    description: Replay of an earlier create with the same Idempotency-Key and body; returns that workspace.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/create_workspace_response
+  '400':
+    description: Invalid body, such as a missing or out-of-range size_limit_gib or an unknown field.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: The request has no user identity, or the team's account has been cleaned up.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '409':
+    description: >-
+      The team's workspace count or total size limit is reached, or a create with this
+      Idempotency-Key is still in progress or created a workspace that is being deleted.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '422':
+    description: The Idempotency-Key was already used with a different body.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '501':
+    description: Persistent workspaces are not enabled for this team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '503':
+    description: The workspace could not be confirmed. Retry with the same Idempotency-Key.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_create_workspace.yml
+security:
+- bearer_auth:
+  - agent_harness_session:create
