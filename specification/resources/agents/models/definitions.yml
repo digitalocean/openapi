@@ -617,6 +617,28 @@ get_session_response:
   properties:
     session:
       $ref: '#/session'
+harness_region:
+  type: object
+  description: One entry of the ListRegions catalog.
+  properties:
+    slug:
+      type: string
+      description: DO datacenter slug, valid as the region a session or config is created in. e.g. "ric1".
+      example: ric1
+    is_default:
+      type: boolean
+      description: True for the region a create lands in when none is named. Exactly one listed region
+        is the default and every team sees it.
+      example: true
+harness_regions_response:
+  type: object
+  description: Response for ListRegions.
+  properties:
+    regions:
+      type: array
+      description: Regions the team may place resources in, sorted by slug.
+      items:
+        $ref: '#/harness_region'
 hitl_outcome:
   type: string
   enum:

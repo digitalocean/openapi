@@ -1146,6 +1146,9 @@ paths:
   /v2/agents/configs/{config_id}/sessions:
     get:
       $ref: "resources/agents/agents_list_config_sessions.yml"
+  /v2/agents/regions:
+    get:
+      $ref: "resources/agents/agents_list_regions.yml"
   /v2/agents/sessions:
     get:
       $ref: "resources/agents/agents_list_sessions.yml"
