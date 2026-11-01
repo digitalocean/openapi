@@ -1,0 +1,27 @@
+description: A single dashboard.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - dashboard
+      properties:
+        dashboard:
+          $ref: '../models/dashboard.yml'
+    example:
+      dashboard:
+        uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        name: Droplet CPU
+        description: CPU utilization across production Droplets.
+        spec: '{"kind":"Dashboard","apiVersion":"perses.dev/v1alpha1","spec":{"display":{"name":"Droplet CPU","description":"CPU utilization across production Droplets."},"duration":"1h","variables":[],"layouts":[{"kind":"Grid","spec":{"items":[{"x":0,"y":0,"width":12,"height":6,"content":{"$ref":"#/spec/panels/cpu"}}]}}],"panels":{"cpu":{"kind":"Panel","spec":{"display":{"name":"CPU utilization"},"plugin":{"kind":"TimeSeriesChart","spec":{}},"queries":[{"kind":"TimeSeriesQuery","spec":{"plugin":{"kind":"MetricsTimeSeriesQuery","spec":{"metricName":"do.droplets.cpu_utilization","kind":"gauge","filters":[],"groupBy":[]}}}}]}}}}}'
+        created_at: '2026-10-29T10:21:44Z'
+        updated_at: '2026-10-29T10:21:44Z'

@@ -1,0 +1,39 @@
+operationId: insights_get_dashboard
+
+summary: Retrieve a Dashboard
+
+description: |
+  To retrieve a dashboard, send a GET request to
+  `/v2/insights/dashboards/{uuid}`.
+
+tags:
+  - Insights
+
+parameters:
+  - $ref: 'parameters.yml#/dashboard_uuid'
+
+responses:
+  '200':
+    $ref: 'responses/dashboard_response.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/dashboard_not_found.yml'
+
+  '429':
+    $ref: 'responses/dashboard_too_many_requests.yml'
+
+  '500':
+    $ref: 'responses/dashboard_server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/insights_get_dashboard.yml'
+
+security:
+  - bearer_auth:
+      - 'insights:read'

@@ -1,0 +1,21 @@
+description: >-
+  The request was malformed. Causes include an empty `spec`, a `spec` that is
+  not valid JSON, a `pagination.per_page` above `200`, or an unsupported
+  `pagination.sort` or `pagination.sort_direction`.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/dashboard_error.yml'
+    example:
+      error: spec is required
+      message: spec is required
+      code: 3
