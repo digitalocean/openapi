@@ -4,7 +4,8 @@ description: |-
   Connects one of your users, identified by `user_id`, to a provider so tools can act on their
   account. An OAuth connection starts pending, and authorization carries the URL to send the user to;
   read the connection until it is active or expired. A connection through a team API-key credential is
-  active immediately.
+  active immediately. Register the API key with `POST /v2/action-gateway/provider-credentials`
+  first, then set `credential.team_credential.credential_id` to the returned `credential.id`.
 
   There is one connection per provider and `user_id` for each DigitalOcean user who creates
   connections. Repeating the request returns the existing connection when its scopes cover the
@@ -19,15 +20,26 @@ requestBody:
     application/json:
       schema:
         $ref: models/connections.yml#/connection_create
-      example:
-        provider: jira
-        user_id: alice
-        scopes:
-        - write:jira-work
-        connection_parameters:
-          site_url: https://example.atlassian.net
-        credential:
-          digitalocean_oauth: {}
+      examples:
+        oauth:
+          summary: Connect using DigitalOcean's OAuth application
+          value:
+            provider: jira
+            user_id: alice
+            scopes:
+            - write:jira-work
+            connection_parameters:
+              site_url: https://example.atlassian.net
+            credential:
+              digitalocean_oauth: {}
+        api_key:
+          summary: Connect using a previously registered API-key credential
+          value:
+            provider: example-provider
+            user_id: user-123
+            credential:
+              team_credential:
+                credential_id: example-credential-id
 responses:
   '200':
     description: The connection was created.
