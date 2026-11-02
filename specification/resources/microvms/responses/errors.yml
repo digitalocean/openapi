@@ -69,6 +69,121 @@ not_found:
         code: NOT_FOUND
         message: MicroVM not found
 
+file_conflict:
+  description: >-
+    The file operation is not possible in the MicroVM's current state.
+    `WORKLOAD_NOT_RUNNING`: the workload container is not running.
+    `NOT_A_REGULAR_FILE`: the path is a directory, device, socket, or symlink.
+    `AGENT_UNSUPPORTED`: the MicroVM runs an image that predates file
+    transfer; recreate it.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      examples:
+        Not A Regular File:
+          value:
+            code: NOT_A_REGULAR_FILE
+            message: "/app is not a regular file"
+        Workload Not Running:
+          value:
+            code: WORKLOAD_NOT_RUNNING
+            message: "workload container is not running"
+        Agent Unsupported:
+          value:
+            code: AGENT_UNSUPPORTED
+            message: "this MicroVM does not support file transfer; recreate it to pick up the new agent"
+
+length_required:
+  description: The request has no `Content-Length` header.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: LENGTH_REQUIRED
+        message: "Content-Length is required"
+
+payload_too_large:
+  description: The file exceeds 64 MiB, or the guest disk is full.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: PAYLOAD_TOO_LARGE
+        message: "file exceeds the 67108864 byte limit"
+
+checksum_mismatch:
+  description: >-
+    The request body does not match the `sha256` query parameter. The target
+    file is unchanged.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: CHECKSUM_MISMATCH
+        message: "sha256 mismatch: expected e3b0c442…, got 9f86d081…"
+
+file_timeout:
+  description: >-
+    The transfer did not finish within 10 minutes. On upload the target file
+    is unchanged. On download, if the body had already started, the stream
+    ends short of `Content-Length` instead.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: FILE_TIMEOUT
+        message: "file transfer timed out"
+
 bad_gateway:
   description: >-
     The command did not reach the workload, for example because the container

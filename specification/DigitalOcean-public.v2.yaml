@@ -526,8 +526,8 @@ tags:
       resumes on the next HTTP request, command, or console session, with its
       memory, files, and processes intact. By sending requests to the
       `/v2/microvms` endpoints, you can create, list, pause, resume, and delete
-      MicroVMs, run commands and open a console in them, and create checkpoints
-      to start new MicroVMs from a saved state.
+      MicroVMs, run commands and open a console in them, upload and download
+      files, and create checkpoints to start new MicroVMs from a saved state.
 
       Each MicroVM serves its HTTP port at
       `https://{microvm_id}.{region}.microvm.ondigitalocean.com`. Requests to
@@ -2377,6 +2377,12 @@ paths:
   /v2/microvms/{microvm_id}/console:
     get:
       $ref: "resources/microvms/microvms_console.yml"
+
+  /v2/microvms/{microvm_id}/files:
+    put:
+      $ref: "resources/microvms/microvms_files_upload.yml"
+    get:
+      $ref: "resources/microvms/microvms_files_download.yml"
 
   /v2/microvms/{microvm_id}/checkpoints:
     post:
