@@ -4,9 +4,8 @@ description: >-
   Deletes a live version. Only the endpoint owner may delete versions. Deleting
   the head makes the highest-numbered remaining live version the head. With no
   live versions, the endpoint MCP URL fails closed until another version is
-  published. Inaccessible or deleted versions return 404 endpoint_version_not_found.
-  Individual versions of service-managed endpoints cannot be deleted through the
-  public API; only the endpoint itself may be deleted as a whole.
+  published. Inaccessible or deleted versions return 404 endpoint_version_not_found,
+  and so does a version of a service-managed endpoint, exactly as for an unknown ID.
   Deletion is final for the version identity. Retries, replays, and later writes
   cannot resurrect it. Reusing identical contents requires a new version identity
   and version number.

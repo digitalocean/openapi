@@ -7,8 +7,7 @@ description: >-
   version returns 404 endpoint_version_not_found.
   The new version always has a new identity and number, even for identical
   contents; deleted identities are never resurrected. Head replacement does not
-  implicitly reset logs or traces: each signal retains its latest explicit
-  true or false choice when omitted.
+  change the endpoint's Insights consent, which applies to every version.
 tags:
 - Action Gateway
 parameters:

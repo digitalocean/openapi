@@ -18,9 +18,9 @@ endpoint_create:
         custom_instructions: Prefer primary sources and cite URLs.
       network:
         vpc_uuid: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
-      insights: &insights
-        logs: true
-        traces: false
+    insights: &insights
+      logs: true
+      traces: false
 
 endpoint_patch:
   summary: Rename an endpoint
@@ -38,14 +38,12 @@ endpoint_version_spec:
 logs_disabled:
   summary: Disable logs while preserving the existing traces choice
   value:
-    actor_id: alice
     insights:
       logs: false
 
 traces_enabled:
   summary: Enable traces while preserving the existing logs choice
   value:
-    actor_id: alice
     insights:
       traces: true
 
@@ -72,7 +70,6 @@ version:
       network: &network_response
         vpc_uuid: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
         region: nyc3
-      insights: *insights
       mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/9a7c2d5b-6e8f-4a13-8f3c-2a6e1b4d4e0f
       created_at: '2026-10-15T14:00:00Z'
 
@@ -83,9 +80,8 @@ endpoint:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
       actor_id: alice
-      owning_user_id: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
-      head_version_number: 1
       head_version: *version
+      insights: *insights
       mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       created_at: '2026-10-15T14:00:00Z'
       updated_at: '2026-10-15T14:00:00Z'
@@ -96,7 +92,7 @@ empty_endpoint:
     endpoint:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
-      head_version_number: 0
+      insights: *insights
       mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
 
 publish:
@@ -113,7 +109,7 @@ publish_empty:
     endpoint:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
-      head_version_number: 2
+      insights: *insights
       mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       head_version: &empty_version
         id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v2
@@ -124,7 +120,6 @@ publish_empty:
           references: []
         policy: {}
         config: {}
-        insights: *insights
         mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
         created_at: '2026-10-16T13:00:00Z'
     version: *empty_version
@@ -137,7 +132,7 @@ promotion:
     endpoint:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
-      head_version_number: 3
+      insights: *insights
       mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       head_version: &promoted
         id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v3
@@ -153,7 +148,6 @@ promotion:
         policy: *policy
         config: *config
         network: *network_response
-        insights: *insights
         mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/3b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
         created_at: '2026-10-16T14:00:00Z'
     version: *promoted
@@ -171,3 +165,43 @@ versions:
   value:
     versions: [*version]
     next_page_token: ''
+
+endpoint_search:
+  summary: Final page of endpoints matching support
+  value:
+    endpoints: [*endpoint]
+    next_page_token: ''
+
+endpoint_from_session:
+  summary: Convert a legacy session into a named endpoint
+  value:
+    session_id: 4e6a8c0d-3b5f-4d7e-9a1c-2e4f6a8c0d3b
+    name: support-agent
+
+converted_session:
+  summary: The session is version 1 of the endpoint and keeps its backing UUID
+  value:
+    endpoint:
+      id: 3c5e7a9b-2d4f-4a6c-8e0b-1f3d5a7c9e2b
+      name: support-agent
+      actor_id: alice
+      head_version: &converted
+        id: 3c5e7a9b-2d4f-4a6c-8e0b-1f3d5a7c9e2b.v1
+        endpoint_id: 3c5e7a9b-2d4f-4a6c-8e0b-1f3d5a7c9e2b
+        version_number: 1
+        actor_id: alice
+        tools:
+          references:
+          - kind: SESSION_TOOL_REFERENCE_KIND_TOOL
+            name: exa_web_search
+            version: '1'
+        policy: *policy
+        mcp_url: https://actions.do-ai.run/mcp/endpoint/3c5e7a9b-2d4f-4a6c-8e0b-1f3d5a7c9e2b/version/4e6a8c0d-3b5f-4d7e-9a1c-2e4f6a8c0d3b
+        created_at: '2026-09-24T12:00:00Z'
+      insights: *insights
+      mcp_url: https://actions.do-ai.run/mcp/endpoint/3c5e7a9b-2d4f-4a6c-8e0b-1f3d5a7c9e2b
+      created_at: '2026-10-20T09:00:00Z'
+      updated_at: '2026-10-20T09:00:00Z'
+    version: *converted
+    mcp_url: https://actions.do-ai.run/mcp/endpoint/3c5e7a9b-2d4f-4a6c-8e0b-1f3d5a7c9e2b
+    version_mcp_url: https://actions.do-ai.run/mcp/endpoint/3c5e7a9b-2d4f-4a6c-8e0b-1f3d5a7c9e2b/version/4e6a8c0d-3b5f-4d7e-9a1c-2e4f6a8c0d3b

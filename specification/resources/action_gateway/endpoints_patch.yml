@@ -1,10 +1,15 @@
 operationId: endpoints_patch
-summary: Rename an Endpoint
+summary: Update an Endpoint
 description: >-
-  Renames an endpoint without changing its owner, actor, or versions. Only the
-  endpoint owner may rename it. An invalid name returns 400 invalid_endpoint_name;
-  a duplicate team name returns 409 endpoint_name_taken. Inaccessible endpoints
-  return 404 endpoint_not_found.
+  Renames an endpoint, changes its Insights consent, or both, without changing
+  its owner, actor, or versions. Send name, insights, or both. Insights merges
+  per signal: a metrics, logs, or traces value of true or false replaces that
+  signal, and an omitted signal keeps its stored value. The consent applies to
+  every version, including pinned and older versions. A body with no name and
+  no insights signal returns 400 endpoint_update_empty. Only the endpoint owner
+  may update it. An invalid name returns 400 invalid_endpoint_name; a duplicate
+  team name returns 409 endpoint_name_taken. Inaccessible endpoints return 404
+  endpoint_not_found.
 tags:
 - Action Gateway
 parameters:
@@ -18,6 +23,10 @@ requestBody:
       examples:
         request:
           $ref: examples/endpoints.yml#/endpoint_patch
+        logs_disabled:
+          $ref: examples/endpoints.yml#/logs_disabled
+        traces_enabled:
+          $ref: examples/endpoints.yml#/traces_enabled
 responses:
   '200':
     description: The request was successful.

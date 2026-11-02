@@ -4,8 +4,8 @@ description: >-
   Deletes an endpoint and all its versions. The owner or a team owner may delete
   it. Missing endpoints, endpoints outside your team, and otherwise invisible
   endpoints all return the same empty 204 response as a successful deletion.
-  A service-managed endpoint may be deleted as a whole; its individual versions
-  cannot be deleted through the public API.
+  A service-managed endpoint is invisible: deleting its ID returns the same 204
+  as an unknown ID and does not change it. Repeating a delete returns 204.
   Deletion is final for the endpoint identity and all cascaded version identities;
   retries, replays, and later writes cannot resurrect them. Reusing the same
   contents requires a new endpoint identity and a new version identity and number.

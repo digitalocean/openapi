@@ -14,7 +14,18 @@ const models = load('specification/resources/action_gateway/models/endpoints.yml
 const examples = load('specification/resources/action_gateway/examples/endpoints.yml');
 const ajv = new Ajv({ strict: false, allErrors: true });
 addFormats(ajv);
-ajv.addSchema(spec, 'api');
+// OpenAPI 3.0 `nullable` admits null for a composed schema; Ajv applies allOf to null as well.
+const nullableComposition = (node) => {
+  if (!node || typeof node !== 'object') return node;
+  if (Array.isArray(node)) return node.map(nullableComposition);
+  const out = Object.fromEntries(Object.entries(node).map(([key, child]) => [key, nullableComposition(child)]));
+  if (out.nullable === true && out.allOf) {
+    out.anyOf = [{ enum: [null] }, { allOf: out.allOf }];
+    delete out.allOf;
+  }
+  return out;
+};
+ajv.addSchema(nullableComposition(spec), 'api');
 const validate = (schema, value) => {
   const check = schema.$ref ? ajv.getSchema(`api${schema.$ref}`)
     : ajv.compile({ ...schema, components: spec.components });
@@ -24,11 +35,15 @@ const checkModel = (name) => ajv.getSchema(`api#/components/schemas/${name}`);
 const deref = (object) => object.$ref
   ? object.$ref.slice(2).split('/').reduce((value, key) => value[key.replace(/~1/g, '/').replace(/~0/g, '~')], spec)
   : object;
+const requestExamples = new Set(['endpoint_create', 'endpoint_patch', 'endpoint_version_spec',
+  'logs_disabled', 'traces_enabled', 'endpoint_promotion', 'endpoint_from_session']);
 const prefix = '/v2/action-gateway';
 const endpointId = examples.publish.value.endpoint.id;
 const operations = [
   ['/endpoints', 'post', 'create'],
   ['/endpoints', 'get', 'read'],
+  ['/endpoints/search', 'get', 'read'],
+  ['/endpoints:fromSession', 'post', 'update'],
   ['/endpoints/{endpoint_id}', 'get', 'read'],
   ['/endpoints/{endpoint_id}', 'patch', 'update'],
   ['/endpoints/{endpoint_id}', 'delete', 'delete'],
@@ -164,11 +179,20 @@ test('VPC region is returned but rejected from version creation input', () => {
   assert.deepEqual(examples.promotion.value.version.network, output);
 });
 
-test('service-managed mutation exception applies only to endpoint deletion', () => {
-  assert.match(models.endpoint.description, /only public mutation allowed for a service-managed endpoint is deleting the endpoint itself/);
-  assert.match(models.endpoint.description, /Individual version creation, promotion, and deletion are not allowed/);
+test('service-managed endpoints are indistinguishable from unknown IDs on every public route', () => {
+  const text = models.endpoint.description;
+  assert.match(text, /lists and search omit them/);
+  assert.match(text, /every read or write of one returns the same 404 as an unknown ID/);
+  assert.match(text, /deleting one returns the same 204 as deleting an unknown ID without changing it/);
+  assert.doesNotMatch(text, /only public mutation allowed/);
+  const remove = spec.paths[prefix + '/endpoints/{endpoint_id}'].delete;
+  assert.match(remove.description, /service-managed endpoint is invisible: deleting its ID returns the same 204 as an unknown ID/);
+  assert.match(remove.description, /Repeating a delete returns 204/);
   assert.match(spec.paths[prefix + '/endpoint-versions/{version_id}'].delete.description,
-    /Individual versions of service-managed endpoints cannot be deleted through the public API/);
+    /version of a service-managed endpoint, exactly as for an unknown ID/);
+  assert.match(spec.paths[prefix + '/endpoints/search'].get.description, /Service-managed endpoints are never returned/);
+  assert.match(spec.paths[prefix + '/endpoints:fromSession'].post.description,
+    /service-managed session, another user's session when you are not a team owner, and an unknown ID all return 404 session_not_found/);
 });
 
 test('endpoint and version IDs reject URNs, malformed forms, and uint32 overflow', () => {
@@ -212,16 +236,29 @@ test('cURL examples use the documented method, path, and request schema', () => 
   }
 });
 
-test('names, rename-only requests, and immutable version specs have the intended bounds', () => {
+test('names, partial endpoint updates, and immutable version specs have the intended bounds', () => {
   const name = checkModel('endpoint_name');
   for (const value of ['support-agent', 'A._-09', 'a'.repeat(64)]) assert.ok(name(value));
   for (const value of ['', 'a'.repeat(65), 'has space', 'has/slash']) assert.equal(name(value), false);
   const create = checkModel('endpoint_create');
   assert.equal(create({ name: 'support-agent' }), false);
   assert.ok(create({ name: 'support-agent', version: {} }));
+  assert.ok(create({ name: 'support-agent', version: {}, insights: { logs: true } }));
   const patch = checkModel('endpoint_patch');
-  assert.equal(patch({ name: 'support-agent', actor_id: 'other' }), false);
-  assert.equal(patch({}), false);
+  assert.equal(models.endpoint_patch.required, undefined);
+  assert.equal(models.endpoint_patch.additionalProperties, undefined);
+  for (const value of [{ name: 'support-agent' }, { insights: { logs: false } }, { insights: { traces: true } },
+    { insights: { metrics: true } }, { name: 'support-agent', insights: {} }, { name: 'support-agent', insights: { logs: true } }]) {
+    assert.ok(patch(value), JSON.stringify(value));
+  }
+  for (const value of [{}, { name: '' }, { name: 'has space' }]) assert.equal(patch(value), false, JSON.stringify(value));
+  assert.match(models.endpoint_patch.description, /only field is an empty insights object, returns 400 endpoint_update_empty/);
+  assert.match(models.endpoint_patch.description, /An empty insights object next to a name is a rename/);
+  const operation = spec.paths[prefix + '/endpoints/{endpoint_id}'].patch;
+  assert.match(operation.description, /no name and no insights signal returns 400 endpoint_update_empty/);
+  assert.match(operation.description, /omitted signal keeps its stored value/);
+  const media = operation.requestBody.content['application/json'];
+  assert.deepEqual(Object.keys(media.examples).sort(), ['logs_disabled', 'request', 'traces_enabled']);
 });
 
 test('omitted and empty nested selections remain distinct, without defaults', () => {
@@ -250,15 +287,21 @@ test('omitted and empty nested selections remain distinct, without defaults', ()
   inspect(models.endpoint_policy);
 });
 
-test('logs and traces document independent explicit updates without omission resets', () => {
+test('the endpoint owns Insights consent with independent explicit updates and no omission resets', () => {
   const insights = deref(spec.components.schemas.endpoint_insights);
   assert.equal(insights.nullable, true);
   assert.equal(insights.required, undefined);
+  assert.match(insights.description, /applies to every version of the endpoint, including pinned and older versions/);
   assert.match(insights.description, /latest explicit true enables and false disables/);
   assert.match(insights.description, /Omission preserves the existing value through updates, head replacement, and new-version creation/);
+  assert.match(insights.description, /a stored choice cannot be cleared/);
   assert.match(insights.description, /Metrics defaults are unchanged/);
   assert.doesNotMatch(insights.description, /null leaves no stored choice/);
   const legacy = load('specification/resources/action_gateway/models/sessions.yml');
+  for (const schema of ['endpoint', 'endpoint_create', 'endpoint_patch']) {
+    assert.equal(models[schema].properties.insights.$ref, '#/endpoint_insights', schema);
+  }
+  const patch = checkModel('endpoint_patch');
   const request = checkModel('endpoint_version_spec');
   for (const logs of [undefined, true, false]) {
     for (const traces of [undefined, true, false]) {
@@ -266,10 +309,36 @@ test('logs and traces document independent explicit updates without omission res
       if (logs !== undefined) value.insights.logs = logs;
       if (traces !== undefined) value.insights.traces = traces;
       const before = structuredClone(value);
+      assert.ok(patch(value), JSON.stringify(patch.errors));
       assert.ok(request(value), JSON.stringify(request.errors));
       assert.deepEqual(value, before);
     }
   }
+  // Version-level insights stays accepted for old clients but is deprecated and points to the endpoint.
+  const specInsights = models.endpoint_version_spec.properties.insights;
+  assert.equal(specInsights.deprecated, true);
+  assert.equal(specInsights.type, 'object');
+  assert.match(specInsights.description, /Deprecated: accepted and ignored/);
+  assert.match(specInsights.description, /PATCH \/v2\/action-gateway\/endpoints\/\{endpoint_id\}/);
+  const versionInsights = models.endpoint_version.properties.insights;
+  assert.equal(versionInsights.deprecated, true);
+  assert.equal(versionInsights.type, 'object');
+  assert.match(versionInsights.description, /Deprecated: always omitted/);
+  assert.match(versionInsights.description, /read the endpoint's insights/);
+  for (const key of ['version', 'publish', 'publish_empty', 'promotion', 'versions', 'converted_session']) {
+    const visit = (value) => {
+      if (!value || typeof value !== 'object') return;
+      if (value.endpoint_id && value.version_number) assert.equal(Object.hasOwn(value, 'insights'), false, key);
+      Object.values(value).forEach(visit);
+    };
+    visit(examples[key].value);
+  }
+  assert.equal(Object.hasOwn(examples.endpoint_create.value.version, 'insights'), false);
+  assert.deepEqual(examples.endpoint_create.value.insights, { logs: true, traces: false });
+  assert.match(spec.paths[prefix + '/endpoints'].post.description, /version\.insights is deprecated and ignored/);
+  assert.match(spec.paths[prefix + '/endpoints/{endpoint_id}/versions'].post.description,
+    /insights field is deprecated and ignored, and the endpoint's consent applies to the new version/);
+  assert.equal(spec.paths[prefix + '/endpoints/{endpoint_id}/versions'].post.requestBody.content['application/json'].examples.logs_disabled, undefined);
   for (const signal of ['logs', 'traces']) {
     const field = insights.properties[signal];
     assert.match(field.description, /Explicit true enables .* and false disables/);
@@ -280,10 +349,11 @@ test('logs and traces document independent explicit updates without omission res
     assert.equal(shape.default, undefined);
   }
   assert.deepEqual(deref(insights.properties.metrics), legacy.session_insights.properties.metrics);
-  assert.deepEqual(examples.logs_disabled.value.insights, { logs: false });
-  assert.deepEqual(examples.traces_enabled.value.insights, { traces: true });
+  assert.deepEqual(examples.logs_disabled.value, { insights: { logs: false } });
+  assert.deepEqual(examples.traces_enabled.value, { insights: { traces: true } });
   assert.equal(Object.hasOwn(examples.endpoint_version_spec.value, 'insights'), false);
-  assert.deepEqual(examples.publish_empty.value.version.insights, examples.publish.value.version.insights);
+  assert.deepEqual(examples.publish_empty.value.endpoint.insights, examples.publish.value.endpoint.insights);
+  assert.deepEqual(examples.promotion.value.endpoint.insights, examples.publish.value.endpoint.insights);
   for (const path of ['/endpoints/{endpoint_id}/versions', '/endpoints/{endpoint_id}/versions:promote']) {
     assert.match(spec.paths[prefix + path].post.description, /[Hh]ead replacement/);
     assert.match(spec.paths[prefix + path].post.description, /[Ii]dentical contents/);
@@ -324,8 +394,12 @@ test('public responses expose no internal identity keys and examples agree acros
     if (value.items) visit(value.items);
     for (const part of value.allOf || []) visit(part);
   };
-  for (const name of ['endpoint', 'endpoint_version', 'endpoint_publish_response', 'endpoints_response', 'endpoint_versions_response']) {
+  for (const name of ['endpoint', 'endpoint_version', 'endpoint_publish_response', 'endpoints_response',
+    'endpoint_search_response', 'endpoint_versions_response']) {
     visit(spec.components.schemas[name]);
+  }
+  for (const field of ['owning_user_id', 'head_version_number']) {
+    assert.equal(models.endpoint.properties[field], undefined, field);
   }
   const inspect = (value) => {
     if (!value || typeof value !== 'object') return;
@@ -334,7 +408,6 @@ test('public responses expose no internal identity keys and examples agree acros
     }
     if (value.head_version) {
       assert.equal(value.head_version.endpoint_id, value.id);
-      assert.equal(value.head_version.version_number, value.head_version_number);
     }
     if (value.version_mcp_url) {
       const tail = value.version_mcp_url.split('/').at(-1);
@@ -348,8 +421,8 @@ test('public responses expose no internal identity keys and examples agree acros
       inspect(child);
     }
   };
-  Object.values(examples).forEach((example) => inspect(example.value));
-  const fields = ['actor_id', 'policy', 'config', 'insights'];
+  Object.entries(examples).filter(([key]) => !requestExamples.has(key)).forEach(([, example]) => inspect(example.value));
+  const fields = ['actor_id', 'policy', 'config'];
   for (const field of fields) {
     assert.deepEqual(examples.publish.value.version[field], examples.endpoint_create.value.version[field]);
     assert.deepEqual(examples.promotion.value.version[field], examples.publish.value.version[field]);
@@ -366,9 +439,9 @@ test('legacy paths, fields, pagination, and pinned URLs remain compatible', () =
     assert.equal(operation.deprecated, true);
     assert.ok(operation.responses['200']);
     if (method === 'post') {
-      const gone = operation.responses['410'].content['application/json'];
-      assert.equal(gone.example.id, 'session_creation_disabled');
-      assert.match(gone.example.message, /POST \/v2\/action-gateway\/endpoints/);
+      // Legacy session creation stays available whether or not endpoints are enabled.
+      assert.equal(operation.responses['410'], undefined);
+      assert.match(operation.description, /keeps creating legacy sessions/);
       assert.match(operation.responses['200'].content['application/json'].example.mcpUrl, /\/mcp\/session\//);
     }
   }
@@ -388,6 +461,7 @@ test('legacy paths, fields, pagination, and pinned URLs remain compatible', () =
     endpoint_version_id: endpointId + '.v1',
     version_number: 1,
   });
+  assert.match(spec.paths[prefix + '/sessions/search'].get.description, /use GET \/v2\/action-gateway\/endpoints\/search/);
   const listing = spec.paths[prefix + '/sessions'].get.parameters.map(deref);
   assert.deepEqual(listing.map((param) => param.name), ['end_user_id', 'page', 'per_page']);
   assert.ok(legacy.list_sessions_response.properties.pagination);
@@ -416,18 +490,19 @@ test('endpoints and versions expose a read-only server-built mcp_url that matche
       assert.ok(uuid(value.mcp_url.split('/').at(-1)));
       assert.ok(!value.mcp_url.endsWith(value.id));
       seen.versions += 1;
-    } else if (value.id && value.name && 'head_version_number' in value) {
+    } else if (value.id && value.name && !value.endpoint_id && 'mcp_url' in value) {
       assert.match(value.mcp_url, live(value.id));
       seen.endpoints += 1;
     }
     Object.values(value).forEach(check);
   };
-  for (const key of ['version', 'endpoint', 'empty_endpoint', 'publish', 'publish_empty', 'promotion', 'endpoints', 'versions']) {
+  for (const key of ['version', 'endpoint', 'empty_endpoint', 'publish', 'publish_empty', 'promotion', 'endpoints',
+    'versions', 'endpoint_search', 'converted_session']) {
     check(examples[key].value);
   }
-  assert.ok(seen.endpoints >= 6 && seen.versions >= 8, JSON.stringify(seen));
+  assert.ok(seen.endpoints >= 8 && seen.versions >= 10, JSON.stringify(seen));
   // Nested read objects equal the top-level create-response URLs for the same resource.
-  for (const key of ['publish', 'publish_empty', 'promotion']) {
+  for (const key of ['publish', 'publish_empty', 'promotion', 'converted_session']) {
     const { endpoint: nested, version: pinnedVersion, mcp_url: url, version_mcp_url: versionUrl } = examples[key].value;
     assert.equal(nested.mcp_url, url);
     assert.equal(pinnedVersion.mcp_url, versionUrl);
@@ -444,4 +519,64 @@ test('endpoints and versions expose a read-only server-built mcp_url that matche
   validate(spec.components.schemas.endpoints_response, examples.endpoints.value);
   validate(spec.components.schemas.endpoint_versions_response, examples.versions.value);
   assert.equal(Object.keys(spec.components.schemas.endpoint_version.properties).some((key) => /session/.test(key)), false);
+});
+
+test('endpoint search is ranked, keyset paged, and bound to its query', () => {
+  const operation = spec.paths[prefix + '/endpoints/search'].get;
+  const params = operation.parameters.map(deref);
+  assert.deepEqual(params.map((param) => param.name), ['query', 'actor_id', 'page_size', 'page_token']);
+  const query = params.find((param) => param.name === 'query');
+  assert.equal(query.required, true);
+  assert.equal(query.schema.minLength, 1);
+  assert.match(query.description, /endpoint name, endpoint ID, actor_id, or agent name/);
+  assert.match(query.description, /empty query returns 400 invalid_search_query/);
+  assert.match(params.find((param) => param.name === 'actor_id').description, /Exact actor_id filter/);
+  assert.match(operation.description, /exact matches first, then prefix matches, then substring matches, then by name/);
+  assert.match(operation.description, /valid only with the same query and actor_id/);
+  const response = deref(operation.responses['200'].content['application/json'].schema);
+  assert.deepEqual(response.required, ['endpoints', 'next_page_token']);
+  assert.equal(response.properties.total, undefined);
+  assert.equal(deref(response.properties.endpoints.items), spec.components.schemas.endpoint);
+  // The fixed segment must not be read as an endpoint ID.
+  assert.equal(checkModel('endpoint_id')('search'), false);
+});
+
+test('session conversion keeps the session as version 1 and its pinned URL', () => {
+  const operation = spec.paths[prefix + '/endpoints:fromSession'].post;
+  assert.deepEqual(operation.security, [{ bearer_auth: ['action_gateway:update'] }]);
+  assert.ok(operation.responses['200']);
+  assert.ok(operation.responses['201']);
+  assert.match(operation.responses['200'].description, /already converted/);
+  assert.match(operation.description, /already converted returns its existing endpoint with 200/);
+  assert.match(operation.description, /400 session_owner_required/);
+  assert.match(operation.description, /\/mcp\/session\/ URL keeps working/);
+  assert.equal(deref(operation.responses['404']).content['application/json'].example.id, 'session_not_found');
+  assert.equal(deref(operation.responses['409']).content['application/json'].example.id, 'endpoint_name_taken');
+  const request = checkModel('endpoint_from_session');
+  const input = examples.endpoint_from_session.value;
+  assert.ok(request(input));
+  assert.ok(request({ session_id: input.session_id }));
+  for (const invalid of [{}, { name: 'support-agent' }, { session_id: input.session_id.toUpperCase() },
+    { session_id: `do:managed_agent_session:${input.session_id}` }, { session_id: input.session_id, name: '' }]) {
+    assert.equal(request(invalid), false, JSON.stringify(invalid));
+  }
+  assert.deepEqual(models.endpoint_from_session.required, ['session_id']);
+  assert.match(models.endpoint_from_session.description, /defaults to the session's agent name/);
+  const output = examples.converted_session.value;
+  validate({ $ref: '#/components/schemas/endpoint_publish_response' }, output);
+  assert.equal(output.version.version_number, 1);
+  assert.equal(output.version.endpoint_id, output.endpoint.id);
+  assert.equal(output.endpoint.name, input.name);
+  assert.equal(output.version_mcp_url.split('/').at(-1), input.session_id);
+  assert.ok(output.endpoint.insights);
+});
+
+test('an endpoint with no live version returns a null head_version', () => {
+  assert.equal(models.endpoint.properties.head_version.nullable, true);
+  assert.equal(models.endpoint.properties.head_version.type, 'object');
+  const empty = examples.empty_endpoint.value;
+  assert.equal(Object.hasOwn(empty.endpoint, 'head_version'), false);
+  validate({ $ref: '#/components/schemas/endpoint_response' }, empty);
+  validate({ $ref: '#/components/schemas/endpoint_response' }, { endpoint: { ...empty.endpoint, head_version: null } });
+  assert.match(spec.paths[prefix + '/endpoints/{endpoint_id}'].get.description, /head_version is null/);
 });

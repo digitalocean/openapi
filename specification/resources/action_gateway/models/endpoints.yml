@@ -129,10 +129,12 @@ endpoint_insights:
   type: object
   nullable: true
   description: >-
-    Customer telemetry choices. For logs and traces independently, the latest
+    The endpoint's Insights consent. It applies to every version of the endpoint,
+    including pinned and older versions. For each signal independently, the latest
     explicit true enables and false disables. Omission preserves the existing
     value through updates, head replacement, and new-version creation; none of
-    these operations implicitly resets either choice. Metrics defaults are unchanged.
+    these operations implicitly resets a choice, and a stored choice cannot be
+    cleared. Metrics defaults are unchanged.
   properties:
     metrics:
       $ref: sessions.yml#/session_insights/properties/metrics
@@ -182,7 +184,15 @@ endpoint_version_spec:
     network:
       $ref: '#/endpoint_network'
     insights:
-      $ref: '#/endpoint_insights'
+      type: object
+      nullable: true
+      deprecated: true
+      description: >-
+        Deprecated: accepted and ignored. Versions do not carry Insights consent;
+        set the endpoint's insights when creating the endpoint or with
+        PATCH /v2/action-gateway/endpoints/{endpoint_id}.
+      allOf:
+        - $ref: '#/endpoint_insights'
 
 endpoint_version:
   type: object
@@ -218,7 +228,13 @@ endpoint_version:
     network:
       $ref: '#/endpoint_network_response'
     insights:
-      $ref: sessions.yml#/session_insights
+      type: object
+      deprecated: true
+      description: >-
+        Deprecated: always omitted. Versions do not carry Insights consent; read
+        the endpoint's insights instead.
+      allOf:
+        - $ref: sessions.yml#/session_insights
     mcp_url:
       type: string
       format: uri
@@ -240,11 +256,12 @@ endpoint:
   required: [id, name]
   description: >-
     A named lineage of immutable versions owned by its creating user. Only that
-    user may use it, rename it, create versions, or promote versions. A team owner
+    user may use it, update it, create versions, or promote versions. A team owner
     may also list and delete team endpoints, but may not use them or add versions.
-    The only public mutation allowed for a service-managed endpoint is deleting
-    the endpoint itself and all its versions. Individual version creation,
-    promotion, and deletion are not allowed for service-managed endpoints.
+    Service-managed endpoints and their versions are not part of the public API:
+    lists and search omit them, every read or write of one returns the same 404
+    as an unknown ID, and deleting one returns the same 204 as deleting an unknown
+    ID without changing it.
     Deletion is final for this identity and all cascaded version identities;
     retries, replays, and later writes cannot resurrect them. Reusing identical
     contents after endpoint deletion requires a new endpoint identity and a new
@@ -258,21 +275,16 @@ endpoint:
       type: string
       description: Immutable actor binding; empty means no actor.
       example: alice
-    owning_user_id:
-      type: string
-      description: DigitalOcean user ID of the endpoint's owner.
-      example: 2f8e1c3a-6b4d-4f7e-9a1c-5d3b7e9f1a2c
-    head_version_number:
-      type: integer
-      format: int64
-      minimum: 0
-      maximum: 4294967295
-      description: Highest live version number, or zero when no live version remains.
-      example: 1
     head_version:
-      description: Embedded live head version. Absent when no live version remains.
+      type: object
+      nullable: true
+      description: >-
+        Embedded live head version, the highest-numbered live version. Null when
+        no live version remains.
       allOf:
         - $ref: '#/endpoint_version'
+    insights:
+      $ref: '#/endpoint_insights'
     mcp_url:
       type: string
       format: uri
@@ -302,16 +314,45 @@ endpoint_create:
       $ref: '#/endpoint_name'
     version:
       $ref: '#/endpoint_version_spec'
-  description: Creates an endpoint and its first version atomically.
+    insights:
+      $ref: '#/endpoint_insights'
+  description: >-
+    Creates an endpoint and its first version atomically. Omitting insights
+    stores no explicit Insights choice.
 
 endpoint_patch:
   type: object
-  required: [name]
-  additionalProperties: false
+  minProperties: 1
   properties:
     name:
       $ref: '#/endpoint_name'
-  description: Renames an endpoint; its identity and versions do not change.
+    insights:
+      $ref: '#/endpoint_insights'
+  description: >-
+    Renames an endpoint, changes its Insights consent, or both; its identity and
+    versions do not change. Send a name, at least one insights signal, or both.
+    A body with neither, including one whose only field is an empty insights
+    object, returns 400 endpoint_update_empty. An empty insights object next to
+    a name is a rename. Unrecognized fields are ignored.
+
+endpoint_from_session:
+  type: object
+  required: [session_id]
+  properties:
+    session_id:
+      type: string
+      format: uuid
+      pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+      description: >-
+        Lowercase, hyphenated UUID of a legacy session: the last segment of its
+        session URN and of its /mcp/session/ URL.
+      example: 4e6a8c0d-3b5f-4d7e-9a1c-2e4f6a8c0d3b
+    name:
+      $ref: '#/endpoint_name'
+  description: >-
+    Converts a legacy session into version 1 of a new endpoint. An omitted name
+    defaults to the session's agent name, or to its name when it has no agent,
+    with other characters replaced by hyphens.
 
 endpoint_promotion:
   type: object
@@ -385,6 +426,22 @@ endpoints_response:
     next_page_token:
       $ref: '#/next_page_token'
   description: A keyset page without offsets or totals.
+
+endpoint_search_response:
+  type: object
+  required: [endpoints, next_page_token]
+  properties:
+    endpoints:
+      type: array
+      items:
+        $ref: '#/endpoint'
+      description: >-
+        Matching endpoints in rank order across the whole result set. Do not
+        re-sort a page to rank it.
+      example: []
+    next_page_token:
+      $ref: '#/next_page_token'
+  description: A ranked page of matching endpoints without offsets or totals.
 
 endpoint_versions_response:
   type: object

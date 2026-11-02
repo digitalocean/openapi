@@ -60,3 +60,26 @@ actor_id:
   schema:
     type: string
   example: alice
+
+search_query:
+  name: query
+  in: query
+  required: true
+  description: >-
+    Text matched case-insensitively as a substring of the endpoint name, endpoint
+    ID, actor_id, or agent name. Leading and trailing whitespace is trimmed; an
+    empty query returns 400 invalid_search_query.
+  schema:
+    type: string
+    minLength: 1
+  example: support
+
+search_actor_id:
+  name: actor_id
+  in: query
+  required: false
+  description: >-
+    Exact actor_id filter, combined with query. Omitted or empty means all actors.
+  schema:
+    type: string
+  example: alice

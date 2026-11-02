@@ -1,9 +1,10 @@
 operationId: endpoints_get
 summary: Retrieve an Endpoint
 description: >-
-  Returns an endpoint with its live head embedded. When no live versions remain,
-  head_version is absent and the endpoint MCP URL fails closed until a version
-  is published. An inaccessible endpoint returns 404 endpoint_not_found.
+  Returns an endpoint with its live head and Insights consent. When no live
+  versions remain, head_version is null and the endpoint MCP URL fails closed
+  until a version is published. An inaccessible endpoint returns 404
+  endpoint_not_found.
 tags:
 - Action Gateway
 parameters:

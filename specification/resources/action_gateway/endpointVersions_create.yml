@@ -6,9 +6,10 @@ description: >-
   identity mismatch returns 404 endpoint_identity_mismatch. Inaccessible endpoints
   return 404 endpoint_not_found.
   Publishing identical contents still creates a new version identity and number;
-  it never resurrects a deleted version. For logs and traces, the latest explicit
-  true or false wins independently; an omitted signal preserves its existing
-  value through new-version creation and head replacement, without an implicit reset.
+  it never resurrects a deleted version. Versions carry no Insights consent: a
+  request's insights field is deprecated and ignored, and the endpoint's consent
+  applies to the new version. Neither new-version creation nor head replacement
+  changes that consent; change it with PATCH /v2/action-gateway/endpoints/{endpoint_id}.
 tags:
 - Action Gateway
 parameters:
@@ -22,10 +23,6 @@ requestBody:
       examples:
         request:
           $ref: examples/endpoints.yml#/endpoint_version_spec
-        logs_disabled:
-          $ref: examples/endpoints.yml#/logs_disabled
-        traces_enabled:
-          $ref: examples/endpoints.yml#/traces_enabled
 responses:
   '201':
     description: The new head version was created.

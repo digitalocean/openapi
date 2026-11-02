@@ -2,9 +2,10 @@ operationId: endpoints_create
 summary: Create an Endpoint
 description: >-
   Creates a named endpoint and its first immutable version atomically. The MCP URL
-  follows the highest-numbered live version; version_mcp_url stays pinned. An
-  invalid name returns 400 invalid_endpoint_name; a duplicate team name returns
-  409 endpoint_name_taken.
+  follows the highest-numbered live version; version_mcp_url stays pinned. The
+  top-level insights field sets the endpoint's Insights consent; version.insights
+  is deprecated and ignored. An invalid name returns 400 invalid_endpoint_name; a
+  duplicate team name returns 409 endpoint_name_taken.
 tags:
 - Action Gateway
 requestBody:

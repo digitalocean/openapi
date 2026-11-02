@@ -963,6 +963,14 @@ paths:
     get:
       $ref: "resources/action_gateway/endpoints_list.yml"
 
+  /v2/action-gateway/endpoints/search:
+    get:
+      $ref: "resources/action_gateway/endpoints_list_search.yml"
+
+  /v2/action-gateway/endpoints:fromSession:
+    post:
+      $ref: "resources/action_gateway/endpoints_create_from_session.yml"
+
   /v2/action-gateway/endpoints/{endpoint_id}:
     get:
       $ref: "resources/action_gateway/endpoints_get.yml"
