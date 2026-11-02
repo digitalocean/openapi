@@ -905,6 +905,20 @@ paths:
     post:
       $ref: "resources/action_gateway/actorLimits_update.yml"
 
+  /v2/action-gateway/provider-credentials:
+    post:
+      $ref: "resources/action_gateway/providerCredentials_create.yml"
+    get:
+      $ref: "resources/action_gateway/providerCredentials_list.yml"
+
+  /v2/action-gateway/provider-credentials/{id}:
+    get:
+      $ref: "resources/action_gateway/providerCredentials_get.yml"
+    patch:
+      $ref: "resources/action_gateway/providerCredentials_update.yml"
+    delete:
+      $ref: "resources/action_gateway/providerCredentials_delete.yml"
+
   /v2/action-gateway/connections:
     post:
       $ref: "resources/action_gateway/connections_create.yml"
