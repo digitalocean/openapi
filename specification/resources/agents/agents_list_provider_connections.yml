@@ -1,0 +1,103 @@
+operationId: harness_list_provider_connections
+summary: List the team's connections for a provider.
+description: One page of connections the team holds for `{provider}`. `user_id` is the actor identifier
+  the connection acts for, not a DigitalOcean user id. A list never includes revoked connections and
+  never includes a token. `github` is the provider served today. Page defaults are the upstream
+  connection service's own (20 per page, at most 100).
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: provider
+  required: true
+  description: Provider key. `github` is the provider served today.
+  schema:
+    type: string
+    example: github
+  example: github
+- in: query
+  name: user_id
+  required: false
+  description: Return only the connection for this actor identifier.
+  schema:
+    type: string
+    example: octocat
+  example: octocat
+- in: query
+  name: status
+  required: false
+  description: Filter by connection status. Known values are `pending`, `active`, and `expired`.
+  schema:
+    type: string
+    example: active
+  example: active
+- in: query
+  name: page
+  required: false
+  description: Page number. Omit it to use the upstream default.
+  schema:
+    type: integer
+    format: int32
+    minimum: 0
+    example: 1
+  example: 1
+- in: query
+  name: per_page
+  required: false
+  description: Page size. Omit it to use the upstream default of 20. Values above 100 are capped.
+  schema:
+    type: integer
+    format: int32
+    minimum: 0
+    maximum: 100
+    example: 20
+  example: 20
+responses:
+  '200':
+    description: One page of connections.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/list_provider_connections_response
+  '400':
+    description: '`page` or `per_page` is not an integer.'
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '501':
+    description: Provider connections are not enabled.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_list_provider_connections.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

@@ -1,0 +1,65 @@
+operationId: harness_post_provider_connection_reconnect
+summary: Start a fresh login for an existing connection.
+description: Begins the interactive step again for a connection that needs it. The response includes
+  `authorization` while that step is outstanding. No token is returned.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: provider
+  required: true
+  description: Provider key. `github` is the provider served today.
+  schema:
+    type: string
+    example: github
+  example: github
+- in: path
+  name: connection_id
+  required: true
+  description: The connection id.
+  schema:
+    type: string
+    example: 3f2a1b0c-9d8e-7f6a-5b4c-3d2e1f0a9b8c
+  example: 3f2a1b0c-9d8e-7f6a-5b4c-3d2e1f0a9b8c
+responses:
+  '200':
+    description: The connection, plus authorization steps when login is still outstanding.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/provider_connection_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '501':
+    description: Provider connections are not enabled.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_reconnect_provider_connection.yml
+security:
+- bearer_auth:
+  - agent_harness_session:create
