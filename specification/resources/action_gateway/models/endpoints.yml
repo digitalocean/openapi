@@ -335,25 +335,6 @@ endpoint_patch:
     object, returns 400 endpoint_update_empty. An empty insights object next to
     a name is a rename. Unrecognized fields are ignored.
 
-endpoint_from_session:
-  type: object
-  required: [session_id]
-  properties:
-    session_id:
-      type: string
-      format: uuid
-      pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-      description: >-
-        Lowercase, hyphenated UUID of a legacy session: the last segment of its
-        session URN and of its /mcp/session/ URL.
-      example: 4e6a8c0d-3b5f-4d7e-9a1c-2e4f6a8c0d3b
-    name:
-      $ref: '#/endpoint_name'
-  description: >-
-    Converts a legacy session into version 1 of a new endpoint. An omitted name
-    defaults to the session's agent name, or to its name when it has no agent,
-    with other characters replaced by hyphens.
-
 endpoint_promotion:
   type: object
   required: [version_id]

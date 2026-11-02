@@ -1,7 +1,0 @@
-lang: cURL
-source: |-
-  curl -X POST \
-    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-    -H "Content-Type: application/json" \
-    -d '{"session_id":"4e6a8c0d-3b5f-4d7e-9a1c-2e4f6a8c0d3b","name":"support-agent"}' \
-    "https://api.digitalocean.com/v2/action-gateway/endpoints:fromSession"

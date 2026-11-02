@@ -36,14 +36,13 @@ const deref = (object) => object.$ref
   ? object.$ref.slice(2).split('/').reduce((value, key) => value[key.replace(/~1/g, '/').replace(/~0/g, '~')], spec)
   : object;
 const requestExamples = new Set(['endpoint_create', 'endpoint_patch', 'endpoint_version_spec',
-  'logs_disabled', 'traces_enabled', 'endpoint_promotion', 'endpoint_from_session']);
+  'logs_disabled', 'traces_enabled', 'endpoint_promotion']);
 const prefix = '/v2/action-gateway';
 const endpointId = examples.publish.value.endpoint.id;
 const operations = [
   ['/endpoints', 'post', 'create'],
   ['/endpoints', 'get', 'read'],
   ['/endpoints/search', 'get', 'read'],
-  ['/endpoints:fromSession', 'post', 'update'],
   ['/endpoints/{endpoint_id}', 'get', 'read'],
   ['/endpoints/{endpoint_id}', 'patch', 'update'],
   ['/endpoints/{endpoint_id}', 'delete', 'delete'],
@@ -191,8 +190,6 @@ test('service-managed endpoints are indistinguishable from unknown IDs on every 
   assert.match(spec.paths[prefix + '/endpoint-versions/{version_id}'].delete.description,
     /version of a service-managed endpoint, exactly as for an unknown ID/);
   assert.match(spec.paths[prefix + '/endpoints/search'].get.description, /Service-managed endpoints are never returned/);
-  assert.match(spec.paths[prefix + '/endpoints:fromSession'].post.description,
-    /service-managed session, another user's session when you are not a team owner, and an unknown ID all return 404 session_not_found/);
 });
 
 test('endpoint and version IDs reject URNs, malformed forms, and uint32 overflow', () => {
@@ -325,7 +322,7 @@ test('the endpoint owns Insights consent with independent explicit updates and n
   assert.equal(versionInsights.type, 'object');
   assert.match(versionInsights.description, /Deprecated: always omitted/);
   assert.match(versionInsights.description, /read the endpoint's insights/);
-  for (const key of ['version', 'publish', 'publish_empty', 'promotion', 'versions', 'converted_session']) {
+  for (const key of ['version', 'publish', 'publish_empty', 'promotion', 'versions']) {
     const visit = (value) => {
       if (!value || typeof value !== 'object') return;
       if (value.endpoint_id && value.version_number) assert.equal(Object.hasOwn(value, 'insights'), false, key);
@@ -497,12 +494,12 @@ test('endpoints and versions expose a read-only server-built mcp_url that matche
     Object.values(value).forEach(check);
   };
   for (const key of ['version', 'endpoint', 'empty_endpoint', 'publish', 'publish_empty', 'promotion', 'endpoints',
-    'versions', 'endpoint_search', 'converted_session']) {
+    'versions', 'endpoint_search']) {
     check(examples[key].value);
   }
-  assert.ok(seen.endpoints >= 8 && seen.versions >= 10, JSON.stringify(seen));
+  assert.ok(seen.endpoints >= 7 && seen.versions >= 10, JSON.stringify(seen));
   // Nested read objects equal the top-level create-response URLs for the same resource.
-  for (const key of ['publish', 'publish_empty', 'promotion', 'converted_session']) {
+  for (const key of ['publish', 'publish_empty', 'promotion']) {
     const { endpoint: nested, version: pinnedVersion, mcp_url: url, version_mcp_url: versionUrl } = examples[key].value;
     assert.equal(nested.mcp_url, url);
     assert.equal(pinnedVersion.mcp_url, versionUrl);
@@ -539,36 +536,6 @@ test('endpoint search is ranked, keyset paged, and bound to its query', () => {
   assert.equal(deref(response.properties.endpoints.items), spec.components.schemas.endpoint);
   // The fixed segment must not be read as an endpoint ID.
   assert.equal(checkModel('endpoint_id')('search'), false);
-});
-
-test('session conversion keeps the session as version 1 and its pinned URL', () => {
-  const operation = spec.paths[prefix + '/endpoints:fromSession'].post;
-  assert.deepEqual(operation.security, [{ bearer_auth: ['action_gateway:update'] }]);
-  assert.ok(operation.responses['200']);
-  assert.ok(operation.responses['201']);
-  assert.match(operation.responses['200'].description, /already converted/);
-  assert.match(operation.description, /already converted returns its existing endpoint with 200/);
-  assert.match(operation.description, /400 session_owner_required/);
-  assert.match(operation.description, /\/mcp\/session\/ URL keeps working/);
-  assert.equal(deref(operation.responses['404']).content['application/json'].example.id, 'session_not_found');
-  assert.equal(deref(operation.responses['409']).content['application/json'].example.id, 'endpoint_name_taken');
-  const request = checkModel('endpoint_from_session');
-  const input = examples.endpoint_from_session.value;
-  assert.ok(request(input));
-  assert.ok(request({ session_id: input.session_id }));
-  for (const invalid of [{}, { name: 'support-agent' }, { session_id: input.session_id.toUpperCase() },
-    { session_id: `do:managed_agent_session:${input.session_id}` }, { session_id: input.session_id, name: '' }]) {
-    assert.equal(request(invalid), false, JSON.stringify(invalid));
-  }
-  assert.deepEqual(models.endpoint_from_session.required, ['session_id']);
-  assert.match(models.endpoint_from_session.description, /defaults to the session's agent name/);
-  const output = examples.converted_session.value;
-  validate({ $ref: '#/components/schemas/endpoint_publish_response' }, output);
-  assert.equal(output.version.version_number, 1);
-  assert.equal(output.version.endpoint_id, output.endpoint.id);
-  assert.equal(output.endpoint.name, input.name);
-  assert.equal(output.version_mcp_url.split('/').at(-1), input.session_id);
-  assert.ok(output.endpoint.insights);
 });
 
 test('an endpoint with no live version returns a null head_version', () => {
