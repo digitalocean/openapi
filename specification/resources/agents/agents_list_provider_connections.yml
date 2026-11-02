@@ -49,7 +49,6 @@ parameters:
     type: integer
     format: int32
     minimum: 0
-    maximum: 100
     example: 20
   example: 20
 responses:

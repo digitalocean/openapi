@@ -3,8 +3,10 @@ summary: Cancel the agent turn in flight.
 description: Stops the turn `POST /input` started. Pass `run_id` from that response to name the turn;
   an empty body cancels whichever turn is in flight. `outcome` is `acked` when the agent accepted the
   interrupt, `no_turn` when nothing addressable was running, and `unsupported` when this agent cannot
-  be interrupted. A team that is not enabled for turn cancel receives 403. A cancel starts nothing and
-  is not blocked by the prepayment gate.
+  be interrupted. A session that cannot take a cancel at all — paused, still starting, being destroyed,
+  or with no active run — answers 409 instead of an `outcome`, so treat that as "nothing to cancel"
+  rather than a fault. A team that is not enabled for turn cancel receives 403. A cancel starts nothing
+  and is not blocked by the prepayment gate.
 tags:
 - Harness Runtime
 parameters:
@@ -37,7 +39,7 @@ responses:
         schema:
           $ref: models/definitions.yml#/cancel_session_turn_response
   '400':
-    description: The body is not valid JSON.
+    description: The body is not valid JSON, or the agent rejected the cancel as malformed.
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
@@ -60,6 +62,24 @@ responses:
           $ref: models/definitions.yml#/error
   '404':
     $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: >-
+      Nothing could be cancelled in the session's current state: it is paused, still provisioning,
+      being destroyed, has no sandbox, or the agent has no active run for it. This is the ordinary
+      answer for "nothing to cancel", not a fault. A turn that was running and has already finished
+      returns 200 with `outcome` `no_turn` instead.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '423':
+    description: This session is unavailable; contact support.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
   '503':
     description: The agent is not accepting requests yet. Retry once the session is ready.
     headers: *id001
