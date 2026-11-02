@@ -1,0 +1,19 @@
+description: >-
+  The raw file content. `Content-Length` and `X-Checksum-Sha256` describe the
+  file as it was when the transfer began.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  X-Checksum-Sha256:
+    $ref: '../headers.yml#/x-checksum-sha256'
+
+content:
+  application/octet-stream:
+    schema:
+      type: string
+      format: binary
