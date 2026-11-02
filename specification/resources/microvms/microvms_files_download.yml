@@ -1,0 +1,66 @@
+operationId: microvms_get_file
+
+summary: Download a file from a MicroVM
+
+description: |
+  To read a file from a MicroVM's workload container, send a GET request to
+  `/v2/microvms/{microvm_id}/files?path=<absolute path>`.
+
+  The response body is the raw file content with a `Content-Type` of
+  `application/octet-stream`. The `Content-Length` and `X-Checksum-Sha256` headers describe the
+  file as it was when the transfer began. Only regular files of up to 64 MiB can be downloaded.
+  A MicroVM serves up to 4 downloads at a time.
+
+  Your team needs the `file_transfer` feature. Check `GET /v2/microvms/options`. If the MicroVM
+  is paused and auto-resume is on, the request resumes it.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+  - $ref: 'parameters.yml#/file_path'
+
+responses:
+  '200':
+    $ref: 'responses/file_content.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '409':
+    $ref: 'responses/errors.yml#/file_conflict'
+
+  '413':
+    $ref: 'responses/errors.yml#/payload_too_large'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  '502':
+    $ref: 'responses/errors.yml#/bad_gateway'
+
+  '504':
+    $ref: 'responses/errors.yml#/file_timeout'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_files_download.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:update'

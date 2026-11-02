@@ -1,0 +1,87 @@
+operationId: microvms_upload_file
+
+summary: Upload a file to a MicroVM
+
+description: |
+  To write a file into a MicroVM's workload container, send a PUT request to
+  `/v2/microvms/{microvm_id}/files?path=<absolute path>` with the raw file content as the
+  request body and a `Content-Type` of `application/octet-stream`.
+
+  The file replaces any existing regular file at `path` atomically. The parent directory
+  must already exist. The request must carry a `Content-Length` header; chunked bodies are
+  rejected. A body of up to 64 MiB is accepted, and a `Content-Length` of `0` writes an empty
+  file. Pass `sha256` to have the API verify the content before it replaces the target.
+
+  Your team needs the `file_transfer` feature. Check `GET /v2/microvms/options`. If the MicroVM
+  is paused and auto-resume is on, the request resumes it.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+  - $ref: 'parameters.yml#/file_path'
+  - $ref: 'parameters.yml#/file_mode'
+  - $ref: 'parameters.yml#/file_uid'
+  - $ref: 'parameters.yml#/file_gid'
+  - $ref: 'parameters.yml#/file_sha256'
+
+requestBody:
+  description: The raw file content.
+  required: true
+
+  content:
+    application/octet-stream:
+      schema:
+        type: string
+        format: binary
+
+responses:
+  '200':
+    $ref: 'responses/file_info.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '409':
+    $ref: 'responses/errors.yml#/file_conflict'
+
+  '411':
+    $ref: 'responses/errors.yml#/length_required'
+
+  '413':
+    $ref: 'responses/errors.yml#/payload_too_large'
+
+  '422':
+    $ref: 'responses/errors.yml#/checksum_mismatch'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  '502':
+    $ref: 'responses/errors.yml#/bad_gateway'
+
+  '504':
+    $ref: 'responses/errors.yml#/file_timeout'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_files_upload.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:update'

@@ -81,6 +81,62 @@ console_cols:
     default: 80
   example: 80
 
+file_path:
+  in: query
+  name: path
+  required: true
+  description: The absolute path of the file inside the workload container.
+  schema:
+    type: string
+  example: /app/config.json
+
+file_mode:
+  in: query
+  name: mode
+  required: false
+  description: >-
+    The octal permission bits for the file, from `0001` to `0777`. Defaults to
+    `0644`. Setuid, setgid, sticky bits, and `0000` are rejected.
+  schema:
+    type: string
+  example: "0600"
+
+file_uid:
+  in: query
+  name: uid
+  required: false
+  description: >-
+    The owner user ID. Set it together with `gid`. Defaults to the workload
+    container's user.
+  schema:
+    type: integer
+    format: uint32
+  example: 1000
+
+file_gid:
+  in: query
+  name: gid
+  required: false
+  description: >-
+    The owner group ID. Set it together with `uid`. Defaults to the workload
+    container's group.
+  schema:
+    type: integer
+    format: uint32
+  example: 1000
+
+file_sha256:
+  in: query
+  name: sha256
+  required: false
+  description: >-
+    The lowercase hex SHA-256 of the request body. When set, the API verifies
+    the content before it replaces the target. A mismatch returns 422 and
+    leaves the existing file unchanged.
+  schema:
+    type: string
+  example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
 microvm_per_page:
   in: query
   name: per_page
