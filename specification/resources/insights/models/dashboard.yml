@@ -2,7 +2,6 @@ type: object
 description: An Insights dashboard.
 required:
   - uuid
-  - name
   - spec
   - created_at
   - updated_at
@@ -19,7 +18,8 @@ properties:
     maxLength: 255
     description: >-
       The dashboard's display name. Populated by the server from
-      `spec.display.name`; it cannot be set directly.
+      `spec.display.name`; it cannot be set directly. Omitted when
+      `spec.display.name` is an empty string.
     example: Droplet CPU
   description:
     type: string

@@ -364,8 +364,8 @@ dashboards_sort:
   name: pagination.sort
   required: false
   description: >-
-    Field to sort by. Matched case-insensitively. Defaults to `created_at`.
-    Any other value is rejected with `400`.
+    Field to sort by. Matched case-insensitively. When omitted, results are
+    ordered by `created_at` descending. Any other value is rejected with `400`.
   schema:
     type: string
     enum:
@@ -378,7 +378,10 @@ dashboards_sort_direction:
   in: query
   name: pagination.sort_direction
   required: false
-  description: Sort direction. Defaults to `desc`.
+  description: >-
+    Sort direction. Only applied when `pagination.sort` is set, in which case
+    it defaults to `asc`. When `pagination.sort` is omitted, results are
+    ordered by `created_at` descending regardless of this parameter.
   schema:
     type: string
     enum:

@@ -5,6 +5,7 @@ required:
 properties:
   spec:
     type: string
+    minLength: 1
     description: >-
       The dashboard definition as a JSON document serialized to a string.
       The document must have `kind` set to `Dashboard` and a `spec.display.name`

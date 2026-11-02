@@ -9,7 +9,9 @@ description: |
   Results are paginated with `pagination.page` and `pagination.per_page`
   (default `20`, maximum `200`) and can be sorted with `pagination.sort`
   (`name`, `created_at`, or `updated_at`) and `pagination.sort_direction`.
-  By default dashboards are ordered by `created_at` descending.
+  When `pagination.sort` is omitted, dashboards are ordered by `created_at`
+  descending. When it is set, the direction defaults to `asc` unless
+  `pagination.sort_direction` is also given.
 
 tags:
   - Insights
