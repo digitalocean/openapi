@@ -4,6 +4,10 @@ description: >-
   Creates a session owned by your team, with a new session URN, and returns the MCP URL an agent connects
   to. tools selects the tools and toolbelts the session exposes, and policy decides which calls run, need
   approval, or are refused.
+
+
+  Set config.cache to opt into result caching for all eligible tools or a
+  specific list. Caching is off by default and must be enabled for the team.
 tags:
 - Action Gateway
 requestBody:

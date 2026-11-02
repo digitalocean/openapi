@@ -21,3 +21,7 @@ properties:
         type: string
         description: The unit of measure for the disk size.
         example: gib
+  ephemeral:
+    type: boolean
+    description: Indicates an ephemeral (non-persistent) disk.
+    example: false

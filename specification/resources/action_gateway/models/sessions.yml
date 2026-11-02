@@ -42,6 +42,54 @@ session_policy:
             description: 'Required: allow, ask, or deny.'
       description: Rules for specific tools or toolbelts.
 
+session_cache:
+  type: object
+  additionalProperties: false
+  description: >-
+    Opts the session into result caching. Omit config.cache to leave caching off.
+    Set exactly one of tools or allEligible. Caching must also be enabled for
+    the team. Tool selection and permission rules still apply to every call.
+  properties:
+    tools:
+      type: array
+      maxItems: 100
+      description: >-
+        Provider-qualified tool slugs to cache. Every listed tool must resolve
+        for the team and have a catalog cache policy, or session creation fails.
+        Use slugs without version suffixes or toolbelt references. An empty
+        array enables no tools.
+      items:
+        type: string
+      example:
+        - exa_web_search
+    allEligible:
+      type: boolean
+      enum:
+        - true
+      description: >-
+        Enables caching for every called tool version with a catalog cache
+        policy, including tools that become eligible after session creation.
+        Do not combine with tools.
+      example: true
+    maxAgeSeconds:
+      type: integer
+      minimum: 1
+      maximum: 300
+      description: >-
+        Maximum cache lifetime in seconds for this session. Omit to use each
+        tool's lifetime, up to 300 seconds. A smaller tool lifetime or provider
+        response cache header can shorten it. Per-call max_age_seconds can
+        require a fresher result but cannot increase this limit.
+      example: 60
+  example:
+    allEligible: true
+    maxAgeSeconds: 60
+  oneOf:
+    - required:
+        - tools
+    - required:
+        - allEligible
+
 session_network:
   type: object
   description: Attaches a session to a VPC.
@@ -121,7 +169,11 @@ session:
           description: The selected references. Empty means the session exposes no tools.
     config:
       type: object
+      additionalProperties: true
       description: Session options as supplied at creation. Omitted when none were supplied.
+      properties:
+        cache:
+          $ref: '#/session_cache'
       example:
         preloadTools:
           - exa_web_search
@@ -197,10 +249,15 @@ session_create:
         - jira_create_issue
     config:
       type: object
+      additionalProperties: true
       description: >-
         Optional session options. config.preloadTools may contain concrete tool names (optionally version-pinned)
         and version-pinned toolbelt references. config.customInstructions is a string of at most 1000 characters.
         config.outputViews maps up to 100 tool slugs to the name of an output view to apply to that tool's results.
+        config.cache opts eligible tools into result caching for this session.
+      properties:
+        cache:
+          $ref: '#/session_cache'
       example:
         preloadTools:
           - exa_web_search

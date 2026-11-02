@@ -43,6 +43,80 @@ error_envelope:
         - verify_provider_state
       example: fix_args
 
+cache_controls:
+  type: object
+  additionalProperties: false
+  description: >-
+    Optional per-call caching controls. Send beside arguments, not inside them.
+    Accepted only for tools opted into caching in this session; tool search
+    advertises these tools with a cache field. Omitting controls uses the
+    session's settings. Direct MCP tools/call requests use session settings
+    without overrides; use action_invoke for per-call controls.
+  properties:
+    mode:
+      type: string
+      enum:
+        - auto
+        - bypass
+      default: auto
+      description: >-
+        auto uses a sufficiently recent cached result or calls the provider
+        and can store a successful result. bypass skips lookup and storage
+        without clearing or refreshing existing entries.
+      example: auto
+    max_age_seconds:
+      type: integer
+      minimum: 0
+      description: >-
+        Oldest cached result this call accepts, in seconds. Zero bypasses
+        caching. Values above 300 are clamped to 300; larger values cannot
+        increase the session or tool lifetime. This controls accepted result
+        age, not the lifetime of a newly stored entry.
+      example: 30
+
+cache_status:
+  type: object
+  description: >-
+    Cache outcome. Hits always include this metadata. MISS and BYPASS appear
+    only when the call includes cache controls. Cache hits still incur the
+    gateway invocation charge but not an additional provider charge.
+  properties:
+    status:
+      type: string
+      enum:
+        - HIT
+        - MISS
+        - BYPASS
+      description: >-
+        HIT returned a cached result without calling the provider. MISS found
+        no usable result and called the provider. BYPASS skipped caching.
+      example: HIT
+    age_seconds:
+      type: integer
+      minimum: 0
+      description: Age of the cached result in seconds. Present only on a hit.
+      example: 12
+  required:
+    - status
+
+cache_advertisement:
+  type: object
+  description: >-
+    Present when this tool accepts cache controls in the session. Unlike the
+    catalog's cache.ttlSeconds, this describes the session's caching opt-in.
+  properties:
+    maxAgeSeconds:
+      type: integer
+      minimum: 1
+      maximum: 300
+      description: >-
+        Maximum result age the session allows, or 300 if the session sets no
+        limit. The tool's own cache lifetime can be shorter. Invoke controls
+        use max_age_seconds, not this field's camelCase spelling.
+      example: 60
+  required:
+    - maxAgeSeconds
+
 tool_result:
   type: object
   description: >-
@@ -93,6 +167,11 @@ tool_result:
           retried the call.
 
         - `output_view`: the output view applied to the result.
+
+        - `cache`: whether the result came from cache, with its age on a hit.
+      properties:
+        cache:
+          $ref: '#/cache_status'
       additionalProperties: true
       example:
         status: requires_approval
@@ -264,6 +343,8 @@ search_tools_result:
   type: object
   description: A tool that matched a query.
   properties:
+    cache:
+      $ref: '#/cache_advertisement'
     name:
       type: string
       description: The provider-qualified tool name. Pass it as `tool` to invoke the tool.
@@ -331,6 +412,8 @@ search_tools_response:
 tool_call:
   type: object
   properties:
+    cache:
+      $ref: '#/cache_controls'
     tool:
       type: string
       description: >-
