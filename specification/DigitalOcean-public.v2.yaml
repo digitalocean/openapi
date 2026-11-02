@@ -526,8 +526,8 @@ tags:
       resumes on the next HTTP request, command, or console session, with its
       memory, files, and processes intact. By sending requests to the
       `/v2/microvms` endpoints, you can create, list, pause, resume, and delete
-      MicroVMs, run commands and open a console in them, and create checkpoints
-      to start new MicroVMs from a saved state.
+      MicroVMs, run commands and open a console in them, upload and download
+      files, and create checkpoints to start new MicroVMs from a saved state.
 
       Each MicroVM serves its HTTP port at
       `https://{microvm_id}.{region}.microvm.ondigitalocean.com`. Requests to
@@ -670,10 +670,9 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
-  # Secrets Manager omitted from this tag description until GA; paths commented out below.
   - name: Security
     description: |-
-      Security CSPM endpoints for scans, scan findings, and settings.
+      Security endpoints for CSPM scans, scan findings, settings, and Secrets Manager.
 
   - name: Signals
     description: |-
@@ -2409,6 +2408,12 @@ paths:
     get:
       $ref: "resources/microvms/microvms_console.yml"
 
+  /v2/microvms/{microvm_id}/files:
+    put:
+      $ref: "resources/microvms/microvms_files_upload.yml"
+    get:
+      $ref: "resources/microvms/microvms_files_download.yml"
+
   /v2/microvms/{microvm_id}/checkpoints:
     post:
       $ref: "resources/microvms/microvms_checkpoints_create.yml"
@@ -3059,34 +3064,34 @@ paths:
     delete:
       $ref: "resources/security/security_suppression_delete.yml"
 
-  # Secrets Manager endpoints are temporarily commented out so they are not
-  # published in the public API docs until the product is generally available.
-  # The operation/model files remain under resources/security/ for easy restore.
-  #
-  # /v2/security/secrets:
-  #   get:
-  #     $ref: "resources/security/security_secrets_list.yml"
-  #
-  #   post:
-  #     $ref: "resources/security/security_secret_create.yml"
-  #
-  # /v2/security/secrets/{secret}:
-  #   get:
-  #     $ref: "resources/security/security_secret_get.yml"
-  #
-  #   put:
-  #     $ref: "resources/security/security_secret_update.yml"
-  #
-  #   delete:
-  #     $ref: "resources/security/security_secret_delete.yml"
-  #
-  # /v2/security/secrets/{secret}/versions:
-  #   get:
-  #     $ref: "resources/security/security_secret_list_versions.yml"
-  #
-  # /v2/security/secrets/{secret}/restore:
-  #   post:
-  #     $ref: "resources/security/security_secret_restore.yml"
+  /v2/security/secrets:
+    get:
+      $ref: "resources/security/security_secrets_list.yml"
+
+    post:
+      $ref: "resources/security/security_secret_create.yml"
+
+  /v2/security/secrets/{secret}:
+    get:
+      $ref: "resources/security/security_secret_get.yml"
+
+    put:
+      $ref: "resources/security/security_secret_update.yml"
+
+    delete:
+      $ref: "resources/security/security_secret_delete.yml"
+
+  /v2/security/secrets/{secret}/versions:
+    get:
+      $ref: "resources/security/security_secret_list_versions.yml"
+
+  /v2/security/secrets/{secret}/versions/{version}/revert:
+    post:
+      $ref: "resources/security/security_secret_revert.yml"
+
+  /v2/security/secrets/{secret}/restore:
+    post:
+      $ref: "resources/security/security_secret_restore.yml"
 
   /v2/sizes:
     get:

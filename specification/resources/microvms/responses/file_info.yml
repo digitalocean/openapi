@@ -1,0 +1,28 @@
+description: >-
+  The file was written. The `X-Checksum-Sha256` header repeats the digest from
+  the body.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  X-Checksum-Sha256:
+    $ref: '../headers.yml#/x-checksum-sha256'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/file.yml#/file_info'
+
+    examples:
+      File Written:
+        value:
+          path: /app/config.json
+          size_bytes: 1024
+          sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+          mode: "0600"
+          uid: 0
+          gid: 0
