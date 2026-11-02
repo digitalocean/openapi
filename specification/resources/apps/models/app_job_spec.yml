@@ -11,14 +11,32 @@ allOf:
       - PRE_DEPLOY
       - POST_DEPLOY
       - FAILED_DEPLOY
+      - SCHEDULED
       description: |2-
         - UNSPECIFIED: Default job type, will auto-complete to POST_DEPLOY kind.
         - PRE_DEPLOY: Indicates a job that runs before an app deployment.
         - POST_DEPLOY: Indicates a job that runs after an app deployment.
         - FAILED_DEPLOY: Indicates a job that runs after a component fails to deploy.
+        - SCHEDULED: Indicates a job that runs on the cron schedule set in `schedule`.
       default: UNSPECIFIED
       example: PRE_DEPLOY
+    schedule:
+      type: object
+      description: The schedule for a `SCHEDULED` job.
+      properties:
+        cron:
+          type: string
+          description: The cron expression defining the schedule.
+          example: "0 0 * * *"
+        time_zone:
+          type: string
+          description: The time zone for the schedule.
+          example: America/New_York
     termination:
       $ref: app_job_spec_termination.yml
+    alerts:
+      type: array
+      items:
+        $ref: app_alert_spec.yml
   required:
   - name
