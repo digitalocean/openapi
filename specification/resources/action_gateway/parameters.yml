@@ -246,6 +246,24 @@ server_ref:
     type: string
   example: docs
 
+provider_credential_id:
+  name: id
+  in: path
+  required: true
+  description: Provider credential ID returned when the credential was created.
+  schema:
+    type: string
+  example: example-credential-id
+
+provider_credential_provider:
+  name: provider
+  in: query
+  required: false
+  description: Optional provider slug, matched case-insensitively. Omit to list credentials for all providers.
+  schema:
+    type: string
+  example: example-provider
+
 connection_id:
   name: id
   in: path
