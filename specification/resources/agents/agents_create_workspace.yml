@@ -49,7 +49,9 @@ responses:
         schema:
           $ref: models/definitions.yml#/create_workspace_response
   '400':
-    description: Invalid body, such as a missing or out-of-range size_limit_gib or an unknown field.
+    description: >-
+      Invalid body, such as a missing or out-of-range size_limit_gib, a name longer than 255
+      characters, or an unknown field.
     headers: *id001
     content:
       application/json:

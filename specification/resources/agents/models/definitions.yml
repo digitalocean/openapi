@@ -1522,7 +1522,8 @@ create_workspace_request:
       example: 10
     name:
       type: string
-      description: Optional label. It does not need to be unique.
+      maxLength: 255
+      description: Optional label of at most 255 characters. It does not need to be unique.
       example: notes
 create_workspace_response:
   type: object
