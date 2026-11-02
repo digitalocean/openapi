@@ -1,0 +1,5 @@
+x-checksum-sha256:
+  description: The lowercase hex SHA-256 of the file content.
+  schema:
+    type: string
+  example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
