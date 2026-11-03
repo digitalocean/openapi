@@ -4,5 +4,5 @@ source: |-
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -d '{"status":"paused"}' \
-    "https://api.digitalocean.com/v2/agents/triggers/{trigger_id}"
+    "https://api.digitalocean.com/v2/harness-runtime/triggers/{trigger_id}"
 label: cURL
