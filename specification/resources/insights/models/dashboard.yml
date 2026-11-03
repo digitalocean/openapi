@@ -38,8 +38,10 @@ properties:
       between 1 and 255 characters, which is projected to `name`. An optional
       `spec.display.description` of up to 1000 characters is projected to
       `description`. Retrieve the full JSON Schema from
-      `GET /v2/insights/dashboards/schema`.
-    example: '{"kind":"Dashboard","apiVersion":"perses.dev/v1alpha1","spec":{"display":{"name":"Droplet CPU","description":"CPU utilization across production Droplets."},"duration":"1h","variables":[],"layouts":[{"kind":"Grid","spec":{"items":[{"x":0,"y":0,"width":12,"height":6,"content":{"$ref":"#/spec/panels/cpu"}}]}}],"panels":{"cpu":{"kind":"Panel","spec":{"display":{"name":"CPU utilization"},"plugin":{"kind":"TimeSeriesChart","spec":{}},"queries":[{"kind":"TimeSeriesQuery","spec":{"plugin":{"kind":"MetricsTimeSeriesQuery","spec":{"metricName":"do.droplets.cpu_utilization","kind":"gauge","filters":[],"groupBy":[]}}}}]}}}}}'
+      `GET /v2/insights/dashboards/schema`. The document is returned in a
+      normalized form: content is unchanged, but object keys may be
+      reordered and whitespace may differ from the submitted string.
+    example: '{"kind": "Dashboard", "spec": {"panels": {"cpu": {"kind": "Panel", "spec": {"plugin": {"kind": "TimeSeriesChart", "spec": {}}, "display": {"name": "CPU utilization"}, "queries": [{"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "MetricsTimeSeriesQuery", "spec": {"kind": "gauge", "filters": [], "groupBy": [], "metricName": "do.droplets.cpu_utilization"}}}}]}}}, "display": {"name": "Droplet CPU", "description": "CPU utilization across production Droplets."}, "layouts": [{"kind": "Grid", "spec": {"items": [{"x": 0, "y": 0, "width": 12, "height": 6, "content": {"$ref": "#/spec/panels/cpu"}}]}}], "duration": "1h", "variables": []}, "apiVersion": "perses.dev/v1alpha1"}'
   created_at:
     type: string
     format: date-time

@@ -14,5 +14,5 @@ content:
       $ref: '../models/dashboard_error.yml'
     example:
       error: internal error
-      message: internal error
       code: 13
+      message: internal error

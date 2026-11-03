@@ -17,5 +17,5 @@ content:
       $ref: '../models/dashboard_error.yml'
     example:
       error: spec is required
-      message: spec is required
       code: 3
+      message: spec is required

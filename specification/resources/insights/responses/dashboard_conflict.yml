@@ -16,5 +16,5 @@ content:
       $ref: '../models/dashboard_error.yml'
     example:
       error: dashboard name already exists
-      message: dashboard name already exists
       code: 6
+      message: dashboard name already exists

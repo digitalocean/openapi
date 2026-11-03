@@ -16,5 +16,5 @@ content:
       $ref: '../models/dashboard_error.yml'
     example:
       error: dashboard not found
-      message: dashboard not found
       code: 5
+      message: dashboard not found

@@ -30,8 +30,8 @@ content:
         summary: Team dashboard limit reached
         value:
           error: This team has reached the limit of 50 dashboards. Delete an existing dashboard before creating another, or contact support to request a higher limit.
-          message: This team has reached the limit of 50 dashboards. Delete an existing dashboard before creating another, or contact support to request a higher limit.
           code: 8
+          message: This team has reached the limit of 50 dashboards. Delete an existing dashboard before creating another, or contact support to request a higher limit.
           details:
             - '@type': type.googleapis.com/google.rpc.ErrorInfo
               reason: dashboard_limit_reached
@@ -42,5 +42,5 @@ content:
         summary: Per-dashboard chart limit reached
         value:
           error: Max number of charts reached per dashboard. Delete a chart to add another, or contact support to request a higher limit.
-          message: Max number of charts reached per dashboard. Delete a chart to add another, or contact support to request a higher limit.
           code: 8
+          message: Max number of charts reached per dashboard. Delete a chart to add another, or contact support to request a higher limit.
