@@ -34,7 +34,8 @@ parameters:
 - in: query
   name: page
   required: false
-  description: Page number. Omit it to use the upstream default.
+  description: Page number. Omit it or pass `0` to use the upstream default. A negative value
+    is rejected.
   schema:
     type: integer
     format: int32
@@ -44,7 +45,8 @@ parameters:
 - in: query
   name: per_page
   required: false
-  description: Page size. Omit it to use the upstream default of 20. Values above 100 are capped.
+  description: Page size. Omit it or pass `0` to use the upstream default of 20. Values above 100
+    are capped. A negative value is rejected.
   schema:
     type: integer
     format: int32
@@ -66,7 +68,8 @@ responses:
         schema:
           $ref: models/definitions.yml#/list_provider_connections_response
   '400':
-    description: '`page` or `per_page` is not an integer.'
+    description: '`page` or `per_page` is not an integer, or is negative. Zero is accepted and
+      treated as omitted. Values of `per_page` above 100 are capped, not rejected.'
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit

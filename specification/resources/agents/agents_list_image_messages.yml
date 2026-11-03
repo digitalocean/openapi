@@ -50,8 +50,9 @@ parameters:
 - in: query
   name: page_token
   required: false
-  description: Opaque cursor from the previous page. Empty starts at the beginning. Ignored when
-    `session_name` or `checkpoint_name` is set.
+  description: Opaque cursor from the previous page. Empty starts at the beginning. A value that
+    did not come from a previous page is rejected. Ignored when `session_name` or `checkpoint_name`
+    is set.
   schema:
     type: string
     example: ''
@@ -71,7 +72,8 @@ responses:
         schema:
           $ref: models/definitions.yml#/list_image_messages_response
   '400':
-    description: Unknown `type`, a non-integer `page_size`, or both `session_name` and `checkpoint_name` set.
+    description: Unknown `type`, a non-integer `page_size`, a malformed `page_token`, or both
+      `session_name` and `checkpoint_name` set.
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
