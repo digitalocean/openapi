@@ -1,0 +1,109 @@
+operationId: harness_list_image_messages
+summary: List sandbox-image notices for the team.
+description: Returns the caller's sessions and checkpoints whose sandbox image carries a live notice.
+  Pass `session_name` or `checkpoint_name` to look up one resource; those two parameters cannot be set
+  together, and `page_size` / `page_token` are ignored when either is set. Without a name, the list is
+  keyset-paginated. `type` filters the notice kind; the only documented value is `vulnerability`.
+  Triggers are not listed here — a trigger runs on a session, so ask about that session.
+tags:
+- Harness Runtime
+parameters:
+- in: query
+  name: type
+  required: false
+  description: Notice type. Omit it to return every type. The only documented value is `vulnerability`.
+  schema:
+    type: string
+    enum:
+    - vulnerability
+    example: vulnerability
+  example: vulnerability
+- in: query
+  name: session_name
+  required: false
+  description: Exact session name. Returns one resource for that session. Cannot be combined with
+    `checkpoint_name`.
+  schema:
+    type: string
+    example: support-agent
+  example: support-agent
+- in: query
+  name: checkpoint_name
+  required: false
+  description: Exact checkpoint name. Returns one resource for that checkpoint. Cannot be combined with
+    `session_name`.
+  schema:
+    type: string
+    example: before-upgrade
+  example: before-upgrade
+- in: query
+  name: page_size
+  required: false
+  description: Page size when listing. Defaults to 50 when omitted or not positive; values above 200
+    are clamped to 200. A non-integer is rejected. Ignored when `session_name` or `checkpoint_name` is set.
+  schema:
+    type: integer
+    format: int32
+    default: 50
+    example: 50
+  example: 50
+- in: query
+  name: page_token
+  required: false
+  description: Opaque cursor from the previous page. Empty starts at the beginning. A value that
+    did not come from a previous page is rejected. Ignored when `session_name` or `checkpoint_name`
+    is set.
+  schema:
+    type: string
+    example: ''
+  example: ''
+responses:
+  '200':
+    description: Notices for the team's matching sessions and checkpoints.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/list_image_messages_response
+  '400':
+    description: Unknown `type`, a non-integer `page_size`, a malformed `page_token`, or both
+      `session_name` and `checkpoint_name` set.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '501':
+    description: Image messages are not available on this deployment.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_list_image_messages.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

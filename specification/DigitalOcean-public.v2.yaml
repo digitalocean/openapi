@@ -166,6 +166,12 @@ tags:
       stream, and port-forward (`GET /v2/agents/sessions/{session_id}/port-forward/{port}`)
       opens a WebSocket tunnel to a guest port.
 
+      `POST /v2/agents/sessions/{session_id}/cancel` stops the turn in flight.
+      `GET /v2/agents/image-messages` lists sandbox-image notices on the team's
+      sessions and checkpoints. `POST /v2/agents/auth/{provider}` starts the
+      interactive provider login a session uses; `github` is the provider served
+      today. Connections for that login are under `/v2/agents/auth/{provider}/connections`.
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -1144,6 +1150,28 @@ paths:
     patch:
       $ref: "resources/addons/addons_update_plan.yml"
 
+  /v2/agents/auth/{provider}:
+    post:
+      $ref: "resources/agents/agents_start_provider_connect.yml"
+  /v2/agents/auth/{provider}/poll:
+    get:
+      $ref: "resources/agents/agents_poll_provider_connect.yml"
+  /v2/agents/auth/{provider}/connections:
+    get:
+      $ref: "resources/agents/agents_list_provider_connections.yml"
+    post:
+      $ref: "resources/agents/agents_create_provider_connection.yml"
+  /v2/agents/auth/{provider}/connections/{connection_id}:
+    get:
+      $ref: "resources/agents/agents_get_provider_connection.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_provider_connection.yml"
+  /v2/agents/auth/{provider}/connections/{connection_id}/reconnect:
+    post:
+      $ref: "resources/agents/agents_reconnect_provider_connection.yml"
+  /v2/agents/image-messages:
+    get:
+      $ref: "resources/agents/agents_list_image_messages.yml"
   /v2/agents/configs:
     get:
       $ref: "resources/agents/agents_list_configs.yml"
@@ -1191,6 +1219,9 @@ paths:
       $ref: "resources/agents/agents_get_session_checkpoint.yml"
     delete:
       $ref: "resources/agents/agents_delete_session_checkpoint.yml"
+  /v2/agents/sessions/{session_id}/checkpoints/{checkpoint_id}/image-messages:
+    get:
+      $ref: "resources/agents/agents_get_checkpoint_image_messages.yml"
   /v2/agents/sessions/{session_id}/checkpoints/{checkpoint_id}/rollback:
     post:
       $ref: "resources/agents/agents_revert_session_checkpoint.yml"
@@ -1200,6 +1231,12 @@ paths:
   /v2/agents/sessions/{session_id}/hitl/{request_id}:
     post:
       $ref: "resources/agents/agents_post_session_hitl.yml"
+  /v2/agents/sessions/{session_id}/cancel:
+    post:
+      $ref: "resources/agents/agents_cancel_session_turn.yml"
+  /v2/agents/sessions/{session_id}/image-messages:
+    get:
+      $ref: "resources/agents/agents_get_session_image_messages.yml"
   /v2/agents/sessions/{session_id}/input:
     post:
       $ref: "resources/agents/agents_create_session_input.yml"

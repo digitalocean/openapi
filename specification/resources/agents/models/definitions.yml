@@ -2623,3 +2623,285 @@ get_ingress_url_response:
   properties:
     ingress_url:
       $ref: '#/session_ingress_url'
+
+cancel_session_turn_request:
+  type: object
+  description: Optional. An empty body cancels the turn in flight.
+  properties:
+    run_id:
+      type: string
+      description: Turn id returned by POST /input. Omit it to cancel whichever turn is in flight.
+      example: run_example
+
+cancel_session_turn_response:
+  type: object
+  required:
+  - outcome
+  properties:
+    outcome:
+      type: string
+      enum:
+      - acked
+      - no_turn
+      - unsupported
+      description: acked means the agent accepted the interrupt. no_turn means nothing addressable was
+        running. unsupported means this agent cannot be interrupted.
+      example: acked
+    run_id:
+      type: string
+      description: The turn the cancel was aimed at. Omitted when an unnamed cancel found no turn.
+      example: run_example
+
+image_message:
+  type: object
+  description: One live notice on a sandbox image.
+  properties:
+    type:
+      type: string
+      description: Notice kind. The documented value is vulnerability.
+      example: vulnerability
+    title:
+      type: string
+      example: Image update available
+    message:
+      type: string
+      example: This sandbox image has a published fix.
+    more_info_url:
+      type: string
+      example: https://docs.digitalocean.com/products/gradient-ai-platform/
+
+image_message_resource:
+  type: object
+  description: A session or checkpoint and the live notices on its sandbox image. Every key is present.
+    messages is an empty array when the image has no notice.
+  properties:
+    kind:
+      type: string
+      enum:
+      - SESSION
+      - CHECKPOINT
+      example: SESSION
+    session_id:
+      type: string
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    session_name:
+      type: string
+      example: support-agent
+    checkpoint_id:
+      type: string
+      example: cp_example
+    checkpoint_name:
+      type: string
+      example: before-upgrade
+    image_id:
+      type: string
+      example: img_example
+    resolution_complete:
+      type: boolean
+      example: true
+    vulnerable:
+      type: boolean
+      example: false
+    messages:
+      type: array
+      items:
+        $ref: '#/image_message'
+
+list_image_messages_response:
+  type: object
+  properties:
+    resources:
+      type: array
+      items:
+        $ref: '#/image_message_resource'
+    next_page_token:
+      type: string
+      description: Opaque cursor for the next page. Empty on the last page and on a single-resource lookup.
+      example: ''
+
+get_image_message_resource_response:
+  type: object
+  properties:
+    resource:
+      $ref: '#/image_message_resource'
+
+start_provider_connect_request:
+  type: object
+  properties:
+    force_reconnect:
+      type: boolean
+      description: When true, start a new login even if the team is already connected.
+      example: false
+
+start_provider_connect_response:
+  type: object
+  properties:
+    provider:
+      type: string
+      example: github
+    status:
+      type: string
+      description: success when a credential already exists. requires_authorization when the user must
+        finish the interactive step at connect_url.
+      enum:
+      - success
+      - requires_authorization
+      example: requires_authorization
+    connect_url:
+      type: string
+      description: Where to send the user. Omitted once status is success.
+      example: https://example.invalid/connect
+    poll_url:
+      type: string
+      description: Pass this to the poll call. Omitted once status is success.
+      example: https://example.invalid/poll
+    verification_code:
+      type: string
+      description: Code the user confirms during the interactive step. Omitted once status is success.
+      example: ABCD-1234
+    expires_at:
+      type: string
+      format: date-time
+      description: When the interactive step expires. Omitted when there is nothing to expire.
+      example: '2026-07-27T12:00:00Z'
+
+poll_provider_connect_response:
+  type: object
+  properties:
+    provider:
+      type: string
+      example: github
+    status:
+      type: string
+      description: success when login has finished. requires_authorization while it is still outstanding.
+      enum:
+      - success
+      - requires_authorization
+      example: success
+    expires_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+
+provider_connection:
+  type: object
+  description: One provider connection. Identifiers only — no token or authorization handle.
+  properties:
+    id:
+      type: string
+      example: 3f2a1b0c-9d8e-7f6a-5b4c-3d2e1f0a9b8c
+    provider:
+      type: string
+      example: github
+    provider_display_name:
+      type: string
+      example: GitHub
+    user_id:
+      type: string
+      description: Actor identifier the connection acts for. Not a DigitalOcean user id.
+      example: octocat
+    status:
+      type: string
+      description: pending, active, revoked, or expired. A list does not include revoked connections.
+      example: active
+    owning_user_id:
+      type: string
+      description: DigitalOcean user id of the member who created the connection, when recorded.
+      example: b1c2d3e4-f5a6-7890-abcd-ef1234567890
+    deletion_protected:
+      type: boolean
+      description: True when an ordinary delete will be refused because an environment config uses it.
+      example: false
+    created_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+    oauth:
+      $ref: '#/provider_connection_oauth'
+
+provider_connection_oauth:
+  type: object
+  description: The grant on an OAuth connection. Absent for a connection that has no grant.
+  properties:
+    scopes:
+      type: array
+      items:
+        type: string
+      example:
+      - repo
+    granted_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+
+provider_connection_authorization:
+  type: object
+  description: Interactive step a pending connection still needs. Omitted when the connection is active.
+  properties:
+    status:
+      type: string
+      example: requires_authorization
+    connect_url:
+      type: string
+      example: https://example.invalid/connect
+    verification_code:
+      type: string
+      example: ABCD-1234
+    expires_at:
+      type: string
+      format: date-time
+      example: '2026-07-27T12:00:00Z'
+
+provider_connection_pagination:
+  type: object
+  properties:
+    page:
+      type: integer
+      format: int32
+      example: 1
+    per_page:
+      type: integer
+      format: int32
+      example: 20
+    total:
+      type: integer
+      format: int32
+      example: 1
+
+list_provider_connections_response:
+  type: object
+  properties:
+    connections:
+      type: array
+      items:
+        $ref: '#/provider_connection'
+    pagination:
+      $ref: '#/provider_connection_pagination'
+
+provider_connection_response:
+  type: object
+  properties:
+    connection:
+      $ref: '#/provider_connection'
+    authorization:
+      $ref: '#/provider_connection_authorization'
+
+create_provider_connection_request:
+  type: object
+  required:
+  - user_id
+  properties:
+    user_id:
+      type: string
+      description: Actor identifier the connection acts for. Not a DigitalOcean user id.
+      example: octocat
+    scopes:
+      type: array
+      items:
+        type: string
+      example:
+      - repo
