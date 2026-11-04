@@ -295,14 +295,15 @@ endpoint:
       type: boolean
       readOnly: true
       description: >-
-        True for the owner's default endpoint in the team: the one the generic
-        MCP URL and data-plane requests without `X-Session-Id` or
-        `X-Endpoint-Id` resolve to, which Action Gateway creates on first use.
-        Otherwise false. It marks the owner's default, not the caller's: each
-        user has at most one, so a team owner listing team endpoints can see
-        several. A default endpoint does not count toward your team's
-        endpoint limit or reserve its name. After it is deleted, the next such
-        request creates a new default. Returned in responses only.
+        True only for your own default endpoint in the team: the one the
+        generic MCP URL and data-plane requests without `X-Session-Id` or
+        `X-Endpoint-Id` resolve to for you, which Action Gateway creates on
+        first use. False for every other endpoint, including other team
+        members' default endpoints that a team owner can see, so a response
+        marks at most one endpoint. A default endpoint does not count toward
+        your team's endpoint limit or reserve its name. After it is deleted,
+        the next such request creates a new default. Returned in responses
+        only.
       example: false
     head_version:
       type: object

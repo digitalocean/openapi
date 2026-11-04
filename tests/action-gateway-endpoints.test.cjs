@@ -560,7 +560,10 @@ test('endpoints report a read-only is_default flag tied to the endpoint limit ex
   assert.equal(property.type, 'boolean');
   assert.equal(property.readOnly, true);
   assert.ok(!models.endpoint.required.includes('is_default'));
-  assert.match(property.description, /does not count toward your team's\s+endpoint limit/);
+  assert.match(property.description, /True only for your own default endpoint/);
+  assert.match(property.description, /including other team\s+members' default endpoints/);
+  assert.doesNotMatch(property.description, /owner's default/);
+  assert.match(property.description, /does not count toward\s+your team's endpoint limit/);
   for (const name of ['endpoint_create', 'endpoint_patch']) {
     assert.equal(Object.hasOwn(models[name].properties, 'is_default'), false, name);
   }
