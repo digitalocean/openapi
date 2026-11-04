@@ -82,6 +82,7 @@ endpoint:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
       actor_id: alice
+      is_default: false
       head_version: *version
       insights: &stored_insights
         metrics: null
@@ -98,6 +99,7 @@ empty_endpoint:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
       actor_id: alice
+      is_default: false
       insights: *stored_insights
       mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       created_at: '2026-10-15T14:00:00Z'
@@ -118,6 +120,7 @@ publish_empty:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
       actor_id: alice
+      is_default: false
       insights: *stored_insights
       mcp_url: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       created_at: '2026-10-15T14:00:00Z'
@@ -148,6 +151,7 @@ promotion:
       id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       name: support-agent
       actor_id: alice
+      is_default: false
       insights: *stored_insights
       mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
       created_at: '2026-10-15T14:00:00Z'

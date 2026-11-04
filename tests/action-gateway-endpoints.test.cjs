@@ -554,3 +554,16 @@ test('an endpoint with no live version returns a null head_version', () => {
   validate({ $ref: '#/components/schemas/endpoint_response' }, { endpoint: { ...empty.endpoint, head_version: null } });
   assert.match(spec.paths[prefix + '/endpoints/{endpoint_id}'].get.description, /head_version is null/);
 });
+
+test('endpoints report a read-only is_default flag tied to the endpoint limit exclusion', () => {
+  const property = models.endpoint.properties.is_default;
+  assert.equal(property.type, 'boolean');
+  assert.equal(property.readOnly, true);
+  assert.ok(!models.endpoint.required.includes('is_default'));
+  assert.match(property.description, /does not count toward your team's\s+endpoint limit/);
+  for (const name of ['endpoint_create', 'endpoint_patch']) {
+    assert.equal(Object.hasOwn(models[name].properties, 'is_default'), false, name);
+  }
+  assert.equal(Object.hasOwn(models.endpoint_version.properties, 'is_default'), false);
+  assert.equal(examples.endpoint.value.endpoint.is_default, false);
+});

@@ -291,6 +291,17 @@ endpoint:
       type: string
       description: Immutable actor binding; empty means no actor.
       example: alice
+    is_default:
+      type: boolean
+      readOnly: true
+      description: >-
+        True for the owner's default endpoint in the team: the one the generic
+        MCP URL and data-plane requests without `X-Session-Id` or
+        `X-Endpoint-Id` resolve to, which Action Gateway creates on first use.
+        Otherwise false. A default endpoint does not count toward your team's
+        endpoint limit or reserve its name. After it is deleted, the next such
+        request creates a new default. Returned in responses only.
+      example: false
     head_version:
       type: object
       nullable: true
