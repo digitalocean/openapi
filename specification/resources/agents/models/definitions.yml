@@ -2168,8 +2168,10 @@ webhook_config:
       $ref: '#/webhook_provider_key'
     webhook_url:
       type: string
-      description: The Payload URL to configure in the external system.
-      example: https://api.digitalocean.com/v2/harness-runtime/triggers/b1a0.../webhook
+      description: >-
+        The Payload URL to configure in the external system. The service returns
+        the `/v2/agents` spelling. Paste that value unchanged.
+      example: https://api.digitalocean.com/v2/agents/triggers/b1a0.../webhook
 
 cron_config:
   type: object
