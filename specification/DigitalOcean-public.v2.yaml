@@ -166,13 +166,18 @@ tags:
       stream, and port-forward (`GET /v2/agents/sessions/{session_id}/port-forward/{port}`)
       opens a WebSocket tunnel to a guest port.
 
+      Persistent workspaces (`/v2/agents/workspaces`) are in public preview and are
+      described under Harness Runtime Workspaces [Public Preview].
+
+  - name: Harness Runtime Workspaces [Public Preview]
+    description: |-
       Persistent workspaces (`/v2/agents/workspaces`) are sets of files that outlive
       a session. Attach one by passing `workspace_id` when you create a session from
       an Environment Config; it mounts at `/workspace`, a workspace is attached to one
       session at a time, and its files are saved when the session is removed or
       checkpointed. Fork and rollback are not available for a session with a
-      workspace. Persistent workspaces are in preview and enabled per team; requests
-      from other teams return `501`.
+      workspace. Persistent workspaces are in public preview, free during public
+      preview, and enabled per team; requests from other teams return `501`.
 
   - name: Apps
     description: |-
@@ -860,6 +865,7 @@ x-tagGroups:
       - Floating IPs
       - Functions
       - Harness Runtime
+      - Harness Runtime Workspaces [Public Preview]
       - Image Actions
       - Images
       - Insights

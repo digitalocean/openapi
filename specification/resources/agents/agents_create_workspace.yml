@@ -5,10 +5,10 @@ description: >-
   ID that is mounted at `/workspace` in the session it is attached to, and is kept when that session
   is removed. Attach it to a session by passing `workspace_id` when you create the session from an
   Environment Config. A new workspace returns `201`. A retry with the same `Idempotency-Key` and body
-  within 24 hours returns the existing workspace with `200`. Persistent workspaces are in preview and
-  enabled per team; for a team without access this returns `501`.
+  within 24 hours returns the existing workspace with `200`. Persistent workspaces are in public preview,
+  free during public preview, and enabled per team; for a team without access this returns `501`.
 tags:
-- Harness Runtime
+- Harness Runtime Workspaces [Public Preview]
 parameters:
 - in: header
   name: Idempotency-Key

@@ -5,7 +5,7 @@ description: >-
   `FAILED` can be deleted; remove the session that holds it first. Workspaces are never deleted
   automatically.
 tags:
-- Harness Runtime
+- Harness Runtime Workspaces [Public Preview]
 parameters:
 - in: path
   name: workspace_id

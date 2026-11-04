@@ -4,7 +4,7 @@ description: >-
   Lists the calling team's persistent workspaces, optionally only those in one state. A page can hold
   fewer results than page_size, so keep paging until next_page_token is empty.
 tags:
-- Harness Runtime
+- Harness Runtime Workspaces [Public Preview]
 parameters:
 - in: query
   name: page_size

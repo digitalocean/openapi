@@ -4,7 +4,7 @@ description: >-
   Returns one persistent workspace by its ID, including its state and when its files were last saved.
   Use it to wait for a workspace to return to `AVAILABLE` after the session that held it was removed.
 tags:
-- Harness Runtime
+- Harness Runtime Workspaces [Public Preview]
 parameters:
 - in: path
   name: workspace_id
