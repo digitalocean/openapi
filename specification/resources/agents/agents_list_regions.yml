@@ -1,10 +1,13 @@
 operationId: harness_list_regions
 summary: ListRegions returns the regions the caller's team may create sessions and agent configs in.
 description: Per-team catalog the UI (and other clients) render as the region picker, instead of hardcoding
-  the list. The default region is always listed and is marked `is_default`; every other open region is
-  listed only when the team holds its placement grant. The set is exactly what CreateSession and CreateAgentConfig
-  placement admit, so every `slug` returned here is accepted as the region a session or config is created
-  in, and a slug missing here is refused. Legacy regions are never listed. Sorted by slug; no pagination.
+  the list. A region is chosen by the API host you call, not by a field in the request body, so a returned
+  `slug` tells you which regional host to target — `ric1` means `https://api-ric1.digitalocean.com`. The
+  default region is always listed and is marked `is_default`; its resources are also reachable on the
+  region-less host, `https://api.digitalocean.com`. Every other open region is listed only when the team
+  holds its placement grant, so a create on a listed region's host is admitted and a region missing from
+  this list is refused. Teams not yet on the regional routing rollout see only the default region, and
+  their responses carry no `region` field. Legacy regions are never listed. Sorted by slug; no pagination.
 tags:
 - Harness Runtime
 responses:
