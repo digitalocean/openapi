@@ -1,0 +1,31 @@
+type: object
+description: >-
+  Error body returned by the dashboards service. Unlike most DigitalOcean API
+  errors, this body carries a gRPC status code rather than an `id` string.
+required:
+  - error
+  - message
+  - code
+properties:
+  error:
+    type: string
+    description: A human-readable description of the error. Identical to `message`.
+    example: dashboard not found
+  message:
+    type: string
+    description: A human-readable description of the error. Identical to `error`.
+    example: dashboard not found
+  code:
+    type: integer
+    description: >-
+      The gRPC status code for the error. `3` = invalid argument, `5` = not
+      found, `6` = already exists, `8` = resource exhausted, `13` = internal.
+    example: 5
+  details:
+    type: array
+    description: >-
+      Additional machine-readable error details. Omitted when there are none.
+      Each entry carries an `@type` identifying its schema.
+    items:
+      type: object
+      additionalProperties: true

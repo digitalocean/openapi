@@ -1,0 +1,73 @@
+operationId: harness_create_provider_connect
+summary: Start an interactive provider login for the team.
+description: Starts, or resumes, the one-time login the team uses so a session can act on a provider.
+  `github` is the provider served today; any other value returns 501. The body is optional. When the
+  team is already connected, `status` is `success` and no URL is returned. Otherwise `status` is
+  `requires_authorization` and the response carries the URL, verification code, and poll URL for the
+  interactive step. No token or authorization handle is returned.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: provider
+  required: true
+  description: Provider key. `github` is the provider served today.
+  schema:
+    type: string
+    example: github
+  example: github
+requestBody:
+  required: false
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/start_provider_connect_request
+responses:
+  '200':
+    description: Login started, or already complete.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/start_provider_connect_response
+  '400':
+    description: The body is present and is not the documented JSON object.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '501':
+    description: Provider login is not enabled, or this provider is not served.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_start_provider_connect.yml
+security:
+- bearer_auth:
+  - agent_harness_session:create
