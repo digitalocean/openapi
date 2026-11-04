@@ -149,7 +149,7 @@ test('creation and promotion document throttling and their applicable resource c
       assert.equal(error.message, `endpoint limit ${limit} reached (current count ${limit})`);
       assert.match(response.description, /message includes the limit and current count/);
       assert.match(response.description, /not a fixed limit for every team/);
-      assert.match(response.description, /excluding service-managed endpoints and legacy sessions/);
+      assert.match(response.description, /does not count each user's default endpoint, .*service-managed endpoints, or legacy sessions/);
     } else {
       assert.equal(error.message, 'live version limit reached; delete an older version');
       assert.match(response.description, /at most 100 live versions/);

@@ -56,8 +56,10 @@ endpoint_creation_limited:
     error uses too_many_requests. An endpoint-cap error uses endpoint_limit_exceeded;
     its message includes the limit and current count. The endpoint limit depends
     on your team's allowance, not a fixed limit for every team. It counts endpoints
-    created through the public API, excluding service-managed endpoints and legacy
-    sessions. Delete an endpoint before creating another when this cap is reached.
+    created through the public API. It does not count each user's default
+    endpoint, which Action Gateway creates on first use, service-managed
+    endpoints, or legacy sessions. Delete an endpoint before creating another when
+    this cap is reached.
   headers:
     $ref: response_headers.yml
   content:
