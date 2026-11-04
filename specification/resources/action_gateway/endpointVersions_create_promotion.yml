@@ -3,8 +3,9 @@ summary: Promote an Endpoint Version
 description: >-
   Copies a live version's configuration into a new, higher-numbered head version
   and sets promoted_from_version_number. Existing versions never change. Only the
-  endpoint owner may promote. A deleted, inaccessible, or different endpoint's
-  version returns 404 endpoint_version_not_found.
+  endpoint owner may promote. An inaccessible endpoint returns 404
+  endpoint_not_found, and a deleted, unknown, or different endpoint's version
+  returns 404 endpoint_version_not_found.
   The new version always has a new identity and number, even for identical
   contents; deleted identities are never resurrected. Head replacement does not
   change the endpoint's Insights consent, which applies to every version.
@@ -38,7 +39,7 @@ responses:
   '401':
     $ref: ../../shared/responses/unauthorized.yml
   '404':
-    $ref: ../../shared/responses/not_found.yml
+    $ref: endpoint_responses.yml#/promotion_not_found
   '429':
     $ref: endpoint_responses.yml#/version_creation_limited
   '500':

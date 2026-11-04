@@ -9,14 +9,46 @@ version_creation_not_found:
       schema:
         $ref: ../../shared/models/error.yml
       examples:
-        endpoint_not_found:
+        endpoint_not_found: &endpoint_not_found
           value:
             id: endpoint_not_found
-            message: The endpoint was not found.
-        endpoint_identity_mismatch:
+            message: endpoint not found
+        endpoint_identity_mismatch: &endpoint_identity_mismatch
           value:
             id: endpoint_identity_mismatch
-            message: The request owner or actor does not match the endpoint.
+            message: version owner and actor must match the endpoint
+
+promotion_not_found:
+  description: >-
+    An inaccessible endpoint returns endpoint_not_found. A version that is
+    deleted, unknown, or belongs to another endpoint returns
+    endpoint_version_not_found. A source version whose owner or actor differs
+    from the endpoint returns endpoint_identity_mismatch.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: ../../shared/models/error.yml
+      examples:
+        endpoint_not_found: *endpoint_not_found
+        endpoint_version_not_found:
+          value:
+            id: endpoint_version_not_found
+            message: endpoint version not found
+        endpoint_identity_mismatch: *endpoint_identity_mismatch
+
+endpoint_name_taken:
+  description: An endpoint with this name already exists in the team (endpoint_name_taken).
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: ../../shared/models/error.yml
+      example:
+        id: endpoint_name_taken
+        message: endpoint name is already in use
 
 endpoint_creation_limited:
   description: >-
@@ -38,20 +70,20 @@ endpoint_creation_limited:
           value:
             id: too_many_requests
             message: API rate limit exceeded.
-        endpoint_limit:
+        endpoint_limit: &endpoint_limit
           summary: Illustrative team allowance of 50 endpoints is full
           value:
             id: endpoint_limit_exceeded
-            message: 'Endpoint limit exceeded: limit 50, current 50. Delete an endpoint before creating another.'
+            message: endpoint limit 50 reached (current count 50)
 
 version_creation_limited:
   description: >-
     The API rate limit or the endpoint's live-version limit was exceeded. A
     rate-limit error uses too_many_requests. A version-cap error uses
-    endpoint_version_limit_exceeded; its message includes the limit and current
-    count. Each endpoint may have at most 100 live versions. Creation and promotion
-    both consume a live-version slot. Delete an older live version before creating
-    or promoting another when this cap is reached.
+    endpoint_version_limit_exceeded. Each endpoint may have at most 100 live
+    versions. Creation and promotion both consume a live-version slot. Delete an
+    older live version before creating or promoting another when this cap is
+    reached.
   headers:
     $ref: response_headers.yml
   content:
@@ -64,4 +96,34 @@ version_creation_limited:
           summary: The endpoint has 100 live versions
           value:
             id: endpoint_version_limit_exceeded
-            message: 'Live version limit exceeded: limit 100, current 100. Delete an older live version before creating or promoting another.'
+            message: live version limit reached; delete an older version
+
+session_creation_limited:
+  description: >-
+    The API rate limit or your team's endpoint limit was exceeded. A rate-limit
+    error uses too_many_requests. When the new session is created as an endpoint,
+    it counts against your team's endpoint limit, and a full limit returns
+    endpoint_limit_exceeded with the limit and current count in its message.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: ../../shared/models/error.yml
+      examples:
+        rate_limit: *rate_limit
+        endpoint_limit: *endpoint_limit
+
+session_name_taken:
+  description: >-
+    The session is created as an endpoint, and every endpoint name derived from
+    the session name is already in use in the team (endpoint_name_taken).
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: ../../shared/models/error.yml
+      example:
+        id: endpoint_name_taken
+        message: endpoint name is already in use; choose another session name

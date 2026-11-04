@@ -39,12 +39,14 @@ endpoint_policy:
   nullable: true
   description: >-
     Tool-permission policy. Omission or an empty object asks before every call.
-    Nested property names use snake_case, unlike the legacy session API.
+    Property names are camelCase, as in the session API.
   properties:
-    default_action:
+    defaultAction:
       type: string
-      enum: [allow, ask, deny]
-      description: Action for calls no rule matches. Omission means ask.
+      enum: [allow, ask, deny, SESSION_POLICY_ACTION_UNSPECIFIED]
+      description: >-
+        Action for calls no rule matches. Omission means ask; responses then
+        return SESSION_POLICY_ACTION_UNSPECIFIED.
       example: ask
     rules:
       type: array
@@ -72,17 +74,19 @@ endpoint_policy:
 
 endpoint_config:
   type: object
+  additionalProperties: true
   description: >-
-    Version options. Omission leaves config absent; an explicit empty object is
-    preserved. Nested property names use snake_case.
+    Version options, stored and returned as supplied. Omission leaves config
+    absent; an explicit empty object is preserved. Property names are camelCase,
+    as in the session API; other keys are stored but have no effect.
   properties:
-    preload_tools:
+    preloadTools:
       type: array
       description: Tool names, optionally version-pinned, or version-pinned toolbelt references.
       items:
         type: string
       example: [exa_web_search]
-    output_views:
+    outputViews:
       type: object
       maxProperties: 100
       additionalProperties:
@@ -90,11 +94,13 @@ endpoint_config:
       description: Maps up to 100 tool slugs to output-view names.
       example:
         exa_web_search: titles-and-urls
-    custom_instructions:
+    customInstructions:
       type: string
       maxLength: 1000
       description: Instructions for tools in this version.
       example: Prefer primary sources and cite URLs.
+    cache:
+      $ref: sessions.yml#/session_cache
 
 endpoint_network:
   type: object
@@ -104,7 +110,7 @@ endpoint_network:
   not:
     required: [region]
   properties:
-    vpc_uuid:
+    vpcUuid:
       type: string
       format: uuid
       description: UUID of a VPC owned by your team in a supported region.
@@ -112,10 +118,11 @@ endpoint_network:
 
 endpoint_network_response:
   type: object
+  required: [vpcUuid, region]
   description: VPC binding, including the VPC region recorded at creation. Omitted when no binding was supplied.
   properties:
-    vpc_uuid:
-      $ref: '#/endpoint_network/properties/vpc_uuid'
+    vpcUuid:
+      $ref: '#/endpoint_network/properties/vpcUuid'
     region:
       type: string
       readOnly: true
@@ -196,7 +203,7 @@ endpoint_version_spec:
 
 endpoint_version:
   type: object
-  required: [id, endpoint_id, version_number]
+  required: [id, endpoint_id, version_number, name, actor_id, policy, created_at, updated_at]
   description: >-
     An immutable, live endpoint version. Its ID must encode endpoint_id and
     version_number. Deleting it does not reuse its number or change older versions.
@@ -213,6 +220,10 @@ endpoint_version:
       $ref: '#/version_number'
     promoted_from_version_number:
       $ref: '#/version_number'
+    name:
+      type: string
+      description: The endpoint's name when this version was created. Renaming the endpoint does not change it.
+      example: support-agent
     actor_id:
       type: string
       description: Actor binding shared by every version of the endpoint; empty means no actor.
@@ -250,10 +261,15 @@ endpoint_version:
       format: date-time
       description: When the version was created.
       example: '2026-10-15T14:00:00Z'
+    updated_at:
+      type: string
+      format: date-time
+      description: When the version was last updated.
+      example: '2026-10-15T14:00:00Z'
 
 endpoint:
   type: object
-  required: [id, name]
+  required: [id, name, actor_id, created_at, updated_at]
   description: >-
     A named lineage of immutable versions owned by its creating user. Only that
     user may use it, update it, create versions, or promote versions. A team owner

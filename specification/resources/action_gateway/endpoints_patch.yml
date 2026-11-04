@@ -45,23 +45,14 @@ responses:
     $ref: ../../shared/responses/unauthorized.yml
   '404':
     $ref: ../../shared/responses/not_found.yml
+  '409':
+    $ref: endpoint_responses.yml#/endpoint_name_taken
   '429':
     $ref: ../../shared/responses/too_many_requests.yml
   '500':
     $ref: ../../shared/responses/server_error.yml
   'default':
     $ref: ../../shared/responses/unexpected_error.yml
-  '409':
-    description: An endpoint with this name already exists in the team (endpoint_name_taken).
-    headers:
-      $ref: response_headers.yml
-    content:
-      application/json:
-        schema:
-          $ref: ../../shared/models/error.yml
-        example:
-          id: endpoint_name_taken
-          message: An endpoint with this name already exists.
 x-codeSamples:
 - $ref: examples/curl/endpoints_patch.yml
 security:

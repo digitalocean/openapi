@@ -143,15 +143,15 @@ test('creation and promotion document throttling and their applicable resource c
     assert.equal(deref(media.examples.rate_limit).value.id, 'too_many_requests');
     const error = deref(media.examples[exampleName]).value;
     assert.equal(error.id, id);
-    assert.match(error.message, new RegExp(`limit ${limit}, current ${limit}`));
-    assert.match(error.message, /Delete an? /);
     assert.deepEqual(Object.keys(error).sort(), ['id', 'message']);
     validate(media.schema, error);
-    assert.match(response.description, /message includes the limit and current count/);
     if (id === 'endpoint_limit_exceeded') {
+      assert.equal(error.message, `endpoint limit ${limit} reached (current count ${limit})`);
+      assert.match(response.description, /message includes the limit and current count/);
       assert.match(response.description, /not a fixed limit for every team/);
       assert.match(response.description, /excluding service-managed endpoints and legacy sessions/);
     } else {
+      assert.equal(error.message, 'live version limit reached; delete an older version');
       assert.match(response.description, /at most 100 live versions/);
       assert.match(response.description, /Creation and promotion both consume/);
     }
@@ -268,7 +268,10 @@ test('omitted and empty nested selections remain distinct, without defaults', ()
     assert.deepEqual(value, before);
   }
   const version = checkModel('endpoint_version');
-  const base = { id: endpointId + '.v1', endpoint_id: endpointId, version_number: 1 };
+  const base = {
+    id: endpointId + '.v1', endpoint_id: endpointId, version_number: 1, name: 'support-agent',
+    actor_id: '', policy: null, created_at: '2026-10-15T14:00:00Z', updated_at: '2026-10-15T14:00:00Z',
+  };
   for (const extra of [{}, { tools: { references: [] } }, { policy: {} }, { config: {} }]) {
     assert.ok(version({ ...base, ...extra }), JSON.stringify(version.errors));
   }
@@ -426,7 +429,7 @@ test('public responses expose no internal identity keys and examples agree acros
   }
   assert.deepEqual(examples.promotion.value.version.tools, examples.publish.value.version.tools);
   assert.deepEqual(examples.publish_empty.value.version.tools, { references: [] });
-  assert.deepEqual(examples.publish_empty.value.version.policy, {});
+  assert.deepEqual(examples.publish_empty.value.version.policy, { defaultAction: 'SESSION_POLICY_ACTION_UNSPECIFIED', rules: [] });
   assert.deepEqual(examples.publish_empty.value.version.config, {});
 });
 
@@ -438,7 +441,11 @@ test('legacy paths, fields, pagination, and pinned URLs remain compatible', () =
     if (method === 'post') {
       // Legacy session creation stays available whether or not endpoints are enabled.
       assert.equal(operation.responses['410'], undefined);
-      assert.match(operation.description, /keeps creating legacy sessions/);
+      assert.match(operation.description, /Existing sessions and their\s+MCP URLs keep working/);
+      assert.equal(deref(operation.responses['409']).content['application/json'].example.id, 'endpoint_name_taken');
+      const limited = deref(operation.responses['429']).content['application/json'].examples;
+      assert.equal(deref(limited.endpoint_limit).value.id, 'endpoint_limit_exceeded');
+      assert.equal(deref(limited.rate_limit).value.id, 'too_many_requests');
       assert.match(operation.responses['200'].content['application/json'].example.mcpUrl, /\/mcp\/session\//);
     }
   }
