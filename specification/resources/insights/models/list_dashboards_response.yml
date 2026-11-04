@@ -1,0 +1,12 @@
+type: object
+description: Response body for listing dashboards.
+required:
+  - pagination
+properties:
+  dashboards:
+    type: array
+    description: The requested page of dashboards. Omitted when the page is empty.
+    items:
+      $ref: 'dashboard.yml'
+  pagination:
+    $ref: 'dashboards_pagination_response.yml'
