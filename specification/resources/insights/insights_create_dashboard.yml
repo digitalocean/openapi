@@ -1,0 +1,55 @@
+operationId: insights_create_dashboard
+
+summary: Create a Dashboard
+
+description: |
+  To create a dashboard, send a POST request to `/v2/insights/dashboards`
+  with a `spec` containing the dashboard definition as a JSON document
+  serialized to a string.
+
+  The server derives the dashboard's `name` and `description` from
+  `spec.display.name` and `spec.display.description`. Dashboard names are
+  unique within a team; reusing a name returns `409`.
+
+  The response status is `200` and the body contains the created dashboard.
+
+tags:
+  - Insights
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/dashboard_request.yml'
+      example:
+        spec: '{"kind":"Dashboard","apiVersion":"perses.dev/v1alpha1","spec":{"display":{"name":"Droplet CPU","description":"CPU utilization across production Droplets."},"duration":"1h","variables":[],"layouts":[{"kind":"Grid","spec":{"items":[{"x":0,"y":0,"width":12,"height":6,"content":{"$ref":"#/spec/panels/cpu"}}]}}],"panels":{"cpu":{"kind":"Panel","spec":{"display":{"name":"CPU utilization"},"plugin":{"kind":"TimeSeriesChart","spec":{}},"queries":[{"kind":"TimeSeriesQuery","spec":{"plugin":{"kind":"MetricsTimeSeriesQuery","spec":{"metricName":"do.droplets.cpu_utilization","kind":"gauge","filters":[],"groupBy":[]}}}}]}}}}}'
+
+responses:
+  '200':
+    $ref: 'responses/dashboard_response.yml'
+
+  '400':
+    $ref: 'responses/dashboard_bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '409':
+    $ref: 'responses/dashboard_conflict.yml'
+
+  '429':
+    $ref: 'responses/dashboard_too_many_requests.yml'
+
+  '500':
+    $ref: 'responses/dashboard_server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/insights_create_dashboard.yml'
+
+security:
+  - bearer_auth:
+      - 'insights:create'
