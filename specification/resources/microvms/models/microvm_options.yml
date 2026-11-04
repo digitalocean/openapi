@@ -102,7 +102,9 @@ properties:
 
   features:
     type: array
-    description: Features and whether they are enabled for your team.
+    description: >-
+      Features and whether they are enabled for your team. `exec_pty` gates
+      `exec` and `console`; `file_transfer` gates `files`.
     items:
       type: object
       properties:

@@ -14,7 +14,7 @@ description: 'Creates an asynchronous, object-storage-backed transfer for payloa
   `download_url` from Spaces.
 
 
-  Upload and cancel currently return 501 until the sandbox backend RPCs ship; download is live.'
+  Upload, download, and cancel are live.'
 tags:
 - Harness Runtime
 parameters:
@@ -57,11 +57,11 @@ requestBody:
             description: Download only. When true, `path` is exported as a tar stream.
             example: true
           size_bytes:
-            type: string
+            type: integer
             format: int64
-            description: Optional total payload size. Validated against the maximum staged object size
-              (50 GiB); a larger value returns 413.
-            example: example
+            description: Optional total payload size, as a JSON number. Validated against the maximum
+              staged object size (50 GiB); a larger value returns 413.
+            example: 4
           sha256:
             type: string
             description: Optional lowercase hex SHA-256 of the full payload. If set on an upload, it must
