@@ -503,9 +503,9 @@ tags:
       The DigitalOcean Insights API provides observability resources for
       monitoring your infrastructure, including alert rules that evaluate
       metrics, notification channels that deliver alert events, read-only
-      alert instances that record when alert rules fire, PromQL, logs, spans,
-      and traces query interfaces, and per-resource enablement of the metrics,
-      logs, and traces signals.
+      alert instances that record when alert rules fire, user-defined
+      dashboards, PromQL, logs, spans, and traces query interfaces, and
+      per-resource enablement of the metrics, logs, and traces signals.
 
   - name: Kubernetes
     description: |-
@@ -2123,6 +2123,27 @@ paths:
 
     delete:
       $ref: "resources/insights/insights_delete_alertRule.yml"
+
+  /v2/insights/dashboards:
+    get:
+      $ref: "resources/insights/insights_list_dashboards.yml"
+
+    post:
+      $ref: "resources/insights/insights_create_dashboard.yml"
+
+  /v2/insights/dashboards/schema:
+    get:
+      $ref: "resources/insights/insights_get_dashboardSchema.yml"
+
+  /v2/insights/dashboards/{uuid}:
+    get:
+      $ref: "resources/insights/insights_get_dashboard.yml"
+
+    put:
+      $ref: "resources/insights/insights_update_dashboard.yml"
+
+    delete:
+      $ref: "resources/insights/insights_delete_dashboard.yml"
 
   /v2/insights/notification-channels:
     get:
