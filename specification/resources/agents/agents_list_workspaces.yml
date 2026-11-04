@@ -54,8 +54,15 @@ responses:
           $ref: models/definitions.yml#/error
   '401':
     $ref: ../../shared/responses/unauthorized.yml
-  '501':
+  '403':
     description: Persistent workspaces are not enabled for this team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '501':
+    description: Persistent workspaces are not available yet.
     headers: *id001
     content:
       application/json:

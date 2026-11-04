@@ -607,7 +607,7 @@ create_session_config_request:
       description: >-
         Optional persistent workspace to attach at create; its files are mounted at `/workspace`. The
         workspace must be `AVAILABLE`, otherwise the request returns 409. Accepted only in this JSON
-        form; an environment spec that contains workspace_id is rejected with 400. Returns 501 when
+        form; an environment spec that contains workspace_id is rejected with 400. Returns 403 when
         persistent workspaces are not enabled for the team.
       example: 019a2f4e-8c1d-7b3a-9e5f-2d6c8a1b4e70
   description: >-

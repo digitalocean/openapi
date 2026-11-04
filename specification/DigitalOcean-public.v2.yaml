@@ -183,7 +183,7 @@ tags:
       session at a time, and its files are saved when the session is removed or
       checkpointed. Fork and rollback are not available for a session with a
       workspace. Persistent workspaces are in public preview, free during public
-      preview, and enabled per team; requests from other teams return `501`.
+      preview, and enabled per team; requests from other teams return `403`.
 
   - name: Apps
     description: |-

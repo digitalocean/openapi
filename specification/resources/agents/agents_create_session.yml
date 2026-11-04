@@ -94,7 +94,9 @@ responses:
         schema:
           $ref: models/definitions.yml#/error
   '403':
-    description: Secrets Manager denied access to a pinned credential.
+    description: >-
+      Secrets Manager denied access to a pinned credential, or `workspace_id` was sent and
+      persistent workspaces are not enabled for the team.
     headers: *id002
     content:
       application/json:
