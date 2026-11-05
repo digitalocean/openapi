@@ -20,6 +20,7 @@ servers:
 parameters:
 - $ref: parameters.yml#/session_id
 - $ref: parameters.yml#/approval_id
+- $ref: parameters.yml#/actor_id_header
 requestBody:
   required: true
   content:

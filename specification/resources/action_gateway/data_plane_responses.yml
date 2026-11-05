@@ -1,7 +1,8 @@
 bad_request:
   description: >-
     The request is invalid: the body is not valid JSON, a required field is
-    missing, or a value is out of range.
+    missing, a value is out of range, `X-Endpoint-Id` is malformed or repeated,
+    or both `X-Session-Id` and `X-Endpoint-Id` were sent.
   content:
     application/json:
       schema:
@@ -48,8 +49,9 @@ forbidden:
     `action_gateway:execute` scope, and accounts that are not in good
     standing, are rejected with the standard DigitalOcean API error format.
     Session failures return a tool result: the session ID is missing or
-    invalid, the session belongs to another user or team, the session has no
-    policy, or the session policy denies the operation.
+    invalid, the session or endpoint belongs to another user or team,
+    `X-Actor-Id` does not match its actor binding, the session has no policy,
+    or the session policy denies the operation.
   content:
     application/json:
       schema:
@@ -61,6 +63,23 @@ forbidden:
         error:
           class: forbidden
           message: A valid session ID is required to invoke tools.
+          retriable: false
+          recovery_hint: fix_args
+        call_id: ''
+
+endpoint_not_found:
+  description: >-
+    The endpoint in `X-Endpoint-Id` does not exist, has no live version, or
+    belongs to another user or team.
+  content:
+    application/json:
+      schema:
+        $ref: models/data_plane.yml#/tool_result_error
+      example:
+        status: failed
+        error:
+          class: invalid_argument
+          message: The requested route is not supported.
           retriable: false
           recovery_hint: fix_args
         call_id: ''
