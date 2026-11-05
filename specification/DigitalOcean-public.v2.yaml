@@ -3208,6 +3208,10 @@ paths:
     delete:
       $ref: "resources/snapshots/snapshots_delete.yml"
 
+  /v2/snapshots/{snapshot_id}/regions/{region}:
+    delete:
+      $ref: "resources/snapshots/snapshots_delete_region.yml"
+
   /v2/spaces/keys:
     get:
       $ref: "resources/spaces/key_list.yml"
