@@ -4214,6 +4214,14 @@ apiGetModelCatalogCardOutput:
     data:
       $ref: '#/apiModelCatalogCard'
   type: object
+apiGetModelCatalogCardV2Output:
+  description: |-
+    V2 catalog card. description, code_snippets, pricing_detail, and liveliness
+    are populated on this response.
+  properties:
+    data:
+      $ref: '#/apiModelCatalogEntryV2'
+  type: object
 apiGetModelEvaluationPresetOutput:
   properties:
     preset:
@@ -5952,6 +5960,71 @@ apiListModelCatalogOutput:
     meta:
       $ref: '#/apiMeta'
   type: object
+apiListModelCatalogV2Output:
+  properties:
+    available_badges:
+      description: Badge values present in the unfiltered catalog.
+      items:
+        $ref: '#/apiModelCatalogBadge'
+      type: array
+    available_creators:
+      description: Creator values the client can offer in the creator filter.
+      example:
+      - Meta
+      items:
+        example: Meta
+        type: string
+      type: array
+    available_input_modalities:
+      description: Modality values accepted by the input_modality filter.
+      items:
+        $ref: '#/apiModelModality'
+      type: array
+    available_model_types:
+      description: |-
+        Model types present in the unfiltered catalog, such as chat or embedding.
+        Informational only. V2 has no model_type request filter; browse by
+        input_modality, output_modality, or capabilities.
+      example:
+      - chat
+      items:
+        example: chat
+        type: string
+      type: array
+    available_output_modalities:
+      description: Modality values accepted by the output_modality filter.
+      items:
+        $ref: '#/apiModelModality'
+      type: array
+    available_products:
+      description: Product enrollment values present in the unfiltered catalog.
+      items:
+        $ref: '#/apiModelCatalogProduct'
+      type: array
+    available_serving:
+      description: Serving values present in the unfiltered catalog.
+      items:
+        $ref: '#/apiModelServing'
+      type: array
+    available_sort_by:
+      description: Sort fields the client can offer in the sort UI.
+      items:
+        $ref: '#/apiModelCatalogSortByV2'
+      type: array
+    available_sort_directions:
+      description: Sort directions the client can offer in the sort UI.
+      items:
+        $ref: '#/apiSortDirection'
+      type: array
+    data:
+      items:
+        $ref: '#/apiModelCatalogEntryV2'
+      type: array
+    links:
+      $ref: '#/apiLinks'
+    meta:
+      $ref: '#/apiMeta'
+  type: object
 apiListModelEvaluationMetricsOutput:
   properties:
     metrics:
@@ -6642,6 +6715,25 @@ apiModelBillingMode:
   - MODEL_BILLING_MODE_BATCH
   example: MODEL_BILLING_MODE_UNSPECIFIED
   type: string
+apiModelCatalogBadge:
+  default: MODEL_CATALOG_BADGE_UNSPECIFIED
+  description: |-
+    Badge shown on a V2 catalog row.
+
+     - MODEL_CATALOG_BADGE_FEATURED: Featured in the catalog.
+     - MODEL_CATALOG_BADGE_NEW: Newly added.
+     - MODEL_CATALOG_BADGE_PREVIEW: Preview.
+     - MODEL_CATALOG_BADGE_DEPRECATING: Scheduled for deprecation.
+     - MODEL_CATALOG_BADGE_INFERENCE_ROUTER: Inference Router preset.
+  enum:
+  - MODEL_CATALOG_BADGE_UNSPECIFIED
+  - MODEL_CATALOG_BADGE_FEATURED
+  - MODEL_CATALOG_BADGE_NEW
+  - MODEL_CATALOG_BADGE_PREVIEW
+  - MODEL_CATALOG_BADGE_DEPRECATING
+  - MODEL_CATALOG_BADGE_INFERENCE_ROUTER
+  example: MODEL_CATALOG_BADGE_UNSPECIFIED
+  type: string
 apiModelCatalogCard:
   description: Detail view for GetModelCatalogCard
   properties:
@@ -6815,6 +6907,247 @@ apiModelCatalogEntry:
       example: '"text-to-text"'
       type: string
   type: object
+apiModelCatalogEntryV2:
+  description: |-
+    Catalog row returned by List Model Catalog V2 and Get Model Catalog Card V2.
+    description, code_snippets, pricing_detail, and liveliness are populated on
+    the card and empty on list rows. performance is populated on list rows and
+    the card when canary data is available.
+  properties:
+    badges:
+      example:
+      - MODEL_CATALOG_BADGE_FEATURED
+      items:
+        $ref: '#/apiModelCatalogBadge'
+      type: array
+    capabilities:
+      example:
+      - tool_calling
+      items:
+        example: tool_calling
+        type: string
+      type: array
+    code_snippets:
+      $ref: '#/apiCodeSnippets'
+    context_window:
+      example: "128000"
+      format: int64
+      type: string
+    created_at:
+      description: RFC 3339 timestamp indicating when the model was added to the catalog.
+      example: "2021-01-01T00:00:00Z"
+      format: date-time
+      type: string
+    creator:
+      description: Model creator or developer, such as Meta, Anthropic, or OpenAI.
+      example: '"Meta"'
+      type: string
+    description:
+      description: Full catalog description. Populated on Get Model Catalog Card V2.
+      example: '"Claude Sonnet 4 is Anthropic''s most capable model..."'
+      type: string
+    huggingface_repo_id:
+      description: Hugging Face repository ID the model is based on, when applicable.
+      example: '"meta-llama/Llama-3.3-70B-Instruct"'
+      type: string
+    id:
+      example: '"506a3371-88d0-4047-9212-e2079497ac68"'
+      type: string
+    input_modality:
+      example:
+      - MODEL_MODALITY_TEXT
+      items:
+        $ref: '#/apiModelModality'
+      type: array
+    item_type:
+      $ref: '#/apiModelCatalogItemType'
+    liveliness:
+      $ref: '#/apiModelLiveliness'
+    max_output_tokens:
+      description: Maximum number of output tokens the model can generate in one response.
+      example: "65536"
+      format: int64
+      type: string
+    max_tokens:
+      $ref: '#/apiNumericRange'
+    model_id:
+      description: Model identifier used for inference API calls, such as llama3.1-70b-instruct.
+      example: '"llama3.1-70b-instruct"'
+      type: string
+    name:
+      example: '"Llama 3.1 70B"'
+      type: string
+    output_modality:
+      example:
+      - MODEL_MODALITY_TEXT
+      items:
+        $ref: '#/apiModelModality'
+      type: array
+    parameter_count_in_billions:
+      description: Parameter count in billions. For example, 70.0 means 70B.
+      example: 70
+      format: float
+      type: number
+    performance:
+      $ref: '#/apiModelCatalogPerformance'
+    pricing:
+      $ref: '#/apiModelPricing'
+    pricing_detail:
+      $ref: '#/apiModelPricingDetail'
+    products:
+      example:
+      - MODEL_CATALOG_PRODUCT_EVALUATION_CANDIDATE
+      items:
+        $ref: '#/apiModelCatalogProduct'
+      type: array
+    provider:
+      $ref: '#/apiModelProvider'
+    reasoning_efforts:
+      description: Supported reasoning effort levels, such as low, medium, and high.
+      example:
+      - low
+      items:
+        example: low
+        type: string
+      type: array
+    scaled_pricing_enabled:
+      description: True when this model's pricing varies over time.
+      example: true
+      type: boolean
+    serving:
+      example:
+      - MODEL_SERVING_SERVERLESS
+      items:
+        $ref: '#/apiModelServing'
+      type: array
+    short_description:
+      example: '"Fast, efficient model for general tasks"'
+      type: string
+    supported_endpoints:
+      description: |-
+        Inference endpoints this model serves, such as chat completions or responses.
+        Empty for Inference Router presets.
+      example:
+      - MODEL_SUPPORTED_ENDPOINT_CHAT_COMPLETIONS
+      items:
+        $ref: '#/apiModelSupportedEndpoint'
+      type: array
+    supports_temperature:
+      description: Whether the inference request schema includes a temperature field.
+      example: true
+      type: boolean
+    temperature:
+      $ref: '#/apiNumericRange'
+    thinking:
+      description: Whether the model supports extended thinking.
+      example: true
+      type: boolean
+    top_p:
+      $ref: '#/apiNumericRange'
+    type:
+      description: Catalog model type, such as chat or embedding.
+      example: '"chat"'
+      type: string
+  type: object
+apiModelCatalogItemType:
+  default: MODEL_CATALOG_ITEM_TYPE_UNSPECIFIED
+  description: |-
+    Whether a catalog row is a foundation model or an Inference Router preset.
+
+     - MODEL_CATALOG_ITEM_TYPE_MODEL: A foundation or inference model.
+     - MODEL_CATALOG_ITEM_TYPE_INFERENCE_ROUTER: An Inference Router preset.
+  enum:
+  - MODEL_CATALOG_ITEM_TYPE_UNSPECIFIED
+  - MODEL_CATALOG_ITEM_TYPE_MODEL
+  - MODEL_CATALOG_ITEM_TYPE_INFERENCE_ROUTER
+  example: MODEL_CATALOG_ITEM_TYPE_UNSPECIFIED
+  type: string
+apiModelCatalogPerformance:
+  description: |-
+    Compact canary performance rollup for catalog browse and the catalog card.
+    List Model Catalog V2 uses a rolling last-24-hour window (window_days is 1).
+    Get Model Catalog Card V2 uses the sample-weighted mean of daily percentiles
+    over the liveliness window, typically 7 days. The full daily series stays on
+    liveliness. This is canary traffic, not live customer load.
+  properties:
+    e2e_latency_p50_seconds:
+      description: End-to-end latency in seconds, p50.
+      example: 0.42
+      format: double
+      type: number
+    e2e_latency_p75_seconds:
+      description: End-to-end latency in seconds, p75.
+      example: 0.9
+      format: double
+      type: number
+    e2e_latency_p95_seconds:
+      description: End-to-end latency in seconds, p95.
+      example: 1.9
+      format: double
+      type: number
+    samples:
+      description: Request samples across the window. Prefers end-to-end latency, then time to first token, then throughput.
+      example: 168
+      format: int64
+      type: integer
+    status:
+      description: |-
+        "ok" when time to first token, end-to-end latency, and throughput all
+        have data, "partial_data" when only some do, "insufficient_data" when
+        none do.
+      example: '"ok"'
+      type: string
+    throughput_p50_tok_per_s:
+      description: Throughput in tokens per second, p50.
+      example: 48.5
+      format: double
+      type: number
+    throughput_p75_tok_per_s:
+      description: Throughput in tokens per second, p75.
+      example: 60
+      format: double
+      type: number
+    throughput_p95_tok_per_s:
+      description: Throughput in tokens per second, p95.
+      example: 72
+      format: double
+      type: number
+    ttft_p50_seconds:
+      description: Time to first token in seconds, p50. Streaming canary probes only.
+      example: 0.18
+      format: double
+      type: number
+    ttft_p75_seconds:
+      description: Time to first token in seconds, p75. Streaming canary probes only.
+      example: 0.3
+      format: double
+      type: number
+    ttft_p95_seconds:
+      description: Time to first token in seconds, p95. Streaming canary probes only.
+      example: 0.55
+      format: double
+      type: number
+    window_days:
+      description: Lookback window length in days. 1 is the rolling 24-hour list window.
+      example: 7
+      format: int64
+      type: integer
+  type: object
+apiModelCatalogProduct:
+  default: MODEL_CATALOG_PRODUCT_UNSPECIFIED
+  description: |-
+    Product that offers the model. Serving (serverless or dedicated) is separate.
+
+     - MODEL_CATALOG_PRODUCT_EVALUATIONS_JUDGE: Model can judge evaluations.
+     - MODEL_CATALOG_PRODUCT_HARNESS_RUNTIME: Model is enrolled for the harness runtime.
+     - MODEL_CATALOG_PRODUCT_EVALUATION_CANDIDATE: Model can be an evaluation or simulation candidate.
+  enum:
+  - MODEL_CATALOG_PRODUCT_UNSPECIFIED
+  - MODEL_CATALOG_PRODUCT_EVALUATIONS_JUDGE
+  - MODEL_CATALOG_PRODUCT_HARNESS_RUNTIME
+  - MODEL_CATALOG_PRODUCT_EVALUATION_CANDIDATE
+  example: MODEL_CATALOG_PRODUCT_UNSPECIFIED
+  type: string
 apiModelCatalogSortBy:
   default: MODEL_CATALOG_SORT_BY_CREATED_AT
   description: |-
@@ -6827,6 +7160,26 @@ apiModelCatalogSortBy:
   - MODEL_CATALOG_SORT_BY_CREATED_AT
   - MODEL_CATALOG_SORT_BY_NAME
   - MODEL_CATALOG_SORT_BY_PRICE
+  example: MODEL_CATALOG_SORT_BY_CREATED_AT
+  type: string
+apiModelCatalogSortByV2:
+  default: MODEL_CATALOG_SORT_BY_CREATED_AT
+  description: |-
+    Field on which to sort V2 model catalog results.
+
+     - MODEL_CATALOG_SORT_BY_CREATED_AT: Default: sort by creation date.
+     - MODEL_CATALOG_SORT_BY_NAME: Sort by the model's display name (case-insensitive).
+     - MODEL_CATALOG_SORT_BY_PRICE: Sort by input token price.
+     - MODEL_CATALOG_SORT_BY_E2E_LATENCY_P50: Sort by canary end-to-end latency p50, in seconds. Lower is better. Rows without performance data sort after rows with data.
+     - MODEL_CATALOG_SORT_BY_THROUGHPUT_P50: Sort by canary throughput p50, in tokens per second. Higher is better. Rows without performance data sort after rows with data.
+     - MODEL_CATALOG_SORT_BY_TTFT_P50: Sort by canary time to first token p50, in seconds. Lower is better. Rows without performance data sort after rows with data.
+  enum:
+  - MODEL_CATALOG_SORT_BY_CREATED_AT
+  - MODEL_CATALOG_SORT_BY_NAME
+  - MODEL_CATALOG_SORT_BY_PRICE
+  - MODEL_CATALOG_SORT_BY_E2E_LATENCY_P50
+  - MODEL_CATALOG_SORT_BY_THROUGHPUT_P50
+  - MODEL_CATALOG_SORT_BY_TTFT_P50
   example: MODEL_CATALOG_SORT_BY_CREATED_AT
   type: string
 apiModelCatalogUseCase:
@@ -7271,6 +7624,87 @@ apiModelEvaluationRunSummary:
     status:
       $ref: '#/apiModelEvaluationRunStatus'
   type: object
+apiModelLiveliness:
+  description: |-
+    Performance statistics for a model, computed from canary traffic.
+    Present when the feature is enabled. Each metric (ttft, e2e_latency,
+    throughput) has its own status.
+  properties:
+    e2e_latency:
+      $ref: '#/apiModelLivelinessMetric'
+    overall_status:
+      description: |-
+        Summary across metrics: "ok" when every metric has data, "partial_data"
+        when some do and some do not, "insufficient_data" when none do.
+      example: '"ok"'
+      type: string
+    source:
+      description: Traffic the statistics are computed from. Always "canary".
+      example: '"canary"'
+      type: string
+    throughput:
+      $ref: '#/apiModelLivelinessMetric'
+    ttft:
+      $ref: '#/apiModelLivelinessMetric'
+  type: object
+apiModelLivelinessDay:
+  description: |-
+    One UTC day of a performance metric, merged across serving regions.
+    Percentiles use the parent metric's unit.
+  properties:
+    day_ms:
+      description: Start of the day (00:00 UTC) as Unix milliseconds.
+      example: 1758499200000
+      format: double
+      type: number
+    p50:
+      description: Median value, rounded to 2 decimal places.
+      example: 0.42
+      format: double
+      type: number
+    p75:
+      description: 75th percentile value, rounded to 2 decimal places.
+      example: 0.61
+      format: double
+      type: number
+    p95:
+      description: 95th percentile value, rounded to 2 decimal places.
+      example: 1.9
+      format: double
+      type: number
+    partial:
+      description: True while the day is still in progress; its values will keep changing.
+      example: true
+      type: boolean
+    samples:
+      description: Number of requests the percentiles were computed from.
+      example: 24
+      format: int64
+      type: integer
+  type: object
+apiModelLivelinessMetric:
+  description: |-
+    One performance metric for a model: its daily series, oldest day first, and
+    whether it has data.
+  properties:
+    days:
+      description: Daily points, oldest first. Empty when status is "insufficient_data".
+      items:
+        $ref: '#/apiModelLivelinessDay'
+      type: array
+    status:
+      description: |-
+        "ok" when days has data; "insufficient_data" when there are not enough
+        recent samples for this model.
+      example: '"ok"'
+      type: string
+    unit:
+      description: |-
+        Unit of the percentile values: "s" for ttft and e2e_latency, "tok/s" for
+        throughput.
+      example: '"s"'
+      type: string
+  type: object
 apiModelModalities:
   description: Input/output modalities
   properties:
@@ -7289,6 +7723,29 @@ apiModelModalities:
         type: string
       type: array
   type: object
+apiModelModality:
+  default: MODEL_MODALITY_UNSPECIFIED
+  description: |-
+    A kind of data a model accepts as input or produces as output.
+
+     - MODEL_MODALITY_TEXT: plain text
+     - MODEL_MODALITY_IMAGE: still images
+     - MODEL_MODALITY_AUDIO: audio
+     - MODEL_MODALITY_VIDEO: video
+     - MODEL_MODALITY_EMBEDDING: embedding vectors
+     - MODEL_MODALITY_RANKING: document ranking scores produced by reranking models
+     - MODEL_MODALITY_DECISIONS: structured decisions produced by classification models
+  enum:
+  - MODEL_MODALITY_UNSPECIFIED
+  - MODEL_MODALITY_TEXT
+  - MODEL_MODALITY_IMAGE
+  - MODEL_MODALITY_AUDIO
+  - MODEL_MODALITY_VIDEO
+  - MODEL_MODALITY_EMBEDDING
+  - MODEL_MODALITY_RANKING
+  - MODEL_MODALITY_DECISIONS
+  example: MODEL_MODALITY_UNSPECIFIED
+  type: string
 apiModelPrice:
   properties:
     attributes:
@@ -7840,6 +8297,19 @@ apiModelScaledPricing:
     min_prices:
       $ref: '#/apiModelPricing'
   type: object
+apiModelServing:
+  default: MODEL_SERVING_UNSPECIFIED
+  description: |-
+    Where a V2 catalog model is served.
+
+     - MODEL_SERVING_SERVERLESS: Serverless inference.
+     - MODEL_SERVING_DEDICATED: Dedicated inference.
+  enum:
+  - MODEL_SERVING_UNSPECIFIED
+  - MODEL_SERVING_SERVERLESS
+  - MODEL_SERVING_DEDICATED
+  example: MODEL_SERVING_UNSPECIFIED
+  type: string
 apiModelSetting:
   description: A configurable setting for a model in the playground
   properties:
@@ -7884,6 +8354,39 @@ apiModelSetting:
       example: number
       type: string
   type: object
+apiModelSupportedEndpoint:
+  default: MODEL_SUPPORTED_ENDPOINT_UNSPECIFIED
+  description: |-
+    An inference endpoint a model can be served on.
+
+     - MODEL_SUPPORTED_ENDPOINT_CHAT_COMPLETIONS: OpenAI-compatible POST /v1/chat/completions
+     - MODEL_SUPPORTED_ENDPOINT_COMPLETIONS: OpenAI-compatible POST /v1/completions
+     - MODEL_SUPPORTED_ENDPOINT_EMBEDDINGS: OpenAI-compatible POST /v1/embeddings
+     - MODEL_SUPPORTED_ENDPOINT_AUDIO_TRANSCRIPTIONS: POST /v1/audio/transcriptions
+     - MODEL_SUPPORTED_ENDPOINT_AUDIO_SPEECH: POST /v1/audio/speech
+     - MODEL_SUPPORTED_ENDPOINT_IMAGE_GENERATIONS: POST /v1/images/generations
+     - MODEL_SUPPORTED_ENDPOINT_VIDEO_GENERATIONS: POST /v1/videos
+     - MODEL_SUPPORTED_ENDPOINT_AUDIO_DIARIZATIONS: POST /v1/audio/diarizations
+     - MODEL_SUPPORTED_ENDPOINT_ASYNC_INVOKE: POST /v1/async-invoke
+     - MODEL_SUPPORTED_ENDPOINT_RERANKING: POST /v1/rerank
+     - MODEL_SUPPORTED_ENDPOINT_SYSTEM_ONE: POST /v1/systemone
+     - MODEL_SUPPORTED_ENDPOINT_RESPONSES: OpenAI-compatible POST /v1/responses
+  enum:
+  - MODEL_SUPPORTED_ENDPOINT_UNSPECIFIED
+  - MODEL_SUPPORTED_ENDPOINT_CHAT_COMPLETIONS
+  - MODEL_SUPPORTED_ENDPOINT_COMPLETIONS
+  - MODEL_SUPPORTED_ENDPOINT_EMBEDDINGS
+  - MODEL_SUPPORTED_ENDPOINT_AUDIO_TRANSCRIPTIONS
+  - MODEL_SUPPORTED_ENDPOINT_AUDIO_SPEECH
+  - MODEL_SUPPORTED_ENDPOINT_IMAGE_GENERATIONS
+  - MODEL_SUPPORTED_ENDPOINT_VIDEO_GENERATIONS
+  - MODEL_SUPPORTED_ENDPOINT_AUDIO_DIARIZATIONS
+  - MODEL_SUPPORTED_ENDPOINT_ASYNC_INVOKE
+  - MODEL_SUPPORTED_ENDPOINT_RERANKING
+  - MODEL_SUPPORTED_ENDPOINT_SYSTEM_ONE
+  - MODEL_SUPPORTED_ENDPOINT_RESPONSES
+  example: MODEL_SUPPORTED_ENDPOINT_UNSPECIFIED
+  type: string
 apiModelUploadCompleteOutput:
   description: Information about an updated model
   properties:
