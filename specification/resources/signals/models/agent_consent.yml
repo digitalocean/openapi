@@ -22,6 +22,11 @@ properties:
     format: uuid
     description: The unique identifier of the environment. For Harness Runtime, this is the Environment Config ID.
     example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
+  environment_id:
+    type: string
+    format: uuid
+    description: Same as agent_id. Dual-emitted during the rename.
+    example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
   enabled:
     type: boolean
     description: Whether signals collection is enabled for this environment.
@@ -35,4 +40,5 @@ required:
   - team_id
   - source
   - agent_id
+  - environment_id
   - enabled

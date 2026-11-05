@@ -1,9 +1,22 @@
 operationId: sessions_create
+deprecated: true
 summary: Create a Session
 description: >-
+  Deprecated: use POST /v2/action-gateway/endpoints. Existing sessions and their
+  MCP URLs keep working. A new session may be created as version 1 of a new
+  endpoint whose name is derived from the session name, with part of the
+  session ID appended when that name is taken. The response then includes
+  endpoint_id, endpoint_version_id, and version_number. Such a session counts
+  against your team's endpoint limit (429 endpoint_limit_exceeded). If every
+  derived name is already used by an endpoint in your team, the request returns
+  409 endpoint_name_taken.
   Creates a session owned by your team, with a new session URN, and returns the MCP URL an agent connects
   to. tools selects the tools and toolbelts the session exposes, and policy decides which calls run, need
   approval, or are refused.
+
+
+  Set config.cache to opt into result caching for all eligible tools or a
+  specific list. Caching is off by default and must be enabled for the team.
 tags:
 - Action Gateway
 requestBody:
@@ -73,8 +86,10 @@ responses:
     $ref: ../../shared/responses/bad_request.yml
   '401':
     $ref: ../../shared/responses/unauthorized.yml
+  '409':
+    $ref: endpoint_responses.yml#/session_name_taken
   '429':
-    $ref: ../../shared/responses/too_many_requests.yml
+    $ref: endpoint_responses.yml#/session_creation_limited
   '500':
     $ref: ../../shared/responses/server_error.yml
   default:

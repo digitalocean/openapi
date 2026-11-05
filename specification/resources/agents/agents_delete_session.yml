@@ -1,6 +1,10 @@
 operationId: harness_delete_session
 summary: DestroySession tears down the sandbox and marks the session DESTROYED.
-description: Persistent workspace contents are retained per tenant policy. Returns 204 No Content on success.
+description: >-
+  Persistent workspace contents are retained per tenant policy. A persistent workspace the session
+  holds is saved and kept: it goes to `RELEASING` while the files are saved and then back to
+  `AVAILABLE`. Creating a session on that workspace returns `409` until it is `AVAILABLE` again.
+  Returns 204 No Content on success.
 tags:
 - Harness Runtime
 parameters:

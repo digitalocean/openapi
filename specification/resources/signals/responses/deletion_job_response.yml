@@ -17,6 +17,7 @@ content:
       deletion_id: 01J9ZX0N5Q7M2K3R4S5T6V7W8X
       type: agent
       agent_id: 01a10d3f-2c09-764f-99f8-458e521627f3
+      environment_id: 01a10d3f-2c09-764f-99f8-458e521627f3
       status: running
       error_message: null
       created_at: 1791036405

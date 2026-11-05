@@ -4,7 +4,7 @@ summary: Retrieve Consent for an Environment
 
 description: |
   To retrieve the consent record for a specific environment, send a GET
-  request to `/v1/consent/{agent_id}`. The response includes an `enabled`
+  request to `/v1/consent/{environment_id}`. The response includes an `enabled`
   field indicating whether signals collection is on for this environment.
 
   This endpoint only serves per-environment (`source: agent`) records. Team-level
@@ -14,7 +14,7 @@ tags:
   - Signals
 
 parameters:
-  - $ref: 'parameters.yml#/agent_id'
+  - $ref: 'parameters.yml#/environment_id'
 
 responses:
   '200':

@@ -5,9 +5,10 @@ summary: Create an Export Job
 description: |
   To create a new signals data export, send a POST request to
   `/v1/signals/exports`. To export one Harness Runtime environment, include its
-  `agent_id` (`type` defaults to `agent`). To export the team's Serverless
-  Inference Signals conversations, set `type` to `inference` and omit
-  `agent_id`. You may optionally filter the export by `signal_type`,
+  `environment_id` (`type` defaults to `agent`). Deprecated `agent_id` is still
+  accepted. To export the team's Serverless Inference Signals conversations, set
+  `type` to `inference` and omit `environment_id` and `agent_id`. You may
+  optionally filter the export by `signal_type`,
   `session_ids`, `start_time`, and `end_time`. Use the export options endpoint
   to discover available signal types.
 
@@ -28,7 +29,7 @@ requestBody:
         agent:
           summary: Export one Harness Runtime environment
           value:
-            agent_id: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
+            environment_id: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
             signal_type:
               - ExecutionFailureToolNotFound
         inference:

@@ -1,6 +1,6 @@
 operationId: inference_create_image
 summary: Generate images from text prompts
-description: Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest image generation model with automatic prompt optimization and enhanced visual capabilities.
+description: Creates a high-quality image from a text prompt using GPT-IMAGE-2, the latest image generation model with automatic prompt optimization and enhanced visual capabilities.
 tags:
   - Serverless Inference
 servers:

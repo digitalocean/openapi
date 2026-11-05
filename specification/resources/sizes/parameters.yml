@@ -1,0 +1,106 @@
+cpu_minimum:
+  in: query
+  name: cpu_minimum
+  description: Filter sizes with an inclusive minimum CPU count
+  required: false
+  schema:
+    type: integer
+    minimum: 1
+  example: 4
+
+cpu_maximum:
+  in: query
+  name: cpu_maximum
+  description: Filter sizes with an inclusive maximum CPU count
+  required: false
+  schema:
+    type: integer
+    minimum: 1
+  example: 4
+
+gpu_minimum:
+  in: query
+  name: gpu_minimum
+  description: Filter sizes with an inclusive minimum GPU count
+  required: false
+  schema:
+    type: integer
+    minimum: 1
+  example: 1
+
+gpu_maximum:
+  in: query
+  name: gpu_maximum
+  description: Filter sizes with an inclusive maximum GPU count. Zero is allowed to filter to sizes without GPUs.
+  required: false
+  schema:
+    type: integer
+    minimum: 0
+  example: 8
+
+gpu_fabric:
+  in: query
+  name: gpu_fabric
+  description: Filter sizes to those with a given GPU fabric setting
+  required: false
+  schema:
+    type: boolean
+  example: true
+
+memory_minimum:
+  in: query
+  name: memory_minimum
+  description: Filter sizes with an inclusive minimum memory amount (in megabytes)
+  required: false
+  schema:
+    type: integer
+    multipleOf: 8
+    minimum: 8
+  example: 1024
+
+memory_maximum:
+  in: query
+  name: memory_maximum
+  description: Filter sizes with an inclusive maximum memory amount (in megabytes)
+  required: false
+  schema:
+    type: integer
+    multipleOf: 8
+    minimum: 8
+  example: 1024
+
+price_hourly_minimum:
+  in: query
+  name: price_hourly_minimum
+  description: Filter sizes with an inclusive minimum hourly price (in USD)
+  required: false
+  schema:
+    type: string
+  example: "0.50"
+
+price_hourly_maximum:
+  in: query
+  name: price_hourly_maximum
+  description: Filter sizes with an inclusive maximum hourly price (in USD)
+  required: false
+  schema:
+    type: string
+  example: "1.00"
+
+price_monthly_minimum:
+  in: query
+  name: price_monthly_minimum
+  description: Filter sizes with an inclusive minimum monthly price (in USD)
+  required: false
+  schema:
+    type: string
+  example: "5.00"
+
+price_monthly_maximum:
+  in: query
+  name: price_monthly_maximum
+  description: Filter sizes with an inclusive maximum monthly price (in USD)
+  required: false
+  schema:
+    type: string
+  example: "10.00"

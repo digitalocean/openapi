@@ -4,7 +4,7 @@ summary: Update Consent for an Environment
 
 description: |
   To enable or disable signals collection for a specific environment, send a
-  PUT request to `/v1/consent/{agent_id}` with an `enabled` boolean in the
+  PUT request to `/v1/consent/{environment_id}` with an `enabled` boolean in the
   request body.
 
   This endpoint only manages per-environment (`source: agent`) consent. To manage
@@ -15,7 +15,7 @@ tags:
   - Signals
 
 parameters:
-  - $ref: 'parameters.yml#/agent_id'
+  - $ref: 'parameters.yml#/environment_id'
 
 requestBody:
   required: true

@@ -5,21 +5,33 @@ properties:
     type: string
     description: >-
       The scope of the export. `agent` exports Signals conversations for one
-      Harness Runtime environment and requires `agent_id`. `inference` exports
-      Serverless Inference Signals conversations for the whole team (team-wide;
-      omit `agent_id`). Defaults to `agent` when `agent_id` is provided and to
-      `inference` when it is omitted.
+      Harness Runtime environment and requires `environment_id` (or deprecated
+      `agent_id`). `inference` exports Serverless Inference Signals conversations
+      for the whole team (team-wide; omit `environment_id` and `agent_id`).
+      Defaults to `agent` when `environment_id` or `agent_id` is provided and to
+      `inference` when both are omitted.
     enum:
       - agent
       - inference
     example: agent
-  agent_id:
+  environment_id:
     type: string
     format: uuid
     description: >-
       The environment whose data should be exported. For Harness Runtime, this
-      is the Environment Config ID. Required when `type` is `agent`; must be
-      omitted when `type` is `inference`.
+      is the Environment Config ID. Required when `type` is `agent` if
+      `agent_id` is omitted; must be omitted when `type` is `inference`.
+      Prefer this over `agent_id`.
+    example: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
+  agent_id:
+    type: string
+    format: uuid
+    deprecated: true
+    description: >-
+      Deprecated alias for `environment_id`. Accepted for backward
+      compatibility; must equal `environment_id` when both are set. Both set
+      and different returns 400. Required when `type` is `agent` if
+      `environment_id` is omitted; must be omitted when `type` is `inference`.
     example: 01a0f3d5-b58d-7c99-a743-7ca0397b7f5d
   signal_type:
     type: array

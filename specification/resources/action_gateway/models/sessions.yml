@@ -42,6 +42,54 @@ session_policy:
             description: 'Required: allow, ask, or deny.'
       description: Rules for specific tools or toolbelts.
 
+session_cache:
+  type: object
+  additionalProperties: false
+  description: >-
+    Opts the session into result caching. Omit config.cache to leave caching off.
+    Set exactly one of tools or allEligible. Caching must also be enabled for
+    the team. Tool selection and permission rules still apply to every call.
+  properties:
+    tools:
+      type: array
+      maxItems: 100
+      description: >-
+        Provider-qualified tool slugs to cache. Every listed tool must resolve
+        for the team and have a catalog cache policy, or session creation fails.
+        Use slugs without version suffixes or toolbelt references. An empty
+        array enables no tools.
+      items:
+        type: string
+      example:
+        - exa_web_search
+    allEligible:
+      type: boolean
+      enum:
+        - true
+      description: >-
+        Enables caching for every called tool version with a catalog cache
+        policy, including tools that become eligible after session creation.
+        Do not combine with tools.
+      example: true
+    maxAgeSeconds:
+      type: integer
+      minimum: 1
+      maximum: 300
+      description: >-
+        Maximum cache lifetime in seconds for this session. Omit to use each
+        tool's lifetime, up to 300 seconds. A smaller tool lifetime or provider
+        response cache header can shorten it. Per-call max_age_seconds can
+        require a fresher result but cannot increase this limit.
+      example: 60
+  example:
+    allEligible: true
+    maxAgeSeconds: 60
+  oneOf:
+    - required:
+        - tools
+    - required:
+        - allEligible
+
 session_network:
   type: object
   description: Attaches a session to a VPC.
@@ -76,6 +124,28 @@ session:
   type: object
   description: A session and the tool-permission policy bound to it.
   properties:
+    endpoint_id:
+      type: string
+      format: uuid
+      pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+      not:
+        pattern: '\s'
+      example: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+      description: Public parent endpoint UUID. Absent for legacy sessions without a parent.
+    endpoint_version_id:
+      type: string
+      pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.v([1-9][0-9]{0,8}|[1-3][0-9]{9}|4[01][0-9]{8}|42[0-8][0-9]{7}|429[0-3][0-9]{6}|4294[0-8][0-9]{5}|42949[0-5][0-9]{4}|429496[0-6][0-9]{3}|4294967[01][0-9]{2}|42949672[0-8][0-9]|429496729[0-5])$'
+      not:
+        pattern: '\s'
+      example: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v1
+      description: Public composite version ID. Absent for legacy sessions without a parent.
+    version_number:
+      type: integer
+      format: int64
+      minimum: 1
+      maximum: 4294967295
+      example: 1
+      description: Version number within the parent endpoint. Absent for legacy sessions without a parent.
     sessionUrn:
       type: string
       example: do:managed_agent_session:2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
@@ -121,7 +191,11 @@ session:
           description: The selected references. Empty means the session exposes no tools.
     config:
       type: object
+      additionalProperties: true
       description: Session options as supplied at creation. Omitted when none were supplied.
+      properties:
+        cache:
+          $ref: '#/session_cache'
       example:
         preloadTools:
           - exa_web_search
@@ -197,10 +271,15 @@ session_create:
         - jira_create_issue
     config:
       type: object
+      additionalProperties: true
       description: >-
         Optional session options. config.preloadTools may contain concrete tool names (optionally version-pinned)
         and version-pinned toolbelt references. config.customInstructions is a string of at most 1000 characters.
         config.outputViews maps up to 100 tool slugs to the name of an output view to apply to that tool's results.
+        config.cache opts eligible tools into result caching for this session.
+      properties:
+        cache:
+          $ref: '#/session_cache'
       example:
         preloadTools:
           - exa_web_search

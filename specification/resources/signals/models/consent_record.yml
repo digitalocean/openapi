@@ -29,6 +29,12 @@ properties:
       Environment Config ID. Empty for team-level records (`source:
       inference`), which are not tied to an environment.
     example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
+  environment_id:
+    type: string
+    description: >-
+      Same as agent_id when present. Dual-emitted during the rename; omitted
+      when agent_id is empty.
+    example: 019fb3d2-8a56-72cc-8bf9-9d21510b2a99
   enabled:
     type: boolean
     description: Whether signals collection is enabled for this source.

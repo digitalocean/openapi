@@ -1,0 +1,43 @@
+file_info:
+  type: object
+
+  description: Metadata of a file written into a MicroVM.
+
+  properties:
+    path:
+      type: string
+      description: The absolute path inside the workload container.
+      example: /app/config.json
+
+    size_bytes:
+      type: integer
+      format: uint64
+      description: The file size in bytes.
+      example: 1024
+
+    sha256:
+      type: string
+      description: The lowercase hex SHA-256 of the content.
+      example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+    mode:
+      type: string
+      description: The octal permission bits as written.
+      example: "0644"
+
+    uid:
+      type: integer
+      format: uint32
+      description: The owner user ID.
+      example: 0
+
+    gid:
+      type: integer
+      format: uint32
+      description: The owner group ID.
+      example: 0
+
+  required:
+    - path
+    - size_bytes
+    - sha256

@@ -166,6 +166,25 @@ tags:
       stream, and port-forward (`GET /v2/agents/sessions/{session_id}/port-forward/{port}`)
       opens a WebSocket tunnel to a guest port.
 
+      `POST /v2/agents/sessions/{session_id}/cancel` stops the turn in flight.
+      `GET /v2/agents/image-messages` lists sandbox-image notices on the team's
+      sessions and checkpoints. `POST /v2/agents/auth/{provider}` starts the
+      interactive provider login a session uses; `github` is the provider served
+      today. Connections for that login are under `/v2/agents/auth/{provider}/connections`.
+
+      Persistent workspaces (`/v2/agents/workspaces`) are in public preview and are
+      described under Harness Runtime Workspaces [Public Preview].
+
+  - name: Harness Runtime Workspaces [Public Preview]
+    description: |-
+      Persistent workspaces (`/v2/agents/workspaces`) are sets of files that outlive
+      a session. Attach one by passing `workspace_id` when you create a session from
+      an Environment Config; it mounts at `/workspace`, a workspace is attached to one
+      session at a time, and its files are saved when the session is removed or
+      checkpointed. Fork and rollback are not available for a session with a
+      workspace. Persistent workspaces are in public preview, free during public
+      preview, and enabled per team; requests from other teams return `403`.
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -497,9 +516,9 @@ tags:
       The DigitalOcean Insights API provides observability resources for
       monitoring your infrastructure, including alert rules that evaluate
       metrics, notification channels that deliver alert events, read-only
-      alert instances that record when alert rules fire, PromQL, logs, spans,
-      and traces query interfaces, and per-resource enablement of the metrics,
-      logs, and traces signals.
+      alert instances that record when alert rules fire, user-defined
+      dashboards, PromQL, logs, spans, and traces query interfaces, and
+      per-resource enablement of the metrics, logs, and traces signals.
 
   - name: Kubernetes
     description: |-
@@ -526,8 +545,8 @@ tags:
       resumes on the next HTTP request, command, or console session, with its
       memory, files, and processes intact. By sending requests to the
       `/v2/microvms` endpoints, you can create, list, pause, resume, and delete
-      MicroVMs, run commands and open a console in them, and create checkpoints
-      to start new MicroVMs from a saved state.
+      MicroVMs, run commands and open a console in them, upload and download
+      files, and create checkpoints to start new MicroVMs from a saved state.
 
       Each MicroVM serves its HTTP port at
       `https://{microvm_id}.{region}.microvm.ondigitalocean.com`. Requests to
@@ -670,10 +689,9 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
-  # Secrets Manager omitted from this tag description until GA; paths commented out below.
   - name: Security
     description: |-
-      Security CSPM endpoints for scans, scan findings, and settings.
+      Security endpoints for CSPM scans, scan findings, settings, and Secrets Manager.
 
   - name: Signals
     description: |-
@@ -853,6 +871,7 @@ x-tagGroups:
       - Floating IPs
       - Functions
       - Harness Runtime
+      - Harness Runtime Workspaces [Public Preview]
       - Image Actions
       - Images
       - Insights
@@ -906,6 +925,20 @@ paths:
     post:
       $ref: "resources/action_gateway/actorLimits_update.yml"
 
+  /v2/action-gateway/provider-credentials:
+    post:
+      $ref: "resources/action_gateway/providerCredentials_create.yml"
+    get:
+      $ref: "resources/action_gateway/providerCredentials_list.yml"
+
+  /v2/action-gateway/provider-credentials/{id}:
+    get:
+      $ref: "resources/action_gateway/providerCredentials_get.yml"
+    patch:
+      $ref: "resources/action_gateway/providerCredentials_update.yml"
+    delete:
+      $ref: "resources/action_gateway/providerCredentials_delete.yml"
+
   /v2/action-gateway/connections:
     post:
       $ref: "resources/action_gateway/connections_create.yml"
@@ -957,6 +990,40 @@ paths:
       $ref: "resources/action_gateway/outputViews_get.yml"
     delete:
       $ref: "resources/action_gateway/outputViews_delete.yml"
+
+  /v2/action-gateway/endpoints:
+    post:
+      $ref: "resources/action_gateway/endpoints_create.yml"
+    get:
+      $ref: "resources/action_gateway/endpoints_list.yml"
+
+  /v2/action-gateway/endpoints/search:
+    get:
+      $ref: "resources/action_gateway/endpoints_list_search.yml"
+
+  /v2/action-gateway/endpoints/{endpoint_id}:
+    get:
+      $ref: "resources/action_gateway/endpoints_get.yml"
+    patch:
+      $ref: "resources/action_gateway/endpoints_patch.yml"
+    delete:
+      $ref: "resources/action_gateway/endpoints_delete.yml"
+
+  /v2/action-gateway/endpoints/{endpoint_id}/versions:
+    post:
+      $ref: "resources/action_gateway/endpointVersions_create.yml"
+    get:
+      $ref: "resources/action_gateway/endpointVersions_list.yml"
+
+  /v2/action-gateway/endpoints/{endpoint_id}/versions:promote:
+    post:
+      $ref: "resources/action_gateway/endpointVersions_create_promotion.yml"
+
+  /v2/action-gateway/endpoint-versions/{version_id}:
+    get:
+      $ref: "resources/action_gateway/endpointVersions_get.yml"
+    delete:
+      $ref: "resources/action_gateway/endpointVersions_delete.yml"
 
   /v2/action-gateway/sessions:
     post:
@@ -1131,6 +1198,28 @@ paths:
     patch:
       $ref: "resources/addons/addons_update_plan.yml"
 
+  /v2/agents/auth/{provider}:
+    post:
+      $ref: "resources/agents/agents_start_provider_connect.yml"
+  /v2/agents/auth/{provider}/poll:
+    get:
+      $ref: "resources/agents/agents_poll_provider_connect.yml"
+  /v2/agents/auth/{provider}/connections:
+    get:
+      $ref: "resources/agents/agents_list_provider_connections.yml"
+    post:
+      $ref: "resources/agents/agents_create_provider_connection.yml"
+  /v2/agents/auth/{provider}/connections/{connection_id}:
+    get:
+      $ref: "resources/agents/agents_get_provider_connection.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_provider_connection.yml"
+  /v2/agents/auth/{provider}/connections/{connection_id}/reconnect:
+    post:
+      $ref: "resources/agents/agents_reconnect_provider_connection.yml"
+  /v2/agents/image-messages:
+    get:
+      $ref: "resources/agents/agents_list_image_messages.yml"
   /v2/agents/configs:
     get:
       $ref: "resources/agents/agents_list_configs.yml"
@@ -1175,6 +1264,9 @@ paths:
       $ref: "resources/agents/agents_get_session_checkpoint.yml"
     delete:
       $ref: "resources/agents/agents_delete_session_checkpoint.yml"
+  /v2/agents/sessions/{session_id}/checkpoints/{checkpoint_id}/image-messages:
+    get:
+      $ref: "resources/agents/agents_get_checkpoint_image_messages.yml"
   /v2/agents/sessions/{session_id}/checkpoints/{checkpoint_id}/rollback:
     post:
       $ref: "resources/agents/agents_revert_session_checkpoint.yml"
@@ -1184,6 +1276,12 @@ paths:
   /v2/agents/sessions/{session_id}/hitl/{request_id}:
     post:
       $ref: "resources/agents/agents_post_session_hitl.yml"
+  /v2/agents/sessions/{session_id}/cancel:
+    post:
+      $ref: "resources/agents/agents_cancel_session_turn.yml"
+  /v2/agents/sessions/{session_id}/image-messages:
+    get:
+      $ref: "resources/agents/agents_get_session_image_messages.yml"
   /v2/agents/sessions/{session_id}/input:
     post:
       $ref: "resources/agents/agents_create_session_input.yml"
@@ -1280,6 +1378,16 @@ paths:
   /v2/agents/webhook-providers:
     get:
       $ref: "resources/agents/agents_list_webhook_providers.yml"
+  /v2/agents/workspaces:
+    get:
+      $ref: "resources/agents/agents_list_workspaces.yml"
+    post:
+      $ref: "resources/agents/agents_create_workspace.yml"
+  /v2/agents/workspaces/{workspace_id}:
+    get:
+      $ref: "resources/agents/agents_get_workspace.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_workspace.yml"
 
   /v2/apps:
     get:
@@ -2071,6 +2179,27 @@ paths:
     delete:
       $ref: "resources/insights/insights_delete_alertRule.yml"
 
+  /v2/insights/dashboards:
+    get:
+      $ref: "resources/insights/insights_list_dashboards.yml"
+
+    post:
+      $ref: "resources/insights/insights_create_dashboard.yml"
+
+  /v2/insights/dashboards/schema:
+    get:
+      $ref: "resources/insights/insights_get_dashboardSchema.yml"
+
+  /v2/insights/dashboards/{uuid}:
+    get:
+      $ref: "resources/insights/insights_get_dashboard.yml"
+
+    put:
+      $ref: "resources/insights/insights_update_dashboard.yml"
+
+    delete:
+      $ref: "resources/insights/insights_delete_dashboard.yml"
+
   /v2/insights/notification-channels:
     get:
       $ref: "resources/insights/insights_list_notificationChannels.yml"
@@ -2151,14 +2280,14 @@ paths:
     put:
       $ref: "resources/signals/signals_update_team_consent.yml"
 
-  /v1/consent/{agent_id}:
+  /v1/consent/{environment_id}:
     get:
       $ref: "resources/signals/signals_get_consent.yml"
 
     put:
       $ref: "resources/signals/signals_update_consent.yml"
 
-  /v1/signals/agents/{agent_id}/sessions:
+  /v1/signals/agents/{environment_id}/sessions:
     get:
       $ref: "resources/signals/signals_list_sessions.yml"
 
@@ -2378,6 +2507,12 @@ paths:
   /v2/microvms/{microvm_id}/console:
     get:
       $ref: "resources/microvms/microvms_console.yml"
+
+  /v2/microvms/{microvm_id}/files:
+    put:
+      $ref: "resources/microvms/microvms_files_upload.yml"
+    get:
+      $ref: "resources/microvms/microvms_files_download.yml"
 
   /v2/microvms/{microvm_id}/checkpoints:
     post:
@@ -3029,34 +3164,34 @@ paths:
     delete:
       $ref: "resources/security/security_suppression_delete.yml"
 
-  # Secrets Manager endpoints are temporarily commented out so they are not
-  # published in the public API docs until the product is generally available.
-  # The operation/model files remain under resources/security/ for easy restore.
-  #
-  # /v2/security/secrets:
-  #   get:
-  #     $ref: "resources/security/security_secrets_list.yml"
-  #
-  #   post:
-  #     $ref: "resources/security/security_secret_create.yml"
-  #
-  # /v2/security/secrets/{secret}:
-  #   get:
-  #     $ref: "resources/security/security_secret_get.yml"
-  #
-  #   put:
-  #     $ref: "resources/security/security_secret_update.yml"
-  #
-  #   delete:
-  #     $ref: "resources/security/security_secret_delete.yml"
-  #
-  # /v2/security/secrets/{secret}/versions:
-  #   get:
-  #     $ref: "resources/security/security_secret_list_versions.yml"
-  #
-  # /v2/security/secrets/{secret}/restore:
-  #   post:
-  #     $ref: "resources/security/security_secret_restore.yml"
+  /v2/security/secrets:
+    get:
+      $ref: "resources/security/security_secrets_list.yml"
+
+    post:
+      $ref: "resources/security/security_secret_create.yml"
+
+  /v2/security/secrets/{secret}:
+    get:
+      $ref: "resources/security/security_secret_get.yml"
+
+    put:
+      $ref: "resources/security/security_secret_update.yml"
+
+    delete:
+      $ref: "resources/security/security_secret_delete.yml"
+
+  /v2/security/secrets/{secret}/versions:
+    get:
+      $ref: "resources/security/security_secret_list_versions.yml"
+
+  /v2/security/secrets/{secret}/versions/{version}/revert:
+    post:
+      $ref: "resources/security/security_secret_revert.yml"
+
+  /v2/security/secrets/{secret}/restore:
+    post:
+      $ref: "resources/security/security_secret_restore.yml"
 
   /v2/sizes:
     get:
@@ -3072,6 +3207,10 @@ paths:
 
     delete:
       $ref: "resources/snapshots/snapshots_delete.yml"
+
+  /v2/snapshots/{snapshot_id}/regions/{region}:
+    delete:
+      $ref: "resources/snapshots/snapshots_delete_region.yml"
 
   /v2/spaces/keys:
     get:
