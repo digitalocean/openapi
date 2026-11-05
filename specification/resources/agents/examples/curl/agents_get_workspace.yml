@@ -1,0 +1,6 @@
+lang: bash
+source: |-
+  curl -X GET \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v2/agents/workspaces/019a2f4e-8c1d-7b3a-9e5f-2d6c8a1b4e70"
+label: cURL
