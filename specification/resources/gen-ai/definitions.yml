@@ -2674,6 +2674,8 @@ apiCustomEvaluationMetricConfig:
       description: Instructions for the judge model (multi-line).
       example: example string
       type: string
+    turn_type:
+      $ref: '#/apiEvaluationMetricTurnType'
     updated_at:
       example: "2023-01-01T00:00:00Z"
       format: date-time
@@ -3445,6 +3447,8 @@ apiEvaluationMetric:
       type: number
     source:
       $ref: '#/apiEvaluationMetricSource'
+    turn_type:
+      $ref: '#/apiEvaluationMetricTurnType'
   type: object
 apiEvaluationMetricCategory:
   default: METRIC_CATEGORY_UNSPECIFIED
@@ -3510,6 +3514,15 @@ apiEvaluationMetricSource:
   - EVALUATION_METRIC_SOURCE_BUILTIN
   - EVALUATION_METRIC_SOURCE_CUSTOM
   example: EVALUATION_METRIC_SOURCE_UNSPECIFIED
+  type: string
+apiEvaluationMetricTurnType:
+  default: EVALUATION_METRIC_TURN_TYPE_UNSPECIFIED
+  description: Whether the metric is for single-turn or multi-turn evaluations.
+  enum:
+  - EVALUATION_METRIC_TURN_TYPE_UNSPECIFIED
+  - EVALUATION_METRIC_TURN_TYPE_SINGLE_TURN
+  - EVALUATION_METRIC_TURN_TYPE_MULTI_TURN
+  example: EVALUATION_METRIC_TURN_TYPE_UNSPECIFIED
   type: string
 apiEvaluationMetricType:
   default: METRIC_TYPE_UNSPECIFIED
