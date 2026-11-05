@@ -113,6 +113,19 @@ properties:
       value is false. When enabled, a NAT gateway must exist in the VPC where
       the cluster is created.
 
+  max_pods_per_node:
+    type: integer
+    enum:
+      - 110
+      - 220
+      - 450
+    default: 110
+    example: 110
+    description: The maximum number of pods that can run on each worker node in
+      the cluster. When omitted on create, the default value is 110. This can
+      only be set at creation time and requires a Kubernetes version that
+      supports it.
+
   gpu_operator_ready:
     type: boolean
     default: false

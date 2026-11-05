@@ -10,6 +10,7 @@ source: |-
     "region": "nyc1",
     "version": "1.18.6-do.0",
     "isolated_workers": False,
+    "max_pods_per_node": 110,
     "gpu_operator_ready": False,
     "node_pools": [
       {
