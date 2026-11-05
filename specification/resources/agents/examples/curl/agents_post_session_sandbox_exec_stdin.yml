@@ -1,0 +1,8 @@
+lang: bash
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"data":"aGVsbG8K","offset":0}' \
+    "https://api.digitalocean.com/v2/agents/sessions/{session_id}/sandbox/exec/{exec_id}/stdin"
+label: cURL

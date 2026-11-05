@@ -2178,9 +2178,17 @@ exec_in_sandbox_request:
       type: string
       format: byte
       description: >-
-        Optional base64 stdin payload, delivered in full and then closed so the process sees EOF.
-        One-shot only — there is no streaming stdin on this endpoint.
+        Optional base64 stdin payload. Without keep_stdin_open it is delivered in full and then
+        closed so the process sees EOF. With keep_stdin_open it is the optional first chunk. Later
+        bytes use POST /v2/agents/sessions/{session_id}/sandbox/exec/{exec_id}/stdin.
       example: ''
+    keep_stdin_open:
+      type: boolean
+      description: >-
+        Leave the process stdin open. Requires an event-stream response (Accept text/event-stream,
+        or stream=1). The stream starts with event started and an exec_id. A buffered request with
+        this set returns 400.
+      example: false
     timeout_seconds:
       type: integer
       format: int64
@@ -2212,6 +2220,37 @@ exec_in_sandbox_response:
       format: int64
       description: Wall-clock duration the guest reported for the command.
       example: 12
+
+write_exec_stdin_request:
+  type: object
+  properties:
+    data:
+      type: string
+      format: byte
+      description: Base64 stdin bytes to append. Omit on an eof-only write.
+      example: aGVsbG8K
+    offset:
+      type: integer
+      format: int64
+      description: >-
+        Required. Count of stdin bytes already accepted. An equal offset appends. A lower offset
+        retries and trims the overlap. A higher offset returns 409.
+      example: 0
+    eof:
+      type: boolean
+      description: Close stdin after this write. A later write, or a second eof, returns 409.
+      example: false
+  required:
+    - offset
+
+write_exec_stdin_response:
+  type: object
+  properties:
+    offset:
+      type: integer
+      format: int64
+      description: Count of stdin bytes accepted after this write.
+      example: 6
 
 trigger_kind:
   type: string

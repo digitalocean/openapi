@@ -1297,6 +1297,9 @@ paths:
   /v2/agents/sessions/{session_id}/sandbox/exec:
     post:
       $ref: "resources/agents/agents_post_session_sandbox_exec.yml"
+  /v2/agents/sessions/{session_id}/sandbox/exec/{exec_id}/stdin:
+    post:
+      $ref: "resources/agents/agents_post_session_sandbox_exec_stdin.yml"
   /v2/agents/sessions/{session_id}/workspace/download:
     get:
       $ref: "resources/agents/agents_get_session_workspace_download.yml"
