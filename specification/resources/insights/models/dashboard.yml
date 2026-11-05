@@ -1,0 +1,56 @@
+type: object
+description: An Insights dashboard.
+required:
+  - uuid
+  - spec
+  - created_at
+  - updated_at
+properties:
+  uuid:
+    type: string
+    format: uuid
+    readOnly: true
+    description: A unique identifier for the dashboard.
+    example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+  name:
+    type: string
+    readOnly: true
+    maxLength: 255
+    description: >-
+      The dashboard's display name. Populated by the server from
+      `spec.display.name`; it cannot be set directly. Omitted when
+      `spec.display.name` is an empty string.
+    example: Droplet CPU
+  description:
+    type: string
+    readOnly: true
+    maxLength: 1000
+    description: >-
+      The dashboard's display description. Populated by the server from
+      `spec.display.description`; it cannot be set directly. Omitted when
+      the spec has no description.
+    example: CPU utilization across production Droplets.
+  spec:
+    type: string
+    description: >-
+      The dashboard definition as a JSON document serialized to a string.
+      The document must have `kind` set to `Dashboard` and a `spec.display.name`
+      between 1 and 255 characters, which is projected to `name`. An optional
+      `spec.display.description` of up to 1000 characters is projected to
+      `description`. Retrieve the full JSON Schema from
+      `GET /v2/insights/dashboards/schema`. The document is returned in a
+      normalized form: content is unchanged, but object keys may be
+      reordered and whitespace may differ from the submitted string.
+    example: '{"kind": "Dashboard", "spec": {"panels": {"cpu": {"kind": "Panel", "spec": {"plugin": {"kind": "TimeSeriesChart", "spec": {}}, "display": {"name": "CPU utilization"}, "queries": [{"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "MetricsTimeSeriesQuery", "spec": {"kind": "gauge", "filters": [], "groupBy": [], "metricName": "do.droplets.cpu_utilization"}}}}]}}}, "display": {"name": "Droplet CPU", "description": "CPU utilization across production Droplets."}, "layouts": [{"kind": "Grid", "spec": {"items": [{"x": 0, "y": 0, "width": 12, "height": 6, "content": {"$ref": "#/spec/panels/cpu"}}]}}], "duration": "1h", "variables": []}, "apiVersion": "perses.dev/v1alpha1"}'
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: Time the dashboard was created.
+    example: '2026-10-29T10:21:44Z'
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: Time the dashboard was last updated.
+    example: '2026-10-29T10:21:44Z'

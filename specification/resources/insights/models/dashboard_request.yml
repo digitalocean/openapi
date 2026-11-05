@@ -1,0 +1,15 @@
+type: object
+description: Request body for creating or updating a dashboard.
+required:
+  - spec
+properties:
+  spec:
+    type: string
+    minLength: 1
+    description: >-
+      The dashboard definition as a JSON document serialized to a string.
+      The document must have `kind` set to `Dashboard` and a `spec.display.name`
+      between 1 and 255 characters. An empty value or a value that is not valid
+      JSON is rejected with `400`. Retrieve the full JSON Schema from
+      `GET /v2/insights/dashboards/schema`.
+    example: '{"kind":"Dashboard","apiVersion":"perses.dev/v1alpha1","spec":{"display":{"name":"Droplet CPU","description":"CPU utilization across production Droplets."},"duration":"1h","variables":[],"layouts":[{"kind":"Grid","spec":{"items":[{"x":0,"y":0,"width":12,"height":6,"content":{"$ref":"#/spec/panels/cpu"}}]}}],"panels":{"cpu":{"kind":"Panel","spec":{"display":{"name":"CPU utilization"},"plugin":{"kind":"TimeSeriesChart","spec":{}},"queries":[{"kind":"TimeSeriesQuery","spec":{"plugin":{"kind":"MetricsTimeSeriesQuery","spec":{"metricName":"do.droplets.cpu_utilization","kind":"gauge","filters":[],"groupBy":[]}}}}]}}}}}'

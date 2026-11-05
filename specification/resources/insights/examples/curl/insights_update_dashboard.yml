@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X PUT \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"spec":"{\"kind\":\"Dashboard\",\"apiVersion\":\"perses.dev/v1alpha1\",\"spec\":{\"display\":{\"name\":\"Droplet CPU (production)\",\"description\":\"CPU utilization across production Droplets.\"},\"duration\":\"6h\",\"variables\":[],\"layouts\":[{\"kind\":\"Grid\",\"spec\":{\"items\":[{\"x\":0,\"y\":0,\"width\":12,\"height\":6,\"content\":{\"$ref\":\"#/spec/panels/cpu\"}}]}}],\"panels\":{\"cpu\":{\"kind\":\"Panel\",\"spec\":{\"display\":{\"name\":\"CPU utilization\"},\"plugin\":{\"kind\":\"TimeSeriesChart\",\"spec\":{}},\"queries\":[{\"kind\":\"TimeSeriesQuery\",\"spec\":{\"plugin\":{\"kind\":\"MetricsTimeSeriesQuery\",\"spec\":{\"metricName\":\"do.droplets.cpu_utilization\",\"kind\":\"gauge\",\"filters\":[],\"groupBy\":[]}}}}]}}}}}"}' \
+    "https://api.digitalocean.com/v2/insights/dashboards/7c9e6679-7425-40de-944b-e07fc1f90ae7"

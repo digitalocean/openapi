@@ -172,6 +172,19 @@ tags:
       interactive provider login a session uses; `github` is the provider served
       today. Connections for that login are under `/v2/agents/auth/{provider}/connections`.
 
+      Persistent workspaces (`/v2/agents/workspaces`) are in public preview and are
+      described under Harness Runtime Workspaces [Public Preview].
+
+  - name: Harness Runtime Workspaces [Public Preview]
+    description: |-
+      Persistent workspaces (`/v2/agents/workspaces`) are sets of files that outlive
+      a session. Attach one by passing `workspace_id` when you create a session from
+      an Environment Config; it mounts at `/workspace`, a workspace is attached to one
+      session at a time, and its files are saved when the session is removed or
+      checkpointed. Fork and rollback are not available for a session with a
+      workspace. Persistent workspaces are in public preview, free during public
+      preview, and enabled per team; requests from other teams return `403`.
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -503,9 +516,9 @@ tags:
       The DigitalOcean Insights API provides observability resources for
       monitoring your infrastructure, including alert rules that evaluate
       metrics, notification channels that deliver alert events, read-only
-      alert instances that record when alert rules fire, PromQL, logs, spans,
-      and traces query interfaces, and per-resource enablement of the metrics,
-      logs, and traces signals.
+      alert instances that record when alert rules fire, user-defined
+      dashboards, PromQL, logs, spans, and traces query interfaces, and
+      per-resource enablement of the metrics, logs, and traces signals.
 
   - name: Kubernetes
     description: |-
@@ -858,6 +871,7 @@ x-tagGroups:
       - Floating IPs
       - Functions
       - Harness Runtime
+      - Harness Runtime Workspaces [Public Preview]
       - Image Actions
       - Images
       - Insights
@@ -1330,6 +1344,16 @@ paths:
   /v2/agents/webhook-providers:
     get:
       $ref: "resources/agents/agents_list_webhook_providers.yml"
+  /v2/agents/workspaces:
+    get:
+      $ref: "resources/agents/agents_list_workspaces.yml"
+    post:
+      $ref: "resources/agents/agents_create_workspace.yml"
+  /v2/agents/workspaces/{workspace_id}:
+    get:
+      $ref: "resources/agents/agents_get_workspace.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_workspace.yml"
 
   /v2/apps:
     get:
@@ -2120,6 +2144,27 @@ paths:
 
     delete:
       $ref: "resources/insights/insights_delete_alertRule.yml"
+
+  /v2/insights/dashboards:
+    get:
+      $ref: "resources/insights/insights_list_dashboards.yml"
+
+    post:
+      $ref: "resources/insights/insights_create_dashboard.yml"
+
+  /v2/insights/dashboards/schema:
+    get:
+      $ref: "resources/insights/insights_get_dashboardSchema.yml"
+
+  /v2/insights/dashboards/{uuid}:
+    get:
+      $ref: "resources/insights/insights_get_dashboard.yml"
+
+    put:
+      $ref: "resources/insights/insights_update_dashboard.yml"
+
+    delete:
+      $ref: "resources/insights/insights_delete_dashboard.yml"
 
   /v2/insights/notification-channels:
     get:
