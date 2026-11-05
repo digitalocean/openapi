@@ -31,6 +31,8 @@ servers:
   description: production
 parameters:
 - $ref: parameters.yml#/session_id_header
+- $ref: parameters.yml#/endpoint_id_header
+- $ref: parameters.yml#/actor_id_header
 requestBody:
   required: true
   content:
@@ -48,6 +50,11 @@ responses:
   '200':
     description: >-
       The calls ran. Each item reports its own success or failure.
+    headers:
+      X-Endpoint-Id:
+        $ref: data_plane_headers.yml#/X-Endpoint-Id
+      X-Action-Gateway-Endpoint-Version:
+        $ref: data_plane_headers.yml#/X-Action-Gateway-Endpoint-Version
     content:
       application/json:
         schema:
@@ -132,6 +139,8 @@ responses:
     $ref: data_plane_responses.yml#/payment_required
   '403':
     $ref: data_plane_responses.yml#/forbidden
+  '404':
+    $ref: data_plane_responses.yml#/endpoint_not_found
   '412':
     $ref: data_plane_responses.yml#/precondition_failed
   '413':

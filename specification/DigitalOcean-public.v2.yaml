@@ -172,6 +172,19 @@ tags:
       interactive provider login a session uses; `github` is the provider served
       today. Connections for that login are under `/v2/agents/auth/{provider}/connections`.
 
+      Persistent workspaces (`/v2/agents/workspaces`) are in public preview and are
+      described under Harness Runtime Workspaces [Public Preview].
+
+  - name: Harness Runtime Workspaces [Public Preview]
+    description: |-
+      Persistent workspaces (`/v2/agents/workspaces`) are sets of files that outlive
+      a session. Attach one by passing `workspace_id` when you create a session from
+      an Environment Config; it mounts at `/workspace`, a workspace is attached to one
+      session at a time, and its files are saved when the session is removed or
+      checkpointed. Fork and rollback are not available for a session with a
+      workspace. Persistent workspaces are in public preview, free during public
+      preview, and enabled per team; requests from other teams return `403`.
+
   - name: Apps
     description: |-
       App Platform is a Platform-as-a-Service (PaaS) offering from DigitalOcean that allows
@@ -858,6 +871,7 @@ x-tagGroups:
       - Floating IPs
       - Functions
       - Harness Runtime
+      - Harness Runtime Workspaces [Public Preview]
       - Image Actions
       - Images
       - Insights
@@ -976,6 +990,40 @@ paths:
       $ref: "resources/action_gateway/outputViews_get.yml"
     delete:
       $ref: "resources/action_gateway/outputViews_delete.yml"
+
+  /v2/action-gateway/endpoints:
+    post:
+      $ref: "resources/action_gateway/endpoints_create.yml"
+    get:
+      $ref: "resources/action_gateway/endpoints_list.yml"
+
+  /v2/action-gateway/endpoints/search:
+    get:
+      $ref: "resources/action_gateway/endpoints_list_search.yml"
+
+  /v2/action-gateway/endpoints/{endpoint_id}:
+    get:
+      $ref: "resources/action_gateway/endpoints_get.yml"
+    patch:
+      $ref: "resources/action_gateway/endpoints_patch.yml"
+    delete:
+      $ref: "resources/action_gateway/endpoints_delete.yml"
+
+  /v2/action-gateway/endpoints/{endpoint_id}/versions:
+    post:
+      $ref: "resources/action_gateway/endpointVersions_create.yml"
+    get:
+      $ref: "resources/action_gateway/endpointVersions_list.yml"
+
+  /v2/action-gateway/endpoints/{endpoint_id}/versions:promote:
+    post:
+      $ref: "resources/action_gateway/endpointVersions_create_promotion.yml"
+
+  /v2/action-gateway/endpoint-versions/{version_id}:
+    get:
+      $ref: "resources/action_gateway/endpointVersions_get.yml"
+    delete:
+      $ref: "resources/action_gateway/endpointVersions_delete.yml"
 
   /v2/action-gateway/sessions:
     post:
@@ -1333,6 +1381,16 @@ paths:
   /v2/agents/webhook-providers:
     get:
       $ref: "resources/agents/agents_list_webhook_providers.yml"
+  /v2/agents/workspaces:
+    get:
+      $ref: "resources/agents/agents_list_workspaces.yml"
+    post:
+      $ref: "resources/agents/agents_create_workspace.yml"
+  /v2/agents/workspaces/{workspace_id}:
+    get:
+      $ref: "resources/agents/agents_get_workspace.yml"
+    delete:
+      $ref: "resources/agents/agents_delete_workspace.yml"
 
   /v2/apps:
     get:
@@ -3152,6 +3210,10 @@ paths:
 
     delete:
       $ref: "resources/snapshots/snapshots_delete.yml"
+
+  /v2/snapshots/{snapshot_id}/regions/{region}:
+    delete:
+      $ref: "resources/snapshots/snapshots_delete_region.yml"
 
   /v2/spaces/keys:
     get:
