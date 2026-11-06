@@ -4,5 +4,5 @@ source: |-
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -d '{"name":"demo-agent","config_id":"019fb39c-14d9-7080-933e-b9b90e25acda"}' \
-    "https://api.digitalocean.com/v2/agents/sessions"
+    "https://api.digitalocean.com/v2/harness-runtime/sessions"
 label: cURL

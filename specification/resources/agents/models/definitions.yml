@@ -195,7 +195,7 @@ agent_manifest:
             sizeSlug:
               type: string
               description: >-
-                Requested sandbox size (catalog: GET /v2/agents/sessions/sandbox/sizes). Empty means
+                Requested sandbox size (catalog: GET /v2/harness-runtime/sessions/sandbox/sizes). Empty means
                 the service default.
               example: example
             mounts:
@@ -953,7 +953,7 @@ session:
       description: >-
         Session consents to being resumed automatically when the team's prepayment balance is
         restored after a low-balance pause. Defaults to false at create time; may be toggled later
-        via PATCH /v2/agents/sessions/{session_id} (resume_on_topoff only). Only a session paused
+        via PATCH /v2/harness-runtime/sessions/{session_id} (resume_on_topoff only). Only a session paused
         with reason low_balance whose latest run did not complete is ever resumed automatically - a
         session the customer paused themselves, or one that idled out, stays paused regardless. Not
         an environment-spec field, and forks do not inherit it. Omitted when false.
@@ -1227,7 +1227,7 @@ stream_event:
       properties: {}
 validation_result:
   type: object
-  description: 'Response of POST /v2/agents/sessions/policy/validate: per-rule verdicts for the (agent,
+  description: 'Response of POST /v2/harness-runtime/sessions/policy/validate: per-rule verdicts for the (agent,
     version). The same shape is persisted per session in session_policies.verdicts.'
   properties:
     agent:
@@ -2027,7 +2027,7 @@ patch_session_request:
         config-scoped. Omitted properties are not modified.
       example: false
   description: >-
-    PATCH body for /v2/agents/sessions/{session_id}: an allowlisted subset of session-scoped
+    PATCH body for /v2/harness-runtime/sessions/{session_id}: an allowlisted subset of session-scoped
     settings (never environment-spec / config mutation). At least one property below must be present; {}
     is 400. Unknown top-level keys are rejected with 400. New patchable fields will be added here as
     optional properties over time.
@@ -2310,7 +2310,9 @@ webhook_config:
       $ref: '#/webhook_provider_key'
     webhook_url:
       type: string
-      description: The Payload URL to configure in the external system.
+      description: >-
+        The Payload URL to configure in the external system. The service returns
+        the `/v2/agents` spelling. Paste that value unchanged.
       example: https://api.digitalocean.com/v2/agents/triggers/b1a0.../webhook
 
 cron_config:

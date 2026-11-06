@@ -6,5 +6,5 @@ source: |-
     -H "Upgrade: websocket" \
     -H "Sec-WebSocket-Version: 13" \
     -H "Sec-WebSocket-Key: $(openssl rand -base64 16)" \
-    "https://api.digitalocean.com/v2/agents/sessions/{session_id}/port-forward/8000"
+    "https://api.digitalocean.com/v2/harness-runtime/sessions/{session_id}/port-forward/8000"
 label: cURL

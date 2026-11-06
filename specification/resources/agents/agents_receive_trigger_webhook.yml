@@ -16,6 +16,11 @@ description: |-
   On success (including a provider retry that dedupes to an existing firing) it returns 202 with the
   execution_id. A delivery to a paused trigger returns 202 with no body and queues nothing (deliberately
   not 409, so providers do not auto-disable the webhook after repeated non-2xx).
+
+  Both `/v2/agents/triggers/{trigger_id}/webhook` and
+  `/v2/harness-runtime/triggers/{trigger_id}/webhook` are accepted and keep working
+  indefinitely. Paste the `webhook_url` returned on the trigger into the external system
+  unchanged.
 tags:
 - Harness Runtime
 parameters:
