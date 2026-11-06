@@ -10,6 +10,15 @@ snapshot_resource_type:
         - volume
   example: droplet
 
+region:
+  in: path
+  name: region
+  required: true
+  description: The slug of the region from which to delete the snapshot's copy.
+  schema:
+    type: string
+  example: fra1
+
 snapshot_id:
   in: path
   name: snapshot_id
