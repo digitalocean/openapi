@@ -1,7 +1,8 @@
 type: object
 description: |
-  Email notification channel configuration. Recipients must be verified email
-  addresses.
+  Email notification channel configuration. Recipients must be team contact
+  emails added and verified by a team owner. They do not need to be team
+  members.
 required:
   - to
 properties:
