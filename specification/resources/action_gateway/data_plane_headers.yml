@@ -1,0 +1,18 @@
+X-Endpoint-Id:
+  description: >-
+    The UUID of your default endpoint. Returned when the request sent neither
+    `X-Session-Id` nor `X-Endpoint-Id` and used your default endpoint.
+  schema:
+    type: string
+    format: uuid
+  example: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+
+X-Action-Gateway-Endpoint-Version:
+  description: >-
+    The composite ID of the endpoint version that served the request, such as
+    `<endpoint uuid>.v3`. Returned when the request targeted an endpoint with
+    `X-Endpoint-Id` or used your default endpoint, so the version is the head
+    at request time.
+  schema:
+    type: string
+  example: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v1

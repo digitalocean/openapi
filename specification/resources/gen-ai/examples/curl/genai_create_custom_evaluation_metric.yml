@@ -9,6 +9,7 @@ source: |-
       "description": "Scores adherence to our support macros",
       "config": {
         "requires_ground_truth": true,
-        "scoring_prompt": "Grade for brand tone and factuality."
+        "scoring_prompt": "Grade for brand tone and factuality.",
+        "turn_type": "EVALUATION_METRIC_TURN_TYPE_SINGLE_TURN"
       }
     }'
