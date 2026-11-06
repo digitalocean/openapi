@@ -7,7 +7,7 @@ description: |
   `/v2/insights/notification-channels` with a `name` and exactly one of
   `email`, `slack`, or `webhook`.
 
-  Email recipients must be verified team member addresses. Webhook URLs must
+  Email recipients must be verified addresses. Webhook URLs must
   use HTTPS. Secret fields (`slack.webhook_url`, webhook credentials) are
   write-only. Subsequent reads never return secret values; they include
   optional `*_status` objects when a secret is configured.
