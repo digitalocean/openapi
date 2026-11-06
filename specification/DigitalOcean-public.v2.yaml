@@ -3879,6 +3879,16 @@ paths:
       $ref: 'resources/gen-ai/genai_get_model_catalog_card.yml'
 
 
+  /v2/gen-ai/models/catalog_v2:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_catalog_v2.yml'
+
+
+  /v2/gen-ai/models/catalog_v2/{id}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_catalog_card_v2.yml'
+
+
   /v2/gen-ai/models/routers:
     get:
       $ref: 'resources/gen-ai/genai_list_model_routers.yml'
