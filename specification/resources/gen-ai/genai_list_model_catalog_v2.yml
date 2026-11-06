@@ -1,0 +1,241 @@
+description: Returns the model catalog using the V2 card shape (typed serving, badges,
+  and modalities). Requires authentication.
+operationId: genai_list_model_catalog_v2
+parameters:
+- description: Page number for pagination.
+  example: 1
+  in: query
+  name: page
+  schema:
+    type: integer
+- description: Number of items per page.
+  example: 1
+  in: query
+  name: per_page
+  schema:
+    type: integer
+- description: |-
+    Optional partial, case-insensitive match on the display name or model ID.
+    Omit this when filtering only by modality, serving, or product.
+  example: llama
+  in: query
+  name: search
+  schema:
+    type: string
+- description: |-
+    Filter by where the model is served. Multiple values use OR semantics.
+
+     - MODEL_SERVING_SERVERLESS: Serverless inference.
+     - MODEL_SERVING_DEDICATED: Dedicated inference.
+  example:
+  - MODEL_SERVING_SERVERLESS
+  in: query
+  name: serving
+  schema:
+    items:
+      enum:
+      - MODEL_SERVING_UNSPECIFIED
+      - MODEL_SERVING_SERVERLESS
+      - MODEL_SERVING_DEDICATED
+      type: string
+    type: array
+- description: |-
+    Filter by badge. Multiple values use OR semantics.
+
+     - MODEL_CATALOG_BADGE_FEATURED: Featured in the catalog.
+     - MODEL_CATALOG_BADGE_NEW: Newly added.
+     - MODEL_CATALOG_BADGE_PREVIEW: Preview.
+     - MODEL_CATALOG_BADGE_DEPRECATING: Scheduled for deprecation.
+     - MODEL_CATALOG_BADGE_INFERENCE_ROUTER: Inference Router preset.
+  example:
+  - MODEL_CATALOG_BADGE_FEATURED
+  in: query
+  name: badges
+  schema:
+    items:
+      enum:
+      - MODEL_CATALOG_BADGE_UNSPECIFIED
+      - MODEL_CATALOG_BADGE_FEATURED
+      - MODEL_CATALOG_BADGE_NEW
+      - MODEL_CATALOG_BADGE_PREVIEW
+      - MODEL_CATALOG_BADGE_DEPRECATING
+      - MODEL_CATALOG_BADGE_INFERENCE_ROUTER
+      type: string
+    type: array
+- description: |-
+    Require every listed modality as a model input. Multiple values use AND semantics.
+
+     - MODEL_MODALITY_TEXT: plain text
+     - MODEL_MODALITY_IMAGE: still images
+     - MODEL_MODALITY_AUDIO: audio
+     - MODEL_MODALITY_VIDEO: video
+     - MODEL_MODALITY_EMBEDDING: embedding vectors
+     - MODEL_MODALITY_RANKING: document ranking scores produced by reranking models
+     - MODEL_MODALITY_DECISIONS: structured decisions produced by classification models
+  example:
+  - MODEL_MODALITY_TEXT
+  in: query
+  name: input_modality
+  schema:
+    items:
+      enum:
+      - MODEL_MODALITY_UNSPECIFIED
+      - MODEL_MODALITY_TEXT
+      - MODEL_MODALITY_IMAGE
+      - MODEL_MODALITY_AUDIO
+      - MODEL_MODALITY_VIDEO
+      - MODEL_MODALITY_EMBEDDING
+      - MODEL_MODALITY_RANKING
+      - MODEL_MODALITY_DECISIONS
+      type: string
+    type: array
+- description: |-
+    Require every listed modality as a model output. Multiple values use AND semantics.
+
+     - MODEL_MODALITY_TEXT: plain text
+     - MODEL_MODALITY_IMAGE: still images
+     - MODEL_MODALITY_AUDIO: audio
+     - MODEL_MODALITY_VIDEO: video
+     - MODEL_MODALITY_EMBEDDING: embedding vectors
+     - MODEL_MODALITY_RANKING: document ranking scores produced by reranking models
+     - MODEL_MODALITY_DECISIONS: structured decisions produced by classification models
+  example:
+  - MODEL_MODALITY_TEXT
+  in: query
+  name: output_modality
+  schema:
+    items:
+      enum:
+      - MODEL_MODALITY_UNSPECIFIED
+      - MODEL_MODALITY_TEXT
+      - MODEL_MODALITY_IMAGE
+      - MODEL_MODALITY_AUDIO
+      - MODEL_MODALITY_VIDEO
+      - MODEL_MODALITY_EMBEDDING
+      - MODEL_MODALITY_RANKING
+      - MODEL_MODALITY_DECISIONS
+      type: string
+    type: array
+- description: |-
+    Filter by product enrollment.
+
+     - MODEL_CATALOG_PRODUCT_EVALUATIONS_JUDGE: Model can judge evaluations.
+     - MODEL_CATALOG_PRODUCT_HARNESS_RUNTIME: Model is enrolled for the harness runtime.
+     - MODEL_CATALOG_PRODUCT_EVALUATION_CANDIDATE: Model can be an evaluation or simulation candidate. It serves a text endpoint and accepts and returns text.
+  example:
+  - MODEL_CATALOG_PRODUCT_EVALUATION_CANDIDATE
+  in: query
+  name: product
+  schema:
+    items:
+      enum:
+      - MODEL_CATALOG_PRODUCT_UNSPECIFIED
+      - MODEL_CATALOG_PRODUCT_EVALUATIONS_JUDGE
+      - MODEL_CATALOG_PRODUCT_HARNESS_RUNTIME
+      - MODEL_CATALOG_PRODUCT_EVALUATION_CANDIDATE
+      type: string
+    type: array
+- description: |-
+    Require every listed capability. Multiple values use AND semantics.
+    `coding` matches a coding specialisation, not only models whose type is coding.
+  example:
+  - tool_calling
+  in: query
+  name: capabilities
+  schema:
+    items:
+      type: string
+    type: array
+- description: |-
+    Include foundation models, Inference Router presets, or both. Omit to return both.
+
+     - MODEL_CATALOG_ITEM_TYPE_MODEL: A foundation or inference model.
+     - MODEL_CATALOG_ITEM_TYPE_INFERENCE_ROUTER: An Inference Router preset.
+  example:
+  - MODEL_CATALOG_ITEM_TYPE_MODEL
+  in: query
+  name: item_type
+  schema:
+    items:
+      enum:
+      - MODEL_CATALOG_ITEM_TYPE_UNSPECIFIED
+      - MODEL_CATALOG_ITEM_TYPE_MODEL
+      - MODEL_CATALOG_ITEM_TYPE_INFERENCE_ROUTER
+      type: string
+    type: array
+- description: |-
+    Field to sort results by. Default is `MODEL_CATALOG_SORT_BY_CREATED_AT`.
+
+     - MODEL_CATALOG_SORT_BY_CREATED_AT: Sort by creation date.
+     - MODEL_CATALOG_SORT_BY_NAME: Sort by display name, case-insensitive.
+     - MODEL_CATALOG_SORT_BY_PRICE: Sort by input token price.
+     - MODEL_CATALOG_SORT_BY_E2E_LATENCY_P50: Sort by canary end-to-end latency p50, in seconds. Lower is better. Rows without performance data sort after rows with data.
+     - MODEL_CATALOG_SORT_BY_THROUGHPUT_P50: Sort by canary throughput p50, in tokens per second. Higher is better. Rows without performance data sort after rows with data.
+     - MODEL_CATALOG_SORT_BY_TTFT_P50: Sort by canary time to first token p50, in seconds. Lower is better. Rows without performance data sort after rows with data.
+  example: MODEL_CATALOG_SORT_BY_NAME
+  in: query
+  name: sort_by
+  schema:
+    default: MODEL_CATALOG_SORT_BY_CREATED_AT
+    enum:
+    - MODEL_CATALOG_SORT_BY_CREATED_AT
+    - MODEL_CATALOG_SORT_BY_NAME
+    - MODEL_CATALOG_SORT_BY_PRICE
+    - MODEL_CATALOG_SORT_BY_E2E_LATENCY_P50
+    - MODEL_CATALOG_SORT_BY_THROUGHPUT_P50
+    - MODEL_CATALOG_SORT_BY_TTFT_P50
+    type: string
+- description: Sort direction. Defaults to descending when unspecified.
+  example: SORT_DIRECTION_ASC
+  in: query
+  name: sort_direction
+  schema:
+    default: SORT_DIRECTION_UNSPECIFIED
+    enum:
+    - SORT_DIRECTION_UNSPECIFIED
+    - SORT_DIRECTION_ASC
+    - SORT_DIRECTION_DESC
+    type: string
+- description: |-
+    Filter by model creator or developer, such as Meta or Google. Multiple values use OR semantics
+    and match case-insensitively. Use `available_creators` in the response to discover valid options.
+  example:
+  - Meta
+  in: query
+  name: creator
+  schema:
+    items:
+      type: string
+    type: array
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions.yml#/apiListModelCatalogV2Output
+    description: A successful response.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+  "401":
+    $ref: ../../shared/responses/unauthorized.yml
+  "404":
+    $ref: ../../shared/responses/not_found.yml
+  "429":
+    $ref: ../../shared/responses/too_many_requests.yml
+  "500":
+    $ref: ../../shared/responses/server_error.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+security:
+- bearer_auth:
+  - genai:read
+summary: List Model Catalog V2
+tags:
+- Agent Platform API
+x-codeSamples:
+- $ref: examples/curl/genai_list_model_catalog_v2.yml
