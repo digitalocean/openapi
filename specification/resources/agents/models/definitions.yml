@@ -988,10 +988,11 @@ session:
       type: string
       description: >-
         Why this session is paused. Present only when status is SESSION_STATUS_PAUSED; omitted
-        otherwise. Known values: manual (PauseSession RPC), idle (inactivity auto-pause),
-        low_balance (prepay gate). Clients should treat an unrecognized value as an opaque reason
-        string.
-      example: example
+        otherwise. Known values: manual (the customer paused the session), idle (inactivity
+        auto-pause), zero_balance (prepay gate; stored rows may still say low_balance), trigger
+        (a reuse trigger paused the session after a firing). Clients should treat an unrecognized
+        value as an opaque reason string.
+      example: manual
     idle_timeout_seconds:
       type: integer
       format: int64
@@ -2571,6 +2572,17 @@ trigger_execution:
       type: string
       description: Populated once SendInput acks; correlation/audit only. May be empty.
       example: ''
+    status_reason:
+      type: string
+      description: >-
+        Why a running execution has not started its turn. Omitted when there is nothing to report.
+        Known value: waiting_for_bound_session (a reuse firing is waiting for its bound session to
+        pause; status stays running). Clients should treat an unrecognized value as an opaque string.
+      example: waiting_for_bound_session
+    status_message:
+      type: string
+      description: Human-readable detail for status_reason. Omitted when status_reason is omitted.
+      example: Waiting for the bound session to pause.
     failure_reason:
       type: string
       description: Client-safe reason when status=failed; absent otherwise. One of a fixed set of messages; do not parse it or match on substrings. Quote the execution_id when contacting support.
