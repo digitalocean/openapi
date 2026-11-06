@@ -263,7 +263,7 @@ tags:
       * IPv4 addresses
       * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
       * Same API and management interface as our existing reserved IPs feature
-      * Assignable to Droplets only
+      * Assignable to Droplets, and to external regional load balancers and public NAT gateways at creation
 
   - name: CDN Endpoints
     description: |-
@@ -3880,6 +3880,16 @@ paths:
   /v2/gen-ai/models/catalog/{id}:
     get:
       $ref: 'resources/gen-ai/genai_get_model_catalog_card.yml'
+
+
+  /v2/gen-ai/models/catalog_v2:
+    get:
+      $ref: 'resources/gen-ai/genai_list_model_catalog_v2.yml'
+
+
+  /v2/gen-ai/models/catalog_v2/{id}:
+    get:
+      $ref: 'resources/gen-ai/genai_get_model_catalog_card_v2.yml'
 
 
   /v2/gen-ai/models/routers:
