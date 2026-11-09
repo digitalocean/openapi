@@ -9,7 +9,7 @@ properties:
     description: >
       The model ID of the model you want to use. Get the model ID using
       `/v1/models` or on the available models page.
-    example: "openai-gpt-oss-20b"
+    example: "openai-gpt-oss-120b"
   input:
     description: >
       The prompt or input content you want the model to respond to.

@@ -15,7 +15,7 @@ source: |-
       ctx := context.Background()
 
       resp, _, err := client.Responses.New(ctx, &godo.ResponseNewParams{
-          Model:           "openai-gpt-oss-20b",
+          Model:           "openai-gpt-oss-120b",
           Input:           "What is the capital of France?",
           MaxOutputTokens: godo.PtrTo(50),
           Temperature:     godo.PtrTo(0.7),
