@@ -11,7 +11,7 @@ description: |
   when the MicroVM is `creating`, `terminated`, or `failed`.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: 'parameters.yml#/microvm_id'

@@ -10,7 +10,7 @@ description: |
   `failed`.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: 'parameters.yml#/microvm_id'

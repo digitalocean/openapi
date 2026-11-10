@@ -15,7 +15,7 @@ description: |
   is paused and auto-resume is on, the request resumes it.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: 'parameters.yml#/microvm_id'

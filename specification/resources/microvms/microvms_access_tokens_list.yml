@@ -9,7 +9,7 @@ description: |
   with DELETE `/v2/microvms/{microvm_id}/access_tokens/{token_id}`.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: 'parameters.yml#/microvm_id'
