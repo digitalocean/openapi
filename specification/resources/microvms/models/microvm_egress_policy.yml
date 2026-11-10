@@ -1,0 +1,46 @@
+type: object
+
+description: >-
+  An outbound allow list. A destination that matches any rule is allowed;
+  `default_action` decides every other destination. Only valid with `public`
+  networking, and fixed at create: there is no way to change it later. With a
+  policy set, direct connections out of the MicroVM are dropped; only HTTP and
+  HTTPS through the platform proxy to the allowed destinations works, so
+  clients must honor the injected `HTTP_PROXY` / `HTTPS_PROXY` environment.
+  The registries needed to pull the workload image are allowed automatically.
+  On a MicroVM this is the policy set at create, exactly as supplied. On a
+  checkpoint it is the policy a restored MicroVM inherits; a restore cannot
+  change it. Omitted when egress is unrestricted.
+
+properties:
+  default_action:
+    type: string
+    enum:
+      - deny
+      - allow
+    default: deny
+    description: >-
+      What to do with a destination no rule matches. `deny` refuses it (an
+      HTTP request gets a 403 and a TLS connection is closed).
+    example: deny
+
+  rules:
+    type: array
+    maxItems: 50
+    description: >-
+      The destinations to allow. Rules match the host only: port, path, and
+      method are not considered, and a hostname that resolves to an IP is not
+      matched by an `ip` rule. Each rule sets exactly one of `domain` or `ip`.
+    items:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: >-
+            An exact host such as `api.example.com`, or a wildcard such as
+            `*.example.com`.
+          example: api.example.com
+        ip:
+          type: string
+          description: An exact IP address. CIDR ranges are not supported.
+          example: 203.0.113.5

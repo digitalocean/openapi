@@ -44,8 +44,32 @@ properties:
     format: uuid
     description: >-
       The ID of a VPC network in the same region that belongs to your team.
-      Required when `networking` is `vpc`.
+      When `networking` is `vpc` and this is omitted, the team's default VPC
+      is used.
     example: 5a4981aa-9653-4bd1-bef5-d6bff52042e4
+
+  egress_policy:
+    $ref: 'microvm_egress_policy.yml'
+
+  insights_enablement:
+    $ref: 'microvm_insights_enablement.yml'
+
+  project_id:
+    type: string
+    format: uuid
+    description: >-
+      The project to place the MicroVM in. Omit to use the team's default
+      project. A project that does not belong to the team is rejected.
+    example: 4de7ac8b-495b-4884-9a69-1050c6793cd6
+
+  ingress:
+    type: boolean
+    default: true
+    description: >-
+      Whether to create the MicroVM with a default public URL. Defaults to
+      `true`. Set to `false` to create the MicroVM without one; URLs can be
+      added later with POST `/v2/microvms/{microvm_id}/urls`.
+    example: true
 
   auto_pause:
     $ref: 'microvm_auto_pause.yml'
