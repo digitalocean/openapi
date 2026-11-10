@@ -1,8 +1,14 @@
 operationId: harness_post_session_sandbox_exec
 summary: ExecInSandbox runs a one-shot command inside the session's sandbox.
 description: |-
-  Runs `argv` directly in the guest (no shell). Stdout/stderr are buffered and capped at 1 MiB each;
-  truncation is indicated via response headers when present. A non-zero exit code is still HTTP 200.
+  Runs `argv` directly in the guest (no shell). The default response is buffered JSON.
+  Stdout and stderr are capped at 1 MiB each; truncation is indicated via response headers when present.
+  A non-zero exit code is still HTTP 200.
+  With Accept `text/event-stream` or `stream=1`, the response is an event stream of stdout, stderr, and exit.
+  Set `keep_stdin_open` to leave the process stdin open. The stream then starts with `event: started` and an `exec_id`.
+  Later bytes are POST `/v2/agents/sessions/{session_id}/sandbox/exec/{exec_id}/stdin`.
+  `keep_stdin_open` without the event stream returns 400.
+  If the session cannot accept interactive stdin, the call returns 409 before any event-stream header.
 tags:
 - Harness Runtime
 parameters:
@@ -36,7 +42,7 @@ responses:
         schema:
           $ref: models/definitions.yml#/exec_in_sandbox_response
   '400':
-    description: Invalid argv or request body.
+    description: Invalid argv or request body, or keep_stdin_open without an event stream.
     headers: *id001
     content:
       application/json:
@@ -61,7 +67,7 @@ responses:
   '404':
     $ref: ../../shared/responses/not_found.yml
   '409':
-    description: Session is not in a state that can run exec.
+    description: Session is not in a state that can run exec, or interactive stdin is not available for this session.
     headers: *id001
     content:
       application/json:
