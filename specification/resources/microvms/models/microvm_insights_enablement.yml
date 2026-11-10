@@ -1,0 +1,22 @@
+type: object
+
+description: >-
+  The customer's per-signal choice for Insights telemetry storage. An omitted
+  signal means no explicit choice; the product default applies (metrics on,
+  logs and traces off). Settable only at create.
+
+properties:
+  metrics:
+    type: boolean
+    description: Whether metrics from this MicroVM are stored in Insights.
+    example: true
+
+  logs:
+    type: boolean
+    description: Whether logs from this MicroVM are stored in Insights.
+    example: false
+
+  traces:
+    type: boolean
+    description: Whether traces from this MicroVM are stored in Insights.
+    example: false

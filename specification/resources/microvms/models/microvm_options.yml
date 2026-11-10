@@ -105,7 +105,8 @@ properties:
     description: >-
       Features and whether they are enabled for your team. `exec_pty` gates
       `exec` and `console`; `file_transfer` gates `files`; `egress_policy`
-      gates `egress_policy` on create.
+      gates `egress_policy` on create; `insights_opt_in` gates
+      `insights_enablement` on create.
     items:
       type: object
       properties:

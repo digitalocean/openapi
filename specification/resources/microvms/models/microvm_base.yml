@@ -67,6 +67,9 @@ properties:
   egress_policy:
     $ref: 'microvm_egress_policy.yml'
 
+  insights_enablement:
+    $ref: 'microvm_insights_enablement.yml'
+
   auto_pause:
     $ref: 'microvm_auto_pause.yml'
 
