@@ -1,0 +1,13 @@
+type: object
+
+description: The request body for adding a URL to a MicroVM.
+
+properties:
+  port:
+    type: integer
+    minimum: 1
+    maximum: 65535
+    description: >-
+      The guest port the URL routes to. Must be one of the MicroVM's `ports`.
+      Defaults to the MicroVM's HTTP port when omitted.
+    example: 8080
