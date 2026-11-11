@@ -78,7 +78,9 @@ responses:
         schema:
           $ref: models/definitions.yml#/create_session_response
   '400':
-    description: Invalid manifest/config JSON, incompatible credentials, or invalid query parameter.
+    description: >-
+      Invalid manifest/config JSON, incompatible credentials, deny-all egress (an empty allowlist)
+      combined with URL-bound credentials, or invalid query parameter.
     headers: *id002
     content:
       application/json:
