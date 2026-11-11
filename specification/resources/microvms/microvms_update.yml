@@ -1,0 +1,60 @@
+operationId: microvms_update
+
+summary: Update a MicroVM
+
+description: |
+  To change a MicroVM's name or tags, send a PATCH request to
+  `/v2/microvms/{microvm_id}`.
+
+  The MicroVM must be running or paused. Omitted fields keep their current
+  value. Every other field is fixed at create; sending one (for example
+  `size` or `region`) is rejected with a `400` status code, and changing it
+  means creating a new MicroVM.
+
+  `tags` replaces the whole tag set: tags not in the list are removed, and an
+  empty list removes every tag.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/microvm_update.yml'
+
+responses:
+  '200':
+    $ref: 'responses/microvm.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '409':
+    $ref: 'responses/errors.yml#/conflict'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_update.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:update'

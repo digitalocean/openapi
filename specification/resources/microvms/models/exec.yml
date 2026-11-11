@@ -22,6 +22,19 @@ exec_request:
       description: The working directory to run the command in.
       example: /usr/share/nginx/html
 
+    output_encoding:
+      type: string
+      enum:
+        - utf-8
+        - base64
+      default: utf-8
+      description: >-
+        How `stdout` and `stderr` are returned. `utf-8` (the default) is a
+        JSON string; bytes that are not valid UTF-8 become U+FFFD. `base64`
+        returns the exact bytes. Use `base64` when the command may emit
+        binary output.
+      example: utf-8
+
   required:
     - argv
 
@@ -36,16 +49,26 @@ exec_response:
     stdout:
       type: string
       description: >-
-        The command's standard output. Bytes that are not valid UTF-8 are
-        replaced.
+        The command's standard output. A UTF-8 string when `output_encoding`
+        is `utf-8`; standard Base64 when it is `base64`.
       example: ""
 
     stderr:
       type: string
       description: >-
-        The command's standard error. Bytes that are not valid UTF-8 are
-        replaced.
+        The command's standard error. A UTF-8 string when `output_encoding`
+        is `utf-8`; standard Base64 when it is `base64`.
       example: "nginx version: nginx/1.29.1\n"
+
+    output_encoding:
+      type: string
+      enum:
+        - utf-8
+        - base64
+      description: >-
+        The encoding of `stdout` and `stderr`, echoing the request's
+        `output_encoding` (or the `utf-8` default).
+      example: utf-8
 
     exit_code:
       type: integer

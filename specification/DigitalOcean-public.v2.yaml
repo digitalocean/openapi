@@ -544,9 +544,11 @@ tags:
       in an isolated kernel. A MicroVM pauses automatically when it is idle and
       resumes on the next HTTP request, command, or console session, with its
       memory, files, and processes intact. By sending requests to the
-      `/v2/microvms` endpoints, you can create, list, pause, resume, and delete
-      MicroVMs, run commands and open a console in them, upload and download
-      files, and create checkpoints to start new MicroVMs from a saved state.
+      `/v2/microvms` endpoints, you can create, list, update, pause, resume,
+      and delete MicroVMs, run commands and open a console in them, upload and
+      download files, add and remove ingress URLs, create access tokens scoped
+      to one MicroVM, and create checkpoints to start new MicroVMs from a
+      saved state.
 
       Each MicroVM serves its HTTP port at
       `https://{microvm_id}.{region}.microvm.ondigitalocean.com`. Requests to
@@ -2494,6 +2496,28 @@ paths:
 
     delete:
       $ref: "resources/microvms/microvms_delete.yml"
+
+    patch:
+      $ref: "resources/microvms/microvms_update.yml"
+
+  /v2/microvms/{microvm_id}/urls:
+    post:
+      $ref: "resources/microvms/microvms_urls_add.yml"
+
+  /v2/microvms/{microvm_id}/urls/{url_id}:
+    delete:
+      $ref: "resources/microvms/microvms_urls_remove.yml"
+
+  /v2/microvms/{microvm_id}/access_tokens:
+    post:
+      $ref: "resources/microvms/microvms_access_tokens_create.yml"
+
+    get:
+      $ref: "resources/microvms/microvms_access_tokens_list.yml"
+
+  /v2/microvms/{microvm_id}/access_tokens/{token_id}:
+    delete:
+      $ref: "resources/microvms/microvms_access_tokens_revoke.yml"
 
   /v2/microvms/{microvm_id}/pause:
     post:
