@@ -1,7 +1,10 @@
 operationId: harness_get_trigger_by_session
-summary: GetTriggerBySession reverse-looks-up the trigger that produced or binds a session.
-description: Returns the trigger that produced (fresh) or binds (reuse) the given session. Resolves to
-  the row even after the trigger is soft-deleted.
+summary: Get the newest trigger bound to a session, or the trigger of its newest execution.
+description: >-
+  Returns the newest trigger whose bound session is this one. Deleted triggers are skipped.
+  When none is bound, returns the trigger of the newest execution for this session, again
+  skipping deleted triggers. A session can be bound to more than one trigger; only the newest
+  is returned. 404 when neither lookup matches.
 tags:
 - Harness Runtime
 parameters:
@@ -15,7 +18,7 @@ parameters:
   example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
 responses:
   '200':
-    description: The trigger that produced (fresh) or binds (reuse) this session.
+    description: The newest trigger bound to this session, or the trigger of its newest execution.
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
