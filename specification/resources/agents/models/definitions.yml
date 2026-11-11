@@ -637,6 +637,32 @@ get_session_response:
   properties:
     session:
       $ref: '#/session'
+harness_region:
+  type: object
+  description: One entry of the ListRegions catalog.
+  properties:
+    slug:
+      type: string
+      description: DO datacenter slug. Names the regional API host to call to work in this region —
+        "ric1" means https://api-ric1.digitalocean.com. A request is placed in the region of the host
+        that served it; the optional `region` field on a create is a check against that host, not a
+        choice of region.
+      example: ric1
+    is_default:
+      type: boolean
+      description: True for the region the region-less host, https://api.digitalocean.com, serves.
+        Exactly one listed region is the default and every team sees it. Preselect it in a picker
+        instead of hardcoding a slug.
+      example: true
+harness_regions_response:
+  type: object
+  description: Response for ListRegions.
+  properties:
+    regions:
+      type: array
+      description: Regions the team may place resources in, each on its own API host, sorted by slug.
+      items:
+        $ref: '#/harness_region'
 hitl_outcome:
   type: string
   enum:

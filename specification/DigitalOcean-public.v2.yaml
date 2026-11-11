@@ -263,7 +263,7 @@ tags:
       * IPv4 addresses
       * Network sizes of anywhere from `/24` (256 addresses) to `/18` (16,384 addresses)
       * Same API and management interface as our existing reserved IPs feature
-      * Assignable to Droplets only
+      * Assignable to Droplets, and to external regional load balancers and public NAT gateways at creation
 
   - name: CDN Endpoints
     description: |-
@@ -1236,6 +1236,9 @@ paths:
   /v2/agents/configs/{config_id}/sessions:
     get:
       $ref: "resources/agents/agents_list_config_sessions.yml"
+  /v2/harness-runtime/regions:
+    get:
+      $ref: "resources/agents/agents_list_regions.yml"
   /v2/agents/sessions:
     get:
       $ref: "resources/agents/agents_list_sessions.yml"
