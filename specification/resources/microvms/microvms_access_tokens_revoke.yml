@@ -1,0 +1,44 @@
+operationId: microvmAccessTokens_delete
+
+summary: Revoke an access token of a MicroVM
+
+description: |
+  To revoke an access token, send a DELETE request to
+  `/v2/microvms/{microvm_id}/access_tokens/{token_id}`. The token stops
+  working at the edge right away and drops out of the list. Revoke is
+  permanent; a revoked token cannot be restored.
+
+  A successful request returns a `204 No Content` status code.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+  - $ref: 'parameters.yml#/token_id'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_access_tokens_revoke.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:update'
