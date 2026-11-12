@@ -3,8 +3,9 @@ summary: Start a fresh login for an existing connection.
 description: Resumes a pending connection's authorization, or starts a new one for an expired or revoked
   connection. The connection keeps its id, `user_id`, and scopes, so environments that use it keep
   working once it is active again. An active connection is returned unchanged. Only the member who owns
-  the connection can reconnect it. The response includes `authorization` while the interactive step is
-  outstanding. No token is returned.
+  the connection can reconnect it; for anyone else the response is `404`, the same as for an unknown
+  connection. The response includes `authorization` while the interactive step is outstanding. No token
+  is returned.
 tags:
 - Harness Runtime
 parameters:
