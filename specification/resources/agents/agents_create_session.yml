@@ -110,7 +110,9 @@ responses:
     description: >-
       Team is at the active-session quota, a live session name already exists, or the requested
       workspace_id is not AVAILABLE (attached to another session, still being saved, FAILED, or being
-      deleted).
+      deleted). The quota case has the error id `session_quota_exceeded`; branch on the id, not the
+      message. Paused sessions count toward the quota, so retrying without destroying a session fails
+      the same way; destroy sessions that are no longer needed, or contact Support to raise the limit.
     headers: *id002
     content:
       application/json:
