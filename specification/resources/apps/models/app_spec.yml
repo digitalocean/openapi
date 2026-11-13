@@ -106,5 +106,25 @@ properties:
   vpc:
     $ref: apps_vpc.yml
 
+  envs:
+    description: A list of environment variables made available to all components in the app.
+    type: array
+    items:
+      $ref: app_variable_definition.yml
+
+  alerts:
+    description: A list of alerts which apply to the app.
+    type: array
+    items:
+      $ref: app_alert_spec.yml
+
+  features:
+    description: A list of features to enable for the app.
+    type: array
+    items:
+      type: string
+    example:
+    - buildpack-stack=ubuntu-22
+
 required:
 - name

@@ -32,10 +32,10 @@ source: |-
   # client.droplet_actions.password_reset(droplet_id: 3164450)
 
   # Resize a Droplet
-  # client.droplet_actions.resize(droplet_id: 3164450, size: '1gb')
+  # client.droplet_actions.resize(droplet_id: 3164450, size: 's-2vcpu-4gb')
 
   # Rebuild a Droplet
-  # client.droplet_actions.rebuild(droplet_id: 3164450, image: 'ubuntu-16-04-x64')
+  # client.droplet_actions.rebuild(droplet_id: 3164450, image: 'ubuntu-26-04-x64')
 
   # Rename a Droplet
   # client.droplet_actions.rename(droplet_id: 3164450, name: 'nifty-new-name')
@@ -45,9 +45,6 @@ source: |-
 
   # Enable IPv6
   # client.droplet_actions.enable_ipv6(droplet_id: 3164450)
-
-  # Enable Private Networking
-  # client.droplet_actions.enable_private_networking(droplet_id: 3164450)
 
   # Snapshot a Droplet
   # client.droplet_actions.snapshot(droplet_id: 3164450, name: 'Nifty New Snapshot')
