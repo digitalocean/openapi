@@ -3175,6 +3175,10 @@ paths:
     get:
       $ref: "resources/security/security_scan_finding_list_affected_resources.yml"
 
+  /v2/security/audit_history/export:
+    get:
+      $ref: "resources/security/security_audit_history_export.yml"
+
   /v2/security/settings:
     get:
       $ref: "resources/security/security_settings_list.yml"
