@@ -13,7 +13,7 @@ description: |
   per minute. Rejected requests count toward the per-minute limit.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: 'parameters.yml#/microvm_id'

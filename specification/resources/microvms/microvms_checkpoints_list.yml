@@ -8,7 +8,7 @@ description: |
   parameter.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: '../../shared/parameters.yml#/page'

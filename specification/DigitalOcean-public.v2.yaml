@@ -537,7 +537,7 @@ tags:
       delete load balancers as well as add or remove Droplets, forwarding rules,
       and other configuration details.
 
-  - name: MicroVMs [Public Preview]
+  - name: MicroVMs
     description: |-
       [DigitalOcean MicroVMs](https://docs.digitalocean.com/products/microvms/)
       are lightweight virtual machines that run a `linux/amd64` container image
@@ -879,7 +879,7 @@ x-tagGroups:
       - Insights
       - Kubernetes
       - Load Balancers
-      - MicroVMs [Public Preview]
+      - MicroVMs
       - Monitoring
       - NFS
       - NFS Actions

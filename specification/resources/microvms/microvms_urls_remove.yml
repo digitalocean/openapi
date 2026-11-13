@@ -10,7 +10,7 @@ description: |
   A successful request returns a `204 No Content` status code.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: 'parameters.yml#/microvm_id'
