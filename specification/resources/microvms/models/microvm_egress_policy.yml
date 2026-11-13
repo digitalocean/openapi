@@ -44,3 +44,51 @@ properties:
           type: string
           description: An exact IP address. CIDR ranges are not supported.
           example: 203.0.113.5
+
+  credentials:
+    type: array
+    maxItems: 16
+    description: >-
+      Credentials the platform adds to outbound requests, so the workload
+      never holds them. Settable only at create, and only in regions that
+      support credential injection. Each host must be allowed by a rule (or
+      `default_action` must be `allow`). HTTPS requests to these hosts are
+      intercepted so the credential can be attached; clients that pin
+      certificates will fail on them. The credential is sent in the
+      `authorization` header. Credentials cannot be set when restoring a
+      checkpoint: the restored MicroVM inherits the origin's. Never returned
+      in responses.
+    items:
+      type: object
+      required:
+        - host
+        - secret
+      properties:
+        host:
+          type: string
+          description: An exact host. Wildcards and IP addresses are not allowed.
+          example: api.example.com
+        path_prefix:
+          type: string
+          description: >-
+            Only requests whose path starts with this prefix get the
+            credential. Must start with `/`. Defaults to every path.
+          example: /v1
+        scheme:
+          type: string
+          enum:
+            - bearer
+            - raw
+          default: bearer
+          description: >-
+            How the value is sent. `bearer` sends `Bearer <secret>`; `raw`
+            sends the secret as is.
+          example: bearer
+        secret:
+          type: string
+          writeOnly: true
+          maxLength: 8192
+          description: >-
+            The credential value. It is stored in a secrets vault, never
+            returned by the API, and cannot be read back.
+          example: s3cr3t-t0k3n
