@@ -34,5 +34,8 @@ properties:
     example: fra1
     description: Slug of the region where registry data is stored. When not provided, a region will be selected.
 
+  insights:
+    $ref: "insights_opt_in.yml"
+
 required:
 - name
