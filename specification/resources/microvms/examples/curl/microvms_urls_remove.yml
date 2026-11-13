@@ -1,0 +1,6 @@
+lang: cURL
+source: |-
+  curl -X DELETE \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v2/microvms/01a0ef1a-d873-793d-ae6a-5dd6239be62a/urls/3f6c1a2b-9d4e-5f70-8a1b-2c3d4e5f6a7b"

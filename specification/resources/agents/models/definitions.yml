@@ -245,18 +245,27 @@ agent_manifest:
             egress:
               type: object
               description: >-
-                Requested egress policy (legacy envelope). unrestricted opts out of platform-default
-                host allowlists and cannot combine with allow / allowIps / vpcUuid / subnetUuid.
-                Absent or empty means no destination ACL (same as unrestricted). Flat authors prefer
-                egress: unrestricted (scalar), a bare host list, or an object with allow_hosts /
-                allow_ips / vpc_uuid / subnet_uuid. Platform host defaults are unioned only when
-                allow names something; allowIps does not trigger that union (IP-only turns the
-                destination ACL on without domain rules). VPC attachment is create-time immutable;
-                ownership is verified at session create. Allowlists are a request only: the server
-                intersects them with tenant + platform policy and can only narrow them.
+                Requested egress policy (legacy envelope object). Absent means no destination ACL,
+                same as unrestricted: true. unrestricted cannot combine with allow / allowIps /
+                vpcUuid / subnetUuid. If allow or allowIps is present and neither list names an
+                entry, the policy is deny-all: every outbound destination is blocked. Deny-all
+                cannot combine with unrestricted / vpcUuid / subnetUuid, and a session that also
+                binds URL-bound credentials is rejected with 400. If the other list names entries,
+                only those are allowed (allow: [] with a non-empty allowIps is IP-only). A null
+                egress, allow or allowIps is rejected with 400; omit the key instead. The flat
+                manifest format spells these differently: egress: none (deny-all), egress:
+                unrestricted, a bare host list (an empty list is deny-all), or an object with
+                allow_hosts / allow_ips / vpc_uuid / subnet_uuid. Platform host defaults are unioned
+                only when allow names something; allowIps does not trigger that union (IP-only turns
+                the destination ACL on without domain rules). VPC attachment is create-time
+                immutable; ownership is verified at session create. Allowlists are a request only:
+                the server intersects them with tenant + platform policy and can only narrow them.
               properties:
                 allow:
                   type: array
+                  description: >-
+                    Host allowlist. allow: [] with no non-empty allowIps means deny-all (flat
+                    spelling: egress: none). With a non-empty allowIps it is IP-only.
                   items:
                     type: object
                     required:
@@ -267,7 +276,9 @@ agent_manifest:
                         example: api.example.com
                 allowIps:
                   type: array
-                  description: Exact IPv4/IPv6 literals (not CIDRs).
+                  description: >-
+                    Exact IPv4/IPv6 literals (not CIDRs). Present-but-empty with no non-empty allow
+                    means deny-all; allow: [] with a non-empty allowIps is IP-only.
                   items:
                     type: string
                     example: example
@@ -1053,6 +1064,22 @@ session:
         The persistent workspace attached to the session, mounted at `/workspace`. Empty when the
         session has none. Fork and rollback return 409 for a session that has a workspace.
       example: 019a2f4e-8c1d-7b3a-9e5f-2d6c8a1b4e70
+    update:
+      $ref: '#/session_config_update'
+    config_drifted:
+      type: boolean
+      description: >-
+        True when the running config differs from the manifest the session was created from, for
+        example after a successful PATCH with `manifest_yaml`. Omitted when false.
+      example: true
+    config_diff:
+      $ref: '#/session_config_changes'
+    manifest:
+      type: object
+      additionalProperties: true
+      description: >-
+        The effective manifest of the session. Present only when `config_drifted` is true. Never
+        contains secret values.
 
 session_origin:
   type: object
@@ -1115,6 +1142,7 @@ session_status:
     - SESSION_STATUS_DESTROYED
     - SESSION_STATUS_FAILED
     - SESSION_STATUS_PAUSED
+    - SESSION_STATUS_UPDATING
     - SESSION_STATUS_ALL
     - SESSION_STATUS_LOCKED
   default: SESSION_STATUS_UNSPECIFIED
@@ -1122,7 +1150,8 @@ session_status:
     SessionStatus is the lifecycle state of the sandbox + agent pair. SESSION_STATUS_ALL is a
     ListSessions status-filter value only -- no session is ever actually in this status.
     SESSION_STATUS_LOCKED is reserved for internal use and never appears in an end-user-facing
-    response.
+    response. SESSION_STATUS_UPDATING is reported while a live config update (PATCH with
+    `manifest_yaml`) is being applied; poll the session until it leaves this status.
   example: SESSION_STATUS_UNSPECIFIED
 
 stream_event:
@@ -2050,13 +2079,159 @@ patch_session_request:
       description: >-
         When present, sets whether this session opts in to automatic resumption when the team's
         prepayment balance is restored after a low-balance pause. Session-scoped consent, not
-        config-scoped. Omitted properties are not modified.
+        config-scoped. Omitted properties are not modified. Cannot be combined with `manifest_yaml`.
       example: false
+    manifest_yaml:
+      type: string
+      description: >-
+        A partial manifest, as YAML, holding only the sections to change: `tools`, `env`, `secrets`.
+        Absent sections are untouched; any other top-level key is 400, and `model` / `permissions`
+        return 501. `tools` is the full replacement list (`tools: []` detaches every MCP server;
+        `tools: null` is 400). `env` and `secrets` are full sets: a key left out is removed. A secret
+        value is a string (set or rotate) or `{}` (keep the current value); per-key `null` is 400.
+        Platform and framework keys and non-plain secrets must be sent back unchanged, or the request
+        is 422. Cannot be combined with `resume_on_topoff`. Requires the team to be enrolled in the
+        config-update feature (403 otherwise).
+      example: |
+        tools:
+          - do.actions:
+              tools: [toolbelt:read-only@1]
   description: >-
-    PATCH body for /v2/agents/sessions/{session_id}: an allowlisted subset of session-scoped
-    settings (never environment-spec / config mutation). At least one property below must be present; {}
-    is 400. Unknown top-level keys are rejected with 400. New patchable fields will be added here as
-    optional properties over time.
+    PATCH body for /v2/agents/sessions/{session_id}. Either toggle the session-scoped
+    `resume_on_topoff` consent, or change the live config with `manifest_yaml`; the two cannot be
+    combined in one request. At least one property must be present; {} is 400. Unknown top-level keys
+    are rejected with 400.
+
+patch_session_response:
+  type: object
+  properties:
+    session:
+      $ref: '#/session'
+    outcome:
+      type: string
+      enum:
+        - ACCEPTED
+        - UNCHANGED
+      description: >-
+        Present for `manifest_yaml` patches. ACCEPTED (HTTP 202): the update is applying and the
+        session status is SESSION_STATUS_UPDATING; poll GET until the status leaves UPDATING, then read
+        `session.update`. UNCHANGED (HTTP 200): the manifest changes nothing and nothing was recorded.
+      example: ACCEPTED
+    warnings:
+      type: array
+      items:
+        type: string
+      description: Non-fatal notes about the update.
+
+session_config_update_state:
+  type: string
+  enum:
+    - APPLYING
+    - APPLIED
+    - APPLIED_RESTARTED
+    - FAILED
+  description: >-
+    State of a live config update. APPLIED_RESTARTED means the agent was restarted to apply it (env
+    and secret changes). FAILED means the update did not take effect; see `reverted` and `detail`.
+  example: APPLIED
+
+session_config_section_changes:
+  type: object
+  description: Keys touched in one manifest section.
+  properties:
+    added:
+      type: array
+      items:
+        type: string
+      example: [jira]
+    removed:
+      type: array
+      items:
+        type: string
+      example: [docs]
+    changed:
+      type: array
+      items:
+        type: string
+      example: [github]
+
+session_config_changes:
+  type: object
+  description: Changes per manifest section. Never contains secret values.
+  properties:
+    tools:
+      $ref: '#/session_config_section_changes'
+    env:
+      $ref: '#/session_config_section_changes'
+    secrets:
+      $ref: '#/session_config_section_changes'
+
+session_config_update:
+  type: object
+  description: One live config update (or automatic rollback) of a session.
+  properties:
+    update_id:
+      type: string
+      example: 019b0000-0000-7000-8000-000000000001
+    session_id:
+      type: string
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    kind:
+      type: string
+      enum:
+        - update
+        - rollback
+      example: update
+    state:
+      $ref: '#/session_config_update_state'
+    sections:
+      type: array
+      items:
+        type: string
+      description: Manifest sections this update touched.
+      example:
+        - tools
+    changes:
+      $ref: '#/session_config_changes'
+    error:
+      type: string
+      enum:
+        - update_failed
+        - requires_new_session
+        - interrupted
+      description: Failure class; present when state is FAILED.
+      example: update_failed
+    reverted:
+      type: boolean
+      description: True when a failed update was rolled back to the previous config.
+    detail:
+      type: string
+      description: Human-readable explanation, typically for a failed update.
+      example: agent restart did not become healthy; reverted to previous config
+    manifest_hash:
+      type: string
+      description: Hash of the manifest after this update.
+      example: 9f2c1a7e
+    previous_hash:
+      type: string
+      description: Hash of the manifest before this update.
+      example: 3b8d0e54
+    user_uuid:
+      type: string
+      description: User who requested the update.
+      example: 4f3c2b1a-0000-4000-8000-000000000000
+    user_email:
+      type: string
+      description: Email of the user who requested the update.
+      example: user@example.com
+    started_at:
+      type: string
+      format: date-time
+      example: '2026-11-11T12:00:00Z'
+    finished_at:
+      type: string
+      format: date-time
+      example: '2026-11-11T12:00:20Z'
 
 agent_config_clone_request:
   type: object

@@ -1,0 +1,23 @@
+type: object
+
+description: The request body for creating an access token for a MicroVM.
+
+properties:
+  name:
+    type: string
+    minLength: 1
+    maxLength: 64
+    description: >-
+      A name for the token. Unique among the live access tokens of the
+      MicroVM.
+    example: alice-workspace
+
+  expires_in_seconds:
+    type: integer
+    minimum: 1
+    description: The lifetime of the token in seconds. Omit for a token that
+      does not expire.
+    example: 2592000
+
+required:
+  - name
