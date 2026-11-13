@@ -35,6 +35,8 @@ responses:
 
 x-codeSamples:
   - $ref: "examples/curl/spaces_key_list.yml"
+  - $ref: "examples/go/spaces_key_list.yml"
+  - $ref: "examples/python/spaces_key_list.yml"
 
 security:
   - bearer_auth:
