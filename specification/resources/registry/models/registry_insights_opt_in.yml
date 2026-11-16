@@ -1,0 +1,15 @@
+type: object
+nullable: true
+writeOnly: true
+description: An object specifying the Insights telemetry that the customer opts
+  in to for the container registry. This is only accepted when creating a
+  registry and is not returned in responses. If the object is omitted, or if
+  `logs` is not set, the registry is created with logs not enabled.
+properties:
+  logs:
+    type: boolean
+    description: A boolean value indicating whether the registry's logs are sent
+      to Insights. Set this to `true` to send the registry's logs to Insights.
+      `false`, and omitting `insights` or `logs`, both create the registry with
+      logs not enabled.
+    example: true
