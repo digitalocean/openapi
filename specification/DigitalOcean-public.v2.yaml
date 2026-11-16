@@ -1021,6 +1021,10 @@ paths:
     post:
       $ref: "resources/action_gateway/endpointVersions_create_promotion.yml"
 
+  /v2/action-gateway/endpoints/{endpoint_id}:fork:
+    post:
+      $ref: "resources/action_gateway/endpoints_create_fork.yml"
+
   /v2/action-gateway/endpoint-versions/{version_id}:
     get:
       $ref: "resources/action_gateway/endpointVersions_get.yml"

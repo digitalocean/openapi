@@ -38,6 +38,45 @@ promotion_not_found:
             message: endpoint version not found
         endpoint_identity_mismatch: *endpoint_identity_mismatch
 
+fork_not_found:
+  description: >-
+    An inaccessible endpoint returns endpoint_not_found. A version_id that is
+    deleted, unknown, or belongs to another endpoint returns
+    endpoint_version_not_found.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: ../../shared/models/error.yml
+      examples:
+        endpoint_not_found: *endpoint_not_found
+        endpoint_version_not_found:
+          value:
+            id: endpoint_version_not_found
+            message: endpoint version not found
+
+fork_connection_not_held:
+  description: >-
+    The fork copies versions that name connections you neither hold nor share
+    with the team (fork_connection_not_held). The message lists each connection
+    ID and the version numbers that use it. Nothing is stripped or created.
+    Also returned for other invalid input, such as an invalid_endpoint_name,
+    invalid_endpoint_id, invalid_endpoint_version_id, or an invalid actor_id.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: ../../shared/models/error.yml
+      examples:
+        fork_connection_not_held:
+          value:
+            id: fork_connection_not_held
+            message: >-
+              inherited versions use connections the forking user does not
+              hold: 3f6b9a1e-0c2d-4e8f-a7b5-1d9c8e7f6a54 (versions 1, 2)
+
 endpoint_name_taken:
   description: An endpoint with this name already exists in the team (endpoint_name_taken).
   headers:

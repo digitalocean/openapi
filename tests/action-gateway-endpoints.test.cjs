@@ -49,6 +49,7 @@ const operations = [
   ['/endpoints/{endpoint_id}/versions', 'post', 'create'],
   ['/endpoints/{endpoint_id}/versions', 'get', 'read'],
   ['/endpoints/{endpoint_id}/versions:promote', 'post', 'create'],
+  ['/endpoints/{endpoint_id}:fork', 'post', 'create'],
   ['/endpoint-versions/{version_id}', 'get', 'read'],
   ['/endpoint-versions/{version_id}', 'delete', 'delete'],
 ];
@@ -78,6 +79,23 @@ test('all lifecycle operations, scopes, status codes, and examples are bundled',
       }
     }
   }
+});
+
+test('fork documents the new endpoint, its lineage, and its errors', () => {
+  const operation = spec.paths[prefix + '/endpoints/{endpoint_id}:fork'].post;
+  const body = operation.requestBody.content['application/json'];
+  assert.deepEqual(deref(body.schema).required, ['name']);
+  assert.deepEqual(Object.keys(deref(body.schema).properties).sort(), ['actor_id', 'insights', 'name', 'version_id']);
+  const fork = examples.fork.value;
+  assert.deepEqual(fork.endpoint.forked_from, {
+    endpoint_id: examples.publish.value.endpoint.id,
+    version_id: examples.endpoint_fork.value.version_id,
+  });
+  assert.notEqual(fork.endpoint.id, examples.publish.value.endpoint.id);
+  assert.equal(Object.hasOwn(examples.publish.value.endpoint, 'forked_from'), false);
+  const media = deref(operation.responses['400']).content['application/json'];
+  assert.equal(deref(media.examples.fork_connection_not_held).value.id, 'fork_connection_not_held');
+  validate(media.schema, deref(media.examples.fork_connection_not_held).value);
 });
 
 test('endpoint deletion documents a uniform empty outcome for missing and hidden resources', () => {

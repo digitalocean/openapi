@@ -325,6 +325,8 @@ endpoint:
         no version is live. It is the same value the create response returns as
         mcp_url. Returned in responses only.
       example: https://actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+    forked_from:
+      $ref: '#/endpoint_forked_from'
     created_at:
       type: string
       format: date-time
@@ -335,6 +337,19 @@ endpoint:
       format: date-time
       description: When the endpoint was last changed.
       example: '2026-10-15T14:00:00Z'
+
+endpoint_forked_from:
+  type: object
+  readOnly: true
+  description: >-
+    Where a forked endpoint came from: the source endpoint and the version the
+    fork was taken at. Present only on endpoints created by a fork; absent
+    otherwise. Returned in responses only.
+  properties:
+    endpoint_id:
+      $ref: '#/endpoint_id'
+    version_id:
+      $ref: '#/endpoint_version_id'
 
 endpoint_create:
   type: object
@@ -372,6 +387,30 @@ endpoint_promotion:
     version_id:
       $ref: '#/endpoint_version_id'
   description: Live version of this endpoint whose configuration will be copied to a new head.
+
+endpoint_fork:
+  type: object
+  required: [name]
+  properties:
+    name:
+      $ref: '#/endpoint_name'
+    version_id:
+      $ref: '#/endpoint_version_id'
+    actor_id:
+      type: string
+      description: >-
+        Actor binding for the new endpoint. Omit it to keep the source
+        endpoint's actor; an empty string removes the actor.
+      example: bob
+    insights:
+      $ref: '#/endpoint_insights'
+  description: >-
+    Forks an endpoint into a new endpoint you own. name is required and follows
+    the same rules and team uniqueness as endpoint creation. version_id names the
+    live source version to fork from and must belong to the source endpoint;
+    omit it to fork the source's current head. Omitting insights copies the
+    source endpoint's Insights consent; a team that requires logs still forces
+    logs on.
 
 endpoint_response:
   type: object

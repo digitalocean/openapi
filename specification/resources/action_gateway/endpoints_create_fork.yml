@@ -1,0 +1,68 @@
+operationId: endpoints_create_fork
+summary: Fork an Endpoint
+description: >-
+  Creates a new endpoint you own from an existing one. The fork copies every live
+  version of the source up to and including version_id (default: the source's
+  head) and keeps their version numbers; deleted numbers stay absent. The new
+  endpoint's head is its copy of the fork point, and its next version is one
+  higher than that number. Later changes to the source never reach the fork,
+  and changes to the fork never reach the source. The new endpoint records
+  forked_from with the source endpoint and version, is never a default
+  endpoint, and answers only at its own MCP URLs.
+  Approval grants, usage, and Insights data are not copied. Connections are
+  not copied either; they resolve for the fork's owner and actor at call time.
+  Every connection a copied version names explicitly must be held by you or
+  shared with your team, or the request fails with 400 fork_connection_not_held
+  and nothing is created. VPC attachments in copied versions are validated again
+  for your team. You may fork an endpoint you can read, which is your own or,
+  as a team owner, any team endpoint, and you own the result. The fork counts
+  toward your team's endpoint limit. Because a fork copies the full live history
+  up to the fork point, including configuration and instructions in older
+  versions, delete versions with sensitive content before you fork rather than
+  only replacing them. A duplicate team name returns 409 endpoint_name_taken.
+  If the source's versions change while the fork is running, the request can
+  fail with 409; retry it.
+tags:
+- Action Gateway
+parameters:
+- $ref: endpoint_parameters.yml#/endpoint_id
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/endpoints.yml#/endpoint_fork
+      examples:
+        request:
+          $ref: examples/endpoints.yml#/endpoint_fork
+responses:
+  '201':
+    description: The fork was created; its head is its copy of the fork point.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/endpoints.yml#/endpoint_publish_response
+        examples:
+          response:
+            $ref: examples/endpoints.yml#/fork
+  '400':
+    $ref: endpoint_responses.yml#/fork_connection_not_held
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: endpoint_responses.yml#/fork_not_found
+  '409':
+    $ref: endpoint_responses.yml#/endpoint_name_taken
+  '429':
+    $ref: endpoint_responses.yml#/endpoint_creation_limited
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  'default':
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/endpoints_create_fork.yml
+security:
+- bearer_auth:
+  - action_gateway:create

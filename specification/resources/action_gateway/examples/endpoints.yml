@@ -52,6 +52,13 @@ endpoint_promotion:
   value:
     version_id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v1
 
+endpoint_fork:
+  summary: Fork version 1 of an endpoint under a new name
+  value:
+    name: support-agent-staging
+    version_id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v1
+    actor_id: bob
+
 version:
   summary: Immutable version with a selected tool
   value:
@@ -177,6 +184,42 @@ promotion:
     version: *promoted
     mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
     version_mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/version/3b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+
+fork:
+  summary: Fork whose head is its copy of version 1
+  value:
+    endpoint:
+      id: 7c2e9a40-5b1d-4f68-9e3a-0d8b6a4c1f72
+      name: support-agent-staging
+      actor_id: bob
+      is_default: false
+      insights: *stored_insights
+      forked_from:
+        endpoint_id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+        version_id: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v1
+      mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/7c2e9a40-5b1d-4f68-9e3a-0d8b6a4c1f72
+      created_at: '2026-10-17T14:00:00Z'
+      updated_at: '2026-10-17T14:00:00Z'
+      head_version: &forked
+        id: 7c2e9a40-5b1d-4f68-9e3a-0d8b6a4c1f72.v1
+        endpoint_id: 7c2e9a40-5b1d-4f68-9e3a-0d8b6a4c1f72
+        version_number: 1
+        name: support-agent-staging
+        actor_id: bob
+        tools:
+          references:
+          - kind: SESSION_TOOL_REFERENCE_KIND_TOOL
+            name: exa_web_search
+            version: '1'
+        policy: *policy
+        config: *config
+        network: *network_response
+        mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/7c2e9a40-5b1d-4f68-9e3a-0d8b6a4c1f72/version/5d1f8e2a-3c4b-4a69-b7e0-9f2a1c6d8b34
+        created_at: '2026-10-17T14:00:00Z'
+        updated_at: '2026-10-17T14:00:00Z'
+    version: *forked
+    mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/7c2e9a40-5b1d-4f68-9e3a-0d8b6a4c1f72
+    version_mcp_url: https://nyc3.actions.do-ai.run/mcp/endpoint/7c2e9a40-5b1d-4f68-9e3a-0d8b6a4c1f72/version/5d1f8e2a-3c4b-4a69-b7e0-9f2a1c6d8b34
 
 endpoints:
   summary: Final page of endpoints
