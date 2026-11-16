@@ -6525,6 +6525,13 @@ apiMetricResultSummary:
     metric_uuid:
       example: 123e4567-e89b-12d3-a456-426614174000
       type: string
+    pass_at_k_curve:
+      description: |-
+        Pass@k for this metric at each k from 1 up to epochs. Only set when
+        epochs > 1.
+      items:
+        $ref: '#/apiPassAtKPoint'
+      type: array
     pass_at_k_percent:
       example: 123
       format: double
@@ -8558,6 +8565,22 @@ apiPages:
       description: Previous page
       example: example string
       type: string
+  type: object
+apiPassAtKPoint:
+  description: |-
+    One point on the pass@k curve. Only pass@k is reported per k: avg@k and
+    cons@k always use every epoch, so there is nothing to vary for them.
+  properties:
+    k:
+      description: Number of attempts, from 1 up to epochs.
+      example: 123
+      format: int64
+      type: integer
+    pass_at_k_percent:
+      description: Percent of rows that pass at least once in k attempts.
+      example: 123
+      format: double
+      type: number
   type: object
 apiPerEpochResultSummary:
   description: |-
