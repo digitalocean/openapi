@@ -20,8 +20,8 @@ description: >-
   up to the fork point, including configuration and instructions in older
   versions, delete versions with sensitive content before you fork rather than
   only replacing them. A duplicate team name returns 409 endpoint_name_taken.
-  If the source's versions change while the fork is running, the request can
-  fail with 409; retry it.
+  If the source's versions change while the fork is running, the request fails
+  with 409 endpoint_fork_conflict; retry it.
 tags:
 - Action Gateway
 parameters:
@@ -54,7 +54,7 @@ responses:
   '404':
     $ref: endpoint_responses.yml#/fork_not_found
   '409':
-    $ref: endpoint_responses.yml#/endpoint_name_taken
+    $ref: endpoint_responses.yml#/fork_conflict
   '429':
     $ref: endpoint_responses.yml#/endpoint_creation_limited
   '500':

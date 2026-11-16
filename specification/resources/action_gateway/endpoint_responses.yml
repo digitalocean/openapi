@@ -61,8 +61,10 @@ fork_connection_not_held:
     The fork copies versions that name connections you neither hold nor share
     with the team (fork_connection_not_held). The message lists each connection
     ID and the version numbers that use it. Nothing is stripped or created.
-    Also returned for other invalid input, such as an invalid_endpoint_name,
-    invalid_endpoint_id, invalid_endpoint_version_id, or an invalid actor_id.
+    Also returned for other invalid input: invalid_endpoint_name,
+    invalid_endpoint_id, invalid_endpoint_version_id, invalid_actor_id, or
+    endpoint_logs_locked when the request turns off Insights logs that your team
+    requires.
   headers:
     $ref: response_headers.yml
   content:
@@ -168,3 +170,24 @@ session_name_taken:
       example:
         id: endpoint_name_taken
         message: endpoint name is already in use; choose another session name
+
+fork_conflict:
+  description: >-
+    An endpoint with this name already exists in the team (endpoint_name_taken),
+    or the source's versions changed while the fork was running
+    (endpoint_fork_conflict). Retry the second case.
+  headers:
+    $ref: response_headers.yml
+  content:
+    application/json:
+      schema:
+        $ref: ../../shared/models/error.yml
+      examples:
+        endpoint_name_taken:
+          value:
+            id: endpoint_name_taken
+            message: endpoint name is already in use
+        endpoint_fork_conflict:
+          value:
+            id: endpoint_fork_conflict
+            message: the source's versions changed during the fork; retry
