@@ -52,7 +52,7 @@ responses:
   '404':
     $ref: ../../shared/responses/not_found.yml
   '409':
-    description: 'Team is at the active-session quota (error id `session_quota_exceeded`; paused sessions count toward it; nothing is created), the checkpoint is not READY, the source session is itself a fork, or the source session has a persistent workspace.'
+    description: 'The team''s active-session quota has no room for `count` more sessions (error id `session_quota_exceeded`; paused sessions count toward it; nothing is created), the checkpoint is not READY, the source session is itself a fork, or the source session has a persistent workspace.'
     headers: *id001
     content:
       application/json:
