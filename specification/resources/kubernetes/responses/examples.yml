@@ -91,7 +91,6 @@ kubernetes_clusters_all:
         day: any
       auto_upgrade: false
       isolated_workers: false
-      max_pods_per_node: 110
       gpu_operator_ready: false
       status:
         state: provisioning
@@ -237,7 +236,6 @@ kubernetes_single:
         day: any
       auto_upgrade: false
       isolated_workers: false
-      max_pods_per_node: 110
       gpu_operator_ready: false
       status:
         state: running
@@ -379,7 +377,6 @@ kubernetes_updated:
         day: any
       auto_upgrade: true
       isolated_workers: false
-      max_pods_per_node: 110
       gpu_operator_ready: false
       status:
         state: running
@@ -485,7 +482,6 @@ kubernetes_clusters_create_basic_response:
         day: any
       auto_upgrade: false
       isolated_workers: false
-      max_pods_per_node: 110
       gpu_operator_ready: false
       status:
         state: provisioning
@@ -630,7 +626,6 @@ kubernetes_clusters_multi_pool_response:
         day: any
       auto_upgrade: false
       isolated_workers: false
-      max_pods_per_node: 110
       gpu_operator_ready: false
       status:
         state: provisioning
