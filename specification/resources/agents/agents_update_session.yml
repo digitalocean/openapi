@@ -1,6 +1,15 @@
 operationId: harness_update_session
-summary: PatchSession updates session-scoped settings on an existing session.
-description: 'Partial update of session-scoped settings (not the agent manifest / config). The body must include at least one recognized patchable property; an empty object {} is 400. Only properties listed on PatchSessionRequest are accepted — any other top-level JSON key is rejected with 400. Omitted properties are left unchanged. Today the only patchable field is resume_on_topoff; more session settings may be added over time. Terminal sessions (DESTROYED, FAILED) cannot be patched.'
+summary: PatchSession updates an existing session (session-scoped settings or live config).
+description: >-
+  Partial update of an existing session. Send exactly one of: `resume_on_topoff` (session-scoped
+  consent), or `manifest_yaml` (live config update of `tools`, `env` and `secrets`). The two cannot be
+  combined, and `{}` is 400. With `manifest_yaml`, absent sections are untouched; `model` and
+  `permissions` return 501. A config update that changes something returns 202 with outcome ACCEPTED and
+  the session in SESSION_STATUS_UPDATING (update state APPLYING): poll GET on the session every 2-5
+  seconds until the status leaves UPDATING, then read `session.update` (APPLIED, APPLIED_RESTARTED or
+  FAILED). A tools-only update usually finishes in seconds; env and secret changes restart the agent and
+  can take about two minutes. A manifest that changes nothing returns 200 with outcome UNCHANGED.
+  Terminal sessions (DESTROYED, FAILED) cannot be patched.
 tags:
 - Harness Runtime
 parameters:
@@ -18,10 +27,10 @@ requestBody:
     application/json:
       schema:
         $ref: models/definitions.yml#/patch_session_request
-  description: 'PATCH body: allowlisted session-scoped settings. At least one property required.'
+  description: 'PATCH body: either resume_on_topoff or manifest_yaml (not both).'
 responses:
   '200':
-    description: Updated session snapshot.
+    description: Updated session snapshot, or outcome UNCHANGED when a manifest changes nothing.
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
@@ -32,9 +41,16 @@ responses:
     content:
       application/json:
         schema:
-          $ref: models/definitions.yml#/get_session_response
+          $ref: models/definitions.yml#/patch_session_response
+  '202':
+    description: Config update accepted and applying; the session is SESSION_STATUS_UPDATING. Poll the session until the status changes.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/patch_session_response
   '400':
-    description: 'Malformed body, unknown field, or no recognized patchable properties.'
+    description: 'Malformed body, invalid YAML, unknown field or manifest section, invalid values, both properties set, or no recognized patchable properties.'
     headers: *id001
     content:
       application/json:
@@ -43,7 +59,7 @@ responses:
   '401':
     $ref: ../../shared/responses/unauthorized.yml
   '403':
-    description: Session belongs to another team.
+    description: Session belongs to another team, or the team is not enrolled in the config-update feature (manifest_yaml only).
     headers: *id001
     content:
       application/json:
@@ -52,7 +68,14 @@ responses:
   '404':
     $ref: ../../shared/responses/not_found.yml
   '409':
-    description: Session is in a terminal state and cannot be updated.
+    description: Session is in a terminal state, not running, paused for zero balance, already updating, busy, or does not support the change (for example env and secrets on a non-hermes session). The message says which.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '422':
+    description: The change needs a new session (requires_new_session).
     headers: *id001
     content:
       application/json:
@@ -60,6 +83,13 @@ responses:
           $ref: models/definitions.yml#/error
   '423':
     description: This session is unavailable; contact support.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '501':
+    description: '`model` or `permissions` sent in manifest_yaml; not supported yet.'
     headers: *id001
     content:
       application/json:

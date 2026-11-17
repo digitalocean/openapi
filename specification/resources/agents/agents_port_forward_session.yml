@@ -5,7 +5,7 @@ description: |-
   guest `port`. Binary frames carry the opaque byte stream in both directions; the server closes with
   a descriptive WebSocket close code when the tunnel ends. This is the raw TCP tunnel; browser clients
   reaching the in-guest OpenHands Agent Server use the ingress URL
-  (`GET /v2/agents/sessions/{session_id}/ingress`), which has replaced this bridge for them.
+  (`GET /v2/harness-runtime/sessions/{session_id}/ingress`), which has replaced this bridge for them.
 
   WebSocket is not expressible in OpenAPI; this documents the GET that initiates the upgrade handshake
   (HTTP 101 Switching Protocols). The handler dials the guest before upgrading, so a PAUSED session is

@@ -22,6 +22,15 @@ requestBody:
     application/json:
       schema:
         $ref: 'models/registry_create.yml'
+      examples:
+        Registry with Insights logs:
+          description: Creates a registry and opts in to sending its logs to Insights.
+          value:
+            name: example
+            subscription_tier_slug: basic
+            region: fra1
+            insights:
+              logs: true
 
 responses:
   '201':

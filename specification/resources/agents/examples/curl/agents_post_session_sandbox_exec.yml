@@ -4,5 +4,5 @@ source: |-
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -d '{"argv":["uname","-a"]}' \
-    "https://api.digitalocean.com/v2/agents/sessions/{session_id}/sandbox/exec"
+    "https://api.digitalocean.com/v2/harness-runtime/sessions/{session_id}/sandbox/exec"
 label: cURL
