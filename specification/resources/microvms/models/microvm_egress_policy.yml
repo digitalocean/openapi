@@ -56,8 +56,9 @@ properties:
       intercepted so the credential can be attached; clients that pin
       certificates will fail on them. The credential is sent in the
       `authorization` header. Credentials cannot be set when restoring a
-      checkpoint: the restored MicroVM inherits the origin's. Never returned
-      in responses.
+      checkpoint: the restored MicroVM inherits the origin's. Responses
+      include `host`, `path_prefix`, and `scheme` for each credential. The
+      `secret` is never returned.
     items:
       type: object
       required:
