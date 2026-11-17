@@ -581,14 +581,50 @@ sort_direction_users:
 session_id_header:
   name: X-Session-Id
   in: header
-  required: true
+  required: false
   description: >-
     The session to act in: the UUID at the end of the session's `sessionUrn`
-    and `mcpUrl`. The session must belong to the authenticated user and team.
+    and `mcpUrl`. For a pinned endpoint version, use the session UUID at the
+    end of its `mcp_url`, not the composite version ID. The session must
+    belong to the authenticated user and team. Send either this header or
+    `X-Endpoint-Id`, not both; both returns 400. With
+    neither, the request uses your default endpoint when default endpoints
+    are enabled for your team, and otherwise returns 403.
   schema:
     type: string
     format: uuid
   example: 2b3c9f0e-1a4d-4e5f-8a7b-6c5d4e3f2a1b
+
+endpoint_id_header:
+  name: X-Endpoint-Id
+  in: header
+  required: false
+  description: >-
+    The endpoint to act in, as a lowercase endpoint UUID. The request uses the
+    endpoint's current head version, which the response reports in
+    `X-Action-Gateway-Endpoint-Version`. The endpoint must belong to the
+    authenticated user and team; an unknown or inaccessible endpoint returns
+    404. Send either this header or `X-Session-Id`, not both. A malformed
+    value or more than one value returns 400.
+  schema:
+    type: string
+    format: uuid
+    pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+  example: 1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13
+
+actor_id_header:
+  name: X-Actor-Id
+  in: header
+  required: false
+  description: >-
+    The actor you expect the session or endpoint to be bound to. It does not
+    select an actor or connections; those come from the session's or endpoint's
+    `actor_id`. When sent, it must equal that binding. A different value,
+    including any value for a target with no actor, returns 403 with the
+    message "The session is not bound to the request's actor."
+  schema:
+    type: string
+  example: alice
 
 session_id:
   name: session_id

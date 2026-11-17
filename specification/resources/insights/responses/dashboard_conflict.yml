@@ -1,0 +1,20 @@
+description: >-
+  Another dashboard in your team already uses the `spec.display.name` in the
+  request. Dashboard names are unique within a team.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/dashboard_error.yml'
+    example:
+      error: dashboard name already exists
+      code: 6
+      message: dashboard name already exists

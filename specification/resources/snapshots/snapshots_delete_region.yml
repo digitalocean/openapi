@@ -1,0 +1,59 @@
+operationId: snapshots_delete_region
+
+summary: Delete a Snapshot Copy from a Region
+
+description: |
+  A Droplet snapshot that has been transferred to additional regions holds an
+  independent copy in each one. To delete the copy in a single region without
+  affecting the snapshot or its copies in other regions, send a DELETE request
+  to `/v2/snapshots/$SNAPSHOT_ID/regions/$REGION`.
+
+  The regions a snapshot holds copies in are listed in the `regions` attribute
+  of the snapshot. The copy in the snapshot's original region cannot be
+  deleted individually; to delete the snapshot entirely, use
+  `DELETE /v2/snapshots/$SNAPSHOT_ID`. This endpoint is only available for
+  Droplet snapshots.
+
+  A status of 204 will be given. This indicates that the request was processed
+  successfully, but that no response body is needed.
+
+tags:
+  - Snapshots
+
+parameters:
+  - $ref: 'parameters.yml#/snapshot_id'
+  - $ref: 'parameters.yml#/region'
+
+responses:
+  '204':
+    $ref: '../../shared/responses/no_content.yml'
+
+  '400':
+    $ref: 'responses/invalid_region.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '422':
+    $ref: 'responses/cannot_delete_original_region.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/snapshots_delete_region.yml'
+  - $ref: 'examples/python/snapshots_delete_region.yml'
+
+security:
+  - bearer_auth:
+    - 'image:delete'
+    - 'snapshot:delete'

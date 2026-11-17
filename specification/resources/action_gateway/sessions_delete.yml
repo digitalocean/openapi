@@ -1,9 +1,15 @@
 operationId: sessions_delete
+deprecated: true
 summary: Delete a Session
 description: >-
+  Deprecated: use DELETE /v2/action-gateway/endpoints/{endpoint_id} for endpoints.
+  This route continues to accept legacy session URNs and delete legacy sessions.
   Deletes the session and its policy. Succeeds without deleting anything when the session does not exist
   or you cannot delete it, so repeating a delete also succeeds. A malformed `session_urn` is rejected
-  with 400.
+  with 400. When the session is a version of an endpoint, this deletes that version, and deleting
+  the endpoint's last live version also deletes the endpoint. Deleting the last live version with
+  DELETE /v2/action-gateway/endpoint-versions/{version_id} instead keeps the endpoint, with no live
+  version.
 tags:
 - Action Gateway
 parameters:

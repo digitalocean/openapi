@@ -40,7 +40,9 @@ responses:
         schema:
           $ref: models/definitions.yml#/get_trigger_response
   '400':
-    description: Validation failed.
+    description: >-
+      Validation failed, including a `session_template` that names `workspace_id` and a
+      `bound_session_id` whose session has a workspace.
     headers: *id001
     content:
       application/json:

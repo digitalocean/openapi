@@ -1,0 +1,29 @@
+description: >-
+  The response will be a JSON object with a key called `url`. The value will
+  be the added URL object.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        url:
+          $ref: '../models/microvm_url.yml'
+
+    examples:
+      Added URL:
+        value:
+          url:
+            id: 3f6c1a2b-9d4e-5f70-8a1b-2c3d4e5f6a7b
+            hostname: 3f6c1a2b9d4e5f70.mkc1.microvm.ondigitalocean.com
+            port: 8080
+            default: false
+            status: PENDING

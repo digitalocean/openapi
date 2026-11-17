@@ -1,0 +1,9 @@
+lang: bash
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "Idempotency-Key: 7f9c2ba4-e88f-4c2a-9d1e-0b6a1f3c5d21" \
+    -d '{"size_limit_gib":10,"name":"notes"}' \
+    "https://api.digitalocean.com/v2/agents/workspaces"
+label: cURL

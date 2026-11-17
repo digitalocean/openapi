@@ -1,0 +1,62 @@
+operationId: microvmAccessTokens_create
+
+summary: Create an access token for a MicroVM
+
+description: |
+  To create an API token that grants access to the public endpoint of one
+  MicroVM only, send a POST request to
+  `/v2/microvms/{microvm_id}/access_tokens`.
+
+  The token value is returned once, in this response. Save it; list never
+  returns it. To recover a lost token, revoke it and create a new one.
+
+  The token works on every URL of the MicroVM: the default URL and any extra
+  URL added with POST `/v2/microvms/{microvm_id}/urls`. This token does not
+  restrict team tokens: team members with `microvm:access` keep their access
+  to the MicroVM. A MicroVM can have at most 10 live access tokens. Deleting
+  the MicroVM revokes its tokens.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/microvm_access_token_create.yml'
+
+responses:
+  '201':
+    $ref: 'responses/access_token_created.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '409':
+    $ref: 'responses/errors.yml#/conflict'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_access_tokens_create.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:update'

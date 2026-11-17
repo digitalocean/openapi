@@ -1,0 +1,40 @@
+description: >-
+  The JSON Schema (draft 2020-12) that dashboard `spec` documents must satisfy.
+  The response body is the schema document itself, not wrapped in an object.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      description: A JSON Schema document.
+      additionalProperties: true
+    example:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: https://api.digitalocean.com/v2/insights/dashboards/schema
+      title: Dashboard
+      type: object
+      additionalProperties: false
+      required:
+        - kind
+        - spec
+      properties:
+        apiVersion:
+          const: perses.dev/v1alpha1
+        kind:
+          const: Dashboard
+        spec:
+          type: object
+          required:
+            - display
+            - duration
+            - variables
+            - layouts
+            - panels

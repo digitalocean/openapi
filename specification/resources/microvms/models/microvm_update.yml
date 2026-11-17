@@ -1,0 +1,27 @@
+type: object
+
+description: >-
+  The request body for updating a MicroVM. Set at least one field. Fields
+  fixed at create (region, size, source, checkpoint_id, networking, vpc_uuid,
+  http_port, http_protocol, ports, environment, auto_resume, project_id,
+  ingress, egress_policy) are rejected.
+
+properties:
+  name:
+    type: string
+    pattern: '^[a-z0-9-]{1,63}$'
+    description: >-
+      The new name. Must be unique in the region and contain 1 to 63
+      lowercase letters, digits, and hyphens.
+    example: example-microvm-2
+
+  tags:
+    type: array
+    items:
+      type: string
+    description: >-
+      The complete tag set. Replaces the current tags; tags not in the list
+      are removed, and an empty list removes every tag.
+    example:
+      - example
+      - prod

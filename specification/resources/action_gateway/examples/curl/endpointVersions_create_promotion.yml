@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{"version_id":"1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13.v1"}' \
+    "https://api.digitalocean.com/v2/action-gateway/endpoints/1b4d4e0f-9a7c-4d5b-8f3c-2a6e6e8f0a13/versions:promote"

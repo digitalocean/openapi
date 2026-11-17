@@ -1,0 +1,44 @@
+operationId: microvmAccessTokens_list
+
+summary: List the access tokens of a MicroVM
+
+description: |
+  To list the live access tokens of a MicroVM, send a GET request to
+  `/v2/microvms/{microvm_id}/access_tokens`. Tokens are returned oldest first.
+  Token values are never returned. The `id` of an entry revokes the token
+  with DELETE `/v2/microvms/{microvm_id}/access_tokens/{token_id}`.
+
+tags:
+  - MicroVMs [Public Preview]
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+
+responses:
+  '200':
+    $ref: 'responses/all_access_tokens.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_access_tokens_list.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:read'

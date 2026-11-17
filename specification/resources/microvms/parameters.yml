@@ -8,6 +8,26 @@ microvm_id:
     format: uuid
   example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
 
+url_id:
+  in: path
+  name: url_id
+  description: The unique ID of the URL, from the MicroVM's `urls` list.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 3f6c1a2b-9d4e-5f70-8a1b-2c3d4e5f6a7b
+
+token_id:
+  in: path
+  name: token_id
+  description: The unique ID of the access token, from the list.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 4f6a1c2e-9d3b-4e7a-8f10-2b5c7d9e1a33
+
 checkpoint_id:
   in: path
   name: checkpoint_id
@@ -31,7 +51,9 @@ name:
   in: query
   name: name
   required: false
-  description: Only return the MicroVM with this exact name.
+  description: >-
+    Only return MicroVMs whose name contains this substring
+    (case-insensitive).
   schema:
     type: string
   example: example-microvm

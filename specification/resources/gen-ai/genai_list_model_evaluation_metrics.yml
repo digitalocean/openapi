@@ -1,6 +1,13 @@
 description: To list all available metrics for model evaluation, send a GET request
   to `/v2/genai/model_evaluation_metrics`.
 operationId: genai_list_model_evaluation_metrics
+parameters:
+- description: When set, only return metrics compatible with this turn type.
+  example: EVALUATION_METRIC_TURN_TYPE_MULTI_TURN
+  in: query
+  name: turn_type
+  schema:
+    $ref: ./definitions.yml#/apiEvaluationMetricTurnType
 responses:
   "200":
     content:
