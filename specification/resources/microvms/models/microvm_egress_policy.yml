@@ -8,9 +8,10 @@ description: >-
   HTTPS through the platform proxy to the allowed destinations works, so
   clients must honor the injected `HTTP_PROXY` / `HTTPS_PROXY` environment.
   The registries needed to pull the workload image are allowed automatically.
-  On a MicroVM this is the policy set at create, exactly as supplied. On a
-  checkpoint it is the policy a restored MicroVM inherits; a restore cannot
-  change it. Omitted when egress is unrestricted.
+  On a MicroVM this is the policy set at create, as supplied, except that
+  credential secrets are never returned. On a checkpoint it is the policy a
+  restored MicroVM inherits; a restore cannot change it. Omitted when egress
+  is unrestricted.
 
 properties:
   default_action:
