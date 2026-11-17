@@ -2360,7 +2360,9 @@ exec_in_sandbox_request:
         and must not be platform-reserved keys (the same rule as `spec.env`). At most 64
         entries, keys up to 256 bytes, values up to 64 KiB.
       example:
-        API_TOKEN: example-token
+        LOG_LEVEL: debug
+        API_BASE_URL: https://api.example.com
+        API_KEY: your-api-key
     stdin:
       type: string
       format: byte
