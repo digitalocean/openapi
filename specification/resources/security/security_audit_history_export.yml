@@ -3,10 +3,10 @@ operationId: security_get_audit_history_export
 summary: Export Audit History
 
 description: |-
-  To export a team's Audit History as a CSV file, send a GET request to `/v2/security/audit_history/export`. The team is the one identified by the bearer token.
+  To export a team's Audit History as a CSV file, send a GET request to `/v2/teams/audit_history/export`. The team is the one identified by the bearer token.
   Both `start_date` and `end_date` are included, down to the second. To include all of 10 November, set `end_date` to `2026-11-10T23:59:59Z`.
   The interval must not exceed 30 days. An export contains at most 5,000 events. When the range contains more events, the API returns `422 Unprocessable Entity`; request a smaller time range.
-  Each Teams API instance serves up to 5 exports at a time. Another export request returns `429 Too Many Requests` with `Retry-After: 60` until one finishes.
+  Each Security History instance serves up to 5 exports at a time. Another export request returns `429 Too Many Requests` with `Retry-After: 60` until one finishes.
 
 tags:
   - Security
