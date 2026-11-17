@@ -15,6 +15,8 @@ servers:
   description: production
 parameters:
 - $ref: parameters.yml#/session_id_header
+- $ref: parameters.yml#/endpoint_id_header
+- $ref: parameters.yml#/actor_id_header
 - $ref: parameters.yml#/session_tools_page_size
 - $ref: parameters.yml#/session_tools_page_token
 - $ref: parameters.yml#/if_none_match
@@ -27,6 +29,10 @@ responses:
         schema:
           type: string
         example: '"3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c"'
+      X-Endpoint-Id:
+        $ref: data_plane_headers.yml#/X-Endpoint-Id
+      X-Action-Gateway-Endpoint-Version:
+        $ref: data_plane_headers.yml#/X-Action-Gateway-Endpoint-Version
     content:
       application/json:
         schema:
@@ -60,12 +66,19 @@ responses:
           next_page_token: eyJ2IjoxLCJhZnRlciI6ImV4YV93ZWJfc2VhcmNoIiwiZnAiOiI5YzFlNWI3YTNkMmY0ZTYwIn0
   '304':
     description: The page is unchanged since the `ETag` in `If-None-Match`.
+    headers:
+      X-Endpoint-Id:
+        $ref: data_plane_headers.yml#/X-Endpoint-Id
+      X-Action-Gateway-Endpoint-Version:
+        $ref: data_plane_headers.yml#/X-Action-Gateway-Endpoint-Version
   '400':
     $ref: data_plane_responses.yml#/bad_request
   '401':
     $ref: data_plane_responses.yml#/unauthorized
   '403':
     $ref: data_plane_responses.yml#/forbidden
+  '404':
+    $ref: data_plane_responses.yml#/endpoint_not_found
   '412':
     $ref: data_plane_responses.yml#/precondition_failed
   '429':

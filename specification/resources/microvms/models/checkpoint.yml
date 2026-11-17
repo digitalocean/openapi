@@ -55,6 +55,17 @@ properties:
       when it is `CHECKPOINT_AVAILABLE`.
     example: CHECKPOINT_AVAILABLE
 
+  failure_reason:
+    type: string
+    readOnly: true
+    description: >-
+      Why the checkpoint failed. Present only when `status` is
+      `CHECKPOINT_FAILED`.
+    example: another checkpoint of this MicroVM is in progress; retry shortly
+
+  egress_policy:
+    $ref: 'microvm_egress_policy.yml'
+
   memory_bytes:
     type: integer
     format: int64

@@ -7,7 +7,9 @@ description: |-
   session_mode=fresh requires `session_template` (a well-formed agents.yaml Agent manifest) and
   forbids `bound_session_id`; session_mode=reuse requires `bound_session_id` (an existing team-owned
   session) and forbids `session_template`. `output.mode` selects the destination block (email/slack),
-  which is stored encrypted. `name` must be unique per team among non-deleted triggers.
+  which is stored encrypted. `name` must be unique per team among non-deleted triggers. Triggers do
+  not support persistent workspaces: a `session_template` that names `workspace_id`, and a
+  `bound_session_id` whose session has a workspace, are both refused.
 
   For webhook triggers the response includes `webhook_secret` exactly ONCE - it is never returned
   again. Cron triggers return no secret and carry a computed `trigger.cron.next_run_at`. The team and
@@ -37,7 +39,8 @@ responses:
           $ref: models/definitions.yml#/create_trigger_response
   '400':
     description: Validation failed (bad manifest/cron/timezone, kind/block/mode mismatch, provider on
-      cron, payload placeholder in a cron prompt, invalid email, etc.).
+      cron, payload placeholder in a cron prompt, invalid email, a `session_template` that names
+      `workspace_id`, a `bound_session_id` whose session has a workspace, etc.).
     headers: *id001
     content:
       application/json:

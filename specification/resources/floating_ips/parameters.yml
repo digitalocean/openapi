@@ -8,3 +8,40 @@ floating_ip:
     format: ipv4
     minimum: 1
   example: 45.55.96.47
+
+sort:
+  in: query
+  name: sort
+  required: false
+  description: |
+    Field to sort results by. Possible values are `created_at`, `updated_at`,
+    `ip`, `id`, and `droplet_id`. Defaults to `id`. Any other value is treated
+    as `id`.
+
+    Sorting by `droplet_id` orders floating IPs by the Droplet they are
+    assigned to. Unassigned floating IPs (`droplet` is null) sort as the
+    lowest value, so they are returned first when `sort_direction` is `asc`
+    and last when it is `desc`.
+  schema:
+    type: string
+    enum:
+      - created_at
+      - updated_at
+      - ip
+      - id
+      - droplet_id
+  example: droplet_id
+
+sort_direction:
+  in: query
+  name: sort_direction
+  required: false
+  description: >-
+    Direction to sort results. Possible values are `asc` and `desc`. Defaults
+    to `asc`.
+  schema:
+    type: string
+    enum:
+      - asc
+      - desc
+  example: asc

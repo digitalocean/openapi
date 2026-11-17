@@ -94,7 +94,10 @@ rules:
     description: Responses should contain common response - 404 (not found)
     message: '{{description}}. Missing {{property}}'
     severity: error
-    given: $.paths[?(@property.match(/.*\/{.*}.*/))]..responses
+    # Endpoint deletion returns the same empty 204 for missing and hidden resources.
+    given:
+      - $.paths[?(@property.match(/.*\/{.*}.*/) && @property != '/v2/action-gateway/endpoints/{endpoint_id}')]..responses
+      - $.paths['/v2/action-gateway/endpoints/{endpoint_id}'][?(@property != 'delete')].responses
     then:
       field: '404'
       function: truthy

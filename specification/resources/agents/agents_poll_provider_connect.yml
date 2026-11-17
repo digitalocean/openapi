@@ -1,0 +1,72 @@
+operationId: harness_get_provider_connect
+summary: Check whether a provider login has finished.
+description: Pass the `poll_url` from the start response. The response reports only whether login has
+  finished. No token or authorization handle is returned. `github` is the provider served today.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: provider
+  required: true
+  description: Provider key. `github` is the provider served today.
+  schema:
+    type: string
+    example: github
+  example: github
+- in: query
+  name: poll_url
+  required: true
+  description: The `poll_url` returned by the start call.
+  schema:
+    type: string
+    example: https://example.invalid/poll
+  example: https://example.invalid/poll
+responses:
+  '200':
+    description: Current login status.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/poll_provider_connect_response
+  '400':
+    description: '`poll_url` is missing.'
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '501':
+    description: Provider login is not enabled, or this provider is not served.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_poll_provider_connect.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

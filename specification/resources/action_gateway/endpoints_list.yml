@@ -1,0 +1,41 @@
+operationId: endpoints_list
+summary: List Endpoints
+description: >-
+  Lists visible endpoints, newest creation time first, with endpoint UUID
+  descending as the tie-breaker. Keyset pagination remains stable across tied
+  timestamps, deletions, and concurrent inserts. There are no offsets or totals.
+  Team owners may list all endpoints in their team.
+tags:
+- Action Gateway
+parameters:
+- $ref: endpoint_parameters.yml#/page_size
+- $ref: endpoint_parameters.yml#/page_token
+- $ref: endpoint_parameters.yml#/name
+- $ref: endpoint_parameters.yml#/actor_id
+responses:
+  '200':
+    description: The request was successful.
+    headers:
+      $ref: response_headers.yml
+    content:
+      application/json:
+        schema:
+          $ref: models/endpoints.yml#/endpoints_response
+        examples:
+          response:
+            $ref: examples/endpoints.yml#/endpoints
+  '400':
+    $ref: ../../shared/responses/bad_request.yml
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  'default':
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/endpoints_list.yml
+security:
+- bearer_auth:
+  - action_gateway:read

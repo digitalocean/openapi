@@ -1,0 +1,5 @@
+lang: cURL
+source: |-
+  curl -X GET \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    "https://api.digitalocean.com/v2/insights/dashboards?pagination.per_page=50&pagination.sort=updated_at&pagination.sort_direction=desc"

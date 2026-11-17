@@ -50,6 +50,25 @@ forbidden:
         code: PERMISSION_DENIED
         message: "permission denied"
 
+conflict:
+  description: The request conflicts with the resource's current state.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/microvm_error.yml'
+      example:
+        code: CONFLICT
+        message: "another MicroVM in the region already has the requested name"
+
 not_found:
   description: The MicroVM or checkpoint does not exist, or it belongs to another team.
 

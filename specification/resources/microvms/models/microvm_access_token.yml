@@ -1,0 +1,47 @@
+type: object
+
+description: >-
+  The metadata of one access token of a MicroVM. The token value is never on
+  this object: it exists only in the create response.
+
+properties:
+  id:
+    type: string
+    format: uuid
+    readOnly: true
+    description: >-
+      The unique ID of the access token. Use it to revoke the token with
+      DELETE `/v2/microvms/{microvm_id}/access_tokens/{token_id}`.
+    example: 4f6a1c2e-9d3b-4e7a-8f10-2b5c7d9e1a33
+
+  micro_vm_id:
+    type: string
+    format: uuid
+    readOnly: true
+    description: The MicroVM the token grants access to.
+    example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
+  name:
+    type: string
+    description: The name given at create.
+    example: alice-workspace
+
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: When the token was created, in ISO 8601 format.
+    example: "2026-10-21T14:02:11Z"
+
+  expires_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: When the token expires. Absent when the token does not expire.
+    example: "2026-11-20T14:02:11Z"
+
+required:
+  - id
+  - micro_vm_id
+  - name
+  - created_at

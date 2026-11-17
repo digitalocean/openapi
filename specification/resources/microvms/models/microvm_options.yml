@@ -104,7 +104,8 @@ properties:
     type: array
     description: >-
       Features and whether they are enabled for your team. `exec_pty` gates
-      `exec` and `console`; `file_transfer` gates `files`.
+      `exec` and `console`; `file_transfer` gates `files`; `egress_policy`
+      gates `egress_policy` on create.
     items:
       type: object
       properties:

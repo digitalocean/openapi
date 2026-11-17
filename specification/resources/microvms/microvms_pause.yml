@@ -18,7 +18,7 @@ parameters:
 
 responses:
   '200':
-    $ref: 'responses/microvm.yml'
+    $ref: 'responses/microvm_lifecycle.yml'
 
   '400':
     $ref: 'responses/errors.yml#/bad_request'

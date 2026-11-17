@@ -24,6 +24,8 @@ servers:
   description: production
 parameters:
 - $ref: parameters.yml#/session_id_header
+- $ref: parameters.yml#/endpoint_id_header
+- $ref: parameters.yml#/actor_id_header
 requestBody:
   required: true
   content:
@@ -37,6 +39,11 @@ responses:
     description: >-
       The code ran, or it is waiting for approval. Check `status` before
       reading `output`.
+    headers:
+      X-Endpoint-Id:
+        $ref: data_plane_headers.yml#/X-Endpoint-Id
+      X-Action-Gateway-Endpoint-Version:
+        $ref: data_plane_headers.yml#/X-Action-Gateway-Endpoint-Version
     content:
       application/json:
         schema:
@@ -54,6 +61,8 @@ responses:
     $ref: data_plane_responses.yml#/unauthorized
   '403':
     $ref: data_plane_responses.yml#/forbidden
+  '404':
+    $ref: data_plane_responses.yml#/endpoint_not_found
   '412':
     $ref: data_plane_responses.yml#/precondition_failed
   '413':

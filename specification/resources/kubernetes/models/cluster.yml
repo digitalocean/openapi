@@ -232,6 +232,9 @@ properties:
   coredns_autoscaler:
     $ref: "coredns_autoscaler.yml"
 
+  insights:
+    $ref: "insights_opt_in.yml"
+
 required:
   - name
   - region

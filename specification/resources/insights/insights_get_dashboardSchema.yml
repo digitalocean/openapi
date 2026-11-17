@@ -1,0 +1,37 @@
+operationId: insights_get_dashboardSchema
+
+summary: Retrieve the Dashboard Schema
+
+description: |
+  To retrieve the JSON Schema that dashboard `spec` documents must satisfy,
+  send a GET request to `/v2/insights/dashboards/schema`.
+
+  The response body is the JSON Schema document itself (draft 2020-12). Use
+  it to validate a dashboard definition before sending it to the create or
+  update endpoints.
+
+tags:
+  - Insights
+
+responses:
+  '200':
+    $ref: 'responses/dashboard_schema_response.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '429':
+    $ref: 'responses/dashboard_too_many_requests.yml'
+
+  '500':
+    $ref: 'responses/dashboard_server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/insights_get_dashboardSchema.yml'
+
+security:
+  - bearer_auth:
+      - 'insights:read'

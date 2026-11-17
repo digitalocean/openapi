@@ -1,0 +1,65 @@
+operationId: harness_get_provider_connection
+summary: Read one provider connection.
+description: Returns one connection. Poll a pending connection with this call until `authorization` is
+  absent. A connection that belongs to another provider than `{provider}` is 404. No token is returned.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: provider
+  required: true
+  description: Provider key. `github` is the provider served today.
+  schema:
+    type: string
+    example: github
+  example: github
+- in: path
+  name: connection_id
+  required: true
+  description: The connection id.
+  schema:
+    type: string
+    example: 3f2a1b0c-9d8e-7f6a-5b4c-3d2e1f0a9b8c
+  example: 3f2a1b0c-9d8e-7f6a-5b4c-3d2e1f0a9b8c
+responses:
+  '200':
+    description: The connection, plus authorization steps when it is still pending.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/provider_connection_response
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '501':
+    description: Provider connections are not enabled.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_get_provider_connection.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read
