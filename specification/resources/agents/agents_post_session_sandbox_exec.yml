@@ -36,7 +36,7 @@ responses:
         schema:
           $ref: models/definitions.yml#/exec_in_sandbox_response
   '400':
-    description: Invalid argv or request body.
+    description: Invalid argv, env, or request body.
     headers: *id001
     content:
       application/json:
