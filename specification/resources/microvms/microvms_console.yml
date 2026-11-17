@@ -12,7 +12,7 @@ description: |
   auto-resume is on, opening a console resumes it.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: 'parameters.yml#/microvm_id'

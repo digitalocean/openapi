@@ -8,7 +8,7 @@ description: |
   The `region`, `name`, and `tag_name` filters combine with AND.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: '../../shared/parameters.yml#/page'

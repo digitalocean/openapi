@@ -10,7 +10,7 @@ description: |
   request returns a `204 No Content` status code.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: 'parameters.yml#/checkpoint_id'
