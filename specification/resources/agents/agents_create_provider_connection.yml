@@ -3,9 +3,10 @@ summary: Create a provider connection for one actor.
 description: Creates the connection `{provider}` will use for `user_id`. `user_id` is the actor
   identifier the connection acts for, not a DigitalOcean user id. Each actor has at most one active,
   pending, or expired connection per provider. If `user_id` already has one, the request fails with
-  `409`. Find that connection's id with `GET /v2/agents/auth/{provider}/connections?user_id=...`, then
-  resume or restart it with `POST /v2/agents/auth/{provider}/connections/{connection_id}/reconnect`,
-  which keeps its scopes. Revoked connections do not count toward the limit, and list responses omit
+  `409`. Find that connection's id with
+  `GET /v2/harness-runtime/auth/{provider}/connections?user_id=...`, then resume or restart it with
+  `POST /v2/harness-runtime/auth/{provider}/connections/{connection_id}/reconnect`, which keeps its
+  scopes. Revoked connections do not count toward the limit, and list responses omit
   them. If the only connection `user_id` has for `{provider}` is revoked, for example by `DELETE`,
   create starts it again under the same connection id, with the scopes in this request. To change a
   connection's scopes, delete it and then create it. A successful create returns the connection as

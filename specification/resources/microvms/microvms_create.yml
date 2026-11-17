@@ -16,7 +16,7 @@ description: |
   All settings are fixed at creation. There is no update endpoint.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 requestBody:
   required: true

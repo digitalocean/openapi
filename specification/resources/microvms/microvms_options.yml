@@ -7,7 +7,7 @@ description: |
   your team, send a GET request to `/v2/microvms/options`.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 responses:
   '200':

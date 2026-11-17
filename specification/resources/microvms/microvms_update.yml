@@ -15,7 +15,7 @@ description: |
   empty list removes every tag.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: 'parameters.yml#/microvm_id'

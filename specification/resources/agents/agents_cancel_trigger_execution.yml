@@ -1,9 +1,10 @@
 operationId: harness_cancel_trigger_execution
 summary: CancelExecution ends a running execution and frees the trigger's in-flight slot.
-description: Fails the execution and frees the trigger's in-flight slot. A fresh-mode session is
-  destroyed outright. A reuse-mode session is only paused, not stopped - harness has no run-interrupt
-  call, so the agent's turn may still be in flight server-side; this frees the queue, not necessarily
-  the agent's work. A non-running execution is a no-op that still returns 200.
+description: Fails the execution and frees the trigger's in-flight slot or session lock. A
+  fresh-mode session is destroyed. In reuse mode the agent's current turn is cancelled first, and
+  the execution is ended only once the agent confirms the turn is over; until then it stays running
+  and keeps its lock (see 409 and 503). The failure reason names the cancelling user. A non-running
+  execution is a no-op that still returns 200.
 tags:
 - Harness Runtime
 parameters:
@@ -53,7 +54,16 @@ responses:
     $ref: ../../shared/responses/not_found.yml
   '409':
     description: Execution has not started a run yet (the worker's dispatch is still in flight); retry
-      shortly, or pass force=true.
+      shortly, or pass force=true. Also returned in reuse mode when the agent cannot interrupt its
+      turn. The run is still in progress and the execution stays running.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '503':
+    description: Reuse mode. The agent did not confirm the cancel (timeout, or the agent could not be
+      reached). The run may still be in progress and the execution stays running. Retry.
     headers: *id001
     content:
       application/json:

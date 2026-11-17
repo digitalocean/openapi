@@ -14,7 +14,7 @@ description: |
   the default one included.
 
 tags:
-  - MicroVMs [Public Preview]
+  - MicroVMs
 
 parameters:
   - $ref: 'parameters.yml#/microvm_id'
