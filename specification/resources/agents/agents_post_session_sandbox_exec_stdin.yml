@@ -1,0 +1,104 @@
+operationId: harness_post_session_sandbox_exec_stdin
+summary: Write one chunk of stdin to a command started with keep_stdin_open.
+description: |-
+  `offset` is required and is the count of stdin bytes already accepted.
+  An equal offset appends. A lower offset retries and trims the overlap. A higher offset returns 409.
+  `data` is base64. `eof` closes stdin. A write needs `data`, `eof`, or both. Each write is at most 1 MiB.
+  The exec id comes from the `started` event on the exec stream.
+  An unknown or finished exec returns 404.
+  A closed stdin, an offset gap, or a session that cannot accept interactive stdin returns 409.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: path
+  name: exec_id
+  required: true
+  description: The exec id from the started event.
+  schema:
+    type: string
+    example: 01932a6e-7b4c-7d2e-8f10-1a2b3c4d5e6f
+  example: 01932a6e-7b4c-7d2e-8f10-1a2b3c4d5e6f
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/write_exec_stdin_request
+  description: Stdin bytes to append, or eof.
+responses:
+  '200':
+    description: The write was accepted. offset is the new count of stdin bytes accepted.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/write_exec_stdin_response
+  '400':
+    description: Malformed JSON, missing offset, bad base64, neither data nor eof, or more than 1 MiB.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '402':
+    description: The team is blocked by the prepayment gate.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '403':
+    description: Session belongs to another team.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    description: Session not found, or the exec is unknown or already finished.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '409':
+    description: Stdin is already closed, the offset skips ahead, the session cannot be operated on, or interactive stdin is not available for this session.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '423':
+    description: This session is unavailable; contact support.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_post_session_sandbox_exec_stdin.yml
+security:
+- bearer_auth:
+  - agent_harness_session:operate
