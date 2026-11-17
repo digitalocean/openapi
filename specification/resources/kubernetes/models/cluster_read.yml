@@ -119,8 +119,9 @@ properties:
     example: 110
     description: The maximum number of pods that can run on each worker node in
       the cluster. When omitted on create, the default value is 110. This can
-      only be set at creation time and requires a Kubernetes version that
-      supports it.
+      only be set at creation time. Supported on Kubernetes 1.34.12-do.3 and
+      later, 1.35.9-do.3 and later, 1.36.5-do.3 and later, and 1.37.0-do.3 and
+      later.
 
   gpu_operator_ready:
     type: boolean
