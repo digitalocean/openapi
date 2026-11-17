@@ -51,6 +51,9 @@ properties:
   egress_policy:
     $ref: 'microvm_egress_policy.yml'
 
+  insights_enablement:
+    $ref: 'microvm_insights_enablement.yml'
+
   project_id:
     type: string
     format: uuid
