@@ -28,6 +28,7 @@ responses:
             credential_parameters: []
             oauth_client_setup_url: https://developer.atlassian.com/console/myapps/
             oauth_redirect_url: https://cloud.digitalocean.com/api/v1/security/connectlinks/callback
+            authorization_variants: []
           - name: jira
             display_name: Jira
             description: Jira issue tracking tools.
@@ -51,6 +52,7 @@ responses:
             credential_parameters: []
             oauth_client_setup_url: https://developer.atlassian.com/console/myapps/
             oauth_redirect_url: https://cloud.digitalocean.com/api/v1/security/connectlinks/callback
+            authorization_variants: []
   '401':
     $ref: ../../shared/responses/unauthorized.yml
   '429':

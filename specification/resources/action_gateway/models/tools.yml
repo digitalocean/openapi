@@ -478,6 +478,17 @@ provider_summary:
         HTTPS page at the provider where a team creates that OAuth client, such as its developer console or
         setup guide. Empty unless `auth_types` contains `user_oauth_app` and the provider declares one.
       example: https://developer.atlassian.com/console/myapps/
+    authorization_variants:
+      type: array
+      description: >-
+        Names accepted as `authorization_variant` when a team registers its own OAuth client for this provider,
+        sorted. Each selects a different way the provider authorizes that client, such as acting as the
+        application instead of the user. Empty unless `auth_types` contains `user_oauth_app` and the provider
+        offers any.
+      items:
+        type: string
+      example:
+      - app
   description: Describes a catalog provider and how to authenticate to it.
 
 list_providers_response:
