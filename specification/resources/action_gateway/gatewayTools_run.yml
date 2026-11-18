@@ -19,6 +19,12 @@ description: >-
   `requires_connection_configuration`.
 
 
+  A call that pins an older released version, such as `version: v16` while `v17` is current, returns
+  `_meta.latest_version` with the current release's version. Calls without a version, and calls pinned to the
+  current release, omit it. List a tool's versions and their changes with `GET
+  /v2/action-gateway/tools/{tool_slug}/versions`.
+
+
   Tools opted into result caching use the session's settings automatically.
   Set cache on an individual tools entry to bypass caching or require a
   fresher result. The result's _meta.cache reports cache hits. Hits still

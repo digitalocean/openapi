@@ -733,3 +733,109 @@ get_tool_health_response:
                   - $ref: '#/health_metrics'
           description: Points oldest first, ending with the slot in progress.
   description: Health of one tool.
+
+tool_version_change:
+  type: object
+  description: One difference from the previous released version.
+  properties:
+    type:
+      type: string
+      description: >-
+        What changed. `inputPropertyAdded` is breaking when the property is required. `inputTypeChanged` and
+        `outputTypeChanged` list the new types in `values`, and are breaking when a previously accepted
+        input type is no longer accepted or an output can hold a new type. `requiredScopesAdded` is breaking
+        because a connection authorized before the version may lack the scopes and must be reconnected.
+        `inputSchemaChanged` and `outputSchemaChanged` cover other schema changes and are reported as
+        breaking, except when an output schema is declared for the first time.
+      enum:
+        - inputPropertyAdded
+        - inputPropertyRemoved
+        - inputPropertyRequired
+        - inputPropertyOptional
+        - inputTypeChanged
+        - inputEnumValuesAdded
+        - inputEnumValuesRemoved
+        - inputSchemaChanged
+        - outputPropertyAdded
+        - outputPropertyRemoved
+        - outputPropertyOptional
+        - outputTypeChanged
+        - outputEnumValuesAdded
+        - outputSchemaChanged
+        - requiredScopesAdded
+        - requiredScopesRemoved
+      example: requiredScopesAdded
+    path:
+      type: string
+      description: >-
+        Dotted path of the schema property that changed, for example `page.cursor`. `items[]` names an
+        array's elements. Empty for the schema root and for scope changes.
+      example: page.cursor
+    values:
+      type: array
+      items:
+        type: string
+      description: >-
+        The values the change concerns, sorted: enum values added or removed, the property's new types, or
+        the scopes added or removed. Empty otherwise.
+      example:
+      - organizations:read
+    breaking:
+      type: boolean
+      description: True when a call that worked against the previous version can fail against this one.
+      example: true
+
+tool_version_release:
+  type: object
+  description: One released version of a catalog tool.
+  properties:
+    tool_slug:
+      type: string
+      description: Catalog tool slug.
+      example: supabase_list_organizations
+    version:
+      type: string
+      description: Version, for example `v3`. Pin it as `<tool_slug>@v3`.
+      example: v17
+    released_at:
+      type: string
+      format: date-time
+      description: When this version was first released.
+      example: '2026-11-12T09:30:00Z'
+    latest:
+      type: boolean
+      description: >-
+        True for the version calls without a pinned version currently use. At most one version is latest;
+        none is while a tool is withdrawn from the catalog.
+      example: true
+    previous_version:
+      type: string
+      description: >-
+        The released version this one is compared with. Empty for the oldest version listed, which has no
+        changes.
+      example: v16
+    breaking:
+      type: boolean
+      description: True when any change is breaking.
+      example: true
+    changes:
+      type: array
+      description: >-
+        Changes from `previous_version`, input changes first, then output, then scopes. Descriptions,
+        titles, and examples are not compared.
+      items:
+        $ref: '#/tool_version_change'
+
+list_tool_versions_response:
+  type: object
+  description: One page of a tool's released versions, newest first.
+  properties:
+    versions:
+      type: array
+      description: Released versions, newest first.
+      items:
+        $ref: '#/tool_version_release'
+    next_page_token:
+      type: string
+      description: Pass as `page_token` to read older versions. Empty on the last page.
+      example: djE1
