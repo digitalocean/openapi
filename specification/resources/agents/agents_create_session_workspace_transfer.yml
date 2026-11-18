@@ -105,7 +105,7 @@ responses:
         schema:
           $ref: models/definitions.yml#/error
   '403':
-    description: Path resolves outside the workspace, or the session belongs to another team.
+    description: Path resolves outside the workspace, or the caller holds no access grant on the session.
     headers: *id001
     content:
       application/json:
