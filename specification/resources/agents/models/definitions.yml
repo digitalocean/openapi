@@ -2350,6 +2350,20 @@ exec_in_sandbox_request:
         Working directory inside the sandbox. Empty uses the sandbox default (/workspace); not
         restricted to the workspace root.
       example: /workspace
+    env:
+      type: object
+      additionalProperties:
+        type: string
+      description: >-
+        Optional environment variables for this command only; nothing is stored on the session
+        and values are not logged, but any process in the sandbox can read them. For credentials
+        the platform holds, use `spec.secrets`. Keys must match `[A-Z][A-Z0-9_]*`
+        and must not be platform-reserved keys (the same rule as `spec.env`). At most 64
+        entries, keys up to 256 bytes, values up to 64 KiB.
+      example:
+        LOG_LEVEL: debug
+        API_BASE_URL: https://api.example.com
+        API_KEY: your-api-key
     stdin:
       type: string
       format: byte

@@ -42,7 +42,7 @@ responses:
         schema:
           $ref: models/definitions.yml#/exec_in_sandbox_response
   '400':
-    description: Invalid argv or request body, or keep_stdin_open without an event stream.
+    description: Invalid argv, env, or request body, or keep_stdin_open without an event stream.
     headers: *id001
     content:
       application/json:
