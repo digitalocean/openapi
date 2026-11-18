@@ -48,7 +48,7 @@ responses:
         schema:
           $ref: models/definitions.yml#/error
   '403':
-    description: Session belongs to another team.
+    description: The caller holds no access grant on the session.
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit

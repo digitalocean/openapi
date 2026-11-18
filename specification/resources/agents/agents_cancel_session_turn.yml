@@ -54,7 +54,7 @@ responses:
   '401':
     $ref: ../../shared/responses/unauthorized.yml
   '403':
-    description: The session belongs to another team, or this team is not enabled for turn cancel.
+    description: The caller holds no access grant on the session, or this team is not enabled for turn cancel.
     headers: *id001
     content:
       application/json:

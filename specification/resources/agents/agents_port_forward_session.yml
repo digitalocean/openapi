@@ -62,7 +62,7 @@ responses:
         schema:
           $ref: models/definitions.yml#/error
   '403':
-    description: The port is outside 1024-65535, or the session belongs to another team.
+    description: The port is outside 1024-65535, or the caller holds no access grant on the session.
     headers: *id001
     content:
       application/json:
