@@ -1090,6 +1090,10 @@ paths:
     get:
       $ref: "resources/action_gateway/tools_get_health.yml"
 
+  /v2/action-gateway/tools/{tool_slug}/versions:
+    get:
+      $ref: "resources/action_gateway/tools_list_versions.yml"
+
   /v2/action-gateway/tools/providers:
     get:
       $ref: "resources/action_gateway/tools_list_providers.yml"
