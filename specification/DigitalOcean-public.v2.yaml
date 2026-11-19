@@ -3220,10 +3220,6 @@ paths:
     get:
       $ref: "resources/security/security_secret_list_versions.yml"
 
-  /v2/security/secrets/{secret}/versions/{version}/revert:
-    post:
-      $ref: "resources/security/security_secret_revert.yml"
-
   /v2/security/secrets/{secret}/restore:
     post:
       $ref: "resources/security/security_secret_restore.yml"
