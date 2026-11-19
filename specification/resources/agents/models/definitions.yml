@@ -2090,8 +2090,8 @@ patch_session_request:
         your team (`403` otherwise).
 
         Supported sections are `tools`, `env`, and `secrets`. Sections you omit are not changed.
-        The top-level `model` and `permissions` sections return `501`; change the model through
-        `env` instead (see below). Any other top-level key returns `400`.
+        A top-level `model` or `permissions` section returns `501`. Any other top-level key
+        returns `400`.
 
         Each section you include replaces that section in full:
 
@@ -2103,8 +2103,9 @@ patch_session_request:
           removed. For each secret, set the value to a string to add or rotate it, or to `{}` to
           keep its current value. A `null` value returns `400`.
 
-        **Changing the model.** Set `HARNESS_INFERENCE_MODEL` in `env` to a DigitalOcean
-        Serverless Inference model ID, or to `router:<name>` for an inference router. This works
+        **Changing the model.** The only way to change a session's model is through `env`. Set
+        `HARNESS_INFERENCE_MODEL` to a DigitalOcean Serverless Inference model ID, or to
+        `router:<name>` for an inference router. This works
         only on sessions created with `HARNESS_INFERENCE_MODEL` set and without their own
         inference endpoint. Adding, removing, or changing the key on any other session, or moving
         a session to its own endpoint, returns `422`. A malformed value (empty, multi-line, or over
