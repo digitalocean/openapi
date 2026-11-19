@@ -29,8 +29,9 @@ description: |-
   sessions that use a third-party model provider can't change their model. A top-level `model`
   section returns `400`.
 
-  The following can't be changed on an existing session: custom MCP servers, egress rules, GitHub
-  OAuth connections, URL-bound secrets, platform-managed model keys, and `permissions` (`400`).
+  The following can't be changed on an existing session: custom MCP servers (`422`), egress rules,
+  GitHub OAuth connections, URL-bound secrets, platform-managed model keys, and `permissions`
+  (`400`). To use a different custom MCP server, create a new session.
 
   ### Tracking an update
 
@@ -63,9 +64,12 @@ description: |-
 
   ### Requirements
 
-  - The session must be idle: not provisioning, not already updating, and with no agent turn or
-    approval in progress. Sessions paused for zero balance and destroyed sessions
-    (`SESSION_STATUS_DESTROYED`) can't be updated.
+  - The session status must be `SESSION_STATUS_READY`, `SESSION_STATUS_DETACHED`, or
+    `SESSION_STATUS_PAUSED`. A paused session is resumed to apply the update and paused again
+    afterwards, unless it was paused for zero balance. Any other status returns `409`, including
+    `SESSION_STATUS_PROVISIONING`, `SESSION_STATUS_UPDATING`, a session paused for zero balance,
+    and a destroyed or failed session. A locked session returns `423`.
+  - The session must be idle: no agent turn running and no approval pending (`409`).
   - Session settings updates must be enabled for your team.
   - Not every agent runtime supports every section. An unsupported change returns `409`.
 tags:
@@ -151,8 +155,9 @@ responses:
           $ref: models/definitions.yml#/error
   '422':
     description: >-
-      The change can only be made by creating a new session. For example: changing a reserved
-      platform key or a secret that is not a plain value (such as a URL-bound or OAuth secret), or
+      The change can only be made by creating a new session. For example: adding, removing, or
+      changing a custom MCP server in `tools`, changing a reserved platform key or a secret that is
+      not a plain value (such as a URL-bound or OAuth secret), or
       adding, removing, or changing `HARNESS_INFERENCE_MODEL` on a session that doesn't use
       DigitalOcean Serverless Inference.
     headers: *id001
