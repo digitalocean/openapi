@@ -36,7 +36,10 @@ description: |-
   1. A request that changes the session settings returns `202` with `outcome` set to `ACCEPTED`.
      The session status becomes `SESSION_STATUS_UPDATING`.
   2. Poll [`GET /v2/harness-runtime/sessions/{session_id}`](#operation/harness_get_session)
-     every 2 to 5 seconds until the status is no longer `SESSION_STATUS_UPDATING`.
+     every 2 to 5 seconds until the status is no longer `SESSION_STATUS_UPDATING`. The session
+     returns to `SESSION_STATUS_READY`, or to `SESSION_STATUS_PAUSED` if it was paused when you
+     sent the update. This happens whether the update succeeded or failed, so don't wait for a
+     specific status.
   3. Read `session.update.state`:
      - `APPLIED`: the update is live.
      - `APPLIED_RESTARTED`: the update is live and the agent was restarted to apply it.
