@@ -105,8 +105,9 @@ responses:
   '202':
     description: >-
       The session settings update was accepted and is being applied. The session status is
-      `SESSION_STATUS_UPDATING`; poll the session until the status changes, then read
-      `session.update`.
+      `SESSION_STATUS_UPDATING`. Poll the session until the status is `SESSION_STATUS_READY`, or
+      `SESSION_STATUS_PAUSED` if the session was paused when you sent the update, then read
+      `session.update` to see whether the update was applied.
     headers: *id001
     content:
       application/json:
