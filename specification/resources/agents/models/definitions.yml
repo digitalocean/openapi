@@ -1151,7 +1151,7 @@ session_status:
     SessionStatus is the lifecycle state of the sandbox + agent pair. SESSION_STATUS_ALL is a
     ListSessions status-filter value only -- no session is ever actually in this status.
     SESSION_STATUS_LOCKED is reserved for internal use and never appears in an end-user-facing
-    response. SESSION_STATUS_UPDATING is reported while an agent settings update (PATCH with
+    response. SESSION_STATUS_UPDATING is reported while a session settings update (PATCH with
     `manifest_yaml`) is being applied; poll the session until it leaves this status.
   example: SESSION_STATUS_UNSPECIFIED
 
@@ -2086,7 +2086,7 @@ patch_session_request:
       type: string
       description: |-
         A partial agent manifest, as a YAML string, that holds only the sections to change. Can't
-        be combined with `resume_on_topoff`. Requires agent settings updates to be enabled for
+        be combined with `resume_on_topoff`. Requires session settings updates to be enabled for
         your team (`403` otherwise).
 
         Supported sections are `tools`, `env`, and `secrets`. Sections you omit are not changed.
@@ -2134,7 +2134,7 @@ patch_session_request:
               tools: [toolbelt:read-only@1]
   description: >-
     Request body for updating a session. Set either `resume_on_topoff` to change a session
-    preference, or `manifest_yaml` to change the agent settings, not both. At least one property is
+    preference, or `manifest_yaml` to change the session settings, not both. At least one property is
     required, so `{}` returns `400`. Unknown properties return `400`.
 
 patch_session_response:
@@ -2167,7 +2167,7 @@ session_config_update_state:
     - APPLIED_RESTARTED
     - FAILED
   description: >-
-    State of an agent settings update. `APPLYING`: in progress. `APPLIED`: live. `APPLIED_RESTARTED`:
+    State of a session settings update. `APPLYING`: in progress. `APPLIED`: live. `APPLIED_RESTARTED`:
     live, and the agent was restarted to apply it (`env` and `secrets` changes). `FAILED`: the update
     did not take effect; see `reverted` and `detail`.
   example: APPLIED
@@ -2206,7 +2206,7 @@ session_config_changes:
 session_config_update:
   type: object
   description: >-
-    The most recent agent settings update to the session, or the automatic rollback of a failed
+    The most recent session settings update to the session, or the automatic rollback of a failed
     one.
   properties:
     update_id:

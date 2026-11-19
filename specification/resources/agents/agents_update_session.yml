@@ -7,12 +7,12 @@ description: |-
   Each request makes one of two kinds of update, and the two can't be combined:
 
   - **Session preferences**: set `resume_on_topoff`. Applied immediately; returns `200`.
-  - **Agent settings**: set `manifest_yaml` to a partial manifest that holds only the sections
+  - **Session settings**: set `manifest_yaml` to a partial manifest that holds only the sections
     to change. Applied in the background; returns `202`.
 
   An empty body (`{}`) returns `400`.
 
-  ### Updatable agent settings
+  ### Updatable session settings
 
   | Section | What it changes | Agent restart |
   | --- | --- | --- |
@@ -33,7 +33,7 @@ description: |-
 
   ### Tracking an update
 
-  1. A request that changes the agent settings returns `202` with `outcome` set to `ACCEPTED`.
+  1. A request that changes the session settings returns `202` with `outcome` set to `ACCEPTED`.
      The session status becomes `SESSION_STATUS_UPDATING`.
   2. Poll [`GET /v2/harness-runtime/sessions/{session_id}`](#operation/harness_get_session)
      every 2 to 5 seconds until the status is no longer `SESSION_STATUS_UPDATING`.
@@ -63,7 +63,7 @@ description: |-
   - The session must be idle: not provisioning, not already updating, and with no agent turn or
     approval in progress. Sessions paused for zero balance and terminated sessions
     (`SESSION_STATUS_DESTROYED`, `SESSION_STATUS_FAILED`) can't be updated.
-  - Agent settings updates must be enabled for your team.
+  - Session settings updates must be enabled for your team.
   - Not every agent runtime supports every section. An unsupported change returns `409`.
 tags:
 - Harness Runtime
@@ -86,7 +86,7 @@ requestBody:
 responses:
   '200':
     description: >-
-      The session was updated (`resume_on_topoff`), or the requested agent settings match the
+      The session was updated (`resume_on_topoff`), or the requested session settings match the
       current ones and nothing was applied (`outcome` is `UNCHANGED`).
     headers: &id001
       ratelimit-limit:
@@ -101,7 +101,7 @@ responses:
           $ref: models/definitions.yml#/patch_session_response
   '202':
     description: >-
-      The agent settings update was accepted and is being applied. The session status is
+      The session settings update was accepted and is being applied. The session status is
       `SESSION_STATUS_UPDATING`; poll the session until the status changes, then read
       `session.update`.
     headers: *id001
@@ -123,7 +123,7 @@ responses:
     $ref: ../../shared/responses/unauthorized.yml
   '403':
     description: >-
-      You don't have access to this session, or agent settings updates are not enabled for your
+      You don't have access to this session, or session settings updates are not enabled for your
       team (`manifest_yaml` only).
     headers: *id001
     content:
