@@ -63,8 +63,8 @@ description: |-
   ### Requirements
 
   - The session must be idle: not provisioning, not already updating, and with no agent turn or
-    approval in progress. Sessions paused for zero balance and terminated sessions
-    (`SESSION_STATUS_DESTROYED`, `SESSION_STATUS_FAILED`) can't be updated.
+    approval in progress. Sessions paused for zero balance and destroyed sessions
+    (`SESSION_STATUS_DESTROYED`) can't be updated.
   - Session settings updates must be enabled for your team.
   - Not every agent runtime supports every section. An unsupported change returns `409`.
 tags:
@@ -139,7 +139,7 @@ responses:
     description: >-
       The session can't be updated right now. For example, it is still provisioning, already
       updating, running an agent turn, waiting on an approval, paused for zero balance, or
-      terminated, or its agent runtime doesn't support the change. The error message gives the
+      destroyed, or its agent runtime doesn't support the change. The error message gives the
       reason.
     headers: *id001
     content:
