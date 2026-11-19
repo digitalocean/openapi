@@ -16,7 +16,7 @@ description: |-
 
   | Section | What it changes | Agent restart |
   | --- | --- | --- |
-  | `tools` | The session's tools, such as Action Gateway tools and MCP servers. | No |
+  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers can't be changed. | No |
   | `env` | Environment variables (name and value). | Yes |
   | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
   | `secrets` | Plain secrets (name and value). | Yes |
@@ -29,8 +29,8 @@ description: |-
   sessions that use a third-party model provider can't change their model. A top-level `model`
   section returns `400`.
 
-  The following can't be changed on an existing session: egress rules, GitHub OAuth connections,
-  URL-bound secrets, platform-managed model keys, and `permissions` (`400`).
+  The following can't be changed on an existing session: custom MCP servers, egress rules, GitHub
+  OAuth connections, URL-bound secrets, platform-managed model keys, and `permissions` (`400`).
 
   ### Tracking an update
 
