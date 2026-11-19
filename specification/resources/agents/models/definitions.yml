@@ -2612,6 +2612,21 @@ trigger:
       example: nightly-deploy-check
     status:
       $ref: '#/trigger_status'
+    status_reason:
+      type: string
+      description: >-
+        Why the service paused this trigger. Present only while status is paused and the service,
+        not the customer, paused it; omitted otherwise. Known value: agent_config_deleted (the
+        trigger's agent config was deleted, so every firing would fail). While it is set, an update
+        that sets status to active without a new session_template returns 409. An update that
+        supplies a new session_template clears it; send status active in the same request to
+        re-enable the trigger at once, or in a later one. More values may be added. Clients should
+        treat an unrecognized value as an opaque reason and show status_message.
+      example: agent_config_deleted
+    status_message:
+      type: string
+      description: Text to show the customer that explains status_reason and how to resolve it. Present exactly when status_reason is present.
+      example: This trigger was paused because its agent config was deleted. Update the trigger's agent manifest to resume it.
     session_mode:
       $ref: '#/trigger_session_mode'
     agent_kind:
@@ -2624,7 +2639,7 @@ trigger:
       $ref: '#/trigger_output_read'
     session_template:
       type: string
-      description: Present iff session_mode=fresh. The agents.yaml Agent manifest used to CREATE a session on each fire, returned with its env values REDACTED.
+      description: Present iff session_mode=fresh, except while status_reason is agent_config_deleted, when the deleted config cannot be read back. The agents.yaml Agent manifest used to CREATE a session on each fire, returned with its env values REDACTED.
       example: ''
     bound_session_id:
       type: string
@@ -2709,7 +2724,7 @@ create_trigger_request:
 
 update_trigger_request:
   type: object
-  description: Partial update. Only the supplied fields change. kind and webhook.provider are immutable. Sending status alone is how pause/re-enable work.
+  description: Partial update. Only the supplied fields change. kind and webhook.provider are immutable. Sending status alone is how pause/re-enable work, except on a trigger with a status_reason, which needs a new session_template to re-enable.
   properties:
     name:
       type: string
