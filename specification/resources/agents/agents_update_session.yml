@@ -64,9 +64,12 @@ description: |-
 
   ### Requirements
 
-  - The session must be idle: not provisioning, not already updating, and with no agent turn or
-    approval in progress. Sessions paused for zero balance and destroyed sessions
-    (`SESSION_STATUS_DESTROYED`) can't be updated.
+  - The session status must be `SESSION_STATUS_READY`, `SESSION_STATUS_DETACHED`, or
+    `SESSION_STATUS_PAUSED`. A paused session is resumed to apply the update and paused again
+    afterwards, unless it was paused for zero balance. Any other status returns `409`, including
+    `SESSION_STATUS_PROVISIONING`, `SESSION_STATUS_UPDATING`, a session paused for zero balance,
+    and a destroyed or failed session. A locked session returns `423`.
+  - The session must be idle: no agent turn running and no approval pending (`409`).
   - Session settings updates must be enabled for your team.
   - Not every agent runtime supports every section. An unsupported change returns `409`.
 tags:
