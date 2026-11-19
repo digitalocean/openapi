@@ -2099,7 +2099,7 @@ patch_session_request:
         - `tools`: the complete list of tools for the session. Only Action Gateway tools
           (`do.actions` entries) can be added, removed, or changed. Custom MCP servers can't be
           changed on an existing session: include the session's current custom MCP servers
-          exactly as they are. To remove all Action Gateway tools from a session that has no custom
+          exactly as they are. Adding, removing, or changing one returns `422`. To remove all Action Gateway tools from a session that has no custom
           MCP servers, send `tools: []`. `tools: null` returns `400`.
         - `env`: the complete set of environment variables, as name-value pairs. A variable you
           leave out is removed. `env: {}` removes all variables; `env: null` returns `400`.

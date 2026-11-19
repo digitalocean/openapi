@@ -29,8 +29,9 @@ description: |-
   sessions that use a third-party model provider can't change their model. A top-level `model`
   section returns `400`.
 
-  The following can't be changed on an existing session: custom MCP servers, egress rules, GitHub
-  OAuth connections, URL-bound secrets, platform-managed model keys, and `permissions` (`400`).
+  The following can't be changed on an existing session: custom MCP servers (`422`), egress rules,
+  GitHub OAuth connections, URL-bound secrets, platform-managed model keys, and `permissions`
+  (`400`). To use a different custom MCP server, create a new session.
 
   ### Tracking an update
 
@@ -151,8 +152,9 @@ responses:
           $ref: models/definitions.yml#/error
   '422':
     description: >-
-      The change can only be made by creating a new session. For example: changing a reserved
-      platform key or a secret that is not a plain value (such as a URL-bound or OAuth secret), or
+      The change can only be made by creating a new session. For example: adding, removing, or
+      changing a custom MCP server in `tools`, changing a reserved platform key or a secret that is
+      not a plain value (such as a URL-bound or OAuth secret), or
       adding, removing, or changing `HARNESS_INFERENCE_MODEL` on a session that doesn't use
       DigitalOcean Serverless Inference.
     headers: *id001
