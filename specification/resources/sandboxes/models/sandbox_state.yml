@@ -1,0 +1,19 @@
+type: string
+
+description: >
+  The state of a sandbox. Destroying, destroyed, and failed sandboxes are not
+  returned by the API.
+
+enum:
+  - SANDBOX_STATE_UNSPECIFIED
+  - SANDBOX_STATE_RUNNING
+  - SANDBOX_STATE_PAUSED
+  - SANDBOX_STATE_CREATING
+
+default: SANDBOX_STATE_UNSPECIFIED
+
+x-enum-descriptions:
+  - Unspecified. On list requests, treated as no state filter.
+  - The sandbox is ready to use.
+  - The sandbox is paused and can be resumed.
+  - The sandbox is still being created and cannot be used yet.

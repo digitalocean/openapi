@@ -1,0 +1,42 @@
+operationId: sandboxes_get
+
+summary: Retrieve an Existing Sandbox
+
+description: |
+  To show information about an existing sandbox, send a GET request to
+  `/v2/sandboxes/{sandbox_id}`. The sandbox must belong to your team.
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/sandbox_id'
+
+responses:
+  '200':
+    $ref: 'responses/sandbox.yml'
+
+  '401':
+    $ref: 'responses/errors.yml#/unauthorized'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_get.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox:read'
