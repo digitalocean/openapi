@@ -25,7 +25,7 @@ description: |-
   `manifest_yaml` for the exact rules.
 
   The only way to change a session's model is to set `HARNESS_INFERENCE_MODEL` in `env`. A
-  top-level `model` section is not accepted and returns `501`, as does `permissions`.
+  `permissions` section can't be updated on an existing session and returns `501`.
 
   ### Tracking an update
 
@@ -150,9 +150,8 @@ responses:
           $ref: models/definitions.yml#/error
   '501':
     description: >-
-      `manifest_yaml` includes a top-level `model` or `permissions` section, which can't be
-      updated on an existing session. The model can only be changed through
-      `env.HARNESS_INFERENCE_MODEL`.
+      `manifest_yaml` includes a `permissions` section, which can't be updated on an existing
+      session.
     headers: *id001
     content:
       application/json:

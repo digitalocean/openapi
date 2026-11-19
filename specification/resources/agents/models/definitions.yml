@@ -2090,8 +2090,7 @@ patch_session_request:
         your team (`403` otherwise).
 
         Supported sections are `tools`, `env`, and `secrets`. Sections you omit are not changed.
-        A top-level `model` or `permissions` section returns `501`. Any other top-level key
-        returns `400`.
+        A `permissions` section returns `501`. Any other top-level key returns `400`.
 
         Each section you include replaces that section in full:
 
