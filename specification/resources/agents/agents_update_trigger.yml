@@ -6,7 +6,10 @@ description: |-
   `output`, `session_template` (fresh), `bound_session_id` (reuse), `cron.cron_expr` /
   `cron.timezone` (recomputes next_run_at). Re-enabling never produces a catch-up run. PATCHing
   session_template is a full replacement, so every spec.secrets slot value the new manifest declares
-  must be resupplied (secret values are never echoed back), or the request is a 400.
+  must be resupplied (secret values are never echoed back), or the request is a 400. A trigger whose
+  agent config was deleted is paused with status_reason agent_config_deleted. Setting status to
+  active then returns 409 unless the same request, or an earlier one, supplies a new
+  session_template.
 tags:
 - Harness Runtime
 parameters:
@@ -60,7 +63,10 @@ responses:
   '404':
     $ref: ../../shared/responses/not_found.yml
   '409':
-    description: Duplicate name, or an attempt to change an immutable field (kind, provider).
+    description: >-
+      Duplicate name, an attempt to change an immutable field (kind, provider), or status active
+      without a new session_template on a trigger whose status_reason is agent_config_deleted. In
+      that last case the error message says how to resume the trigger.
     headers: *id001
     content:
       application/json:
