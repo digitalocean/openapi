@@ -18,14 +18,18 @@ description: |-
   | --- | --- | --- |
   | `tools` | The session's tools, such as Action Gateway tools and MCP servers. | No |
   | `env` | Environment variables (name and value). | Yes |
-  | `env.HARNESS_INFERENCE_MODEL` | The DigitalOcean Serverless Inference model the agent uses. | Yes |
-  | `secrets` | Secrets (name and value). | Yes |
+  | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
+  | `secrets` | Plain secrets (name and value). | Yes |
 
   Sections you omit are not changed. Each section you include replaces that section in full; see
   `manifest_yaml` for the exact rules.
 
-  The only way to change a session's model is to set `HARNESS_INFERENCE_MODEL` in `env`. A
-  `permissions` section can't be updated on an existing session and returns `501`.
+  The only way to change a session's model is to set `HARNESS_INFERENCE_MODEL` in `env`. This
+  works only for sessions that were created with a DigitalOcean Serverless Inference model;
+  sessions that use a third-party model provider can't change their model.
+
+  The following can't be changed on an existing session: egress rules, GitHub OAuth connections,
+  URL-bound secrets, platform-managed model keys, and `permissions` (`501`).
 
   ### Tracking an update
 
@@ -44,6 +48,15 @@ description: |-
 
   If the request matches the session's current settings, it returns `200` with `outcome` set to
   `UNCHANGED` and nothing is applied.
+
+  ### Versioning
+
+  Each accepted update is recorded with its own `update_id` and the manifest hashes before and
+  after the change (`session.update.previous_hash` and `session.update.manifest_hash`). When an
+  update fails, the session is rolled back to its previous settings and `session.update.reverted`
+  is `true`. Once a session's settings differ from its agent config, the session reports
+  `config_drifted: true`, `config_diff` lists the changed entries, and `manifest` holds the
+  settings the session now runs with (without secret values).
 
   ### Requirements
 
