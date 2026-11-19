@@ -1,15 +1,55 @@
 operationId: harness_update_session
-summary: PatchSession updates an existing session (session-scoped settings or live config).
-description: >-
-  Partial update of an existing session. Send exactly one of: `resume_on_topoff` (session-scoped
-  consent), or `manifest_yaml` (live config update of `tools`, `env` and `secrets`). The two cannot be
-  combined, and `{}` is 400. With `manifest_yaml`, absent sections are untouched; `model` and
-  `permissions` return 501. A config update that changes something returns 202 with outcome ACCEPTED and
-  the session in SESSION_STATUS_UPDATING (update state APPLYING): poll GET on the session every 2-5
-  seconds until the status leaves UPDATING, then read `session.update` (APPLIED, APPLIED_RESTARTED or
-  FAILED). A tools-only update usually finishes in seconds; env and secret changes restart the agent and
-  can take about two minutes. A manifest that changes nothing returns 200 with outcome UNCHANGED.
-  Terminal sessions (DESTROYED, FAILED) cannot be patched.
+summary: Update a session's settings.
+description: |-
+  Updates the settings of an existing session. Changes apply to this session only; the agent
+  config the session was created from is not modified.
+
+  Each request makes one of two kinds of update, and the two can't be combined:
+
+  - **Session preferences**: set `resume_on_topoff`. Applied immediately; returns `200`.
+  - **Agent settings**: set `manifest_yaml` to a partial manifest that holds only the sections
+    to change. Applied in the background; returns `202`.
+
+  An empty body (`{}`) returns `400`.
+
+  ### Updatable agent settings
+
+  | Section | What it changes | Agent restart |
+  | --- | --- | --- |
+  | `tools` | The session's tools, such as Action Gateway tools and MCP servers. | No |
+  | `env` | Environment variables (name and value). | Yes |
+  | `secrets` | Secrets (name and value). | Yes |
+  | `model` | Not supported yet. Returns `501`. | - |
+  | `permissions` | Not supported yet. Returns `501`. | - |
+
+  Sections you omit are not changed. Each section you include replaces that section in full; see
+  `manifest_yaml` for the exact rules.
+
+  ### Tracking an update
+
+  1. A request that changes the agent settings returns `202` with `outcome` set to `ACCEPTED`.
+     The session status becomes `SESSION_STATUS_UPDATING`.
+  2. Poll [`GET /v2/harness-runtime/sessions/{session_id}`](#operation/harness_get_session)
+     every 2 to 5 seconds until the status is no longer `SESSION_STATUS_UPDATING`.
+  3. Read `session.update.state`:
+     - `APPLIED`: the update is live.
+     - `APPLIED_RESTARTED`: the update is live and the agent was restarted to apply it.
+     - `FAILED`: the update did not take effect. `session.update.detail` explains why, and
+       `session.update.reverted` is `true` if the previous settings were restored.
+
+  Tool updates usually finish within a few seconds. Updates to `env` or `secrets` restart the
+  agent and can take up to about two minutes.
+
+  If the request matches the session's current settings, it returns `200` with `outcome` set to
+  `UNCHANGED` and nothing is applied.
+
+  ### Requirements
+
+  - The session must be idle: not provisioning, not already updating, and with no agent turn or
+    approval in progress. Sessions paused for zero balance and terminated sessions
+    (`SESSION_STATUS_DESTROYED`, `SESSION_STATUS_FAILED`) can't be updated.
+  - Agent settings updates must be enabled for your team.
+  - Not every agent runtime supports every section. An unsupported change returns `409`.
 tags:
 - Harness Runtime
 parameters:
@@ -27,10 +67,12 @@ requestBody:
     application/json:
       schema:
         $ref: models/definitions.yml#/patch_session_request
-  description: 'PATCH body: either resume_on_topoff or manifest_yaml (not both).'
+  description: Set either `resume_on_topoff` or `manifest_yaml`, not both.
 responses:
   '200':
-    description: Updated session snapshot, or outcome UNCHANGED when a manifest changes nothing.
+    description: >-
+      The session was updated (`resume_on_topoff`), or the requested agent settings match the
+      current ones and nothing was applied (`outcome` is `UNCHANGED`).
     headers: &id001
       ratelimit-limit:
         $ref: ../../shared/headers.yml#/ratelimit-limit
@@ -43,14 +85,20 @@ responses:
         schema:
           $ref: models/definitions.yml#/patch_session_response
   '202':
-    description: Config update accepted and applying; the session is SESSION_STATUS_UPDATING. Poll the session until the status changes.
+    description: >-
+      The agent settings update was accepted and is being applied. The session status is
+      `SESSION_STATUS_UPDATING`; poll the session until the status changes, then read
+      `session.update`.
     headers: *id001
     content:
       application/json:
         schema:
           $ref: models/definitions.yml#/patch_session_response
   '400':
-    description: 'Malformed body, invalid YAML, unknown field or manifest section, invalid values, both properties set, or no recognized patchable properties.'
+    description: >-
+      The request is invalid. For example: the body is empty or not valid JSON, `manifest_yaml` is
+      not valid YAML, a field or manifest section is not recognized, a value is invalid, or both
+      `resume_on_topoff` and `manifest_yaml` are set.
     headers: *id001
     content:
       application/json:
@@ -59,7 +107,9 @@ responses:
   '401':
     $ref: ../../shared/responses/unauthorized.yml
   '403':
-    description: The caller holds no access grant on the session, or the team is not enrolled in the config-update feature (manifest_yaml only).
+    description: >-
+      You don't have access to this session, or agent settings updates are not enabled for your
+      team (`manifest_yaml` only).
     headers: *id001
     content:
       application/json:
@@ -68,28 +118,36 @@ responses:
   '404':
     $ref: ../../shared/responses/not_found.yml
   '409':
-    description: Session is in a terminal state, not running, paused for zero balance, already updating, busy, or does not support the change (for example env and secrets on a non-hermes session). The message says which.
+    description: >-
+      The session can't be updated right now. For example, it is still provisioning, already
+      updating, running an agent turn, waiting on an approval, paused for zero balance, or
+      terminated, or its agent runtime doesn't support the change. The error message gives the
+      reason.
     headers: *id001
     content:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
   '422':
-    description: The change needs a new session (requires_new_session).
+    description: >-
+      The change can only be made by creating a new session, for example changing a reserved
+      platform key or a secret that is not a plain value (such as a URL-bound or OAuth secret).
     headers: *id001
     content:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
   '423':
-    description: This session is unavailable; contact support.
+    description: The session is unavailable. Contact support.
     headers: *id001
     content:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
   '501':
-    description: '`model` or `permissions` sent in manifest_yaml; not supported yet.'
+    description: >-
+      `manifest_yaml` includes a section that can't be updated on an existing session yet
+      (`model` or `permissions`).
     headers: *id001
     content:
       application/json:
