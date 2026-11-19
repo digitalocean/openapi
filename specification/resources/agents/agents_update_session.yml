@@ -18,12 +18,14 @@ description: |-
   | --- | --- | --- |
   | `tools` | The session's tools, such as Action Gateway tools and MCP servers. | No |
   | `env` | Environment variables (name and value). | Yes |
+  | `env.HARNESS_INFERENCE_MODEL` | The DigitalOcean Serverless Inference model the agent uses. | Yes |
   | `secrets` | Secrets (name and value). | Yes |
-  | `model` | Not supported yet. Returns `501`. | - |
-  | `permissions` | Not supported yet. Returns `501`. | - |
 
   Sections you omit are not changed. Each section you include replaces that section in full; see
   `manifest_yaml` for the exact rules.
+
+  To change the model, set `HARNESS_INFERENCE_MODEL` in `env`. The top-level `model` and
+  `permissions` sections can't be updated on an existing session and return `501`.
 
   ### Tracking an update
 
@@ -37,8 +39,8 @@ description: |-
      - `FAILED`: the update did not take effect. `session.update.detail` explains why, and
        `session.update.reverted` is `true` if the previous settings were restored.
 
-  Tool updates usually finish within a few seconds. Updates to `env` or `secrets` restart the
-  agent and can take up to about two minutes.
+  Tool updates usually finish within a few seconds. Updates to `env` (including the model) or
+  `secrets` restart the agent and can take up to about two minutes.
 
   If the request matches the session's current settings, it returns `200` with `outcome` set to
   `UNCHANGED` and nothing is applied.
@@ -130,8 +132,10 @@ responses:
           $ref: models/definitions.yml#/error
   '422':
     description: >-
-      The change can only be made by creating a new session, for example changing a reserved
-      platform key or a secret that is not a plain value (such as a URL-bound or OAuth secret).
+      The change can only be made by creating a new session. For example: changing a reserved
+      platform key or a secret that is not a plain value (such as a URL-bound or OAuth secret), or
+      adding, removing, or changing `HARNESS_INFERENCE_MODEL` on a session that doesn't use
+      DigitalOcean Serverless Inference.
     headers: *id001
     content:
       application/json:
@@ -146,8 +150,8 @@ responses:
           $ref: models/definitions.yml#/error
   '501':
     description: >-
-      `manifest_yaml` includes a section that can't be updated on an existing session yet
-      (`model` or `permissions`).
+      `manifest_yaml` includes a section that can't be updated on an existing session (`model` or
+      `permissions`). To change the model, set `HARNESS_INFERENCE_MODEL` in `env` instead.
     headers: *id001
     content:
       application/json:

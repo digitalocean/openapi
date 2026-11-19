@@ -2090,26 +2090,40 @@ patch_session_request:
         your team (`403` otherwise).
 
         Supported sections are `tools`, `env`, and `secrets`. Sections you omit are not changed.
-        `model` and `permissions` are not supported yet and return `501`. Any other top-level key
-        returns `400`.
+        The top-level `model` and `permissions` sections return `501`; change the model through
+        `env` instead (see below). Any other top-level key returns `400`.
 
         Each section you include replaces that section in full:
 
         - `tools`: the complete list of tools for the session, such as Action Gateway tools and
           MCP servers. To remove all tools, send `tools: []`. `tools: null` returns `400`.
         - `env`: the complete set of environment variables, as name-value pairs. A variable you
-          leave out is removed.
+          leave out is removed. `env: {}` removes all variables; `env: null` returns `400`.
         - `secrets`: the complete set of secrets, as name-value pairs. A secret you leave out is
           removed. For each secret, set the value to a string to add or rotate it, or to `{}` to
           keep its current value. A `null` value returns `400`.
 
-        Reserved platform and framework keys, and secrets that are not plain values (such as
-        URL-bound or OAuth secrets), can't be changed on an existing session. Include them with
-        their current values, or the request returns `422`.
+        **Changing the model.** Set `HARNESS_INFERENCE_MODEL` in `env` to a DigitalOcean
+        Serverless Inference model ID, or to `router:<name>` for an inference router. This works
+        only on sessions created with `HARNESS_INFERENCE_MODEL` set and without their own
+        inference endpoint. Adding, removing, or changing the key on any other session, or moving
+        a session to its own endpoint, returns `422`. A malformed value (empty, multi-line, or over
+        256 bytes) returns `400`. Whether the model exists is not checked when you send the
+        request; an unknown model fails on the agent's next turn.
 
-        Example that keeps one secret and rotates another:
+        **Reserved keys.** `HARNESS_INFERENCE_API_KEY` and `HARNESS_INFERENCE_BASE_URL` are
+        managed by the platform: include them with their current values, or the request returns
+        `422`. Framework keys can't be changed either (`422`). Secrets that are not plain values
+        (such as URL-bound or OAuth secrets) can't be changed on an existing session (`422`).
+
+        Example that changes the model, keeps one secret, and rotates another. Because each
+        section is a full replacement, the example assumes the session has no other env
+        variables or secrets:
 
         ```yaml
+        env:
+          HARNESS_INFERENCE_MODEL: llama3.3-70b-instruct
+          LOG_LEVEL: info
         secrets:
           GITHUB_TOKEN: {}
           JIRA_API_TOKEN: new-token-value
