@@ -26,10 +26,11 @@ description: |-
 
   The only way to change a session's model is to set `HARNESS_INFERENCE_MODEL` in `env`. This
   works only for sessions that were created with a DigitalOcean Serverless Inference model;
-  sessions that use a third-party model provider can't change their model.
+  sessions that use a third-party model provider can't change their model. A top-level `model`
+  section returns `400`.
 
   The following can't be changed on an existing session: egress rules, GitHub OAuth connections,
-  URL-bound secrets, platform-managed model keys, and `permissions` (`501`).
+  URL-bound secrets, platform-managed model keys, and `permissions` (`400`).
 
   ### Tracking an update
 
@@ -116,7 +117,9 @@ responses:
     description: >-
       The request is invalid. For example: the body is empty or not valid JSON, `manifest_yaml` is
       not valid YAML, a field or manifest section is not recognized, a value is invalid, or both
-      `resume_on_topoff` and `manifest_yaml` are set.
+      `resume_on_topoff` and `manifest_yaml` are set. A top-level `model` section (set
+      `env.HARNESS_INFERENCE_MODEL` instead) and a `permissions` section (can't be changed on an
+      existing session) also return `400`.
     headers: *id001
     content:
       application/json:
@@ -159,15 +162,6 @@ responses:
           $ref: models/definitions.yml#/error
   '423':
     description: The session is unavailable. Contact support.
-    headers: *id001
-    content:
-      application/json:
-        schema:
-          $ref: models/definitions.yml#/error
-  '501':
-    description: >-
-      `manifest_yaml` includes a `permissions` section, which can't be updated on an existing
-      session.
     headers: *id001
     content:
       application/json:
