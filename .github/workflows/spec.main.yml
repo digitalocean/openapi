@@ -10,6 +10,14 @@ on:
       - 'spectral/**'
   workflow_dispatch:
 
+# Every run uploads to the same DigitalOcean-public.v2.yaml, and the client and
+# docs triggers fire when a run completes. Queuing runs keeps publishes in merge
+# order, so an older spec never overwrites a newer one. A newer pending run
+# replaces an older one; it carries that run's changes, since main is linear.
+concurrency:
+  group: spec-main
+  cancel-in-progress: false
+
 jobs:
   lint:
     name: Validate style
