@@ -1,0 +1,56 @@
+operationId: microvms_get_port_forward
+
+summary: Forward a port to a MicroVM
+
+description: |
+  To open a TCP connection to a port inside a MicroVM, open a WebSocket connection to
+  `wss://api.digitalocean.com/v2/microvms/{microvm_id}/port_forward?port={port}`. The
+  connection goes to `127.0.0.1:{port}` in the MicroVM, so the port does not need to be
+  public.
+
+  One WebSocket carries one TCP connection. To forward a local port, open a new WebSocket
+  for each local connection.
+
+  Send the API token in the `Authorization` header of the handshake. Browsers cannot set this
+  header, so you cannot open a port forward from browser JavaScript. Requires the
+  `port_forward` feature. If the MicroVM is paused and auto-resume is on, opening a port
+  forward resumes it.
+
+tags:
+  - MicroVMs
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+  - $ref: 'parameters.yml#/port_forward_port'
+
+responses:
+  '101':
+    $ref: 'responses/port_forward_upgrade.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_port_forward.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:update'
