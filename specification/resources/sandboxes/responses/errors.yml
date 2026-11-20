@@ -1,0 +1,107 @@
+bad_request:
+  description: The request is not valid, or the sandbox cannot be changed in its current state.
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      example:
+        id: bad_request
+        message: The sandbox cannot be paused in its current state.
+        request_id: 4851a473-1621-42ea-b2f9-5071c0ea8414
+
+forbidden:
+  description: The caller does not have the required permission.
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      example:
+        id: forbidden
+        message: You do not have permission to perform this action.
+        request_id: 4851a473-1621-42ea-b2f9-5071c0ea8414
+
+not_found:
+  description: The requested sandbox or template was not found for your team.
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      example:
+        id: not_found
+        message: Sandbox not found for your team.
+        request_id: 4851a473-1621-42ea-b2f9-5071c0ea8414
+
+conflict:
+  description: The request is valid, and this team cannot be given a sandbox right now.
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      example:
+        id: conflict
+        message: The request could not be completed due to a conflict.
+        request_id: 4851a473-1621-42ea-b2f9-5071c0ea8414
+
+unprocessable_entity:
+  description: A field is missing or not acceptable.
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      example:
+        id: unprocessable_entity
+        message: A field is missing or not acceptable.
+        request_id: 4851a473-1621-42ea-b2f9-5071c0ea8414
+
+too_many_requests_team_limit:
+  description: The team is at its sandbox limit.
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      example:
+        id: too_many_requests
+        message: The team is at its sandbox limit.
+        request_id: 4851a473-1621-42ea-b2f9-5071c0ea8414

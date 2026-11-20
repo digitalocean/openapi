@@ -1,0 +1,35 @@
+type: object
+
+description: The body of a create-sandbox request.
+
+required:
+  - template
+  - size_slug
+
+properties:
+  template:
+    type: string
+    description: The name of the template to create the sandbox from.
+    example: base
+
+  size_slug:
+    type: string
+    description: The size of the sandbox, as a size slug. It must be an enabled size.
+    example: s-1vcpu-2gb
+
+  allow_internet_access:
+    type: boolean
+    description: >-
+      Let the sandbox reach the internet. When unset or true, egress is
+      unrestricted. When false, the sandbox can reach only the platform
+      file-transfer host. Allow-lists of hosts and IPs are not part of this
+      contract yet.
+    example: true
+
+  env_vars:
+    type: object
+    additionalProperties:
+      type: string
+    description: Environment variables for the sandbox. The values are secrets.
+    example:
+      MY_KEY: my-value

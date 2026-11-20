@@ -692,6 +692,12 @@ tags:
       An action object is returned. These objects hold the current status of the
       requested action.
 
+  - name: Sandboxes
+    description: |-
+      Sandboxes are isolated microVMs that run your code. By sending requests
+      to the `/v2/sandboxes` endpoints, you can create, list, retrieve, pause,
+      resume, and delete sandboxes.
+
   - name: Security
     description: |-
       Security endpoints for CSPM scans, scan findings, settings, and Secrets Manager.
@@ -893,6 +899,7 @@ x-tagGroups:
       - Reserved IPs
       - Reserved IPv6
       - Reserved IPv6 Actions
+      - Sandboxes
       - Security
       - Signals
       - Sizes
@@ -3159,6 +3166,29 @@ paths:
   /v2/byoip_prefixes/{byoip_prefix_uuid}/ips:
     get:
       $ref: "resources/byoip_prefixes/byoip_prefix_list_resources.yml"
+
+
+  /v2/sandboxes:
+    get:
+      $ref: "resources/sandboxes/sandboxes_list.yml"
+
+    post:
+      $ref: "resources/sandboxes/sandboxes_create.yml"
+
+  /v2/sandboxes/{sandbox_id}:
+    get:
+      $ref: "resources/sandboxes/sandboxes_get.yml"
+
+    delete:
+      $ref: "resources/sandboxes/sandboxes_delete.yml"
+
+  /v2/sandboxes/{sandbox_id}/pause:
+    post:
+      $ref: "resources/sandboxes/sandboxes_pause.yml"
+
+  /v2/sandboxes/{sandbox_id}/resume:
+    post:
+      $ref: "resources/sandboxes/sandboxes_resume.yml"
 
   /v2/security/scans:
     get:
