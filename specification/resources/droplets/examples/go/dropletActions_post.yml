@@ -40,10 +40,10 @@ source: |-
   //  action, _, err := client.DropletActions.PasswordReset(ctx, 3164450)
 
   // Resize a Droplet
-  //  action, _, err := client.DropletActions.Resize(ctx, 3164450, "1gb", true)
+  //  action, _, err := client.DropletActions.Resize(ctx, 3164450, "s-2vcpu-4gb", true)
 
   // Rebuild a Droplet
-  //  action, _, err := client.DropletActions.RebuildByImageSlug(ctx, 3164450, "ubuntu-16-04-x64")
+  //  action, _, err := client.DropletActions.RebuildByImageSlug(ctx, 3164450, "ubuntu-26-04-x64")
 
   // Rename a Droplet
   //  action, _, err := client.DropletActions.Rename(ctx, 3164450, "nifty-new-name")

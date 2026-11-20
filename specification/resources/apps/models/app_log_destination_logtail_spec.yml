@@ -6,4 +6,4 @@ properties:
     example: abcdefghijklmnopqrstuvwxyz0123456789
 description: Logtail configuration.
 required:
-  - endpoint
+  - token
