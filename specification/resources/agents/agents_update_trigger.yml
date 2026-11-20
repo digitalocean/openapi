@@ -64,9 +64,11 @@ responses:
     $ref: ../../shared/responses/not_found.yml
   '409':
     description: >-
-      Duplicate name, an attempt to change an immutable field (kind, provider), or status active
-      without a new session_template on a trigger whose status_reason is agent_config_deleted. In
-      that last case the error message says how to resume the trigger.
+      Duplicate name, an attempt to change an immutable field (kind, provider), status active
+      without a new session_template on a trigger whose status_reason is agent_config_deleted, or
+      the trigger was paused because its agent config was deleted while this update was in
+      flight. Nothing is applied. If the request set status active, the error message says how
+      to resume the trigger; otherwise it asks for a retry, so read the trigger again first.
     headers: *id001
     content:
       application/json:
