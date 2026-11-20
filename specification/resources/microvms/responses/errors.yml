@@ -32,6 +32,10 @@ bad_request:
           value:
             code: INVALID_ARGUMENT
             message: "port must be an integer in 1..65535"
+        Reserved Port:
+          value:
+            code: INVALID_ARGUMENT
+            message: "port 50051 is reserved"
 
 forbidden:
   description: >-
