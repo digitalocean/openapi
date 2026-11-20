@@ -546,8 +546,9 @@ tags:
       resumes on the next HTTP request, command, or console session, with its
       memory, files, and processes intact. By sending requests to the
       `/v2/microvms` endpoints, you can create, list, update, pause, resume,
-      and delete MicroVMs, run commands and open a console in them, upload and
-      download files, add and remove ingress URLs, create access tokens scoped
+      and delete MicroVMs, run commands and open a console in them, forward
+      ports to them, upload and download files, add and remove ingress URLs,
+      create access tokens scoped
       to one MicroVM, and create checkpoints to start new MicroVMs from a
       saved state.
 
@@ -2542,6 +2543,10 @@ paths:
   /v2/microvms/{microvm_id}/console:
     get:
       $ref: "resources/microvms/microvms_console.yml"
+
+  /v2/microvms/{microvm_id}/port_forward:
+    get:
+      $ref: "resources/microvms/microvms_port_forward.yml"
 
   /v2/microvms/{microvm_id}/files:
     put:

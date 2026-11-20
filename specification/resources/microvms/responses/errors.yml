@@ -28,6 +28,10 @@ bad_request:
           value:
             code: FAILED_PRECONDITION
             message: "checkpoint 01a11cd5-25dd-790f-a77c-3677f24bca85 is still being captured; retry delete once the capture completes"
+        Invalid Port:
+          value:
+            code: INVALID_ARGUMENT
+            message: "port must be an integer in 1..65535"
 
 forbidden:
   description: >-

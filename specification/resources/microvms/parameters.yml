@@ -103,6 +103,19 @@ console_cols:
     default: 80
   example: 80
 
+port_forward_port:
+  in: query
+  name: port
+  required: true
+  description: >-
+    The TCP port to connect to inside the MicroVM. Port 50051 is reserved and
+    cannot be forwarded.
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 65535
+  example: 8080
+
 file_path:
   in: query
   name: path
