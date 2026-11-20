@@ -36,24 +36,24 @@ description: |-
 
   ### Changing permissions
 
-  `permissions` replaces the whole policy: `defaultAction` and the full `rules` list. A rule you
-  leave out is removed. Use the same fields as when you create the session. The agent is not
-  restarted; the new rules apply from its next tool call once the update is `APPLIED`.
+  `permissions` replaces the whole policy: `default` and the full `rules` list. A rule you leave
+  out is removed. Use the same fields as when you create the session. The agent is not restarted;
+  the new rules apply from its next tool call once the update is `APPLIED`.
 
   What can change depends on the session's agent:
 
-  - `claude-code`, `opencode`: `defaultAction` and every rule type (`bash`, `file.read`,
-    `file.write`, `file.edit`, `web.fetch`, `mcp`, `do.actions`), with `allow`, `ask`, or `deny`.
-  - `openhands`: `defaultAction` and `bash`, `file.read`, `file.write`, `file.edit`, and
-    `web.fetch` rules. Not `mcp` or `do.actions` rules.
-  - `hermes`, `langgraph`: `do.actions` rules with `allow` or `deny`, and `defaultAction` set to
+  - `claude-code`, `opencode`: `default` and every rule type (`bash`, `file.read`, `file.write`,
+    `web.fetch`, `mcp`, `do.actions/<tool>`), with `allow`, `ask`, or `deny`.
+  - `openhands`: `default` and `bash`, `file.read`, `file.write`, and `web.fetch` rules. Not
+    `mcp` or `do.actions/<tool>` rules.
+  - `hermes`, `langgraph`: `do.actions/<tool>` rules with `allow` or `deny`, and `default` set to
     `allow` or `deny`. Not `ask`, and no other rule types.
   - Any other agent: nothing.
 
   `permissions.filesystem` and `permissions.network` can't be changed on any agent.
 
   Only the differences from the current policy are checked: rules you add, remove, or change, and
-  a changed `defaultAction`. Rules you keep as they are never cause a refusal.
+  a changed `default`. Rules you keep as they are never cause a refusal.
 
   If any change can't be applied on the session's agent, the request returns `409` and nothing is
   applied, including changes to other sections. The error message names the unsupported changes.
@@ -73,8 +73,8 @@ description: |-
      - `FAILED`: the update did not take effect. `session.update.detail` explains why, and
        `session.update.reverted` is `true` if the previous settings were restored.
 
-  Tool and permissions updates usually finish within a few seconds. Updates to `env` (including
-  the model) or `secrets` restart the agent and can take up to about two minutes.
+  Tool updates usually finish within a few seconds. Updates to `env` (including the model) or
+  `secrets` restart the agent and can take up to about two minutes.
 
   If the request matches the session's current settings, it returns `200` with `outcome` set to
   `UNCHANGED` and nothing is applied.

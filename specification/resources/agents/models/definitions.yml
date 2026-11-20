@@ -2105,8 +2105,8 @@ patch_session_request:
         - `secrets`: the complete set of secrets, as name-value pairs. A secret you leave out is
           removed. For each secret, set the value to a string to add or rotate it, or to `{}` to
           keep its current value. A `null` value returns `400`.
-        - `permissions`: the complete permission policy, `defaultAction` and the full `rules`
-          list, with the same fields as at session creation. A rule you leave out is removed. What
+        - `permissions`: the complete permission policy, `default` and the full `rules` list,
+          with the same fields as at session creation. A rule you leave out is removed. What
           can change depends on the session's agent, and `permissions.filesystem` and
           `permissions.network` can't be changed. If any change can't be applied on the agent, the
           request returns `409` and nothing is applied; the error message names the unsupported
