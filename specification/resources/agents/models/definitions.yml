@@ -2106,11 +2106,13 @@ patch_session_request:
           removed. For each secret, set the value to a string to add or rotate it, or to `{}` to
           keep its current value. A `null` value returns `400`.
         - `permissions`: the complete permission policy, `default` and the full `rules` list,
-          with the same fields as at session creation. A rule you leave out is removed. What
-          can change depends on the session's agent, and `permissions.filesystem` and
-          `permissions.network` can't be changed. If any change can't be applied on the agent, the
-          request returns `409` and nothing is applied; the error message names the unsupported
-          changes so you can remove them and send the update again.
+          with the same fields as at session creation. A rule you leave out is removed.
+          `permissions: {}` removes the policy (the agent's built-in default applies);
+          `permissions: null` returns `400`. What can change depends on the session's agent, and
+          `permissions.filesystem` and `permissions.network` can't be changed. If any change
+          can't be applied on the agent, the request returns `409` and nothing is applied; the
+          error message names the unsupported changes so you can remove them and send the update
+          again. Sessions created before live permissions updates were released return `409`.
 
         **Changing the model.** The only way to change a session's model is through `env`. Set
         `HARNESS_INFERENCE_MODEL` to a DigitalOcean Serverless Inference model ID, or to
@@ -2178,7 +2180,7 @@ session_config_update_state:
     - FAILED
   description: >-
     State of a session settings update. `APPLYING`: in progress. `APPLIED`: live. `APPLIED_RESTARTED`:
-    live, and the agent was restarted to apply it (`env` and `secrets` changes). `FAILED`: the update
+    live, and the agent was restarted to apply it (for example, `env` and `secrets` changes). `FAILED`: the update
     did not take effect; see `reverted` and `detail`.
   example: APPLIED
 

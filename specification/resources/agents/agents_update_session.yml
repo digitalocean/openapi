@@ -20,7 +20,7 @@ description: |-
   | `env` | Environment variables (name and value). | Yes |
   | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
   | `secrets` | Plain secrets (name and value). | Yes |
-  | `permissions` | The permission policy: the default action and the full rules list. What can change depends on the agent; see below. | No |
+  | `permissions` | The permission policy: the default action and the full rules list. What can change depends on the agent; see below. | No (LangGraph: yes for `do.actions` rules or `default`) |
 
   Sections you omit are not changed. Each section you include replaces that section in full; see
   `manifest_yaml` for the exact rules.
@@ -37,8 +37,15 @@ description: |-
   ### Changing permissions
 
   `permissions` replaces the whole policy: `default` and the full `rules` list. A rule you leave
-  out is removed. Use the same fields as when you create the session. The agent is not restarted;
-  the new rules apply from its next tool call once the update is `APPLIED`.
+  out is removed. Use the same fields as when you create the session. `permissions: {}` removes
+  the policy, so the agent goes back to its built-in default. `permissions: null` returns `400`.
+
+  The agent is not restarted; the new rules apply from its next tool call once the update is
+  `APPLIED`. On `langgraph`, a change to `do.actions/<tool>` rules or `default` restarts the
+  agent, as a `tools` change does.
+
+  Only sessions created after live permissions updates were released can change `permissions`.
+  An older session returns `409`; create a new session instead.
 
   What can change depends on the session's agent:
 
@@ -56,8 +63,16 @@ description: |-
   a changed `default`. Rules you keep as they are never cause a refusal.
 
   If any change can't be applied on the session's agent, the request returns `409` and nothing is
-  applied, including changes to other sections. The error message names the unsupported changes.
-  Remove them and send the update again.
+  applied, including changes to other sections. The error message names the unsupported changes
+  and what the agent can change. Remove them and send the update again. For example:
+
+  ```
+  permissions can't change live on hermes for: bash rule "rm -rf *" (only do.actions allow/deny rules can change on this agent). Remove these changes and send the update again (update_unsupported)
+  ```
+
+  If the agent itself refuses a change after the request is accepted, the update ends `FAILED`
+  with `session.update.reverted` set to `true`, and `session.update.detail` says to remove the
+  permission changes the agent can't take and send the update again.
 
   ### Tracking an update
 
@@ -149,7 +164,7 @@ responses:
       The request is invalid. For example: the body is empty or not valid JSON, `manifest_yaml` is
       not valid YAML, a field or manifest section is not recognized, a value is invalid, or both
       `resume_on_topoff` and `manifest_yaml` are set. A top-level `model` section (set
-      `env.HARNESS_INFERENCE_MODEL` instead) also returns `400`.
+      `env.HARNESS_INFERENCE_MODEL` instead) and `permissions: null` also return `400`.
     headers: *id001
     content:
       application/json:
@@ -174,7 +189,9 @@ responses:
       updating, running an agent turn, waiting on an approval, paused for zero balance, or
       destroyed, or its agent runtime doesn't support the change. The error message gives the
       reason. For a `permissions` change the agent can't apply, the message names the unsupported
-      changes; nothing is applied, so remove them and send the update again.
+      changes and ends with `(update_unsupported)`; nothing is applied, so remove them and send
+      the update again. A session created before live permissions updates were released can't
+      change `permissions`; create a new session.
     headers: *id001
     content:
       application/json:
