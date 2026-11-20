@@ -20,6 +20,7 @@ description: |-
   | `env` | Environment variables (name and value). | Yes |
   | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
   | `secrets` | Plain secrets (name and value). | Yes |
+  | `permissions` | The permission policy: the default action and the full rules list. What can change depends on the agent; see below. | No |
 
   Sections you omit are not changed. Each section you include replaces that section in full; see
   `manifest_yaml` for the exact rules.
@@ -30,8 +31,33 @@ description: |-
   section returns `400`.
 
   The following can't be changed on an existing session: custom MCP servers (`422`), egress rules,
-  GitHub OAuth connections, URL-bound secrets, platform-managed model keys, and `permissions`
-  (`400`). To use a different custom MCP server, create a new session.
+  GitHub OAuth connections, URL-bound secrets, and platform-managed model keys. To use a different
+  custom MCP server, create a new session.
+
+  ### Changing permissions
+
+  `permissions` replaces the whole policy: `defaultAction` and the full `rules` list. A rule you
+  leave out is removed. Use the same fields as when you create the session. The agent is not
+  restarted; the new rules apply from its next tool call once the update is `APPLIED`.
+
+  What can change depends on the session's agent:
+
+  - `claude-code`, `opencode`: `defaultAction` and every rule type (`bash`, `file.read`,
+    `file.write`, `file.edit`, `web.fetch`, `mcp`, `do.actions`), with `allow`, `ask`, or `deny`.
+  - `openhands`: `defaultAction` and `bash`, `file.read`, `file.write`, `file.edit`, and
+    `web.fetch` rules. Not `mcp` or `do.actions` rules.
+  - `hermes`, `langgraph`: `do.actions` rules with `allow` or `deny`, and `defaultAction` set to
+    `allow` or `deny`. Not `ask`, and no other rule types.
+  - Any other agent: nothing.
+
+  `permissions.filesystem` and `permissions.network` can't be changed on any agent.
+
+  Only the differences from the current policy are checked: rules you add, remove, or change, and
+  a changed `defaultAction`. Rules you keep as they are never cause a refusal.
+
+  If any change can't be applied on the session's agent, the request returns `409` and nothing is
+  applied, including changes to other sections. The error message names the unsupported changes.
+  Remove them and send the update again.
 
   ### Tracking an update
 
@@ -47,8 +73,8 @@ description: |-
      - `FAILED`: the update did not take effect. `session.update.detail` explains why, and
        `session.update.reverted` is `true` if the previous settings were restored.
 
-  Tool updates usually finish within a few seconds. Updates to `env` (including the model) or
-  `secrets` restart the agent and can take up to about two minutes.
+  Tool and permissions updates usually finish within a few seconds. Updates to `env` (including
+  the model) or `secrets` restart the agent and can take up to about two minutes.
 
   If the request matches the session's current settings, it returns `200` with `outcome` set to
   `UNCHANGED` and nothing is applied.
@@ -71,7 +97,8 @@ description: |-
     and a destroyed or failed session. A locked session returns `423`.
   - The session must be idle: no agent turn running and no approval pending (`409`).
   - Session settings updates must be enabled for your team.
-  - Not every agent runtime supports every section. An unsupported change returns `409`.
+  - Not every agent runtime supports every section, or every `permissions` change (see Changing
+    permissions above). An unsupported change returns `409`, and nothing is applied.
 tags:
 - Harness Runtime
 parameters:
@@ -122,8 +149,7 @@ responses:
       The request is invalid. For example: the body is empty or not valid JSON, `manifest_yaml` is
       not valid YAML, a field or manifest section is not recognized, a value is invalid, or both
       `resume_on_topoff` and `manifest_yaml` are set. A top-level `model` section (set
-      `env.HARNESS_INFERENCE_MODEL` instead) and a `permissions` section (can't be changed on an
-      existing session) also return `400`.
+      `env.HARNESS_INFERENCE_MODEL` instead) also returns `400`.
     headers: *id001
     content:
       application/json:
@@ -147,7 +173,8 @@ responses:
       The session can't be updated right now. For example, it is still provisioning, already
       updating, running an agent turn, waiting on an approval, paused for zero balance, or
       destroyed, or its agent runtime doesn't support the change. The error message gives the
-      reason.
+      reason. For a `permissions` change the agent can't apply, the message names the unsupported
+      changes; nothing is applied, so remove them and send the update again.
     headers: *id001
     content:
       application/json:
@@ -180,6 +207,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 x-codeSamples:
 - $ref: examples/curl/agents_update_session.yml
+- $ref: examples/curl/agents_update_session_permissions.yml
 security:
 - bearer_auth:
   - agent_harness_session:manage

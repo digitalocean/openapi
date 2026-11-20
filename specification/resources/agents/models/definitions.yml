@@ -2089,10 +2089,9 @@ patch_session_request:
         be combined with `resume_on_topoff`. Requires session settings updates to be enabled for
         your team (`403` otherwise).
 
-        Supported sections are `tools`, `env`, and `secrets`. Sections you omit are not changed.
-        Any other top-level key returns `400`, including `model` (to change the model, set
-        `HARNESS_INFERENCE_MODEL` in `env`) and `permissions` (can't be changed on an existing
-        session).
+        Supported sections are `tools`, `env`, `secrets`, and `permissions`. Sections you omit are
+        not changed. Any other top-level key returns `400`, including `model` (to change the model,
+        set `HARNESS_INFERENCE_MODEL` in `env`).
 
         Each section you include replaces that section in full:
 
@@ -2106,6 +2105,12 @@ patch_session_request:
         - `secrets`: the complete set of secrets, as name-value pairs. A secret you leave out is
           removed. For each secret, set the value to a string to add or rotate it, or to `{}` to
           keep its current value. A `null` value returns `400`.
+        - `permissions`: the complete permission policy, `defaultAction` and the full `rules`
+          list, with the same fields as at session creation. A rule you leave out is removed. What
+          can change depends on the session's agent, and `permissions.filesystem` and
+          `permissions.network` can't be changed. If any change can't be applied on the agent, the
+          request returns `409` and nothing is applied; the error message names the unsupported
+          changes so you can remove them and send the update again.
 
         **Changing the model.** The only way to change a session's model is through `env`. Set
         `HARNESS_INFERENCE_MODEL` to a DigitalOcean Serverless Inference model ID, or to
