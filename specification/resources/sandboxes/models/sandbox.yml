@@ -1,0 +1,38 @@
+type: object
+
+description: A sandbox.
+
+required:
+  - sandbox_id
+  - template
+  - state
+  - created_at
+
+properties:
+  sandbox_id:
+    type: string
+    readOnly: true
+    description: The ID of the sandbox.
+    example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
+  template:
+    type: string
+    readOnly: true
+    description: The name of the template the sandbox was created from.
+    example: base
+
+  state:
+    $ref: 'sandbox_state.yml'
+
+  size_slug:
+    type: string
+    readOnly: true
+    description: The size of the sandbox, as a size slug.
+    example: s-1vcpu-2gb
+
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: The time the sandbox was created, in ISO 8601 format.
+    example: "2026-11-20T12:00:00Z"

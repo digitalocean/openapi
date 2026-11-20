@@ -1,0 +1,17 @@
+type: string
+description: >-
+  The state of a sandbox. Destroying, destroyed, and failed sandboxes are not
+  returned.
+
+  - `SANDBOX_STATE_RUNNING`: The sandbox is ready to use.
+  - `SANDBOX_STATE_PAUSED`: The sandbox is paused.
+  - `SANDBOX_STATE_CREATING`: The sandbox is still being created and cannot be
+    used yet. CreateSandbox answers only after the sandbox is running, so only
+    a concurrent get or list sees this state.
+enum:
+  - SANDBOX_STATE_UNSPECIFIED
+  - SANDBOX_STATE_RUNNING
+  - SANDBOX_STATE_PAUSED
+  - SANDBOX_STATE_CREATING
+default: SANDBOX_STATE_UNSPECIFIED
+example: SANDBOX_STATE_RUNNING
