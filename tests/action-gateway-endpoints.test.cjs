@@ -570,3 +570,19 @@ test('endpoints report a read-only is_default flag tied to the endpoint limit ex
   assert.equal(Object.hasOwn(models.endpoint_version.properties, 'is_default'), false);
   assert.equal(examples.endpoint.value.endpoint.is_default, false);
 });
+
+test('connection GET supports optional provider account metadata', () => {
+  const operation = spec.paths[prefix + '/connections/{id}'].get;
+  const response = deref(operation.responses['200'].content['application/json'].schema);
+  const connection = deref(response.properties.connection.allOf[0]);
+  const metadata = connection.properties.provider_data;
+  assert.equal(metadata.type, 'object');
+  assert.equal(metadata.readOnly, true);
+  assert.equal(metadata.additionalProperties, true);
+  assert.ok(!(connection.required || []).includes('provider_data'));
+  const check = ajv.compile(metadata);
+  assert.ok(check({}));
+  assert.ok(check({ workspace: { name: 'Example', region: 'test' }, accounts: [{ id: '123' }] }));
+  assert.equal(check('serialized JSON'), false);
+  assert.equal(check([]), false);
+});
