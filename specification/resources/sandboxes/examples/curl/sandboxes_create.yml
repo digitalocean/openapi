@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"template":"base","size_slug":"s-1vcpu-2gb"}' \
+    "https://api.digitalocean.com/v2/sandboxes"

@@ -1,0 +1,35 @@
+description: >-
+  The response is a JSON object with a `sandboxes` array and an optional
+  `next_page_token` for cursor pagination.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        sandboxes:
+          type: array
+          items:
+            $ref: '../models/sandbox.yml'
+        next_page_token:
+          type: string
+          description: The token for the next page. Empty on the last page.
+          example: ''
+    examples:
+      Sandboxes Page:
+        value:
+          sandboxes:
+            - sandbox_id: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+              template: base
+              state: SANDBOX_STATE_RUNNING
+              size_slug: s-1vcpu-2gb
+              created_at: "2026-11-20T12:00:00Z"
+          next_page_token: ""
