@@ -1,0 +1,25 @@
+type: object
+
+description: >-
+  The DigitalOcean-standard error body (`id`, `message`, `request_id`). The
+  gateway builds it from the gRPC status.
+
+properties:
+  id:
+    type: string
+    description: A short, stable ID for the error, for example `not_found`.
+    example: not_found
+
+  message:
+    type: string
+    description: A message that explains the error.
+    example: Sandbox not found for your team.
+
+  request_id:
+    type: string
+    description: The ID of the request. Give it to support when you report a problem.
+    example: 4851a473-1621-42ea-b2f9-5071c0ea8414
+
+required:
+  - id
+  - message
