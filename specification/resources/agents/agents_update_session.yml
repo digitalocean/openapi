@@ -16,7 +16,7 @@ description: |-
 
   | Section | What it changes | Agent restart |
   | --- | --- | --- |
-  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers can't be changed. | No |
+  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers can't be changed. | No (LangGraph and CrewAI: yes) |
   | `env` | Environment variables (name and value). | Yes |
   | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
   | `secrets` | Plain secrets (name and value). | Yes |
@@ -88,8 +88,9 @@ description: |-
      - `FAILED`: the update did not take effect. `session.update.detail` explains why, and
        `session.update.reverted` is `true` if the previous settings were restored.
 
-  Tool updates usually finish within a few seconds. Updates to `env` (including the model) or
-  `secrets` restart the agent and can take up to about two minutes.
+  Tool updates usually finish within a few seconds, except on `langgraph` and `crewai`, where
+  they restart the agent. Updates to `env` (including the model) or `secrets` restart the agent
+  and can take up to about two minutes.
 
   If the request matches the session's current settings, it returns `200` with `outcome` set to
   `UNCHANGED` and nothing is applied.
