@@ -1,0 +1,27 @@
+name: Trigger Product Docs API Reference Regeneration
+on:
+  workflow_run:
+    workflows: [Spec Main]
+    types:
+      - completed
+
+permissions: {}
+
+jobs:
+  build:
+    name: Trigger product-docs daily-jobs Workflow
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # Spec Main can also be dispatched from a branch; only a main publish
+    # should regenerate the public API reference.
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
+    steps:
+      # The SHA comes from the Spec Main run, not a checkout, so a merge that
+      # lands while this waits cannot change it. Its first 7 characters name
+      # the revision spec Spec Main uploaded (DigitalOcean-public-<sha>.v2.yaml),
+      # which product-docs fetches.
+      - name: trigger-workflow
+        run: gh workflow run --repo digitalocean/product-docs daily-jobs.yml --ref main -f openapi-sha="${HEAD_SHA:0:7}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
