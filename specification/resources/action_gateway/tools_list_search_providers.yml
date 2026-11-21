@@ -44,6 +44,7 @@ responses:
             credential_parameters: []
             oauth_client_setup_url: https://developer.atlassian.com/console/myapps/
             oauth_redirect_url: https://cloud.digitalocean.com/api/v1/security/connectlinks/callback
+            authorization_variants: []
           next_page_token: ''
   '400':
     $ref: ../../shared/responses/bad_request.yml
