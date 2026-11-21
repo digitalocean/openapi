@@ -1,0 +1,9 @@
+type: string
+description: >-
+  Signal to send to a sandbox command. Defaults to SIGTERM when unset.
+enum:
+  - SANDBOX_COMMAND_SIGNAL_UNSPECIFIED
+  - SANDBOX_COMMAND_SIGNAL_SIGTERM
+  - SANDBOX_COMMAND_SIGNAL_SIGKILL
+default: SANDBOX_COMMAND_SIGNAL_UNSPECIFIED
+example: SANDBOX_COMMAND_SIGNAL_SIGTERM

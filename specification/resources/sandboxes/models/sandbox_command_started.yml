@@ -1,0 +1,8 @@
+type: object
+
+properties:
+  pid:
+    type: integer
+    format: int64
+    description: The process ID of the started command.
+    example: 42
