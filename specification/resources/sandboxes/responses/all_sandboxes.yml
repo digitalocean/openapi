@@ -1,0 +1,42 @@
+description: >
+  A JSON object with a key called `sandboxes`. The value is an array of sandbox
+  objects. When more results exist, `next_page_token` is set for the next page.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        sandboxes:
+          type: array
+          description: The sandboxes.
+          items:
+            $ref: '../models/sandbox.yml'
+        next_page_token:
+          type: string
+          description: The token for the next page. Empty on the last page.
+          example: ""
+
+    examples:
+      Sandbox List:
+        value:
+          sandboxes:
+            - sandbox_id: 11111111-1111-4111-8111-111111111111
+              template: coding-opencode
+              state: SANDBOX_STATE_RUNNING
+              size_slug: s-1vcpu-1gb
+              created_at: "2026-11-18T12:00:00Z"
+            - sandbox_id: 22222222-2222-4222-8222-222222222222
+              template: coding-opencode
+              state: SANDBOX_STATE_PAUSED
+              size_slug: s-2vcpu-4gb
+              created_at: "2026-11-18T11:00:00Z"
+          next_page_token: ""

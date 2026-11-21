@@ -1,0 +1,45 @@
+operationId: sandboxes_delete
+
+summary: Delete a Sandbox
+
+description: |
+  To delete a sandbox, send a DELETE request to `/v2/sandboxes/{sandbox_id}`.
+
+  A successful request returns HTTP 200 with an empty JSON object. Deleting a
+  sandbox that is already destroyed is idempotent and also succeeds. A locked
+  sandbox cannot be deleted and returns HTTP 403.
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/sandbox_id'
+
+responses:
+  '200':
+    $ref: 'responses/empty.yml'
+
+  '401':
+    $ref: 'responses/errors.yml#/unauthorized'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_delete.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox:delete'

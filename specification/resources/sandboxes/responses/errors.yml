@@ -1,0 +1,93 @@
+bad_request:
+  description: The request is not valid, or the sandbox cannot be resumed in its current state.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      examples:
+        Invalid UUID:
+          value:
+            id: invalid_argument
+            message: sandbox_id must be a valid UUID
+        Cannot Resume:
+          value:
+            id: bad_request
+            message: sandbox cannot be resumed in its current state
+        Invalid Page Token:
+          value:
+            id: invalid_argument
+            message: invalid page_token
+
+unauthorized:
+  description: Missing or invalid credentials.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      example:
+        id: unauthorized
+        message: Unable to authenticate you.
+
+forbidden:
+  description: >
+    The caller does not have the required permission, or the sandbox is locked
+    and cannot be deleted.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      examples:
+        Permission Denied:
+          value:
+            id: forbidden
+            message: The caller does not have the required permission.
+        Locked:
+          value:
+            id: forbidden
+            message: sandbox is locked
+
+not_found:
+  description: Sandbox not found for your team.
+
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      example:
+        id: not_found
+        message: sandbox not found
