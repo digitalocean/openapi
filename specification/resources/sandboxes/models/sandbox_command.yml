@@ -1,0 +1,27 @@
+type: object
+
+description: A command running in a sandbox.
+
+required:
+  - pid
+  - cmd
+
+properties:
+  pid:
+    type: integer
+    format: int64
+    readOnly: true
+    description: The process ID of the command.
+    example: 42
+
+  cmd:
+    type: string
+    readOnly: true
+    description: The executable that was started.
+    example: bash
+
+  cwd:
+    type: string
+    readOnly: true
+    description: The working directory of the command.
+    example: /workspace

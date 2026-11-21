@@ -38,3 +38,13 @@ state:
   schema:
     $ref: 'models/sandbox_state.yml'
   example: SANDBOX_STATE_RUNNING
+
+pid:
+  in: path
+  name: pid
+  description: The process ID of the command in the sandbox.
+  required: true
+  schema:
+    type: integer
+    format: int64
+  example: 42
