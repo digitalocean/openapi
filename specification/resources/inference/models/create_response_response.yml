@@ -26,7 +26,7 @@ properties:
   model:
     type: string
     description: The model used to generate the response.
-    example: "openai-gpt-oss-20b"
+    example: "openai-gpt-oss-120b"
   output:
     type: array
     description: >

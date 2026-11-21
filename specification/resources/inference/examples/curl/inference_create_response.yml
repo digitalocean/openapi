@@ -4,7 +4,7 @@ source: |-
     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "openai-gpt-oss-20b",
+      "model": "openai-gpt-oss-120b",
       "input": "What is the capital of France?",
       "max_output_tokens": 50,
       "temperature": 0.7,
