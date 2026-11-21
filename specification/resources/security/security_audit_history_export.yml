@@ -1,0 +1,65 @@
+operationId: security_get_audit_history_export
+
+summary: Export Audit History
+
+description: |-
+  To export a team's Audit History as a CSV file, send a GET request to `/v2/teams/audit_history/export`. The team is the one identified by the bearer token.
+  Both `start_date` and `end_date` are included, down to the second. To include all of 10 November, set `end_date` to `2026-11-10T23:59:59Z`.
+  The interval must not exceed 30 days. An export contains at most 5,000 events. When the range contains more events, the API returns `422 Unprocessable Entity`; request a smaller time range.
+  Each Security History instance serves up to 5 exports at a time. Another export request returns `429 Too Many Requests` with `Retry-After: 60` until one finishes.
+
+tags:
+  - Security
+
+parameters:
+  - $ref: 'parameters.yml#/audit_history_start_date'
+  - $ref: 'parameters.yml#/audit_history_end_date'
+
+responses:
+  '200':
+    $ref: 'responses/audit_history_csv.yml'
+
+  '400':
+    $ref: '../../shared/responses/bad_request.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: '../../shared/responses/forbidden.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '422':
+    description: The requested range contains more than 5,000 Audit History events. Request a smaller time range.
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+    content:
+      application/json:
+        schema:
+          $ref: '../../shared/models/error.yml'
+        example:
+          id: internal_error
+          message: audit history export is limited to 5,000 events; request a smaller time range
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/security_audit_history_export.yml'
+
+security:
+  - bearer_auth:
+      - 'security:read'
