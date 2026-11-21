@@ -1,0 +1,7 @@
+type: object
+
+description: The body of a signal-sandbox-command request.
+
+properties:
+  signal:
+    $ref: 'sandbox_command_signal.yml'

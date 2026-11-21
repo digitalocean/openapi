@@ -1,0 +1,47 @@
+type: object
+
+description: The body of a start-sandbox-command request.
+
+required:
+  - cmd
+
+properties:
+  cmd:
+    type: string
+    description: >-
+      Executable (not a shell string). Use `cmd="bash"`, `args=["-lc", "..."]`
+      for a shell.
+    example: bash
+
+  args:
+    type: array
+    items:
+      type: string
+    description: Arguments passed to the executable.
+    example:
+      - "-lc"
+      - "echo hello"
+
+  cwd:
+    type: string
+    description: Working directory for the command.
+    example: /workspace
+
+  env_vars:
+    type: object
+    additionalProperties:
+      type: string
+    description: Environment variables for the command.
+    example:
+      MY_KEY: my-value
+
+  stdin:
+    type: boolean
+    description: When true, leave stdin open for later writes.
+    example: false
+
+  timeout_seconds:
+    type: string
+    format: int64
+    description: Zero means no timeout. Encoded as a string per protobuf JSON.
+    example: "0"
