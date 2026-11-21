@@ -3,7 +3,8 @@ summary: Get a Connection
 description: >-
   Returns the connection and, while it is pending, the authorization the user still has to complete. Reading
   a pending connection picks up a completed authorization, and marks the connection expired once its link
-  has lapsed. Returns 404 for an unknown connection or one you cannot see.
+  has lapsed. Includes provider account and workspace metadata in `connection.provider_data` when available.
+  Returns 404 for an unknown connection or one you cannot see.
 tags:
 - Action Gateway
 parameters:

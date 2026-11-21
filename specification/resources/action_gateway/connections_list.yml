@@ -3,6 +3,7 @@ summary: List Connections
 description: >-
   Returns the connections you can see, excluding revoked ones. Offset-paged with page and `per_page`;
   filter by provider, `user_id`, and status.
+  Each active connection may include sanitized provider metadata in `provider_data` when available.
 tags:
 - Action Gateway
 parameters:

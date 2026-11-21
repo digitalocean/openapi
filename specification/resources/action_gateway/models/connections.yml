@@ -80,6 +80,16 @@ connection:
     a status or a provider without first asking what kind it is; only the members a kind alone has move
     into details.
   properties:
+    provider_data:
+      type: object
+      readOnly: true
+      additionalProperties: true
+      description: >-
+        Optional sanitized provider metadata returned when reading or listing connections.
+        Fields vary by provider and may include account, workspace, and granted scope information. Unavailable metadata is omitted, while an empty object is valid.
+      example:
+        workspace_id: workspace-123
+        workspace_name: Example workspace
     id:
       type: string
       format: uuid
