@@ -1,0 +1,18 @@
+type: object
+
+properties:
+  exit_code:
+    type: integer
+    format: int32
+    description: The process exit code.
+    example: 0
+
+  status:
+    type: string
+    description: A short status string for the exit.
+    example: exited
+
+  error:
+    type: string
+    description: An error message when the process failed abnormally.
+    example: ""

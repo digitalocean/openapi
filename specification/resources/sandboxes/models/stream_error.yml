@@ -1,0 +1,35 @@
+type: object
+
+description: A streaming transport error from the gateway.
+
+properties:
+  grpc_code:
+    type: integer
+    format: int32
+    example: 5
+
+  http_code:
+    type: integer
+    format: int32
+    example: 404
+
+  message:
+    type: string
+    example: not found
+
+  http_status:
+    type: string
+    example: Not Found
+
+  details:
+    type: array
+    items:
+      type: object
+      properties:
+        type_url:
+          type: string
+          example: type.googleapis.com/google.rpc.Status
+        value:
+          type: string
+          format: byte
+          example: ""

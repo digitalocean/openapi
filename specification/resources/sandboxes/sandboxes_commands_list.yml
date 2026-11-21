@@ -1,0 +1,41 @@
+operationId: sandboxes_list_commands
+
+summary: List Sandbox Commands
+
+description: |
+  List running commands. Returns `pid`, `cmd`, and `cwd` only.
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/sandbox_id'
+
+responses:
+  '200':
+    $ref: 'responses/all_sandbox_commands.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_commands_list.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox:read'
