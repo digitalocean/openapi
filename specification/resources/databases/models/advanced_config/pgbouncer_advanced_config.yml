@@ -76,3 +76,12 @@ properties:
     minimum: 0
     maximum: 86400
     example: 3600
+  max_prepared_statements:
+    description: >-
+      Sets the protocol-level named prepared statements related to commands sent by the client
+      in transaction or statement pooling modes. When set to 0, prepared statements are disabled.
+    type: integer
+    minimum: 0
+    maximum: 3000
+    default: 100
+    example: 100
