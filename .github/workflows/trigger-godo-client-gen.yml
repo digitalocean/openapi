@@ -1,0 +1,30 @@
+name: Trigger Godo V2 Client Generation
+on:
+  workflow_run:
+    workflows: [Spec Main]
+    types:
+      - completed
+
+jobs:
+  build:
+    name: Trigger digitalocean/godo V2 Client Generation
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          # The commit Spec Main built, not whatever main is when this job starts.
+          # fetch-depth 1 matches Spec Main, so `git rev-parse --short` is the
+          # same abbrev used in the published spec filename.
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 1
+      - name: Set outputs
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
+      - name: trigger-workflow
+        run: gh workflow run --repo digitalocean/godo v2-client-gen.yml --ref main -f openapi_short_sha=${{ steps.vars.outputs.sha_short }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
