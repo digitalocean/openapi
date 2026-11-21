@@ -61,6 +61,17 @@ parameters:
     maxLength: 64
     example: demo
   example: demo
+- in: query
+  name: parent_session_id
+  required: false
+  description: Optional exact filter on fork lineage. Returns only the sessions created by forking this
+    session, whichever checkpoint they were forked from. Takes the parent's session id, not its name.
+    A fork cannot be forked again, so every child of a session is listed directly under it. The default
+    status filter still applies, so pass `status=SESSION_STATUS_ALL` to include destroyed and failed children.
+  schema:
+    type: string
+    example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+  example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
 responses:
   '200':
     description: A successful response.
