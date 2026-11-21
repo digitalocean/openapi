@@ -5,7 +5,8 @@ properties:
     type: string
     description: |
       The ID of the project the app should be assigned to. If omitted, it will be assigned to your default project.
-      <br><br>Requires `project:assign_resource` and `project:update` scopes.
+      <br><br>Requires `project:update` scope. The `project:assign_resource` scope applies to the Projects API
+      resource-assignment endpoints, such as `POST /v2/projects/{project_id}/resources`, and is not sufficient for this check.
 required:
 - spec
 type: object

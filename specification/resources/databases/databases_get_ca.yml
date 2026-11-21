@@ -9,6 +9,10 @@ description: |
   The response will be a JSON object with a `ca` key. This will be set to an object
   containing the base64 encoding of the public key certificate.
 
+  Retrieving the certificate content requires both the `database:read` and
+  `database:view_credentials` scopes. A token with only `database:read` still
+  receives a `200` response, but the `certificate` field is empty.
+
 tags:
   - Databases
 
@@ -42,4 +46,5 @@ x-codeSamples:
 security:
   - bearer_auth:
     - 'database:read'
+    - 'database:view_credentials'
 
