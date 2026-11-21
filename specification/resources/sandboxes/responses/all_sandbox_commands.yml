@@ -1,0 +1,27 @@
+description: >-
+  The response is a JSON object with a `commands` array of running commands.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        commands:
+          type: array
+          items:
+            $ref: '../models/sandbox_command.yml'
+    examples:
+      Commands List:
+        value:
+          commands:
+            - pid: 42
+              cmd: bash
+              cwd: /workspace

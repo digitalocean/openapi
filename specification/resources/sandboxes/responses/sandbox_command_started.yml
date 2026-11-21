@@ -1,0 +1,23 @@
+description: The command was started. The process keeps running after this call returns.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        pid:
+          type: integer
+          format: int64
+          description: The process ID of the started command.
+    examples:
+      Started Command:
+        value:
+          pid: 42
