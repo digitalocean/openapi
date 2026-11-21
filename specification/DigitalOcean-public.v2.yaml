@@ -3,7 +3,7 @@ openapi: "3.0.0"
 info:
   title: DigitalOcean API
   version: "2.0"
-  description: ""
+  description: The DigitalOcean API lets you programmatically manage Droplets and other DigitalOcean resources using conventional HTTP requests.
 
   license:
     name: Apache 2.0
