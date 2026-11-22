@@ -1,0 +1,57 @@
+type: object
+
+description: A snapshot of a sandbox.
+
+required:
+  - snapshot_id
+  - sandbox_id
+  - state
+  - created_at
+
+properties:
+  snapshot_id:
+    type: string
+    readOnly: true
+    description: The ID of the snapshot.
+    example: 33333333-4444-4555-8666-777777777777
+
+  sandbox_id:
+    type: string
+    readOnly: true
+    description: The ID of the sandbox the snapshot was taken from.
+    example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
+  name:
+    type: string
+    readOnly: true
+    description: The name given when the snapshot was created, if any.
+    example: my-snapshot
+
+  state:
+    $ref: 'snapshot_state.yml'
+
+  size_bytes:
+    type: string
+    format: uint64
+    readOnly: true
+    description: The size of the snapshot in bytes. Set when the snapshot is `COMPLETE`.
+    example: "1073741824"
+
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: The time the snapshot was created, in ISO 8601 format.
+    example: "2026-11-20T12:00:00Z"
+
+  error_message:
+    type: string
+    readOnly: true
+    description: Why the snapshot failed. Set when the state is `FAILED`.
+    example: ''
+
+  ttl:
+    type: string
+    readOnly: true
+    description: How long the snapshot is kept. Unset when the platform default applies.
+    example: 168h

@@ -1,0 +1,63 @@
+operationId: sandboxes_create_snapshot
+
+summary: Create a Snapshot
+
+description: |
+  Start a snapshot of a ready or paused sandbox. The snapshot is created
+  asynchronously: the response is `202` with state `CREATING`. Poll retrieve
+  a snapshot until the state is `COMPLETE` or `FAILED`. The sandbox must be
+  on a microVM cell. The snapshot captures the boot disk and memory, not the
+  workspace data disk.
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/sandbox_id'
+
+requestBody:
+  required: false
+  content:
+    application/json:
+      schema:
+        $ref: 'models/snapshot_create.yml'
+      examples:
+        Create Snapshot:
+          value:
+            name: my-snapshot
+            ttl: 168h
+
+responses:
+  '202':
+    $ref: 'responses/snapshot_accepted.yml'
+
+  '200':
+    $ref: 'responses/snapshot.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_snapshots_create.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox:update'

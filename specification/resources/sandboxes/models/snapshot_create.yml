@@ -1,0 +1,16 @@
+type: object
+
+description: The body of a create-snapshot request.
+
+properties:
+  name:
+    type: string
+    description: >-
+      An optional name for the snapshot. 1 to 63 characters: lowercase letters,
+      digits and hyphens.
+    example: my-snapshot
+
+  ttl:
+    type: string
+    description: How long to keep the snapshot. When unset, the platform default applies.
+    example: 168h
