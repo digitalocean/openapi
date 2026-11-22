@@ -697,8 +697,9 @@ tags:
     description: |-
       Sandboxes are isolated microVMs that run your code. By sending requests
       to the `/v2/sandboxes` endpoints, you can create, list, retrieve, pause,
-      resume, and delete sandboxes, and start, list, signal, write stdin to,
-      and attach to commands inside a sandbox.
+      resume, and delete sandboxes; start, list, signal, write stdin to, and
+      attach to commands inside a sandbox; and create, list, update, and delete
+      team custom templates and poll their builds.
 
   - name: Security
     description: |-
@@ -3180,6 +3181,31 @@ paths:
 
     post:
       $ref: "resources/sandboxes/sandboxes_create.yml"
+
+  /v2/sandboxes/templates:
+    get:
+      $ref: "resources/sandboxes/sandboxes_templates_list.yml"
+
+    post:
+      $ref: "resources/sandboxes/sandboxes_templates_create.yml"
+
+  /v2/sandboxes/templates/{template_id}:
+    get:
+      $ref: "resources/sandboxes/sandboxes_templates_get.yml"
+
+    put:
+      $ref: "resources/sandboxes/sandboxes_templates_update.yml"
+
+    delete:
+      $ref: "resources/sandboxes/sandboxes_templates_delete.yml"
+
+  /v2/sandboxes/templates/{template_id}/builds:
+    get:
+      $ref: "resources/sandboxes/sandboxes_templates_builds_list.yml"
+
+  /v2/sandboxes/templates/{template_id}/builds/{build_id}:
+    get:
+      $ref: "resources/sandboxes/sandboxes_templates_builds_get.yml"
 
   /v2/sandboxes/{sandbox_id}:
     get:
