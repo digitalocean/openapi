@@ -1,0 +1,12 @@
+type: object
+
+description: The configuration returned on template and build resources.
+
+properties:
+  base_template:
+    type: string
+    description: Accepted base template key (for example `coding-base`).
+    example: coding-base
+
+  image:
+    $ref: 'image_source.yml'

@@ -1,0 +1,43 @@
+type: object
+
+description: A team custom sandbox template.
+
+required:
+  - template_id
+  - name
+  - status
+
+properties:
+  template_id:
+    type: string
+    readOnly: true
+    description: The unique ID of the template.
+    example: 11111111-2222-4333-8444-555555555555
+
+  name:
+    type: string
+    readOnly: true
+    description: The template name.
+    example: my-custom-template
+
+  spec:
+    readOnly: true
+    allOf:
+      - $ref: 'template_spec.yml'
+
+  status:
+    $ref: 'template_status.yml'
+
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: The time the template was created, in ISO 8601 format.
+    example: "2026-11-20T12:00:00Z"
+
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: The time the template was last updated, in ISO 8601 format.
+    example: "2026-11-20T12:05:00Z"
