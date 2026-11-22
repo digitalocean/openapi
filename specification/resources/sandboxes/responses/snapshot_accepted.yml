@@ -1,0 +1,29 @@
+description: >-
+  The snapshot was accepted and is being created. Its state is usually
+  `CREATING`. Poll retrieve until `COMPLETE` or `FAILED`.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        snapshot:
+          $ref: '../models/snapshot.yml'
+    examples:
+      Accepted Snapshot:
+        value:
+          snapshot:
+            snapshot_id: 33333333-4444-4555-8666-777777777777
+            sandbox_id: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+            name: my-snapshot
+            state: SNAPSHOT_STATE_CREATING
+            created_at: "2026-11-20T12:00:00Z"
+            ttl: 168h

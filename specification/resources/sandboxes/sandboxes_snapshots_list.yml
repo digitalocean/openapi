@@ -1,0 +1,59 @@
+operationId: sandboxes_list_snapshots
+
+summary: List Snapshots
+
+description: |
+  List your team's snapshots, newest first. Pass `sandbox_id` to list the
+  snapshots of one sandbox.
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/filter_sandbox_id'
+  - $ref: 'parameters.yml#/page_size'
+  - $ref: 'parameters.yml#/page_token'
+
+responses:
+  '200':
+    $ref: 'responses/all_snapshots.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    description: The sandbox in `sandbox_id` was not found for your team.
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+    content:
+      application/json:
+        schema:
+          $ref: 'models/error.yml'
+        example:
+          id: not_found
+          message: Sandbox not found for your team.
+          request_id: 4851a473-1621-42ea-b2f9-5071c0ea8414
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_snapshots_list.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox:read'
