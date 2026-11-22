@@ -53,9 +53,11 @@ description: |-
     `web.fetch`, `mcp`, `do.actions/<tool>`), with `allow`, `ask`, or `deny`.
   - `openhands`: `default` and `bash`, `file.read`, `file.write`, and `web.fetch` rules. Not
     `mcp` or `do.actions/<tool>` rules.
+  - `codex`: `default` and `bash` and `do.actions/<tool>` rules, with `allow`, `ask`, or `deny`.
+    Not `file.read`, `file.write`, `web.fetch`, or `mcp` rules.
   - `hermes`, `langgraph`: `do.actions/<tool>` rules with `allow` or `deny`, and `default` set to
     `allow` or `deny`. Not `ask`, and no other rule types.
-  - Any other agent: nothing.
+  - `crewai`, `cursor`, and any other agent: nothing.
 
   `permissions.filesystem` and `permissions.network` can't be changed on any agent.
 
