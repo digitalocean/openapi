@@ -48,3 +48,21 @@ pid:
     type: integer
     format: int64
   example: 42
+
+template_id:
+  in: path
+  name: template_id
+  description: The unique ID of the template.
+  required: true
+  schema:
+    type: string
+  example: 11111111-2222-4333-8444-555555555555
+
+build_id:
+  in: path
+  name: build_id
+  description: The unique ID of the template build.
+  required: true
+  schema:
+    type: string
+  example: 22222222-3333-4444-8555-666666666666

@@ -1,0 +1,73 @@
+operationId: sandboxes_update_template
+
+summary: Update a Template
+
+description: |
+  Update a team custom template's `base_template` and/or `source_oci_ref` and
+  kick a new build. Omitted fields keep their previous values.
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/template_id'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/template_update.yml'
+      examples:
+        Update Template:
+          value:
+            source_oci_ref: registry.digitalocean.com/my-team/my-image:v2
+
+responses:
+  '200':
+    $ref: 'responses/template.yml'
+
+  '400':
+    description: The body is not valid JSON, or it contains an unknown field.
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+    content:
+      application/json:
+        schema:
+          $ref: 'models/error.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '409':
+    $ref: 'responses/errors.yml#/conflict'
+
+  '422':
+    $ref: 'responses/errors.yml#/unprocessable_entity'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_templates_update.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox_templates:update'
