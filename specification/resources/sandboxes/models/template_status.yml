@@ -1,0 +1,14 @@
+type: string
+
+description: The product status of a team custom template.
+
+enum:
+  - TEMPLATE_STATUS_UNSPECIFIED
+  - TEMPLATE_STATUS_PENDING
+  - TEMPLATE_STATUS_BUILDING
+  - TEMPLATE_STATUS_READY
+  - TEMPLATE_STATUS_FAILED
+
+default: TEMPLATE_STATUS_UNSPECIFIED
+
+example: TEMPLATE_STATUS_READY

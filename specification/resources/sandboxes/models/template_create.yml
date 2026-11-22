@@ -1,0 +1,26 @@
+type: object
+
+description: The body of a create-template request.
+
+required:
+  - name
+  - base_template
+  - source_oci_ref
+
+properties:
+  name:
+    type: string
+    description: Template name. Must not collide with a global base template name.
+    example: my-custom-template
+
+  base_template:
+    type: string
+    description: Accepted base template key to rebase onto (for example `coding-base`).
+    example: coding-base
+
+  source_oci_ref:
+    type: string
+    description: >-
+      Customer OCI image reference (`registry/repository:tag` or `@digest`).
+      Equivalent to E2B `fromImage`; parsed into an image source server-side.
+    example: registry.digitalocean.com/my-team/my-image:v1

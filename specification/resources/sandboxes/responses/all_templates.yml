@@ -1,0 +1,41 @@
+description: >-
+  The response is a JSON object with a `templates` array and an optional
+  `next_page_token` for cursor pagination.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        templates:
+          type: array
+          items:
+            $ref: '../models/template.yml'
+        next_page_token:
+          type: string
+          description: The token for the next page. Empty on the last page.
+          example: ''
+    examples:
+      Templates Page:
+        value:
+          templates:
+            - template_id: 11111111-2222-4333-8444-555555555555
+              name: my-custom-template
+              status: TEMPLATE_STATUS_READY
+              spec:
+                base_template: coding-base
+                image:
+                  registry: registry.digitalocean.com
+                  repository: my-team/my-image
+                  tag: v1
+              created_at: "2026-11-20T12:00:00Z"
+              updated_at: "2026-11-20T12:05:00Z"
+          next_page_token: ""

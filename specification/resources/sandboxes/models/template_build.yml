@@ -1,0 +1,55 @@
+type: object
+
+description: One rebase of a customer image onto a base template.
+
+required:
+  - build_id
+  - template_id
+  - status
+
+properties:
+  build_id:
+    type: string
+    readOnly: true
+    description: The unique ID of the build.
+    example: 22222222-3333-4444-8555-666666666666
+
+  template_id:
+    type: string
+    readOnly: true
+    description: The unique ID of the template.
+    example: 11111111-2222-4333-8444-555555555555
+
+  name:
+    type: string
+    readOnly: true
+    description: The template name at the time of the build.
+    example: my-custom-template
+
+  spec:
+    readOnly: true
+    allOf:
+      - $ref: 'template_spec.yml'
+
+  status:
+    $ref: 'template_build_status.yml'
+
+  error:
+    type: string
+    readOnly: true
+    description: An error message when the build failed.
+    example: ''
+
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: The time the build was created, in ISO 8601 format.
+    example: "2026-11-20T12:00:00Z"
+
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: The time the build was last updated, in ISO 8601 format.
+    example: "2026-11-20T12:05:00Z"
