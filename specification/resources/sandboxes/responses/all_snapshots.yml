@@ -1,0 +1,37 @@
+description: >-
+  The response is a JSON object with a `snapshots` array and an optional
+  `next_page_token` for cursor pagination.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        snapshots:
+          type: array
+          items:
+            $ref: '../models/snapshot.yml'
+        next_page_token:
+          type: string
+          description: Pass this as `page_token` to get the next page. Empty on the last page.
+          example: ''
+    examples:
+      Snapshots Page:
+        value:
+          snapshots:
+            - snapshot_id: 33333333-4444-4555-8666-777777777777
+              sandbox_id: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+              name: my-snapshot
+              state: SNAPSHOT_STATE_COMPLETE
+              size_bytes: "1073741824"
+              created_at: "2026-11-20T12:00:00Z"
+              ttl: 168h
+          next_page_token: ""

@@ -1,0 +1,20 @@
+type: string
+
+description: |-
+  Where a snapshot is in its life.
+
+  - `SNAPSHOT_STATE_CREATING`: The capture is in progress.
+  - `SNAPSHOT_STATE_UPLOADING`: The capture finished and the artifacts are uploading to storage.
+  - `SNAPSHOT_STATE_COMPLETE`: The snapshot is ready. You can start sandboxes from it.
+  - `SNAPSHOT_STATE_FAILED`: The snapshot failed. See `error_message`.
+
+enum:
+  - SNAPSHOT_STATE_UNSPECIFIED
+  - SNAPSHOT_STATE_CREATING
+  - SNAPSHOT_STATE_UPLOADING
+  - SNAPSHOT_STATE_COMPLETE
+  - SNAPSHOT_STATE_FAILED
+
+default: SNAPSHOT_STATE_UNSPECIFIED
+
+example: SNAPSHOT_STATE_COMPLETE
