@@ -18,7 +18,7 @@ content:
         sandboxes:
           type: array
           items:
-            $ref: '../models/sandbox.yml'
+            $ref: '../models/sandbox_info.yml'
         next_page_token:
           type: string
           description: The token for the next page. Empty on the last page.

@@ -20,7 +20,7 @@ content:
       type: object
       properties:
         sandbox:
-          $ref: '../models/sandbox.yml'
+          $ref: '../models/sandbox_info.yml'
     examples:
       Created Sandbox:
         value:
