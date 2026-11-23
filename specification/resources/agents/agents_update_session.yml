@@ -45,7 +45,7 @@ description: |-
   These updates have the following additional requirements:
 
   - URL-bound secret and egress updates must be enabled for your team. Otherwise, the request
-    returns `422`.
+    returns `403`.
   - The session must have been created with a URL-bound secret or an egress allowlist. A session
     created with unrestricted egress and no URL-bound secrets can't gain either one: the update
     ends in `FAILED` with `error` set to `requires_new_session`.
@@ -158,7 +158,8 @@ responses:
   '403':
     description: >-
       You don't have access to this session, or session settings updates are not enabled for your
-      team (`manifest_yaml` only).
+      team (`manifest_yaml` only). A URL-bound secret or `egress` change also returns `403` when
+      URL-bound secret and egress updates are not enabled for your team.
     headers: *id001
     content:
       application/json:
@@ -183,9 +184,8 @@ responses:
     description: >-
       The change can only be made by creating a new session. For example: adding, removing, or
       changing a custom MCP server in `tools`; changing a reserved platform key, an OAuth secret, or
-      a mount-only secret; changing `vpc_uuid` or `subnet_uuid` in `egress`; changing a URL-bound
-      secret or `egress` when those updates are not enabled for your team; or adding, removing, or
-      changing `HARNESS_INFERENCE_MODEL` on a session that doesn't use DigitalOcean Serverless
+      a mount-only secret; changing `vpc_uuid` or `subnet_uuid` in `egress`; or adding, removing,
+      or changing `HARNESS_INFERENCE_MODEL` on a session that doesn't use DigitalOcean Serverless
       Inference.
     headers: *id001
     content:
