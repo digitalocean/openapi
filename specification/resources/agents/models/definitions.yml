@@ -2109,7 +2109,8 @@ patch_session_request:
           keep its current value. URL-bound secrets also accept an object; see **URL-bound
           secrets**. A `null` value returns `400`.
         - `egress`: the complete egress allowlist, as an object with `allow_hosts` (hostnames) and
-          `allow_ips` (exact IPv4 or IPv6 addresses, not CIDR ranges). It replaces the session's
+          `allow_ips` (exact IPv4 or IPv6 addresses, not CIDR ranges). Only this object form is
+          supported in an update. It replaces the session's
           current allowlist: a host or IP address you leave out is removed. Leave out `vpc_uuid`
           and `subnet_uuid` to keep the session's current VPC, or set them to their current values.
           A different value returns `422`. See **Egress**.
@@ -2132,7 +2133,7 @@ patch_session_request:
 
         `url` must use `https://` and name an exact hostname (no wildcards, IP addresses, or
         `localhost`), with an optional path and no port, query, or fragment. A session can have up
-        to 16 URL-bound secrets. A URL-bound secret can't be changed back to a plain secret. If
+        to 16 URL-bound secrets, fewer if it has storage mounts, which count toward the same limit. A URL-bound secret can't be changed back to a plain secret. If
         the session has an egress allowlist, the secret's host is added to it. After a rollback or
         fork, a URL-bound secret that was moved off its agent config's URL can need its value
         again: the request returns `409` until you send `value`.
