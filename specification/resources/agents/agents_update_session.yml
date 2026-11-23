@@ -19,6 +19,7 @@ description: |-
   | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers can't be changed. | No |
   | `env` | Environment variables (name and value). | Yes |
   | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
+  | `env.MODEL`, `env.OPENAI_MODEL`, `env.ANTHROPIC_MODEL` | The model, for sessions that use their own OpenAI-compatible or Anthropic endpoint. | Yes |
   | `secrets` | Plain secrets (name and value). | Yes |
   | `secrets` (URL-bound) | URL-bound secrets: value, `url`, and `scheme`. | No |
   | `egress` | The hosts and IP addresses the session can reach (`allow_hosts` and `allow_ips`). | No |
@@ -26,10 +27,21 @@ description: |-
   Sections you omit are not changed. Each section you include replaces that section in full; see
   `manifest_yaml` for the exact rules.
 
-  The only way to change a session's model is to set `HARNESS_INFERENCE_MODEL` in `env`. This
-  works only for sessions that were created with a DigitalOcean Serverless Inference model;
-  sessions that use a third-party model provider can't change their model. A top-level `model`
-  section returns `400`.
+  ### Changing the model
+
+  You change a session's model through `env`; a top-level `model` section returns `400`. The key
+  to set depends on the model endpoint the session was created with:
+
+  | Session created with | Model endpoint | `env` key that sets the model |
+  | --- | --- | --- |
+  | `HARNESS_INFERENCE_MODEL`, and none of the keys below | DigitalOcean Serverless Inference | `HARNESS_INFERENCE_MODEL` |
+  | `OPENAI_BASE_URL` | Your OpenAI-compatible endpoint | `MODEL`, or `OPENAI_MODEL` |
+  | `ANTHROPIC_BASE_URL`, or an `ANTHROPIC_API_KEY` secret | Your Anthropic endpoint, or the Anthropic API | `ANTHROPIC_MODEL`, or `MODEL` |
+
+  A session keeps the model endpoint it was created with. Its provider and base URL can't be
+  changed (`422`). The provider API key (`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) can be rotated
+  but not added, removed, or moved to another URL or scheme (`422`). See `manifest_yaml` for the
+  rules.
 
   The following can't be changed on an existing session: custom MCP servers (`422`), the egress
   VPC (`vpc_uuid` and `subnet_uuid`, `422`), GitHub OAuth connections, platform-managed model keys,
@@ -144,10 +156,10 @@ responses:
     description: >-
       The request is invalid. For example: the body is empty or not valid JSON, `manifest_yaml` is
       not valid YAML, a field or manifest section is not recognized, a value is invalid, or both
-      `resume_on_topoff` and `manifest_yaml` are set. A top-level `model` section (set
-      `env.HARNESS_INFERENCE_MODEL` instead) and a `permissions` section (can't be changed on an
-      existing session) also return `400`. A URL-bound secret moved to a new host or path, or to
-      `scheme: raw`, without `value` returns `400`.
+      `resume_on_topoff` and `manifest_yaml` are set. A top-level `model` section (set the model in
+      `env` instead) and a `permissions` section (can't be changed on an existing session) also
+      return `400`, as does a malformed model name. A URL-bound secret moved to a new host or path,
+      or to `scheme: raw`, without `value` returns `400`.
     headers: *id001
     content:
       application/json:
@@ -184,9 +196,10 @@ responses:
     description: >-
       The change can only be made by creating a new session. For example: adding, removing, or
       changing a custom MCP server in `tools`; changing a reserved platform key, an OAuth secret, or
-      a mount-only secret; changing `vpc_uuid` or `subnet_uuid` in `egress`; or adding, removing,
+      a mount-only secret; changing `vpc_uuid` or `subnet_uuid` in `egress`; adding, removing,
       or changing `HARNESS_INFERENCE_MODEL` on a session that doesn't use DigitalOcean Serverless
-      Inference.
+      Inference; changing a session's model provider or base URL; or adding, removing, or moving
+      the provider API key of a session that uses its own endpoint.
     headers: *id001
     content:
       application/json:

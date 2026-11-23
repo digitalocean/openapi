@@ -2090,8 +2090,8 @@ patch_session_request:
         your team (`403` otherwise).
 
         Supported sections are `tools`, `env`, `secrets`, and `egress`. Sections you omit are not
-        changed. Any other top-level key returns `400`, including `model` (to change the model,
-        set `HARNESS_INFERENCE_MODEL` in `env`) and `permissions` (can't be changed on an existing
+        changed. Any other top-level key returns `400`, including `model` (set the model in `env`
+        instead; see **Changing the model**) and `permissions` (can't be changed on an existing
         session).
 
         Each section you include replaces that section in full:
@@ -2145,14 +2145,38 @@ patch_session_request:
         is created. A session created with unrestricted egress and no URL-bound secrets can't gain
         an allowlist: the update ends in `FAILED` with `error` set to `requires_new_session`.
 
-        **Changing the model.** The only way to change a session's model is through `env`. Set
-        `HARNESS_INFERENCE_MODEL` to a DigitalOcean Serverless Inference model ID, or to
-        `router:<name>` for an inference router. This works
-        only on sessions created with `HARNESS_INFERENCE_MODEL` set and without their own
-        inference endpoint. Adding, removing, or changing the key on any other session, or moving
-        a session to its own endpoint, returns `422`. A malformed value (empty, multi-line, or over
-        256 bytes) returns `400`. Whether the model exists is not checked when you send the
-        request; an unknown model fails on the agent's next turn.
+        **Changing the model.** You change a session's model through `env`. The key to set depends
+        on the model endpoint the session was created with:
+
+        - DigitalOcean Serverless Inference (created with `HARNESS_INFERENCE_MODEL` and without
+          `OPENAI_BASE_URL`, `ANTHROPIC_BASE_URL`, or an `ANTHROPIC_API_KEY` secret): set
+          `HARNESS_INFERENCE_MODEL` to a Serverless Inference model ID, or to `router:<name>` for
+          an inference router. Removing the key, or moving the session to its own endpoint,
+          returns `422`. Adding the key to a session that was created without it also returns
+          `422`.
+        - Your own OpenAI-compatible endpoint (created with `OPENAI_BASE_URL`): set `MODEL`. The
+          session reads `MODEL` before `OPENAI_MODEL`, so set `OPENAI_MODEL` only if the session
+          uses it and doesn't have `MODEL`.
+        - Your own Anthropic endpoint (created with `ANTHROPIC_BASE_URL`), or the Anthropic API
+          (created with an `ANTHROPIC_API_KEY` secret and no base URL): set `ANTHROPIC_MODEL`. The
+          session reads `ANTHROPIC_MODEL` before `MODEL`.
+
+        On a session that uses its own endpoint, the following rules also apply:
+
+        - Removing the model key makes the agent use its default model for that endpoint.
+        - The model provider and the base URL (`OPENAI_BASE_URL` or `ANTHROPIC_BASE_URL`) can't be
+          changed (`422`). Include the base URL with its current value.
+        - The provider API key (`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) can only be rotated: set
+          it to the new value as a string, or to `{}` to keep it. Removing it, adding it to a
+          session that was created without it, or changing its `url` or `scheme` returns `422`.
+          If the key is URL-bound, rotating it follows the URL-bound secret rules: the agent isn't
+          restarted, and URL-bound secret updates must be enabled for your team (`403`
+          otherwise).
+
+        A model name can't be empty, start or end with whitespace, span more than one line, be
+        longer than 256 bytes, or contain ` #` or `: ` (`400`). Whether the endpoint serves the
+        model is not checked when you send the request; an unknown model fails on the agent's next
+        turn.
 
         **Reserved keys.** `HARNESS_INFERENCE_API_KEY` and `HARNESS_INFERENCE_BASE_URL` are
         managed by the platform: include them with their current values, or the request returns
@@ -2171,6 +2195,18 @@ patch_session_request:
         secrets:
           GITHUB_TOKEN: {}
           JIRA_API_TOKEN: new-token-value
+        ```
+
+        Example that changes the model and rotates the provider API key of a session that was
+        created with its own OpenAI-compatible endpoint. The example assumes the session has no
+        other env variables or secrets:
+
+        ```yaml
+        env:
+          OPENAI_BASE_URL: https://llm.example.com/v1
+          MODEL: my-model-v2
+        secrets:
+          OPENAI_API_KEY: new-api-key
         ```
 
         Example that keeps one URL-bound secret, moves another to a new URL, and replaces the
