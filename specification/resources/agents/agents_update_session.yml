@@ -49,10 +49,13 @@ description: |-
 
   What can change depends on the session's agent:
 
-  - `claude-code`, `opencode`: `default` and every rule type (`bash`, `file.read`, `file.write`,
-    `web.fetch`, `mcp`, `do.actions/<tool>`), with `allow`, `ask`, or `deny`.
+  - `claude-code`, `opencode`: `default` and `bash`, `file.read`, `file.write`, `mcp`, and
+    `do.actions/<tool>` rules, with `allow`, `ask`, or `deny`.
   - `openhands`: `default` and `bash`, `file.read`, `file.write`, and `web.fetch` rules. Not
     `mcp` or `do.actions/<tool>` rules.
+  - On `claude-code` and `openhands`, while the session uses `do.actions` tools, `default` and
+    `do.actions/<tool>` rules can't change: the change would move the session to a new Action
+    Gateway endpoint, which these agents can't pick up while running.
   - `codex`: `default` and `bash` and `do.actions/<tool>` rules, with `allow`, `ask`, or `deny`.
     Not `file.read`, `file.write`, `web.fetch`, or `mcp` rules.
   - `hermes`, `langgraph`: `do.actions/<tool>` rules with `allow` or `deny`, and `default` set to
