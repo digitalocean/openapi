@@ -2089,9 +2089,9 @@ patch_session_request:
         be combined with `resume_on_topoff`. Requires session settings updates to be enabled for
         your team (`403` otherwise).
 
-        Supported sections are `tools`, `env`, and `secrets`. Sections you omit are not changed.
-        Any other top-level key returns `400`, including `model` (to change the model, set
-        `HARNESS_INFERENCE_MODEL` in `env`) and `permissions` (can't be changed on an existing
+        Supported sections are `tools`, `env`, `secrets`, and `egress`. Sections you omit are not
+        changed. Any other top-level key returns `400`, including `model` (to change the model,
+        set `HARNESS_INFERENCE_MODEL` in `env`) and `permissions` (can't be changed on an existing
         session).
 
         Each section you include replaces that section in full:
@@ -2099,13 +2099,50 @@ patch_session_request:
         - `tools`: the complete list of tools for the session. Only Action Gateway tools
           (`do.actions` entries) can be added, removed, or changed. Custom MCP servers can't be
           changed on an existing session: include the session's current custom MCP servers
-          exactly as they are. Adding, removing, or changing one returns `422`. To remove all Action Gateway tools from a session that has no custom
-          MCP servers, send `tools: []`. `tools: null` returns `400`.
+          exactly as they are. Adding, removing, or changing one returns `422`. To remove all
+          Action Gateway tools from a session that has no custom MCP servers, send `tools: []`.
+          `tools: null` returns `400`.
         - `env`: the complete set of environment variables, as name-value pairs. A variable you
           leave out is removed. `env: {}` removes all variables; `env: null` returns `400`.
         - `secrets`: the complete set of secrets, as name-value pairs. A secret you leave out is
           removed. For each secret, set the value to a string to add or rotate it, or to `{}` to
-          keep its current value. A `null` value returns `400`.
+          keep its current value. URL-bound secrets also accept an object; see **URL-bound
+          secrets**. A `null` value returns `400`.
+        - `egress`: the complete egress allowlist, as an object with `allow_hosts` (hostnames) and
+          `allow_ips` (exact IPv4 or IPv6 addresses, not CIDR ranges). It replaces the session's
+          current allowlist: a host or IP address you leave out is removed. Leave out `vpc_uuid`
+          and `subnet_uuid` to keep the session's current VPC, or set them to their current values.
+          A different value returns `422`. See **Egress**.
+
+        **URL-bound secrets.** The egress proxy sends a URL-bound secret only to requests that
+        match its `url`; the agent never receives the value. An update to a URL-bound secret
+        doesn't restart the agent. In `secrets`, you can:
+
+        - Rotate the value: set the secret to the new value as a string. Its `url` and `scheme`
+          don't change.
+        - Move it to another URL or scheme: set it to `{value, url, scheme}`. A new host or path,
+          or a change to `scheme: raw`, requires `value` (`400` otherwise). Sending the current
+          `value`, `url`, and `scheme` again is not a change.
+        - Add one: set it to `{value, url}`. `scheme` is optional and defaults to `bearer`
+          (`Authorization: Bearer <value>`); `raw` sends the value exactly as stored.
+        - Bind an existing plain secret to a URL: set it to `{url}`. The secret keeps its current
+          value.
+        - Keep one unchanged: set it to `{}`.
+        - Remove one: leave it out of `secrets`.
+
+        `url` must use `https://` and name an exact hostname (no wildcards, IP addresses, or
+        `localhost`), with an optional path and no port, query, or fragment. A session can have up
+        to 16 URL-bound secrets. A URL-bound secret can't be changed back to a plain secret. If
+        the session has an egress allowlist, the secret's host is added to it. After a rollback or
+        fork, a URL-bound secret that was moved off its agent config's URL can need its value
+        again: the request returns `409` until you send `value`.
+
+        **Egress.** `egress` changes the hosts and IP addresses the session can reach. The new
+        allowlist takes effect on the session's next outbound connection, without an agent
+        restart. Connections that are already open stay open, including connections to a host you
+        removed. Only `allow_hosts` and `allow_ips` can change; the VPC is fixed when the session
+        is created. A session created with unrestricted egress and no URL-bound secrets can't gain
+        an allowlist: the update ends in `FAILED` with `error` set to `requires_new_session`.
 
         **Changing the model.** The only way to change a session's model is through `env`. Set
         `HARNESS_INFERENCE_MODEL` to a DigitalOcean Serverless Inference model ID, or to
@@ -2118,8 +2155,9 @@ patch_session_request:
 
         **Reserved keys.** `HARNESS_INFERENCE_API_KEY` and `HARNESS_INFERENCE_BASE_URL` are
         managed by the platform: include them with their current values, or the request returns
-        `422`. Framework keys can't be changed either (`422`). Secrets that are not plain values
-        (such as URL-bound or OAuth secrets) can't be changed on an existing session (`422`).
+        `422`. Framework keys can't be changed either (`422`). OAuth secrets and mount-only
+        secrets (`env: false`) can't be changed on an existing session: set them to `{}` (`422`
+        otherwise).
 
         Example that changes the model, keeps one secret, and rotates another. Because each
         section is a full replacement, the example assumes the session has no other env
@@ -2132,6 +2170,23 @@ patch_session_request:
         secrets:
           GITHUB_TOKEN: {}
           JIRA_API_TOKEN: new-token-value
+        ```
+
+        Example that keeps one URL-bound secret, moves another to a new URL, and replaces the
+        egress allowlist. The example assumes the session has no other secrets:
+
+        ```yaml
+        secrets:
+          GITHUB_TOKEN: {}
+          JIRA_API_TOKEN:
+            value: new-token-value
+            url: https://example.atlassian.net/rest/api/3
+        egress:
+          allow_hosts:
+            - api.github.com
+            - example.atlassian.net
+          allow_ips:
+            - 203.0.113.10
         ```
       example: |
         tools:
@@ -2173,7 +2228,7 @@ session_config_update_state:
     - FAILED
   description: >-
     State of a session settings update. `APPLYING`: in progress. `APPLIED`: live. `APPLIED_RESTARTED`:
-    live, and the agent was restarted to apply it (`env` and `secrets` changes). `FAILED`: the update
+    live, and the agent was restarted to apply it (`env` and plain secret changes). `FAILED`: the update
     did not take effect; see `reverted` and `detail`.
   example: APPLIED
 
@@ -2206,7 +2261,39 @@ session_config_changes:
     env:
       $ref: '#/session_config_section_changes'
     secrets:
-      $ref: '#/session_config_section_changes'
+      allOf:
+        - $ref: '#/session_config_section_changes'
+      description: >-
+        Secret names, never values. On an update, `changed` lists the secrets that got a new value
+        or were bound to another URL or scheme. On `config_diff`, `changed` lists only the secrets
+        bound to a different URL or scheme than in the agent config.
+    egress:
+      $ref: '#/session_config_egress_changes'
+
+session_config_egress_changes:
+  type: object
+  description: >-
+    The hosts and IP addresses an `egress` change added or removed, and the new egress mode when
+    it changed. Omitted when the egress policy is unchanged.
+  properties:
+    mode:
+      type: string
+      enum:
+        - allowlist
+        - unrestricted
+        - deny_all
+      description: The new egress mode. Present only when the mode changed.
+      example: allowlist
+    added:
+      type: array
+      items:
+        type: string
+      example: [example.atlassian.net]
+    removed:
+      type: array
+      items:
+        type: string
+      example: [203.0.113.10]
 
 session_config_update:
   type: object
