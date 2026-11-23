@@ -8,7 +8,9 @@ description: |
 
   **Note:** If you do not currently have a VPC network in a specific datacenter
   region, the first one that you create will be set as the default for that
-  region. The default VPC for a region cannot be changed or deleted.
+  region. You cannot delete the default VPC for a region or unset its `default`
+  field directly. To change the default, set `default` to `true` on another VPC
+  in the same region.
 
 tags:
   - VPCs
