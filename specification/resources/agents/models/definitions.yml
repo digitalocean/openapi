@@ -2349,7 +2349,9 @@ session_config_permissions_changes:
   properties:
     default:
       type: string
-      description: The new default action (`allow`, `ask`, or `deny`), when it changed.
+      description: >-
+        The new default action (`allow`, `ask`, or `deny`), when it changed. Empty when the
+        default was removed.
       example: ask
     rules:
       type: object

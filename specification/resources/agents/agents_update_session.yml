@@ -16,7 +16,7 @@ description: |-
 
   | Section | What it changes | Agent restart |
   | --- | --- | --- |
-  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers can't be changed. | No (LangGraph and CrewAI: yes) |
+  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers can't be changed. | No (LangGraph: yes) |
   | `env` | Environment variables (name and value). | Yes |
   | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
   | `env.MODEL`, `env.OPENAI_MODEL`, `env.ANTHROPIC_MODEL` | The model, for sessions that use their own OpenAI-compatible or Anthropic endpoint. | Yes |
@@ -89,10 +89,9 @@ description: |-
   - `claude-code`, `opencode`: `default` and `bash`, `file.read`, `file.write`, `mcp`, and
     `do.actions/<tool>` rules, with `allow`, `ask`, or `deny`.
   - `openhands`: `default` and `bash`, `file.read`, `file.write`, and `web.fetch` rules. Not
-    `mcp` or `do.actions/<tool>` rules.
-  - On `claude-code` and `openhands`, while the session uses `do.actions` tools, `default` and
-    `do.actions/<tool>` rules can't change: the change would move the session to a new Action
-    Gateway endpoint, which these agents can't pick up while running.
+    `mcp` or `do.actions/<tool>` rules. While the session uses `do.actions` tools, `default`
+    can't change: the change would move the session to a new Action Gateway endpoint, which
+    `openhands` can't pick up while running.
   - `codex`: `default` and `bash` and `do.actions/<tool>` rules, with `allow`, `ask`, or `deny`.
     Not `file.read`, `file.write`, `web.fetch`, or `mcp` rules.
   - `hermes`, `langgraph`: `do.actions/<tool>` rules with `allow` or `deny`, and `default` set to
@@ -111,7 +110,7 @@ description: |-
   and what the agent can change. Remove them and send the update again. For example:
 
   ```
-  permissions can't change live on hermes for: bash rule "rm -rf *" (only do.actions allow/deny rules can change on this agent). Remove these changes and send the update again (update_unsupported)
+  permissions can't change live on hermes for: bash rule "rm -rf *" (only do.actions allow/deny rules and an allow or deny default action can change on this agent). Remove these changes and send the update again (update_unsupported)
   ```
 
   If the agent itself refuses a change after the request is accepted, the update ends `FAILED`
@@ -132,10 +131,10 @@ description: |-
      - `FAILED`: the update did not take effect. `session.update.detail` explains why, and
        `session.update.reverted` is `true` if the previous settings were restored.
 
-  Tool, URL-bound secret, and `egress` updates usually finish within a few seconds, except on
-  `langgraph` and `crewai`, where a `tools` update restarts the agent. Updates to `env`
-  (including the model) or plain secrets restart the agent and can take up to about two
-  minutes.
+  Tool, URL-bound secret, `egress`, and `permissions` updates usually finish within a few
+  seconds, except on `langgraph`, where a `tools` update or a `permissions` change to `default`
+  or `do.actions/<tool>` rules restarts the agent. Updates to `env` (including the model) or
+  plain secrets restart the agent and can take up to about two minutes.
 
   If the request matches the session's current settings, it returns `200` with `outcome` set to
   `UNCHANGED` and nothing is applied.
@@ -158,7 +157,8 @@ description: |-
     and a destroyed or failed session. A locked session returns `423`.
   - The session must be idle: no agent turn running and no approval pending (`409`).
   - Session settings updates must be enabled for your team. Changing `permissions` must also be
-    enabled for your team; if it isn't, a request that changes `permissions` returns `403`.
+    enabled for your team; if it isn't, a request whose manifest includes a `permissions`
+    section returns `403`, even if the section matches the session's policy.
   - Not every agent runtime supports every section, or every `permissions` change (see Changing
     permissions above). An unsupported change returns `409`, and nothing is applied.
 tags:
@@ -225,8 +225,8 @@ responses:
     description: >-
       You don't have access to this session, or session settings updates are not enabled for your
       team (`manifest_yaml` only). A URL-bound secret or `egress` change also returns `403` when
-      URL-bound secret and egress updates are not enabled for your team, and a `permissions`
-      change returns `403` when permission updates are not enabled for your team.
+      URL-bound secret and egress updates are not enabled for your team, and a manifest with a
+      `permissions` section returns `403` when permission updates are not enabled for your team.
     headers: *id001
     content:
       application/json:
