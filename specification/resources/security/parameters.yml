@@ -89,3 +89,23 @@ secret_name_prefix:
   schema:
     type: string
   example: app
+
+audit_history_start_date:
+  in: query
+  name: start_date
+  description: The inclusive start of the export interval as an ISO 8601 date-time, for example `2026-11-16T15:00:00Z`.
+  required: true
+  schema:
+    type: string
+    format: date-time
+  example: '2026-10-01T00:00:00Z'
+
+audit_history_end_date:
+  in: query
+  name: end_date
+  description: The inclusive end of the export interval as an ISO 8601 date-time, for example `2026-11-16T15:20:00Z`. This exact second is included.
+  required: true
+  schema:
+    type: string
+    format: date-time
+  example: '2026-10-30T23:59:59Z'

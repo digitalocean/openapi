@@ -1,0 +1,20 @@
+description: The response is a CSV file containing the requested Audit History events.
+
+headers:
+  content-disposition:
+    description: Indicates that the response is an attached CSV file.
+    schema:
+      type: string
+    example: attachment; filename="audit-history-2026-10-01-2026-10-30-20261116T224500Z.csv"
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  text/csv:
+    schema:
+      type: string
+      format: binary
