@@ -1,0 +1,20 @@
+description: >-
+  The connection is upgraded to a WebSocket. Binary frames in both directions
+  are the raw bytes of the TCP connection. Text frames from the server are
+  control messages: `{"status":{"state":"connected"}}` when the connection to
+  the port is open, and `{"error":{"code":"...","message":"..."}}` when it
+  fails (with `code` set to `dial_failed`, `start_failed`, or `agent_error`,
+  for example when nothing listens on the port). The server closes the
+  WebSocket after an error, or when the program in the MicroVM closes the
+  connection. Text frames from the client are ignored. The server sends a
+  ping every 30 seconds and closes a port forward whose client stops
+  answering. A port forward closes after 4 hours. A message larger than
+  1 MiB closes the port forward with WebSocket code 1009.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
