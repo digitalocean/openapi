@@ -2676,7 +2676,7 @@ webhook_signature_scheme:
   description: >-
     How the external system authenticates a delivery: hmac-sha256 over the raw body (github), a
     plaintext token replayed verbatim (gitlab), or do-signature-v1 (`t=<unix>,v1=<hex>` over
-    `{unix}.{body}`, custom).
+    `{unix}.{body}`, custom). A custom delivery signed more than 3 minutes before it arrives is refused.
   example: hmac-sha256
 
 slack_output_write:

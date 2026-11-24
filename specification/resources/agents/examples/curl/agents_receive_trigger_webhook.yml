@@ -2,7 +2,7 @@ lang: bash
 source: |-
   curl -X POST \
     -H "Content-Type: application/json" \
-    -H "X-DigitalOcean-Signature: t=1700000000,v1=<hmac-sha256-hex>" \
+    -H "X-DigitalOcean-Signature: t=<current-unix-time>,v1=<hmac-sha256-hex>" \
     -d '{"event":"push","ref":"refs/heads/main"}' \
     "https://api.digitalocean.com/v2/harness-runtime/triggers/{trigger_id}/webhook"
 label: cURL
