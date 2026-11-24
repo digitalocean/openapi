@@ -176,6 +176,11 @@ tags:
       Persistent workspaces (`/v2/harness-runtime/workspaces`) are in public preview and are
       described under Harness Runtime Workspaces [Public Preview].
 
+      Sub-agent routes (`/v2/harness-runtime/sessions/{session_id}/subagents`) let a parent
+      session fan work out to child sessions as a swarm run and accept or reject each result.
+      They are gated: agent swarms must be enabled for the team, and until then every route
+      in the family returns `404`.
+
   - name: Harness Runtime Workspaces [Public Preview]
     description: |-
       Persistent workspaces (`/v2/harness-runtime/workspaces`) are sets of files that outlive
@@ -1338,6 +1343,32 @@ paths:
   /v2/harness-runtime/sessions/{session_id}/ingress:
     get:
       $ref: "resources/agents/agents_get_session_ingress.yml"
+  /v2/harness-runtime/sessions/{session_id}/subagents:
+    post:
+      $ref: "resources/agents/agents_create_subagents.yml"
+  /v2/harness-runtime/sessions/{session_id}/subagents/{run_id}:
+    delete:
+      $ref: "resources/agents/agents_delete_subagent_run.yml"
+    get:
+      $ref: "resources/agents/agents_get_subagent_run.yml"
+  /v2/harness-runtime/sessions/{session_id}/subagents/{run_id}/tasks/{task_id}/accept:
+    post:
+      $ref: "resources/agents/agents_post_subagent_task_accept.yml"
+  /v2/harness-runtime/sessions/{session_id}/subagents/{run_id}/tasks/{task_id}/cancel:
+    post:
+      $ref: "resources/agents/agents_cancel_subagent_task.yml"
+  /v2/harness-runtime/sessions/{session_id}/subagents/{run_id}/tasks/{task_id}/input:
+    post:
+      $ref: "resources/agents/agents_post_subagent_task_input.yml"
+  /v2/harness-runtime/sessions/{session_id}/subagents/{run_id}/tasks/{task_id}/reject:
+    post:
+      $ref: "resources/agents/agents_post_subagent_task_reject.yml"
+  /v2/harness-runtime/sessions/{session_id}/subagents/{run_id}/tasks/{task_id}/spawn:
+    post:
+      $ref: "resources/agents/agents_post_subagent_task_spawn.yml"
+  /v2/harness-runtime/sessions/{session_id}/subagents/{run_id}/tasks/{task_id}/trace:
+    get:
+      $ref: "resources/agents/agents_get_subagent_task_trace.yml"
   /v2/harness-runtime/templates:
     get:
       $ref: "resources/agents/agents_list_templates.yml"

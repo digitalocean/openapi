@@ -1,0 +1,91 @@
+operationId: harness_get_subagent_task_trace
+summary: GetSubagentTrace returns the most recent tool calls of a task's child session.
+description: >-
+  Read-only. One entry per tool call, newest last: the tool, the path it acted on and its exit
+  code. It carries no tool arguments, output or prompts. `last` bounds how many of the most recent
+  entries are returned. Agent swarms must be enabled for the team; otherwise the route answers 404.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The parent session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: path
+  name: run_id
+  required: true
+  description: The swarm run id returned when the run was created.
+  schema:
+    type: string
+    format: uuid
+    example: 9b2e6f10-4c3a-4d7e-8a15-0f6d2c9e7b41
+  example: 9b2e6f10-4c3a-4d7e-8a15-0f6d2c9e7b41
+- in: path
+  name: task_id
+  required: true
+  description: The task id from the run's `tasks` list.
+  schema:
+    type: string
+    format: uuid
+    example: 3f8a1d52-7b60-4e9c-a2d4-5c1e8b7f9a03
+  example: 3f8a1d52-7b60-4e9c-a2d4-5c1e8b7f9a03
+- in: query
+  name: last
+  required: false
+  description: >-
+    How many of the most recent entries to return. Defaults to 50 when omitted or non-positive;
+    values above 200 are clamped to 200 (not rejected).
+  schema:
+    type: integer
+    default: 50
+    example: 50
+  example: 50
+responses:
+  '200':
+    description: The task's recent tool calls.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/get_subagent_trace_response
+  '400':
+    description: '`last` is not an integer.'
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: >-
+      The caller holds no access grant on the session, or the caller is a child session: only the
+      parent may call these routes.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_get_subagent_task_trace.yml
+security:
+- bearer_auth:
+  - agent_harness_session:read

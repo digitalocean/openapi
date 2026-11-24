@@ -1,0 +1,108 @@
+operationId: harness_create_subagents
+summary: CreateSubagents fans work out from the parent session to child sessions and returns the swarm run.
+description: >-
+  Submits a batch of subtasks as one swarm run. Each subtask becomes a task with its own child
+  session, objective, owned paths and grant; the parent integrates the results with the accept and
+  reject routes. The call is idempotent on `request_id`: a retry with the same `request_id` and the
+  same payload returns the run it created, and a retry with a different payload answers 409
+  `request_sig_mismatch`. Every `grant` (secrets by name, tools, egress hosts) is validated as a
+  subset of the parent's own, and the batch is bounded by the fan-out cap.
+
+
+  When the team's plan approval is set to `human`, the plan is held for approval on the parent and
+  the call answers 202 with run status `pending_approval`; no child is started until it is
+  approved. Only a top-level session may call this route: a child session that calls it gets 403
+  `depth_exceeded`. Agent swarms must be enabled for the team; otherwise the route answers 404.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The parent session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: models/definitions.yml#/create_subagents_request
+responses:
+  '201':
+    description: The run was created and its children are being started.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/create_subagents_response
+  '202':
+    description: >-
+      The plan is held for human approval on the parent. The run has status `pending_approval` and
+      no child exists yet.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/create_subagents_response
+  '400':
+    description: >-
+      Malformed JSON; no subtasks; `min_children` outside 1 to the number of subtasks; a `grant`
+      that is not a subset of the parent's; an unknown `config_id`; or a deadline in the past.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: >-
+      `depth_exceeded`: the caller is a child session, and only a top-level session may start a
+      swarm run. Otherwise, the caller holds no access grant on the session.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: >-
+      Branch on `id`. Permanent for this payload: `owned_paths_overlap` (two subtasks claim
+      overlapping owned paths), `fan_out_exceeded` (more subtasks than the fan-out cap),
+      `request_sig_mismatch` (the same `request_id` was already used with a different payload),
+      `plan_approval_required` (plan approval is `human` and the call came from an unattended
+      origin, which has no one to approve). Transient, retry in a moment: the parent session is not
+      in a state that accepts work, or a checkpoint, fork or rollback is in progress on it.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '423':
+    description: This session is unavailable; contact support.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_create_subagents.yml
+security:
+- bearer_auth:
+  - agent_harness_session:create

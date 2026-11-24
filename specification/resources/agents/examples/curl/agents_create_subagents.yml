@@ -1,0 +1,3 @@
+"lang": "bash"
+"source": "curl -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $DIGITALOCEAN_TOKEN\" \\\n  -d '{\"request_id\":\"7c1f3e5a-2b4d-4f60-9a8e-1d2c3b4a5f60\",\"subtasks\":[{\"objective\":\"Add pagination to the list endpoint and update its tests.\",\"owned_paths\":[\"api/list/\"]}]}' \\\n  \"https://api.digitalocean.com/v2/harness-runtime/sessions/{session_id}/subagents\""
+"label": "cURL"

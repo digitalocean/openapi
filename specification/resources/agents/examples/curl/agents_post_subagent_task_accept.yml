@@ -1,0 +1,3 @@
+"lang": "bash"
+"source": "curl -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $DIGITALOCEAN_TOKEN\" \\\n  -d '{\"attempt\":1}' \\\n  \"https://api.digitalocean.com/v2/harness-runtime/sessions/{session_id}/subagents/{run_id}/tasks/{task_id}/accept\""
+"label": "cURL"

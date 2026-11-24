@@ -1,0 +1,91 @@
+operationId: harness_post_subagent_task_spawn
+summary: SpawnSubagentTask starts a child session for an open task.
+description: >-
+  For a task that is open, for example because its first spawn failed (`spawn_error` on the task
+  says why) or because it was abandoned and reopened. The task is claimed and a child session is
+  created with the task's objective, grant and agent config. A task that already has a running
+  child is not spawned a second time. Agent swarms must be enabled for the team; otherwise the
+  route answers 404.
+tags:
+- Harness Runtime
+parameters:
+- in: path
+  name: session_id
+  required: true
+  description: The parent session UUID.
+  schema:
+    type: string
+    example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- in: path
+  name: run_id
+  required: true
+  description: The swarm run id returned when the run was created.
+  schema:
+    type: string
+    format: uuid
+    example: 9b2e6f10-4c3a-4d7e-8a15-0f6d2c9e7b41
+  example: 9b2e6f10-4c3a-4d7e-8a15-0f6d2c9e7b41
+- in: path
+  name: task_id
+  required: true
+  description: The task id from the run's `tasks` list.
+  schema:
+    type: string
+    format: uuid
+    example: 3f8a1d52-7b60-4e9c-a2d4-5c1e8b7f9a03
+  example: 3f8a1d52-7b60-4e9c-a2d4-5c1e8b7f9a03
+responses:
+  '200':
+    description: A child session was started for the task.
+    headers: &id001
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/swarm_task
+  '400':
+    description: The path ids are malformed.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '401':
+    $ref: ../../shared/responses/unauthorized.yml
+  '403':
+    description: >-
+      The caller holds no access grant on the session, or the caller is a child session: only the
+      parent may call these routes.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '404':
+    $ref: ../../shared/responses/not_found.yml
+  '409':
+    description: >-
+      The task is not open (it already has a child, or reached a terminal status), the run is not in
+      a status that spawns, or the parent session is not running.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '500':
+    $ref: ../../shared/responses/server_error.yml
+  '429':
+    $ref: ../../shared/responses/too_many_requests.yml
+  default:
+    $ref: ../../shared/responses/unexpected_error.yml
+x-codeSamples:
+- $ref: examples/curl/agents_post_subagent_task_spawn.yml
+security:
+- bearer_auth:
+  - agent_harness_session:operate
