@@ -497,9 +497,11 @@ agent_manifest:
           description: >-
             Declared credential requirements. source tenantSecret is enforced today: value is
             write-only plaintext, extracted into Secrets Manager at create and never persisted or
-            returned. source oauth requires provider, carries no value, and is accepted but not yet
-            enforced. ref is legacy and ignored. env false keeps the resolved value out of the guest
-            environment (mount-only slots).
+            returned. source oauth requires provider and carries no value: at session create, the
+            guest environment receives a token from your team's connection for provider, or from
+            the connection that actor names, and session create fails if that connection isn't
+            connected. ref is legacy and ignored. env false keeps the resolved value out of the
+            guest environment (mount-only slots).
           items:
             type: object
             required:
@@ -525,6 +527,15 @@ agent_manifest:
                 type: string
                 description: Write-only tenantSecret plaintext; never persisted or returned.
                 example: sk-example
+              actor:
+                type: string
+                pattern: ^[A-Za-z0-9._-]{1,64}$
+                description: >-
+                  For source oauth only: the user_id of the provider connection the secret uses,
+                  instead of your team's connection for provider. Requires naming connections in
+                  secrets to be enabled for your team. Only a secret with actor can switch to
+                  another connection on a running session (see the session update operation).
+                example: github1
               env:
                 type: boolean
                 description: >-
@@ -2106,8 +2117,9 @@ patch_session_request:
           leave out is removed. `env: {}` removes all variables; `env: null` returns `400`.
         - `secrets`: the complete set of secrets, as name-value pairs. A secret you leave out is
           removed. For each secret, set the value to a string to add or rotate it, or to `{}` to
-          keep its current value. URL-bound secrets also accept an object; see **URL-bound
-          secrets**. A `null` value returns `400`.
+          keep its current value. URL-bound and OAuth secrets also accept an object; see
+          **URL-bound secrets** and **Switching an OAuth connection**. A `null` value returns
+          `400`.
         - `egress`: the complete egress allowlist, as an object with `allow_hosts` (hostnames) and
           `allow_ips` (exact IPv4 or IPv6 addresses, not CIDR ranges). Only this object form is
           supported in an update. It replaces the session's
@@ -2145,6 +2157,25 @@ patch_session_request:
         is created. A session created with unrestricted egress and no URL-bound secrets can't gain
         an allowlist: the update ends in `FAILED` with `error` set to `requires_new_session`.
 
+        **Switching an OAuth connection.** An OAuth secret that was created with `actor` can move
+        to another connection of the same provider: set it to `{source: oauth, provider, actor}`
+        with the new connection's `user_id` as `actor`. The connection must be active, and either
+        yours or shared with your team (`400` otherwise), except when you switch back to the
+        connection the agent config names. Switching OAuth connections must be enabled for your
+        team (`403` otherwise). The agent restarts to read the new token. Sending the connection
+        the secret already uses is not a change. Adding or removing an OAuth secret, changing its
+        provider, or switching one that was created without `actor` returns `422`.
+        This example switches `GITHUB_TOKEN` to the connection `github2` and assumes the session
+        has no other secrets:
+
+        ```yaml
+        secrets:
+          GITHUB_TOKEN:
+            source: oauth
+            provider: github
+            actor: github2
+        ```
+
         **Changing the model.** You change a session's model through `env`. The key to set depends
         on the model endpoint the session was created with:
 
@@ -2180,9 +2211,9 @@ patch_session_request:
 
         **Reserved keys.** `HARNESS_INFERENCE_API_KEY` and `HARNESS_INFERENCE_BASE_URL` are
         managed by the platform: include them with their current values, or the request returns
-        `422`. Framework keys can't be changed either (`422`). OAuth secrets and mount-only
-        secrets (`env: false`) can't be changed on an existing session: set them to `{}` (`422`
-        otherwise).
+        `422`. Framework keys can't be changed either (`422`). Mount-only secrets (`env: false`)
+        can't be changed on an existing session: set them to `{}` (`422` otherwise). Set an OAuth
+        secret to `{}` unless you switch its connection.
 
         Example that changes the model, keeps one secret, and rotates another. Because each
         section is a full replacement, the example assumes the session has no other env

@@ -22,6 +22,7 @@ description: |-
   | `env.MODEL`, `env.OPENAI_MODEL`, `env.ANTHROPIC_MODEL` | The model, for sessions that use their own OpenAI-compatible or Anthropic endpoint. | Yes |
   | `secrets` | Plain secrets (name and value). | Yes |
   | `secrets` (URL-bound) | URL-bound secrets: value, `url`, and `scheme`. | No |
+  | `secrets` (OAuth) | The provider connection an OAuth secret uses (`actor`). | Yes |
   | `egress` | The hosts and IP addresses the session can reach (`allow_hosts` and `allow_ips`). | No |
 
   Sections you omit are not changed. Each section you include replaces that section in full; see
@@ -44,8 +45,38 @@ description: |-
   rules.
 
   The following can't be changed on an existing session: custom MCP servers (`422`), the egress
-  VPC (`vpc_uuid` and `subnet_uuid`, `422`), GitHub OAuth connections, platform-managed model keys,
-  and `permissions` (`400`). To use a different custom MCP server or VPC, create a new session.
+  VPC (`vpc_uuid` and `subnet_uuid`, `422`), platform-managed model keys, and `permissions`
+  (`400`). To use a different custom MCP server or VPC, create a new session.
+
+  ### Switching an OAuth connection
+
+  An OAuth secret that names a provider connection with `actor` can move to another connection of
+  the same provider while the session runs. `actor` is the connection's `user_id`; see
+  [`GET /v2/harness-runtime/auth/{provider}/connections`](#operation/harness_list_provider_connections).
+  Send the secret with `source`, `provider`, and the new `actor`, and keep every other secret as
+  `{}`. See `manifest_yaml` for an example.
+
+  The platform first checks that you can use the new connection: it must be active, and either
+  yours or shared with your team (`400` otherwise). Switching back to the connection the agent
+  config names skips this check, so any team member can do it. The platform then gives the session
+  that connection's token and restarts the agent, so the next `git` operation uses the new
+  connection. Sending the connection the secret already uses returns `200` with `outcome` set to
+  `UNCHANGED`.
+
+  The switch applies to this session only:
+
+  - New sessions from the same agent config still start on the connection the config names.
+  - A rollback, or a fork from a checkpoint, uses the connection the session had when the
+    checkpoint was taken.
+  - The switch changes only the token in the session. Action Gateway tools (`do.actions` entries)
+    keep using the connection Action Gateway picks for the session, so `git` and those tools can
+    act as different accounts.
+  - A token the agent already read stays valid with the provider until the old connection is
+    revoked.
+
+  Switching OAuth connections must be enabled for your team (`403` otherwise). The following
+  still require a new session (`422`): adding or removing an OAuth secret, changing its provider,
+  and switching an OAuth secret that was created without `actor`.
 
   ### URL-bound secrets and egress
 
@@ -82,8 +113,8 @@ description: |-
        `session.update.reverted` is `true` if the previous settings were restored.
 
   Tool, URL-bound secret, and `egress` updates usually finish within a few seconds. Updates to
-  `env` (including the model) or plain secrets restart the agent and can take up to about two
-  minutes.
+  `env` (including the model) or plain secrets, and OAuth connection switches, restart the agent
+  and can take up to about two minutes.
 
   If the request matches the session's current settings, it returns `200` with `outcome` set to
   `UNCHANGED` and nothing is applied.
@@ -159,7 +190,9 @@ responses:
       `resume_on_topoff` and `manifest_yaml` are set. A top-level `model` section (set the model in
       `env` instead) and a `permissions` section (can't be changed on an existing session) also
       return `400`, as does a malformed model name. A URL-bound secret moved to a new host or path,
-      or to `scheme: raw`, without `value` returns `400`.
+      or to `scheme: raw`, without `value` returns `400`. An OAuth secret switched to a connection
+      you can't use also returns `400`: no connection has that `actor`, or the connection is
+      pending, expired, revoked, or another team member's.
     headers: *id001
     content:
       application/json:
@@ -171,7 +204,8 @@ responses:
     description: >-
       You don't have access to this session, or session settings updates are not enabled for your
       team (`manifest_yaml` only). A URL-bound secret or `egress` change also returns `403` when
-      URL-bound secret and egress updates are not enabled for your team.
+      URL-bound secret and egress updates are not enabled for your team, and an OAuth connection
+      switch returns `403` when switching OAuth connections is not enabled for your team.
     headers: *id001
     content:
       application/json:
@@ -195,8 +229,9 @@ responses:
   '422':
     description: >-
       The change can only be made by creating a new session. For example: adding, removing, or
-      changing a custom MCP server in `tools`; changing a reserved platform key, an OAuth secret, or
-      a mount-only secret; changing `vpc_uuid` or `subnet_uuid` in `egress`; adding, removing,
+      changing a custom MCP server in `tools`; changing a reserved platform key or a mount-only
+      secret; adding or removing an OAuth secret, changing its provider, or switching one that was
+      created without `actor`; changing `vpc_uuid` or `subnet_uuid` in `egress`; adding, removing,
       or changing `HARNESS_INFERENCE_MODEL` on a session that doesn't use DigitalOcean Serverless
       Inference; changing a session's model provider or base URL; or adding, removing, or moving
       the provider API key of a session that uses its own endpoint.
