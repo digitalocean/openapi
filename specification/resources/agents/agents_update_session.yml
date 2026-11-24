@@ -40,6 +40,9 @@ description: |-
   out is removed. Use the same fields as when you create the session. `permissions: {}` removes
   the policy, so the agent goes back to its built-in default. `permissions: null` returns `400`.
 
+  Rules are checked in the order you list them, and the last rule that matches wins. The order is
+  part of the policy, so moving a rule counts as a change and is applied like any other.
+
   The agent is not restarted; the new rules apply from its next tool call once the update is
   `APPLIED`. On `langgraph`, a change to `do.actions/<tool>` rules or `default` restarts the
   agent, as a `tools` change does.
@@ -62,10 +65,12 @@ description: |-
     `allow` or `deny`. Not `ask`, and no other rule types.
   - `crewai`, `cursor`, and any other agent: nothing.
 
-  `permissions.filesystem` and `permissions.network` can't be changed on any agent.
+  `permissions.filesystem` and `permissions.network` can't be changed on any agent. If your
+  `permissions` section leaves them out, the session keeps the ones it has; if it sets them to
+  something different, the request returns `409`.
 
-  Only the differences from the current policy are checked: rules you add, remove, or change, and
-  a changed `default`. Rules you keep as they are never cause a refusal.
+  Only the differences from the current policy are checked: rules you add, remove, change, or
+  move, and a changed `default`. Rules you keep as they are never cause a refusal.
 
   If any change can't be applied on the session's agent, the request returns `409` and nothing is
   applied, including changes to other sections. The error message names the unsupported changes
@@ -117,7 +122,8 @@ description: |-
     `SESSION_STATUS_PROVISIONING`, `SESSION_STATUS_UPDATING`, a session paused for zero balance,
     and a destroyed or failed session. A locked session returns `423`.
   - The session must be idle: no agent turn running and no approval pending (`409`).
-  - Session settings updates must be enabled for your team.
+  - Session settings updates must be enabled for your team. Changing `permissions` must also be
+    enabled for your team; if it isn't, a request that changes `permissions` returns `403`.
   - Not every agent runtime supports every section, or every `permissions` change (see Changing
     permissions above). An unsupported change returns `409`, and nothing is applied.
 tags:
@@ -180,8 +186,9 @@ responses:
     $ref: ../../shared/responses/unauthorized.yml
   '403':
     description: >-
-      You don't have access to this session, or session settings updates are not enabled for your
-      team (`manifest_yaml` only).
+      You don't have access to this session, session settings updates are not enabled for your
+      team (`manifest_yaml` only), or the update changes `permissions` and permission updates are
+      not enabled for your team.
     headers: *id001
     content:
       application/json:

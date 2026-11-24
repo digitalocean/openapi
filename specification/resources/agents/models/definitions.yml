@@ -2214,6 +2214,41 @@ session_config_changes:
       $ref: '#/session_config_section_changes'
     secrets:
       $ref: '#/session_config_section_changes'
+    permissions:
+      $ref: '#/session_config_permissions_changes'
+
+session_config_permissions_changes:
+  type: object
+  description: >-
+    Changes to the permission policy. A rule is named by its tool and match values, for example
+    `bash "git *"` or `do.actions/web_search`. Omitted when the permissions are identical.
+  properties:
+    default:
+      type: string
+      description: The new default action (`allow`, `ask`, or `deny`), when it changed.
+      example: ask
+    rules:
+      type: object
+      description: >-
+        Names of the rules added, removed, or changed. `changed` covers a rule kept under the same
+        tool and match with another action, or at another position. The last matching rule wins,
+        so the order is part of the policy.
+      properties:
+        added:
+          type: array
+          items:
+            type: string
+          example: [bash "npm test"]
+        removed:
+          type: array
+          items:
+            type: string
+          example: [bash "rm -rf *"]
+        changed:
+          type: array
+          items:
+            type: string
+          example: [do.actions/web_search]
 
 session_config_update:
   type: object
