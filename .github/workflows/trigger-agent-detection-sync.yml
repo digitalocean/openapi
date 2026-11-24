@@ -1,0 +1,33 @@
+name: Trigger Agent Detection Sync
+# When agents/ changes on main, asks godo, pydo and dots to copy the
+# files at this commit and open a PR. Each SDK runs testcases.json in that PR.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'agents/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    uses: ./.github/workflows/agent-detection.pr.yml
+
+  trigger:
+    name: Trigger ${{ matrix.repo }} sync
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref == 'refs/heads/main'
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: [godo, pydo, dots]
+    steps:
+      - name: Trigger workflow
+        run: gh workflow run --repo digitalocean/${{ matrix.repo }} sync-agent-rules.yml --ref main -f openapi_sha=${{ github.sha }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
