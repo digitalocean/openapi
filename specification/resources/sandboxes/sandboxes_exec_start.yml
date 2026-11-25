@@ -1,0 +1,65 @@
+operationId: sandboxes_create_exec
+
+summary: Start a Sandbox Exec
+
+description: |
+  Start a command in a sandbox and stream output as Server-Sent Events. Set
+  `pty` to allocate a pseudo-terminal. When `pty` or `keep_stdin_open` is set,
+  the stream begins with event `started` containing `exec_id` for later
+  resize and stdin writes.
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/sandbox_id'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: 'models/sandbox_exec_start.yml'
+      examples:
+        Start Bash:
+          value:
+            argv:
+              - bash
+              - "-lc"
+              - "echo hello"
+            workdir: /workspace
+
+responses:
+  '200':
+    $ref: 'responses/sandbox_exec_stream.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '409':
+    $ref: 'responses/errors.yml#/conflict'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_exec_start.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox:update'

@@ -1,0 +1,24 @@
+type: object
+
+properties:
+  exit_code:
+    type: integer
+    format: int32
+    description: Process exit code.
+    example: 0
+
+  duration_ms:
+    type: string
+    format: int64
+    description: How long the process ran, in milliseconds. Encoded as a string per protobuf JSON.
+    example: "120"
+
+  status:
+    type: string
+    description: Exit status string from the guest.
+    example: exited
+
+  error:
+    type: string
+    description: Error message when the process did not exit cleanly.
+    example: ""

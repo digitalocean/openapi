@@ -105,3 +105,39 @@ too_many_requests_team_limit:
         id: too_many_requests
         message: The team is at its sandbox limit.
         request_id: 4851a473-1621-42ea-b2f9-5071c0ea8414
+
+payload_too_large:
+  description: The request body is larger than 50 MiB.
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      example:
+        id: payload_too_large
+        message: The body is larger than 50 MiB.
+        request_id: 4851a473-1621-42ea-b2f9-5071c0ea8414
+
+service_unavailable:
+  description: Too many transfers are in progress. Retry later.
+  headers:
+    ratelimit-limit:
+      $ref: '../../../shared/headers.yml#/ratelimit-limit'
+    ratelimit-remaining:
+      $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+    ratelimit-reset:
+      $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  content:
+    application/json:
+      schema:
+        $ref: '../models/error.yml'
+      example:
+        id: service_unavailable
+        message: Too many transfers are in progress. Retry later.
+        request_id: 4851a473-1621-42ea-b2f9-5071c0ea8414
