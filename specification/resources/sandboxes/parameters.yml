@@ -1,0 +1,42 @@
+sandbox_id:
+  in: path
+  name: sandbox_id
+  description: A unique identifier for a sandbox.
+  required: true
+  schema:
+    type: string
+    format: uuid
+  example: 11111111-1111-4111-8111-111111111111
+
+page_size:
+  in: query
+  name: page_size
+  description: The maximum number of sandboxes to return.
+  required: false
+  schema:
+    type: integer
+    format: int32
+    minimum: 1
+  example: 20
+
+page_token:
+  in: query
+  name: page_token
+  description: >
+    Opaque cursor from a previous list response's `next_page_token`.
+    Omit to start from the beginning.
+  required: false
+  schema:
+    type: string
+  example: ""
+
+state:
+  in: query
+  name: state
+  description: >
+    Return only sandboxes in this state. When unset or
+    `SANDBOX_STATE_UNSPECIFIED`, return sandboxes in any returned state.
+  required: false
+  schema:
+    $ref: 'models/sandbox_state.yml'
+  example: SANDBOX_STATE_RUNNING

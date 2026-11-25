@@ -1,0 +1,49 @@
+operationId: sandboxes_post_resume
+
+summary: Resume a Sandbox
+
+description: |
+  To resume a paused sandbox, send a POST request to
+  `/v2/sandboxes/{sandbox_id}/resume`.
+
+  Resuming a sandbox that is already running succeeds and returns the current
+  sandbox. The request returns HTTP 400 when the sandbox cannot be resumed in
+  its current state (for example while it is still creating).
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/sandbox_id'
+
+responses:
+  '200':
+    $ref: 'responses/sandbox.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: 'responses/errors.yml#/unauthorized'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_post_resume.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox:update'

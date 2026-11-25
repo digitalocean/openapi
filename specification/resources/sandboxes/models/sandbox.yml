@@ -1,0 +1,43 @@
+type: object
+
+description: A sandbox.
+
+required:
+  - sandbox_id
+  - template
+  - state
+  - created_at
+
+properties:
+  sandbox_id:
+    type: string
+    format: uuid
+    description: A unique identifier for a sandbox.
+    readOnly: true
+    example: 11111111-1111-4111-8111-111111111111
+
+  template:
+    type: string
+    description: The name of the template the sandbox was created from.
+    readOnly: true
+    example: coding-opencode
+
+  state:
+    allOf:
+      - $ref: 'sandbox_state.yml'
+    description: The state of the sandbox.
+    readOnly: true
+    example: SANDBOX_STATE_RUNNING
+
+  size_slug:
+    type: string
+    description: The size of the sandbox, as a size slug.
+    readOnly: true
+    example: s-1vcpu-1gb
+
+  created_at:
+    type: string
+    format: date-time
+    description: A time the sandbox was created, in ISO8601 combined date and time format.
+    readOnly: true
+    example: "2026-11-18T12:00:00Z"

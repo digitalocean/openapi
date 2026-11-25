@@ -1,0 +1,47 @@
+operationId: sandboxes_list
+
+summary: List all Sandboxes
+
+description: |
+  To list sandboxes on your team, send a GET request to `/v2/sandboxes`.
+
+  Results are keyset-paginated. When more results exist, the response includes
+  a `next_page_token` to pass as `page_token` on the next request. Destroying,
+  destroyed, and failed sandboxes are omitted. Optionally filter by `state`.
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/page_size'
+  - $ref: 'parameters.yml#/page_token'
+  - $ref: 'parameters.yml#/state'
+
+responses:
+  '200':
+    $ref: 'responses/all_sandboxes.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: 'responses/errors.yml#/unauthorized'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_list.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox:read'
