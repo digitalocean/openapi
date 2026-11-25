@@ -1116,6 +1116,7 @@ session_mutability:
   - egress
   - system_prompt
   - custom_tools
+  - skills
   properties:
     model:
       type: boolean
@@ -1165,6 +1166,16 @@ session_mutability:
         another `url`, or given another secret slot must carry its secret's value in the same
         request, or use a URL-bound secret whose `url` covers the server's `url` (`400`
         otherwise). A new server host under an egress allowlist also needs `egress`.
+      example: false
+    skills:
+      type: boolean
+      description: >-
+        A live update can change the `skills` section, the inline skill list, which is replaced as
+        a whole. Only claude-code, codex and opencode can reload skills live. A session reads
+        `false` until its agent's live skill update is supported, and keeps reading `false` after
+        that if it was created earlier. While skills updates are enabled team by team, a team that
+        has them can also change the skills of a claude-code, codex, or opencode session that reads
+        `false`, unless the session was created before this field existed.
       example: false
 session_origin:
   type: object
