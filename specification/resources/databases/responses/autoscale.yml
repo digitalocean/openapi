@@ -11,13 +11,9 @@ headers:
 content:
   application/json:
     schema:
-      type: object
-      properties:
-        autoscale:
-          $ref: '../models/database_autoscale_params.yml'
+      $ref: '../models/database_autoscale_params.yml'
     example:
-      autoscale:
-        storage:
-          enabled: true
-          threshold_percent: 80
-          increment_gib: 10
+      storage:
+        enabled: true
+        threshold_percent: 80
+        increment_gib: 10

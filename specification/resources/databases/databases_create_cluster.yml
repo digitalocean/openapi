@@ -93,6 +93,20 @@ requestBody:
                 value: test
                 description: "a test tag"
 
+        Create a New Database Cluster with storage autoscaling:
+          value:
+            name: backend
+            engine: pg
+            version: "14"
+            region: nyc3
+            size: db-s-2vcpu-4gb
+            num_nodes: 2
+            storage_size_mib: 61440
+            storage_autoscale:
+              enabled: true
+              threshold_percent: 80
+              increment_gib: 10
+
         Restore from a Database Cluster Backup:
           value:
             name: backend-restored
