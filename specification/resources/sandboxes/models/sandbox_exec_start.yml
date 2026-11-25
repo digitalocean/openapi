@@ -1,0 +1,55 @@
+type: object
+
+description: The body of a start-sandbox-exec request.
+
+properties:
+  argv:
+    type: array
+    items:
+      type: string
+    description: >-
+      `argv[0]` is the executable. Empty `argv` is allowed only when `pty` is
+      set (guest default shell, typically `/bin/bash -l`).
+    example:
+      - bash
+      - "-lc"
+      - "echo hello"
+
+  workdir:
+    type: string
+    description: Working directory for the exec.
+    example: /workspace
+
+  env_vars:
+    type: object
+    additionalProperties:
+      type: string
+    description: Environment variables for the exec.
+    example:
+      MY_KEY: my-value
+
+  timeout_seconds:
+    type: string
+    format: int64
+    description: Zero means the service default stream timeout. Encoded as a string per protobuf JSON.
+    example: "0"
+
+  keep_stdin_open:
+    type: boolean
+    description: >-
+      When true, stdin stays open for later stdin writes after the start
+      stream half-closes.
+    example: false
+
+  pty:
+    allOf:
+      - $ref: 'sandbox_exec_pty.yml'
+    description: >-
+      When set, allocate a PTY. Optional fields default to 24x80 and
+      `xterm-256color`.
+
+  stdin:
+    type: string
+    format: byte
+    description: Optional first stdin chunk sent with the start frame (base64 over HTTP).
+    example: ""

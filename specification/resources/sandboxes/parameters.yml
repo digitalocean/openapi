@@ -86,3 +86,78 @@ filter_sandbox_id:
   schema:
     type: string
   example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
+exec_id:
+  in: path
+  name: exec_id
+  description: The ID of the exec session returned by the start stream.
+  required: true
+  schema:
+    type: string
+  example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
+file_path:
+  in: query
+  name: path
+  required: true
+  description: >-
+    A file or directory path inside the sandbox workspace. Relative paths are
+    resolved from the workspace root.
+  schema:
+    type: string
+  example: /workspace/hello.txt
+
+file_path_optional:
+  in: query
+  name: path
+  required: false
+  description: >-
+    A file or directory path inside the sandbox workspace. Relative paths are
+    resolved from the workspace root.
+  schema:
+    type: string
+  example: /workspace
+
+as_archive:
+  in: query
+  name: as_archive
+  required: false
+  description: >-
+    When true, send the path as a tar archive. Required to download a
+    directory.
+  schema:
+    type: boolean
+  example: false
+
+is_archive:
+  in: query
+  name: is_archive
+  required: false
+  description: >-
+    When true, the request body is a tar archive to extract at `path`.
+  schema:
+    type: boolean
+  example: false
+
+list_depth:
+  in: query
+  name: depth
+  required: false
+  description: >-
+    How many levels to list. `0` or `1` lists the directory's own entries;
+    `2` also lists the entries of its subdirectories, and so on.
+  schema:
+    type: integer
+    format: int64
+  example: 1
+
+x_content_sha256:
+  in: header
+  name: X-Content-Sha256
+  required: false
+  description: >-
+    Lowercase hex SHA-256 of the upload body. The sandbox checks it after the
+    write.
+  schema:
+    type: string
+  example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

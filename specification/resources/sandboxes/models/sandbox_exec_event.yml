@@ -1,0 +1,27 @@
+type: object
+
+description: >-
+  One event on the exec start stream. Exactly one of the fields is set per
+  event.
+
+properties:
+  started:
+    $ref: 'sandbox_exec_started.yml'
+
+  stdout:
+    type: string
+    format: byte
+    description: Base64-encoded stdout chunk.
+    example: aGVsbG8K
+
+  stderr:
+    type: string
+    format: byte
+    description: Base64-encoded stderr chunk.
+    example: ""
+
+  exit:
+    $ref: 'sandbox_exec_exit.yml'
+
+  keepalive:
+    $ref: 'sandbox_exec_keepalive.yml'

@@ -1,0 +1,11 @@
+type: string
+
+description: The type of a file system entry.
+
+enum:
+  - FILE_ENTRY_TYPE_UNSPECIFIED
+  - FILE_ENTRY_TYPE_FILE
+  - FILE_ENTRY_TYPE_DIRECTORY
+  - FILE_ENTRY_TYPE_SYMLINK
+
+example: FILE_ENTRY_TYPE_FILE

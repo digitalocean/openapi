@@ -1,0 +1,31 @@
+description: >-
+  The raw payload (`application/octet-stream`), followed by a 73-byte integrity
+  footer: `DOWSSHA1` (8 bytes), the 64-character lowercase hex SHA-256 of the
+  payload, and a newline. Strip the footer before you save the payload. Headers:
+  `X-Workspace-Is-Archive` is `"true"` when the payload is a tar archive.
+  `X-Workspace-Size-Bytes` is the payload size in bytes as a progress hint; it
+  is not `Content-Length` and does not count the footer.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+  X-Workspace-Is-Archive:
+    schema:
+      type: string
+    description: '`"true"` when the payload is a tar archive.'
+    example: "false"
+  X-Workspace-Size-Bytes:
+    schema:
+      type: string
+    description: Payload size in bytes as a progress hint (excludes the footer).
+    example: "12"
+
+content:
+  application/octet-stream:
+    schema:
+      type: string
+      format: binary

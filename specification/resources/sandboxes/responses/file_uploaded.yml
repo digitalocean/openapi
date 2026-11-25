@@ -1,0 +1,29 @@
+description: The file was written.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The absolute path the file was written to.
+          example: /workspace/hello.txt
+        bytes_written:
+          type: string
+          format: int64
+          description: The number of bytes written. Encoded as a string per protobuf JSON.
+          example: "12"
+    examples:
+      Uploaded:
+        value:
+          path: /workspace/hello.txt
+          bytes_written: "12"
