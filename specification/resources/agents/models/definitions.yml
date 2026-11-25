@@ -1092,7 +1092,77 @@ session:
       description: >-
         The effective manifest of the session. Present only when `config_drifted` is true. Never
         contains secret values.
+    mutability:
+      $ref: '#/session_mutability'
 
+session_mutability:
+  type: object
+  additionalProperties: false
+  description: >-
+    Which manifest sections a live config update (`PATCH /v2/agents/sessions/{session_id}` with
+    `manifest_yaml`) can change on this session. It describes what this session's agent can take,
+    recorded when the session was created. A flag that is `false` answers `409` with
+    `(update_unsupported)` when a PATCH tries to change what it covers. A session created before the
+    field existed reads `false` for every key. A top-level `model` section in `manifest_yaml`
+    returns `400` whatever this says.
+  required:
+  - model
+  - env
+  - secrets
+  - tools
+  - permissions
+  - egress
+  - system_prompt
+  - custom_tools
+  properties:
+    model:
+      type: boolean
+      description: >-
+        The session's model can be changed, through `env.HARNESS_INFERENCE_MODEL` or, on a session
+        with its own endpoint, the env key that endpoint reads its model from. Independent of `env`.
+      example: true
+    env:
+      type: boolean
+      description: >-
+        A live update can change `env` keys other than the model keys. A patch that changes both
+        needs both.
+      example: true
+    secrets:
+      type: boolean
+      description: A live update can change the `secrets` section.
+      example: true
+    tools:
+      type: boolean
+      description: >-
+        A live update can change the `tools` section: the Action Gateway (`do.actions`) entries. A
+        custom MCP server also needs `custom_tools`.
+      example: true
+    permissions:
+      type: boolean
+      description: >-
+        A live update can change `permissions`: the default and the rules of the types the
+        session's agent enforces live. `filesystem` and `network` never change on a running session.
+      example: true
+    egress:
+      type: boolean
+      description: >-
+        A live update can change the `egress` section: the destinations the session can reach.
+      example: true
+    system_prompt:
+      type: boolean
+      description: The session's standing instruction can be replaced by a live update.
+      example: false
+    custom_tools:
+      type: boolean
+      description: >-
+        A live update can add, modify, or remove a custom MCP server (`name` and `url`) in the
+        `tools` section. It also needs `tools`. The agent restarts to take the change. A session
+        reads `false` until its agent's custom-server update is supported, and keeps reading
+        `false` after that if it was created earlier. A server with `auth` that is added, moved to
+        another `url`, or given another secret slot must carry its secret's value in the same
+        request, or use a URL-bound secret whose `url` covers the server's `url` (`400`
+        otherwise). A new server host under an egress allowlist also needs `egress`.
+      example: false
 session_origin:
   type: object
   additionalProperties: false
@@ -2106,12 +2176,15 @@ patch_session_request:
 
         Each section you include replaces that section in full:
 
-        - `tools`: the complete list of tools for the session. Only Action Gateway tools
-          (`do.actions` entries) can be added, removed, or changed. Custom MCP servers can't be
-          changed on an existing session: include the session's current custom MCP servers
-          exactly as they are. Adding, removing, or changing one returns `422`. To remove all
-          Action Gateway tools from a session that has no custom MCP servers, send `tools: []`.
-          `tools: null` returns `400`.
+        - `tools`: the complete list of tools for the session. Action Gateway tools
+          (`do.actions` entries) can be added, removed, or changed. A custom MCP server can be
+          added, modified, or removed only where the session's `mutability.custom_tools` is
+          `true`; otherwise the request returns `409`. Include the session's current custom MCP
+          servers exactly as they are unless you are changing them. A server with `auth` that is
+          added, moved to another `url`, or given another secret slot needs its secret's value in
+          the same request, or a URL-bound secret that covers its `url`; otherwise the request
+          returns `400`. To remove all Action Gateway tools from a session that has no custom MCP
+          servers, send `tools: []`. `tools: null` returns `400`.
         - `env`: the complete set of environment variables, as name-value pairs. A variable you
           leave out is removed. `env: {}` removes all variables; `env: null` returns `400`.
         - `secrets`: the complete set of secrets, as name-value pairs. A secret you leave out is
