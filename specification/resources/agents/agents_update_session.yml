@@ -103,7 +103,8 @@ description: |-
 
   `permissions` replaces the whole policy: `default` and the full `rules` list. A rule you leave
   out is removed. Use the same fields as when you create the session. `permissions: {}` removes
-  the policy, so the agent goes back to its built-in default. `permissions: null` returns `400`.
+  the policy, so the agent goes back to its built-in default, as long as every rule it removes is
+  one the agent can change (see below). `permissions: null` returns `400`.
 
   Rules are checked in the order you list them, and the last rule that matches wins. The order is
   part of the policy, so moving a rule counts as a change and is applied like any other.
@@ -134,7 +135,11 @@ description: |-
   something different, the request returns `409`.
 
   Only the differences from the current policy are checked: rules you add, remove, change, or
-  move, and a changed `default`. Rules you keep as they are never cause a refusal.
+  move, and a changed `default`. Rules you keep as they are never cause a refusal. A removed rule
+  is checked like an added one, so a rule of a type the agent can't change can't be removed
+  either: every update has to keep it, and `permissions: {}` returns `409` while the policy has
+  one. For example, `{}` returns `409` on a `codex` session with a `file.read` rule, or on a
+  `hermes` session with a `bash` rule.
 
   If any change can't be applied on the session's agent, the request returns `409` and nothing is
   applied, including changes to other sections. The error message names the unsupported changes

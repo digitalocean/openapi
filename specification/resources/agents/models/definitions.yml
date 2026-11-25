@@ -2129,7 +2129,9 @@ patch_session_request:
           with the same fields as at session creation. A rule you leave out is removed.
           `permissions: {}` removes the policy (the agent's built-in default applies);
           `permissions: null` returns `400`. What can change depends on the session's agent, and
-          `permissions.filesystem` and `permissions.network` can't be changed. If any change
+          `permissions.filesystem` and `permissions.network` can't be changed. Removing a rule is
+          a change too: a rule of a type the agent can't change must be kept, so `{}` returns
+          `409` while the policy has one. If any change
           can't be applied on the agent, the request returns `409` and nothing is applied; the
           error message names the unsupported changes so you can remove them and send the update
           again. Sessions created before live permissions updates were released return `409`.
