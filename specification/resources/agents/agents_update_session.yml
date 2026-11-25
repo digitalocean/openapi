@@ -16,7 +16,7 @@ description: |-
 
   | Section | What it changes | Agent restart |
   | --- | --- | --- |
-  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers can't be changed. | No (LangGraph: yes) |
+  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers too, where the session's `mutability.custom_tools` is `true`. | No (LangGraph: yes). A custom MCP server change: when it alters the agent's environment |
   | `env` | Environment variables (name and value). | Yes |
   | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
   | `env.MODEL`, `env.OPENAI_MODEL`, `env.ANTHROPIC_MODEL` | The model, for sessions that use their own OpenAI-compatible or Anthropic endpoint. | Yes |
@@ -45,9 +45,33 @@ description: |-
   but not added, removed, or moved to another URL or scheme (`422`). See `manifest_yaml` for the
   rules.
 
-  The following can't be changed on an existing session: custom MCP servers (`422`), the egress
-  VPC (`vpc_uuid` and `subnet_uuid`, `422`), and platform-managed model keys. To use a different
-  custom MCP server or VPC, create a new session.
+  The following can't be changed on an existing session: the egress VPC (`vpc_uuid` and
+  `subnet_uuid`, `422`) and platform-managed model keys. To use a different VPC, create a new
+  session.
+
+  ### Custom MCP servers
+
+  A custom MCP server (`name` and `url`) in `tools` can be added, modified, or removed on a running
+  session only where the session's `mutability.custom_tools` is `true`, and `mutability.tools` is
+  `true` too. Read `mutability` from the session (`GET /v2/agents/sessions/{session_id}`). Where
+  `custom_tools` is `false`, the request returns `409` and the message ends with
+  `(update_unsupported)`. The flag is `false` for every agent until its custom-server update is
+  supported, and a session created before an agent was enabled keeps reading `false`; create a new
+  session to change its custom MCP servers.
+
+  Include the session's other custom MCP servers exactly as they are, because `tools` replaces the
+  whole list. The agent restarts when the change alters its environment (a server added, removed or
+  moved, or a changed credential), and the update then ends `APPLIED_RESTARTED`. A change that
+  doesn't, such as editing the `tools` allowlist of an existing server, ends `APPLIED`.
+
+  A server with `auth` that is added, moved to another `url`, or given another secret slot must carry
+  its credential in the same request, so a credential never goes to a destination the request did
+  not name. Either send the secret's value in `secrets` (a plain secret), or use a URL-bound secret
+  whose `url` covers the server's URL: the same host, a path prefix of the server's path, and the
+  default port. A URL-bound secret needs that coverage even when you send its value. Otherwise the
+  request returns `400`. A server whose `url` differs only in the case of the scheme or host is the
+  same server. A new server host under an egress allowlist also needs `mutability.egress` to be
+  `true`.
 
   ### Switching an OAuth connection
 
@@ -281,7 +305,8 @@ responses:
       The session can't be updated right now. For example, it is still provisioning, already
       updating, running an agent turn, waiting on an approval, paused for zero balance, or
       destroyed, or its agent runtime doesn't support the change (including an `egress` change on a
-      session that doesn't support egress updates). After a rollback or fork, a URL-bound secret
+      session that doesn't support egress updates, and a custom MCP server change on a session
+      whose `mutability.custom_tools` is `false`). After a rollback or fork, a URL-bound secret
       that was moved off its agent config's URL also returns `409` until you send its value again.
       For a `permissions` change the agent can't apply, the message names the unsupported changes
       and ends with `(update_unsupported)`; nothing is applied, so remove them and send the update
@@ -298,9 +323,8 @@ responses:
           $ref: models/definitions.yml#/error
   '422':
     description: >-
-      The change can only be made by creating a new session. For example: adding, removing, or
-      changing a custom MCP server in `tools`; changing a reserved platform key or a mount-only
-      secret; adding or removing an OAuth secret, changing its provider, or switching one that was
+      The change can only be made by creating a new session. For example: changing a reserved
+      platform key or a mount-only secret; adding or removing an OAuth secret, changing its provider, or switching one that was
       created without `actor`; changing `vpc_uuid` or `subnet_uuid` in `egress`; adding, removing,
       or changing `HARNESS_INFERENCE_MODEL` on a session that doesn't use DigitalOcean Serverless
       Inference; changing a session's model provider or base URL; or adding, removing, or moving
