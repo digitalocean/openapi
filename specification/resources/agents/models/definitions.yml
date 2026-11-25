@@ -2102,9 +2102,9 @@ patch_session_request:
         be combined with `resume_on_topoff`. Requires session settings updates to be enabled for
         your team (`403` otherwise).
 
-        Supported sections are `tools`, `env`, `secrets`, `egress`, and `permissions`. Sections you
-        omit are not changed. Any other top-level key returns `400`, including `model` (set the
-        model in `env` instead; see **Changing the model**).
+        Supported sections are `tools`, `env`, `secrets`, `egress`, `permissions`, and `skills`.
+        Sections you omit are not changed. Any other top-level key returns `400`, including `model`
+        (set the model in `env` instead; see **Changing the model**).
 
         Each section you include replaces that section in full:
 
@@ -2137,6 +2137,16 @@ patch_session_request:
           can't be applied on the agent, the request returns `409` and nothing is applied; the
           error message names the unsupported changes so you can remove them and send the update
           again. Sessions created before live permissions updates were released return `409`.
+        - `skills`: the complete list of inline skills, with the same fields and limits as at
+          session creation. A skill you leave out is removed. `skills: []` removes every skill;
+          `skills: null` returns `400`. The same skills in a different order are not a change.
+          Supported on `claude-code`, `codex`, and `opencode` sessions (`409` otherwise), and must
+          be enabled for your team (`403` otherwise). The agent reloads its skills without a
+          restart. If the agent refuses them (for example, a skill named like one the session's
+          repository already ships), the update ends in `FAILED` with `error` set to
+          `update_failed` and the session keeps its previous skills: rename the skill and send the
+          update again. Only an agent that can't reload skills on a running session ends with
+          `requires_new_session`.
 
         **URL-bound secrets.** The egress proxy sends a URL-bound secret only to requests that
         match its `url`; the agent never receives the value. An update to a URL-bound secret
@@ -2352,6 +2362,12 @@ session_config_changes:
       $ref: '#/session_config_egress_changes'
     permissions:
       $ref: '#/session_config_permissions_changes'
+    skills:
+      allOf:
+        - $ref: '#/session_config_section_changes'
+      description: >-
+        Skill names, never their content. `changed` lists the skills kept under the same name
+        whose definition changed.
 
 session_config_egress_changes:
   type: object

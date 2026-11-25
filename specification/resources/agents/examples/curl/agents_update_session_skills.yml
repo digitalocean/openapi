@@ -1,0 +1,8 @@
+lang: bash
+source: |-
+  curl -X PATCH \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"manifest_yaml":"skills:\n  - name: release-checklist\n    description: Use when preparing a release.\n    instructions: |\n      1. Bump the version.\n      2. Tag the release.\n"}' \
+    "https://api.digitalocean.com/v2/harness-runtime/sessions/{session_id}"
+label: cURL (skills)
