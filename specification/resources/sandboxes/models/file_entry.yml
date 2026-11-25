@@ -10,10 +10,7 @@ properties:
     example: hello.txt
 
   type:
-    allOf:
-      - $ref: 'file_entry_type.yml'
-    readOnly: true
-    description: The type of the entry.
+    $ref: 'file_entry_type.yml'
 
   path:
     type: string
