@@ -178,9 +178,18 @@ properties:
   autoscale:
     allOf:
     - $ref: './database_autoscale_params.yml'
+    readOnly: true
     description: >-
       Autoscaling configuration for the database cluster. Currently only supports storage autoscaling. If null, autoscaling is
-      not configured for the cluster.
+      not configured for the cluster. To configure storage autoscaling when creating a cluster, use `storage_autoscale`.
+  storage_autoscale:
+    allOf:
+    - $ref: './database_storage_autoscale_params.yml'
+    writeOnly: true
+    description: >-
+      Storage autoscaling configuration to apply when creating the cluster. If omitted, storage autoscaling is not
+      configured. Responses return the configuration in `autoscale`. To change the configuration of an existing cluster,
+      send a PUT request to `/v2/databases/$DATABASE_ID/autoscale`.
   do_settings:
     allOf:
     - $ref: './do_settings.yml'
