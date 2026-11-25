@@ -1082,7 +1082,9 @@ session:
       type: boolean
       description: >-
         True when the running config differs from the manifest the session was created from, for
-        example after a successful PATCH with `manifest_yaml`. Omitted when false.
+        example after a successful PATCH with `manifest_yaml`. Omitted when false. `config_diff`
+        doesn't cover every kind of drift: after an update that only switched an OAuth connection,
+        `config_drifted` is true and `config_diff` is omitted. `manifest` shows the new `actor`.
       example: true
     config_diff:
       $ref: '#/session_config_changes'
@@ -2168,12 +2170,13 @@ patch_session_request:
 
         **Switching an OAuth connection.** An OAuth secret that was created with `actor` can move
         to another connection of the same provider: set it to `{source: oauth, provider, actor}`
-        with the new connection's `user_id` as `actor`. The connection must be active, and either
-        yours or shared with your team (`400` otherwise), except when you switch back to the
-        connection the agent config names. Switching OAuth connections must be enabled for your
-        team (`403` otherwise). The agent restarts to read the new token. Sending the connection
-        the secret already uses is not a change. Adding or removing an OAuth secret, changing its
-        provider, or switching one that was created without `actor` returns `422`.
+        with the new connection's `user_id` as `actor`; leaving out `provider` or `actor` returns
+        `400`. The connection must be active and owned by you, except when you switch back to the
+        connection the agent config names. Another team member's connection returns `400`.
+        Switching OAuth connections must be enabled for your team (`403` otherwise). The agent
+        restarts to read the new token. Sending the connection the secret already uses is not a
+        change. Adding or removing an OAuth secret, changing its provider, or switching one that
+        was created without `actor` returns `422`.
         This example switches `GITHUB_TOKEN` to the connection `github2` and assumes the session
         has no other secrets:
 
@@ -2341,9 +2344,10 @@ session_config_changes:
       allOf:
         - $ref: '#/session_config_section_changes'
       description: >-
-        Secret names, never values. On an update, `changed` lists the secrets that got a new value
-        or were bound to another URL or scheme. On `config_diff`, `changed` lists only the secrets
-        bound to a different URL or scheme than in the agent config.
+        Secret names, never values. On an update, `changed` lists the secrets that got a new value,
+        were bound to another URL or scheme, or were switched to another OAuth connection. On
+        `config_diff`, `changed` lists only the secrets bound to a different URL or scheme than in
+        the agent config; a switched OAuth connection isn't listed there.
     egress:
       $ref: '#/session_config_egress_changes'
     permissions:

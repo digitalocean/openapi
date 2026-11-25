@@ -55,14 +55,15 @@ description: |-
   the same provider while the session runs. `actor` is the connection's `user_id`; see
   [`GET /v2/harness-runtime/auth/{provider}/connections`](#operation/harness_list_provider_connections).
   Send the secret with `source`, `provider`, and the new `actor`, and keep every other secret as
-  `{}`. See `manifest_yaml` for an example.
+  `{}`. Leaving out `provider` or `actor` returns `400`. See `manifest_yaml` for an example.
 
-  The platform first checks that you can use the new connection: it must be active, and either
-  yours or shared with your team (`400` otherwise). Switching back to the connection the agent
-  config names skips this check, so any team member can do it. The platform then gives the session
-  that connection's token and restarts the agent, so the next `git` operation uses the new
-  connection. Sending the connection the secret already uses returns `200` with `outcome` set to
-  `UNCHANGED`.
+  The platform first checks that you can use the new connection: it must be active and owned by
+  you. Another team member's connection returns `400`, even when it is active. Switching back to
+  the connection the agent config names skips this check, so any team member can do it. If the
+  platform can't reach its connection service to check, the request returns `503`; retry it. The
+  platform then gives the session that connection's token and restarts the agent, so the next
+  `git` operation uses the new connection. Sending the connection the secret already uses returns
+  `200` with `outcome` set to `UNCHANGED`.
 
   The switch applies to this session only:
 
@@ -252,7 +253,7 @@ responses:
       URL-bound secret moved to a new host or path, or to `scheme: raw`, without `value` returns
       `400`. An OAuth secret switched to a connection you can't use also returns `400`: no
       connection has that `actor`, or the connection is pending, expired, revoked, or another team
-      member's.
+      member's. So does an OAuth connection switch that leaves out `provider` or `actor`.
     headers: *id001
     content:
       application/json:
@@ -285,7 +286,11 @@ responses:
       For a `permissions` change the agent can't apply, the message names the unsupported changes
       and ends with `(update_unsupported)`; nothing is applied, so remove them and send the update
       again. A session created before live permissions updates were released can't change
-      `permissions`; create a new session. The error message gives the reason.
+      `permissions`; create a new session. A session forked from a checkpoint whose agent still
+      reaches Action Gateway through its parent session can't take an update involving
+      `do.actions` tools, including an OAuth connection switch on a session that has them; the
+      message ends with `(fork_update_unsupported)`, and you need a new session. The error message
+      gives the reason.
     headers: *id001
     content:
       application/json:
@@ -314,6 +319,16 @@ responses:
           $ref: models/definitions.yml#/error
   '500':
     $ref: ../../shared/responses/server_error.yml
+  '503':
+    description: >-
+      A service the update depends on is unavailable. For example, an OAuth connection switch
+      couldn't reach the connection service to check the new connection. The session wasn't
+      changed; retry the request.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
   '429':
     $ref: ../../shared/responses/too_many_requests.yml
   default:
