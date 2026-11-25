@@ -16,13 +16,15 @@ description: |-
 
   | Section | What it changes | Agent restart |
   | --- | --- | --- |
-  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers can't be changed. | No |
+  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers can't be changed. | No (LangGraph: yes) |
   | `env` | Environment variables (name and value). | Yes |
   | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
   | `env.MODEL`, `env.OPENAI_MODEL`, `env.ANTHROPIC_MODEL` | The model, for sessions that use their own OpenAI-compatible or Anthropic endpoint. | Yes |
   | `secrets` | Plain secrets (name and value). | Yes |
   | `secrets` (URL-bound) | URL-bound secrets: value, `url`, and `scheme`. | No |
+  | `secrets` (OAuth) | The provider connection an OAuth secret uses (`actor`). | Yes |
   | `egress` | The hosts and IP addresses the session can reach (`allow_hosts` and `allow_ips`). | No |
+  | `permissions` | The permission policy: the default action and the full rules list. What can change depends on the agent; see below. | No (LangGraph: yes for `do.actions` rules or `default`) |
 
   Sections you omit are not changed. Each section you include replaces that section in full; see
   `manifest_yaml` for the exact rules.
@@ -44,8 +46,38 @@ description: |-
   rules.
 
   The following can't be changed on an existing session: custom MCP servers (`422`), the egress
-  VPC (`vpc_uuid` and `subnet_uuid`, `422`), GitHub OAuth connections, platform-managed model keys,
-  and `permissions` (`400`). To use a different custom MCP server or VPC, create a new session.
+  VPC (`vpc_uuid` and `subnet_uuid`, `422`), and platform-managed model keys. To use a different
+  custom MCP server or VPC, create a new session.
+
+  ### Switching an OAuth connection
+
+  An OAuth secret that names a provider connection with `actor` can move to another connection of
+  the same provider while the session runs. `actor` is the connection's `user_id`; see
+  [`GET /v2/harness-runtime/auth/{provider}/connections`](#operation/harness_list_provider_connections).
+  Send the secret with `source`, `provider`, and the new `actor`, and keep every other secret as
+  `{}`. See `manifest_yaml` for an example.
+
+  The platform first checks that you can use the new connection: it must be active, and either
+  yours or shared with your team (`400` otherwise). Switching back to the connection the agent
+  config names skips this check, so any team member can do it. The platform then gives the session
+  that connection's token and restarts the agent, so the next `git` operation uses the new
+  connection. Sending the connection the secret already uses returns `200` with `outcome` set to
+  `UNCHANGED`.
+
+  The switch applies to this session only:
+
+  - New sessions from the same agent config still start on the connection the config names.
+  - A rollback, or a fork from a checkpoint, uses the connection the session had when the
+    checkpoint was taken.
+  - The switch changes only the token in the session. Action Gateway tools (`do.actions` entries)
+    keep using the connection Action Gateway picks for the session, so `git` and those tools can
+    act as different accounts.
+  - A token the agent already read stays valid with the provider until the old connection is
+    revoked.
+
+  Switching OAuth connections must be enabled for your team (`403` otherwise). The following
+  still require a new session (`422`): adding or removing an OAuth secret, changing its provider,
+  and switching an OAuth secret that was created without `actor`.
 
   ### URL-bound secrets and egress
 
@@ -67,6 +99,60 @@ description: |-
 
   See `manifest_yaml` for the format of each change.
 
+  ### Changing permissions
+
+  `permissions` replaces the whole policy: `default` and the full `rules` list. A rule you leave
+  out is removed. Use the same fields as when you create the session. `permissions: {}` removes
+  the policy, so the agent goes back to its built-in default, as long as every rule it removes is
+  one the agent can change (see below). `permissions: null` returns `400`.
+
+  Rules are checked in the order you list them, and the last rule that matches wins. The order is
+  part of the policy, so moving a rule counts as a change and is applied like any other.
+
+  The agent is not restarted; the new rules apply from its next tool call once the update is
+  `APPLIED`. On `langgraph`, a change to `do.actions/<tool>` rules or `default` restarts the
+  agent, as a `tools` change does.
+
+  Only sessions created after live permissions updates were released can change `permissions`.
+  An older session returns `409`; create a new session instead.
+
+  What can change depends on the session's agent:
+
+  - `claude-code`, `opencode`: `default` and `bash`, `file.read`, `file.write`, `mcp`, and
+    `do.actions/<tool>` rules, with `allow`, `ask`, or `deny`.
+  - `openhands`: `default` and `bash`, `file.read`, `file.write`, and `web.fetch` rules. Not
+    `mcp` or `do.actions/<tool>` rules. While the session uses `do.actions` tools, `default`
+    can't change: the change would move the session to a new Action Gateway endpoint, which
+    `openhands` can't pick up while running.
+  - `codex`: `default` and `bash` and `do.actions/<tool>` rules, with `allow`, `ask`, or `deny`.
+    Not `file.read`, `file.write`, `web.fetch`, or `mcp` rules.
+  - `hermes`, `langgraph`: `do.actions/<tool>` rules with `allow` or `deny`, and `default` set to
+    `allow` or `deny`. Not `ask`, and no other rule types.
+  - `crewai`, `cursor`, and any other agent: nothing.
+
+  `permissions.filesystem` and `permissions.network` can't be changed on any agent. If your
+  `permissions` section leaves them out, the session keeps the ones it has; if it sets them to
+  something different, the request returns `409`.
+
+  Only the differences from the current policy are checked: rules you add, remove, change, or
+  move, and a changed `default`. Rules you keep as they are never cause a refusal. A removed rule
+  is checked like an added one, so a rule of a type the agent can't change can't be removed
+  either: every `permissions` section you send has to keep it, and `permissions: {}` returns
+  `409` while the policy has one. For example, `{}` returns `409` on a `codex` session with a
+  `file.read` rule, or on a `hermes` session with a `bash` rule.
+
+  If any change can't be applied on the session's agent, the request returns `409` and nothing is
+  applied, including changes to other sections. The error message names the unsupported changes
+  and what the agent can change. Remove them and send the update again. For example:
+
+  ```
+  permissions can't change live on hermes for: bash rule "rm -rf *" (only do.actions allow/deny rules and an allow or deny default action can change on this agent). Remove these changes and send the update again (update_unsupported)
+  ```
+
+  If the agent itself refuses a change after the request is accepted, the update ends `FAILED`
+  with `session.update.reverted` set to `true`, and `session.update.detail` says to remove the
+  permission changes the agent can't take and send the update again.
+
   ### Tracking an update
 
   1. A request that changes the session settings returns `202` with `outcome` set to `ACCEPTED`.
@@ -81,8 +167,10 @@ description: |-
      - `FAILED`: the update did not take effect. `session.update.detail` explains why, and
        `session.update.reverted` is `true` if the previous settings were restored.
 
-  Tool, URL-bound secret, and `egress` updates usually finish within a few seconds. Updates to
-  `env` (including the model) or plain secrets restart the agent and can take up to about two
+  Tool, URL-bound secret, `egress`, and `permissions` updates usually finish within a few
+  seconds, except on `langgraph`, where a `tools` update or a `permissions` change to `default`
+  or `do.actions/<tool>` rules restarts the agent. Updates to `env` (including the model) or
+  plain secrets, and OAuth connection switches, restart the agent and can take up to about two
   minutes.
 
   If the request matches the session's current settings, it returns `200` with `outcome` set to
@@ -105,8 +193,11 @@ description: |-
     `SESSION_STATUS_PROVISIONING`, `SESSION_STATUS_UPDATING`, a session paused for zero balance,
     and a destroyed or failed session. A locked session returns `423`.
   - The session must be idle: no agent turn running and no approval pending (`409`).
-  - Session settings updates must be enabled for your team.
-  - Not every agent runtime supports every section. An unsupported change returns `409`.
+  - Session settings updates must be enabled for your team. Changing `permissions` must also be
+    enabled for your team; if it isn't, a request whose manifest includes a `permissions`
+    section returns `403`, even if the section matches the session's policy.
+  - Not every agent runtime supports every section, or every `permissions` change (see Changing
+    permissions above). An unsupported change returns `409`, and nothing is applied.
 tags:
 - Harness Runtime
 parameters:
@@ -157,9 +248,11 @@ responses:
       The request is invalid. For example: the body is empty or not valid JSON, `manifest_yaml` is
       not valid YAML, a field or manifest section is not recognized, a value is invalid, or both
       `resume_on_topoff` and `manifest_yaml` are set. A top-level `model` section (set the model in
-      `env` instead) and a `permissions` section (can't be changed on an existing session) also
-      return `400`, as does a malformed model name. A URL-bound secret moved to a new host or path,
-      or to `scheme: raw`, without `value` returns `400`.
+      `env` instead) and `permissions: null` also return `400`, as does a malformed model name. A
+      URL-bound secret moved to a new host or path, or to `scheme: raw`, without `value` returns
+      `400`. An OAuth secret switched to a connection you can't use also returns `400`: no
+      connection has that `actor`, or the connection is pending, expired, revoked, or another team
+      member's.
     headers: *id001
     content:
       application/json:
@@ -171,7 +264,10 @@ responses:
     description: >-
       You don't have access to this session, or session settings updates are not enabled for your
       team (`manifest_yaml` only). A URL-bound secret or `egress` change also returns `403` when
-      URL-bound secret and egress updates are not enabled for your team.
+      URL-bound secret and egress updates are not enabled for your team, a manifest with a
+      `permissions` section returns `403` when permission updates are not enabled for your team,
+      and an OAuth connection switch returns `403` when switching OAuth connections is not enabled
+      for your team.
     headers: *id001
     content:
       application/json:
@@ -186,7 +282,10 @@ responses:
       destroyed, or its agent runtime doesn't support the change (including an `egress` change on a
       session that doesn't support egress updates). After a rollback or fork, a URL-bound secret
       that was moved off its agent config's URL also returns `409` until you send its value again.
-      The error message gives the reason.
+      For a `permissions` change the agent can't apply, the message names the unsupported changes
+      and ends with `(update_unsupported)`; nothing is applied, so remove them and send the update
+      again. A session created before live permissions updates were released can't change
+      `permissions`; create a new session. The error message gives the reason.
     headers: *id001
     content:
       application/json:
@@ -195,8 +294,9 @@ responses:
   '422':
     description: >-
       The change can only be made by creating a new session. For example: adding, removing, or
-      changing a custom MCP server in `tools`; changing a reserved platform key, an OAuth secret, or
-      a mount-only secret; changing `vpc_uuid` or `subnet_uuid` in `egress`; adding, removing,
+      changing a custom MCP server in `tools`; changing a reserved platform key or a mount-only
+      secret; adding or removing an OAuth secret, changing its provider, or switching one that was
+      created without `actor`; changing `vpc_uuid` or `subnet_uuid` in `egress`; adding, removing,
       or changing `HARNESS_INFERENCE_MODEL` on a session that doesn't use DigitalOcean Serverless
       Inference; changing a session's model provider or base URL; or adding, removing, or moving
       the provider API key of a session that uses its own endpoint.
@@ -220,6 +320,7 @@ responses:
     $ref: ../../shared/responses/unexpected_error.yml
 x-codeSamples:
 - $ref: examples/curl/agents_update_session.yml
+- $ref: examples/curl/agents_update_session_permissions.yml
 security:
 - bearer_auth:
   - agent_harness_session:manage

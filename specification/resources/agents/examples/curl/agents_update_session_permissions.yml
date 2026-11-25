@@ -1,0 +1,8 @@
+lang: bash
+source: |-
+  curl -X PATCH \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"manifest_yaml":"permissions:\n  default: ask\n  rules:\n    - tool: bash\n      match: {command: npm test}\n      action: allow\n    - tool: bash\n      match: {command: rm -rf *}\n      action: deny\n"}' \
+    "https://api.digitalocean.com/v2/harness-runtime/sessions/{session_id}"
+label: cURL (permissions)
