@@ -16,7 +16,7 @@ description: |-
 
   | Section | What it changes | Agent restart |
   | --- | --- | --- |
-  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers can't be changed. | No (LangGraph: yes) |
+  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers too, where the session's `mutability.custom_tools` is `true`. | No (LangGraph: yes). A custom MCP server change: when it alters the agent's environment |
   | `env` | Environment variables (name and value). | Yes |
   | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
   | `env.MODEL`, `env.OPENAI_MODEL`, `env.ANTHROPIC_MODEL` | The model, for sessions that use their own OpenAI-compatible or Anthropic endpoint. | Yes |
@@ -25,6 +25,7 @@ description: |-
   | `secrets` (OAuth) | The provider connection an OAuth secret uses (`actor`). | Yes |
   | `egress` | The hosts and IP addresses the session can reach (`allow_hosts` and `allow_ips`). | No |
   | `permissions` | The permission policy: the default action and the full rules list. What can change depends on the agent; see below. | No (LangGraph: yes for `do.actions` rules or `default`) |
+  | `skills` | The full list of inline skills. Supported on `claude-code`, `codex`, and `opencode`; see below. | No |
 
   Sections you omit are not changed. Each section you include replaces that section in full; see
   `manifest_yaml` for the exact rules.
@@ -45,9 +46,33 @@ description: |-
   but not added, removed, or moved to another URL or scheme (`422`). See `manifest_yaml` for the
   rules.
 
-  The following can't be changed on an existing session: custom MCP servers (`422`), the egress
-  VPC (`vpc_uuid` and `subnet_uuid`, `422`), and platform-managed model keys. To use a different
-  custom MCP server or VPC, create a new session.
+  The following can't be changed on an existing session: the egress VPC (`vpc_uuid` and
+  `subnet_uuid`, `422`) and platform-managed model keys. To use a different VPC, create a new
+  session.
+
+  ### Custom MCP servers
+
+  A custom MCP server (`name` and `url`) in `tools` can be added, modified, or removed on a running
+  session only where the session's `mutability.custom_tools` is `true`, and `mutability.tools` is
+  `true` too. Read `mutability` from the session (`GET /v2/agents/sessions/{session_id}`). Where
+  `custom_tools` is `false`, the request returns `409` and the message ends with
+  `(update_unsupported)`. The flag is `false` for every agent until its custom-server update is
+  supported, and a session created before an agent was enabled keeps reading `false`; create a new
+  session to change its custom MCP servers.
+
+  Include the session's other custom MCP servers exactly as they are, because `tools` replaces the
+  whole list. The agent restarts when the change alters its environment (a server added, removed or
+  moved, or a changed credential), and the update then ends `APPLIED_RESTARTED`. A change that
+  doesn't, such as editing the `tools` allowlist of an existing server, ends `APPLIED`.
+
+  A server with `auth` that is added, moved to another `url`, or given another secret slot must carry
+  its credential in the same request, so a credential never goes to a destination the request did
+  not name. Either send the secret's value in `secrets` (a plain secret), or use a URL-bound secret
+  whose `url` covers the server's URL: the same host, a path prefix of the server's path, and the
+  default port. A URL-bound secret needs that coverage even when you send its value. Otherwise the
+  request returns `400`. A server whose `url` differs only in the case of the scheme or host is the
+  same server. A new server host under an egress allowlist also needs `mutability.egress` to be
+  `true`.
 
   ### Switching an OAuth connection
 
@@ -55,14 +80,15 @@ description: |-
   the same provider while the session runs. `actor` is the connection's `user_id`; see
   [`GET /v2/harness-runtime/auth/{provider}/connections`](#operation/harness_list_provider_connections).
   Send the secret with `source`, `provider`, and the new `actor`, and keep every other secret as
-  `{}`. See `manifest_yaml` for an example.
+  `{}`. Leaving out `provider` or `actor` returns `400`. See `manifest_yaml` for an example.
 
-  The platform first checks that you can use the new connection: it must be active, and either
-  yours or shared with your team (`400` otherwise). Switching back to the connection the agent
-  config names skips this check, so any team member can do it. The platform then gives the session
-  that connection's token and restarts the agent, so the next `git` operation uses the new
-  connection. Sending the connection the secret already uses returns `200` with `outcome` set to
-  `UNCHANGED`.
+  The platform first checks that you can use the new connection: it must be active and owned by
+  you. Another team member's connection returns `400`, even when it is active. Switching back to
+  the connection the agent config names skips this check, so any team member can do it. If the
+  platform can't reach its connection service to check, the request returns `503`; retry it. The
+  platform then gives the session that connection's token and restarts the agent, so the next
+  `git` operation uses the new connection. Sending the connection the secret already uses returns
+  `200` with `outcome` set to `UNCHANGED`.
 
   The switch applies to this session only:
 
@@ -153,6 +179,36 @@ description: |-
   with `session.update.reverted` set to `true`, and `session.update.detail` says to remove the
   permission changes the agent can't take and send the update again.
 
+  ### Changing skills
+
+  `skills` replaces the session's whole list of inline skills. Send every skill the session
+  should keep, with the same fields as when you create the session: `name`, `description`,
+  `instructions`, and optionally `license`, `metadata`, and `allowed_tools`. A skill you leave
+  out is removed. `skills: []` removes every skill, and `skills: null` returns `400`. The list is
+  checked with the same rules and limits as at session creation: at most 32 skills, and at most
+  512 KiB for all skills together (`400` otherwise). `manifest_yaml` itself can be at most 1 MiB
+  and the request body at most 2 MiB (`413` otherwise). The same skills in a different order are
+  not a change.
+
+  The agent is not restarted, so the conversation continues. The agent reloads its skills, and
+  the new list is in use once the update is `APPLIED`. `session.update.changes.skills` names the
+  skills added, removed, or changed, never their content.
+
+  Changing `skills` is supported on `claude-code`, `codex`, and `opencode` sessions. On any other
+  agent, or on a session created before live updates were available, a manifest with a `skills`
+  section returns `409`, even if the list matches the session's skills. Changing `skills` must be
+  enabled for your team (see Requirements below).
+
+  If the agent refuses the new skills after the request is accepted, the update ends `FAILED`
+  with `error` set to `update_failed` and `session.update.reverted` set to `true`, and the
+  session keeps its previous skills. This happens when a skill has the same name as one the
+  session's repository already provides: rename the skill and send the update again on the same
+  session. Only when the session's agent can't reload skills while it runs does the update end
+  with `error` set to `requires_new_session`. If the same update also changes
+  `permissions`, the platform can't tell which of the two the agent refused: the update ends
+  `FAILED` with `error` set to `update_failed`, and sending the `permissions` and `skills` changes
+  as separate updates shows which one the agent can't take.
+
   ### Tracking an update
 
   1. A request that changes the session settings returns `202` with `outcome` set to `ACCEPTED`.
@@ -167,11 +223,11 @@ description: |-
      - `FAILED`: the update did not take effect. `session.update.detail` explains why, and
        `session.update.reverted` is `true` if the previous settings were restored.
 
-  Tool, URL-bound secret, `egress`, and `permissions` updates usually finish within a few
-  seconds, except on `langgraph`, where a `tools` update or a `permissions` change to `default`
-  or `do.actions/<tool>` rules restarts the agent. Updates to `env` (including the model) or
-  plain secrets, and OAuth connection switches, restart the agent and can take up to about two
-  minutes.
+  Tool, URL-bound secret, `egress`, `permissions`, and `skills` updates usually finish within a
+  few seconds, except on `langgraph`, where a `tools` update or a `permissions` change to
+  `default` or `do.actions/<tool>` rules restarts the agent. Updates to `env` (including the
+  model) or plain secrets, and OAuth connection switches, restart the agent and can take up to
+  about two minutes.
 
   If the request matches the session's current settings, it returns `200` with `outcome` set to
   `UNCHANGED` and nothing is applied.
@@ -195,7 +251,9 @@ description: |-
   - The session must be idle: no agent turn running and no approval pending (`409`).
   - Session settings updates must be enabled for your team. Changing `permissions` must also be
     enabled for your team; if it isn't, a request whose manifest includes a `permissions`
-    section returns `403`, even if the section matches the session's policy.
+    section returns `403`, even if the section matches the session's policy. Likewise, changing
+    `skills` must be enabled for your team; if it isn't, a request whose manifest includes a
+    `skills` section returns `403`, even if the list matches the session's skills.
   - Not every agent runtime supports every section, or every `permissions` change (see Changing
     permissions above). An unsupported change returns `409`, and nothing is applied.
 tags:
@@ -248,11 +306,14 @@ responses:
       The request is invalid. For example: the body is empty or not valid JSON, `manifest_yaml` is
       not valid YAML, a field or manifest section is not recognized, a value is invalid, or both
       `resume_on_topoff` and `manifest_yaml` are set. A top-level `model` section (set the model in
-      `env` instead) and `permissions: null` also return `400`, as does a malformed model name. A
+      `env` instead), `permissions: null`, and `skills: null` also return `400`, as do a malformed
+      model name and a `skills` list that isn't valid (for example, a duplicate or badly formed
+      skill name, a missing `description` or `instructions`, more than 32 skills, or more than
+      512 KiB of skills in total). A
       URL-bound secret moved to a new host or path, or to `scheme: raw`, without `value` returns
       `400`. An OAuth secret switched to a connection you can't use also returns `400`: no
       connection has that `actor`, or the connection is pending, expired, revoked, or another team
-      member's.
+      member's. So does an OAuth connection switch that leaves out `provider` or `actor`.
     headers: *id001
     content:
       application/json:
@@ -266,8 +327,9 @@ responses:
       team (`manifest_yaml` only). A URL-bound secret or `egress` change also returns `403` when
       URL-bound secret and egress updates are not enabled for your team, a manifest with a
       `permissions` section returns `403` when permission updates are not enabled for your team,
-      and an OAuth connection switch returns `403` when switching OAuth connections is not enabled
-      for your team.
+      a manifest with a `skills` section returns `403` when skills updates are not enabled for
+      your team, and an OAuth connection switch returns `403` when switching OAuth connections is
+      not enabled for your team.
     headers: *id001
     content:
       application/json:
@@ -280,12 +342,28 @@ responses:
       The session can't be updated right now. For example, it is still provisioning, already
       updating, running an agent turn, waiting on an approval, paused for zero balance, or
       destroyed, or its agent runtime doesn't support the change (including an `egress` change on a
-      session that doesn't support egress updates). After a rollback or fork, a URL-bound secret
+      session that doesn't support egress updates, and a custom MCP server change on a session
+      whose `mutability.custom_tools` is `false`). After a rollback or fork, a URL-bound secret
       that was moved off its agent config's URL also returns `409` until you send its value again.
       For a `permissions` change the agent can't apply, the message names the unsupported changes
       and ends with `(update_unsupported)`; nothing is applied, so remove them and send the update
       again. A session created before live permissions updates were released can't change
-      `permissions`; create a new session. The error message gives the reason.
+      `permissions`; create a new session. A session forked from a checkpoint whose agent still
+      reaches Action Gateway through its parent session can't take an update involving
+      `do.actions` tools, including an OAuth connection switch on a session that has them; the
+      message ends with `(fork_update_unsupported)`, and you need a new session. A manifest with a
+      `skills` section on an agent that can't take skills while it runs, or on a session created
+      before live updates were available, also returns `409` and ends with `(update_unsupported)`,
+      even if the list matches the session's skills. The error message gives the reason.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+  '413':
+    description: >-
+      The request body exceeds 2 MiB, or `manifest_yaml` exceeds 1 MiB. A long `skills` list is
+      the most likely cause; the error message gives the limit.
     headers: *id001
     content:
       application/json:
@@ -293,9 +371,8 @@ responses:
           $ref: models/definitions.yml#/error
   '422':
     description: >-
-      The change can only be made by creating a new session. For example: adding, removing, or
-      changing a custom MCP server in `tools`; changing a reserved platform key or a mount-only
-      secret; adding or removing an OAuth secret, changing its provider, or switching one that was
+      The change can only be made by creating a new session. For example: changing a reserved
+      platform key or a mount-only secret; adding or removing an OAuth secret, changing its provider, or switching one that was
       created without `actor`; changing `vpc_uuid` or `subnet_uuid` in `egress`; adding, removing,
       or changing `HARNESS_INFERENCE_MODEL` on a session that doesn't use DigitalOcean Serverless
       Inference; changing a session's model provider or base URL; or adding, removing, or moving
@@ -314,6 +391,16 @@ responses:
           $ref: models/definitions.yml#/error
   '500':
     $ref: ../../shared/responses/server_error.yml
+  '503':
+    description: >-
+      A service the update depends on is unavailable. For example, an OAuth connection switch
+      couldn't reach the connection service to check the new connection. The session wasn't
+      changed; retry the request.
+    headers: *id001
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
   '429':
     $ref: ../../shared/responses/too_many_requests.yml
   default:
@@ -321,6 +408,7 @@ responses:
 x-codeSamples:
 - $ref: examples/curl/agents_update_session.yml
 - $ref: examples/curl/agents_update_session_permissions.yml
+- $ref: examples/curl/agents_update_session_skills.yml
 security:
 - bearer_auth:
   - agent_harness_session:manage
