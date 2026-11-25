@@ -697,9 +697,10 @@ tags:
       Sandboxes are isolated microVMs that run your code. By sending requests
       to the `/v2/sandboxes` endpoints, you can create, list, retrieve, pause,
       resume, and delete sandboxes; start, list, signal, write stdin to, and
-      attach to commands inside a sandbox; create, list, update, and delete
-      team custom templates and poll their builds; and create, list, retrieve,
-      and delete sandbox snapshots.
+      attach to commands inside a sandbox; start exec sessions with streaming
+      output, resize, and stdin; upload, download, list, and manage files;
+      create, list, update, and delete team custom templates and poll their
+      builds; and create, list, retrieve, and delete sandbox snapshots.
 
   - name: Security
     description: |-
@@ -3251,6 +3252,50 @@ paths:
   /v2/sandboxes/{sandbox_id}/commands/{pid}/stream:
     get:
       $ref: "resources/sandboxes/sandboxes_commands_attach.yml"
+
+  /v2/sandboxes/{sandbox_id}/exec:
+    post:
+      $ref: "resources/sandboxes/sandboxes_exec_start.yml"
+
+  /v2/sandboxes/{sandbox_id}/exec/{exec_id}/resize:
+    post:
+      $ref: "resources/sandboxes/sandboxes_exec_resize.yml"
+
+  /v2/sandboxes/{sandbox_id}/exec/{exec_id}/stdin:
+    post:
+      $ref: "resources/sandboxes/sandboxes_exec_stdin.yml"
+
+  /v2/sandboxes/{sandbox_id}/files/download:
+    get:
+      $ref: "resources/sandboxes/sandboxes_files_download.yml"
+
+  /v2/sandboxes/{sandbox_id}/files/exists:
+    get:
+      $ref: "resources/sandboxes/sandboxes_files_exists.yml"
+
+  /v2/sandboxes/{sandbox_id}/files/info:
+    get:
+      $ref: "resources/sandboxes/sandboxes_files_info.yml"
+
+  /v2/sandboxes/{sandbox_id}/files/list:
+    get:
+      $ref: "resources/sandboxes/sandboxes_files_list.yml"
+
+  /v2/sandboxes/{sandbox_id}/files/make-directory:
+    post:
+      $ref: "resources/sandboxes/sandboxes_files_make_directory.yml"
+
+  /v2/sandboxes/{sandbox_id}/files/move:
+    post:
+      $ref: "resources/sandboxes/sandboxes_files_move.yml"
+
+  /v2/sandboxes/{sandbox_id}/files/remove:
+    post:
+      $ref: "resources/sandboxes/sandboxes_files_remove.yml"
+
+  /v2/sandboxes/{sandbox_id}/files/upload:
+    post:
+      $ref: "resources/sandboxes/sandboxes_files_upload.yml"
 
   /v2/security/scans:
     get:

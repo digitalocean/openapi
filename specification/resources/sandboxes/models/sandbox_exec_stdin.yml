@@ -1,0 +1,24 @@
+type: object
+
+description: The body of a write-sandbox-exec-stdin request.
+
+properties:
+  data:
+    type: string
+    format: byte
+    description: Base64-encoded stdin bytes.
+    example: aGVsbG8K
+
+  offset:
+    type: string
+    format: int64
+    description: >-
+      Bytes the guest has already accepted. Zero is a valid first write.
+      Encoded as a string per protobuf JSON.
+    example: "0"
+
+  eof:
+    type: boolean
+    description: >-
+      When true, close stdin on a pipe exec; on a PTY send VEOF (`0x04`).
+    example: false

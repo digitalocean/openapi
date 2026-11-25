@@ -1,0 +1,37 @@
+description: >-
+  The directory at `path`, whether it was created or already existed.
+  `created` is false (and omitted) when the directory already existed.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        created:
+          type: boolean
+          description: False when the directory already existed. Omitted when false.
+          example: true
+        entry:
+          $ref: '../models/file_entry.yml'
+    examples:
+      Created:
+        value:
+          created: true
+          entry:
+            name: outdir
+            type: FILE_ENTRY_TYPE_DIRECTORY
+            path: /workspace/outdir
+            size: "0"
+            mode: 493
+            permissions: "drwxr-xr-x"
+            owner: user
+            group: user
+            modified_time: "2026-03-25T12:00:00Z"

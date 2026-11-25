@@ -1,0 +1,3 @@
+type: object
+
+description: An empty keepalive event on the exec stream.

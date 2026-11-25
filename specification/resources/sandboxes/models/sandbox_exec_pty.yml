@@ -1,0 +1,23 @@
+type: object
+
+description: >-
+  PTY options for a start-sandbox-exec request. Presence turns the PTY on;
+  omitted fields default to 24x80 and `xterm-256color`.
+
+properties:
+  rows:
+    type: integer
+    format: int64
+    description: Terminal rows. Defaults to 24.
+    example: 24
+
+  cols:
+    type: integer
+    format: int64
+    description: Terminal columns. Defaults to 80.
+    example: 80
+
+  term:
+    type: string
+    description: Terminal type. Defaults to `xterm-256color`.
+    example: xterm-256color

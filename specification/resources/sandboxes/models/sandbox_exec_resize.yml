@@ -1,0 +1,20 @@
+type: object
+
+description: The body of a resize-sandbox-exec request.
+
+required:
+  - rows
+  - cols
+
+properties:
+  rows:
+    type: integer
+    format: int64
+    description: Terminal rows. Must be between 1 and 1000.
+    example: 40
+
+  cols:
+    type: integer
+    format: int64
+    description: Terminal columns. Must be between 1 and 1000.
+    example: 120
