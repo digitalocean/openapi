@@ -1,12 +1,17 @@
 operationId: harness_create_subagents
 summary: CreateSubagents fans work out from the parent session to child sessions and returns the swarm run.
 description: >-
-  Submits a batch of subtasks as one swarm run. Each subtask becomes a task with its own child
-  session, objective, owned paths and grant; the parent integrates the results with the accept and
-  reject routes. The call is idempotent on `request_id`: a retry with the same `request_id` and the
-  same payload returns the run it created, and a retry with a different payload answers 409
-  `request_sig_mismatch`. Every `grant` (secrets by name, tools, egress hosts) is validated as a
-  subset of the parent's own, and the batch is bounded by the fan-out cap.
+  Submits a batch of tasks as one swarm run. Each task gets its own child session, which is an
+  ordinary session that starts fresh: its brief is the batch `context`, the task's own `context`,
+  objective, owned paths and output contract, and nothing else from the parent. The parent records
+  its verdict on each result with the update-run route, and steers or stops a child with the
+  existing session routes on the task's `session_id`.
+
+
+  The call is idempotent on `request_id`: a retry with the same `request_id` and the same payload
+  returns the run it created and re-spawns any task still `open`; a retry with a different payload
+  answers 409 `request_sig_mismatch`. Every `grant` (secrets by name, tools, egress hosts) is
+  validated as a subset of the parent's own, and the batch is bounded by the fan-out cap.
 
 
   When the team's plan approval is set to `human`, the plan is held for approval on the parent and
@@ -55,8 +60,9 @@ responses:
           $ref: models/definitions.yml#/create_subagents_response
   '400':
     description: >-
-      Malformed JSON; no subtasks; `min_children` outside 1 to the number of subtasks; a `grant`
-      that is not a subset of the parent's; an unknown `config_id`; or a deadline in the past.
+      Malformed JSON; no tasks; a missing `context` or one over 16 KiB; `min_children` outside 1
+      to the number of tasks; an unknown `config_id`; a `base` commit that cannot be resolved; or
+      a deadline in the past.
     headers: *id001
     content:
       application/json:
@@ -77,8 +83,9 @@ responses:
     $ref: ../../shared/responses/not_found.yml
   '409':
     description: >-
-      Branch on `id`. Permanent for this payload: `owned_paths_overlap` (two subtasks claim
-      overlapping owned paths), `fan_out_exceeded` (more subtasks than the fan-out cap),
+      Branch on `id`. Permanent for this payload: `grant_not_subset` (a task's `grant` names a
+      secret, tool or egress host the parent does not have), `owned_paths_overlap` (two tasks
+      claim overlapping owned paths), `fan_out_exceeded` (more tasks than the fan-out cap),
       `request_sig_mismatch` (the same `request_id` was already used with a different payload),
       `plan_approval_required` (plan approval is `human` and the call came from an unattended
       origin, which has no one to approve). Transient, retry in a moment: the parent session is not
@@ -95,10 +102,10 @@ responses:
       application/json:
         schema:
           $ref: models/definitions.yml#/error
-  '500':
-    $ref: ../../shared/responses/server_error.yml
   '429':
     $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
 x-codeSamples:

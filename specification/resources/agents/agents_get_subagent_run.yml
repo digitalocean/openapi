@@ -2,9 +2,9 @@ operationId: harness_get_subagent_run
 summary: GetSwarmRun returns a swarm run with the status of each of its tasks.
 description: >-
   Read-only. Returns the run (status, deadlines, approval) and one entry per task (status, attempt,
-  assigned child session, verdict). Poll it to follow the run; `attempt` is the value to present on
-  the accept and reject routes. Agent swarms must be enabled for the team; otherwise the route
-  answers 404.
+  current child `session_id`, verdict). `attempt` is the value to present with a verdict on the
+  update-run route; `session_id` is the id to use on the existing session routes to steer, stop or
+  read that child. Agent swarms must be enabled for the team; otherwise the route answers 404.
 tags:
 - Harness Runtime
 parameters:
@@ -52,10 +52,10 @@ responses:
           $ref: models/definitions.yml#/error
   '404':
     $ref: ../../shared/responses/not_found.yml
-  '500':
-    $ref: ../../shared/responses/server_error.yml
   '429':
     $ref: ../../shared/responses/too_many_requests.yml
+  '500':
+    $ref: ../../shared/responses/server_error.yml
   default:
     $ref: ../../shared/responses/unexpected_error.yml
 x-codeSamples:
