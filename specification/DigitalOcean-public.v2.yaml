@@ -176,6 +176,32 @@ tags:
       Persistent workspaces (`/v2/harness-runtime/workspaces`) are in public preview and are
       described under Harness Runtime Workspaces [Public Preview].
 
+      ### Error IDs
+
+      For most errors, the `id` in the error body names the HTTP status, such as `not_found`
+      for a `404`. The errors below have their own `id` instead. Branch on the `id`, not on the
+      `message`. An `id` is never renamed or reused for another error.
+
+      | `id` | Status | Meaning and next step |
+      | --- | --- | --- |
+      | `session_quota_exceeded` | `409` | The team is at its active-session limit. Paused sessions count toward it. Destroy sessions you no longer need, or contact Support to raise the limit. |
+      | `session_busy` | `409` | An agent turn is running or an approval is pending. Wait for the turn to end or cancel it, or resolve the approval, then retry. |
+      | `session_provisioning` | `409` | The session is still starting. Retry when its status is `SESSION_STATUS_READY`. |
+      | `session_updating` | `409` | A session settings update is being applied. Retry when the status is no longer `SESSION_STATUS_UPDATING`. |
+      | `session_destroying` | `409` | The session is being destroyed. Create a new session. |
+      | `session_not_running` | `409` | The session's status doesn't allow this request. Get the session to see its status. |
+      | `session_state_changed` | `409` | The session changed while the request ran. Retry. |
+      | `session_zero_balance` | `409` | The session is paused for zero balance. Top up the account, then retry. |
+      | `session_has_no_agent` | `409` | The session runs no agent, so it can't take input or approvals. Use exec, port-forward, or workspace upload and download instead. |
+      | `checkpoint_not_ready` | `409` | The checkpoint is not `READY`. Retry when it is, or use another checkpoint if it `FAILED`. |
+      | `checkpoint_storage_quota_exceeded` | `409` | The team's checkpoint storage is full. Delete checkpoints you no longer need. |
+      | `update_unsupported` | `409` | The session can't take this settings update. Create a new session to make the change. |
+      | `fork_update_unsupported` | `409` | The session was forked from a checkpoint, so it can't take a settings update that involves `do.actions` tools. Create a new session to make the change. |
+      | `requires_new_session` | `422` | Only a new session can make this change. |
+      | `workspace_quota_exceeded` | `409` | The team is at its persistent workspace count or size limit. Delete workspaces you no longer need, or contact Support to raise the limit. |
+      | `region_not_enabled` | `403` | Your team can't create resources in the region of the API host you called. `GET /v2/harness-runtime/regions` lists the regions your team can use. |
+      | `region_not_supported` | `403` | The region of the API host you called doesn't accept new resources. `GET /v2/harness-runtime/regions` lists the regions your team can use. |
+
   - name: Harness Runtime Workspaces [Public Preview]
     description: |-
       Persistent workspaces (`/v2/harness-runtime/workspaces`) are sets of files that outlive
