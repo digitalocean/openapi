@@ -137,9 +137,9 @@ description: |-
   Only the differences from the current policy are checked: rules you add, remove, change, or
   move, and a changed `default`. Rules you keep as they are never cause a refusal. A removed rule
   is checked like an added one, so a rule of a type the agent can't change can't be removed
-  either: every update has to keep it, and `permissions: {}` returns `409` while the policy has
-  one. For example, `{}` returns `409` on a `codex` session with a `file.read` rule, or on a
-  `hermes` session with a `bash` rule.
+  either: every `permissions` section you send has to keep it, and `permissions: {}` returns
+  `409` while the policy has one. For example, `{}` returns `409` on a `codex` session with a
+  `file.read` rule, or on a `hermes` session with a `bash` rule.
 
   If any change can't be applied on the session's agent, the request returns `409` and nothing is
   applied, including changes to other sections. The error message names the unsupported changes
