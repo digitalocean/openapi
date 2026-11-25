@@ -68,7 +68,29 @@ responses:
   '500':
     $ref: ../../shared/responses/server_error.yml
   '429':
-    $ref: ../../shared/responses/too_many_requests.yml
+    description: The API rate limit has been exceeded, or the removal was refused because the session
+      holds a persistent workspace and the team already has too many workspaces being saved. In the second
+      case nothing changed and the session keeps running. Repeat the same request after the number of
+      seconds in the Retry-After header. A session without a workspace is never refused for this reason.
+    headers:
+      ratelimit-limit:
+        $ref: ../../shared/headers.yml#/ratelimit-limit
+      ratelimit-remaining:
+        $ref: ../../shared/headers.yml#/ratelimit-remaining
+      ratelimit-reset:
+        $ref: ../../shared/headers.yml#/ratelimit-reset
+      Retry-After:
+        description: Seconds to wait before repeating the request.
+        schema:
+          type: integer
+        example: 30
+    content:
+      application/json:
+        schema:
+          $ref: models/definitions.yml#/error
+        example:
+          id: too_many_requests
+          message: too many of this team's workspaces are being saved; wait about 30 seconds and retry the removal
   default:
     $ref: ../../shared/responses/unexpected_error.yml
 x-codeSamples:
