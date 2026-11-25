@@ -16,7 +16,7 @@ description: |-
 
   | Section | What it changes | Agent restart |
   | --- | --- | --- |
-  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers too, where the session's `mutability.custom_tools` is `true`. | No (LangGraph: yes). A custom MCP server change: yes |
+  | `tools` | The session's Action Gateway tools (`do.actions` entries). Custom MCP servers too, where the session's `mutability.custom_tools` is `true`. | No (LangGraph: yes). A custom MCP server change: when it alters the agent's environment |
   | `env` | Environment variables (name and value). | Yes |
   | `env.HARNESS_INFERENCE_MODEL` | The model, for sessions that use DigitalOcean Serverless Inference. | Yes |
   | `env.MODEL`, `env.OPENAI_MODEL`, `env.ANTHROPIC_MODEL` | The model, for sessions that use their own OpenAI-compatible or Anthropic endpoint. | Yes |
@@ -60,7 +60,9 @@ description: |-
   session to change its custom MCP servers.
 
   Include the session's other custom MCP servers exactly as they are, because `tools` replaces the
-  whole list. The agent restarts to take the change, and the update ends `APPLIED_RESTARTED`.
+  whole list. The agent restarts when the change alters its environment (a server added, removed or
+  moved, or a changed credential), and the update then ends `APPLIED_RESTARTED`. A change that
+  doesn't, such as editing the `tools` allowlist of an existing server, ends `APPLIED`.
 
   A server with `auth` that is added, moved to another `url`, or given another secret slot must carry
   its credential in the same request, so a credential never goes to a destination the request did

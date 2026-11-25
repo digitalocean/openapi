@@ -1156,7 +1156,8 @@ session_mutability:
       type: boolean
       description: >-
         A live update can add, modify, or remove a custom MCP server (`name` and `url`) in the
-        `tools` section. It also needs `tools`. The agent restarts to take the change. A session
+        `tools` section. It also needs `tools`. The agent restarts when the change alters its
+        environment. A session
         reads `false` until its agent's custom-server update is supported, and keeps reading
         `false` after that if it was created earlier. A server with `auth` that is added, moved to
         another `url`, or given another secret slot must carry its secret's value in the same
