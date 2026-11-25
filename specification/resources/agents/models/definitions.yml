@@ -2100,10 +2100,9 @@ patch_session_request:
         be combined with `resume_on_topoff`. Requires session settings updates to be enabled for
         your team (`403` otherwise).
 
-        Supported sections are `tools`, `env`, `secrets`, and `egress`. Sections you omit are not
-        changed. Any other top-level key returns `400`, including `model` (set the model in `env`
-        instead; see **Changing the model**) and `permissions` (can't be changed on an existing
-        session).
+        Supported sections are `tools`, `env`, `secrets`, `egress`, and `permissions`. Sections you
+        omit are not changed. Any other top-level key returns `400`, including `model` (set the
+        model in `env` instead; see **Changing the model**).
 
         Each section you include replaces that section in full:
 
@@ -2126,6 +2125,16 @@ patch_session_request:
           current allowlist: a host or IP address you leave out is removed. Leave out `vpc_uuid`
           and `subnet_uuid` to keep the session's current VPC, or set them to their current values.
           A different value returns `422`. See **Egress**.
+        - `permissions`: the complete permission policy, `default` and the full `rules` list,
+          with the same fields as at session creation. A rule you leave out is removed.
+          `permissions: {}` removes the policy (the agent's built-in default applies);
+          `permissions: null` returns `400`. What can change depends on the session's agent, and
+          `permissions.filesystem` and `permissions.network` can't be changed. Removing a rule is
+          a change too: a rule of a type the agent can't change must be kept, so `{}` returns
+          `409` while the policy has one. If any change
+          can't be applied on the agent, the request returns `409` and nothing is applied; the
+          error message names the unsupported changes so you can remove them and send the update
+          again. Sessions created before live permissions updates were released return `409`.
 
         **URL-bound secrets.** The egress proxy sends a URL-bound secret only to requests that
         match its `url`; the agent never receives the value. An update to a URL-bound secret
@@ -2337,6 +2346,8 @@ session_config_changes:
         bound to a different URL or scheme than in the agent config.
     egress:
       $ref: '#/session_config_egress_changes'
+    permissions:
+      $ref: '#/session_config_permissions_changes'
 
 session_config_egress_changes:
   type: object
@@ -2362,6 +2373,41 @@ session_config_egress_changes:
       items:
         type: string
       example: [203.0.113.10]
+
+session_config_permissions_changes:
+  type: object
+  description: >-
+    Changes to the permission policy. A rule is named by its tool and match values, for example
+    `bash "git *"` or `do.actions/web_search`. Omitted when the permissions are identical.
+  properties:
+    default:
+      type: string
+      description: >-
+        The new default action (`allow`, `ask`, or `deny`), when it changed. Empty when the
+        default was removed.
+      example: ask
+    rules:
+      type: object
+      description: >-
+        Names of the rules added, removed, or changed. `changed` covers a rule kept under the same
+        tool and match with another action, or at another position. The last matching rule wins,
+        so the order is part of the policy.
+      properties:
+        added:
+          type: array
+          items:
+            type: string
+          example: [bash "npm test"]
+        removed:
+          type: array
+          items:
+            type: string
+          example: [bash "rm -rf *"]
+        changed:
+          type: array
+          items:
+            type: string
+          example: [do.actions/web_search]
 
 session_config_update:
   type: object
