@@ -31,6 +31,25 @@ properties:
   source:
     $ref: 'microvm_source.yml'
 
+  fork_id:
+    type: string
+    format: uuid
+    readOnly: true
+    description: >-
+      The fork that created this MicroVM. Every copy of one fork has the same
+      value. Present only on a MicroVM that a fork created. A MicroVM created
+      later from a fork's checkpoint has none.
+    example: 01a0ed98-0a74-75dd-a625-e4856adbc298
+
+  forked_from:
+    type: string
+    format: uuid
+    readOnly: true
+    description: >-
+      The ID of the MicroVM this one was forked from. Stays set after that
+      MicroVM is deleted. Present only on a MicroVM that a fork created.
+    example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
   state:
     type: string
     readOnly: true

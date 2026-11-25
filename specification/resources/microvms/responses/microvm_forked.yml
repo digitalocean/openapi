@@ -1,0 +1,112 @@
+description: >-
+  The response will be a JSON object with the keys `microvms`, `fork_id`, and
+  `checkpoint_id`. Each MicroVM in `microvms` is a copy with `state` set to
+  `creating` and an empty endpoint hostname until it starts.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        microvms:
+          type: array
+          items:
+            $ref: '../models/microvm.yml'
+          description: The copies, in `creating`.
+
+        fork_id:
+          type: string
+          format: uuid
+          description: >-
+            Identifies this fork. Each copy also reports it as `fork_id`, and
+            `GET /v2/microvms?fork_id={fork_id}` lists the copies. Treat it as
+            an opaque value.
+          example: 01a0ed98-0a74-75dd-a625-e4856adbc298
+
+        checkpoint_id:
+          type: string
+          format: uuid
+          description: >-
+            The ID of the checkpoint the copies start from. Each copy also
+            reports it as `source.checkpoint_id`.
+          example: 01a0ed98-0a74-75dd-a625-e4856adbc298
+
+      required:
+        - microvms
+        - fork_id
+        - checkpoint_id
+
+    examples:
+      Two Copies:
+        value:
+          microvms:
+            - id: 01a0f2c4-5b1e-7a3c-9d2f-6e8a4c1b7d90
+              name: example-fork-1
+              region: mkc1
+              size:
+                cpu: 1
+                memory: 2048
+                disk: 50
+              source:
+                oci_ref: docker.io/library/nginx:latest
+                checkpoint_id: 01a0ed98-0a74-75dd-a625-e4856adbc298
+              fork_id: 01a0ed98-0a74-75dd-a625-e4856adbc298
+              forked_from: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+              state: creating
+              networking: public
+              auto_pause:
+                enabled: true
+                idle_timeout: 5m0s
+              auto_resume: true
+              http_protocol: http
+              ports:
+                - 80
+              tags:
+                - example
+                - run-42
+              urls:
+                - hostname: ""
+                  port: 80
+                  default: true
+                  status: PENDING
+              created_at: "2026-09-29T21:38:29Z"
+            - id: 01a0f2c4-5b1f-7c48-8a61-2f9d3e5b0c17
+              name: example-fork-2
+              region: mkc1
+              size:
+                cpu: 1
+                memory: 2048
+                disk: 50
+              source:
+                oci_ref: docker.io/library/nginx:latest
+                checkpoint_id: 01a0ed98-0a74-75dd-a625-e4856adbc298
+              fork_id: 01a0ed98-0a74-75dd-a625-e4856adbc298
+              forked_from: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+              state: creating
+              networking: public
+              auto_pause:
+                enabled: true
+                idle_timeout: 5m0s
+              auto_resume: true
+              http_protocol: http
+              ports:
+                - 80
+              tags:
+                - example
+                - run-42
+              urls:
+                - hostname: ""
+                  port: 80
+                  default: true
+                  status: PENDING
+              created_at: "2026-09-29T21:38:29Z"
+          fork_id: 01a0ed98-0a74-75dd-a625-e4856adbc298
+          checkpoint_id: 01a0ed98-0a74-75dd-a625-e4856adbc298

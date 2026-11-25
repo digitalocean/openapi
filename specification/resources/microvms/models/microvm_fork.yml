@@ -1,0 +1,30 @@
+type: object
+
+description: The copies to create when forking a MicroVM. Every field is optional.
+
+properties:
+  count:
+    type: integer
+    minimum: 1
+    default: 1
+    description: >-
+      The number of copies to create. A count above the maximum for your team
+      is rejected.
+    example: 3
+
+  name:
+    type: string
+    description: >-
+      The base name of the copies. A single copy takes the name as given.
+      Several copies take `<name>-1` to `<name>-N`, and the name with that
+      suffix must fit in 63 characters. If you omit it, names are generated
+      from the source MicroVM's name.
+    example: example-fork
+
+  tags:
+    type: array
+    items:
+      type: string
+    description: Tags to add to every copy, on top of the source MicroVM's tags.
+    example:
+      - run-42

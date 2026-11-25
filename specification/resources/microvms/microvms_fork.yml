@@ -1,0 +1,82 @@
+operationId: microvms_post_fork
+
+summary: Fork a MicroVM
+
+description: |
+  To create one or more copies of a running or paused MicroVM, send a POST request to
+  `/v2/microvms/{microvm_id}/fork`.
+
+  Each copy starts from the memory and disk state the source had when the fork was taken,
+  with the source's size, region, networking, configuration, and tags. A running source
+  keeps running and a paused source stays paused.
+
+  The request returns immediately with the copies in `creating`, a `fork_id` that
+  identifies this fork, and the `checkpoint_id` of the checkpoint the copies start from.
+  That checkpoint is captured first and is kept afterwards as a normal checkpoint. Poll
+  `GET /v2/microvms/{microvm_id}` for each copy until its `state` is `running` or `failed`.
+  Copies settle independently, so some can fail while others run. To list the copies
+  later, send a GET request to `/v2/microvms?fork_id={fork_id}`.
+
+  The request is checked as a whole. If the count, an account limit, or a name conflict
+  rules out any copy, nothing is created.
+
+  This request is not idempotent: sending it again forks again. If a response is lost,
+  send a GET request to `/v2/microvms?forked_from={microvm_id}` to see whether the copies
+  were created before you retry.
+
+  Fork is available when the `fork` feature is enabled for your team. See
+  `GET /v2/microvms/options`.
+
+tags:
+  - MicroVMs
+
+parameters:
+  - $ref: 'parameters.yml#/microvm_id'
+
+requestBody:
+  required: false
+
+  content:
+    application/json:
+      schema:
+        $ref: 'models/microvm_fork.yml'
+
+      examples:
+        Two Named Copies:
+          value:
+            count: 2
+            name: example-fork
+            tags:
+              - run-42
+
+responses:
+  '201':
+    $ref: 'responses/microvm_forked.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '409':
+    $ref: 'responses/errors.yml#/conflict'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/microvms_fork.yml'
+
+security:
+  - bearer_auth:
+      - 'microvm:create'
