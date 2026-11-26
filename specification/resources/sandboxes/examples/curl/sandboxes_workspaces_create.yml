@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"name":"my-workspace","size_limit_gib":10}' \
+    "https://api.digitalocean.com/v2/sandboxes/workspaces"

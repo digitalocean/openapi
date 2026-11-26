@@ -1,0 +1,24 @@
+type: string
+description: >-
+  The state of a workspace.
+
+  - `WORKSPACE_STATE_CREATING`: The workspace is being created.
+  - `WORKSPACE_STATE_AVAILABLE`: The workspace is ready to attach to a sandbox.
+  - `WORKSPACE_STATE_ATTACHING`: A sandbox is starting with the workspace
+    attached.
+  - `WORKSPACE_STATE_ATTACHED`: The workspace is attached to a sandbox.
+  - `WORKSPACE_STATE_RELEASING`: The workspace is being saved after its sandbox
+    went away.
+  - `WORKSPACE_STATE_DELETING`: The workspace is being deleted.
+  - `WORKSPACE_STATE_FAILED`: The workspace failed.
+enum:
+  - WORKSPACE_STATE_UNSPECIFIED
+  - WORKSPACE_STATE_CREATING
+  - WORKSPACE_STATE_AVAILABLE
+  - WORKSPACE_STATE_ATTACHING
+  - WORKSPACE_STATE_ATTACHED
+  - WORKSPACE_STATE_RELEASING
+  - WORKSPACE_STATE_DELETING
+  - WORKSPACE_STATE_FAILED
+default: WORKSPACE_STATE_UNSPECIFIED
+example: WORKSPACE_STATE_AVAILABLE

@@ -701,7 +701,9 @@ tags:
       attach to commands inside a sandbox; start exec sessions with streaming
       output, resize, and stdin; upload, download, list, and manage files;
       create, list, update, and delete team custom templates and poll their
-      builds; and create, list, retrieve, and delete sandbox snapshots.
+      builds; create, list, retrieve, and delete sandbox snapshots; and create,
+      list, retrieve, and delete persistent workspaces that outlive any one
+      sandbox and attach to a sandbox on create.
 
   - name: Security
     description: |-
@@ -3183,6 +3185,20 @@ paths:
 
     post:
       $ref: "resources/sandboxes/sandboxes_create.yml"
+
+  /v2/sandboxes/workspaces:
+    get:
+      $ref: "resources/sandboxes/sandboxes_workspaces_list.yml"
+
+    post:
+      $ref: "resources/sandboxes/sandboxes_workspaces_create.yml"
+
+  /v2/sandboxes/workspaces/{workspace_id}:
+    get:
+      $ref: "resources/sandboxes/sandboxes_workspaces_get.yml"
+
+    delete:
+      $ref: "resources/sandboxes/sandboxes_workspaces_delete.yml"
 
   /v2/sandboxes/templates:
     get:
