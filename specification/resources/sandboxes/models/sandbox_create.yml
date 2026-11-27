@@ -33,3 +33,11 @@ properties:
     description: Environment variables for the sandbox. The values are secrets.
     example:
       MY_KEY: my-value
+
+  workspace_id:
+    type: string
+    description: >-
+      The ID of a persistent workspace to attach to the sandbox. The workspace
+      must be `WORKSPACE_STATE_AVAILABLE`. Create one with
+      `POST /v2/sandboxes/workspaces`.
+    example: 44444444-5555-4666-8777-888888888888

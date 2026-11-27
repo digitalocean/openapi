@@ -1,0 +1,54 @@
+type: object
+
+description: A persistent disk that outlives any one sandbox.
+
+required:
+  - workspace_id
+  - size_limit_gib
+  - state
+  - created_at
+
+properties:
+  workspace_id:
+    type: string
+    readOnly: true
+    description: The unique ID of the workspace.
+    example: 44444444-5555-4666-8777-888888888888
+
+  name:
+    type: string
+    readOnly: true
+    description: The name of the workspace. Empty when none was given.
+    example: my-workspace
+
+  size_limit_gib:
+    type: integer
+    format: int64
+    readOnly: true
+    description: The size limit of the workspace, in GiB.
+    example: 10
+
+  state:
+    $ref: 'workspace_state.yml'
+
+  attached_sandbox_id:
+    type: string
+    readOnly: true
+    description: >-
+      The ID of the sandbox the workspace is attached to. Empty when it is not
+      attached.
+    example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
+  last_saved_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: The last time the workspace data was saved, in ISO 8601 format.
+    example: "2026-11-20T12:30:00Z"
+
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: The time the workspace was created, in ISO 8601 format.
+    example: "2026-11-20T12:00:00Z"

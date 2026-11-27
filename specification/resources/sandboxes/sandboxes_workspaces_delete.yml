@@ -1,0 +1,45 @@
+operationId: sandboxes_delete_workspace
+
+summary: Delete a Workspace
+
+description: |
+  Delete a workspace and its data. Only a workspace that is not attached to a
+  sandbox can be deleted.
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/workspace_id'
+
+responses:
+  '200':
+    $ref: 'responses/deleted.yml'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '409':
+    $ref: 'responses/errors.yml#/conflict'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_workspaces_delete.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox_workspaces:delete'

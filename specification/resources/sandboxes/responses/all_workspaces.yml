@@ -1,0 +1,36 @@
+description: >-
+  The response is a JSON object with a `workspaces` array and an optional
+  `next_page_token` for cursor pagination.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        workspaces:
+          type: array
+          items:
+            $ref: '../models/workspace.yml'
+        next_page_token:
+          type: string
+          description: The token for the next page. Empty on the last page.
+          example: ''
+    examples:
+      Workspaces Page:
+        value:
+          workspaces:
+            - workspace_id: 44444444-5555-4666-8777-888888888888
+              name: my-workspace
+              size_limit_gib: 10
+              state: WORKSPACE_STATE_AVAILABLE
+              last_saved_at: "2026-11-20T12:30:00Z"
+              created_at: "2026-11-20T12:00:00Z"
+          next_page_token: ""
