@@ -549,8 +549,8 @@ tags:
       and delete MicroVMs, run commands and open a console in them, forward
       ports to them, upload and download files, add and remove ingress URLs,
       create access tokens scoped
-      to one MicroVM, and create checkpoints to start new MicroVMs from a
-      saved state.
+      to one MicroVM, create checkpoints to start new MicroVMs from a
+      saved state, and fork a MicroVM into copies.
 
       Each MicroVM serves its HTTP port at
       `https://{microvm_id}.{region}.microvm.ondigitalocean.com`. Requests to
@@ -2557,6 +2557,10 @@ paths:
   /v2/microvms/{microvm_id}/checkpoints:
     post:
       $ref: "resources/microvms/microvms_checkpoints_create.yml"
+
+  /v2/microvms/{microvm_id}/fork:
+    post:
+      $ref: "resources/microvms/microvms_fork.yml"
 
   /v2/monitoring/alerts:
     get:

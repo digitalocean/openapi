@@ -74,7 +74,7 @@ conflict:
       schema:
         $ref: '../models/microvm_error.yml'
       example:
-        code: CONFLICT
+        code: ALREADY_EXISTS
         message: "another MicroVM in the region already has the requested name"
 
 not_found:

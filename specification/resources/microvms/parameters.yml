@@ -69,6 +69,30 @@ tag_name:
     type: string
   example: example
 
+fork_id:
+  in: query
+  name: fork_id
+  required: false
+  description: >-
+    Only return the copies one fork created, by the `fork_id` the fork
+    returned.
+  schema:
+    type: string
+    format: uuid
+  example: 01a0ed98-0a74-75dd-a625-e4856adbc298
+
+forked_from:
+  in: query
+  name: forked_from
+  required: false
+  description: >-
+    Only return MicroVMs forked from this MicroVM, across all of its forks.
+    Keeps matching after that MicroVM is deleted.
+  schema:
+    type: string
+    format: uuid
+  example: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
+
 microvm_id_filter:
   in: query
   name: microvm_id
