@@ -26,9 +26,6 @@ responses:
   '201':
     $ref: 'responses/sandbox_created.yml'
 
-  '200':
-    $ref: 'responses/sandbox.yml'
-
   '400':
     description: The body is not valid JSON, or it contains an unknown field.
     headers:
