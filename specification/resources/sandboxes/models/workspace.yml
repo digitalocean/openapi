@@ -46,13 +46,6 @@ properties:
     description: The last time the workspace data was saved, in ISO 8601 format.
     example: "2026-11-20T12:30:00Z"
 
-  bytes_used:
-    type: string
-    format: uint64
-    readOnly: true
-    description: Bytes used on the workspace. `0` when not reported yet.
-    example: "1073741824"
-
   created_at:
     type: string
     format: date-time

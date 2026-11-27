@@ -25,5 +25,4 @@ content:
             state: WORKSPACE_STATE_ATTACHED
             attached_sandbox_id: 01a0ef1a-d873-793d-ae6a-5dd6239be62a
             last_saved_at: "2026-11-20T12:30:00Z"
-            bytes_used: "1073741824"
             created_at: "2026-11-20T12:00:00Z"

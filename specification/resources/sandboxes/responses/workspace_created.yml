@@ -29,5 +29,4 @@ content:
             name: my-workspace
             size_limit_gib: 10
             state: WORKSPACE_STATE_CREATING
-            bytes_used: "0"
             created_at: "2026-11-20T12:00:00Z"
