@@ -3642,3 +3642,544 @@ create_provider_connection_request:
         type: string
       example:
       - repo
+
+create_subagents_request:
+  type: object
+  description: A batch of tasks to run as one swarm run.
+  required:
+  - request_id
+  - context
+  - tasks
+  properties:
+    request_id:
+      type: string
+      maxLength: 128
+      description: >-
+        Idempotency key chosen by the parent session, unique per parent session. Retrying with the
+        same `request_id` and the same payload returns the run already created and re-spawns any
+        task that is still `open`, which is how a parent retries a child that failed to start. The
+        same `request_id` with a different payload is a 409 with `id` `request_sig_mismatch`.
+      example: plan-2026-11-24-a
+    context:
+      type: string
+      maxLength: 16384
+      description: >-
+        What every child needs to know, at most 16 KiB: what the work is about, where the inputs
+        are, how a result is checked, the conventions to follow and anything the parent has
+        already worked out. A child is a fresh agent and receives nothing else from the parent, so
+        this is the top of every child's brief. The platform bounds it and never interprets it.
+      example: >-
+        The service is the Go API in api/. Run `make test` from the repo root to check a change.
+        Errors are wrapped with fmt.Errorf and %w; do not add new dependencies.
+    base:
+      $ref: '#/subagent_base'
+    tasks:
+      type: array
+      minItems: 1
+      description: >-
+        The pieces of work, one child session each. The batch is bounded by a fan-out cap; a larger
+        batch is a 409 with `id` `fan_out_exceeded`. A task's position in this array is its
+        `ordinal`.
+      items:
+        $ref: '#/subagent_task_spec'
+    min_children:
+      type: integer
+      format: int32
+      minimum: 1
+      description: >-
+        Fewest children that must be running once spawn retries are exhausted. Fewer marks the run
+        `failed` and destroys what started. Between 1 and the number of tasks; defaults to half the
+        batch.
+      example: 2
+    max_attempts:
+      type: integer
+      format: int32
+      minimum: 1
+      description: >-
+        Attempts a task may consume before the run fails. A task returns to `open` with a higher
+        `attempt` each time its child misses its deadline or fails. Omit to use the platform
+        default.
+      example: 3
+    deadline_at:
+      type: string
+      format: date-time
+      description: >-
+        Deadline for the whole run (RFC 3339). Past it the run is `expired` and the remaining
+        children are destroyed; results already integrated stay integrated. Omit to use the
+        platform default.
+      example: '2026-11-24T18:00:00Z'
+
+subagent_base:
+  type: object
+  description: >-
+    Optional shared starting state for every child. For a workspace repo, the ref and commit each
+    child checks out; for other work, input artifacts by reference. Omit when the context is all a
+    child needs. Unpushed parent work is in no child's world, so a parent with local changes
+    pushes a branch first.
+  properties:
+    repos:
+      type: array
+      description: One entry per workspace repo. A commit the platform cannot resolve is a 400.
+      items:
+        type: object
+        required:
+        - repo
+        - commit
+        properties:
+          repo:
+            type: string
+            description: The workspace repo, as named in the parent's agent config.
+            example: github.com/acme/api
+          ref:
+            type: string
+            description: The branch or tag the commit was taken from, for the record.
+            example: swarm/pagination
+          commit:
+            type: string
+            description: The commit every child's workspace is cloned at.
+            example: 4f2a9c1e7b3d5a8f0c6e2b9d1a7f3c5e8b0d2a4f
+    artifacts:
+      type: array
+      description: Input artifacts every child reads, by reference.
+      items:
+        type: string
+      example:
+      - inputs/shot-list.json
+
+subagent_task_spec:
+  type: object
+  description: One piece of work for one child session.
+  required:
+  - objective
+  properties:
+    objective:
+      type: string
+      description: What done means for this task. The child stops when it is true.
+      example: Add retry with backoff to the HTTP client in src/client/.
+    context:
+      type: string
+      description: >-
+        Pointers only this child needs, appended to the batch `context` in its brief.
+      example: The client is src/client/http.go; retries belong in doRequest.
+    owned_paths:
+      type: array
+      description: >-
+        The only paths this child may write: source paths in a repo, or slots under the run's
+        artifact prefix. No two tasks in the batch, and no live task in the same run, may overlap;
+        an overlap is a 409 with `id` `owned_paths_overlap`. A result that touches a path outside
+        this list is refused on an `accept` verdict with a 409 with `id` `out_of_bounds`. Omit for
+        a child that writes nothing, such as a verifier.
+      items:
+        type: string
+      example:
+      - src/client/
+    output_contract:
+      type: string
+      description: >-
+        What the parent will check before accepting. The platform stores it and returns it in the
+        child's brief and in the run view; it never evaluates it.
+      example: Unit tests in src/client/ pass and the public API is unchanged.
+    output_kind:
+      type: string
+      enum:
+      - patch
+      - files
+      default: files
+      description: >-
+        What the child returns. `patch`: a unified diff against the `base`. `files`: whatever
+        `output_contract` names, such as a report, a dataset or a rendered segment.
+      example: patch
+    deadline_at:
+      type: string
+      format: date-time
+      description: >-
+        Deadline for this task alone (RFC 3339). Past it the child is destroyed and the task is
+        abandoned. Omit and only the run deadline applies.
+      example: '2026-11-24T17:00:00Z'
+    config_id:
+      type: string
+      format: uuid
+      description: >-
+        Agent Config for the child, to use a different model or harness than the parent. Omit to
+        use the parent's. The grant rules are checked against this config, so a different model
+        never means more authority.
+      example: 3f8a1c52-7d94-4e0b-b6a1-9c2d5e7f1a30
+    grant:
+      $ref: '#/subagent_grant'
+
+subagent_grant:
+  type: object
+  description: >-
+    What a child receives. Every list must be a subset of the parent's own resolved config;
+    anything outside it is a 409 with `id` `grant_not_subset`. Omit the grant and the child gets
+    the parent's secrets, tools and egress hosts unchanged.
+  properties:
+    secrets:
+      type: array
+      description: >-
+        Secret names, taken from the parent's own secrets. The DigitalOcean API token is never
+        eligible, and a literal token in a grant is refused.
+      items:
+        type: string
+      example:
+      - NPM_TOKEN
+    tools:
+      type: array
+      description: >-
+        Tools the child may use, a subset of the parent's tool permissions. Gated actions stay
+        gated.
+      items:
+        type: string
+      example:
+      - bash
+    egress_hosts:
+      type: array
+      description: >-
+        Hosts the child may reach, a subset of the parent's egress allowlist. DigitalOcean API
+        hosts are always excluded.
+      items:
+        type: string
+      example:
+      - registry.npmjs.org
+
+create_subagents_response:
+  type: object
+  properties:
+    run_id:
+      type: string
+      format: uuid
+      description: The swarm run. Use it on the other routes in this family.
+      example: 9b2e6f10-4c3a-4d7e-8a15-0f6d2c9e7b41
+    status:
+      type: string
+      enum:
+      - pending_approval
+      - spawning
+      - running
+      description: >-
+        `pending_approval`: the plan is held for a human decision on the parent and no child exists
+        yet. Otherwise the run is spawning or running.
+      example: spawning
+    approval_request_id:
+      type: string
+      description: >-
+        The human-in-the-loop (HITL) request on the parent that carries the plan. Present only
+        when `status` is `pending_approval`; a human answers it through the existing HITL route.
+      example: req_5d1f0a
+    tasks:
+      type: array
+      description: >-
+        One task per entry in the request's `tasks`, in `ordinal` order. Empty while the run is
+        `pending_approval`: tasks are created when the plan is approved.
+      items:
+        $ref: '#/swarm_task'
+
+swarm_run:
+  type: object
+  description: >-
+    One swarm run, covering the plan, its approval and where it stands.
+  properties:
+    run_id:
+      type: string
+      format: uuid
+      description: The run id.
+      example: 9b2e6f10-4c3a-4d7e-8a15-0f6d2c9e7b41
+    status:
+      type: string
+      enum:
+      - pending_approval
+      - spawning
+      - running
+      - integrating
+      - done
+      - failed
+      - expired
+      - cancelled
+      description: >-
+        `done` when every task is done. `failed` when fewer than `min_children` started, a task
+        used up `max_attempts`, or the plan was rejected. `expired` when the run deadline fired
+        first. `cancelled` when the parent or a human destroyed the run on purpose.
+      example: running
+    failure_reason:
+      type: string
+      description: >-
+        Why the run is `failed`, `expired` or `cancelled`, for example `min_children`,
+        `max_attempts`, `plan_rejected` or `destroyed`. Empty otherwise.
+      example: min_children
+    approval_request_id:
+      type: string
+      description: The HITL request that carried the plan. Empty when plan approval is off.
+      example: req_5d1f0a
+    approved_by:
+      type: string
+      description: Who approved the plan, copied from the HITL decision. Never set by the parent.
+      example: user@example.com
+    approved_at:
+      type: string
+      format: date-time
+      description: When the plan was approved.
+      example: '2026-11-24T10:05:00Z'
+    fan_out:
+      type: integer
+      format: int32
+      description: Number of tasks in the batch.
+      example: 4
+    min_children:
+      type: integer
+      format: int32
+      description: Fewest children that must be running once spawn retries are exhausted.
+      example: 2
+    max_attempts:
+      type: integer
+      format: int32
+      description: Attempts a task may consume before the run fails.
+      example: 3
+    stall_after_seconds:
+      type: integer
+      format: int32
+      description: A running task with no event for this long is marked `stalled`.
+      example: 600
+    deadline_at:
+      type: string
+      format: date-time
+      description: Deadline for the whole run. Absent when the run has none.
+      example: '2026-11-24T18:00:00Z'
+    created_at:
+      type: string
+      format: date-time
+      description: When the run was created.
+      example: '2026-11-24T10:00:00Z'
+    ended_at:
+      type: string
+      format: date-time
+      description: When the run reached a terminal status. Absent while it is open.
+      example: '2026-11-24T11:30:00Z'
+
+swarm_task:
+  type: object
+  description: >-
+    One piece of work in a run. `status` is the coordination state; the declared fields
+    (`objective`, `owned_paths`, `output_contract`, `output_kind`, `grant`) echo what the parent
+    submitted.
+  properties:
+    task_id:
+      type: string
+      format: uuid
+      description: The task id.
+      example: c41d7e92-0b6a-4f58-93e1-7a2b8d5f0c16
+    run_id:
+      type: string
+      format: uuid
+      description: The run this task belongs to.
+      example: 9b2e6f10-4c3a-4d7e-8a15-0f6d2c9e7b41
+    ordinal:
+      type: integer
+      format: int32
+      description: Position in the submitted batch, from 0.
+      example: 0
+    status:
+      type: string
+      enum:
+      - open
+      - claimed
+      - running
+      - integrating
+      - done
+      - abandoned
+      - cancelled
+      description: >-
+        `open`: no child yet. `claimed`: a child session is being created. `running`: the child is
+        working. `integrating`: the child returned a result and the parent must give a verdict.
+        `done`: accepted. `abandoned`: the child missed its deadline or failed; the task reopens
+        with a higher `attempt` until `max_attempts`. `cancelled`: the parent took the work back,
+        the child was stopped, or the run was destroyed.
+      example: running
+    sub_status:
+      type: string
+      enum:
+      - waiting
+      - stalled
+      description: >-
+        Set only while `running`. `waiting`: the child is blocked on an approval, which a human
+        answers on the child's session. `stalled`: no event from the child for the run's
+        `stall_after_seconds`.
+      example: waiting
+    attempt:
+      type: integer
+      format: int32
+      description: >-
+        Fence to present with a verdict. It increases each time an abandoned task reopens, so a
+        verdict on a superseded attempt is a 409 with `id` `stale_attempt`.
+      example: 1
+    session_id:
+      type: string
+      description: >-
+        The child session currently doing the work. Absent while the task is `open`. The parent
+        steers, stops and reads the child with the existing session routes on this id: input,
+        cancel, delete and events.
+      example: d7a2e5b8-1c40-4693-a8f2-5b9e0c3d6f14
+    objective:
+      type: string
+      description: What done means for this task, as submitted.
+      example: Add retry with backoff to the HTTP client in src/client/.
+    owned_paths:
+      type: array
+      description: The only paths this child may write, as submitted.
+      items:
+        type: string
+      example:
+      - src/client/
+    output_contract:
+      type: string
+      description: What the parent checks before accepting, as submitted.
+      example: Unit tests in src/client/ pass and the public API is unchanged.
+    output_kind:
+      type: string
+      enum:
+      - patch
+      - files
+      description: What the child returns, as submitted.
+      example: patch
+    grant:
+      $ref: '#/subagent_grant'
+    config_id:
+      type: string
+      format: uuid
+      description: Agent Config the child runs. Absent when it uses the parent's.
+      example: 3f8a1c52-7d94-4e0b-b6a1-9c2d5e7f1a30
+    deadline_at:
+      type: string
+      format: date-time
+      description: This task's own deadline. Absent when only the run deadline applies.
+      example: '2026-11-24T17:00:00Z'
+    result_ref:
+      type: string
+      description: >-
+        Reference to the child's result artifact and its evidence, set when the task reaches
+        `integrating`. For `output_kind` `patch` it is a unified diff against the base. Fetch the
+        result with it; the result itself is never in an event.
+      example: artifacts/c41d7e92/attempt-1/result.diff
+    verdict:
+      type: string
+      enum:
+      - accept
+      - reject
+      description: >-
+        The verdict recorded on the parent's call. The platform records it; it never judges the
+        result.
+      example: accept
+    verdict_by:
+      type: string
+      format: uuid
+      description: The verifier task that judged the result. Absent when the parent judged it.
+      example: e8b3f6a1-2d50-4a74-b9c2-6c1f0d4e8a27
+    verdict_evidence_ref:
+      type: string
+      description: Artifact the parent supplied as evidence for the verdict.
+      example: artifacts/e8b3f6a1/report.md
+    verdict_at:
+      type: string
+      format: date-time
+      description: When the verdict was recorded.
+      example: '2026-11-24T11:20:00Z'
+    last_event_at:
+      type: string
+      format: date-time
+      description: >-
+        When the child last emitted an event, as the platform saw it. Unlike a progress note, the
+        child cannot fake it.
+      example: '2026-11-24T11:18:00Z'
+    tool_calls:
+      type: integer
+      format: int32
+      description: Tool calls the child made in the current attempt.
+      example: 42
+    spawn_error:
+      type: string
+      description: Why the last attempt to create the child failed. Set only while the task is `open`.
+      example: sandbox capacity unavailable
+    created_at:
+      type: string
+      format: date-time
+      description: When the task was created.
+      example: '2026-11-24T10:00:00Z'
+    started_at:
+      type: string
+      format: date-time
+      description: When the task first reached `running`.
+      example: '2026-11-24T10:02:00Z'
+    ended_at:
+      type: string
+      format: date-time
+      description: When the task reached a terminal status.
+      example: '2026-11-24T11:20:00Z'
+
+get_swarm_run_response:
+  type: object
+  properties:
+    run:
+      $ref: '#/swarm_run'
+    tasks:
+      type: array
+      description: One entry per task, in `ordinal` order.
+      items:
+        $ref: '#/swarm_task'
+
+update_swarm_run_request:
+  type: object
+  description: Verdicts on one or more tasks in the run.
+  required:
+  - tasks
+  properties:
+    tasks:
+      type: array
+      minItems: 1
+      description: One verdict per task. A task may appear at most once.
+      items:
+        $ref: '#/swarm_task_verdict'
+
+swarm_task_verdict:
+  type: object
+  required:
+  - task_id
+  - attempt
+  - verdict
+  properties:
+    task_id:
+      type: string
+      format: uuid
+      description: The task id from the run's `tasks` list.
+      example: c41d7e92-0b6a-4f58-93e1-7a2b8d5f0c16
+    attempt:
+      type: integer
+      format: int32
+      description: >-
+        The task's current `attempt`, as read from the get-run route. Any other value is a 409 with
+        `id` `stale_attempt`.
+      example: 1
+    verdict:
+      type: string
+      enum:
+      - accept
+      - reject
+      - cancel
+      description: >-
+        `accept`: the result is integrated and the task is done; every path the result changed
+        must lie inside the task's `owned_paths`, or it is a 409 with `id` `out_of_bounds`.
+        `reject`: the task goes back to `running` on the same child, which receives `note` as new
+        input and can revise and resubmit. `cancel`: the parent takes the work back; the child is
+        stopped, the task is cancelled and its `owned_paths` are released. Cancel is allowed at
+        any time before the task is done, including while it is `open`.
+      example: accept
+    evidence_ref:
+      type: string
+      description: >-
+        Artifact that supports the verdict, for whoever reads the record later. Recorded as the
+        task's `verdict_evidence_ref`.
+      example: artifacts/e8b3f6a1/report.md
+    note:
+      type: string
+      description: >-
+        Free text for the record. Required with `reject`: it goes back to the same child as new
+        input, for example the conflicting hunk.
+      example: The retry loop in client.go never gives up.
