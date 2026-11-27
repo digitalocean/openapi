@@ -10,6 +10,10 @@ allOf:
       $ref: app_worker_spec_termination.yml
     liveness_health_check:
       $ref: app_health_check_spec.yml
+    alerts:
+      type: array
+      items:
+        $ref: app_alert_spec.yml
 required:
   - name
 

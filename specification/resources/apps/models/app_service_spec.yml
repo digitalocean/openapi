@@ -61,5 +61,10 @@ allOf:
     termination:
       $ref: app_service_spec_termination.yml
 
+    alerts:
+      type: array
+      items:
+        $ref: app_alert_spec.yml
+
   required:
   - name
