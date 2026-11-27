@@ -1,0 +1,12 @@
+type: object
+
+description: The body of a remove-file request.
+
+required:
+  - path
+
+properties:
+  path:
+    type: string
+    description: The file or directory to remove.
+    example: /workspace/old.txt

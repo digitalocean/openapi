@@ -1,0 +1,61 @@
+operationId: sandboxes_get_files_download
+
+summary: Download a File
+
+description: |
+  Stream a file from the sandbox, or a directory as a tar archive when
+  `as_archive` is set, up to 50 MiB. The `path` query parameter is required.
+
+  The body is the payload followed by a 73-byte integrity footer: `DOWSSHA1`
+  (8 bytes), the 64-character lowercase hex SHA-256 of the payload, and a
+  newline. Strip the footer before you save the payload. Concurrent direct
+  transfers are limited; over the limit the request answers `503`.
+
+tags:
+  - Sandboxes
+
+parameters:
+  - $ref: 'parameters.yml#/sandbox_id'
+  - $ref: 'parameters.yml#/file_path'
+  - $ref: 'parameters.yml#/as_archive'
+
+responses:
+  '200':
+    $ref: 'responses/file_content.yml'
+
+  '400':
+    $ref: 'responses/errors.yml#/bad_request'
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '403':
+    $ref: 'responses/errors.yml#/forbidden'
+
+  '404':
+    $ref: 'responses/errors.yml#/not_found'
+
+  '409':
+    $ref: 'responses/errors.yml#/conflict'
+
+  '413':
+    $ref: 'responses/errors.yml#/payload_too_large'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+  '503':
+    $ref: 'responses/errors.yml#/service_unavailable'
+
+  default:
+    $ref: '../../shared/responses/unexpected_error.yml'
+
+x-codeSamples:
+  - $ref: 'examples/curl/sandboxes_files_download.yml'
+
+security:
+  - bearer_auth:
+      - 'sandbox:read'

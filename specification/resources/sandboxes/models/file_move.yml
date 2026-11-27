@@ -1,0 +1,18 @@
+type: object
+
+description: The body of a move-file request.
+
+required:
+  - source
+  - destination
+
+properties:
+  source:
+    type: string
+    description: The file, directory, or symlink to move.
+    example: /workspace/old.txt
+
+  destination:
+    type: string
+    description: The new path.
+    example: /workspace/new.txt

@@ -1,0 +1,32 @@
+description: The entries under the requested directory.
+
+headers:
+  ratelimit-limit:
+    $ref: '../../../shared/headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../../../shared/headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../../../shared/headers.yml#/ratelimit-reset'
+
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '../models/file_entry.yml'
+    examples:
+      Directory Listing:
+        value:
+          entries:
+            - name: hello.txt
+              type: FILE_ENTRY_TYPE_FILE
+              path: /workspace/hello.txt
+              size: "12"
+              mode: 420
+              permissions: "-rw-r--r--"
+              owner: user
+              group: user
+              modified_time: "2026-03-25T12:00:00Z"

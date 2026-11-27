@@ -1,0 +1,66 @@
+type: object
+
+description: A file, directory, or symlink in a sandbox workspace.
+
+properties:
+  name:
+    type: string
+    readOnly: true
+    description: The base name of the entry.
+    example: hello.txt
+
+  type:
+    $ref: 'file_entry_type.yml'
+
+  path:
+    type: string
+    readOnly: true
+    description: The absolute path of the entry in the sandbox.
+    example: /workspace/hello.txt
+
+  size:
+    type: string
+    format: int64
+    readOnly: true
+    description: The size in bytes. Encoded as a string per protobuf JSON.
+    example: "12"
+
+  mode:
+    type: integer
+    format: int64
+    readOnly: true
+    description: The Unix file mode bits, for example `420` (`0644`).
+    example: 420
+
+  permissions:
+    type: string
+    readOnly: true
+    description: The permissions in `ls` form, for example `-rw-r--r--`.
+    example: "-rw-r--r--"
+
+  owner:
+    type: string
+    readOnly: true
+    description: The user that owns the entry.
+    example: user
+
+  group:
+    type: string
+    readOnly: true
+    description: The group that owns the entry.
+    example: user
+
+  modified_time:
+    type: string
+    format: date-time
+    readOnly: true
+    description: When the entry was last modified.
+    example: "2026-03-25T12:00:00Z"
+
+  symlink_target:
+    type: string
+    readOnly: true
+    description: >-
+      Symlink only. The path the symlink points to. Empty unless `type` is
+      `FILE_ENTRY_TYPE_SYMLINK`.
+    example: ""
