@@ -1,0 +1,15 @@
+type: object
+
+description: The body of a write-sandbox-command-stdin request.
+
+properties:
+  data:
+    type: string
+    format: byte
+    description: Base64-encoded stdin bytes.
+    example: aGVsbG8K
+
+  eof:
+    type: boolean
+    description: When true, close stdin after writing.
+    example: true

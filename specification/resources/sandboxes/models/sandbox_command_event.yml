@@ -1,0 +1,26 @@
+type: object
+
+description: >-
+  One event on the attach stream. Exactly one of the fields is set per event.
+
+properties:
+  started:
+    $ref: 'sandbox_command_started.yml'
+
+  stdout:
+    type: string
+    format: byte
+    description: Base64-encoded stdout chunk.
+    example: aGVsbG8K
+
+  stderr:
+    type: string
+    format: byte
+    description: Base64-encoded stderr chunk.
+    example: ""
+
+  exit:
+    $ref: 'sandbox_command_exit.yml'
+
+  keepalive:
+    $ref: 'sandbox_command_keepalive.yml'
