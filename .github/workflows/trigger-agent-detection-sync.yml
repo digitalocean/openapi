@@ -30,4 +30,4 @@ jobs:
       - name: Trigger workflow
         run: gh workflow run --repo digitalocean/${{ matrix.repo }} sync-agent-rules.yml --ref main -f openapi_sha=${{ github.sha }}
         env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SDK_WORKFLOW_TRIGGER_TOKEN }}
