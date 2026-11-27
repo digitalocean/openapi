@@ -31,9 +31,6 @@ responses:
   '202':
     $ref: 'responses/snapshot_accepted.yml'
 
-  '200':
-    $ref: 'responses/snapshot.yml'
-
   '400':
     $ref: 'responses/errors.yml#/bad_request'
 
