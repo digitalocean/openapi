@@ -1,0 +1,23 @@
+type: object
+
+description: >-
+  Identifies a customer OCI image. Auth for private DOCR images is resolved
+  server-side from the caller's team.
+
+properties:
+  registry:
+    type: string
+    example: registry.digitalocean.com
+
+  repository:
+    type: string
+    example: my-team/my-image
+
+  tag:
+    type: string
+    example: v1
+
+  digest:
+    type: string
+    description: When set, preferred over tag for pulls.
+    example: sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef

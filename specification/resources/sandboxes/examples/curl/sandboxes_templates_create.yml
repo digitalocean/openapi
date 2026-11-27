@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+    -d '{"name":"my-custom-template","base_template":"coding-base","source_oci_ref":"registry.digitalocean.com/my-team/my-image:v1"}' \
+    "https://api.digitalocean.com/v2/sandboxes/templates"

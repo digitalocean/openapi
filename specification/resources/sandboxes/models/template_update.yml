@@ -1,0 +1,16 @@
+type: object
+
+description: >-
+  The body of an update-template request. Omitted fields keep their previous
+  values. The template ID is taken from the path.
+
+properties:
+  base_template:
+    type: string
+    description: When set, replaces the stored base template for the next build.
+    example: coding-base
+
+  source_oci_ref:
+    type: string
+    description: When set, replaces the customer image for the next build.
+    example: registry.digitalocean.com/my-team/my-image:v2
